@@ -4,6 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>repasaYA — Tipo Test para la Carrera</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://jxliian.github.io/repasaYA/" />
+  <meta property="og:title"       content="repasaYA — Tipo Test para la Carrera" />
+  <meta property="og:description" content="Tipo test, verdadero/falso y flashcards para las asignaturas de ADE y Economía. Gratis, sin registro." />
+  <meta property="og:image"       content="https://jxliian.github.io/repasaYA/logo.png" />
+  <meta name="twitter:card"       content="summary" />
+  <meta name="twitter:title"      content="repasaYA — Tipo Test para la Carrera" />
+  <meta name="twitter:description" content="Tipo test, V/F y flashcards para la carrera. Gratis." />
+  <meta name="twitter:image"      content="https://jxliian.github.io/repasaYA/logo.png" />
   <style>
     :root {
       --bg: #0f1117;
@@ -323,6 +335,80 @@
       .github-fab { bottom: 18px; right: 18px; padding: 11px 16px 11px 14px; font-size: 0.8rem; }
     }
 
+    /* ── LOGO IMG ───────────────────────────── */
+    .logo-img { height: 36px; width: auto; display: block; }
+
+    /* ── WHATSAPP SHARE ─────────────────────── */
+    .share-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 28px;
+    }
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.3);
+      border-radius: 99px;
+      padding: 10px 22px;
+      color: #4ade80;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .wa-btn:hover {
+      background: rgba(37,211,102,0.18);
+      box-shadow: 0 0 16px rgba(37,211,102,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ── COMMUNITY SECTION ──────────────────── */
+    .community {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+    .community-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .community-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+    .community-text { flex: 1; min-width: 200px; }
+    .community-text h3 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+    .community-text p  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+    .community-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 10px 20px;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .community-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+      background: rgba(108,99,255,0.08);
+    }
+
     /* ── FOOTER ─────────────────────────────── */
     footer {
       text-align: center;
@@ -333,6 +419,7 @@
     }
     footer a { color: var(--accent2); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+    .counter-wrap { margin-top: 10px; display: flex; justify-content: center; gap: 6px; align-items: center; }
 
     /* ── RESPONSIVE ─────────────────────────── */
     @media (max-width: 600px) {
@@ -349,7 +436,7 @@
 
   <!-- HEADER -->
   <header>
-    <div class="logo">repasaYA<span class="logo-dot"></span></div>
+    <img src="logo.png" alt="repasaYA" class="logo-img" />
     <div class="header-tagline">Tipo test · Verdadero/Falso · Flashcards</div>
   </header>
 
@@ -364,13 +451,23 @@
         <span class="stat-label">Asignaturas activas</span>
       </div>
       <div class="stat">
-        <span class="stat-value">+500</span>
+        <span class="stat-value">+1000</span>
         <span class="stat-label">Preguntas</span>
       </div>
       <div class="stat">
-        <span class="stat-value">17</span>
+        <span class="stat-value">+20</span>
         <span class="stat-label">Temas cubiertos</span>
       </div>
+    </div>
+
+    <!-- WHATSAPP SHARE -->
+    <div class="share-row">
+      <a class="wa-btn"
+         href="https://wa.me/?text=%F0%9F%93%9A%20*repasaYA*%20%E2%80%94%20Tipo%20test%2C%20V%2FF%20y%20flashcards%20para%20la%20carrera.%20Gratis%20%E2%86%92%20https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F"
+         target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Comparte con tus compañeros
+      </a>
     </div>
   </section>
 
@@ -418,6 +515,22 @@
     </div>
   </main>
 
+  <!-- COMMUNITY SECTION -->
+  <section class="community">
+    <div class="community-card">
+      <div class="community-icon">💬</div>
+      <div class="community-text">
+        <h3>¿Quieres que añada tu asignatura?</h3>
+        <p>Dímelo en GitHub y lo valoramos. Si tienes preguntas de examen, tipo test o V/F, entre los dos lo montamos en poco tiempo.</p>
+      </div>
+      <a class="community-btn"
+         href="https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre+de+la+asignatura%5D&body=%23%23+Datos+de+la+asignatura%0A%0A-+**Nombre**%3A+%0A-+**Curso**%3A+%0A-+**¿Tienes+material?**+S%C3%AD+%2F+No%0A%0A%23%23+Comentarios%0A%0A"
+         target="_blank" rel="noopener">
+        ✦ Solicitar asignatura
+      </a>
+    </div>
+  </section>
+
   <!-- GITHUB FAB -->
   <a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -427,7 +540,10 @@
   </a>
 
   <footer>
-    Hecho con ganas y noches de estudio · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a> · <a href="https://jxliian.github.io/EE_tipotest/" target="_blank" rel="noopener">EE Tipo Test</a>
+    Hecho con ganas y noches de estudio · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a>
+    <div class="counter-wrap">
+      <img src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=Visitas+totales&color=6c63ff&labelColor=252836" alt="Visitas" height="20" />
+    </div>
   </footer>
 
 </body>
