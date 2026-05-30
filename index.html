@@ -33,11 +33,14 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
@@ -124,24 +127,21 @@
     /* ── SPLIT LAYOUT ── */
     .page-split {
       flex: 1;
+      min-height: 0;          /* crucial: permite que flex-child se encoja */
       display: grid;
       grid-template-columns: 1fr 1fr;
-      max-width: 1400px;
       width: 100%;
-      margin: 0 auto;
-      padding: 0;
+      overflow: hidden;
     }
 
     /* ── LEFT: hero content ── */
     .left-col {
-      padding: 64px 48px 64px 48px;
+      padding: 64px 48px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 28px;
-      position: sticky;
-      top: 58px;
-      height: calc(100vh - 58px);
+      overflow-y: auto;       /* si la ventana es muy pequeña, scroll interno */
       background: radial-gradient(ellipse 100% 80% at -10% 50%, rgba(108,99,255,0.1) 0%, transparent 70%);
     }
     .hero-badge {
@@ -209,11 +209,11 @@
     /* ── RIGHT: cards ── */
     .right-col {
       border-left: 1px solid var(--border);
-      padding: 48px 40px 48px 40px;
+      padding: 48px 40px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      overflow-y: auto;
+      overflow-y: auto;       /* solo este lado scrollea */
     }
     .section-title {
       font-size: 0.72rem;
@@ -325,17 +325,25 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
-      .page-split { grid-template-columns: 1fr; }
+      html, body { height: auto; overflow: visible; }
+      .page-split {
+        grid-template-columns: 1fr;
+        overflow: visible;
+      }
       .left-col {
-        position: static;
-        height: auto;
+        overflow: visible;
         padding: 48px 24px 32px;
         text-align: center;
         align-items: center;
       }
       .left-col p.desc { margin: 0 auto; }
       .hero-stats { justify-content: center; }
-      .right-col { border-left: none; border-top: 1px solid var(--border); padding: 32px 24px 48px; }
+      .right-col {
+        overflow: visible;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 32px 24px 48px;
+      }
       .header-tagline { display: none; }
       header { padding: 0 16px; gap: 10px; }
       .request-btn span { display: none; }
