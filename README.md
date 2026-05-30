@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="logo.png" alt="repasaYA" width="160" />
+</div>
+
 # repasaYA
 
 > Material interactivo de repaso para las asignaturas de la carrera — todo en un sitio.
