@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import QuizEngine from '../../components/QuizEngine.astro';
+import testData from '../../data/oe.json';
+---
+<Base title="Organización de Empresas" description="318 preguntas tipo test sobre Mintzberg. 18 bloques.">
+  <QuizEngine
+    title="Organización de Empresas"
+    code="OE"
+    testData={testData}
+  />
+</Base>

@@ -1,0 +1,374 @@
+---
+// QuizEngine — motor único para tipo test (4 opts) y V/F con justificación
+// Props: vfData y/o testData (arrays JSON), title, code
+interface Props {
+  title: string;
+  code: string;
+  vfData?: any[];
+  testData?: any[];
+}
+const { title, code, vfData = [], testData = [] } = Astro.props;
+const hasVF   = vfData.length > 0;
+const hasTest = testData.length > 0;
+const hasBoth = hasVF && hasTest;
+const base = import.meta.env.BASE_URL;
+---
+<style>
+  html,body{height:100%;overflow:hidden}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .logo{font-size:1.15rem;font-weight:800}.logo span{color:var(--accent)}
+  .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}.back:hover{color:var(--accent)}
+  .tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border)}
+  .tab{padding:12px 20px;cursor:pointer;font-size:.9rem;color:var(--text-muted);border-bottom:2px solid transparent;transition:all .2s;user-select:none}
+  .tab.active{color:var(--accent);border-bottom-color:var(--accent)}.tab:hover:not(.active){color:var(--text)}
+  main{flex:1;min-height:0;overflow-y:auto;padding:24px;max-width:860px;width:100%;margin:0 auto}
+  .panel{display:none;flex-direction:column;gap:20px}.panel.active{display:flex}
+  /* START */
+  .start{display:flex;flex-direction:column;gap:24px;padding:8px 0}
+  .start-title{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+  .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mode-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:22px 20px;cursor:pointer;transition:all .2s;position:relative;user-select:none}
+  .mode-card:hover,.mode-card.selected{border-color:var(--accent);background:rgba(108,99,255,.08);transform:translateY(-2px)}
+  .mode-card.selected::after{content:'✓';position:absolute;top:12px;right:14px;font-size:.8rem;font-weight:800;color:var(--accent)}
+  .mc-icon{font-size:1.6rem;margin-bottom:10px}.mc-title{font-size:1rem;font-weight:800;margin-bottom:4px}
+  .mc-desc{font-size:.78rem;color:var(--text-muted);line-height:1.4}
+  .mc-chip{display:inline-block;margin-top:10px;font-size:.7rem;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--text-muted)}
+  .mode-card.selected .mc-chip{background:rgba(108,99,255,.12);border-color:rgba(108,99,255,.3);color:var(--accent2)}
+  .sel-label{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px}
+  select.sel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;color:var(--text);font-size:.95rem;outline:none;cursor:pointer;transition:border-color .2s;width:100%}
+  select.sel:focus{border-color:var(--accent)}
+  .btn-start{width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:#fff;border:none;font-weight:800;cursor:pointer;transition:all .2s}
+  .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(108,99,255,.4);transform:translateY(-1px)}
+  /* PROGRESS */
+  .q-header{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)}
+  .progress-bar{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:6px}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .3s}
+  .score-live{color:var(--accent);font-weight:700}
+  /* QUESTION */
+  .q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;margin-top:16px}
+  .q-tema-tag{font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+  .q-text{font-size:1.05rem;line-height:1.65}
+  /* VF */
+  .vf-buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .vf-btn{padding:16px;border:2px solid var(--border);border-radius:var(--radius);background:var(--surface2);color:var(--text);font-size:1rem;font-weight:700;cursor:pointer;transition:all .18s}
+  .vf-btn:hover:not(:disabled){transform:translateY(-2px)}
+  .vf-btn.v-btn:hover:not(:disabled){border-color:var(--correct);background:rgba(34,197,94,.08);color:var(--correct)}
+  .vf-btn.f-btn:hover:not(:disabled){border-color:var(--wrong);background:rgba(239,68,68,.08);color:var(--wrong)}
+  .vf-btn:disabled{cursor:default;transform:none}
+  .vf-btn.chosen-correct{border-color:var(--correct);background:rgba(34,197,94,.12);color:var(--correct)}
+  .vf-btn.chosen-wrong{border-color:var(--wrong);background:rgba(239,68,68,.12);color:var(--wrong)}
+  .vf-btn.show-correct{border-color:var(--correct);background:rgba(34,197,94,.08);color:var(--correct)}
+  .justification{margin-top:14px;border-radius:var(--radius);padding:14px 18px;font-size:.88rem;line-height:1.6;display:none}
+  .justification.show{display:block}
+  .justification.correct-just{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)}
+  .justification.wrong-just{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
+  .just-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+  .correct-just .just-label{color:var(--correct)}.wrong-just .just-label{color:var(--wrong)}
+  /* TEST */
+  .options{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  .opt-btn{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid var(--border);border-radius:var(--radius);background:var(--surface2);color:var(--text);font-size:.9rem;font-weight:500;cursor:pointer;transition:all .18s;text-align:left}
+  .opt-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(108,99,255,.08);color:var(--accent2);transform:translateX(3px)}
+  .opt-btn:disabled{cursor:default;transform:none}
+  .opt-letter{flex-shrink:0;width:28px;height:28px;border-radius:7px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:var(--text-muted);transition:all .18s}
+  .opt-btn:hover:not(:disabled) .opt-letter{background:var(--accent);border-color:var(--accent);color:#fff}
+  .opt-btn.chosen-correct{border-color:var(--correct);background:rgba(34,197,94,.1)}
+  .opt-btn.chosen-correct .opt-letter{background:var(--correct);border-color:var(--correct);color:#fff}
+  .opt-btn.chosen-wrong{border-color:var(--wrong);background:rgba(239,68,68,.1)}
+  .opt-btn.chosen-wrong .opt-letter{background:var(--wrong);border-color:var(--wrong);color:#fff}
+  .opt-btn.show-correct{border-color:var(--correct);background:rgba(34,197,94,.06)}
+  .opt-btn.show-correct .opt-letter{background:var(--correct);border-color:var(--correct);color:#fff}
+  .feedback{margin-top:14px;border-radius:var(--radius);padding:12px 16px;font-size:.85rem;font-weight:600;display:none}
+  .feedback.show{display:block}
+  .feedback.correct{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:var(--correct)}
+  .feedback.wrong{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:var(--wrong)}
+  /* NAV */
+  .q-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+  .btn{padding:11px 22px;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}
+  .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+  .btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  /* RESULTS */
+  .stats-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .stats-row{display:flex;justify-content:space-around;gap:12px;flex-wrap:wrap}
+  .stat-item{text-align:center}.stat-num{font-size:2.2rem;font-weight:800;letter-spacing:-1px}
+  .stat-lbl{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+  .c-num{color:var(--correct)}.w-num{color:var(--wrong)}.p-num{color:var(--accent2)}
+  /* BANCO */
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  .search-box{flex:1;min-width:180px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s}
+  .search-box:focus{border-color:var(--accent)}.search-box::placeholder{color:var(--text-muted)}
+  .cnt{font-size:.78rem;color:var(--text-muted)}
+  .bank-list{display:flex;flex-direction:column;gap:10px}
+  .bank-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;gap:14px}
+  .bank-badge{flex-shrink:0;width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800}
+  .b-v{background:rgba(34,197,94,.12);color:var(--correct);border:1px solid rgba(34,197,94,.2)}
+  .b-f{background:rgba(239,68,68,.12);color:var(--wrong);border:1px solid rgba(239,68,68,.2)}
+  .b-t{background:rgba(108,99,255,.12);color:var(--accent2);border:1px solid rgba(108,99,255,.2);font-size:.6rem}
+  .bank-meta{font-size:.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+  .bank-q{font-size:.88rem;color:var(--text);margin-bottom:3px}.bank-ans{font-size:.8rem;color:var(--text-muted);font-style:italic}
+  .github-fab{position:fixed;bottom:28px;right:28px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:12px 20px 12px 16px;color:var(--text);font-size:.85rem;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:all .25s;z-index:100}
+  .github-fab:hover{border-color:var(--accent);background:#1e1c35;color:var(--accent2);box-shadow:0 0 0 3px rgba(108,99,255,.2),0 0 24px rgba(108,99,255,.35);transform:translateY(-2px)}
+  .github-fab svg{flex-shrink:0;transition:transform .25s}.github-fab:hover svg{transform:rotate(-8deg) scale(1.1)}
+  body{display:flex;flex-direction:column}
+  @media(max-width:560px){html,body{height:auto;overflow:visible}main{overflow:visible}.mode-grid{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="back" href={base}>← repasaYA</a>
+    <span style="color:var(--border)">|</span>
+    <div class="logo"><span>{code}</span> · {title}</div>
+  </div>
+  <div style="font-size:.78rem;color:var(--text-muted)" id="hdr-stats">
+    {hasVF && `${vfData.length} V/F`}{hasBoth && ' · '}{hasTest && `${testData.length} preguntas`}
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" data-tab="test">Test</div>
+  <div class="tab" data-tab="banco">Banco</div>
+</div>
+
+<main style="display:flex;flex-direction:column;flex:1">
+  <!-- TEST PANEL -->
+  <div id="panel-test" class="panel active">
+
+    <div id="selector-view" class="start">
+      {hasBoth && (
+        <div>
+          <p class="start-title">Tipo de preguntas</p>
+          <div class="mode-grid">
+            <div class="mode-card selected" id="card-vf" onclick="selectMode('vf')">
+              <div class="mc-icon">✓✗</div>
+              <div class="mc-title">Verdadero / Falso</div>
+              <div class="mc-desc">Afirmaciones con justificación. Ideal para examen.</div>
+              <span class="mc-chip">{vfData.length} preguntas</span>
+            </div>
+            <div class="mode-card" id="card-test" onclick="selectMode('test')">
+              <div class="mc-icon">🧠</div>
+              <div class="mc-title">Tipo test</div>
+              <div class="mc-desc">4 opciones, una correcta. Corrección automática.</div>
+              <span class="mc-chip">{testData.length} preguntas</span>
+            </div>
+          </div>
+        </div>
+      )}
+      <div>
+        <span class="sel-label">Bloque</span>
+        <select class="sel" id="sel-tema"><option value="">Todo mezclado</option></select>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">Empezar →</button>
+    </div>
+
+    <div id="quiz-view" style="display:none">
+      <div class="q-header"><span id="q-counter"></span><span class="score-live" id="q-score"></span></div>
+      <div class="progress-bar"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+      <div class="q-card">
+        <div class="q-tema-tag" id="q-tema"></div>
+        <div class="q-text" id="q-text"></div>
+        <!-- VF controls -->
+        <div id="vf-controls">
+          <div class="vf-buttons">
+            <button class="vf-btn v-btn" id="btn-v" onclick="answerVF('V')">✓ VERDADERO</button>
+            <button class="vf-btn f-btn" id="btn-f" onclick="answerVF('F')">✗ FALSO</button>
+          </div>
+          <div class="justification" id="just-box">
+            <div class="just-label" id="just-label"></div>
+            <div id="just-text"></div>
+          </div>
+        </div>
+        <!-- Test controls -->
+        <div id="test-controls" style="display:none">
+          <div class="options" id="options-container"></div>
+          <div class="feedback" id="feedback"></div>
+        </div>
+      </div>
+      <div class="q-nav">
+        <button class="btn btn-ghost" onclick="backToSelector()">← Volver</button>
+        <button class="btn btn-primary" id="btn-next" onclick="nextQ()" style="display:none">Siguiente →</button>
+      </div>
+    </div>
+
+    <div id="results-view" style="display:none;flex-direction:column;gap:20px">
+      <div class="stats-box">
+        <div style="font-size:1.1rem;font-weight:800;margin-bottom:20px">Resultado</div>
+        <div class="stats-row">
+          <div class="stat-item"><div class="stat-num p-num" id="r-pct"></div><div class="stat-lbl">Nota</div></div>
+          <div class="stat-item"><div class="stat-num c-num" id="r-ok"></div><div class="stat-lbl">Correctas</div></div>
+          <div class="stat-item"><div class="stat-num w-num" id="r-fail"></div><div class="stat-lbl">Incorrectas</div></div>
+          <div class="stat-item"><div class="stat-num" id="r-total"></div><div class="stat-lbl">Total</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="startQuiz()">Repetir</button>
+        <button class="btn btn-ghost" onclick="backToSelector()">← Volver</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANCO PANEL -->
+  <div id="panel-banco" class="panel">
+    <div class="controls">
+      <input class="search-box" type="text" id="b-search" placeholder="Buscar..." oninput="filterBank()">
+      {hasBoth && (
+        <select class="search-box" id="b-tipo" onchange="filterBank()" style="max-width:170px">
+          <option value="">V/F y Test</option>
+          <option value="vf">Solo V/F</option>
+          <option value="test">Solo Test</option>
+        </select>
+      )}
+      <select class="search-box" id="b-tema" onchange="filterBank()" style="max-width:200px">
+        <option value="">Todos los bloques</option>
+      </select>
+    </div>
+    <div class="cnt" id="b-count"></div>
+    <div class="bank-list" id="b-list"></div>
+  </div>
+</main>
+
+<a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+  Sígueme en GitHub ⭐
+</a>
+
+<script define:vars={{ vfData, testData, hasBoth, hasVF, hasTest }}>
+const LETTERS = ['A','B','C','D','E'];
+const VF_DATA   = vfData;
+const TEST_DATA = testData;
+const VF_TEMAS   = [...new Set(VF_DATA.map(q=>q.tema))];
+const TEST_TEMAS = [...new Set(TEST_DATA.map(q=>q.tema))];
+let selectedMode = hasVF ? 'vf' : 'test';
+let questions=[], idx=0, correct=0, wrong=0, answered=false;
+
+function selectMode(mode){
+  selectedMode=mode;
+  ['vf','test'].forEach(m=>{
+    const el=document.getElementById('card-'+m);
+    if(el) el.classList.toggle('selected',m===mode);
+  });
+  updateDropdown();
+}
+function updateDropdown(){
+  const sel=document.getElementById('sel-tema');
+  const temas=selectedMode==='vf'?VF_TEMAS:TEST_TEMAS;
+  sel.innerHTML='<option value="">Todo mezclado</option>';
+  temas.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o)});
+}
+updateDropdown();
+
+function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
+function startQuiz(){
+  const tema=document.getElementById('sel-tema').value;
+  const src=selectedMode==='vf'?VF_DATA:TEST_DATA;
+  questions=shuffle(tema?src.filter(q=>q.tema===tema):src);
+  idx=0;correct=0;wrong=0;
+  hide('selector-view');hide('results-view');show('quiz-view');
+  document.getElementById('vf-controls').style.display=selectedMode==='vf'?'':'none';
+  document.getElementById('test-controls').style.display=selectedMode==='test'?'':'none';
+  showQ();
+}
+function showQ(){
+  answered=false;
+  const q=questions[idx];
+  document.getElementById('q-tema').textContent=q.tema;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-counter').textContent=`${idx+1} / ${questions.length}`;
+  document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
+  document.getElementById('q-progress').style.width=`${(idx/questions.length)*100}%`;
+  hide_el('btn-next');
+  if(selectedMode==='vf'){
+    const bv=document.getElementById('btn-v'),bf=document.getElementById('btn-f');
+    bv.className='vf-btn v-btn';bv.disabled=false;
+    bf.className='vf-btn f-btn';bf.disabled=false;
+    document.getElementById('just-box').className='justification';
+  } else {
+    const container=document.getElementById('options-container');
+    container.innerHTML='';
+    q.opts.forEach((opt,i)=>{
+      const btn=document.createElement('button');btn.className='opt-btn';
+      btn.innerHTML=`<span class="opt-letter">${LETTERS[i]}</span><span>${opt}</span>`;
+      btn.onclick=()=>answerTest(i);container.appendChild(btn);
+    });
+    document.getElementById('feedback').className='feedback';
+  }
+}
+function answerVF(chosen){
+  if(answered)return;answered=true;
+  const q=questions[idx],ok=chosen===q.answer;
+  if(ok)correct++;else wrong++;
+  const bv=document.getElementById('btn-v'),bf=document.getElementById('btn-f');
+  bv.disabled=true;bf.disabled=true;
+  const cb=chosen==='V'?bv:bf,rb=q.answer==='V'?bv:bf;
+  cb.className+=(ok?' chosen-correct':' chosen-wrong');
+  if(!ok)rb.className+=' show-correct';
+  const jbox=document.getElementById('just-box');
+  jbox.className='justification show '+(ok?'correct-just':'wrong-just');
+  document.getElementById('just-label').textContent=ok?`✓ Correcto — ${q.answer==='V'?'VERDADERO':'FALSO'}`:`✗ Incorrecto — Era ${q.answer==='V'?'VERDADERO':'FALSO'}`;
+  document.getElementById('just-text').textContent=q.justification;
+  document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
+  show_el('btn-next');
+}
+function answerTest(chosen){
+  if(answered)return;answered=true;
+  const q=questions[idx],ok=chosen===q.correct;
+  if(ok)correct++;else wrong++;
+  const btns=document.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
+  btns[chosen].className+=(ok?' chosen-correct':' chosen-wrong');
+  if(!ok)btns[q.correct].className+=' show-correct';
+  const fb=document.getElementById('feedback');
+  fb.className='feedback show '+(ok?'correct':'wrong');
+  fb.textContent=ok?`✓ Correcto — ${q.opts[q.correct]}`:`✗ Incorrecto — Era: ${q.opts[q.correct]}`;
+  document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
+  show_el('btn-next');
+}
+function nextQ(){idx++;if(idx>=questions.length){showResults();return}showQ()}
+function showResults(){
+  hide('quiz-view');
+  const rv=document.getElementById('results-view');rv.style.display='flex';rv.style.flexDirection='column';rv.style.gap='20px';
+  document.getElementById('r-pct').textContent=Math.round(correct/questions.length*10)+'/10';
+  document.getElementById('r-ok').textContent=correct;
+  document.getElementById('r-fail').textContent=wrong;
+  document.getElementById('r-total').textContent=questions.length;
+}
+function backToSelector(){hide('quiz-view');hide('results-view');show('selector-view')}
+function show(id){document.getElementById(id).style.display=''}
+function hide(id){document.getElementById(id).style.display='none'}
+function show_el(id){document.getElementById(id).style.display=''}
+function hide_el(id){document.getElementById(id).style.display='none'}
+
+// Tabs
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-'+t.dataset.tab).classList.add('active');
+    if(t.dataset.tab==='banco')initBank();
+  });
+});
+
+// Banco
+const ALL_BANK=[...VF_DATA.map(q=>({...q,tipo:'vf'})),...TEST_DATA.map(q=>({...q,tipo:'test'}))];
+let bankReady=false;
+function initBank(){
+  if(bankReady)return;bankReady=true;
+  const sel=document.getElementById('b-tema');
+  [...new Set(ALL_BANK.map(q=>q.tema))].forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o)});
+  filterBank();
+}
+function filterBank(){
+  const s=document.getElementById('b-search').value.toLowerCase();
+  const tipo=(document.getElementById('b-tipo')||{value:''}).value;
+  const tema=document.getElementById('b-tema').value;
+  const list=ALL_BANK.filter(q=>(!tipo||q.tipo===tipo)&&(!tema||q.tema===tema)&&(!s||q.q.toLowerCase().includes(s)));
+  document.getElementById('b-count').textContent=`${list.length} preguntas`;
+  const el=document.getElementById('b-list');el.innerHTML='';
+  list.forEach(q=>{
+    const div=document.createElement('div');div.className='bank-item';
+    const badge=q.tipo==='vf'?`<div class="bank-badge ${q.answer==='V'?'b-v':'b-f'}">${q.answer}</div>`:'<div class="bank-badge b-t">Test</div>';
+    const ans=q.tipo==='vf'?q.justification:(q.opts?q.opts[q.correct]:'');
+    div.innerHTML=`${badge}<div><div class="bank-meta">${q.tema}</div><div class="bank-q">${q.q}</div><div class="bank-ans">${ans}</div></div>`;
+    el.appendChild(div);
+  });
+}
+</script>

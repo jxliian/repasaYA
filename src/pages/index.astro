@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import SubjectCard from '../components/SubjectCard.astro';
+import { subjects } from '../data/subjects';
+const base = import.meta.env.BASE_URL;
+---
+<Base title="repasaYA">
+<style>
+  html, body { height:100%; overflow:hidden; }
+  header {
+    background:var(--surface); border-bottom:1px solid var(--border);
+    padding:0 28px; height:58px; display:flex; align-items:center; gap:16px;
+    position:sticky; top:0; z-index:50;
+  }
+  .logo { font-size:1.4rem; font-weight:800; letter-spacing:-1px; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; flex-shrink:0; }
+  .logo-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-left:2px; vertical-align:middle; margin-bottom:3px; -webkit-text-fill-color:initial; }
+  .tagline { font-size:.78rem; color:var(--text-muted); border-left:1px solid var(--border); padding-left:16px; }
+  .header-right { margin-left:auto; display:flex; align-items:center; gap:12px; }
+  .request-btn { display:inline-flex; align-items:center; gap:6px; background:rgba(108,99,255,.08); border:1px solid rgba(108,99,255,.25); border-radius:99px; padding:7px 14px; color:var(--accent2); font-size:.78rem; font-weight:700; transition:all .2s; white-space:nowrap; }
+  .request-btn:hover { background:rgba(108,99,255,.16); border-color:var(--accent); }
+  .hits-badge { display:flex; align-items:center; background:var(--surface2); border:1px solid var(--border); border-radius:99px; padding:5px 12px; }
+  .hits-badge img { display:block; border-radius:3px; }
+  .layout { flex:1; min-height:0; display:grid; grid-template-columns:1fr 1fr; width:100%; overflow:hidden; }
+  .left { padding:64px 48px; display:flex; flex-direction:column; justify-content:center; gap:28px; overflow-y:auto; background:radial-gradient(ellipse 100% 80% at -10% 50%,rgba(108,99,255,.1) 0%,transparent 70%); }
+  .hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(108,99,255,.12); border:1px solid rgba(108,99,255,.3); border-radius:99px; padding:5px 14px; font-size:.78rem; color:var(--accent2); font-weight:600; width:fit-content; }
+  h1 { font-size:clamp(2rem,3.2vw,3rem); font-weight:800; letter-spacing:-1.5px; line-height:1.12; }
+  h1 span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .desc { font-size:1rem; color:var(--text-muted); line-height:1.65; max-width:420px; }
+  .stats { display:flex; gap:32px; flex-wrap:wrap; }
+  .stat { display:flex; flex-direction:column; gap:3px; }
+  .stat-value { font-size:1.6rem; font-weight:800; color:var(--accent2); letter-spacing:-.5px; }
+  .stat-label { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; }
+  .wa-btn { display:inline-flex; align-items:center; gap:8px; background:rgba(37,211,102,.1); border:1px solid rgba(37,211,102,.3); border-radius:99px; padding:10px 22px; color:#4ade80; font-size:.85rem; font-weight:700; transition:all .2s; width:fit-content; }
+  .wa-btn:hover { background:rgba(37,211,102,.18); box-shadow:0 0 16px rgba(37,211,102,.2); transform:translateY(-1px); }
+  .right { border-left:1px solid var(--border); padding:48px 40px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
+  .section-title { font-size:.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+  .cards { display:flex; flex-direction:column; gap:14px; }
+  .github-fab { position:fixed; bottom:28px; right:28px; display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:99px; padding:12px 20px 12px 16px; color:var(--text); font-size:.85rem; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,.4); transition:all .25s; z-index:100; }
+  .github-fab:hover { border-color:var(--accent); background:#1e1c35; color:var(--accent2); box-shadow:0 0 0 3px rgba(108,99,255,.2),0 0 24px rgba(108,99,255,.35); transform:translateY(-2px); }
+  footer { text-align:center; padding:16px; font-size:.75rem; color:var(--text-muted); border-top:1px solid var(--border); }
+  @media(max-width:860px) {
+    html,body{height:auto;overflow:visible}
+    .layout{grid-template-columns:1fr;overflow:visible}
+    .left{position:static;height:auto;padding:48px 24px 32px;text-align:center;align-items:center;overflow:visible}
+    .left .desc{margin:0 auto} .stats{justify-content:center}
+    .right{border-left:none;border-top:1px solid var(--border);padding:32px 24px 48px;overflow:visible}
+    .tagline{display:none} header{padding:0 16px;gap:10px}
+    .request-btn span{display:none} .request-btn{padding:7px 10px}
+  }
+</style>
+
+<header>
+  <div class="logo">repasaYA<span class="logo-dot"></span></div>
+  <div class="tagline">Tipo test · Verdadero/Falso · Flashcards</div>
+  <div class="header-right">
+    <a class="request-btn" href="https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre+de+la+asignatura%5D&body=%23%23+Datos%0A%0A-+**Nombre**%3A+%0A-+**Curso**%3A+%0A-+**¿Tienes+material?**+Sí+%2F+No" target="_blank" rel="noopener">
+      ✦ <span>Solicitar asignatura</span>
+    </a>
+    <div class="hits-badge">
+      <img src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=6c63ff&labelColor=1a1d27" alt="visitas" height="18" />
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="left">
+    <div class="hero-badge">✦ Material de repaso colaborativo</div>
+    <h1>Estudia más rápido,<br><span>aprueba de verdad.</span></h1>
+    <p class="desc">Tests interactivos, verdadero/falso y flashcards para las asignaturas de la carrera. Todo gratis, sin registro.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">{subjects.length}</span><span class="stat-label">Asignaturas</span></div>
+      <div class="stat"><span class="stat-value">+700</span><span class="stat-label">Preguntas</span></div>
+      <div class="stat"><span class="stat-value">+25</span><span class="stat-label">Temas cubiertos</span></div>
+    </div>
+    <a class="wa-btn" href="https://wa.me/?text=%F0%9F%93%9A%20*repasaYA*%20%E2%80%94%20Tipo%20test%2C%20V%2FF%20y%20flashcards%20para%20la%20carrera.%20Gratis%20%E2%86%92%20https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Comparte con tus compañeros
+    </a>
+  </div>
+
+  <div class="right">
+    <p class="section-title">Asignaturas</p>
+    <div class="cards">
+      {subjects.map(s => <SubjectCard subject={s} />)}
+    </div>
+  </div>
+</div>
+
+<a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+  Sígueme en GitHub ⭐
+</a>
+
+<footer>Hecho con ganas · <a href="https://github.com/jxliian" style="color:var(--accent2)">jxliian</a></footer>
+</Base>

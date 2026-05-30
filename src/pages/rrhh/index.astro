@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import QuizEngine from '../../components/QuizEngine.astro';
+import vfData from '../../data/rrhh.json';
+---
+<Base title="Recursos Humanos" description="318 V/F con justificación. Temas 1-8 y exámenes ordinarios.">
+  <QuizEngine
+    title="Recursos Humanos"
+    code="RRHH"
+    vfData={vfData}
+  />
+</Base>
