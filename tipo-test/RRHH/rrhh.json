@@ -1692,5 +1692,461 @@
     "q": "Existe equidad individual retributiva si dos individuos que ocupan un puesto similar pero que no contribuyen de forma similar a la organización, no reciben la misma retribución.",
     "answer": "V",
     "justification": "Verdadero. La equidad individual o personal reconoce las diferencias de rendimiento y contribución entre empleados del mismo puesto, retribuyendo de forma diferente según su desempeño."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "La presión de grupo que se produce al utilizar la técnica Delphi en la planificación de recursos humanos, puede hacer que las valoraciones realizadas por los expertos sean menos precisas de lo esperado.",
+    "answer": "F",
+    "justification": "La presión de grupo se produce en la técnica de grupo nominal. En la técnica Delphi pueden surgir problemas al integrar las opiniones de los expertos, pero no típicamente por presión de grupo directa."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "El reclutamiento es la práctica de gestión de recursos humanos que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles los cometidos de sus puestos y presentarles a otras personas con las que van a trabajar.",
+    "answer": "F",
+    "justification": "Esta descripción corresponde a la socialización u onboarding. El reclutamiento se encarga de la búsqueda y atracción de candidatos."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.",
+    "answer": "F",
+    "justification": "La diversidad, bien gestionada, puede tener un impacto positivo en la productividad, la innovación y la atracción de talento."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "La motivación de los empleados es una función importante de la gestión de recursos humanos.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "El liderazgo transformacional se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "El acoso en el lugar de trabajo es un problema menor y no necesita ser abordado con seriedad.",
+    "answer": "F",
+    "justification": "El acoso laboral es un problema grave que requiere atención y solución inmediata por parte de la empresa."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "El reclutamiento es un proceso único y no hay necesidad de revisar o mejorar constantemente las prácticas de reclutamiento de una empresa.",
+    "answer": "F",
+    "justification": "El reclutamiento es un proceso dinámico y continuo que debe ser revisado y mejorado constantemente para asegurar su efectividad."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "Los beneficios laborales, como los seguros de salud y los planes de retiro, no son importantes para los empleados.",
+    "answer": "F",
+    "justification": "Los beneficios laborales (retribución indirecta) son muy importantes para los empleados y contribuyen a su motivación y retención."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "La retroalimentación positiva es la única forma efectiva de motivar a los empleados.",
+    "answer": "F",
+    "justification": "La retroalimentación positiva es importante, pero no la única forma. También se pueden usar metas desafiantes, recompensas, oportunidades de mejora y retroalimentación constructiva."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "La evaluación del desempeño es una herramienta importante para identificar fortalezas y debilidades de los empleados.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "Las empresas deben enfocarse en la contratación de empleados con habilidades técnicas y no preocuparse por la personalidad o habilidades sociales.",
+    "answer": "F",
+    "justification": "Tanto las habilidades técnicas como las habilidades sociales (personalidad, trabajo en equipo, comunicación) son cruciales para el éxito en el trabajo."
+  },
+  {
+    "tema": "Exámenes Ordinarios",
+    "q": "La capacitación y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas necesarias para el trabajo.",
+    "answer": "F",
+    "justification": "La capacitación y el desarrollo son importantes para todos los empleados para su crecimiento profesional a largo plazo y para adaptarse a los cambios."
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "El ajuste persona-organización es un factor q influye en la gestión de RRHH y es un factor: Individual.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "Actualmente las empresas consideran que los recursos humanos solo actúan ante los estímulos económicos.",
+    "answer": "F",
+    "justification": "Influyen más factores además de los económicos, como la motivación, el desarrollo, el ambiente laboral, etc."
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "Los RRHH son todas las personas q pertenecen a una organización, salvo las que ocupan un puesto directivo.",
+    "answer": "F",
+    "justification": "Los RRHH incluyen a todas las personas que pertenecen a la organización, incluyendo los puestos directivos."
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "Para conseguir estructuras más planas en ningún caso se realizaran cambios en el diseño de trabajo.",
+    "answer": "F",
+    "justification": "Para conseguir estructuras más planas, frecuentemente se realizan cambios en el diseño de trabajo, como la ampliación o enriquecimiento de puestos."
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "La descentralización tiene un efecto directo sobre las practicas de RRHH pero la subcontratación y el uso de nuevas tecnologías no.",
+    "answer": "F",
+    "justification": "Tanto la descentralización, como la subcontratación y el uso de nuevas tecnologías tienen efectos directos sobre las prácticas de RRHH."
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "Actualmente el director de RRHH es un gestor q pone su atención en las personas.\",\n    answer: false, // Según el PDF, la corrección dice \"Falso. Los directores de RRHH se encargan de diseñar las estrategias, políticas y practicas de gestión y los responsables funcionales se encargan de poner en marcha estas estrategias y políticas y son el elemento de enlace con el personal de la organización.\"\n    explanation: \"Si bien pone atención en las personas, su rol principal es diseñar estrategias, políticas y prácticas de gestión, y los responsables funcionales las implementan. Es un rol más estratégico y de diseño que solo 'poner atención'.\"\n},\n{\n    statement: \"Entre las tendencias de la gestión de RRHH se encuentran: la gestión de la diversidad, la gestión del talento y el personal branding.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "Los objetivos a largo plazo son los q presentan el alcance estratégico de la gestión de los RRHH y son la rentabilidad y competitividad, incremento de valor en la empresa y la mejora de la eficiencia y eficacia de la organización.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "Los procesos de afectación la organización los lleva a cabo para buscar e incorporar las personas mas adecuadas para cada puesto. Se incluyen el reclutamiento, la selección y la socialización.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 1",
+    "q": "El employer branding es una marca q define como buen empleador y les permita atraer y retener a los mejores profesionales.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Un programa de outplacement o recolocación tiene como objetivo minimizar las demandas judiciales que puedan interponer los trabajadores despedidos.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La planificación de RRHH es un proceso mas completo y complejo que la planificación de plantillas.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los despidos son ruptura laboral involuntaria.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "En el proceso de selección las herramientas tienen que ser válidas y fiables.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los juegos de empresas y assesment centres son técnicas de selección.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Entre las fuentes de reclutamiento interno se encuentra las empresas de trabajo temporal.",
+    "answer": "F",
+    "justification": "Las empresas de trabajo temporal (ETT) son una fuente de reclutamiento externo."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los fines de la evaluación del rendimiento no son solo evaluar lo que no se hace bien, sino buscar la manera de mejorarlo.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El efecto halo y eco es un error q se produce cuando el evaluador generaliza una característica especifica del evaluado a todos los aspectos de la evaluación de desempeño, dando un resultado superior o inferior al que merece el empleado.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "En la gestión y mejora del una vez identificadas la causaas se definen las estrategias disponibles y se establecen los planes de actuación para resolver el problema.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Se proponen tres tipos de estrategias en En la gestión y mejora del rendimiento: estrategias de reforzamiento positivo, negativo y estrategias en caso de q las anteriores no funcionen.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "En el tipo de entrevista mixta se combina las de hablar y convencer con la solución de problemas, forma que la primera sirva para la evaluación y la segunda para la mejora.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los procesos sustractivos solamente afectan a los procesos de evaluación y compensación ya que se trata de una etapa final en el proceso de gestión de RRHH.",
+    "answer": "F",
+    "justification": "Los procesos sustractivos (desvinculación) afectan a todo el sistema de RRHH (planificación, moral, etc.), no solo a evaluación y compensación como etapa final."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Las empresas piensan que el principal motivante del trabajador es el dinero.",
+    "answer": "F",
+    "justification": "Si bien el dinero es un motivador importante, no es el único. También influyen el aprendizaje, desarrollo, reconocimiento, ambiente, etc."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La retribución o compensación total es el conjunto de percepciones financieras, servicios o beneficios tangibles que recibe el empleado como consecuencia de su actividad en la organización.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El dinero es extrínseco y las otras compensaciones motivantes son intrínsecas.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La retribución no financiera (factores intrínsecos) se basa en 3 elementos fundamentales: autonomía, ambiente de trabajo y flexibilidad.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La retribución financiera indirecta mediante prestaciones no suelen pagarse de forma directa al empleado y se perciben por el hecho de formar parte de la organización.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La retribución financiera directa puede fija o variable.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Las dietas no son prestaciones ni salarios, son simplemente un gasto empresarial.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La equidad o consistencia interna se refiere al logro de una retribución justa haciendo que los individuos que estan en el mismo nivel o que tiene contribuciones similares para la organización reciban la misma retribución.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La equidad o competitividad externa se refiere a la consideración de que la retribución es justa respecto a lo que se percibe en puestos similares en otras empresas.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "En la equidad individual se cobra distinto por resultados distintos individualmente.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La política salarial es el conjunto de principios y directrices que reflejan la orientación y filosofía de la organización respecto al sistema de retribución.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La horquilla salarial diferencia monetariamente entre el que mas gana dentro de la empresa y el que menos.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Para determinar el salario base de cada puesto se pueden utilizar dos sistemas de retribución: la retribución basada en el puesto de trabajo y los sistemas de retribución basados en competencias o habilidades, y para determinar los incentivos, el sistema de retribución es aquel que esta basado en el rendimiento.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La retribución basada en competencias es un sistema donde se paga por el valor que se atribuye a los deberes, responsabilidades, tareas y otros factores relacionados con el trabajo y las condiciones laborales.",
+    "answer": "F",
+    "justification": "Cuando la retribución se basa en competencias, se paga en función de las aptitudes, conocimientos, habilidades y capacidades del trabajador, no del valor del puesto en sí."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Las entrevistas de trabajo son una de las fuentes de recopilación de información que se pueden utilizar para realizar un análisis de puestos de trabajo.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los problemas asociados a la baja especialización en los puestos de trabajo pueden solventarse mediante la ampliación o el enriquecimiento de tareas de los mismos.",
+    "answer": "F",
+    "justification": "La ampliación y el enriquecimiento de tareas son técnicas para solventar problemas de alta especialización (monotonía). Para la baja especialización (demasiadas tareas o muy complejas) se podría simplificar o dividir el trabajo."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El área de recursos humanos debe tener muy en cuenta los cambios tecnológicos que ocurren en el entorno ya que pueden afectar a la planificación de plantillas a corto y largo plazo.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El reclutamiento externo mal gestionado puede producir endogamia en la organización.",
+    "answer": "F",
+    "justification": "La endogamia se produce más comúnmente por un reclutamiento interno excesivo o mal gestionado."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "En la planificación de RRHH, se hace un estudio sobre las fuerzas del mercado.",
+    "answer": "V",
+    "justification": "La planificación de RRHH puede incluir un estudio de las fuerzas del mercado, como la disponibilidad de trabajadores calificados en una determinada área o industria."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La ruptura laboral voluntaria: dimisión, jubilación y jubilación anticipada.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La entrevista es el método más común en la selección de personal, aunque es una prueba imprecisa y subjetiva.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El outdoor training es una formación mayoritariamente teórica que se imparte al aire libre para adquirir conocimientos más que habilidades y actitudes.",
+    "answer": "F",
+    "justification": "Es una formación de carácter práctico en la que se adquieren habilidades individuales y grupales al aire libre."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Se denomina empleabilidad a la sucesión de actividades y puestos de trabajo desempeñados por una persona a lo largo de su vida, así como las actitudes y reacciones asociadas que experimenta.",
+    "answer": "F",
+    "justification": "Esa definición se corresponde con la carrera profesional."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La excedencia debida a la asignación o elección para un cargo público o a la realización de funciones sindicales de ámbito provincial o superior se considera excedencia voluntaria.",
+    "answer": "F",
+    "justification": "Se trata de una excedencia obligatoria que las empresas siempre tienen que concederle al trabajador."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Un ERE es un proceso sustractivo de reducción de plantilla y por tanto se trata de una ruptura laboral involuntaria.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La autoevaluación es una fuente de evaluación del desempeño que sirve para incrementar el compromiso de los empleados pero que debe ser utilizada teniendo en cuenta los sesgos que conlleva.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El buen ambiente laboral, la retroalimentación de la información y la flexibilidad laboral son considerados un tipo de remuneración indirecta.",
+    "answer": "F",
+    "justification": "Se considera retribución no financiera o emocional."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Hay equidad individual si dos trabajadores que tienen el mismo puesto pero obtienen diferentes resultados en su desempeño no perciben lo mismo como recompensa.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Es importante que los responsables de realizar un proceso de selección posean la ficha del puesto para el que se hace la selección. Dicha ficha debe recoger el profesiograma del puesto (también denominado especificación) donde se definen las tareas, obligaciones y responsabilidades que deben asumir quienes lo van a ocupar.",
+    "answer": "F",
+    "justification": "Cuando se definen las responsabilidades, tareas y obligaciones se denomina descripción."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Si una empresa se encuentra en una situación de crisis debido por ejemplo a la entrada de un nuevo competidor en su sector que venda a precios mucho más baratos, es posible que el área de recursos humanos se tenga que enfrentar a problemas en la planificación de la plantilla y que la oferta de trabajo exceda a la demanda.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La fiabilidad hace referencia al grado en que una técnica de selección mide el conocimiento, las habilidades o las capacidades requeridas por el perfil de un puesto.",
+    "answer": "F",
+    "justification": "Esa definición se corresponde con la validez."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Las agencias privadas de colocación contratan de manera temporal a empleados para que realicen su trabajo en otra empresa con la que han llegado a un acuerdo.",
+    "answer": "F",
+    "justification": "Eso lo realizan las ETT (Empresas de Trabajo Temporal)."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los métodos de medición del rendimiento que son objetivos, también llamados de resultados, miden el rendimiento en función de lo que aporta la persona a la organización en base a su trabajo.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Es necesario que el coach tenga experiencia en el área donde asesora al coachee para poder ayudarle a maximizar su potencial.",
+    "answer": "F",
+    "justification": "No es necesario. En el caso del mentoring sí que es necesario que el mentor tenga experiencia en el área."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los programas que se utilizan para mejorar los conocimientos, habilidades y actitudes de la plantilla tanto para el trabajo actual como para el futuro son, en esencia, los mismos.",
+    "answer": "F",
+    "justification": "Los programas para mejorar las habilidades de los empleados pueden variar ampliamente dependiendo del objetivo, la audiencia y la empresa."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Los grupos nominales es una técnica grupal de investigación social a distancia donde no existe presión de grupo.",
+    "answer": "F",
+    "justification": "Es presencial y sí hay presión de grupo. La definición corresponde al método Delphi."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "El reclutamiento es el proceso mediante el cual se identifican, se atraen y se eligen a las personas idóneas para ocupar los puestos vacantes.",
+    "answer": "F",
+    "justification": "No se eligen, se eligen en la selección."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Una empresa que quiere amortizar la inversión en formación realizada en sus trabajadores debe realizar reclutamiento externo.",
+    "answer": "F",
+    "justification": "Debe realizar reclutamiento interno porque ha formado a sus trabajadores."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Una de las desventajas del reclutamiento interno es la pérdida de creatividad e innovación.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Entre las fuentes de reclutamiento interno se encuentra las agencias públicas de empleo.",
+    "answer": "F",
+    "justification": "Son una fuente de reclutamiento externo."
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "La horquilla salarial diferencia monetariamente entre el que más gana dentro de la empresa y el que menos.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "Una de las razones para desarrollar correctamente el proceso de reclutamiento de personal es para disminuir la tasa de rotación externa de personal recién contratado.",
+    "answer": "V",
+    "justification": ""
+  },
+  {
+    "tema": "TEMA 2",
+    "q": "En la planificación de RRHH si la demanda de personal es menor que la oferta, la empresa podría optar por realizar despidos.",
+    "answer": "V",
+    "justification": ""
   }
 ]
