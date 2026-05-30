@@ -39,16 +39,36 @@
     .panel.active { display: flex; }
 
     /* ── SELECTOR ── */
-    .selector-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
-    .sel-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 180px; }
+    .start-screen { display: flex; flex-direction: column; gap: 28px; padding: 8px 0; }
+    .start-title { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* modo cards */
+    .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .mode-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 22px 20px; cursor: pointer; transition: all 0.2s; position: relative; user-select: none; }
+    .mode-card:hover { border-color: var(--accent); background: #1e1c35; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,99,255,0.12); }
+    .mode-card.selected { border-color: var(--accent); background: rgba(108,99,255,0.08); }
+    .mode-card.selected::after { content: '✓'; position: absolute; top: 12px; right: 14px; font-size: 0.8rem; font-weight: 800; color: var(--accent); }
+    .mc-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .mc-title { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+    .mc-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+    .mc-chip { display: inline-block; margin-top: 10px; font-size: 0.7rem; font-weight: 700; background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; padding: 3px 10px; color: var(--text-muted); }
+    .mode-card.selected .mc-chip { background: rgba(108,99,255,0.12); border-color: rgba(108,99,255,0.3); color: var(--accent2); }
+
+    /* bloque selector */
+    .bloque-row { display: flex; flex-direction: column; gap: 8px; }
     .sel-label { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
-    select.sel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 11px 14px; color: var(--text); font-size: 0.9rem; outline: none; cursor: pointer; transition: border-color 0.2s; width: 100%; }
+    select.sel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 16px; color: var(--text); font-size: 0.95rem; outline: none; cursor: pointer; transition: border-color 0.2s; width: 100%; }
     select.sel:focus { border-color: var(--accent); }
+
     .btn { padding: 11px 22px; border: none; border-radius: var(--radius); font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 4px 16px rgba(108,99,255,0.35); }
+    .btn-start { width: 100%; padding: 16px; font-size: 1rem; border-radius: var(--radius); background: var(--accent); color: #fff; border: none; font-weight: 800; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px; }
+    .btn-start:hover { background: var(--accent-hover); box-shadow: 0 4px 20px rgba(108,99,255,0.4); transform: translateY(-1px); }
     .btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 480px) { .mode-grid { grid-template-columns: 1fr; } }
 
     /* ── PROGRESS ── */
     .q-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
@@ -154,23 +174,35 @@
   <div id="panel-test" class="panel active">
 
     <!-- SELECTOR -->
-    <div id="selector-view">
-      <div class="selector-row">
-        <div class="sel-group">
-          <span class="sel-label">Tipo de preguntas</span>
-          <select class="sel" id="sel-mode" onchange="updateTemasDropdown()">
-            <option value="vf">Verdadero / Falso</option>
-            <option value="quiz">Quiz (tipo test)</option>
-          </select>
+    <div id="selector-view" class="start-screen">
+
+      <div>
+        <p class="start-title" style="margin-bottom:14px">Tipo de preguntas</p>
+        <div class="mode-grid">
+          <div class="mode-card selected" id="card-vf" onclick="selectMode('vf')">
+            <div class="mc-icon">✓✗</div>
+            <div class="mc-title">Verdadero / Falso</div>
+            <div class="mc-desc">Afirmaciones con justificación detallada. Ideal para examen.</div>
+            <span class="mc-chip">242 preguntas · 10 bloques</span>
+          </div>
+          <div class="mode-card" id="card-quiz" onclick="selectMode('quiz')">
+            <div class="mc-icon">🧠</div>
+            <div class="mc-title">Quiz tipo test</div>
+            <div class="mc-desc">Pregunta + respuesta correcta. Autoevalúate al revelar.</div>
+            <span class="mc-chip">125 preguntas · 9 temas</span>
+          </div>
         </div>
-        <div class="sel-group">
-          <span class="sel-label">Bloque</span>
-          <select class="sel" id="sel-tema">
-            <option value="">Todo mezclado</option>
-          </select>
-        </div>
-        <button class="btn btn-primary" onclick="startQuiz()" style="align-self:flex-end">Empezar →</button>
       </div>
+
+      <div class="bloque-row">
+        <span class="sel-label">Bloque</span>
+        <select class="sel" id="sel-tema">
+          <option value="">Todo mezclado</option>
+        </select>
+      </div>
+
+      <button class="btn-start" onclick="startQuiz()">Empezar →</button>
+
     </div>
 
     <!-- QUIZ VIEW -->
@@ -266,11 +298,19 @@ const QUIZ_TEMAS = [...new Set(QUIZ_DATA.map(q => q.tema))];
 document.getElementById('hdr-stats').textContent =
   `${VF_DATA.length} V/F · ${QUIZ_DATA.length} Quiz · ${VF_DATA.length + QUIZ_DATA.length} total`;
 
-// ── DROPDOWNS ────────────────────────────────────────────
+// ── MODO CARDS ───────────────────────────────────────────
+let selectedMode = 'vf';
+
+function selectMode(mode) {
+  selectedMode = mode;
+  document.getElementById('card-vf').classList.toggle('selected', mode === 'vf');
+  document.getElementById('card-quiz').classList.toggle('selected', mode === 'quiz');
+  updateTemasDropdown();
+}
+
 function updateTemasDropdown() {
-  const mode = document.getElementById('sel-mode').value;
   const sel = document.getElementById('sel-tema');
-  const temas = mode === 'vf' ? VF_TEMAS : QUIZ_TEMAS;
+  const temas = selectedMode === 'vf' ? VF_TEMAS : QUIZ_TEMAS;
   sel.innerHTML = '<option value="">Todo mezclado</option>';
   temas.forEach(t => {
     const o = document.createElement('option');
@@ -286,7 +326,7 @@ let questions = [], idx = 0, correct = 0, wrong = 0, currentMode = 'vf', answere
 function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
 
 function startQuiz() {
-  currentMode = document.getElementById('sel-mode').value;
+  currentMode = selectedMode;
   const tema = document.getElementById('sel-tema').value;
   const src = currentMode === 'vf' ? VF_DATA : QUIZ_DATA;
   questions = shuffle(tema ? src.filter(q => q.tema === tema) : src);
