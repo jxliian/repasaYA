@@ -156,7 +156,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <span class="sel-label">Bloque</span>
         <select class="sel" id="sel-tema"><option value="">Todo mezclado</option></select>
       </div>
-      <button class="btn-start" onclick="startQuiz()">Empezar →</button>
+      <button class="btn-start" id="btn-start">Empezar →</button>
     </div>
 
     <div id="quiz-view" style="display:none">
@@ -168,8 +168,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <!-- VF controls -->
         <div id="vf-controls">
           <div class="vf-buttons">
-            <button class="vf-btn v-btn" id="btn-v" onclick="answerVF('V')">✓ VERDADERO</button>
-            <button class="vf-btn f-btn" id="btn-f" onclick="answerVF('F')">✗ FALSO</button>
+            <button class="vf-btn v-btn" id="btn-v">✓ VERDADERO</button>
+            <button class="vf-btn f-btn" id="btn-f">✗ FALSO</button>
           </div>
           <div class="justification" id="just-box">
             <div class="just-label" id="just-label"></div>
@@ -183,8 +183,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
       </div>
       <div class="q-nav">
-        <button class="btn btn-ghost" onclick="backToSelector()">← Volver</button>
-        <button class="btn btn-primary" id="btn-next" onclick="nextQ()" style="display:none">Siguiente →</button>
+        <button class="btn btn-ghost" id="btn-back">← Volver</button>
+        <button class="btn btn-primary" id="btn-next" style="display:none">Siguiente →</button>
       </div>
     </div>
 
@@ -199,8 +199,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="startQuiz()">Repetir</button>
-        <button class="btn btn-ghost" onclick="backToSelector()">← Volver</button>
+        <button class="btn btn-primary" id="btn-repeat">Repetir</button>
+        <button class="btn btn-ghost" id="btn-back2">← Volver</button>
       </div>
     </div>
   </div>
@@ -208,15 +208,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <!-- BANCO PANEL -->
   <div id="panel-banco" class="panel">
     <div class="controls">
-      <input class="search-box" type="text" id="b-search" placeholder="Buscar..." oninput="filterBank()">
+      <input class="search-box" type="text" id="b-search" placeholder="Buscar...">
       {hasBoth && (
-        <select class="search-box" id="b-tipo" onchange="filterBank()" style="max-width:170px">
+        <select class="search-box" id="b-tipo" style="max-width:170px">
           <option value="">V/F y Test</option>
           <option value="vf">Solo V/F</option>
           <option value="test">Solo Test</option>
         </select>
       )}
-      <select class="search-box" id="b-tema" onchange="filterBank()" style="max-width:200px">
+      <select class="search-box" id="b-tema" style="max-width:200px">
         <option value="">Todos los bloques</option>
       </select>
     </div>
@@ -286,7 +286,7 @@ function showQ(){
     q.opts.forEach((opt,i)=>{
       const btn=document.createElement('button');btn.className='opt-btn';
       btn.innerHTML=`<span class="opt-letter">${LETTERS[i]}</span><span>${opt}</span>`;
-      btn.onclick=()=>answerTest(i);container.appendChild(btn);
+      btn.addEventListener('click',()=>answerTest(i));container.appendChild(btn);
     });
     document.getElementById('feedback').className='feedback';
   }
@@ -336,38 +336,72 @@ function hide(id){document.getElementById(id).style.display='none'}
 function show_el(id){document.getElementById(id).style.display=''}
 function hide_el(id){document.getElementById(id).style.display='none'}
 
+// ── Wiring de eventos (dentro del IIFE de define:vars) ──────────────────
+// Botones principales
+document.getElementById('btn-start').addEventListener('click', startQuiz);
+document.getElementById('btn-v').addEventListener('click', () => answerVF('V'));
+document.getElementById('btn-f').addEventListener('click', () => answerVF('F'));
+document.getElementById('btn-next').addEventListener('click', nextQ);
+document.getElementById('btn-back').addEventListener('click', backToSelector);
+document.getElementById('btn-back2').addEventListener('click', backToSelector);
+document.getElementById('btn-repeat').addEventListener('click', startQuiz);
+
+// Mode cards (solo existen si hasBoth)
+const cvf = document.getElementById('card-vf');
+const ctest = document.getElementById('card-test');
+if(cvf)  cvf.addEventListener('click',  () => selectMode('vf'));
+if(ctest) ctest.addEventListener('click', () => selectMode('test'));
+
 // Tabs
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
     t.classList.add('active');
-    document.getElementById('panel-'+t.dataset.tab).classList.add('active');
-    if(t.dataset.tab==='banco')initBank();
+    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
+    if(t.dataset.tab === 'banco') initBank();
   });
 });
 
 // Banco
-const ALL_BANK=[...VF_DATA.map(q=>({...q,tipo:'vf'})),...TEST_DATA.map(q=>({...q,tipo:'test'}))];
-let bankReady=false;
+const ALL_BANK = [...VF_DATA.map(q=>({...q,tipo:'vf'})), ...TEST_DATA.map(q=>({...q,tipo:'test'}))];
+let bankReady = false;
+
 function initBank(){
-  if(bankReady)return;bankReady=true;
-  const sel=document.getElementById('b-tema');
-  [...new Set(ALL_BANK.map(q=>q.tema))].forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o)});
+  if(bankReady) return;
+  bankReady = true;
+  const sel = document.getElementById('b-tema');
+  [...new Set(ALL_BANK.map(q => q.tema))].forEach(t => {
+    const o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o);
+  });
+  // Event listeners del banco
+  document.getElementById('b-search').addEventListener('input', filterBank);
+  const bTipo = document.getElementById('b-tipo');
+  const bTema = document.getElementById('b-tema');
+  if(bTipo) bTipo.addEventListener('change', filterBank);
+  if(bTema) bTema.addEventListener('change', filterBank);
   filterBank();
 }
+
 function filterBank(){
-  const s=document.getElementById('b-search').value.toLowerCase();
-  const tipo=(document.getElementById('b-tipo')||{value:''}).value;
-  const tema=document.getElementById('b-tema').value;
-  const list=ALL_BANK.filter(q=>(!tipo||q.tipo===tipo)&&(!tema||q.tema===tema)&&(!s||q.q.toLowerCase().includes(s)));
-  document.getElementById('b-count').textContent=`${list.length} preguntas`;
-  const el=document.getElementById('b-list');el.innerHTML='';
-  list.forEach(q=>{
-    const div=document.createElement('div');div.className='bank-item';
-    const badge=q.tipo==='vf'?`<div class="bank-badge ${q.answer==='V'?'b-v':'b-f'}">${q.answer}</div>`:'<div class="bank-badge b-t">Test</div>';
-    const ans=q.tipo==='vf'?q.justification:(q.opts?q.opts[q.correct]:'');
-    div.innerHTML=`${badge}<div><div class="bank-meta">${q.tema}</div><div class="bank-q">${q.q}</div><div class="bank-ans">${ans}</div></div>`;
+  const s    = document.getElementById('b-search').value.toLowerCase();
+  const bTipo = document.getElementById('b-tipo');
+  const tipo  = bTipo ? bTipo.value : '';
+  const tema  = document.getElementById('b-tema').value;
+  const list  = ALL_BANK.filter(q =>
+    (!tipo || q.tipo === tipo) &&
+    (!tema || q.tema === tema) &&
+    (!s    || q.q.toLowerCase().includes(s))
+  );
+  document.getElementById('b-count').textContent = `${list.length} preguntas`;
+  const el = document.getElementById('b-list'); el.innerHTML = '';
+  list.forEach(q => {
+    const div = document.createElement('div'); div.className = 'bank-item';
+    const badge = q.tipo==='vf'
+      ? `<div class="bank-badge ${q.answer==='V'?'b-v':'b-f'}">${q.answer}</div>`
+      : '<div class="bank-badge b-t">Test</div>';
+    const ans = q.tipo==='vf' ? q.justification : (q.opts ? q.opts[q.correct] : '');
+    div.innerHTML = `${badge}<div><div class="bank-meta">${q.tema}</div><div class="bank-q">${q.q}</div><div class="bank-ans">${ans}</div></div>`;
     el.appendChild(div);
   });
 }
