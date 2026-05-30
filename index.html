@@ -7,15 +7,16 @@
   <link rel="icon" type="image/png" href="logo.png" />
 
   <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://jxliian.github.io/repasaYA/" />
-  <meta property="og:title"       content="repasaYA — Tipo Test para la Carrera" />
-  <meta property="og:description" content="Tipo test, verdadero/falso y flashcards para las asignaturas de ADE y Economía. Gratis, sin registro." />
-  <meta property="og:image"       content="https://jxliian.github.io/repasaYA/logo.png" />
-  <meta name="twitter:card"       content="summary" />
-  <meta name="twitter:title"      content="repasaYA — Tipo Test para la Carrera" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://jxliian.github.io/repasaYA/" />
+  <meta property="og:title"        content="repasaYA — Tipo Test para la Carrera" />
+  <meta property="og:description"  content="Tipo test, verdadero/falso y flashcards para las asignaturas de ADE y Economía. Gratis, sin registro." />
+  <meta property="og:image"        content="https://jxliian.github.io/repasaYA/logo.png" />
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="repasaYA — Tipo Test para la Carrera" />
   <meta name="twitter:description" content="Tipo test, V/F y flashcards para la carrera. Gratis." />
-  <meta name="twitter:image"      content="https://jxliian.github.io/repasaYA/logo.png" />
+  <meta name="twitter:image"       content="https://jxliian.github.io/repasaYA/logo.png" />
+
   <style>
     :root {
       --bg: #0f1117;
@@ -32,7 +33,6 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg);
@@ -42,28 +42,32 @@
       flex-direction: column;
     }
 
-    /* ── HEADER ─────────────────────────────── */
+    /* ── HEADER ── */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 18px 32px;
+      padding: 0 28px;
+      height: 58px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
       letter-spacing: -1px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      flex-shrink: 0;
     }
     .logo-dot {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--accent);
       margin-left: 2px;
@@ -72,17 +76,73 @@
       -webkit-text-fill-color: initial;
     }
     .header-tagline {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       border-left: 1px solid var(--border);
-      padding-left: 14px;
+      padding-left: 16px;
+    }
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .request-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(108,99,255,0.08);
+      border: 1px solid rgba(108,99,255,0.25);
+      border-radius: 99px;
+      padding: 7px 14px;
+      color: var(--accent2);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .request-btn:hover {
+      background: rgba(108,99,255,0.16);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(108,99,255,0.2);
+    }
+    .hits-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .hits-badge img { display: block; border-radius: 3px; }
+
+    /* ── SPLIT LAYOUT ── */
+    .page-split {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
     }
 
-    /* ── HERO ────────────────────────────────── */
-    .hero {
-      text-align: center;
-      padding: 64px 24px 48px;
-      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(108,99,255,0.15) 0%, transparent 70%);
+    /* ── LEFT: hero content ── */
+    .left-col {
+      padding: 64px 48px 64px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      position: sticky;
+      top: 58px;
+      height: calc(100vh - 58px);
+      background: radial-gradient(ellipse 100% 80% at -10% 50%, rgba(108,99,255,0.1) 0%, transparent 70%);
     }
     .hero-badge {
       display: inline-flex;
@@ -95,86 +155,88 @@
       font-size: 0.78rem;
       color: var(--accent2);
       font-weight: 600;
-      margin-bottom: 22px;
       letter-spacing: 0.3px;
+      width: fit-content;
     }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
+    .left-col h1 {
+      font-size: clamp(2rem, 3.2vw, 3rem);
       font-weight: 800;
       letter-spacing: -1.5px;
-      line-height: 1.15;
-      margin-bottom: 16px;
+      line-height: 1.12;
     }
-    .hero h1 span {
+    .left-col h1 span {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero p {
+    .left-col p.desc {
       font-size: 1rem;
       color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto;
       line-height: 1.65;
+      max-width: 420px;
     }
     .hero-stats {
       display: flex;
-      justify-content: center;
       gap: 32px;
-      margin-top: 36px;
       flex-wrap: wrap;
     }
-    .stat {
-      display: flex;
-      flex-direction: column;
+    .stat { display: flex; flex-direction: column; gap: 3px; }
+    .stat-value { font-size: 1.6rem; font-weight: 800; color: var(--accent2); letter-spacing: -0.5px; }
+    .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .wa-btn {
+      display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 8px;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.3);
+      border-radius: 99px;
+      padding: 10px 22px;
+      color: #4ade80;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      width: fit-content;
     }
-    .stat-value {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--accent2);
-      letter-spacing: -0.5px;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .wa-btn:hover {
+      background: rgba(37,211,102,0.18);
+      box-shadow: 0 0 16px rgba(37,211,102,0.2);
+      transform: translateY(-1px);
     }
 
-    /* ── GRID ────────────────────────────────── */
-    main {
-      flex: 1;
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 24px 64px;
+    /* ── RIGHT: cards ── */
+    .right-col {
+      border-left: 1px solid var(--border);
+      padding: 48px 40px 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
     }
     .section-title {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 20px;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 18px;
+    .cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    /* ── SUBJECT CARD ────────────────────────── */
+    /* ── CARD ── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
+      padding: 22px 20px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       transition: all 0.22s ease;
       position: relative;
       overflow: hidden;
@@ -189,246 +251,96 @@
       transition: opacity 0.22s;
     }
     .card.available {
-      cursor: pointer;
       text-decoration: none;
       color: inherit;
-      display: flex;
     }
     .card.available:hover {
       border-color: var(--accent);
       background: #1e1c35;
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(108,99,255,0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(108,99,255,0.18);
     }
     .card.available:hover::before { opacity: 1; }
-
-    .card-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
-      background: var(--surface2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      border: 1px solid var(--border);
-    }
-    .card.available .card-icon {
-      background: rgba(108,99,255,0.12);
-      border-color: rgba(108,99,255,0.25);
-    }
-
     .card-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 10px;
     }
-    .card-meta { flex: 1; }
-    .card-code {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 4px;
-    }
-    .card-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--text);
-    }
-    .card.available .card-name { color: var(--text); }
-
-    .badge {
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(108,99,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      border: 1px solid rgba(108,99,255,0.25);
       flex-shrink: 0;
-      font-size: 0.7rem;
-      font-weight: 700;
-      border-radius: 99px;
-      padding: 3px 10px;
-      white-space: nowrap;
     }
-    .badge-live {
-      background: rgba(34,197,94,0.15);
-      color: #4ade80;
-      border: 1px solid rgba(34,197,94,0.25);
-    }
-    .badge-soon {
-      background: rgba(245,158,11,0.1);
-      color: var(--soon);
-      border: 1px solid rgba(245,158,11,0.2);
-    }
+    .card-meta { flex: 1; }
+    .card-code { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
+    .card-name { font-size: 1rem; font-weight: 700; }
+    .badge { flex-shrink: 0; font-size: 0.68rem; font-weight: 700; border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
+    .badge-live { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+    .card-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    .card-footer { display: flex; align-items: center; gap: 8px; margin-top: auto; }
+    .chip { font-size: 0.68rem; color: var(--text-muted); background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; padding: 3px 10px; }
+    .chip-accent { color: var(--accent2); background: rgba(108,99,255,0.08); border-color: rgba(108,99,255,0.2); }
+    .arrow { margin-left: auto; font-size: 1rem; color: var(--accent); opacity: 0; transform: translateX(-4px); transition: all 0.2s; }
+    .card.available:hover .arrow { opacity: 1; transform: translateX(0); }
 
-    .card-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: auto;
-      padding-top: 4px;
-    }
-    .chip {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      padding: 3px 10px;
-    }
-    .chip-accent {
-      color: var(--accent2);
-      background: rgba(108,99,255,0.08);
-      border-color: rgba(108,99,255,0.2);
-    }
-    .arrow {
-      margin-left: auto;
-      font-size: 1rem;
-      color: var(--accent);
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s;
-    }
-    .card.available:hover .arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* ── GITHUB FAB ─────────────────────────── */
+    /* ── GITHUB FAB ── */
     .github-fab {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      bottom: 28px; right: 28px;
+      display: flex; align-items: center; gap: 10px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 99px;
       padding: 12px 20px 12px 16px;
       text-decoration: none;
       color: var(--text);
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.85rem; font-weight: 600;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
       transition: all 0.25s ease;
       z-index: 100;
     }
-    .github-fab:hover, .github-fab:active {
-      border-color: var(--accent);
-      background: #1e1c35;
-      color: var(--accent2);
+    .github-fab:hover {
+      border-color: var(--accent); background: #1e1c35; color: var(--accent2);
       box-shadow: 0 0 0 3px rgba(108,99,255,0.2), 0 0 24px rgba(108,99,255,0.35), 0 4px 20px rgba(0,0,0,0.4);
       transform: translateY(-2px);
     }
-    .github-fab svg {
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
-    }
+    .github-fab svg { flex-shrink: 0; transition: transform 0.25s ease; }
     .github-fab:hover svg { transform: rotate(-8deg) scale(1.1); }
-    @media (max-width: 600px) {
-      .github-fab { bottom: 18px; right: 18px; padding: 11px 16px 11px 14px; font-size: 0.8rem; }
-    }
 
-    /* ── LOGO IMG ───────────────────────────── */
-    .logo-img { height: 36px; width: auto; display: block; }
-
-    /* ── WHATSAPP SHARE ─────────────────────── */
-    .share-row {
-      display: flex;
-      justify-content: center;
-      margin-top: 28px;
-    }
-    .wa-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(37,211,102,0.1);
-      border: 1px solid rgba(37,211,102,0.3);
-      border-radius: 99px;
-      padding: 10px 22px;
-      color: #4ade80;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .wa-btn:hover {
-      background: rgba(37,211,102,0.18);
-      box-shadow: 0 0 16px rgba(37,211,102,0.2);
-      transform: translateY(-1px);
-    }
-
-    /* ── COMMUNITY SECTION ──────────────────── */
-    .community {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px 56px;
-    }
-    .community-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-    .community-icon {
-      font-size: 2.2rem;
-      flex-shrink: 0;
-    }
-    .community-text { flex: 1; min-width: 200px; }
-    .community-text h3 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
-    .community-text p  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
-    .community-btn {
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      padding: 10px 20px;
-      color: var(--text);
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .community-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent2);
-      background: rgba(108,99,255,0.08);
-    }
-
-    /* ── FOOTER ─────────────────────────────── */
+    /* ── FOOTER ── */
     footer {
       text-align: center;
-      padding: 24px;
-      font-size: 0.78rem;
+      padding: 18px 24px;
+      font-size: 0.75rem;
       color: var(--text-muted);
       border-top: 1px solid var(--border);
     }
     footer a { color: var(--accent2); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-    .counter-wrap { margin-top: 10px; display: flex; justify-content: center; gap: 6px; align-items: center; }
 
-    /* ── RESPONSIVE ─────────────────────────── */
-    @media (max-width: 600px) {
-      header { padding: 14px 18px; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .page-split { grid-template-columns: 1fr; }
+      .left-col {
+        position: static;
+        height: auto;
+        padding: 48px 24px 32px;
+        text-align: center;
+        align-items: center;
+      }
+      .left-col p.desc { margin: 0 auto; }
+      .hero-stats { justify-content: center; }
+      .right-col { border-left: none; border-top: 1px solid var(--border); padding: 32px 24px 48px; }
       .header-tagline { display: none; }
-      .hero { padding: 44px 18px 36px; }
-      main { padding: 0 16px 48px; }
-      .grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 20px; }
+      header { padding: 0 16px; gap: 10px; }
+      .request-btn span { display: none; }
+      .request-btn { padding: 7px 10px; }
+      .github-fab { bottom: 16px; right: 16px; padding: 10px 14px 10px 12px; font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -438,112 +350,104 @@
   <header>
     <div class="logo">repasaYA<span class="logo-dot"></span></div>
     <div class="header-tagline">Tipo test · Verdadero/Falso · Flashcards</div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-badge">✦ Material de repaso colaborativo</div>
-    <h1>Estudia más rápido,<br><span>aprueba de verdad.</span></h1>
-    <p>Colección de tests interactivos, preguntas de verdadero/falso y flashcards para las asignaturas de la carrera. Todo en un sitio.</p>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-value">2</span>
-        <span class="stat-label">Asignaturas activas</span>
-      </div>
-      <div class="stat">
-        <span class="stat-value">+1000</span>
-        <span class="stat-label">Preguntas</span>
-      </div>
-      <div class="stat">
-        <span class="stat-value">+20</span>
-        <span class="stat-label">Temas cubiertos</span>
+    <div class="header-right">
+      <a class="request-btn"
+         href="https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre+de+la+asignatura%5D&body=%23%23+Datos+de+la+asignatura%0A%0A-+**Nombre**%3A+%0A-+**Curso**%3A+%0A-+**¿Tienes+material?**+S%C3%AD+%2F+No%0A%0A%23%23+Comentarios%0A%0A"
+         target="_blank" rel="noopener">
+        ✦ <span>Solicitar asignatura</span>
+      </a>
+      <div class="hits-badge">
+        <img src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=6c63ff&labelColor=1a1d27" alt="visitas" height="18" />
       </div>
     </div>
+  </header>
 
-    <!-- WHATSAPP SHARE -->
-    <div class="share-row">
+  <!-- SPLIT LAYOUT -->
+  <div class="page-split">
+
+    <!-- LEFT: texto + stats + share -->
+    <div class="left-col">
+      <div class="hero-badge">✦ Material de repaso colaborativo</div>
+      <h1>Estudia más rápido,<br><span>aprueba de verdad.</span></h1>
+      <p class="desc">Tests interactivos, verdadero/falso y flashcards para las asignaturas de la carrera. Todo gratis, sin registro.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">2</span>
+          <span class="stat-label">Asignaturas activas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">+500</span>
+          <span class="stat-label">Preguntas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">17</span>
+          <span class="stat-label">Temas cubiertos</span>
+        </div>
+      </div>
       <a class="wa-btn"
          href="https://wa.me/?text=%F0%9F%93%9A%20*repasaYA*%20%E2%80%94%20Tipo%20test%2C%20V%2FF%20y%20flashcards%20para%20la%20carrera.%20Gratis%20%E2%86%92%20https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F"
          target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
         Comparte con tus compañeros
       </a>
     </div>
-  </section>
 
-  <!-- SUBJECT GRID -->
-  <main>
-    <p class="section-title">Asignaturas</p>
-    <div class="grid">
+    <!-- RIGHT: cards -->
+    <div class="right-col">
+      <p class="section-title">Asignaturas</p>
+      <div class="cards-grid">
 
-      <!-- ✅ DISPONIBLE: Economía Española -->
-      <a class="card available" href="https://jxliian.github.io/EE_tipotest/" target="_blank" rel="noopener">
-        <div class="card-header">
-          <div class="card-icon">🇪🇸</div>
-          <span class="badge badge-live">● Disponible</span>
-        </div>
-        <div class="card-meta">
-          <div class="card-code">4º Curso · Economía</div>
-          <div class="card-name">Economía Española</div>
-        </div>
-        <p class="card-desc">Tests por tema, banco de preguntas completo, flashcards y resultados del examen oficial. 9 temas cubiertos.</p>
-        <div class="card-footer">
-          <span class="chip chip-accent">+300 preguntas</span>
-          <span class="chip">9 temas</span>
-          <span class="arrow">→</span>
-        </div>
-      </a>
+        <!-- Economía Española -->
+        <a class="card available" href="https://jxliian.github.io/EE_tipotest/" target="_blank" rel="noopener">
+          <div class="card-header">
+            <div class="card-icon">🇪🇸</div>
+            <div class="card-meta">
+              <div class="card-code">4º · Economía</div>
+              <div class="card-name">Economía Española</div>
+            </div>
+            <span class="badge badge-live">● Live</span>
+          </div>
+          <p class="card-desc">Tests por tema, banco de preguntas, flashcards y exámenes oficiales. 9 temas cubiertos.</p>
+          <div class="card-footer">
+            <span class="chip chip-accent">+300 preguntas</span>
+            <span class="chip">9 temas</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
 
-      <!-- ✅ DISPONIBLE: RRHH -->
-      <a class="card available" href="tipo-test/RRHH/index.html">
-        <div class="card-header">
-          <div class="card-icon">👥</div>
-          <span class="badge badge-live">● Disponible</span>
-        </div>
-        <div class="card-meta">
-          <div class="card-code">ADE · Empresa</div>
-          <div class="card-name">Recursos Humanos</div>
-        </div>
-        <p class="card-desc">242 preguntas de verdadero/falso con justificación. 8 temas + exámenes ordinarios.</p>
-        <div class="card-footer">
-          <span class="chip chip-accent">242 preguntas</span>
-          <span class="chip">8 temas</span>
-          <span class="arrow">→</span>
-        </div>
-      </a>
+        <!-- RRHH -->
+        <a class="card available" href="tipo-test/RRHH/index.html">
+          <div class="card-header">
+            <div class="card-icon">👥</div>
+            <div class="card-meta">
+              <div class="card-code">ADE · Empresa</div>
+              <div class="card-name">Recursos Humanos</div>
+            </div>
+            <span class="badge badge-live">● Live</span>
+          </div>
+          <p class="card-desc">242 V/F con justificación + 125 quiz tipo test. 8 temas y exámenes ordinarios.</p>
+          <div class="card-footer">
+            <span class="chip chip-accent">367 preguntas</span>
+            <span class="chip">8 temas</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
 
-    </div>
-  </main>
-
-  <!-- COMMUNITY SECTION -->
-  <section class="community">
-    <div class="community-card">
-      <div class="community-icon">💬</div>
-      <div class="community-text">
-        <h3>¿Quieres que añada tu asignatura?</h3>
-        <p>Dímelo en GitHub y lo valoramos. Si tienes preguntas de examen, tipo test o V/F, entre los dos lo montamos en poco tiempo.</p>
       </div>
-      <a class="community-btn"
-         href="https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre+de+la+asignatura%5D&body=%23%23+Datos+de+la+asignatura%0A%0A-+**Nombre**%3A+%0A-+**Curso**%3A+%0A-+**¿Tienes+material?**+S%C3%AD+%2F+No%0A%0A%23%23+Comentarios%0A%0A"
-         target="_blank" rel="noopener">
-        ✦ Solicitar asignatura
-      </a>
     </div>
-  </section>
+
+  </div>
 
   <!-- GITHUB FAB -->
   <a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
     </svg>
     Sígueme en GitHub ⭐
   </a>
 
   <footer>
-    Hecho con ganas y noches de estudio · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a>
-    <div class="counter-wrap">
-      <img src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=Visitas+totales&color=6c63ff&labelColor=252836" alt="Visitas" height="20" />
-    </div>
+    Hecho con ganas · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a>
   </footer>
 
 </body>
