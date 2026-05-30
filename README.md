@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo.png" alt="repasaYA" width="160" />
+  <img src="logo.png" alt="repasaYA" width="320" />
 </div>
 
 # repasaYA
