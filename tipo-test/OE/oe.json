@@ -2298,7 +2298,7 @@
   },
   {
     "tema": "Regulación del Comportamiento",
-    "q": "Analice la siguiente afirmación: \\\"La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores y normativas organizacionales\\\".",
+    "q": "Analice la siguiente afirmación: \"La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores y normativas organizacionales\".",
     "opts": [
       "Los dos procesos son de naturaleza informal. (socialización informal, adoctrinamiento formal)",
       "La socialización es un proceso de naturaleza informal, mientras que los conocimientos y habilidades necesarios para la realización del trabajo se dan a través del proceso de adoctrinamiento.",
@@ -2366,7 +2366,7 @@
   },
   {
     "tema": "Configuraciones Estructurales",
-    "q": "Analice la siguiente afirmación: \\\"Debido a la naturaleza de su principal mecanismo de coordinación, la organización misionaria puede considerarse como una adhocracia ideológica\\\".",
+    "q": "Analice la siguiente afirmación: \"Debido a la naturaleza de su principal mecanismo de coordinación, la organización misionaria puede considerarse como una adhocracia ideológica\".",
     "opts": [
       "Es falsa, se puede considerar como una burocracia profesional.",
       "Es falsa, se puede considerar como una adhocracia administrativa.",
@@ -2388,7 +2388,7 @@
   },
   {
     "tema": "Configuraciones Estructurales",
-    "q": "Analice la siguiente afirmación: \\\"Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce como la denominación de burocracia duplicada\\\":",
+    "q": "Analice la siguiente afirmación: \"Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce como la denominación de burocracia duplicada\":",
     "opts": [
       "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional. (forma divisional duplicada)",
       "Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia maquinal.",
@@ -2422,7 +2422,7 @@
   },
   {
     "tema": "Configuraciones Estructurales",
-    "q": "Analice la siguiente afirmación: \\\"En las burocracias profesionales, los miembros de la línea media suelen ser los analistas de los procesos de trabajo y de los resultados\\\".",
+    "q": "Analice la siguiente afirmación: \"En las burocracias profesionales, los miembros de la línea media suelen ser los analistas de los procesos de trabajo y de los resultados\".",
     "opts": [
       "Sí, y además controlan las actividades de los operadores.",
       "No, los miembros de la línea media son los responsables de la operación.",
@@ -2467,7 +2467,7 @@
   },
   {
     "tema": "Examen OE",
-    "q": "Indique la veracidad/falsedad de la siguiente afirmación:\\\"El contacto directo como dispositivo de enlace se utiliza cuando hay problemas entre dos departamentos, entonces se sitúa a un miembro de una unidad en la otra para ayudar a solucionar el conflicto\\\".",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación:\"El contacto directo como dispositivo de enlace se utiliza cuando hay problemas entre dos departamentos, entonces se sitúa a un miembro de una unidad en la otra para ayudar a solucionar el conflicto\".",
     "opts": [
       "Falso, el contacto directo dificulta el establecimiento de relaciones entre los directivos o miembros de la organización que han de intervenir en la toma de decisiones o solución de problemas.",
       "Falso, dicha afirmación se corresponde con el rol de enlace.",
@@ -2478,7 +2478,7 @@
   },
   {
     "tema": "Examen OE",
-    "q": "Indique la veracidad/falsedad de la siguiente afirmación: \\\"Cuanto más antiguas son las organizaciones, más formalizadas suelen estar mientras que, conforme aumentan su tamaño, utilizan menos formalización\\\".",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación: \"Cuanto más antiguas son las organizaciones, más formalizadas suelen estar mientras que, conforme aumentan su tamaño, utilizan menos formalización\".",
     "opts": [
       "Falso, es justo al contrario cuanto mayor es el tamaño más formalizadas están las empresas y cuando son más antiguas menos.",
       "Falso, tanto con un aumento en la edad como con un aumento del tamaño, el uso de formalización crece.",
@@ -2489,7 +2489,7 @@
   },
   {
     "tema": "Examen OE",
-    "q": "Indique la veracidad/falsedad de la siguiente afirmación: \\\"La organización en crisis, que aparece cuando la extrema hostilidad obliga a la organización a centralizarse independientemente de cuál sea su estructura habitual, es una variante de la estructura simple\\\".",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación: \"La organización en crisis, que aparece cuando la extrema hostilidad obliga a la organización a centralizarse independientemente de cuál sea su estructura habitual, es una variante de la estructura simple\".",
     "opts": [
       "Falso, es una burocracia maquinal.",
       "Falso, es una forma divisional.",
@@ -2511,7 +2511,7 @@
   },
   {
     "tema": "Examen OE",
-    "q": "Indique la veracidad/falsedad de la siguiente afirmación: *Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada\\\".",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación: *Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada\".",
     "opts": [
       "Falso, se produce una forma divisional de subproductos.",
       "Verdadero.",
@@ -2522,7 +2522,7 @@
   },
   {
     "tema": "Examen OE",
-    "q": "Indique la veracidad/falsedad de la siguiente afirmación (esta pregunta parece una repetición de la pregunta 9 en enunciado, pero las opciones son diferentes y se refieren a tipos de estructuras en general): *Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada\\\". (Asumiré que la pregunta busca identificar un tipo de estructura, y la respuesta C dada es 'Estructura Adhocrática', lo cual no tiene relación directa con la afirmación. Si la pregunta real era otra, por favor, indícalo)",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación (esta pregunta parece una repetición de la pregunta 9 en enunciado, pero las opciones son diferentes y se refieren a tipos de estructuras en general): *Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada\". (Asumiré que la pregunta busca identificar un tipo de estructura, y la respuesta C dada es 'Estructura Adhocrática', lo cual no tiene relación directa con la afirmación. Si la pregunta real era otra, por favor, indícalo)",
     "opts": [
       "Burocracia Profesional",
       "Estructura misionera",
@@ -2566,7 +2566,7 @@
   },
   {
     "tema": "Hipótesis de Congruencia",
-    "q": "La Hipótesis 1 de congruencia afirma que \\\"cuanto más antigua sea la organización más formalizado estará el comportamiento\\\". ¿Significa esto que las organizaciones jóvenes también están muy formalizadas?",
+    "q": "La Hipótesis 1 de congruencia afirma que \"cuanto más antigua sea la organización más formalizado estará el comportamiento\". ¿Significa esto que las organizaciones jóvenes también están muy formalizadas?",
     "opts": [
       "Verdadero, la hipótesis implica alta formalización para todas las edades.",
       "Falso, la hipótesis no implica que las jóvenes estén muy formalizadas, solo que las antiguas lo están más.",
