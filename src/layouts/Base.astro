@@ -4,7 +4,8 @@ interface Props {
   description?: string;
 }
 const { title, description = 'Tipo test, V/F y flashcards para la carrera. Gratis.' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+// BASE_URL puede venir sin barra final dependiendo de la versión
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <!DOCTYPE html>
 <html lang="es">

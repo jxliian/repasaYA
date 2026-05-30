@@ -2,7 +2,7 @@
 import type { Subject } from '../data/subjects';
 interface Props { subject: Subject; }
 const { subject: s } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const href = s.external ?? `${base}${s.slug}/`;
 const isExternal = !!s.external;
 ---

@@ -11,7 +11,7 @@ const { title, code, vfData = [], testData = [] } = Astro.props;
 const hasVF   = vfData.length > 0;
 const hasTest = testData.length > 0;
 const hasBoth = hasVF && hasTest;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <style>
   html,body{height:100%;overflow:hidden}
