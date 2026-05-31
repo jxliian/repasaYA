@@ -24,7 +24,7 @@ const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
   .hits-badge { display:flex; align-items:center; background:var(--surface2); border:1px solid var(--border); border-radius:99px; padding:5px 12px; }
   .hits-badge img { display:block; border-radius:3px; }
   .layout { flex:1; min-height:0; display:grid; grid-template-columns:1fr 1fr; width:100%; overflow:hidden; }
-  .left { padding:64px 48px; display:flex; flex-direction:column; justify-content:center; gap:28px; overflow-y:auto; background:radial-gradient(ellipse 100% 80% at -10% 50%,rgba(108,99,255,.1) 0%,transparent 70%); }
+  .left { padding:64px 48px; display:flex; flex-direction:column; justify-content:center; gap:28px; overflow-y:auto; min-height:0; background:radial-gradient(ellipse 100% 80% at -10% 50%,rgba(108,99,255,.1) 0%,transparent 70%); }
   .hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(108,99,255,.12); border:1px solid rgba(108,99,255,.3); border-radius:99px; padding:5px 14px; font-size:.78rem; color:var(--accent2); font-weight:600; width:fit-content; }
   h1 { font-size:clamp(2rem,3.2vw,3rem); font-weight:800; letter-spacing:-1.5px; line-height:1.12; }
   h1 span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
@@ -35,7 +35,7 @@ const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
   .stat-label { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; }
   .wa-btn { display:inline-flex; align-items:center; gap:8px; background:rgba(37,211,102,.1); border:1px solid rgba(37,211,102,.3); border-radius:99px; padding:10px 22px; color:#4ade80; font-size:.85rem; font-weight:700; transition:all .2s; width:fit-content; }
   .wa-btn:hover { background:rgba(37,211,102,.18); box-shadow:0 0 16px rgba(37,211,102,.2); transform:translateY(-1px); }
-  .right { border-left:1px solid var(--border); padding:48px 40px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; }
+  .right { border-left:1px solid var(--border); padding:48px 40px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; min-height:0; }
   .section-title { font-size:.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
   .cards { display:flex; flex-direction:column; gap:14px; }
   .github-fab { position:fixed; bottom:28px; right:28px; display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:99px; padding:12px 20px 12px 16px; color:var(--text); font-size:.85rem; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,.4); transition:all .25s; z-index:100; }
