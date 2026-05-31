@@ -1,0 +1,117 @@
+---
+import type { Subject } from '../data/subjects';
+import SubjectCard from './SubjectCard.astro';
+
+interface Props {
+  title: string;
+  icon: string;
+  subjects: Subject[];
+}
+
+const { title, icon, subjects } = Astro.props;
+---
+<details class="degree-card">
+  <summary class="degree-header">
+    <div class="degree-icon">{icon}</div>
+    <div class="degree-title">{title}</div>
+    <div class="degree-count">{subjects.length} {subjects.length === 1 ? 'asignatura' : 'asignaturas'}</div>
+    <div class="degree-chevron">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </div>
+  </summary>
+  <div class="degree-content">
+    <div class="cards">
+      {subjects.map(s => <SubjectCard subject={s} />)}
+    </div>
+  </div>
+</details>
+
+<style>
+  .degree-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 14px;
+    transition: all 0.2s ease;
+  }
+  .degree-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(108,99,255,.08);
+  }
+  .degree-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .degree-header::-webkit-details-marker {
+    display: none;
+  }
+  .degree-icon {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(108,99,255,.1);
+    border: 1px solid rgba(108,99,255,.2);
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .degree-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    flex: 1;
+    color: var(--text);
+  }
+  .degree-count {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+  .degree-chevron {
+    color: var(--text-muted);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+  }
+  details[open] .degree-chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+  details[open] .degree-icon {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-color: transparent;
+  }
+  details[open] .degree-title {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .degree-content {
+    padding: 0 20px 20px 20px;
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px dashed var(--border);
+    padding-top: 16px;
+  }
+  
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
