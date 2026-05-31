@@ -1,0 +1,751 @@
+Tema 1: Introducción a los SIBW
+Pregunta 1: ¿Cuál es la principal característica distintiva de un Sistema de
+Información Basado en Web (SIBW) en comparación con otros sistemas de
+información?
+a) Siempre requiere un servidor de base de datos local.
+b) Utiliza navegadores web como interfaz de usuario para acceder a la información y
+funcionalidades.
+c) Solo puede ser accedido desde dispositivos móviles.
+d) Se desarrolla exclusivamente con lenguajes de programación de escritorio.
+Respuesta Correcta: b) Utiliza navegadores web como interfaz de usuario para acceder
+a la información y funcionalidades.
+
+Pregunta 2: ¿Cuál de los siguientes protocolos es fundamental para la transferencia
+de documentos hipermedia en la Web?
+a) FTP (File Transfer Protocol)
+b) SMTP (Simple Mail Transfer Protocol)
+c) HTTP (Hypertext Transfer Protocol)
+d) SSH (Secure Shell)
+Respuesta Correcta: c) HTTP (Hypertext Transfer Protocol)
+
+Pregunta 3: ¿Qué es el HTML (HyperText Markup Language) en el contexto de la
+Web?
+a) Un lenguaje de programación para crear interactividad en las páginas web.
+b) Un protocolo para el intercambio seguro de información.
+c) Un lenguaje de marcado utilizado para estructurar el contenido de las páginas web.
+d) Un sistema de gestión de bases de datos para la Web.
+Respuesta Correcta: c) Un lenguaje de marcado utilizado para estructurar el contenido
+de las páginas web.
+
+Pregunta 4: ¿Cuál de las siguientes afirmaciones describe mejor el concepto de
+"hipertexto"?
+a) Texto plano sin formato que se almacena en una base de datos.
+b) Texto que contiene enlaces a otros textos o documentos.
+c) Un tipo de texto que solo puede ser leído en dispositivos móviles.
+d) Texto encriptado para garantizar la seguridad de la información.
+Respuesta Correcta: b) Texto que contiene enlaces a otros textos o documentos.
+
+Pregunta 5: ¿Qué papel juega un "servidor web" en la arquitectura de un SIBW?
+a) Es el dispositivo del usuario final que solicita la información.
+b) Almacena y procesa las peticiones de los clientes, enviando las páginas web
+solicitadas.
+c) Se encarga exclusivamente de la seguridad de la red.
+d) Traduce el código HTML a un formato legible por el navegador.
+Respuesta Correcta: b) Almacena y procesa las peticiones de los clientes, enviando las
+páginas web solicitadas.
+
+Pregunta 6: ¿Qué significa que HTTP es un protocolo "sin estado" (stateless)?
+a) Que no puede transmitir información dinámica.
+b) Que cada petición del cliente es independiente de las anteriores, sin que el servidor
+guarde memoria de ellas.
+c) Que no requiere una conexión a Internet constante.
+d) Que los datos transferidos no tienen un formato definido.
+Respuesta Correcta: b) Que cada petición del cliente es independiente de las
+anteriores, sin que el servidor guarde memoria de ellas.
+
+Pregunta 7: ¿Qué tecnología se utiliza principalmente para dar estilo y presentación
+visual a los documentos HTML?
+a) JavaScript b) XML
+c) CSS (Cascading Style Sheets)
+d) PHP
+
+Respuesta Correcta: c) CSS (Cascading Style Sheets)
+
+Pregunta 8: ¿Qué funcionalidad principal aporta JavaScript a una página web?
+a) Estructura el contenido y define los elementos de la página.
+b) Proporciona interactividad y funcionalidades dinámicas del lado del cliente.
+c) Define la lógica de negocio del lado del servidor.
+d) Gestiona las bases de datos.
+Respuesta Correcta: b) Proporciona interactividad y funcionalidades dinámicas del lado
+del cliente.
+
+Pregunta 9: En la evolución de la Web, ¿qué característica principal se asocia con la
+Web 2.0?
+a) Énfasis en la lectura pasiva de contenido estático.
+b) Mayor interactividad, colaboración y participación del usuario (redes sociales, blogs,
+wikis).
+c) El surgimiento de la Web Semántica y el procesamiento inteligente de datos.
+d) Uso exclusivo de hipertexto sin elementos multimedia.
+Respuesta Correcta: b) Mayor interactividad, colaboración y participación del usuario
+(redes sociales, blogs, wikis).
+
+Pregunta 10: ¿Qué concepto se refiere a la capacidad de un sitio web para adaptarse
+y ofrecer una experiencia de usuario óptima en diferentes dispositivos y tamaños de
+pantalla (ordenadores, tablets, móviles)?
+a) Diseño fijo
+b) Diseño responsive (adaptativo)
+c) Diseño de escritorio
+d) Diseño de alta fidelidad
+Respuesta Correcta: b) Diseño responsive (adaptativo)
+
+Pregunta 11: ¿Cuál de las siguientes es una ventaja clave de los SIBW para las
+empresas?
+a) Mayor coste de mantenimiento y actualización.
+
+b) Limitación de acceso a la información a usuarios específicos.
+c) Acceso global 24/7 a la información y servicios, con bajo coste de distribución.
+d) Necesidad de instalar software específico en cada ordenador cliente.
+Respuesta Correcta: c) Acceso global 24/7 a la información y servicios, con bajo coste
+de distribución.
+
+Pregunta 12: ¿Qué componente de un SIBW es el encargado de ejecutar scripts del
+lado del servidor y conectarse a bases de datos para generar contenido dinámico?
+a) El navegador web del cliente.
+b) El servidor de aplicaciones (por ejemplo, PHP, Node.js, Python).
+c) El router de la red.
+d) El sistema operativo del cliente.
+Respuesta Correcta: b) El servidor de aplicaciones (por ejemplo, PHP, Node.js, Python).
+
+Pregunta 13: En la arquitectura cliente-servidor de la Web, ¿quién inicia la petición
+de recursos (páginas, imágenes, etc.)?
+a) El servidor DNS.
+b) El servidor web.
+c) El cliente (navegador web).
+d) El servidor de base de datos.
+Respuesta Correcta: c) El cliente (navegador web).
+
+Pregunta 14: ¿Cuál es la función principal de un "servidor de base de datos" en un
+SIBW?
+a) Alojar los archivos HTML y CSS de las páginas web.
+b) Almacenar, gestionar y proporcionar acceso a los datos persistentes del sistema.
+c) Enviar correos electrónicos a los usuarios.
+d) Traducir las peticiones HTTP.
+Respuesta Correcta: b) Almacenar, gestionar y proporcionar acceso a los datos
+persistentes del sistema.
+
+Pregunta 15: ¿Qué tecnología permite el intercambio de datos entre un cliente y un
+servidor de forma asíncrona, sin necesidad de recargar toda la página web?
+a) HTML tradicional
+b) CSS estático
+c) AJAX (Asynchronous JavaScript and XML)
+d) SQL directo
+Respuesta Correcta: c) AJAX (Asynchronous JavaScript and XML)
+
+Pregunta 16: ¿Cuál de las siguientes es una desventaja potencial de los SIBW
+mencionada en el material?
+a) Facilidad de distribución y acceso.
+b) Altos costes iniciales de desarrollo.
+c) Dependencia de una conexión a Internet.
+d) Interoperabilidad limitada con otros sistemas.
+Respuesta Correcta: c) Dependencia de una conexión a Internet.
+
+Pregunta 17: El World Wide Web Consortium (W3C) es una organización clave en el
+desarrollo de la Web. ¿Cuál es su principal función?
+a) Desarrollar navegadores web populares.
+b) Crear software de servidor para alojar sitios web.
+c) Desarrollar estándares y directrices para asegurar el crecimiento a largo plazo de la
+Web.
+d) Proporcionar servicios de hosting para sitios web.
+Respuesta Correcta: c) Desarrollar estándares y directrices para asegurar el
+crecimiento a largo plazo de la Web.
+
+Pregunta 18: ¿Qué representa una URL (Uniform Resource Locator) en el contexto de
+la Web?
+a) El nombre de un lenguaje de programación.
+b) La dirección única de un recurso (página, imagen, etc.) en Internet.
+c) Un tipo de protocolo de seguridad.
+
+d) El nombre de un navegador web.
+Respuesta Correcta: b) La dirección única de un recurso (página, imagen, etc.) en
+Internet.
+
+Pregunta 19: ¿Qué se entiende por "Web semántica" o Web 3.0?
+a) Una web centrada en contenido multimedia y streaming.
+b) Una web donde los datos están interconectados y son inteligibles para máquinas, no
+solo para humanos.
+c) Una web exclusivamente para el comercio electrónico.
+d) Una web que solo permite la interacción básica entre usuarios.
+Respuesta Correcta: b) Una web donde los datos están interconectados y son
+inteligibles para máquinas, no solo para humanos.
+
+Pregunta 20: ¿Cuál es una característica fundamental de los sistemas de información
+distribuidos que se aplica a los SIBW?
+a) Todos los componentes deben residir en un único servidor.
+b) Los componentes del sistema están ubicados en diferentes ordenadores y se
+comunican entre sí.
+c) Solo pueden ser utilizados por un único usuario a la vez.
+d) No requieren de una red para su funcionamiento.
+Respuesta Correcta: b) Los componentes del sistema están ubicados en diferentes
+ordenadores y se comunican entre sí.
+
+Tema 5: Estándares y Normativas Aplicables a los Entornos WEB
+Pregunta 1: Según las WCAG (Web Content Accessibility Guidelines) del W3C, la
+accesibilidad web se organiza en cuatro principios. ¿Cuál de los siguientes NO es uno
+de esos principios?
+a) Perceptible
+b) Adaptable
+c) Operable
+d) Robusto
+Respuesta Correcta: b) Adaptable
+
+Pregunta 2: En la LOPD-GDD (Ley Orgánica de Protección de Datos Personales y
+garantía de los derechos digitales), los datos personales se clasifican en diferentes
+niveles de seguridad. ¿Qué tipo de datos se considera de Nivel Alto?
+a) Datos de carácter personal "generales" (nombre, dirección, teléfono).
+b) Datos relativos a la comisión de infracciones administrativas o penales.
+c) Datos recabados para fines policiales sin consentimiento de las personas afectadas.
+d) Datos financieros de entidades bancarias.
+Respuesta Correcta: c) Datos recabados para fines policiales sin consentimiento de las
+personas afectadas.
+
+Pregunta 3: El material menciona cinco documentos legales clave que una web puede
+necesitar. Para una tienda online o e-commerce, ¿cuál de los siguientes documentos
+es específicamente requerido por las leyes LSSI y LOCM?
+a) Política de Cookies
+b) Aviso Legal
+c) Condiciones de Contratación y Uso
+d) Política de Privacidad
+Respuesta Correcta: c) Condiciones de Contratación y Uso
+
+Pregunta 4: La evaluación automática de la accesibilidad de un sitio web, a través de
+herramientas como las proporcionadas por WEBAIM o Google, ¿qué porcentaje
+aproximado de fallos de accesibilidad detecta, según el material?
+a) Entre un 5% y un 10%
+b) Menos del 25%
+c) Entre un 25% y un 35%
+d) Más del 75%
+Respuesta Correcta: c) Entre un 25% y un 35%
+
+Pregunta 5: Cuando una web instala cookies no imprescindibles (como las analíticas o
+publicitarias), ¿qué sistema se debe aplicar para obtener el consentimiento del
+usuario, según la normativa?
+a) Un sistema de consentimiento tácito donde el usuario continúa navegando.
+b) Un sistema de doble capa (información básica en primer plano y completa vía
+enlace).
+c) Un banner informativo que desaparece automáticamente tras unos segundos.
+d) Una política de cookies enlazada directamente en el pie de página sin requerir
+interacción inicial.
+Respuesta Correcta: b) Un sistema de doble capa (información básica en primer plano
+y completa vía enlace).
+
+Pregunta 6: Según el material, ¿a quién beneficia que la web sea accesible cuando los
+sitios están correctamente diseñados e implementados?
+a) Solamente a las personas con discapacidades severas.
+b) Únicamente a las empresas para evitar sanciones.
+c) A las personas, a las empresas y a la sociedad en general.
+d) Exclusivamente a los desarrolladores web.
+Respuesta Correcta: c) A las personas, a las empresas y a la sociedad en general.
+
+Pregunta 7: Una de las pautas del principio de "Perceptible" en las WCAG es la Pauta
+1.1. ¿A qué se refiere principalmente esta pauta?
+a) Acceso mediante teclado.
+b) Alternativas textuales para cualquier contenido no textual.
+c) Evitar destellos en el contenido.
+d) Legibilidad e inteligibilidad del texto.
+Respuesta Correcta: b) Alternativas textuales para cualquier contenido no textual.
+
+Pregunta 8: Dentro del principio de "Operable" de las WCAG, ¿qué pauta se enfoca
+en asegurar que los usuarios tengan suficiente tiempo para interactuar con el
+contenido?
+a) Pauta 2.1: Acceso mediante teclado.
+b) Pauta 2.2: Suficiente tiempo.
+c) Pauta 2.3: No destellos.
+d) Pauta 2.4: Navegable.
+Respuesta Correcta: b) Pauta 2.2: Suficiente tiempo.
+
+Pregunta 9: El principio de "Robustez" en las WCAG se refiere a que el contenido
+debe ser suficientemente descrito para poder ser leído con distintos lectores y
+tecnologías de asistencia. ¿Qué aspecto específico busca maximizar la Pauta 4.1
+asociada a este principio?
+a) La distinción entre lo más y menos importante.
+b) La compatibilidad con los agentes de usuario (actuales y futuros).
+c) La ayuda a la entrada de datos.
+d) La previsibilidad de la apariencia y operabilidad.
+Respuesta Correcta: b) La compatibilidad con los agentes de usuario (actuales y
+futuros).
+
+Pregunta 10: ¿Cuál es el nivel de cumplimiento de la WCAG que requiere que se
+cumplan los puntos de verificación de prioridad 1 y 2?
+a) Nivel de conformidad ‘A’
+b) Nivel de conformidad ‘AA’
+c) Nivel de conformidad ‘AAA’
+d) Nivel de conformidad ‘B’
+Respuesta Correcta: b) Nivel de conformidad ‘AA’
+
+Pregunta 11: ¿Cuál es el propósito principal de las Accessible Rich Internet
+Applications (ARIA)?
+a) Reemplazar por completo el uso de HTML para la estructura web.
+b) Definir cómo realizar contenido y aplicaciones web más accesibles, especialmente
+las desarrolladas con JavaScript.
+c) Establecer los estándares de diseño visual para sitios web.
+d) Mejorar el rendimiento de carga de las páginas web.
+Respuesta Correcta: b) Definir cómo realizar contenido y aplicaciones web más
+accesibles, especialmente las desarrolladas con JavaScript.
+
+Pregunta 12: Según el Artículo 18.4 de la Constitución Española, ¿qué garantiza la ley
+en relación con el uso de la informática?
+a) La libertad absoluta para el tratamiento de cualquier dato.
+b) El honor y la intimidad personal y familiar de los ciudadanos y el pleno ejercicio de
+sus derechos.
+c) El control total de las empresas sobre los datos de sus empleados.
+d) La prioridad de los intereses comerciales sobre la privacidad individual.
+Respuesta Correcta: b) El honor y la intimidad personal y familiar de los ciudadanos y
+el pleno ejercicio de sus derechos.
+
+Pregunta 13: ¿Cuál es el doble propósito de la Ley Orgánica 3/2018 (LOPD-GDD)
+según su artículo primero?
+a) Regular el comercio electrónico y la publicidad online.
+b) Adaptar el derecho español al RGPD y garantizar los derechos digitales de la
+ciudadanía.
+c) Establecer impuestos sobre los servicios digitales y controlar la ciberseguridad.
+d) Promover la creación de nuevas empresas tecnológicas en España.
+Respuesta Correcta: b) Adaptar el derecho español al RGPD y garantizar los derechos
+digitales de la ciudadanía.
+
+Pregunta 14: ¿Qué tipo de datos personales se consideran de "categorías especiales"
+(sensibles o especialmente protegidos) según la LOPD-GDD, cuyo tratamiento está
+prohibido salvo excepciones?
+a) Datos identificativos (nombre, DNI).
+b) Datos biométricos (para identificación de personas).
+c) Información laboral (categoría, puesto).
+d) Datos académicos (formación, títulos).
+Respuesta Correcta: b) Datos biométricos (para identificación de personas).
+
+Pregunta 15: Según la LOPD-GDD, ¿cuál es el rango de sanción para las infracciones
+graves?
+a) Hasta 40.000 euros.
+b) De 40.001 a 300.000 euros.
+c) De 300.001 euros a 20 millones de euros.
+d) Sin sanción económica, solo advertencia.
+Respuesta Correcta: b) De 40.001 a 300.000 euros.
+
+Pregunta 16: ¿Qué tipo de sitios web están obligados a incluir un Aviso Legal según la
+normativa LSSI?
+a) Solo las tiendas online.
+b) Todas las webs que contemplen servicios relacionados con una actividad económica
+(siempre que estén en España).
+
+c) Únicamente los blogs particulares sin publicidad.
+d) Solo las webs del sector público.
+Respuesta Correcta: b) Todas las webs que contemplen servicios relacionados con una
+actividad económica (siempre que estén en España).
+
+Pregunta 17: La Política de Privacidad es obligatoria para todas las webs que realizan
+algún tratamiento de datos personales. ¿Qué ejemplo de tratamiento de datos
+personales se menciona que la hace obligatoria?
+a) Mostrar únicamente imágenes no identificables.
+b) Obtener datos mediante un formulario (contacto, boletines, alta de usuario).
+c) Usar solamente cookies técnicas imprescindibles.
+d) Ofrecer enlaces a sitios web externos.
+Respuesta Correcta: b) Obtener datos mediante un formulario (contacto, boletines,
+alta de usuario).
+
+Pregunta 18: Para obtener datos personales mediante formularios, ¿qué sistema de
+información se debe aplicar para obtener el consentimiento del usuario, ofreciendo
+información básica en primer plano y completa mediante un enlace?
+a) Un sistema de "opt-out" implícito.
+b) Un sistema de doble capa.
+c) Un consentimiento verbal.
+d) Un único documento de política de privacidad sin capas.
+Respuesta Correcta: b) Un sistema de doble capa.
+
+Pregunta 19: ¿Qué tipo de cookies se consideran "exentas" y no precisan
+consentimiento, según el material?
+a) Cookies de publicidad de terceros.
+b) Cookies de análisis de comportamiento de usuario.
+c) Cookies necesarias solo para prestar un servicio expresamente solicitado por el
+usuario o permitir la comunicación entre equipo y red.
+d) Cookies persistentes para recordar el idioma del usuario.
+
+Respuesta Correcta: c) Cookies necesarias solo para prestar un servicio expresamente
+solicitado por el usuario o permitir la comunicación entre equipo y red.
+
+Pregunta 20: En PHP, ¿qué función se utiliza para eliminar una cookie que ya ha sido
+creada?
+a) session_destroy();
+b) unset($_COOKIE["nombre"]);
+c) setcookie("nombre", "", time() - 3600);
+d) delete_cookie("nombre");
+Respuesta Correcta: c) setcookie("nombre", "", time() - 3600);
+
+Tema 4: Gestión de la Información
+Pregunta 1: Según el material, ¿qué tipo de datos se caracterizan por tener una
+estructura fija y fuertemente tipada, siendo usualmente gestionados por Sistemas de
+Gestión de Bases de Datos (SGBD) relacionales como MySQL o PostgreSQL?
+a) Datos desestructurados
+b) Datos semi-estructurados
+c) Datos estructurados
+d) Datos no relacionales
+Respuesta Correcta: c) Datos estructurados
+
+Pregunta 2: La Inyección SQL es una técnica de ataque peligrosa. ¿Cuál de las
+siguientes es una de las soluciones principales mencionadas en el texto para prevenir
+este tipo de ataque en PHP?
+a) El uso exclusivo de la función eval() para validar entradas de usuario.
+b) La configuración de mysqli.max_persistent para limitar conexiones.
+c) El uso de declaraciones preparadas y consultas parametrizadas.
+d) La habilitación de funciones como exec() y system() en PHP.
+Respuesta Correcta: c) El uso de declaraciones preparadas y consultas parametrizadas.
+
+Pregunta 3: Un Crawler o Spider es un robot que navega por la web indexando y
+clasificando contenidos. ¿Cuál de los siguientes archivos XML es utilizado por los
+sitios web para describir jerárquicamente su estructura y facilitar la vida a los
+buscadores?
+a) robots.txt
+b) .htaccess
+c) sitemap
+d) index.html
+Respuesta Correcta: c) sitemap
+
+Pregunta 4: La técnica de Web Scraping para extraer información de sitios web de
+manera automática, según el RGPD y la LOPDGDD, solo está permitida si los datos se
+recaban por un fin de interés público general, o si prevalece el interés del
+responsable del tratamiento sobre la protección de datos. ¿Cuál es la tercera
+condición explícitamente mencionada?
+a) Si la información es exclusivamente de carácter técnico.
+b) Si el sitio web no tiene un archivo robots.txt.
+c) Si la persona rastreada lo es bajo su consentimiento.
+d) Si se utiliza un método de scraping a ciegas.
+Respuesta Correcta: c) Si la persona rastreada lo es bajo su consentimiento.
+
+Pregunta 5: Las conexiones persistentes en PHP, utilizadas con APIs como MySQLi,
+tienen la ventaja de evitar el tiempo de establecimiento de nuevas conexiones. ¿Qué
+otro beneficio principal se menciona?
+a) Aumentan el consumo de recursos del servidor de base de datos.
+b) Pueden quedar en estados impredecibles (bloqueos).
+c) Mejoran la eficiencia en el uso de recursos al reutilizar conexiones existentes.
+d) Requieren una limpieza manual constante para evitar problemas.
+Respuesta Correcta: c) Mejoran la eficiencia en el uso de recursos al reutilizar
+conexiones existentes.
+
+Pregunta 6: ¿Qué tipo de datos se caracteriza por tener una estructura con cierta
+flexibilidad, no tan rígida como la de una base de datos relacional, siendo ejemplos el
+JSON o el XML?
+a) Datos desestructurados
+b) Datos estructurados
+c) Datos semi-estructurados
+d) Datos relacionales
+Respuesta Correcta: c) Datos semi-estructurados
+
+Pregunta 7: ¿Cuál de los siguientes es un peligro principal de la inyección SQL, según
+el material?
+a) Ralentización de la conexión a internet del usuario.
+b) Acceso no autorizado a datos sensibles o modificación de los mismos.
+c) Sobrecalentamiento del procesador del cliente.
+d) Borrado de las cookies de sesión del usuario.
+Respuesta Correcta: b) Acceso no autorizado a datos sensibles o modificación de los
+mismos.
+
+Pregunta 8: Si un atacante no ve los resultados de una consulta SQL maliciosa
+directamente, pero infiere información a través de respuestas booleanas
+(verdadero/falso) de la base de datos, ¿qué tipo de inyección SQL está utilizando?
+a) Inyección SQL In-Band
+b) Inyección SQL Basada en Errores
+c) Inyección SQL a Ciegas d) Inyección SQL a través de comandos directos
+Respuesta Correcta: c) Inyección SQL a Ciegas
+
+Pregunta 9: ¿Cuál de los siguientes es un inconveniente de las conexiones
+persistentes en una base de datos PHP?
+a) Siempre cierran la conexión al finalizar la ejecución del script.
+b) Reducen la latencia al establecer nuevas conexiones.
+c) Consumen recursos del servidor incluso cuando no se están utilizando activamente.
+d) No permiten la reutilización de conexiones existentes.
+Respuesta Correcta: c) Consumen recursos del servidor incluso cuando no se están
+utilizando activamente.
+
+Pregunta 10: ¿Para qué propósito principal se utiliza XML (Extensible Markup
+Language)?
+a) Para definir lenguajes de programación con una sintaxis estricta.
+b) Para la gestión de datos estructurados en bases de datos relacionales.
+c) Como metalenguaje de marcas para definir otros lenguajes de marcas, facilitando el
+intercambio de información.
+
+d) Para crear interfaces de usuario interactivas en el navegador.
+Respuesta Correcta: c) Como metalenguaje de marcas para definir otros lenguajes de
+marcas, facilitando el intercambio de información.
+
+Pregunta 11: ¿Cuál de los siguientes es un lenguaje derivado de XML mencionado en
+el texto?
+a) JavaScript
+b) HTML5
+c) MathML
+d) CSS
+Respuesta Correcta: c) MathML
+
+Pregunta 12: El lenguaje XSL (Extensible Stylesheet Language) se utiliza para dar
+estilo a los documentos XML. ¿Cuáles son sus tres componentes principales?
+a) XML, DTD, Schema
+b) XSLT, XPath, XSL-FO
+c) DOM, SAX, WSDL
+d) HTML, CSS, JavaScript
+Respuesta Correcta: b) XSLT, XPath, XSL-FO
+
+Pregunta 13: ¿Qué es JSON (JavaScript Object Notation)?
+a) Un lenguaje de programación completo para el desarrollo web.
+b) Un formato de texto sencillo para el intercambio de información, subconjunto de la
+notación literal de objetos de JavaScript.
+c) Un sistema de gestión de bases de datos relacionales.
+d) Un protocolo de comunicación para servicios web.
+Respuesta Correcta: b) Un formato de texto sencillo para el intercambio de
+información, subconjunto de la notación literal de objetos de JavaScript.
+
+Pregunta 14: ¿Cuál es el objetivo principal de la Web Semántica?
+a) Reducir el tiempo de carga de las páginas web.
+
+b) Crear tecnologías para publicar datos legibles y evaluables automáticamente por
+aplicaciones informáticas.
+c) Mejorar la apariencia visual de los sitios web.
+d) Aumentar el número de visitas a los sitios web.
+Respuesta Correcta: b) Crear tecnologías para publicar datos legibles y evaluables
+automáticamente por aplicaciones informáticas.
+
+Pregunta 15: Dentro del contexto de la Web Semántica, ¿cuál es la utilidad principal
+de una Ontología?
+a) Definir la sintaxis de un lenguaje de programación.
+b) Proporcionar un conocimiento compartido sobre un dominio concreto y organizar
+datos.
+c) Gestionar transacciones financieras seguras.
+d) Diseñar la interfaz de usuario de aplicaciones móviles.
+Respuesta Correcta: b) Proporcionar un conocimiento compartido sobre un dominio
+concreto y organizar datos.
+
+Pregunta 16: ¿Cuál es el objetivo principal de un crawler o spider en el contexto de la
+gestión de datos desestructurados?
+a) Ejecutar código JavaScript en el navegador del usuario.
+b) Descubrir nuevas webs e identificar cambios en las existentes para indexarlas.
+c) Realizar ataques de inyección SQL en bases de datos.
+d) Mostrar publicidad personalizada a los usuarios.
+Respuesta Correcta: b) Descubrir nuevas webs e identificar cambios en las existentes
+para indexarlas.
+
+Pregunta 17: ¿Para qué se utiliza el archivo robots.txt en relación con los crawlers o
+spiders?
+a) Para almacenar información de sesión del usuario.
+b) Para describir la estructura jerárquica completa del sitio web.
+c) Para indicar a los buscadores qué partes del sitio pueden o no acceder.
+d) Para definir las reglas de estilo de los documentos HTML.
+
+Respuesta Correcta: c) Para indicar a los buscadores qué partes del sitio pueden o no
+acceder.
+
+Pregunta 18: Según el material, ¿cuál de las siguientes acciones relacionadas con el
+web scraping NO está permitida?
+a) Scrapear fuentes de acceso público para un fin de interés público general.
+b) Usar los datos obtenidos para spam o robo de identidades.
+c) Recabar datos con el consentimiento de la persona rastreada.
+d) Scrapear si prevalece el interés del responsable del tratamiento.
+Respuesta Correcta: b) Usar los datos obtenidos para spam o robo de identidades.
+
+Pregunta 19: ¿Cuál de los siguientes es un método común para evitar el web
+scraping?
+a) Eliminar el archivo robots.txt del servidor.
+b) Usar eval() para validar las entradas del usuario.
+c) Ofuscar o esconder los datos y establecer límites de peticiones.
+d) Permitir el acceso ilimitado a cualquier fuente de datos.
+Respuesta Correcta: c) Ofuscar o esconder los datos y establecer límites de peticiones.
+
+Pregunta 20: ¿Qué es SEO (Search Engine Optimization)?
+a) Una técnica para extraer información de sitios web de manera automática.
+b) El conjunto de acciones orientadas a mejorar el posicionamiento de un sitio web en
+los resultados de buscadores.
+c) Un lenguaje de marcas para definir la estructura de los datos.
+d) Un método para gestionar bases de datos no estructuradas.
+Respuesta Correcta: b) El conjunto de acciones orientadas a mejorar el
+posicionamiento de un sitio web en los resultados de buscadores.
+
+TIPO TEST TEMA 4
+1. ¿Qué tipo de datos se caracteriza por una estructura fija y fuertemente tipada?
+A) Desestructurados
+B) Semi-estructurados
+C) Estructurados
+D) Híbridos
+2. ¿Cuál de los siguientes es un ejemplo de datos semi-estructurados?
+A) Video
+B) XML
+C) Tabla de Excel
+D) Imagen PNG
+3. ¿Cuál de las siguientes tecnologías permite almacenar datos estructurados de
+forma relacional?
+A) MongoDB
+B) MySQL
+C) SVG
+D) JSON
+4. ¿Qué es una inyección SQL?
+A) Un sistema de backup
+B) Un tipo de dato en XML
+C) Un ataque que inserta código SQL malicioso
+D) Una forma de conexión persistente
+5. ¿Qué tipo de inyección SQL devuelve resultados por el mismo canal usado para
+explotar la vulnerabilidad?
+A) Ciega
+B) Basada en errores
+C) In-Band
+D) XPath
+6. Técnica que limpia los datos de entrada para eliminar caracteres peligrosos.
+A) Validación
+B) Ofuscación
+C) Sanitización
+D) Refactorización
+7. ¿Qué es un crawler o spider?
+A) Un lenguaje de marcado
+B) Un programa para limpiar datos
+
+C) Un bot que navega por la web indexando contenidos
+D) Un ataque de red
+8. ¿Cuál es una ventaja de las conexiones persistentes a bases de datos?
+A) Incremento del consumo de recursos
+B) Estados impredecibles
+C) Reducción de la latencia
+D) Mayor complejidad en SQL
+9. ¿Qué significa XSLT?
+A) Lenguaje de estilos XML
+B) Lenguaje de transformación XML
+C) Sistema de log XML
+D) Estilo externo de SVG
+10. ¿Qué función cumple el archivo robots.txt?
+A) Mejora la seguridad del sitio
+B) Describe la estructura del sitio
+C) Indica a los bots qué partes de un sitio pueden visitar
+D) Permite generar mapas de sitio
+
+Preguntas de definición (elige el término que corresponde):
+11. Formato de texto sencillo basado en notación de objetos de JavaScript.
+A) JSON
+B) CSV
+C) XML
+D) XSLT
+12. Describe tipos, propiedades y relaciones entre entidades dentro de un dominio.
+A) XML
+B) JSON
+C) Ontología
+D) Base de Datos
+13. Técnica automatizada para extraer datos de sitios web.
+A) Crawler
+B) SQL Injection
+C) Web Scraping
+D) SEO
+14. Archivo XML que representa la estructura de un sitio web.
+
+A) sitemap.xml
+B) robots.txt
+C) links.html
+D) index.xml
+15. Técnica para extraer palabras clave y preparar textos para búsqueda.
+A) Indexación
+B) Tokenización
+C) Sanitización
+D) Compilación
+
+Más preguntas del tema:
+16. ¿Cuál de estas bases de datos se usa comúnmente con formato JSON?
+A) MySQL
+B) PostgreSQL
+C) Oracle
+D) MongoDB
+17. ¿Qué opción corresponde a una técnica SEO?
+A) Inyección de código
+B) Investigación de palabras clave
+C) Sanitización
+D) Web scraping
+18. ¿Cuál es una solución segura ante inyecciones SQL?
+A) Uso de cookies
+B) Consultas dinámicas
+C) Consultas parametrizadas
+D) Uso de eval()
+19. ¿Qué elemento es propio del estilo en documentos XML?
+A) SVG
+B) XPath
+C) JSON
+D) PDO
+20. ¿Cuál de los siguientes no es un lenguaje derivado de XML?
+A) NewsML
+B) OOXML
+C) XHTML
+D) JSON
+
+Preguntas con código o ejemplos:
+21. ¿Qué entrada puede producir una inyección SQL en un login vulnerable?
+A) admin'; DROP TABLE users;-B) <script>alert('xss')
+C) ' OR '1'='2
+D) admin' -22. ¿Qué significa que una conexión sea persistente?
+A) Se cierra tras cada script
+B) Se abre con cada nueva petición
+C) Permanece abierta entre ejecuciones
+D) Se establece una sola vez por sesión de usuario
+23. ¿Qué función en PHP se usa para validar emails?
+A) validate_email()
+B) filter_var()
+C) mysql_email_check()
+D) email_is_valid()
+24. ¿Cuál de los siguientes elementos de XSL transforma documentos XML?
+A) XSL-FO
+B) XPath
+C) XSLT
+D) XSL-CSS
+25. ¿Qué herramienta permite formatear visualmente XML para impresión?
+A) XSLT
+B) XPath
+C) XSL-FO
+D) JSON
+
+Definiciones adicionales:
+26. Recomendación de no usar funciones como eval() en PHP.
+A) Seguridad web
+B) Depuración
+C) Análisis de rendimiento
+D) Compresión de datos
+
+27. Conjunto de acciones para mejorar el ranking de un sitio web en buscadores.
+A) SQL Injection
+B) Web Semántica
+C) SEO
+D) Sanitización
+28. Técnica para bloquear bots de scraping.
+A) Uso de metadatos
+B) Captchas
+C) Inyección de errores
+D) sitemap.xml
+29. ¿Qué formato separa columnas con comas y filas con saltos de línea?
+A) JSON
+B) XML
+C) CSV
+D) TXT
+30. ¿Qué fase del proceso de búsqueda incluye clasificación e indexación?
+A) Tokenización
+B) Análisis semántico
+C) Rastreo
+D) Indexación
+RESPUESTAS
+1. C
+2. B
+3. B
+4. C
+5. C
+6. C
+7. C
+8. C
+9. B
+10. C
+11. A
+12. C
+13. C
+14. A
+15. B
+16. D
+17. B
+18. C
+19. B
+20. D
+
+21. D
+22. C
+23. B
+24. C
+25. C
+26. A
+27. C
+28. B
+29. C
+30. D
+
+

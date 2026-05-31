@@ -49,9 +49,9 @@ export const subjects: Subject[] = [
     title: 'Sistemas de Información Basados en Web',
     code: 'Informática · SIBW',
     icon: '🌐',
-    description: '89 preguntas tipo test sobre Introducción, Gestión de Información, Análisis/Diseño y Normativa.',
+    description: '178 preguntas tipo test sobre Introducción, Gestión de Información, Análisis/Diseño y Normativa.',
     type: 'test',
-    chips: ['89 preguntas', '4 temas'],
+    chips: ['178 preguntas', '4 temas'],
     dataFile: 'sibw.json',
   },
   // ─── AÑADE AQUÍ NUEVAS ASIGNATURAS ───────────────

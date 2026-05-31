@@ -977,5 +977,984 @@
       "Política de inteligencia artificial"
     ],
     "correct": 3
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es la principal característica distintiva de un Sistema de Información Basado en Web (SIBW) en comparación con otros sistemas de información?",
+    "opts": [
+      "Siempre requiere un servidor de base de datos local.",
+      "Utiliza navegadores web como interfaz de usuario para acceder a la información y funcionalidades.",
+      "Solo puede ser accedido desde dispositivos móviles.",
+      "Se desarrolla exclusivamente con lenguajes de programación de escritorio."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de los siguientes protocolos es fundamental para la transferencia de documentos hipermedia en la Web?",
+    "opts": [
+      "FTP (File Transfer Protocol)",
+      "SMTP (Simple Mail Transfer Protocol)",
+      "HTTP (Hypertext Transfer Protocol)",
+      "SSH (Secure Shell)"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué es el HTML (HyperText Markup Language) en el contexto de la Web?",
+    "opts": [
+      "Un lenguaje de programación para crear interactividad en las páginas web.",
+      "Un protocolo para el intercambio seguro de información.",
+      "Un lenguaje de marcado utilizado para estructurar el contenido de las páginas web.",
+      "Un sistema de gestión de bases de datos para la Web."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de las siguientes afirmaciones describe mejor el concepto de \"hipertexto\"?",
+    "opts": [
+      "Texto plano sin formato que se almacena en una base de datos.",
+      "Texto que contiene enlaces a otros textos o documentos.",
+      "Un tipo de texto que solo puede ser leído en dispositivos móviles.",
+      "Texto encriptado para garantizar la seguridad de la información."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué papel juega un \"servidor web\" en la arquitectura de un SIBW?",
+    "opts": [
+      "Es el dispositivo del usuario final que solicita la información.",
+      "Almacena y procesa las peticiones de los clientes, enviando las páginas web solicitadas.",
+      "Se encarga exclusivamente de la seguridad de la red.",
+      "Traduce el código HTML a un formato legible por el navegador."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué significa que HTTP es un protocolo \"sin estado\" (stateless)?",
+    "opts": [
+      "Que no puede transmitir información dinámica.",
+      "Que cada petición del cliente es independiente de las anteriores, sin que el servidor guarde memoria de ellas.",
+      "Que no requiere una conexión a Internet constante.",
+      "Que los datos transferidos no tienen un formato definido."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué tecnología se utiliza principalmente para dar estilo y presentación visual a los documentos HTML?",
+    "opts": [
+      "JavaScript",
+      "XML",
+      "CSS (Cascading Style Sheets)",
+      "PHP"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué funcionalidad principal aporta JavaScript a una página web?",
+    "opts": [
+      "Estructura el contenido y define los elementos de la página.",
+      "Proporciona interactividad y funcionalidades dinámicas del lado del cliente.",
+      "Define la lógica de negocio del lado del servidor.",
+      "Gestiona las bases de datos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "En la evolución de la Web, ¿qué característica principal se asocia con la Web 2.0?",
+    "opts": [
+      "Énfasis en la lectura pasiva de contenido estático.",
+      "Mayor interactividad, colaboración y participación del usuario (redes sociales, blogs, wikis).",
+      "El surgimiento de la Web Semántica y el procesamiento inteligente de datos.",
+      "Uso exclusivo de hipertexto sin elementos multimedia."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué concepto se refiere a la capacidad de un sitio web para adaptarse y ofrecer una experiencia de usuario óptima en diferentes dispositivos y tamaños de pantalla (ordenadores, tablets, móviles)?",
+    "opts": [
+      "Diseño fijo",
+      "Diseño responsive (adaptativo)",
+      "Diseño de escritorio",
+      "Diseño de alta fidelidad"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de las siguientes es una ventaja clave de los SIBW para las empresas?",
+    "opts": [
+      "Mayor coste de mantenimiento y actualización.",
+      "Limitación de acceso a la información a usuarios específicos.",
+      "Acceso global 24/7 a la información y servicios, con bajo coste de distribución.",
+      "Necesidad de instalar software específico en cada ordenador cliente."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué componente de un SIBW es el encargado de ejecutar scripts del lado del servidor y conectarse a bases de datos para generar contenido dinámico?",
+    "opts": [
+      "El navegador web del cliente.",
+      "El servidor de aplicaciones (por ejemplo, PHP, Node.js, Python).",
+      "El router de la red.",
+      "El sistema operativo del cliente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "En la arquitectura cliente-servidor de la Web, ¿quién inicia la petición de recursos (páginas, imágenes, etc.)?",
+    "opts": [
+      "El servidor DNS.",
+      "El servidor web.",
+      "El cliente (navegador web).",
+      "El servidor de base de datos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es la función principal de un \"servidor de base de datos\" en un SIBW?",
+    "opts": [
+      "Alojar los archivos HTML y CSS de las páginas web.",
+      "Almacenar, gestionar y proporcionar acceso a los datos persistentes del sistema.",
+      "Enviar correos electrónicos a los usuarios.",
+      "Traducir las peticiones HTTP."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué tecnología permite el intercambio de datos entre un cliente y un servidor de forma asíncrona, sin necesidad de recargar toda la página web?",
+    "opts": [
+      "HTML tradicional",
+      "CSS estático",
+      "AJAX (Asynchronous JavaScript and XML)",
+      "SQL directo"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de las siguientes es una desventaja potencial de los SIBW mencionada en el material?",
+    "opts": [
+      "Facilidad de distribución y acceso.",
+      "Altos costes iniciales de desarrollo.",
+      "Dependencia de una conexión a Internet.",
+      "Interoperabilidad limitada con otros sistemas."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "El World Wide Web Consortium (W3C) es una organización clave en el desarrollo de la Web. ¿Cuál es su principal función?",
+    "opts": [
+      "Desarrollar navegadores web populares.",
+      "Crear software de servidor para alojar sitios web.",
+      "Desarrollar estándares y directrices para asegurar el crecimiento a largo plazo de la Web.",
+      "Proporcionar servicios de hosting para sitios web."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué representa una URL (Uniform Resource Locator) en el contexto de la Web?",
+    "opts": [
+      "El nombre de un lenguaje de programación.",
+      "La dirección única de un recurso (página, imagen, etc.) en Internet.",
+      "Un tipo de protocolo de seguridad.",
+      "El nombre de un navegador web."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué se entiende por \"Web semántica\" o Web 3.0?",
+    "opts": [
+      "Una web centrada en contenido multimedia y streaming.",
+      "Una web donde los datos están interconectados y son inteligibles para máquinas, no solo para humanos.",
+      "Una web exclusivamente para el comercio electrónico.",
+      "Una web que solo permite la interacción básica entre usuarios."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es una característica fundamental de los sistemas de información distribuidos que se aplica a los SIBW?",
+    "opts": [
+      "Todos los componentes deben residir en un único servidor.",
+      "Los componentes del sistema están ubicados en diferentes ordenadores y se comunican entre sí.",
+      "Solo pueden ser utilizados por un único usuario a la vez.",
+      "No requieren de una red para su funcionamiento."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Según las WCAG (Web Content Accessibility Guidelines) del W3C, la accesibilidad web se organiza en cuatro principios. ¿Cuál de los siguientes NO es uno de esos principios?",
+    "opts": [
+      "Perceptible",
+      "Adaptable",
+      "Operable",
+      "Robusto"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "En la LOPD-GDD (Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales), los datos personales se clasifican en diferentes niveles de seguridad. ¿Qué tipo de datos se considera de Nivel Alto?",
+    "opts": [
+      "Datos de carácter personal \"generales\" (nombre, dirección, teléfono).",
+      "Datos relativos a la comisión de infracciones administrativas o penales.",
+      "Datos recabados para fines policiales sin consentimiento de las personas afectadas.",
+      "Datos financieros de entidades bancarias."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "El material menciona cinco documentos legales clave que una web puede necesitar. Para una tienda online o e-commerce, ¿cuál de los siguientes documentos es específicamente requerido por las leyes LSSI y LOCM?",
+    "opts": [
+      "Política de Cookies",
+      "Aviso Legal",
+      "Condiciones de Contratación y Uso",
+      "Política de Privacidad"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "La evaluación automática de la accesibilidad de un sitio web, a través de herramientas como las proporcionadas por WEBAIM o Google, ¿qué porcentaje aproximado de fallos de accesibilidad detecta, según el material?",
+    "opts": [
+      "Entre un 5% y un 10%",
+      "Menos del 25%",
+      "Entre un 25% y un 35%",
+      "Más del 75%"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Cuando una web instala cookies no imprescindibles (como las analíticas o publicitarias), ¿qué sistema se debe aplicar para obtener el consentimiento del usuario, según la normativa?",
+    "opts": [
+      "Un sistema de consentimiento tácito donde el usuario continúa navegando.",
+      "Un sistema de doble capa (información básica en primer plano y completa vía enlace).",
+      "Un banner informativo que desaparece automáticamente tras unos segundos.",
+      "Una política de cookies enlazada directamente en el pie de página sin requerir interacción inicial."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Según el material, ¿a quién beneficia que la web sea accesible cuando los sitios están correctamente diseñados e implementados?",
+    "opts": [
+      "Solamente a las personas con discapacidades severas.",
+      "Únicamente a las empresas para evitar sanciones.",
+      "A las personas, a las empresas y a la sociedad en general.",
+      "Exclusivamente a los desarrolladores web."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Una de las pautas del principio de \"Perceptible\" en las WCAG es la Pauta 1.1. ¿A qué se refiere principalmente esta pauta?",
+    "opts": [
+      "Acceso mediante teclado.",
+      "Alternativas textuales para cualquier contenido no textual.",
+      "Evitar destellos en el contenido.",
+      "Legibilidad e inteligibilidad del texto."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Dentro del principio de \"Operable\" de las WCAG, ¿qué pauta se enfoca en asegurar que los usuarios tengan suficiente tiempo para interactuar con el contenido?",
+    "opts": [
+      "Pauta 2.1: Acceso mediante teclado.",
+      "Pauta 2.2: Suficiente tiempo.",
+      "Pauta 2.3: No destellos.",
+      "Pauta 2.4: Navegable."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "El principio de \"Robustez\" en las WCAG se refiere a que el contenido debe ser suficientemente descrito para poder ser leído con distintos lectores y tecnologías de asistencia. ¿Qué aspecto específico busca maximizar la Pauta 4.1 asociada a este principio?",
+    "opts": [
+      "La distinción entre lo más y menos importante.",
+      "La compatibilidad con los agentes de usuario (actuales y futuros).",
+      "La ayuda a la entrada de datos.",
+      "La previsibilidad de la apariencia y operabilidad."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es el nivel de cumplimiento de la WCAG que requiere que se cumplan los puntos de verificación de prioridad 1 y 2?",
+    "opts": [
+      "Nivel de conformidad ‘A’",
+      "Nivel de conformidad ‘AA’",
+      "Nivel de conformidad ‘AAA’",
+      "Nivel de conformidad ‘B’"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es el propósito principal de las Accessible Rich Internet Applications (ARI",
+    "opts": [
+      "? a) Reemplazar por completo el uso de HTML para la estructura web.",
+      "Definir cómo realizar contenido y aplicaciones web más accesibles, especialmente las desarrolladas con JavaScript.",
+      "Establecer los estándares de diseño visual para sitios web.",
+      "Mejorar el rendimiento de carga de las páginas web."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Según el Artículo 18.4 de la Constitución Española, ¿qué garantiza la ley en relación con el uso de la informática?",
+    "opts": [
+      "La libertad absoluta para el tratamiento de cualquier dato.",
+      "El honor y la intimidad personal y familiar de los ciudadanos y el pleno ejercicio de sus derechos.",
+      "El control total de las empresas sobre los datos de sus empleados.",
+      "La prioridad de los intereses comerciales sobre la privacidad individual."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es el doble propósito de la Ley Orgánica 3/2018 (LOPD-GDD) según su artículo primero?",
+    "opts": [
+      "Regular el comercio electrónico y la publicidad online.",
+      "Adaptar el derecho español al RGPD y garantizar los derechos digitales de la ciudadanía.",
+      "Establecer impuestos sobre los servicios digitales y controlar la ciberseguridad.",
+      "Promover la creación de nuevas empresas tecnológicas en España."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué tipo de datos personales se consideran de \"categorías especiales\" (sensibles o especialmente protegidos) según la LOPD-GDD, cuyo tratamiento está prohibido salvo excepciones?",
+    "opts": [
+      "Datos identificativos (nombre, DNI).",
+      "Datos biométricos (para identificación de personas).",
+      "Información laboral (categoría, puesto).",
+      "Datos académicos (formación, títulos)."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Según la LOPD-GDD, ¿cuál es el rango de sanción para las infracciones graves?",
+    "opts": [
+      "Hasta 40.000 euros.",
+      "De 40.001 a 300.000 euros.",
+      "De 300.001 euros a 20 millones de euros.",
+      "Sin sanción económica, solo advertencia."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué tipo de sitios web están obligados a incluir un Aviso Legal según la normativa LSSI?",
+    "opts": [
+      "Solo las tiendas online.",
+      "Todas las webs que contemplen servicios relacionados con una actividad económica (siempre que estén en España).",
+      "Únicamente los blogs particulares sin publicidad.",
+      "Solo las webs del sector público."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "La Política de Privacidad es obligatoria para todas las webs que realizan algún tratamiento de datos personales. ¿Qué ejemplo de tratamiento de datos personales se menciona que la hace obligatoria?",
+    "opts": [
+      "Mostrar únicamente imágenes no identificables.",
+      "Obtener datos mediante un formulario (contacto, boletines, alta de usuario).",
+      "Usar solamente cookies técnicas imprescindibles.",
+      "Ofrecer enlaces a sitios web externos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Para obtener datos personales mediante formularios, ¿qué sistema de información se debe aplicar para obtener el consentimiento del usuario, ofreciendo información básica en primer plano y completa mediante un enlace?",
+    "opts": [
+      "Un sistema de \"opt-out\" implícito.",
+      "Un sistema de doble capa.",
+      "Un consentimiento verbal.",
+      "Un único documento de política de privacidad sin capas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué tipo de cookies se consideran \"exentas\" y no precisan consentimiento, según el material?",
+    "opts": [
+      "Cookies de publicidad de terceros.",
+      "Cookies de análisis de comportamiento de usuario.",
+      "Cookies necesarias solo para prestar un servicio expresamente solicitado por el usuario o permitir la comunicación entre equipo y red.",
+      "Cookies persistentes para recordar el idioma del usuario."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "En PHP, ¿qué función se utiliza para eliminar una cookie que ya ha sido creada?",
+    "opts": [
+      "session_destroy();",
+      "unset($_COOKIE[\"nombre\"]);",
+      "setcookie(\"nombre\", \"\", time() - 3600);",
+      "delete_cookie(\"nombre\");"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Según el material, ¿qué tipo de datos se caracterizan por tener una estructura fija y fuertemente tipada, siendo usualmente gestionados por Sistemas de Gestión de Bases de Datos (SGBD) relacionales como MySQL o PostgreSQL?",
+    "opts": [
+      "Datos desestructurados",
+      "Datos semi-estructurados",
+      "Datos estructurados",
+      "Datos no relacionales"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "La Inyección SQL es una técnica de ataque peligrosa. ¿Cuál de las siguientes es una de las soluciones principales mencionadas en el texto para prevenir este tipo de ataque en PHP?",
+    "opts": [
+      "El uso exclusivo de la función eval() para validar entradas de usuario.",
+      "La configuración de mysqli.max_persistent para limitar conexiones.",
+      "El uso de declaraciones preparadas y consultas parametrizadas.",
+      "La habilitación de funciones como exec() y system() en PHP."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Un Crawler o Spider es un robot que navega por la web indexando y clasificando contenidos. ¿Cuál de los siguientes archivos XML es utilizado por los sitios web para describir jerárquicamente su estructura y facilitar la vida a los buscadores?",
+    "opts": [
+      "robots.txt",
+      ".htaccess",
+      "sitemap",
+      "index.html"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "La técnica de Web Scraping para extraer información de sitios web de manera automática, según el RGPD y la LOPDGDD, solo está permitida si los datos se recaban por un fin de interés público general, o si prevalece el interés del responsable del tratamiento sobre la protección de datos. ¿Cuál es la tercera condición explícitamente mencionada?",
+    "opts": [
+      "Si la información es exclusivamente de carácter técnico.",
+      "Si el sitio web no tiene un archivo robots.txt.",
+      "Si la persona rastreada lo es bajo su consentimiento.",
+      "Si se utiliza un método de scraping a ciegas."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Las conexiones persistentes en PHP, utilizadas con APIs como MySQLi, tienen la ventaja de evitar el tiempo de establecimiento de nuevas conexiones. ¿Qué otro beneficio principal se menciona?",
+    "opts": [
+      "Aumentan el consumo de recursos del servidor de base de datos.",
+      "Pueden quedar en estados impredecibles (bloqueos).",
+      "Mejoran la eficiencia en el uso de recursos al reutilizar conexiones existentes.",
+      "Requieren una limpieza manual constante para evitar problemas."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué tipo de datos se caracteriza por tener una estructura con cierta flexibilidad, no tan rígida como la de una base de datos relacional, siendo ejemplos el JSON o el XML?",
+    "opts": [
+      "Datos desestructurados",
+      "Datos estructurados",
+      "Datos semi-estructurados",
+      "Datos relacionales"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de los siguientes es un peligro principal de la inyección SQL, según el material?",
+    "opts": [
+      "Ralentización de la conexión a internet del usuario.",
+      "Acceso no autorizado a datos sensibles o modificación de los mismos.",
+      "Sobrecalentamiento del procesador del cliente.",
+      "Borrado de las cookies de sesión del usuario."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Si un atacante no ve los resultados de una consulta SQL maliciosa directamente, pero infiere información a través de respuestas booleanas (verdadero/falso) de la base de datos, ¿qué tipo de inyección SQL está utilizando?",
+    "opts": [
+      "Inyección SQL In-Band",
+      "Inyección SQL Basada en Errores",
+      "Inyección SQL a Ciegas",
+      "Inyección SQL a través de comandos directos"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de los siguientes es un inconveniente de las conexiones persistentes en una base de datos PHP?",
+    "opts": [
+      "Siempre cierran la conexión al finalizar la ejecución del script.",
+      "Reducen la latencia al establecer nuevas conexiones.",
+      "Consumen recursos del servidor incluso cuando no se están utilizando activamente.",
+      "No permiten la reutilización de conexiones existentes."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Para qué propósito principal se utiliza XML (Extensible Markup Language)?",
+    "opts": [
+      "Para definir lenguajes de programación con una sintaxis estricta.",
+      "Para la gestión de datos estructurados en bases de datos relacionales.",
+      "Como metalenguaje de marcas para definir otros lenguajes de marcas, facilitando el intercambio de información.",
+      "Para crear interfaces de usuario interactivas en el navegador."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de los siguientes es un lenguaje derivado de XML mencionado en el texto?",
+    "opts": [
+      "JavaScript",
+      "HTML5",
+      "MathML",
+      "CSS"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "El lenguaje XSL (Extensible Stylesheet Language) se utiliza para dar estilo a los documentos XML. ¿Cuáles son sus tres componentes principales?",
+    "opts": [
+      "XML, DTD, Schema",
+      "XSLT, XPath, XSL-FO",
+      "DOM, SAX, WSDL",
+      "HTML, CSS, JavaScript"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué es JSON (JavaScript Object Notation)?",
+    "opts": [
+      "Un lenguaje de programación completo para el desarrollo web.",
+      "Un formato de texto sencillo para el intercambio de información, subconjunto de la notación literal de objetos de JavaScript.",
+      "Un sistema de gestión de bases de datos relacionales.",
+      "Un protocolo de comunicación para servicios web."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es el objetivo principal de la Web Semántica?",
+    "opts": [
+      "Reducir el tiempo de carga de las páginas web.",
+      "Crear tecnologías para publicar datos legibles y evaluables automáticamente por aplicaciones informáticas.",
+      "Mejorar la apariencia visual de los sitios web.",
+      "Aumentar el número de visitas a los sitios web."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Dentro del contexto de la Web Semántica, ¿cuál es la utilidad principal de una Ontología?",
+    "opts": [
+      "Definir la sintaxis de un lenguaje de programación.",
+      "Proporcionar un conocimiento compartido sobre un dominio concreto y organizar datos.",
+      "Gestionar transacciones financieras seguras.",
+      "Diseñar la interfaz de usuario de aplicaciones móviles."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál es el objetivo principal de un crawler o spider en el contexto de la gestión de datos desestructurados?",
+    "opts": [
+      "Ejecutar código JavaScript en el navegador del usuario.",
+      "Descubrir nuevas webs e identificar cambios en las existentes para indexarlas.",
+      "Realizar ataques de inyección SQL en bases de datos.",
+      "Mostrar publicidad personalizada a los usuarios."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Para qué se utiliza el archivo robots.txt en relación con los crawlers o spiders?",
+    "opts": [
+      "Para almacenar información de sesión del usuario.",
+      "Para describir la estructura jerárquica completa del sitio web.",
+      "Para indicar a los buscadores qué partes del sitio pueden o no acceder.",
+      "Para definir las reglas de estilo de los documentos HTML."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "Según el material, ¿cuál de las siguientes acciones relacionadas con el web scraping NO está permitida?",
+    "opts": [
+      "Scrapear fuentes de acceso público para un fin de interés público general.",
+      "Usar los datos obtenidos para spam o robo de identidades.",
+      "Recabar datos con el consentimiento de la persona rastreada.",
+      "Scrapear si prevalece el interés del responsable del tratamiento."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Cuál de los siguientes es un método común para evitar el web scraping?",
+    "opts": [
+      "Eliminar el archivo robots.txt del servidor.",
+      "Usar eval() para validar las entradas del usuario.",
+      "Ofuscar o esconder los datos y establecer límites de peticiones.",
+      "Permitir el acceso ilimitado a cualquier fuente de datos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1/T4/T5: Preguntas Extraídas (PDF)",
+    "q": "¿Qué es SEO (Search Engine Optimization)?",
+    "opts": [
+      "Una técnica para extraer información de sitios web de manera automática.",
+      "El conjunto de acciones orientadas a mejorar el posicionamiento de un sitio web en los resultados de buscadores.",
+      "Un lenguaje de marcas para definir la estructura de los datos.",
+      "Un método para gestionar bases de datos no estructuradas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué tipo de datos se caracteriza por una estructura fija y fuertemente tipada?",
+    "opts": [
+      "Desestructurados",
+      "Semi-estructurados",
+      "Estructurados",
+      "Híbridos"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál de los siguientes es un ejemplo de datos semi-estructurados?",
+    "opts": [
+      "Video",
+      "XML",
+      "Tabla de Excel",
+      "Imagen PNG"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál de las siguientes tecnologías permite almacenar datos estructurados de forma relacional?",
+    "opts": [
+      "MongoDB",
+      "MySQL",
+      "SVG",
+      "JSON"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué es una inyección SQL?",
+    "opts": [
+      "Un sistema de backup",
+      "Un tipo de dato en XML",
+      "Un ataque que inserta código SQL malicioso",
+      "Una forma de conexión persistente"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué tipo de inyección SQL devuelve resultados por el mismo canal usado para explotar la vulnerabilidad?",
+    "opts": [
+      "Ciega",
+      "Basada en errores",
+      "In-Band",
+      "XPath"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Técnica que limpia los datos de entrada para eliminar caracteres peligrosos.",
+    "opts": [
+      "Validación",
+      "Ofuscación",
+      "Sanitización",
+      "Refactorización"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué es un crawler o spider?",
+    "opts": [
+      "Un lenguaje de marcado",
+      "Un programa para limpiar datos",
+      "Un bot que navega por la web indexando contenidos",
+      "Un ataque de red"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál es una ventaja de las conexiones persistentes a bases de datos?",
+    "opts": [
+      "Incremento del consumo de recursos",
+      "Estados impredecibles",
+      "Reducción de la latencia",
+      "Mayor complejidad en SQL"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué significa XSLT?",
+    "opts": [
+      "Lenguaje de estilos XML",
+      "Lenguaje de transformación XML",
+      "Sistema de log XML",
+      "Estilo externo de SVG"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué función cumple el archivo robots.txt?",
+    "opts": [
+      "Mejora la seguridad del sitio",
+      "Describe la estructura del sitio",
+      "Indica a los bots qué partes de un sitio pueden visitar",
+      "Permite generar mapas de sitio Preguntas de definición (elige el término que corresponde):"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Formato de texto sencillo basado en notación de objetos de JavaScript.",
+    "opts": [
+      "JSON",
+      "CSV",
+      "XML",
+      "XSLT"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Describe tipos, propiedades y relaciones entre entidades dentro de un dominio.",
+    "opts": [
+      "XML",
+      "JSON",
+      "Ontología",
+      "Base de Datos"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Técnica automatizada para extraer datos de sitios web.",
+    "opts": [
+      "Crawler",
+      "SQL Injection",
+      "Web Scraping",
+      "SEO"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Archivo XML que representa la estructura de un sitio web.",
+    "opts": [
+      "sitemap.xml",
+      "robots.txt",
+      "links.html",
+      "index.xml"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Técnica para extraer palabras clave y preparar textos para búsqueda.",
+    "opts": [
+      "Indexación",
+      "Tokenización",
+      "Sanitización",
+      "Compilación Más preguntas del tema:"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál de estas bases de datos se usa comúnmente con formato JSON?",
+    "opts": [
+      "MySQL",
+      "PostgreSQL",
+      "Oracle",
+      "MongoDB"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué opción corresponde a una técnica SEO?",
+    "opts": [
+      "Inyección de código",
+      "Investigación de palabras clave",
+      "Sanitización",
+      "Web scraping"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál es una solución segura ante inyecciones SQL?",
+    "opts": [
+      "Uso de cookies",
+      "Consultas dinámicas",
+      "Consultas parametrizadas",
+      "Uso de eval()"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué elemento es propio del estilo en documentos XML?",
+    "opts": [
+      "SVG",
+      "XPath",
+      "JSON",
+      "PDO"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál de los siguientes no es un lenguaje derivado de XML?",
+    "opts": [
+      "NewsML",
+      "OOXML",
+      "XHTML",
+      "JSON Preguntas con código o ejemplos:"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué entrada puede producir una inyección SQL en un login vulnerable?",
+    "opts": [
+      "admin'; DROP TABLE users;-B) <script>alert('xss') C) ' OR '1'='2 D) admin' -22. ¿Qué significa que una conexión sea persistente? A) Se cierra tras cada script",
+      "Se abre con cada nueva petición",
+      "Permanece abierta entre ejecuciones",
+      "Se establece una sola vez por sesión de usuario"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué función en PHP se usa para validar emails?",
+    "opts": [
+      "validate_email()",
+      "filter_var()",
+      "mysql_email_check()",
+      "email_is_valid()"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Cuál de los siguientes elementos de XSL transforma documentos XML?",
+    "opts": [
+      "XSL-FO",
+      "XPath",
+      "XSLT",
+      "XSL-CSS"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué herramienta permite formatear visualmente XML para impresión?",
+    "opts": [
+      "XSLT",
+      "XPath",
+      "XSL-FO",
+      "JSON Definiciones adicionales:"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Recomendación de no usar funciones como eval() en PHP.",
+    "opts": [
+      "Seguridad web",
+      "Depuración",
+      "Análisis de rendimiento",
+      "Compresión de datos"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Conjunto de acciones para mejorar el ranking de un sitio web en buscadores.",
+    "opts": [
+      "SQL Injection",
+      "Web Semántica",
+      "SEO",
+      "Sanitización"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "Técnica para bloquear bots de scraping.",
+    "opts": [
+      "Uso de metadatos",
+      "Captchas",
+      "Inyección de errores",
+      "sitemap.xml"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué formato separa columnas con comas y filas con saltos de línea?",
+    "opts": [
+      "JSON",
+      "XML",
+      "CSV",
+      "TXT"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Gestión de la Información (Tipo Test PDF)",
+    "q": "¿Qué fase del proceso de búsqueda incluye clasificación e indexación?",
+    "opts": [
+      "Tokenización",
+      "Análisis semántico",
+      "Rastreo",
+      "Indexación"
+    ],
+    "correct": 3
   }
 ]
