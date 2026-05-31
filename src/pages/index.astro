@@ -9,7 +9,8 @@ const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
 ---
 <Base title="repasaYA">
 <style>
-  html, body { height:100%; overflow:hidden; }
+  html { height:100%; overflow:hidden; }
+  body { height:100%; overflow:hidden; display:flex; flex-direction:column; }
   header {
     background:var(--surface); border-bottom:1px solid var(--border);
     padding:0 28px; height:58px; display:flex; align-items:center; gap:16px;
