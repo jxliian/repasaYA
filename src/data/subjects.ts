@@ -44,6 +44,16 @@ export const subjects: Subject[] = [
     chips: ['318 preguntas', '18 bloques'],
     dataFile: 'oe.json',
   },
+  {
+    slug: 'sibw',
+    title: 'Sistemas de Información Basados en Web',
+    code: 'Informática · SIBW',
+    icon: '🌐',
+    description: '89 preguntas tipo test sobre Introducción, Gestión de Información, Análisis/Diseño y Normativa.',
+    type: 'test',
+    chips: ['89 preguntas', '4 temas'],
+    dataFile: 'sibw.json',
+  },
   // ─── AÑADE AQUÍ NUEVAS ASIGNATURAS ───────────────
   // {
   //   slug: 'macroeconomia',

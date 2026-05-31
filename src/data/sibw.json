@@ -1,0 +1,981 @@
+[
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿En qué año apareció ARPANET, el origen de Internet?",
+    "opts": [
+      "1959",
+      "1969",
+      "1974",
+      "1989"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué significa que Internet sea 'descentralizado'?",
+    "opts": [
+      "Que depende de un único servidor central",
+      "Que está formado por redes interconectadas sin un nodo central de control",
+      "Que solo los gobiernos controlan su acceso",
+      "Que funciona únicamente con protocolo IPv4"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuántas capas tiene el modelo TCP/IP de Internet?",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "7"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "En el modelo TCP/IP, ¿en qué capa opera el protocolo HTTP?",
+    "opts": [
+      "Capa de acceso a red",
+      "Capa de internet",
+      "Capa de transporte",
+      "Capa de aplicación"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuántos bits tiene una dirección IPv4?",
+    "opts": [
+      "16",
+      "32",
+      "64",
+      "128"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuántos bits tiene una dirección IPv6?",
+    "opts": [
+      "32",
+      "64",
+      "128",
+      "256"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "En la URL www.example.com, ¿qué es 'example'?",
+    "opts": [
+      "Dominio de Nivel Superior (TLD)",
+      "Subdominio",
+      "Dominio de Segundo Nivel (SLD)",
+      "Protocolo"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuál de estos es un TLD de tipo 'patrocinado'?",
+    "opts": [
+      ".com",
+      ".net",
+      ".edu",
+      ".es"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuál de estos es un TLD de código de país?",
+    "opts": [
+      ".com",
+      ".org",
+      ".gov",
+      ".es"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué tipo de alojamiento web ofrece un servidor físico completo para un único cliente?",
+    "opts": [
+      "Hosting compartido",
+      "VPS",
+      "Hosting dedicado",
+      "Cloud hosting"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué tipo de hosting comparte recursos del servidor entre múltiples clientes?",
+    "opts": [
+      "Dedicado",
+      "VPS",
+      "Compartido",
+      "Colocation"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué protocolo añade cifrado SSL/TLS al protocolo HTTP?",
+    "opts": [
+      "FTP",
+      "SMTP",
+      "HTTPS",
+      "DNS"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué función tiene una CDN (Content Delivery Network)?",
+    "opts": [
+      "Gestionar dominios de primer nivel",
+      "Servir contenido estático desde el nodo más cercano al usuario",
+      "Cifrar el tráfico HTTP",
+      "Almacenar bases de datos en la nube"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuál es el mayor coste en los SIBW modernos?",
+    "opts": [
+      "La infraestructura cloud",
+      "Los certificados SSL",
+      "El equipo humano (personal técnico)",
+      "Los dominios y hosting"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué son los costes CAPEX en el contexto de SIBW?",
+    "opts": [
+      "Costes operativos recurrentes",
+      "Costes de inversión inicial (desarrollo, infraestructura base)",
+      "Costes de formación del personal",
+      "Costes indirectos de gestión"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "El mantenimiento puede suponer entre el 60-80% del coste total del ciclo de vida de un SIBW. ¿Qué norma lo recoge?",
+    "opts": [
+      "ISO 27001",
+      "RGPD",
+      "ISO/IEC 14764",
+      "IEEE 830"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué arquitectura web presenta el menor coste inicial pero puede escalar peor?",
+    "opts": [
+      "Microservicios",
+      "3 capas",
+      "Monolítica",
+      "Cloud nativo"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Cuál es el rango salarial aproximado de un DevOps/Cloud Senior en España?",
+    "opts": [
+      "20k-28k €",
+      "30k-40k €",
+      "45k-65k €",
+      "65k-90k €"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué es la 'deuda técnica' en el contexto de costes de SIBW?",
+    "opts": [
+      "El dinero adeudado al proveedor cloud",
+      "Decisiones rápidas durante el desarrollo que generan problemas técnicos futuros",
+      "Los impuestos asociados al software",
+      "El coste de cambiar de proveedor"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Introducción a los SIBW",
+    "q": "¿Qué es el 'vendor lock-in' en el contexto de costes indirectos?",
+    "opts": [
+      "Un tipo de ataque informático",
+      "La dificultad de cambiar de proveedor tecnológico una vez adoptado",
+      "Un método de pago por uso en cloud",
+      "El coste de la rotación de personal"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuál de los siguientes es un ejemplo de dato NO estructurado?",
+    "opts": [
+      "Fila de una tabla MySQL",
+      "Fichero JSON de configuración",
+      "Vídeo de YouTube",
+      "Documento CSV"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuál de los siguientes es un ejemplo de dato semi-estructurado?",
+    "opts": [
+      "Tabla relacional en Oracle",
+      "Un currículum vitae en JSON",
+      "Imagen JPEG",
+      "Audio MP3"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "En seguridad de BD, ¿qué principio establece que las aplicaciones NO deben conectarse como superusuario?",
+    "opts": [
+      "Principio de menor privilegio",
+      "Principio de divulgación",
+      "Principio de puerta principal",
+      "Principio de robustez"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "La inyección SQL In-Band se caracteriza por:",
+    "opts": [
+      "El atacante infiere información mediante respuestas booleanas",
+      "El atacante obtiene resultados en el mismo canal que usa para explotarla",
+      "El atacante induce errores en la BD para obtener información",
+      "El atacante no ve resultados directamente"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "En una inyección SQL a ciegas, ¿cómo obtiene información el atacante?",
+    "opts": [
+      "Recibe los datos directamente en la respuesta HTTP",
+      "Lee los mensajes de error de la BD",
+      "Infiere información a través de respuestas booleanas",
+      "Descarga el dump de la BD"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuál es la solución más efectiva contra la inyección SQL?",
+    "opts": [
+      "Usar solo IPv6",
+      "Usar declaraciones preparadas y consultas parametrizadas",
+      "Deshabilitar el servidor web",
+      "Usar cookies de sesión"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué hace la función bind_param() en PHP?",
+    "opts": [
+      "Crea una cookie de sesión",
+      "Separa la lógica SQL de los datos en consultas preparadas",
+      "Elimina caracteres peligrosos de un string",
+      "Cifra la contraseña antes de almacenarla"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuál es una DESVENTAJA de las conexiones persistentes a BD en PHP?",
+    "opts": [
+      "Mayor latencia al establecer conexiones",
+      "Las conexiones pueden quedar en estados inesperados (bloqueos, transacciones abiertas)",
+      "No son compatibles con mysqli",
+      "Consumen menos recursos que las conexiones normales"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "XML significa:",
+    "opts": [
+      "Extra Markup Language",
+      "Extensible Markup Language",
+      "Extended Model Language",
+      "Extensible Model Language"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué es un DTD en XML?",
+    "opts": [
+      "Un tipo de base de datos NoSQL",
+      "Un conjunto de reglas que define la estructura y elementos permitidos en un documento XML",
+      "Un protocolo de transferencia de datos XML",
+      "Un lenguaje para transformar documentos XML"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Por qué XSD (XML Schema) es preferible al DTD?",
+    "opts": [
+      "Porque es más antiguo y estable",
+      "Porque usa sintaxis XML, soporta tipos de datos y espacios de nombres",
+      "Porque es más simple de aprender",
+      "Porque solo funciona con JSON"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué ventaja principal tiene JSON frente a XML para el intercambio de datos en APIs REST?",
+    "opts": [
+      "JSON soporta más tipos de datos",
+      "JSON es más pesado pero más seguro",
+      "JSON es más ligero, simple y rápido de procesar",
+      "JSON es el único formato que soporta JavaScript"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "En PHP, ¿qué función convierte un array PHP a formato JSON?",
+    "opts": [
+      "json_decode()",
+      "json_parse()",
+      "json_encode()",
+      "json_stringify()"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "En JavaScript, ¿qué función convierte un objeto JS a string JSON?",
+    "opts": [
+      "JSON.parse()",
+      "JSON.decode()",
+      "JSON.stringify()",
+      "JSON.encode()"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué es un crawler o spider web?",
+    "opts": [
+      "Un tipo de ataque DDoS",
+      "Un robot que navega por webs indexando y clasificando sus contenidos",
+      "Un programa de cifrado de datos",
+      "Un tipo de base de datos NoSQL"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuántas fases tiene el proceso de indexación de un buscador web?",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué hace el archivo robots.txt?",
+    "opts": [
+      "Cifra el contenido de la web",
+      "Define qué partes del sitio pueden acceder los buscadores",
+      "Almacena contraseñas de usuarios robot",
+      "Lista los usuarios bloqueados de la web"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuál es el orden correcto de las fases de indexación?",
+    "opts": [
+      "Rastreo → Indexación → Procesamiento → Ranking",
+      "Procesamiento → Rastreo → Indexación → Ranking",
+      "Rastreo → Procesamiento → Indexación → Ranking",
+      "Indexación → Rastreo → Procesamiento → Ranking"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "El scraping de datos personales sin consentimiento puede vulnerar:",
+    "opts": [
+      "Solo la LSSI-CE",
+      "El RGPD y la LOPDGDD",
+      "Solo el Código Civil",
+      "Solo los términos y condiciones del sitio"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Cuál es una técnica antiscraping basada en verificación de usuarios?",
+    "opts": [
+      "Cambiar el HTML constantemente",
+      "Usar honeypots (datos trampa)",
+      "Implementar CAPTCHA",
+      "Bloquear IPs por rango geográfico"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué significa que el SEO moderno sea 'más estratégico que técnico'?",
+    "opts": [
+      "Que ya no importa el contenido técnico del sitio",
+      "Que Google ahora entiende intención y contexto, no solo palabras clave",
+      "Que el SEO ha desaparecido con la IA",
+      "Que solo importan los backlinks"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "¿Qué es el Link Building en SEO?",
+    "opts": [
+      "Crear muchos enlaces internos en la propia web",
+      "Obtener backlinks de calidad desde otros sitios que apunten a tu web",
+      "Eliminar enlaces rotos del sitio",
+      "Comprar dominios similares al tuyo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Gestión de la Información",
+    "q": "MongoDB es una BD NoSQL que almacena datos en formato:",
+    "opts": [
+      "XML",
+      "CSV",
+      "JSON",
+      "Relacional"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Cuál es la diferencia principal entre usabilidad y UX?",
+    "opts": [
+      "Son exactamente lo mismo",
+      "UX es más amplio e incluye aspectos emocionales y contextuales además de los técnicos",
+      "La usabilidad es más amplia que la UX",
+      "La UX solo aplica a apps móviles"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué es la accesibilidad web?",
+    "opts": [
+      "Que la web cargue rápido",
+      "Hacer que la web pueda ser usada por personas con diversidad funcional sin pérdida de información",
+      "Que la web sea responsive en móviles",
+      "Que la web tenga un buen posicionamiento SEO"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Cuál de estos es un Requisito NO Funcional (RFN)?",
+    "opts": [
+      "El usuario podrá registrarse en la plataforma",
+      "El sistema mostrará un listado de productos",
+      "Los usuarios pueden clasificar productos por familias",
+      "La web debe funcionar correctamente en Chrome y Firefox"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Cuál de estos es un Requisito Funcional (RF)?",
+    "opts": [
+      "La web debe soportar 1000 usuarios concurrentes",
+      "El desarrollo debe usar React y Node.js",
+      "Cuando el cliente hace un pedido, debe llegar un mensaje al departamento de cobros",
+      "El tiempo de carga debe ser inferior a 3 segundos"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué técnica de extracción de requisitos consiste en crear perfiles ficticios representativos de grupos de usuarios?",
+    "opts": [
+      "Estudio de viabilidad",
+      "Entrevistas",
+      "Personas",
+      "Casos de uso"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué describe un Caso de Uso?",
+    "opts": [
+      "El código fuente de una funcionalidad",
+      "La interacción del usuario con el sistema, sin entrar en detalles de implementación",
+      "El diseño visual de la interfaz",
+      "Los requisitos no funcionales del sistema"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué son los Diagramas de Flujo en análisis de requisitos?",
+    "opts": [
+      "Representaciones de la BD del sistema",
+      "El proceso que sigue un usuario para llevar a cabo una tarea de principio a fin",
+      "El mapa jerárquico del sitio web",
+      "Los wireframes de baja fidelidad"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "El Principio de Elección de Dan Brown en Arquitectura de Información establece que:",
+    "opts": [
+      "Cada contenido debe crecer y evolucionar con el tiempo",
+      "Los usuarios creen que prefieren más opciones pero en realidad necesitan menos bien organizadas",
+      "Los usuarios acceden frecuentemente por páginas secundarias",
+      "Los menús deben diseñarse de manera lógica"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "El Principio de la Puerta Principal (Dan Brown) implica que:",
+    "opts": [
+      "La página de inicio debe ser la más importante del sitio",
+      "Los usuarios a menudo acceden al sitio por páginas que no son la principal",
+      "Cada página debe tener un botón de inicio visible",
+      "Los menús deben estar en la parte superior"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Cuántos principios de Arquitectura de Información definió Dan Brown?",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué es la ordenación de tarjetas (card sorting)?",
+    "opts": [
+      "Un método para ordenar las páginas por tráfico",
+      "Un método donde los usuarios agrupan tarjetas con conceptos para construir una navegación eficiente",
+      "Una técnica de wireframing de alta fidelidad",
+      "Un tipo de diagrama de flujo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "En la ordenación de tarjetas ABIERTA, ¿qué pueden hacer los usuarios?",
+    "opts": [
+      "Solo reorganizar las tarjetas sin cambiar nombres",
+      "Poner ellos mismos el nombre a los grupos",
+      "Solo usar categorías predefinidas por el evaluador",
+      "Eliminar tarjetas que no consideren relevantes"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué son los wireframes?",
+    "opts": [
+      "Prototipos de alta fidelidad con colores y tipografías finales",
+      "Bocetos de baja fidelidad que muestran posicionamiento y estructura sin estilos concretos",
+      "Maquetas interactivas del producto final",
+      "Documentos de especificación de requisitos"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué NO incluyen los wireframes?",
+    "opts": [
+      "Encabezados y logo del sitio",
+      "Barra de búsqueda y menús de navegación",
+      "Colores, imágenes y fuentes específicas",
+      "Controles de usuario como botones y campos de texto"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Cuál es la diferencia entre un mockup y un prototipo?",
+    "opts": [
+      "Son exactamente lo mismo",
+      "Un mockup es una representación estática y un prototipo es interactivo",
+      "Un prototipo es de baja fidelidad y un mockup de alta fidelidad",
+      "Los mockups solo se hacen en papel"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué herramienta digital se usa habitualmente para crear wireframes y prototipos?",
+    "opts": [
+      "MySQL Workbench",
+      "Figma",
+      "Eclipse",
+      "phpMyAdmin"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "La pauta de diseño Mobile-First implica:",
+    "opts": [
+      "Diseñar primero la versión de escritorio y luego adaptar a móvil",
+      "Diseñar primero para dispositivos móviles, priorizando contenido esencial",
+      "Que la web solo debe funcionar en móvil",
+      "Que el tamaño mínimo de pantalla es 768px"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué es el 'hilo de Ariadna' o 'breadcrumb' en diseño web?",
+    "opts": [
+      "Un menú desplegable de múltiples niveles",
+      "Un indicador de la sección del sitio donde se encuentra el usuario",
+      "Un tipo de formulario con múltiples pasos",
+      "Un test de usabilidad con usuarios reales"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Cuántas heurísticas de usabilidad definió Nielsen (las más utilizadas)?",
+    "opts": [
+      "5",
+      "7",
+      "10",
+      "12"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué es la evaluación heurística?",
+    "opts": [
+      "Un test con usuarios reales que realizan tareas concretas",
+      "Expertos evalúan la interfaz comparándola con principios de diseño predefinidos",
+      "Una técnica donde el usuario verbaliza sus pensamientos mientras usa el sistema",
+      "Un cuestionario de satisfacción de 10 preguntas"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué es el método Think-Aloud?",
+    "opts": [
+      "Una evaluación heurística por expertos sin usuarios",
+      "El usuario verbaliza lo que siente, espera y le confunde mientras usa el sistema",
+      "Un test automatizado de rendimiento web",
+      "Un cuestionario SUS de 10 preguntas"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué mide el cuestionario SUS (System Usability Scale)?",
+    "opts": [
+      "El posicionamiento SEO del sitio",
+      "La usabilidad percibida mediante 10 preguntas estandarizadas",
+      "El rendimiento técnico del servidor",
+      "El número de errores de código JavaScript"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué son los dark patterns en diseño web?",
+    "opts": [
+      "El modo oscuro de las interfaces web",
+      "Técnicas de diseño que manipulan al usuario para que haga algo que no quería hacer",
+      "Patrones visuales con colores oscuros para mayor contraste",
+      "Técnicas de SEO negativo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué método de evaluación de usabilidad utiliza la tecnología de seguimiento ocular?",
+    "opts": [
+      "Think-Aloud",
+      "Cognitive Walkthrough",
+      "Eye tracking",
+      "Evaluación heurística"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "¿Qué ventaja principal tiene la evaluación heurística frente al user testing?",
+    "opts": [
+      "Detecta problemas reales de usuarios reales",
+      "Es más rápida, barata y no requiere usuarios para realizarla",
+      "Ofrece datos cuantitativos más precisos",
+      "Es obligatoria por la normativa WCAG"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Análisis y Diseño Web",
+    "q": "Según las buenas prácticas de diseño, ¿cuándo se debe lanzar automáticamente música o vídeo al cargar una web?",
+    "opts": [
+      "Siempre, para mejorar la experiencia",
+      "Solo cuando el usuario lo ha configurado previamente",
+      "Nunca, es una mala práctica",
+      "Solo en páginas de inicio"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué regula el RGPD/GDPR?",
+    "opts": [
+      "El comercio electrónico entre empresas",
+      "La protección de datos personales, cookies, consentimiento y privacidad en la UE",
+      "El diseño accesible de webs para personas con discapacidad",
+      "Los servicios de inteligencia artificial de alto riesgo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué ley española regula específicamente los servicios de la sociedad de la información y el comercio electrónico?",
+    "opts": [
+      "LOPDGDD",
+      "RGPD",
+      "LSSI-CE",
+      "AI Act"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuál es la principal función del Aviso Legal en una web?",
+    "opts": [
+      "Informar sobre el uso de cookies",
+      "Identificar al titular de la web y establecer las condiciones de uso",
+      "Describir la política de privacidad de datos",
+      "Gestionar las condiciones de contratación online"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué documento web informa sobre los tipos de cookies usadas, su finalidad y cómo gestionarlas?",
+    "opts": [
+      "Aviso legal",
+      "Política de privacidad",
+      "Política de cookies",
+      "Términos de uso"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué regula la ePrivacy Directive?",
+    "opts": [
+      "El uso de inteligencia artificial en webs",
+      "El consentimiento para cookies y tracking online",
+      "La accesibilidad web para personas con discapacidad",
+      "Los contratos de comercio electrónico"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuántos principios define WCAG 2.2 para la accesibilidad web?",
+    "opts": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuál es el principio de WCAG que establece que el contenido debe ser perceptible por al menos un sentido?",
+    "opts": [
+      "Operable",
+      "Comprensible",
+      "Robusto",
+      "Perceptible"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "El principio 'Operable' de WCAG significa que:",
+    "opts": [
+      "El contenido debe ser legible y entendible",
+      "Se puede interaccionar con el contenido",
+      "El contenido debe ser compatible con tecnologías de asistencia",
+      "El contenido es perceptible por al menos un sentido"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "El principio 'Robusto' de WCAG implica que:",
+    "opts": [
+      "La web carga rápido en cualquier dispositivo",
+      "El contenido está suficientemente descrito para ser interpretado por tecnologías de asistencia",
+      "Los menús son fáciles de usar",
+      "El texto tiene buen contraste con el fondo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuántos niveles de cumplimiento define WCAG?",
+    "opts": [
+      "2 (Básico y Avanzado)",
+      "3 (A, AA, AAA)",
+      "4 (Bajo, Medio, Alto, Excelente)",
+      "5 (de 1 a 5 estrellas)"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué nivel de WCAG es el mínimo recomendado para la mayoría de webs?",
+    "opts": [
+      "Nivel A",
+      "Nivel AA",
+      "Nivel AAA",
+      "No existe un nivel mínimo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué es ARIA en el contexto de accesibilidad web?",
+    "opts": [
+      "Un lenguaje de marcado alternativo al HTML",
+      "Accessible Rich Internet Applications: atributos para mejorar la accesibilidad de contenido dinámico",
+      "Un nivel de cumplimiento WCAG superior al AAA",
+      "Un protocolo de cifrado de datos"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuál es la herramienta de evaluación automática de accesibilidad desarrollada por Google?",
+    "opts": [
+      "WAVE",
+      "AccessibilityChecker",
+      "Lighthouse",
+      "Axe-core"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "En PHP, ¿qué función se usa para crear una cookie?",
+    "opts": [
+      "cookie_create()",
+      "new Cookie()",
+      "setcookie()",
+      "createCookie()"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cómo se elimina una cookie en PHP?",
+    "opts": [
+      "delete_cookie('nombre')",
+      "Estableciendo su tiempo de expiración en el pasado (time() - 3600)",
+      "Usando unset() directamente sobre la cookie",
+      "Las cookies no se pueden eliminar desde PHP"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué regula el Digital Services Act (DSA)?",
+    "opts": [
+      "El uso de inteligencia artificial de alto riesgo",
+      "La regulación de plataformas digitales, publicidad online y dark patterns",
+      "La protección de datos personales en la UE",
+      "Los certificados SSL de los sitios web"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuándo debe aparecer el banner de cookies en un sitio web?",
+    "opts": [
+      "Solo en la primera visita del usuario",
+      "En cada visita del usuario",
+      "Solo cuando el usuario accede a páginas con formularios",
+      "Solo si el sitio vende productos online"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "Según el artículo 30 del RGPD, todas las empresas deberán tener:",
+    "opts": [
+      "Un responsable de accesibilidad web",
+      "Un registro de actividades de tratamiento de datos",
+      "Un certificado SSL de nivel EV",
+      "Un equipo dedicado a ciberseguridad"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Qué documento web describe cómo la organización recopila, usa y protege los datos personales de los usuarios?",
+    "opts": [
+      "Aviso legal",
+      "Términos y condiciones",
+      "Política de privacidad",
+      "Política de cookies"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Normativa y Estándares",
+    "q": "¿Cuál de estos NO es obligatorio en todas las webs según la normativa española?",
+    "opts": [
+      "Aviso legal",
+      "Política de privacidad (si recoge datos)",
+      "Política de cookies (si usa cookies)",
+      "Política de inteligencia artificial"
+    ],
+    "correct": 3
+  }
+]
