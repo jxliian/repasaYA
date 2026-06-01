@@ -4,7 +4,7 @@ import DegreeCard from '../components/DegreeCard.astro';
 import { subjects } from '../data/subjects';
 const base = import.meta.env.BASE_URL;
 
-const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas'].includes(s.slug));
+const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas', 'do1'].includes(s.slug));
 const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
 ---
 <Base title="repasaYA">

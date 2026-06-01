@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import QuizEngine from '../../components/QuizEngine.astro';
+import vfData from '../../data/do1.json';
+---
+<Base title="Dirección de Operaciones I" description="80 V/F con justificación. Temas 1-7: Introducción, Cadena de Suministro, Diseño de Producto, Estrategia de Proceso, Capacidad, Localización y Layout.">
+  <QuizEngine
+    title="Dirección de Operaciones I"
+    code="DO1"
+    vfData={vfData}
+  />
+</Base>

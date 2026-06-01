@@ -1,0 +1,562 @@
+[
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 1,
+    "q": "Adidas expone en su página web corporativa la siguiente declaración: 'Ser la mejor marca deportiva del mundo', lo cual se corresponde con la misión de la empresa.",
+    "answer": "F",
+    "justification": "Declaraciones aspiracionales como 'Ser la mejor...' corresponden a la Visión (futuro). La Misión define qué hace la empresa hoy."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 2,
+    "q": "Un servicio como el de 'Room Mate Hotels' presenta la característica de tangibilidad, ya que la habitación de un hotel se puede tocar y percibir de manera clara.",
+    "answer": "F",
+    "justification": "Los servicios son fundamentalmente intangibles. Aunque uses bienes tangibles (la cama), el producto 'servicio de alojamiento' no se puede poseer ni almacenar."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 3,
+    "q": "Para una empresa manufacturera, a mayores ingresos directos obtenidos por servicios mayor será su nivel de servitización, mientras que a mayores ingresos indirectos por servicios, menor será su nivel de servitización.",
+    "answer": "F",
+    "justification": "La servitización implica integrar servicios. Tanto los ingresos directos como indirectos contribuyen al nivel de servitización, no necesariamente 'menor' por ser indirectos."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 4,
+    "q": "Entre las decisiones de operaciones de carácter estratégico, se encuentra la gestión de inventarios y la decisión de localización.",
+    "answer": "F",
+    "justification": "La localización sí es estratégica (largo plazo), pero la gestión de inventarios es una decisión táctica/operativa (medio/corto plazo)."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 5,
+    "q": "Fabbric permite a cualquiera diseñar y fabricar prendas (personalización). Según la noticia, se podría afirmar que Fabbric lidera el enfoque de respuesta rápida.",
+    "answer": "F",
+    "justification": "Al centrarse en personalización, diseño único y adaptación al cliente, su enfoque principal es la Flexibilidad (o Diferenciación), no solo rapidez pura."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 6,
+    "q": "Una programación flexible hace referencia a la rapidez en el diseño, producción y entrega, que es capaz de acortar los tiempos de suministro al cliente.",
+    "answer": "F",
+    "justification": "La definición dada (rapidez, acortar tiempos) corresponde a Rapidez de respuesta. La flexibilidad es la capacidad de adaptación a cambios."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 7,
+    "q": "HP tiene capacidad de adaptarse y ajustarse a los cambios de la demanda para introducir innovaciones en el diseño y/o variar el volumen. Según esto, su capacidad de respuesta es flexible.",
+    "answer": "V",
+    "justification": "Correcto. La capacidad de cambiar volumen y diseño (mix) define la flexibilidad."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 8,
+    "q": "La servitización puede permitir a los clientes hacer uso de un bien sin comprarlo directamente, generando ingresos a la empresa fabricante.",
+    "answer": "V",
+    "justification": "Correcto. Modelos como el alquiler o pago por uso son formas claras de servitización."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 9,
+    "q": "La dirección de operaciones se centra exclusivamente en la fabricación de productos o bienes tangibles.",
+    "answer": "F",
+    "justification": "Falso. La Dirección de Operaciones gestiona tanto la producción de bienes como la prestación de servicios."
+  },
+  {
+    "tema": "TEMA 1: Introducción a la DO",
+    "n": 10,
+    "q": "Entre las tendencias de actualidad en la Dirección de Operaciones destaca la existencia de clientes cada vez más informados, que desempeñan un papel activo con la co-creación.",
+    "answer": "V",
+    "justification": "Correcto. El cliente prosumidor y la co-creación son tendencias clave."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 1,
+    "q": "Al utilizar muchos proveedores se reduce el riesgo de dependencia, pero aumenta la complejidad logística.",
+    "answer": "V",
+    "justification": "Correcto. Es el trade-off habitual: diversificar reduce riesgos de suministro pero dificulta la gestión."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 2,
+    "q": "El enfoque ágil en la gestión estratégica de la cadena de suministro se basa en una filosofía de gestión empresarial desarrollada por Taiichi Ono (ingeniero industrial de Toyota) para hacer sus procesos más eficientes y flexibles.",
+    "answer": "F",
+    "justification": "La filosofía desarrollada por Taiichi Ono en Toyota es la LEAN (esbelta/eficiente), no la ágil."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 3,
+    "q": "En cadenas de suministro lean, orientadas a productos estables y de gran volumen, como las de Unilever en detergentes, se recurre a sistemas de empuje (push), planificando la producción en base a previsiones de venta anteriores y economías de escala.",
+    "answer": "V",
+    "justification": "Correcto. Aunque Lean busca el flujo tenso, en productos muy estables y masivos la planificación basada en previsión (push) es habitual."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 4,
+    "q": "Las redes keiretsu, frecuentes en Japón, se caracterizan por mantener relaciones transaccionales con una gran variedad de proveedores, apostando por diversificar riesgos.",
+    "answer": "F",
+    "justification": "Las redes Keiretsu se caracterizan por redes de pocos proveedores con relaciones a largo plazo y alta integración (coaliciones), no relaciones transaccionales dispersas."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 5,
+    "q": "Todas las estrategias competitivas (bajo coste, diferenciación y respuesta rápida) tienen como objetivo principal minimizar inventarios dado el elevado coste que suponen.",
+    "answer": "F",
+    "justification": "Para la estrategia de respuesta rápida a menudo sí necesitamos un inventario alto (buffer) para garantizar la disponibilidad inmediata."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 6,
+    "q": "El minorista es el último eslabón antes del consumidor final, mientras que el mayorista compra a los fabricantes para revender a minoristas.",
+    "answer": "V",
+    "justification": "Correcto. Es la estructura clásica del canal de distribución."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 7,
+    "q": "La logística y la gestión de la cadena de suministro se pueden utilizar como sinónimos en la práctica, ya que ambas planifican y controlan el flujo de materiales hasta el consumidor final.",
+    "answer": "F",
+    "justification": "No son sinónimos. La cadena de suministro engloba a la logística. La logística es una parte (movimiento/almacenaje), la SCM es la gestión integral de relaciones y procesos."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 8,
+    "q": "El papel higiénico y otros productos funcionales de primera necesidad, al ser consumidos masivamente y con márgenes reducidos, exigen una cadena de suministro ágil.",
+    "answer": "F",
+    "justification": "Los productos funcionales requieren una cadena de suministro LEAN (eficiente), no ágil. Necesitan bajo coste y gran stock, no adaptación constante a cambios bruscos."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 9,
+    "q": "Entre las seis estrategias de gestión de la cadena de suministro, las empresas virtuales se definen por operar exclusivamente a través de internet sin necesidad de proveedores físicos ni relaciones de colaboración externas.",
+    "answer": "F",
+    "justification": "Las empresas virtuales dependen enormemente de proveedores físicos y relaciones externas, ya que subcontratan (outsourcing) casi toda su actividad física."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 10,
+    "q": "La logística inversa solo se aplica en sectores industriales, ya que en servicios no existen devoluciones ni procesos de reutilización.",
+    "answer": "F",
+    "justification": "Existen las devoluciones en los servicios (ej. reembolsos, cancelaciones, gestión de errores), por lo que también aplica."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 11,
+    "q": "En 2025, Apple anunció que colaboraría con TSMC. Este acuerdo es un claro ejemplo de outsourcing, donde Apple diseña sus procesadores pero subcontrata la producción.",
+    "answer": "V",
+    "justification": "Correcto. Apple se centra en el diseño (Core Competence) y externaliza la manufactura."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 12,
+    "q": "La empresa ColaDrink responde que su ética empresarial puede ponerse en duda, ya que el problema del uso masivo de agua por parte de sus proveedores corresponde únicamente a los proveedores.",
+    "answer": "F",
+    "justification": "La responsabilidad social corporativa se extiende a la cadena de suministro. La empresa principal es responsable de seleccionar y controlar la ética de sus proveedores."
+  },
+  {
+    "tema": "TEMA 2: Cadena de Suministro",
+    "n": 13,
+    "q": "La logística inversa se limita al transporte de productos devueltos hasta el almacén, mientras que actividades como reciclaje, reacondicionamiento o refabricación forman parte exclusiva de las políticas de sostenibilidad.",
+    "answer": "F",
+    "justification": "El reciclaje, reacondicionamiento y refabricación también forman parte de la logística inversa, no solo el transporte."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 1,
+    "q": "En la fase de madurez del ciclo de vida del producto, las tasas de crecimiento de las ventas tienden a disminuir con el tiempo, aunque se mantengan positivas hasta cierto punto de la curva.",
+    "answer": "V",
+    "justification": "Correcto. En la madurez las ventas se estabilizan; siguen siendo altas, pero el ritmo de crecimiento se frena en comparación con la fase de crecimiento."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 2,
+    "q": "El desarrollo de nuevos productos consiste en una secuencia de decisiones cuya fase inicial consiste en elaborar prototipos que permitan testar la viabilidad.",
+    "answer": "F",
+    "justification": "La fase inicial no es el prototipado, sino la Búsqueda y Generación de Nuevas Ideas."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 3,
+    "q": "La estrategia de desarrollo interno de nuevos productos y servicios normalmente supone menores costes y riesgos de desarrollo del producto que una estrategia de desarrollo externo.",
+    "answer": "F",
+    "justification": "Al revés. El desarrollo interno suele implicar mayores costes y riesgos (I+D propio). La estrategia externa (alianzas, compra de tecnología) suele reducir riesgos y costes compartidos."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 4,
+    "q": "Los aviones suelen incorporar dos motores aunque solamente necesiten uno. El uso de motores dobles se considera un elemento redundante para garantizar la fiabilidad del producto.",
+    "answer": "V",
+    "justification": "Correcto. La redundancia (componentes de respaldo) es una estrategia clave para aumentar la fiabilidad del sistema."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 5,
+    "q": "El modelo de ciclo de vida del producto recomienda comenzar la estandarización del producto en la fase de introducción para reducir los elevados costes de I+D iniciales.",
+    "answer": "F",
+    "justification": "La estandarización se busca principalmente en la fase de Madurez (para optimizar costes). En la introducción se requiere flexibilidad para ajustes de diseño."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 6,
+    "q": "Entre los factores del entorno que pueden influir en el éxito del sector de los videojuegos destacan las expectativas de crecimiento del mercado de la realidad virtual y aumentada.",
+    "answer": "V",
+    "justification": "Correcto. Son factores tecnológicos y de mercado del entorno externo que impactan en la estrategia."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 7,
+    "q": "'Meta se hace con la startup PlayAI...'. La noticia hace referencia a una estrategia de desarrollo externo que busca la adquisición de tecnología o experiencia externa.",
+    "answer": "V",
+    "justification": "Correcto. Comprar una startup es una forma clásica de desarrollo externo para adquirir capacidades rápidamente."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 8,
+    "q": "El cloud computing es un ejemplo claro de innovación incremental que ha cambiado los trabajos consiguiendo una mayor eficiencia.",
+    "answer": "F",
+    "justification": "El Cloud Computing supuso un cambio de paradigma total, por lo tanto es una Innovación Radical, no incremental (que serían solo pequeñas mejoras)."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 9,
+    "q": "La participación de las distintas funciones empresariales puede adoptar un enfoque secuencial cuando las diferentes áreas funcionales participan en el proceso desde el comienzo.",
+    "answer": "F",
+    "justification": "Si participan todas desde el comienzo y a la vez, se llama Enfoque Concurrente (Ingeniería Concurrente). El secuencial es paso a paso (una tras otra)."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 10,
+    "q": "El inventario permite acomodar fácilmente los cambios de la demanda en el caso de los servicios.",
+    "answer": "F",
+    "justification": "Los servicios son intangibles y perecederos, por lo tanto no se pueden inventariar (no puedes guardar un corte de pelo o una hora de consultoría)."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 11,
+    "q": "La ingeniería de valor se centra en mejorar el diseño previo a la producción, mientras que el análisis de valor busca la mejora durante el proceso de producción.",
+    "answer": "V",
+    "justification": "Correcto. Ingeniería de valor = Antes (diseño/I+D). Análisis de valor = Durante (producto ya existente)."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 12,
+    "q": "La concreción de una idea de negocio debe cumplir con requisitos; la viabilidad económica considera el estudio del potencial de mercado para conocer las preferencias de los consumidores.",
+    "answer": "F",
+    "justification": "El estudio de mercado y preferencias corresponde a la Viabilidad Comercial. La económica se refiere a costes, márgenes y rentabilidad."
+  },
+  {
+    "tema": "TEMA 3: Diseño de Productos y Servicios",
+    "n": 13,
+    "q": "El diseño robusto consiste en garantizar que las pequeñas variaciones que se produzcan en el proceso de fabricación no afecten al resultado.",
+    "answer": "V",
+    "justification": "Correcto. Un diseño es robusto si funciona bien incluso con variaciones en los componentes o el entorno."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 1,
+    "q": "En relación con las estrategias del proceso productivo, el enfoque de proceso también es conocido como proceso continuo ya que simula un flujo continuo de producción.",
+    "answer": "F",
+    "justification": "El enfoque de proceso es un proceso intermitente (talleres, bajo volumen). El flujo continuo corresponde al Enfoque de Producto."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 2,
+    "q": "Cabify ofreció un nuevo servicio de envío de paquetes. Este hecho hace referencia especialmente al factor de naturaleza de la demanda de carácter estacional.",
+    "answer": "F",
+    "justification": "Este cambio demuestra Flexibilidad de proceso (capacidad de adaptarse a cambios), no estacionalidad."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 3,
+    "q": "SilverPen S.L. crea bolígrafos de lujo únicos (artesanales). Su estrategia de proceso productivo más adecuada sería un enfoque de producto.",
+    "answer": "F",
+    "justification": "Para productos únicos, artesanales y de bajo volumen, el enfoque adecuado es el Enfoque de Proceso (talleres), no de Producto (línea de montaje)."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 4,
+    "q": "En relación con las estrategias del proceso productivo, la personalización en masa es un enfoque que en la práctica resulta imposible de alcanzar.",
+    "answer": "F",
+    "justification": "La personalización en masa sí es posible y real (ej. Dell, Nike ID), combinando la eficiencia de la producción en masa con la adaptación al cliente."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 5,
+    "q": "El enfoque por proyectos o de posición fija resulta más adecuado para elaborar productos únicos de elevada complejidad, donde los inputs y outputs presentan una alta especificidad.",
+    "answer": "V",
+    "justification": "Correcto. Se usa cuando el producto es demasiado grande o frágil para moverse (barcos, puentes, edificios)."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 6,
+    "q": "Las plataformas como Airbnb, que usan códigos digitales en lugar de entrega presencial de llaves, han supuesto un incremento del capital frente al trabajo en el sector.",
+    "answer": "V",
+    "justification": "Correcto. Se sustituye mano de obra (recepcionistas/trabajo) por tecnología automatizada (inversión en sistemas/capital)."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 7,
+    "q": "El análisis coste-volumen-beneficio (CVB) tiene sentido únicamente en el corto plazo.",
+    "answer": "V",
+    "justification": "Correcto. Asume que los costes fijos no cambian y los variables son lineales, supuestos que solo son válidos en el corto plazo."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 8,
+    "q": "Las socias han determinado que el punto muerto está en 250 ejemplares. Esto significa que, cuando hayan vendido 250 ejemplares, su beneficio será máximo.",
+    "answer": "F",
+    "justification": "El Punto Muerto (Umbral de Rentabilidad) es el punto donde los ingresos cubren los costes. En ese punto el beneficio es 0, no máximo."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 9,
+    "q": "La productividad multifactorial se calcula dividiendo los outputs obtenidos por la suma de todos los factores productivos utilizados expresados en unidades físicas.",
+    "answer": "F",
+    "justification": "Para sumar factores distintos (horas de trabajo, kw de energía, toneladas de material) hay que expresarlos en una unidad común: unidades monetarias (dinero)."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 10,
+    "q": "El análisis coste-volumen-beneficio (CVB) considera una perspectiva económica y financiera en su cálculo.",
+    "answer": "F",
+    "justification": "El CVB es fundamentalmente una herramienta económica (costes/ingresos operativos), no financiera (no suele considerar flujos de caja, tasas de descuento, etc.)."
+  },
+  {
+    "tema": "TEMA 4: Estrategia de Proceso",
+    "n": 11,
+    "q": "En relación con las herramientas de análisis, los diagramas de flujo consideran la variable tiempo para realizar un esquema del movimiento.",
+    "answer": "F",
+    "justification": "El diagrama de flujo estándar muestra pasos y decisiones. Para incluir explícitamente el tiempo, se usan los Mapas de flujo de valor o Gráficos de función-tiempo."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 1,
+    "q": "Las economías de escala describen que múltiples productos se pueden producir a un coste más bajo si se hacen de forma combinada que por separado, a través de sinergias.",
+    "answer": "F",
+    "justification": "La definición dada (producir múltiples productos juntos más barato) corresponde a Economías de Alcance. Las economías de escala se refieren a aumentar el volumen de un solo producto para reducir su coste unitario."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 2,
+    "q": "En cooperativa La Palma, un retraso en la llegada de camiones provocó que no hubiera producto disponible. La empresa registró una disminución del factor de eficiencia durante ese periodo.",
+    "answer": "F",
+    "justification": "Si la planta para por falta de insumos (causa externa), lo que disminuye es la Utilización. La eficiencia mide el rendimiento de la planta mientras está funcionando."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 3,
+    "q": "Un modelo de ajuste de capacidad reactivo o conservador resulta adecuado cuando existe un bajo coste por capacidad ociosa.",
+    "answer": "F",
+    "justification": "Si el coste de tener capacidad ociosa es bajo, lo ideal es un enfoque expansionista (tener de sobra). El enfoque reactivo se usa cuando la capacidad ociosa es muy cara o riesgosa."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 4,
+    "q": "Un modelo de ajuste de capacidad expansionista o proactivo resulta adecuado cuando existen altos costes de insatisfacción de la demanda.",
+    "answer": "V",
+    "justification": "Correcto. Si perder ventas es muy costoso (pérdida de clientes o imagen), compensa tener capacidad de sobra (buffer) para asegurar el servicio."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 5,
+    "q": "Gracias al iPad, Apple domina el mercado. La fabricación de iPad y iPhone comparten componentes comunes, lo que permite cambiar las líneas de ensamblaje entre ambos dispositivos. Este factor que influye en la planificación de la capacidad productiva se denomina economías de alcance.",
+    "answer": "V",
+    "justification": "Correcto. Definición de economías de alcance: producir varios productos juntos es más barato que por separado."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 6,
+    "q": "En los servicios, no tener colas siempre genera una mejor percepción de prestigio, ya que los clientes interpretan que la empresa es de mayor calidad.",
+    "answer": "F",
+    "justification": "No siempre. En ciertos servicios (restaurantes de moda, clubes), una cola puede actuar como señal de calidad o popularidad. Un sitio vacío puede generar desconfianza."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 7,
+    "q": "Por norma general, al prestar un servicio, la cola única en forma de 'S' se asocia con menor posibilidad de elegir una cola más lenta y menor probabilidad de abandonar la cola.",
+    "answer": "V",
+    "justification": "Correcto. La cola única garantiza el orden de llegada (equidad FCFS) y reduce la ansiedad del cliente de haber elegido la fila equivocada."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 8,
+    "q": "KETO SA prevé crecimiento a largo plazo. Entre las medidas correctivas de capacidad a largo plazo, podría pagar horas extra a sus trabajadores y contratar nuevo personal temporal.",
+    "answer": "F",
+    "justification": "Las horas extra y el personal temporal son medidas de ajuste a corto o medio plazo. Las medidas a largo plazo implican inversión estructural (nuevas instalaciones, maquinaria)."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 9,
+    "q": "La capacidad productiva de una empresa a largo plazo influye tanto en la capacidad de respuesta de una empresa como en su estructura de costes, política de inventarios y fuerza de trabajo.",
+    "answer": "V",
+    "justification": "Correcto. Las decisiones de capacidad son estratégicas y condicionan el techo de operación de todas las demás áreas."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 10,
+    "q": "Ante un exceso de demanda, las empresas pueden realizar ajustes como poner pedidos en 'back order' (vender inventario que no tiene para fecha posterior).",
+    "answer": "V",
+    "justification": "Correcto. El 'back order' es una táctica válida de gestión de la demanda cuando la capacidad es insuficiente temporalmente."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 11,
+    "q": "El overbooking es una práctica que se lleva a cabo para hacer frente a una previsión de falta de capacidad ante una determinada demanda futura.",
+    "answer": "F",
+    "justification": "El overbooking se hace para protegerse contra los 'no-shows' (asientos vacíos). Se gestiona el riesgo de exceso de capacidad (asientos libres), no la falta de ella."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 12,
+    "q": "A la hora de medir la capacidad de una empresa manufacturera (automovilística), lo adecuado sería usar medidas basadas en los inputs dado que se trata de procesos repetitivos.",
+    "answer": "F",
+    "justification": "En procesos repetitivos y estandarizados, la capacidad se mide mejor por Outputs (coches fabricados). Los Inputs se usan más en servicios o procesos a medida."
+  },
+  {
+    "tema": "TEMA 5: Capacidad Productiva",
+    "n": 13,
+    "q": "El grupo de 2º de ADE tiene 63 estudiantes. 'La población de clientes es finita, ya que el número de estudiantes que ya están en el sistema afecta al número de estudiantes potenciales'.",
+    "answer": "V",
+    "justification": "Correcto. Al ser un grupo cerrado, cada persona que entra reduce la probabilidad de que entre otra (quedan menos fuera). Eso es población finita."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 1,
+    "q": "Silver AI es una empresa virtual que busca emplear un servidor propio, por lo que deberá considerar el consumo energético que tiene el servidor, ya que eso supondrá elevados costes.",
+    "answer": "V",
+    "justification": "Correcto. Al gestionar hardware propio (on-premise), la empresa asume directamente los costes de energía y refrigeración."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 2,
+    "q": "Wilson es un nómada digital. La proximidad al mercado potencial es irrelevante para la localización de la sede social de la empresa de Wilson.",
+    "answer": "V",
+    "justification": "Correcto. Para negocios puramente digitales y remotos, la ubicación física de los clientes no condiciona la sede operativa."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 3,
+    "q": "La decisión de localización se toma únicamente en el momento de creación de una empresa, determinando la capacidad competitiva de dicha empresa.",
+    "answer": "F",
+    "justification": "Las decisiones de localización no son únicas; surgen también por expansión, cambios en la demanda, fin de contratos de alquiler o cambios en los costes."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 4,
+    "q": "De acuerdo con las fases en el proceso secuencial de localización, el análisis preliminar es el primer paso y consiste en la búsqueda de alternativas de localización.",
+    "answer": "F",
+    "justification": "El análisis preliminar establece criterios. La búsqueda de alternativas es el paso siguiente, una vez definidos los requisitos."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 5,
+    "q": "En relación con las áreas de agrupamiento empresarial, los viveros, semilleros e incubadoras ofrecen condiciones ventajosas y asesoramiento especializado.",
+    "answer": "V",
+    "justification": "Correcto. Están diseñados para apoyar el nacimiento y consolidación de nuevas empresas."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 6,
+    "q": "En relación con las áreas de agrupamiento empresarial, el uso de espacios de co-working tiene un carácter temporal, normalmente de 1-3 años.",
+    "answer": "F",
+    "justification": "El co-working no tiene límite temporal (es flexible). La limitación de estancia (ej. 3 años) es característica de los viveros/incubadoras para forzar la graduación de la empresa."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 7,
+    "q": "Las economías de localización o aglomeración se refieren a la reducción en costes que supone estar alejado de la competencia al 'conquistar' una mayor cuota de mercado.",
+    "answer": "F",
+    "justification": "Las economías de aglomeración surgen de estar cerca de la competencia, lo que atrae a más clientes (demanda acumulada) y proveedores especializados."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 8,
+    "q": "Según el titular 'Ford pide rebajas salariales o amenaza con la deslocalización', Ford tiene como principal razón los cambios en el coste de los inputs.",
+    "answer": "V",
+    "justification": "Correcto. La mano de obra es un input productivo clave; si su coste sube, motiva la deslocalización."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 9,
+    "q": "Golden AI busca emplear un servidor alquilado. Deberá considerar como criterio la localización del servidor en lugares remotos a la hora de seleccionar el servicio.",
+    "answer": "F",
+    "justification": "Al alquilar un servidor (Cloud), a la empresa usuaria generalmente no le interesa la ubicación física exacta, sino el servicio prestado."
+  },
+  {
+    "tema": "TEMA 6: Localización",
+    "n": 10,
+    "q": "El efecto lugar de origen es una práctica de competencia desleal mediante la cual las empresas reducen sus costes aprovechándose de los bajos salarios de un país subdesarrollado.",
+    "answer": "F",
+    "justification": "Eso se denomina Dumping Social. El Efecto lugar de origen (Made in...) se refiere a cómo la imagen de un país influye en la percepción de calidad del producto por el cliente."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 1,
+    "q": "El layout de almacenes resulta esencial para las empresas de manufacturas puesto que los procesos de almacenamiento añaden un valor clave al producto final.",
+    "answer": "F",
+    "justification": "El almacenamiento se considera una actividad que no añade valor (es un coste/desperdicio en la filosofía Lean). El objetivo del layout es minimizarlo, no aumentarlo."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 2,
+    "q": "La distribución en planta o layout consiste en la disposición específica de los recursos productivos, tratándose de una decisión de carácter operativo o táctico.",
+    "answer": "F",
+    "justification": "Las decisiones de layout son de carácter Estratégico (largo plazo), ya que implican grandes inversiones y son difíciles de modificar una vez implementadas."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 3,
+    "q": "El Layout por proceso o funcional resulta adecuado cuando la empresa cuenta con un bajo volumen de producción y alta variedad en sus productos.",
+    "answer": "V",
+    "justification": "Correcto. Es la configuración típica de talleres (Job Shop) donde se agrupan máquinas similares para tener flexibilidad."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 4,
+    "q": "Un programa de 'hoteling' consiste en oficinas que permiten hospedarse y pernoctar a los trabajadores de proyectos temporales.",
+    "answer": "F",
+    "justification": "El 'hoteling' no es dormir en la oficina. Consiste en reservar una zona de trabajo o escritorio por tiempos limitados para trabajadores móviles que no tienen puesto fijo."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 5,
+    "q": "En relación con los objetivos básicos del layout, el objetivo de circulación mínima pretende que los recorridos efectuados por los materiales y personas sean óptimos.",
+    "answer": "V",
+    "justification": "Correcto. Se busca la economía de movimientos y reducir distancias innecesarias."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 6,
+    "q": "Un buffet libre tiene cuatro áreas organizadas. Su distribución de layout según el tipo de proceso se corresponde con un layout por producto o repetitivo.",
+    "answer": "F",
+    "justification": "Se corresponde con un Layout Celular (o de proceso), donde el cliente va a las estaciones (células) específicas, no sigue una única línea rígida igual para todos."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 7,
+    "q": "La Cooperativa La Palma ha desarrollado una configuración que permite procesar pedidos a medida que los recibe, evitando el almacenamiento. Sigue un sistema ASRS.",
+    "answer": "F",
+    "justification": "La técnica logística de recibir y expedir mercancía casi inmediatamente sin almacenarla se denomina Cross-docking, no ASRS (que son almacenes automatizados de gran altura)."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 8,
+    "q": "Las células de trabajo o layout celular constituyen un tipo de distribución adecuada cuando los volúmenes son reducidos y un mismo trabajador atiende varias máquinas.",
+    "answer": "V",
+    "justification": "Correcto. Busca la eficiencia del flujo (como en línea) pero con la flexibilidad de lotes pequeños y operarios polivalentes."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 9,
+    "q": "La oficina convencional presenta ventajas como una comunicación más fluida entre equipos y reducción de costes por equipos comunes.",
+    "answer": "F",
+    "justification": "Esa descripción corresponde a la Oficina Abierta (Paisajista). La convencional (despachos cerrados) suele dificultar la comunicación y encarecer equipos."
+  },
+  {
+    "tema": "TEMA 7: Layout y Distribución en Planta",
+    "n": 10,
+    "q": "El diseño de lugar de trabajo deberá crear puestos que garanticen la expansión vertical, enriqueciendo la variedad de tareas del puesto de trabajo.",
+    "answer": "F",
+    "justification": "Enriquecer la variedad de tareas (hacer más cosas del mismo nivel) es Expansión Horizontal. La Vertical implica añadir responsabilidad, planificación y control."
+  }
+]

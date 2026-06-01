@@ -45,6 +45,16 @@ export const subjects: Subject[] = [
     dataFile: 'oe.json',
   },
   {
+    slug: 'do1',
+    title: 'Dirección de Operaciones I',
+    code: 'ADE · Operaciones',
+    icon: '⚙️',
+    description: '80 V/F con justificación. T1-T7: Intro, Cadena de Suministro, Diseño de Producto, Estrategia de Proceso, Capacidad, Localización y Layout.',
+    type: 'vf',
+    chips: ['80 V/F', '7 temas'],
+    dataFile: 'do1.json',
+  },
+  {
     slug: 'sibw',
     title: 'Sistemas de Información Basados en Web',
     code: 'Informática · SIBW',
