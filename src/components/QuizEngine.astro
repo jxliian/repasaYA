@@ -37,6 +37,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .sel-label{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px}
   select.sel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;color:var(--text);font-size:.95rem;outline:none;cursor:pointer;transition:border-color .2s;width:100%}
   select.sel:focus{border-color:var(--accent)}
+  .tema-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .tema-chip{padding:6px 14px;border:1.5px solid var(--border);border-radius:99px;background:var(--surface2);color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s;user-select:none;line-height:1.5}
+  .tema-chip:hover{border-color:var(--accent);color:var(--accent2)}
+  .tema-chip.chip-on{border-color:var(--accent);background:rgba(108,99,255,.14);color:var(--accent2)}
+  .chip-all.chip-on{background:var(--accent);color:#fff}
+  .chip-count{font-size:.65rem;opacity:.7;margin-left:4px}
   .btn-start{width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:#fff;border:none;font-weight:800;cursor:pointer;transition:all .2s}
   .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(108,99,255,.4);transform:translateY(-1px)}
   /* PROGRESS */
@@ -153,8 +159,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
       )}
       <div>
-        <span class="sel-label">Bloque</span>
-        <select class="sel" id="sel-tema"><option value="">Todo mezclado</option></select>
+        <span class="sel-label">Bloques <span id="sel-count" style="font-weight:400;text-transform:none;letter-spacing:0"></span></span>
+        <div class="tema-chips" id="tema-chips"></div>
       </div>
       <button class="btn-start" id="btn-start">Empezar →</button>
     </div>
@@ -238,28 +244,59 @@ const VF_TEMAS   = [...new Set(VF_DATA.map(q=>q.tema))];
 const TEST_TEMAS = [...new Set(TEST_DATA.map(q=>q.tema))];
 let selectedMode = hasVF ? 'vf' : 'test';
 let questions=[], idx=0, correct=0, wrong=0, answered=false;
+let selectedTemas = new Set(); // vacío = todos
 
 function selectMode(mode){
   selectedMode=mode;
+  selectedTemas.clear();
   ['vf','test'].forEach(m=>{
     const el=document.getElementById('card-'+m);
     if(el) el.classList.toggle('selected',m===mode);
   });
-  updateDropdown();
+  renderChips();
 }
-function updateDropdown(){
-  const sel=document.getElementById('sel-tema');
-  const temas=selectedMode==='vf'?VF_TEMAS:TEST_TEMAS;
-  sel.innerHTML='<option value="">Todo mezclado</option>';
-  temas.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o)});
+
+function renderChips(){
+  const temas = selectedMode==='vf' ? VF_TEMAS : TEST_TEMAS;
+  const src   = selectedMode==='vf' ? VF_DATA  : TEST_DATA;
+  const container = document.getElementById('tema-chips');
+  container.innerHTML = '';
+
+  // chip "Todos"
+  const allChip = document.createElement('button');
+  const allCount = src.length;
+  allChip.className = 'tema-chip chip-all' + (selectedTemas.size===0 ? ' chip-on' : '');
+  allChip.innerHTML = 'Todos<span class="chip-count">'+allCount+'</span>';
+  allChip.addEventListener('click', () => { selectedTemas.clear(); renderChips(); });
+  container.appendChild(allChip);
+
+  temas.forEach(t => {
+    const count = src.filter(q=>q.tema===t).length;
+    const chip = document.createElement('button');
+    chip.className = 'tema-chip' + (selectedTemas.has(t) ? ' chip-on' : '');
+    chip.innerHTML = t + '<span class="chip-count">'+count+'</span>';
+    chip.addEventListener('click', () => {
+      if(selectedTemas.has(t)) selectedTemas.delete(t);
+      else selectedTemas.add(t);
+      renderChips();
+    });
+    container.appendChild(chip);
+  });
+
+  // indicador de cuántos temas seleccionados
+  const countEl = document.getElementById('sel-count');
+  if(countEl){
+    if(selectedTemas.size===0) countEl.textContent='';
+    else countEl.textContent = '· '+selectedTemas.size+' de '+temas.length+' seleccionados';
+  }
 }
-updateDropdown();
+renderChips();
 
 function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
 function startQuiz(){
-  const tema=document.getElementById('sel-tema').value;
   const src=selectedMode==='vf'?VF_DATA:TEST_DATA;
-  questions=shuffle(tema?src.filter(q=>q.tema===tema):src);
+  const pool=selectedTemas.size===0 ? src : src.filter(q=>selectedTemas.has(q.tema));
+  questions=shuffle(pool);
   idx=0;correct=0;wrong=0;
   hide('selector-view');hide('results-view');show('quiz-view');
   document.getElementById('vf-controls').style.display=selectedMode==='vf'?'':'none';
