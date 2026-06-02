@@ -190,6 +190,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       </div>
       <div class="q-nav">
         <button class="btn btn-ghost" id="btn-back">← Volver</button>
+        <button class="btn btn-ghost" id="btn-prev" style="display:none">← Anterior</button>
         <button class="btn btn-primary" id="btn-next" style="display:none">Siguiente →</button>
       </div>
     </div>
@@ -244,6 +245,7 @@ const VF_TEMAS   = [...new Set(VF_DATA.map(q=>q.tema))];
 const TEST_TEMAS = [...new Set(TEST_DATA.map(q=>q.tema))];
 let selectedMode = hasVF ? 'vf' : 'test';
 let questions=[], idx=0, correct=0, wrong=0, answered=false;
+let answers=[];   // answers[i] = {chosen, wasCorrect} | undefined
 let selectedTemas = new Set(); // vacío = todos
 
 function selectMode(mode){
@@ -297,7 +299,7 @@ function startQuiz(){
   const src=selectedMode==='vf'?VF_DATA:TEST_DATA;
   const pool=selectedTemas.size===0 ? src : src.filter(q=>selectedTemas.has(q.tema));
   questions=shuffle(pool);
-  idx=0;correct=0;wrong=0;
+  idx=0;correct=0;wrong=0;answers=[];
   hide('selector-view');hide('results-view');show('quiz-view');
   document.getElementById('vf-controls').style.display=selectedMode==='vf'?'':'none';
   document.getElementById('test-controls').style.display=selectedMode==='test'?'':'none';
@@ -312,11 +314,25 @@ function showQ(){
   document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
   document.getElementById('q-progress').style.width=`${(idx/questions.length)*100}%`;
   hide_el('btn-next');
+  idx>0 ? show_el('btn-prev') : hide_el('btn-prev');
   if(selectedMode==='vf'){
     const bv=document.getElementById('btn-v'),bf=document.getElementById('btn-f');
     bv.className='vf-btn v-btn';bv.disabled=false;
     bf.className='vf-btn f-btn';bf.disabled=false;
     document.getElementById('just-box').className='justification';
+    if(answers[idx]!==undefined){
+      answered=true;
+      const {chosen,wasCorrect}=answers[idx];
+      bv.disabled=true;bf.disabled=true;
+      const cb=chosen==='V'?bv:bf,rb=q.answer==='V'?bv:bf;
+      cb.className+=(wasCorrect?' chosen-correct':' chosen-wrong');
+      if(!wasCorrect)rb.className+=' show-correct';
+      const jbox=document.getElementById('just-box');
+      jbox.className='justification show '+(wasCorrect?'correct-just':'wrong-just');
+      document.getElementById('just-label').textContent=wasCorrect?`✓ Correcto — ${q.answer==='V'?'VERDADERO':'FALSO'}`:`✗ Incorrecto — Era ${q.answer==='V'?'VERDADERO':'FALSO'}`;
+      document.getElementById('just-text').textContent=q.justification;
+      show_el('btn-next');
+    }
   } else {
     const container=document.getElementById('options-container');
     container.innerHTML='';
@@ -326,6 +342,18 @@ function showQ(){
       btn.addEventListener('click',()=>answerTest(i));container.appendChild(btn);
     });
     document.getElementById('feedback').className='feedback';
+    if(answers[idx]!==undefined){
+      answered=true;
+      const {chosen,wasCorrect}=answers[idx];
+      const btns=document.querySelectorAll('.opt-btn');
+      btns.forEach(b=>b.disabled=true);
+      btns[chosen].className+=(wasCorrect?' chosen-correct':' chosen-wrong');
+      if(!wasCorrect)btns[q.correct].className+=' show-correct';
+      const fb=document.getElementById('feedback');
+      fb.className='feedback show '+(wasCorrect?'correct':'wrong');
+      fb.textContent=wasCorrect?`✓ Correcto — ${q.opts[q.correct]}`:`✗ Incorrecto — Era: ${q.opts[q.correct]}`;
+      show_el('btn-next');
+    }
   }
 }
 function answerVF(chosen){
@@ -341,6 +369,7 @@ function answerVF(chosen){
   jbox.className='justification show '+(ok?'correct-just':'wrong-just');
   document.getElementById('just-label').textContent=ok?`✓ Correcto — ${q.answer==='V'?'VERDADERO':'FALSO'}`:`✗ Incorrecto — Era ${q.answer==='V'?'VERDADERO':'FALSO'}`;
   document.getElementById('just-text').textContent=q.justification;
+  answers[idx]={chosen,wasCorrect:ok};
   document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
   show_el('btn-next');
 }
@@ -355,9 +384,11 @@ function answerTest(chosen){
   const fb=document.getElementById('feedback');
   fb.className='feedback show '+(ok?'correct':'wrong');
   fb.textContent=ok?`✓ Correcto — ${q.opts[q.correct]}`:`✗ Incorrecto — Era: ${q.opts[q.correct]}`;
+  answers[idx]={chosen,wasCorrect:ok};
   document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
   show_el('btn-next');
 }
+function prevQ(){if(idx>0){idx--;showQ()}}
 function nextQ(){idx++;if(idx>=questions.length){showResults();return}showQ()}
 function showResults(){
   hide('quiz-view');
@@ -379,6 +410,7 @@ document.getElementById('btn-start').addEventListener('click', startQuiz);
 document.getElementById('btn-v').addEventListener('click', () => answerVF('V'));
 document.getElementById('btn-f').addEventListener('click', () => answerVF('F'));
 document.getElementById('btn-next').addEventListener('click', nextQ);
+document.getElementById('btn-prev').addEventListener('click', prevQ);
 document.getElementById('btn-back').addEventListener('click', backToSelector);
 document.getElementById('btn-back2').addEventListener('click', backToSelector);
 document.getElementById('btn-repeat').addEventListener('click', startQuiz);
