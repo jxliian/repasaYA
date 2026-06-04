@@ -235,7 +235,7 @@
     "n": 35,
     "q": "El departamento de RRHH es igual de importante y complejo en todas las organizaciones.",
     "answer": "F",
-    "justification": "El departamento de RRHH puede variar en importancia y complejidad en diferentes organizaciones. 36. Entre las cualidades que debería tener un director de RRHH está el tener un liderazgo competente es decir, disponer de credibilidad, conocimiento y poder de influencia. VERDADERO"
+    "justification": "La importancia y complejidad del departamento de RRHH varía según el tamaño de la empresa. En empresas pequeñas es mínima o inexistente; a medida que la empresa crece, aumenta su relevancia y estructura."
   },
   {
     "tema": "TEMA 1",
@@ -319,7 +319,7 @@
     "n": 48,
     "q": "Los procesos de afectación están relacionados entre sí pero no están relacionados con los procesos de formación y desarrollo.",
     "answer": "F",
-    "justification": "Los procesos de afectación están relacionados tanto entre sí como con los procesos de formación y desarrollo. 49. Los procesos de afectación la organización los lleva a cabo para buscar e incorporar las personas mas adecuadas para cada puesto. Se incluyen el reclutamiento, la selección y la socialización. VERDADERO"
+    "justification": "Los procesos de afectación (reclutamiento, selección, socialización) están relacionados tanto entre sí como con el resto de procesos de gestión de RRHH (formación, evaluación, compensación). Todos están interrelacionados."
   },
   {
     "tema": "TEMA 1",
@@ -389,7 +389,7 @@
     "n": 8,
     "q": "La observación como método utilizado en el análisis de puestos permite recoger la opinión de un grupo de personas especialistas.",
     "answer": "F",
-    "justification": "La observación como método utilizado en el análisis de puestos de trabajo no permite recoger la opinión de un grupo de personas especialistas sino observa al trabajador en el desarrollo del trabajo. 9. La observación como método utilizado en el análisis de puestos permite servir para obtener información útil de puestos muy especializados VERDADERO"
+    "justification": "La observación consiste en observar al trabajador mientras realiza su trabajo, no en recoger la opinión de un grupo de expertos. La técnica que recoge opiniones de trabajadores o supervisores experimentados son los grupos de expertos."
   },
   {
     "tema": "TEMA 2",
@@ -466,7 +466,7 @@
     "n": 20,
     "q": "Cuando el análisis de puestos implica la redacción de la descripción de puestos teniendo en cuenta no solo las tareas y responsabilidades, sino también los conocimientos, experiencias y competencias, se refiere al análisis multifuncional.",
     "answer": "V",
-    "justification": "21. Cuando el análisis de puestos implica la redacción de la descripción de puestos teniendo en cuenta no solo las tareas y responsabilidades, sino también los conocimientos, experiencias y competencias, se refiere a la especificación del puesto de trabajo. FALSO, Se refiere al análisis de puestos"
+    "justification": "Correcto. El análisis de puestos basado en competencias (o análisis multifuncional) va más allá de las tareas y responsabilidades, incorporando los conocimientos, experiencias y competencias necesarios para el puesto. Se diferencia del análisis tradicional, centrado solo en obligaciones y responsabilidades."
   },
   {
     "tema": "TEMA 2",
@@ -536,7 +536,7 @@
     "n": 2,
     "q": "En la planificación de RRHH se analiza si la plantilla de la empresa es suficiente y si hay que iniciar procesos de reclutamiento y selección.",
     "answer": "V",
-    "justification": "Parte de la planificación de RRHH implica determinar si la fuerza laboral actual es suficiente o si es necesario iniciar procesos de reclutamiento y selección. 3. En la planificación de RRHH, se hace un estudio sobre las fuerzas del mercado. VERDADERO, La planificación de RRHH puede incluir un estudio de las fuerzas del mercado, como la disponibilidad de trabajadores calificados en una determinada área o industria."
+    "justification": "Correcto. La planificación de RRHH determina si la plantilla actual es suficiente cuantitativa y cualitativamente, e identifica si es necesario iniciar procesos de reclutamiento, formación o reducción de plantilla para alcanzar los objetivos organizativos."
   },
   {
     "tema": "TEMA 3",
@@ -837,7 +837,7 @@
     "n": 11,
     "q": "La selección es anterior al reclutamiento.",
     "answer": "F",
-    "justification": "El proceso de reclutamiento generalmente precede al de selección. 12. En el proceso de selección las herramientas tienen que ser válidas y fiables. VERDADERO, En el proceso de selección, las herramientas deben ser válidas y fiables"
+    "justification": "El reclutamiento es siempre anterior a la selección: primero se atrae y reúne a los candidatos (reclutamiento) y después se elige al más adecuado entre ellos (selección). Es el orden lógico del proceso de afectación."
   },
   {
     "tema": "TEMA 4 Y 5",
@@ -1005,7 +1005,7 @@
     "n": 2,
     "q": "El coaching es una herramienta que ayuda a potenciar el desarrollo de las personas mediante un proceso de reflexión para identificar, incorporar o desarrollar nuevas habilidades y competencias, y también favorece el desarrollo de acciones para lograr un mejor desempeño actual y futuro.",
     "answer": "V",
-    "justification": "3. Los programas que se utilizan para mejorar los conocimientos, habilidades y actitudes de la plantilla tanto para el trabajo actual como para el futuro son, en esencia, los mismos. Esta afirmación puede ser correcta o incorrecta dependiendo del contexto. Los programas para mejorar las habilidades de los empleados pueden variar ampliamente dependiendo del objetivo, la audiencia y la empresa"
+    "justification": "Correcto. El coaching es un proceso de reflexión y transformación a nivel emocional, cognitivo, conductual y espiritual que libera el potencial de la persona para incrementar al máximo su desempeño. El coach facilita que el coachee descubra sus puntos fuertes y áreas de mejora."
   },
   {
     "tema": "TEMA 6 Y 7",
@@ -1068,7 +1068,7 @@
     "n": 2,
     "q": "La finalidad de la evaluación es ver si el trabajador es productivo y si podrá mejorar su rendimiento en el futuro.",
     "answer": "V",
-    "justification": "3. Los fines de la evaluación del rendimiento no son solo evaluar lo que no se hace bien, sino buscar la manera de mejorarlo. VERDADERO"
+    "justification": "Correcto. La evaluación del rendimiento es un proceso formal y sistemático para identificar, medir y gestionar el rendimiento, con la doble finalidad de comprobar si el trabajador es productivo actualmente y de prever si podrá mejorar en el futuro."
   },
   {
     "tema": "TEMA 8",
@@ -1250,7 +1250,7 @@
     "n": 29,
     "q": "La retroalimentación o feedback permanente busca personalizar la evaluación y orientar el desarrollo de las capacidades hacia el logro de los objetivos.",
     "answer": "V",
-    "justification": "30. Los procesos sustractivos solamente afectan a los procesos de evaluación y compensación ya que se trata de una etapa final en el proceso de gestión de RRHH. FALSO, Los procesos sustractivos pueden afectar a todos los aspectos de la gestión de RRHH, no solo la evaluación y compensación."
+    "justification": "Correcto. La evaluación continua moderna se caracteriza por un feedback abierto y espontáneo que permite personalizar la evaluación y orientar el desarrollo profesional de cada trabajador de forma continua, frente al modelo tradicional de evaluación anual o trimestral."
   },
   {
     "tema": "TEMA 8",
@@ -1306,7 +1306,7 @@
     "n": 2,
     "q": "Los sistemas de retribución flexible consisten en cambiar parte monetaria del salario por productos o servicios ofrecidos por la empresa, obteniendo el trabajador una menor disponibilidad neta dineraria después de pagar los impuestos y los gastos personales.",
     "answer": "F",
-    "justification": "Los sistemas de Retribución flexible, permite al trabajador cambiar una parte monetaria del salario por productos y servicios ofrecidos por la empresa para que el trabajador tenga mayor disponibilidad dineraria después de pagar impuestos y gastos personales. 3. Si un trabajador se quiere incorporar tras haber disfrutado de dos años de excedencia por ocupar un cargo público, la empresa debe reincorporarlo en cuanto quede un puesto vacante. VERDADERO"
+    "justification": "La retribución flexible permite al trabajador cambiar parte de su salario monetario por productos y servicios con ventajas fiscales, lo que le otorga una MAYOR (no menor) disponibilidad neta dineraria tras el pago de impuestos. La afirmación es falsa porque invierte el efecto: dice \"menor disponibilidad\"."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1327,14 +1327,14 @@
     "n": 6,
     "q": "Los trabajadores de la empresa ferronautica siempre han considerado que juan, el evaluador de desempeño de la fábrica de montaje, comete errores de primacía porque normalmente evalúa calificando de forma indulgente a todo el mundo para no tener problemas.",
     "answer": "F",
-    "justification": "La equidad interna, establece retribución justa realizando comparaciones salariales entre los puestos de trabajo de la organización"
+    "justification": "Lo descrito es el error de LENIDAD, no de primacía. El error de lenidad se produce cuando el evaluador califica por encima de lo real para evitar conflictos con los evaluados. El error de primacía ocurre cuando la primera información recibida sobre un empleado condiciona desproporcionadamente las evaluaciones posteriores."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 7,
     "q": "La equidad interna trata de reconocer las diferencias que puede haber entre individuos que tienen el mismo puesto, logrando que empleados con diferentes niveles de eficiencia no reciban la misma remuneración.",
     "answer": "F",
-    "justification": "La equidad interna busca precisamente reconocer las diferencias entre individuos que ocupan el mismo puesto, asegurando que los empleados reciban una remuneración justa y acorde a factores como responsabilidad, experiencia, habilidades y desempeño"
+    "justification": "Lo descrito es la equidad INDIVIDUAL (reconocer diferencias de rendimiento entre individuos del mismo puesto). La equidad interna consiste en establecer una retribución justa mediante comparaciones salariales entre los distintos PUESTOS DE TRABAJO de la organización, garantizando que puestos de igual valor reciban la misma retribución."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1354,8 +1354,8 @@
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 10,
     "q": "La carrera profesional recoge la sucesión de actividades laborales y puestos de trabajo desempeñados por una persona dentro de una misma empresa.",
-    "answer": "V",
-    "justification": "Verdadero."
+    "answer": "F",
+    "justification": "La carrera profesional abarca toda la trayectoria laboral de una persona a lo largo de su vida, incluyendo puestos en diferentes empresas y organizaciones, no solo dentro de una misma empresa. Los apuntes lo aclaran explícitamente: \"no se refiere solo a una organización donde ha trabajado ese trabajador, se refiere a toda su trayectoria también en otras empresas\"."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1369,7 +1369,7 @@
     "n": 12,
     "q": "El enriquecimiento del puesto se produce cuando se aumentan las tareas o funciones que corresponden a un puesto, manteniéndose inadecuados los niveles de responsabilidad, autonomía y control.",
     "answer": "F",
-    "justification": "El enriquecimiento del puesto busca precisamente mejorar la calidad del trabajo al otorgar a los empleados un mayor nivel de responsabilidad, autonomía y control sobre las tareas que realizan. 13. La técnica del DELPHL aplicada a la planificación RRHH, es una técnica cualitativa de carácter presencial en la que discute la evolución de la oferta y la demanda de RRHH de forma abierta facilitando al intercambiando de ideas para expertos en la materia FALSO, La técnica DELPHI aplicada a la planificación de Recursos Humanos no es necesariamente presencial, sino que se basa en la recopilación y síntesis de opiniones de expertos de manera estructurada y anónima."
+    "justification": "El enriquecimiento del puesto (job enrichment) aumenta tanto las tareas como los niveles de responsabilidad, autonomía y control del trabajador (expansión vertical + horizontal). Lo que mantiene las tareas iguales sin añadir autonomía es la ampliación del puesto (job enlargement)."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1390,14 +1390,14 @@
     "n": 1,
     "q": "Los problemas derivados de un puesto con un alto nivel de especialización pueden solucionarse a través de la simplificación del trabajo.",
     "answer": "F",
-    "justification": "Porque la simplificación del trabajo puede solucionarse a través de problemas derivados de un puesto con un bajo nivel de especialización o porque los problemas derivados de un puesto con un alto nivel de especialización pueden solucionarse a través de la ampliación de puestos de trabajo, enriquecimiento del trabajo, rotación de puestos o diseño de equipo."
+    "justification": "La simplificación del trabajo es una técnica de rediseño para puestos con BAJO nivel de especialización, donde el trabajo se divide en tareas simples y repetitivas. Para puestos con ALTO nivel de especialización se emplean técnicas como la rotación de puestos, la ampliación del puesto, el enriquecimiento del puesto o el diseño de trabajo en equipos."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 2,
     "q": "Luis Montiel, nuevo vicerrector de la UGR de personal, esta rediseñando los puestos de la entidad y esta elaborando nuevamente la descripción de los puestos de administración incluyendo en el documento las tareas, responsabilidades, obligaciones del puesto y las competencias básicas y características que deberían tener las personas que los vayan a ocupar.",
     "answer": "F",
-    "justification": "la descripción de los puestos incluye la información de tareas y obligaciones y responsabilidades mientras que la especificación del puesto de trabajo incluye competencias y características que ocupan esos puestos."
+    "justification": "La descripción del puesto recoge información SOBRE EL PUESTO (tareas, obligaciones, responsabilidades). La especificación del puesto o profesiograma recoge las competencias y características que debe tener la PERSONA que lo ocupe. Como Luis incluye ambos tipos de información en el mismo documento, lo está elaborando es una especificación del puesto, no solo una descripción."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
@@ -1418,7 +1418,7 @@
     "n": 5,
     "q": "La diferencia entre una ruptura laboral y una ruptura involuntaria es que la primera supone una interrupción temporal de la relación laboral y la segunda una interrupción definitiva.",
     "answer": "F",
-    "justification": "Ruptura laboral Voluntaria es cuando el empleado decide finalizar su relación laboral con la empresa por razones personales o profesionales, mientras que la Ruptura Laboral Involuntaria la empresa decide finalizar su relación con un empleado debido a necesidades conómicas o a un mal ajuste entre el empleado y la organización. 6. El Outplacement es un programa creado para ayudar a los empleados despedidos por la perdida de trabajo y ofrecerles apoyo para encontrar uno nuevo, siendo su coste asumido por la empresa. VERDADERO"
+    "justification": "La ruptura laboral (voluntaria o involuntaria) implica siempre la EXTINCIÓN definitiva del contrato, no una interrupción temporal. Lo que implica interrupción temporal es la suspensión laboral (ERTE, excedencia). Además, \"ruptura involuntaria\" es un subtipo de ruptura laboral (no dos categorías distintas), por lo que la comparación de la pregunta no tiene sentido."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
