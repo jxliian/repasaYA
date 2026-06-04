@@ -29,9 +29,9 @@ export const subjects: Subject[] = [
     title: 'Recursos Humanos',
     code: 'ADE · Empresa',
     icon: '👥',
-    description: '318 V/F con justificación + 138 quiz tipo test. 11 bloques y exámenes.',
+    description: '312 V/F con justificación + tipo test. 11 bloques y exámenes.',
     type: 'both',
-    chips: ['318 V/F', '138 quiz'],
+    chips: ['312 V/F', 'Tipo test'],
     dataFile: 'rrhh.json',
   },
   {

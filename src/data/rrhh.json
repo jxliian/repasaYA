@@ -86,14 +86,14 @@
   {
     "tema": "TEMA 1",
     "n": 13,
-    "q": "Los RRHH de una empresa son exclusivamente las personas que pertenecen al departamento de RRHH.",
+    "q": "La gestión de Recursos Humanos de una empresa recae únicamente sobre las personas que pertenecen al departamento de RRHH.",
     "answer": "F",
     "justification": "Los RRHH de una empresa incluyen a todos los empleados, no solo aquellos que trabajan en el departamento de RHH"
   },
   {
     "tema": "TEMA 1",
     "n": 14,
-    "q": "Los RRHH son exclusivamente las personas que ocupan el último nivel de la cadena de mando de una organización.",
+    "q": "El concepto de Recursos Humanos hace referencia únicamente a las personas que ocupan el nivel más alto de la cadena de mando de una organización.",
     "answer": "F",
     "justification": "Los RRHH de una empresa se refiere a todos los empelados de la organización, no solo los de alto nivel"
   },
@@ -117,13 +117,6 @@
     "q": "La reestructuración organizativa supone una reducción del tamaño empresarial.",
     "answer": "F",
     "justification": "la reestructuración organizativa puede conllevar una reducción del tamaño empresarial, pero no siempre es el caso."
-  },
-  {
-    "tema": "TEMA 1",
-    "n": 18,
-    "q": "Para conseguir estructuras más planas en ningún caso se realizarán cambios en el diseño de trabajo.",
-    "answer": "F",
-    "justification": "Para conseguir estructuras mas planas, a menudo es necesario hacer cambios en el diseño de trabajo"
   },
   {
     "tema": "TEMA 1",
@@ -444,8 +437,8 @@
     "tema": "TEMA 2",
     "n": 16,
     "q": "El análisis de puestos de trabajo es el proceso a través del cual la empresa recopila y analiza la información sobre el puesto de trabajo con la intención de identificar las tareas, y responsabilidades del puesto.",
-    "answer": "V",
-    "justification": "Verdadero."
+    "answer": "F",
+    "justification": "La definición del APT incluye identificar tareas, obligaciones Y responsabilidades. Al omitir las obligaciones, la afirmación es incompleta y por tanto falsa."
   },
   {
     "tema": "TEMA 2",
@@ -486,8 +479,8 @@
     "tema": "TEMA 2",
     "n": 23,
     "q": "Entre las técnicas utilizadas para realizar el rediseño de puestos se encuentran la simplificación del puesto, la ampliación del puesto y la reestructuración del puesto.",
-    "answer": "V",
-    "justification": "Verdadero."
+    "answer": "F",
+    "justification": "La \"reestructuración del puesto\" no es una técnica estándar de rediseño. Las técnicas correctas son: simplificación del trabajo, rotación de puestos, ampliación del puesto, enriquecimiento del puesto y diseño de trabajo en equipos."
   },
   {
     "tema": "TEMA 2",
@@ -527,9 +520,9 @@
   {
     "tema": "TEMA 2",
     "n": 29,
-    "q": "En la fase análisis de puestos de trabajo, entre otras cosas, se trata de determinar qué puestos de trabajo se van a analizar",
+    "q": "En la fase de análisis de puestos de trabajo, entre otras cosas, se trata únicamente de determinar qué puestos de trabajo se van a analizar.",
     "answer": "F",
-    "justification": "En la fase de análisis de puestos de trabajo, no solo se determinan los puestos a analizar, también se recopilan datos sobre las actividades laborales, las características y las capacidades humanas necesarias para esos puestos."
+    "justification": "En la fase de análisis de puestos no solo se determinan los puestos a analizar, también se recopilan datos sobre las actividades laborales, las características y las capacidades humanas necesarias para esos puestos."
   },
   {
     "tema": "TEMA 3",
@@ -589,13 +582,6 @@
   },
   {
     "tema": "TEMA 3",
-    "n": 10,
-    "q": "El programa de outplacement o recolocación es un programa creado para ayudar a los empleados despedidos a superar el estrés emocional del mismo y a ayudarle a buscar nuevo empleo",
-    "answer": "V",
-    "justification": "Minimizar las demandas judiciales es uno de los beneficios de los programas de outplacement, aunque no su único objetivo."
-  },
-  {
-    "tema": "TEMA 3",
     "n": 11,
     "q": "El coste de un programa de outplacement o recolocación es asumido por la empresa que despide al empleado.",
     "answer": "V",
@@ -638,13 +624,6 @@
   },
   {
     "tema": "TEMA 3",
-    "n": 17,
-    "q": "El coste de un programa de outplacement o recolocación es asumido por la empresa que despide al empleado.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 3",
     "n": 18,
     "q": "El programa de outplacement o recolocación tiene como objetivo minimizar las demandas judiciales que puedan interponer los trabajadores despedidos.",
     "answer": "V",
@@ -675,27 +654,6 @@
     "tema": "TEMA 3",
     "n": 22,
     "q": "La planificación de la sucesión permite tomar decisiones sobre las promociones internas.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 23,
-    "q": "Para hacer una planificación de plantilla es necesario hacer un análisis de las necesidades de plantilla existentes.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 24,
-    "q": "La limitación de la contratación es una medida a través de la cual se puede corregir el defecto en la oferta de personal.",
-    "answer": "F",
-    "justification": "Se corrige así el Exceso en la oferta de personal."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 25,
-    "q": "Los planes de RRHH se pueden clasificar en planes a largo, medio y corto plazo.",
     "answer": "V",
     "justification": "Verdadero."
   },
