@@ -1,0 +1,732 @@
+[
+  {
+    "term": "Recursos Humanos",
+    "def": "Todas las personas que trabajan en la organización, independientemente del nivel en la jerarquía. Factor estratégico clave para la ventaja competitiva sostenible.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Capital humano",
+    "def": "Conjunto de conocimientos, habilidades y destrezas valiosos y específicos que los empleados poseen y aplican en sus puestos. Se considera una inversión a largo plazo, no un coste.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Gestión de RRHH",
+    "def": "Planificación, organización, desarrollo y control de las técnicas capaces de promover el desempeño eficiente del personal, incluyendo relaciones laborales, salud, seguridad y justicia.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Gestión tradicional",
+    "def": "Enfoque que considera los RRHH como un coste a minimizar con escaso valor estratégico. Se centra en el control del personal y las nóminas.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Gestión estratégica",
+    "def": "Enfoque que considera los RRHH como factor de competitividad y fuente de ventaja competitiva sostenible. Visión proactiva e integradora.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Procesos básicos",
+    "def": "Punto de partida de la gestión de RRHH: análisis del puesto de trabajo y planificación de RRHH. Fundamentan el resto de procesos.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Procesos de afectación",
+    "def": "Los que se llevan a cabo para buscar e incorporar a las personas más adecuadas para cada puesto: reclutamiento, selección y socialización.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Procesos de formación y desarrollo",
+    "def": "Mejoran la capacitación del personal y gestionan su evolución dentro de la empresa: formación, desarrollo de carrera.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Procesos sustractivos",
+    "def": "Analizan la desvinculación del trabajador de la empresa (voluntaria o involuntaria): despidos, dimisión, jubilación.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Procesos de evaluación y compensación",
+    "def": "Analizan el rendimiento del trabajador y el sistema retributivo. Interrelacionados con todos los demás procesos.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Employer Branding",
+    "def": "Estrategia por la que la empresa se define como buen empleador para atraer y retener a los mejores profesionales. Permite no solo atraer talento sino contratar los perfiles más adecuados.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Empowerment (delegación de poder)",
+    "def": "Otorgar a los trabajadores autoridad, autonomía, creatividad y capacidad de asunción de riesgos. Genera mayor satisfacción y compromiso con el trabajo.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Fuga de cerebros",
+    "def": "Fenómeno por el que trabajadores altamente cualificados buscan desarrollo profesional fuera de la empresa por sobrecualificación. La empresa pierde la inversión realizada en ellos.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Gestión del talento",
+    "def": "Conjunto de prácticas para atraer, identificar, desarrollar y retener a los empleados más valiosos de la organización.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "People analytics",
+    "def": "Uso del big data para analizar patrones de comportamiento y tomar decisiones estratégicas en materia de RRHH basadas en datos objetivos.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Software de gestión de personas (SIRH)",
+    "def": "Sistema informatizado, usualmente en la nube, que reúne toda la información de los colaboradores para optimizar procesos como contrataciones, pagos, permisos y planes de carrera.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Factores del entorno",
+    "def": "Están fuera del control de la dirección de las empresas: rapidez de cambios, crecimiento de internet, legislación, conciliación vida laboral-familiar, diversidad de la fuerza de trabajo.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Factores organizativos",
+    "def": "Relativos a los aspectos internos de la empresa, gestionados por los directivos: posición competitiva, flexibilidad empresarial, reestructuración organizativa, tamaño, cultura organizativa.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Factores individuales",
+    "def": "Aspectos relativos a cada trabajador que influyen en la gestión de RRHH: ajuste persona-organización, ética, productividad, empowerment, fuga de cerebros, inseguridad laboral.",
+    "tema": "T1: Introducción a los RRHH"
+  },
+  {
+    "term": "Análisis del puesto de trabajo (APT)",
+    "def": "Proceso mediante el cual la empresa recopila y analiza información sobre el puesto para identificar las tareas, obligaciones y responsabilidades y establecer el perfil de persona idónea.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Tareas",
+    "def": "Elementos básicos del trabajo. La unidad mínima de análisis en el estudio del puesto.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Obligaciones",
+    "def": "Tareas que constituyen una actividad significativa en la realización del trabajo. Subconjunto importante de tareas del puesto.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Responsabilidades",
+    "def": "Obligaciones que identifican el fin principal o razón de ser del puesto de trabajo. El nivel más alto de análisis del contenido del puesto.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Descripción del puesto",
+    "def": "Documento resultado del APT que recoge la información relativa a cada puesto: identificación, resumen, obligaciones, responsabilidades y condiciones de trabajo.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Especificación del puesto (Profesiograma)",
+    "def": "Documento que recoge las características que debería tener la persona que ocupe el puesto: cualificación mínima, especificaciones del cargo y capacidades y conocimientos necesarios.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Rediseño del puesto",
+    "def": "Actividad derivada del APT que persigue la mejora a través de aspectos tecnológicos y humanos para lograr eficiencia organizativa y satisfacción laboral del empleado.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Simplificación del trabajo",
+    "def": "Técnica de rediseño para puestos de bajo nivel de especialización: el trabajo se divide en tareas simples y repetitivas, repartidas entre varios puestos. Mayor eficacia en producción a escala pero riesgo de monotonía.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Rotación de puestos",
+    "def": "El trabajador va cambiando de un puesto a otro sin que se rompa el flujo normal del trabajo. Reduce la monotonía y permite desarrollar competencias en más de un puesto. Disminuye la especialización horizontal.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Ampliación del puesto",
+    "def": "Aumentar las tareas que corresponden a un puesto sin adquirir más responsabilidades (expansión horizontal). Reduce la monotonía y rutina sin añadir autonomía.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Enriquecimiento del puesto",
+    "def": "Añadir nuevas tareas y aumentar la responsabilidad, autonomía y control (expansión vertical + horizontal). Permite al empleado planificar y controlar su trabajo sin un supervisor directo.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Diseño de trabajo en equipos",
+    "def": "Grupos de trabajadores que desempeñan labores dentro de una amplia gama de responsabilidades, incluso del ámbito de dirección. Requieren habilidades de adaptación.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Outsourcing (subcontratación)",
+    "def": "Transferir trabajos a otras empresas especializadas en ello. Suele aplicarse a actividades no nucleares para la empresa con el fin de ahorrar costes.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Teletrabajo",
+    "def": "Permite trabajar desde casa manteniendo contacto con la oficina a través de teléfono, correo u otro medio. Ventajas: flexibilidad, libertad espacial. Desventajas: dificultad de control, aislamiento.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Reingeniería",
+    "def": "Rediseño radical de los procesos de la empresa para lograr mejoras drásticas en medidas como el coste, la calidad y el servicio. No es una mejora incremental sino un cambio fundamental.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Análisis de puestos basado en competencias",
+    "def": "Descripción de puestos a partir de competencias, conocimientos y experiencias en lugar de solo tareas. Se centra en cómo el trabajador cumple los objetivos, no solo qué hace.",
+    "tema": "T2: Análisis y Diseño del Puesto"
+  },
+  {
+    "term": "Planificación de RRHH",
+    "def": "Proceso de elaboración de planes mediante el cual la empresa trata de anticiparse y prever las necesidades de personal, con el objetivo de contar con los trabajadores necesarios, con la cualificación oportuna, en el lugar y momento precisos.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Demanda de RRHH",
+    "def": "Número y tipo de trabajadores que la empresa va a necesitar. Puede variar por factores externos (entorno económico, tecnológico), organizativos (estrategia, ventas) y laborales (bajas, permisos).",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Oferta de RRHH",
+    "def": "Disponibilidad de trabajadores con la cualificación necesaria, tanto en el mercado interno (plantilla actual) como externo (mercado de trabajo).",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Análisis de tendencias",
+    "def": "Técnica cuantitativa que estudia cómo han ido variando las necesidades de empleo a lo largo del tiempo mediante extrapolación. Sencillo pero poco exacto; válido solo para el corto plazo.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Análisis de ratios/razón",
+    "def": "Técnica cuantitativa basada en la indexación que compara ratios históricos del crecimiento de variables (ventas) con el tamaño de la plantilla para predecir la demanda de empleo.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Diagrama de dispersión",
+    "def": "Método gráfico cuantitativo utilizado para encontrar la relación entre dos variables: una que mide la productividad empresarial y otra el número de empleados.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Análisis de regresión",
+    "def": "Técnica cuantitativa que emplea una ecuación que predice la conducta de una variable dependiente (empleados) según se modifican otras independientes (ventas, productividad).",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Técnica de grupo nominal",
+    "def": "Método cualitativo de previsión: reunión cara a cara de un pequeño grupo de expertos que discuten la evolución de la demanda de RRHH. Presencial, con presión de grupo, pero facilita el intercambio de ideas.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Técnica Delphi",
+    "def": "Método cualitativo de previsión: intercambio de ideas de un grupo de expertos a distancia y de forma anónima. No hay presión de grupo. Cada experto ajusta su estimación según las respuestas de los demás.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Planificación de plantillas",
+    "def": "Anualmente, partiendo de la plantilla existente, se analizan reincorporaciones y bajas previstas y se establece la plantilla teórica necesaria al final del periodo.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Auditoría de RRHH",
+    "def": "Instrumento para conocer el potencial de los trabajadores (capacidades, habilidades) y detectar necesidades futuras cuando se produzcan vacantes.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Análisis de organigramas",
+    "def": "Representación gráfica que recoge todos los puestos de la organización, número de ocupantes actuales y necesidades futuras de personal por puesto.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Análisis de Markov",
+    "def": "Método cuantitativo que sirve para pronosticar la disponibilidad de candidatos internos. Crea una matriz que muestra las probabilidades de que los empleados susceptibles de ascender estén disponibles cuando llegue el momento.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Inventarios de RRHH",
+    "def": "Documentos que recogen información cualitativa sobre los trabajadores: capacitación actual, evaluación del desempeño, experiencia y formación recibida.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Gráficas de reemplazo",
+    "def": "Identifican la posibilidad de empleados y puestos actuales de ascender a puestos de mayor responsabilidad en caso de que se produzcan vacantes.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Planificación de la sucesión",
+    "def": "Proceso mediante el cual la dirección y el departamento de RRHH utilizan la información disponible para tomar decisiones sobre las promociones internas. Implica a empleados preseleccionados, superiores y RRHH.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Sistema de Información de RRHH (SIRH)",
+    "def": "Sistema informatizado para recopilar, registrar, almacenar y recuperar datos relativos a los RRHH de la organización. Ofrece información tanto para decisiones operativas como estratégicas.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Proceso sustractivo",
+    "def": "Conjunto de decisiones y acciones mediante las cuales un empleado deja de ofrecer sus servicios a la organización, ya sea de forma voluntaria o involuntaria.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Suspensión laboral",
+    "def": "Se produce cuando se interrumpe temporalmente la prestación laboral sin quedar roto el vínculo contractual empresa-trabajador ni las obligaciones de ambas partes.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Excedencia",
+    "def": "El trabajador puede dejar su empleo de forma voluntaria y temporal bajo ciertas condiciones. Tipos: forzosa (por cargo público), voluntaria (mínimo 1 año de antigüedad) y por cuidado de familiares.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "ERTE (Expediente de Regulación Temporal de Empleo)",
+    "def": "Suspensión temporal de contratos por causas económicas, técnicas, organizativas o de producción. El trabajador mantiene el derecho a reincorporarse una vez superada la causa.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Ruptura laboral",
+    "def": "Terminación definitiva de la relación laboral (extinción del contrato). Puede ser voluntaria (dimisión, jubilación) o involuntaria (despido, ERE, reducción de plantilla).",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Dimisión",
+    "def": "Ruptura laboral voluntaria por la que el empleado decide finalizar su relación con la empresa por insatisfacción u otras razones. Se comunicará al superior con 15 días de antelación.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Jubilación anticipada",
+    "def": "Utilizada como alternativa menos drástica a los despidos para reducir la plantilla. Incluye paquetes de incentivos financieros y posibilidad de actuar como asesor temporal hasta encontrar sustituto.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Despido individual",
+    "def": "Se produce cuando la empresa decide prescindir de un trabajador por razones de productividad o disciplina. Requiere comunicación personal directa y breve, sin tono acusatorio.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "ERE (Expediente de Regulación de Empleo)",
+    "def": "Procedimiento de despido colectivo por causas económicas, técnicas, organizativas o de producción. Afecta a más del 10% de la plantilla en menos de 90 días. Indemnización: 20 días por año trabajado, máximo 12 mensualidades.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Downsizing",
+    "def": "Proceso de desinversión reactivo o proactivo que busca mejorar los sistemas de trabajo, rediseñar la organización y ajustar la plantilla de empleados para mantener la competitividad.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Rightsizing",
+    "def": "Proceso de reestructuración y reorientación estratégica para ajustar el tamaño empresarial (exceso de niveles jerárquicos). No siempre da lugar a una reducción de plantilla.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Outplacement (recolocación)",
+    "def": "Programa de RRHH para ayudar a los empleados despedidos a superar el estrés de la pérdida de trabajo y encontrar uno nuevo, aumentando su empleabilidad. El coste corre a cargo de la empresa.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Tasa de rotación laboral",
+    "def": "Tasa a la que abandonan los trabajadores una organización. Alta: indica problemas organizativos. Baja: impide entrada de nueva savia e inmoviliza el personal.",
+    "tema": "T3: Planificación de RRHH"
+  },
+  {
+    "term": "Reclutamiento",
+    "def": "Conjunto de actividades tendentes a atraer un número suficiente de candidatos cualificados para ocupar un puesto de trabajo. Su fin es reunir el mayor número posible de aspirantes idóneos al mínimo coste.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Proceso de afectación",
+    "def": "Aquel mediante el que la organización busca, analiza e incorpora a las personas que precisa para cada puesto de trabajo. Comprende reclutamiento, selección y socialización.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Reclutamiento interno",
+    "def": "Buscar dentro de la empresa los candidatos para cubrir una vacante. Incluye movimientos verticales (ascensos), horizontales (traslados) y diagonales (traslado con ascenso). Más económico pero puede generar endogamia.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Reclutamiento externo",
+    "def": "Cubrir una vacante con personas ajenas a la empresa. Aporta nuevas perspectivas e ideas, pero es más caro, tarda más y puede generar frustración en el personal interno.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Endogamia",
+    "def": "Riesgo del reclutamiento interno: selección de profesionales entre grupos cerrados de la misma profesión, impidiendo la entrada de personas ajenas con nuevos puntos de vista e ideas.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Yield ratio",
+    "def": "Relación entre las solicitudes de empleo presentadas y las aceptadas. Mide la eficacia del proceso de reclutamiento.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Time lapse ratio",
+    "def": "Tiempo transcurrido desde que se toma la decisión de reclutar hasta que se contrata. Mide la velocidad del proceso de reclutamiento.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "E-recruitment",
+    "def": "Uso de internet para reclutar personal, a través de portales de empleo (Infojobs, LinkedIn), redes sociales o la propia web de la empresa.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Social recruiting (Reclutamiento 2.0)",
+    "def": "Reclutamiento a través de redes sociales donde el candidato interviene activamente junto con la empresa (a diferencia del e-recruitment tradicional donde el candidato es pasivo).",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Headhunters (cazatalentos)",
+    "def": "Empresas de agencia privada especializadas en reclutamiento y selección de altos directivos y profesionales con gran demanda en el mercado laboral. Cobran honorarios elevados.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "ETT (Empresa de Trabajo Temporal)",
+    "def": "Contrata empleados con carácter temporal para que realicen su trabajo en otra empresa con la que ha llegado a un acuerdo. Se trata de una subcontratación de personal.",
+    "tema": "T4: Reclutamiento"
+  },
+  {
+    "term": "Selección",
+    "def": "Proceso de elección del candidato más adecuado para ocupar un puesto disponible. Comprende la recopilación de información sobre los candidatos y la determinación de a quién se deberá contratar.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Fiabilidad",
+    "def": "Consistencia de la medida en el tiempo y entre diferentes entrevistadores. Una técnica de selección es fiable si proporciona resultados reproducibles y consistentes en diferentes contextos.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Validez",
+    "def": "Grado en que una técnica de selección mide el conocimiento, las habilidades o las capacidades requeridas por el perfil de un puesto. Puede ser de contenido o empírica.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Preselección",
+    "def": "Primera etapa del proceso de selección: filtrado de candidatos reclutados para decidir cuáles realizarán las pruebas (comparación de CVs, impreso de solicitud, solicitud ponderada, biodatos).",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Tests de capacidad y personalidad",
+    "def": "Pruebas de selección objetivas y estandarizadas que miden capacidades verbales, matemáticas, rapidez mental, razonamiento, aptitudes y rasgos de personalidad.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Entrevista de selección",
+    "def": "Método de selección más popular por ser fácil, económico y flexible. Tiene alta validez aparente pero baja fiabilidad por su carácter subjetivo e impreciso y su dependencia del entrevistador.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Entrevista estructurada",
+    "def": "Entrevista con preguntas predefinidas iguales para todos los candidatos y escalas de respuestas estándar. Gana uniformidad y permite distinguir las respuestas adecuadas de las inadecuadas.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Entrevista de descripción de conductas",
+    "def": "Se basa en que el comportamiento pasado es el mejor predictor del rendimiento futuro. Se pide al candidato que describa situaciones concretas pasadas y cómo las resolvió.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Entrevista de tensión",
+    "def": "El entrevistador busca irritar e incomodar intencionadamente al candidato para observar su reacción ante situaciones adversas. Adecuada para puestos con alta presión.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Assessment center (centro de evaluación)",
+    "def": "Centro externo donde se evalúan candidatos, normalmente para puestos de dirección, mediante distintas pruebas (rol play, bandeja de entrada, juegos de roles) realizadas por distintos evaluadores.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Efecto halo (en selección)",
+    "def": "Un rasgo o atributo del candidato influye en la evaluación de todas las demás cualidades. El entrevistador generaliza a partir de una característica específica.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Error de primacía / recencia",
+    "def": "La información recibida primero (primacía) o la última recibida (recencia) condiciona desproporcionadamente la evaluación global del candidato.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Error de contraste",
+    "def": "Comparar al candidato con otro candidato que ya ha sido evaluado en lugar de con el perfil ideal del puesto.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Socialización / Orientación",
+    "def": "Actividad de RRHH que se ocupa de introducir a los nuevos empleados en la organización y facilitarles su incorporación. Es un proceso individualizado, continuo y subjetivo que dura todo el periodo en la empresa.",
+    "tema": "T5: Selección y Socialización"
+  },
+  {
+    "term": "Formación",
+    "def": "Proceso reactivo por el que se forma a los empleados en habilidades específicas para corregir deficiencias en el desarrollo de su trabajo actual. Enfoque individual, inmediato y remedial.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Desarrollo",
+    "def": "Proceso proactivo que prepara a los grupos y la organización para el desarrollo de trabajos futuros. Dirigido especialmente a ejecutivos y mandos medios. Enfoque de largo plazo y orientado al futuro.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "E-learning",
+    "def": "Formación basada en internet que elimina barreras geográficas y temporales. Puede ser síncrona (en tiempo real) o asíncrona (a demanda). Permite aprendizaje autónomo y en entornos colaborativos.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Learning Management System (LMS)",
+    "def": "Programas informáticos que permiten gestionar las actividades de e-learning: contenidos, participantes, evaluaciones y seguimiento del progreso.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Método 70-20-10",
+    "def": "Modelo de aprendizaje que establece que el 70% proviene del aprendizaje experiencial (trabajo diario, proyectos), el 20% de la interacción social (coaching, mentoring) y el 10% del aprendizaje formal (cursos, talleres).",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Flipped room (clase invertida)",
+    "def": "Modalidad formativa en la que la parte teórica se trabaja de forma autónoma antes de la sesión, y el tiempo presencial se dedica a resolver problemas y aplicar el conocimiento.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Outdoor training",
+    "def": "Formación en habilidades y actitudes a través de actividades al aire libre que potencian el trabajo en equipo, la toma de decisiones y la confianza entre compañeros. Actúa sobre las emociones en un entorno motivador.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Gamificación",
+    "def": "Uso de estrategias y mecánicas de juego en entornos no lúdicos como técnicas de aprendizaje. Fomenta el compromiso, la creatividad y el trabajo en equipo.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Universidades corporativas",
+    "def": "Estructuras internas diseñadas para mejorar el desempeño individual y colectivo de la organización. Transmiten no solo conocimiento técnico sino también los valores, cultura e historia de la empresa.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Criterio de reacción",
+    "def": "Primer nivel de evaluación de la formación (Kirkpatrick): mide las reacciones iniciales de los participantes ante la experiencia formativa. ¿Fue relevante e inmediatamente aplicable?",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Criterio de aprendizaje",
+    "def": "Segundo nivel de evaluación de la formación: ¿han adquirido los conocimientos y habilidades planificadas en el programa?",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Criterio de conducta",
+    "def": "Tercer nivel de evaluación de la formación: ¿se aplica lo aprendido en el puesto de trabajo? ¿Ha cambiado el comportamiento del empleado?",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Criterio de rendimiento",
+    "def": "Cuarto nivel de evaluación de la formación: ¿qué resultados se aprecian en el negocio? ¿Ha mejorado la productividad, las ventas, la calidad?",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Carrera profesional",
+    "def": "Sucesión de actividades laborales y puestos desempeñados por una persona a lo largo de su vida, incluyendo todas las organizaciones en las que ha trabajado y las decisiones y experiencias profesionales acumuladas.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Coaching",
+    "def": "Proceso de reflexión y transformación a nivel emocional, cognitivo, conductual y espiritual para liberar el potencial de una persona e incrementar al máximo su desempeño. El coach NO pertenece a la empresa ni necesita experiencia previa en el área.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Mentoring",
+    "def": "Vehículo de desarrollo que fortalece el talento. El mentor SÍ pertenece a la organización, tiene experiencia directa en el campo de actuación y guía voluntariamente a otro empleado con especial talento. Independiente de la relación jerárquica.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Método GROW",
+    "def": "Herramienta utilizada en coaching para estructurar las sesiones: Goal (objetivo), Reality (realidad actual), Options (opciones disponibles), Will (voluntad de actuar).",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Shadow coaching",
+    "def": "Modalidad de coaching individual para directivos en la que el coach acompaña al coachee en su jornada de trabajo real, observando su comportamiento en el contexto laboral.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Networking",
+    "def": "Habilidad de establecer una red de contactos profesionales que permitan al empleado conocerse mejor a sí mismo y al negocio. Incluye tarjetas de visita, redes sociales, eventos y congresos.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Personal branding (marca personal)",
+    "def": "Permite conocerse mejor, aumentar la visibilidad profesional, diferenciarse de otros, mejorar la posición negociadora y abrir puertas a nuevas áreas profesionales.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Empleabilidad",
+    "def": "Capacidad de una persona para encontrar y mantener un empleo adaptado a sus características. Depende de la adecuación, vocación, competencia profesional, salud y relaciones interpersonales.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Mentoring inverso",
+    "def": "Modalidad de mentoring en la que los empleados jóvenes actúan como mentores de los más experimentados, generalmente en temas de tecnología o tendencias actuales.",
+    "tema": "T6: Formación y Desarrollo"
+  },
+  {
+    "term": "Evaluación del rendimiento",
+    "def": "Proceso formal y sistemático para identificar, evaluar, medir y gestionar el rendimiento de los RRHH en las empresas, con la finalidad de comprobar si un trabajador es productivo y cómo puede mejorar en el futuro.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Evaluación 360º",
+    "def": "Evaluación realizada por múltiples evaluadores: superiores, compañeros, subordinados, clientes y el propio empleado (autoevaluación). Ofrece una visión completa y objetiva del desempeño.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Efecto halo-eco (en evaluación)",
+    "def": "El evaluador generaliza una característica específica del evaluado a todos los aspectos y dimensiones, dando un resultado superior o inferior al real.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Error de lenidad",
+    "def": "El evaluador califica por encima de lo real para evitar problemas o conflictos con el evaluado o con la organización.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Error de severidad",
+    "def": "El evaluador califica por debajo de lo real, normalmente por presión o para parecer exigente.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Error de tendencia central",
+    "def": "El evaluador califica a todos los individuos en torno a un valor medio, evitando los extremos. Impide discriminar entre distintos niveles de desempeño.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Error de similitud",
+    "def": "El evaluador tiende a evaluar más alto a los empleados que se parecen más a él en valores, actitudes o comportamientos.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Efecto contagio",
+    "def": "El evaluador se deja influir por las calificaciones previas del empleado al realizar la evaluación actual, condicionando el resultado.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "BARS (Escalas de medición de comportamientos)",
+    "def": "Método de evaluación subjetivo basado en comportamientos con anclas conductuales que describe niveles específicos de desempeño para cada dimensión evaluada.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Dirección por Objetivos (DPO)",
+    "def": "Método de evaluación objetiva que mide los resultados cuantificables que el empleado obtiene en su puesto de trabajo. Se establecen objetivos concretos y medibles previamente acordados.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Distribución forzada",
+    "def": "Método comparativo de evaluación que obliga al evaluador a distribuir las evaluaciones de los empleados según un porcentaje o proporción predeterminada de categorías.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Evaluación continua",
+    "def": "Enfoque moderno de evaluación del rendimiento caracterizado por: trabajos por proyectos con incertidumbre, sistema de información constante y fluido, evaluación predominantemente cualitativa y feedback abierto y espontáneo.",
+    "tema": "T7: Evaluación del Rendimiento"
+  },
+  {
+    "term": "Compensación total",
+    "def": "Todo tipo de recompensas que reciben los empleados a cambio de su trabajo. Comprende retribución financiera (directa e indirecta) y no financiera.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución financiera directa",
+    "def": "De carácter monetario: salario base (parte fija, en función del tiempo trabajado y puesto ocupado) más incentivos (parte variable, basada en el rendimiento).",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución financiera indirecta (prestaciones)",
+    "def": "Servicios o beneficios obtenidos por el empleado que no se pagan de forma directa (seguros médicos, tickets restaurante, economato, plan de pensiones...). Se reciben por el hecho de pertenecer a la organización.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución no financiera (salario emocional)",
+    "def": "Aspectos intangibles de la compensación: satisfacción del empleado, ambiente psicológico o físico de trabajo agradable, flexibilidad horaria, teletrabajo, desarrollo personal.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Salario base",
+    "def": "Retribución fija por unidad de tiempo o de obra en función del puesto ocupado y del tiempo trabajado. Establece el nivel mínimo garantizado de compensación.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Incentivos",
+    "def": "Vinculan el trabajo con determinados objetivos y resultados. Pueden ser individuales (pago por méritos, trabajo a destajo), grupales o de organización (participación en beneficios).",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Prestaciones",
+    "def": "Servicios o beneficios con objetivos de carácter social, organizativo y personal para mejorar las condiciones de trabajo y de vida de los trabajadores. Pueden ser obligatorias por ley o voluntarias.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Complementos salariales",
+    "def": "Retribución adicional al salario base en función de condiciones del trabajador o del trabajo (antigüedad, pagas extraordinarias, nocturnidad, peligrosidad, manutención, etc.).",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Política salarial",
+    "def": "Conjunto de principios y directrices que reflejan la orientación y filosofía de la organización respecto al sistema de retribución. Debe ser adaptable a los cambios de la empresa y del mercado laboral.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Equidad interna",
+    "def": "Principio retributivo que establece una retribución justa realizando comparaciones salariales entre los puestos de trabajo de la organización. Individuos en el mismo nivel reciben la misma retribución.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Equidad externa",
+    "def": "La retribución se considera justa respecto a lo que se percibe en puestos similares en otras empresas. Permite a la empresa decidir su posicionamiento salarial respecto al mercado.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Equidad individual",
+    "def": "Reconoce las diferencias entre individuos que ocupan el mismo puesto pero obtienen diferentes resultados en su desempeño. Dos trabajadores con el mismo puesto pero distintos resultados reciben distinta recompensa.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución basada en el puesto de trabajo",
+    "def": "Sistema fijo que paga por el valor atribuido a los deberes, responsabilidades y tareas del puesto. Busca equidad interna y externa. Sistema orientado hacia el trabajo.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución basada en competencias",
+    "def": "Sistema fijo que remunera al empleado en función de los trabajos que puede realizar y los conocimientos y habilidades que posee. Sistema orientado hacia la persona. Equidad individual.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución basada en el rendimiento (variable)",
+    "def": "Asociada al logro de objetivos e introduce diferencias entre personas en base a su esfuerzo o rendimiento. Puede ser individual, grupal u organizacional.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Pago por méritos",
+    "def": "Aumento del sueldo fijo concedido en función del desempeño individual evaluado. Incentivo individual permanente que reconoce la aportación del trabajador.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Trabajo a destajo",
+    "def": "Se paga por unidad producida (bonos de producción). Incentivo individual que vincula directamente la retribución con la cantidad de trabajo producido.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Stock options",
+    "def": "Incentivos a largo plazo para directivos que les permiten adquirir acciones de la empresa a un precio inferior al del mercado. Alinean los intereses del directivo con los de la organización.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Paracaídas de oro (contrato blindado)",
+    "def": "Garantiza a un directivo muy valioso condiciones muy ventajosas si la empresa rescinde su contrato. Protege a personal muy difícilmente reemplazable frente al despido unilateral.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Plan Scanlon",
+    "def": "Incentivo organizacional que premia a los trabajadores que aporten y participen activamente en la empresa. Se reparte parte del porcentaje de los beneficios sin necesidad de ser directivos.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Retribución flexible",
+    "def": "Permite al trabajador cambiar una parte monetaria de su salario bruto por productos y servicios ofrecidos por la empresa con ventajas fiscales, incrementando así su salario neto disponible.",
+    "tema": "T8: Retribución"
+  },
+  {
+    "term": "Salario emocional",
+    "def": "Conjunto de aspectos no económicos que complementan la retribución y ayudan a atraer y retener talento: flexibilidad horaria, teletrabajo, formación, buen ambiente, conciliación laboral-personal.",
+    "tema": "T8: Retribución"
+  }
+]

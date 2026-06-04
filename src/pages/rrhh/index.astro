@@ -1,14 +1,90 @@
 ---
 import Base from '../../layouts/Base.astro';
-import QuizEngine from '../../components/QuizEngine.astro';
-import vfData from '../../data/rrhh.json';
-import testData from '../../data/rrhh-test.json';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-<Base title="Recursos Humanos" description="318 V/F con justificación. Temas 1-8 y exámenes ordinarios.">
-  <QuizEngine
-    title="Recursos Humanos"
-    code="RRHH"
-    vfData={vfData}
-    testData={testData}
-  />
+<Base title="Recursos Humanos" description="Preguntas interactivas V/F y tipo test, glosario con flashcards y PDF descargable para Dirección de Recursos Humanos I.">
+<style is:global>
+  html,body{height:100%;overflow:hidden}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .logo{font-size:1.15rem;font-weight:800}.logo span{color:var(--accent)}
+  .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}.back:hover{color:var(--accent)}
+  main{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:32px}
+  .hub-hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hub-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.3);border-radius:99px;padding:5px 14px;font-size:.75rem;color:var(--accent2);font-weight:600}
+  .hub-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-1px}
+  .hub-title span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hub-desc{font-size:.9rem;color:var(--text-muted);max-width:480px;line-height:1.6}
+  .hub-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%;max-width:800px}
+  .hub-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:28px 22px;display:flex;flex-direction:column;gap:14px;transition:all .22s;position:relative;overflow:hidden;text-decoration:none;color:var(--text)}
+  .hub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .22s}
+  .hub-card:hover{border-color:var(--accent);background:#1e1c35;transform:translateY(-4px);box-shadow:0 12px 32px rgba(108,99,255,.2)}
+  .hub-card:hover::before{opacity:1}
+  .hub-card-icon{font-size:2rem;width:52px;height:52px;border-radius:12px;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);display:flex;align-items:center;justify-content:center}
+  .hub-card-title{font-size:1.05rem;font-weight:800}
+  .hub-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55;flex:1}
+  .hub-card-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .hub-chip{font-size:.68rem;font-weight:600;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);border-radius:99px;padding:3px 10px;color:var(--accent2)}
+  .hub-card-arrow{position:absolute;bottom:20px;right:20px;font-size:.9rem;color:var(--accent);opacity:0;transform:translateX(-4px);transition:all .2s}
+  .hub-card:hover .hub-card-arrow{opacity:1;transform:translateX(0)}
+  .pdf-card .hub-card-icon{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+  .pdf-card:hover{border-color:#ef4444;box-shadow:0 12px 32px rgba(239,68,68,.12)}
+  .pdf-card::before{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .pdf-card .hub-chip{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#fca5a5}
+  .pdf-card .hub-card-arrow{color:#ef4444}
+  @media(max-width:700px){html,body{height:auto;overflow:visible}main{overflow:visible}.hub-cards{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="back" href={base}>← repasaYA</a>
+    <span style="color:var(--border)">|</span>
+    <div class="logo"><span>RRHH</span> · Recursos Humanos</div>
+  </div>
+  <div style="font-size:.75rem;color:var(--text-muted)">ADE · Empresa</div>
+</header>
+
+<main>
+  <div class="hub-hero">
+    <div class="hub-badge">👥 Dirección de Recursos Humanos I</div>
+    <h1 class="hub-title">Elige tu <span>herramienta</span></h1>
+    <p class="hub-desc">Preguntas interactivas V/F y tipo test, glosario con flashcards y PDF descargable. Todo el material que necesitas para la asignatura.</p>
+  </div>
+
+  <div class="hub-cards">
+    <a class="hub-card" href={`${base}rrhh/quiz/`}>
+      <div class="hub-card-icon">🧠</div>
+      <div class="hub-card-title">Preguntas interactivas</div>
+      <p class="hub-card-desc">318 preguntas V/F con justificación y tipo test de opción múltiple. Elige temas, mezcla preguntas y repasa con puntuación en tiempo real.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">318 V/F</span>
+        <span class="hub-chip">Tipo test</span>
+        <span class="hub-chip">11 bloques</span>
+      </div>
+      <span class="hub-card-arrow">→</span>
+    </a>
+
+    <a class="hub-card" href={`${base}rrhh/glosario/`}>
+      <div class="hub-card-icon">📚</div>
+      <div class="hub-card-title">Glosario interactivo</div>
+      <p class="hub-card-desc">146 términos clave de la asignatura en formato flashcard. Toca la tarjeta para revelar la definición completa. Filtra por tema.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">146 términos</span>
+        <span class="hub-chip">Flashcards</span>
+        <span class="hub-chip">8 temas</span>
+      </div>
+      <span class="hub-card-arrow">→</span>
+    </a>
+
+    <a class="hub-card pdf-card" href={`${base}rrhh/glosario-rrhh.pdf`} target="_blank" rel="noopener">
+      <div class="hub-card-icon">📄</div>
+      <div class="hub-card-title">Glosario PDF</div>
+      <p class="hub-card-desc">Descarga el glosario completo en PDF para estudiar sin conexión. Todos los términos organizados por tema con definiciones detalladas.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">PDF descargable</span>
+        <span class="hub-chip">146 términos</span>
+      </div>
+      <span class="hub-card-arrow">↗</span>
+    </a>
+  </div>
+</main>
 </Base>

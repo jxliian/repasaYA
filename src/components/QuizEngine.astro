@@ -6,8 +6,10 @@ interface Props {
   code: string;
   vfData?: any[];
   testData?: any[];
+  backHref?: string;
+  backLabel?: string;
 }
-const { title, code, vfData = [], testData = [] } = Astro.props;
+const { title, code, vfData = [], testData = [], backHref, backLabel } = Astro.props;
 const hasVF   = vfData.length > 0;
 const hasTest = testData.length > 0;
 const hasBoth = hasVF && hasTest;
@@ -120,7 +122,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 <header>
   <div style="display:flex;align-items:center;gap:12px">
-    <a class="back" href={base}>← repasaYA</a>
+    <a class="back" href={backHref ?? base}>← {backLabel ?? 'repasaYA'}</a>
     <span style="color:var(--border)">|</span>
     <div class="logo"><span>{code}</span> · {title}</div>
   </div>
