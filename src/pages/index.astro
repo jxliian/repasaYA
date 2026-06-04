@@ -2,10 +2,26 @@
 import Base from '../layouts/Base.astro';
 import DegreeCard from '../components/DegreeCard.astro';
 import { subjects } from '../data/subjects';
+import { execSync } from 'child_process';
 const base = import.meta.env.BASE_URL;
 
 const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas', 'do1'].includes(s.slug));
 const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
+
+// Lee los últimos commits en tiempo de build
+let commits: { hash: string; msg: string; date: string }[] = [];
+try {
+  const raw = execSync(
+    'git log --pretty=format:"%ad%x09%h%x09%s" --date=format:"%d %b %Y" -n 8',
+    { encoding: 'utf8', cwd: process.cwd() }
+  ).trim();
+  commits = raw.split('\n').filter(Boolean).map(line => {
+    const [date, hash, ...rest] = line.split('\t');
+    return { date: date ?? '', hash: hash ?? '', msg: rest.join(' ').slice(0, 52) };
+  });
+} catch (_) { /* git no disponible */ }
+
+const lastUpdate = commits[0]?.date ?? null;
 ---
 <Base title="repasaYA">
 <style>
@@ -39,6 +55,19 @@ const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
   .right { border-left:1px solid var(--border); padding:48px 40px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; min-height:0; }
   .section-title { font-size:.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
   .cards { display:flex; flex-direction:column; gap:14px; }
+  /* ── Changelog panel ── */
+  .updates { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+  .updates-hdr { padding:9px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; font-size:.68rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.8px; }
+  .upd-dot { width:6px; height:6px; border-radius:50%; background:var(--correct); box-shadow:0 0 6px rgba(34,197,94,.7); flex-shrink:0; animation:pulse 2.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .upd-since { margin-left:auto; font-size:.65rem; color:var(--accent2); font-weight:600; text-transform:none; letter-spacing:0; }
+  .commit-list { display:flex; flex-direction:column; }
+  .commit-item { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--border); transition:background .15s; }
+  .commit-item:last-child { border-bottom:none; }
+  .commit-item:hover { background:var(--surface2); }
+  .commit-date { font-size:.65rem; color:var(--text-muted); white-space:nowrap; min-width:62px; }
+  .commit-msg { font-size:.8rem; color:var(--text); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .commit-hash { font-size:.62rem; font-family:'Courier New',monospace; background:rgba(108,99,255,.1); border:1px solid rgba(108,99,255,.2); border-radius:4px; padding:1px 6px; color:var(--accent2); white-space:nowrap; flex-shrink:0; }
   .github-fab { position:fixed; bottom:28px; right:28px; display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:99px; padding:12px 20px 12px 16px; color:var(--text); font-size:.85rem; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,.4); transition:all .25s; z-index:100; }
   .github-fab:hover { border-color:var(--accent); background:#1e1c35; color:var(--accent2); box-shadow:0 0 0 3px rgba(108,99,255,.2),0 0 24px rgba(108,99,255,.35); transform:translateY(-2px); }
   footer { text-align:center; padding:16px; font-size:.75rem; color:var(--text-muted); border-top:1px solid var(--border); }
@@ -76,6 +105,24 @@ const infoSubjects = subjects.filter(s => ['sibw'].includes(s.slug));
       <div class="stat"><span class="stat-value">+700</span><span class="stat-label">Preguntas</span></div>
       <div class="stat"><span class="stat-value">+25</span><span class="stat-label">Temas cubiertos</span></div>
     </div>
+    {commits.length > 0 && (
+      <div class="updates">
+        <div class="updates-hdr">
+          <span class="upd-dot"></span>
+          Últimas actualizaciones
+          {lastUpdate && <span class="upd-since">{lastUpdate}</span>}
+        </div>
+        <div class="commit-list">
+          {commits.map(c => (
+            <a class="commit-item" href={`https://github.com/jxliian/repasaYA/commit/${c.hash}`} target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+              <span class="commit-date">{c.date}</span>
+              <span class="commit-msg">{c.msg}</span>
+              <span class="commit-hash">{c.hash}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
     <a class="wa-btn" href="https://wa.me/?text=%F0%9F%93%9A%20*repasaYA*%20%E2%80%94%20Tipo%20test%2C%20V%2FF%20y%20flashcards%20para%20la%20carrera.%20Gratis%20%E2%86%92%20https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F" target="_blank" rel="noopener">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
       Comparte con tus compañeros
