@@ -1,0 +1,739 @@
+[
+  {
+    "tema": "Preguntas de Prado",
+    "q": "Dado el siguiente código:\nint v1 = 4, v2 = 7;\nint *p1 = &v1, *p2 = &v2;\np2 = p1;\n*p1 += 10;\nint res = 0;\nif (*p1 == *p2) res++;\nif (p1 == p2) res += 2;\n¿Cuál es el valor de res al finalizar?",
+    "opts": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "Dado el siguiente código:\nfloat v1=2.7, v2=1.7;\nfloat *p1=&v1, *p2=&v2;\n(*p1) += 1;\n(*p2) += 2;\nint res = 0;\nif (*p1 == *p2) res++;\nif (p1 == p2) res += 2;\n¿Cuál es el valor de res?",
+    "opts": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "Para recorrer int array1[DIM] con puntero en for (p1=array1; p1 < array1+util_array1; p1++), ¿cuál es la declaración correcta de p1?",
+    "opts": [
+      "int p1;",
+      "int *p1;",
+      "int &p1;",
+      "const int *p1;"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para reinicializar() que reinicializa los campos de un objeto al valor por defecto es:",
+    "opts": [
+      "void reinicializar();",
+      "int reinicializar() const;",
+      "void reinicializar(Complejo & c);",
+      "void reinicializar() const;"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para contar(valor) que cuenta cuántas veces aparece un valor en SecuenciaEnteros es:",
+    "opts": [
+      "int contar(int value);",
+      "int contar(int value) const;",
+      "void contar(SecuenciaEnteros c, int value, int & r);",
+      "int contar(int value, int & r) const;"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para title(cad) que recibe una cadena como entrada y devuelve una copia donde cada palabra empieza por mayúscula es:",
+    "opts": [
+      "void title(const string & cad, string & res);",
+      "void title(string cad, int util, string res);",
+      "void title(string & cad, int util, string res);",
+      "void title(string & cad, string res);"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para media(v1, v2) que recibe dos float de entrada y calcula el promedio es:",
+    "opts": [
+      "float media(float & v1, float & v2) const;",
+      "float media(float & v1, float & v2);",
+      "float media(float v1, float v2);",
+      "float media(float v1, float v2, float & result);"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para interseccion() método de SecuenciaEnteros que devuelve la intersección de dos secuencias es:",
+    "opts": [
+      "SecuenciaEnteros interseccion(SecuenciaEnteros & c1, SecuenciaEnteros & c2);",
+      "SecuenciaEnteros interseccion(const SecuenciaEnteros & c2);",
+      "void interseccion(const SecuenciaEnteros c1, const SecuenciaEnteros c2, SecuenciaEnteros & c3);",
+      "SecuenciaEnteros interseccion(const SecuenciaEnteros & c2) const;"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "Dada la función int funcion(int num) que recibe a por valor, ¿qué relación hay entre a, b y num?",
+    "opts": [
+      "a, b y num son tres variables diferentes",
+      "num es la referencia y a es la variable origen",
+      "num es la referencia y b es la variable origen",
+      "a es la referencia y num es la variable origen"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para desplazar(char, int) que desplaza un carácter en la tabla ASCII es:",
+    "opts": [
+      "char desplazar(char & v1, int & n);",
+      "char desplazar(char v1, int n);",
+      "void desplazar(char v1, int n, char & result);",
+      "char desplazar(const char & v1, const int & n);"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "Dadas estas instrucciones, ¿cuántas variables hay?\nstring cadena1, cadena2 = \"Feliz \";\nstring & cadena3 = cadena2;",
+    "opts": [
+      "ninguna válida",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "¿Qué ocurre al ejecutar esto?\nvoid insertaPrefijo(string & cadena) { cadena = \"des\" + cadena; }\nconst string otraCadena = \"aprender\";\ninsertaPrefijo(otraCadena);",
+    "opts": [
+      "Error de compilación en la asignación.",
+      "El parámetro es entrada/salida, asignación permitida, se modifica cadena.",
+      "Asignación permitida, se modifica cadena (copia de otraCadena), otraCadena no cambia.",
+      "Error de compilación en la llamada: const string no puede pasarse como string &"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Preguntas de Prado",
+    "q": "La declaración más adecuada para toString(bool) que devuelve un string es:",
+    "opts": [
+      "void toString(bool v1);",
+      "string toString(bool & v1) const;",
+      "string toString(bool v1);",
+      "string toString(bool v1, string & s);"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál es la diferencia entre paso por valor y paso por referencia?",
+    "opts": [
+      "En paso por valor se crea una copia del argumento; en paso por referencia se trabaja directamente con el argumento original.",
+      "En paso por referencia se crea una copia; en paso por valor se trabaja con el original.",
+      "No hay diferencia en tiempo de ejecución.",
+      "a) es correcta"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué imprime el siguiente código?\nvoid f(int x) { x = x * 2; }\nint a = 5;\nf(a);\ncout << a;",
+    "opts": [
+      "10",
+      "5",
+      "Error de compilación",
+      "Comportamiento indefinido"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué imprime el siguiente código?\nvoid f(int& x) { x = x * 2; }\nint a = 5;\nf(a);\ncout << a;",
+    "opts": [
+      "5",
+      "10",
+      "Error de compilación",
+      "Comportamiento indefinido"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál de estas declaraciones de función tiene un parámetro con valor por defecto correcto?",
+    "opts": [
+      "void f(int x = 0, int y);",
+      "void f(int x, int y = 0);",
+      "void f(int x = 0, int y = );",
+      "void f(int = x, int y);"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "Dado:\nvoid swap(int& a, int& b) { int tmp = a; a = b; b = tmp; }\nint x = 3, y = 7;\nswap(x, y);\n¿Cuánto vale x tras la llamada?",
+    "opts": [
+      "3",
+      "7",
+      "0",
+      "Error de compilación"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "La sobrecarga de funciones permite:",
+    "opts": [
+      "Que una función tenga distintos valores de retorno con el mismo nombre y parámetros.",
+      "Que existan varias funciones con el mismo nombre pero distinta lista de parámetros.",
+      "Que una función se llame a sí misma.",
+      "Que una función ignore sus parámetros."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuándo es obligatorio pasar un parámetro por referencia constante (const T&) en lugar de por valor?",
+    "opts": [
+      "Siempre que el parámetro sea de tipo int.",
+      "Cuando el tipo es grande (objetos, strings, arrays) y no queremos modificarlo.",
+      "Solo cuando el parámetro es un puntero.",
+      "Nunca, siempre se puede pasar por valor."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es el índice del último elemento de int v[10]?",
+    "opts": [
+      "10",
+      "9",
+      "1",
+      "-1"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué hace este código?\nint v[5] = {1, 2, 3};\ncout << v[4];",
+    "opts": [
+      "Imprime 0",
+      "Comportamiento indefinido",
+      "Error de compilación",
+      "Imprime 3"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuánto ocupa en memoria double m[3][4]?",
+    "opts": [
+      "12 bytes",
+      "96 bytes  (en sistemas con double de 8 bytes)",
+      "7 bytes",
+      "24 bytes"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "Al pasar un array a una función en C++:",
+    "opts": [
+      "Se pasa una copia completa del array.",
+      "Se pasa un puntero al primer elemento.",
+      "Se produce un error si el array es grande.",
+      "Se pasa por referencia usando &."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es la forma correcta de declarar una función que recibe y modifica un array de int?",
+    "opts": [
+      "void f(int v);",
+      "void f(const int* v, int n);",
+      "void f(int* v, int n);",
+      "void f(int &v, int n);"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué es un puntero en C++?",
+    "opts": [
+      "Una variable que almacena un valor entero.",
+      "Una variable que almacena una dirección de memoria.",
+      "Una referencia constante a otra variable.",
+      "Un tipo de array dinámico."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "Dado int* p = nullptr;, ¿qué ocurre al ejecutar *p = 5;?",
+    "opts": [
+      "Se asigna 5 a la variable apuntada correctamente.",
+      "Error de compilación.",
+      "Error en tiempo de ejecución (segfault).",
+      "Se asigna 5 a p."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es la diferencia entre delete p y delete[] p?",
+    "opts": [
+      "No hay diferencia.",
+      "delete p libera más memoria.",
+      "delete es para un solo objeto (new T); delete[] es para arrays (new T[n]).",
+      "delete[] solo funciona con arrays de tamaño conocido."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué problema tiene este código?\nint* p = new int[10];\ndelete p;",
+    "opts": [
+      "No hay ningún problema.",
+      "Error de compilación.",
+      "Comportamiento indefinido: se usó new[] pero se libera con delete en lugar de delete[].",
+      "Solo libera el primer elemento."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "Dado:\nint a = 10;\nint* p = &a;\n*p = 20;\ncout << a;\n¿Qué imprime?",
+    "opts": [
+      "10",
+      "20",
+      "La dirección de memoria de a",
+      "Error de compilación"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué hace int pp?",
+    "opts": [
+      "Un puntero a int.",
+      "Un puntero a un puntero a int (permite matrices dinámicas 2D).",
+      "Una matriz de punteros.",
+      "Un error de sintaxis."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es el valor de p después de int v[5]; int* p = v; p++;?",
+    "opts": [
+      "La dirección de v[0].",
+      "La dirección de v[1].",
+      "La dirección de v[5].",
+      "Error de compilación."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué problema representa el siguiente código?\nint* crearArray(int n) {\n    int v[n];\n    return v;\n}",
+    "opts": [
+      "No compila porque n no es constante.",
+      "Devuelve un puntero a una variable local que deja de existir al salir de la función.",
+      "Funciona correctamente.",
+      "Solo falla si n > 100."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cómo se crea correctamente un array dinámico de 50 doubles?",
+    "opts": [
+      "double v = new double[50];",
+      "double* v = new double[50];",
+      "double[] v = new double(50);",
+      "double *v = malloc(50);"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Cuándo es necesario implementar el destructor en una clase?",
+    "opts": [
+      "Siempre.",
+      "Nunca, C++ lo gestiona automáticamente.",
+      "Cuando la clase tiene datos miembro que son punteros a memoria dinámica.",
+      "Solo cuando la clase tiene más de 5 atributos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Por qué es necesario el constructor de copia cuando la clase tiene un puntero T* _datos?",
+    "opts": [
+      "No es necesario, el compilador hace una copia correcta.",
+      "Porque la copia por defecto copiaría el puntero (shallow copy), haciendo que dos objetos apunten al mismo bloque de memoria.",
+      "Para mejorar el rendimiento.",
+      "Solo es necesario si la clase tiene más de un puntero."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué es el \"autocheck\" en el operador de asignación y por qué es necesario?",
+    "opts": [
+      "Es opcional y solo mejora el rendimiento.",
+      "Es if (this != &otro) y evita que un objeto se destruya a sí mismo al hacer a = a.",
+      "Comprueba que los tipos sean compatibles.",
+      "Verifica que el objeto esté inicializado."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué ocurre si no implementas operator= en una clase con puntero T* _datos?",
+    "opts": [
+      "Error de compilación.",
+      "El compilador genera uno correcto automáticamente.",
+      "El compilador genera una copia superficial (shallow copy): dos objetos apuntan al mismo bloque y el segundo delete[] provoca error.",
+      "La asignación siempre falla en tiempo de ejecución."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "En el patrón allocate/deallocate/copy, ¿cuál es el orden correcto en el operador de asignación?",
+    "opts": [
+      "allocate → copy → deallocate",
+      "copy → deallocate → allocate",
+      "deallocate → allocate → copy",
+      "copy → allocate → deallocate"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué le falta a este destructor?\nVectorInt::~VectorInt() {\n    delete _values;\n    _values = nullptr;\n}",
+    "opts": [
+      "Nada, está correcto.",
+      "Debe usar delete[] en lugar de delete porque _values apunta a un array.",
+      "Debe poner _size = 0 también.",
+      "No hace falta destructor."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "En tu proyecto Fraud4, VectorInt tiene static const int BLOCK_SIZE = 20. ¿Para qué sirve?",
+    "opts": [
+      "Para limitar el tamaño máximo del vector.",
+      "Para redimensionar el array en bloques de 20 en lugar de elemento a elemento, reduciendo el número de realocaciones.",
+      "Es el tamaño inicial obligatorio.",
+      "Para controlar el índice máximo accesible."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "En DataSet de Fraud4, _values es int. ¿Cómo se libera correctamente?",
+    "opts": [
+      "delete[] _values;",
+      "delete _values;",
+      "Bucle liberando cada fila con delete[] _values[i], luego delete[] _values.",
+      "No hace falta liberarlo, string lo gestiona."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué significa que un método sea const?\nint getSize() const;",
+    "opts": [
+      "El parámetro que recibe es constante.",
+      "El valor devuelto no puede modificarse.",
+      "El método no puede modificar ningún dato miembro del objeto.",
+      "Solo puede llamarse sobre objetos constantes."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Por qué se implementan DOS versiones del operator[]?\nT& operator[](int i);\nconst T& operator[](int i) const;",
+    "opts": [
+      "Para mejorar la velocidad.",
+      "Para compatibilidad con versiones antiguas de C++.",
+      "La versión const se usa cuando el objeto es constante (solo lectura); la no-const permite modificación.",
+      "Son equivalentes, solo una es necesaria."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuáles de estos operadores NO pueden sobrecargarse en C++?",
+    "opts": [
+      "+=, -=",
+      "<<, >>",
+      "::  (scope), . (miembro), sizeof",
+      "[], ()"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Por qué operator<< y operator>> deben implementarse como funciones externas (friend) y no como métodos?",
+    "opts": [
+      "Por convención, no por obligación técnica.",
+      "Porque el operando izquierdo es ostream o istream, que no es nuestra clase.",
+      "Porque los métodos no pueden devolver referencias.",
+      "Para poder acceder a los datos privados."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué devuelve correctamente operator+=?",
+    "opts": [
+      "void",
+      "El valor del objeto modificado por valor",
+      "Una referencia al objeto modificado: X& operator+=(const T& e)",
+      "Un puntero al objeto"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué problema tiene este operator=?\nTienda Tienda::operator=(const Tienda& otra) {\n    deallocate();\n    allocate(otra.capacidad);\n    copy(otra);\n    return *this;\n}",
+    "opts": [
+      "Falta el autocheck if (this != &otra).",
+      "Devuelve por valor en vez de por referencia.",
+      "Ambas: falta el autocheck Y debe devolver Tienda& no Tienda.",
+      "No hay ningún problema."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "Si implementas operator> como el único operador relacional basado en una métrica, ¿cómo implementas operator< eficientemente?",
+    "opts": [
+      "return b.metrica() < a.metrica();",
+      "return b > a;  (reutiliza operator>)",
+      "return !(a > b);",
+      "No se puede implementar solo con operator>."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la firma correcta de operator<< para una clase Tienda?",
+    "opts": [
+      "ostream operator<<(ostream os, Tienda t);",
+      "void operator<<(ostream& os, const Tienda& t);",
+      "ostream& operator<<(ostream& os, const Tienda& t);",
+      "Tienda& operator<<(ostream& os);"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué include es necesario para usar ifstream y ofstream?",
+    "opts": [
+      "#include <iostream>",
+      "#include <fstream>",
+      "#include <file>",
+      "#include <stream>"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace getline(is, s) frente a is >> s?",
+    "opts": [
+      "Son equivalentes.",
+      "getline lee solo una palabra; >> lee la línea completa.",
+      "getline lee hasta el salto de línea (puede incluir espacios); >> lee hasta el primer espacio/salto.",
+      "getline funciona solo con ficheros, no con cin."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Por qué se necesita is.ignore() entre is >> n y getline(is, s)?",
+    "opts": [
+      "Para limpiar el buffer de errores.",
+      "Porque >> deja el \\n en el buffer; getline lo leería como línea vacía si no se descarta.",
+      "Para avanzar al siguiente campo.",
+      "No es necesario, es opcional."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "En el patrón de constructor con fichero (cadena mágica), ¿qué ocurre si la primera línea del fichero no coincide con la cadena mágica?",
+    "opts": [
+      "Se lanza una excepción automáticamente.",
+      "El programa termina.",
+      "El objeto queda inicializado como vacío/por defecto y no se leen datos.",
+      "Se lee el fichero igualmente ignorando la primera línea."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la forma correcta de abrir un fichero para lectura y comprobar que se abrió?",
+    "opts": [
+      "ifstream f(nombre); f.read();",
+      "ifstream f(nombre); if (f) { /* leer */ }",
+      "FILE* f = open(nombre);",
+      "ifstream f; f = nombre;"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué diferencia hay entre ofstream e ifstream?",
+    "opts": [
+      "ofstream es más rápido.",
+      "ifstream es para lectura; ofstream es para escritura.",
+      "ifstream solo funciona con ficheros binarios.",
+      "Son intercambiables."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "Para guardar un objeto con cadena mágica al fichero, ¿cuál es el patrón correcto?",
+    "opts": [
+      "f << *this;",
+      "f.write(nombre);",
+      "f << \"CADENA_MAGICA\" << endl; f << *this;",
+      "f >> *this;"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Proyecto Fraud4",
+    "q": "En VectorInt del proyecto Fraud4, ¿cuándo se produce la redimensión del array?",
+    "opts": [
+      "Cada vez que se añade un elemento.",
+      "Cuando _size supera INT_MAX.",
+      "Cuando _size alcanza _capacity, se añaden BLOCK_SIZE (20) posiciones adicionales.",
+      "La redimensión no existe en VectorInt."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Proyecto Fraud4",
+    "q": "En Clustering de Fraud4, ¿qué representa _sumWCV?",
+    "opts": [
+      "El número total de iteraciones del algoritmo.",
+      "El número de clusters.",
+      "La suma de varianzas dentro de cada cluster (Within Cluster Variance), medida de calidad del clustering.",
+      "La distancia entre el centroide más cercano y el más lejano."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Proyecto Fraud4",
+    "q": "En DataSet de Fraud4, _values es int. ¿Qué estructura representa?",
+    "opts": [
+      "Un array de punteros a enteros.",
+      "Una matriz 2D dinámica donde _values[i][j] es el valor j de la instancia i.",
+      "Un array de arrays de tamaño fijo.",
+      "Un puntero a un vector de enteros."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Proyecto Fraud4",
+    "q": "¿Por qué Location en Fraud4 NO necesita destructor ni constructor de copia?",
+    "opts": [
+      "Porque es una clase pequeña.",
+      "Porque la profesora no lo pidió.",
+      "Porque sus datos miembro (_x, _y, _name) son tipos que gestionan su propia memoria (double, string). No hay punteros.",
+      "Porque tiene un operator= definido."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Proyecto Fraud4",
+    "q": "El algoritmo K-means en Clustering::run() itera hasta que:",
+    "opts": [
+      "Se completen exactamente 100 iteraciones.",
+      "La suma WCV sea menor que un umbral.",
+      "Ningún punto cambie de cluster entre dos iteraciones consecutivas.",
+      "Todos los clusters tengan el mismo número de puntos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Preguntas difíciles",
+    "q": "¿Qué imprime este código?\nint a = 5;\nint& b = a;\nb = 10;\ncout << a << \" \" << b;",
+    "opts": [
+      "5 10",
+      "5 5",
+      "10 10",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Preguntas difíciles",
+    "q": "¿Qué diferencia hay entre estos dos métodos?\n// A\nstring toString() const { return _name; }\n// B\nstring& toString() { return _name; }",
+    "opts": [
+      "A no puede llamarse, B sí.",
+      "Ninguna diferencia práctica.",
+      "A devuelve una copia (seguro). B devuelve una referencia a dato interno (peligroso si el objeto se destruye).",
+      "B no compila."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Preguntas difíciles",
+    "q": "¿Cuál de estas clases necesita destructor?",
+    "opts": [
+      "class A { int x; string s; };",
+      "class B { int x; double y; };",
+      "class C { int* datos; int n; };",
+      "class D { string nombre; vector<int> v; };"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Preguntas difíciles",
+    "q": "¿Qué ocurre si llamas a delete[] dos veces sobre el mismo puntero?",
+    "opts": [
+      "No pasa nada, está permitido.",
+      "El compilador lo detecta y lo ignora.",
+      "Comportamiento indefinido (double free), puede causar crash o corrupción de memoria.",
+      "Solo se libera la memoria una vez."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Preguntas difíciles",
+    "q": "¿Qué hace allocate(0) en el patrón habitual de este temario?",
+    "opts": [
+      "Error: no se puede reservar 0 bytes.",
+      "Reserva 1 posición para evitar el nullptr.",
+      "Pone _capacity = 0 y _data = nullptr (objeto vacío pero válido).",
+      "Libera la memoria existente."
+    ],
+    "correct": 2
+  }
+]

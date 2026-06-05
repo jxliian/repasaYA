@@ -64,6 +64,16 @@ export const subjects: Subject[] = [
     chips: ['178 preguntas', '4 temas'],
     dataFile: 'sibw.json',
   },
+  {
+    slug: 'mp',
+    title: 'Metodología de la Programación',
+    code: 'Informática · C++',
+    icon: '💻',
+    description: '67 preguntas tipo test con código C++. Punteros, clases dinámicas, sobrecarga de operadores y ficheros.',
+    type: 'test',
+    chips: ['67 preguntas', '9 temas', 'C++'],
+    dataFile: 'mp-test.json',
+  },
   // ─── AÑADE AQUÍ NUEVAS ASIGNATURAS ───────────────
   // {
   //   slug: 'macroeconomia',

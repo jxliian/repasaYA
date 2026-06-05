@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/Base.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<Base title="Metodología de la Programación" description="67 preguntas tipo test de MP con código C++. Exámenes anteriores en PDF: Estanterías 21/22, Rutas 22/23, Orlas 24/25.">
+<style is:global>
+  html,body{height:100%;overflow:hidden}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .logo{font-size:1.15rem;font-weight:800}.logo span{color:var(--accent)}
+  .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}.back:hover{color:var(--accent)}
+  main{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:32px}
+  .hub-hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hub-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.3);border-radius:99px;padding:5px 14px;font-size:.75rem;color:var(--accent2);font-weight:600}
+  .hub-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-1px}
+  .hub-title span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hub-desc{font-size:.9rem;color:var(--text-muted);max-width:520px;line-height:1.6}
+  .hub-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:100%;max-width:860px}
+  .hub-cards-pdfs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:860px}
+  .section-label{font-size:.7rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;width:100%;max-width:860px;text-align:left}
+  .hub-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:28px 22px;display:flex;flex-direction:column;gap:14px;transition:all .22s;position:relative;overflow:hidden;text-decoration:none;color:var(--text)}
+  .hub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .22s}
+  .hub-card:hover{border-color:var(--accent);background:#1e1c35;transform:translateY(-4px);box-shadow:0 12px 32px rgba(108,99,255,.2)}
+  .hub-card:hover::before{opacity:1}
+  .hub-card-icon{font-size:2rem;width:52px;height:52px;border-radius:12px;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);display:flex;align-items:center;justify-content:center}
+  .hub-card-title{font-size:1.05rem;font-weight:800}
+  .hub-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55;flex:1}
+  .hub-card-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .hub-chip{font-size:.68rem;font-weight:600;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);border-radius:99px;padding:3px 10px;color:var(--accent2)}
+  .hub-card-arrow{position:absolute;bottom:20px;right:20px;font-size:.9rem;color:var(--accent);opacity:0;transform:translateX(-4px);transition:all .2s}
+  .hub-card:hover .hub-card-arrow{opacity:1;transform:translateX(0)}
+  .pdf-card .hub-card-icon{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+  .pdf-card:hover{border-color:#ef4444;box-shadow:0 12px 32px rgba(239,68,68,.12)}
+  .pdf-card::before{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .pdf-card .hub-chip{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#fca5a5}
+  .pdf-card .hub-card-arrow{color:#ef4444}
+  @media(max-width:700px){html,body{height:auto;overflow:visible}main{overflow:visible}.hub-cards{grid-template-columns:1fr}.hub-cards-pdfs{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="back" href={base}>← repasaYA</a>
+    <span style="color:var(--border)">|</span>
+    <div class="logo"><span>MP</span> · Metodología de la Programación</div>
+  </div>
+  <div style="font-size:.75rem;color:var(--text-muted)">Informática · C++</div>
+</header>
+
+<main>
+  <div class="hub-hero">
+    <div class="hub-badge">💻 Metodología de la Programación</div>
+    <h1 class="hub-title">Elige tu <span>herramienta</span></h1>
+    <p class="hub-desc">67 preguntas tipo test con código C++ organizadas por tema. Exámenes anteriores en PDF para practicar con casos reales.</p>
+  </div>
+
+  <div class="hub-cards">
+    <a class="hub-card" href={`${base}mp/quiz/`}>
+      <div class="hub-card-icon">🧠</div>
+      <div class="hub-card-title">Tipo test interactivo</div>
+      <p class="hub-card-desc">67 preguntas sobre punteros, clases con datos dinámicos, sobrecarga de operadores, ficheros y el proyecto Fraud4. Incluye preguntas reales de Prado.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">67 preguntas</span>
+        <span class="hub-chip">9 temas</span>
+        <span class="hub-chip">Código C++</span>
+      </div>
+      <span class="hub-card-arrow">→</span>
+    </a>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <p class="section-label" style="margin:0">Exámenes anteriores</p>
+      <a class="hub-card pdf-card" href={`${base}mp/estanterias2122_repaso.pdf`} target="_blank" rel="noopener">
+        <div class="hub-card-icon">📄</div>
+        <div class="hub-card-title">Estanterías 2021/22</div>
+        <p class="hub-card-desc">Examen de repaso con el proyecto Estanterías. Curso 2021–2022.</p>
+        <div class="hub-card-chips"><span class="hub-chip">PDF</span><span class="hub-chip">21/22</span></div>
+        <span class="hub-card-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="section-label">Más exámenes en PDF</div>
+  <div class="hub-cards-pdfs">
+    <a class="hub-card pdf-card" href={`${base}mp/rutas2223_repaso.pdf`} target="_blank" rel="noopener">
+      <div class="hub-card-icon">📄</div>
+      <div class="hub-card-title">Rutas 2022/23</div>
+      <p class="hub-card-desc">Examen de repaso con el proyecto Rutas. Curso 2022–2023.</p>
+      <div class="hub-card-chips"><span class="hub-chip">PDF</span><span class="hub-chip">22/23</span></div>
+      <span class="hub-card-arrow">↗</span>
+    </a>
+
+    <a class="hub-card pdf-card" href={`${base}mp/orlas2425_repaso.pdf`} target="_blank" rel="noopener">
+      <div class="hub-card-icon">📄</div>
+      <div class="hub-card-title">Orlas 2024/25</div>
+      <p class="hub-card-desc">Examen de repaso con el proyecto Orlas. Curso 2024–2025.</p>
+      <div class="hub-card-chips"><span class="hub-chip">PDF</span><span class="hub-chip">24/25</span></div>
+      <span class="hub-card-arrow">↗</span>
+    </a>
+  </div>
+</main>
+</Base>
