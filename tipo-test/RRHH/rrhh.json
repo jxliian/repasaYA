@@ -1340,43 +1340,50 @@
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 1,
     "q": "Dentro de los procesos sustractivos clasificaremos al ERTE como una suspensión del contrato de trabajo mientras que el ERE se clasificaría como una ruptura laboral.",
-    "answer": "F",
-    "justification": "El ERTE concedido a la empresa por causas económicas, es una suspensión de contrato de trabajo temporal a los trabajadores afectados hasta que cesen o mejoren causas que lo provoque, mientras que el ERE, es un despido colectivo por causas económicas, técnicas, organizativas…."
+    "answer": "V",
+    "justification": "Verdadero. El ERTE es una suspensión temporal del contrato de trabajo (el vínculo contractual no se rompe y el trabajador tiene derecho a reincorporarse), mientras que el ERE es una ruptura laboral (despido colectivo o extinción del contrato)."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 2,
     "q": "Los sistemas de retribución flexible consisten en cambiar parte monetaria del salario por productos o servicios ofrecidos por la empresa, obteniendo el trabajador una menor disponibilidad neta dineraria después de pagar los impuestos y los gastos personales.",
     "answer": "F",
-    "justification": "Los sistemas de Retribución flexible, permite al trabajador cambiar una parte monetaria del salario por productos y servicios ofrecidos por la empresa para que el trabajador tenga mayor disponibilidad dineraria después de pagar impuestos y gastos personales. 3. Si un trabajador se quiere incorporar tras haber disfrutado de dos años de excedencia por ocupar un cargo público, la empresa debe reincorporarlo en cuanto quede un puesto vacante. VERDADERO"
+    "justification": "La retribución flexible permite al trabajador cambiar parte de su salario monetario por productos y servicios con ventajas fiscales, lo que le otorga una mayor disponibilidad neta dineraria después de pagar impuestos y gastos personales."
+  },
+  {
+    "tema": "EXAMEN ORDINARIO 2023",
+    "n": 3,
+    "q": "Si un trabajador se quiere incorporar tras haber disfrutado de dos años de excedencia por ocupar un cargo público, la empresa debe reincorporarlo en cuanto quede un puesto vacante.",
+    "answer": "F",
+    "justification": "La excedencia por ocupar un cargo público es forzosa. En la excedencia forzosa el trabajador tiene derecho de reserva de su puesto de trabajo, por lo que la reincorporación es inmediata al finalizar la excedencia, sin necesidad de esperar a que quede un puesto vacante."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 4,
-    "q": "Los incentivos ofrecidos a un trabajador que se asocian al volumen de ventas que consiga el de carácter organizativo y persiguen el logro del principio de equidad interna.",
+    "q": "Los incentivos ofrecidos a un trabajador que se asocian al volumen de ventas que consiga es de carácter organizativo y persiguen el logro del principio de equidad interna.",
     "answer": "F",
-    "justification": "Los incentivos vinculan al trabajo con determinados objetivos y resultados y pueden recompensar al rendimiento de individuos, grupos o de la organización. Estos incentivos están más relacionados con el logro de metas individuales y el rendimiento personal que con el principio de equidad interna, que se refiere a la equidad salarial dentro de la organización"
+    "justification": "Los incentivos por volumen de ventas individual son de carácter individual (no organizativo). Además, persiguen recompensar el rendimiento personal, no establecer equidad interna (que compara el valor de diferentes puestos de trabajo)."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 5,
-    "q": "El personal baranding persigue la atracción y retención de talento valioso, reforzando así la marca de empleador de la empresa",
-    "answer": "V",
-    "justification": "Verdadero."
+    "q": "El personal branding persigue la atracción y retención de talento valioso, reforzando así la marca de empleador de la empresa",
+    "answer": "F",
+    "justification": "Falso. Quien persigue la atracción y retención de talento reforzando la marca de empleador de la empresa es el Employer Branding. El Personal Branding (marca personal) es desarrollado por el propio individuo para potenciar su carrera."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 6,
     "q": "Los trabajadores de la empresa ferronautica siempre han considerado que juan, el evaluador de desempeño de la fábrica de montaje, comete errores de primacía porque normalmente evalúa calificando de forma indulgente a todo el mundo para no tener problemas.",
     "answer": "F",
-    "justification": "La equidad interna, establece retribución justa realizando comparaciones salariales entre los puestos de trabajo de la organización"
+    "justification": "Lo descrito es el error de LENIDAD, no de primacía. El error de lenidad se produce cuando el evaluador califica por encima de lo real para evitar conflictos con los evaluados. El error de primacía ocurre cuando la primera información recibida sobre un empleado condiciona desproporcionadamente las evaluaciones posteriores."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 7,
     "q": "La equidad interna trata de reconocer las diferencias que puede haber entre individuos que tienen el mismo puesto, logrando que empleados con diferentes niveles de eficiencia no reciban la misma remuneración.",
     "answer": "F",
-    "justification": "La equidad interna busca precisamente reconocer las diferencias entre individuos que ocupan el mismo puesto, asegurando que los empleados reciban una remuneración justa y acorde a factores como responsabilidad, experiencia, habilidades y desempeño"
+    "justification": "Lo descrito es la equidad individual (diferente remuneración por diferente rendimiento en el mismo puesto). La equidad interna compara la retribución entre diferentes puestos de trabajo dentro de la misma organización según el valor de cada puesto."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1396,22 +1403,29 @@
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 10,
     "q": "La carrera profesional recoge la sucesión de actividades laborales y puestos de trabajo desempeñados por una persona dentro de una misma empresa.",
-    "answer": "V",
-    "justification": "Verdadero."
+    "answer": "F",
+    "justification": "La carrera profesional abarca toda la vida laboral de una persona, incluyendo puestos en diferentes empresas, no solo en una misma organización."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 11,
-    "q": "Una prueba de saturación que tiene validez si logra tener una combinación de resultados a lo largo del tiempo independientemente de los seleccionados.",
-    "answer": "V",
-    "justification": "Una prueba de saturación es válida si logra obtener una combinación consistente de resultados a lo largo del tiempo, independientemente de los individuos seleccionados para realizar la prueba."
+    "q": "Una prueba de selección tiene validez si logra tener una combinación de resultados a lo largo del tiempo independientemente de los seleccionados.",
+    "answer": "F",
+    "justification": "Falso. La consistencia de los resultados a lo largo del tiempo y entre evaluadores define la fiabilidad de la prueba, no su validez (que mide si la prueba evalúa realmente lo que pretende medir)."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
     "n": 12,
     "q": "El enriquecimiento del puesto se produce cuando se aumentan las tareas o funciones que corresponden a un puesto, manteniéndose inadecuados los niveles de responsabilidad, autonomía y control.",
     "answer": "F",
-    "justification": "El enriquecimiento del puesto busca precisamente mejorar la calidad del trabajo al otorgar a los empleados un mayor nivel de responsabilidad, autonomía y control sobre las tareas que realizan. 13. La técnica del DELPHL aplicada a la planificación RRHH, es una técnica cualitativa de carácter presencial en la que discute la evolución de la oferta y la demanda de RRHH de forma abierta facilitando al intercambiando de ideas para expertos en la materia FALSO, La técnica DELPHI aplicada a la planificación de Recursos Humanos no es necesariamente presencial, sino que se basa en la recopilación y síntesis de opiniones de expertos de manera estructurada y anónima."
+    "justification": "El enriquecimiento del puesto aumenta las tareas (expansión horizontal) y también la responsabilidad, autonomía y control (expansión vertical). Mantener las tareas y el bajo control se denomina ampliación del puesto."
+  },
+  {
+    "tema": "EXAMEN ORDINARIO 2023",
+    "n": 13,
+    "q": "La técnica del DELPHI aplicada a la planificación RRHH, es una técnica cualitativa de carácter presencial en la que discute la evolución de la oferta y la demanda de RRHH de forma abierta facilitando al intercambiando de ideas para expertos en la materia",
+    "answer": "F",
+    "justification": "La técnica Delphi es una técnica cualitativa no presencial y anónima, donde se recopilan opiniones de expertos mediante cuestionarios sucesivos para evitar la presión de grupo."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1430,135 +1444,142 @@
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 1,
-    "q": "Los problemas derivados de un puesto con un alto nivel de especialización pueden solucionarse a través de la simplificación del trabajo.",
+    "q": "Los problemas derivados de un puesto con alto nivel de especialización pueden solucionarse a través de la simplificación del trabajo.",
     "answer": "F",
-    "justification": "Porque la simplificación del trabajo puede solucionarse a través de problemas derivados de un puesto con un bajo nivel de especialización o porque los problemas derivados de un puesto con un alto nivel de especialización pueden solucionarse a través de la ampliación de puestos de trabajo, enriquecimiento del trabajo, rotación de puestos o diseño de equipo."
+    "justification": "Falso. Los problemas derivados de un puesto con alto nivel de especialización se solucionan a través de la ampliación del puesto de trabajo."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 2,
-    "q": "Luis Montiel, nuevo vicerrector de la UGR de personal, esta rediseñando los puestos de la entidad y esta elaborando nuevamente la descripción de los puestos de administración incluyendo en el documento las tareas, responsabilidades, obligaciones del puesto y las competencias básicas y características que deberían tener las personas que los vayan a ocupar.",
+    "q": "Luis Montiel, nuevo vicerrector de la UGR de personal, está rediseñando los puestos de la entidad y esta elabrando nuevamente la descripción de los puestos de administración incluyendo en el documento las tareas, responsabilidades, obligaciones del puesto y las competencias básicas y características que deberían tener las personas que los vayan a ocupar.",
     "answer": "F",
-    "justification": "la descripción de los puestos incluye la información de tareas y obligaciones y responsabilidades mientras que la especificación del puesto de trabajo incluye competencias y características que ocupan esos puestos."
+    "justification": "Falso. En el rediseño no sería necesario volver a elaborar nuevamente el documento. Bastaría únicamente modificar aquellas cosas necesarias, es decir, realizar cambios y mejoras."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 3,
-    "q": "Los analistas de puestos basados en las competencias se centran en determinar las capacidades o conductas que un empleado debe poseer para desempeñar bien el trabajo.",
+    "q": "Los análisis de puestos basados en las competencias se centran en determinar las capacidades o conductas que un empleado debe poseer para desempeñar bien el trabajo.",
     "answer": "V",
     "justification": "Verdadero."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 4,
-    "q": "Si una empresa identifica que su demanda es menor que la oferta solucionarlo contratando personal, subcontratando o amortizando puestos.",
+    "q": "Si una empresa identifica que su demanda de trabajo es menor que la oferta puedes solucionarlo contratando personal, subcontratando o amortizando puestos.",
     "answer": "F",
-    "justification": "la demanda es menor que la oferta es que las necesidades de la empresa son menores que las lo que hay disponible en el mercado por lo tanto no vamos a proceder a llevar a cabo un reclutamiento y selección."
+    "justification": "Falso. Si la demanda (previsión de las personas necesarias para cumplir los objetivos de la organización) es menor que la oferta (disponibilidad de trabajadores con la cualificación necesaria) significa que sobran puestos de trabajo. Esto si se podría solucionar amortizando puestos y además, limitando la contratación y reduciendo las horas de jornada laboral; pero no con la contratación o subcontratación de personal."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 5,
-    "q": "La diferencia entre una ruptura laboral y una ruptura involuntaria es que la primera supone una interrupción temporal de la relación laboral y la segunda una interrupción definitiva.",
+    "q": "La diferencia entre una ruptura laboral voluntaria y una ruptura laboral involuntaria es que la primera supone una interrupción temporal de la relación laboral y la segunda una interrupción definitiva.",
     "answer": "F",
-    "justification": "Ruptura laboral Voluntaria es cuando el empleado decide finalizar su relación laboral con la empresa por razones personales o profesionales, mientras que la Ruptura Laboral Involuntaria la empresa decide finalizar su relación con un empleado debido a necesidades conómicas o a un mal ajuste entre el empleado y la organización. 6. El Outplacement es un programa creado para ayudar a los empleados despedidos por la perdida de trabajo y ofrecerles apoyo para encontrar uno nuevo, siendo su coste asumido por la empresa. VERDADERO"
+    "justification": "Falso, ambas son definitivas. La diferencia es que en la ruptura laboral voluntaria es el empleado quien decide finalizar su relación con la empresa, mientras que en la involuntaria es la empresa ."
+  },
+  {
+    "tema": "EXAMEN ORDINARIO 2024",
+    "n": 6,
+    "q": "El outplacement es un programa creado para ayudar a los empleados despedidos a superar el estrés emocional producido por la pérdida de su trabajo y ofrecerles apoyo para encontrar uno nuevo, siendo su coste asumido por la empresa.",
+    "answer": "V",
+    "justification": "Verdadero."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 7,
-    "q": "Si una empresa necesita cubrir una vacante y quiere asegurarse un mayor índice de validez y seguridad, reducir la endogamia y aprovechar la inversión en formación de otras empresas, debería llevar a cabo un reclutamiento interno.",
+    "q": "Si una empresa necesita cubrir una vacante y quiere asegurarse un mayor índice de validez y seguridad, reducir la endogamia y aprovechar la inversión información de otras empresas, debería llevar a cabo un reclutamiento interno.",
     "answer": "F",
-    "justification": "Reclutamiento interno buscar dentro de la empresa los candidatos para cubrir una vacante. El reclutamiento interno requiere coordinación continua e integración entre el departamento de RRHH y el resto de los departamentos e implica varios sistemas y bases de datos. Endogamia→ Selección de profesionales entre grupos cerrados de miembros de la misma profesión, de manera que no se permite la entrada de personas ajenas a los mismos."
+    "justification": "Falso. Para reducir la endogamia y aprovechar la inversión en formación de otras empresas sería necesario buscar el personal fuera de la empresa, es decir, reclutamiento externo."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 8,
-    "q": "El YIED RATIO permite medir la eficacia del proceso de socialización y considera el tiempo transcurrido desde que le nuevo empleado hasta que se encuentra integrado en la misma.",
+    "q": "El Yield Ratio permite medir la eficacia del proceso de socialización y considera el tiempo transcurrido desde que el nuevo empleado entra en la empresa hasta que se encuentra totalmente integrado en la misma.",
     "answer": "F",
-    "justification": "Yied Ratio es permite analizar el proceso de reclutamiento como la relación entre las solicitudes presentadas y las aceptadas."
+    "justification": "Falso, esa es la definición de Time lapse ratio. El Yield ratio mide la relación entre las solicitudes presentadas y las aceptadas."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 9,
-    "q": "La evaluación debida la designación o elección para un cargo publico o a la realización de funciones sindicales de ámbito provisional o superior se considera excedencia forzosa.",
+    "q": "La excedencia debida hoy la designación o elección para un cargo público o a la realización defunciones sindicales de ámbito provincial o superior se considera excedencia forzosa.",
     "answer": "V",
     "justification": "Verdadero."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 10,
-    "q": "Además de la entrevista, existía otros métodos de selección de personal como el networking, las sesiones de coaching y mentoring, las técnicas de simulación de trabajo y la técnica de outdoor training.",
+    "q": "Además de la entrevista, existen otros métodos de selección de personal como el Networking, las sesiones de coaching y mentoring, las técnicas de simulación de trabajo y la técnica de outdoor training.",
     "answer": "F",
-    "justification": "Otros métodos de selección personal son pruebas escritas o orales de selección, entrevistas de selección, técnicas de simulación de trabajo y centros de evaluación o valoración mientras que lo otro son tendencias en la gestión de la carrera profesional."
+    "justification": "Falso, sólo es método de selección de personal la entrevista. El resto son métodos de formación."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 11,
-    "q": "Para seleccionar a un nuevo contable, una empresa realiza una prueba en la que el candidato debe realizar un caso practico de asientos contables. La prueba de selección utilizadas se considera valida al ser el contenido de la prueba representativa del contenido del puesto.",
+    "q": "Para seleccionar a un nuevo contable, una empresa realiza una prueba en la que el candidato debe realizar un caso práctico de asientos contables. La prueba de selección utilizada se considera válida al ser el contenido de la prueba representativo el contenido del puesto.",
     "answer": "V",
     "justification": "Verdadero."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 12,
-    "q": "Como parte de su proceso de socialización, una empresa ha organizado con antelación una jornada al aire libre en la que los nuevos empleados tendrán ocasión con sus compañeros en un ambiente mas distendido. Esta la actividad se clasificaría dentro del componente formal del proceso de socialización.",
+    "q": "Como parte de su proceso de socialización, hoy una empresa ha organizado con antelación una jornada al aire libre en la que los nuevos empleados tendrán ocasión de interactuar con sus compañeros en un ambiente más distendido.",
     "answer": "V",
     "justification": "Verdadero."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 13,
-    "q": "A la hora de evaluar los programas de formación, el criterio de aprendizaje considera los resultados tangibles en productividad, calidad o ahorro de tiempo entre otros, que han sido consecuencia de la formación.",
+    "q": "A la hora de evaluar los programas de formación, el criterio de aprendizaje considera los resultados tangibles en productividad, calidad o ahorro de tiempo, entre otros, que han sido consecuencia de la formación.",
     "answer": "F",
-    "justification": "el criterio de aprendizaje analiza si sen han adquiridos los conocimientos y habilidades planificados. Y la definición es de criterios de rendimiento"
+    "justification": "Falso, esa es la definición del criterio de rendimiento, el de aprendizaje analiza si se han adquirido los conocimientos y habilidades planificados."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 14,
-    "q": "El método 70-20-10 considera el tipo de formación que deberá recibir los empleados y el peso década una asignado un 70% a la formación teórica, un 20% a la formación online y un 10% fuera del puesto de trabajo.",
+    "q": "El método 70-20-10 considera el tipo de formación que deben recibir los empleados y el peso de cada una, asignando un 70% a la formación teórica, un 20% a la formación online y un 10% a la formación fuera del puesto de trabajo.",
     "answer": "F",
-    "justification": "70%: Aprendizaje experiencial, Presentaciones, Observación, Rotación de puestos, Actividades diarias, Nuevos proyectos/tareas, Resolución de problemas… 20%: interacción social: Coaching y mentoring, Asociaciones profesionales, Grupos de debate, Trabajo en equipo/reuniones de trabajo 10%: Aprendizaje forma"
+    "justification": "Falso, el 10% de su tiempo a cursos de formación presenciales y online (educación), el 20% a aprender de otras personas como compañeros, miembros de su equipo, mentores u otros profesionales (exposición) y el 70% del tiempo trabajando (experiencia)."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 15,
-    "q": "Cuando un directivo con varios años de experiencia en la empresa y especialización en termas de digitalización ejerce como mentor de un trabajador recién incorporado, se denomina REVERSE MENTOR.",
+    "q": "Cuando un directivo con varios años de experiencia en la empresa y especializado en temas de digitalización ejerce como mentor de un trabajador recién incorporado, se denomina Reverse Mentor.",
     "answer": "F",
-    "justification": "Cuando un directivo con experiencia en digitalización ejerce como mentor, se llama mentor NO reverse Mentor."
+    "justification": "Falso, los trabajadores más jóvenes tutorizan a los de mayor experiencia en aspectos novedosos como la digitalización donde los millenials son más experimentados que los seniors."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 16,
     "q": "Los criterios de valoración subjetivos son aquellos que evalúan el rendimiento de los empleados a través de las opiniones emitidas por un evaluador.",
     "answer": "F",
-    "justification": "los criterios subjetivos evalúan comportamientos, actitudes, capacidades…. Y los objetivos es la medición de resultados."
+    "justification": "Falso, es en base a actitudes, comportamientos y capacidades."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 17,
-    "q": "Juan es responsable de RRHH una empresa y acabo de promocionar a julieta, su prima. Algunos compañeros se quejan de que la evaluación se ha podido producir un error de primacia por las relaciones familiares que desea ambas personas.",
+    "q": "Juan es responsable de RRHH una empresa y acaba de promocionar a Julieta, su prima. Algunos compañeros se quejan de que en la evaluación se ha podido producir un error de primacía por las relaciones familiares que tienen ambas personas.",
     "answer": "F",
-    "justification": "Error de similitud→ evaluar dejándose llevar por la percepción de lo que es ser un buen empleado, de forma que calificará más alto a los empleados que se parecen más a ese empleado."
+    "justification": "Falso, en el error de primacía se valora únicamente comportamientos o resultados recientes y se elimina la información anterior. Este sería un caso de lenidad."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 18,
-    "q": "La introducción de cualquier tipo de incentivo asociado a la consecución de objetivos individuales, grupales u organización permite a la empresa cumplir con el principio de equidad interna.",
+    "q": "Hoy la introducción de cualquier tipo de incentivo asociado a la consecución de objetivos individuales, grupales u organizativos permite a la empresa cumplir con el principio de equidad interna.",
     "answer": "F",
-    "justification": "Equidad interna establecer una retribución justa realizando comparaciones salariales entre los puestos de trabajo de la organización."
+    "justification": "Falso, la equidad interna establece una retribución justa realizando comparaciones salariales entre los puestos de trabajo de la organización, con la idea de que los individuos que están en el mismo nivel o con parecida responsabilidad reciban una retribución similar. Se podría aplicar únicamente a nivel grupal. La única forma de que se cumpla en los tres casos la equidad interna sería que la organización estuviera formada únicamente por un solo grupo, cuyos miembros TODOS tuvieran la misma responsabilidad, es decir, todos fueran iguales en la empresa."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 19,
-    "q": "Una empresa ofrece a sus trabajadores como parte de un salario emocional, un sistema de retribución flexible, que considere en permitir a los trabajadores determinar cuántos días a la semana trabajaran desde casa.",
+    "q": "Una empresa ofrece a sus trabajadores como parte de su salario emocional, un sistema de retribución flexible, Que consiste en permitir a los trabajadores determinar cuántos días a la semana trabajarán desde casa.",
     "answer": "F",
-    "justification": "Pagar mejor a los empleados y de manera más eficiente. “CÓMO PAGAR (no CUÁNTO PAGAR)”. Permiten al trabajador cambiar una parte monetaria del salario por productos y servicios ofrecidos por la empresa para que el trabajador pueda tener una mayor disponibilidad neta dineraria después de pagar los impuestos y gastos personales."
+    "justification": "Falso, en el sistema de retribución flexible se persigue pagar mejor a los empleados y de manera más eficiente permitiendo cambiar parte monetaria del salario por productos y servicios ofrecidos por la empresa. Además, pueden tener una mayor disponibilidad neta dineraria después de pagar los impuestos y los gastos personales. La flexibilidad laboral es un componente no financiero de la retribución."
   },
   {
     "tema": "EXAMEN ORDINARIO 2024",
     "n": 20,
-    "q": "Un buen ambiente laboral, la flexibilidad horaria y los tickets guardería son considerados un tipo de remuneración indirecta.",
+    "q": "El buen ambiente laboral, la flexibilidad horaria y los tickets guardería son considerados un tipo de remuneración indirecta.",
     "answer": "F",
-    "justification": "Retribución indirecta son servicios o beneficios obtenidos de la empresa. NO se pagan de forma directa."
+    "justification": "Falso, los tickets guardería sí son remuneración indirecta. Remuneración no financiera son el ambiente laboral, la flexibilidad laboral y las características del puesto."
   },
   {
     "tema": "EXÁMENES ANTERIORES",
