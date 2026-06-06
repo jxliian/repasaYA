@@ -6,7 +6,7 @@ import { execSync } from 'child_process';
 const base = import.meta.env.BASE_URL;
 
 const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas', 'do1'].includes(s.slug));
-const infoSubjects = subjects.filter(s => ['sibw', 'mp'].includes(s.slug));
+const infoSubjects = subjects.filter(s => ['sibw', 'mp', 'dsd'].includes(s.slug));
 
 // Lee los últimos commits en tiempo de build
 let commits: { hash: string; msg: string; date: string }[] = [];

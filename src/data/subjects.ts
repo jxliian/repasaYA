@@ -65,6 +65,15 @@ export const subjects: Subject[] = [
     dataFile: 'sibw.json',
   },
   {
+    slug: 'dsd',
+    title: 'Desarrollo de Sistemas Distribuidos',
+    code: 'Informática · DSD',
+    icon: '🖧',
+    description: 'Resumen de los temas 4 y 5 en PDF. Temario completo para repasar antes del examen.',
+    type: 'test',
+    chips: ['Resumen T4+T5', 'PDF'],
+  },
+  {
     slug: 'mp',
     title: 'Metodología de la Programación',
     code: 'Informática · C++',
