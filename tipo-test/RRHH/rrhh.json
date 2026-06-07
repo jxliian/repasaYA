@@ -388,8 +388,8 @@
     "tema": "TEMA 2",
     "n": 7,
     "q": "La observación como método utilizado en el análisis de puestos permite analizar varios puestos de manera simultánea a un bajo coste.",
-    "answer": "V",
-    "justification": "Verdadero."
+    "answer": "F",
+    "justification": "La observación es una fuente lenta y costosa (coste ALTO). La ventaja de bajo coste y análisis de múltiples puestos corresponde al cuestionario, no a la observación."
   },
   {
     "tema": "TEMA 2",
@@ -631,20 +631,6 @@
   },
   {
     "tema": "TEMA 3",
-    "n": 16,
-    "q": "El programa de outplacement o recolocación es un programa creado para ayudar a los empleados despedidos a superar el estrés emocional del mismo y a ayudarle a buscar nuevo empleo.",
-    "answer": "V",
-    "justification": "Un programa de outplacement está diseñado para apoyar a los empleados despedidos, ayudándoles a manejar el estrés emocional del despido y a buscar un nuevo empleo."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 17,
-    "q": "El coste de un programa de outplacement o recolocación es asumido por la empresa que despide al empleado.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 3",
     "n": 18,
     "q": "El programa de outplacement o recolocación tiene como objetivo minimizar las demandas judiciales que puedan interponer los trabajadores despedidos.",
     "answer": "V",
@@ -675,27 +661,6 @@
     "tema": "TEMA 3",
     "n": 22,
     "q": "La planificación de la sucesión permite tomar decisiones sobre las promociones internas.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 23,
-    "q": "Para hacer una planificación de plantilla es necesario hacer un análisis de las necesidades de plantilla existentes.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 24,
-    "q": "La limitación de la contratación es una medida a través de la cual se puede corregir el defecto en la oferta de personal.",
-    "answer": "F",
-    "justification": "Se corrige así el Exceso en la oferta de personal."
-  },
-  {
-    "tema": "TEMA 3",
-    "n": 25,
-    "q": "Los planes de RRHH se pueden clasificar en planes a largo, medio y corto plazo.",
     "answer": "V",
     "justification": "Verdadero."
   },
@@ -920,8 +885,8 @@
     "tema": "TEMA 4 Y 5",
     "n": 18,
     "q": "Entre las ventajas que tienen las redes sociales está la posibilidad de crear mala reputación para la empresa.",
-    "answer": "V",
-    "justification": "Aunque no es una ventaja, es cierto que las redes sociales pueden dañar la reputación de una empresa si no se usan de manera efectiva y responsable."
+    "answer": "F",
+    "justification": "Crear mala reputación para la empresa es una DESVENTAJA de las redes sociales, no una ventaja. Las ventajas incluyen el menor coste, mayor alcance y acceso a candidatos pasivos."
   },
   {
     "tema": "TEMA 4 Y 5",
@@ -1376,7 +1341,7 @@
     "n": 6,
     "q": "Los trabajadores de la empresa ferronautica siempre han considerado que juan, el evaluador de desempeño de la fábrica de montaje, comete errores de primacía porque normalmente evalúa calificando de forma indulgente a todo el mundo para no tener problemas.",
     "answer": "F",
-    "justification": "Lo descrito es el error de LENIDAD, no de primacía. El error de lenidad se produce cuando el evaluador califica por encima de lo real para evitar conflictos con los evaluados. El error de primacía ocurre cuando la primera información recibida sobre un empleado condiciona desproporcionadamente las evaluaciones posteriores."
+    "justification": "El comportamiento descrito (calificar de forma indulgente para evitar problemas) corresponde al error de LENIDAD, no al error de primacía. El error de primacía se produce cuando el evaluador da más peso a la primera impresión del evaluado."
   },
   {
     "tema": "EXAMEN ORDINARIO 2023",
@@ -1716,18 +1681,6 @@
   },
   {
     "tema": "Exámenes Ordinarios",
-    "q": "La presión de grupo que se produce al utilizar la técnica Delphi en la planificación de recursos humanos, puede hacer que las valoraciones realizadas por los expertos sean menos precisas de lo esperado.",
-    "answer": "F",
-    "justification": "La presión de grupo se produce en la técnica de grupo nominal. En la técnica Delphi pueden surgir problemas al integrar las opiniones de los expertos, pero no típicamente por presión de grupo directa."
-  },
-  {
-    "tema": "Exámenes Ordinarios",
-    "q": "El reclutamiento es la práctica de gestión de recursos humanos que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles los cometidos de sus puestos y presentarles a otras personas con las que van a trabajar.",
-    "answer": "F",
-    "justification": "Esta descripción corresponde a la socialización u onboarding. El reclutamiento se encarga de la búsqueda y atracción de candidatos."
-  },
-  {
-    "tema": "Exámenes Ordinarios",
     "q": "La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.",
     "answer": "F",
     "justification": "La diversidad, bien gestionada, puede tener un impacto positivo en la productividad, la innovación y la atracción de talento."
@@ -1785,132 +1738,6 @@
     "q": "La capacitación y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas necesarias para el trabajo.",
     "answer": "F",
     "justification": "La capacitación y el desarrollo son importantes para todos los empleados para su crecimiento profesional a largo plazo y para adaptarse a los cambios."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "El ajuste persona-organización es un factor q influye en la gestión de RRHH y es un factor: Individual.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "Actualmente las empresas consideran que los recursos humanos solo actúan ante los estímulos económicos.",
-    "answer": "F",
-    "justification": "Influyen más factores además de los económicos, como la motivación, el desarrollo, el ambiente laboral, etc."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "Los RRHH son todas las personas q pertenecen a una organización, salvo las que ocupan un puesto directivo.",
-    "answer": "F",
-    "justification": "Los RRHH incluyen a todas las personas que pertenecen a la organización, incluyendo los puestos directivos."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "Para conseguir estructuras más planas en ningún caso se realizaran cambios en el diseño de trabajo.",
-    "answer": "F",
-    "justification": "Para conseguir estructuras más planas, frecuentemente se realizan cambios en el diseño de trabajo, como la ampliación o enriquecimiento de puestos."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "La descentralización tiene un efecto directo sobre las practicas de RRHH pero la subcontratación y el uso de nuevas tecnologías no.",
-    "answer": "F",
-    "justification": "Tanto la descentralización, como la subcontratación y el uso de nuevas tecnologías tienen efectos directos sobre las prácticas de RRHH."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "Actualmente el director de RRHH es un gestor q pone su atención en las personas.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "Los objetivos a largo plazo son los q presentan el alcance estratégico de la gestión de los RRHH y son la rentabilidad y competitividad, incremento de valor en la empresa y la mejora de la eficiencia y eficacia de la organización.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "Los procesos de afectación la organización los lleva a cabo para buscar e incorporar las personas mas adecuadas para cada puesto. Se incluyen el reclutamiento, la selección y la socialización.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 1",
-    "q": "El employer branding es una marca q define como buen empleador y les permita atraer y retener a los mejores profesionales.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Un programa de outplacement o recolocación tiene como objetivo minimizar las demandas judiciales que puedan interponer los trabajadores despedidos.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "La planificación de RRHH es un proceso mas completo y complejo que la planificación de plantillas.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Los despidos son ruptura laboral involuntaria.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "En el proceso de selección las herramientas tienen que ser válidas y fiables.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Los juegos de empresas y assesment centres son técnicas de selección.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Entre las fuentes de reclutamiento interno se encuentra las empresas de trabajo temporal.",
-    "answer": "F",
-    "justification": "Las empresas de trabajo temporal (ETT) son una fuente de reclutamiento externo."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Los fines de la evaluación del rendimiento no son solo evaluar lo que no se hace bien, sino buscar la manera de mejorarlo.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "El efecto halo y eco es un error q se produce cuando el evaluador generaliza una característica especifica del evaluado a todos los aspectos de la evaluación de desempeño, dando un resultado superior o inferior al que merece el empleado.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "En la gestión y mejora del una vez identificadas la causaas se definen las estrategias disponibles y se establecen los planes de actuación para resolver el problema.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Se proponen tres tipos de estrategias en En la gestión y mejora del rendimiento: estrategias de reforzamiento positivo, negativo y estrategias en caso de q las anteriores no funcionen.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "En el tipo de entrevista mixta se combina las de hablar y convencer con la solución de problemas, forma que la primera sirva para la evaluación y la segunda para la mejora.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Los procesos sustractivos solamente afectan a los procesos de evaluación y compensación ya que se trata de una etapa final en el proceso de gestión de RRHH.",
-    "answer": "F",
-    "justification": "Los procesos sustractivos (desvinculación) afectan a todo el sistema de RRHH (planificación, moral, etc.), no solo a evaluación y compensación como etapa final."
   },
   {
     "tema": "TEMA 2",
@@ -2011,30 +1838,6 @@
   {
     "tema": "TEMA 2",
     "q": "El área de recursos humanos debe tener muy en cuenta los cambios tecnológicos que ocurren en el entorno ya que pueden afectar a la planificación de plantillas a corto y largo plazo.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "El reclutamiento externo mal gestionado puede producir endogamia en la organización.",
-    "answer": "F",
-    "justification": "La endogamia se produce más comúnmente por un reclutamiento interno excesivo o mal gestionado."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "En la planificación de RRHH, se hace un estudio sobre las fuerzas del mercado.",
-    "answer": "V",
-    "justification": "La planificación de RRHH puede incluir un estudio de las fuerzas del mercado, como la disponibilidad de trabajadores calificados en una determinada área o industria."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "La ruptura laboral voluntaria: dimisión, jubilación y jubilación anticipada.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "La entrevista es el método más común en la selección de personal, aunque es una prueba imprecisa y subjetiva.",
     "answer": "V",
     "justification": "Verdadero."
   },
@@ -2143,24 +1946,6 @@
   {
     "tema": "TEMA 2",
     "q": "Una de las desventajas del reclutamiento interno es la pérdida de creatividad e innovación.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Entre las fuentes de reclutamiento interno se encuentra las agencias públicas de empleo.",
-    "answer": "F",
-    "justification": "Son una fuente de reclutamiento externo."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "La horquilla salarial diferencia monetariamente entre el que más gana dentro de la empresa y el que menos.",
-    "answer": "V",
-    "justification": "Verdadero."
-  },
-  {
-    "tema": "TEMA 2",
-    "q": "Una de las razones para desarrollar correctamente el proceso de reclutamiento de personal es para disminuir la tasa de rotación externa de personal recién contratado.",
     "answer": "V",
     "justification": "Verdadero."
   },
