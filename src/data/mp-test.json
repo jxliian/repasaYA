@@ -735,5 +735,1380 @@
       "Libera la memoria existente."
     ],
     "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál es la diferencia entre una función y un procedimiento en C++?",
+    "opts": [
+      "En C++ no existen procedimientos.",
+      "Un procedimiento puede devolver varios valores; una función solo uno.",
+      "Una función devuelve un valor con `return`; un procedimiento tiene tipo de retorno `void` y no devuelve nada.",
+      "Solo las funciones pueden recibir parámetros."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nint f(int& x, int y) {\n    x = x + y;\n    y = y * 2;\n    return x + y;\n}\nint a = 3, b = 4;\nint r = f(a, b);\ncout << a << \" \" << b << \" \" << r;\n```",
+    "opts": [
+      "`3 4 15`",
+      "`7 4 15`",
+      "`7 8 7`",
+      "`7 4 15`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "En C++, ¿qué regla se aplica cuando hay varios candidatos en la resolución de sobrecarga de funciones?",
+    "opts": [
+      "Se llama a la primera función declarada con ese nombre.",
+      "Se produce siempre un error de ambigüedad.",
+      "Se elige la función cuya lista de parámetros hace coincidir los tipos del argumento de manera más exacta (mejor conversión).",
+      "Se elige la función con más parámetros."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "Dado el prototipo `void f(int x, double y = 3.14, bool z = false);`, ¿cuál de estas llamadas es INCORRECTA?",
+    "opts": [
+      "`f(1);`",
+      "`f(1, 2.0);`",
+      "`f(1, 2.0, true);`",
+      "`f(1, , true);`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué devuelve una función con tipo de retorno `void` si se ejecuta `return;`?",
+    "opts": [
+      "El valor 0.",
+      "El valor `nullptr`.",
+      "Error de compilación, `void` no puede tener `return`.",
+      "Nada; termina la ejecución de la función y devuelve el control al punto de llamada."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál es la declaración correcta para una función `potencia` que recibe una base `double` y un exponente entero (ambos de entrada) y devuelve el resultado como `double`?",
+    "opts": [
+      "`double potencia(double& base, int& exp);`",
+      "`void potencia(double base, int exp, double& res);`",
+      "`double potencia(double base, int exp);`",
+      "`double potencia(const double& base, const int& exp);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué significa que una función sea `inline`?",
+    "opts": [
+      "Solo puede llamarse una vez.",
+      "Es una sugerencia al compilador para que sustituya la llamada por el cuerpo de la función, evitando el coste de la llamada.",
+      "La función se compila en un fichero separado.",
+      "Solo puede usarse con funciones sin parámetros."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "Dado:\n```cpp\nvoid incrementa(int* p) { (*p)++; }\nint x = 10;\nincrementa(&x);\ncout << x;\n```\n¿Qué imprime?",
+    "opts": [
+      "10",
+      "11",
+      "Error de compilación",
+      "La dirección de x"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál de estas afirmaciones sobre la recursividad es CORRECTA?",
+    "opts": [
+      "Una función recursiva nunca puede sustituirse por un bucle.",
+      "La recursividad es siempre más eficiente que la iteración.",
+      "Una función recursiva sin caso base compila pero da error de enlace.",
+      "Una función recursiva sin caso base provoca desbordamiento de pila (stack overflow) en tiempo de ejecución."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué imprime este código?\n```cpp\nint suma(int n) {\n    if (n == 0) return 0;\n    return n + suma(n - 1);\n}\ncout << suma(4);\n```",
+    "opts": [
+      "4",
+      "6",
+      "10",
+      "24"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál es la declaración más adecuada para `mayor(a, b)` que determina cuál de dos objetos `Complejo` tiene mayor módulo, sin modificarlos?",
+    "opts": [
+      "`bool mayor(Complejo a, Complejo b);`",
+      "`bool mayor(Complejo& a, Complejo& b);`",
+      "`bool mayor(const Complejo& a, const Complejo& b);`",
+      "`Complejo mayor(const Complejo& a, const Complejo& b) const;`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué problema tiene este código?\n```cpp\ndouble& leerValor() {\n    double x;\n    cin >> x;\n    return x;\n}\n```",
+    "opts": [
+      "`cin >> x` no funciona con `double`.",
+      "No se puede devolver `double&` desde una función.",
+      "Devuelve una referencia a una variable local que deja de existir al salir de la función (dangling reference).",
+      "Falta `return 0` al final."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "En el paso de parámetros, ¿cuándo se usa `T&` (referencia no const) en lugar de `const T&`?",
+    "opts": [
+      "Cuando el tipo es primitivo.",
+      "Cuando el parámetro es de solo lectura.",
+      "Cuando la función necesita modificar el valor original del argumento (parámetro de entrada/salida o salida).",
+      "`T&` y `const T&` son equivalentes."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál es la declaración más adecuada para `leerSecuencia(s)`, que lee desde `cin` los datos de un objeto `SecuenciaEnteros` y lo rellena?",
+    "opts": [
+      "`void leerSecuencia(const SecuenciaEnteros& s);`",
+      "`SecuenciaEnteros leerSecuencia();`",
+      "`void leerSecuencia(SecuenciaEnteros& s);`",
+      "`void leerSecuencia(SecuenciaEnteros s);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué ocurre en C++ si defines dos funciones con el mismo nombre y exactamente los mismos tipos de parámetros pero diferente tipo de retorno?",
+    "opts": [
+      "Se usa la que tiene el tipo de retorno más preciso.",
+      "La segunda definición sobreescribe a la primera.",
+      "Error de compilación: el tipo de retorno no forma parte de la firma de la función para la resolución de sobrecarga.",
+      "La sobrecarga es válida si se usan en contextos distintos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "Dado:\n```cpp\nvoid f(int a, int b = 5, int c = 10) {\n    cout << a + b + c;\n}\nf(1, 2);\n```\n¿Qué imprime?",
+    "opts": [
+      "16",
+      "13",
+      "6",
+      "Error de compilación"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál de los siguientes prototipos de función es INVÁLIDO en C++?",
+    "opts": [
+      "`void f(int x = 0);`",
+      "`int f(int x, int y = 1);`",
+      "`int f(int x = 0, int y);`",
+      "`void f(int x, double y = 3.14);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué ventaja tiene devolver un resultado mediante parámetro de salida (`T& resultado`) en lugar de por `return`?",
+    "opts": [
+      "Es obligatorio para tipos no primitivos.",
+      "Mejora la legibilidad siempre.",
+      "Permite que la función devuelva múltiples resultados simultáneamente mediante varios parámetros de salida.",
+      "No hay ninguna ventaja; siempre se prefiere `return`."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Cuál es la declaración más adecuada para `convertir(cad, n)` que transforma una cadena `cad` en el entero `n` (resultado de salida) y devuelve `true` si la conversión fue exitosa?",
+    "opts": [
+      "`void convertir(string cad, int n);`",
+      "`int convertir(const string& cad);`",
+      "`bool convertir(const string& cad, int& n);`",
+      "`bool convertir(string& cad, int& n);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T0: Funciones y paso de parámetros",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nint x = 1;\nvoid f() { int x = 2; cout << x; }\nf();\ncout << x;\n```",
+    "opts": [
+      "`1 1`",
+      "`2 2`",
+      "`2 1`",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nint v[5] = {10, 20, 30, 40, 50};\nint* p = v + 2;\ncout << *(p + 1);\n```",
+    "opts": [
+      "30",
+      "40",
+      "20",
+      "Error de compilación"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es el resultado de `strlen(\"hola\")` en C++?",
+    "opts": [
+      "5 (incluye el terminador `\\0`)",
+      "4",
+      "Error: `strlen` no existe en C++",
+      "Depende del compilador"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es la diferencia entre `string` de C++ y las cadenas de estilo C (`char[]`)?",
+    "opts": [
+      "No hay diferencia funcional.",
+      "`string` no puede concatenarse con `+`.",
+      "`string` gestiona automáticamente su memoria y tamaño; `char[]` tiene tamaño fijo y requiere `\\0` manual.",
+      "`char[]` es más seguro porque tiene comprobación de límites."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "Dado `string s = \"Hola Mundo\";`, ¿qué devuelve `s.substr(5, 3)`?",
+    "opts": [
+      "`\"Hola\"`",
+      "`\"Mund\"`",
+      "`\"Mun\"`",
+      "`\"und\"`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cómo se pasa correctamente una matriz `int m[3][4]` a una función?",
+    "opts": [
+      "`void f(int m[][])`",
+      "`void f(int m)`",
+      "`void f(int m[][4], int filas)`",
+      "`void f(int m[3][])`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué hace `s.find(\"lo\")` si `s = \"hola\"`?",
+    "opts": [
+      "Devuelve 0",
+      "Devuelve 2",
+      "Devuelve -1",
+      "Devuelve `string::npos`"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué valor devuelve `s.find(\"xyz\")` cuando la subcadena NO existe?",
+    "opts": [
+      "-1",
+      "0",
+      "`string::npos`",
+      "Error en tiempo de ejecución"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es la forma correcta de recorrer un array `int v[N]` con sus elementos válidos en `v[0]..v[util-1]`?",
+    "opts": [
+      "`for (int i = 1; i <= util; i++)`",
+      "`for (int i = 0; i < N; i++)`",
+      "`for (int i = 0; i < util; i++)`",
+      "`for (int i = 0; i <= util; i++)`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué imprime este código?\n```cpp\nstring s = \"abcde\";\ns[2] = 'X';\ncout << s;\n```",
+    "opts": [
+      "`abcde`",
+      "`abXde`",
+      "`abXde`",
+      "Error: `string` es inmutable"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "Dado `int m[2][3] = {{1,2,3},{4,5,6}};`, ¿cuánto vale `m[1][2]`?",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es la declaración correcta para una función que busca un valor en un array y devuelve su posición (o -1 si no está)?",
+    "opts": [
+      "`void buscar(int v[], int n, int val, int& pos);`",
+      "`int buscar(const int v[], int n, int val);`",
+      "`int buscar(int* v, int n, int val);`",
+      "Las opciones b y c son igualmente correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué hace `s.erase(2, 3)` si `s = \"abcdefg\"`?",
+    "opts": [
+      "Borra el carácter en posición 2.",
+      "Borra 3 caracteres a partir de la posición 2, dejando `s = \"abfg\"`.",
+      "Borra desde la posición 2 hasta el final.",
+      "Error: `erase` solo acepta un parámetro."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuántas variables de tipo array se crean con `int v[5];` declarado localmente?",
+    "opts": [
+      "5 variables enteras independientes.",
+      "1 variable array (bloque contiguo de 5 enteros en la pila).",
+      "1 puntero y 5 enteros en el heap.",
+      "Depende del valor de inicialización."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué hace `s.insert(2, \"XY\")` si `s = \"abcd\"`?",
+    "opts": [
+      "Reemplaza los caracteres en posición 2 y 3.",
+      "Inserta `\"XY\"` a partir de la posición 2, resultando `\"abXYcd\"`.",
+      "Inserta `\"XY\"` al final.",
+      "Error: se necesita especificar el número de caracteres."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Cuál es la diferencia entre `v[i]` y `*(v+i)` para un array `int v[]`?",
+    "opts": [
+      "`*(v+i)` solo funciona si `v` es un puntero dinámico.",
+      "`v[i]` es más rápido en tiempo de ejecución.",
+      "Son completamente equivalentes: `v[i]` es azúcar sintáctica de `*(v+i)`.",
+      "`v[i]` devuelve el valor; `*(v+i)` devuelve la dirección."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "Dado:\n```cpp\nchar s[] = \"hola\";\ncout << sizeof(s);\n```\n¿Qué imprime?",
+    "opts": [
+      "4",
+      "5",
+      "8",
+      "Depende del compilador"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué hace `s.compare(\"abc\")` si `s = \"abc\"`?",
+    "opts": [
+      "Devuelve `true`.",
+      "Devuelve 0.",
+      "Devuelve 1.",
+      "Error de compilación."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "Para ordenar un array `int v[]` de menor a mayor con el algoritmo de selección, ¿cuántos intercambios se realizan como máximo para un array de 5 elementos?",
+    "opts": [
+      "25",
+      "10",
+      "4",
+      "5"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué es la búsqueda binaria y cuál es su precondición?",
+    "opts": [
+      "Busca en cualquier array comparando todos los elementos.",
+      "Busca en un array ORDENADO dividiendo el espacio de búsqueda por la mitad en cada paso.",
+      "Solo funciona con arrays de tamaño potencia de 2.",
+      "Requiere que el array esté en memoria dinámica."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Arrays, cadenas y matrices",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nstring s = \"12345\";\ncout << s.length() << \" \" << s.size();\n```",
+    "opts": [
+      "`5 4`",
+      "`6 6`",
+      "`5 5`",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nint v[] = {10, 20, 30, 40};\nint* p = v;\np += 2;\ncout << *p << \" \" << *(p-1);\n```",
+    "opts": [
+      "`20 10`",
+      "`30 20`",
+      "`30 20`",
+      "`40 30`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué diferencia hay entre `int* p` y `int* const p`?",
+    "opts": [
+      "No hay diferencia.",
+      "`int* p` es un puntero que puede redirigirse a otra dirección; `int* const p` es un puntero constante que siempre apunta a la misma dirección.",
+      "`int* const p` no permite modificar el valor apuntado.",
+      "`int* p` no puede inicializarse con `nullptr`."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuántos bytes reserva `new int[10]` asumiendo `sizeof(int) = 4`?",
+    "opts": [
+      "10",
+      "40",
+      "4",
+      "Depende del sistema operativo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué problema tiene este código?\n```cpp\nint* p = new int(5);\np = new int(10);\n```",
+    "opts": [
+      "Error de compilación: no se puede reasignar un puntero.",
+      "Funciona correctamente, el primer `new` se libera automáticamente.",
+      "Memory leak: el primer bloque asignado con `new int(5)` queda sin liberar.",
+      "Comportamiento indefinido porque se usa `new` dos veces."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "Dado:\n```cpp\nint a = 5, b = 10;\nint *p = &a, *q = &b;\nint **pp = &p;\n**pp = 99;\ncout << a;\n```\n¿Qué imprime?",
+    "opts": [
+      "5",
+      "10",
+      "99",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es la aritmética de punteros correcta para avanzar un `double*` en 3 posiciones?",
+    "opts": [
+      "`p = p + 24;` (3 × 8 bytes)",
+      "`p = p + 3;`",
+      "`p = p + 3 * sizeof(double);`",
+      "`p += sizeof(double) * 3;`"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué ocurre si `new` no puede reservar la memoria solicitada?",
+    "opts": [
+      "Devuelve `nullptr` siempre.",
+      "El programa se termina automáticamente.",
+      "Por defecto lanza la excepción `std::bad_alloc`.",
+      "Devuelve un puntero a memoria no válida."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es la diferencia entre `const int* p` y `int* const p`?",
+    "opts": [
+      "Son lo mismo.",
+      "`const int* p`: el valor apuntado no se puede modificar; `int* const p`: el puntero no puede redirigirse.",
+      "`int* const p` no puede desreferenciarse.",
+      "`const int* p` no puede inicializarse."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué imprime este código?\n```cpp\nint v[4] = {1, 2, 3, 4};\nint* ini = v;\nint* fin = v + 4;\nint suma = 0;\nfor (int* p = ini; p != fin; p++) suma += *p;\ncout << suma;\n```",
+    "opts": [
+      "4",
+      "6",
+      "10",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué es un puntero colgante (dangling pointer)?",
+    "opts": [
+      "Un puntero inicializado a `nullptr`.",
+      "Un puntero a un array dinámico.",
+      "Un puntero que apunta a memoria que ya ha sido liberada o a una variable que ya no existe.",
+      "Un puntero que apunta a otro puntero."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué hace `p++` si `p` es de tipo `char*` y apunta al primer carácter de `\"Hola\"`?",
+    "opts": [
+      "Suma 4 a la dirección de `p`.",
+      "Avanza `p` un byte (un carácter), apuntando ahora a `'o'`.",
+      "Incrementa el valor del carácter apuntado.",
+      "Error de compilación: no se puede incrementar `char*`."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es la forma correcta de crear dinámicamente una matriz 2D de 3 filas y 4 columnas?",
+    "opts": [
+      "`int m = new int[3][4];`",
+      "`int m[][] = new int[3][4];`",
+      "`int m = new int*[3]; for(int i=0;i<3;i++) m[i] = new int[4];`",
+      "`int* m = new int[12];` (válida pero no permite acceso `m[i][j]`)"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nint* p = nullptr;\nif (p) cout << \"válido\";\nelse cout << \"nulo\";\n```",
+    "opts": [
+      "`válido`",
+      "`nulo`",
+      "Error en tiempo de ejecución",
+      "Error de compilación"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Para qué sirve poner `_p = nullptr` después de `delete[] _p` en el destructor?",
+    "opts": [
+      "Para liberar la memoria nuevamente.",
+      "Para indicar al compilador que la memoria fue liberada.",
+      "Para evitar que el puntero sea un dangling pointer y que un doble `delete` cause comportamiento indefinido.",
+      "Es obligatorio para que `delete[]` funcione."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es el resultado de `p - q` si `p` y `q` son punteros a elementos del mismo array `int v[10]`, con `p = &v[6]` y `q = &v[2]`?",
+    "opts": [
+      "16 (6-2 multiplicado por sizeof(int))",
+      "8",
+      "4",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué hace `new int(5)` frente a `new int[5]`?",
+    "opts": [
+      "Son equivalentes.",
+      "`new int(5)` crea un array de 5 enteros.",
+      "`new int(5)` crea UN entero inicializado a 5; `new int[5]` crea un array de 5 enteros.",
+      "`new int[5]` inicializa todos los elementos a 5."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es el valor de `p` después de ejecutar `int* p = new int[5]; delete[] p; p = nullptr;`?",
+    "opts": [
+      "Apunta al bloque de memoria recién liberado.",
+      "Apunta al primer elemento libre del heap.",
+      "`nullptr`",
+      "Valor indeterminado."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Por qué no se puede hacer aritmética entre dos punteros que apuntan a arrays distintos?",
+    "opts": [
+      "El compilador lo prohíbe siempre.",
+      "Solo funciona si los arrays tienen el mismo tipo.",
+      "Porque el resultado sería sin significado y produce comportamiento indefinido según el estándar C++.",
+      "Sí se puede, simplemente da la diferencia de bytes entre las dos direcciones."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nint x = 42;\nconst int* p = &x;\nx = 100;\ncout << *p;\n```",
+    "opts": [
+      "42",
+      "100",
+      "Error de compilación",
+      "Comportamiento indefinido"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T2: Punteros y memoria dinámica",
+    "q": "¿Cuál es la declaración más adecuada para `buscarMax` que recibe un array de doubles y devuelve el puntero al elemento máximo?",
+    "opts": [
+      "`double buscarMax(double* v, int n);`",
+      "`double& buscarMax(double* v, int n);`",
+      "`double* buscarMax(double* v, int n);`",
+      "`const double* buscarMax(const double* v, int n);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿En qué orden se llama automáticamente el destructor de los atributos de una clase?",
+    "opts": [
+      "En el mismo orden en que fueron declarados.",
+      "En el orden en que fueron inicializados en el constructor.",
+      "En orden inverso al de su declaración.",
+      "El orden no está definido."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Cuándo se invoca automáticamente el constructor de copia?",
+    "opts": [
+      "Solo cuando se usa explícitamente `Clase c = Clase(otro);`",
+      "Nunca, siempre se invoca manualmente.",
+      "Al inicializar un objeto con otro (`Clase b = a;`), al pasar por valor, y al devolver por valor.",
+      "Solo al devolver un objeto por valor."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué es la \"regla de los tres\" (rule of three) en C++?",
+    "opts": [
+      "Una clase debe tener exactamente 3 constructores.",
+      "Si una clase necesita destructor personalizado, probablemente también necesita constructor de copia y `operator=` personalizados.",
+      "Un objeto puede copiarse como máximo 3 veces.",
+      "Toda clase debe implementar 3 métodos: constructor, destructor y `toString`."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué imprime este código si `VectorInt` tiene constructor de copia correcto (deep copy)?\n```cpp\nVectorInt a;\na.push_back(1);\na.push_back(2);\nVectorInt b = a;      // copia\nb.push_back(3);\ncout << a.size() << \" \" << b.size();\n```",
+    "opts": [
+      "`3 3`",
+      "`2 2`",
+      "`2 3`",
+      "Comportamiento indefinido"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué función especial se genera automáticamente por el compilador si NO la defines?",
+    "opts": [
+      "Solo el constructor por defecto.",
+      "Constructor por defecto, constructor de copia, `operator=` y destructor (todos con comportamiento de copia superficial).",
+      "Solo el destructor.",
+      "Ninguna función se genera automáticamente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Cuál es el problema de la copia superficial (shallow copy) cuando la clase tiene un `int* _datos`?",
+    "opts": [
+      "Copia los datos incorrectamente.",
+      "Solo copia el primer elemento.",
+      "Dos objetos quedan apuntando al mismo bloque de memoria: modificar uno afecta al otro, y el `delete[]` doble al destruir ambos produce comportamiento indefinido.",
+      "El compilador detecta el problema y lanza un error."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué hace el siguiente constructor de copia?\n```cpp\nVectorInt::VectorInt(const VectorInt& otro) {\n    _capacity = otro._capacity;\n    _size = otro._size;\n    _values = new int[_capacity];\n    for (int i = 0; i < _size; i++)\n        _values[i] = otro._values[i];\n}\n```",
+    "opts": [
+      "Realiza una copia superficial.",
+      "Comparte el bloque de memoria con `otro`.",
+      "Realiza una copia profunda (deep copy): reserva nuevo array y copia elemento a elemento.",
+      "Error de compilación: falta `const` en el bucle."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "En el patrón `allocate/deallocate/copy`, ¿qué debe hacer `allocate(n)`?",
+    "opts": [
+      "Liberar la memoria existente y reservar nueva.",
+      "Solo inicializar `_size` y `_capacity` a 0.",
+      "Reservar un array de tamaño `n` con `new`, asignar `_capacity = n` y `_size = 0`.",
+      "Copiar los datos de otro objeto."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué debe devolver un operador de asignación `operator=` bien implementado?",
+    "opts": [
+      "`void`",
+      "Una copia del objeto por valor",
+      "Un `bool` indicando éxito",
+      "Una referencia al objeto modificado (`*this`)"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Cuándo se llama el destructor de un objeto local?",
+    "opts": [
+      "Cuando el objeto se pasa por valor a una función.",
+      "Al inicio del programa.",
+      "Al salir del bloque (`{}`) en el que fue declarado.",
+      "Solo cuando se usa `delete` explícitamente."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué problema detecta el siguiente operador de asignación?\n```cpp\nVectorInt& VectorInt::operator=(const VectorInt& otro) {\n    deallocate();\n    allocate(otro._capacity);\n    copy(otro);\n    return *this;\n}\n```",
+    "opts": [
+      "Falta devolver por valor.",
+      "`deallocate` debería ir al final.",
+      "Falta el autocheck `if (this != &otro)`: si se asigna un objeto a sí mismo, `deallocate()` destruye los datos que `copy()` luego intenta leer.",
+      "No hay ningún problema."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué método de `VectorInt` debería ser `const`?",
+    "opts": [
+      "`push_back(int val)`",
+      "`operator=(const VectorInt&)`",
+      "`size()` que devuelve el número de elementos.",
+      "El destructor."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Por qué en el constructor de `VectorInt` con parámetro `int n` se suele inicializar `_size = 0` y `_capacity = n`?",
+    "opts": [
+      "Por eficiencia: `_size = n` sería incorrecto.",
+      "Porque `_capacity` siempre debe ser menor que `_size`.",
+      "Porque el vector empieza vacío (0 elementos útiles) pero con capacidad reservada para `n` elementos.",
+      "Para que `operator[]` no compruebe límites."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué ocurre si el destructor de una clase lanza una excepción?",
+    "opts": [
+      "La excepción se propaga normalmente.",
+      "El programa continúa.",
+      "Comportamiento indefinido o terminación del programa: los destructores no deben lanzar excepciones.",
+      "La excepción se ignora automáticamente."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Cuál es la firma correcta del constructor de copia de una clase `MiClase`?",
+    "opts": [
+      "`MiClase(MiClase otro);`",
+      "`MiClase(MiClase* otro);`",
+      "`MiClase(const MiClase& otro);`",
+      "`void MiClase(const MiClase& otro);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "En `VectorInt`, cuando `_size == _capacity` y se intenta hacer `push_back`, ¿cuál es la secuencia correcta de operaciones?",
+    "opts": [
+      "Aumentar `_size`, copiar datos, reservar nuevo array.",
+      "Reservar nuevo array, liberar el antiguo, aumentar `_size`.",
+      "Reservar nuevo array más grande, copiar datos, liberar el antiguo, actualizar `_capacity`.",
+      "Aumentar `_capacity` en 1 y continuar sin reservar."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Para qué sirve el especificador `explicit` en un constructor de un solo parámetro?",
+    "opts": [
+      "Para que el constructor solo pueda llamarse en ficheros `.cpp`.",
+      "Para evitar conversiones implícitas no deseadas: el compilador no usará ese constructor automáticamente en conversiones.",
+      "Para que el constructor no pueda copiarse.",
+      "Para que el constructor sea `inline` automáticamente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Cuál es la diferencia entre un atributo declarado como `static` en una clase y un atributo normal?",
+    "opts": [
+      "Los atributos `static` solo pueden ser `const`.",
+      "Los atributos `static` no pueden inicializarse.",
+      "Un atributo `static` es compartido por todos los objetos de la clase; uno normal es independiente en cada objeto.",
+      "Los atributos `static` se destruyen antes que los normales."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué significa que un método sea `private` en una clase?",
+    "opts": [
+      "Solo puede llamarse desde otras clases.",
+      "No puede tener parámetros.",
+      "Solo puede llamarse desde otros métodos de la misma clase (encapsulación).",
+      "Es más lento que un método `public`."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Clases con datos dinámicos",
+    "q": "¿Qué imprime el siguiente código si `A` tiene un constructor que imprime `\"C\"` y un destructor que imprime `\"D\"`?\n```cpp\n{ A obj1; A obj2; }\n```",
+    "opts": [
+      "`C C D D`",
+      "`C D C D`",
+      "`C C D D`",
+      "`C C D` (solo un destructor)"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la firma correcta del `operator+` binario para sumar dos objetos `Complejo`?",
+    "opts": [
+      "`void operator+(const Complejo& a, const Complejo& b);`",
+      "`Complejo operator+(Complejo a);`",
+      "`Complejo operator+(const Complejo& a, const Complejo& b);`",
+      "`Complejo& operator+(const Complejo& a, const Complejo& b);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Por qué `operator+` debe devolver por valor y no por referencia?",
+    "opts": [
+      "Por convención histórica.",
+      "Por razones de rendimiento.",
+      "Porque el resultado es un objeto temporal creado dentro de la función; devolver referencia a él sería un dangling reference.",
+      "Las dos formas son equivalentes."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la relación correcta para implementar `operator+` a partir de `operator+=`?",
+    "opts": [
+      "`operator+=` se implementa a partir de `operator+`.",
+      "No hay relación entre ellos.",
+      "`operator+(a, b)` se implementa creando una copia de `a` y aplicando `+= b` a la copia.",
+      "`operator+` llama a `operator+=` con el objeto original."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué es la sobrecarga del `operator()` (operador de llamada)?",
+    "opts": [
+      "Permite llamar a la clase como si fuera una función puntero.",
+      "Hace que los objetos de la clase sean \"llamables\" como funciones: `obj(args)`.",
+      "Es equivalente a sobrecargar `operator[]`.",
+      "Solo se usa para iteradores."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "Dado el `operator<` sobrecargado para `Fraccion`:\n```cpp\nbool operator<(const Fraccion& a, const Fraccion& b) {\n    return a.num * b.den < b.num * a.den;\n}\n```\nSi `a = 1/2` y `b = 3/4`, ¿devuelve `true` o `false`?",
+    "opts": [
+      "`false`",
+      "`true`",
+      "Error de compilación",
+      "Comportamiento indefinido"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la diferencia entre el `operator++` prefijo y postfijo?",
+    "opts": [
+      "No hay diferencia funcional.",
+      "El prefijo es más lento.",
+      "El prefijo `++obj` incrementa y devuelve `*this` por referencia; el postfijo `obj++` guarda el estado anterior, incrementa y devuelve la copia antigua por valor.",
+      "El postfijo no puede sobrecargarse."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la firma correcta del `operator++` POSTFIJO para una clase `Contador`?",
+    "opts": [
+      "`Contador& operator++();`",
+      "`Contador operator++();`",
+      "`Contador& operator++(int);`",
+      "`Contador operator++(int);`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué ocurre si sobrecargas `operator=` pero NO el constructor de copia en una clase con punteros?",
+    "opts": [
+      "Todo funciona correctamente.",
+      "El constructor de copia generado es correcto porque usa el `operator=`.",
+      "El constructor de copia generado realiza shallow copy; solo las asignaciones posteriores a la construcción usarán tu `operator=` correcto.",
+      "Error de compilación al intentar copiar el objeto."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuándo es obligatorio que `operator<<` sea función `friend` de la clase?",
+    "opts": [
+      "Siempre.",
+      "Nunca, se puede implementar con getters.",
+      "Solo cuando necesita acceder a atributos privados de la clase y no hay getters disponibles.",
+      "Solo cuando la clase tiene punteros."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué imprime el siguiente código?\n```cpp\nstruct Punto {\n    int x, y;\n    Punto operator+(const Punto& o) const {\n        return {x + o.x, y + o.y};\n    }\n};\nPunto a{1,2}, b{3,4};\nPunto c = a + b;\ncout << c.x << \" \" << c.y;\n```",
+    "opts": [
+      "`1 2`",
+      "`3 4`",
+      "`4 6`",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la firma correcta de `operator[]` no constante en `VectorInt`?",
+    "opts": [
+      "`int operator[](int i) const;`",
+      "`const int& operator[](int i) const;`",
+      "`int& operator[](int i);`",
+      "`int operator[](int i);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué operadores NO pueden sobrecargarse en C++?",
+    "opts": [
+      "`+`, `-`, `*`, `/`",
+      "`<<`, `>>`",
+      "`==`, `!=`, `<`, `>`",
+      "`::`  (resolución de ámbito), `.` (acceso a miembro), `.*`, `?:` (ternario), `sizeof`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la implementación correcta de `operator!=` usando `operator==`?",
+    "opts": [
+      "`bool operator!=(const T& a, const T& b) { return a != b; }` (recursivo)",
+      "`bool operator!=(const T& a, const T& b) { return !a; }`",
+      "`bool operator!=(const T& a, const T& b) { return !(a == b); }`",
+      "No se puede implementar `!=` a partir de `==`."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Por qué el `operator=` devuelve `T&` y no `T`?",
+    "opts": [
+      "Por requisito del compilador.",
+      "Para evitar la copia.",
+      "Para permitir el encadenamiento `a = b = c` y para ser consistente con el comportamiento de los tipos primitivos.",
+      "Devolver `T` y `T&` son equivalentes para `operator=`."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "Si una clase `Matriz` tiene `operator*` para multiplicar dos matrices, ¿cuál es la firma más adecuada?",
+    "opts": [
+      "`void operator*(Matriz& a, Matriz& b, Matriz& res);`",
+      "`Matriz& operator*(const Matriz& otra) const;`",
+      "`Matriz operator*(Matriz otra) const;`",
+      "`Matriz operator*(const Matriz& otra) const;`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué hace el siguiente código?\n```cpp\nComplejo a(1, 2), b(3, 4);\na += b;\n```\nAsumiendo `operator+=` correctamente implementado, ¿cuánto vale `a`?",
+    "opts": [
+      "`(1, 2)` (no cambia)",
+      "`(3, 4)`",
+      "`(4, 6)`",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál de las siguientes afirmaciones sobre la sobrecarga de operadores es INCORRECTA?",
+    "opts": [
+      "Se puede cambiar la precedencia de un operador al sobrecargarlo.",
+      "No se puede cambiar el número de operandos (aridad) de un operador.",
+      "El significado de los operadores para tipos primitivos no se puede cambiar.",
+      "Se puede cambiar la precedencia de un operador al sobrecargarlo.  (esta afirmación es incorrecta)"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué diferencia hay entre implementar `operator+` como método o como función libre?",
+    "opts": [
+      "Como método puede acceder a privados; como función libre no.",
+      "Como función libre es más eficiente.",
+      "Como método, el operando izquierdo es `*this`; como función libre, ambos operandos son parámetros explícitos, lo que permite conversiones implícitas en el operando izquierdo.",
+      "No hay diferencia."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Cuál es la firma correcta del `operator-` unario (negación) para una clase `Complejo`?",
+    "opts": [
+      "`Complejo operator-(const Complejo& a, const Complejo& b);`",
+      "`void operator-();`",
+      "`Complejo operator-() const;`",
+      "`Complejo& operator-(int);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Sobrecarga de operadores",
+    "q": "¿Qué imprime el siguiente código asumiendo que `operator<<` está bien sobrecargado para `Complejo` con formato `(a+bi)`?\n```cpp\nComplejo c(2, -3);\ncout << c;\n```",
+    "opts": [
+      "`2 -3`",
+      "`Complejo(2,-3)`",
+      "`(2+-3i)`  (o el formato exacto definido)",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿En qué se diferencian los ficheros de texto y los ficheros binarios?",
+    "opts": [
+      "Los ficheros binarios son más grandes.",
+      "Los ficheros de texto solo pueden contener letras.",
+      "En los ficheros de texto los datos se guardan como caracteres imprimibles; en los binarios se guardan en la representación interna del tipo (bits).",
+      "Los ficheros binarios no pueden leerse con `ifstream`."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la forma correcta de abrir un fichero binario para escritura?",
+    "opts": [
+      "`ofstream f(\"datos.bin\");`",
+      "`ifstream f(\"datos.bin\", ios::binary);`",
+      "`ofstream f(\"datos.bin\", ios::binary);`",
+      "`fstream f(\"datos.bin\", ios::binary);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué bandera de estado del flujo se activa cuando se intenta leer más allá del final del fichero?",
+    "opts": [
+      "`failbit`",
+      "`badbit`",
+      "`goodbit`",
+      "`eofbit`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace `cin.clear()` tras un error de lectura?",
+    "opts": [
+      "Vacía el buffer de entrada.",
+      "Reinicia el flujo desde el principio.",
+      "Borra las banderas de error del flujo, permitiendo nuevas operaciones de lectura.",
+      "Cierra y reabre el flujo."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la jerarquía correcta de clases de flujo en C++?",
+    "opts": [
+      "`istream` hereda de `ifstream`",
+      "`fstream` hereda de `iostream` directamente",
+      "`ios_base` → `ios` → `istream`/`ostream` → `ifstream`/`ofstream`",
+      "`ifstream` y `ofstream` no tienen relación de herencia con `istream` y `ostream`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace `f.close()` al cerrar un fichero de escritura?",
+    "opts": [
+      "Solo marca el fichero como cerrado internamente.",
+      "Libera el objeto `ofstream` de memoria.",
+      "Vuelca el buffer a disco y cierra el fichero, asegurando que todos los datos escritos queden guardados.",
+      "Es opcional, el destructor no hace nada al respecto."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál de estas formas de pasar un flujo a una función es INCORRECTA?",
+    "opts": [
+      "`void f(istream& is);`",
+      "`void f(ostream& os);`",
+      "`void f(istream is);`  (por valor)",
+      "`void f(ifstream& f);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace `is.peek()` en la lectura de un flujo?",
+    "opts": [
+      "Lee el siguiente carácter y avanza la posición.",
+      "Lee el siguiente carácter SIN avanzar la posición (sin consumirlo).",
+      "Comprueba si el flujo está en buen estado.",
+      "Devuelve la posición actual del cursor."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la diferencia entre `is.get()` y `is >> c` para leer un carácter?",
+    "opts": [
+      "`is.get()` es más eficiente.",
+      "No hay diferencia.",
+      "`is >> c` salta espacios en blanco; `is.get()` lee el siguiente carácter tal cual, incluyendo espacios y saltos de línea.",
+      "`is.get()` solo funciona con ficheros."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "Para leer un fichero de texto línea a línea hasta el final, ¿cuál es el patrón correcto?",
+    "opts": [
+      "`while (!f.eof()) { getline(f, linea); }`",
+      "`for (int i = 0; f.good(); i++) { getline(f, linea); }`",
+      "`while (getline(f, linea)) { /* procesar */ }`",
+      "`do { getline(f, linea); } while (f);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace `f.write(buffer, n)` en un fichero binario?",
+    "opts": [
+      "Escribe `n` caracteres en formato texto.",
+      "Escribe exactamente `n` bytes del buffer al fichero en su representación binaria.",
+      "Escribe `n` enteros al fichero.",
+      "Es equivalente a `f << buffer`."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace `f.read(buffer, n)` en un fichero binario?",
+    "opts": [
+      "Lee hasta el primer espacio en blanco.",
+      "Lee una línea completa.",
+      "Lee hasta `n` bytes del fichero y los almacena en `buffer`.",
+      "Lee solo si el fichero tiene exactamente `n` bytes."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué devuelve `f.gcount()` tras una operación `read()`?",
+    "opts": [
+      "El número total de bytes del fichero.",
+      "El número de bytes restantes por leer.",
+      "El número de bytes realmente leídos en la última operación de entrada sin formato.",
+      "El tamaño del buffer."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es el modo de apertura correcto para AÑADIR datos al final de un fichero existente sin borrar su contenido?",
+    "opts": [
+      "`ios::out`",
+      "`ios::trunc`",
+      "`ios::in`",
+      "`ios::app`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Por qué no se pueden pasar flujos como argumentos `const` a una función?",
+    "opts": [
+      "Porque los flujos son siempre de solo escritura.",
+      "Porque `const` no es compatible con `istream`.",
+      "Porque las operaciones de lectura y escritura modifican el estado interno del flujo (posición, banderas), por lo que no pueden ser `const`.",
+      "Es una restricción arbitraria del estándar."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué clase se usa para leer/escribir tanto en fichero como en memoria de manera combinada?",
+    "opts": [
+      "`ifstream`",
+      "`stringstream`",
+      "`fstream`  (para ficheros) / `stringstream` (para strings en memoria)",
+      "`iostream`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es el uso típico de `stringstream` en el temario?",
+    "opts": [
+      "Leer ficheros de texto grandes.",
+      "Redirigir `cout` a un fichero.",
+      "Convertir entre tipos y strings: `ss << valor` para convertir a string; `ss >> variable` para parsear.",
+      "Solo se usa para depuración."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué bandera de estado está activa cuando el flujo funciona correctamente (sin errores)?",
+    "opts": [
+      "`eofbit`",
+      "`failbit`",
+      "`badbit`",
+      "`goodbit`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué diferencia hay entre `failbit` y `badbit`?",
+    "opts": [
+      "Son equivalentes.",
+      "`failbit` es más grave que `badbit`.",
+      "`failbit` indica un error recuperable (ej. leer texto donde se esperaba un número); `badbit` indica un error irrecuperable (ej. fallo del hardware).",
+      "`badbit` solo se activa en ficheros binarios."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué imprime el siguiente código si el fichero `datos.txt` contiene exactamente `\"42\\n\"`?\n```cpp\nifstream f(\"datos.txt\");\nint n;\nf >> n;\ncout << n << \" \" << f.eof();\n```",
+    "opts": [
+      "`42 0`",
+      "`42 1`",
+      "`42 0`",
+      "Error de compilación"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la operación de posicionamiento correcta para ir al inicio de un fichero de entrada?",
+    "opts": [
+      "`f.seekg(0, ios::end);`",
+      "`f.rewind();`",
+      "`f.seekg(0, ios::beg);`",
+      "`f.seekg(ios::beg);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la declaración más adecuada para `guardar(os)`, método de una clase `Agenda` que guarda sus datos en un flujo de salida?",
+    "opts": [
+      "`void guardar(ofstream os);`",
+      "`void guardar(ostream os) const;`",
+      "`void guardar(const ostream& os) const;`",
+      "`void guardar(ostream& os) const;`"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Qué hace el siguiente código?\n```cpp\nofstream f(\"test.txt\");\nf << \"Hola\" << endl;\nf.close();\nofstream f2(\"test.txt\");\nf2 << \"Mundo\" << endl;\n```",
+    "opts": [
+      "El fichero contiene `\"Hola\\nMundo\\n\"`.",
+      "Error: no se puede abrir un fichero que ya existe.",
+      "El fichero contiene solo `\"Mundo\\n\"` porque `ofstream` sin flags borra el contenido previo.",
+      "El fichero contiene `\"Mundo\\nHola\\n\"`."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Cuál es la forma correcta de leer un entero binario (`int`) escrito con `write()`?",
+    "opts": [
+      "`f >> n;`",
+      "`getline(f, s);`",
+      "`f.read(reinterpret_cast<char*>(&n), sizeof(int));`",
+      "`f.get(n);`"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T6: Ficheros E/S",
+    "q": "¿Para qué se usa `ios::trunc` al abrir un fichero?",
+    "opts": [
+      "Para añadir datos al final.",
+      "Para abrir en modo lectura y escritura.",
+      "Para borrar el contenido existente del fichero al abrirlo.",
+      "Para evitar que se cree el fichero si no existe."
+    ],
+    "correct": 2
   }
 ]
