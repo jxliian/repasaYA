@@ -1,18 +1,21 @@
 ---
-// QuizEngine — motor único para tipo test (4 opts) y V/F con justificación
-// Props: vfData y/o testData (arrays JSON), title, code
+// QuizEngine — motor único para tipo test (4 opts), V/F con justificación y quiz reveal
+// Props: vfData, testData y/o quizzData (arrays JSON), title, code
 interface Props {
   title: string;
   code: string;
   vfData?: any[];
   testData?: any[];
+  quizzData?: any[];
   backHref?: string;
   backLabel?: string;
 }
-const { title, code, vfData = [], testData = [], backHref, backLabel } = Astro.props;
-const hasVF   = vfData.length > 0;
-const hasTest = testData.length > 0;
-const hasBoth = hasVF && hasTest;
+const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel } = Astro.props;
+const hasVF    = vfData.length > 0;
+const hasTest  = testData.length > 0;
+const hasQuizz = quizzData.length > 0;
+const hasBoth  = hasVF && hasTest;
+const hasMultiple = [hasVF, hasTest, hasQuizz].filter(Boolean).length > 1;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <style is:global>
@@ -28,7 +31,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   /* START */
   .start{display:flex;flex-direction:column;gap:24px;padding:8px 0}
   .start-title{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
-  .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px}
   .mode-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:22px 20px;cursor:pointer;transition:all .2s;position:relative;user-select:none}
   .mode-card:hover,.mode-card.selected{border-color:var(--accent);background:rgba(108,99,255,.08);transform:translateY(-2px)}
   .mode-card.selected::after{content:'✓';position:absolute;top:12px;right:14px;font-size:.8rem;font-weight:800;color:var(--accent)}
@@ -72,6 +75,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .justification.wrong-just{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
   .just-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
   .correct-just .just-label{color:var(--correct)}.wrong-just .just-label{color:var(--wrong)}
+  /* QUIZZ REVEAL */
+  .reveal-btn{width:100%;padding:14px;margin-top:18px;font-size:.95rem;font-weight:700;border-radius:var(--radius);background:rgba(108,99,255,.1);color:var(--accent2);border:2px solid rgba(108,99,255,.3);cursor:pointer;transition:all .2s}
+  .reveal-btn:hover:not(:disabled){background:rgba(108,99,255,.2);border-color:var(--accent);transform:translateY(-1px)}
+  .quiz-answer-box{margin-top:16px;background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.25);border-radius:var(--radius);padding:16px 18px;font-size:.92rem;line-height:1.65;display:none}
+  .quiz-answer-box.show{display:block}
+  .quiz-answer-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:8px}
   /* TEST */
   .options{display:flex;flex-direction:column;gap:10px;margin-top:20px}
   .opt-btn{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid var(--border);border-radius:var(--radius);background:var(--surface2);color:var(--text);font-size:.9rem;font-weight:500;cursor:pointer;transition:all .18s;text-align:left}
@@ -141,22 +150,34 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <div id="panel-test" class="panel active">
 
     <div id="selector-view" class="start">
-      {hasBoth && (
+      {hasMultiple && (
         <div>
           <p class="start-title">Tipo de preguntas</p>
           <div class="mode-grid">
-            <div class="mode-card selected" id="card-vf" onclick="selectMode('vf')">
-              <div class="mc-icon">✓✗</div>
-              <div class="mc-title">Verdadero / Falso</div>
-              <div class="mc-desc">Afirmaciones con justificación. Ideal para examen.</div>
-              <span class="mc-chip">{vfData.length} preguntas</span>
-            </div>
-            <div class="mode-card" id="card-test" onclick="selectMode('test')">
-              <div class="mc-icon">🧠</div>
-              <div class="mc-title">Tipo test</div>
-              <div class="mc-desc">4 opciones, una correcta. Corrección automática.</div>
-              <span class="mc-chip">{testData.length} preguntas</span>
-            </div>
+            {hasVF && (
+              <div class="mode-card selected" id="card-vf" onclick="selectMode('vf')">
+                <div class="mc-icon">✓✗</div>
+                <div class="mc-title">Verdadero / Falso</div>
+                <div class="mc-desc">Afirmaciones con justificación. Ideal para examen.</div>
+                <span class="mc-chip">{vfData.length} preguntas</span>
+              </div>
+            )}
+            {hasTest && (
+              <div class="mode-card" id="card-test" onclick="selectMode('test')">
+                <div class="mc-icon">🧠</div>
+                <div class="mc-title">Tipo test</div>
+                <div class="mc-desc">4 opciones, una correcta. Corrección automática.</div>
+                <span class="mc-chip">{testData.length} preguntas</span>
+              </div>
+            )}
+            {hasQuizz && (
+              <div class="mode-card" id="card-quizz" onclick="selectMode('quizz')">
+                <div class="mc-icon">💡</div>
+                <div class="mc-title">Quiz de repaso</div>
+                <div class="mc-desc">Pregunta abierta, revela la respuesta y autoevalúate.</div>
+                <span class="mc-chip">{quizzData.length} preguntas</span>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -188,6 +209,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div id="test-controls" style="display:none">
           <div class="options" id="options-container"></div>
           <div class="feedback" id="feedback"></div>
+        </div>
+        <!-- Quizz reveal controls -->
+        <div id="quizz-controls" style="display:none">
+          <button class="reveal-btn" id="btn-reveal">Revelar respuesta</button>
+          <div class="quiz-answer-box" id="quiz-answer-box">
+            <div class="quiz-answer-label">Respuesta</div>
+            <div id="quiz-answer-text"></div>
+          </div>
         </div>
       </div>
       <div class="q-nav">
@@ -239,21 +268,23 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   Sígueme en GitHub ⭐
 </a>
 
-<script define:vars={{ vfData, testData, hasBoth, hasVF, hasTest }}>
+<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz }}>
 const LETTERS = ['A','B','C','D','E'];
-const VF_DATA   = vfData;
-const TEST_DATA = testData;
-const VF_TEMAS   = [...new Set(VF_DATA.map(q=>q.tema))];
-const TEST_TEMAS = [...new Set(TEST_DATA.map(q=>q.tema))];
-let selectedMode = hasVF ? 'vf' : 'test';
+const VF_DATA    = vfData;
+const TEST_DATA  = testData;
+const QUIZZ_DATA = quizzData;
+const VF_TEMAS    = [...new Set(VF_DATA.map(q=>q.tema))];
+const TEST_TEMAS  = [...new Set(TEST_DATA.map(q=>q.tema))];
+const QUIZZ_TEMAS = [...new Set(QUIZZ_DATA.map(q=>q.tema))];
+let selectedMode = hasVF ? 'vf' : hasTest ? 'test' : 'quizz';
 let questions=[], idx=0, correct=0, wrong=0, answered=false;
-let answers=[];   // answers[i] = {chosen, wasCorrect} | undefined
+let answers=[];   // answers[i] = {chosen, wasCorrect} | {revealed:true} | undefined
 let selectedTemas = new Set(); // vacío = todos
 
 function selectMode(mode){
   selectedMode=mode;
   selectedTemas.clear();
-  ['vf','test'].forEach(m=>{
+  ['vf','test','quizz'].forEach(m=>{
     const el=document.getElementById('card-'+m);
     if(el) el.classList.toggle('selected',m===mode);
   });
@@ -261,8 +292,8 @@ function selectMode(mode){
 }
 
 function renderChips(){
-  const temas = selectedMode==='vf' ? VF_TEMAS : TEST_TEMAS;
-  const src   = selectedMode==='vf' ? VF_DATA  : TEST_DATA;
+  const temas = selectedMode==='vf' ? VF_TEMAS : selectedMode==='test' ? TEST_TEMAS : QUIZZ_TEMAS;
+  const src   = selectedMode==='vf' ? VF_DATA  : selectedMode==='test' ? TEST_DATA  : QUIZZ_DATA;
   const container = document.getElementById('tema-chips');
   container.innerHTML = '';
 
@@ -298,13 +329,14 @@ renderChips();
 
 function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
 function startQuiz(){
-  const src=selectedMode==='vf'?VF_DATA:TEST_DATA;
+  const src=selectedMode==='vf'?VF_DATA:selectedMode==='test'?TEST_DATA:QUIZZ_DATA;
   const pool=selectedTemas.size===0 ? src : src.filter(q=>selectedTemas.has(q.tema));
   questions=shuffle(pool);
   idx=0;correct=0;wrong=0;answers=[];
   hide('selector-view');hide('results-view');show('quiz-view');
   document.getElementById('vf-controls').style.display=selectedMode==='vf'?'':'none';
   document.getElementById('test-controls').style.display=selectedMode==='test'?'':'none';
+  document.getElementById('quizz-controls').style.display=selectedMode==='quizz'?'':'none';
   showQ();
 }
 function showQ(){
@@ -356,6 +388,21 @@ function showQ(){
       fb.textContent=wasCorrect?`✓ Correcto — ${q.opts[q.correct]}`:`✗ Incorrecto — Era: ${q.opts[q.correct]}`;
       show_el('btn-next');
     }
+  } else {
+    // quizz reveal mode
+    const revealBtn=document.getElementById('btn-reveal');
+    const answerBox=document.getElementById('quiz-answer-box');
+    document.getElementById('quiz-answer-text').textContent=q.answer;
+    if(answers[idx]!==undefined){
+      answered=true;
+      revealBtn.style.display='none';
+      answerBox.className='quiz-answer-box show';
+      show_el('btn-next');
+    } else {
+      revealBtn.style.display='';
+      revealBtn.disabled=false;
+      answerBox.className='quiz-answer-box';
+    }
   }
 }
 function answerVF(chosen){
@@ -390,14 +437,27 @@ function answerTest(chosen){
   document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
   show_el('btn-next');
 }
+function answerReveal(){
+  if(answered)return;answered=true;
+  document.getElementById('btn-reveal').style.display='none';
+  document.getElementById('quiz-answer-box').className='quiz-answer-box show';
+  answers[idx]={revealed:true};
+  show_el('btn-next');
+}
 function prevQ(){if(idx>0){idx--;showQ()}}
 function nextQ(){idx++;if(idx>=questions.length){showResults();return}showQ()}
 function showResults(){
   hide('quiz-view');
   const rv=document.getElementById('results-view');rv.style.display='flex';rv.style.flexDirection='column';rv.style.gap='20px';
-  document.getElementById('r-pct').textContent=Math.round(correct/questions.length*10)+'/10';
-  document.getElementById('r-ok').textContent=correct;
-  document.getElementById('r-fail').textContent=wrong;
+  if(selectedMode==='quizz'){
+    document.getElementById('r-pct').textContent=questions.length+' ✓';
+    document.getElementById('r-ok').textContent=questions.length;
+    document.getElementById('r-fail').textContent=0;
+  } else {
+    document.getElementById('r-pct').textContent=Math.round(correct/questions.length*10)+'/10';
+    document.getElementById('r-ok').textContent=correct;
+    document.getElementById('r-fail').textContent=wrong;
+  }
   document.getElementById('r-total').textContent=questions.length;
 }
 function backToSelector(){hide('quiz-view');hide('results-view');show('selector-view')}
@@ -411,17 +471,20 @@ function hide_el(id){document.getElementById(id).style.display='none'}
 document.getElementById('btn-start').addEventListener('click', startQuiz);
 document.getElementById('btn-v').addEventListener('click', () => answerVF('V'));
 document.getElementById('btn-f').addEventListener('click', () => answerVF('F'));
+document.getElementById('btn-reveal').addEventListener('click', answerReveal);
 document.getElementById('btn-next').addEventListener('click', nextQ);
 document.getElementById('btn-prev').addEventListener('click', prevQ);
 document.getElementById('btn-back').addEventListener('click', backToSelector);
 document.getElementById('btn-back2').addEventListener('click', backToSelector);
 document.getElementById('btn-repeat').addEventListener('click', startQuiz);
 
-// Mode cards (solo existen si hasBoth)
+// Mode cards (solo existen si hasMultiple)
 const cvf = document.getElementById('card-vf');
 const ctest = document.getElementById('card-test');
-if(cvf)  cvf.addEventListener('click',  () => selectMode('vf'));
-if(ctest) ctest.addEventListener('click', () => selectMode('test'));
+const cquizz = document.getElementById('card-quizz');
+if(cvf)   cvf.addEventListener('click',   () => selectMode('vf'));
+if(ctest)  ctest.addEventListener('click',  () => selectMode('test'));
+if(cquizz) cquizz.addEventListener('click', () => selectMode('quizz'));
 
 // Tabs
 document.querySelectorAll('.tab').forEach(t => {

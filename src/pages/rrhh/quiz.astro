@@ -3,14 +3,16 @@ import Base from '../../layouts/Base.astro';
 import QuizEngine from '../../components/QuizEngine.astro';
 import vfData from '../../data/rrhh.json';
 import testData from '../../data/rrhh-test.json';
+import quizzData from '../../data/rrhh-quizz.json';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-<Base title="RRHH · Preguntas" description="318 V/F con justificación y tipo test de Recursos Humanos. 11 bloques y exámenes.">
+<Base title="RRHH · Preguntas" description="286 V/F con justificación, tipo test y quiz de repaso de Recursos Humanos.">
   <QuizEngine
     title="Recursos Humanos"
     code="RRHH"
     vfData={vfData}
     testData={testData}
+    quizzData={quizzData}
     backHref={`${base}rrhh/`}
     backLabel="Recursos Humanos"
   />
