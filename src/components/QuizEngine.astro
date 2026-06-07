@@ -367,7 +367,7 @@ function showQ(){
       document.getElementById('just-text').textContent=q.justification;
       show_el('btn-next');
     }
-  } else {
+  } else if(selectedMode==='test') {
     const container=document.getElementById('options-container');
     container.innerHTML='';
     q.opts.forEach((opt,i)=>{
