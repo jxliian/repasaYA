@@ -103,6 +103,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .btn{padding:11px 22px;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}
   .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
   .btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-danger{background:rgba(239,68,68,.15);color:var(--wrong);border:1px solid rgba(239,68,68,.3)}.btn-danger:hover{background:rgba(239,68,68,.25);border-color:var(--wrong)}
+  .btn-back-top{background:none;border:none;color:var(--text-muted);font-size:.8rem;font-weight:600;cursor:pointer;padding:2px 6px;border-radius:6px;transition:color .2s;white-space:nowrap}.btn-back-top:hover{color:var(--accent)}
   /* RESULTS */
   .stats-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
   .stats-row{display:flex;justify-content:space-around;gap:12px;flex-wrap:wrap}
@@ -126,7 +128,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .github-fab:hover{border-color:var(--accent);background:#1e1c35;color:var(--accent2);box-shadow:0 0 0 3px rgba(108,99,255,.2),0 0 24px rgba(108,99,255,.35);transform:translateY(-2px)}
   .github-fab svg{flex-shrink:0;transition:transform .25s}.github-fab:hover svg{transform:rotate(-8deg) scale(1.1)}
   body{display:flex;flex-direction:column}
-  @media(max-width:560px){html,body{height:auto;overflow:visible}main{overflow:visible}.mode-grid{grid-template-columns:1fr}}
+  @media(max-width:560px){html,body{height:auto;overflow:visible}main{overflow:visible;padding-bottom:80px}.mode-grid{grid-template-columns:1fr}.github-fab{bottom:14px;right:14px;padding:9px 14px 9px 12px;font-size:.78rem}}
 </style>
 
 <header>
@@ -189,7 +191,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     </div>
 
     <div id="quiz-view" style="display:none">
-      <div class="q-header"><span id="q-counter"></span><span class="score-live" id="q-score"></span></div>
+      <div class="q-header">
+        <button class="btn-back-top" id="btn-back">← Menú</button>
+        <span id="q-counter"></span>
+        <span class="score-live" id="q-score"></span>
+      </div>
       <div class="progress-bar"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
       <div class="q-card">
         <div class="q-tema-tag" id="q-tema"></div>
@@ -220,7 +226,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
       </div>
       <div class="q-nav">
-        <button class="btn btn-ghost" id="btn-back">← Volver</button>
         <button class="btn btn-ghost" id="btn-prev" style="display:none">← Anterior</button>
         <button class="btn btn-primary" id="btn-next" style="display:none">Siguiente →</button>
       </div>
@@ -237,7 +242,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary" id="btn-repeat">Repetir</button>
+        <button class="btn btn-primary" id="btn-repeat">Repetir todo</button>
+        <button class="btn btn-danger" id="btn-repeat-wrong" style="display:none">↺ Solo fallos</button>
         <button class="btn btn-ghost" id="btn-back2">← Volver</button>
       </div>
     </div>
@@ -453,12 +459,25 @@ function showResults(){
     document.getElementById('r-pct').textContent=questions.length+' ✓';
     document.getElementById('r-ok').textContent=questions.length;
     document.getElementById('r-fail').textContent=0;
+    document.getElementById('btn-repeat-wrong').style.display='none';
   } else {
     document.getElementById('r-pct').textContent=Math.round(correct/questions.length*10)+'/10';
     document.getElementById('r-ok').textContent=correct;
     document.getElementById('r-fail').textContent=wrong;
+    document.getElementById('btn-repeat-wrong').style.display=wrong>0?'':'none';
   }
   document.getElementById('r-total').textContent=questions.length;
+}
+function repeatWrong(){
+  const wrongQs=questions.filter((_,i)=>answers[i]!==undefined&&answers[i].wasCorrect===false);
+  if(!wrongQs.length)return;
+  questions=wrongQs;
+  idx=0;correct=0;wrong=0;answers=[];
+  hide('results-view');show('quiz-view');
+  document.getElementById('vf-controls').style.display=selectedMode==='vf'?'':'none';
+  document.getElementById('test-controls').style.display=selectedMode==='test'?'':'none';
+  document.getElementById('quizz-controls').style.display=selectedMode==='quizz'?'':'none';
+  showQ();
 }
 function backToSelector(){hide('quiz-view');hide('results-view');show('selector-view')}
 function show(id){document.getElementById(id).style.display=''}
@@ -477,6 +496,7 @@ document.getElementById('btn-prev').addEventListener('click', prevQ);
 document.getElementById('btn-back').addEventListener('click', backToSelector);
 document.getElementById('btn-back2').addEventListener('click', backToSelector);
 document.getElementById('btn-repeat').addEventListener('click', startQuiz);
+document.getElementById('btn-repeat-wrong').addEventListener('click', repeatWrong);
 
 // Mode cards (solo existen si hasMultiple)
 const cvf = document.getElementById('card-vf');
