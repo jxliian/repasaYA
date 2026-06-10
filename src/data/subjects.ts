@@ -83,6 +83,16 @@ export const subjects: Subject[] = [
     chips: ['67 preguntas', '9 temas', 'C++'],
     dataFile: 'mp-test.json',
   },
+  {
+    slug: 'aef',
+    title: 'Análisis de Estados Financieros',
+    code: 'ADE · Finanzas',
+    icon: '📈',
+    description: '38 preguntas tipo test con casos reales (Dulcesol, Viscofan, Mercadona…) y 63 flashcards de ratios, PMM, NOF y rentabilidad.',
+    type: 'test',
+    chips: ['38 preguntas', '63 flashcards', 'Casos reales'],
+    dataFile: 'aef-test.json',
+  },
   // ─── AÑADE AQUÍ NUEVAS ASIGNATURAS ───────────────
   // {
   //   slug: 'macroeconomia',

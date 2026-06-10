@@ -1,0 +1,317 @@
+[
+  {
+    "term": "Ratio de endeudamiento — fórmula e interpretación",
+    "def": "Pasivo Total / Patrimonio Neto. Mide cuántos euros de deuda hay por cada euro de fondos propios. Cuanto mayor, más endeudada está la empresa y mayor es el riesgo financiero. No tiene un valor 'bueno' o 'malo' por sí solo: depende del efecto apalancamiento (si RE > Kd, más deuda puede ser positivo).",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "¿Cuándo es financieramente positivo que el endeudamiento AUMENTE?",
+    "def": "Cuando el efecto apalancamiento es POSITIVO, es decir, cuando RE global > Kd (coste de la deuda). En ese caso, cada euro adicional de deuda genera más rentabilidad de la que cuesta, aumentando la RF del accionista. Si RE < Kd, más deuda destruye valor.",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "¿Cuándo es financieramente positivo que el endeudamiento DISMINUYA?",
+    "def": "Cuando el efecto apalancamiento es NEGATIVO (RE < Kd). Reducir deuda elimina una fuente de destrucción de valor. También es positivo si mejora la ratio de garantía y reduce el riesgo de insolvencia, aunque se sacrifique algo de RF potencial.",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "Composición del endeudamiento — fórmula e interpretación",
+    "def": "PNC / PC (Pasivo No Corriente / Pasivo Corriente). Mide la proporción de deuda a largo plazo frente a la de corto plazo. Cuanto mayor el ratio, mejor estructura: la empresa se financia con deuda más estable. Si disminuye → más deuda a c/p → mayor riesgo de liquidez.",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "Ratio de garantía — fórmula e interpretación",
+    "def": "Activo Total / Pasivo Total. Indica cuántos euros de activo respaldan cada euro de deuda. Debe ser > 1 (si fuera < 1 la empresa estaría en quiebra técnica). Cuanto mayor, más garantía ofrece a los acreedores.",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "Ratio de autonomía financiera — fórmula e interpretación",
+    "def": "Patrimonio Neto / Pasivo Total. Complementario al endeudamiento. Indica el peso de la financiación propia frente a la ajena. Cuanto mayor, menos dependiente es la empresa de financiación externa.",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "Coste medio del endeudamiento (Kd) — fórmula",
+    "def": "Gastos financieros / Pasivo total no comercial (deudas financieras). Indica el tipo de interés medio que paga la empresa por su deuda financiera. Se usa para calcular el efecto apalancamiento: si RE global > Kd → apalancamiento positivo.",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "NOF — fórmula e interpretación",
+    "def": "NOF = Existencias + Deudores comerciales − Acreedores comerciales. Representa la financiación que necesita la empresa para sostener su ciclo de explotación. Si es positiva, la empresa necesita financiar ese importe. Si es negativa, los proveedores financian más de lo necesario (propio de distribución: Mercadona).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "FM — fórmula e interpretación",
+    "def": "FM = Activo Corriente − Pasivo Corriente (= Capitales Permanentes − Activo No Corriente). Si FM > 0 → la empresa tiene colchón de liquidez. Si FM < 0 → parte del ANC se financia con deuda a c/p (riesgo, pero puede ser normal en distribución como Mercadona si NOF también es muy negativa).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "RLN — fórmula e interpretación",
+    "def": "RLN = FM − NOF. Indica si los capitales permanentes cubren las NOF. Si RLN > 0 → capitales permanentes financian las NOF y sobra tesorería (situación óptima). Si RLN < 0 → el FM no cubre las NOF, se recurre a deuda financiera a c/p.",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "¿Con qué se financian las NOF según el signo del RLN?",
+    "def": "RLN > 0 → Capitales permanentes (FM cubre NOF y sobra). RLN = 0 → FM = NOF exacto. RLN < 0 → FM + deuda financiera a corto plazo. NOF < 0 → Los propios acreedores comerciales (proveedores) financian el ciclo y generan excedente.",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "Efecto de los PROVEEDORES sobre las NOF",
+    "def": "Si los proveedores (acreedores comerciales) AUMENTAN → NOF disminuye → POSITIVO (los proveedores financian más el ciclo, la empresa necesita menos recursos propios). Si los proveedores DISMINUYEN → NOF aumenta → NEGATIVO (la empresa debe financiar más el ciclo con recursos propios o deuda).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "Efecto de los DEUDORES (clientes) sobre las NOF",
+    "def": "Si los deudores AUMENTAN → NOF aumenta → NEGATIVO (la empresa tarda más en cobrar, necesita más financiación). Si los deudores DISMINUYEN → NOF disminuye → POSITIVO (cobra antes, necesita menos financiación del ciclo).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "Efecto de las EXISTENCIAS sobre las NOF",
+    "def": "Si las existencias AUMENTAN → NOF aumenta → NEGATIVO (más dinero inmovilizado en almacén). Si las existencias DISMINUYEN → NOF disminuye → POSITIVO (menor inversión en stock).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "¿Está la empresa financiando adecuadamente sus inversiones? — Cómo responder",
+    "def": "Analiza tres niveles: 1) ¿ANC financiado con capitales permanentes? (regla de equilibrio financiero mínimo). 2) ¿FM > 0? (colchón de liquidez). 3) ¿RLN > 0? (capitales permanentes cubren NOF). Si los tres se cumplen, la financiación es adecuada. También mira ratio de garantía > 1 y capacidad de devolución de deuda (FGO/PC).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "¿Qué es el equilibrio financiero mínimo?",
+    "def": "El Activo No Corriente debe estar financiado con capitales permanentes (PN + PNC). Equivale a FM > 0. Si FM < 0, parte del ANC se financia con deuda a c/p, lo cual es estructuralmente arriesgado (aunque viable en distribución si NOF es muy negativa).",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "PMM industrial — fórmula",
+    "def": "PMM = SA + SF + SV + SC\nSA = (Existencias MP / Consumo MP) × 360\nSF = (Existencias en curso / Coste producción terminada) × 360\nSV = (Existencias PT / Coste ventas) × 360\nSC = (Clientes / Ventas) × 360\nPMMF = PMM − SP  donde SP = (Proveedores / Compras) × 360",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "PMM comercial — fórmula",
+    "def": "PMM = SV + SC\nSV = (Existencias mercaderías / Coste ventas) × 360\nSC = (Clientes / Ventas) × 360\nPMMF = PMM − SP  donde SP = (Proveedores / Compras) × 360\nNo hay SA ni SF porque no fabrica ni almacena materias primas.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "¿Los acreedores financian suficientemente el ciclo? — Cómo responder",
+    "def": "Compara PMM con el subperiodo de pago a proveedores (SP): si SP ≥ PMM → PMMF ≤ 0 → los acreedores financian todo el ciclo y sobra (situación muy favorable). Si SP < PMM → PMMF > 0 → los acreedores no cubren todo, la empresa debe financiar PMMF días con capitales permanentes o deuda financiera a c/p.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "Período Medio de Maduración Financiero (PMMF) — interpretación",
+    "def": "PMMF = PMM − Subperiodo de pago a proveedores. Si > 0: la empresa debe financiar ese número de días con recursos propios o deuda financiera (los proveedores no cubren todo el ciclo). Si < 0: los proveedores financian más que el ciclo completo, generando tesorería excedente (típico de supermercados).",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "¿Qué supone un subperiodo de cobro a clientes alto?",
+    "def": "Que la empresa tarda muchos días en cobrar de sus clientes. Implica mayor inversión en deudores (clientes), lo que aumenta las NOF. Puede indicar condiciones de pago generosas (política comercial) o dificultades de cobro. Cuanto menor el SC, mejor para la liquidez.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "¿Qué supone un subperiodo de pago a proveedores alto?",
+    "def": "Que la empresa tarda muchos días en pagar a sus proveedores. Es POSITIVO para la empresa: los proveedores le están financiando el ciclo durante más tiempo, reduciendo las NOF y el PMMF. Cuanto mayor el SP, menos financiación propia necesita la empresa para su ciclo.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "Resultado neto de explotación (RNEX) — qué incluye",
+    "def": "RNEX = Ingresos de explotación − Gastos de explotación (consumos + personal + amortizaciones + otros gastos − otros ingresos de explotación). Es el resultado generado EXCLUSIVAMENTE por la actividad principal, sin resultado financiero ni resultado atípico ni impuestos.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "¿Por qué el RNEX puede variar más % que el resultado del ejercicio?",
+    "def": "Porque entre RNEX y resultado del ejercicio hay más partidas que pueden amortiguar o amplificar: resultado financiero (intereses cobrados/pagados), resultado atípico (enajenaciones, deterioros), e impuesto sobre beneficios. Una caída del RNEX puede verse compensada por mejora del resultado financiero, reducción del impuesto o un ingreso atípico.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "Cómo explicar la evolución del RNEX — estructura de respuesta",
+    "def": "1) Indica si subió o bajó y en qué %. 2) Analiza los ingresos de explotación (INCN + otros ingresos): ¿crecieron o cayeron? 3) Analiza cada partida de gasto (consumos, personal, amortizaciones, otros): ¿cuál tiene más peso? ¿cuál creció más en términos relativos? 4) Calcula el margen de explotación (RNEX/Ventas) y compara entre años.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "Cómo explicar que el resultado del ejercicio varía menos que el RNEX — estructura de respuesta",
+    "def": "1) Señala que parten de bases distintas. 2) Identifica qué partida intermedia amortigua la diferencia: resultado financiero positivo, ingreso atípico, o menor impuesto. 3) Calcula la diferencia numérica: si RNEX cayó X€ pero el resultado financiero mejoró Y€, el resultado del ejercicio cae (X−Y)×(1−t)€. 4) Concluye cuál de esas partidas fue la 'culpable' o la 'amortiguadora'.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "Resultado financiero — qué es y cómo afecta",
+    "def": "Resultado financiero = Ingresos financieros − Gastos financieros. Si es positivo → la empresa genera más de sus inversiones financieras de lo que paga por su deuda (empresa poco endeudada o con muchas inversiones). Si es negativo → paga más intereses de los que cobra (lo habitual en empresas endeudadas). Aparece entre RNEX y RAI en el PyG funcional.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "Resultado atípico — qué es",
+    "def": "Recoge operaciones no relacionadas con la actividad habitual: deterioros de valor, resultados por enajenación de inmovilizado (plusvalías o minusvalías), subvenciones de capital imputadas. Puede ser positivo (venta con plusvalía) o negativo (deterioro, venta con pérdida). En el PyG funcional aparece entre el resultado financiero y el RAI.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "FGO (Fondos Generados por las Operaciones) — fórmula",
+    "def": "FGO = Resultado del ejercicio + Amortizaciones (+ otros ajustes no monetarios si los hay). NO es RNEX + Amortizaciones. Mide el cash flow contable: cuánto efectivo genera la empresa con su actividad antes de considerar variaciones del capital corriente. Si FGO > 0 y creciente, señal de salud financiera.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "FGO antes de intereses e impuestos — fórmula y diferencia",
+    "def": "FGO_ai = RNEX + Amortizaciones. Es el FGO calculado antes de descontar gastos financieros e impuesto. Se usa para calcular la capacidad de devolución de deuda sin efecto fiscal ni financiero. Diferencia clave: FGO normal parte del resultado del ejercicio (ya descontados intereses e impuestos); FGO_ai parte del RNEX.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "RBEX (Resultado Bruto de Explotación) — qué es",
+    "def": "RBEX = RNEX + Amortizaciones. Es el resultado de explotación antes de descontar las amortizaciones. Equivale al EBITDA anglosajón. Se usa en el PyG funcional para calcular el FGO sumando los ajustes financieros y fiscales.",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "EFE — estructura y qué indica cada bloque",
+    "def": "A) Flujos de explotación: cash generado/consumido por la actividad principal. Debe ser POSITIVO en empresa sana. B) Flujos de inversión: pagos por compra de inmovilizado, cobros por ventas de activos. Suele ser NEGATIVO (empresa invierte). C) Flujos de financiación: cobros de préstamos, pagos de dividendos, amortización de deuda. Puede ser positivo (nueva deuda) o negativo (devuelve deuda/dividendos). D) Variación neta = A + B + C.",
+    "tema": "EFE"
+  },
+  {
+    "term": "¿De dónde obtiene efectivo la empresa? — Cómo responder usando el EFE",
+    "def": "Mira el bloque que tiene el importe POSITIVO mayor. Si A (explotación) es la mayor fuente → señal de empresa sana, genera caja con su negocio. Si B (inversión) es positivo → está desinvirtiendo (vendiendo activos). Si C (financiación) es positivo → está captando nueva deuda o capital. Una empresa sana debe vivir principalmente del bloque A.",
+    "tema": "EFE"
+  },
+  {
+    "term": "Capital corriente en el EFE — qué significa",
+    "def": "Dentro del bloque A del EFE aparece la 'Variación del capital corriente' (Δ NOF, básicamente). Si es positivo → el capital corriente aumentó (la empresa invirtió más en circulante: clientes tardaron más en pagar, o aumentó stock). Si es negativo → el capital corriente disminuyó (los proveedores financiaron más, o se cobró antes).",
+    "tema": "EFE"
+  },
+  {
+    "term": "RE de explotación — fórmula e interpretación",
+    "def": "RE explot. = RNEX / Activo de explotación. Activo de explotación = Activo Total − Inversiones financieras (activos ajenos a la explotación). Mide el rendimiento de los activos dedicados a la actividad principal. Se descompone en: Margen de explotación × Rotación del activo de explotación.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "RE global (total) — fórmula e interpretación",
+    "def": "RE global = (RAI + Gastos financieros) / Activo Total. Mide el rendimiento de TODOS los activos (incluyendo inversiones financieras), independientemente de cómo se financian. Es el que se usa para calcular el efecto apalancamiento. Se descompone en: Margen global × Rotación total.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "RF (Rentabilidad Financiera) — fórmula",
+    "def": "RF = Resultado del ejercicio / Fondos Propios. Mide la rentabilidad obtenida por el accionista sobre su inversión. Fórmula ampliada: RF = [RE global + (D/FP) × (RE global − Kd)] × (1 − t). Es la que más le importa al accionista.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Efecto apalancamiento — fórmula e interpretación",
+    "def": "Apalancamiento = (D/FP) × (RE global − Kd). Si RE > Kd → POSITIVO: endeudarse amplifica la RF. Si RE < Kd → NEGATIVO: endeudarse destruye RF. Si RE = Kd → NULO. La clave: el exceso de rendimiento (RE−Kd) que genera cada euro de deuda revierte al accionista vía mayor RF.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Fórmula larga de la RF — interpretación completa",
+    "def": "RF = [RE global + (D/FP) × (RE global − Kd)] × (1 − t). Componentes: RE global = rentabilidad sin apalancamiento. (D/FP)×(RE−Kd) = efecto apalancamiento. (1−t) = escudo fiscal (los impuestos reducen la RF proporcionalmente). Un apalancamiento positivo + tasa impositiva baja maximiza la RF.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Margen de explotación — fórmula e interpretación",
+    "def": "Margen explot. = RNEX / Ingresos de explotación. Indica qué porcentaje de cada euro de ventas queda como resultado de explotación después de cubrir todos los gastos operativos. Cuanto mayor, más eficiente es la empresa en su actividad principal. Se mejora reduciendo costes operativos o aumentando precios.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Rotación del activo — fórmula e interpretación",
+    "def": "Rotación = Ingresos de explotación / Activo de explotación. Indica cuántos euros de ventas genera la empresa por cada euro invertido en activos. Cuanto mayor, más eficiente es el uso de los activos. Se mejora aumentando ventas sin aumentar el activo, o reduciendo activos improductivos.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Descomposición de la RE: margen × rotación",
+    "def": "RE = Margen × Rotación = (RNEX / Ventas) × (Ventas / Activo explot.) Una empresa puede tener RE alta por: alto margen (ej. lujo, farmacia) o alta rotación (ej. distribución, supermercados). Una caída en RE puede venir de margen, rotación, o ambos — hay que mirar cuál se deterioró.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Grado de envejecimiento del inmovilizado — fórmula",
+    "def": "Grado envejecimiento = Amortización acumulada / (Inmovilizado material bruto + Inmovilizado intangible bruto). Indica qué porcentaje de vida útil se ha consumido. Si es alto (cercano a 1) → activos muy amortizados, la empresa deberá renovarlos pronto. Si es bajo → activos relativamente nuevos.",
+    "tema": "Indicadores de renovación"
+  },
+  {
+    "term": "Tasa de renovación del inmovilizado — fórmula",
+    "def": "Tasa renovación = Inversiones en inmovilizado del año (EFE bloque B) / Amortización del año. Si > 1 → la empresa está invirtiendo más de lo que amortiza: renovación activa, crecimiento. Si < 1 → invierte menos de lo que amortiza: desinversión progresiva, envejecimiento de la flota.",
+    "tema": "Indicadores de renovación"
+  },
+  {
+    "term": "Capacidad de devolución de deuda — fórmula",
+    "def": "Capacidad devolución deuda = FGO / Pasivo no comercial (o FGO / Pasivo total no comercial). Si > 1 → en menos de un año podría teóricamente devolver toda la deuda financiera. Cuanto mayor, más holgada la situación. Si < 1 → necesita varios años para devolver la deuda.",
+    "tema": "Indicadores de solvencia"
+  },
+  {
+    "term": "Plazo de devolución de deuda — fórmula",
+    "def": "Plazo devolución = Pasivo no comercial / FGO (en años) o × 360 (en días). Indica cuántos años/días tardaría en devolver toda la deuda financiera con los recursos generados por su actividad. Cuanto menor, más solvente.",
+    "tema": "Indicadores de solvencia"
+  },
+  {
+    "term": "Recomendación para aumentar RF cuando apalancamiento es POSITIVO",
+    "def": "Si RE > Kd → recomienda AUMENTAR el endeudamiento (más deuda amplifica la RF). Fundamento: cada euro adicional de deuda genera (RE − Kd) euros extra de rentabilidad para el accionista. Condición: verificar que la empresa puede asumir el servicio de la deuda (FGO suficiente, plazo devolución razonable).",
+    "tema": "Recomendación estratégica"
+  },
+  {
+    "term": "Recomendación para aumentar RF cuando apalancamiento es NEGATIVO",
+    "def": "Si RE < Kd → NO conviene más deuda. Opciones: 1) Mejorar la RE de explotación (reducir costes, aumentar ventas). 2) Renegociar el coste de la deuda (buscar financiación más barata). 3) Reducir deuda (desapalancarse). 4) Desinvertir en activos improductivos para mejorar la rotación.",
+    "tema": "Recomendación estratégica"
+  },
+  {
+    "term": "Recomendación para aumentar RE global — tres vías",
+    "def": "RE global = Margen × Rotación + rendimiento inversiones financieras. Para aumentarla: 1) Aumentar el margen de explotación (reducir consumos, personal, otros gastos). 2) Aumentar la rotación (más ventas por cada euro de activo). 3) Mejorar el rendimiento de inversiones financieras (ingresos financieros). Las tres son igualmente válidas → suelen ser la respuesta 'd) Todas correctas'.",
+    "tema": "Recomendación estratégica"
+  },
+  {
+    "term": "NOF negativas — ¿problema o ventaja? (caso Mercadona/distribución)",
+    "def": "NOF negativa NO es un problema: significa que los acreedores comerciales (proveedores) financian íntegramente el ciclo y generan un excedente. La empresa cobra a clientes antes de pagar a proveedores. Típico del gran comercio minorista (supermercados): cobran al contado, pagan a 30-60-90 días. Es una ventaja competitiva, no una señal de alarma.",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "FM negativo con NOF muy negativa — ¿es malo? (caso Mercadona)",
+    "def": "No necesariamente. Si FM < 0 pero NOF << 0 (muy negativa), entonces RLN = FM − NOF > 0. Los proveedores financian tanto el ciclo como parte del ANC. La empresa no necesita capitales permanentes para financiar el AC. Es la situación típica de distribución: modelo financiero sostenible si las NOF siguen siendo muy negativas.",
+    "tema": "NOF, FM y RLN"
+  },
+  {
+    "term": "Eficiencia del personal — ratio e interpretación",
+    "def": "Eficiencia = Valor añadido / Gasto de personal. Valor añadido = INCN − Consumos (lo que genera la empresa por encima de sus compras). Si el ratio aumenta → por cada euro de gasto en personal se genera más valor: la empresa es más eficiente. Si baja → el personal genera menos valor relativo a su coste.",
+    "tema": "Indicadores de gestión"
+  },
+  {
+    "term": "Valor añadido — fórmula",
+    "def": "Valor añadido = Ingresos de explotación − Consumos de la explotación. Mide la riqueza generada por la empresa en su proceso productivo/comercial, antes de pagar al personal, amortizaciones e impuestos. Es la base para calcular la eficiencia del personal y el peso de los costes laborales.",
+    "tema": "Indicadores de gestión"
+  },
+  {
+    "term": "Activos ajenos a la explotación — cuáles son y por qué importan",
+    "def": "Principalmente las inversiones financieras (l/p y c/p): participaciones en otras empresas, préstamos concedidos, valores de deuda. No participan en la actividad operativa. Importa para RE de explotación: Activo explotación = Activo Total − Inv. financieras. Para RE global se usa el Activo Total completo.",
+    "tema": "Indicadores de rentabilidad"
+  },
+  {
+    "term": "¿Qué es el FEAE y en qué se diferencia del FGO?",
+    "def": "FEAE (Flujo de Efectivo de las Actividades de Explotación) = bloque A del EFE. Es el cash flow REAL generado (cobros menos pagos efectivos de explotación). FGO = Resultado + Amortizaciones: es un cash flow aproximado o contable. Diferencia: el FEAE incluye variaciones del capital corriente (Δ clientes, Δ proveedores, Δ existencias); el FGO no.",
+    "tema": "EFE"
+  },
+  {
+    "term": "Subperiodo de almacenamiento de MP (SA) — qué mide",
+    "def": "SA = (Existencias de materias primas / Consumo de materias primas) × 360. Número de días que las materias primas permanecen en almacén antes de entrar al proceso productivo. Solo en empresas industriales. Cuanto menor, más ágil la gestión de aprovisionamiento.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "Subperiodo de fabricación (SF) — qué mide",
+    "def": "SF = (Existencias en curso / Coste de producción terminada) × 360. Número de días que tarda el proceso productivo en transformar las materias primas en producto terminado. Solo en empresas industriales. Cuanto menor, más eficiente la producción.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "Subperiodo de venta (SV) — qué mide",
+    "def": "SV = (Existencias de productos terminados / Coste de ventas) × 360. Días que el producto terminado permanece en almacén antes de ser vendido. Cuanto menor, más rápida es la rotación de inventario. En empresas comerciales se usan existencias de mercaderías.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "Subperiodo de cobro (SC) — qué mide",
+    "def": "SC = (Clientes / Ventas) × 360. Días que tarda la empresa en cobrar de sus clientes. Cuanto menor, mejor para la liquidez. Si es muy alto → la empresa financia a sus clientes, aumentando las NOF y el riesgo de impago.",
+    "tema": "PMM y ciclo de explotación"
+  },
+  {
+    "term": "Estructura del PyG funcional — orden de partidas",
+    "def": "INCN + Otros ingresos explot. − Consumos − Personal − Amortizaciones − Otros gastos = RNEX / + Resultado financiero (Ing.Fin − G.Fin) / + Resultado atípico (deterioros, enajenaciones) / = RAI / − Impuesto sobre beneficios / = Resultado del ejercicio",
+    "tema": "PyG funcional"
+  },
+  {
+    "term": "¿Por qué sustituir FP por FA puede aumentar la RF?",
+    "def": "Si RE global > Kd: al aumentar D/FP, el efecto apalancamiento = (D/FP)×(RE−Kd) crece → RF aumenta. La RE global no cambia (el RNEX y el activo total no varían al cambiar la estructura financiera). La ratio de garantía empeora (más deuda), pero la RF del accionista mejora. Solo recomendable si RE > Kd.",
+    "tema": "Rentabilidad"
+  },
+  {
+    "term": "Grado de endeudamiento < 1: ¿qué implica?",
+    "def": "D/FP < 1 significa que la empresa tiene menos deuda que fondos propios: se financia mayoritariamente con recursos propios. Es una señal de bajo riesgo financiero. En el contexto del apalancamiento: con RF, RE y Kd dados, si RE > Kd y la RF resultante es < RE, implica que D/FP es pequeño (efectos fiscales moderan la RF).",
+    "tema": "Endeudamiento"
+  },
+  {
+    "term": "Coste de producción terminada — fórmula",
+    "def": "Coste prod. terminada = Consumo MP + Mano de obra directa + Amortizaciones de producción + Otros gastos de fabricación − Variación existencias productos en curso. Si aumentan las existencias en curso → se resta (coste queda en proceso). Si disminuyen → se suma (se liberan al producto terminado).",
+    "tema": "PyG funcional"
+  }
+]

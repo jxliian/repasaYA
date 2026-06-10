@@ -5,7 +5,7 @@ import { subjects } from '../data/subjects';
 import { execSync } from 'child_process';
 const base = import.meta.env.BASE_URL;
 
-const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas', 'do1'].includes(s.slug));
+const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas', 'do1', 'aef'].includes(s.slug));
 const infoSubjects = subjects.filter(s => ['sibw', 'mp', 'dsd'].includes(s.slug));
 
 // Lee los últimos commits en tiempo de build

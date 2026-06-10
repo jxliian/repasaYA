@@ -1,0 +1,420 @@
+[
+  {
+    "tema": "Financiación obtenida — Primor 2019",
+    "q": "En el año 2019, en términos netos, la empresa Perfumerías PRIMOR ha obtenido nueva financiación por importe de:",
+    "opts": [
+      "46.597,01€ de financiación ajena a corto plazo",
+      "955.858,36€ de financiación ajena a largo plazo",
+      "473.391,94€ de financiación propia (resultado del ejercicio retenido)",
+      "Todas las respuestas anteriores son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Financiación obtenida — Dulcesol 2023",
+    "q": "En el año 2023, en términos netos, la empresa DULCESOL ha obtenido nueva financiación tanto propia como ajena por importe de:",
+    "opts": [
+      "6.908.860€ de financiación ajena",
+      "6.939.017€ de financiación total",
+      "30.157€ de financiación propia",
+      "Todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Estructura financiera comparativa — Dulcesol 2023",
+    "q": "Con respecto al año 2022, en el año 2023 la empresa DULCESOL:",
+    "opts": [
+      "Se financia en menor proporción a través de fondos propios",
+      "Se financia con mayor cantidad de recursos exigibles",
+      "Han aumentado sus reservas",
+      "Todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Estructura financiera comparativa — Primor 2019",
+    "q": "Con respecto al año 2018, en el año 2019 la empresa Perfumerías PRIMOR:\n[PN 2019: 1.046.134,69€ (31,2% del activo) | PN 2018: 569.815,50€ (24,1% del activo) | Pasivo total 2019: 2.301.555,90€ | Pasivo total 2018: 1.800.264,48€]",
+    "opts": [
+      "Se financia en mayor proporción a través de pasivos",
+      "Se financia con mayor cantidad de recursos exigibles en términos absolutos",
+      "Disminuye el importe del capital escriturado",
+      "Se financia en la misma proporción con reservas legales y estatutarias"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Estructura financiera comparativa — Viscofan 2023",
+    "q": "Con respecto al año 2022, en el año 2023 la empresa VISCOFAN:",
+    "opts": [
+      "Se financia en mayor proporción a través de fondos propios",
+      "Se financia con mayor cantidad de recursos exigibles en términos absolutos",
+      "Han aumentado sus reservas",
+      "Todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Estructura financiera comparativa — Fertysem 2011",
+    "q": "Con respecto al año 2010, en el año 2011 la empresa FERTYSEM:\n[PN 2011: 10.261.191€ | PN 2010: 9.870.341€ | Capital 2011 = Capital 2010 = 3.000.000€ | Pasivo total 2011: 20.905.393€ | Pasivo total 2010: 16.337.352€]",
+    "opts": [
+      "Se financia en mayor proporción a través de fondos propios",
+      "Ha aumentado el capital escriturado en 2011",
+      "Han aumentado sus reservas respecto a 2010",
+      "Todas son correctas"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "FM, NOF y RLN — Dulcesol 2023",
+    "q": "DULCESOL presenta la siguiente información a 31/12/2023: FM = 848.129€, NOF = -4.464.338€, RLN = 5.312.467€. A la vista de estos datos, puede decirse que la empresa financia sus Necesidades Operativas de Financiación con:",
+    "opts": [
+      "Acreedores comerciales, dado que las NOF son negativas",
+      "Recursos Líquidos Netos (deuda financiera a c/p)",
+      "Capitales permanentes, dado que el FM es positivo",
+      "Ninguna es correcta"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "FM, NOF y RLN — INDESPA 2021",
+    "q": "La empresa INDESPA financia sus Necesidades Operativas de Financiación en el ejercicio 2021 con:\n[FM = 315.153 miles€ | NOF = 262.622 miles€ | RLN = 52.531 miles€]",
+    "opts": [
+      "Acreedores comerciales",
+      "Recursos Líquidos Netos (deuda financiera a c/p)",
+      "Capitales permanentes",
+      "Financiación externa adicional"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "FM, NOF y RLN — Viscofan 2023",
+    "q": "VISCOFAN presenta a 31/12/2023 (en miles €): FM = 208.685, NOF = 262.522, RLN = -53.837. A la vista de estos datos, puede decirse que la empresa financia sus Necesidades Operativas de Financiación con:",
+    "opts": [
+      "Únicamente acreedores comerciales, dado que las NOF son positivas",
+      "FM más deuda financiera a corto plazo, dado que el RLN es negativo y el FM no cubre todas las NOF",
+      "Capitales permanentes únicamente, dado que el FM es positivo",
+      "Ninguna de las anteriores es correcta"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "FM, NOF y RLN — Primor 2018",
+    "q": "Perfumerías PRIMOR presenta la siguiente información a 31/12/2018: FM = 14.465€, NOF = -602.987€, RLN = 617.452€. A la vista de estos datos, puede decirse que financia sus NOF con:",
+    "opts": [
+      "Acreedores comerciales (NOF negativas: los proveedores financian el ciclo y generan excedente)",
+      "Recursos Líquidos Netos",
+      "Capitales permanentes",
+      "Ninguna es correcta"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "FM, NOF y RLN — Mercadona 2023",
+    "q": "MERCADONA presenta a 31/12/2023 (en miles €): FM = -740.221, NOF = -2.042.647, RLN = 1.302.426. A la vista de estos datos, puede decirse que la empresa financia sus Necesidades Operativas de Financiación con:",
+    "opts": [
+      "Acreedores comerciales, dado que las NOF son negativas: los proveedores financian íntegramente el ciclo y generan un excedente",
+      "Deuda financiera a c/p, dado que el FM es negativo",
+      "Capitales permanentes, dado que el RLN es positivo",
+      "Ninguna es correcta porque el FM es negativo"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "FM, NOF y RLN — Cotton South 2022",
+    "q": "COTTON SOUTH presenta a 31/12/2022 (en miles €): FM = 2.473, NOF = 11.051, RLN = -8.578. A la vista de estos datos, puede decirse que la empresa financia sus Necesidades Operativas de Financiación con:",
+    "opts": [
+      "Acreedores comerciales, dado que el FM es positivo",
+      "FM (2.473 miles€) más 8.578 miles€ de deuda financiera a c/p, dado que el RLN es negativo",
+      "Capitales permanentes únicamente",
+      "Ninguna es correcta"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "FM, NOF y RLN — Sensient Fragrances 2010",
+    "q": "SENSIENT FRAGRANCES presenta a 31/12/2010 (en euros): NOF = 14.772.537, RLN = 8.029.931. A la vista de estos datos, puede decirse que la empresa financia sus Necesidades Operativas de Financiación con:",
+    "opts": [
+      "Acreedores comerciales, dado que las NOF son positivas",
+      "FM más deuda financiera a c/p, dado que no tiene suficientes capitales permanentes",
+      "Capitales permanentes, dado que el RLN es positivo y el FM supera las NOF",
+      "Ninguna es correcta"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Subperiodos del ciclo — Viscofan 2023",
+    "q": "En el año 2023, la empresa VISCOFAN, por término medio:\n[Subperiodo almacenamiento MP: 68 días | Subperiodo fabricación: 27 días | Subperiodo pago proveedores: 82 días | SA+SF+SV (proceso producción y venta): 167 días]",
+    "opts": [
+      "Tarda aproximadamente algo más de dos meses en renovar su almacén de materias primas",
+      "Tarda algo menos de un mes en producir sus productos",
+      "Tarda menos tiempo en pagar a sus proveedores que en realizar su proceso de producción y venta (82 días < 167 días)",
+      "Todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Subperiodos del ciclo — Primor 2019",
+    "q": "En el año 2019, la empresa Perfumerías PRIMOR (empresa comercial), por término medio:\n[Subperiodo venta mercaderías: 62 días | Subperiodo cobro clientes: 1,48 días | Subperiodo pago proveedores: 33,94 días]",
+    "opts": [
+      "Tarda 62 días en rotar sus existencias de mercaderías",
+      "Tarda menos de 2 días en cobrar de sus clientes",
+      "Tarda aproximadamente 34 días en pagar a sus proveedores",
+      "Todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Coste del endeudamiento — Viscofan 2023",
+    "q": "La empresa VISCOFAN presenta en 2023 un coste medio del endeudamiento del 1,295%, lo que significa:",
+    "opts": [
+      "Que por cada 100€ de financiación ajena paga 1,295€ en concepto de intereses",
+      "Los gastos financieros representan el 1,295% del total de su pasivo",
+      "El coste medio asumido por la empresa al recurrir a financiación ajena es del 1,295%",
+      "Todas las respuestas anteriores son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Efecto apalancamiento — Viscofan 2023",
+    "q": "El efecto del apalancamiento financiero sobre la rentabilidad financiera de VISCOFAN en 2023 es:\n[RE global: 18,81% | Coste medio endeudamiento: 1,295%]",
+    "opts": [
+      "Positivo, porque la rentabilidad económica global (18,81%) supera el coste de la deuda (1,295%)",
+      "Negativo, porque endeudarse siempre reduce la rentabilidad del accionista",
+      "Nulo, porque el nivel de endeudamiento no ha variado significativamente",
+      "No se puede determinar sin conocer el nivel de endeudamiento exacto"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Eficiencia del personal — INDESPA 2021",
+    "q": "A partir de la cuenta de pérdidas y ganancias y de la siguiente información, se puede decir que en el ejercicio 2021 de INDESPA:\n[Nº empleados 2021: 42,50 | Nº empleados 2020: 49,50]\n[Gasto medio/empleado 2021: 3.338€ | Gasto medio/empleado 2020: 3.297€]\n[Valor añadido / Gasto personal 2021: 3,85 | 2020: 2,93]",
+    "opts": [
+      "El personal ha sido menos eficiente porque el valor añadido ha perdido peso sobre los ingresos de explotación",
+      "El personal ha sido menos eficiente porque el gasto medio por empleado ha aumentado de 3.297€ a 3.338€",
+      "La eficiencia del personal ha aumentado, al reducirse el peso de los gastos de personal",
+      "El personal ha sido menos eficiente porque el valor añadido entre el gasto de personal ha aumentado en 2021"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Rentabilidad económica total — INDESPA 2021",
+    "q": "¿Qué aconsejaría a la empresa INDESPA para aumentar su rentabilidad económica total?\n[RE total = (RAI + Gastos financieros) / Activo Total]",
+    "opts": [
+      "Disminuir el peso de los consumos de la explotación",
+      "Aumentar la rotación de los activos de la explotación",
+      "Aumentar el rendimiento de sus inversiones financieras",
+      "Todas las respuestas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Interpretación NOF negativa — Mercadona 2023",
+    "q": "MERCADONA presenta en 2023 unas NOF de -2.042.647 miles€. Esto significa:",
+    "opts": [
+      "La empresa tiene graves problemas financieros porque sus NOF son negativas",
+      "Los acreedores comerciales financian íntegramente el ciclo de explotación y generan un excedente de 2.042.647 miles€: la empresa cobra antes de pagar a sus proveedores",
+      "La empresa necesita 2.042.647 miles€ adicionales para financiar su ciclo de explotación",
+      "El fondo de maniobra no es suficiente para cubrir las necesidades del ciclo"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Recomendación para aumentar RF — Viscofan 2023",
+    "q": "VISCOFAN presenta en 2023: RE global = 18,81% y coste del endeudamiento = 1,295%. Si quisiera aumentar la rentabilidad financiera de sus accionistas, ¿qué le recomendaría principalmente?",
+    "opts": [
+      "Reducir el nivel de endeudamiento para disminuir el riesgo financiero",
+      "Aumentar el nivel de endeudamiento, ya que el apalancamiento es positivo (RE 18,81% >> Kd 1,295%) y cada euro adicional de deuda amplifica la RF",
+      "Reducir las inversiones en activo fijo para mejorar la liquidez",
+      "Repartir más dividendos para atraer nuevos inversores"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Diferencia RNEX vs Resultado del ejercicio — Dulcesol 2023",
+    "q": "El RNEX de DULCESOL disminuyó un -147,87% en 2023 mientras que el resultado del ejercicio solo cayó un -40,48%. ¿Por qué el resultado del ejercicio cae menos porcentualmente que el RNEX?",
+    "opts": [
+      "Porque el resultado del ejercicio no incluye las amortizaciones, que subieron ese año",
+      "Porque el resultado del ejercicio parte de una base de cálculo diferente (menor) que el RNEX; el mismo deterioro absoluto representa un porcentaje menor sobre esa base, y el resultado financiero o fiscal puede haber amortiguado la caída",
+      "Porque los gastos financieros disminuyeron mucho en 2023, compensando la caída del RNEX",
+      "Porque las ventas aumentaron aunque el resultado de explotación cayera"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Estructura económico-patrimonial — Sensient Fragrances 2010",
+    "q": "SENSIENT FRAGRANCES (empresa industrial química) presenta en 2010:\n[Activo No Corriente: 38.440.770€ (72,2% del total) | Activo Corriente: 14.772.537€ (27,8%) | Total Activo: 53.213.307€]\n¿Se corresponde esta estructura con la de su sector?",
+    "opts": [
+      "No, porque una empresa industrial debería tener más activo corriente que no corriente",
+      "Sí, es coherente con una empresa industrial: el elevado peso del ANC (72,2%) refleja la importancia de instalaciones y maquinaria en la producción química",
+      "No, porque el activo corriente debería representar al menos el 50% del total en cualquier empresa",
+      "Sí, pero solo si el ANC está financiado íntegramente con pasivo corriente"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Período medio de maduración financiero — Viscofan 2023",
+    "q": "Respecto al período medio de maduración financiero de VISCOFAN en 2023:\n[PMM: 218 días | Subperiodo pago a proveedores: 82 días | PMMF 2022: 128 días]",
+    "opts": [
+      "Es de 136 días, lo que significa que la empresa necesita financiar 136 días de su ciclo con recursos distintos a los proveedores",
+      "Ha empeorado respecto a 2022 (128 días): los proveedores financian ahora una parte menor del ciclo",
+      "Un PMMF positivo implica que los proveedores no cubren todo el ciclo y la empresa debe buscar financiación adicional",
+      "Todas las respuestas anteriores son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Período medio de maduración financiero — Cotton South 2022",
+    "q": "Respecto al período medio de maduración financiero de COTTON SOUTH en 2022:\n[PMM: 254 días | Subperiodo pago a proveedores: 106 días | PMMF: 148 días]",
+    "opts": [
+      "Es de 148 días, lo que significa que los proveedores financian 106 días pero quedan 148 días que la empresa debe financiar con otros recursos",
+      "Es negativo, lo que indica que los proveedores financian más del ciclo de lo necesario",
+      "Coincide con el PMM porque los proveedores no financian nada",
+      "No se puede calcular sin conocer el subperiodo de cobro"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Composición del endeudamiento — Dulcesol 2023",
+    "q": "La composición del endeudamiento (PNC/PC) de DULCESOL pasa de 0,31 en 2022 a 0,43 en 2023. Esto significa:",
+    "opts": [
+      "La empresa tiene más deuda a corto plazo que a largo plazo en 2023",
+      "La estructura de endeudamiento ha empeorado porque el ratio ha aumentado",
+      "La estructura de endeudamiento ha mejorado: hay más deuda a l/p por cada euro de deuda a c/p que en 2022, reduciendo el riesgo de liquidez",
+      "El nivel de endeudamiento total (Pasivo/PN) ha aumentado de 0,31 a 0,43"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "FGO — Sensient Fragrances 2010",
+    "q": "SENSIENT FRAGRANCES presenta en 2010 un FGO de 3.979.111€ y un resultado del ejercicio de 2.760.576€. ¿Cómo se explica la diferencia?",
+    "opts": [
+      "El FGO es mayor que el resultado porque incluye los gastos financieros que no están en el resultado",
+      "El FGO es mayor porque se suman al resultado del ejercicio las amortizaciones y otros ajustes no monetarios (gastos que no suponen salida de caja)",
+      "El FGO debería ser siempre igual al resultado del ejercicio; la diferencia indica un error contable",
+      "El FGO es mayor porque excluye el impuesto sobre beneficios"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Análisis de balance — INDESPA 2021",
+    "q": "A la vista de la información contenida en el balance de INDESPA, podemos decir que:",
+    "opts": [
+      "El aumento del activo se debe fundamentalmente al aumento de las periodificaciones a corto plazo y de los activos por impuestos diferidos",
+      "El aumento de la inversión se ha financiado, fundamentalmente, con el resultado del ejercicio",
+      "Se ha reducido el nivel de endeudamiento de la empresa",
+      "Las respuestas b) y c) son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Composición endeudamiento disminuye — INDESPA 2022",
+    "q": "Si en el ejercicio 2022 disminuyera el valor de la ratio composición del endeudamiento (PNC/PC), se podría decir que:",
+    "opts": [
+      "Se ha reducido la proporción de la deuda a largo plazo respecto al pasivo total",
+      "Se ha reducido la proporción de la deuda a largo plazo respecto al pasivo corriente",
+      "Ha aumentado la deuda a largo plazo respecto al pasivo total",
+      "Ha aumentado la proporción de la deuda a largo plazo respecto al pasivo corriente"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "PMM y ciclo de explotación — INDESPA 2020",
+    "q": "INDESPA presenta los siguientes indicadores en el ejercicio 2020:\n[Subperiodo almacenamiento: 78 días | Subperiodo de venta: 18 días | Subperiodo cobro a clientes: 100 días | Subperiodo pago a proveedores: 65 días]\nA la vista de los datos anteriores, puede decirse que la empresa:",
+    "opts": [
+      "Tarda 196 días en realizar su ciclo de explotación",
+      "Tarda 261 días en realizar su ciclo de explotación",
+      "Tiene un periodo de maduración financiero de 35 días",
+      "En el año 2020 la empresa no ha fabricado bebidas"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Capacidad devolución deuda — INDESPA",
+    "q": "Con respecto a la capacidad de devolución de la deuda a corto plazo, puede afirmarse que INDESPA:",
+    "opts": [
+      "No presenta dificultades financieras porque los recursos que genera con el desarrollo de su actividad son aproximadamente 1,1 veces su pasivo corriente",
+      "Presenta dificultades financieras porque en un ejercicio no genera suficiente tesorería para atender la totalidad de sus créditos de financiación",
+      "Necesitaría 4 años para, a través de su actividad, conseguir la tesorería necesaria para atender todo su pasivo",
+      "Presenta dificultades financieras porque no genera suficiente tesorería para atender a tiempo la totalidad de sus créditos de financiación"
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Comparativa empresa líder del sector — INDESPA",
+    "q": "Se conoce la siguiente información relativa a la empresa líder del sector (subperiodos en días):\n[2020: SA=78, SV=18, SC=100, SP=65 | 2021: SA=77, SV=25, SC=120, SP=50]\nEl hecho de que el período de maduración haya aumentado de 2020 a 2021 en la empresa líder supone que, con respecto al año 2020, en 2021:",
+    "opts": [
+      "Haya visto aumentada la rotación de sus productos terminados",
+      "Haya visto aumentados los derechos de cobro frente a clientes",
+      "Haya visto aumentados sus flujos de efectivo de las actividades de explotación",
+      "Haya visto reducidas sus necesidades operativas de financiación"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Cambio vida útil inmovilizado — INDESPA",
+    "q": "La empresa INDESPA está valorando cambiar la estimación de la vida útil del inmovilizado, reduciéndola de 10 a 8 años. Suponiendo todo lo demás constante, este cambio supondría:",
+    "opts": [
+      "Una reducción del resultado del ejercicio y de los fondos generados por las operaciones",
+      "Un aumento de los fondos generados por las operaciones (FGO)",
+      "Una reducción de los fondos generados por las operaciones",
+      "Las respuestas a) y c) son correctas"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Análisis EFE — INDESPA 2020",
+    "q": "En base a la información contenida en el Estado de Flujos de Efectivo (EFE), podemos asegurar que en el año 2020 INDESPA:",
+    "opts": [
+      "El capital corriente aumenta en 23.064€",
+      "La empresa consigue dinero, principalmente, a través de sus actividades de explotación",
+      "Los cobros superan a los pagos en 3.964€",
+      "Las respuestas a) y b) son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Análisis PyG — INDESPA",
+    "q": "Al analizar la cuenta de pérdidas y ganancias de INDESPA podemos observar que:",
+    "opts": [
+      "Entre los gastos de explotación, los consumos de la explotación son los que tienen mayor peso",
+      "En 2020 la empresa obtiene un resultado financiero negativo",
+      "En ambos ejercicios, el resultado atípico contribuye de forma negativa al resultado del ejercicio",
+      "Todas las respuestas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Margen explotación y RE — INDESPA 2021",
+    "q": "Con respecto al año 2020, en 2021 el margen de explotación de INDESPA aumenta:",
+    "opts": [
+      "Y, consecuentemente, mejorará la rotación de los activos de explotación",
+      "Y, consecuentemente, mejorará la rentabilidad económica de explotación",
+      "Principalmente, por la buena evolución de los consumos de la explotación y otros gastos de explotación",
+      "Por la reducción de los resultados negativos por enajenación de instrumentos financieros"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Comparativa RE y RF — INDESPA vs competidora 2022",
+    "q": "La empresa INDESPA, SA y su principal competidora ofrecen la siguiente información en 2022:\n[INDESPA: RE explot.=22%, RE global=18%, Ef. apalancamiento=5%, Tasa impos.=25%]\n[Competidora: RE explot.=25%, RE global=14%, Ef. apalancamiento=5%, Tasa impos.=25%]\nEn base a estos datos se puede decir, sin lugar a duda, que INDESPA, SA:",
+    "opts": [
+      "Consigue un mayor rendimiento a sus inversiones de explotación",
+      "Obtiene una rentabilidad financiera mayor",
+      "Tiene un resultado del ejercicio superior al de su principal competidora",
+      "Tiene un nivel de endeudamiento similar al de su principal competidora"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Efecto apalancamiento: sustituir FP por FA — INDESPA",
+    "q": "Suponga que la empresa INDESPA decide sustituir parte de su financiación propia por financiación ajena. Esta variación supondría:",
+    "opts": [
+      "Un aumento de la rentabilidad económica global de la empresa al aumentar los gastos financieros",
+      "Un aumento de la rentabilidad financiera antes de impuestos, siempre que la RE global sea menor que el coste de la financiación no propia",
+      "Un aumento de la rentabilidad financiera antes de impuestos, siempre que la RE global sea mayor que el coste de la financiación no propia",
+      "Un aumento de la ratio de garantía"
+    ],
+    "correct": 2
+  }
+]
