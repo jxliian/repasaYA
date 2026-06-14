@@ -1956,5 +1956,357 @@
       "Indexación"
     ],
     "correct": 3
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Cuál es la diferencia fundamental entre Internet y la World Wide Web (WWW)?",
+    "opts": [
+      "Son sinónimos y se usan indistintamente en ingeniería.",
+      "La WWW es la infraestructura física (cables y routers) e Internet es el software.",
+      "Internet es la red global de redes interconectadas (TCP/IP), y la WWW es solo uno de los servicios que funciona sobre ella.",
+      "Internet solo funciona por cable, mientras que la WWW permite conexiones inalámbricas."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué tipo de alojamiento implica que la empresa compra su propio servidor físico, pero alquila un espacio en el centro de datos de un tercero para alojarlo allí?",
+    "opts": [
+      "Servidor Privado Virtual (VPS).",
+      "Alojamiento en la nube (Cloud Hosting).",
+      "Sistema On-Premise.",
+      "Alojamiento en colocación (Colocation hosting / Housing)."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "En la estructura de costes de un proyecto SIBW, ¿cómo se clasificaría el pago mensual de un servidor en la nube y el soporte técnico?",
+    "opts": [
+      "Como costes de capital (CAPEX).",
+      "Como deuda técnica.",
+      "Como costes operativos y de mantenimiento (OPEX).",
+      "Como costes de oportunidad."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "En una arquitectura clásica de 3 capas (3-tier), ¿qué elemento gestiona la capa intermedia o de lógica de negocio?",
+    "opts": [
+      "El navegador web del cliente.",
+      "El sistema gestor de bases de datos (SGBD).",
+      "El servidor de aplicaciones.",
+      "El balanceador de carga."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué método del protocolo HTTP se recomienda para enviar contraseñas o datos sensibles en un formulario web?",
+    "opts": [
+      "GET.",
+      "POST.",
+      "PUT.",
+      "HEAD."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "En la URL 'https://ejemplo.com:8080/catalogo', ¿qué representa el número '8080'?",
+    "opts": [
+      "El protocolo de seguridad.",
+      "La cadena de consulta (Query string).",
+      "El puerto TCP de conexión.",
+      "El fragmento (Hash)."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué ventaja principal ofrece la arquitectura de Microservicios frente a la Monolítica?",
+    "opts": [
+      "Concentrar todo el código en un único ejecutable para ahorrar espacio.",
+      "Permitir el escalado individual de módulos concretos sin tener que replicar toda la aplicación.",
+      "Eliminar la necesidad de utilizar bases de datos.",
+      "Garantizar que si un servicio falla, se apague toda la web por seguridad."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué protocolo de la pila TCP/IP se encarga del direccionamiento lógico y de enrutar los paquetes a través de diferentes redes hasta su destino?",
+    "opts": [
+      "TCP.",
+      "HTTP.",
+      "IP.",
+      "DNS."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué es un Servidor Privado Virtual (VPS)?",
+    "opts": [
+      "Varios sitios web alojados en un mismo disco duro compartiendo toda la RAM.",
+      "Un servidor físico dividido mediante software en varios servidores virtuales, asignando recursos dedicados a cada uno.",
+      "Una máquina física entera alquilada en exclusiva para un solo cliente.",
+      "Una red de múltiples servidores interconectados que manejan la carga colectivamente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Para qué sirve el sistema DNS (Domain Name System)?",
+    "opts": [
+      "Para traducir nombres de dominio legibles por humanos a direcciones IP numéricas que entienden las máquinas.",
+      "Para cifrar las contraseñas antes de enviarlas por la red.",
+      "Para asignar dinámicamente direcciones IP locales a los ordenadores de una oficina.",
+      "Para bloquear el acceso de piratas informáticos a la red interna."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué componente de infraestructura actúa como punto de entrada único, ocultando y protegiendo a los servidores web internos mientras balancea la carga de tráfico?",
+    "opts": [
+      "El Router.",
+      "El Proxy Inverso (Reverse Proxy).",
+      "El SGBD.",
+      "La Red de Distribución de Contenidos (CDN)."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué caracteriza a un 'Cliente Pesado' (Thick Client) en una arquitectura web?",
+    "opts": [
+      "Que solo es capaz de renderizar HTML simple enviado por el servidor.",
+      "Que el cliente (navegador/app) asume y ejecuta gran parte de la lógica de presentación y de negocio.",
+      "Que requiere una conexión a Internet de fibra óptica obligatoria.",
+      "Que no permite la ejecución de código JavaScript."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué código de estado de respuesta HTTP indica que el servidor ha procesado correctamente la petición y devuelve el contenido solicitado?",
+    "opts": [
+      "200.",
+      "301.",
+      "404.",
+      "500."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué tecnología mapea relaciones semánticas entre conceptos, permitiendo que las máquinas comprendan el significado y las conexiones entre términos?",
+    "opts": [
+      "CSS.",
+      "Sitemaps.",
+      "Ontologías.",
+      "robots.txt."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué estructura describe XML correctamente?",
+    "opts": [
+      "Grafo completo.",
+      "Tabla plana.",
+      "Lista circular.",
+      "Árbol ordenado."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "En el SEO actual, ¿qué ventaja del link building es la más valorada por los motores de búsqueda?",
+    "opts": [
+      "Anchors ocultos (enlaces ocultos).",
+      "Compra de enlaces.",
+      "Calidad de los enlaces entrantes.",
+      "Cantidad total de enlaces."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué ventaja principal presentan las conexiones de bases de datos persistentes?",
+    "opts": [
+      "Más latencia.",
+      "Menos latencia al reutilizar conexiones ya abiertas.",
+      "Permiten la reutilización de código SQL.",
+      "Usan menor cantidad de CPU."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué práctica SEO es más crucial en el SEO moderno impulsado por IA?",
+    "opts": [
+      "Ocultar texto con palabras clave.",
+      "Ofrecer contenido genuinamente útil para el usuario.",
+      "Repetir keywords en todos los párrafos.",
+      "Comprar enlaces de forma masiva."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Dónde se debe colocar correctamente la directiva 'noindex' para indicar a los buscadores que no indexen una página?",
+    "opts": [
+      "En el archivo robots.txt.",
+      "En una etiqueta meta dentro del head del HTML.",
+      "En el atributo ALT de las imágenes.",
+      "En el pie de página."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué función PHP se utiliza para prevenir ataques XSS al mostrar datos en HTML, convirtiendo caracteres especiales en entidades HTML?",
+    "opts": [
+      "system().",
+      "htmlspecialchars().",
+      "shell_exec().",
+      "eval()."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Cuál clasifica mejor los CVs modernos en cuanto a tipo de datos?",
+    "opts": [
+      "Datos estructurados.",
+      "Series temporales.",
+      "Datos semi-estructurados.",
+      "Datos desestructurados."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué técnica se utiliza específicamente para extraer información estructurada de sitios web de forma automática?",
+    "opts": [
+      "Scraping.",
+      "Crawling.",
+      "Indexación.",
+      "SEO."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué tipo de datos se caracterizan por carecer de formato fijo y no organizarse mediante esquemas definidos, lo que dificulta su almacenamiento y análisis automático?",
+    "opts": [
+      "Datos estructurados.",
+      "Datos semi-estructurados.",
+      "Datos desestructurados.",
+      "Datos relacionales."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Durante el proceso de indexación de un motor de búsqueda, ¿qué ocurre específicamente en la fase de 'Indexación'?",
+    "opts": [
+      "El robot simplemente sigue enlaces descargando páginas al azar.",
+      "El buscador ordena y presenta los resultados al usuario final.",
+      "El contenido procesado se almacena en la base de datos organizado por temas, contexto y significado.",
+      "Se generan palabras clave automáticamente para competir con otros portales."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Según la normativa legal (RGPD y LOPDGDD), ¿bajo qué supuesto está permitida principalmente la técnica de Scraping?",
+    "opts": [
+      "Siempre que se realice de madrugada para no sobrecargar el servidor.",
+      "Si los datos recopilados proceden de fuentes de acceso público o se cuenta con el consentimiento de los afectados.",
+      "Solamente si los datos extraídos se alojan después en una arquitectura de microservicios.",
+      "Cuando la página web no posea medidas de seguridad técnicas como Captchas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Ante la revolución de la Inteligencia Artificial, ¿cuál es el enfoque principal que rige actualmente las técnicas de SEO para posicionar una página?",
+    "opts": [
+      "Repetir incesantemente una palabra clave exacta en todos los párrafos de la web.",
+      "Engañar al algoritmo generando miles de enlaces falsos desde directorios ocultos.",
+      "Comprender la intención de búsqueda real del usuario, priorizando un contenido útil, bien estructurado y con excelente UX.",
+      "Bloquear completamente el rastreo de Googlebot utilizando DTDs."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "En la estructura de un documento XML, ¿cuál de las siguientes afirmaciones sobre los 'atributos' es correcta?",
+    "opts": [
+      "Los atributos deben estar siempre ordenados jerárquicamente, al igual que el contenido.",
+      "Los atributos no están ordenados, pero su contenido sí, y aparecen como pares clave-valor dentro de la etiqueta de apertura.",
+      "Los atributos se declaran en el prólogo del documento junto a la codificación.",
+      "Solo se permiten atributos si el XML incluye un DTD externo."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Dentro del proceso de descubrimiento que realizan los motores de búsqueda, ¿qué función principal cumple el archivo Sitemap?",
+    "opts": [
+      "Bloquear el acceso de los crawlers maliciosos a la base de datos.",
+      "Proveer un mapa en formato XML que describe de manera jerárquica la estructura del sitio para facilitar la indexación.",
+      "Eliminar el contenido desestructurado que penaliza el SEO.",
+      "Cifrar las conexiones HTTP del servidor."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "En el ciclo de funcionamiento de un buscador como Google, ¿en qué fase se evalúa la relevancia, la autoridad y la experiencia de usuario para decidir el orden de aparición de los resultados?",
+    "opts": [
+      "Rastreo (Crawling).",
+      "Procesamiento.",
+      "Indexación.",
+      "Clasificación o Ranking."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "A nivel de seguridad en el entorno PHP, ¿por qué se desaconseja rotundamente el uso de funciones como eval(), exec() o system()?",
+    "opts": [
+      "Porque ralentizan drásticamente el uso de conexiones persistentes.",
+      "Porque pueden permitir la ejecución de código arbitrario o comandos directos en el sistema operativo del servidor.",
+      "Porque son incompatibles con la arquitectura de microservicios.",
+      "Porque impiden el cifrado de contraseñas de la base de datos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué técnica antiscraping implica incluir datos trampa ocultos en el HTML que solo los bots detectarían e intentarían extraer?",
+    "opts": [
+      "Solicitar la resolución de un Captcha visual al usuario.",
+      "Usar honeypots: ofuscar el código e incluir datos trampa ocultos que solo los bots detectarían e intentarían extraer.",
+      "Limitar el ancho de banda del servidor para ralentizar las descargas.",
+      "Redirigir el tráfico a un servidor privado virtual."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "En una ontología para la Web Semántica, si definimos que la clase 'Profesor' es una subclase de la clase general 'Personal', ¿qué concepto estamos aplicando?",
+    "opts": [
+      "Instanciación de variables.",
+      "Restricción de cardinalidad.",
+      "Inyección semántica ciega.",
+      "Herencia."
+    ],
+    "correct": 3
   }
 ]
