@@ -3740,5 +3740,467 @@
       "Verdadera"
     ],
     "correct": 3
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Considerando la organización como un sistema de flujos regulados, señale la afirmación correcta:",
+    "opts": [
+      "La visión de la organización como un sistema de flujos regulados considera, entre otros, el movimiento de material e información que tiene lugar dentro del núcleo de operaciones, denominado como flujo de trabajo de operaciones.",
+      "Los flujos regulados se relacionan con el mecanismo de coordinación de la adaptación mutua.",
+      "La visión de la organización como un sistema de flujos regulados considera, entre otros, a los círculos prácticamente independientes de individuos que comparten responsabilidades sobre un conjunto de decisiones adecuadas a su particular nivel jerárquico, denominados como constelaciones de trabajo.",
+      "La visión de la organización como un sistema de flujos regulados solo considera a las relaciones de autoridad que tienen lugar dentro de la organización."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Una organización en la que todo el poder recae en los profesionales del núcleo de operaciones se encuentra:",
+    "opts": [
+      "Descentralizada verticalmente y centralizada horizontalmente.",
+      "Descentralizada vertical y horizontalmente.",
+      "Descentralizada horizontalmente y centralizada verticalmente.",
+      "Centralizada vertical y horizontalmente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Indique cómo podría un directivo de primera línea incrementar el tamaño de la unidad que supervisa:",
+    "opts": [
+      "Formalizando el comportamiento de sus subordinados.",
+      "Permitiendo que sus subordinados se coordinen mediante adaptación mutua.",
+      "Coordinando a sus subordinados a través de supervisión directa.",
+      "Un directivo de primera línea nunca podrá supervisar una unidad de gran tamaño."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Configuraciones: Burocracia Maquinal",
+    "q": "¿Qué características tienen las estructuras organizativas planas?",
+    "opts": [
+      "Tramos de control estrechos y pocos niveles jerárquicos.",
+      "Tramos de control estrechos y muchos niveles jerárquicos.",
+      "Tramos de control amplios y pocos niveles jerárquicos.",
+      "Tramos de control amplios y muchos niveles jerárquicos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "¿Cuál de las siguientes características se corresponden con las de una burocracia profesional?",
+    "opts": [
+      "Su sistema técnico regulador.",
+      "Los puestos del núcleo de operaciones están muy formalizados, ya que es necesaria una elevada formación para ocuparlos.",
+      "La centralización de la estructura.",
+      "Los puestos del núcleo de operaciones se encuentran especializados horizontalmente por conocimientos y ampliados verticalmente."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Dispositivos de Enlace",
+    "q": "¿En qué dispositivo de enlace se incumple el principio de unidad de mando?",
+    "opts": [
+      "Puestos de enlace.",
+      "Grupos de trabajo.",
+      "Directivos integradores.",
+      "Estructura matricial."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Examen OE",
+    "q": "¿Qué dos parámetros de diseño facilitan el control externo de una organización?",
+    "opts": [
+      "La agrupación basada en unidades de mercado y los puestos profesionales en el núcleo de operaciones.",
+      "La existencia de dispositivos de enlace para la toma de decisiones y la descentralización vertical.",
+      "La centralización y la formalización del comportamiento.",
+      "Ninguno, el diseño de la estructura organizativa no se ve influido por la existencia de un control externo."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Analice la siguiente afirmación: 'El núcleo de operaciones de una burocracia maquinal se coordina mediante normalización de procesos, provocando que la tecnoestructura sea la parte más importante de la organización':",
+    "opts": [
+      "Es falsa, el núcleo de operaciones de una burocracia maquinal se coordina mediante normalización de habilidades.",
+      "Es falsa, el staff de apoyo es la parte más importante de una burocracia maquinal.",
+      "Es falsa, el núcleo de operaciones de una burocracia maquinal se coordina mediante supervisión directa, provocando que sea el ápice estratégico la parte más importante de la organización.",
+      "Es verdadera."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Mecanismos de Coordinación",
+    "q": "Con respecto a la normalización como mecanismo de coordinación, señale la respuesta correcta:",
+    "opts": [
+      "La normalización de resultados no deja ninguna libertad de acción al trabajador para determinar la forma de realizar el trabajo.",
+      "La normalización que deja una mayor autonomía al trabajador es la de procesos de trabajo.",
+      "En la normalización de valores coincide la persona que ejecuta y administra la tarea.",
+      "La formación necesaria para la normalización de habilidades puede ser adquirida por el trabajador antes de entrar a formar parte de la organización."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "La falta de cooperación interdisciplinaria entre los profesionales, con el consecuente problema para el desarrollo eficaz de innovaciones, es un problema típico de:",
+    "opts": [
+      "La burocracia profesional.",
+      "La forma divisional.",
+      "La estructura simple.",
+      "La adhocracia."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Configuraciones: Forma Divisional",
+    "q": "Indique cuál de las siguientes afirmaciones sobre las etapas de transición hacia una forma divisional pura es correcta:",
+    "opts": [
+      "En la forma puramente funcional la organización comercializa sus productos intermedios en el mercado.",
+      "En la forma de subproductos cada división atiende a sus propios mercados, ofreciendo líneas de productos no relacionados con las demás divisiones.",
+      "En la forma de los productos relacionados las divisiones ofrecen productos diferentes pero relacionados entre sí, manteniendo algún aspecto en común.",
+      "En la forma conglomerada cada división se encarga de una función específica dentro del proceso de transformación que tiene lugar dentro de la organización."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Estructura Simple",
+    "q": "¿Qué características tendrá el entorno de una estructura simple?",
+    "opts": [
+      "Sencillo y dinámico.",
+      "Sencillo y estable.",
+      "Complejo y estable.",
+      "Complejo y dinámico."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Configuraciones: Forma Divisional",
+    "q": "Analice la siguiente afirmación: 'Como la estructura de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce con la denominación de burocracia duplicada':",
+    "opts": [
+      "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional.",
+      "Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia maquinal.",
+      "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional.",
+      "Es verdadera."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Indique cuál de las siguientes afirmaciones relacionadas con la planificación de acciones es FALSA:",
+    "opts": [
+      "Los sistemas de planificación son diseñados por la tecnoestructura.",
+      "A través de la planificación de acciones se determinan las acciones necesarias para alcanzar los objetivos.",
+      "La planificación de acciones es necesaria para coordinar unidades de mercado que actúan de manera independiente.",
+      "La planificación de acciones se considera un parámetro de diseño."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Teniendo en cuenta la relación entre el entorno y la estructura organizativa, indique cuál de las siguientes afirmaciones es cierta:",
+    "opts": [
+      "La sencillez y la extrema hostilidad del entorno conducen a una centralización de la estructura.",
+      "La complejidad y estabilidad del entorno conducen a una centralización de la estructura.",
+      "La disparidad y munificencia del entorno conducen a una centralización de la estructura.",
+      "La sencillez y la diversificación del entorno conducen a una centralización de la estructura."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Centralización y Descentralización",
+    "q": "En las estructuras divisionales puras, ¿cómo se encuentra el poder?",
+    "opts": [
+      "Centralizado verticalmente en la sede central.",
+      "Descentralizado horizontalmente hacia los responsables de las distintas divisiones.",
+      "Descentralizado verticalmente, de forma selectiva, hacia los responsables de las distintas divisiones.",
+      "Descentralizado verticalmente, de forma paralela, hacia los responsables de las distintas divisiones."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Configuraciones: Adhocracia",
+    "q": "¿Qué característica comparten una adhocracia administrativa y una adhocracia operativa?",
+    "opts": [
+      "El núcleo de operaciones está truncado.",
+      "Se trabaja por encargo de los clientes.",
+      "Su principal mecanismo de coordinación es la adaptación mutua.",
+      "Ambas organizaciones acabarán transformándose en estructuras simples."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Adhocracia",
+    "q": "¿Qué característica del entorno comparten la burocracia profesional y la adhocracia?",
+    "opts": [
+      "Sencillo.",
+      "Complejo.",
+      "Dinámico.",
+      "Diversificado."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Analice la siguiente afirmación: 'La agrupación de mercado puede favorecer el desarrollo de economías de escala, al concentrar en una única unidad los recursos (conocimientos) necesarios para llevar a cabo una determinada actividad que afecta a diferentes unidades':",
+    "opts": [
+      "Es verdadera.",
+      "Es falsa, es la agrupación funcional la que puede favorecer el desarrollo de economías de escala.",
+      "Es falsa, es la agrupación profesional la que puede favorecer el desarrollo de economías de escala.",
+      "Es falsa, ninguna base de agrupación favorece el desarrollo de economías de escala."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Analice la siguiente afirmación: 'La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores e ideología de la organización':",
+    "opts": [
+      "Es falsa, a través de estos procesos se transmiten los conocimientos y habilidades necesarios para desempeñar un puesto.",
+      "Es falsa, la socialización es un proceso de naturaleza informal.",
+      "Es falsa, el adoctrinamiento es un proceso de naturaleza informal.",
+      "Es verdadera."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Indique cuál de las siguientes afirmaciones relacionadas con el concepto de comité permanente es FALSA:",
+    "opts": [
+      "Es un dispositivo de enlace.",
+      "Es un ejemplo de constelación de trabajo.",
+      "Los individuos que forman parte de un comité permanente se relacionan entre sí a través de una intensa comunicación informal.",
+      "Se trata de un conjunto de trabajadores que son convocados para cumplir una tarea determinada y específica, desagrupándose tras su cumplimiento."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Examen OE",
+    "q": "¿Qué características tienen en común las estructuras simples y las adhocracias?",
+    "opts": [
+      "Las características de su entorno.",
+      "El ápice estratégico concentra todo el poder.",
+      "Son estructuras orgánicas.",
+      "Las estructuras simples y las adhocracias no tienen ninguna característica común."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Org. Misionaria",
+    "q": "Las organizaciones misionarias conversoras:",
+    "opts": [
+      "Llevan a cabo acciones para fomentar cambios radicales en la sociedad.",
+      "Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión.",
+      "Prefieren aislarse de cualquier influencia externa y no pretenden cambiar la sociedad.",
+      "Son aquellas que se coordinan mediante normalización de procesos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "Señale en qué configuración estructural se da una jerarquía denominada de 'pirámide invertida':",
+    "opts": [
+      "Estructura simple.",
+      "Adhocracia.",
+      "Burocracia profesional.",
+      "Esto no se da en ninguna configuración estructural."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Regulación del Comportamiento",
+    "q": "¿Cómo se denomina el parámetro de diseño que introduce descripciones que indican en todo momento lo que han de hacer los trabajadores en sus puestos de trabajo?",
+    "opts": [
+      "Especialización.",
+      "Preparación.",
+      "Formalización.",
+      "Adoctrinamiento."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Flujos",
+    "q": "Con qué mecanismo de coordinación se relaciona la visión de la organización como un sistema de comunicación informal:",
+    "opts": [
+      "La supervisión directa.",
+      "La adaptación mutua.",
+      "La normalización de procesos.",
+      "La normalización de valores."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación: 'Según la cadena de valor, las actividades de abastecimiento, desarrollo tecnológico, gestión de recursos humanos e infraestructura, son actividades de apoyo realizadas por las unidades de staff'",
+    "opts": [
+      "Falso, pero no es por ninguna de las razones expuestas.",
+      "Falso, esas actividades son primarias.",
+      "Verdadero.",
+      "Falso, esas actividades son realizadas por las unidades de línea."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Examen OE",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación: 'El contacto directo como dispositivo de enlace se utiliza cuando hay problemas entre dos departamentos, entonces se sitúa a un miembro de una unidad en la otra para ayudar a solucionar el conflicto'.",
+    "opts": [
+      "Falso, el contacto directo dificulta el establecimiento de relaciones entre los directivos o miembros de la organización que han de intervenir en la toma de decisiones o solución de problemas.",
+      "Falso, dicha afirmación se corresponde con el rol de enlace.",
+      "Falso, dicha afirmación se corresponde con el directivo integrador.",
+      "Verdadero."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Configuraciones: Forma Divisional",
+    "q": "Indique la veracidad/falsedad de la siguiente afirmación: 'Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada'.",
+    "opts": [
+      "Falso, se produce una forma divisional de subproductos.",
+      "Verdadero.",
+      "Falso, se produce una burocracia duplicada.",
+      "Falso, se produce una forma divisional integrada."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Hipótesis de Congruencia",
+    "q": "Respecto a las hipótesis sobre el entorno, es falso que:",
+    "opts": [
+      "Cuanto más dinámico sea el entorno, más burocrática será su estructura.",
+      "Cuando el entorno es más complejo, más descentralizada estará la organización.",
+      "Las disparidades en el entorno estimulan la descentralización.",
+      "Si los mercados están muy diversificados, la organización utilizará una base de agrupación por mercados."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Configuraciones: Estructura Simple",
+    "q": "NO es una característica de la estructura simple que:",
+    "opts": [
+      "Su tecnoestructura y staff son mínimos.",
+      "Sus unidades están diferenciadas.",
+      "Su jerarquía directiva es pequeña.",
+      "La división del trabajo es poco estricta."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Configuraciones: Estructura Simple",
+    "q": "Respecto a las variantes de la estructura simple:",
+    "opts": [
+      "La entidad emprendedora surge cuando hay entornos sin riesgo.",
+      "La organización autocrática nace por el poder que le dan al líder sus seguidores.",
+      "La organización carismática se da cuando el líder tiene ansias de poder.",
+      "La organización en crisis se centraliza por entornos muy hostiles."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Configuraciones: Estructura Simple",
+    "q": "NO es una ventaja de la estructura simple:",
+    "opts": [
+      "Su flexibilidad.",
+      "Su estructura paternalista.",
+      "Su adaptabilidad.",
+      "La relación buena entre sus empleados."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "Configuraciones: Estructura Simple",
+    "q": "La estructura simple:",
+    "opts": [
+      "Se suele utilizar por organizaciones maduras.",
+      "Es una forma estructural sin riesgo.",
+      "Conduce a organizaciones eficientes en entornos competitivos complejos.",
+      "Tiene como parte principal el ápice estratégico."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Configuraciones: Burocracia Maquinal",
+    "q": "El término 'buropatologías' que introdujo Thompson…",
+    "opts": [
+      "Son comportamientos funcionales que dan lugar a precios elevados.",
+      "Son comportamientos que dan lugar a un buen trato a los clientes.",
+      "Son comportamientos disfuncionales propios de las burocracias maquinales.",
+      "Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "NO es una característica de la burocracia profesional:",
+    "opts": [
+      "Su mecanismo de coordinación más utilizado es la normalización de habilidades.",
+      "El proceso de encasillamiento.",
+      "Que los profesionales realicen tareas directivas y de administración.",
+      "Tener un entorno complejo y estable."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "El sistema técnico en la burocracia profesional:",
+    "opts": [
+      "Es regulador y sofisticado.",
+      "Se caracteriza por la automatización.",
+      "No es regulador, sofisticado ni automatizado.",
+      "Es regulador, pero no automatizado."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "En cuanto a las variantes de la burocracia profesional, la burocracia profesional simple:",
+    "opts": [
+      "Surge cuando el entorno es parcialmente dinámico.",
+      "Se combina la burocracia profesional con una adhocracia.",
+      "Se da cuando el entorno se diversifica geográficamente.",
+      "Ocurre cuando el tamaño de la organización es pequeño y hay centralización."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Configuraciones: Burocracia Profesional",
+    "q": "Los problemas de libertad de acción en una burocracia profesional se refieren a:",
+    "opts": [
+      "Cuando se necesita innovar y los profesionales carecen de voluntad de cooperación.",
+      "Cuando se intentan introducir nuevos mecanismos de coordinación como otras normalizaciones, ya que esto desanima a los profesionales.",
+      "Surgen de la autonomía de los profesionales, ya que no todos son competentes.",
+      "Estos problemas son típicos de la burocracia maquinal."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "Configuraciones: Adhocracia",
+    "q": "La adhocracia administrativa:",
+    "opts": [
+      "Soluciona los problemas de sus clientes dando una solución novedosa.",
+      "Las tareas directivas y el trabajo operativo se combinan.",
+      "No automatiza el núcleo de operaciones.",
+      "No trabaja por encargos específicos, fabrica y vende sus propios productos."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "Configuraciones: Adhocracia",
+    "q": "Respecto a las condiciones de la adhocracia, es falso que:",
+    "opts": [
+      "Su entorno no tiene incertidumbre.",
+      "Su tamaño suele ser pequeño.",
+      "Suele adoptarse por empresas jóvenes con estructura orgánica.",
+      "Ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "Configuraciones: Adhocracia",
+    "q": "El mecanismo de coordinación propio de la adhocracia se corresponde con:",
+    "opts": [
+      "Normalización de resultados.",
+      "Supervisión directa.",
+      "Adaptación mutua.",
+      "Normalización de procesos de trabajo."
+    ],
+    "correct": 2
   }
 ]
