@@ -39,9 +39,9 @@ export const subjects: Subject[] = [
     title: 'Organización de Empresas',
     code: 'ADE · Organización',
     icon: '🏢',
-    description: '318 preguntas tipo test sobre Mintzberg. 18 bloques.',
+    description: '339 preguntas tipo test sobre Mintzberg. 19 bloques.',
     type: 'test',
-    chips: ['318 preguntas', '18 bloques'],
+    chips: ['339 preguntas', '19 bloques'],
     dataFile: 'oe.json',
   },
   {
