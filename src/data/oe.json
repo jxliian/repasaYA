@@ -3941,7 +3941,139 @@
   },
   {
     "tema": "ExamenSec",
-    "q": "13. ¿Qué dispositivo de enlace consiste en un conjunto de trabajadores que son convocados para cumplir una determinada tarea y se desagrupa tras su cumplimiento?",
+    "q": "Con respecto a la organización como un sistema de flujos regulados, señale la afirmación correcta:",
+    "opts": [
+      "La visión de la organización como un sistema de flujos regulados considera, entre otros, a los flujos horizontales que tienen lugar entre los especialistas del staff y tecnoestructura con los directivos de línea media.",
+      "Los flujos regulados incluyen exclusivamente flujos verticales descendentes, que representan las órdenes que fluyen desde el ápice estratégico hasta el núcleo de operaciones.",
+      "La visión de la organización como un sistema de flujos regulados es un reflejo completo de todas las relaciones de flujo que tienen lugar dentro de la organización.",
+      "La visión de la organización como un sistema de flujos regulados solo considera el flujo horizontal dentro del núcleo de operaciones."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Un puesto de trabajo que está especializado horizontalmente:",
+    "opts": [
+      "Siempre estará muy formalizado.",
+      "Está obligatoriamente ampliado verticalmente.",
+      "No puede exigir formación para ser realizado.",
+      "Realiza pocas tareas o tareas con poco contenido."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Considerando una organización en la que todo el poder recae en los profesionales del núcleo de operaciones, indique la opción correcta:",
+    "opts": [
+      "La organización se encuentra descentralizada verticalmente y centralizada horizontalmente.",
+      "La organización se encuentra descentralizada vertical y horizontalmente.",
+      "La organización se encuentra descentralizada horizontalmente y centralizada verticalmente.",
+      "La organización se encuentra centralizada vertical y horizontalmente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Indique cómo un directivo de primera línea podría incrementar el tamaño de la unidad que supervisa:",
+    "opts": [
+      "Formalizando el comportamiento de sus subordinados.",
+      "Permitiendo que sus subordinados se coordinen mediante adaptación mutua.",
+      "Coordinando a sus subordinados a través de supervisión directa.",
+      "Un directivo de primera línea nunca podrá supervisar una unidad de gran tamaño."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La hipótesis de configuración extendida pone de manifiesto que la estructura eficaz requiere:",
+    "opts": [
+      "Únicamente que los parámetros de diseño se ajusten debidamente a los factores de contingencia.",
+      "Únicamente que exista una consistencia interna entre los distintos parámetros de diseño.",
+      "Una consistencia interna entre los distintos parámetros de diseño y la adecuación de estos parámetros de diseño a los factores de contingencia.",
+      "Según esta hipótesis no existe ninguna estructura eficaz."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "¿Qué características tienen las estructuras organizativas planas?",
+    "opts": [
+      "Tramos de control estrechos y pocos niveles jerárquicos.",
+      "Tramos de control estrechos y muchos niveles jerárquicos.",
+      "Tramos de control amplios y pocos niveles jerárquicos.",
+      "Tramos de control amplios y muchos niveles jerárquicos."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La burocracia maquinal presenta:",
+    "opts": [
+      "Un sistema técnico regulador y poco sofisticado.",
+      "Puestos de trabajo del núcleo de operaciones ampliados en ambas dimensiones.",
+      "Una formulación de estrategias intuitiva.",
+      "Una división poco estricta del trabajo."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Cuando el trabajo de los operarios se ve controlado y/o condicionado por el sistema técnico, se dice que el sistema técnico es…",
+    "opts": [
+      "Sofisticado.",
+      "Automatizado.",
+      "Regulador.",
+      "Complejo."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La estructura simple presenta:",
+    "opts": [
+      "Un entorno sencillo y estable.",
+      "Puestos de trabajo especializados y formalizados.",
+      "Una formulación de estrategias racional y analítica.",
+      "Una división poco estricta del trabajo."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Uno de los inconvenientes de la burocracia profesional se encuentra en:",
+    "opts": [
+      "Su sistema técnico regulador.",
+      "La formalización del comportamiento de los profesionales.",
+      "La centralización de la estructura.",
+      "Su dificultad para la innovación."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Una de las ventajas de la burocracia maquinal es:",
+    "opts": [
+      "Ser una estructura eficiente cuando se necesita realizar tareas sencillas y repetitivas.",
+      "Su adaptación rápida a los cambios del entorno.",
+      "El fuerte sentido de la misión de sus miembros.",
+      "La no existencia de problemas humanos en el núcleo de operaciones."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Analice la siguiente afirmación: \"Debido a la naturaleza de su principal mecanismo de coordinación, la organización misionaria puede considerarse como una adhocracia ideológica\".",
+    "opts": [
+      "Es falsa, se puede considerar como una burocracia profesional.",
+      "Es falsa, se puede considerar como una adhocracia administrativa.",
+      "Es falsa, se puede considerar como una burocracia ideológica.",
+      "Es verdadera."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "¿Qué dispositivo de enlace consiste en un conjunto de trabajadores que son convocados para cumplir una determinada tarea y se desagrupa tras su cumplimiento?",
     "opts": [
       "Puestos de enlace.",
       "Grupos de trabajo.",
@@ -3952,9 +4084,64 @@
   },
   {
     "tema": "ExamenSec",
-    "q": "19. El núcleo de operaciones de la adhocracia operativa:",
+    "q": "Teniendo en cuenta las hipótesis de congruencia, cuanto mayor sea el control externo de una organización…",
     "opts": [
-      "Se encuentra fusionado con el resto de la estructura formando una “masa orgánica” en la que no está clara la diferencia entre línea y staff.",
+      "más descentralizada y formalizada resulta su estructura.",
+      "más descentralizada y menos formalizada resulta su estructura.",
+      "más centralizada y formalizada resulta su estructura.",
+      "más descentralizada y menos formalizada resulta su estructura."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La burocracia maquinal se caracteriza por un diseño del sistema decisor:",
+    "opts": [
+      "Centralizado vertical y horizontalmente.",
+      "Centralizado verticalmente y descentralizado horizontalmente hacia el staff de apoyo.",
+      "Centralizado verticalmente y descentralizado horizontalmente hacia la tecnoestructura.",
+      "Centralizado verticalmente y descentralizado horizontalmente hacia el núcleo de operaciones."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Con respecto a la normalización como mecanismo de coordinación, señale la respuesta correcta:",
+    "opts": [
+      "La normalización de resultados no deja libertad de acción al trabajador para determinar la forma de realizar el trabajo.",
+      "La normalización que deja una mayor autonomía al trabajador es la de procesos de trabajo y la que menos la de habilidades.",
+      "En la normalización de procesos coincide la persona que ejecuta y administra la tarea.",
+      "Mediante la normalización de habilidades, la organización sacrifica parte del control en beneficio de las entidades externas que forman a sus trabajadores."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "En las burocracias profesionales ¿suelen surgir dos jerarquías paralelas?:",
+    "opts": [
+      "No, en las burocracias profesionales no pueden existir dos jerarquías paralelas.",
+      "Sí, una democrática y ascendente para los profesionales del staff de apoyo y otra con forma de burocracia maquinal para la tecnoestructura.",
+      "Sí, una democrática y ascendente para los profesionales de las unidades de línea y otra con forma de burocracia maquinal para el staff de apoyo.",
+      "Sí, una forma de burocracia maquinal en el núcleo de operaciones y otra democrática y ascendente en los profesionales del staff y la tecnoestructura."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La forma divisional pura se caracteriza por:",
+    "opts": [
+      "Una centralización total en la sede central.",
+      "Un cierto grado de descentralización horizontal paralela desde la sede central hacia las divisiones.",
+      "Un cierto grado de descentralización vertical paralela desde la sede central hacia las divisiones y una centralización del poder de toma de decisiones en las propias divisiones.",
+      "Un cierto grado de descentralización vertical selectiva desde la sede central hacia las divisiones y una descentralización del poder de toma de decisiones en las propias divisiones."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "El núcleo de operaciones de la adhocracia operativa:",
+    "opts": [
+      "Se encuentra fusionado con el resto de la estructura formando una \"masa orgánica\" en la que no está clara la diferencia entre línea y staff.",
       "Se encuentra tronchado y separado de la estructura.",
       "Se coordina mediante la normalización de procesos.",
       "Está automatizado y separado de la estructura."
@@ -3963,7 +4150,18 @@
   },
   {
     "tema": "ExamenSec",
-    "q": "21. Analice la siguiente afirmación: “Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce con la denominación de burocracia duplicada”.",
+    "q": "El personal directivo de una organización:",
+    "opts": [
+      "Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo.",
+      "Se encuentra solo en el ápice estratégico y la línea media.",
+      "Se distribuye entre la línea media y el núcleo de operaciones.",
+      "Ocupa exclusivamente la línea media."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Analice la siguiente afirmación: \"Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce con la denominación de burocracia duplicada\".",
     "opts": [
       "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional.",
       "Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia duplicada.",
@@ -3974,7 +4172,40 @@
   },
   {
     "tema": "ExamenSec",
-    "q": "25. En las estructuras divisionales puras ¿cuál es el principal mecanismo para coordinar a las divisiones?",
+    "q": "Señale la afirmación correcta relacionada con el organigrama de una empresa:",
+    "opts": [
+      "La organización como un sistema de autoridad formal queda representada en el organigrama organizativo, reflejando las relaciones informales que tienen lugar dentro de la misma.",
+      "El organigrama organizativo representa la visión de la organización como un sistema de constelaciones de trabajo.",
+      "El organigrama organizativo permite identificar las unidades que se coordinan mediante adaptación mutua.",
+      "El organigrama refleja gráficamente las relaciones de autoridad formal de la organización y proporciona una adecuada representación de la división del trabajo que hay en ella."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Indique cuál de las siguientes afirmaciones relacionadas con la planificación de acciones es FALSA:",
+    "opts": [
+      "La planificación de acciones permite introducir en la estructura el mecanismo de coordinación de la normalización de resultados de forma directa.",
+      "A través de la planificación de acciones se determinan las acciones necesarias para alcanzar los objetivos.",
+      "La planificación de acciones puede exceder el trabajo de una unidad, permitiendo coordinar así a distintas unidades involucradas en la consecución de un mismo objetivo.",
+      "La planificación de acciones se considera un parámetro de diseño."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Teniendo en cuenta las hipótesis de congruencia, indique cuál de las siguientes afirmaciones es cierta:",
+    "opts": [
+      "La sencillez y extrema hostilidad del entorno conducen a una centralización de la estructura.",
+      "La complejidad y extrema hostilidad del entorno conducen a una centralización de la estructura.",
+      "La complejidad y munificencia del entorno conducen a una descentralización de la estructura.",
+      "La sencillez y munificencia del entorno conducen a una centralización de la estructura."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "En las estructuras divisionales puras ¿cuál es el principal mecanismo para coordinar a las divisiones?",
     "opts": [
       "Normalización de procesos de trabajo, para establecer la forma de trabajo de cada división.",
       "Adaptación mutua, por la alta formación de los directivos medios.",
@@ -3985,7 +4216,7 @@
   },
   {
     "tema": "ExamenSec",
-    "q": "26. Los principales mecanismos de coordinación de la adhocracia operativa y de la adhocracia administrativa:",
+    "q": "Los principales mecanismos de coordinación de la adhocracia operativa y de la adhocracia administrativa:",
     "opts": [
       "En ambos casos es la estructura matricial.",
       "La normalización de habilidades en la operativa y la adaptación mutua en la administrativa.",
@@ -3993,5 +4224,159 @@
       "La adaptación mutua en la operativa y la supervisión directa en la administrativa."
     ],
     "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La identificación natural del individuo con la ideología de una organización se produce cuando:",
+    "opts": [
+      "Sus valores personales son congruentes con la ideología de la organización.",
+      "Se ve sometido a procesos de socialización y adoctrinamiento por parte de la organización.",
+      "La propia escala de valores de la organización es la que atrae al individuo.",
+      "Solamente cuando la cultura organizacional es débil."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "¿Qué tipo de entorno comparten la estructura simple y la adhocracia?",
+    "opts": [
+      "Sencillo.",
+      "Complejo.",
+      "Dinámico.",
+      "Diversificado."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "¿Qué interdependencias se consiguen controlar usando una base de agrupación según mercado?",
+    "opts": [
+      "Interdependencias de las funciones.",
+      "Interdependencias de flujo de trabajo.",
+      "Interdependencias de las tareas.",
+      "Interdependencias de escala o tamaño."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Analice la siguiente afirmación: \"La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores e ideología de la organización\".",
+    "opts": [
+      "Es falsa, a través de estos procesos se transmiten los conocimientos y habilidades necesarios para desempeñar un puesto.",
+      "Es falsa, la socialización es un proceso de naturaleza informal.",
+      "Es falsa, el adoctrinamiento es un proceso de naturaleza informal.",
+      "Es verdadera."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Indique cuál de las siguientes afirmaciones relacionadas con el concepto de estructura matricial es FALSA:",
+    "opts": [
+      "Es un dispositivo de enlace.",
+      "Existen dos tipos de estructuras matriciales, permanentes y variables.",
+      "Los individuos que forman parte de una estructura matricial deben responder ante dos responsables que tienen el mismo poder formal.",
+      "Hay dos tipos de estructuras matriciales, unas que se agrupan sólo en base a la función y otras que se agrupan sólo en base al mercado."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La adhocracia emprendedora:",
+    "opts": [
+      "Es una configuración híbrida que se mueve entre la adhocracia operativa y la burocracia profesional.",
+      "Es una configuración híbrida que se mueve entre la adhocracia operativa y la estructura simple.",
+      "Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia profesional.",
+      "Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia maquinal simple."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "A mayor tamaño de la organización:",
+    "opts": [
+      "Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y más desarrollado su componente administrativo.",
+      "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, menos diferenciadas sus unidades y más desarrollado su componente administrativo.",
+      "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, más diferenciadas sus unidades y más desarrollado su componente administrativo.",
+      "Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y menos desarrollado su componente administrativo."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Las organizaciones misionarias reformadoras:",
+    "opts": [
+      "Se orientan a fomentar cambios radicales en la sociedad.",
+      "Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión.",
+      "Prefieren aislarse de cualquier influencia externa.",
+      "Son una variante de la estructura simple."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Si el poder se encuentra repartido de forma igualitaria entre todos los miembros de la organización:",
+    "opts": [
+      "Existe descentralización vertical y centralización horizontal.",
+      "Existe descentralización horizontal y centralización vertical.",
+      "Existe descentralización horizontal y vertical.",
+      "Existe descentralización total."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Marque la opción correcta:",
+    "opts": [
+      "Las unidades de línea se encargan de prestar soporte y ayuda para que las actividades primarias de la cadena de valor se realicen con éxito.",
+      "Los analistas del staff de apoyo se encargan de normalizar los procesos, habilidades y outputs de la organización.",
+      "La tecnoestructura, el staff de apoyo y la línea media se consideran unidades de línea.",
+      "El staff de apoyo se encarga de realizar parte de las actividades secundarias de la cadena de valor, al margen del flujo fundamental del trabajo operativo."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "Analice la siguiente afirmación: \"En las burocracias profesionales, los miembros de la línea media suelen ser elegidos, o al menos consentidos, por los operarios del núcleo de operaciones\".",
+    "opts": [
+      "Falso, esto ocurre en la adhocracia administrativa.",
+      "Falso, esto ocurre en la burocracia maquinal.",
+      "Falso, esto ocurre en la estructura simple.",
+      "Verdadero."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "¿Cómo se denomina el parámetro de diseño que introduce descripciones que indican en todo momento lo que han de hacer los trabajadores en sus puestos de trabajo?",
+    "opts": [
+      "Especialización.",
+      "Preparación.",
+      "Formalización.",
+      "Adoctrinamiento."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "¿Sobre qué parte de la organización recae el poder cuando existe centralización vertical y horizontal?",
+    "opts": [
+      "El poder formal e informal recae sobre el ápice estratégico.",
+      "El poder formal e informal recae sobre los profesionales del núcleo de operaciones.",
+      "El poder formal recae sobre el ápice estratégico y el poder informal sobre la tecnoestructura.",
+      "El poder formal e informal recae sobre cualquier miembro de la organización."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "ExamenSec",
+    "q": "La visión de la organización como un sistema de comunicación informal describe el uso de:",
+    "opts": [
+      "La supervisión directa.",
+      "La adaptación mutua.",
+      "La normalización de procesos.",
+      "La normalización de valores."
+    ],
+    "correct": 1
   }
 ]
