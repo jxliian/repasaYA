@@ -2308,5 +2308,841 @@
       "Herencia."
     ],
     "correct": 3
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿En qué año apareció ARPANET y qué instituciones conectaba inicialmente?",
+    "opts": [
+      "En 1989, conectando el CERN en Suiza y el MIT.",
+      "En 1969, conectando las universidades de Stanford y California en Los Ángeles (UCLA).",
+      "En 1974, conectando diversas agencias gubernamentales de Europa.",
+      "En 1995, conectando los primeros proveedores de servicios comerciales de Internet."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué etapa de la evolución web introdujo el concepto de usuario 'prosumidor' y permitió el auge de las redes sociales y blogs?",
+    "opts": [
+      "Web 1.0.",
+      "Web 2.0.",
+      "Web 3.0.",
+      "Web 4.0."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Qué término describe el riesgo de crear un sistema web utilizando tecnologías exclusivas de un único proveedor en la nube, dificultando un futuro cambio de empresa?",
+    "opts": [
+      "Deuda técnica.",
+      "Dependencia tecnológica (Vendor lock-in).",
+      "Coste de oportunidad.",
+      "Escalabilidad monolítica."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "En el desarrollo de software web, ¿qué se entiende por 'deuda técnica'?",
+    "opts": [
+      "El dinero que la empresa debe al banco por el préstamo para desarrollar la web.",
+      "Tomar decisiones rápidas de programación que generan un código desordenado, lo que encarece y dificulta el mantenimiento futuro.",
+      "El coste mensual de mantener los servidores encendidos.",
+      "Pagar licencias de software atrasadas a proveedores como Microsoft."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "En la estructura de Internet, una red CDN sirve principalmente para:",
+    "opts": [
+      "Realizar ataques de denegación de servicio a la competencia.",
+      "Alojar exclusivamente las bases de datos de una empresa.",
+      "Almacenar copias de contenido estático en múltiples servidores geográficos para servirlo más rápido al usuario.",
+      "Generar código dinámico y contraseñas de un solo uso."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "¿Por qué se dice técnicamente que el protocolo HTTP es 'sin estado' (stateless)?",
+    "opts": [
+      "Porque no requiere conexión a la red de datos del Estado.",
+      "Porque cifra las conexiones impidiendo conocer la identidad del usuario.",
+      "Porque no guarda memoria o contexto de peticiones anteriores del mismo cliente.",
+      "Porque solo funciona correctamente si el cliente y el servidor están en el mismo país."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Wuolah",
+    "q": "Según el Tema 1, ¿cuál suele ser el coste dominante que mayor impacto económico tiene a lo largo del ciclo de vida de un sistema web moderno?",
+    "opts": [
+      "El registro del nombre de dominio.",
+      "La compra inicial de servidores de hardware.",
+      "El personal técnico y el mantenimiento continuo.",
+      "El diseño de la interfaz gráfica."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué tipo de datos se caracterizan por carecer de formato fijo y no organizarse mediante esquemas definidos, lo que dificulta enormemente su almacenamiento y análisis automático?",
+    "opts": [
+      "Datos estructurados.",
+      "Datos semi-estructurados.",
+      "Datos desestructurados.",
+      "Datos relacionales."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué vulnerabilidad de seguridad aprovecha la entrada no validada de un usuario para insertar sentencias perjudiciales y acceder, alterar o eliminar información en el sistema?",
+    "opts": [
+      "Inyección de código SQL.",
+      "Persistencia de sesiones.",
+      "Extracción de datos masiva (Scraping).",
+      "Dependencia tecnológica."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Al trabajar con bases de datos en PHP, ¿qué ventaja fundamental proporcionan las 'conexiones persistentes'?",
+    "opts": [
+      "Eliminan la necesidad de utilizar contraseñas en el SGBD.",
+      "Realizan copias de seguridad de las tablas automáticamente.",
+      "Evitan las inyecciones SQL a ciegas.",
+      "Reducen la latencia al reutilizar enlaces abiertos entre diferentes ejecuciones de scripts."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Dentro del modelado de datos semi-estructurados, ¿cuál es una de las principales diferencias entre DTD y XML-Schema (XSD)?",
+    "opts": [
+      "El DTD utiliza tipos de datos específicos, mientras que XML-Schema no.",
+      "XML-Schema es el estándar moderno basado en sintaxis XML y permite definir tipos de datos, al contrario que el DTD.",
+      "DTD está diseñado de forma exclusiva para archivos JSON.",
+      "XML-Schema no admite el uso de atributos en sus definiciones."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué formato ligero, rápido de procesar y fundamentado en el uso de llaves y corchetes, se ha convertido en el estándar preferido para las APIs frente al uso del antiguo XML?",
+    "opts": [
+      "CSV.",
+      "SVG.",
+      "JSON.",
+      "RDF."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "En el ecosistema de la Web Semántica, ¿qué término se utiliza para describir formalmente los tipos, propiedades y relaciones existentes entre diversas entidades dentro de un dominio específico?",
+    "opts": [
+      "Crawler.",
+      "Ontología.",
+      "DTD.",
+      "Sitemap."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Durante el proceso mediante el cual un motor de búsqueda descubre y analiza sitios web, ¿qué ocurre específicamente en la fase de 'Indexación'?",
+    "opts": [
+      "El robot simplemente sigue enlaces descargando páginas al azar.",
+      "El buscador ordena y presenta los resultados al usuario final.",
+      "El contenido procesado se almacena en la base de datos organizado por temas, contexto y significado.",
+      "Se generan palabras clave automáticamente para competir con otros portales."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué archivo se ubica en el directorio raíz de una web para limitar o denegar técnicamente el acceso de los buscadores y bots a determinados apartados del servidor?",
+    "opts": [
+      "index.html",
+      "robots.txt",
+      ".json()",
+      "sitemap.xml"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Según la normativa legal (como el RGPD y LOPDGDD), el uso de la técnica de extracción de datos conocida como 'Scraping' está permitida fundamentalmente bajo el siguiente supuesto:",
+    "opts": [
+      "Siempre que se realice de madrugada para no sobrecargar el servidor.",
+      "Si los datos recopilados proceden exclusivamente de fuentes de acceso público o se cuenta con el consentimiento de los afectados.",
+      "Solamente si los datos extraídos se alojan después en una arquitectura de microservicios.",
+      "Cuando la página web no posea medidas de seguridad técnicas como Captchas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué tipo de inyección SQL se caracteriza porque el atacante no visualiza los resultados directamente en pantalla, sino que deduce la vulnerabilidad formulando preguntas de verdadero o falso a la base de datos?",
+    "opts": [
+      "Inyección SQL In-Band.",
+      "Inyección SQL Basada en Errores.",
+      "Inyección SQL a Ciegas.",
+      "Inyección SQL Parametrizada."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Si estás trabajando con PHP y necesitas convertir una variable (como un array de base de datos) al formato JSON para enviarlo al cliente, ¿qué función nativa debes utilizar?",
+    "opts": [
+      "json_decode()",
+      "JSON.stringify()",
+      "json_encode()",
+      "fetch()"
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "En el ciclo de vida de funcionamiento de un buscador (como Google), ¿en qué fase se evalúa la relevancia, la autoridad y la experiencia de usuario para decidir el orden de aparición de los resultados?",
+    "opts": [
+      "Rastreo (Crawling).",
+      "Procesamiento.",
+      "Indexación.",
+      "Clasificación o Ranking."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Cuando un administrador de sistemas desea implementar protección 'antiscraping' para evitar la extracción automática de datos de su web, ¿qué técnica implica el uso de 'honeypots'?",
+    "opts": [
+      "Solicitar la resolución de un Captcha visual al usuario.",
+      "Ofuscar el código e incluir datos trampa ocultos que solo los bots detectarían e intentarían extraer.",
+      "Limitar el ancho de banda del servidor para ralentizar las descargas.",
+      "Redirigir el tráfico a un servidor privado virtual."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Analizando una ontología para la Web Semántica sobre el dominio 'Universidad', si definimos que la clase 'Profesor' es una subclase de la clase general 'Personal', ¿qué concepto estamos aplicando?",
+    "opts": [
+      "Instanciación de variables.",
+      "Restricción de cardinalidad.",
+      "Inyección semántica ciega.",
+      "Herencia."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "Teniendo en cuenta las normativas vigentes (RGPD y LOPDGDD), ¿en qué circunstancia se considera estrictamente legal extraer datos de un sitio web mediante Scraping?",
+    "opts": [
+      "Cuando los datos forman parte de fuentes de acceso público y no poseen restricciones de acceso, o si hay un consentimiento previo.",
+      "Siempre que el servidor se encuentre alojado fuera de la Unión Europea.",
+      "Cuando la web no tenga publicado un archivo robots.txt.",
+      "Si la extracción se realiza mediante un script de JavaScript en el lado del cliente."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Cómo ha evolucionado el SEO técnico respecto al uso tradicional de palabras clave (keywords) con la introducción de algoritmos basados en Inteligencia Artificial?",
+    "opts": [
+      "Ahora es imperativo repetir la palabra clave al menos un 10% más que la competencia.",
+      "La repetición exacta carece de importancia; la IA prioriza entender la intención del usuario y el contexto semántico de la búsqueda.",
+      "Las palabras clave se han eliminado por completo y solo se posicionan webs con imágenes generadas por IA.",
+      "Se requiere ocultar cientos de palabras clave en el código fuente mediante CSS."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿La posibilidad de acceso a los datos que da Internet permite un uso ilimitado de los mismos?",
+    "opts": [
+      "Verdadero: cualquier dato accesible en Internet puede usarse libremente.",
+      "Falso: existen leyes de propiedad intelectual, privacidad (RGPD) y derechos de autor que limitan el uso.",
+      "Verdadero, siempre que se cite la fuente.",
+      "Verdadero, si el dato no está protegido por contraseña."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué es un DTD en el contexto de XML?",
+    "opts": [
+      "Un lenguaje CSS para dar estilo a documentos XML.",
+      "Un conjunto de reglas que define la estructura y los elementos permitidos en un documento XML.",
+      "Un tipo de dato primitivo en bases de datos.",
+      "Un motor de bases de datos NoSQL."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué ventaja principal presentan las conexiones de bases de datos persistentes en PHP?",
+    "opts": [
+      "Mayor latencia por reconfiguración constante.",
+      "Menor latencia al evitar el coste de establecer una nueva conexión en cada petición.",
+      "Permiten la reutilización de código fuente.",
+      "Usan menor cantidad de CPU en todos los casos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué describe mejor un archivo CSV?",
+    "opts": [
+      "Una estructura de datos jerárquica similar a XML.",
+      "Un formato clave-valor como JSON.",
+      "Un formato tabular donde columnas se separan por comas y filas por saltos de línea.",
+      "Un formato binario de compresión."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué sanitización en PHP previene ataques XSS al mostrar código HTML en el navegador?",
+    "opts": [
+      "system()",
+      "htmlspecialchars()",
+      "shell_exec()",
+      "eval()"
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Cuál técnica separa los datos de la lógica SQL, previniendo inyecciones?",
+    "opts": [
+      "Declaraciones preparadas (prepared statements).",
+      "Triggers masivos.",
+      "Vistas materializadas.",
+      "Consultas concatenadas con variables de usuario."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T3: Wuolah",
+    "q": "¿Qué archivo se utiliza para indicar a los buscadores a qué partes de un sitio web no deben acceder?",
+    "opts": [
+      "sitemap.xml.",
+      "index.html.",
+      "robots.txt.",
+      ".htaccess."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál es el objetivo principal de la usabilidad, a diferencia del diseño web?",
+    "opts": [
+      "Definir la paleta de colores y la tipografía del sitio.",
+      "Asegurar que el sitio sea intuitivo, eficiente y accesible para todos los usuarios.",
+      "Proporcionar una experiencia emocional memorable.",
+      "Programar la lógica de negocio del servidor."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "Según la norma ISO 9241-210, ¿cómo se define la Experiencia de Usuario (UX)?",
+    "opts": [
+      "Como el conjunto de colores y tipografías que conforman la marca.",
+      "Como las percepciones y respuestas del usuario que resultan del uso y/o uso anticipado de un sistema, producto o servicio.",
+      "Como la velocidad de carga de un servidor web.",
+      "Como el número de clics necesarios para completar una compra."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál de las siguientes afirmaciones sobre usabilidad y accesibilidad es correcta?",
+    "opts": [
+      "Son sinónimos y siempre se cumplen a la vez.",
+      "Es posible hacer un sitio usable y no accesible, y viceversa.",
+      "La accesibilidad solo afecta a usuarios con conexión lenta.",
+      "La usabilidad siempre garantiza la accesibilidad."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál de las siguientes NO es una ventaja directa de la usabilidad mencionada en el tema?",
+    "opts": [
+      "Mayor productividad.",
+      "Menores costes en formación y soporte.",
+      "Mayor número de servidores necesarios.",
+      "Más visitas y ventas."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "El enunciado 'Cuando el cliente hace un pedido debe llegar un mensaje al departamento de pedidos y otro al de cobros' es un ejemplo de:",
+    "opts": [
+      "Requisito no funcional (RFN).",
+      "Política de empresa.",
+      "Requisito funcional (RF).",
+      "Coste de oportunidad."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál de los siguientes es un problema habitual en la especificación de requisitos?",
+    "opts": [
+      "Los requisitos siempre se validan demasiado pronto.",
+      "Los requisitos suelen ser inestables y variables.",
+      "El usuario ve el producto final demasiado pronto.",
+      "La comunicación entre interesados y equipo de desarrollo nunca falla."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Para qué tipo de proyectos es especialmente recomendable realizar un Estudio de viabilidad?",
+    "opts": [
+      "Para sistemas idénticos a otros ya implantados con éxito.",
+      "Para sistemas novedosos, donde las posibilidades de fracaso son más altas.",
+      "Únicamente para proyectos con presupuesto ilimitado.",
+      "Solo cuando ya existe un sistema previo que observar."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "En las entrevistas como mecanismo de extracción de requisitos, ¿qué se recomienda?",
+    "opts": [
+      "Hacerlas únicamente con el dueño o jefe del proyecto.",
+      "Usar solo preguntas cerradas de tipo sí/no.",
+      "Realizarlas con personal de todos los estamentos e incluso con clientes (enfoque top-down).",
+      "Evitar prepararlas para que surjan de forma espontánea."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Qué es una 'Persona' dentro de los métodos de análisis de requisitos?",
+    "opts": [
+      "Un diagrama que representa el flujo de datos del sistema.",
+      "Un documento legal firmado por el cliente.",
+      "Una representación de un grupo de usuarios con características comunes (edad, objetivos, hábitos, etc.).",
+      "Un tipo de prueba de carga del servidor."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿En qué consiste el 'Desarrollo conjunto de aplicaciones' (JAD)?",
+    "opts": [
+      "Un proceso de programación automática sin intervención humana.",
+      "Sesiones colaborativas entre usuarios, analistas y desarrolladores para definir requisitos de forma conjunta.",
+      "Una técnica exclusiva de observación sin participación del cliente.",
+      "Una metodología de despliegue en servidores en la nube."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "Al aplicar observación directa o etnografía sobre un sistema ya existente, ¿qué precaución es fundamental?",
+    "opts": [
+      "Informar al personal de que se trata de una evaluación de su rendimiento.",
+      "Dejar constancia de que NO es una evaluación del personal, para que el trabajo se desarrolle con normalidad.",
+      "Realizarla sin avisar a nadie del equipo.",
+      "Limitarse a observar el software, ignorando la interacción con las personas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál de los siguientes elementos NO forma parte de la estructura habitual de un caso de uso?",
+    "opts": [
+      "Actores y precondiciones.",
+      "Lista de pasos del escenario de éxito.",
+      "Caminos alternativos.",
+      "Paleta de colores de la interfaz."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "En un diagrama de flujo de usuario, ¿qué elemento se representa habitualmente con un rombo?",
+    "opts": [
+      "Las pantallas del sistema.",
+      "Las condiciones o decisiones.",
+      "Las acciones de entrada/salida.",
+      "La dirección de avance del proceso."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuáles son los tres elementos en los que se agrupa la 'ecología de la información' dentro de la arquitectura de la información (AI)?",
+    "opts": [
+      "Servidor, cliente y base de datos.",
+      "Usuarios, contenido y contexto.",
+      "Hardware, software y red.",
+      "CAPEX, OPEX y ROI."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "Según los 8 principios de Dan Brown, ¿qué establece el 'Principio de la puerta principal'?",
+    "opts": [
+      "Que la página principal debe contener absolutamente todo el contenido del sitio.",
+      "Que los usuarios a menudo acceden a un sitio web a través de una página que no es la principal.",
+      "Que solo debe existir una única puerta de entrada al sitio.",
+      "Que la navegación debe limitarse a un único menú fijo."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "En la técnica de 'ordenación de tarjetas' (card sorting), ¿qué diferencia hay entre la ordenación abierta y la cerrada?",
+    "opts": [
+      "La abierta es individual y la cerrada es en grupo.",
+      "En la abierta los usuarios pueden poner nombre a los grupos; en la cerrada se da una lista de posibles nombres.",
+      "La abierta se hace sin tarjetas físicas y la cerrada sí las usa.",
+      "No existe diferencia real entre ambas."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál de las siguientes afirmaciones describe correctamente un wireframe?",
+    "opts": [
+      "Es una representación de alta fidelidad que incluye colores e imágenes definitivas.",
+      "Es un boceto de baja fidelidad centrado en la disposición de elementos, sin definir colores, imágenes ni fuentes concretas.",
+      "Es siempre una versión interactiva que simula la navegación real.",
+      "Sustituye por completo a la arquitectura de la información."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Qué diferencia principal existe entre un mockup y un prototipo?",
+    "opts": [
+      "El mockup es interactivo y el prototipo es estático.",
+      "El mockup es una representación gráfica estática del wireframe con estilo visual, mientras que el prototipo es una versión interactiva de media o alta fidelidad que permite navegar y probar la interacción.",
+      "Ambos términos significan exactamente lo mismo.",
+      "El prototipo se usa solo después del lanzamiento del producto final."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Cuál es una limitación característica de la evaluación heurística realizada por expertos?",
+    "opts": [
+      "Requiere un número muy elevado de usuarios reales.",
+      "Depende en gran medida de la experiencia del evaluador y puede ignorar problemas reales de los usuarios.",
+      "Es el método más caro y lento de todos.",
+      "No permite detectar ningún tipo de problema de interfaz."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "En el cuestionario SUS (Escala de Usabilidad del Sistema), si la suma de respuestas de enunciados impares menos 5 es 8, y 25 menos la suma de los enunciados pares es 16, ¿cuál es la puntuación SUS final?",
+    "opts": [
+      "24.",
+      "40.",
+      "60.",
+      "100."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Es Requisito Funcional (RF): 'Tiempo de carga menor de 3 segundos'?",
+    "opts": [
+      "Verdadero, porque define una funcionalidad concreta medible.",
+      "Falso, es un requisito no funcional (RNF) de rendimiento.",
+      "Verdadero, porque lo percibe directamente el usuario.",
+      "Falso, porque ningún tiempo de carga puede especificarse como requisito."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Es Requisito Funcional (RF): 'Uso de tecnologías web modernas (ej. React, Node.js)'?",
+    "opts": [
+      "Verdadero, porque son tecnologías concretas del sistema.",
+      "Falso, es un requisito no funcional de implementación/arquitectura.",
+      "Verdadero, porque el usuario elige la tecnología.",
+      "Falso, porque React y Node.js están obsoletos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Es Requisito Funcional (RF): 'Acceso sin registro obligatorio'?",
+    "opts": [
+      "Verdadero, porque describe una funcionalidad observable que el sistema debe ofrecer al usuario.",
+      "Falso, porque el acceso no es una función del sistema.",
+      "Verdadero, pero solo si el sistema es un e-commerce.",
+      "Falso, siempre es un requisito de seguridad."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Es Requisito Funcional (RF): 'Cifrado de datos en tránsito'?",
+    "opts": [
+      "Verdadero, porque protege los datos del usuario.",
+      "Falso, es un requisito no funcional de seguridad (RNF).",
+      "Verdadero, porque HTTPS es obligatorio.",
+      "Falso, porque el cifrado no existe en web."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Es Requisito Funcional (RF): 'Diseño responsivo para móviles'?",
+    "opts": [
+      "Verdadero, porque el usuario interactúa con el diseño.",
+      "Falso, es un requisito no funcional de usabilidad/accesibilidad.",
+      "Verdadero, porque es observable directamente.",
+      "Falso, el diseño responsivo es solo una recomendación."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T4: Wuolah",
+    "q": "¿Es Requisito Funcional (RF): 'Soportar miles de usuarios simultáneos'?",
+    "opts": [
+      "Verdadero, porque describe una capacidad operativa del sistema.",
+      "Falso, es un requisito no funcional de escalabilidad y rendimiento.",
+      "Verdadero, porque el usuario necesita acceso concurrente.",
+      "Falso, porque no es técnicamente posible."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "Según el artículo 18.4 de la Constitución Española, ¿qué se establece respecto al uso de la informática?",
+    "opts": [
+      "Que se prohíbe totalmente el tratamiento automatizado de datos personales.",
+      "Que la ley limitará el uso de la informática para garantizar el honor y la intimidad personal y familiar de los ciudadanos.",
+      "Que solo las administraciones públicas pueden tratar datos personales.",
+      "Que el uso de la informática queda fuera del ámbito constitucional."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuál de las siguientes es una de las leyes 'fundamentales' para los SIBW según el tema?",
+    "opts": [
+      "Ley General para la Defensa de los Consumidores y Usuarios.",
+      "Ley de Propiedad Intelectual.",
+      "LSSI-CE (Ley de Servicios de la Sociedad de la Información y Comercio Electrónico).",
+      "Digital Services Act (DSA)."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuál es la finalidad principal de la Agencia de Protección de Datos?",
+    "opts": [
+      "Diseñar páginas web accesibles para empresas privadas.",
+      "Velar por el cumplimiento de la legislación sobre protección de datos personales y controlar su aplicación.",
+      "Gestionar el registro de dominios .es.",
+      "Aprobar las políticas de cookies de cada empresa antes de su publicación."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuál es el doble propósito de la LOPD-GDD según su artículo primero?",
+    "opts": [
+      "Sustituir completamente al RGPD y crear una normativa española independiente.",
+      "Adaptar el derecho español al RGPD y garantizar los derechos digitales de la ciudadanía.",
+      "Regular exclusivamente el comercio electrónico.",
+      "Eliminar la necesidad de un Delegado de Protección de Datos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuál de los siguientes es un dato de 'categoría especial' o sensible, cuyo tratamiento está prohibido salvo excepciones?",
+    "opts": [
+      "El número de teléfono de contacto.",
+      "Los datos relativos a la salud o la orientación sexual.",
+      "El puesto de trabajo de un empleado.",
+      "La dirección postal de envío."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuál es el rango de sanción económica para una infracción muy grave según el RGPD/LOPD-GDD?",
+    "opts": [
+      "Hasta 40.000 euros.",
+      "De 40.001 a 300.000 euros.",
+      "De 300.001 euros a 20 millones de euros o el 4% del volumen de facturación anual.",
+      "No existen sanciones económicas, solo amonestaciones."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuándo es obligatorio incluir el Aviso Legal en una web según la LSSI-CE?",
+    "opts": [
+      "Solo si la web es de una administración pública.",
+      "Siempre que la web contemple servicios relacionados con una actividad económica, estando en España.",
+      "Únicamente si la web utiliza cookies de seguimiento.",
+      "Solo en webs que vendan productos físicos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Cuándo es obligatoria la Política de Privacidad en un sitio web?",
+    "opts": [
+      "Solo si la empresa tiene más de 50 empleados.",
+      "Cuando la web realiza algún tratamiento de datos personales, por ejemplo a través de un formulario.",
+      "Únicamente en ecommerce con pasarela de pago.",
+      "Solo si el sitio está alojado en servidores europeos."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "En la Política de Cookies, ¿qué diferencia existe entre cookies prescindibles e imprescindibles?",
+    "opts": [
+      "Las prescindibles nunca requieren consentimiento y las imprescindibles siempre lo requieren.",
+      "Las prescindibles necesitan consentimiento mediante un sistema de doble capa, mientras que en las imprescindibles no se precisa si existe un interés legítimo.",
+      "Ambas requieren siempre consentimiento explícito por escrito.",
+      "Las imprescindibles solo se usan en aplicaciones móviles."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Qué NO debe incluir un banner de cookies según las buenas prácticas vigiladas por la AEPD?",
+    "opts": [
+      "Opción de aceptar todas las cookies.",
+      "Opción de rechazar las cookies.",
+      "Dark patterns o rechazo oculto.",
+      "Opción de configurar las cookies."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Qué documento regula las normas legales del proceso de compra o contratación online y es requerido para una tienda virtual?",
+    "opts": [
+      "Condiciones de Uso.",
+      "Política de Privacidad.",
+      "Condiciones de Contratación.",
+      "Aviso Legal."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "Según la LSSI, ¿cómo puede confirmarse una compra online tras finalizar el proceso?",
+    "opts": [
+      "Únicamente mediante una llamada telefónica posterior.",
+      "Mediante email de confirmación (máximo 24 horas) o pantalla final de confirmación al finalizar la compra.",
+      "No es necesario confirmar la compra si el pago ya se ha procesado.",
+      "Solo mediante carta postal certificada."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Qué aspecto debe informar obligatoriamente una Política de IA en un sitio web?",
+    "opts": [
+      "El código fuente completo del algoritmo utilizado.",
+      "Cuándo se utiliza IA, su finalidad, y si existen decisiones automatizadas o uso de chatbots.",
+      "El coste exacto del desarrollo del sistema de IA.",
+      "Los nombres de los programadores que crearon el sistema."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "Respecto al consentimiento en formularios, ¿cuál de las siguientes opciones es correcta según las buenas prácticas legales?",
+    "opts": [
+      "'Acepto recibir publicidad' (checkbox marcado por defecto).",
+      "'Acepto recibir comunicaciones comerciales' (checkbox no marcado por defecto, con lenguaje claro).",
+      "No incluir ninguna casilla de consentimiento para agilizar el formulario.",
+      "Marcar todas las casillas por defecto para facilitar la aceptación del usuario."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Qué principio establece que solo se deben solicitar en un formulario los datos estrictamente necesarios para la finalidad?",
+    "opts": [
+      "Principio de transparencia.",
+      "Principio de minimización de datos.",
+      "Principio de portabilidad.",
+      "Principio de limitación del tratamiento."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿En qué consiste el 'sistema de doble capa' aplicado al consentimiento en formularios?",
+    "opts": [
+      "En pedir el consentimiento dos veces seguidas en la misma pantalla.",
+      "En ofrecer información básica del tratamiento en primer plano (responsable, finalidad, derechos) y una información completa mediante un enlace a la política de privacidad.",
+      "En duplicar el formulario para mayor seguridad.",
+      "En solicitar dos firmas digitales distintas al usuario."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "Según las guías WCAG, ¿qué principio garantiza que el contenido se pueda percibir por al menos un sentido?",
+    "opts": [
+      "Operable.",
+      "Perceptible.",
+      "Comprensible.",
+      "Robusto."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Qué nivel de conformidad de la WCAG se considera el 'estándar real' de uso, al exigir el cumplimiento de los puntos de prioridad 1 y 2?",
+    "opts": [
+      "Nivel A.",
+      "Nivel AA.",
+      "Nivel AAA.",
+      "Nivel B."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "¿Qué porcentaje aproximado de fallos de accesibilidad detectan las herramientas de evaluación automática, según el tema?",
+    "opts": [
+      "Entre el 25% y el 35%.",
+      "Entre el 60% y el 70%.",
+      "El 100% de los fallos.",
+      "Menos del 5%."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T5: Wuolah",
+    "q": "En PHP, ¿qué función se utiliza para crear una cookie en el navegador del usuario?",
+    "opts": [
+      "session_start().",
+      "$_SESSION['nombre'].",
+      "setcookie('nombre', 'valor', tiempo_expiración).",
+      "unset($_COOKIE['nombre'])."
+    ],
+    "correct": 2
   }
 ]

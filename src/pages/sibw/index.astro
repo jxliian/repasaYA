@@ -1,12 +1,74 @@
 ---
 import Base from '../../layouts/Base.astro';
-import QuizEngine from '../../components/QuizEngine.astro';
-import testData from '../../data/sibw.json';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
-<Base title="Sistemas de Información Basados en Web" description="178 preguntas tipo test sobre Introducción, Gestión de Información, Análisis/Diseño y Normativa.">
-  <QuizEngine
-    title="Sistemas de Información Basados en Web"
-    code="SIBW"
-    testData={testData}
-  />
+<Base title="SIBW" description="286 preguntas tipo test y 40 flashcards de Sistemas de Información Basados en Web: HTTP, SEO, UX, XML, RGPD y más.">
+<style is:global>
+  html,body{height:100%;overflow:hidden}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .logo{font-size:1.15rem;font-weight:800}.logo span{color:var(--accent)}
+  .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}.back:hover{color:var(--accent)}
+  main{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:32px}
+  .hub-hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hub-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.3);border-radius:99px;padding:5px 14px;font-size:.75rem;color:var(--accent2);font-weight:600}
+  .hub-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-1px}
+  .hub-title span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hub-desc{font-size:.9rem;color:var(--text-muted);max-width:520px;line-height:1.6}
+  .hub-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:100%;max-width:640px}
+  .hub-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:28px 22px;display:flex;flex-direction:column;gap:14px;transition:all .22s;position:relative;overflow:hidden;text-decoration:none;color:var(--text)}
+  .hub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .22s}
+  .hub-card:hover{border-color:var(--accent);background:#1e1c35;transform:translateY(-4px);box-shadow:0 12px 32px rgba(108,99,255,.2)}
+  .hub-card:hover::before{opacity:1}
+  .hub-card-icon{font-size:2rem;width:52px;height:52px;border-radius:12px;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);display:flex;align-items:center;justify-content:center}
+  .hub-card-title{font-size:1.05rem;font-weight:800}
+  .hub-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55;flex:1}
+  .hub-card-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .hub-chip{font-size:.68rem;font-weight:600;background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);border-radius:99px;padding:3px 10px;color:var(--accent2)}
+  .hub-card-arrow{position:absolute;bottom:20px;right:20px;font-size:.9rem;color:var(--accent);opacity:0;transform:translateX(-4px);transition:all .2s}
+  .hub-card:hover .hub-card-arrow{opacity:1;transform:translateX(0)}
+  body{display:flex;flex-direction:column}
+  @media(max-width:600px){html,body{height:auto;overflow:visible}main{overflow:visible}.hub-cards{grid-template-columns:1fr}}
+</style>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="back" href={base}>← repasaYA</a>
+    <span style="color:var(--border)">|</span>
+    <div class="logo"><span>SIBW</span> · Sistemas de Información Basados en Web</div>
+  </div>
+  <div style="font-size:.75rem;color:var(--text-muted)">Informática · SIBW</div>
+</header>
+
+<main>
+  <div class="hub-hero">
+    <span class="hub-badge">🌐 Informática · SIBW</span>
+    <h1 class="hub-title">Sistemas de <span>Información Basados en Web</span></h1>
+    <p class="hub-desc">Tipo test con preguntas de HTTP, SEO, UX, XML, normativa RGPD y más. Flashcards con preguntas cortas por tema.</p>
+  </div>
+
+  <div class="hub-cards">
+    <a class="hub-card" href={`${base}sibw/quiz/`}>
+      <div class="hub-card-icon">🧠</div>
+      <div class="hub-card-title">Tipo Test</div>
+      <p class="hub-card-desc">286 preguntas de opción múltiple sobre T1, T3, T4 y T5. Filtra por tema y practica por bloques.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">286 preguntas</span>
+        <span class="hub-chip">4 temas</span>
+      </div>
+      <span class="hub-card-arrow">→</span>
+    </a>
+
+    <a class="hub-card" href={`${base}sibw/glosario/`}>
+      <div class="hub-card-icon">🃏</div>
+      <div class="hub-card-title">Flashcards</div>
+      <p class="hub-card-desc">40 tarjetas con preguntas cortas resueltas: hosting, SEO, UX, RGPD/cookies, accesibilidad WCAG y más.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">40 tarjetas</span>
+        <span class="hub-chip">4 temas</span>
+        <span class="hub-chip">Flashcards</span>
+      </div>
+      <span class="hub-card-arrow">→</span>
+    </a>
+  </div>
+</main>
 </Base>
