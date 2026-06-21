@@ -95,6 +95,8 @@ html, body { height: auto; overflow: visible; }
     transparent 70%);
   filter: blur(100px);
 }
+/* Center orb — only shown in light mode (see light-mode overrides) */
+.orb-mid { display: none; }
 
 /* ═══════════════════════════════════════════════════════
    GLASSMORPHISM UTILITY
@@ -525,8 +527,9 @@ footer a:hover { color: #7c6dfe; }
    LIGHT MODE OVERRIDES
 ═══════════════════════════════════════════════════════ */
 [data-theme="light"] .site-header {
-  background: rgba(244,242,255,0.92);
-  border-bottom-color: rgba(0,0,0,0.07);
+  background: rgba(224,218,255,0.85);
+  border-bottom-color: rgba(124,58,237,0.14);
+  box-shadow: 0 1px 0 rgba(124,58,237,0.08);
 }
 [data-theme="light"] .search-wrap {
   background: rgba(0,0,0,0.04);
@@ -575,13 +578,47 @@ footer a:hover { color: #7c6dfe; }
 [data-theme="light"] footer { color: rgba(30,27,75,0.40); border-top-color: rgba(0,0,0,0.07); }
 [data-theme="light"] .footer-meta { color: rgba(30,27,75,0.28); }
 [data-theme="light"] footer a { color: var(--accent); }
+
+/* Orbs in light mode: larger, more vivid, repositioned toward center */
 [data-theme="light"] .orb-tl {
+  width: 800px; height: 800px;
+  top: -10%; left: -10%;
   background: radial-gradient(circle,
-    rgba(124,58,237,0.38) 0%, rgba(124,58,237,0.12) 50%, transparent 70%);
+    rgba(124,58,237,0.60) 0%, rgba(124,58,237,0.22) 45%, transparent 70%);
 }
 [data-theme="light"] .orb-br {
+  width: 750px; height: 750px;
+  bottom: 0%; right: -10%;
   background: radial-gradient(circle,
-    rgba(6,182,212,0.30) 0%, rgba(6,182,212,0.09) 50%, transparent 70%);
+    rgba(6,182,212,0.55) 0%, rgba(6,182,212,0.18) 45%, transparent 70%);
+}
+
+/* Hits badge uses dark external image — hide in light mode */
+[data-theme="light"] .hits-pill { display: none; }
+
+/* Neon button: tone down glow on light bg */
+[data-theme="light"] .btn-neon {
+  box-shadow: 0 0 8px rgba(16,185,129,0.25), inset 0 0 8px rgba(16,185,129,0.04);
+}
+
+/* Glass boxes in light: give a slight purple-tinted shadow */
+[data-theme="light"] .glass {
+  box-shadow: 0 8px 32px rgba(124,58,237,0.10), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Center orb: lavender accent behind the bento grid content area */
+[data-theme="light"] .orb-mid {
+  display: block;
+  width: 700px; height: 700px;
+  top: 10%; left: 28%;
+  background: radial-gradient(circle,
+    rgba(168,85,247,0.25) 0%, rgba(124,58,237,0.08) 50%, transparent 70%);
+  filter: blur(90px);
+}
+
+/* Novedades header separator */
+[data-theme="light"] .clog-hdr {
+  background: rgba(124,58,237,0.04);
 }
 </style>
 
@@ -594,6 +631,7 @@ footer a:hover { color: #7c6dfe; }
   <div id="particles-bg"></div>
   <div class="orb orb-tl"></div>
   <div class="orb orb-br"></div>
+  <div class="orb orb-mid"></div>
 </div>
 
 <!-- ══════════════════════════════════════════════════
