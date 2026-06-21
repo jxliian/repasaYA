@@ -1,0 +1,642 @@
+[
+  {
+    "term": "¿Qué es la adaptación mutua?",
+    "def": "Mecanismo de coordinación ORGÁNICO que consigue la coordinación del trabajo mediante la comunicación informal y espontánea entre los propios trabajadores. Es el más simple (organizaciones pequeñas) y a la vez el más sofisticado (adhocracias complejas). Es el único en que la ejecución y la administración de la tarea recaen en la misma persona. Dificulta que la unidad sea de gran tamaño.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué es la supervisión directa?",
+    "def": "Mecanismo de coordinación ORGÁNICO en que una persona se responsabiliza del trabajo de otras, dándoles instrucciones y controlando sus acciones. El control se realiza de modo directo. Aparece cuando una organización sencilla aumenta su dificultad. Dificulta que un directivo tenga muchos subordinados (tramo de control estrecho). Ej.: capataz, supervisor de almacén.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué es la normalización de procesos de trabajo?",
+    "def": "Mecanismo de coordinación MECÁNICO que especifica las tareas concretas o procedimientos que los empleados han de realizar. El contenido del trabajo queda programado de antemano en la mesa de un diseñador (analista de tecnoestructura). Aparece mediante políticas, procedimientos y reglas. El parámetro de diseño que la introduce es la formalización del comportamiento. Ej.: cadena de montaje.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué es la normalización de resultados (outputs)?",
+    "def": "Mecanismo de coordinación MECÁNICO que especifica los resultados fijando de antemano características o propiedades a las que hay que ajustarse, dejando cierta discrecionalidad para el proceso. Se usan cuando la organización fija objetivos financieros o no financieros. Permite controlar el rendimiento. Los parámetros que la introducen son: control de rendimiento (directa) y planificación de acciones (indirecta o impura).",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué es la normalización de habilidades y conocimientos?",
+    "def": "Mecanismo de coordinación MECÁNICO que especifica la preparación requerida para realizar un trabajo cuando no se puede normalizar el proceso o los resultados. El individuo puede recibirla antes de entrar (externa, en universidades) o dentro de la organización (interna). Introducida por el parámetro de preparación. Clave en puestos profesionales. La organización cede parte del control a entidades externas. Ej.: médico, abogado.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué es la normalización de valores (o de la cultura)?",
+    "def": "Mecanismo de coordinación MECÁNICO que estandariza el comportamiento de los miembros mediante la normalización de los valores o creencias que conforman la base de su estructura organizacional. Requiere una cultura organizativa fuerte y un alto compromiso de todos los miembros. Introducida por el parámetro de adoctrinamiento y socialización. Es el mecanismo principal de la organización misionaria.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Cuál es la secuencia de los mecanismos de coordinación según la complejidad?",
+    "def": "A medida que aumenta la complejidad de las tareas a coordinar, la secuencia es: Adaptación mutua → Supervisión directa → Normalización (de procesos, valores, resultados, habilidades) → de nuevo Adaptación mutua (para situaciones extremadamente complejas o urgentes). Los mecanismos no son excluyentes; se usan varios a la vez con distinto grado de intensidad.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué mecanismo de coordinación da poder a los analistas de la tecnoestructura?",
+    "def": "La normalización de procesos de trabajo. Cuanto más se use la normalización, mayor será el poder de los analistas. Siendo de mayor a menor poder para los analistas: 1) Normalización de procesos, 2) Normalización de outputs, 3) Normalización de habilidades.",
+    "tema": "Mecanismos de Coordinación"
+  },
+  {
+    "term": "¿Qué es el núcleo de operaciones?",
+    "def": "Parte de la organización formada por los operarios que realizan el trabajo básico relacionado con la producción de bienes y servicios propios. Realizan 4 funciones: aseguran los inputs, transforman inputs en outputs, distribuyen los outputs, y proporcionan apoyo directo. Es el centro de toda organización y nunca puede faltar. NUNCA hay puestos directivos en él.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es el ápice estratégico?",
+    "def": "Parte de la organización formada por las personas que tienen como trabajo gobernar toda la organización. Normalmente: un solo individuo con mando supremo más directivos de alto nivel. Sus obligaciones: supervisar la organización como unidad integrada, mantener relaciones con el entorno y desarrollar las estrategias. Está más ampliado verticalmente (mayor autonomía). Formula las estrategias de forma descendente en la burocracia maquinal.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es la línea media?",
+    "def": "Conjunto de directivos con autoridad formal que unen el ápice estratégico con el núcleo de operaciones. Sus roles: ejecutar y transmitir decisiones de superiores, recopilar y transmitir información relativa a su unidad, hacer frente a situaciones externas y tomar decisiones sobre asuntos de su unidad. Los directivos de primera línea son los únicos cuyos subordinados son operarios (no directivos). Están más especializados verticalmente conforme se baja en la jerarquía.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es la tecnoestructura?",
+    "def": "Unidad de STAFF formada por analistas que sirven a la organización operando sobre el trabajo de los demás miembros. No intervienen directamente en el flujo de operaciones, aunque lo diseñan, planifican, cambian y preparan a las personas. Tres tipos de analistas: de estudios de trabajo (normalizan procesos), de planificación y control (normalizan outputs), y de personal (normalizan habilidades y valores). Son unidades de staff: realizan actividades SECUNDARIAS de la cadena de valor.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es el staff de apoyo?",
+    "def": "Unidad de STAFF formada por unidades especializadas que asisten a la organización fuera del flujo de trabajo de operaciones corrientes. La mayoría de las veces se subcontratan exteriormente. Pueden estar compuestas por personal no directivo y también por directivos especialistas. Pueden ser muy cualificados o poco cualificados y son fácilmente externalizables. Realizan actividades secundarias de la cadena de valor. Ej.: limpieza, cafetería, gabinete jurídico.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es la ideología o cultura organizacional?",
+    "def": "La parte inmaterial de la organización: sistema de creencias y valores compartidos que desencadenan normas, conductas y actitudes comunes entre los miembros. Según Schein tiene 3 componentes: artefactos (visible y explícito), valores (tronco, principios duraderos y más arraigados) y creencias (raíz, invisibles e implícitas, más arraigadas de todas). Condiciona a los miembros. Es la 6ª parte de la organización de Mintzberg.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Cuál es la diferencia entre unidades de línea y unidades de staff?",
+    "def": "Unidades de LÍNEA: realizan tareas que contribuyen DIRECTAMENTE a la realización de la misión a través de los productos/servicios. Son: ápice estratégico, línea media y núcleo de operaciones. Unidades de STAFF: realizan actividades de apoyo que contribuyen de forma INDIRECTA. Son: tecnoestructura y staff de apoyo. El staff realiza actividades secundarias de la cadena de valor, al margen del flujo fundamental del trabajo operativo.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué refleja el organigrama y qué NO refleja?",
+    "def": "El organigrama refleja GRÁFICAMENTE: las relaciones de autoridad formal (quién manda sobre quién), los diferentes puestos existentes, cómo se agrupan en unidades y la utilización de la supervisión directa. NO refleja: las relaciones informales, la visión como sistema de constelaciones de trabajo, los flujos regulados de información, ni las comunicaciones informales. Es una descripción incompleta de lo que realmente sucede.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Cuáles son los 5 sistemas de flujos de Mintzberg?",
+    "def": "1) Sistema de autoridad formal (representado en el organigrama). 2) Sistema de flujos regulados: incluye el flujo de trabajo de operaciones (núcleo), flujos de control regulados (órdenes descendentes e información ascendente) y flujos regulados de información de staff (horizontal entre staff y línea). 3) Sistema de comunicación informal (adaptación mutua). 4) Sistema de constelaciones de trabajo (grupos con responsabilidades sobre un conjunto de decisiones). 5) Sistema de procesos de decisión ad hoc.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Qué son las constelaciones de trabajo?",
+    "def": "Grupos de individuos que comparten responsabilidades sobre un conjunto de decisiones adecuadas a su particular nivel jerárquico. Se comunican extensa e informalmente formando grupos exclusivos. Son prácticamente independientes entre sí. Se asocian al mecanismo de coordinación de adaptación mutua. Pueden ser funcionales o multifuncionales. Las del núcleo de operaciones suelen corresponder a unidades formales del organigrama.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Qué son las decisiones programadas y no programadas?",
+    "def": "Decisiones PROGRAMADAS: tomadas para resolver problemas sencillos, familiares, conocidos y fáciles de definir (problema estructurado). La decisión es repetida, tomada bajo condiciones de certeza. Se vinculan a las actividades operativas del día a día. Decisiones NO PROGRAMADAS: son únicas, no repitiéndose, para problemas no estructurados. La información es incompleta, tomadas bajo condiciones de incertidumbre. Las estratégicas son las más complejas y menos rutinarias.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Qué son las actividades primarias y secundarias de la cadena de valor?",
+    "def": "Actividades PRIMARIAS: intervienen directamente en la creación física del producto/servicio, su venta y transferencia al cliente. Relacionadas con unidades de línea. 6 categorías: compras/logística de entradas, operaciones/producción, logística de salidas, marketing y ventas, SS post-venta. Actividades de APOYO (secundarias): respaldan las primarias. 4 categorías: abastecimiento, desarrollo tecnológico, gestión de RRHH, infraestructura. Relacionadas con unidades de staff.",
+    "tema": "Cadena de Valor"
+  },
+  {
+    "term": "¿Para qué sirve la cadena de valor?",
+    "def": "Es una herramienta de análisis estratégico que sirve para identificar la ventaja competitiva de una organización sistematizando las actividades que contribuyen a la creación de valor. Permite detectar el origen de la ventaja competitiva, encontrar los medios para crearla y mantenerla. Es un medio sistemático de dividir la organización en actividades que se necesitan para crear valor, distinguiéndolas por su implicación directa o indirecta en la transformación de inputs en outputs.",
+    "tema": "Cadena de Valor"
+  },
+  {
+    "term": "¿Qué es la especialización horizontal del puesto?",
+    "def": "Un puesto está especializado horizontalmente cuando tiene un número LIMITADO de tareas distintas a realizar que han de repetirse constantemente. Hay dos formas: por TAREAS (para trabajos que se pueden descomponer en tareas sencillas sin cualificación especial, ej.: cajero) y por DESTREZAS/CONOCIMIENTOS (cuando el trabajo requiere conocimientos complejos y no es posible dividirlo en tareas sencillas, ej.: dermatólogo). Ventajas: favorece productividad por repetición, facilita aprendizaje, ajusta tareas al individuo.",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Qué es la especialización vertical del puesto?",
+    "def": "Un puesto está especializado verticalmente cuando el trabajador se limita a ejecutar sus tareas SIN PODER TOMAR DECISIONES en casi ningún aspecto relacionado con las mismas. Separa la ejecución del control. Cuando hay especialización horizontal es muy probable que aparezca también la vertical. El control, administración y diseño de los puestos especializados verticalmente son ejercidos por un directivo (supervisión directa) o un analista de tecnoestructura (normalización de procesos).",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Cómo es un puesto profesional en términos de especialización?",
+    "def": "Un puesto profesional (médico, abogado, ingeniero) es: ESPECIALIZADO HORIZONTALMENTE por conocimientos (realizan pocas funciones pero muy especializadas por el conocimiento requerido) y AMPLIADO VERTICALMENTE (tienen gran autonomía y poder de decisión sobre su trabajo). Es complejo y no puede especializarse fácilmente en la dimensión vertical. Requiere mucha preparación formal previa (externa, en universidades).",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Qué relación hay entre formalización y especialización vertical?",
+    "def": "La formalización del comportamiento SIEMPRE conlleva alta especialización vertical (el trabajador tiene poco control sobre su trabajo). Sin embargo, la relación inversa NO siempre se cumple: un puesto especializado verticalmente no tiene por qué estar formalizado (puede coordinarse por supervisión directa). Además, la formalización conlleva alta especialización horizontal (los puestos más limitados y sencillos son los que se suelen formalizar).",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Qué es la ampliación de puestos y cuándo es positiva?",
+    "def": "La ampliación horizontal: el trabajador emprende una amplia gama de tareas (trabajador polivalente). La ampliación vertical: el trabajador desempeña más tareas y obtiene más autocontrol y capacidad de decisión. La ampliación será POSITIVA cuando el aumento de la productividad de los trabajadores, más motivados por un puesto más amplio, sean superiores a la pérdida de eficiencia ocasionada por una especialización técnica inferior a la óptima. Algunos trabajadores prefieren puestos especializados (baja tolerancia a la ambigüedad).",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Qué relación tiene el puesto directivo con la especialización?",
+    "def": "Los puestos directivos son AMPLIADOS HORIZONTALMENTE (tienen roles muy variados) y su especialización VERTICAL varía según el nivel: conforme se SUBE por la línea media, más ampliado verticalmente es el puesto (más autonomía). El ápice estratégico es el más ampliado verticalmente. Los directivos de primera línea son los más especializados verticalmente de todos los directivos. Los supervisores de primera línea son los que más se acercan a la especialización vertical.",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Qué es la formalización del comportamiento?",
+    "def": "Parámetro de diseño que hace referencia a la existencia de descripciones explícitas o implícitas relativas a reglas, procedimientos y procesos que indican en todo momento lo que ha de hacer el trabajador. Introduce el mecanismo de coordinación de la normalización de los procesos de trabajo. A mayor formalización, menor control tiene el trabajador. Se puede formalizar según: el puesto, el flujo de trabajo, o las reglas. Es el principal parámetro de diseño de la burocracia maquinal.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Por qué se formaliza el comportamiento?",
+    "def": "Para: 1) Reducir la variabilidad del comportamiento y poder predecirlo y controlarlo. 2) Lograr una coordinación sumamente ajustada cuando las tareas requieren una coordinación minuciosamente predeterminada. 3) Garantizar la consistencia mecánica que conduce a una producción eficiente. 4) Garantizar la imparcialidad ante los clientes. 5) Por motivos de validez dudosa, como el deseo arbitrario de orden y de que todo esté bajo control.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Cuál es la diferencia entre burocracia y estructura orgánica?",
+    "def": "Burocracia (Weber): estructura cuyo comportamiento es predecible y está normalizado. Las organizaciones burocráticas se apoyan en la normalización para coordinar sus actividades. Estructura ORGÁNICA (Burns y Stalker, 1966): se caracteriza por relaciones de trabajo abiertas e informales, resolución de problemas a medida que surgen, y ausencia de normalización como mecanismo ganador (siendo supervisión directa o adaptación mutua). Las burocracias funcionan bien en entornos estables; las orgánicas son necesarias para innovar o adaptarse.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Qué es la preparación como parámetro de diseño?",
+    "def": "Parámetro de diseño que especifica los conocimientos y habilidades necesarios para ocupar un puesto. Corresponde al proceso mediante el cual se enseñan habilidades y conocimientos relacionados con la ejecución de las tareas. Puede ser interna (formal y práctica) o externa (universidades, centros de formación). Introduce el mecanismo de normalización de habilidades. Clave cuando el trabajo es complejo y requiere habilidades difíciles pero especificadas. Predominante en organizaciones profesionales.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Qué es el adoctrinamiento y la socialización?",
+    "def": "SOCIALIZACIÓN: proceso social informal por el que un miembro interioriza la escala de valores, normas y pautas de comportamiento necesarias de la organización. ADOCTRINAMIENTO: proceso FORMAL por el que la organización socializa a sus miembros de acuerdo con su cultura o ideología organizacional. Ambos introducen la normalización de valores. Son importantes cuando los puestos son delicados o quedan lejos de la sede central. Son sustitutos mutuos de la formalización.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Cuáles son los 4 tipos de identificación del individuo con la ideología de la organización?",
+    "def": "1) NATURAL: la escala de valores de la organización atrae al nuevo miembro (sus valores personales son congruentes con la ideología). 2) POR SELECCIÓN: la organización elige a sus miembros con el criterio de que su escala de valores sea lo más congruente posible. 3) POR EVOCACIÓN: se recurre a procesos de socialización y adoctrinamiento para reforzar las otras formas de identificación. 4) CALCULADA: al individuo le supone alguna ganancia o retribución individual concreta.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Qué es la agrupación funcional y cuáles son sus ventajas e inconvenientes?",
+    "def": "Agrupa en una misma unidad a individuos con conocimientos y habilidades similares que realizan un mismo proceso o función. Controla interdependencias de PROCESO y ESCALA. VENTAJAS: especialización de tareas, eficiencia, facilita el desarrollo profesional, economías de escala. INCONVENIENTES: flexibilidad muy reducida, entorno laboral aislado con objetivos del departamento antepuestos a los de la organización, difícil determinar responsabilidades y juzgar el rendimiento, carece de mecanismos para coordinar el flujo de trabajo.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Qué es la agrupación según el mercado y cuáles son sus ventajas e inconvenientes?",
+    "def": "Agrupa unidades según sus FINES, según las características de los mercados a los que sirve la organización (output, cliente, lugar). Controla interdependencias del FLUJO DE TRABAJO. VENTAJAS: flexibilidad, capacidad de desempeñar una gama más amplia de actividades, coordinación más fácil del flujo de trabajo. INCONVENIENTES: mayor gasto de recursos (duplica personal e instalaciones), menor aprovechamiento de economías de escala, posible disminución de la calidad del trabajo especializado.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cuáles son los 4 tipos de interdependencias que determinan la agrupación?",
+    "def": "1) INTERDEPENDENCIA DEL FLUJO DE TRABAJO: conjunto de tareas de donde la organización obtiene un output (puede ser secuencial o recíproca). Favorece la agrupación de mercado. 2) INTERDEPENDENCIA DE FUNCIONES/PROCESOS/TAREAS: estimulan la agrupación funcional. 3) INTERDEPENDENCIA DE ESCALA O TAMAÑO: economías de escala; favorece agrupación funcional. 4) INTERDEPENDENCIAS SOCIALES: relaciones sociales; las personas prefieren agruparse con quienes 'se llevan bien'.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Qué son las estructuras altas y planas?",
+    "def": "Estructura ALTA: tramos de control ESTRECHOS y MUCHOS niveles jerárquicos. Estructura PLANA: tramos de control AMPLIOS y POCOS niveles jerárquicos. El tramo de control define el número de subordinados que pueden agruparse eficazmente bajo un solo directivo. No hay un número fijo: depende de la persona, el mecanismo de coordinación, la tarea y los medios. La normalización aumenta el tramo de control (mayor tamaño de unidad); la supervisión directa y la adaptación mutua lo reducen.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cómo varía el tamaño de la unidad según el mecanismo de coordinación?",
+    "def": "El tamaño de la unidad AUMENTA con: los 3 tipos de normalización, la similitud de tareas en la unidad, y las necesidades de autonomía de los empleados. El tamaño DISMINUYE con: necesidad de supervisión directa estricta, necesidad de frecuente acceso al directivo para consultas, y necesidad de adaptación mutua entre tareas complejas interdependientes. El núcleo de operaciones tiene las unidades mayores porque depende más de la normalización.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cuáles son los 4 tipos de dispositivos de enlace?",
+    "def": "1) PUESTO DE ENLACE: mejora la coordinación y evita conflictos entre departamentos. Sin autoridad formal, pero con poder informal. Mediador directo entre unidades. 2) GRUPOS DE TRABAJO: grupo convocado para cumplir una tarea determinada y que se desagrupa tras su cumplimiento. Pueden surgir formal o informalmente. 3) COMITÉS PERMANENTES: agrupación estable entre miembros de distintos departamentos que se convoca regularmente. 4) DIRECTIVOS INTEGRADORES: puesto de enlace CON poder formal (sobre procesos de decisión, no sobre el personal). 5) ESTRUCTURAS MATRICIALES: combinación equilibrada de agrupación funcional y de mercado con doble autoridad formal.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Qué es el directivo integrador?",
+    "def": "Dispositivo de enlace que tiene un puesto de enlace CON PODER FORMAL. Su poder formal comprende algunos aspectos de los procesos de decisión que corresponden a distintos departamentos, pero NUNCA se extiende a la autoridad formal sobre el personal de cada departamento. Medios: tiene contactos (comunica con el director general), infunde confianza (visión global), gestiona la toma de decisiones y es la encarnación del poder de experto. Ej.: jefe de proyecto, project manager.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Qué es la estructura matricial?",
+    "def": "Dispositivo de enlace que combina de forma equilibrada una agrupación funcional y una de mercado, superponiendo una DOBLE CADENA DE MANDO. Ambos directivos (funcional y de mercado) tienen el mismo poder formal. Rompe el principio de unidad de mando de Fayol. Eficaz en entornos complejos e inciertos. Dos tipos: PERMANENTE (interdependencias estables) y VARIABLE (orientada a proyectos, las interdependencias cambian). Problemas: conflicto entre directivos, estrés, costes de comunicación (grupitis), mayor necesidad de directivos.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Qué es la descentralización vertical?",
+    "def": "La dispersión de poder formal a medida que se desciende por la escala de autoridad lineal (hacia la línea media). El poder está en el ápice estratégico y puede permanecer ahí (centralización) o dispersarse hacia niveles inferiores (directivos de línea media). Dos tipos: SELECTIVA (el poder para decisiones de distinto tipo está en distintos niveles, según constellaciones de trabajo, adaptación mutua) y PARALELA (individuos del mismo nivel y jerarquía tienen capacidad para tomar decisiones sobre los mismos campos; propia de agrupaciones por mercado).",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Qué es la descentralización horizontal?",
+    "def": "Grado en el que los procesos de decisión están controlados por personas ajenas a la estructura lineal (tecnoestructura, staff de apoyo o núcleo de operaciones). El poder de decisión es principalmente INFORMAL. Hay 4 etapas: 1) Poder en un solo individuo. 2) Poder en analistas de tecnoestructura (normalización). 3) Poder en los expertos (conocimientos). 4) Poder en todos los miembros. Se diferencia de la dispersión física de los servicios (disperso-concentrado geográficamente).",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Cuáles son los 6 tipos de descentralización (A-F)?",
+    "def": "A) Centralización vertical y horizontal: todo el poder en el director general (supervisión directa). B) Centralización vertical + descentralización horizontal selectiva y limitada: poder formal en el ápice, poder informal en analistas (normalización de procesos). C) Centralización horizontal + descentralización vertical paralela limitada: agrupación por mercado, normalización de resultados. D) Descentralización selectiva vertical y horizontal: constelaciones, adaptación mutua. E) Descentralización vertical y horizontal: profesionales en el núcleo, normalización de habilidades. F) Descentralización total: todos los miembros, normalización de valores.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Por qué descentralizar una estructura?",
+    "def": "Razones para descentralizar: 1) No todas las decisiones pueden ser entendidas por un único centro (información demasiado blanda o falta de capacidad cognoscitiva). 2) Permite reaccionar con rapidez ante las condiciones locales. 3) Constituye un estímulo de motivación (fundamental en puestos profesionales y directivos). INCONVENIENTES de la descentralización: coste de capacitación de directivos, procedimientos de planificación y control más extensos, dificultad al tomar decisiones, y la alta dirección puede no estar dispuesta a delegar.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Qué implica la centralización vertical total cuando hay normalización de procesos?",
+    "def": "En organizaciones con normalización de procesos, hay poco margen para la discrecionalidad en la toma de acciones. Es casi nula en el núcleo de operaciones y muy baja en la línea media. Cualquier decisión no programada requiere autorización de algún directivo de nivel superior, por lo que las decisiones importantes las toman los directivos más altos (ápice). Las organizaciones con normalización de procesos suelen estar MUY POCO descentralizadas verticalmente (Tipo B).",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Cuáles son los factores de contingencia en Mintzberg?",
+    "def": "Son variables independientes/causales que condicionan las características del diseño estructural y sus resultados. Hay 4 grupos: 1) EDAD Y TAMAÑO de la organización. 2) SISTEMA TÉCNICO utilizado en el núcleo de operaciones. 3) ENTORNO: competencia, productos sustitutivos, marco socioeconómico, legal, político y tecnológico. 4) PODER: control externo y necesidades de poder de los miembros. La teoría contingente afirma que no existe una estructura universal: depende de la situación.",
+    "tema": "Factores de Contingencia"
+  },
+  {
+    "term": "H1: Hipótesis de la Edad",
+    "def": "H1: Cuanto más antigua sea la organización, más formalizado estará su comportamiento. Las organizaciones repiten su trabajo hasta que es más predecible y, en consecuencia, más fácil de formalizar. La antigüedad hace el trabajo repetible y normalizable. Las organizaciones jóvenes tienden a ser menos formalizadas, pero esto no es absoluto; otros factores de contingencia pueden tener más peso.",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "H2, H3 y H4: Hipótesis del Tamaño",
+    "def": "H2: Cuanto mayor sea la organización, más compleja será su estructura (más especializadas tareas, más diferenciadas unidades, más desarrollado el componente administrativo). H3: Cuanto mayor sea la organización, mayor será la dimensión promedio de las unidades (más empleados por directivo, más homogeneidad dentro de cada unidad). H4: Cuanto mayor sea la organización, más formalizado estará su comportamiento (los comportamientos se repiten más y son más predecibles). CONCLUSIÓN: A mayor edad y tamaño, más rasgos burocráticos.",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "H5, H6 y H7: Hipótesis del Sistema Técnico",
+    "def": "H5: Cuanto más REGULADOR sea el sistema técnico, más formalizado resultará el trabajo de operaciones y más burocrática la estructura del núcleo de operaciones. H6: Cuanto más SOFISTICADO (difícil de entender) sea el sistema técnico, más elaborada y compleja será la estructura; mayor y más profesional el staff de apoyo; mayor la descentralización horizontal selectiva hacia dicho staff y mayor uso de dispositivos de enlace. H7: La AUTOMATIZACIÓN del núcleo de operaciones transforma la estructura administrativa burocrática en una estructura orgánica.",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "H8, H9, H10, H11 y H12: Hipótesis del Entorno",
+    "def": "H8: Más dinámico el entorno → más orgánica la estructura. H9: Más complejo el entorno → más descentralizada la estructura. H10: Más diversificados los mercados → mayor tendencia a dividir en unidades de mercado (si hay economías de escala favorables). H11: La extrema HOSTILIDAD del entorno conduce a una centralización personal de la estructura (se centraliza temporalmente aunque sea compleja). H12: Las disparidades en el entorno estimulan la descentralización selectiva hacia constelaciones de trabajo diferenciadas.",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "H13 y H14: Hipótesis del Poder",
+    "def": "H13: La existencia de cualquier tipo de CONTROL EXTERNO sobre la organización induce a ésta a aumentar los niveles de centralización y formalización de su estructura (los medios más eficaces para controlarla desde fuera son hacer responsable a un miembro poderoso y/o imponer normas de comportamiento). H14: Las NECESIDADES DE PODER de los miembros suelen generar estructuras excesivamente centralizadas (los miembros que quieren obtener poder fomentan el parámetro de diseño que más poder les da).",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "¿Qué es la hipótesis de la configuración y la hipótesis de la configuración extendida?",
+    "def": "Hipótesis de la CONFIGURACIÓN: la organización de éxito desarrolla una configuración lógica de los parámetros de diseño (consistencia interna entre parámetros, sin que se contradigan entre sí). Hipótesis de CONGRUENCIA: la organización de éxito diseña su estructura adaptándola a los factores de contingencia (ajuste a la situación). Hipótesis de la CONFIGURACIÓN EXTENDIDA: combina ambas. La estructura eficaz requiere una CONSISTENCIA INTERNA entre los parámetros de diseño Y su ADECUACIÓN a los factores de contingencia.",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "¿Cuáles son las 4 variables intermedias de Mintzberg?",
+    "def": "Las variables intermedias son características del trabajo a través de las cuales los factores de contingencia afectan a los parámetros de diseño: 1) COMPRENSIBILIDAD DEL TRABAJO: facilidad para entender el trabajo (influida por complejidad del entorno y sofisticación del sistema técnico). 2) PREDICTIBILIDAD DEL TRABAJO: conocimientos previos del trabajo (influida por edad, tamaño, estabilidad del entorno y regulación del sistema técnico). 3) DIVERSIDAD DEL TRABAJO: grado en que varía el trabajo (influida por diversidad del entorno y tamaño). 4) VELOCIDAD DE REACCIÓN (influida por hostilidad del entorno).",
+    "tema": "Hipótesis de Congruencia"
+  },
+  {
+    "term": "¿Cuáles son las dimensiones del entorno según Mintzberg?",
+    "def": "4 dimensiones: 1) ESTABILIDAD: estable (predecible) vs. dinámico (impredecible). Relacionada con la predictibilidad del trabajo. 2) COMPLEJIDAD: simple vs. complejo (cuántos conocimientos sofisticados se necesitan). Relacionada con la comprensibilidad del trabajo. 3) DIVERSIDAD DE MERCADOS: integrados vs. diversificados. Relacionada con la diversidad del trabajo. 4) HOSTILIDAD: munificente vs. hostil. Relacionada con la velocidad de reacción.",
+    "tema": "Factores de Contingencia"
+  },
+  {
+    "term": "¿Cuáles son las 3 dimensiones del sistema técnico?",
+    "def": "1) CARÁCTER REGULADOR: grado en que el trabajo de los operarios se ve controlado o condicionado por los instrumentos. A más regulador → más formalizado el trabajo → más burocrática la estructura del núcleo. 2) GRADO DE SOFISTICACIÓN: complejidad o carácter intrincado del sistema (dificultad de comprensión). A más sofisticado → más elaborada la estructura, mayor staff de apoyo profesional. 3) AUTOMATIZACIÓN: el sistema técnico funciona sin operarios. La automatización elimina los trabajadores no cualificados y transforma la estructura burocrática en orgánica.",
+    "tema": "Factores de Contingencia"
+  },
+  {
+    "term": "¿Cuáles son las características de la Estructura Simple?",
+    "def": "Mecanismo de coordinación: SUPERVISIÓN DIRECTA. Parte clave: ÁPICE ESTRATÉGICO. Entorno: sencillo y dinámico. Sistema técnico: no sofisticado, no regulador. Edad/tamaño: joven y pequeña. Descentralización: centralización vertical y horizontal (Tipo A). Parámetros: poca formalización, poca preparación, división poco estricta del trabajo, agrupación funcional muy poco estricta. Ventajas: flexibilidad, sentido de la misión. Inconvenientes: muy arriesgada (depende del director general), tendencia autocrática, distribuye inadecuadamente el poder.",
+    "tema": "Configuraciones: Estructura Simple"
+  },
+  {
+    "term": "¿Cuáles son las variantes de la Estructura Simple?",
+    "def": "1) ETAPA DE DESARROLLO (más importante): organización nueva que aún no ha elaborado su estructura administrativa. 2) ESTRUCTURA SIMPLÍSIMA: muy pequeña, a veces sin ápice estratégico, coordinada por adaptación mutua. 3) ORGANIZACIÓN EN CRISIS: hostilidad extrema obliga a centralizar independientemente de la estructura habitual. 4) ORGANIZACIÓN AUTOCRÁTICA: líder obtiene poder por ansias de poder. 5) ORGANIZACIÓN CARISMÁTICA: el líder obtiene poder porque sus seguidores se lo confieren. 6) ENTIDAD EMPRENDEDORA: alta innovación, alto riesgo, centralizada en el empresario-propietario.",
+    "tema": "Configuraciones: Estructura Simple"
+  },
+  {
+    "term": "¿Cuáles son las características de la Burocracia Maquinal?",
+    "def": "Mecanismo de coordinación: NORMALIZACIÓN DE PROCESOS. Parte clave: TECNOESTRUCTURA. Entorno: sencillo y estable. Sistema técnico: regulador y poco sofisticado (no automatizado). Edad/tamaño: antigua y grande. Descentralización: centralización vertical + descentralización horizontal selectiva y limitada hacia la tecnoestructura (Tipo B). El núcleo de operaciones realiza tareas sencillas y repetitivas con alta especialización horizontal y vertical. Gran desarrollo de tecnoestructura y staff de apoyo. Obsesión por el control.",
+    "tema": "Configuraciones: Burocracia Maquinal"
+  },
+  {
+    "term": "¿Cuáles son los problemas de la Burocracia Maquinal?",
+    "def": "1) PROBLEMAS HUMANOS en el núcleo de operaciones: los trabajadores se resisten a ser tratados como engranajes. Buropatologías: mal trato a clientes, absentismo, huelgas. 2) PROBLEMAS DE COORDINACIÓN en la línea media: los problemas no rutinarios ascienden hasta el ápice sobrecargándolo. 3) PROBLEMAS DE ADAPTACIÓN en el ápice estratégico: los entornos cambian inevitablemente, generando nuevos problemas no rutinarios. La información que llega al ápice es sesgada e incompleta. Es inflexible, cuyo fuerte NO es la innovación.",
+    "tema": "Configuraciones: Burocracia Maquinal"
+  },
+  {
+    "term": "¿Cuáles son las variantes de la Burocracia Maquinal?",
+    "def": "1) BUROCRACIA SIMPLE: híbrido entre estructura simple y burocracia. Centralizada, muy burocrática en el núcleo de operaciones, pero poca elaboración administrativa (poca tecnoestructura, staff y línea media). Tamaño pequeño. 2) BUROCRACIA DE CUELLO BLANCO: organizaciones de servicios. 3) BUROCRACIA MAQUINAL PÚBLICA: fuerte control externo (agencias gubernamentales). 4) BUROCRACIA DE CONTROL: prisiones, policía. 5) BUROCRACIAS DE SEGURIDAD: aeropuertos, bomberos. 6) BUROCRACIAS DE CONTINGENCIAS: servicios no rutinarios que deben reaccionar rápido.",
+    "tema": "Configuraciones: Burocracia Maquinal"
+  },
+  {
+    "term": "¿Cuáles son las características de la Burocracia Profesional?",
+    "def": "Mecanismo de coordinación: NORMALIZACIÓN DE HABILIDADES. Parte clave: NÚCLEO DE OPERACIONES (profesionales). Entorno: complejo y estable. Sistema técnico: no regulador, no excesivamente sofisticado, no automatizado. Descentralización: vertical y horizontal (Tipo E). La tecnoestructura es poco elaborada (las normas vienen de asociaciones profesionales externas). La línea media es reducida. Gran staff de apoyo. Dos jerarquías paralelas: democrática (ascendente) para profesionales y burocrática (descendente) para el staff de apoyo.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Qué es el proceso de encasillamiento en la Burocracia Profesional?",
+    "def": "El trabajo del profesional consta de dos tareas: 1) CATEGORIZAR las necesidades del cliente de acuerdo con una contingencia, indicando el programa normativo que hay que utilizar (diagnóstico). 2) APLICAR o ejecutar dicho programa: el tratamiento. Con el encasillamiento se simplifican estas tareas, permitiendo separar las distintas tareas de operaciones para asignárselas a profesionales individuales, contener la incertidumbre y crear una equivalencia entre agrupación funcional y de mercado. Diferencia clave con la adhocracia: el profesional aplica programas normativos conocidos.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Cuáles son los problemas de la Burocracia Profesional?",
+    "def": "1) PROBLEMAS DE COORDINACIÓN: la normalización de habilidades es insuficiente cuando el encasillamiento falla. El staff tiene doble presión: autoridad formal de superiores y poder informal del experto. 2) PROBLEMAS DE LIBERTAD DE ACCIÓN: hay libertad de acción pero no todos los trabajadores son competentes y concienzudos. Pueden negar actualización de habilidades. 3) PROBLEMAS DE INNOVACIÓN: la innovación implica cooperación interdisciplinaria, pero hay falta de voluntad. Es inflexible, inadecuada para producir outputs nuevos. Los cambios han de introducirse LENTAMENTE mediante la preparación de nuevos profesionales.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Cuáles son las características de la Forma Divisional?",
+    "def": "Mecanismo de coordinación: NORMALIZACIÓN DE RESULTADOS. Parte clave: LÍNEA MEDIA (directores de división). Entorno: sencillo y estable, mercados diversificados. Factor contingente principal: diversificación de mercados. Descentralización: centralización horizontal + descentralización vertical paralela limitada hacia divisiones (Tipo C). Principal parámetro: sistema de control del rendimiento. Cada división funciona como entidad semiautónoma. Presión para que las divisiones se configuren como burocracias maquinales.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Cuáles son las 4 etapas de transición hacia la Forma Divisional pura?",
+    "def": "1) FORMA INTEGRADA: funcional pura; toda la producción forma una cadena integrada, vende solo el producto final. 2) FORMA DE SUBPRODUCTOS: la empresa empieza a comercializar productos intermedios en el mercado, introduciendo pequeñas interrupciones. La sede sigue con mucho control. 3) FORMA DE PRODUCTOS RELACIONADOS: divisiones más autónomas con un denominador común (habilidad o tecnología). 4) FORMA CONGLOMERADA (divisional pura): cada división atiende sus propios mercados con líneas de productos no relacionadas. Mínimas interdependencias entre divisiones.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Cuáles son las 6 funciones básicas de la sede central en la Forma Divisional?",
+    "def": "1) Formulación de la estrategia general producto/mercado. 2) Asignación de los recursos financieros globales. 3) Diseño del sistema de control del rendimiento (con su propia tecnoestructura). 4) Nombramiento y sustitución de los directivos de las divisiones. 5) Visitar las divisiones de vez en cuando (supervisión directa como complemento a la normalización de outputs). 6) Proporcionar algunos servicios de apoyo comunes a las divisiones. La sede NO gestiona las divisiones individualmente.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Cuáles son las ventajas económicas de la divisionalización?",
+    "def": "4 ventajas básicas respecto a la estructura funcional con operaciones integradas: 1) ASIGNACIÓN EFICIENTE DEL CAPITAL: la sede central puede elegir dónde colocar los fondos, concentrándose en los mercados más fuertes. 2) AYUDA A PREPARAR DIRECTORES GENERALES (abre el camino a oportunidades de gestión de negocios individuales). 3) DISPERSA LOS RIESGOS entre distintos negocios o mercados. 4) REACCIONA ESTRATÉGICAMENTE con rapidez ante oportunidades y amenazas específicas de cada mercado.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Cuáles son los híbridos de la Forma Divisional?",
+    "def": "1) BUROCRACIA DUPLICADA (forma divisional-burocracia maquinal): cuando una organización establece divisiones regionales idénticas y concentra funciones críticas en la sede central. Típica del sector servicios y fabricación. 2) FORMA DIVISIONAL PERSONALIZADA (forma divisional-estructura simple): énfasis en supervisión directa sobre directivos de división. 3) FORMA DIVISIONAL SOCIALIZADA (forma divisional-burocracia profesional): énfasis en la socialización de los directivos divisionales.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Cuáles son las características de la Adhocracia?",
+    "def": "Mecanismo de coordinación: ADAPTACIÓN MUTUA. Parte clave: STAFF DE APOYO (en adm.) o NÚCLEO DE OPERACIONES y staff fusionados (en operativa). Entorno: dinámico y complejo. Sistema técnico: operativa = sencillo y no regulador; administrativa = sofisticado y automatizado. Edad: jóvenes. Descentralización: selectiva vertical y horizontal (Tipo D). No suele tener organigrama formal. Usa estructura matricial. Combina especialistas en equipos multidisciplinares ad hoc. Es la única capaz de innovación compleja y sofisticada.",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿Cuál es la diferencia entre adhocracia operativa y administrativa?",
+    "def": "ADHOCRACIA OPERATIVA: innova y soluciona problemas en nombre de sus CLIENTES EXTERNOS. Las tareas directivas y operativas se combinan en un solo esfuerzo; no distingue entre niveles directivos y núcleo de operaciones. Los directivos medios y staff ocupan su lugar al lado de los especialistas de operaciones. Ej.: agencia creativa de publicidad. ADHOCRACIA ADMINISTRATIVA: fabrica y vende sus propios productos. Separa el componente directivo y el núcleo de operaciones. El NO tiene poca relevancia o se elimina/subcontrata/automatiza. Ej.: empresa de alta tecnología con I+D propio.",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿Cuáles son los problemas de la Adhocracia?",
+    "def": "1) REACCIONES HUMANAS ANTE LA AMBIGÜEDAD: personas intolerantes a la ambigüedad prefieren estructuras más ordenadas. 2) PROBLEMAS DE EFICIENCIA: la innovación tiene altos costes. Elevado coste de comunicación en la toma de decisiones, desequilibrio entre cargas de trabajo y politización. 3) PELIGROS DE TRANSICIÓN INADECUADA: cambiarla hacia formas más burocráticas no siempre es adecuado. Para la adhocracia administrativa puede suponer su desaparición y destruir su capacidad innovadora. El éxito a veces lleva a que se repitan proyectos y tienda a burocratizarse.",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿Cuál es la diferencia entre adhocracia operativa y burocracia profesional?",
+    "def": "En la BUROCRACIA PROFESIONAL: los profesionales aplican programas normativos conocidos (proceso analítico-deductivo/convergente). Se usa cuando la contingencia es conocida y se busca la perfección. Los profesionales trabajan de forma INDEPENDIENTE. En la ADHOCRACIA OPERATIVA: se buscan soluciones creativas y singulares a problemas nuevos (pensamiento DIVERGENTE). No hay encasillamiento. Las tareas son interdependientes y los especialistas trabajan juntos en equipos. No puede normalizar y por tanto no puede ser eficiente en costes estándar.",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿Cuáles son las características de la Organización Misionaria?",
+    "def": "Mecanismo de coordinación: NORMALIZACIÓN DE VALORES (+ adaptación mutua). Parte clave: IDEOLOGÍA. Entorno: estable y no muy complejo. Sistema técnico: no regulador ni sofisticado. Edad: ni muy joven ni muy vieja. Tamaño: pequeña (el contacto personal es importante). Descentralización: TOTAL (Tipo F). No existe gran división del trabajo. Todos los miembros homogeneizados entorno a la ideología. Poca elaboración de estructura (escasa tecnoestructura y staff). Principal parámetro de diseño: adoctrinamiento. También llamada 'burocracia ideológica'.",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Cuáles son las 4 variantes de la Organización Misionaria?",
+    "def": "1) REFORMADORAS: su misión está orientada a fomentar cambios radicales o revolucionarios en la sociedad (son el instrumento de cambio). 2) CONVERSORAS: intentan cambiar la sociedad tratando de cambiar a sus propios miembros (cambian la conducta de sus miembros según su misión; hacen proselitismo). 3) DE CLAUSTRO: pretenden que sus miembros lleven un estilo de vida único acorde con la misión; viven físicamente en el interior de la organización. 4) PSEUDOMISIONARIAS: estructuras maquinales o simples que parecen misionarias pero los miembros están para satisfacer necesidades personales (identificación calculada).",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Cómo se refuerza la ideología en la Organización Misionaria?",
+    "def": "A través de 4 tipos de identificación: natural, por selección, por evocación (procesos de socialización y adoctrinamiento que refuerzan las dos anteriores) y calculada (la más débil). La cultura es FUERTE cuando los procesos informales de socialización funcionan de forma natural, siendo reforzados con programas de adoctrinamiento. La misión debe ser: CLARA y concreta, CLARAMENTE DISTINTIVA, y ATRAYENTE para los miembros. El líder carismático es fundamental en los inicios; luego la ideología toma su lugar.",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Qué es el control del rendimiento como parámetro de diseño?",
+    "def": "Sistema de planificación y control cuyo objetivo es regular los resultados globales de una unidad determinada. Lleva a cabo una normalización de outputs muy general, basándose en resultados globales y finales de una serie de decisiones y acciones. NO se centra en las decisiones o acciones concretas. Introduce la normalización de resultados de forma DIRECTA (típica o pura). Se vincula a la agrupación por mercados. Sus características: completo, objetivo, sensible ante variaciones, con retroalimentación.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Qué es la planificación de acciones como parámetro de diseño?",
+    "def": "Sistema de planificación y control cuyo objetivo es determinar las decisiones o acciones concretas que serán necesarias de antemano. Introduce la normalización de resultados de forma INDIRECTA o IMPURA (a medio camino entre la normalización de resultados pura del control del rendimiento y la normalización de procesos de la formalización). La discrecionalidad del trabajador se estrecha más. Es esencialmente descendente. Puede exceder el trabajo de una unidad, coordinando distintas unidades. Se vincula más a la agrupación funcional.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Qué diferencia hay entre control del rendimiento y planificación de acciones?",
+    "def": "CONTROL DEL RENDIMIENTO: regula los resultados globales de una unidad. Mide resultados A POSTERIORI. Introduce normalización de resultados de forma DIRECTA. Parte del ápice en subobjetivos y presupuestos (también puede ser ascendente). Se usa más en estructuras de mercado. PLANIFICACIÓN DE ACCIONES: determina las decisiones y acciones concretas A PRIORI. Introduce normalización de resultados de forma INDIRECTA. Es esencialmente DESCENDENTE. Comienza con la planificación estratégica. Se usa más en estructuras funcionales.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Cuándo se usa agrupación funcional vs. agrupación por mercado?",
+    "def": "AGRUPACIÓN FUNCIONAL: cuando el flujo de trabajo es irregular, la normalización logra controlar fácilmente las interdependencias del flujo de trabajo, o las interdependencias del proceso y de la escala son las más significativas (busca especialización). AGRUPACIÓN POR MERCADO: cuando las interdependencias del flujo de trabajo son las más significativas y no encajan fácilmente en una normalización, de forma que se facilita la supervisión directa y la adaptación mutua (busca flexibilidad y coordinación del flujo de trabajo).",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Qué ocurre con los flujos en el sistema de autoridad formal?",
+    "def": "La estructura supone una red de autoridad formal en la que unos elementos están subordinados a otros, con una dependencia formal, oficial o legítima claramente establecida. Las órdenes e instrucciones (flujo DESCENDENTE) van desde el ápice estratégico desagregándose con más detalle a medida que bajan. El sistema de control ascendente (información retroalimentada/SID) recopila y clasifica datos sobre el rendimiento a partir del núcleo de operaciones. Los flujos circulares representan la toma de decisiones a cada nivel jerárquico.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Qué son los flujos regulados de información de staff?",
+    "def": "Flujos horizontales entre unidades del staff de apoyo y la tecnoestructura con las unidades de línea. Es el flujo de comunicación entre línea y staff, tanto tecnocrático como de apoyo. Su fin es proporcionar la información y asesoramiento a las decisiones de los directivos de la línea media. La tecnoestructura suele ser la que diseña y pone en funcionamiento el sistema de información de gestión que utilizan los directivos de línea.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Cuáles son las 3 variables de la descentralización horizontal según el origen del poder?",
+    "def": "1) PODER INFORMAL DEL EXPERTO superpuesto a una estructura de autoridad tradicional: el menos descentralizado horizontalmente. La autoridad formal permanece en los directivos de línea, pero cuando se necesitan conocimientos especializados los expertos asumen poder informal. 2) PODER DEL EXPERTO FUSIONADO CON LA AUTORIDAD FORMAL: la experiencia es más importante que tomar decisiones, se reúnen ambos en equipos. Descentralización horizontal SELECTIVA. 3) PODER DEL EXPERTO ENTRE LOS OPERARIOS: los expertos son operarios (profesionales). Descentraliza en ambas dimensiones.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Cómo se relacionan la formalización, la preparación y el adoctrinamiento con la descentralización?",
+    "def": "FORMALIZACIÓN del comportamiento: resta poder formal al núcleo de operaciones y la línea media, concentrándolo cerca del ápice estratégico y en la tecnoestructura → centralización vertical + descentralización horizontal selectiva y limitada (TIPO B). PREPARACIÓN: desarrolla expertos por debajo de la línea media → descentralización vertical y horizontal (TIPO E). ADOCTRINAMIENTO y socialización con valores fuertemente compartidos: provoca descentralización total. Los miembros realizan múltiples tareas, puestos polivalentes y poco especializados → TIPO F.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Cómo es el proceso de toma de decisiones según Paterson?",
+    "def": "El proceso de decisión tiene 5 fases: 1) RECOPILAR INFORMACIÓN. 2) PROCESAR dicha información para asesorar al decisor. 3) REALIZAR LA ELECCIÓN (determinar lo que se pretende hacer). 4) AUTORIZAR lo que pretende hacerse. 5) EJECUTAR lo que al final se hace. El poder del individuo se determina según su control sobre las distintas etapas: se maximiza cuando controla todas las etapas (centralización) y se minimiza cuando controla menos etapas (descentralización).",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Por qué la organización misionaria puede ser llamada 'burocracia ideológica'?",
+    "def": "Porque consigue su coordinación y cohesión interna con la normalización de los valores culturales o ideológicos. La cultura es fuerte y el comportamiento de los miembros es perfectamente predecible; se adaptan de forma VOLUNTARIA a los valores y creencias de la cultura. Esto convierte a la organización en una estructura burocrática aunque no tenga los controles burocráticos habituales. Sin embargo, se diferencia de otras burocracias en que no necesita controles burocráticos (analistas, directivos intermedios, formalización). Es la más democrática de todas las estructuras básicas.",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Qué es la 'adhocracia emprendedora'?",
+    "def": "Híbrido entre la estructura simple y la adhocracia operativa. Son empresas pequeñas e innovadoras con entornos de alta tecnología, con un empresario individual experto que tiene control sobre la organización y trabaja junto a sus empleados. Las disparidades del entorno estimulan la descentralización selectiva hacia constelaciones de trabajo. Si el entorno fuera muy diversificado, además de complejo y dinámico, aparece una mezcla entre la 'adhocracia divisional' (forma divisional y adhocracia administrativa).",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿Qué es la 'buro-adhocracia profesional'?",
+    "def": "Variante de la burocracia profesional que sucede cuando los entornos son parcialmente dinámicos y precisan de nuevas soluciones para problemas nuevos, o precisan de sistemas técnicos más sofisticados para prestar sus servicios profesionales. Es un híbrido entre la burocracia profesional y la adhocracia. Se diferencia de la burocracia profesional en que no solo aplica programas normativos conocidos sino que también debe innovar para resolver nuevos problemas.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Qué factores del entorno influyen principalmente en cada parte de la organización?",
+    "def": "ÁPICE ESTRATÉGICO: el entorno tiene principales repercusiones (también edad y tamaño significativas; sistema técnico y poder selectivos). LÍNEA MEDIA y TECNOESTRUCTURA/STAFF: edad y tamaño tienen principales repercusiones (entorno significativo; sistema técnico y poder selectivos). NÚCLEO DE OPERACIONES: el sistema técnico tiene principales repercusiones (también edad y tamaño significativas; entorno y poder selectivos).",
+    "tema": "Factores de Contingencia"
+  },
+  {
+    "term": "¿Cuál es la misión de la organización y cómo condiciona la estructura?",
+    "def": "La misión es el propósito general/razón por el que existe la organización. Se encuentra en la cúspide del proceso de planificación. La estructura de la organización NO es un fin en sí mismo, sino un MEDIO PARA LOGRAR LOS OBJETIVOS. Todos los objetivos y acciones deben ser consistentes y coherentes con su misión. Las personas o actividades que contribuyen directamente a proporcionar los productos/servicios forman el personal o actividades de LÍNEA. Las que cumplen función de apoyo forman el personal o actividades de STAFF.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es la eficacia y la eficiencia en el diseño organizativo?",
+    "def": "El diseño o rediseño de la estructura de la organización se basa en aplicar conocimientos especializados para conseguir una estructura que funcione mejor que la anterior. El nivel de mejora ha de valorarse en términos de: EFICACIA: que se alcancen los objetivos de forma más precisa (se cumplen los objetivos). EFICIENCIA: que se usen el mínimo de recursos. Al afrontar un proceso de diseño estructural hay que tener claro: el objetivo organizacional, el coste de desarrollo e implantación del nuevo diseño, y el beneficio esperado del nuevo diseño en comparación con el anterior.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es la naturaleza sistémica de la organización?",
+    "def": "Los parámetros de diseño están INTERCONECTADOS: cambiar la especialización de los puestos supondrá cambios en otros parámetros como la departamentalización, la formalización, etc. Una modificación de la estructura alterará toda la organización. Las organizaciones son sistemas ABIERTOS: son conjuntos de elementos interrelacionados que transforman inputs del entorno en outputs que devuelven a su entorno. Las empresas son sistemas artificiales pero también abiertos. Por ello, el enfoque contingente del diseño de la estructura es clave.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué es la función organizativa y cuáles son las 4 funciones del directivo?",
+    "def": "La FUNCIÓN ORGANIZATIVA es diseñar una estructura que pueda ejecutar los planes establecidos. Las 4 funciones básicas SECUENCIALES del directivo (enfoque clásico): 1) PLANIFICACIÓN: fijar las metas y cómo alcanzarlas (misiones, estrategias, procedimientos, reglas, políticas...). 2) ORGANIZACIÓN: diseñar la estructura para ejecutar los planes. 3) DIRECCIÓN: influir en las personas para que aporten su máximo esfuerzo (liderazgo). 4) CONTROL: verificar la adecuación de los logros a las metas y detectar desviaciones. Actúan de forma coordinada e interdependiente.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Qué son los 3 tipos de decisiones según su importancia?",
+    "def": "1) DECISIONES OPERATIVAS: rutinarias, problemas estructurados y predeterminados. Se ejecutan con rapidez. Vinculadas a las actividades del día a día. 2) DECISIONES ADMINISTRATIVAS: a) Coordinativas (orientan y coordinan las decisiones operativas, rutinarias) y b) De excepción (no rutinarias, menos programadas; afectan a unidades o departamentos). 3) DECISIONES ESTRATÉGICAS: afectan a toda la organización, las más complejas y menos rutinarias, pueden tardar años en solucionarse. El contexto es el que les otorga carácter estratégico, no la decisión en sí misma.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Cuál es el papel del líder en la Organización Misionaria?",
+    "def": "El líder tiene una influencia especial que se deriva de su relación con la IDEOLOGÍA, no con la autoridad o poder del puesto. En el pasado de una organización misionaria hay un LÍDER CARISMÁTICO (suele ser su fundador o el que estableció su ideología). En sus inicios es una estructura simple. La transformación a misionaria se produce cuando el líder DEJA EL PODER y pasa a ser ejercido por la IDEOLOGÍA. El líder ejerce el poder que le transmite la ideología con un estilo directivo claramente carismático.",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Cuáles son las 3 disfunciones de la especialización del puesto?",
+    "def": "1) PROBLEMAS DE COMUNICACIÓN Y COORDINACIÓN (puestos especializados vertical y horizontalmente): los trabajadores se aíslan, la comunicación es mínima, pueden perpetuarse fallos o errores. 2) ELEVADA ESPECIALIZACIÓN HORIZONTAL crea PROBLEMAS DE EQUILIBRIO cuando el volumen de actividad no justifica la existencia de puestos especializados (la escala de la organización impide tener puestos muy especializados). 3) EXCESIVA ESPECIALIZACIÓN horizontal y vertical crea problemas en el núcleo de operaciones que afectan la postura emocional del individuo (alienación del trabajo: trabajadores=máquinas).",
+    "tema": "Diseño de Puestos"
+  },
+  {
+    "term": "¿Cómo se determinan las estrategias en la Burocracia Profesional?",
+    "def": "La formulación explícita desde el ápice estratégico pierde sentido debido a la autonomía del profesional: es muy difícil medir los outputs y llegar a un acuerdo sobre los objetivos. La estrategia es la del profesional INDIVIDUAL y de las ASOCIACIONES PROFESIONALES que los han formado. Las estrategias se inculcan durante la preparación formal y son modificadas cuando surgen nuevas necesidades. Representan el efecto acumulado de los proyectos mayoritariamente aceptados promovidos por los profesionales. El proceso es ASCENDENTE o EMERGENTE.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Por qué la forma divisional pura tiene problemas en el sector público?",
+    "def": "La forma divisional pura no funciona efectivamente en el sector público porque los 'directivos' de cada división no tendrían control sobre sus subordinados en temas como su selección, formación, sistemas retributivos, castigos, disciplina, traslados, despidos. También tienen el problema de la MEDICIÓN: tienen que introducir en el sistema de control de rendimiento objetivos que no pueden ser medidos de manera objetiva. Para controlarlo de otra forma se usa la socialización o el nombramiento de directivos que crean en los objetivos sociales en cuestión.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Cuáles son los 4 problemas/costes de la descentralización?",
+    "def": "1) COSTE DE CAPACITACIÓN: el proceso de capacitación de los directivos en la toma de decisiones es muy costoso, y se requieren salarios mayores por más responsabilidades. 2) COSTE DE PLANIFICACIÓN: los procedimientos de planificación y control son más extensos para comprobar que la toma de decisiones cumple los objetivos. 3) COSTE DE EVALUACIÓN: los métodos para medir la responsabilidad son costosos en tiempo y generan temor en los directivos. 4) BLOQUEO DE ALTA DIRECCIÓN: la alta dirección puede no estar dispuesta o no ser capaz de delegar, percibiendo la delegación como pérdida de poder.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Cuándo se usa el puesto de enlace vs. directivo integrador?",
+    "def": "PUESTO DE ENLACE: cuando hay problemas de coordinación entre departamentos con distintas orientaciones funcionales pero con importantes interdependencias. NO tiene autoridad formal pero tiene poder informal como 'comunicador'. Actúa como mediador para encauzar directamente la comunicación sin recurrir a un directivo común superior. DIRECTIVO INTEGRADOR: cuando se necesita más coordinación por adaptación mutua de la que pueden proporcionar los puestos de enlace. Tiene poder formal sobre PROCESOS de decisión (no sobre el personal de los departamentos).",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿En qué partes de la organización son más importantes los dispositivos de enlace?",
+    "def": "1) LÍNEA MEDIA: el conjunto de dispositivos de enlace son los parámetros de diseño más importantes, combinándose en muchos casos grupos de trabajo y comités permanentes. 2) TECNOESTRUCTURA Y STAFF DE APOYO: se usan cuando se realiza un trabajo especializado, complejo y muy interdependiente con las unidades de línea. 3) NÚCLEO DE OPERACIONES: cuando está compuesto por profesionales con interdependencias, se usa la adaptación mutua: grupos de trabajo y estructuras matriciales variables. 4) ÁPICE ESTRATÉGICO: son frecuentes los comités permanentes de altos directivos y grupos de trabajo.",
+    "tema": "Dispositivos de Enlace"
+  },
+  {
+    "term": "¿Cuáles son los problemas/funciones del sistema de comunicación informal?",
+    "def": "Desde los experimentos de Hawthorne (años 20 s.XX) se evidenció que las organizaciones también funcionan con flujos informales. Las redes informales se crean al amparo de sentimientos, intereses y afinidades personales. Son indispensables para los aspectos formales pero demasiado fluidas. Dos motivos de existencia: 1) TRABAJO: muchos contactos informales están relacionados con las tareas. 2) SOCIALES: la gente necesita relacionarse. Efectos negativos: los individuos pueden no hacer caso a los sistemas regulados, revelando información a personas de fuera o reteniendo datos.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Qué es la descentralización vertical paralela y cuándo se produce?",
+    "def": "La descentralización vertical PARALELA se produce cuando individuos situados en la misma parte de la organización (y normalmente del mismo nivel jerárquico) tienen, cada uno de ellos, capacidad para tomar decisiones sobre los mismos campos o áreas. Es para MÚLTIPLES funciones. Se produce cuando las organizaciones tienen unidades agrupadas en base al MERCADO (divisional), en las que cada división representa un negocio semindependiente. EXCLUSIVA de organizaciones cuyas unidades están agrupadas en base a mercado.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Cuáles son las disfunciones burocráticas según Merton y Crozier?",
+    "def": "MODELO DE MERTON: la rigidez del comportamiento reduce la eficacia organizativa. El burócrata atiende estrictamente las reglas internas y se preocupa de defender y justificar su propio comportamiento. Aumenta el uso de sistemas de control, fuente de disfunciones. ESTUDIOS DE CROZIER: 1) El uso de reglas destruye la relación de dependencia superior/subordinado. 2) Decisiones tomadas por personas sin conocimiento directo del problema. 3) Cuanto más regulada está la organización, mayor la independencia e influencia de los expertos que controlan los ámbitos de incertidumbre. Generan CÍRCULOS VICIOSOS.",
+    "tema": "Configuraciones: Burocracia Maquinal"
+  },
+  {
+    "term": "¿Cómo son las estructuras planas en el núcleo de operaciones vs. en la línea media?",
+    "def": "En el NÚCLEO DE OPERACIONES: las unidades son las MAYORES porque depende más de la normalización para su coordinación. Los supervisores de primera línea pueden tener muchos subordinados. En la LÍNEA MEDIA: el tamaño depende de las interdependencias correspondientes al nivel jerárquico. Si se agrupa por mercado (unidades con interdependencias del flujo de trabajo dentro), las unidades serán PLANAS. Si se agrupa funcionalmente (requiere coordinación entre unidades), las unidades serán ALTAS. ÁPICE ESTRATÉGICO: tiene normalmente el ámbito de control más estrecho de toda la organización.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cuándo se usa la agrupación funcional o de mercado en el núcleo de operaciones vs. en las unidades superiores?",
+    "def": "NÚCLEO DE OPERACIONES: los operarios se agrupan en unidades dirigidas por supervisores de primera línea. LÍNEA MEDIA: la agrupación por mercado es más frecuente en los niveles superiores y medios (grandes organizaciones). TECNOESTRUCTURA Y STAFF: se agrupan por grupos homogéneos definidos por la función que desempeñan (agrupación funcional). El staff suele estar bajo el mando de directivos de su propia especialidad. Existen unidades de staff en todos los niveles de la jerarquía.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Qué es la 'organización en crisis' como variante de la estructura simple?",
+    "def": "Una organización en crisis se da cuando la extrema hostilidad obliga a la organización a centralizarse independientemente de cuál sea su estructura habitual. Las condiciones de entorno extremadamente hostiles llevan a cualquier organización a centralizar transitoriamente su estructura bajo el director general para poder reaccionar de forma rápida y coordinada. Es una VARIANTE DE LA ESTRUCTURA SIMPLE que puede surgir en cualquier tipo de organización cuando se produce una crisis. Pregunta trampa frecuente: NO es una variante de la burocracia maquinal.",
+    "tema": "Configuraciones: Estructura Simple"
+  },
+  {
+    "term": "¿Qué es la descentralización total (Tipo F) y en qué mecanismo se basa?",
+    "def": "La descentralización es COMPLETA cuando el poder no se basa en el puesto o los conocimientos, sino en el mero hecho de pertenecer a la organización. Se produce en las organizaciones 'democráticas' (Ej.: cooperativas). Todos los miembros tienen el mismo poder ('un miembro, un voto'). Están muy influidas por una ideología o cultura organizacional fuerte y democrática. El mecanismo de coordinación es la NORMALIZACIÓN DE LOS VALORES. Los miembros suelen realizar múltiples tareas con puestos polivalentes y poco especializados.",
+    "tema": "Descentralización"
+  },
+  {
+    "term": "¿Qué son las 'buropatologías' en la Burocracia Maquinal?",
+    "def": "Las buropatologías son comportamientos disfuncionales de las estructuras burocráticas maquinales que dan lugar a precios más elevados, al trabajo descuidado y a un trato indiferente o desconsiderado hacia el cliente. Se producen porque los individuos del núcleo de operaciones se resisten a ser considerados como meros engranajes. Consecuencias disfuncionales: 1) Osificación/creación del comportamiento con rechazo a cualquier innovación. 2) Mal trato hacia los clientes. 3) Aumento del absentismo laboral. 4) Huelgas e incluso subversión de operaciones.",
+    "tema": "Configuraciones: Burocracia Maquinal"
+  },
+  {
+    "term": "¿Cuáles son las condiciones contingentes de la Adhocracia para el sistema técnico?",
+    "def": "En las adhocracias OPERATIVAS: el sistema técnico es SENCILLO y NO REGULADOR (el trabajo es complejo intelectualmente pero los instrumentos utilizados no son sofisticados en sí). En las adhocracias ADMINISTRATIVAS: el sistema técnico es SOFISTICADO y AUTOMATIZADO (la complejidad del sistema técnico requiere grandes staffs de apoyo de expertos, y la automatización del núcleo de operaciones elimina la fuente de los conflictos burocráticos, transformando la estructura administrativa en orgánica). Resultado: 'adhocracias automatizadas'.",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿En qué consiste el proceso de toma de decisiones estratégicas y por qué es complejo?",
+    "def": "Las decisiones estratégicas afectan a toda la organización y son las más complejas y menos rutinarias. Su proceso es muy complejo en todas sus fases: reconocimiento del problema, diagnóstico, desarrollo y selección de soluciones ad hoc (a la medida) = nuevo producto. Se agrava porque la implantación de una decisión estratégica requiere la puesta en marcha de una sucesión de decisiones administrativas que se van extendiendo por toda la estructura jerárquica hasta desembocar en una serie de cambios en los procesos de decisiones operativas.",
+    "tema": "Flujos y Organigrama"
+  },
+  {
+    "term": "¿Qué diferencia hay entre preparación (formación) y formalización del comportamiento como reguladores?",
+    "def": "Aunque ambos condicionan el comportamiento de los trabajadores, son SUSTITUTOS MUTUOS con finalidad similar: FORMALIZACIÓN: usada mediante propios procedimientos y reglas (trabajos no cualificados sometidos a fuerte especialización vertical y horizontal). PREPARACIÓN Y ADOCTRINAMIENTO: vía indirecta para trabajos complejos que no pueden especializarse fácilmente en la dimensión vertical ni ser formalizados (contratar profesionales ya dotados de preparación). En culturas fuertes, el adoctrinamiento desempeña un papel crucial. En organizaciones normativas o misionarias, la normalización de valores es el mecanismo más importante.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Qué parte de la organización asume la responsabilidad principal sobre la formalización?",
+    "def": "La TECNOESTRUCTURA es la única que tiene el poder en este aspecto. En ella, las unidades más cercanas al núcleo de operaciones tendrán muchas reglas y procedimientos de trabajo bastante normalizados. Las unidades dedicadas a trabajos más variados adoptarán estructuras relativamente orgánicas. La tecnoestructura asume la responsabilidad principal sobre la formalización de todo el trabajo en la organización. El poder que determina cómo realizar un trabajo formalizado recae sobre la persona que lo DISEÑA (un analista de la tecnoestructura), no sobre el supervisor jerárquico.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Qué puestos están más formalizados en la organización y en qué partes?",
+    "def": "NÚCLEO DE OPERACIONES: se da con mayor frecuencia la formalización ya que las tareas suelen ser más repetitivas. LÍNEA MEDIA: el trabajo es menos repetitivo y por ello menos formalizado. El más cercano al núcleo de operaciones (supervisor de primera línea) suele estar más formalizado. Los más distantes del núcleo funcionan bajo condiciones más orgánicas. ÁPICE ESTRATÉGICO: el trabajo menos programado (formalizado); condiciones sumamente orgánicas. STAFF DE APOYO: distintas estructuras según el trabajo y las condiciones externas. Los puestos SIN CUALIFICACIÓN son los más fáciles de formalizar.",
+    "tema": "Regulación del Comportamiento"
+  },
+  {
+    "term": "¿Cómo afecta la automatización del sistema técnico a la estructura?",
+    "def": "H7: La automatización del núcleo de operaciones TRANSFORMA la estructura administrativa burocrática en una estructura ORGÁNICA. La automatización elimina prácticamente a los operarios no cualificados del núcleo de operaciones. Los supervisores de primera línea ya no tienen que controlar operarios ni normalizar su trabajo los analistas. Ambos se reemplazan por especialistas de staff que controlan su propio trabajo. Se elimina la mentalidad de control. Se necesitan especialistas de staff (los más sofisticados). La estructura administrativa pasa a ser ORGÁNICA.",
+    "tema": "Factores de Contingencia"
+  },
+  {
+    "term": "¿Cuáles son los 6 tipos de bases o posibles agrupaciones de unidades?",
+    "def": "1) Según CONOCIMIENTOS Y HABILIDADES (hospitales: departamento de cardiología, neurología...). 2) Según PROCESO DE TRABAJO Y FUNCIÓN (departamento de producción, marketing...). 3) Según TIEMPO (turnos de trabajo). 4) Según OUTPUT/PRODUCTO (departamento de producto X, producto Y...). 5) Según CLIENTES (departamento de clientes A, clientes B...). 6) Según ZONAS GEOGRÁFICAS (división europea, división americana...). Las 6 se pueden clasificar en 2 grupos: FUNCIONAL (1, 2, 3) y MERCADO (4, 5, 6).",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cuáles son las repercusiones de la agrupación de unidades en la organización?",
+    "def": "La agrupación constituye un medio fundamental de coordinación y tiene 3 repercusiones: 1) Establece un sistema de SUPERVISIÓN COMÚN entre puestos y unidades (introduce supervisión directa). 2) Precisa que los puestos y unidades COMPARTAN RECURSOS COMUNES (estimula el contacto informal → adaptación mutua). 3) Suele crear MEDIDAS COMUNES DE RENDIMIENTO (sienta las bases para normalización de resultados). Pero también puede crear PROBLEMAS DE COORDINACIÓN ENTRE UNIDADES: la comunicación se centra en el interior de la unidad, aislando a los miembros de distintas unidades.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cuáles son las características del personal directivo y no directivo?",
+    "def": "PERSONAL DIRECTIVO: conjunto de directivos de la organización, incluyendo el ápice estratégico. Incluye directivos de línea media, directivos del staff de apoyo y directivos de la tecnoestructura. PERSONAL NO DIRECTIVO: hay personal no directivo también fuera del núcleo de operaciones: en la tecnoestructura (analistas) y en el staff de apoyo. Los directivos de LÍNEA MEDIA son los únicos unidos a los operarios del núcleo de operaciones a través de la cadena de autoridad formal. En organizaciones muy pequeñas el ápice estratégico puede estar fusionado con el núcleo de operaciones.",
+    "tema": "Partes de la Organización"
+  },
+  {
+    "term": "¿Cuáles son las disfunciones del modelo de Crozier en la Burocracia Maquinal?",
+    "def": "Michel Crozier (1964) estudió burocracias del gobierno francés e identificó 4 puntos que conducen a círculos viciosos: 1) El uso de las reglas destruye la relación de dependencia entre superior y subordinado. 2) Para mantener el clima de impersonalidad, las decisiones que no quedan definidas por las reglas se toman fuera del núcleo. 3) Se desarrollan rigideces comunicativas como consecuencia de las presiones de grupos de compañeros dentro del nivel jerárquico, minimizando la interacción entre estratos. 4) Las reglas y la autoridad central no son capaces de controlarlo todo, creando zonas de poder informal.",
+    "tema": "Configuraciones: Burocracia Maquinal"
+  },
+  {
+    "term": "¿Qué es la 'inversión medios/fines' en la Burocracia Profesional?",
+    "def": "El último caso de los problemas de libertad de acción en la burocracia profesional: el profesional CONFUNDE LAS NECESIDADES DE SUS CLIENTES con las habilidades que es capaz de ofrecerles. En lugar de buscar la solución óptima para el cliente, busca la solución que mejor domina, independientemente de si es la más adecuada. Tratar esta reversión se ve obstaculizada por la dificultad de medir los outputs de gran parte del trabajo profesional de forma objetiva e incuestionable.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Cuáles son las condiciones contingentes que favorecen la Organización Misionaria?",
+    "def": "EDAD: ni muy joven (requiere cierto tiempo para que la ideología surja, se desarrolle e implante) ni muy vieja (el paso del tiempo actúa contra la misión). TAMAÑO: normalmente pequeñas (el contacto personal mantiene la cohesión). El dilema de tamaño se resuelve siendo pequeña y grande a la vez: federación de enclaves autónomos. SISTEMA TÉCNICO: no demasiado regulador ni demasiado sofisticado (incompatible que sea sofisticado: genera expertos que constituyen un poder al margen de la ideología). ENTORNO: estable (para afianzar la ideología) y no muy complejo.",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Cuál es la diferencia entre socialización e identificación 'por evocación' en la organización misionaria?",
+    "def": "La SOCIALIZACIÓN es el proceso social INFORMAL por el que un miembro interioriza la escala de valores, normas y pautas. El individuo estaría sometido a un proceso de aprendizaje mediante presiones informales. La identificación POR EVOCACIÓN se produce cuando la necesidad de lealtad a la ideología organizacional es muy importante, y por ello se recurre a procesos FORMALES de socialización y adoctrinamiento para reforzar las otras formas de identificación (natural y por selección). La evocación refuerza y formaliza lo que ya existe de forma natural.",
+    "tema": "Configuraciones: Org. Misionaria"
+  },
+  {
+    "term": "¿Por qué la Burocracia Profesional tiene una línea media reducida?",
+    "def": "La línea media es reducida por ser escasa la necesidad de supervisión directa de los operarios y la adaptación mutua entre ellos. En estas organizaciones la estructura directiva recurre a la ADAPTACIÓN MUTUA, siendo frecuentes los dispositivos de enlace, abundando los comités permanentes y los grupos de trabajo ad hoc. Estas organizaciones se describen como 'PIRÁMIDES INVERTIDAS' porque los operarios profesionales están encima (gran poder) y los directivos abajo (dispuestos a servirlos). La línea media se considera una especie de staff de apoyo profesional.",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Por qué la Forma Divisional genera presión hacia la Burocracia Maquinal?",
+    "def": "La normalización de outputs requiere el establecimiento de normas de rendimiento claramente definidas cuya existencia depende de dos condiciones que solo cumple la burocracia maquinal: 1) Cada división debe tratarse como un SOLO SISTEMA INTEGRADO con un solo conjunto consistente de objetivos, siendo por tanto el acoplamiento interno de cada división fuerte. 2) Los objetivos tienen que ser OPERATIVOS, prestándose a medidas cuantitativas de control de rendimiento. Si la forma divisional se superpone a las otras tres configuraciones, el directivo divisional debe hacer cumplir las dos condiciones anteriores.",
+    "tema": "Configuraciones: Forma Divisional"
+  },
+  {
+    "term": "¿Qué implica la agrupación de la Tecnoestructura y el Staff de Apoyo?",
+    "def": "TECNOESTRUCTURA Y STAFF DE APOYO se agrupan por grupos homogéneos definidos por la FUNCIÓN que desempeñan en la organización (agrupación funcional). El staff suele estar bajo el mando de los directivos de su propia especialidad. Por lo general se pueden encontrar unidades de staff en TODOS LOS NIVELES de la jerarquía. Los dispositivos de enlace se usan entre tecnoestructura/staff y línea cuando se realiza un trabajo especializado, complejo y muy interdependiente. Cuando hay muchos grupos de staff, es difícil distinguir entre línea y staff, formando una masa amorfa de relaciones de adaptación mutua.",
+    "tema": "Agrupación y Tamaño"
+  },
+  {
+    "term": "¿Cuándo se crea una 'adhocracia divisional'?",
+    "def": "Cuando el entorno de la adhocracia es muy diversificado, además de complejo y dinámico, aparece una mezcla entre la 'adhocracia divisional': forma divisional y adhocracia administrativa, con divisiones regionales y forma de estructura matricial permanente. Es adecuada para empresas que fabrican y venden muchos productos y materiales, aunque tecnológicamente interrelacionados, interesados en expandirse y someterse a fuerte competencia en un entorno de cambio rápido.",
+    "tema": "Configuraciones: Adhocracia"
+  },
+  {
+    "term": "¿Cómo difiere la Burocracia Maquinal de la Burocracia Profesional en términos de autoridad?",
+    "def": "BUROCRACIA MAQUINAL: recurre a la autoridad de naturaleza JERÁRQUICA (poder del puesto). La tecnoestructura diseña las normas de trabajo de los operarios. Cuando se le presenta un estímulo ejecuta una SECUENCIA NORMATIVA de programas (no precisa hacer diagnóstico). BUROCRACIA PROFESIONAL: hace hincapié en la autoridad de naturaleza PROFESIONAL (poder del experto). Las normas surgen generalmente en asociaciones profesionales EXTERNAS. Cuando se le presenta un estímulo, INVENTA o encuentra el programa normativo que se ajuste a una contingencia determinada (proceso de encasillamiento).",
+    "tema": "Configuraciones: Burocracia Profesional"
+  },
+  {
+    "term": "¿Qué función cumplen las 3 formas de formalización del comportamiento?",
+    "def": "1) FORMALIZACIÓN SEGÚN EL PUESTO: la organización atribuye al puesto en sí una serie de características de comportamiento, documentándolo en la descripción formal del puesto. El individuo puede recibir instrucciones sobre los pasos a dar y la secuencia. 2) FORMALIZACIÓN SEGÚN EL FLUJO DE TRABAJO: la organización introduce las características del puesto en el mismo trabajo, formalizando un flujo completo de trabajo (ej.: toda una cadena de montaje). 3) FORMALIZACIÓN SEGÚN LAS REGLAS: la organización instaura reglas para todo tipo de situaciones, especificándose quién puede y no puede hacer cada cosa, cuándo, dónde y con permiso de quién.",
+    "tema": "Regulación del Comportamiento"
+  }
+]
