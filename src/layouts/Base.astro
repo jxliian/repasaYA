@@ -41,15 +41,19 @@ const pageTitle =
   <ClientRouter />
   <style is:global>
     :root {
-      --bg:           #09090f;
-      --surface:      #111220;
-      --surface2:     #181928;
+      /* slate-950 base — very dark for orb contrast */
+      --bg:           #02021a;
+      --surface:      #0d0d1f;
+      --surface2:     #131328;
       --border:       rgba(255,255,255,0.08);
-      --glass:        rgba(255,255,255,0.025);
+      /* true glassmorphism values — semi-transparent, NOT solid */
+      --glass:        rgba(255,255,255,0.04);
+      --glass-hi:     rgba(255,255,255,0.10);
       --glass-border: rgba(255,255,255,0.09);
       --accent:       #7c6dfe;
       --accent2:      #c4b5fd;
       --accent-hover: #6b5cf0;
+      --purple-vivid: rgba(124,58,237,0.8);
       --cyan:         #22d3ee;
       --correct:      #22c55e;
       --wrong:        #ef4444;
@@ -57,7 +61,7 @@ const pageTitle =
       --text:         #eef0ff;
       --text-muted:   #8a94c8;
       --radius:       16px;
-      --radius-lg:    24px;
+      --radius-lg:    22px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; }
