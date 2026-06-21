@@ -1,147 +1,774 @@
 ---
 import Base from '../layouts/Base.astro';
-import DegreeCard from '../components/DegreeCard.astro';
+import SubjectCard from '../components/SubjectCard.astro';
 import { subjects } from '../data/subjects';
 import { execSync } from 'child_process';
-const base = import.meta.env.BASE_URL;
 
-const adeSubjects = subjects.filter(s => ['economia-espanola', 'rrhh', 'organizacion-empresas', 'do1', 'aef'].includes(s.slug));
-const infoSubjects = subjects.filter(s => ['sibw', 'mp', 'dsd'].includes(s.slug));
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
-// Lee los últimos commits en tiempo de build
-let commits: { hash: string; msg: string; date: string }[] = [];
+const adeSubjects  = subjects.filter(s =>
+  ['economia-espanola','rrhh','organizacion-empresas','do1','aef'].includes(s.slug));
+const infoSubjects = subjects.filter(s =>
+  ['sibw','mp','dsd'].includes(s.slug));
+
+/* ── Novedades from git log ─────────────────────────────────────── */
+type CommitEntry = {
+  date: string; hash: string; raw: string;
+  badge: string; cls: string; scope: string; text: string;
+};
+
+const BADGE_MAP: Record<string, { badge: string; cls: string }> = {
+  feat:     { badge: 'Nuevo',       cls: 'upd-green'  },
+  fix:      { badge: 'Fix',         cls: 'upd-orange' },
+  chore:    { badge: 'Mejora',      cls: 'upd-blue'   },
+  docs:     { badge: 'Docs',        cls: 'upd-gray'   },
+  style:    { badge: 'UI',          cls: 'upd-purple' },
+  refactor: { badge: 'Refactor',    cls: 'upd-blue'   },
+  perf:     { badge: 'Rendimiento', cls: 'upd-cyan'   },
+};
+
+function humanize(msg: string): Pick<CommitEntry, 'badge'|'cls'|'scope'|'text'> {
+  const m = msg.match(/^(feat|fix|chore|docs|style|refactor|perf)\(([^)]+)\):\s*(.+)/i);
+  if (!m) return { badge: 'Update', cls: 'upd-gray', scope: '', text: msg.slice(0,60) };
+  const [, type, scope, rawText] = m;
+  const meta = BADGE_MAP[type.toLowerCase()] ?? { badge: 'Update', cls: 'upd-gray' };
+  const text = rawText
+    .replace(/^(añadir|agregar|add|crear|create|actualizar|update|corregir|mejorar)\s+/i, '')
+    .replace(/^\d+\s+/, '');
+  return { ...meta, scope: scope.toUpperCase(), text: (text.charAt(0).toUpperCase() + text.slice(1)).slice(0,60) };
+}
+
+let commits: CommitEntry[] = [];
 try {
   const raw = execSync(
-    'git log --pretty=format:"%ad%x09%h%x09%s" --date=format:"%d %b %Y" -n 8',
+    'git log --pretty=format:"%ad%x09%h%x09%s" --date=format:"%d %b" -n 7',
     { encoding: 'utf8', cwd: process.cwd() }
   ).trim();
   commits = raw.split('\n').filter(Boolean).map(line => {
-    const [date, hash, ...rest] = line.split('\t');
-    return { date: date ?? '', hash: hash ?? '', msg: rest.join(' ').slice(0, 52) };
+    const [date='', hash='', ...rest] = line.split('\t');
+    const raw = rest.join(' ');
+    return { date, hash, raw, ...humanize(raw) };
   });
-} catch (_) { /* git no disponible */ }
+} catch { /* ci/cd no git */ }
 
-const lastUpdate = commits[0]?.date ?? null;
+const lastUpdate  = commits[0]?.date ?? null;
+const totalFlash  = 128 + 40 + 63;           // OE + SIBW + AEF
+const ISSUE_URL   = 'https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre%5D&body=%23%23+Datos%0A-%20**Nombre**%3A+%0A-%20**Curso**%3A+';
+const REPO_URL    = 'https://github.com/jxliian/repasaYA';
+const PROFILE_URL = 'https://github.com/jxliian';
+const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests+y+flashcards+para+la+carrera.+Gratis+%E2%86%92+https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F';
 ---
-<Base title="repasaYA">
+<Base title="repasaYA" description="Tipo test, V/F y flashcards para las asignaturas de ADE e Informática. +1000 preguntas, +200 flashcards. Gratis, sin registro.">
+
 <style>
-  html { height:100%; overflow:hidden; }
-  body { height:100%; overflow:hidden; display:flex; flex-direction:column; }
-  header {
-    background:var(--surface); border-bottom:1px solid var(--border);
-    padding:0 28px; height:58px; display:flex; align-items:center; gap:16px;
-    position:sticky; top:0; z-index:50;
+  /* ── Reset for this page ───────────────────────────── */
+  html, body { height: auto; overflow: visible; }
+
+  /* ── Background ambient blobs ─────────────────────── */
+  .bg-decor {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0; overflow: hidden;
   }
-  .logo { font-size:1.4rem; font-weight:800; letter-spacing:-1px; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; flex-shrink:0; }
-  .logo-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-left:2px; vertical-align:middle; margin-bottom:3px; -webkit-text-fill-color:initial; }
-  .tagline { font-size:.78rem; color:var(--text-muted); border-left:1px solid var(--border); padding-left:16px; }
-  .header-right { margin-left:auto; display:flex; align-items:center; gap:12px; }
-  .request-btn { display:inline-flex; align-items:center; gap:6px; background:rgba(108,99,255,.08); border:1px solid rgba(108,99,255,.25); border-radius:99px; padding:7px 14px; color:var(--accent2); font-size:.78rem; font-weight:700; transition:all .2s; white-space:nowrap; }
-  .request-btn:hover { background:rgba(108,99,255,.16); border-color:var(--accent); }
-  .hits-badge { display:flex; align-items:center; background:var(--surface2); border:1px solid var(--border); border-radius:99px; padding:5px 12px; }
-  .hits-badge img { display:block; border-radius:3px; }
-  .layout { flex:1; min-height:0; display:grid; grid-template-columns:1fr 1fr; width:100%; overflow:hidden; }
-  .left { padding:64px 48px; display:flex; flex-direction:column; justify-content:center; gap:28px; overflow-y:auto; min-height:0; background:radial-gradient(ellipse 100% 80% at -10% 50%,rgba(108,99,255,.1) 0%,transparent 70%); }
-  .hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(108,99,255,.12); border:1px solid rgba(108,99,255,.3); border-radius:99px; padding:5px 14px; font-size:.78rem; color:var(--accent2); font-weight:600; width:fit-content; }
-  h1 { font-size:clamp(2rem,3.2vw,3rem); font-weight:800; letter-spacing:-1.5px; line-height:1.12; }
-  h1 span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .desc { font-size:1rem; color:var(--text-muted); line-height:1.65; max-width:420px; }
-  .stats { display:flex; gap:32px; flex-wrap:wrap; }
-  .stat { display:flex; flex-direction:column; gap:3px; }
-  .stat-value { font-size:1.6rem; font-weight:800; color:var(--accent2); letter-spacing:-.5px; }
-  .stat-label { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; }
-  .wa-btn { display:inline-flex; align-items:center; gap:8px; background:rgba(37,211,102,.1); border:1px solid rgba(37,211,102,.3); border-radius:99px; padding:10px 22px; color:#4ade80; font-size:.85rem; font-weight:700; transition:all .2s; width:fit-content; }
-  .wa-btn:hover { background:rgba(37,211,102,.18); box-shadow:0 0 16px rgba(37,211,102,.2); transform:translateY(-1px); }
-  .right { border-left:1px solid var(--border); padding:48px 40px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; min-height:0; }
-  .section-title { font-size:.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
-  .cards { display:flex; flex-direction:column; gap:14px; }
-  /* ── Changelog panel ── */
-  .updates { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-  .updates-hdr { padding:9px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; font-size:.68rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.8px; }
-  .upd-dot { width:6px; height:6px; border-radius:50%; background:var(--correct); box-shadow:0 0 6px rgba(34,197,94,.7); flex-shrink:0; animation:pulse 2.5s ease-in-out infinite; }
+  .bg-blob {
+    position: absolute; border-radius: 50%;
+    animation: blobDrift 20s ease-in-out infinite alternate;
+  }
+  .bg-blob-1 {
+    width: 700px; height: 700px; top: -200px; left: -150px;
+    background: radial-gradient(circle, rgba(124,109,254,.14), transparent 65%);
+    animation-duration: 22s;
+  }
+  .bg-blob-2 {
+    width: 550px; height: 550px; bottom: -150px; right: -100px;
+    background: radial-gradient(circle, rgba(34,211,238,.07), transparent 65%);
+    animation-duration: 28s;
+  }
+  .bg-blob-3 {
+    width: 350px; height: 350px; top: 45%; left: 40%;
+    background: radial-gradient(circle, rgba(124,109,254,.06), transparent 65%);
+    animation-duration: 18s;
+  }
+  @keyframes blobDrift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.05); }
+  }
+
+  /* ── Header ────────────────────────────────────────── */
+  .site-header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(9,9,15,0.82);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 0 24px; height: 62px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .logo-link {
+    font-size: 1.35rem; font-weight: 800; letter-spacing: -1px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex; align-items: center; gap: 2px;
+  }
+  .logo-dot {
+    display: inline-block; width: 7px; height: 7px;
+    border-radius: 50%; background: var(--accent);
+    -webkit-text-fill-color: initial;
+    margin-left: 1px; margin-bottom: 6px; flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(124,109,254,.7);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-  .upd-since { margin-left:auto; font-size:.65rem; color:var(--accent2); font-weight:600; text-transform:none; letter-spacing:0; }
-  .commit-list { display:flex; flex-direction:column; }
-  .commit-item { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--border); transition:background .15s; }
-  .commit-item:last-child { border-bottom:none; }
-  .commit-item:hover { background:var(--surface2); }
-  .commit-date { font-size:.65rem; color:var(--text-muted); white-space:nowrap; min-width:62px; }
-  .commit-msg { font-size:.8rem; color:var(--text); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .commit-hash { font-size:.62rem; font-family:'Courier New',monospace; background:rgba(108,99,255,.1); border:1px solid rgba(108,99,255,.2); border-radius:4px; padding:1px 6px; color:var(--accent2); white-space:nowrap; flex-shrink:0; }
-  .github-fab { position:fixed; bottom:28px; right:28px; display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:99px; padding:12px 20px 12px 16px; color:var(--text); font-size:.85rem; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,.4); transition:all .25s; z-index:100; }
-  .github-fab:hover { border-color:var(--accent); background:#1e1c35; color:var(--accent2); box-shadow:0 0 0 3px rgba(108,99,255,.2),0 0 24px rgba(108,99,255,.35); transform:translateY(-2px); }
-  footer { text-align:center; padding:16px; font-size:.75rem; color:var(--text-muted); border-top:1px solid var(--border); }
-  @media(max-width:860px) {
-    html,body{height:auto;overflow:visible}
-    .layout{grid-template-columns:1fr;overflow:visible}
-    .left{position:static;height:auto;padding:48px 24px 32px;text-align:center;align-items:center;overflow:visible}
-    .left .desc{margin:0 auto} .stats{justify-content:center}
-    .right{border-left:none;border-top:1px solid var(--border);padding:32px 24px 48px;overflow:visible}
-    .tagline{display:none} header{padding:0 16px;gap:10px}
-    .request-btn span{display:none} .request-btn{padding:7px 10px}
+
+  /* Search */
+  .search-wrap {
+    flex: 1; max-width: 480px; min-width: 160px;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px; padding: 0 14px; height: 38px;
+    transition: border-color .2s, box-shadow .2s;
+    cursor: text;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(124,109,254,.5);
+    box-shadow: 0 0 0 3px rgba(124,109,254,.1);
+  }
+  .search-icon { color: var(--text-muted); flex-shrink: 0; }
+  .search-input {
+    flex: 1; background: none; border: none; outline: none;
+    color: var(--text); font-size: .88rem;
+    font-family: inherit;
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-kbd {
+    flex-shrink: 0; font-size: .65rem; font-weight: 700;
+    color: var(--text-muted); background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 5px;
+    padding: 2px 6px; font-family: inherit; letter-spacing: .3px;
+    transition: opacity .2s;
+  }
+  .search-wrap:focus-within .search-kbd { opacity: 0; }
+
+  /* Header right */
+  .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .hdr-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(124,109,254,.08); border: 1px solid rgba(124,109,254,.22);
+    border-radius: 99px; padding: 7px 14px;
+    color: var(--accent2); font-size: .78rem; font-weight: 700;
+    transition: all .2s; white-space: nowrap; cursor: pointer;
+  }
+  .hdr-btn:hover { background: rgba(124,109,254,.16); border-color: var(--accent); }
+  .hits-pill {
+    display: flex; align-items: center;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 99px; padding: 5px 10px; height: 30px; overflow: hidden;
+  }
+  .hits-pill img { display: block; }
+
+  /* ── Main wrapper ──────────────────────────────────── */
+  main {
+    position: relative; z-index: 1;
+    max-width: 1280px; margin: 0 auto;
+    padding: 28px 24px 64px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  /* ── Shared glass cell ─────────────────────────────── */
+  .glass-cell {
+    --mx: 50%; --my: 50%;
+    position: relative;
+    background: var(--glass);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .glass-cell::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      250px circle at var(--mx) var(--my),
+      rgba(124,109,254,.09),
+      transparent 70%
+    );
+    opacity: 0; transition: opacity .35s;
+    pointer-events: none;
+  }
+  .glass-cell:hover::after { opacity: 1; }
+
+  /* Top accent stripe */
+  .cell-stripe {
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--cyan));
+    opacity: 0; transition: opacity .22s;
+    z-index: 2;
+  }
+  .glass-cell:hover .cell-stripe { opacity: 1; }
+
+  /* ── Top grid: hero + changelog ───────────────────── */
+  .top-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 16px;
+    align-items: start;
+  }
+
+  /* Hero cell */
+  .hero-cell { padding: 36px 40px; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.22);
+    border-radius: 99px; padding: 5px 14px;
+    font-size: .73rem; font-weight: 700; color: #4ade80;
+    margin-bottom: 20px; width: fit-content;
+  }
+  .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34,197,94,.7);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  .hero-title {
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    font-weight: 800; letter-spacing: -1.5px; line-height: 1.12;
+    margin-bottom: 14px;
+  }
+  .grad-text {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-desc {
+    font-size: .95rem; color: var(--text-muted); line-height: 1.65;
+    max-width: 480px; margin-bottom: 28px;
+  }
+  .hero-stats {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: wrap; gap: 4px; margin-bottom: 28px;
+  }
+  .hstat {
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 10px 20px;
+    background: rgba(124,109,254,.06); border: 1px solid rgba(124,109,254,.12);
+    border-radius: 12px;
+  }
+  .hstat-n {
+    font-size: 1.55rem; font-weight: 800; letter-spacing: -.5px;
+    color: var(--accent2); line-height: 1;
+  }
+  .hstat-l {
+    font-size: .65rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .7px; color: var(--text-muted);
+  }
+  .hero-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(37,211,102,.08); border: 1px solid rgba(37,211,102,.22);
+    border-radius: 99px; padding: 9px 20px;
+    color: #4ade80; font-size: .82rem; font-weight: 700;
+    transition: all .2s;
+  }
+  .wa-btn:hover { background: rgba(37,211,102,.16); transform: translateY(-1px); }
+
+  /* Changelog cell */
+  .changelog-cell { display: flex; flex-direction: column; }
+  .changelog-hdr {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 18px; border-bottom: 1px solid var(--glass-border);
+    font-size: .68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .8px; color: var(--text-muted);
+    position: relative; z-index: 3;
+  }
+  .changelog-since {
+    margin-left: auto; font-size: .65rem; color: var(--accent2);
+    font-weight: 600; text-transform: none; letter-spacing: 0;
+  }
+  .changelog-list {
+    list-style: none; flex: 1;
+    position: relative; z-index: 3;
+  }
+  .changelog-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center; gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    transition: background .15s;
+  }
+  .changelog-item:last-child { border-bottom: none; }
+  .changelog-item:hover { background: rgba(255,255,255,.03); }
+  .upd-badge {
+    font-size: .6rem; font-weight: 700; border-radius: 99px;
+    padding: 2px 8px; white-space: nowrap; flex-shrink: 0;
+  }
+  .upd-green  { background: rgba(34,197,94,.15); color: #4ade80; border: 1px solid rgba(34,197,94,.25); }
+  .upd-orange { background: rgba(249,115,22,.15); color: #fb923c; border: 1px solid rgba(249,115,22,.25); }
+  .upd-blue   { background: rgba(59,130,246,.15); color: #93c5fd; border: 1px solid rgba(59,130,246,.25); }
+  .upd-purple { background: rgba(168,85,247,.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,.25); }
+  .upd-cyan   { background: rgba(34,211,238,.12); color: #67e8f9; border: 1px solid rgba(34,211,238,.22); }
+  .upd-gray   { background: rgba(148,163,184,.1); color: #94a3b8; border: 1px solid rgba(148,163,184,.18); }
+  .upd-scope {
+    font-size: .62rem; font-weight: 800; color: var(--accent2);
+    background: rgba(124,109,254,.1); border: 1px solid rgba(124,109,254,.2);
+    border-radius: 4px; padding: 1px 6px; font-family: 'Courier New', monospace;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .upd-text {
+    font-size: .78rem; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .upd-date {
+    font-size: .62rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* ── CTA strip (3 cards) ───────────────────────────── */
+  .cta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .cta-card {
+    --mx: 50%; --my: 50%;
+    position: relative;
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 18px 20px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    overflow: hidden; isolation: isolate;
+    color: var(--text);
+  }
+  .cta-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(150px circle at var(--mx) var(--my), rgba(124,109,254,.12), transparent 70%);
+    opacity: 0; transition: opacity .3s; pointer-events: none;
+  }
+  .cta-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.4); }
+  .cta-card:hover::after { opacity: 1; }
+  .cta-card.github:hover  { border-color: rgba(255,255,255,.25); }
+  .cta-card.star:hover    { border-color: rgba(250,204,21,.35); }
+  .cta-card.request:hover { border-color: rgba(124,109,254,.45); }
+  .cta-label {
+    font-size: .68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .7px; color: var(--text-muted); position: relative; z-index: 1;
+  }
+  .cta-title {
+    font-size: .95rem; font-weight: 700; color: var(--text); position: relative; z-index: 1;
+  }
+  .cta-hint {
+    font-size: .75rem; color: var(--text-muted); position: relative; z-index: 1;
+  }
+  .cta-icon {
+    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+    font-size: 1.6rem; opacity: .18; transition: opacity .2s;
+    z-index: 0;
+  }
+  .cta-card:hover .cta-icon { opacity: .3; }
+
+  /* Hits cell (4th in strip — different style) */
+  .hits-cell {
+    position: relative;
+    display: flex; flex-direction: column; justify-content: center; gap: 6px;
+    padding: 18px 20px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: var(--radius); backdrop-filter: blur(12px); overflow: hidden;
+  }
+  .hits-cell-label {
+    font-size: .67rem; font-weight: 700; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: .7px;
+  }
+
+  /* ── Filter bar ────────────────────────────────────── */
+  .filter-bar {
+    display: flex; align-items: center; gap: 20px;
+    padding: 14px 20px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: var(--radius); backdrop-filter: blur(12px);
+    flex-wrap: wrap;
+  }
+  .filter-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .filter-label {
+    font-size: .67rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .7px; color: var(--text-muted); white-space: nowrap;
+    padding-right: 4px; border-right: 1px solid var(--border);
+  }
+  .fchips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .fchip {
+    font-size: .76rem; font-weight: 600; border-radius: 99px;
+    padding: 5px 14px; border: 1px solid var(--glass-border);
+    background: transparent; color: var(--text-muted);
+    cursor: pointer; transition: all .18s; font-family: inherit;
+  }
+  .fchip:hover:not(.fchip-on) { border-color: rgba(124,109,254,.4); color: var(--accent2); }
+  .fchip.fchip-on {
+    background: rgba(124,109,254,.18); border-color: rgba(124,109,254,.5);
+    color: var(--accent2);
+  }
+
+  /* No-results */
+  .no-results {
+    text-align: center; padding: 48px 24px;
+    color: var(--text-muted); font-size: .9rem;
+  }
+  .no-results[hidden] { display: none; }
+  .no-results p { margin-bottom: 8px; }
+
+  /* ── Subject sections ──────────────────────────────── */
+  .subject-section { display: flex; flex-direction: column; gap: 14px; }
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: .72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-muted);
+    padding: 0 4px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  /* ── Footer ────────────────────────────────────────── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 20px 24px;
+    font-size: .75rem; color: var(--text-muted);
+    border-top: 1px solid var(--glass-border);
+  }
+  footer a { color: var(--accent2); }
+  footer a:hover { color: var(--accent); }
+
+  /* ── Responsive ────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .top-grid { grid-template-columns: 1fr; }
+    .changelog-cell { order: 2; }
+  }
+  @media (max-width: 680px) {
+    .site-header { padding: 0 16px; gap: 10px; }
+    .search-wrap  { max-width: none; }
+    .hdr-btn span { display: none; }
+    .hdr-btn      { padding: 7px 10px; }
+    main          { padding: 20px 16px 48px; gap: 14px; }
+    .hero-cell    { padding: 24px 22px; }
+    .cta-strip    { grid-template-columns: 1fr 1fr; }
+    .subject-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .cta-strip { grid-template-columns: 1fr; }
+    .hero-stats { gap: 6px; }
   }
 </style>
 
-<header>
-  <div class="logo">repasaYA<span class="logo-dot"></span></div>
-  <div class="tagline">Tipo test · Verdadero/Falso · Flashcards</div>
+<!-- Ambient background blobs -->
+<div class="bg-decor" aria-hidden="true">
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="bg-blob bg-blob-3"></div>
+</div>
+
+<!-- ── Header ──────────────────────────────────────────── -->
+<header class="site-header">
+  <a class="logo-link" href={base} aria-label="repasaYA inicio">
+    repasaYA<span class="logo-dot" aria-hidden="true"></span>
+  </a>
+
+  <div class="search-wrap" role="search" id="search-wrap">
+    <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input
+      class="search-input" id="search-input"
+      type="search" placeholder="Buscar asignatura..."
+      aria-label="Buscar asignatura" autocomplete="off"
+    />
+    <kbd class="search-kbd" id="search-kbd" aria-hidden="true">⌘K</kbd>
+  </div>
+
   <div class="header-right">
-    <a class="request-btn" href="https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre+de+la+asignatura%5D&body=%23%23+Datos%0A%0A-+**Nombre**%3A+%0A-+**Curso**%3A+%0A-+**¿Tienes+material?**+Sí+%2F+No" target="_blank" rel="noopener">
-      ✦ <span>Solicitar asignatura</span>
+    <a class="hdr-btn" href={ISSUE_URL} target="_blank" rel="noopener" aria-label="Solicitar asignatura">
+      ✦ <span>Solicitar</span>
     </a>
-    <div class="hits-badge">
-      <img src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=6c63ff&labelColor=1a1d27" alt="visitas" height="18" />
+    <div class="hits-pill" aria-label="Contador de visitas">
+      <img
+        src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=7c6dfe&labelColor=111220"
+        alt="visitas" height="18" width="auto"
+        loading="lazy"
+      />
     </div>
   </div>
 </header>
 
-<div class="layout">
-  <div class="left">
-    <div class="hero-badge">✦ Material de repaso colaborativo</div>
-    <h1>Estudia más rápido,<br><span>aprueba de verdad.</span></h1>
-    <p class="desc">Tests interactivos, verdadero/falso y flashcards para las asignaturas de la carrera. Todo gratis, sin registro.</p>
-    <div class="stats">
-      <div class="stat"><span class="stat-value">{subjects.length}</span><span class="stat-label">Asignaturas</span></div>
-      <div class="stat"><span class="stat-value">+1000</span><span class="stat-label">Preguntas</span></div>
-      <div class="stat"><span class="stat-value">+25</span><span class="stat-label">Temas cubiertos</span></div>
-    </div>
-    {commits.length > 0 && (
-      <div class="updates">
-        <div class="updates-hdr">
-          <span class="upd-dot"></span>
-          Últimas actualizaciones
-          {lastUpdate && <span class="upd-since">{lastUpdate}</span>}
+<!-- ── Main ─────────────────────────────────────────────── -->
+<main>
+
+  <!-- Row 1: Hero + Changelog -->
+  <section class="top-grid" aria-label="Presentación y novedades">
+
+    <!-- Hero cell -->
+    <article class="glass-cell hero-cell" data-spot>
+      <div class="cell-stripe" aria-hidden="true"></div>
+
+      <span class="live-badge">
+        <span class="live-dot" aria-hidden="true"></span>
+        Open Source · GitHub
+      </span>
+
+      <h1 class="hero-title">
+        Estudia mejor,<br>
+        <span class="grad-text">aprueba de verdad.</span>
+      </h1>
+
+      <p class="hero-desc">
+        Tests interactivos, verdadero/falso y flashcards para las asignaturas
+        de la carrera. Gratis, sin registro, sin anuncios.
+      </p>
+
+      <div class="hero-stats" role="list" aria-label="Estadísticas">
+        <div class="hstat" role="listitem">
+          <span class="hstat-n">{subjects.length}</span>
+          <span class="hstat-l">Asignaturas</span>
         </div>
-        <div class="commit-list">
-          {commits.map(c => (
-            <a class="commit-item" href={`https://github.com/jxliian/repasaYA/commit/${c.hash}`} target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-              <span class="commit-date">{c.date}</span>
-              <span class="commit-msg">{c.msg}</span>
-              <span class="commit-hash">{c.hash}</span>
-            </a>
-          ))}
+        <div class="hstat" role="listitem">
+          <span class="hstat-n">+1000</span>
+          <span class="hstat-l">Preguntas</span>
+        </div>
+        <div class="hstat" role="listitem">
+          <span class="hstat-n">+{Math.floor(totalFlash / 10) * 10}</span>
+          <span class="hstat-l">Flashcards</span>
+        </div>
+        <div class="hstat" role="listitem">
+          <span class="hstat-n">+25</span>
+          <span class="hstat-l">Temas</span>
         </div>
       </div>
-    )}
-    <a class="wa-btn" href="https://wa.me/?text=%F0%9F%93%9A%20*repasaYA*%20%E2%80%94%20Tipo%20test%2C%20V%2FF%20y%20flashcards%20para%20la%20carrera.%20Gratis%20%E2%86%92%20https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F" target="_blank" rel="noopener">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Comparte con tus compañeros
+
+      <div class="hero-actions">
+        <a class="wa-btn" href={WA_URL} target="_blank" rel="noopener" aria-label="Compartir por WhatsApp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Comparte con tus compañeros
+        </a>
+      </div>
+    </article>
+
+    <!-- Changelog / Novedades cell -->
+    <article class="glass-cell changelog-cell" data-spot aria-label="Novedades recientes">
+      <div class="cell-stripe" aria-hidden="true"></div>
+
+      <div class="changelog-hdr">
+        <span class="live-dot" aria-hidden="true"></span>
+        Novedades
+        {lastUpdate && <span class="changelog-since" aria-label={`Última actualización: ${lastUpdate}`}>{lastUpdate}</span>}
+      </div>
+
+      {commits.length > 0 ? (
+        <ul class="changelog-list">
+          {commits.map(c => (
+            <li class="changelog-item">
+              <span class={`upd-badge ${c.cls}`} aria-label={`Tipo: ${c.badge}`}>{c.badge}</span>
+              {c.scope && <span class="upd-scope">{c.scope}</span>}
+              <span class="upd-text">{c.text}</span>
+              <time class="upd-date">{c.date}</time>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div style="padding:24px 16px;color:var(--text-muted);font-size:.82rem">Sin historial disponible.</div>
+      )}
+    </article>
+
+  </section>
+
+  <!-- Row 2: CTA strip -->
+  <section class="cta-strip" aria-label="Acciones rápidas">
+
+    <a class="cta-card github" href={PROFILE_URL} target="_blank" rel="noopener" data-spot aria-label="Seguir en GitHub">
+      <span class="cta-label">Sígueme</span>
+      <span class="cta-title">@jxliian en GitHub</span>
+      <span class="cta-hint">Perfil y proyectos →</span>
+      <span class="cta-icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </span>
     </a>
-  </div>
 
-  <div class="right">
-    <p class="section-title">Grados</p>
-    <div class="degrees">
-      <DegreeCard title="Administración de Empresas (ADE)" icon="📊" subjects={adeSubjects} />
-      <DegreeCard title="Ingeniería Informática" icon="💻" subjects={infoSubjects} />
+    <a class="cta-card star" href={REPO_URL} target="_blank" rel="noopener" data-spot aria-label="Dar estrella en GitHub">
+      <span class="cta-label">Repositorio</span>
+      <span class="cta-title" style="color:#fde68a">⭐ Dar estrella en GitHub</span>
+      <span class="cta-hint">Apoya el proyecto →</span>
+      <span class="cta-icon" aria-hidden="true">⭐</span>
+    </a>
+
+    <a class="cta-card request" href={ISSUE_URL} target="_blank" rel="noopener" data-spot aria-label="Solicitar una asignatura nueva">
+      <span class="cta-label">¿Falta algo?</span>
+      <span class="cta-title" style="color:var(--accent2)">✦ Solicitar asignatura</span>
+      <span class="cta-hint">Abre un issue →</span>
+      <span class="cta-icon" aria-hidden="true">✦</span>
+    </a>
+
+  </section>
+
+  <!-- Row 3: Filter bar -->
+  <nav class="filter-bar" aria-label="Filtros de asignaturas">
+    <div class="filter-group">
+      <span class="filter-label" id="degree-label">Grado</span>
+      <div class="fchips" role="group" aria-labelledby="degree-label">
+        <button class="fchip fchip-on" data-degree="" aria-pressed="true">Todos</button>
+        <button class="fchip" data-degree="ade" aria-pressed="false">📊 ADE</button>
+        <button class="fchip" data-degree="info" aria-pressed="false">💻 Informática</button>
+      </div>
     </div>
+    <div class="filter-group">
+      <span class="filter-label" id="type-label">Tipo</span>
+      <div class="fchips" role="group" aria-labelledby="type-label">
+        <button class="fchip fchip-on" data-mtype="" aria-pressed="true">Todo</button>
+        <button class="fchip" data-mtype="test" aria-pressed="false">Tipo Test</button>
+        <button class="fchip" data-mtype="vf" aria-pressed="false">V/F</button>
+        <button class="fchip" data-mtype="flashcards" aria-pressed="false">Flashcards</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- No results -->
+  <div class="no-results" id="no-results" role="status" hidden>
+    <p>No se encontraron asignaturas para "<strong id="no-results-q"></strong>".</p>
+    <p style="font-size:.8rem">Prueba con otro filtro o borra la búsqueda.</p>
   </div>
-</div>
 
-<a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-  Sígueme en GitHub ⭐
-</a>
+  <!-- Row 4: ADE subjects -->
+  <section class="subject-section" data-section="ade" aria-labelledby="lbl-ade">
+    <h2 class="section-label" id="lbl-ade">📊 Administración de Empresas</h2>
+    <div class="subject-grid">
+      {adeSubjects.map(s => <SubjectCard subject={s} degree="ade" />)}
+    </div>
+  </section>
 
-<footer>Hecho con ganas · <a href="https://github.com/jxliian" style="color:var(--accent2)">jxliian</a></footer>
+  <!-- Row 5: Informática subjects -->
+  <section class="subject-section" data-section="info" aria-labelledby="lbl-info">
+    <h2 class="section-label" id="lbl-info">💻 Ingeniería Informática</h2>
+    <div class="subject-grid">
+      {infoSubjects.map(s => <SubjectCard subject={s} degree="info" />)}
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Hecho con ganas ·
+  <a href={PROFILE_URL} target="_blank" rel="noopener">jxliian</a> ·
+  <a href={REPO_URL} target="_blank" rel="noopener">Código en GitHub</a>
+</footer>
+
+<!-- ── Client-side scripts ────────────────────────────────── -->
+<script>
+  /* ── Cmd/Ctrl+K shortcut ── */
+  const input = document.getElementById('search-input') as HTMLInputElement;
+  const kbd   = document.getElementById('search-kbd') as HTMLElement;
+
+  if (kbd) {
+    const isMac = /Mac|iPhone|iPod|iPad/.test(navigator.platform);
+    kbd.textContent = isMac ? '⌘K' : 'Ctrl K';
+  }
+
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      input?.focus();
+      input?.select();
+    }
+    if (e.key === 'Escape' && document.activeElement === input) {
+      input.blur();
+      input.value = '';
+      applyFilters();
+    }
+  });
+
+  /* ── Filter logic ── */
+  let activeDegree = '';
+  let activeMtype  = '';
+
+  function applyFilters() {
+    const q = (input?.value ?? '').toLowerCase().trim();
+    let totalVisible = 0;
+
+    document.querySelectorAll<HTMLElement>('[data-slug]').forEach(card => {
+      const title       = card.dataset.title ?? '';
+      const degree      = card.dataset.degree ?? '';
+      const type        = card.dataset.type ?? '';
+      const flashcards  = card.dataset.flashcards === '1';
+
+      let show = true;
+      if (q && !title.includes(q)) show = false;
+      if (activeDegree && degree !== activeDegree) show = false;
+      if (activeMtype === 'test'       && !['test','both'].includes(type)) show = false;
+      if (activeMtype === 'vf'         && !['vf','both'].includes(type))   show = false;
+      if (activeMtype === 'flashcards' && !flashcards)                     show = false;
+
+      card.style.display  = show ? '' : 'none';
+      card.style.opacity  = show ? '1' : '0';
+      if (show) totalVisible++;
+    });
+
+    /* Hide degree sections where all cards are hidden */
+    document.querySelectorAll<HTMLElement>('[data-section]').forEach(sec => {
+      const anyVisible = [...sec.querySelectorAll<HTMLElement>('[data-slug]')]
+        .some(c => c.style.display !== 'none');
+      sec.style.display = anyVisible ? '' : 'none';
+    });
+
+    /* No-results message */
+    const noRes = document.getElementById('no-results') as HTMLElement;
+    const noQ   = document.getElementById('no-results-q') as HTMLElement;
+    if (noRes) {
+      if (totalVisible === 0) {
+        noRes.removeAttribute('hidden');
+        if (noQ) noQ.textContent = q || '(filtro activo)';
+      } else {
+        noRes.setAttribute('hidden', '');
+      }
+    }
+  }
+
+  /* Degree chips */
+  document.querySelectorAll<HTMLButtonElement>('[data-degree]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeDegree = btn.dataset.degree ?? '';
+      document.querySelectorAll<HTMLButtonElement>('[data-degree]').forEach(b => {
+        b.classList.toggle('fchip-on', b === btn);
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      applyFilters();
+    });
+  });
+
+  /* Type chips */
+  document.querySelectorAll<HTMLButtonElement>('[data-mtype]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeMtype = btn.dataset.mtype ?? '';
+      document.querySelectorAll<HTMLButtonElement>('[data-mtype]').forEach(b => {
+        b.classList.toggle('fchip-on', b === btn);
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      applyFilters();
+    });
+  });
+
+  /* Search input */
+  input?.addEventListener('input', applyFilters);
+
+  /* Re-run after view transitions */
+  document.addEventListener('astro:after-swap', applyFilters);
+</script>
 </Base>

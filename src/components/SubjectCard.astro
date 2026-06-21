@@ -1,49 +1,223 @@
 ---
 import type { Subject } from '../data/subjects';
-interface Props { subject: Subject; }
-const { subject: s } = Astro.props;
+
+interface Props {
+  subject: Subject;
+  degree?: 'ade' | 'info' | '';
+}
+
+const { subject: s, degree = '' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const href = s.external ?? `${base}${s.slug}/`;
 const isExternal = !!s.external;
+
+const hasFlashcards = s.chips.some(c => c.toLowerCase().includes('flashcard'));
+
+type BadgeStyle = { label: string; cls: string };
+const typeBadge: Record<string, BadgeStyle> = {
+  test: { label: 'Tipo Test', cls: 'badge-purple' },
+  vf:   { label: 'V/F',      cls: 'badge-cyan'   },
+  both: { label: 'Test + V/F', cls: 'badge-multi' },
+};
+const badge = typeBadge[s.type] ?? { label: s.type, cls: 'badge-purple' };
 ---
-<a class="card" href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined}>
-  <div class="card-header">
-    <div class="card-icon">{s.icon}</div>
-    <div class="card-meta">
-      <div class="card-code">{s.code}</div>
-      <div class="card-name">{s.title}</div>
-    </div>
-    <span class="badge-live">● Live</span>
-  </div>
-  <p class="card-desc">{s.description}</p>
-  <div class="card-footer">
-    {s.chips.map(chip => <span class="chip chip-accent">{chip}</span>)}
-    <span class="arrow">→</span>
+
+<a
+  class="scard"
+  href={href}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
+  data-spot
+  data-degree={degree}
+  data-type={s.type}
+  data-flashcards={hasFlashcards ? '1' : '0'}
+  data-title={s.title.toLowerCase()}
+  data-slug={s.slug}
+  aria-label={`${s.title} — ${s.description}`}
+>
+  <div class="scard-top-line" aria-hidden="true"></div>
+  <div class="scard-body">
+    <header class="scard-head">
+      <div class="scard-icon" aria-hidden="true">{s.icon}</div>
+      <div class="scard-meta">
+        <p class="scard-code">{s.code}</p>
+        <p class="scard-name">{s.title}</p>
+      </div>
+      <span class={`scard-badge ${badge.cls}`} aria-label={`Tipo: ${badge.label}`}>{badge.label}</span>
+    </header>
+
+    <p class="scard-desc">{s.description}</p>
+
+    <footer class="scard-foot">
+      {s.chips.map(chip => <span class="chip">{chip}</span>)}
+      <span class="scard-arrow" aria-hidden="true">→</span>
+    </footer>
   </div>
 </a>
 
 <style>
-  .card {
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-    padding:22px 20px; display:flex; flex-direction:column; gap:12px;
-    transition:all .22s ease; position:relative; overflow:hidden;
+  .scard {
+    --mx: 50%; --my: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: hidden;
+    transition:
+      transform 0.22s cubic-bezier(0.4,0,0.2,1),
+      border-color 0.22s,
+      box-shadow 0.22s;
+    color: var(--text);
+    isolation: isolate;
   }
-  .card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background:linear-gradient(90deg,var(--accent),var(--accent2)); opacity:0; transition:opacity .22s;
+
+  /* Radial spotlight follows cursor */
+  .scard::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      200px circle at var(--mx) var(--my),
+      rgba(124,109,254,0.13),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border-radius: inherit;
   }
-  .card:hover { border-color:var(--accent); background:#1e1c35; transform:translateY(-3px); box-shadow:0 8px 28px rgba(108,99,255,.18); }
-  .card:hover::before { opacity:1; }
-  .card-header { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
-  .card-icon { width:44px; height:44px; border-radius:10px; background:rgba(108,99,255,.12); display:flex; align-items:center; justify-content:center; font-size:1.2rem; border:1px solid rgba(108,99,255,.25); flex-shrink:0; }
-  .card-meta { flex:1; }
-  .card-code { font-size:.68rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.8px; margin-bottom:3px; }
-  .card-name { font-size:1rem; font-weight:700; }
-  .badge-live { flex-shrink:0; font-size:.68rem; font-weight:700; border-radius:99px; padding:3px 10px; background:rgba(34,197,94,.15); color:#4ade80; border:1px solid rgba(34,197,94,.25); }
-  .card-desc { font-size:.82rem; color:var(--text-muted); line-height:1.5; }
-  .card-footer { display:flex; align-items:center; gap:8px; margin-top:auto; }
-  .chip { font-size:.68rem; color:var(--text-muted); background:var(--surface2); border:1px solid var(--border); border-radius:99px; padding:3px 10px; }
-  .chip-accent { color:var(--accent2); background:rgba(108,99,255,.08); border-color:rgba(108,99,255,.2); }
-  .arrow { margin-left:auto; font-size:1rem; color:var(--accent); opacity:0; transform:translateX(-4px); transition:all .2s; }
-  .card:hover .arrow { opacity:1; transform:translateX(0); }
+  .scard:hover::after { opacity: 1; }
+
+  .scard:hover {
+    transform: translateY(-5px);
+    border-color: rgba(124,109,254,0.45);
+    box-shadow:
+      0 0 0 1px rgba(124,109,254,0.12),
+      0 12px 40px rgba(0,0,0,0.5),
+      0 0 80px rgba(124,109,254,0.07);
+  }
+
+  /* Top accent line on hover */
+  .scard-top-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.22s;
+    z-index: 2;
+  }
+  .scard:hover .scard-top-line { opacity: 1; }
+
+  .scard-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    flex: 1;
+  }
+
+  .scard-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .scard-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(124,109,254,0.1);
+    border: 1px solid rgba(124,109,254,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+  }
+
+  .scard-meta { flex: 1; min-width: 0; }
+
+  .scard-code {
+    font-size: .64rem; font-weight: 700; letter-spacing: .9px;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .scard-name {
+    font-size: .95rem; font-weight: 700; line-height: 1.25;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .scard-badge {
+    flex-shrink: 0;
+    font-size: .62rem; font-weight: 700; letter-spacing: .3px;
+    border-radius: 99px; padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .badge-purple { background: rgba(124,109,254,.15); color: #c4b5fd; border: 1px solid rgba(124,109,254,.25); }
+  .badge-cyan   { background: rgba(34,211,238,.1);   color: #67e8f9; border: 1px solid rgba(34,211,238,.2);  }
+  .badge-multi  {
+    background: linear-gradient(135deg, rgba(124,109,254,.12), rgba(34,211,238,.08));
+    color: #c4b5fd;
+    border: 1px solid rgba(124,109,254,.22);
+  }
+
+  .scard-desc {
+    font-size: .8rem; color: var(--text-muted); line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .scard-foot {
+    display: flex; align-items: center;
+    gap: 6px; flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .chip {
+    font-size: .64rem; font-weight: 600;
+    background: rgba(124,109,254,.08);
+    border: 1px solid rgba(124,109,254,.18);
+    color: var(--accent2);
+    border-radius: 99px; padding: 2px 9px;
+    white-space: nowrap;
+  }
+
+  .scard-arrow {
+    margin-left: auto;
+    font-size: .95rem; color: var(--accent);
+    opacity: 0; transform: translateX(-5px);
+    transition: opacity .2s, transform .2s;
+    flex-shrink: 0;
+  }
+  .scard:hover .scard-arrow { opacity: 1; transform: translateX(0); }
+
+  /* Hidden by filter JS */
+  .scard[hidden] { display: none; }
 </style>
+
+<script>
+  function initSpotlight() {
+    document.querySelectorAll<HTMLElement>('[data-spot]').forEach(el => {
+      if ((el as any).__spot) return;
+      (el as any).__spot = true;
+      el.addEventListener('mousemove', (e: MouseEvent) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+        el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.setProperty('--mx', '50%');
+        el.style.setProperty('--my', '50%');
+      });
+    });
+  }
+  initSpotlight();
+  document.addEventListener('astro:after-swap', initSpotlight);
+</script>

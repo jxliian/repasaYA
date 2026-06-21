@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interactivo de Organización de Empresas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #quiz-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #progress-bar-container {
+            width: 100%;
+            background-color: #e9ecef;
+        }
+
+        #progress-bar {
+            height: 8px;
+            width: 0%;
+            background-color: #007bff;
+            transition: width 0.3s ease-in-out;
+        }
+        
+        .quiz-content {
+            padding: 30px 40px;
+        }
+        
+        #stats-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        #question-container h3 {
+            font-size: 1.25em;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-label {
+            display: block;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option-label input {
+            margin-right: 12px;
+        }
+        
+        .option-label.selected {
+            background-color: #cfe2ff;
+            border-color: #b6d4fe;
+        }
+
+        .option-label.correct {
+            background-color: #d1e7dd;
+            border-color: #a3cfbb;
+        }
+
+        .option-label.incorrect {
+            background-color: #f8d7da;
+            border-color: #f1aeb5;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .feedback-correct {
+            background-color: #d1e7dd;
+            color: #0a3622;
+        }
+
+        .feedback-incorrect {
+            background-color: #f8d7da;
+            color: #58151c;
+        }
+
+        #actions-container {
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        #next-btn {
+            display: none;
+        }
+
+        #results-container {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        #results-container h2 {
+            color: #007bff;
+            font-size: 2em;
+        }
+        
+        #results-container p {
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+
+        #final-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+        <div class="quiz-content">
+            <div id="stats-container">
+                <span id="question-counter">Pregunta 1 de 40</span>
+                <div>
+                    <span id="score-tracker">Aciertos: 0</span> | 
+                    <span id="mistakes-tracker">Fallos: 0</span>
+                </div>
+            </div>
+            
+            <div id="question-container">
+                <h3 id="question-text"></h3>
+                <div id="options-container"></div>
+            </div>
+
+            <div id="feedback"></div>
+
+            <div id="actions-container">
+                <button id="submit-btn">Comprobar</button>
+                <button id="next-btn">Siguiente Pregunta</button>
+            </div>
+        </div>
+        
+        <div id="results-container" style="display: none;">
+            <h2>¡Test completado!</h2>
+            <p>Aquí están tus resultados:</p>
+            <p id="final-score"></p>
+            <p id="correct-count"></p>
+            <p id="incorrect-count"></p>
+            <button onclick="location.reload()">Volver a intentar</button>
+        </div>
+    </div>
+
+<script>
+const quizData = [
+    {
+        question: "1. Con respecto a la organización como un sistema de flujos regulados, señale la afirmación correcta:",
+        options: [
+            "La visión de la organización como un sistema de flujos regulados considera, entre otros, a los flujos horizontales que tienen lugar entre los especialistas del staff y tecnoestructura con los directivos de línea media.",
+            "Los flujos regulados incluyen exclusivamente flujos verticales descendentes, que representan las órdenes que fluyen desde el ápice estratégico hasta el núcleo de operaciones.",
+            "La visión de la organización como un sistema de flujos regulados es un reflejo completo de todas las relaciones de flujo que tienen lugar dentro de la organización.",
+            "La visión de la organización como un sistema de flujos regulados solo considera el flujo horizontal dentro del núcleo de operaciones."
+        ],
+        correctAnswer: "La visión de la organización como un sistema de flujos regulados considera, entre otros, a los flujos horizontales que tienen lugar entre los especialistas del staff y tecnoestructura con los directivos de línea media."
+    },
+    {
+        question: "2. Un puesto de trabajo que está especializado horizontalmente:",
+        options: [
+            "Siempre estará muy formalizado.",
+            "Está obligatoriamente ampliado verticalmente.",
+            "No puede exigir formación para ser realizado.",
+            "Realiza pocas tareas o tareas con poco contenido."
+        ],
+        correctAnswer: "Realiza pocas tareas o tareas con poco contenido."
+    },
+    {
+        question: "3. Considerando una organización en la que todo el poder recae en los profesionales del núcleo de operaciones, indique la opción correcta:",
+        options: [
+            "La organización se encuentra descentralizada verticalmente y centralizada horizontalmente.",
+            "La organización se encuentra descentralizada vertical y horizontalmente.",
+            "La organización se encuentra descentralizada horizontalmente y centralizada verticalmente.",
+            "La organización se encuentra centralizada vertical y horizontalmente."
+        ],
+        correctAnswer: "La organización se encuentra descentralizada vertical y horizontalmente."
+    },
+    {
+        question: "4. Indique cómo un directivo de primera línea podría incrementar el tamaño de la unidad que supervisa:",
+        options: [
+            "Formalizando el comportamiento de sus subordinados.",
+            "Permitiendo que sus subordinados se coordinen mediante adaptación mutua.",
+            "Coordinando a sus subordinados a través de supervisión directa.",
+            "Un directivo de primera línea nunca podrá supervisar una unidad de gran tamaño."
+        ],
+        correctAnswer: "Formalizando el comportamiento de sus subordinados."
+    },
+    {
+        question: "5. La hipótesis de configuración extendida pone de manifiesto que la estructura eficaz requiere:",
+        options: [
+            "Únicamente que los parámetros de diseño se ajusten debidamente a los factores de contingencia.",
+            "Únicamente que exista una consistencia interna entre los distintos parámetros de diseño.",
+            "Una consistencia interna entre los distintos parámetros de diseño y la adecuación de estos parámetros de diseño a los factores de contingencia.",
+            "Según esta hipótesis no existe ninguna estructura eficaz."
+        ],
+        correctAnswer: "Una consistencia interna entre los distintos parámetros de diseño y la adecuación de estos parámetros de diseño a los factores de contingencia."
+    },
+    {
+        question: "6. ¿Qué características tienen las estructuras organizativas planas?",
+        options: [
+            "Tramos de control estrechos y pocos niveles jerárquicos.",
+            "Tramos de control estrechos y muchos niveles jerárquicos.",
+            "Tramos de control amplios y pocos niveles jerárquicos.",
+            "Tramos de control amplios y muchos niveles jerárquicos."
+        ],
+        correctAnswer: "Tramos de control amplios y pocos niveles jerárquicos."
+    },
+    {
+        question: "7. La burocracia maquinal presenta:",
+        options: [
+            "Un sistema técnico regulador y poco sofisticado.",
+            "Puestos de trabajo del núcleo de operaciones ampliados en ambas dimensiones.",
+            "Una formulación de estrategias intuitiva.",
+            "Una división poco estricta del trabajo."
+        ],
+        correctAnswer: "Un sistema técnico regulador y poco sofisticado."
+    },
+    {
+        question: "8. Cuando el trabajo de los operarios se ve controlado y/o condicionado por el sistema técnico, se dice que el sistema técnico es…",
+        options: ["Sofisticado.", "Automatizado.", "Regulador.", "Complejo."],
+        correctAnswer: "Regulador."
+    },
+    {
+        question: "9. La estructura simple presenta:",
+        options: [
+            "Un entorno sencillo y estable.",
+            "Puestos de trabajo especializados y formalizados.",
+            "Una formulación de estrategias racional y analítica.",
+            "Una división poco estricta del trabajo."
+        ],
+        correctAnswer: "Una división poco estricta del trabajo."
+    },
+    {
+        question: "10. Uno de los inconvenientes de la burocracia profesional se encuentra en:",
+        options: [
+            "Su sistema técnico regulador.",
+            "La formalización del comportamiento de los profesionales.",
+            "La centralización de la estructura.",
+            "Su dificultad para la innovación."
+        ],
+        correctAnswer: "Su dificultad para la innovación."
+    },
+    {
+        question: "11. Una de las ventajas de la burocracia maquinal es:",
+        options: [
+            "Ser una estructura eficiente cuando se necesita realizar tareas sencillas y repetitivas.",
+            "Su adaptación rápida a los cambios del entorno.",
+            "El fuerte sentido de la misión de sus miembros.",
+            "La no existencia de problemas humanos en el núcleo de operaciones."
+        ],
+        correctAnswer: "Ser una estructura eficiente cuando se necesita realizar tareas sencillas y repetitivas."
+    },
+    {
+        question: "12. Analice la siguiente afirmación: “Debido a la naturaleza de su principal mecanismo de coordinación, la organización misionaria puede considerarse como una adhocracia ideológica”.",
+        options: [
+            "Es falsa, se puede considerar como una burocracia profesional.",
+            "Es falsa, se puede considerar como una adhocracia administrativa.",
+            "Es falsa, se puede considerar como una burocracia ideológica.",
+            "Es verdadera."
+        ],
+        correctAnswer: "Es falsa, se puede considerar como una burocracia ideológica."
+    },
+    {
+        question: "13. ¿Qué dispositivo de enlace consiste en un conjunto de trabajadores que son convocados para cumplir una determinada tarea y se desagrupa tras su cumplimiento?",
+        options: [
+            "Puestos de enlace.",
+            "Grupos de trabajo.",
+            "Directivos integradores.",
+            "Estructura matricial permanente."
+        ],
+        correctAnswer: "Grupos de trabajo."
+    },
+    {
+        question: "14. Teniendo en cuenta las hipótesis de congruencia, cuanto mayor sea el control externo de una organización…",
+        options: [
+            "más descentralizada y formalizada resulta su estructura.",
+            "más descentralizada y menos formalizada resulta su estructura.",
+            "más centralizada y formalizada resulta su estructura.",
+            "más descentralizada y menos formalizada resulta su estructura."
+        ],
+        correctAnswer: "más centralizada y formalizada resulta su estructura."
+    },
+    {
+        question: "15. La burocracia maquinal se caracteriza por un diseño del sistema decisor:",
+        options: [
+            "Centralizado vertical y horizontalmente.",
+            "Centralizado verticalmente y descentralizado horizontalmente hacia el staff de apoyo.",
+            "Centralizado verticalmente y descentralizado horizontalmente hacia la tecnoestructura.",
+            "Centralizado verticalmente y descentralizado horizontalmente hacia el núcleo de operaciones."
+        ],
+        correctAnswer: "Centralizado verticalmente y descentralizado horizontalmente hacia la tecnoestructura."
+    },
+    {
+        question: "16. Con respecto a la normalización como mecanismo de coordinación, señale la respuesta correcta:",
+        options: [
+            "La normalización de resultados no deja libertad de acción al trabajador para determinar la forma de realizar el trabajo.",
+            "La normalización que deja una mayor autonomía al trabajador es la de procesos de trabajo y la que menos la de habilidades.",
+            "En la normalización de procesos coincide la persona que ejecuta y administra la tarea.",
+            "Mediante la normalización de habilidades, la organización sacrifica parte del control en beneficio de las entidades externas que forman a sus trabajadores."
+        ],
+        correctAnswer: "Mediante la normalización de habilidades, la organización sacrifica parte del control en beneficio de las entidades externas que forman a sus trabajadores."
+    },
+    {
+        question: "17. En las burocracias profesionales ¿suelen surgir dos jerarquías paralelas?:",
+        options: [
+            "No, en las burocracias profesionales no pueden existir dos jerarquías paralelas.",
+            "Sí, una democrática y ascendente para los profesionales del staff de apoyo y otra con forma de burocracia maquinal para la tecnoestructura.",
+            "Sí, una democrática y ascendente para los profesionales de las unidades de línea y otra con forma de burocracia maquinal para el staff de apoyo.",
+            "Sí, una forma de burocracia maquinal en el núcleo de operaciones y otra democrática y ascendente en los profesionales del staff y la tecnoestructura."
+        ],
+        correctAnswer: "Sí, una democrática y ascendente para los profesionales de las unidades de línea y otra con forma de burocracia maquinal para el staff de apoyo."
+    },
+    {
+        question: "18. La forma divisional pura se caracteriza por:",
+        options: [
+            "Una centralización total en la sede central.",
+            "Un cierto grado de descentralización horizontal paralela desde la sede central hacia las divisiones.",
+            "Un cierto grado de descentralización vertical paralela desde la sede central hacia las divisiones y una centralización del poder de toma de decisiones en las propias divisiones.",
+            "Un cierto grado de descentralización vertical selectiva desde la sede central hacia las divisiones y una descentralización del poder de toma de decisiones en las propias divisiones."
+        ],
+        correctAnswer: "Un cierto grado de descentralización vertical paralela desde la sede central hacia las divisiones y una centralización del poder de toma de decisiones en las propias divisiones."
+    },
+    {
+        question: "19. El núcleo de operaciones de la adhocracia operativa:",
+        options: [
+            "Se encuentra fusionado con el resto de la estructura formando una “masa orgánica” en la que no está clara la diferencia entre línea y staff.",
+            "Se encuentra tronchado y separado de la estructura.",
+            "Se coordina mediante la normalización de procesos.",
+            "Está automatizado y separado de la estructura."
+        ],
+        correctAnswer: "Se encuentra fusionado con el resto de la estructura formando una “masa orgánica” en la que no está clara la diferencia entre línea y staff."
+    },
+    {
+        question: "20. El personal directivo de una organización:",
+        options: [
+            "Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo.",
+            "Se encuentra solo en el ápice estratégico y la línea media.",
+            "Se distribuye entre la línea media y el núcleo de operaciones.",
+            "Ocupa exclusivamente la línea media."
+        ],
+        correctAnswer: "Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo."
+    },
+    {
+        question: "21. Analice la siguiente afirmación: “Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce con la denominación de burocracia duplicada”.",
+        options: [
+            "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional.",
+            "Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia duplicada.",
+            "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional.",
+            "Es verdadera."
+        ],
+        correctAnswer: "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional."
+    },
+    {
+        question: "22. Señale la afirmación correcta relacionada con el organigrama de una empresa:",
+        options: [
+            "La organización como un sistema de autoridad formal queda representada en el organigrama organizativo, reflejando las relaciones informales que tienen lugar dentro de la misma.",
+            "El organigrama organizativo representa la visión de la organización como un sistema de constelaciones de trabajo.",
+            "El organigrama organizativo permite identificar las unidades que se coordinan mediante adaptación mutua.",
+            "El organigrama refleja gráficamente las relaciones de autoridad formal de la organización y proporciona una adecuada representación de la división del trabajo que hay en ella."
+        ],
+        correctAnswer: "El organigrama refleja gráficamente las relaciones de autoridad formal de la organización y proporciona una adecuada representación de la división del trabajo que hay en ella."
+    },
+    {
+        question: "23. Indique cuál de las siguientes afirmaciones relacionadas con la planificación de acciones es FALSA:",
+        options: [
+            "La planificación de acciones permite introducir en la estructura el mecanismo de coordinación de la normalización de resultados de forma directa.",
+            "A través de la planificación de acciones se determinan las acciones necesarias para alcanzar los objetivos.",
+            "La planificación de acciones puede exceder el trabajo de una unidad, permitiendo coordinar así a distintas unidades involucradas en la consecución de un mismo objetivo.",
+            "La planificación de acciones se considera un parámetro de diseño."
+        ],
+        correctAnswer: "La planificación de acciones permite introducir en la estructura el mecanismo de coordinación de la normalización de resultados de forma directa."
+    },
+    {
+        question: "24. Teniendo en cuenta las hipótesis de congruencia, indique cuál de las siguientes afirmaciones es cierta:",
+        options: [
+            "La sencillez y extrema hostilidad del entorno conducen a una centralización de la estructura.",
+            "La complejidad y extrema hostilidad del entorno conducen a una centralización de la estructura.",
+            "La complejidad y munificencia del entorno conducen a una descentralización de la estructura.",
+            "La sencillez y munificencia del entorno conducen a una centralización de la estructura."
+        ],
+        correctAnswer: "La sencillez y extrema hostilidad del entorno conducen a una centralización de la estructura."
+    },
+    {
+        question: "25. En las estructuras divisionales puras ¿cuál es el principal mecanismo para coordinar a las divisiones?",
+        options: [
+            "Normalización de procesos de trabajo, para establecer la forma de trabajo de cada división.",
+            "Adaptación mutua, por la alta formación de los directivos medios.",
+            "Supervisión directa, por los valores compartidos por todos los directivos.",
+            "Normalización de resultados, para conservar el control y proteger la autonomía divisional."
+        ],
+        correctAnswer: "Normalización de resultados, para conservar el control y proteger la autonomía divisional."
+    },
+    {
+        question: "26. Los principales mecanismos de coordinación de la adhocracia operativa y de la adhocracia administrativa:",
+        options: [
+            "En ambos casos es la estructura matricial.",
+            "La normalización de habilidades en la operativa y la adaptación mutua en la administrativa.",
+            "En ambos casos es la adaptación mutua.",
+            "La adaptación mutua en la operativa y la supervisión directa en la administrativa."
+        ],
+        correctAnswer: "En ambos casos es la adaptación mutua."
+    },
+    {
+        question: "27. La identificación natural del individuo con la ideología de una organización se produce cuando:",
+        options: [
+            "Sus valores personales son congruentes con la ideología de la organización.",
+            "Se ve sometido a procesos de socialización y adoctrinamiento por parte de la organización.",
+            "La propia escala de valores de la organización es la que atrae al individuo.",
+            "Solamente cuando la cultura organizacional es débil."
+        ],
+        correctAnswer: "Sus valores personales son congruentes con la ideología de la organización."
+    },
+    {
+        question: "28. ¿Qué tipo de entorno comparten la estructura simple y la adhocracia?",
+        options: ["Sencillo.", "Complejo.", "Dinámico.", "Diversificado."],
+        correctAnswer: "Dinámico."
+    },
+    {
+        question: "29. ¿Qué interdependencias se consiguen controlar usando una base de agrupación según mercado?",
+        options: [
+            "Interdependencias de las funciones.",
+            "Interdependencias de flujo de trabajo.",
+            "Interdependencias de las tareas.",
+            "Interdependencias de escala o tamaño."
+        ],
+        correctAnswer: "Interdependencias de flujo de trabajo."
+    },
+    {
+        question: "30. Analice la siguiente afirmación: “La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores e ideología de la organización”.",
+        options: [
+            "Es falsa, a través de estos procesos se transmiten los conocimientos y habilidades necesarios para desempeñar un puesto.",
+            "Es falsa, la socialización es un proceso de naturaleza informal.",
+            "Es falsa, el adoctrinamiento es un proceso de naturaleza informal.",
+            "Es verdadera."
+        ],
+        correctAnswer: "Es falsa, la socialización es un proceso de naturaleza informal."
+    },
+    {
+        question: "31. Indique cuál de las siguientes afirmaciones relacionadas con el concepto de estructura matricial es FALSA:",
+        options: [
+            "Es un dispositivo de enlace.",
+            "Existen dos tipos de estructuras matriciales, permanentes y variables.",
+            "Los individuos que forman parte de una estructura matricial deben responder ante dos responsables que tienen el mismo poder formal.",
+            "Hay dos tipos de estructuras matriciales, unas que se agrupan sólo en base a la función y otras que se agrupan sólo en base al mercado."
+        ],
+        correctAnswer: "Hay dos tipos de estructuras matriciales, unas que se agrupan sólo en base a la función y otras que se agrupan sólo en base al mercado."
+    },
+    {
+        question: "32. La adhocracia emprendedora:",
+        options: [
+            "Es una configuración híbrida que se mueve entre la adhocracia operativa y la burocracia profesional.",
+            "Es una configuración híbrida que se mueve entre la adhocracia operativa y la estructura simple.",
+            "Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia profesional.",
+            "Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia maquinal simple."
+        ],
+        correctAnswer: "Es una configuración híbrida que se mueve entre la adhocracia operativa y la estructura simple."
+    },
+    {
+        question: "33. A mayor tamaño de la organización:",
+        options: [
+            "Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y más desarrollado su componente administrativo.",
+            "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, menos diferenciadas sus unidades y más desarrollado su componente administrativo.",
+            "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, más diferenciadas sus unidades y más desarrollado su componente administrativo.",
+            "Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y menos desarrollado su componente administrativo."
+        ],
+        correctAnswer: "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, más diferenciadas sus unidades y más desarrollado su componente administrativo."
+    },
+    {
+        question: "34. Las organizaciones misionarias reformadoras:",
+        options: [
+            "Se orientan a fomentar cambios radicales en la sociedad.",
+            "Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión.",
+            "Prefieren aislarse de cualquier influencia externa.",
+            "Son una variante de la estructura simple."
+        ],
+        correctAnswer: "Se orientan a fomentar cambios radicales en la sociedad."
+    },
+    {
+        question: "35. Si el poder se encuentra repartido de forma igualitaria entre todos los miembros de la organización:",
+        options: [
+            "Existe descentralización vertical y centralización horizontal.",
+            "Existe descentralización horizontal y centralización vertical.",
+            "Existe descentralización horizontal y vertical.",
+            "Existe descentralización total."
+        ],
+        correctAnswer: "Existe descentralización total."
+    },
+    {
+        question: "36. Marque la opción correcta:",
+        options: [
+            "Las unidades de línea se encargan de prestar soporte y ayuda para que las actividades primarias de la cadena de valor se realicen con éxito.",
+            "Los analistas del staff de apoyo se encargan de normalizar los procesos, habilidades y outputs de la organización.",
+            "La tecnoestructura, el staff de apoyo y la línea media se consideran unidades de línea.",
+            "El staff de apoyo se encarga de realizar parte de las actividades secundarias de la cadena de valor, al margen del flujo fundamental del trabajo operativo."
+        ],
+        correctAnswer: "El staff de apoyo se encarga de realizar parte de las actividades secundarias de la cadena de valor, al margen del flujo fundamental del trabajo operativo."
+    },
+    {
+        question: "37. Analice la siguiente afirmación: “En las burocracias profesionales, los miembros de la línea media suelen ser elegidos, o al menos consentidos, por los operarios del núcleo de operaciones”.",
+        options: [
+            "Falso, esto ocurre en la adhocracia administrativa.",
+            "Falso, esto ocurre en la burocracia maquinal.",
+            "Falso, esto ocurre en la estructura simple.",
+            "Verdadero."
+        ],
+        correctAnswer: "Verdadero."
+    },
+    {
+        question: "38. ¿Cómo se denomina el parámetro de diseño que introduce descripciones que indican en todo momento lo que han de hacer los trabajadores en sus puestos de trabajo?",
+        options: ["Especialización.", "Preparación.", "Formalización.", "Adoctrinamiento."],
+        correctAnswer: "Formalización."
+    },
+    {
+        question: "39. ¿Sobre qué parte de la organización recae el poder cuando existe centralización vertical y horizontal?",
+        options: [
+            "El poder formal e informal recae sobre el ápice estratégico.",
+            "El poder formal e informal recae sobre los profesionales del núcleo de operaciones.",
+            "El poder formal recae sobre el ápice estratégico y el poder informal sobre la tecnoestructura.",
+            "El poder formal e informal recae sobre cualquier miembro de la organización."
+        ],
+        correctAnswer: "El poder formal e informal recae sobre el ápice estratégico."
+    },
+    {
+        question: "40. La visión de la organización como un sistema de comunicación informal describe el uso de:",
+        options: ["La supervisión directa.", "La adaptación mutua.", "La normalización de procesos.", "La normalización de valores."],
+        correctAnswer: "La adaptación mutua."
+    }
+];
+
+const questionTextEl = document.getElementById('question-text');
+const optionsContainerEl = document.getElementById('options-container');
+const feedbackEl = document.getElementById('feedback');
+const submitBtn = document.getElementById('submit-btn');
+const nextBtn = document.getElementById('next-btn');
+const questionCounterEl = document.getElementById('question-counter');
+const scoreTrackerEl = document.getElementById('score-tracker');
+const mistakesTrackerEl = document.getElementById('mistakes-tracker');
+const quizContainerEl = document.querySelector('.quiz-content');
+const resultsContainerEl = document.getElementById('results-container');
+const progressBarEl = document.getElementById('progress-bar');
+
+let currentQuestionIndex = 0;
+let score = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
+
+function loadQuestion() {
+    feedbackEl.innerHTML = '';
+    feedbackEl.className = '';
+    const currentQuestion = quizData[currentQuestionIndex];
+    questionTextEl.innerText = currentQuestion.question;
+    optionsContainerEl.innerHTML = '';
+
+    currentQuestion.options.forEach(option => {
+        const optionId = `option-${Math.random().toString(36).substr(2, 9)}`;
+        const label = document.createElement('label');
+        label.className = 'option-label';
+        label.htmlFor = optionId;
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'option';
+        radio.value = option;
+        radio.id = optionId;
+        
+        radio.addEventListener('change', () => {
+            document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+            label.classList.add('selected');
+        });
+
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(option));
+        optionsContainerEl.appendChild(label);
+    });
+
+    questionCounterEl.innerText = `Pregunta ${currentQuestionIndex + 1} de ${quizData.length}`;
+    scoreTrackerEl.innerText = `Aciertos: ${correctAnswers}`;
+    mistakesTrackerEl.innerText = `Fallos: ${incorrectAnswers}`;
+    progressBarEl.style.width = `${((currentQuestionIndex) / quizData.length) * 100}%`;
+    
+    submitBtn.style.display = 'inline-block';
+    nextBtn.style.display = 'none';
+    submitBtn.disabled = false;
+}
+
+function showResults() {
+    quizContainerEl.style.display = 'none';
+    resultsContainerEl.style.display = 'block';
+    progressBarEl.style.width = '100%';
+
+    // Asegurarse de que la nota no sea negativa
+    const finalScore = Math.max(0, score).toFixed(2);
+    
+    document.getElementById('final-score').innerText = `Nota Final: ${finalScore} / 10.00`;
+    document.getElementById('correct-count').innerText = `Total de aciertos: ${correctAnswers}`;
+    document.getElementById('incorrect-count').innerText = `Total de fallos: ${incorrectAnswers}`;
+}
+
+submitBtn.addEventListener('click', () => {
+    const selectedOption = document.querySelector('input[name="option"]:checked');
+    if (!selectedOption) {
+        alert('Por favor, selecciona una opción.');
+        return;
+    }
+
+    const answer = selectedOption.value;
+    const currentQuestion = quizData[currentQuestionIndex];
+    const isCorrect = answer === currentQuestion.correctAnswer;
+    
+    // Deshabilitar todas las opciones
+    document.querySelectorAll('input[name="option"]').forEach(input => {
+        input.disabled = true;
+    });
+
+    if (isCorrect) {
+        correctAnswers++;
+        score += 0.25;
+        feedbackEl.textContent = '¡Correcto!';
+        feedbackEl.className = 'feedback-correct';
+        selectedOption.parentElement.classList.add('correct');
+    } else {
+        incorrectAnswers++;
+        score -= (0.25 / 3);
+        feedbackEl.innerHTML = `Incorrecto. <br>La respuesta correcta es: <strong>${currentQuestion.correctAnswer}</strong>`;
+        feedbackEl.className = 'feedback-incorrect';
+        selectedOption.parentElement.classList.add('incorrect');
+        // También resaltar la correcta
+        document.querySelectorAll('input[name="option"]').forEach(input => {
+            if (input.value === currentQuestion.correctAnswer) {
+                input.parentElement.classList.add('correct');
+            }
+        });
+    }
+
+    scoreTrackerEl.innerText = `Aciertos: ${correctAnswers}`;
+    mistakesTrackerEl.innerText = `Fallos: ${incorrectAnswers}`;
+    submitBtn.style.display = 'none';
+    nextBtn.style.display = 'inline-block';
+    
+    if (currentQuestionIndex === quizData.length - 1) {
+        nextBtn.textContent = 'Ver Resultados';
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+});
+
+// Iniciar el quiz
+loadQuestion();
+</script>
+
+</body>
+</html>

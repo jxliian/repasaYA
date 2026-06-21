@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de OE Florin Emanuel Todor Gliga GIIADE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        #quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .welcome-screen, .quiz-screen, .results-screen, #block-end-screen {
+            display: none; /* Hidden by default */
+            padding: 20px;
+        }
+
+        .welcome-screen.active, .quiz-screen.active, .results-screen.active, #block-end-screen.active {
+            display: block; /* Shown when active */
+        }
+
+        #question-area {
+            margin-bottom: 20px;
+            text-align: left;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fdfdfd;
+        }
+
+        #question-number-label {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        #question-label {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Para que los botones se ajusten en pantallas pequeñas */
+        }
+
+        button, .option-button {
+            padding: 12px 20px; /* Ajustado para 4 opciones */
+            font-size: 1em; /* Ajustado para 4 opciones */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-width: 150px; /* Ancho mínimo para botones de opción */
+        }
+
+        button:hover:not(:disabled), .option-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:disabled, .option-button:disabled {
+            background-color: #cccccc !important; /* Asegurar que el color de deshabilitado se aplique */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        #start-button, #next-block-button {
+            background-color: #3498db;
+            color: white;
+        }
+
+        #start-button:hover:not(:disabled), #next-block-button:hover:not(:disabled) {
+            background-color: #2980b9;
+        }
+
+        .multiple-choice-buttons .option-button {
+            background-color: #5dade2; /* Un color azul claro para opciones */
+            color: white;
+            flex-basis: 48%; /* Dos botones por fila en pantallas más grandes */
+            margin-bottom: 10px;
+        }
+        .multiple-choice-buttons .option-button:hover:not(:disabled) {
+            background-color: #4b9cd3;
+        }
+
+        .option-button.correct-option {
+            background-color: #2ecc71 !important; /* Verde para la opción correcta */
+            border: 2px solid #27ae60;
+        }
+        .option-button.incorrect-user-choice {
+            background-color: #e74c3c !important; /* Rojo para la opción incorrecta elegida por el usuario */
+            border: 2px solid #c0392b;
+        }
+
+
+        #next-button {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        #next-button:hover:not(:disabled) {
+            background-color: #e67e22;
+        }
+
+        #reset-button, #reset-button-welcome, #reset-button-results, #reset-button-block-end {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        #reset-button:hover:not(:disabled), 
+        #reset-button-welcome:hover:not(:disabled),
+        #reset-button-results:hover:not(:disabled),
+        #reset-button-block-end:hover:not(:disabled) {
+            background-color: #7f8c8d;
+        }
+
+        #feedback-message {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 20px; /* Ensure space even if empty */
+        }
+
+        .correct-feedback { /* Renombrado para evitar conflicto con clase de botón */
+            color: #27ae60;
+            background-color: #e6ffe6;
+            border: 1px solid #27ae60;
+        }
+
+        .incorrect-feedback { /* Renombrado para evitar conflicto con clase de botón */
+            color: #c0392b;
+            background-color: #ffe6e6;
+            border: 1px solid #c0392b;
+        }
+
+        #score-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 1.1em;
+            color: #444;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 10px;
+        }
+
+        #score-area > div {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        #remaining-count-label {
+            font-weight: bold;
+            color: #3498db;
+        }
+        #current-score-label { /* NUEVO */
+            font-weight: bold;
+            color: #e67e22; /* Naranja para destacar la puntuación */
+        }
+
+        .final-results {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #eaf4fa;
+            border-radius: 10px;
+            border: 1px solid #3498db;
+        }
+
+        .final-results p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .final-results p strong { /* NUEVO */
+            color: #e67e22;
+        }
+
+
+        .hidden-initially {
+            display: none;
+        }
+
+
+        @media (max-width: 700px) { /* Ajustado el breakpoint */
+            .multiple-choice-buttons .option-button {
+                flex-basis: 100%; /* Un botón por fila */
+            }
+        }
+        @media (max-width: 600px) {
+            .button-group:not(.multiple-choice-buttons) { /* Aplicar solo a los botones de navegación */
+                flex-direction: column;
+            }
+             .button-group:not(.multiple-choice-buttons) button {
+                width: 100%;
+            }
+            #quiz-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>Test de OE</h1> 
+        <h2>Florin Emanuel Todor Gliga GIIADE</h2>
+
+        <div id="welcome-screen" class="welcome-screen active">
+            <p>¡Bienvenido al Test de Organización de Empresas!</p>
+            <p>Este test consta de preguntas de opción múltiple. Cada pregunta tiene 4 opciones, solo una es correcta. Las preguntas se presentan en bloques de 40. Si fallas una pregunta, esta volverá a la cola para poder salir en futuros bloques.</p>
+            <p>Puntuación: +0.25 por acierto, -1/3 de acierto por fallo.</p> <!-- Info añadida -->
+            <p>Total de preguntas en el banco: <span id="total-questions-count"></span></p>
+            <button id="start-button">Empezar Test</button>
+            <button id="reset-button-welcome" class="hidden-initially">Reiniciar Test</button>
+        </div>
+
+        <div id="quiz-screen" class="quiz-screen">
+            <div id="question-area">
+                <span id="question-number-label"></span>
+                <p id="question-label"></p>
+            </div>
+
+            <div class="button-group multiple-choice-buttons">
+                <button class="option-button" data-index="0"></button>
+                <button class="option-button" data-index="1"></button>
+                <button class="option-button" data-index="2"></button>
+                <button class="option-button" data-index="3"></button>
+            </div>
+
+            <p id="feedback-message"></p>
+
+            <div class="button-group">
+                <button id="next-button" disabled>Siguiente Pregunta</button>
+                <button id="reset-button">Reiniciar Test</button>
+            </div>
+
+            <div id="score-area">
+                <div>Aciertos: <span id="correct-answers-count">0</span></div>
+                <div>Fallos: <span id="incorrect-answers-count">0</span></div>
+                <div><span id="remaining-count-label">Preguntas restantes por responder: 0</span></div>
+                <div><span id="current-score-label">Puntuación: <span id="current-score-value">0.00</span></span></div> <!-- NUEVO -->
+            </div>
+        </div>
+
+        <div id="results-screen" class="results-screen">
+            <div class="final-results">
+                <h2>Test Finalizado</h2>
+                <p>¡Has respondido a todas las preguntas disponibles!</p>
+                <p>Aciertos totales: <span id="final-correct-answers">0</span></p>
+                <p>Fallos totales: <span id="final-incorrect-answers">0</span></p>
+                <p>Puntuación Final: <strong id="final-score-value">0.00</strong></p> <!-- NUEVO -->
+            </div>
+            <button id="reset-button-results">Reiniciar Test</button>
+        </div>
+
+        <div id="block-end-screen" class="results-screen"> <!-- Usa la misma clase para estilo similar -->
+            <div class="final-results">
+                <h2>Bloque de preguntas finalizado</h2>
+                <p>Aciertos en este bloque: <span id="block-correct-answers">0</span></p>
+                <p>Fallos en este bloque: <span id="block-incorrect-answers">0</span></p>
+                <p>Aciertos totales: <span id="total-correct-on-block-end">0</span></p>
+                <p>Fallos totales: <span id="total-incorrect-on-block-end">0</span></p>
+                <p>Puntuación Acumulada: <strong id="block-end-score-value">0.00</strong></p> <!-- NUEVO -->
+                <p>Preguntas restantes en la cola: <span id="remaining-on-block-end">0</span></p>
+            </div>
+            <button id="next-block-button">Siguiente Bloque</button>
+            <button id="reset-button-block-end">Reiniciar Test</button>
+        </div>
+
+    </div>
+
+    <script>
+        const allQuizQuestionsData = [
+          { theme: "OE - Diseño de Puestos y Coordinación", question: "1. Un puesto implica una sola tarea pero sobre la que el operario tiene una gran libertad de acción, ¿cómo se encuentra?", options: ["Especializado horizontal y verticalmente.", "Especializado horizontalmente y ampliado verticalmente.", "Ampliado horizontalmente y especializado verticalmente.", "Ampliado horizontal y verticalmente."], answer: 1 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "2. ¿Cómo son los puestos profesionales?", options: ["Especializados horizontalmente (tareas) y ampliado verticalmente.", "Especializados horizontalmente (conocimientos) y ampliado verticalmente.", "Ampliado horizontalmente (tareas) y ampliado verticalmente.", "Especializados horizontalmente (conocimientos) y verticalmente."], answer: 1 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "3. Un directivo medio tiene autoridad sobre un responsable de primera línea y sólo responde ante el gerente.", options: ["El puesto del directivo está más ampliado verticalmente que los otros dos.", "El puesto del gerente está más especializado verticalmente que los otros dos.", "El puesto del directivo tiene más especialización vertical que los otros dos.", "El puesto del responsable de línea es el más especializado verticalmente."], answer: 3 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "4. ¿Cómo se denomina al parámetro de diseño a través del que describe la forma en que deben realizar una tarea?", options: ["Normalización de procesos.", "Adoctrinamiento.", "Preparación.", "Formalización."], answer: 3 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "5. Si un puesto formalizado implica realizar varias tareas, ¿Cómo se encuentra?", options: ["Especializado horizontal y verticalmente.", "Especializado horizontalmente y ampliado verticalmente.", "Ampliado horizontalmente y especializado verticalmente.", "Ampliado horizontal y verticalmente."], answer: 2 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "6. ¿Qué puestos resultan más fáciles de formalizar?", options: ["Puestos profesionales.", "Puestos sin cualificación.", "Supervisor de primera línea.", "Alta dirección."], answer: 1 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "7. ¿Qué mecanismo de coordinación es propio de la burocracia?", options: ["Normalización de procesos.", "Normalización de habilidades.", "Normalización de valores.", "Todas las anteriores son correctas."], answer: 3 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "8. ¿En qué situación la preparación introducirá el mecanismo de coordinación de la normalización de habilidades?", options: ["Cuando se enseñe un procedimiento fijo para realizar una tarea.", "Cuando se trate de un puesto profesional.", "Es imposible acotar todas las situaciones a las que se enfrenta un puesto.", "Todas las anteriores son falsas."], answer: 1 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "9. ¿Con qué mecanismo de coordinación se relaciona la formalización del puesto?", options: ["Adaptación mutua.", "Supervisión directa.", "Normalización de procesos.", "Normalización de habilidades."], answer: 2 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "10. ¿Cómo se denominan los procesos de naturaleza formal en los que se transmiten las normas relacionas con la cultura?", options: ["Adoctrinamiento.", "Socialización.", "Preparación.", "Formalización."], answer: 0 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "¿Se puede coordinar el trabajo de un traumatólogo y un fisioterapeuta sin que tengan que interactuar entre si?", options: ["Si, a través de la normalización de procesos.", "Si, a través de la normalización de habilidades.", "Si, a través de la adaptación mutua.", "No, es imposible, se necesitará ponerse en contacto entre si."], answer: 1 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "Si se imparte un curso a los trabajadores enseñándoles el procedimiento fijo que tienen que seguir. ¿Cómo se coordinan?", options: ["A través de la adaptación.", "A través de supervisión directa.", "A través de normalización de procesos.", "A través de normalización de habilidades."], answer: 2 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "¿En qué parte de la organización podemos estar seguros de que nunca va a haber un puesto directivo?", options: ["Línea media.", "Núcleo de operaciones.", "Tecnoestructura.", "Staff de apoyo."], answer: 1 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "Una organización ha subcontratado el servicio de limpieza. ¿A qué parte de la organización pertenece?", options: ["Núcleo de operaciones.", "Staff de apoyo.", "Tecnoestructura.", "ninguna."], answer: 3 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "¿A qué parte pertenece al departamento de finanzas que participa en la fijación de los objetivos financieros?", options: ["Línea media.", "Staff de apoyo.", "Tecnoestructura.", "Ápice estratégico."], answer: 2 },
+
+{ theme: "OE - Diseño de Puestos y Coordinación", question: "¿A qué parte pertenece un departamento de RRHH que solo realiza tareas administrativas?", options: ["Núcleo de operaciones.", "Staff de apoyo.", "Tecnoestructura.", "Línea media."], answer: 1 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "1. ¿Qué interdependencia se consigue controlar con la base de agrupación según mercado?", options: ["Interdependencia de las funciones.", "Interdependencia de escala o tamaño.", "Interdependencia del flujo de trabajo.", "Interdependencia de las tareas."], answer: 2 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "2. ¿Qué base de agrupación permite generar y aprovechar economías de escala?", options: ["Funcional.", "Productos.", "Mercados", "Lugar."], answer: 0 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "3. ¿Cuál de las siguientes NO es una ventaja de la agrupación en base a la funcional?", options: ["Especialización en la tarea.", "Flexibilidad.", "Eficiencia.", "Facilita el desarrollo profesional."], answer: 1 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "4. ¿Qué base de agrupación se ha seguido para crear las unidades Comerciales?", options: ["Agrupación según el producto.", "Agrupación según el mercado.", "Agrupación según el lugar.", "Agrupación funcional."], answer: 3 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "5. ¿Qué base de agrupación se ha seguido para crear las unidades encargadas de cada producto?", options: ["Agrupación según los conocimientos y habilidades.", "Agrupación según mercado.", "Agrupación según procesos de trabajo.", "Agrupación funcional."], answer: 1 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "6. ¿Qué base de agrupación se ha seguido para crear la División Europea y las Unidades de Almacenamiento?", options: ["Europea según mercado y almacenamiento agrupación funcional.", "Las dos siguen un agrupamiento funcional.", "Las dos siguen un agrupamiento según mercado.", "Europea funcional y almacenamiento según mercado."], answer: 0 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "7. ¿Qué característica tienen las estructuras altas?", options: ["Tramos de control estrechos y pocos niveles jerárquicos.", "Tramos de control amplios y muchos niveles jerárquicos.", "Tramos de control estrechos y muchos niveles jerárquicos.", "Tramos de control amplios y pocos niveles jerárquicos."], answer: 2 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "8. ¿Qué mecanismo de coordinación dificulta un gran tamaño para la unidad?", options: ["Adaptación mutua.", "Normalización de procesos.", "Normalización de habilidades.", "Normalización de resultados."], answer: 0 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "9. ¿Para qué tipo de tareas es más probable que la unidad sea de tamaño reducido?", options: ["Tareas poco complejas.", "Tareas complejas e interdependientes.", "Tareas complejas e independientes.", "Ninguna de las anteriores."], answer: 1 },
+
+{ theme: "OE - Estructura Organizativa (Agrupación y Tamaño)", question: "10. ¿En qué circunstancias la línea media tendrá un tamaño mayor?", options: ["Cuando la compongan unidades funcionales interdependientes.", "Cuando la compongan unidades de mercado e interdependientes.", "Cuando la compongan unidades de mercado e independientes.", "La línea media nunca tendrá gran tamaño."], answer: 2 },
+        
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "27. ¿Qué parámetro de diseño permite introducir la normalización de resultados, pero de forma indirecta?", options: ["Dispositivos de enlace.", "Control de rendimiento.", "Planificación de acciones.", "Agrupación de unidades."], answer: 2 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "28. ¿Qué dispositivo supone una combinación equilibrada entre una agrupación funcional y una de mercado?", options: ["Puesto de enlace.", "Directivo integrador.", "Grupo de trabajo.", "Estructura matricial."], answer: 3 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "29. ¿Cómo se denomina al dispositivo de enlace consistente en un grupo que cumple una determinada tarea y se desagraga?", options: ["Comité permanente.", "Grupo de trabajo.", "Estructura matricial.", "No es un dispositivo de enlace."], answer: 1 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "30. Si un trabajador forma parte de un equipo de trabajo en el que tiene dos supervisores con la misma autoridad formal:", options: ["Se encuentra en un comité permanente.", "Se encuentra en una estructura matricial.", "Se encuentra en un grupo de trabajo.", "Es un puesto de enlace."], answer: 1 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "31. ¿Cómo se denomina al puesto que tiene autoridad formal pero solo para coordinar los puestos bajo su mando?", options: ["Directivo de línea media.", "Puesto de enlace.", "Ápice estratégico.", "Directivo integrador."], answer: 0 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "32. ¿Qué mecanismo de coordinación se relaciona directamente con el control del rendimiento?", options: ["Normalización de procesos.", "Normalización de resultados.", "Adaptación mutua.", "Supervisión directa."], answer: 1 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "33. ¿A qué parte de la organización pertenece una unidad encargada de diseñar el sistema de control de calidad?", options: ["Tecnoestructura.", "Staff de apoyo.", "Línea media.", "Núcleo de operaciones."], answer: 0 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "34. ¿Bajo qué base de agrupación resulta más efectivo el control de rendimiento?", options: ["Agrupación funcional.", "Agrupación según los conocimientos.", "Agrupación en base al mercado.", "Bajo ninguna."], answer: 2 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "35. ¿Qué refleja el organigrama de una empresa?", options: ["Las relaciones de autoridad formal.", "Las relaciones informales.", "Las constelaciones de trabajo.", "Los flujos regulados de información."], answer: 0 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "36. ¿Cuál de los siguientes no forma parte del sistema de flujos regulados?", options: ["El flujo de trabajo de operaciones.", "El flujo de información y decisiones de control.", "El flujo de comunicaciones informales.", "El flujo de información del personal."], answer: 2 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "37. ¿Con qué mecanismo de coordinación se relaciona la visión de la organización como sistema de comunicación informal?", options: ["Supervisión directa.", "Adaptación mutua.", "Urbanización de valores (probablemente Normalización de valores).", "Una organización de habilidades (probablemente Normalización de habilidades)."], answer: 1 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "38. ¿Qué tipo de decisiones se consideran programadas?", options: ["Operativas.", "Estratégicas.", "Administrativas excepción.", "Ad hoc."], answer: 0 },
+
+{ theme: "OE - TIPO TEST MEZCLA DE TEMAS", question: "39. ¿Como se denomina los grupos de individuos que tienen responsabilidades sobre un conjunto de decisiones?", options: ["Organigramas.", "Flujos de información.", "Constelaciones de trabajo.", "Flujos regulares de información."], answer: 2 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "1. En la empresa Memory Software SL, estará más ampliado horizontalmente:", options: ["Ingenieros de desarrollo", "Másters", "Encargado de coordinación", "Comerciales"], answer: 1 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "2. El mecanismo de coordinación que se asocia al parámetro de diseño formalización es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 2 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "3. El mecanismo de coordinación que se asocia al parámetro de diseño preparación es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 0 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "4. El mecanismo de coordinación que se asocia al parámetro de diseño adoctrinamiento y socialización es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 3 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "5. El mecanismo de coordinación que se asocia a las constelaciones de trabajo es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 1 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "6. Un puesto de trabajo que siempre hace exactamente la misma tarea pero tiene total libertad para hacerla, es un puesto:", options: ["Especializado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 3 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "7. Un puesto de trabajo que hace tareas de diferentes áreas pero siguiendo unas pautas estrictas, es un puesto:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 1 }, 
+
+{ theme: "OE - Repaso Primeros Temas", question: "8. Un puesto de trabajo que está en lo más alto de la jerarquía de la organización estará:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 2 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "9. Un puesto de trabajo que denominamos puesto profesional, es un puesto que estará:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 3 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "10. Un puesto de trabajo muy formalizado estará en el 100% de los casos:", options: ["Muy especializado horizontal", "Muy preparado", "Muy especializado verticalmente", "Ninguna de las anteriores es correcta"], answer: 2 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "11. Un puesto de trabajo muy ampliado verticalmente estará en el 100% de los casos:", options: ["Muy especializado horizontal", "Muy preparado", "Muy especializado", "Ninguna de las anteriores es correcta"], answer: 3 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "12. Analice la siguiente frase: Si en una empresa un puesto que no requiere preparación se vuelve cada vez más especializado horizontalmente. ¿Puede derivar en que el puesto acabe siendo muy especializado verticalmente y formalizado?", options: ["Un puesto especializado horizontalmente nunca va a estar especializado verticalmente.", "Un puesto especializado horizontalmente nunca va a estar formalizado.", "Un puesto especializado verticalmente nunca va a estar formalizado.", "Verdadera"], answer: 3 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "13. Analice la siguiente frase: Un puesto formalizado siempre estará especializado verticalmente y viceversa, un puesto especializado verticalmente siempre estará formalizado.", options: ["Falsa, un puesto formalizado no tiene por qué estar especializado verticalmente.", "Falsa, un puesto especializado verticalmente no tiene por qué estar formalizado.", "Falsa, un puesto especializado verticalmente estará siempre especializado horizontalmente.", "Verdadera"], answer: 1 },
+// --- BLOQUE GENERAL VyF (Parte 1) ---
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Según los principios de diseño organizativo, ¿es cierto que a mayor edad y tamaño de la organización, mayores serán los rasgos burocráticos de su estructura?", options: ["Verdadero.", "Falso, la edad disminuye la burocracia pero el tamaño la aumenta.", "Falso, el tamaño disminuye la burocracia pero la edad la aumenta.", "Falso, tanto la edad como el tamaño tienden a reducir la burocracia."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Si un sistema técnico se vuelve más regulador, ¿qué efecto principal tiene sobre la estructura?", options: ["Se produce una descentralización directa hacia el staff de apoyo.", "Más formalizado resultará el trabajo de operaciones y más burocrática la estructura del núcleo de operaciones.", "Se produce una centralización total del poder en el ápice estratégico.", "Se fomenta la adaptación mutua como principal mecanismo de coordinación."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Cuando un experto del staff de apoyo informa y asesora a un directivo de la línea media para una decisión específica, ¿cómo se denomina este flujo?", options: ["Flujo de control regulado de tipo circular.", "Flujo horizontal de información, denominado flujo regulado de información de staff.", "Flujo de autoridad descendente formal.", "Flujo de adaptación mutua entre unidades."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Es correcto afirmar que cuanto más coordinada esté una unidad mediante la normalización, el número de empleados que el directivo puede tener a sus órdenes (tramo de control) podrá ser mayor?", options: ["Verdadero.", "Falso, la normalización siempre reduce el tramo de control.", "Falso, la normalización no afecta el tramo de control, solo la supervisión directa lo hace.", "Verdadero, pero únicamente si se trata de normalización de resultados."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Respecto al puesto de enlace, ¿actúa como mediador para encauzar directamente la comunicación entre unidades sin recurrir a un directivo común superior?", options: ["Verdadero.", "Falso, el puesto de enlace solo recopila información para el directivo común.", "Falso, siempre debe pasar por un directivo común.", "Verdadero, pero solo en estructuras muy pequeñas y simples."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Cuál es el único mecanismo de coordinación en el que la persona que realiza la tarea es también la persona que la administra (controla)?", options: ["Adaptación mutua.", "Supervisión directa.", "Normalización de habilidades.", "Normalización de procesos."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "La adhocracia emprendedora, ¿es una configuración híbrida entre la adhocracia operativa y la burocracia profesional?", options: ["Verdadero, combinando innovación con profesionalismo.", "Falso, es un híbrido con la estructura simple (en caso de ser con la burocracia profesional sería buro-adhocracia profesional).", "Falso, es un híbrido entre la adhocracia administrativa y la forma divisional.", "Verdadero, y es la forma más común de adhocracia."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Debido a la autonomía requerida, ¿es cierto que ningún puesto directivo está especializado en la dimensión vertical?", options: ["Verdadero, la autonomía implica ampliación vertical total.", "Falso, existen diferentes niveles de especialización vertical; por ejemplo, los supervisores de primera línea están más especializados verticalmente.", "Falso, todos los puestos directivos tienen un alto grado de especialización vertical.", "Verdadero, excepto en el ápice estratégico."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "En la burocracia maquinal, ¿cuál es el principal mecanismo de coordinación?", options: ["La formalización del comportamiento.", "La normalización de los procesos de trabajo.", "La supervisión directa intensiva.", "La normalización de resultados."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Es frecuente encontrar la centralización vertical de la estructura en organizaciones que usan principalmente la supervisión directa o la normalización de los procesos?", options: ["Verdadero.", "Falso, la normalización de procesos siempre conduce a la descentralización vertical.", "Falso, la supervisión directa es más común en estructuras descentralizadas.", "Verdadero, pero solo si la tecnoestructura es grande."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "La descentralización total implica que el poder para tomar decisiones está:", options: ["Repartido de forma selectiva entre distintas constelaciones de trabajo.", "Repartido de forma igualitaria entre cada miembro de la organización.", "Concentrado exclusivamente en el núcleo de operaciones.", "Delegado completamente al staff de apoyo."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Respecto a la estructura simple, ¿necesita disponer de numerosos expertos en tecnoestructura y staff de apoyo con capacidad de decisión delegada?", options: ["Verdadero, para compensar la simplicidad del ápice.", "Falso, la estructura simple está fuertemente centralizada y apenas dispone de tecnoestructura ni de staff de apoyo.", "Falso, delega la decisión en el núcleo de operaciones.", "Verdadero, pero solo si opera en un entorno complejo."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Es la forma de los subproductos una de las etapas de transición hacia la forma divisional pura?", options: ["Verdadero.", "Falso, la forma de subproductos es una variante de la agrupación funcional.", "Falso, es una etapa hacia la estructura matricial.", "Verdadero, junto con la forma de productos relacionados y conglomerada."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Puede la formalización del comportamiento conducir a puestos ampliados en las dos dimensiones de la especialización (horizontal y vertical)?", options: ["Verdadero, si se aplica de forma flexible.", "Falso, la formalización del comportamiento se relaciona más con puestos especializados horizontalmente y también conlleva especialización vertical.", "Falso, la formalización siempre implica especialización máxima en ambas dimensiones.", "Verdadero, especialmente en puestos profesionales."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "La identificación del individuo con la ideología de la organización se produce por evocación cuando:", options: ["La escala de valores de la organización atrae al individuo como nuevo miembro (identificación natural).", "El individuo se ve sometido a procesos de socialización y adoctrinamiento por parte de la organización.", "El individuo calcula los beneficios de alinearse con la ideología.", "La organización selecciona activamente individuos con valores preexistentes compatibles."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Desempeña la tecnoestructura parte de las actividades primarias de la cadena de valor al diseñar y normalizar el trabajo del núcleo de operaciones?", options: ["Verdadero, la normalización es una actividad primaria.", "Falso, la tecnoestructura (unidad de apoyo) desarrolla actividades secundarias, como normalizar el trabajo vía gestión de calidad, programación, etc.", "Falso, la tecnoestructura solo se encarga de actividades de staff sin impacto en la cadena de valor.", "Verdadero, siempre que la tecnoestructura sea grande y poderosa."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Suelen las organizaciones misionarias recurrir a la preparación como principal parámetro de diseño?", options: ["Verdadero, para asegurar la competencia técnica de sus miembros.", "Falso, las organizaciones misionarias utilizan de forma extensiva el adoctrinamiento y no la preparación.", "Falso, su principal parámetro es la formalización del comportamiento.", "Verdadero, complementado con la normalización de valores."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Sobre los sistemas de control y planificación: ¿Permiten los sistemas de control de rendimiento evaluar unidades determinadas, mientras que la planificación de acciones puede implicar a varias unidades?", options: ["Verdadero.", "Falso, ambos sistemas se aplican exclusivamente a unidades individuales.", "Falso, el control de rendimiento es para la organización en su conjunto, y la planificación de acciones para unidades.", "Verdadero, pero la planificación de acciones es siempre menos formal."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "En la agrupación con base en el mercado, ¿son todo ventajas debido al control de interdependencias del flujo de trabajo y la capacidad de desempeñar una gama más amplia de actividades?", options: ["Verdadero, es la forma de agrupación más eficiente.", "Falso, tiene inconvenientes como mayor gasto de recursos, menor aprovechamiento de economías de escala y posible disminución de la calidad del trabajo especializado.", "Falso, la principal ventaja es la alta especialización funcional que se logra.", "Verdadero, especialmente si los mercados son muy diversos."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Uno de los problemas de la burocracia profesional, ¿se encuentra en la falta de cooperación interdisciplinaria entre los profesionales, con el consecuente problema de innovación?", options: ["Verdadero.", "Falso, la burocracia profesional fomenta inherentemente la cooperación interdisciplinaria.", "Falso, los problemas de innovación en la burocracia profesional se deben a la excesiva normalización de resultados.", "Verdadero, pero solo en burocracias profesionales pequeñas."], answer: 0 },
+
+// --- BLOQUE GENERAL VyF (Parte 2) ---
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Los mecanismos de coordinación de normalización de procesos y normalización de valores, ¿suponen que la persona que ejecuta la tarea es también responsable de su control o administración?", options: ["Verdadero para ambos.", "Falso, en ambos se produce una separación entre ejecución y administración; solo la adaptación mutua cumple ambas características.", "Falso, esto solo es cierto para la normalización de habilidades.", "Verdadero, siempre que los valores estén fuertemente interiorizados."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "La identificación del individuo con la ideología de una organización, ¿puede desarrollarse de dos únicas formas: natural o calculada?", options: ["Verdadero.", "Falso, puede desarrollarse de forma natural, por selección, por evocación o de forma calculada.", "Falso, solo puede ser de forma natural o por adoctrinamiento.", "Verdadero, las demás son subcategorías de estas dos."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "La estructura matricial, ¿consiste en crear un sistema de toma de decisiones conjunta entre los responsables de los departamentos funcionales?", options: ["Verdadero, para mejorar la eficiencia funcional.", "Falso, consiste en crear una doble cadena de mando (funcional y de mercado/proyecto).", "Falso, es una forma de agrupación por mercado con alta autonomía divisional.", "Verdadero, y es el principal mecanismo de coordinación."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Es la descentralización vertical de tipo paralelo exclusiva de las organizaciones cuyas unidades están agrupadas en base a mercado?", options: ["Verdadero.", "Falso, también puede darse en grandes agrupaciones funcionales descentralizadas.", "Falso, es más característica de la agrupación por producto.", "Verdadero, ya que facilita la autonomía de cada mercado."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "En una organización, las actividades que contribuyen directamente a la materialización de su propósito o misión, ¿son realizadas por el núcleo de operaciones, la línea media y el ápice estratégico?", options: ["Verdadero.", "Falso, solo el núcleo de operaciones realiza actividades primarias directas.", "Falso, la tecnoestructura y el staff de apoyo también contribuyen directamente de forma primaria.", "Verdadero, formando la cadena de valor central de la organización."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "En las adhocracias operativas, ¿tiene lugar el proceso de 'encasillamiento' (aplicación de un programa normativo a una contingencia)?", options: ["Verdadero, para estandarizar las soluciones innovadoras.", "Falso, el 'encasillamiento' es típico de la burocracia profesional; la adhocracia busca soluciones creativas y singulares.", "Falso, el 'encasillamiento' ocurre en la burocracia maquinal para tareas rutinarias.", "Verdadero, pero solo si el cliente lo solicita explícitamente."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "En la burocracia profesional, los profesionales se concentran en el núcleo de operaciones trabajando independientemente, mientras que en la adhocracia, se reparten por toda la estructura trabajando también de forma independiente.", options: ["Verdadero.", "Falso, en la adhocracia los profesionales suelen trabajar en equipos interdependientes.", "Falso, en la burocracia profesional hay una alta interdependencia.", "Verdadero, la independencia es clave en ambos casos para la especialización."], answer: 0 }, // La imagen original indica VERDADERO, la justificación de la imagen puede ser interpretada de varias formas. Me baso en el V/F de la imagen.
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Debido a su dependencia de la adaptación mutua, ¿puede la organización misionaria considerarse una 'adhocracia ideológica'?", options: ["Verdadero, la adaptación mutua es clave en su ideología.", "Falso, debido a su dependencia de la normalización de valores, se considera una 'burocracia ideológica'.", "Falso, la organización misionaria depende principalmente de la supervisión directa.", "Verdadero, si su misión es altamente innovadora."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Si una organización enfrenta un entorno complejo y estable, ¿no podrá recurrir a la normalización como mecanismo de coordinación fundamental?", options: ["Verdadero, un entorno complejo siempre requiere adaptación mutua.", "Falso, un entorno complejo y estable favorece una estructura descentralizada y burocrática, siendo la normalización de habilidades un mecanismo adecuado.", "Falso, siempre se puede usar la normalización de procesos.", "Verdadero, la estabilidad no permite la normalización en entornos complejos."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Una organización descentralizada vertical y horizontalmente de forma selectiva, ¿coordina su toma de decisiones principalmente mediante la normalización de los resultados?", options: ["Verdadero, es la forma más eficiente de controlar unidades descentralizadas.", "Falso, coordinará su toma de decisiones diseñando constelaciones de trabajo que se coordinan mediante adaptación mutua.", "Falso, recurrirá principalmente a la normalización de procesos para asegurar la consistencia.", "Verdadero, si las unidades descentralizadas operan en mercados diferentes."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Pueden algunas organizaciones de gran tamaño adoptar temporalmente una forma estructural simple si un entorno extremadamente hostil las obliga a centralizarse?", options: ["Verdadero.", "Falso, las organizaciones grandes no pueden revertir a una forma simple.", "Falso, un entorno hostil siempre conduce a una mayor complejidad estructural, como la adhocracia.", "Verdadero, pero solo si la cultura organizacional es muy fuerte."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "El tamaño de la unidad (tramo de control), ¿puede aumentar con la utilización de la normalización de conocimientos y habilidades, especialmente en tareas complejas independientes?", options: ["Verdadero.", "Falso, la normalización de habilidades siempre reduce el tamaño de la unidad para permitir una supervisión más cercana.", "Falso, esto solo aplica a la normalización de procesos en tareas simples.", "Verdadero, pero solo si los profesionales tienen poca experiencia."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Un sistema técnico regulador, ¿define unos puestos muy ampliados en su dimensión vertical?", options: ["Verdadero, para dar flexibilidad ante la regulación.", "Falso, define puestos especializados en la dimensión vertical, ya que se tiene control sobre el contenido de los mismos.", "Falso, define puestos ampliados horizontalmente pero especializados verticalmente.", "Verdadero, y también ampliados horizontalmente."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Tanto la forma divisional como la burocracia profesional, ¿presentan una fuerte descentralización vertical y horizontal?", options: ["Verdadero, ambas presentan descentralización vertical y horizontal, siendo la B. Profesional más descentralizada horizontalmente que la F. Divisional (que tiene descentralización vertical limitada a directores de división).", "Falso, la forma divisional es fuertemente centralizada verticalmente.", "Falso, la burocracia profesional es fuertemente centralizada horizontalmente.", "Verdadero, pero solo la forma divisional presenta fuerte descentralización en ambas dimensiones."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Los puestos profesionales, ¿se caracterizan por una alta especialización horizontal (basada en el número de tareas) y una alta especialización vertical?", options: ["Verdadero, para asegurar un control estricto.", "Falso, se caracterizan por alta especialización horizontal (basada en conocimientos) y alta ampliación vertical (baja especialización vertical).", "Falso, tienen baja especialización horizontal y alta ampliación vertical.", "Verdadero, y además requieren poca preparación formal."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Suelen las organizaciones sometidas a una fuerte normalización de procesos estar poco descentralizadas verticalmente?", options: ["Verdadero.", "Falso, una fuerte normalización de procesos implica necesariamente una alta descentralización vertical.", "Falso, no existe una relación directa entre normalización de procesos y el grado de descentralización vertical.", "Verdadero, pero solo si la tecnoestructura es pequeña y poco influyente."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Las organizaciones conversoras, ¿son organizaciones misionarias que intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión?", options: ["Verdadero.", "Falso, esta descripción corresponde a las organizaciones reformadoras.", "Falso, las organizaciones conversoras se enfocan en cambiar el entorno externo directamente.", "Verdadero, y siempre son de naturaleza religiosa o política."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "En la burocracia maquinal, ¿se cumplen las hipótesis de congruencia porque la estabilidad de su entorno y el carácter regulador de su sistema técnico son compatibles con la alta formalización del comportamiento de su núcleo de operaciones?", options: ["Verdadero.", "Falso, la burocracia maquinal es más congruente en entornos dinámicos.", "Falso, el sistema técnico regulador es incompatible con la alta formalización.", "Verdadero, pero la formalización del comportamiento es típicamente baja."], answer: 0 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "Las etapas de transición hacia la forma divisional son: ¿la forma divisional simple, la socializada, la múltiple y la conglomerada?", options: ["Verdadero, en ese orden exacto.", "Falso, serían la forma integrada, la forma de los subproductos, la forma de los productos relacionados y la forma conglomerada.", "Falso, solo existen la forma integrada y la conglomerada como etapas de transición.", "Verdadero, aunque el orden puede variar según la industria."], answer: 1 },
+
+{ theme: "OE - VyF Generalidades y Coordinación", question: "¿Introducen la planificación de acciones y el control del rendimiento el mecanismo de normalización de procesos, mientras que los dispositivos de enlace introducen la supervisión directa y la adaptación mutua?", options: ["Verdadero.", "Falso, la planificación de acciones y el control del rendimiento introducen la normalización de resultados; los dispositivos de enlace introducen solo la adaptación mutua.", "Falso, la planificación de acciones introduce la normalización de habilidades y el control de rendimiento la normalización de valores.", "Verdadero, y son los únicos mecanismos que estos parámetros pueden introducir."], answer: 1 },
+
+// --- TEMA 9 ESTRUCTURA SIMPLE VyF ---
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "La Teoría Contingente, ¿enfatiza en la importancia de diseñar una estructura óptima, válida para todas las empresas independientemente del momento y la situación?", options: ["Verdadero, busca un 'one best way'.", "Falso, resalta la importancia de diseñar una estructura diferente según los factores situacionales que afecten a cada empresa.", "Falso, enfatiza la estructura matricial como óptima universal.", "Verdadero, pero solo para pequeñas empresas."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "Las estructuras simples, ¿se caracterizan por un entorno dinámico, donde la variabilidad asociada favorece una estructura más orgánica?", options: ["Verdadero, la variabilidad es clave para la organicidad.", "Falso, un entorno dinámico implica impredecibilidad, no necesariamente variabilidad que favorezca la organicidad de esta forma.", "Falso, las estructuras simples siempre operan en entornos estables.", "Verdadero, y siempre son altamente formalizadas."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "Uno de los inconvenientes de la estructura simple, ¿está relacionado con el riesgo de desequilibrio entre estrategia y operaciones si el director general se centra solo en uno de estos aspectos?", options: ["Verdadero.", "Falso, la estructura simple no tiene problemas de desequilibrio.", "Falso, este problema es más común en la forma divisional.", "Verdadero, pero solo si el director general carece de experiencia."], answer: 0 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "En la estructura simple, ¿es el flujo de trabajo poco flexible debido a que el núcleo de operaciones realiza tareas poco especializadas?", options: ["Verdadero, la falta de especialización reduce la flexibilidad.", "Falso, es muy flexible porque las tareas son intercambiables y poco especializadas.", "Falso, el flujo de trabajo es rígido debido a la alta formalización.", "Verdadero, y se coordina principalmente por normalización de procesos."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "La configuración estructural simple, ¿posee un escaso nivel de riesgo al ser estructuras pequeñas, poco elaboradas, guiadas claramente por una o pocas personas?", options: ["Verdadero, su simplicidad reduce el riesgo.", "Falso, es la más arriesgada, ya que todo recae en el Ápice Estratégico; si este falla, la empresa peligra.", "Falso, el riesgo es moderado y comparable al de otras estructuras.", "Verdadero, pero solo en mercados muy estables."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "En la estructura simple, ¿son la especialización, la normalización de procesos de trabajo y la preparación parámetros de diseño muy poco utilizados?", options: ["Verdadero para todos ellos.", "Falso, aunque la especialización y preparación son bajas, la normalización de procesos no es un parámetro de diseño fundamental aquí (la coordinación es por supervisión directa).", "Falso, la especialización es alta y la preparación también.", "Verdadero, excepto la preparación que es moderada."], answer: 0 }, //La pregunta original dice "FALSO. La normalización es un mecanismo de coordinación". Aquí la especialización y preparación sí son poco utilizados. La normalización de procesos, como parámetro de diseño que introduce ese mecanismo, también es bajo.
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "Las estructuras simples, ¿poseen un entorno sencillo y dinámico, lo cual facilita estructuras orgánicas y poder centralizado respectivamente?", options: ["Verdadero, esa es la correspondencia correcta.", "Falso, es al revés: entorno sencillo facilita la centralización y entorno dinámico facilita la estructura orgánica.", "Falso, un entorno dinámico siempre lleva a descentralización.", "Verdadero, y siempre usan normalización de habilidades."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "Las estructuras orgánicas como la estructura simple, caracterizadas por relaciones informales, ¿necesitan usar mecanismos flexibles como la normalización de conocimientos y/o la supervisión directa?", options: ["Verdadero, ambos son necesarios.", "Falso, en la estructura simple se utiliza principalmente la supervisión directa; la normalización (de conocimientos) no es característica de su organicidad.", "Falso, las estructuras orgánicas siempre usan adaptación mutua exclusivamente.", "Verdadero, pero la supervisión directa es secundaria."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "En la estructura simple, ¿es el núcleo de operaciones la parte más importante debido a la división poco estricta del trabajo y la facilidad para intercambiar tareas?", options: ["Verdadero, la flexibilidad del núcleo es clave.", "Falso, la parte más importante es el Ápice Estratégico, sin el cual la empresa no puede funcionar.", "Falso, la tecnoestructura es la más importante por su rol de diseño.", "Verdadero, si el entorno es muy dinámico."], answer: 1 },
+
+{ theme: "OE - TEMA 9 ESTRUCTURA SIMPLE", question: "La estructura simple, ¿se caracteriza por tener una estructura poco elaborada con parámetros de diseño poco desarrollados?", options: ["Verdadero.", "Falso, tiene una estructura muy elaborada pero flexible.", "Falso, sus parámetros de diseño son altamente desarrollados, especialmente la formalización.", "Verdadero, pero con una tecnoestructura muy desarrollada."], answer: 0 },
+
+// --- TEMA 10 BUROCRACIA MAQUINAL VyF ---
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "Una causa de la centralización del poder en el ápice estratégico en las burocracias maquinales, ¿está relacionada con problemas de coordinación en la línea media debido a la alta especialización en el núcleo de operaciones?", options: ["Verdadero.", "Falso, la centralización se debe a la simplicidad del entorno.", "Falso, la línea media tiene alta capacidad de coordinación en esta estructura.", "Verdadero, pero solo si la tecnoestructura es débil."], answer: 0 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "El principal parámetro de diseño utilizado en la burocracia maquinal, ¿hace referencia a la fuerte división del trabajo en el núcleo de operaciones?", options: ["Verdadero, es la base de su eficiencia.", "Falso, el principal parámetro es la formalización del comportamiento, que introduce el mecanismo de normalización de procesos.", "Falso, es la normalización de habilidades de los operarios.", "Verdadero, junto con una baja especialización vertical."], answer: 1 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "La burocracia maquinal, ¿suele identificarse con sistemas técnicos poco reguladores, dado que estos 'rutinizan' el trabajo permitiendo su normalización?", options: ["Verdadero, los sistemas poco reguladores facilitan la rutina.", "Falso, se identifica con sistemas técnicos muy reguladores, puesto que estos condicionan la forma de trabajo del Núcleo de Operaciones.", "Falso, el grado de regulación del sistema técnico es irrelevante.", "Verdadero, pero solo si el entorno es estable."], answer: 1 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "Una condición típica de las burocracias maquinales, ¿suele ser la existencia de un elevado control externo, lo que lleva a la organización a centralizar decisiones y formalizar su estructura?", options: ["Verdadero.", "Falso, el control externo fomenta la descentralización y la flexibilidad.", "Falso, el control externo solo afecta al ápice estratégico.", "Verdadero, pero solo en organizaciones de gran tamaño."], answer: 0 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "Cuando una burocracia maquinal incrementa sobremanera su tamaño, ¿la organización utiliza solamente la integración vertical hacia atrás para mantener la estabilidad de su entorno?", options: ["Verdadero, es la única estrategia viable.", "Falso, utiliza tanto la integración vertical hacia delante como hacia detrás.", "Falso, recurre a la diversificación en lugar de la integración vertical.", "Verdadero, pero solo si el mercado de proveedores es inestable."], answer: 1 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "La existencia de una fuerte formalización del comportamiento en las burocracias maquinales, ¿supone un gran desarrollo de la tecnoestructura al introducir como mecanismo de coordinación la normalización de los resultados?", options: ["Verdadero, la tecnoestructura define los resultados esperados.", "Falso, supone un gran desarrollo de la tecnoestructura, pero esta introduce como mecanismo de coordinación la normalización de procesos.", "Falso, la formalización del comportamiento reduce la necesidad de una tecnoestructura grande.", "Verdadero, y también la normalización de habilidades."], answer: 1 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "En la burocracia maquinal, ¿la tecnoestructura posee un elevado poder jerárquico, lo que lleva a cierta descentralización horizontal selectiva y limitada?", options: ["Verdadero, su poder jerárquico es formal.", "Falso, la tecnoestructura posee un poder informal (de experto), aunque sí puede haber descentralización horizontal selectiva y limitada hacia ella.", "Falso, la tecnoestructura no tiene poder significativo en esta configuración.", "Verdadero, y una descentralización vertical completa."], answer: 1 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "En la burocracia maquinal, ¿la línea media se compone de una amplia jerarquía de gerentes agrupados funcionalmente, que controlan el trabajo especializado del núcleo de operaciones?", options: ["Verdadero.", "Falso, la línea media es reducida y se agrupa por mercado.", "Falso, el control del núcleo de operaciones recae directamente en el ápice estratégico.", "Verdadero, pero su principal función es la adaptación mutua."], answer: 0 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "Una función característica de la línea media en las burocracias maquinales, ¿es servir de enlace entre el núcleo de operaciones y la tecnoestructura, para que los trabajadores sepan qué trabajo hacer?", options: ["Verdadero.", "Falso, esta función de enlace la realiza el staff de apoyo.", "Falso, la línea media se enfoca solo en la supervisión directa sin enlace con la tecnoestructura.", "Verdadero, y también entre el ápice y el núcleo."], answer: 0 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "La centralización de la burocracia maquinal, ¿hace que los problemas asciendan hasta la parte superior de la estructura, sobrecargándola si la dirección intermedia no puede resolver problemas imprevistos no regulados?", options: ["Verdadero.", "Falso, la dirección intermedia siempre resuelve todos los problemas.", "Falso, la estructura es tan formalizada que no surgen problemas imprevistos.", "Verdadero, pero la sobrecarga es mínima gracias a la eficiencia."], answer: 0 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "En la burocracia maquinal, ¿existe una descentralización vertical y una descentralización horizontal selectiva y limitada para la toma de decisiones?", options: ["Verdadero (Tipo D).", "Falso, existe una centralización vertical y una descentralización horizontal selectiva y limitada (Tipo B).", "Falso, existe una centralización total (Tipo A).", "Verdadero, pero solo en la tecnoestructura (Tipo C)."], answer: 1 },
+
+{ theme: "OE - TEMA 10 BUROCRACIA MAQUINAL", question: "La burocracia maquinal, ¿necesita apoyarse en una gran tecnoestructura para diseñar y mantener sus sistemas de estandarización, sin los cuales sería imposible formalizar los comportamientos en su núcleo de operaciones?", options: ["Verdadero.", "Falso, la tecnoestructura es pequeña y el ápice se encarga de la estandarización.", "Falso, la formalización se logra mediante la supervisión directa, no por sistemas de estandarización.", "Verdadero, pero el staff de apoyo es más importante que la tecnoestructura."], answer: 0 },
+
+// --- TEMA 11 BUROCRACIA PROFESIONAL VyF ---
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "En la estructura profesional, dado que la normalización es esencial en el núcleo de operaciones, ¿es la tecnoestructura (encargada de elaborar las normas) la parte más importante?", options: ["Verdadero, la tecnoestructura define todas las normas.", "Falso, la parte más importante es el Núcleo de Operaciones (NO). Las normas surgen, generalmente, en asociaciones profesionales externas, no en la tecnoestructura interna.", "Falso, la parte más importante es el ápice estratégico.", "Verdadero, si las normas son muy complejas."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "En la burocracia profesional, ¿el núcleo de operaciones presta una atención estricta a las normas sin preocupación real por el cliente, fomentando buropatologías?", options: ["Verdadero, la adherencia a la norma es prioritaria.", "Falso, la preocupación principal es servir al cliente buscando la estrategia (norma profesional) mejor que se adapte a cada caso.", "Falso, las buropatologías son exclusivas de la burocracia maquinal.", "Verdadero, a menos que el cliente sea de alto valor."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "La burocracia profesional, ¿es una estructura centralizada verticalmente y descentralizada horizontalmente?", options: ["Verdadero (Tipo C).", "Falso, es descentralizada tanto vertical como horizontalmente (Tipo D).", "Falso, es completamente centralizada (Tipo A).", "Verdadero, pero con alta formalización (Tipo B)."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "El proceso de 'encasillamiento' típico de la burocracia profesional, ¿permite contener la incertidumbre en el servicio al cliente dentro de cada puesto de trabajo?", options: ["Verdadero.", "Falso, el 'encasillamiento' aumenta la incertidumbre al limitar las opciones.", "Falso, este proceso es típico de la adhocracia.", "Verdadero, pero solo para clientes recurrentes."], answer: 0 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "La complejidad del trabajo inherente a los puestos profesionales y la demanda en este tipo de trabajos, ¿provoca una centralización vertical y una descentralización horizontal?", options: ["Verdadero, para asegurar el control de calidad.", "Falso, provoca tanto descentralización vertical como horizontal.", "Falso, provoca una centralización total.", "Verdadero, si los profesionales son externos."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "La burocracia profesional, ¿se caracteriza por tener una estructura no democrática en el staff de apoyo basada en el poder del experto?", options: ["Verdadero, el conocimiento experto domina.", "Falso, la estructura en el staff de apoyo suele ser más burocrática y basada en el poder del puesto, no necesariamente no democrática o basada solo en expertos.", "Falso, el staff de apoyo es siempre democrático.", "Verdadero, y el staff de apoyo es muy grande."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "El proceso de 'encasillamiento', ¿establece que, ante una posible contingencia, el profesional pueda aplicar una secuencia normativa para solventarla?", options: ["Verdadero, define una secuencia fija.", "Falso, el 'encasillamiento' implica diagnosticar la contingencia para aplicar un programa normativo estándar, no una secuencia única.", "Falso, esto describe la formalización de procesos.", "Verdadero, y siempre es la misma secuencia."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "La formulación de estrategias en la burocracia profesional, ¿es un proceso descendente que emana de los directivos profesionales propios en estas estructuras?", options: ["Verdadero, los directivos marcan la pauta.", "Falso, sería un proceso más ascendente o emergente, influenciado por los profesionales del núcleo y asociaciones externas.", "Falso, la estrategia la define la tecnoestructura.", "Verdadero, pero con consulta al núcleo de operaciones."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "Una diferencia entre la burocracia maquinal (BM) y la profesional (BP) radica en el tipo de trabajo del núcleo de operaciones: ¿En la BM es sencillo, racionalizado y repetitivo, y en la BP es complejo, no racionalizado y menos repetitivo?", options: ["Verdadero.", "Falso, en la BP el trabajo también es sencillo y repetitivo.", "Falso, en la BM el trabajo es complejo pero repetitivo.", "Verdadero, pero la BM es más flexible."], answer: 0 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "Mientras que en las burocracias maquinales (BM) existe especialización horizontal de puestos, ¿en las burocracias profesionales (BP) existe ampliación horizontal, al ser profesionales que ejecutan un trabajo complejo?", options: ["Verdadero, la complejidad impide la especialización horizontal.", "Falso, ambas son especializadas horizontalmente; la BM por tareas y la BP por conocimientos/habilidades.", "Falso, la BM tiene ampliación horizontal y la BP especialización.", "Verdadero, y la BP tiene baja especialización vertical."], answer: 1 },
+
+{ theme: "OE - TEMA 11 BUROCRACIA PROFESIONAL", question: "En las burocracias profesionales, el trabajo de operaciones es complejo y no racionalizado. ¿Esto genera que el principal parámetro de diseño sea la normalización de conocimiento y habilidades?", options: ["Verdadero, es la forma de asegurar la calidad.", "Falso, el principal parámetro de diseño sería la preparación (que introduce la normalización de habilidades).", "Falso, el principal parámetro es la adaptación mutua.", "Verdadero, junto con una alta formalización del comportamiento."], answer: 1 },
+
+// --- TEMA 12 ORGANIZACIÓN MISIONARIA VyF ---
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "La organización misionaria, ¿se asemeja a la estructura simple en aspectos como su falta de elaboración y sencillez en la configuración estructural?", options: ["Verdadero.", "Falso, la organización misionaria es altamente elaborada y compleja.", "Falso, se asemeja más a la burocracia profesional.", "Verdadero, pero es mucho más formalizada."], answer: 0 },
+
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "Los mecanismos de coordinación característicos de la organización misionaria son: ¿normalización de valores y supervisión directa?", options: ["Verdadero, ambos son esenciales.", "Falso, son la normalización de valores y la adaptación mutua (la supervisión directa no es característica).", "Falso, son la normalización de habilidades y el adoctrinamiento.", "Verdadero, y también la normalización de procesos."], answer: 1 },
+
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "La cultura organizativa, ¿es bastante débil cuando la identificación con ésta surge exclusivamente del adoctrinamiento o de forma calculada?", options: ["Verdadero.", "Falso, el adoctrinamiento y la identificación calculada crean culturas muy fuertes.", "Falso, la debilidad cultural solo surge por falta de liderazgo.", "Verdadero, a menos que el adoctrinamiento sea muy intenso."], answer: 0 },
+
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "La organización misionaria, ¿se caracteriza por emplear parámetros de diseño como la descentralización total, preparación y adoctrinamiento de sus miembros?", options: ["Verdadero para todos ellos.", "Falso, la preparación no es característica de este tipo de organizaciones; sí lo son la descentralización (total o amplia) y el adoctrinamiento.", "Falso, es altamente centralizada y usa formalización.", "Verdadero, y también la normalización de procesos."], answer: 1 },
+
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "En la organización misionaria, el sistema técnico no puede ser muy sofisticado para no delegar el poder concretamente en la tecnoestructura, debilitando la igualdad en la organización.", options: ["Verdadero, la sofisticación técnica daría poder a la tecnoestructura.", "Falso, el riesgo sería delegar poder concretamente en el staff de apoyo (si el sistema técnico fuera muy sofisticado), no en la tecnoestructura.", "Falso, el sistema técnico debe ser sofisticado para apoyar la misión.", "Verdadero, y tampoco puede ser muy regulador."], answer: 1 },
+
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "Las organizaciones conversoras, ¿buscan transformar la sociedad de forma directa mientras que las organizaciones reformadoras lo hacen de forma indirecta?", options: ["Verdadero, esa es la distinción.", "Falso, sería al revés: las reformadoras buscan transformar la sociedad directamente (cambiando a sus miembros) y las conversoras indirectamente (cambiando la sociedad).", "Falso, ambas buscan transformar la sociedad de forma directa.", "Verdadero, y las conversoras son siempre más pequeñas."], answer: 0 },
+
+// --- TEMA 13 FORMA DIVISIONAL VyF ---
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "En la forma divisional, la sede central permite gran autonomía a las divisiones, controlando sus resultados. Por tanto, ¿el principal mecanismo de coordinación es la normalización de outputs y sus principales parámetros la planificación de acciones y el control del rendimiento?", options: ["Verdadero, todos los elementos son correctos.", "Falso, el principal mecanismo sí es la normalización de outputs (vía control del rendimiento), pero la planificación de acciones no es un parámetro de diseño principal para este mecanismo, sino para la normalización de procesos.", "Falso, el principal mecanismo es la supervisión directa desde la sede.", "Verdadero, y las divisiones son completamente autónomas."], answer: 1 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "Una ventaja de la forma divisional es la reducción de riesgos. ¿Es esta característica especialmente importante en la forma integrada o en la forma de subproductos?", options: ["Verdadero para ambas.", "Falso, la reducción de riesgos por diversificación es especialmente importante en la forma conglomerada (divisiones independientes en negocios no relacionados).", "Falso, la reducción de riesgos no es una ventaja significativa de la forma divisional.", "Verdadero, y también en la forma de productos relacionados."], answer: 1 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "En la forma divisional, ¿las divisiones dirigen los negocios de forma prácticamente autónoma, lo que supone una descentralización limitada para los directores de la división?", options: ["Verdadero.", "Falso, las divisiones no son autónomas, están estrictamente controladas por la sede.", "Falso, la descentralización es completa, no limitada.", "Verdadero, pero solo en divisiones muy rentables."], answer: 0 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "En la forma divisional, ¿la sede central dirige la estrategia corporativa (cartera de negocios) mientras que las divisiones dirigen las estrategias de los negocios individuales?", options: ["Verdadero.", "Falso, la sede central dirige todas las estrategias, corporativas y de negocio.", "Falso, las divisiones dirigen la estrategia corporativa y la sede la de los negocios.", "Verdadero, pero la sede no interviene en la cartera de negocios."], answer: 0 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "La estructura que surge cuando una organización establece divisiones regionales idénticas y concentra funciones críticas en la sede central, ¿es conocida como forma divisional personalizada?", options: ["Verdadero, es una personalización de la forma divisional.", "Falso, sería la 'burocracia duplicada' (mezcla de burocracia maquinal en las divisiones y forma divisional), típica del sector servicios o fabricación con unidades replicadas.", "Falso, se denomina forma divisional geográfica pura.", "Verdadero, y es muy flexible."], answer: 1 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "El principal factor contingente de la forma divisional, ¿es el entorno, concretamente sus dimensiones de sencillez y estabilidad?", options: ["Verdadero, un entorno sencillo y estable la favorece.", "Falso, el principal factor contingente es la diversificación de mercados o productos.", "Falso, es el tamaño de la organización.", "Verdadero, y también la tecnología utilizada."], answer: 1 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "La parte principal de la forma divisional, ¿es la sede central, encargada de establecer el control del rendimiento junto a la tecnoestructura?", options: ["Verdadero, la sede y su tecnoestructura son clave.", "Falso, la parte más importante son los directivos de la Línea Media (directores de división), que gestionan sus divisiones como 'mini-directores'.", "Falso, es el núcleo de operaciones de cada división.", "Verdadero, y la tecnoestructura es muy grande."], answer: 1 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "La dispersión y duplicación de funciones operativas típica de la forma divisional, ¿minimiza la interdependencia entre divisiones, permitiendo que funcionen como entidades semiautónomas sin necesidad de coordinarse entre sí?", options: ["Verdadero.", "Falso, la interdependencia entre divisiones es alta y requiere mucha coordinación.", "Falso, las funciones no se duplican, se centralizan en la sede.", "Verdadero, pero solo si las divisiones son geográficamente distantes."], answer: 0 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "En la forma divisional, ¿es obligado que las diferentes divisiones se estructuren como burocracias maquinales?", options: ["Verdadero, es un requisito para el control de la sede.", "Falso, pueden adoptar cualquier forma, aunque suelen tender hacia burocracias maquinales debido a la necesidad de estandarización para el control de rendimiento.", "Falso, siempre se estructuran como adhocracias.", "Verdadero, y deben ser idénticas en estructura."], answer: 1 },
+
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "La forma divisional, ¿se compone de una serie de unidades totalmente autónomas (divisiones) acopladas mediante una estructura administrativa central (sede central)?", options: ["Verdadero, la autonomía es total.", "Falso, serían semi-autónomas, ya que el Ápice Estratégico (sede central) mantiene el control, principalmente mediante la normalización de resultados.", "Falso, las unidades no son autónomas, están integradas funcionalmente.", "Verdadero, y la sede central tiene un rol meramente consultivo."], answer: 1 },
+
+// --- TEMA 14 ADHOCRACIA VyF ---
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "La adhocracia, ¿soluciona problemas a la medida, siendo incapaz de normalizar y, por tanto, de ser eficiente en términos de costes estándar?", options: ["Verdadero.", "Falso, la adhocracia es altamente eficiente debido a su flexibilidad.", "Falso, puede normalizar sus soluciones una vez desarrolladas.", "Verdadero, pero es muy eficaz en la innovación."], answer: 0 },
+
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "La adhocracia operativa, ¿realiza proyectos para servirse a sí misma?", options: ["Verdadero, se enfoca en la mejora interna.", "Falso, la adhocracia operativa realiza proyectos para clientes externos; la adhocracia administrativa se enfocaría más en proyectos internos o para sí misma.", "Falso, realiza proyectos para el ápice estratégico.", "Verdadero, y no interactúa con clientes."], answer: 1 },
+
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "Los principales mecanismos de coordinación en la adhocracia son: ¿la adaptación mutua y la normalización de conocimientos y habilidades, al formar parte de ésta puestos profesionales?", options: ["Verdadero, ambos son fundamentales.", "Falso, el principal (y a veces único) mecanismo es la adaptación mutua; aunque haya profesionales, la naturaleza interdependiente y novedosa del trabajo dificulta la normalización de habilidades como mecanismo dominante.", "Falso, es la supervisión directa y la normalización de resultados.", "Verdadero, y la normalización de procesos es secundaria."], answer: 1 },
+
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "Los puestos de la adhocracia, ¿se caracterizan por una escasa formalización del comportamiento, elevada especialización horizontal y elevada preparación?", options: ["Verdadero.", "Falso, la formalización es alta para asegurar la calidad.", "Falso, la especialización horizontal es baja para fomentar la polivalencia.", "Verdadero, pero la preparación es baja, se aprende sobre la marcha."], answer: 0 },
+
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "La descentralización selectiva horizontal y vertical (Tipo D), ¿es típica de las adhocracias, donde el poder de decisión se distribuye entre directivos y no directivos según la naturaleza de las decisiones?", options: ["Verdadero.", "Falso, la adhocracia es centralizada en el ápice estratégico.", "Falso, es de Tipo C (descentralización horizontal limitada).", "Verdadero, pero solo en la adhocracia operativa."], answer: 0 },
+
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "Una empresa de consultoría que trata cada contrato del cliente como un reto creativo, ¿funciona como una burocracia profesional, mientras que si tratara el contrato como la necesidad de reforzar el sistema de planificación del cliente, funcionaría como una adhocracia?", options: ["Verdadero, esa es la distinción correcta.", "Falso, sería al revés: el reto creativo es adhocrático, y reforzar un sistema con un programa estándar es más burocrático-profesional.", "Falso, ambos casos son ejemplos de adhocracia.", "Verdadero, pero solo si la consultora es pequeña."], answer: 1 },
+
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "En las adhocracias, los directivos de línea, ¿constituyen una figura jerárquica que establece reglas estrictas, supervisa el trabajo y ofrece opiniones constructivas a los equipos?", options: ["Verdadero, su rol es de control tradicional.", "Falso, en la adhocracia no hay reglas estrictas impuestas por directivos de línea de forma tradicional; suelen ser parte de los equipos de proyecto, más como coordinadores o expertos que como supervisores jerárquicos clásicos.", "Falso, no existen directivos de línea en la adhocracia.", "Verdadero, y son los responsables de la innovación."], answer: 1 },
+// --- ORGANIZACIÓN EMPRESA (Continuación) ---
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿En qué parte de la organización podemos estar seguros de que nunca va a haber un puesto directivo?", options: ["Línea media", "Núcleo de operaciones", "Tecnoestructura", "Staff de apoyo"], answer: 1 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "Una organización ha subcontratado el servicio de limpieza, ¿a qué parte de la organización pertenece?", options: ["Núcleo de operaciones", "Staff de apoyo", "Tecnoestructura", "Ninguna no forma parte de la organización porque es una empresa subcontratada"], answer: 3 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿A qué parte pertenece el departamento de Finanzas que participa en la fijación de los objetivos financieros?", options: ["Línea media", "Staff de apoyo (iría al staff de apoyo si no participara en la fijación de los objetivos)", "Tecnoestructura", "Ápice estratégico"], answer: 2 }, // La respuesta marcada es Tecnoestructura, aunque la nota sugiere que si no participara en la fijación de objetivos iría a Staff de Apoyo.
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿A qué parte pertenece un departamento de recursos humanos que solo realiza tareas administrativas?", options: ["Núcleo de operaciones", "Línea media", "Staff de apoyo", "Tecnoestructura"], answer: 2 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿Qué tipo de decisiones se consideran programadas?", options: ["Operativas", "Estratégicas de excepción con impacto significativo", "Administrativas excepción es lo mismo que ad hoc", "ad hoc no programadas ni rutinarias, con poco impacto"], answer: 0 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "El personal directivo de una organización:", options: ["Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo.", "Se encuentra solo en el ápice estratégico en la línea media.", "Se distribuye entre la línea media y el núcleo de operaciones.", "Ocupa exclusivamente la línea media."], answer: 0 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "Señale la afirmación correcta relacionada con el organigrama de una empresa:", options: ["La organización como un sistema de autoridad formal queda representada en el organigrama organizativo, reflejando las relaciones informales que tienen lugar dentro de la misma.", "El organigrama organizativo representa la visión de la organización como un sistema de constelaciones de trabajo.", "El organigrama organizativo permite identificar las unidades que se coordinan mediante la adaptación mutua.", "El organigrama refleja gráficamente las relaciones de autoridad formal de la organización y proporciona una adecuada representación de la división del trabajo que hay en ella."], answer: 3 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿En qué parte de la organización estamos seguros de que nunca va a haber un puesto directivo?", options: ["Línea media", "Núcleo de operaciones", "Tecnoestructura", "Staff de apoyo"], answer: 1 }, // Pregunta repetida
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿Cuál de las siguientes NO es una unidad de línea?", options: ["Ápice estratégico", "Línea media", "Núcleo de operaciones", "Tecnoestructura"], answer: 3 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿Cómo se denomina al puesto que tiene autoridad formal pero sólo para coordinar los puestos bajo su mando?", options: ["Directivo de línea media.", "Puesto de enlace.", "Ápice estratégico.", "Directivo integrador."], answer: 0 }, // La respuesta correcta según imagen es A, aunque la pregunta describe más un directivo integrador o un puesto de enlace con autoridad formal.
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿A qué parte de la organización pertenece una unidad encargada de diseñar el sistema de control de calidad?", options: ["Tecnoestructura.", "Staff de apoyo.", "Línea media.", "Núcleo de operaciones."], answer: 0 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "¿Qué refleja el organigrama de una empresa?", options: ["Las relaciones de autoridad formal y jerarquía de la organización", "Las relaciones informales", "Las constelaciones de trabajo", "Los flujos regulados de información"], answer: 0 },
+
+{ theme: "OE - Partes de la Organización y Decisiones", question: "Marque la opción correcta:", options: ["Las unidades de línea se encargan de prestar soporte y ayuda para que las actividades primarias de la cadena de valor se realicen con éxito. (staff de apoyo)", "Los analistas del staff de apoyo se encargan de normalizar los procesos habilidades y outputs de la organización. (tecnoestructura)", "La tecnoestructura, el staff de apoyo y la línea media se consideran unidades de línea.", "El staff de apoyo se encarga de realizar parte de las actividades secundarias de la cadena de valor, al margen del flujo fundamental del trabajo operativo."], answer: 3 },
+
+// --- MECANISMOS DE COORDINACIÓN ---
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Qué mecanismo de coordinación es propio de la burocracia?", options: ["Normalización de procesos (burocracia maquinal)", "Normalización de habilidades (burocracia profesional)", "Normalización de valores (burocracia ideológica)", "Todas son correctas"], answer: 3 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Con qué mecanismo de coordinación se relaciona la visión de la organización como sistema de comunicación informal?", options: ["Supervisión directa", "Adaptación mutua", "Urbanización de valores", "Una organización de habilidades"], answer: 1 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿En qué situación la preparación introducirá el mecanismo de coordinación de la normalización de habilidades?", options: ["Cuando se enseñe un procedimiento fijo para realizar una tarea (formalización)", "Cuando se trate de un puesto profesional", "Es imposible acotar todas las situaciones a las que se enfrenta un puesto", "Todas son falsas"], answer: 1 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Con qué mecanismo de coordinación se relaciona la formalización del puesto?", options: ["Adaptación mutua", "Supervisión directa", "Normalización de procesos", "Normalización de habilidades (preparación)"], answer: 2 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Se puede coordinar el trabajo de un traumatólogo y un fisioterapeuta sin que tengan que interactuar entre sí?", options: ["Sí, a través de la normalización de procesos", "Sí, a través de la normalización de habilidades", "Sí, a través de la adaptación mutua (se tienen que comunicar)", "No, es imposible, se necesitará ponerse en contacto entre sí"], answer: 1 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "Si se imparte un curso a los trabajadores enseñándoles el procedimiento fijo que tienen que seguir, ¿cómo se coordinan?", options: ["A través de la adaptación", "A través de la supervisión directa", "A través de la normalización de procesos (formalización)", "A través de la normalización de habilidades"], answer: 2 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Qué mecanismo de coordinación dificulta un gran tamaño para la unidad?", options: ["Adaptación mutua", "Normalización de procesos", "Normalización de habilidades", "Normalización de resultados"], answer: 0 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "Con respecto a la normalización como mecanismo de coordinación, señala la respuesta correcta:", options: ["La normalización de resultados no deja libertad de acción al trabajador para determinar la forma de realizar el trabajo.", "La normalización que deja una mayor autonomía al trabajador es la de procesos de trabajo y la que menos la de habilidades. (al revés)", "En la normalización de procesos coincide la persona que ejecuta y administra la tarea. (adaptación mutua)", "Mediante la normalización de habilidades, la organización sacrifica parte del control en beneficio de las entidades externas que forman a sus trabajadores."], answer: 3 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿En qué mecanismo de coordinación coinciden las personas que ejecutan y administran la empresa?", options: ["Adaptación mutua", "Supervisión directa", "Normalización de procesos", "Normalización de habilidades"], answer: 0 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Cómo se coordina el trabajo en una cadena de montaje en la que están predefinidos los procedimientos a seguir?", options: ["Adaptación mutua", "Supervisión directa", "Normalización de procesos", "Normalización de habilidades"], answer: 2 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Qué mecanismo de coordinación dificulta que un directivo tenga muchos subordinados bajo su mando?", options: ["Adaptación mutua", "Supervisión directa", "Normalización de procesos", "Normalización de habilidades"], answer: 1 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "La visión de la organización como un sistema de comunicación informal describe el uso de:", options: ["La supervisión directa.", "La normalización de procesos.", "La normalización de valores.", "La adaptación mutua.", "La normalización de roles."], answer: 3 },
+
+{ theme: "OE - Mecanismos de Coordinación", question: "¿Qué mecanismo de coordinación se relaciona directamente con el control del rendimiento?", options: ["Normalización de procesos.", "Normalización de resultados.", "Adaptación mutua.", "Supervisión directa."], answer: 1 },
+
+// --- PARÁMETROS DE DISEÑO: PUESTOS ---
+{ theme: "OE - Parámetros de Diseño: Puestos", question: "Un puesto implica una sola tarea, pero sobre la que el operario tiene una gran libertad de acción, ¿cómo se encuentra?", options: ["Especializado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente (profesionales)", "Ampliado horizontalmente y especializado verticalmente", "Ampliado horizontal y verticalmente"], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Puestos", question: "Un puesto de trabajo que está especializado horizontalmente:", options: ["Siempre está muy formalizado. (puede tener tareas repetitivas)", "Está obligatoriamente ampliado verticalmente. (no tiene nada que ver)", "No puede exigir formación para ser realizado.", "Realiza pocas tareas o tareas con poco contenido."], answer: 3 },
+
+{ theme: "OE - Parámetros de Diseño: Puestos", question: "¿Cómo son los puestos profesionales?", options: ["Especializados horizontalmente (tareas) y ampliado verticalmente", "Especializados horizontalmente (conocimientos) y ampliado verticalmente", "Ampliado horizontalmente (tareas) y ampliado verticalmente", "Especializados horizontalmente (conocimientos) y verticalmente"], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Puestos", question: "Un directivo medio tiene autoridad sobre un responsable de primera línea y solo responde ante el gerente.", options: ["El puesto del directivo está más ampliado verticalmente que los otros dos. (más que el gerente no)", "El puesto del gerente está más especializado verticalmente que los otros dos. (más ampliado)", "El puesto del directivo tiene más especialización vertical que los otros dos", "El puesto del responsable de línea es el más especializado verticalmente"], answer: 3 },
+
+{ theme: "OE - Parámetros de Diseño: Puestos", question: "Si un puesto formalizado implica realizar varias tareas, ¿cómo se encuentra?", options: ["Especializado horizontal y verticalmente. (ampliado horizontalmente)", "Especializado horizontalmente y ampliado verticalmente. (especializado verticalmente)", "Ampliado horizontalmente y especializado verticalmente", "Ampliado horizontal y verticalmente"], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Puestos", question: "Un puesto implica una sola tarea pero sobre la que el operario tiene una gran libertad de acción, ¿como se encuentra?", options: ["Especializado horizontalmente y verticalmente. (pocas tareas o repetitivas y poca libertad)", "Especializado horizontalmente y ampliado verticalmente (pocas tareas o repetitivas y libertad)", "Ampliado horizontalmente y especializado verticalmente (muchas tareas y poca libertad)", "Ampliado horizontal y verticalmente (muchas tareas y libertad)"], answer: 1 },
+
+// --- DISPOSITIVOS DE ENLACE ---
+{ theme: "OE - Dispositivos de Enlace", question: "¿Qué dispositivos de enlace consiste en un conjunto de trabajadores que son convocados para cumplir una determinada tarea y se desagraga tras su cumplimiento?", options: ["Puestos de enlace.", "Grupos de trabajo.", "Directivos integradores.", "Estructura matricial permanente."], answer: 1 },
+
+{ theme: "OE - Dispositivos de Enlace", question: "Indique cuál de las siguientes afirmaciones relacionadas con el concepto de estructura matricial es FALSA.", options: ["Es un sistema de gestión dual. (doble autoridad formal)", "En la base de la estructura están los puestos agrupados con base a la función y otras que se agrupan según el mercado.", "Se puede decir que es una estructura divisional donde se añade una coordinación funcional.", "La comunicación es muy fluida.", "Todas son correctas."], answer: 2 },
+
+{ theme: "OE - Dispositivos de Enlace", question: "¿Qué dispositivo supone una combinación equilibrada entre una agrupación funcional y una de mercado?", options: ["Puesto de enlace.", "Directivo integrador.", "Grupo de trabajo.", "Estructura matricial."], answer: 3 },
+
+{ theme: "OE - Dispositivos de Enlace", question: "Si un trabajador forma parte de un equipo de trabajo en el que tiene dos supervisores con la misma autoridad formal:", options: ["Se encuentra en un comité permanente", "Se encuentra en una estructura matricial", "Se encuentra en un grupo de trabajo", "Es un puesto de enlace"], answer: 1 },
+
+{ theme: "OE - Dispositivos de Enlace", question: "Indique cuál de las siguientes afirmaciones relacionadas con el concepto de estructura matricial es FALSA.", options: ["Es un dispositivo de enlace.", "Existen dos tipos de estructuras matriciales, variables y permanentes.", "Los individuos que forman parte de una estructura matricial deben responder ante dos responsables que tienen el mismo poder formal.", "Hay dos tipos de estructuras matriciales, unas que se agrupan sólo en base a la función y otras que se agrupan en base al mercado."], answer: 3 },
+
+// --- PARÁMETROS DE DISEÑO: REGULACIÓN COMPORTAMIENTO ---
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "¿Cómo se denomina el parámetro de diseño a través del que describe la forma en que deben realizar una tarea?", options: ["Normalización de procesos (mecanismo de coordinación)", "Adoctrinamiento", "Preparación (normalización de habilidades)", "Formalización"], answer: 3 },
+
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "¿Qué puestos resultan más fáciles de formalizar?", options: ["Puestos profesionales.", "Puestos sin cualificación (tareas más fáciles)", "Supervisor de primera línea.", "Alta dirección."], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "¿Cómo se denominan los procesos de naturaleza formal en los que se transmiten las normas relacionadas con la cultura?", options: ["Adoctrinamiento", "Socialización (informal)", "Preparación", "Formalización"], answer: 0 },
+
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "Analice la siguiente afirmación: \"La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores y normativas organizacionales\".", options: ["Los dos procesos son de naturaleza informal. (socialización informal, adoctrinamiento formal)", "La socialización es un proceso de naturaleza informal, mientras que los conocimientos y habilidades necesarios para la realización del trabajo se dan a través del proceso de adoctrinamiento.", "Los dos procesos son de naturaleza formal. (socialización informal, adoctrinamiento formal)", "El adoctrinamiento es un proceso de naturaleza informal. (formal)", "Ninguna de las anteriores."], answer: 1 }, // Respuesta basada en la corrección de la propia imagen.
+
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "Analice la siguiente afirmación: \"La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores y normativas organizacionales\".", options: ["Es falsa, a través de estos procesos se transmiten los conocimientos y habilidades necesarios para desempeñar un puesto.", "Es falsa, la socialización es un proceso de naturaleza informal.", "Es falsa, el adoctrinamiento es un proceso de naturaleza informal.", "Es verdadera."], answer: 1 }, // Similar a la anterior, pero con opciones V/F.
+
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "¿Cómo se denomina el parámetro de diseño que introduce descripciones que indican en todo momento lo que han de hacer los trabajadores en sus puestos de trabajo?", options: ["Supervisión directa. (mecanismo de coordinación)", "Formalización.", "Estandarización.", "Especialización.", "Normalización. (mecanismo de coordinación)"], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Regulación Comportamiento", question: "¿Qué parámetro de diseño permite introducir la normalización de resultados pero de forma indirecta?", options: ["Dispositivos de enlace.", "Control de rendimiento.", "Planificación de acciones.", "Agrupación de unidades."], answer: 2 },
+
+// --- PLANIFICACIÓN DE ACCIONES ---
+{ theme: "OE - Planificación de Acciones", question: "Indique cuál de las siguientes afirmaciones relacionadas con la planificación de las acciones es FALSA:", options: ["La planificación de acciones permite introducir a la estructura el mecanismo de coordinación de la normalización de resultados de forma directa. (forma impura, indirecta)", "A través de la planificación de acciones se determinan las acciones necesarias para alcanzar los objetivos.", "La planificación de acciones puede exceder el trabajo de una unidad, permitiendo coordinar así a distintas unidades involucradas en la consecución de un mismo objetivo.", "La planificación de acciones se considera un parámetro de diseño."], answer: 0 },
+
+// --- PARÁMETROS DE DISEÑO: AGRUPACIONES ---
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué interdependencia se consigue controlar con la base de agrupación según mercado?", options: ["Interdependencia de las funciones (agrupación funcional)", "Interdependencia de escala o tamaño (economías de escala, agrupación funcional)", "Interdependencia del flujo de trabajo", "Entonces dependencia de las tareas"], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué base de agrupación permite generar y aprovechar economías de escala?", options: ["Funcional", "Productos", "Mercados", "Lugar"], answer: 0 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Cuál de las siguientes no es una ventaja de la agrupación en base a las funciones?", options: ["Especialización de la tarea", "Flexibilidad (agrupación por mercado)", "Eficiencia", "Facilita el desarrollo profesional"], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué base de agrupación se ha seguido para crear las unidades comerciales?", options: ["Agrupación según el producto.", "Agrupación según el mercado.", "Agrupación según el lugar.", "Agrupación funcional."], answer: 3 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué base de agrupación se ha seguido para crear las unidades encargadas de cada producto?", options: ["Agrupación según los conocimientos y habilidades", "Agrupación según mercado", "Agrupación según procesos de trabajo", "Agrupación funcional."], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué base de agrupación se ha seguido para crear la división europea y las unidades de almacenamiento?", options: ["Europea según mercado y almacenamiento agrupación funcional (necesidades específicas de cada región y distintos procesos de logística)", "Las dos siguen un agrupamiento funcional", "Las dos siguen un agrupamiento según mercado", "Europea funcional y el almacenamiento según mercado"], answer: 0 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué características tienen las estructuras altas?", options: ["Tramos de control estrechos y pocos niveles jerárquicos (muchos niveles)", "Tramos de control amplios y muchos niveles jerárquicos", "Tramos de control estrechos y muchos niveles jerárquicos", "Tramos de control amplios y pocos niveles jerárquicos"], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Para qué tipo de tareas es más probable que la unidad sea de tamaño reducido?", options: ["Tareas poco complejas", "Tareas complejas e interdependientes (adaptación mutua)", "Tareas complejas e independientes (gran tamaño, normalización habilidades)", "Ninguna de las anteriores"], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿En qué circunstancias la línea media tendrá un tamaño mayor?", options: ["Cuando la componen unidades funcionales interdependientes", "Cuando la componen unidades de mercado e interdependientes", "Cuando la componga unidades de mercado e independientes", "La línea media nunca tendrá gran tamaño"], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Cómo se denominan los grupos de individuos que tienen responsabilidades sobre un conjunto de decisiones?", options: ["Organigramas", "Flujos de información", "Constelaciones de trabajo", "Flujos regulares de información"], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "Indique cómo un directivo de primera línea podría incrementar el tamaño de la unidad que supervisa:", options: ["Formalizando el comportamiento de sus subordinados.", "Permitiendo que sus subordinados se coordinen mediante adaptación mutua. (La adaptación mutua se lleva a cabo para pequeñas empresas, y la normalización para grandes empresas, la normalización de procesos se consigue a través de la formalización)", "Coordinando a sus subordinados a través de supervisión directa.", "Un directivo de primera línea nunca podrá supervisar una unidad de gran tamaño."], answer: 0 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué características tiene la estructura organizativa planas?", options: ["Tramos de control estrecho y pocos niveles jerárquicos.", "Tramos de control estrechos y mucho nivel de jerárquicos.", "Tramos de control amplios y pocos niveles jerárquicos.", "Tramos de control amplios y muchos niveles jerárquicos."], answer: 2 }, // Repetida de "¿Qué características tienen las estructuras altas?" pero con respuesta diferente según imagen. Asumo que "planas" es lo opuesto a "altas".
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Qué interdependencias se consiguen controlar usando una base de agrupación según mercado?", options: ["De flujo de trabajo.", "De proceso.", "De habilidades.", "De escala. (agrupación funcional)", "De supervisión."], answer: 0 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "A mayor tamaño de la organización:", options: ["Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y menos formalizados sus procesos.", "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, menos diferenciadas sus unidades y menos formalizados sus procesos.", "Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, más diferenciadas sus unidades, más formalizados sus procesos. (normalización de habilidades)", "Menor será la necesidad de división del trabajo, más especializadas estarán sus tareas, menos diferenciadas sus unidades y menos formalizados sus procesos.", "Menor será la necesidad de división del trabajo, más especializadas estarán sus tareas, menos diferenciadas sus unidades y más formalizados sus procesos."], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Agrupaciones", question: "¿Bajo qué base de agrupación resulta más efectivo el control de rendimiento?", options: ["Agrupación funcional.", "Agrupación según los conocimientos.", "Agrupación en base al mercado.", "Bajo ninguna."], answer: 2 },
+
+// --- PARÁMETROS DE DISEÑO: CENTRALIZACIÓN Y DESCENTRALIZACIÓN ---
+{ theme: "OE - Parámetros de Diseño: Centralización y Descentralización", question: "Considerando una organización en la que todo el poder recae en los profesionales del núcleo de operaciones, indique la opción correcta:", options: ["La organización se encuentra descentralizada verticalmente y centralizada horizontalmente.", "La organización se encuentra descentralizada vertical y horizontalmente.", "La organización se encuentra centralizada verticalmente y descentralizada verticalmente.", "La organización se encuentra centralizada vertical y horizontalmente."], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Centralización y Descentralización", question: "En una empresa repartido de forma igualitaria entre todos los miembros de la organización:", options: ["Sus procesos están normalizados.", "Se ejerce descentralización vertical y horizontal.", "Su estructura es funcional.", "Se ejerce descentralización vertical.", "Existe adoctrinamiento."], answer: 1 },
+
+{ theme: "OE - Parámetros de Diseño: Centralización y Descentralización", question: "Marque la opción correcta:", options: ["La descentralización horizontal se da para prestar soporte y ayuda para que las actividades primarias de la cadena de valor se realicen de manera efectiva.", "La descentralización horizontal hace que se organicen y normalicen los procesos, habilidades y cultura de la organización. (centraliz)", "La descentralización horizontal se da para asignar poder de decisión en la estructura de la organización.", "La descentralización horizontal hace que la organización se mueva hacia una estructura simple de valor, al margen de su tamaño.", "La descentralización horizontal se organiza en función de los objetivos individuales."], answer: 2 },
+
+{ theme: "OE - Parámetros de Diseño: Centralización y Descentralización", question: "Si el poder se encuentra repartido de forma igualitaria entre todos los miembros de la organización.", options: ["Existe descentralización vertical y centralización horizontal.", "Existe descentralización vertical y descentralización vertical.", "Existe descentralización horizontal y horizontal.", "Existe descentralización total."], answer: 3 },
+
+{ theme: "OE - Parámetros de Diseño: Centralización y Descentralización", question: "Sobre qué parte de la organización recae el poder cuando existe centralización vertical y horizontal?", options: ["El poder formal e informal recae sobre el ápice estratégico.", "El poder formal e informal recae sobre los profesionales del núcleo de operaciones.", "El poder formal e informal recae sobre el ápice estratégico y el poder formal sobre la tecnoestructura.", "El poder formal e informal recae sobre cualquier miembro de la organización."], answer: 0 },
+
+// --- FLUJOS ---
+{ theme: "OE - Flujos", question: "¿Cuál de los siguientes no forma parte del sistema de flujos regulados?", options: ["El flujo de trabajo de operaciones (núcleo de operaciones)", "El flujo de información y decisiones de control (ápice estratégico y línea media (cadena formal))", "El flujo de comunicaciones informales", "El flujo de información del personal (información y asesoramiento: tecnoestructura y staff de apoyo)"], answer: 2 },
+
+{ theme: "OE - Flujos", question: "Con respecto a la organización como un sistema de flujos regulados, señale la afirmación correcta:", options: ["La visión de la organización como un sistema de flujos regulados considera, entre otros, a los flujos horizontales que tienen lugar entre los especialistas del staff y staff con los directivos de la línea media.", "Los flujos regulados incluyen exclusivamente flujos verticales descendentes, que representan las organizaciones que fluyen desde el ápice estratégico hasta el núcleo de operaciones. (también hay descendentes y horizontales de trabajo e información)", "La visión de la organización como un sistema de flujos regulados es un reflejo complejo de todas las necesidades que tienen lugar dentro de la organización. (comunicación informal)", "La visión de la organización como un sistema de flujos regulados solo considera el flujo horizontal de trabajo en el núcleo de operaciones. (vertical (información y órdenes) y horizontal de información)"], answer: 0 },
+
+// --- HIPÓTESIS ---
+{ theme: "OE - Hipótesis", question: "Cuando el trabajo de los operarios se ve controlado y/o condicionado por el sistema técnico, se dice que el sistema técnico es...", options: ["Sofisticado (influye en la tecnoestructura y staff de apoyo)", "Automatizado.", "Regulador. (más control sobre el trabajo, formalización en núcleo de operaciones)", "Complejo. (entorno)"], answer: 2 },
+
+{ theme: "OE - Hipótesis", question: "Teniendo en cuenta las hipótesis de congruencia, cuanto mayor sea el control externo de una organización...", options: ["Más descentralizada y formalizada resulta su estructura.", "Más descentralizada y menos formalizada resulta su estructura.", "Más centralizada y formalizada resulta su estructura.", "Más descentralizada y menos formalizada resulta su estructura."], answer: 2 },
+
+{ theme: "OE - Hipótesis", question: "Teniendo en cuenta la hipótesis de congruencia, indique cuál de las siguientes afirmaciones es correcta:", options: ["La sencillez y extrema hostilidad del entorno conducen a una centralización de la estructura.", "La complejidad y extrema hostilidad del entorno conducen a una centralización de la estructura.", "La complejidad y munificencia del entorno conducen a una centralización de la estructura.", "La sencillez y munificencia del entorno conducen a una centralización de la estructura."], answer: 3 },
+
+{ theme: "OE - Hipótesis", question: "La hipótesis de configuración extendida pone de manifiesto que la estructura eficaz requiere:", options: ["Únicamente que los parámetros de diseño se ajusten debidamente a los factores de contingencia.", "Únicamente que exista una consistencia interna entre los distintos parámetros de diseño.", "Una consistencia interna entre los distintos parámetros de diseño y la adecuación de estos parámetros de diseño a los factores de contingencia.", "Según esta hipótesis no existe ninguna estructura eficaz."], answer: 2 },
+
+// --- ESTRUCTURAS ---
+{ theme: "OE - Estructuras", question: "La burocracia maquinal presenta:", options: ["Un sistema técnico y regulador y poco sofisticado.", "Puestos de trabajo del núcleo de operaciones ampliado en ambas dimensiones. (especializados)", "Una formulación de estrategias intuitiva.", "Una división poco estricta del trabajo. (agrupación funcional)"], answer: 0 },
+
+{ theme: "OE - Estructuras", question: "La estructura simple presenta:", options: ["Un entorno sencillo y estable. (sencillo y dinámico)", "Puestos de trabajo especializados y formalizados. (poca especialización)", "Una formulación de estrategias racional y analítica. (poco analítico, búsqueda agresiva)", "Una división poco estricta del trabajo."], answer: 3 },
+
+{ theme: "OE - Estructuras", question: "Uno de los inconvenientes de la burocracia profesional se encuentra en:", options: ["Su sistema técnico regulador. (formalización)", "La formalización del comportamiento de los profesionales.", "La centralización de la estructura. (no hay centralización)", "Su dificultad para la innovación."], answer: 3 },
+
+{ theme: "OE - Estructuras", question: "Una de las ventajas de la burocracia maquinal es:", options: ["Ser una estructura eficiente cuando se necesita realizar tareas sencillas y repetitivas.", "Su adaptación rápida a los cambios del entorno. (adhocracia)", "El fuerte sentido de la misión de sus miembros. (burocracia misionaria)", "La no existencia de problemas humanos en el núcleo de operaciones."], answer: 0 },
+
+{ theme: "OE - Estructuras", question: "La burocracia maquinal será caracteriza por un diseño del sistema decisor:", options: ["Centralizado vertical y horizontalmente.", "Centralizado verticalmente y centralizado horizontalmente hacia el staff de apoyo.", "Centralizado verticalmente y descentralizado horizontalmente hacia la tecnoestructura.", "Centralizado verticalmente y descentralizado horizontalmente hacia el núcleo de operaciones."], answer: 2 }, // La opción marcada es C, aunque las características suelen ser centralización vertical y descentralización horizontal limitada hacia la tecnoestructura.
+
+{ theme: "OE - Estructuras", question: "Analice la siguiente afirmación: \"Debido a la naturaleza de su principal mecanismo de coordinación, la organización misionaria puede considerarse como una adhocracia ideológica\".", options: ["Es falsa, se puede considerar como una burocracia profesional.", "Es falsa, se puede considerar como una adhocracia administrativa.", "Es falsa, se puede considerar como una burocracia ideológica. no existe", "Es verdadera."], answer: 2 },
+
+{ theme: "OE - Estructuras", question: "En las burocracias profesionales ¿suelen surgir dos jerarquías paralelas?:", options: ["No, en las burocracias profesionales no pueden existir dos jerarquías paralelas.", "Sí, una democrática y ascendente para los profesionales del staff de apoyo y otra con forma de burocracia maquinal para la tecnoestructura.", "Sí, una democrática y ascendente para los profesionales de las unidades de línea y otra con forma de burocracia maquinal para el staff de apoyo.", "Sí, una con forma de burocracia maquinal en el núcleo de operaciones y otra democrática y ascendente en los profesionales del staff y la tecnoestructura."], answer: 2 },
+
+{ theme: "OE - Estructuras", question: "La forma divisional pura se caracteriza por:", options: ["Una centralización total en la sede central. (descentralización vertical paralela limitada)", "Un cierto grado de descentralización horizontal paralela desde la sede central hacia las divisiones.", "Un adaptación entre la descentralización vertical paralela desde la sede central hacia las divisiones y una centralización del poder de toma de decisiones en las propias divisiones.", "Un cierto grado de descentralización vertical selectiva desde la sede central hacia las divisiones y una descentralización del poder de toma de decisiones en las propias divisiones."], answer: 2 },
+
+{ theme: "OE - Estructuras", question: "El núcleo de operaciones de la burocracia operativa:", options: ["Se encuentra fusionado con el resto de la tecnoestructura formando una “masa orgánica” en la que no está clara la diferencia entre línea y staff.", "Se encuentra truncado y separado de la tecnoestructura.", "Se coordina mediante la normalización de procesos.", "Está automatizado y separado de la estructura."], answer: 2 },
+
+{ theme: "OE - Estructuras", question: "Analice la siguiente afirmación: \"Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce como la denominación de burocracia duplicada\":", options: ["Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional. (forma divisional duplicada)", "Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia maquinal.", "Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional.", "Es verdadera."], answer: 2 },
+
+{ theme: "OE - Estructuras", question: "Teniendo en cuenta las hipótesis de congruencia, indique cuál de las siguientes afirmaciones es cierta.", options: ["La simpleza y la formalización están en consonancia con una organización simple. (baja formalización)", "La complejidad y la formalización están en consonancia con una estructura divisional. (no formalización)", "La simpleza y la estandarización están en consonancia con una estructura simple. (flexibilidad)", "La complejidad y la virtualización están en consonancia con una estructura red.", "La simpleza y la virtualización están en consonancia con una estructura simple."], answer: 3 },
+
+{ theme: "OE - Estructuras", question: "En las estructuras divisionales puras, ¿cuál es el principal mecanismo de coordinación entre las divisiones?", options: ["Normalización de procesos de trabajo. (burocracia maquinal)", "Adaptación mutua. (adhocracia)", "Normalización de resultados por lo que se necesita la fijación de metas y medición del desempeño.", "Supervisión directa. (estructura simple)"], answer: 2 },
+
+{ theme: "OE - Estructuras", question: "Los principales mecanismos de coordinación de la adhocracia operativa y de la adhocracia administrativa son:", options: ["En ambos casos la estructura es simple.", "En ambos casos es la estructura matricial, ya que se fundamenta en un administrativo.", "En ambos casos el mecanismo es la normalización.", "En ambos casos el mecanismo de coordinación es la adaptación mutua.", "En ambos casos el mecanismo de coordinación es la supervisión directa."], answer: 3 },
+
+{ theme: "OE - Estructuras", question: "La identificación natural del individuo con la ideología de una organización se produce cuando:", options: ["Sus valores personales son congruentes con la ideología de la organización", "Se ve sometido a procesos de socialización y adoctrinamiento por parte de la organización.", "Se intenta crear un lenguaje en común dentro de la organización.", "Se busca internalizar los objetivos de la organización en el individuo.", "Se busca que la organización se identifique con el individuo."], answer: 0 },
+
+{ theme: "OE - Estructuras", question: "¿Qué tipo de entorno comparten la estructura simple y la adhocracia?", options: ["Complejo.", "Dinámico.", "Estable.", "Diversificado.", "Interdependiente."], answer: 1 },
+
+{ theme: "OE - Estructuras", question: "La adhocracia emprendedora.", options: ["Es un tipo de adhocracia que se mueve entre la adhocracia operativa y la burocracia profesional.", "Es una configuración híbrida que se mueve entre una estructura simple y una adhocracia operativa", "Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia profesional.", "La configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia simple.", "Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia profesional."], answer: 1 },
+
+{ theme: "OE - Estructuras", question: "Las organizaciones misionarias reformadoras se caracterizan por:", options: ["Su ideología.", "Su cultura de trabajo.", "El grado de especialización y formación de sus miembros.", "La homogeneidad que se establece en cuanto a los valores que poseen miembros de acuerdo con su misión."], answer: 3 },
+
+{ theme: "OE - Estructuras", question: "Analice la siguiente afirmación: \"En las burocracias profesionales, los miembros de la línea media suelen ser los analistas de los procesos de trabajo y de los resultados\".", options: ["Sí, y además controlan las actividades de los operadores.", "No, los miembros de la línea media son los responsables de la operación.", "No, los miembros de la línea media son los responsables de diseñar los procesos de trabajo.", "No, los miembros de la línea media son los responsables de la línea de soporte.", "No, los miembros de la línea media son los responsables del núcleo de operaciones."], answer: 1 },
+
+{ theme: "OE - Estructuras", question: "Las organizaciones misionarias reformadoras:", options: ["Se orientan a fomentar cambios radicales en la sociedad.", "Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión. Estas son las conservadoras.", "Prefieren una variable de la estructura simple.", "Son una variable de la estructura simple."], answer: 0 },
+
+{ theme: "OE - Estructuras", question: "Analice la siguiente afirmación: \"En las burocracias profesionales, los miembros de la línea media suelen ser elegidos, o al menos consentidos, por los operarios del núcleo de operaciones\".", options: ["Falso, esto ocurre en la adhocracia administrativa.", "Falso, esto ocurre en la burocracia maquinal. (no 100%)", "Falso, esto ocurre en la estructura simple. (no 100%)", "Verdadero. En las burocracias profesionales, los operarios del núcleo de operaciones tienen un alto grado de autonomía y profesionalismo. Debido a esto, suelen tener una influencia significativa en la selección o consentimiento de los miembros de la línea media, ya que es fundamental que haya"], answer: 3 },
+
+// --- EJEMPLO EXAMEN ORGANIZACIÓN EMPRESAS ---
+{ theme: "OE - Ejemplo Examen", question: "1. ¿Cómo se coordinan las actividades relacionadas con el desarrollo y autorización del Manual de Calidad?", options: ["Normalización de procesos", "Normalización de valores", "Adaptación Mutua", "Supervisión Directa"], answer: 2 },
+
+{ theme: "OE - Ejemplo Examen", question: "2.Indique la veracidad/falsedad de la siguiente afirmación: “Según la cadena de valor, las actividades de abastecimiento, desarrollo tecnológico, gestión de recursos humanos e infraestructura, son actividades de apoyo realizadas por las unidades de staff”", options: ["Falso, pero no es por ninguna de las razones expuestas", "Falso, esas actividades son primarias", "Verdadero", "Falso, esas actividades son realizadas por las unidades de línea"], answer: 2 },
+
+{ theme: "OE - Ejemplo Examen", question: "3. Los empleados que normalmente están especializados verticalmente suelen tener además:", options: ["Adaptación mutua", "Alta preparación", "Formalización del comportamiento", "Normalización de habilidades"], answer: 2 },
+
+//{ theme: "OE - Ejemplo Examen", question: "4. Comente la veracidad o falsedad de la siguiente afirmación: “A medida que aumenta el tamaño de la empresa, el número de niveles jerárquicos disminuye”", options: ["La afirmación es falsa por cualquiera de las otras dos razones expuestas", "La afirmación es verdadera", "La afirmación es falsa, el tamaño de la empresa no es un parámetro de diseño", "La afirmación es falsa, a medida que aumenta el tamaño de la unidad, el número de niveles jerárquicos disminuye"], answer: 0 },
+
+{ theme: "OE - Ejemplo Examen", question: "5. Indique la veracidad/falsedad de la siguiente afirmación:\"El contacto directo como dispositivo de enlace se utiliza cuando hay problemas entre dos departamentos, entonces se sitúa a un miembro de una unidad en la otra para ayudar a solucionar el conflicto\".", options: ["Falso, el contacto directo dificulta el establecimiento de relaciones entre los directivos o miembros de la organización que han de intervenir en la toma de decisiones o solución de problemas.", "Falso, dicha afirmación se corresponde con el rol de enlace.", "Falso, dicha afirmación se corresponde con el directivo integrador.", "Verdadero"], answer: 1 },
+
+{ theme: "OE - Ejemplo Examen", question: "6. Indique la veracidad/falsedad de la siguiente afirmación: \"Cuanto más antiguas son las organizaciones, más formalizadas suelen estar mientras que, conforme aumentan su tamaño, utilizan menos formalización\".", options: ["Falso, es justo al contrario cuanto mayor es el tamaño más formalizadas están las empresas y cuando son más antiguas menos.", "Falso, tanto con un aumento en la edad como con un aumento del tamaño, el uso de formalización crece.", "Falso, tanto con un aumento en la edad como con un aumento del tamaño, la formalización del comportamiento es menor.", "Verdadero."], answer: 1 },
+
+{ theme: "OE - Ejemplo Examen", question: "7. Indique la veracidad/falsedad de la siguiente afirmación: \"La organización en crisis, que aparece cuando la extrema hostilidad obliga a la organización a centralizarse independientemente de cuál sea su estructura habitual, es una variante de la estructura simple\".", options: ["Falso, es una burocracia maquinal.", "Falso, es una forma divisional.", "Falso, simplemente aparecen zonas grises.", "Verdadero."], answer: 3 },
+
+{ theme: "OE - Ejemplo Examen", question: "8. Una empresa que se mueve en entornos estáticos y simples recibe el nombre de:", options: ["Adhocracia", "Burocracia maquinal", "Forma divisional", "Estructura simple"], answer: 1 },
+
+{ theme: "OE - Ejemplo Examen", question: "9. Indique la veracidad/falsedad de la siguiente afirmación: *Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada\".", options: ["Falso, se produce una forma divisional de subproductos.", "Verdadero.", "Falso, se produce una burocracia duplicada.", "Falso, se produce una forma divisional integrada."], answer: 2 },
+
+{ theme: "OE - Ejemplo Examen", question: "10. Indique la veracidad/falsedad de la siguiente afirmación (esta pregunta parece una repetición de la pregunta 9 en enunciado, pero las opciones son diferentes y se refieren a tipos de estructuras en general): *Si la forma divisional se hibrida con la estructura burocrática maquinal se produce una forma divisional socializada\". (Asumiré que la pregunta busca identificar un tipo de estructura, y la respuesta C dada es 'Estructura Adhocrática', lo cual no tiene relación directa con la afirmación. Si la pregunta real era otra, por favor, indícalo)", options: ["Burocracia Profesional", "Estructura misionera", "Estructura Adhocrática", "Forma divisional"], answer: 2 },
+// --- PREGUNTAS V/F (Nuevo Bloque) ---
+{ theme: "OE - VyF Centralización y Descentralización", question: "1. Las organizaciones centralizadas verticalmente pero descentralizadas horizontalmente de forma selectiva y limitada, ¿dan especial poder a los operarios?", options: ["Verdadero, los operarios ganan poder en este tipo de descentralización.", "Falso, en este tipo de descentralización se daría poder principalmente a la Tecnoestructura.", "Falso, el poder recae en el ápice estratégico.", "Verdadero, pero solo si la descentralización horizontal es amplia."], answer: 1 },
+
+{ theme: "OE - VyF Centralización y Descentralización", question: "2. Las organizaciones totalmente descentralizadas en ambas dimensiones (vertical y horizontal), ¿se coordinan mediante normalización de valores?", options: ["Verdadero.", "Falso, se coordinan mediante adaptación mutua.", "Falso, se coordinan mediante normalización de habilidades.", "Verdadero, pero solo si son de pequeño tamaño."], answer: 0 },
+
+{ theme: "OE - VyF Centralización y Descentralización", question: "3. Según la descentralización de la empresa, ¿puede la burocratización mediante la formalización del comportamiento constituir una forma limitada de la descentralización horizontal?", options: ["Verdadero.", "Falso, la formalización del comportamiento siempre lleva a la centralización.", "Falso, la descentralización horizontal se logra solo por normalización de habilidades.", "Verdadero, pero únicamente si la formalización es baja."], answer: 0 },
+
+{ theme: "OE - VyF Hipótesis de Congruencia", question: "4. La Hipótesis 1 de congruencia afirma que \"cuanto más antigua sea la organización más formalizado estará el comportamiento\". ¿Significa esto que las organizaciones jóvenes también están muy formalizadas?", options: ["Verdadero, la hipótesis implica alta formalización para todas las edades.", "Falso, la hipótesis no implica que las jóvenes estén muy formalizadas, solo que las antiguas lo están más.", "Falso, las organizaciones jóvenes tienden a ser menos formalizadas.", "Verdadero, la formalización es independiente de la edad."], answer: 1 }, // El "VERDADERO" de la pregunta original se refiere a que la afirmación inicial (las antiguas más formalizadas) es correcta, no a la inferencia sobre las jóvenes. La inferencia sobre las jóvenes sería falsa o no directamente derivable. Reinterpreto el V/F como que la hipótesis es correcta.
+
+{ theme: "OE - VyF Hipótesis de Congruencia", question: "5. La Hipótesis 5 afirma que el control se vuelve más impersonal a medida que los analistas del staff asumen más poder.", options: ["Verdadero, esa es la Hipótesis 5.", "Falso, el enunciado define la Hipótesis 6 (a mayor uso de la normalización, más impersonal el control). La Hipótesis 5 se refiere a que a mayor tamaño, más elaborada la estructura.", "Falso, la Hipótesis 5 se refiere a la formalización y la edad.", "Verdadero, y el poder del staff siempre aumenta con la normalización."], answer: 1 },
+
+{ theme: "OE - VyF Hipótesis de Congruencia", question: "6. Las Hipótesis 8 y 9 afirman que cuanto más dinámico y complejo es el entorno, más orgánica y descentralizada será la estructura. Por tanto, en entornos estables y simples, ¿la estructura será más burocrática y comprensible, y por ello más descentralizada?", options: ["Verdadero, la comprensibilidad facilita la descentralización.", "Falso, en entornos estables y simples la estructura será más burocrática y centralizada.", "Falso, en entornos estables y simples la estructura será orgánica y centralizada.", "Verdadero, la burocracia implica descentralización en estos entornos."], answer: 1 },
+
+{ theme: "OE - VyF Hipótesis de Congruencia", question: "7. La Hipótesis 10, ¿afirma que la elevada diversificación crea divisionalización que segmenta el sistema técnico de la empresa?", options: ["Verdadero, la diversificación siempre segmenta el sistema técnico.", "Falso, la Hipótesis 10 (o relacionada) sugiere que una mayor diversificación de los mercados tiende a la división por unidades de mercado, no necesariamente a la segmentación del sistema técnico de esa forma.", "Falso, la diversificación siempre lleva a una estructura funcional.", "Verdadero, y la divisionalización es la única respuesta a la diversificación."], answer: 1 },
+
+{ theme: "OE - VyF Hipótesis de Congruencia", question: "8. La Hipótesis 12, ¿afirma que las contingencias del entorno fomentan la diferenciación y por lo tanto descentralización selectiva (horizontal y vertical)?", options: ["Verdadero, esa es la consecuencia directa.", "Falso, la Hipótesis 12 (o relacionada) sugiere que las disparidades en el entorno fomentan la descentralización selectiva hacia constelaciones de trabajo, lo que implica descentralización horizontal y vertical selectiva.", "Falso, las contingencias del entorno siempre llevan a la centralización.", "Verdadero, pero solo si el entorno es complejo."], answer: 1 },
+
+// --- OE - Repaso (TEST-CON-SOLUCIONES) ---
+{ theme: "OE - Repaso Primeros Temas", question: "1. No es una característica de la organización:", options: ["Surgir de decisiones conscientes y voluntarias", "Estar planificada intencionalmente", "Surgir de forma espontánea", "Tener componente humano"], answer: 2 },
+{ theme: "OE - Repaso Primeros Temas", question: "2. Respecto a las cuatro funciones básicas o secuenciales:", options: ["La planificación se ocupa de diseñar la estructura organizativa", "La dirección se encarga de verificar los logros o metas y detectar desviaciones", "La función de organización se encarga de fijar las metas", "La función de dirección se refiere a influir en las personas mediante el liderazgo"], answer: 3 },
+{ theme: "OE - Repaso Primeros Temas", question: "3. Las empresas…", options: ["Son creadas de forma natural", "Son sistemas cerrados", "Su principal objetivo es satisfacer necesidades", "Son creadas de forma artificial"], answer: 3},
+{ theme: "OE - Repaso Primeros Temas", question: "4. No es un condicionante del diseño organizativo…", options: ["La misión", "La visión", "La naturaleza sistémica", "La eficacia"], answer: 2 },
+{ theme: "OE - Repaso Primeros Temas", question: "5. La estructura formal de la empresa…", options: ["Es más necesaria en organizaciones pequeñas", "Surge de relaciones informales", "Se refleja en el organigrama", "No enlaza a los elementos humanos y materiales"], answer: 2 },
+
+{ theme: "OE - Repaso Primeros Temas", question: "6. El mecanismo de adaptación mutua…", options: ["Supone la coordinación del trabajo con la comunicación formal", "Tiene lugar únicamente en organizaciones de pocas personas", "Se utiliza principalmente en situaciones de urgencia o rápidas", "Tiene lugar únicamente en organizaciones complejas o de muchas personas"], answer: 2 },
+{ theme: "OE - Repaso Primeros Temas", question: "7. La formación o preparación para realizar tareas en un determinado puesto es derivado de la normalización de…", options: ["Procesos de trabajo", "Resultados", "Valores", "Habilidades"], answer: 3 },
+{ theme: "OE - Repaso Primeros Temas", question: "8. Las actividades que se definen como primarias…", options: ["Intervienen directamente en la creación del producto o servicio", "No se relacionan con la producción", "Tienen implicación indirecta en la creación del producto o servicio", "Respaldan a las actividades de apoyo"], answer: 0 },
+{ theme: "OE - Repaso Primeros Temas", question: "9. No es función del ápice estratégico:", options: ["Desarrollar la estrategia", "Mantener las relaciones con el entorno", "Supervisar la organización en general", "Unir la línea media con el núcleo de operaciones"], answer: 3 },
+// Tema 1. La organización: conceptos básicos
+{ theme: "OE - Conceptos básicos", question: "No es una característica de la organización:", options: ["Surgir de decisiones conscientes y voluntarias","Estar planificada intencionalmente","Surgir de forma espontánea","Tener componente humano"], answer: 2 },
+{ theme: "OE - Conceptos básicos", question: "Respecto a las cuatro funciones básicas o secuenciales:", options: ["La planificación se ocupa de diseñar la estructura organizativa","La dirección se encarga de verificar los logros o metas y detectar desviaciones","La función de organización se encarga de fijar las metas","La función de dirección se refiere a influir en las personas mediante el liderazgo"], answer: 3 },
+{ theme: "OE - Conceptos básicos", question: "Las empresas…", options: ["Son creadas de forma natural","Son sistemas cerrados","Su principal objetivo es satisfacer necesidades","Son creadas de forma artificial"], answer: 3 },
+{ theme: "OE - Conceptos básicos", question: "No es un condicionante del diseño organizativo…", options: ["La misión","La visión","La naturaleza sistémica","La eficacia"], answer: 3 },
+{ theme: "OE - Conceptos básicos", question: "La estructura formal de la empresa…", options: ["Es más necesaria en organizaciones pequeñas","Surge de relaciones informales","Se refleja en el organigrama","No enlaza a los elementos humanos y materiales"], answer: 2 },
+// Tema 2. Mecanismos de coordinación y partes de la organización
+{ theme: "OE - Mecanismos de coordinación", question: "El mecanismo de adaptación mutua…", options: ["Supone la coordinación del trabajo con la comunicación formal","Tiene lugar únicamente en organizaciones de pocas personas","Se utiliza principalmente en situaciones de urgencia o rápidas","Tiene lugar únicamente en organizaciones complejas o de muchas personas"], answer: 2 },
+{ theme: "OE - Mecanismos de coordinación", question: "La formación o preparación para realizar tareas en un determinado puesto es derivado de la normalización de…", options: ["Procesos de trabajo","Resultados","Valores","Habilidades"], answer: 3 },
+{ theme: "OE - Mecanismos de coordinación", question: "Las actividades que se definen como primarias…", options: ["Intervienen directamente en la creación del producto o servicio","No se relacionan con la producción","Tienen implicación indirecta en la creación del producto o servicio","Respaldan a las actividades de apoyo"], answer: 0 },
+{ theme: "OE - Mecanismos de coordinación", question: "No es función del ápice estratégico:", options: ["Desarrollar la estrategia","Mantener las relaciones con el entorno","Supervisar la organización en general","Unir la línea media con el núcleo de operaciones"], answer: 3 },
+{ theme: "OE - Mecanismos de coordinación", question: "Las organizaciones se forman por distintas partes, de ellas nunca puede faltar…", options: ["La línea media","El ápice estratégico","El núcleo de operaciones","La tecnoestructura"], answer: 2 },
+// Tema 3. La organización como sistema de flujos
+{ theme: "OE - Sistema de flujos", question: "El organigrama es el medio en el que NO se representa…", options: ["La división del trabajo","Los puestos existentes","Las relaciones informales","La autoridad formal en forma de jerarquía"], answer: 2 },
+{ theme: "OE - Sistema de flujos", question: "El flujo de control regulado…", options: ["Se forma por flujos horizontales","Es únicamente ascendente","Es únicamente descendente","Se extiende desde el núcleo de operaciones hasta el ápice"], answer: 2 },
+{ theme: "OE - Sistema de flujos", question: "El flujo descendente del sistema de control regulado…", options: ["Se utiliza para retroalimentar la información directiva","Va subiendo desde el núcleo de operaciones hasta el ápice","Se utiliza para informar del rendimiento del núcleo de operaciones al ápice estratégico","Puede enviar órdenes e instrucciones hacia niveles jerárquicamente más bajos"], answer: 3 },
+{ theme: "OE - Sistema de flujos", question: "La comunicación informal…", options: ["Se crea únicamente por el trabajo","No puede ser antifuncional","Puede aumentar la motivación y el rendimiento del individuo","Nunca se desarrolla independientemente del trabajo"], answer: 2 },
+{ theme: "OE - Sistema de flujos", question: "El flujo de trabajo de operaciones…", options: ["Puede ser inverso cuando se devuelve un producto","No necesita de reglas o condiciones","Atraviesa el ápice estratégico","Sólo genera información formal"], answer: 0 },
+// Tema 4. Los parámetros de diseño: Diseño de puestos
+{ theme: "OE - Diseño de puestos", question: "La especialización…", options: ["Es únicamente horizontal","Conlleva la división del trabajo","No está definida por la organización","Puede o no indicar las tareas a ejecutar"], answer: 1 },
+{ theme: "OE - Diseño de puestos", question: "Con respecto a la especialización horizontal…", options: ["Puede ser de tareas o de destrezas","Se refiere al grado de autonomía","Tiene como desventaja la disminución de la productividad","No facilita el aprendizaje"], answer: 0 },
+{ theme: "OE - Diseño de puestos", question: "La especialización vertical alta se refiere a…", options: ["Una especialización de pocas tareas repetitivas","Una especialización de muchas tareas","Una especialización con mucho grado de autonomía","Una especialización con poco grado de autonomía"], answer: 3 },
+{ theme: "OE - Diseño de puestos", question: "NO es un parámetro para diseñar puestos individuales…", options: ["Especialización del trabajo","Adoctrinamiento y socialización","Preparación de habilidades","Desformalización del comportamiento"], answer: 3 },
+{ theme: "OE - Diseño de puestos", question: "La especialización horizontal por destrezas o conocimientos…", options: ["Es igual que la de tareas","Permite dividir el trabajo en partes más sencillas","No puede dividirse en tareas más sencillas","No existe, esta especialización es vertical"], answer: 2 },
+// Tema 5. Parámetros de diseño (II): Diseño de la superestructura
+{ theme: "OE - Diseño de la superestructura", question: "El diseño de la superestructura sigue un proceso:", options: ["Ascendente","Descendente","Circular","No forma parte de un proceso"], answer: 0 },
+{ theme: "OE - Diseño de la superestructura", question: "NO es un criterio de agrupación objetivo:", options: ["Interdependencias de escala","Interdependencias sociales","Interdependencias de procesos","Interdependencias de funciones"], answer: 1 },
+{ theme: "OE - Diseño de la superestructura", question: "Una ventaja de la agrupación en base funcional es:", options: ["Mayor adaptación","El acercamiento entre unidades","Mayor especialización","Una gama más amplia de productos y tareas"], answer: 2 },
+{ theme: "OE - Diseño de la superestructura", question: "El tamaño de una unidad aumentará cuando…", options: ["Las tareas sean más variadas o diferentes","Se pueda normalizar","Cuanto más se dependa de la adaptación mutua","Cuando se necesite más contacto entre subordinado y superior"], answer: 1 },
+{ theme: "OE - Diseño de la superestructura", question: "En una estructura plana:", options: ["Las unidades son pequeñas","Un directivo tiene a menos empleados bajo su supervisión","El tramo de control es amplio","El tramo de control es estrecho"], answer: 2 },
+// Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales
+{ theme: "OE - Diseño de vínculos laterales", question: "El control de rendimiento…", options: ["Mide los resultados a priori","Lleva a cabo una normalización de procesos","Se identifica con estructuras agrupadas en base a mercados","No regula el rendimiento general"], answer: 2 },
+{ theme: "OE - Diseño de vínculos laterales", question: "El sistema de planificación de acciones:", options: ["Es un proceso descendente","Se determina a posteriori","Normaliza los resultados de forma directa","Se suele dar en estructuras con agrupación por mercados"], answer: 0 },
+{ theme: "OE - Diseño de vínculos laterales", question: "El dispositivo de enlace que tiene papel de mediador, mejorando la coordinación y evitando conflictos es:", options: ["Directivo integrador","Puesto de enlace","Grupo de trabajo","Comité permanente"], answer: 0 },
+{ theme: "OE - Diseño de vínculos laterales", question: "La estructura matricial:", options: ["Se utiliza sólo en organizaciones agrupadas funcionalmente","Si es variable, sus unidades son más estables","Se emplean en un entorno simple","Se utilizan para resolver problemas complejos"], answer: 3 },
+{ theme: "OE - Diseño de vínculos laterales", question: "El mecanismo de coordinación que se relaciona con el control de rendimiento es:", options: ["Normalización de resultados","Supervisión directa","Adaptación mutua","Normalización de habilidades"], answer: 0 },
+// Tema 7. Los parámetros de diseño (IV): Diseño del sistema decisor
+{ theme: "OE - Diseño del sistema decisor", question: "Una estructura centralizada se caracteriza por:", options: ["Utilizar mucho la adaptación mutua","Las decisiones pasan por el director general","Distribuir el poder entre los miembros de la organización","Constituir un estímulo de motivación"], answer: 1 },
+{ theme: "OE - Diseño del sistema decisor", question: "En la descentralización horizontal:", options: ["Se dispersa el poder formal","Hace referencia a la dispersión del poder por la escala de autoridad lineal","El poder de decisión es principalmente informal","No se relaciona con las unidades de staff"], answer: 2 },
+{ theme: "OE - Diseño del sistema decidor", question: "La descentralización:", options: ["Sobrecarga al director general","Es un proceso barato","Es igual a la dispersión física","Permite reaccionar con rapidez"], answer: 3 },
+{ theme: "OE - Diseño del sistema decisor", question: "Una organización en la que el poder de decisión esté concentrado en profesionales del núcleo de operaciones y se coordine mediante la normalización de habilidades, hace uso de una:", options: ["Descentralización total","Descentralización sólo vertical","Centralización vertical y horizontal","Descentralización vertical y horizontal"], answer: 3 },
+{ theme: "OE - Diseño del sistema decisor", question: "Los analistas de la tecnoestructura tienen más poder formal en:", options: ["Normalización de resultados","Normalización de habilidades","Normalización de procesos","El poder que se les concede es informal"], answer: 3 },
+// Tema 8. Los factores de contingencia
+{ theme: "OE - Factores de contingencia", question: "Una organización de éxito diseña su estructura de acuerdo con su situación y factores de contingencia, esta afirmación procede de:", options: ["Hipótesis de configuración","Hipótesis de congruencia","Hipótesis de la configuración extendida","Hipótesis sobre el sistema técnico"], answer: 1 },
+{ theme: "OE - Factores de contingencia", question: "De acuerdo con Mintzberg, respecto a los parámetros de diseño y los factores de contingencia…", options: ["Los parámetros de diseño estructural son dependientes y los factores de contingencia independientes","Los factores de contingencia son dependientes y los parámetros independientes","Ambos son independientes","Ambos son dependientes"], answer: 0 },
+{ theme: "OE - Factores de contingencia", question: "NO es una hipótesis respecto a la edad y el tamaño de la organización que…", options: ["Cuanto más edad o antigua es, más formalizado es su comportamiento","Cuando mayor tamaño tenga, más compleja será su estructura","Cuanto menor tamaño tenga la organización, más formalizado será el comportamiento","Cuanto más grande es la organización, más grande será el tamaño de sus unidades"], answer: 2 },
+{ theme: "OE - Factores de contingencia", question: "Respecto a las hipótesis sobre el entorno, es falso que…", options: ["Cuanto más dinámico sea el entorno, más burocrática será su estructura","Cuando el entorno es más complejo, más descentralizada estará la organización","Las disparidades en el entorno estimulan la descentralización","Si los mercados están muy diversificados, la organización utilizará una base de agrupación por mercados"], answer: 0 },
+{ theme: "OE - Factores de contingencia", question: "El grado en el que varía el trabajo en una organización se refiere a:", options: ["Predictibilidad del trabajo","Comprensibilidad del trabajo","Velocidad de reacción","Diversidad del trabajo"], answer: 3 },
+// Tema 9. La estructura simple
+{ theme: "OE - Estructura simple", question: "NO es una característica de la estructura simple que…", options: ["Su tecnoestructura y staff son mínimos","Sus unidades están diferenciadas","Su jerarquía directiva es pequeña","La división del trabajo es poco estricta"], answer: 1 },
+{ theme: "OE - Estructura simple", question: "El entorno de una configuración que atiende a la estructura simple…", options: ["Es sencillo y dinámico","Es sencillo y estático","Es complejo y estático","Favorece a una normalización"], answer: 0 },
+{ theme: "OE - Estructura simple", question: "Respecto a las variantes de la estructura simple…", options: ["La entidad emprendedora surge cuando hay entornos sin riesgo","La organización autocrática nace por el poder que le dan al líder sus seguidores","La organización carismática se da cuando el líder tienes ansias de poder","La organización en crisis se centraliza por entornos muy hostiles"], answer: 3 },
+{ theme: "OE - Estructura simple", question: "NO es una ventaja de la estructura simple…", options: ["Su flexibilidad","Su estructura paternalista","Su adaptabilidad","La relación buena entre sus empleados"], answer: 1 },
+{ theme: "OE - Estructura simple", question: "La estructura simple…", options: ["Se suele utilizar por organizaciones maduras","Es una forma estructural sin riesgo","Conduce a organizaciones eficientes en entornos competitivos complejos","Tiene como parte principal el ápice estratégico"], answer: 3 },
+// Tema 10. La burocracia maquinal
+{ theme: "OE - Burocracia maquinal", question: "Con respecto al trabajo del núcleo de operaciones en una burocracia maquinal…", options: ["No se encuentra dividido","Es poco formalizado","Se necesita una preparación profesional","Es sencillo y repetitivo"], answer: 3 },
+{ theme: "OE - Burocracia maquinal", question: "El mecanismo de coordinación que más utiliza la burocracia maquinal es:", options: ["Normalización de resultados","Normalización de procesos de trabajo","Normalización de habilidades","Supervisión directa"], answer: 1 },
+{ theme: "OE - Burocracia maquinal", question: "El entorno de una organización que toma la burocracia maquinal como configuración…", options: ["Es sencillo y estable","Es complejo, pero estable","Dinámico y sencillo","Hostil y dinámico"], answer: 0 },
+{ theme: "OE - Burocracia maquinal", question: "El término “buropatologías” que introdujo Thompson…", options: ["Son comportamientos funcionales que dan lugar a precios elevados","Son comportamientos que dan lugar a un buen trato a los clientes","Son comportamientos disfuncionales propios de las burocracias maquinales","Ninguna es correcta"], answer: 2 },
+{ theme: "OE - Burocracia maquinal", question: "Una variante de la burocracia maquinal son las burocracias de seguridad, que…", options: ["Surgen cuando hay riesgo de peligrosidad","Se encargan del cumplimiento de normas gubernamentales, como preservación del medio ambiente","Se dedican al control, como prisiones","Se refiere a organizaciones que son controladas por agencias gubernamentales"], answer: 1 },
+// Tema 11. La burocracia profesional
+{ theme: "OE - Burocracia profesional", question: "NO es una característica de la burocracia profesional…", options: ["Su mecanismo de coordinación más utilizado es la normalización de habilidades","El proceso de encasillamiento","Que los profesionales realicen tareas directivas y de administración","Tener un entorno complejo y estable"], answer: 2 },
+{ theme: "OE - Burocracia profesional", question: "Con respecto a la descentralización en una burocracia profesional…", options: ["Está centralizada verticalmente y descentralizada horizontalmente","Está descentralizada verticalmente y centralizada horizontalmente","Está centralizada en ambas dimensiones","Está descentralizada en ambas dimensiones"], answer: 3 },
+{ theme: "OE - Burocracia profesional", question: "El sistema técnico en la burocracia profesional…", options: ["Es regulador y sofisticado","Se caracteriza por la automatización","No es regulador, sofisticado ni automatizado","Es regulador, pero no automatizado"], answer: 0 },
+{ theme: "OE - Burocracia profesional", question: "En cuanto a las variantes de la burocracia profesional, la burocracia profesional simple…", options: ["Surge cuando el entorno es parcialmente dinámico","Se combina la burocracia profesional con una adhocracia","Se da cuando el entorno se diversifica geográficamente","Ocurre cuando el tamaño de la organización es pequeño y hay centralización"], answer: 3 },
+{ theme: "OE - Burocracia profesional", question: "Los problemas de libertad de acción en una burocracia profesional se refieren a…", options: ["Cuando se necesita innovar y los profesionales carecen de voluntad de cooperación","Cuando se intentan introducir nuevos mecanismos de coordinación como otras normalizaciones, ya que esto desanima a los profesionales","Surgen de la autonomía de los profesionales, ya que no todos son competentes","Estos problemas son típicos de la burocracia maquinal"], answer: 2 },
+// Tema 12. Organización Misionaria :contentReference[oaicite:0]{index=0}
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "56. La organización misionaria NO se caracteriza por:", options: ["Un compromiso fuerte de los miembros con la ideología de la organización", "Utilizar el adoctrinamiento", "Valores arraigados", "Una cultura organizacional débil"], answer: 3 },
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "57. Respecto a los tipos de identificación para el refuerzo de la ideología, la identificación por selección se corresponde con:", options: ["Una identificación procedente de la escala de valores de la organización", "Una identificación que surge de una ganancia individual concreta", "Una congruencia entre los valores de la organización y los del miembro", "Ninguna es correcta"], answer: 2 },
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "58. Una de las variantes de la organización misionaria es la organización de claustro, que:", options: ["Intenta que sus miembros lleven un estilo de vida de acuerdo con la ideología organizacional", "Quiere cambiar la sociedad, cambiando a sus propios miembros", "Su misión se orienta a fomentar cambios radicales y revolucionarios", "Es donde surgen las obsesiones patológicas"], answer: 0 },
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "59. Las condiciones de la organización misionaria son:", options: ["Que sea una empresa joven, con una misión clara", "Que tenga una misión clara y una identificación natural", "Tener un tamaño grande y una identificación calculada", "Su sistema debe ser muy sofisticado y regulado"], answer: 1 },
+{ theme: "OE - TEMA 12 ORGANIZACIÓN MISIONARIA", question: "60. El entorno de una organización misionaria es:", options: ["Estable y muy complejo", "Sencillo y dinámico", "Estable y poco complejo", "Ninguna es correcta"], answer: 2 },
+
+// Tema 13. Forma Divisional :contentReference[oaicite:1]{index=1}
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "61. NO es una característica de la forma divisional:", options: ["Estar agrupada funcionalmente", "Formarse por una serie de entidades semiautónomas", "Tener una sede central", "Tomar la forma de una burocracia maquinal en sus divisiones"], answer: 0 },
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "62. Respecto a los híbridos de la forma divisional, la burocracia duplicada se refiere a:", options: ["Una mezcla entre la estructura simple y forma divisional", "Una mezcla entre una forma divisional y una burocracia profesional", "La mezcla entre una forma divisional y cualquier burocracia", "La mezcla entre una forma divisional y una burocracia maquinal"], answer: 3 },
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "63. Sobre la edad, tamaño, sistema técnico y poder, es falso que:", options: ["Cuanta más edad tenga la organización, más se diversifica", "No utiliza sistema técnico en sus divisiones", "Cuanto más tamaño, más diversificación", "Ninguna es correcta"], answer: 0 },
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "64. La forma integrada es la primera etapa hacia la transición de la forma divisional:", options: ["En ella la empresa comercializa sus productos intermedios, dando lugar a pequeñas interrupciones en la cadena de procesos", "En ella, la organización descompone su cadena de procesos hasta que lo que venden en las divisiones se vuelve más importante", "Se forma por actividades que conforman una cadena integrada interrumpida, vendiendo el producto final", "En ella, no existen interdependencias en las divisiones"], answer: 2 },
+{ theme: "OE - TEMA 13 FORMA DIVISIONAL", question: "65. NO es una función de la sede central:", options: ["Formular la estrategia general, producto y mercado de la organización", "Diseñar el sistema de control de rendimiento (SCR)", "Proporcionar servicios de apoyo y recursos financieros", "Ninguna es correcta"], answer: 3 },
+
+// Tema 14. Adhocracia :contentReference[oaicite:2]{index=2}
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "66. En cuanto a la adhocracia…", options: ["Es una configuración burocrática", "Es la mejor estructura para realizar una innovación compleja", "Utiliza principalmente la supervisión directa como mecanismo de coordinación", "Su entorno es sencillo y estable"], answer: 1 },
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "67. La adhocracia administrativa…", options: ["Soluciona los problemas de sus clientes dando una solución novedosa", "Falso, la adhocracia operativa realiza proyectos para clientes externos; la adhocracia administrativa se enfocaría más en proyectos internos o para sí misma", "No automatiza el núcleo de operaciones", "No trabaja por encargos específicos, fabrica y vende sus propios productos"], answer: 1 },
+{ theme: "OE - TEMA 14 ADHOCRACIA", question: "68. Con respecto a la estructura directiva de la adhocracia…", options: ["El núcleo de operaciones es la parte principal de la organización", "Se necesita de directivos medios para supervisar a los operarios", "El staff de apoyo es mínimo", "La tecnoestructura no es relevante"], answer: 3 },
+
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "1. Señale cuál de los siguientes dispositivos de enlace tiene autoridad formal sobre las unidades que une:", options: ["Puesto de enlace", "Constelación de trabajo", "Directivo integrador", "Ápice estratégico"], answer: 2 }, // :contentReference[oaicite:0]{index=0}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "2. Indique cuál de las siguientes opciones constituye una ventaja de la agrupación divisional frente a la funcional:", options: ["Más eficiente", "Mejor flexibilidad o adaptación", "Mayor facilidad para generar economías de escala", "Ninguna de las anteriores"], answer: 1 }, // :contentReference[oaicite:1]{index=1}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "3. ¿Cuál de los siguientes parámetros de diseño implica una normalización de resultados que deriva en una normalización de procesos?", options: ["Formalización", "Control del rendimiento", "Directivo integrador", "Planificación de acciones"], answer: 1 }, // :contentReference[oaicite:2]{index=2}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "4. Señale cuál de los siguientes dispositivos de enlace rompe con el principio de unidad de mando de Fayol:", options: ["Puesto de enlace", "Comité permanente", "Directivo integrador", "Estructura matricial"], answer: 3 }, // :contentReference[oaicite:3]{index=3}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "5. Cuando en una organización existe un tramo o ámbito de control enorme:", options: ["La supervisión directa funcionará de forma óptima", "Se dará una estructura alta", "Será necesaria alguna normalización", "Se dará una agrupación funcional en toda la organización"], answer: 2 }, // :contentReference[oaicite:4]{index=4}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "6. La supervisión directa y la adaptación mutua funcionarán de forma óptima en la organización para coordinar:", options: ["Unidades de gran tamaño", "Agrupaciones divisionales", "Unidades de tamaño pequeño", "Ninguna de las anteriores"], answer: 2 }, // :contentReference[oaicite:5]{index=5}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "7. Una característica de las estructuras altas frente a las planas será:", options: ["La mejor comunicación y control de los superiores hacia sus subordinados", "Son más económicas", "Mayor autonomía por parte de los subordinados", "Cada supervisor estará más desbordado de trabajo al tener mayores tramos de control"], answer: 0 }, // :contentReference[oaicite:6]{index=6}
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "8. Una característica de la agrupación funcional frente a la divisional será:", options: ["Menor facilidad para generar economías de escala", "Son más costosas, derrochan más recursos", "Mayor facilidad para especializar las tareas", "No presenta problemas de aislamiento a la hora de detectar problemas"], answer: 2 } , // :contentReference[oaicite:7]{index=7}
+
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "1. El mecanismo de coordinación que se asocia al parámetro de diseño formalización es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 2 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "2. El mecanismo de coordinación que se asocia al parámetro de diseño Preparación es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 0 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "3. El mecanismo de coordinación que se asocia al parámetro de diseño adoctrinamiento y socialización es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 3 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "4. El mecanismo de coordinación que se asocia a las constelaciones de trabajo es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 1 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "5. Un puesto de trabajo que siempre hace exactamente la misma tarea pero tiene total libertad para hacerla, es un puesto:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 3 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "6. Un puesto de trabajo que hace tareas de diferentes áreas pero siguiendo unas pautas estrictas para hacerlas, es un puesto:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 1 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "7. Un puesto de trabajo que esté en lo más alto de la jerarquía de la organización estará:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 2 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "8. Un puesto de trabajo que denominamos puesto profesional, es un puesto que estará:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 3 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "9. Un puesto de trabajo muy formalizado estará en el 100% de los casos:", options: ["Muy especializado horizontal", "Muy preparado", "Muy especializado verticalmente", "Ninguna de las anteriores es correcta"], answer: 2 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "10. Un puesto de trabajo muy ampliado verticalmente estará en el 100% de los casos:", options: ["Muy especializado horizontal", "Muy preparado", "Muy adoctrinado", "Ninguna de las anteriores es correcta"], answer: 3 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "11. Analice la siguiente frase: Si en una empresa un puesto que no requiere preparación se vuelve cada vez más especializado horizontalmente, ¿puede derivar en que el puesto acabe siendo muy especializado verticalmente y formalizado?", options: ["Un puesto especializado horizontalmente nunca va a estar especializado verticalmente", "Un puesto especializado horizontalmente nunca va a estar formalizado", "Un puesto especializado verticalmente nunca va a estar formalizado", "Verdadera"], answer: 3 },
+{ theme: "Ejemplo Examen OE 1ª Parte", question: "12. Analice la siguiente frase: Un puesto formalizado siempre estará especializado verticalmente y viceversa, un puesto especializado verticalmente siempre estará formalizado:", options: ["Falsa, un puesto formalizado no tiene por qué estar especializado verticalmente", "Falsa, un puesto especializado verticalmente no tiene por qué estar formalizado", "Falsa, un puesto especializado verticalmente estará siempre especializado horizontalmente", "Verdadera"], answer: 1 },
+// TEST-KAHOOT-TEMA-3.pdf
+{ theme: "OE - Kahoot Tema 3", question: "1. Una organización ha subcontratado el servicio de limpieza, ¿a qué parte de la organización pertenece?", options: ["Núcleo de operaciones", "Staff de apoyo", "Tecnoestructura", "A ninguna"], answer: 3 },
+{ theme: "OE - Kahoot Tema 3", question: "2. ¿Qué refleja el organigrama de una empresa?", options: ["Las relaciones de autoridad formal", "Las relaciones informales", "Las constelaciones de trabajo", "Los flujos regulados de información"], answer: 0 },
+{ theme: "OE - Kahoot Tema 3", question: "3. ¿Cuál de los siguientes NO forma parte del sistema de flujos regulados?", options: ["El flujo de trabajo de operaciones", "El flujo de información y decisiones de control", "El flujo de comunicaciones informales", "El flujo de información del personal"], answer: 2 },
+{ theme: "OE - Kahoot Tema 3", question: "4. ¿Con qué mecanismo de coordinación se relaciona la visión de la organización como sistema de comunicación informal?", options: ["Supervisión directa", "Adaptación mutua", "Normalización de valores", "Normalización de habilidades"], answer: 1 },
+{ theme: "OE - Kahoot Tema 3", question: "5. ¿Qué tipo de decisiones se consideran programadas?", options: ["Operativas", "Estratégicas", "Administrativas excepción", "Ad hoc"], answer: 0 },
+{ theme: "OE - Kahoot Tema 3", question: "6. ¿Cómo se denomina a los grupos de individuos que tienen responsabilidades sobre un conjunto de decisiones?", options: ["Organigramas", "Flujos de información", "Constelaciones de trabajo", "Flujos regulados de información"], answer: 2 },
+{ theme: "Tema 4. Diseño de Puestos", question: "1. Un puesto implica una sola tarea pero sobre la que el operario tiene una gran libertad de acción, ¿cómo se encuentra?", options: ["Especializado horizontal y verticalmente.", "Especializado horizontalmente y ampliado verticalmente.", "Ampliado horizontalmente y especializado verticalmente.", "Ampliado horizontal y verticalmente."], answer: 1 },
+{ theme: "Tema 4. Diseño de Puestos", question: "2. ¿Cómo son los puestos profesionales?", options: ["Especializados horizontalmente (tareas) y ampliado verticalmente.", "Especializados horizontalmente (conocimientos) y ampliado verticalmente.", "Ampliado horizontalmente (tareas) y ampliado verticalmente.", "Especializados horizontalmente (conocimientos) y verticalmente."], answer: 1 },
+{ theme: "Tema 4. Diseño de Puestos", question: "3. Un directivo medio tiene autoridad sobre un responsable de primera línea y sólo responde ante el gerente. ¿Cuál está más especializado verticalmente?", options: ["El puesto del directivo medio.", "El puesto del gerente.", "Ambos igual.", "El puesto del responsable de línea."], answer: 3 },
+{ theme: "Tema 4. Diseño de Puestos", question: "4. ¿Cómo se denomina al parámetro de diseño a través del que describe la forma en que deben realizarse las tareas?", options: ["Normalización de procesos.", "Adoctrinamiento.", "Preparación.", "Formalización."], answer: 3 },
+{ theme: "Tema 4. Diseño de Puestos", question: "5. Si un puesto formalizado implica realizar varias tareas, ¿cómo se encuentra?", options: ["Especializado horizontal y verticalmente.", "Especializado horizontalmente y ampliado verticalmente.", "Ampliado horizontalmente y especializado verticalmente.", "Ampliado horizontal y verticalmente."], answer: 2 },
+{ theme: "Tema 4. Diseño de Puestos", question: "6. ¿Qué puestos resultan más fáciles de formalizar?", options: ["Puestos profesionales.", "Puestos sin cualificación.", "Supervisor de primera línea.", "Alta dirección."], answer: 1 },
+{ theme: "Tema 4. Diseño de Puestos", question: "7. ¿Qué mecanismo de coordinación es propio de la burocracia?", options: ["Normalización de procesos.", "Normalización de habilidades.", "Normalización de valores.", "Todas las anteriores son correctas."], answer: 3 },
+{ theme: "Tema 4. Diseño de Puestos", question: "8. ¿En qué situación la preparación introduce el mecanismo de coordinación de la normalización de habilidades?", options: ["Al enseñar un procedimiento fijo para realizar una tarea.", "Cuando se trate de un puesto profesional.", "Es imposible acotar todas las situaciones a las que se enfrenta un puesto.", "Todas las anteriores son falsas."], answer: 1 },
+{ theme: "Tema 4. Diseño de Puestos", question: "9. ¿Con qué mecanismo se relaciona la formalización del puesto?", options: ["Adaptación mutua.", "Supervisión directa.", "Normalización de procesos.", "Normalización de habilidades."], answer: 2 },
+{ theme: "Tema 4. Diseño de Puestos", question: "10. ¿Cómo se denominan los procesos de naturaleza formal en los que se transmiten las normas relacionadas con la cultura?", options: ["Adoctrinamiento.", "Socialización.", "Preparación.", "Formalización."], answer: 0 },
+
+{ theme: "Tema 5. Agrupaciones", question: "1. ¿Qué interdependencia se consigue controlar con la base de agrupación según de mercado?", options: ["Interdependencia de las funciones", "Interdependencia de escala o tamaño", "Interdependencia del flujo de trabajo", "Interdependencia de las tareas"], answer: 2 },
+{ theme: "Tema 5. Agrupaciones", question: "2. ¿Qué base de agrupación permite generar y aprovechar economías de escala?", options: ["Funcional", "Productos", "Mercados", "Lugar"], answer: 0 },
+{ theme: "Tema 5. Agrupaciones", question: "3. ¿Cuál de las siguientes NO es una ventaja de la agrupación en base a la funcional?", options: ["Especialización en la tarea", "Flexibilidad", "Eficiencia", "Facilita el desarrollo profesional"], answer: 1 },
+{ theme: "Tema 5. Agrupaciones", question: "4. ¿Qué base de agrupación se ha seguido para crear las unidades Comerciales?", options: ["Agrupación según el producto", "Agrupación según el mercado", "Agrupación según el lugar", "Agrupación funcional"], answer: 3 },
+{ theme: "Tema 5. Agrupaciones", question: "5. ¿Qué base de agrupación se ha seguido para crear las unidades encargadas de cada producto?", options: ["Agrupación según los conocimientos y habilidades", "Agrupación según mercado", "Agrupación según procesos de trabajo", "Agrupación funcional"], answer: 1 },
+{ theme: "Tema 5. Agrupaciones", question: "6. ¿Qué base de agrupación se ha seguido para crear la División Europea y las Unidades de Almacenamiento?", options: ["Europea según mercado y almacenamiento agrupación funcional", "Las dos siguen un agrupamiento funcional", "Las dos siguen un agrupamiento según mercado", "Europea funcional y almacenamiento según mercado"], answer: 0 },
+{ theme: "Tema 5. Agrupaciones", question: "7. ¿Qué característica tienen las estructuras altas?", options: ["Tramos de control estrechos y pocos niveles jerárquicos", "Tramos de control amplios y muchos niveles jerárquicos", "Tramos de control estrechos y muchos niveles jerárquicos", "Tramos de control amplios y pocos niveles jerárquicos"], answer: 2 },
+{ theme: "Tema 5. Agrupaciones", question: "8. ¿Qué mecanismo de coordinación dificulta un gran tamaño de unidad?", options: ["Adaptación mutua", "Normalización de procesos", "Normalización de habilidades", "Normalización de resultados"], answer: 0 },
+{ theme: "Tema 5. Agrupaciones", question: "9. ¿Para qué tipo de tareas es más probable que la unidad sea de tamaño reducido?", options: ["Tareas poco complejas", "Tareas complejas e interdependientes", "Tareas complejas e independientes", "Ninguna de las anteriores"], answer: 1 },
+{ theme: "Tema 5. Agrupaciones", question: "10. ¿En qué circunstancias la línea media tendrá un tamaño mayor?", options: ["Cuando la compongan unidades funcionales interdependientes", "Cuando la compongan unidades de mercado e interdependientes", "Cuando la compongan unidades de mercado e independientes", "La línea media nunca tendrá gran tamaño"], answer: 2 },
+
+{
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "1. ¿Qué parámetro de diseño permite introducir la normalización de resultados pero de forma indirecta?",
+    options: [
+      "Dispositivos de enlace.",
+      "Control de rendimiento.",
+      "Planificación de acciones.",
+      "Agrupación de unidades."
+    ],
+    answer: 2
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "2. ¿Qué dispositivo supone una combinación equilibrada entre una agrupación funcional y una de mercado?",
+    options: [
+      "Puesto de enlace.",
+      "Directivo integrador.",
+      "Grupo de trabajo.",
+      "Estructura matricial."
+    ],
+    answer: 3
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "3. ¿Cómo se denomina al dispositivo de enlace consistente en un grupo que cumple una determinada tarea y se desagrupa?",
+    options: [
+      "Comité permanente",
+      "Grupo de trabajo",
+      "Estructura matricial",
+      "No es un dispositivo de enlace"
+    ],
+    answer: 1
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "4. Si un trabajador forma parte de un equipo de trabajo en el que tiene dos supervisores con la misma autoridad formal:",
+    options: [
+      "Se encuentra en un comité permanente",
+      "Se encuentra en una estructura matricial",
+      "Se encuentra en un grupo de trabajo",
+      "Es un puesto de enlace"
+    ],
+    answer: 3
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "5. ¿Cómo se denomina al puesto que tiene autoridad formal pero solo para coordinar los puestos bajo su mando?",
+    options: [
+      "Directivo de línea media.",
+      "Puesto de enlace.",
+      "Ápice estratégico.",
+      "Directivo integrador."
+    ],
+    answer: 0
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "6. ¿Qué mecanismo de coordinación se relaciona directamente con el control del rendimiento?",
+    options: [
+      "Normalización de procesos.",
+      "Normalización de resultados.",
+      "Adaptación mutua.",
+      "Supervisión directa."
+    ],
+    answer: 1
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "7. ¿A qué parte de la organización pertenece una unidad encargada de diseñar el sistema de control de calidad?",
+    options: [
+      "Tecnoestructura.",
+      "Staff de apoyo.",
+      "Línea media.",
+      "Núcleo de operaciones."
+    ],
+    answer: 0
+  },
+  {
+    theme: "Tema 6. Parámetros de diseño (III): Diseño de vínculos laterales",
+    question: "8. ¿Bajo qué base de agrupación resulta más efectivo el control de rendimiento?",
+    options: [
+      "Agrupación funcional.",
+      "Agrupación según los conocimientos.",
+      "Agrupación en base al mercado.",
+      "Bajo ninguna."
+    ],
+    answer: 2
+  },
+
+  { theme: "Ejemplo Examen OE 2ª Parte", question: "1. Señale cuál de los siguientes dispositivos de enlace tiene autoridad formal sobre las unidades que une:", options: ["Puesto de enlace", "Constelación de trabajo", "Directivo integrador", "Ápice estratégico"], answer: 2 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "2. Indique cuál de las siguientes opciones constituye una ventaja de la agrupación divisional frente a la funcional:", options: ["Más eficiente", "Mejor flexibilidad o adaptación", "Mayor facilidad para generar economías de escala", "Ninguna de las anteriores"], answer: 1 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "3. ¿Cuál de los siguientes parámetros de diseño implica una normalización de resultados que deriva en una normalización de procesos?", options: ["Formalización", "Control del rendimiento", "Directivo integrador", "Planificación de acciones"], answer: 3 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "4. Señale cuál de los siguientes dispositivos de enlace rompe con el principio de unidad de mando de Fayol:", options: ["Puesto de enlace", "Comité permanente", "Directivo integrador", "Estructura matricial"], answer: 3 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "5. Cuando en una organización existe un tramo o ámbito de control enorme:", options: ["La supervisión directa funcionará de forma óptima", "Se dará una estructura alta", "Será necesaria alguna normalización", "Se dará una agrupación funcional en toda la organización"], answer: 2 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "6. La supervisión directa y la adaptación mutua funcionarán de forma óptima en la organización para coordinar:", options: ["Unidades de gran tamaño", "Agrupaciones divisionales", "Unidades de tamaño pequeño", "Ninguna de las anteriores"], answer: 2 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "7. Una característica de las estructuras altas frente a las planas será:", options: ["La mejor comunicación y control de los superiores hacia sus subordinados", "Son más económicas", "Mayor autonomía por parte de los subordinados", "Cada supervisor estará más desbordado de trabajo al tener mayores tramos de control"], answer: 0 },
+{ theme: "Ejemplo Examen OE 2ª Parte", question: "8. Una característica de la agrupación funcional frente a la divisional será:", options: ["Menor facilidad para generar economías de escala", "Son más costosas, derrochan más recursos", "Mayor facilidad para especializar las tareas", "No presenta problemas de aislamiento a la hora de detectar problemas"], answer: 2 },
+
+// Preguntas extraídas de TIPO-TEST-EJEMPLO-EXAMEN-OE.pdf
+{ theme: "OE - Ejemplo Examen", question: "1. El mecanismo de coordinación que se asocia al parámetro de diseño formalización es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 2 },
+{ theme: "OE - Ejemplo Examen", question: "2. El mecanismo de coordinación que se asocia al parámetro de diseño Preparación es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 0 },
+{ theme: "OE - Ejemplo Examen", question: "3. El mecanismo de coordinación que se asocia al parámetro de diseño adoctrinamiento y socialización es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 3 },
+{ theme: "OE - Ejemplo Examen", question: "4. El mecanismo de coordinación que se asocia a las constelaciones de trabajo es:", options: ["Normalización de habilidades", "Adaptación mutua", "Normalización de procesos", "Normalización de valores"], answer: 1 },
+{ theme: "OE - Ejemplo Examen", question: "5. Un puesto de trabajo que siempre hace exactamente la misma tarea pero tiene total libertad para hacerla, es un puesto:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 3 },
+{ theme: "OE - Ejemplo Examen", question: "6. Un puesto de trabajo que hace tareas de diferentes áreas pero siguiendo unas pautas estrictas para hacerlas, es un puesto:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 1 },
+{ theme: "OE - Ejemplo Examen", question: "7. Un puesto de trabajo que esté en lo más alto de la jerarquía de la organización estará:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 1 },
+{ theme: "OE - Ejemplo Examen", question: "8. Un puesto de trabajo que denominamos puesto profesional, es un puesto que estará:", options: ["Especializado horizontal y verticalmente", "Especializado verticalmente y ampliado horizontalmente", "Ampliado horizontal y verticalmente", "Especializado horizontalmente y ampliado verticalmente"], answer: 3 },
+{ theme: "OE - Ejemplo Examen", question: "9. Un puesto de trabajo muy formalizado estará en el 100% de los casos:", options: ["Muy especializado horizontal", "Muy preparado", "Muy especializado verticalmente", "Ninguna de las anteriores es correcta"], answer: 2 },
+{ theme: "OE - Ejemplo Examen", question: "10. Un puesto de trabajo muy ampliado verticalmente estará en el 100% de los casos:", options: ["Muy especializado horizontal", "Muy preparado", "Muy adoctrinado", "Ninguna de las anteriores es correcta"], answer: 3 },
+{ theme: "OE - Ejemplo Examen", question: "11. Analice la siguiente frase: Si en una empresa un puesto que no requiere preparación se vuelve cada vez más especializado horizontalmente, ¿Puede esto derivar en que el puesto acabe siendo muy especializado verticalmente y formalizado?", options: ["Un puesto especializado horizontalmente nunca va a estar especializado verticalmente", "Un puesto especializado horizontalmente nunca va a estar formalizado", "Un puesto especializado verticalmente nunca va a estar formalizado", "Verdadera"], answer: 3 },
+{ theme: "OE - Ejemplo Examen", question: "12. Analice la siguiente frase: Un puesto formalizado siempre estará especializado verticalmente y viceversa, un puesto especializado verticalmente siempre estará formalizado:", options: ["Falsa, un puesto formalizado no tiene por qué estar especializado verticalmente", "Falsa, un puesto especializado verticalmente no tiene por qué estar formalizado", "Falsa, un puesto especializado verticalmente estará siempre especializado horizontalmente", "Verdadera"], answer: 3 },
+
+
+];
+
+      // HTML Elements
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const blockEndScreen = document.getElementById('block-end-screen');
+
+        const totalQuestionsCountLabel = document.getElementById('total-questions-count');
+        const questionNumberLabel = document.getElementById('question-number-label');
+        const questionLabel = document.getElementById('question-label');
+        const optionButtons = document.querySelectorAll('.option-button');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const nextButton = document.getElementById('next-button');
+        const startButton = document.getElementById('start-button');
+        const resetButton = document.getElementById('reset-button');
+        const resetButtonWelcome = document.getElementById('reset-button-welcome');
+        const resetButtonResults = document.getElementById('reset-button-results');
+        const resetButtonBlockEnd = document.getElementById('reset-button-block-end');
+        const nextBlockButton = document.getElementById('next-block-button');
+
+        const correctAnswersCountLabel = document.getElementById('correct-answers-count');
+        const incorrectAnswersCountLabel = document.getElementById('incorrect-answers-count');
+        const remainingCountLabel = document.getElementById('remaining-count-label');
+        const currentScoreValueLabel = document.getElementById('current-score-value');
+
+        const finalCorrectAnswers = document.getElementById('final-correct-answers');
+        const finalIncorrectAnswers = document.getElementById('final-incorrect-answers');
+        const finalScoreValueLabel = document.getElementById('final-score-value');
+        const blockCorrectAnswers = document.getElementById('block-correct-answers');
+        const blockIncorrectAnswers = document.getElementById('block-incorrect-answers');
+        const totalCorrectOnBlockEnd = document.getElementById('total-correct-on-block-end');
+        const totalIncorrectOnBlockEnd = document.getElementById('total-incorrect-on-block-end');
+        const blockEndScoreValueLabel = document.getElementById('block-end-score-value');
+        const remainingOnBlockEnd = document.getElementById('remaining-on-block-end');
+
+        // Quiz State Variables
+        let remainingQuestions = [];
+        let currentBlockQuestions = [];
+        let currentQuestionIndex = 0;
+        let totalCorrectAnswers = 0;
+        let totalIncorrectAnswers = 0;
+        let currentScore = 0;
+        const BLOCK_SIZE = 40;
+        let blockCorrectCount = 0;
+        let blockIncorrectCount = 0;
+
+        // Scoring constants
+        const POINTS_CORRECT = 0.25;
+        const PENALTY_INCORRECT = POINTS_CORRECT / 3;
+
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function resetQuiz() {
+            if (!allQuizQuestionsData || allQuizQuestionsData.length === 0) {
+                console.error("No hay preguntas cargadas en allQuizQuestionsData.");
+                alert("Error: No se pudieron cargar las preguntas del test.");
+                return;
+            }
+            remainingQuestions = shuffleArray([...allQuizQuestionsData]);
+            currentBlockQuestions = [];
+            currentQuestionIndex = 0;
+            totalCorrectAnswers = 0;
+            totalIncorrectAnswers = 0;
+            currentScore = 0;
+            blockCorrectCount = 0;
+            blockIncorrectCount = 0;
+
+            updateScoreDisplay();
+            hideAllScreens();
+            welcomeScreen.classList.add('active');
+            totalQuestionsCountLabel.textContent = allQuizQuestionsData.length;
+            feedbackMessage.textContent = '';
+            feedbackMessage.className = '';
+            optionButtons.forEach(btn => {
+                btn.className = 'option-button';
+                btn.style.display = 'inline-block'; // Asegurar que los botones sean visibles al reiniciar
+            });
+            // La lógica de localStorage para 'quizState' no está completa,
+            // ya que no se guarda el estado. Por ahora, el botón de reinicio en bienvenida
+            // probablemente no aparecerá a menos que se añada 'quizState' manualmente.
+            if (localStorage.getItem('quizState')) {
+                resetButtonWelcome.style.display = 'inline-block';
+            } else {
+                resetButtonWelcome.style.display = 'none';
+            }
+        }
+
+        function hideAllScreens() {
+            welcomeScreen.classList.remove('active');
+            quizScreen.classList.remove('active');
+            resultsScreen.classList.remove('active');
+            blockEndScreen.classList.remove('active');
+        }
+
+        function startQuiz() {
+            hideAllScreens();
+            quizScreen.classList.add('active');
+            startNewBlock();
+        }
+
+        function startNewBlock() {
+            hideAllScreens(); // Asegurar que solo la pantalla del quiz esté activa
+            quizScreen.classList.add('active');
+
+            blockCorrectCount = 0;
+            blockIncorrectCount = 0;
+
+            if (remainingQuestions.length === 0) {
+                showFinalResults();
+                return;
+            }
+
+            const numQuestionsForBlock = Math.min(BLOCK_SIZE, remainingQuestions.length);
+
+            // Tomar preguntas del INICIO de remainingQuestions y eliminarlas del array original
+            currentBlockQuestions = remainingQuestions.splice(0, numQuestionsForBlock);
+            currentBlockQuestions = shuffleArray(currentBlockQuestions); // Barajar el bloque seleccionado
+
+            currentQuestionIndex = 0;
+            // displayCurrentQuestion se encargará de llamar a showBlockResults si currentBlockQuestions está vacío
+            displayCurrentQuestion();
+        }
+
+        function displayCurrentQuestion() {
+            if (currentQuestionIndex < currentBlockQuestions.length) {
+                const currentQ = currentBlockQuestions[currentQuestionIndex];
+
+                // Comprobación robusta de la pregunta actual
+                if (!currentQ || typeof currentQ.question !== 'string' || !Array.isArray(currentQ.options) || typeof currentQ.answer !== 'number') {
+                    console.error('Error: Datos de pregunta inválidos o malformados.', currentQ);
+                    feedbackMessage.textContent = 'Error al cargar la pregunta. Saltando a la siguiente...';
+                    feedbackMessage.className = 'incorrect-feedback';
+                    
+                    // Intentar saltar esta pregunta
+                    currentQuestionIndex++;
+                    // Usar setTimeout para permitir que el mensaje de feedback se vea y evitar bucles rápidos
+                    setTimeout(() => {
+                        displayCurrentQuestion(); // Intentar mostrar la siguiente o finalizar bloque
+                    }, 100);
+                    return;
+                }
+
+                questionNumberLabel.textContent = `Pregunta ${currentQuestionIndex + 1} de ${currentBlockQuestions.length} (Tema: ${currentQ.theme || 'General'})`;
+                questionLabel.textContent = currentQ.question;
+
+                optionButtons.forEach((button, index) => {
+                    if (index < currentQ.options.length && typeof currentQ.options[index] === 'string') {
+                        button.textContent = currentQ.options[index];
+                        button.style.display = 'inline-block'; // Asegurar visibilidad
+                    } else {
+                        // Si falta una opción o es inválida, ocultar el botón
+                        button.textContent = '';
+                        button.style.display = 'none';
+                    }
+                    button.disabled = false;
+                    button.className = 'option-button';
+                });
+
+                nextButton.disabled = true;
+                feedbackMessage.textContent = '';
+                feedbackMessage.className = '';
+                updateScoreDisplay();
+            } else {
+                // No hay más preguntas en este bloque o el bloque estaba vacío
+                showBlockResults();
+            }
+        }
+
+        function checkAnswer(selectedIndex) {
+            const currentQ = currentBlockQuestions[currentQuestionIndex];
+            // Validar que currentQ y answer existen antes de usarlos
+            if (!currentQ || typeof currentQ.answer === 'undefined') {
+                console.error("Error en checkAnswer: currentQ o currentQ.answer no definidos.");
+                nextQuestion(); // Intentar saltar si hay un problema
+                return;
+            }
+            const correctAnswerIndex = currentQ.answer;
+
+            optionButtons.forEach(button => button.disabled = true);
+            nextButton.disabled = false;
+
+            if (selectedIndex === correctAnswerIndex) {
+                feedbackMessage.textContent = '¡Correcto!';
+                feedbackMessage.className = 'correct-feedback';
+                optionButtons[selectedIndex].classList.add('correct-option');
+                totalCorrectAnswers++;
+                blockCorrectCount++;
+                currentScore += POINTS_CORRECT;
+            } else {
+                feedbackMessage.textContent = `¡Incorrecto! La respuesta correcta era: "${currentQ.options[correctAnswerIndex]}"`;
+                feedbackMessage.className = 'incorrect-feedback';
+                optionButtons[selectedIndex].classList.add('incorrect-user-choice');
+                if (optionButtons[correctAnswerIndex]) { // Comprobar que el botón existe
+                    optionButtons[correctAnswerIndex].classList.add('correct-option');
+                }
+                totalIncorrectAnswers++;
+                blockIncorrectCount++;
+                currentScore -= PENALTY_INCORRECT;
+                remainingQuestions.unshift(currentQ); // Añadir la pregunta fallada al inicio de la cola
+                remainingQuestions = shuffleArray(remainingQuestions); // Volver a barajar para que no salga inmediatamente
+            }
+            updateScoreDisplay();
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            displayCurrentQuestion();
+        }
+
+        function updateScoreDisplay() {
+            correctAnswersCountLabel.textContent = totalCorrectAnswers;
+            incorrectAnswersCountLabel.textContent = totalIncorrectAnswers;
+            remainingCountLabel.textContent = `Preguntas restantes por responder: ${remainingQuestions.length}`;
+            currentScoreValueLabel.textContent = currentScore.toFixed(2);
+        }
+
+        function showBlockResults() {
+            hideAllScreens();
+            blockEndScreen.classList.add('active');
+            blockCorrectAnswers.textContent = blockCorrectCount;
+            blockIncorrectAnswers.textContent = blockIncorrectCount;
+            totalCorrectOnBlockEnd.textContent = totalCorrectAnswers;
+            totalIncorrectOnBlockEnd.textContent = totalIncorrectAnswers;
+            blockEndScoreValueLabel.textContent = currentScore.toFixed(2);
+            remainingOnBlockEnd.textContent = remainingQuestions.length;
+
+            if (remainingQuestions.length === 0) {
+                nextBlockButton.style.display = 'none';
+                // Modificar el botón para que lleve a los resultados finales si no hay más preguntas
+                const blockEndResetButton = document.getElementById('reset-button-block-end'); // Re-obtener por si acaso
+                if (blockEndResetButton) {
+                    blockEndResetButton.textContent = 'Ver Resultados Finales';
+                    blockEndResetButton.onclick = showFinalResults; // Cambiar el comportamiento
+                }
+
+            } else {
+                nextBlockButton.style.display = 'inline-block';
+                const blockEndResetButton = document.getElementById('reset-button-block-end');
+                 if (blockEndResetButton) {
+                    blockEndResetButton.textContent = 'Reiniciar Test';
+                    blockEndResetButton.onclick = resetQuiz; // Restaurar comportamiento original
+                 }
+            }
+        }
+
+        function showFinalResults() {
+            hideAllScreens();
+            resultsScreen.classList.add('active');
+            finalCorrectAnswers.textContent = totalCorrectAnswers;
+            finalIncorrectAnswers.textContent = totalIncorrectAnswers;
+            finalScoreValueLabel.textContent = currentScore.toFixed(2);
+        }
+
+        // Event Listeners
+        startButton.addEventListener('click', startQuiz);
+        resetButton.addEventListener('click', resetQuiz);
+        resetButtonWelcome.addEventListener('click', resetQuiz);
+        resetButtonResults.addEventListener('click', resetQuiz);
+        
+        // Asegurar que el botón de reinicio en block-end-screen tenga el listener correcto inicialmente
+        const initialResetButtonBlockEnd = document.getElementById('reset-button-block-end');
+        if (initialResetButtonBlockEnd) {
+            initialResetButtonBlockEnd.addEventListener('click', resetQuiz);
+        }
+        
+        nextButton.addEventListener('click', nextQuestion);
+        nextBlockButton.addEventListener('click', startNewBlock);
+
+        optionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                checkAnswer(parseInt(button.dataset.index));
+            });
+        });
+
+        // Initialize quiz
+        document.addEventListener('DOMContentLoaded', resetQuiz);
+    </script>
