@@ -34,11 +34,10 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
   data-slug={s.slug}
   aria-label={`${s.title} — ${s.description}`}
 >
-  <!-- top accent line (revealed on hover) -->
-  <span class="scard-line" aria-hidden="true"></span>
-
-  <!-- radial spotlight overlay (follows cursor via --mx --my) -->
+  <!-- Spotlight radial that tracks cursor via --mx/--my -->
   <span class="scard-spot" aria-hidden="true"></span>
+  <!-- Top accent line revealed on hover -->
+  <span class="scard-line" aria-hidden="true"></span>
 
   <div class="scard-body">
     <div class="scard-head">
@@ -60,23 +59,33 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
 </a>
 
 <style>
-  /* ── Base card — TRUE glassmorphism, not solid ── */
+  /* ────────────────────────────────────────────────────────
+     EXACT spec from brief:
+       bg-white/5        → rgba(255,255,255,0.05)
+       backdrop-blur-xl  → blur(24px)
+       border-white/10   → rgba(255,255,255,0.10)
+       rounded-3xl       → 24px
+       shadow-2xl        → 0 25px 50px -12px rgba(0,0,0,0.5)
+  ──────────────────────────────────────────────────────── */
   .scard {
     --mx: 50%; --my: 50%;
     position: relative;
     display: flex; flex-direction: column;
-    border-radius: var(--radius);
 
-    /* Glassmorphism: semi-transparent + blur */
-    background:  rgba(255,255,255,0.04);
-    backdrop-filter: blur(20px) saturate(1.5);
-    -webkit-backdrop-filter: blur(20px) saturate(1.5);
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.35),
-                inset 0 1px 0 rgba(255,255,255,0.05);
+    /* bg-white/5 */
+    background: rgba(255,255,255,0.05);
+    /* backdrop-blur-xl */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    /* border-white/10 */
+    border: 1px solid rgba(255,255,255,0.10);
+    /* rounded-3xl */
+    border-radius: 24px;
+    /* shadow-2xl (adapted for dark bg) */
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
 
     overflow: hidden;
-    color: var(--text);
+    color: #ffffff;
     transition:
       transform     0.22s cubic-bezier(0.4,0,0.2,1),
       background    0.22s,
@@ -85,25 +94,17 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
     isolation: isolate;
   }
 
-  /* Hover: brighter glass + purple border (brief says border-purple-500/50) */
+  /* ── Hover: bg-white/10 + border-purple-500/50 (as in brief) ── */
   .scard:hover {
     transform: translateY(-5px);
-    background:  rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.10);
     border-color: rgba(168,85,247,0.50);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.55),
-                0 0 0 1px rgba(168,85,247,0.18),
-                inset 0 1px 0 rgba(255,255,255,0.09);
+    box-shadow:
+      0 25px 50px -12px rgba(0,0,0,0.65),
+      0 0 0 1px rgba(168,85,247,0.18);
   }
 
-  /* Top gradient line */
-  .scard-line {
-    position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2;
-    background: linear-gradient(90deg, #7c6dfe, #c4b5fd, #22d3ee);
-    opacity: 0; transition: opacity .22s;
-  }
-  .scard:hover .scard-line { opacity: 1; }
-
-  /* Radial spotlight (tracks --mx --my set by JS) */
+  /* Radial spotlight (follows cursor) */
   .scard-spot {
     position: absolute; inset: 0; z-index: 1;
     background: radial-gradient(
@@ -115,32 +116,40 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
   }
   .scard:hover .scard-spot { opacity: 1; }
 
-  /* ── Card content ── */
+  /* Top gradient accent line */
+  .scard-line {
+    position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2;
+    background: linear-gradient(90deg,#7c6dfe,#c4b5fd,#22d3ee);
+    opacity: 0; transition: opacity .22s;
+  }
+  .scard:hover .scard-line { opacity: 1; }
+
+  /* ── Content ── */
   .scard-body {
     position: relative; z-index: 3;
     display: flex; flex-direction: column; gap: 12px;
-    padding: 20px; flex: 1;
+    padding: 22px; flex: 1;
   }
-  .scard-head {
-    display: flex; align-items: flex-start; gap: 12px;
-  }
+  .scard-head { display: flex; align-items: flex-start; gap: 12px; }
+
   .scard-icon {
     width: 42px; height: 42px; flex-shrink: 0;
     border-radius: 10px;
-    background: rgba(124,109,254,0.1);
-    border: 1px solid rgba(124,109,254,0.2);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
     display: flex; align-items: center; justify-content: center;
     font-size: 1.15rem;
   }
+
   .scard-meta { flex: 1; min-width: 0; }
   .scard-code {
     font-size: .63rem; font-weight: 700; letter-spacing: .9px;
-    text-transform: uppercase; color: var(--text-muted);
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
     margin-bottom: 3px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .scard-name {
-    font-size: .95rem; font-weight: 700; line-height: 1.25;
+    font-size: .95rem; font-weight: 700; line-height: 1.25; color: #ffffff;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
@@ -149,38 +158,36 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
     flex-shrink: 0; font-size: .6rem; font-weight: 700;
     border-radius: 99px; padding: 3px 9px; white-space: nowrap;
   }
-  .b-purple { background: rgba(124,109,254,.15); color: #c4b5fd; border: 1px solid rgba(124,109,254,.28); }
-  .b-cyan   { background: rgba(34,211,238,.10);  color: #67e8f9; border: 1px solid rgba(34,211,238,.22); }
+  .b-purple { background:rgba(124,109,254,.15); color:#c4b5fd; border:1px solid rgba(124,109,254,.28); }
+  .b-cyan   { background:rgba(34,211,238,.12);  color:#67e8f9; border:1px solid rgba(34,211,238,.22); }
   .b-multi  {
     background: linear-gradient(135deg,rgba(124,109,254,.12),rgba(34,211,238,.08));
-    color: #c4b5fd; border: 1px solid rgba(124,109,254,.25);
+    color:#c4b5fd; border:1px solid rgba(124,109,254,.25);
   }
 
   .scard-desc {
-    font-size: .8rem; color: var(--text-muted); line-height: 1.55;
+    font-size: .8rem; color: rgba(255,255,255,0.50); line-height: 1.55;
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden;
   }
 
   .scard-foot {
-    display: flex; align-items: center; gap: 6px;
-    flex-wrap: wrap; margin-top: auto;
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: auto;
   }
   .chip {
     font-size: .63rem; font-weight: 600;
-    background: rgba(124,109,254,.08); border: 1px solid rgba(124,109,254,.18);
-    color: var(--accent2); border-radius: 99px; padding: 2px 9px;
-    white-space: nowrap;
+    background: rgba(124,109,254,.10); border: 1px solid rgba(124,109,254,.20);
+    color: #c4b5fd; border-radius: 99px; padding: 2px 9px; white-space: nowrap;
   }
   .scard-arrow {
-    margin-left: auto; font-size: .95rem; color: var(--accent);
+    margin-left: auto; font-size: .95rem; color: #7c6dfe;
     opacity: 0; transform: translateX(-5px);
     transition: opacity .2s, transform .2s; flex-shrink: 0;
   }
   .scard:hover .scard-arrow { opacity: 1; transform: translateX(0); }
 </style>
 
-<!-- Spotlight: runs once, handles ALL [data-spot] on the page -->
+<!-- Single deduped spotlight script targeting ALL [data-spot] on the page -->
 <script>
   function initSpotlight() {
     document.querySelectorAll<HTMLElement>('[data-spot]').forEach(el => {

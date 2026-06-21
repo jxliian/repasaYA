@@ -11,514 +11,527 @@ const adeSubjects  = subjects.filter(s =>
 const infoSubjects = subjects.filter(s =>
   ['sibw','mp','dsd'].includes(s.slug));
 
-/* ── Parse git commits → human-readable Novedades ── */
+/* ── Parse git log → human-readable Novedades ── */
 type Commit = { date: string; badge: string; cls: string; scope: string; text: string };
 const BADGE: Record<string, Pick<Commit,'badge'|'cls'>> = {
-  feat:     { badge:'Nuevo',       cls:'badge-green'  },
-  fix:      { badge:'Fix',         cls:'badge-orange' },
-  chore:    { badge:'Mejora',      cls:'badge-blue'   },
-  docs:     { badge:'Docs',        cls:'badge-gray'   },
-  style:    { badge:'UI',          cls:'badge-purple' },
-  refactor: { badge:'Refactor',    cls:'badge-blue'   },
-  perf:     { badge:'Perf',        cls:'badge-cyan'   },
+  feat:     { badge:'Nuevo',    cls:'upd-green'  },
+  fix:      { badge:'Fix',      cls:'upd-orange' },
+  chore:    { badge:'Mejora',   cls:'upd-blue'   },
+  docs:     { badge:'Docs',     cls:'upd-gray'   },
+  style:    { badge:'UI',       cls:'upd-purple' },
+  refactor: { badge:'Refactor', cls:'upd-blue'   },
+  perf:     { badge:'Perf',     cls:'upd-cyan'   },
 };
 function humanize(raw: string): Omit<Commit,'date'> {
   const m = raw.match(/^(feat|fix|chore|docs|style|refactor|perf)\(([^)]+)\):\s*(.+)/i);
-  if (!m) return { badge:'Update', cls:'badge-gray', scope:'', text: raw.slice(0,55) };
+  if (!m) return { badge:'Update', cls:'upd-gray', scope:'', text:raw.slice(0,55) };
   const [,type, scope, txt] = m;
-  const meta = BADGE[type.toLowerCase()] ?? { badge:'Update', cls:'badge-gray' };
+  const meta = BADGE[type.toLowerCase()] ?? { badge:'Update', cls:'upd-gray' };
   const text = txt.replace(/^(añadir|agregar|add|crear|actualizar|update|corregir)\s+/i,'');
-  return { ...meta, scope: scope.toUpperCase(), text: (text[0].toUpperCase()+text.slice(1)).slice(0,55) };
+  return { ...meta, scope:scope.toUpperCase(), text:(text[0].toUpperCase()+text.slice(1)).slice(0,55) };
 }
-
 let commits: Commit[] = [];
 try {
   const raw = execSync(
-    'git log --pretty=format:"%ad%x09%s" --date=format:"%d %b" -n 7',
+    'git log --pretty=format:"%ad%x09%s" --date=format:"%d %b" -n 8',
     { encoding:'utf8', cwd:process.cwd() }
   ).trim();
   commits = raw.split('\n').filter(Boolean).map(line => {
     const [date='', ...rest] = line.split('\t');
     return { date, ...humanize(rest.join(' ')) };
   });
-} catch { /* build CI no git */ }
+} catch { /* build CI */ }
 
-const lastUpdate  = commits[0]?.date ?? null;
-const totalFlash  = 128 + 40 + 63;
+const lastUpdate = commits[0]?.date ?? null;
+const totalFlash = 128 + 40 + 63;
+
 const ISSUE_URL   = 'https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre%5D&body=%23%23+Datos%0A-%20**Asignatura**%3A+%0A-%20**Curso**%3A+';
 const REPO_URL    = 'https://github.com/jxliian/repasaYA';
 const PROFILE_URL = 'https://github.com/jxliian';
 const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests+y+flashcards+para+la+carrera.+Gratis+%E2%86%92+https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F';
 ---
-<Base title="repasaYA" description="Tipo test, V/F y flashcards para ADE e Informática. +1000 preguntas, +200 flashcards. Gratis, sin registro.">
-
+<Base title="repasaYA" description="Tipo test, V/F y flashcards para ADE e Informática. +1000 preguntas, +200 flashcards. Gratis.">
 <style>
-  /* ═══════════════════════════════════════════════════════
-     RESET — this page scrolls normally
-  ════════════════════════════════════════════════════════ */
-  html,body { height:auto; overflow:visible; }
+/* ═══════════════════════════════════════════════════════
+   PAGE RESET — normal scroll
+═══════════════════════════════════════════════════════ */
+html, body { height: auto; overflow: visible; }
 
-  /* ═══════════════════════════════════════════════════════
-     ORB LAYER — position:fixed so they show through glass
-     during scroll. filter:blur() is the CRITICAL part.
-  ════════════════════════════════════════════════════════ */
-  .orb-layer {
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 0; overflow: hidden;
-  }
-  .orb {
-    position: absolute; border-radius: 50%;
-    /* filter:blur() makes them soft light sources */
-  }
-  /* Primary — vivid purple, top-left */
-  .orb-1 {
-    width: 900px; height: 900px;
-    top: -350px; left: -300px;
-    background: radial-gradient(closest-side,
-      rgba(124,58,237,0.75) 0%,
-      rgba(124,58,237,0.30) 45%,
-      transparent 100%);
-    filter: blur(90px);
-    animation: orbPulse 22s ease-in-out infinite alternate;
-  }
-  /* Secondary — electric cyan, bottom-right */
-  .orb-2 {
-    width: 700px; height: 700px;
-    bottom: -250px; right: -200px;
-    background: radial-gradient(closest-side,
-      rgba(6,182,212,0.55) 0%,
-      rgba(6,182,212,0.18) 45%,
-      transparent 100%);
-    filter: blur(80px);
-    animation: orbPulse 28s ease-in-out infinite alternate-reverse;
-  }
-  /* Accent — indigo, mid-right, subtle */
-  .orb-3 {
-    width: 500px; height: 500px;
-    top: 38%; right: 5%;
-    background: radial-gradient(closest-side,
-      rgba(79,70,229,0.40) 0%,
-      rgba(79,70,229,0.10) 50%,
-      transparent 100%);
-    filter: blur(70px);
-    animation: orbPulse 18s ease-in-out infinite alternate;
-  }
-  @keyframes orbPulse {
-    from { transform: scale(1)   translate(0,0); }
-    to   { transform: scale(1.1) translate(30px,20px); }
-  }
+/* ═══════════════════════════════════════════════════════
+   BACKGROUND LAYER
+   - #particles-bg: empty hook for tsparticles/particles.js
+   - Two subtle radial orbs, one per corner
+   position:fixed so they show THROUGH glass during scroll
+═══════════════════════════════════════════════════════ */
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+}
+/* Particles placeholder — add tsparticles here later */
+#particles-bg { position: absolute; inset: 0; }
 
-  /* ═══════════════════════════════════════════════════════
-     GLASSMORPHISM BASE — used on every UI surface
-  ════════════════════════════════════════════════════════ */
-  .glass {
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(20px) saturate(1.6);
-    -webkit-backdrop-filter: blur(20px) saturate(1.6);
-    border: 1px solid rgba(255,255,255,0.09);
-    box-shadow:
-      0 8px 40px rgba(0,0,0,0.45),
-      inset 0 1px 0 rgba(255,255,255,0.06);
-  }
+.orb {
+  position: absolute; border-radius: 50%;
+  pointer-events: none;
+}
+/* Top-left: subtle purple */
+.orb-tl {
+  width: 600px; height: 600px;
+  top: -15%; left: -8%;
+  background: radial-gradient(circle,
+    rgba(124,58,237,0.18) 0%,
+    rgba(124,58,237,0.05) 50%,
+    transparent 70%);
+  filter: blur(100px);
+}
+/* Bottom-right: subtle cyan */
+.orb-br {
+  width: 550px; height: 550px;
+  bottom: -12%; right: -8%;
+  background: radial-gradient(circle,
+    rgba(6,182,212,0.13) 0%,
+    rgba(6,182,212,0.04) 50%,
+    transparent 70%);
+  filter: blur(100px);
+}
 
-  /* ═══════════════════════════════════════════════════════
-     HEADER — sticky glass nav
-  ════════════════════════════════════════════════════════ */
-  .site-header {
-    position: sticky; top: 0; z-index: 200;
-    background: rgba(2,2,26,0.75);
-    backdrop-filter: blur(24px) saturate(1.5);
-    -webkit-backdrop-filter: blur(24px) saturate(1.5);
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    padding: 0 28px; height: 62px;
-    display: flex; align-items: center; gap: 16px;
-  }
+/* ═══════════════════════════════════════════════════════
+   GLASSMORPHISM UTILITY
+   EXACT Tailwind equivalents requested:
+     bg-white/5       → rgba(255,255,255,0.05)
+     backdrop-blur-xl → blur(24px)
+     border-white/10  → rgba(255,255,255,0.10)
+     rounded-3xl      → 24px
+     shadow-2xl       → 0 25px 50px -12px rgba(0,0,0,0.5)
+═══════════════════════════════════════════════════════ */
+.glass {
+  background:           rgba(255,255,255,0.05);
+  backdrop-filter:      blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border:               1px solid rgba(255,255,255,0.10);
+  border-radius:        24px;
+  box-shadow:           0 25px 50px -12px rgba(0,0,0,0.50);
+}
 
-  /* Logo */
-  .site-logo {
-    font-size: 1.4rem; font-weight: 800; letter-spacing: -1.2px;
-    flex-shrink: 0; display: flex; align-items: center; gap: 3px;
-    background: linear-gradient(135deg,#7c6dfe,#c4b5fd);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .logo-dot {
-    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-    background: #7c6dfe; flex-shrink: 0; margin-bottom: 6px;
-    -webkit-text-fill-color: initial;
-    box-shadow: 0 0 10px rgba(124,109,254,.9);
-    animation: dotPulse 2.4s ease-in-out infinite;
-  }
-  @keyframes dotPulse { 0%,100%{opacity:1;box-shadow:0 0 10px rgba(124,109,254,.9)} 50%{opacity:.5;box-shadow:0 0 4px rgba(124,109,254,.4)} }
+/* ═══════════════════════════════════════════════════════
+   HEADER — sticky glass nav
+═══════════════════════════════════════════════════════ */
+.site-header {
+  position: sticky; top: 0; z-index: 200;
+  /* slightly more opaque to keep legibility */
+  background: rgba(5,5,5,0.80);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 28px; height: 64px;
+  display: flex; align-items: center; gap: 16px;
+}
 
-  /* Search — glassmorphism input */
-  .search-wrap {
-    flex: 1; max-width: 460px; min-width: 120px;
-    display: flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 12px; padding: 0 14px; height: 38px;
-    transition: border-color .2s, box-shadow .2s; cursor: text;
-  }
-  .search-wrap:focus-within {
-    border-color: rgba(124,109,254,.5);
-    box-shadow: 0 0 0 3px rgba(124,109,254,.12);
-  }
-  .search-icon { color: var(--text-muted); flex-shrink: 0; }
-  .search-input {
-    flex: 1; background: none; border: none; outline: none;
-    color: var(--text); font-size: .88rem; font-family: inherit;
-  }
-  .search-input::placeholder { color: var(--text-muted); }
-  .search-kbd {
-    flex-shrink: 0; font-size: .64rem; font-weight: 700;
-    color: var(--text-muted); background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 5px;
-    padding: 2px 7px; font-family: inherit; letter-spacing: .3px;
-    transition: opacity .2s;
-  }
-  .search-wrap:focus-within .search-kbd { opacity: 0; }
+.site-logo {
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -1.2px;
+  flex-shrink: 0; display: flex; align-items: center; gap: 2px;
+  background: linear-gradient(135deg,#7c6dfe,#c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.logo-dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: #7c6dfe; -webkit-text-fill-color: initial; flex-shrink: 0;
+  margin-bottom: 6px; margin-left: 1px;
+  box-shadow: 0 0 10px rgba(124,109,254,.9);
+  animation: dotPulse 2.4s ease-in-out infinite;
+}
+@keyframes dotPulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-  .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .hdr-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(124,109,254,.08); border: 1px solid rgba(124,109,254,.22);
-    border-radius: 99px; padding: 7px 16px;
-    color: var(--accent2); font-size: .78rem; font-weight: 700;
-    transition: all .2s; white-space: nowrap;
-  }
-  .hdr-btn:hover { background: rgba(124,109,254,.18); border-color: var(--accent); }
-  .hits-pill {
-    display: flex; align-items: center; height: 30px; overflow: hidden;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 99px; padding: 0 10px;
-  }
-  .hits-pill img { display: block; }
+/* Search bar — glass */
+.search-wrap {
+  flex: 1; max-width: 460px; min-width: 120px;
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px; padding: 0 14px; height: 40px;
+  transition: border-color .2s, box-shadow .2s; cursor: text;
+}
+.search-wrap:focus-within {
+  border-color: rgba(124,109,254,.50);
+  box-shadow: 0 0 0 3px rgba(124,109,254,.12);
+}
+.search-icon { color: rgba(255,255,255,0.35); flex-shrink: 0; }
+.search-input {
+  flex: 1; background: none; border: none; outline: none;
+  color: #fff; font-size: .88rem; font-family: inherit;
+}
+.search-input::placeholder { color: rgba(255,255,255,0.30); }
+.search-kbd {
+  flex-shrink: 0; font-size: .64rem; font-weight: 700;
+  color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px; padding: 2px 7px; font-family: inherit;
+  transition: opacity .2s;
+}
+.search-wrap:focus-within .search-kbd { opacity: 0; }
 
-  /* ═══════════════════════════════════════════════════════
-     MAIN WRAPPER
-  ════════════════════════════════════════════════════════ */
-  main {
-    position: relative; z-index: 1;
-    max-width: 1320px; margin: 0 auto;
-    padding: 28px 24px 80px;
-    display: flex; flex-direction: column; gap: 16px;
-  }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
-  /* ═══════════════════════════════════════════════════════
-     BENTO GRID — 12-column CSS grid (the core of the layout)
-  ════════════════════════════════════════════════════════ */
-  .bento {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 14px;
-    align-items: start;
-  }
+/* ── NEON BUTTON "Solicitar" (cybersecurity style) ── */
+/* shadow-[0_0_15px_rgba(16,185,129,0.5)] text-emerald-400 border-emerald-500 */
+.btn-neon {
+  display: inline-flex; align-items: center; gap: 6px;
+  background:   rgba(6,78,59,0.20);
+  border:       1px solid #10b981;
+  border-radius: 99px; padding: 7px 16px;
+  color:        #34d399;
+  font-size: .78rem; font-weight: 700; white-space: nowrap;
+  box-shadow: 0 0 15px rgba(16,185,129,0.50),
+              inset 0 0 12px rgba(16,185,129,0.05);
+  transition: all .22s;
+}
+.btn-neon:hover {
+  background: rgba(6,78,59,0.35);
+  border-color: #34d399;
+  box-shadow: 0 0 25px rgba(16,185,129,0.70),
+              0 0 60px rgba(16,185,129,0.20);
+  transform: translateY(-1px);
+}
+.hits-pill {
+  display: flex; align-items: center; height: 32px; overflow: hidden;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 99px; padding: 0 10px;
+}
+.hits-pill img { display: block; }
 
-  /* ── Hero: 8 cols ── */
-  .bento-hero {
-    grid-column: span 8;
-    border-radius: var(--radius-lg);
-    padding: 40px 44px;
-    min-height: 320px;
-    display: flex; flex-direction: column; gap: 0;
-    position: relative; overflow: hidden;
-    /* extra inner purple tint for depth */
-    background:
-      radial-gradient(ellipse at 5% 10%, rgba(124,58,237,0.10) 0%, transparent 55%),
-      rgba(255,255,255,0.04);
-  }
+/* ═══════════════════════════════════════════════════════
+   MAIN WRAPPER — z:1 keeps it above bg-layer (z:0)
+═══════════════════════════════════════════════════════ */
+main {
+  position: relative; z-index: 1;
+  max-width: 1320px; margin: 0 auto;
+  padding: 28px 24px 80px;
+  display: flex; flex-direction: column; gap: 20px;
+}
 
-  /* Live badge */
-  .live-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(34,197,94,.10); border: 1px solid rgba(34,197,94,.22);
-    border-radius: 99px; padding: 5px 14px; width: fit-content;
-    font-size: .72rem; font-weight: 700; color: #4ade80; margin-bottom: 22px;
-  }
-  .live-dot {
-    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
-    background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,.8);
-    animation: dotPulse 2.4s ease-in-out infinite;
-  }
+/* ═══════════════════════════════════════════════════════
+   BENTO BOX — 12-column CSS grid (strict, as specified)
 
-  /* Hero headline */
-  .hero-h1 {
-    font-size: clamp(2rem,3.2vw,3rem);
-    font-weight: 800; letter-spacing: -1.8px; line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .hero-grad {
-    background: linear-gradient(135deg,#7c6dfe 0%,#c4b5fd 50%,#22d3ee 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-desc {
-    font-size: .95rem; color: var(--text-muted); line-height: 1.65;
-    max-width: 500px; margin-bottom: 28px;
-  }
+   Mapping:
+     Hero        col-span-12 lg:col-span-8  → span 8
+     Novedades   col-span-12 lg:col-span-4 lg:row-span-2 → span 4, row-span 2
+     Profile     col-span-12 lg:col-span-4  → span 4
+     Star        col-span-12 lg:col-span-4  → span 4
 
-  /* Stats row — gradient numbers */
-  .stats-row {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
-  }
-  .stat-chip {
-    display: flex; flex-direction: column; gap: 2px;
-    padding: 12px 18px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  }
-  /* THE GRADIENT NUMBERS the brief asks for */
-  .stat-n {
-    font-size: 1.9rem; font-weight: 800; letter-spacing: -1px; line-height: 1;
-    background: linear-gradient(135deg,#a78bfa 0%,#67e8f9 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .stat-l {
-    font-size: .62rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .8px; color: var(--text-muted);
-  }
+   Auto-placement result on desktop (12 cols):
+     Row 1: [Hero: cols 1-8] [Novedades: cols 9-12]
+     Row 2: [Profile: 1-4] [Star: 5-8] [Novedades: 9-12 ↕]
+   → No blank cells, no huecos
+═══════════════════════════════════════════════════════ */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;         /* gap-6 */
+  /* NO align-items override → default=stretch so rows fill height */
+}
 
-  /* Hero actions */
-  .hero-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .wa-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(37,211,102,.07); border: 1px solid rgba(37,211,102,.22);
-    border-radius: 99px; padding: 9px 20px;
-    color: #4ade80; font-size: .82rem; font-weight: 700; transition: all .2s;
-  }
-  .wa-btn:hover { background: rgba(37,211,102,.16); transform: translateY(-1px); }
+/* Hero — col-span-8 */
+.b-hero {
+  grid-column: span 8;
+  padding: 40px 44px;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  min-height: 300px;
+}
+/* subtle inner glow on hero only */
+.b-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 0% 0%,
+    rgba(124,58,237,0.12) 0%, transparent 60%);
+  pointer-events: none; border-radius: inherit;
+}
 
-  /* ── Changelog: 4 cols, 2 rows tall ── */
-  .bento-changelog {
-    grid-column: span 4;
-    grid-row: span 2;
-    border-radius: var(--radius-lg);
-    display: flex; flex-direction: column;
-    min-height: 360px;
-    position: relative; overflow: hidden;
-  }
-  .clog-hdr {
-    display: flex; align-items: center; gap: 8px;
-    padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.07);
-    font-size: .67rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .9px; color: var(--text-muted);
-    position: relative; z-index: 2; flex-shrink: 0;
-  }
-  .clog-since {
-    margin-left: auto; font-size: .64rem; color: var(--accent2);
-    font-weight: 600; text-transform: none; letter-spacing: 0;
-  }
-  .clog-list { list-style: none; flex: 1; overflow: hidden; position: relative; z-index: 2; }
-  .clog-item {
-    display: grid;
-    grid-template-columns: auto auto 1fr auto;
-    align-items: center; gap: 7px;
-    padding: 10px 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: background .15s;
-  }
-  .clog-item:last-child { border-bottom: none; }
-  .clog-item:hover { background: rgba(255,255,255,0.04); }
-  /* Novedades badges */
-  .nbadge {
-    font-size: .58rem; font-weight: 800; border-radius: 99px;
-    padding: 2px 8px; white-space: nowrap; flex-shrink: 0; letter-spacing: .2px;
-  }
-  .badge-green  { background:rgba(34,197,94,.15); color:#4ade80; border:1px solid rgba(34,197,94,.25); }
-  .badge-orange { background:rgba(249,115,22,.15); color:#fb923c; border:1px solid rgba(249,115,22,.25); }
-  .badge-blue   { background:rgba(59,130,246,.15); color:#93c5fd; border:1px solid rgba(59,130,246,.25); }
-  .badge-purple { background:rgba(168,85,247,.15); color:#d8b4fe; border:1px solid rgba(168,85,247,.25); }
-  .badge-cyan   { background:rgba(34,211,238,.12); color:#67e8f9; border:1px solid rgba(34,211,238,.2); }
-  .badge-gray   { background:rgba(148,163,184,.10); color:#94a3b8; border:1px solid rgba(148,163,184,.18); }
-  .clog-scope {
-    font-size: .6rem; font-weight: 800; color: var(--accent2);
-    background: rgba(124,109,254,.1); border: 1px solid rgba(124,109,254,.2);
-    border-radius: 4px; padding: 1px 6px; font-family:'Courier New',monospace;
-    white-space: nowrap; flex-shrink: 0;
-  }
-  .clog-text {
-    font-size: .77rem; color: var(--text);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .clog-date { font-size: .6rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
+/* Novedades — col-span-4, row-span-2 (tall right column) */
+.b-changelog {
+  grid-column: span 4;
+  grid-row: span 2;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
 
-  /* ── CTA cards: 4 cols each, sit below hero (row 2) ── */
-  .bento-cta {
-    grid-column: span 4;
-    border-radius: var(--radius-lg);
-    padding: 24px 28px;
-    display: flex; flex-direction: column; gap: 8px;
-    position: relative; overflow: hidden;
-    color: var(--text);
-    transition: transform .22s, border-color .22s, box-shadow .22s, background .22s;
-    --mx: 50%; --my: 50%;
-  }
-  /* CTA spotlight (same --mx/--my mechanism as cards) */
-  .bento-cta::after {
-    content:''; position:absolute; inset:0;
-    background: radial-gradient(200px circle at var(--mx) var(--my),
-      rgba(168,85,247,0.12), transparent 70%);
-    opacity:0; transition:opacity .35s; pointer-events:none;
-  }
-  .bento-cta:hover { transform: translateY(-4px); }
-  .bento-cta:hover::after { opacity:1; }
+/* CTA cards — col-span-4 each (sit below hero in row 2) */
+.b-cta {
+  grid-column: span 4;
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+  color: #fff;
+  transition: transform .22s, border-color .22s, background .22s, box-shadow .22s;
+  --mx: 50%; --my: 50%;
+  min-height: 170px;
+}
+/* CTA spotlight (same --mx/--my mechanism) */
+.b-cta::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(180px circle at var(--mx) var(--my),
+    rgba(168,85,247,.13), transparent 70%);
+  opacity: 0; transition: opacity .35s; pointer-events: none;
+}
+.b-cta:hover { transform: translateY(-4px); }
+.b-cta:hover::after { opacity: 1; }
+.b-cta.cta-gh:hover {
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.65);
+}
+.b-cta.cta-star {
+  background: linear-gradient(135deg,
+    rgba(251,191,36,0.05), rgba(255,255,255,0.04));
+}
+.b-cta.cta-star:hover {
+  border-color: rgba(250,204,21,0.40);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.65), 0 0 30px rgba(250,204,21,0.07);
+}
 
-  /* CTA variants */
-  .bento-cta.cta-gh:hover   { border-color:rgba(255,255,255,0.22); box-shadow:0 12px 40px rgba(0,0,0,.5); }
-  .bento-cta.cta-star:hover { border-color:rgba(250,204,21,0.40);  box-shadow:0 12px 40px rgba(0,0,0,.5),0 0 30px rgba(250,204,21,.08); }
-  /* star card — subtle amber tint */
-  .bento-cta.cta-star {
-    background: linear-gradient(135deg,rgba(251,191,36,.04),rgba(255,255,255,.04));
-  }
-  .bento-cta.cta-gh {
-    background: linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
-  }
+/* Large decorative icon in CTA */
+.cta-bg-icon {
+  position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+  opacity: 0.08; transition: opacity .2s; pointer-events: none; z-index: 0;
+}
+.b-cta:hover .cta-bg-icon { opacity: 0.16; }
 
-  .cta-kicker {
-    font-size: .65rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .8px; color: var(--text-muted); position: relative; z-index: 2;
-  }
-  .cta-title {
-    font-size: 1.05rem; font-weight: 800; position: relative; z-index: 2; line-height: 1.2;
-  }
-  .cta-hint {
-    font-size: .78rem; color: var(--text-muted); position: relative; z-index: 2; margin-top: 4px;
-  }
-  .cta-icon-bg {
-    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-    font-size: 2.4rem; opacity: .12; z-index: 0; transition: opacity .22s;
-    pointer-events: none; line-height: 1;
-  }
-  .bento-cta:hover .cta-icon-bg { opacity: .22; }
+.cta-kicker {
+  font-size: .64rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: rgba(255,255,255,0.40);
+  position: relative; z-index: 2;
+}
+.cta-title {
+  font-size: 1rem; font-weight: 800; color: #fff; line-height: 1.2;
+  position: relative; z-index: 2;
+}
+.cta-hint {
+  font-size: .78rem; color: rgba(255,255,255,0.45);
+  position: relative; z-index: 2;
+}
+.cta-arrow {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .7rem; font-weight: 700;
+  background: rgba(124,109,254,0.12); border: 1px solid rgba(124,109,254,0.22);
+  color: #c4b5fd; border-radius: 99px; padding: 4px 12px;
+  width: fit-content; margin-top: auto;
+  position: relative; z-index: 2;
+  transition: background .2s, border-color .2s;
+}
+.b-cta:hover .cta-arrow { background: rgba(124,109,254,0.22); border-color: rgba(124,109,254,0.4); }
+.cta-star .cta-arrow { color:#fde68a; background:rgba(251,191,36,0.10); border-color:rgba(251,191,36,0.22); }
+.b-cta.cta-star:hover .cta-arrow { background:rgba(251,191,36,0.20); }
 
-  /* Arrow chip on CTA */
-  .cta-arrow {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: .7rem; font-weight: 700; color: var(--accent2);
-    background: rgba(124,109,254,.1); border: 1px solid rgba(124,109,254,.2);
-    border-radius: 99px; padding: 3px 10px; width: fit-content;
-    position: relative; z-index: 2; margin-top: auto;
-    transition: background .2s, border-color .2s;
-  }
-  .bento-cta:hover .cta-arrow {
-    background: rgba(124,109,254,.2); border-color: rgba(124,109,254,.4);
-  }
-  .cta-star .cta-arrow { color:#fde68a; background:rgba(251,191,36,.1); border-color:rgba(251,191,36,.25); }
-  .cta-star:hover .cta-arrow { background:rgba(251,191,36,.2); }
+/* ─── Hero content ─── */
+.live-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.22);
+  border-radius: 99px; padding: 5px 14px; width: fit-content;
+  font-size: .72rem; font-weight: 700; color: #4ade80; margin-bottom: 22px;
+  position: relative; z-index: 2;
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,.8);
+  animation: dotPulse 2.4s ease-in-out infinite;
+}
+.hero-h1 {
+  font-size: clamp(1.9rem,3vw,2.9rem);
+  font-weight: 800; letter-spacing: -1.8px; line-height: 1.1;
+  color: #fff; margin-bottom: 14px;
+  position: relative; z-index: 2;
+}
+.hero-grad {
+  background: linear-gradient(135deg,#7c6dfe 0%,#c4b5fd 50%,#22d3ee 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-desc {
+  font-size: .95rem; color: rgba(255,255,255,0.50); line-height: 1.65;
+  max-width: 500px; margin-bottom: 28px;
+  position: relative; z-index: 2;
+}
 
-  /* ═══════════════════════════════════════════════════════
-     FILTER BAR — glassmorphism pill row
-  ════════════════════════════════════════════════════════ */
-  .filter-bar {
-    display: flex; align-items: center; gap: 20px;
-    padding: 14px 22px; border-radius: var(--radius-lg);
-    flex-wrap: wrap;
-  }
-  .fgroup { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .fgroup-label {
-    font-size: .66rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .8px; color: var(--text-muted); white-space: nowrap;
-    padding-right: 6px; border-right: 1px solid rgba(255,255,255,0.07);
-  }
-  .fchips { display: flex; gap: 6px; flex-wrap: wrap; }
-  .fchip {
-    font-size: .77rem; font-weight: 600; border-radius: 99px;
-    padding: 5px 14px;
-    background: transparent; border: 1px solid rgba(255,255,255,0.09);
-    color: var(--text-muted); cursor: pointer; transition: all .18s;
-    font-family: inherit;
-  }
-  .fchip:hover:not(.on) { border-color:rgba(124,109,254,.4); color:var(--accent2); }
-  .fchip.on {
-    background: rgba(124,109,254,.18); border-color: rgba(124,109,254,.5);
-    color: var(--accent2);
-  }
+/* Stats — gradient numbers (as specified in brief) */
+.stats-row {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
+  position: relative; z-index: 2;
+}
+.stat-chip {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 12px 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+}
+/* bg-gradient-to-r text-transparent bg-clip-text  */
+.stat-num {
+  font-size: 1.85rem; font-weight: 800; letter-spacing: -1px; line-height: 1;
+  background: linear-gradient(135deg,#a78bfa 0%,#67e8f9 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-lbl {
+  font-size: .62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: rgba(255,255,255,0.38);
+}
+.hero-actions { position: relative; z-index: 2; }
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(37,211,102,0.07); border: 1px solid rgba(37,211,102,0.22);
+  border-radius: 99px; padding: 9px 20px;
+  color: #4ade80; font-size: .82rem; font-weight: 700; transition: all .2s;
+}
+.wa-btn:hover { background: rgba(37,211,102,0.16); transform: translateY(-1px); }
 
-  /* ═══════════════════════════════════════════════════════
-     SUBJECT SECTIONS
-  ════════════════════════════════════════════════════════ */
-  .subject-section { display: flex; flex-direction: column; gap: 14px; }
-  .section-label {
-    display: flex; align-items: center; gap: 10px;
-    font-size: .7rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1.1px; color: var(--text-muted); padding: 0 4px;
-  }
-  .section-label::after {
-    content:''; flex:1; height:1px; background:rgba(255,255,255,0.07);
-  }
-  .subject-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 14px;
-  }
+/* ─── Novedades content ─── */
+.clog-hdr {
+  display: flex; align-items: center; gap: 8px;
+  padding: 16px 20px; flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: .67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .9px; color: rgba(255,255,255,0.40);
+}
+.clog-since {
+  margin-left: auto; font-size: .64rem; color: #c4b5fd;
+  font-weight: 600; text-transform: none; letter-spacing: 0;
+}
+.clog-list { list-style: none; flex: 1; overflow-y: auto; }
+.clog-item {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center; gap: 7px;
+  padding: 11px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background .15s;
+}
+.clog-item:last-child { border-bottom: none; }
+.clog-item:hover { background: rgba(255,255,255,0.04); }
+.upd-badge {
+  font-size: .58rem; font-weight: 800; border-radius: 99px;
+  padding: 2px 8px; white-space: nowrap; flex-shrink: 0;
+}
+.upd-green  { background:rgba(34,197,94,.15);  color:#4ade80; border:1px solid rgba(34,197,94,.25);  }
+.upd-orange { background:rgba(249,115,22,.15); color:#fb923c; border:1px solid rgba(249,115,22,.25); }
+.upd-blue   { background:rgba(59,130,246,.15); color:#93c5fd; border:1px solid rgba(59,130,246,.25); }
+.upd-purple { background:rgba(168,85,247,.15); color:#d8b4fe; border:1px solid rgba(168,85,247,.25); }
+.upd-cyan   { background:rgba(34,211,238,.12); color:#67e8f9; border:1px solid rgba(34,211,238,.22); }
+.upd-gray   { background:rgba(148,163,184,.10);color:#94a3b8; border:1px solid rgba(148,163,184,.18);}
+.clog-scope {
+  font-size: .6rem; font-weight: 800; color: #c4b5fd;
+  background: rgba(124,109,254,.10); border: 1px solid rgba(124,109,254,.20);
+  border-radius: 4px; padding: 1px 6px; font-family:'Courier New',monospace;
+  white-space: nowrap; flex-shrink: 0;
+}
+.clog-text { font-size: .77rem; color: rgba(255,255,255,0.80); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.clog-date { font-size: .6rem; color: rgba(255,255,255,0.30); white-space: nowrap; flex-shrink: 0; }
 
-  /* No results */
-  .no-results {
-    text-align: center; padding: 48px 24px;
-    color: var(--text-muted); font-size: .9rem;
-  }
-  .no-results[hidden] { display: none; }
+/* ═══════════════════════════════════════════════════════
+   FILTER BAR — glass + filter chips
+═══════════════════════════════════════════════════════ */
+.filter-bar {
+  display: flex; align-items: center; gap: 20px;
+  padding: 14px 22px; flex-wrap: wrap;
+}
+.fgroup { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fgroup-label {
+  font-size: .65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: rgba(255,255,255,0.30); white-space: nowrap;
+  padding-right: 6px; border-right: 1px solid rgba(255,255,255,0.08);
+}
+.fchips { display: flex; gap: 6px; flex-wrap: wrap; }
+.fchip {
+  font-size: .77rem; font-weight: 600; border-radius: 99px;
+  padding: 5px 14px;
+  background: transparent; border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.45); cursor: pointer; transition: all .18s;
+  font-family: inherit;
+}
+.fchip:hover:not(.on) {
+  border-color: rgba(124,109,254,.40); color: rgba(255,255,255,0.80);
+}
+.fchip.on {
+  background: rgba(124,109,254,0.18);
+  border-color: rgba(124,109,254,0.50);
+  color: #c4b5fd;
+}
 
-  /* ═══════════════════════════════════════════════════════
-     FOOTER
-  ════════════════════════════════════════════════════════ */
-  footer {
-    position: relative; z-index: 1;
-    text-align: center; padding: 22px 24px;
-    font-size: .74rem; color: var(--text-muted);
-    border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  footer a { color: var(--accent2); }
-  footer a:hover { color: var(--accent); }
+/* ═══════════════════════════════════════════════════════
+   SUBJECT SECTIONS
+═══════════════════════════════════════════════════════ */
+.subject-section { display: flex; flex-direction: column; gap: 14px; }
+.section-label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .69rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.1px; color: rgba(255,255,255,0.30); padding: 0 2px;
+}
+.section-label::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.08); }
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+}
 
-  /* ═══════════════════════════════════════════════════════
-     RESPONSIVE
-     1100px → two-col bento (hero full, changelog full, cta halves)
-      680px → single column
-  ════════════════════════════════════════════════════════ */
-  @media (max-width:1100px) {
-    .bento { grid-template-columns:repeat(6,1fr); }
-    .bento-hero      { grid-column:span 6; }
-    .bento-changelog { grid-column:span 6; grid-row:span 1; }
-    .bento-cta       { grid-column:span 3; }
-  }
-  @media (max-width:700px) {
-    .site-header { padding:0 16px; gap:10px; }
-    .search-wrap  { max-width:none; }
-    .hdr-btn span { display:none; }
-    .hdr-btn      { padding:7px 11px; }
-    main          { padding:20px 14px 60px; }
-    .bento { grid-template-columns:1fr; }
-    .bento-hero,.bento-changelog,.bento-cta { grid-column:span 1; grid-row:span 1; }
-    .bento-hero { padding:28px 22px; min-height:auto; }
-    .stats-row  { gap:6px; }
-    .stat-chip  { padding:10px 14px; }
-    .stat-n     { font-size:1.5rem; }
-    .filter-bar { gap:12px; }
-    .subject-grid { grid-template-columns:1fr; }
-  }
-  @media (max-width:420px) {
-    .bento-cta { padding:20px 20px; }
-    .hits-pill  { display:none; }
-  }
+/* No results */
+.no-results { text-align:center; padding:48px 24px; color:rgba(255,255,255,0.35); font-size:.9rem; }
+.no-results[hidden] { display:none; }
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  text-align: center; padding: 22px 24px;
+  font-size: .74rem; color: rgba(255,255,255,0.28);
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+footer a { color: #c4b5fd; }
+footer a:hover { color: #7c6dfe; }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+   lg = 1100px+  →  12-col bento
+   md = 700-1099 →  2-col (hero full, cta half)
+   sm = <700     →  single column
+═══════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .bento { grid-template-columns: repeat(6, 1fr); gap: 16px; }
+  .b-hero      { grid-column: span 6; padding: 32px 36px; }
+  .b-changelog { grid-column: span 6; grid-row: span 1; }
+  .b-cta       { grid-column: span 3; }
+}
+@media (max-width: 700px) {
+  .site-header { padding: 0 16px; }
+  .search-wrap { max-width: none; }
+  .btn-neon span { display: none; }
+  .btn-neon { padding: 7px 11px; }
+  main { padding: 20px 14px 60px; gap: 14px; }
+  .bento { grid-template-columns: 1fr; gap: 14px; }
+  .b-hero      { grid-column: span 1; padding: 28px 22px; min-height: auto; }
+  .b-changelog { grid-column: span 1; grid-row: span 1; }
+  .b-cta       { grid-column: span 1; }
+  .stats-row   { gap: 6px; }
+  .stat-chip   { padding: 10px 14px; }
+  .stat-num    { font-size: 1.5rem; }
+  .filter-bar  { gap: 12px; }
+  .subject-grid { grid-template-columns: 1fr; }
+  .hits-pill   { display: none; }
+}
 </style>
 
-<!-- ══════════════════════════════════════════════
-     ORB BACKGROUND — these are the light sources
-     that make backdrop-filter:blur() look real
-═══════════════════════════════════════════════ -->
-<div class="orb-layer" aria-hidden="true">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+<!-- ══════════════════════════════════════════════════
+     BACKGROUND LAYER
+     - #particles-bg ready for tsparticles/particles.js
+     - 2 corner orbs (subtle, NOT vivid)
+═══════════════════════════════════════════════════ -->
+<div class="bg-layer" aria-hidden="true">
+  <div id="particles-bg"></div>
+  <div class="orb orb-tl"></div>
+  <div class="orb orb-br"></div>
 </div>
 
-<!-- ══════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      HEADER
-═══════════════════════════════════════════════ -->
+═══════════════════════════════════════════════════ -->
 <header class="site-header">
   <a class="site-logo" href={base} aria-label="repasaYA — Inicio">
     repasaYA<span class="logo-dot" aria-hidden="true"></span>
@@ -538,28 +551,34 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
   </div>
 
   <div class="header-right">
-    <a class="hdr-btn" href={ISSUE_URL} target="_blank" rel="noopener" aria-label="Solicitar asignatura">
-      ✦ <span>Solicitar</span>
+    <!-- NEON BUTTON: emerald border + glow (cybersecurity style) -->
+    <a class="btn-neon" href={ISSUE_URL} target="_blank" rel="noopener" aria-label="Solicitar asignatura">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      <span>Solicitar</span>
     </a>
-    <div class="hits-pill" aria-label="Contador de visitas">
+    <div class="hits-pill" aria-label="Visitas">
       <img
-        src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=7c6dfe&labelColor=0d0d1f"
+        src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=7c6dfe&labelColor=050505"
         alt="visitas" height="18" loading="lazy"
       />
     </div>
   </div>
 </header>
 
-<!-- ══════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      MAIN
-═══════════════════════════════════════════════ -->
+═══════════════════════════════════════════════════ -->
 <main>
 
-  <!-- ── BENTO 12-col grid ───────────────────────── -->
-  <div class="bento" role="region" aria-label="Dashboard principal">
+  <!-- ─── BENTO 12-COL GRID ─────────────────────── -->
+  <div class="bento" role="region" aria-label="Panel principal">
 
-    <!-- HERO — col-span-8, row 1 -->
-    <article class="bento-hero glass" data-spot aria-label="Bienvenida">
+    <!--
+      HERO — col-span-12 lg:col-span-8
+      On desktop: spans cols 1-8
+    -->
+    <article class="b-hero glass" data-spot aria-label="Bienvenida">
       <span class="live-pill">
         <span class="live-dot" aria-hidden="true"></span>
         Open Source · GitHub
@@ -571,26 +590,26 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
       </h1>
 
       <p class="hero-desc">
-        Tests interactivos, V/F y flashcards para las asignaturas
-        de la carrera. Gratis, sin registro, sin anuncios.
+        Tests interactivos, V/F y flashcards para las asignaturas de la carrera.
+        Gratis, sin registro, sin anuncios.
       </p>
 
-      <div class="stats-row" role="list" aria-label="Estadísticas">
+      <div class="stats-row" role="list">
         <div class="stat-chip" role="listitem">
-          <span class="stat-n">{subjects.length}</span>
-          <span class="stat-l">Asignaturas</span>
+          <span class="stat-num">{subjects.length}</span>
+          <span class="stat-lbl">Asignaturas</span>
         </div>
         <div class="stat-chip" role="listitem">
-          <span class="stat-n">+1000</span>
-          <span class="stat-l">Preguntas</span>
+          <span class="stat-num">+1000</span>
+          <span class="stat-lbl">Preguntas</span>
         </div>
         <div class="stat-chip" role="listitem">
-          <span class="stat-n">+{Math.floor(totalFlash / 10) * 10}</span>
-          <span class="stat-l">Flashcards</span>
+          <span class="stat-num">+{Math.floor(totalFlash / 10) * 10}</span>
+          <span class="stat-lbl">Flashcards</span>
         </div>
         <div class="stat-chip" role="listitem">
-          <span class="stat-n">+25</span>
-          <span class="stat-l">Temas</span>
+          <span class="stat-num">+25</span>
+          <span class="stat-lbl">Temas</span>
         </div>
       </div>
 
@@ -605,8 +624,11 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
       </div>
     </article>
 
-    <!-- CHANGELOG — col-span-4, row-span-2 (tall cell on the right) -->
-    <article class="bento-changelog glass" data-spot aria-label="Novedades recientes">
+    <!--
+      NOVEDADES — col-span-12 lg:col-span-4 lg:row-span-2
+      On desktop: spans cols 9-12, rows 1 AND 2 (tall right column)
+    -->
+    <article class="b-changelog glass" data-spot aria-label="Novedades recientes">
       <div class="clog-hdr">
         <span class="live-dot" aria-hidden="true"></span>
         Novedades
@@ -616,7 +638,7 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
         <ul class="clog-list">
           {commits.map(c => (
             <li class="clog-item">
-              <span class={`nbadge ${c.cls}`}>{c.badge}</span>
+              <span class={`upd-badge ${c.cls}`}>{c.badge}</span>
               {c.scope && <span class="clog-scope">{c.scope}</span>}
               <span class="clog-text">{c.text}</span>
               <time class="clog-date">{c.date}</time>
@@ -624,42 +646,48 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
           ))}
         </ul>
       ) : (
-        <p style="padding:24px 18px;color:var(--text-muted);font-size:.82rem">Sin historial disponible.</p>
+        <p style="padding:24px 18px;color:rgba(255,255,255,.3);font-size:.82rem">Sin historial disponible.</p>
       )}
     </article>
 
-    <!-- CTA 1 — col-span-4, placed auto in row 2 (cols 1-4) -->
-    <a class="bento-cta cta-gh glass" href={PROFILE_URL}
-      target="_blank" rel="noopener" data-spot aria-label="Seguir a jxliian en GitHub">
-      <span class="cta-kicker">Perfil</span>
+    <!--
+      PERFIL GITHUB — col-span-12 lg:col-span-4
+      Auto-placed in row 2, cols 1-4
+    -->
+    <a class="b-cta cta-gh glass" href={PROFILE_URL}
+      target="_blank" rel="noopener" data-spot aria-label="Perfil GitHub de jxliian">
+      <span class="cta-kicker">Sígueme</span>
       <span class="cta-title">@jxliian en GitHub</span>
       <span class="cta-hint">Todos mis proyectos open source</span>
-      <span class="cta-arrow">Seguir ↗</span>
-      <span class="cta-icon-bg" aria-hidden="true">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+      <span class="cta-arrow">Ver perfil ↗</span>
+      <span class="cta-bg-icon" aria-hidden="true">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
         </svg>
       </span>
     </a>
 
-    <!-- CTA 2 — col-span-4, placed auto in row 2 (cols 5-8) -->
-    <a class="bento-cta cta-star glass" href={REPO_URL}
+    <!--
+      REPOSITORIO STAR — col-span-12 lg:col-span-4
+      Auto-placed in row 2, cols 5-8
+    -->
+    <a class="b-cta cta-star glass" href={REPO_URL}
       target="_blank" rel="noopener" data-spot aria-label="Dar estrella al repositorio en GitHub">
       <span class="cta-kicker">Repositorio</span>
       <span class="cta-title" style="color:#fde68a">⭐ Star en GitHub</span>
       <span class="cta-hint">Apoya el proyecto open source</span>
-      <span class="cta-arrow cta-star">Ver repo ↗</span>
-      <span class="cta-icon-bg" aria-hidden="true">⭐</span>
+      <span class="cta-arrow">Ver repo ↗</span>
+      <span class="cta-bg-icon" aria-hidden="true" style="font-size:54px">⭐</span>
     </a>
 
   </div><!-- /bento -->
 
-  <!-- ── FILTER BAR ──────────────────────────────── -->
+  <!-- ─── FILTER BAR ─────────────────────────────── -->
   <nav class="filter-bar glass" aria-label="Filtros de asignaturas">
     <div class="fgroup">
       <span class="fgroup-label" id="lbl-grado">Grado</span>
       <div class="fchips" role="group" aria-labelledby="lbl-grado">
-        <button class="fchip on" data-degree="" aria-pressed="true">Todos</button>
+        <button class="fchip on" data-degree=""     aria-pressed="true">Todos</button>
         <button class="fchip"    data-degree="ade"  aria-pressed="false">📊 ADE</button>
         <button class="fchip"    data-degree="info" aria-pressed="false">💻 Informática</button>
       </div>
@@ -667,7 +695,7 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
     <div class="fgroup">
       <span class="fgroup-label" id="lbl-tipo">Tipo</span>
       <div class="fchips" role="group" aria-labelledby="lbl-tipo">
-        <button class="fchip on" data-mtype="" aria-pressed="true">Todo</button>
+        <button class="fchip on" data-mtype=""           aria-pressed="true">Todo</button>
         <button class="fchip"    data-mtype="test"       aria-pressed="false">Tipo Test</button>
         <button class="fchip"    data-mtype="vf"         aria-pressed="false">V/F</button>
         <button class="fchip"    data-mtype="flashcards" aria-pressed="false">Flashcards</button>
@@ -681,7 +709,7 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
     <p style="font-size:.8rem;margin-top:6px">Prueba otro filtro o borra la búsqueda.</p>
   </div>
 
-  <!-- ── SUBJECT SECTIONS ────────────────────────── -->
+  <!-- ─── SUBJECT SECTIONS ────────────────────────── -->
   <section class="subject-section" data-section="ade" aria-labelledby="lbl-ade">
     <h2 class="section-label" id="lbl-ade">📊 Administración de Empresas</h2>
     <div class="subject-grid">
@@ -704,32 +732,27 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
   <a href={REPO_URL} target="_blank" rel="noopener">Código en GitHub</a>
 </footer>
 
-<!-- ══════════════════════════════════════════════
-     CLIENT SCRIPTS
-═══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════ -->
 <script>
-  /* ── Detect platform for ⌘K vs Ctrl K ── */
+  /* Detect platform → ⌘K vs Ctrl K */
   const kbd = document.getElementById('search-kbd');
-  if (kbd) {
-    const mac = /Mac|iPhone|iPod|iPad/.test(navigator.platform);
-    kbd.textContent = mac ? '⌘K' : 'Ctrl K';
-  }
+  if (kbd) kbd.textContent = /Mac|iPhone|iPod|iPad/.test(navigator.platform) ? '⌘K' : 'Ctrl K';
 
-  /* ── Cmd/Ctrl+K focus search ── */
+  /* Cmd/Ctrl+K → focus search */
   const input = document.getElementById('search-input') as HTMLInputElement | null;
   document.addEventListener('keydown', (e: KeyboardEvent) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      input?.focus(); input?.select();
+      e.preventDefault(); input?.focus(); input?.select();
     }
     if (e.key === 'Escape' && document.activeElement === input) {
-      input?.blur(); if (input) input.value = '';
-      applyFilters();
+      input?.blur(); if (input) input.value = ''; applyFilters();
     }
   });
 
-  /* ── Filter state ── */
-  let activeDeg  = '';
+  /* Filter state */
+  let activeDeg   = '';
   let activeMtype = '';
 
   function applyFilters() {
@@ -739,7 +762,7 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
     document.querySelectorAll<HTMLElement>('[data-slug]').forEach(card => {
       let show = true;
       if (q && !(card.dataset.title ?? '').includes(q)) show = false;
-      if (activeDeg && card.dataset.degree !== activeDeg) show = false;
+      if (activeDeg   && card.dataset.degree !== activeDeg) show = false;
       if (activeMtype === 'test'
         && !['test','both'].includes(card.dataset.type ?? '')) show = false;
       if (activeMtype === 'vf'
@@ -750,23 +773,20 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
       if (show) visible++;
     });
 
-    /* hide empty sections */
     document.querySelectorAll<HTMLElement>('[data-section]').forEach(sec => {
       const any = [...sec.querySelectorAll<HTMLElement>('[data-slug]')]
         .some(c => c.style.display !== 'none');
       sec.style.display = any ? '' : 'none';
     });
 
-    /* no-results */
-    const nr  = document.getElementById('no-results') as HTMLElement | null;
-    const nrq = document.getElementById('no-q') as HTMLElement | null;
+    const nr = document.getElementById('no-results') as HTMLElement | null;
+    const nq = document.getElementById('no-q') as HTMLElement | null;
     if (nr) {
-      if (visible === 0) { nr.removeAttribute('hidden'); if (nrq) nrq.textContent = q || '(filtro)'; }
-      else               { nr.setAttribute('hidden',''); }
+      if (visible === 0) { nr.removeAttribute('hidden'); if (nq) nq.textContent = q || '(filtro)'; }
+      else { nr.setAttribute('hidden',''); }
     }
   }
 
-  /* ── Degree chips ── */
   document.querySelectorAll<HTMLButtonElement>('[data-degree]').forEach(btn => {
     btn.addEventListener('click', () => {
       activeDeg = btn.dataset.degree ?? '';
@@ -778,7 +798,6 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
     });
   });
 
-  /* ── Type chips ── */
   document.querySelectorAll<HTMLButtonElement>('[data-mtype]').forEach(btn => {
     btn.addEventListener('click', () => {
       activeMtype = btn.dataset.mtype ?? '';
@@ -793,5 +812,4 @@ const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests
   input?.addEventListener('input', applyFilters);
   document.addEventListener('astro:after-swap', applyFilters);
 </script>
-
 </Base>

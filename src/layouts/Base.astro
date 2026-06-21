@@ -41,27 +41,25 @@ const pageTitle =
   <ClientRouter />
   <style is:global>
     :root {
-      /* slate-950 base — very dark for orb contrast */
-      --bg:           #02021a;
-      --surface:      #0d0d1f;
-      --surface2:     #131328;
-      --border:       rgba(255,255,255,0.08);
-      /* true glassmorphism values — semi-transparent, NOT solid */
-      --glass:        rgba(255,255,255,0.04);
+      --bg:           #050505;               /* #050505 — near-pure black */
+      --surface:      #0a0a10;               /* solid surface for non-glass pages */
+      --surface2:     #111118;
+      --border:       rgba(255,255,255,0.10);
+      /* EXACT glassmorphism spec: bg-white/5 backdrop-blur-xl border-white/10 */
+      --glass:        rgba(255,255,255,0.05);
       --glass-hi:     rgba(255,255,255,0.10);
-      --glass-border: rgba(255,255,255,0.09);
+      --glass-border: rgba(255,255,255,0.10);
       --accent:       #7c6dfe;
       --accent2:      #c4b5fd;
       --accent-hover: #6b5cf0;
-      --purple-vivid: rgba(124,58,237,0.8);
       --cyan:         #22d3ee;
       --correct:      #22c55e;
       --wrong:        #ef4444;
       --reveal:       #f59e0b;
-      --text:         #eef0ff;
-      --text-muted:   #8a94c8;
+      --text:         #ffffff;
+      --text-muted:   #9ca3af;               /* gray-400 — ~7:1 on #050505 ✓ WCAG AA */
       --radius:       16px;
-      --radius-lg:    22px;
+      --radius-lg:    24px;                  /* rounded-3xl */
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; }
