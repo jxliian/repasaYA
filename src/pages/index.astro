@@ -45,6 +45,7 @@ try {
 const lastUpdate = commits[0]?.date ?? null;
 const totalFlash = 128 + 40 + 63;
 
+const year = new Date().getFullYear();
 const ISSUE_URL   = 'https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre%5D&body=%23%23+Datos%0A-%20**Asignatura**%3A+%0A-%20**Curso**%3A+';
 const REPO_URL    = 'https://github.com/jxliian/repasaYA';
 const PROFILE_URL = 'https://github.com/jxliian';
@@ -105,10 +106,10 @@ html, body { height: auto; overflow: visible; }
      shadow-2xl       → 0 25px 50px -12px rgba(0,0,0,0.5)
 ═══════════════════════════════════════════════════════ */
 .glass {
-  background:           rgba(255,255,255,0.05);
+  background:           var(--glass);
   backdrop-filter:      blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border:               1px solid rgba(255,255,255,0.10);
+  border:               1px solid var(--glass-border);
   border-radius:        24px;
   box-shadow:           0 25px 50px -12px rgba(0,0,0,0.50);
 }
@@ -480,10 +481,13 @@ main {
 ═══════════════════════════════════════════════════════ */
 footer {
   position: relative; z-index: 1;
-  text-align: center; padding: 22px 24px;
+  text-align: center; padding: 22px 24px 32px;
   font-size: .74rem; color: rgba(255,255,255,0.28);
   border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; flex-direction: column; gap: 6px;
 }
+.footer-meta { font-size: .68rem; color: rgba(255,255,255,0.18); }
+.footer-links { font-size: .72rem; }
 footer a { color: #c4b5fd; }
 footer a:hover { color: #7c6dfe; }
 
@@ -515,6 +519,69 @@ footer a:hover { color: #7c6dfe; }
   .filter-bar  { gap: 12px; }
   .subject-grid { grid-template-columns: 1fr; }
   .hits-pill   { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES
+═══════════════════════════════════════════════════════ */
+[data-theme="light"] .site-header {
+  background: rgba(244,242,255,0.92);
+  border-bottom-color: rgba(0,0,0,0.07);
+}
+[data-theme="light"] .search-wrap {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.09);
+}
+[data-theme="light"] .search-icon { color: rgba(30,27,75,0.45); }
+[data-theme="light"] .search-input { color: #1e1b4b; }
+[data-theme="light"] .search-input::placeholder { color: rgba(30,27,75,0.38); }
+[data-theme="light"] .search-kbd {
+  color: rgba(30,27,75,0.45);
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.10);
+}
+[data-theme="light"] .hero-h1   { color: #1e1b4b; }
+[data-theme="light"] .hero-desc { color: rgba(30,27,75,0.55); }
+[data-theme="light"] .stat-chip {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.09);
+}
+[data-theme="light"] .stat-lbl   { color: rgba(30,27,75,0.45); }
+[data-theme="light"] .b-cta      { color: #1e1b4b; }
+[data-theme="light"] .cta-kicker { color: rgba(30,27,75,0.45); }
+[data-theme="light"] .cta-title  { color: #1e1b4b; }
+[data-theme="light"] .cta-hint   { color: rgba(30,27,75,0.50); }
+[data-theme="light"] .b-cta.cta-gh:hover { border-color: rgba(0,0,0,0.18); }
+[data-theme="light"] .clog-hdr {
+  border-bottom-color: rgba(0,0,0,0.07);
+  color: rgba(30,27,75,0.45);
+}
+[data-theme="light"] .clog-item { border-bottom-color: rgba(0,0,0,0.04); }
+[data-theme="light"] .clog-item:hover { background: rgba(0,0,0,0.03); }
+[data-theme="light"] .clog-text { color: rgba(30,27,75,0.80); }
+[data-theme="light"] .clog-date { color: rgba(30,27,75,0.35); }
+[data-theme="light"] .fgroup-label {
+  color: rgba(30,27,75,0.35);
+  border-right-color: rgba(0,0,0,0.08);
+}
+[data-theme="light"] .fchip {
+  border-color: rgba(0,0,0,0.10);
+  color: rgba(30,27,75,0.55);
+}
+[data-theme="light"] .fchip:hover:not(.on) { color: rgba(30,27,75,0.85); }
+[data-theme="light"] .section-label { color: rgba(30,27,75,0.40); }
+[data-theme="light"] .section-label::after { background: rgba(0,0,0,0.07); }
+[data-theme="light"] .no-results { color: rgba(30,27,75,0.35); }
+[data-theme="light"] footer { color: rgba(30,27,75,0.40); border-top-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .footer-meta { color: rgba(30,27,75,0.28); }
+[data-theme="light"] footer a { color: var(--accent); }
+[data-theme="light"] .orb-tl {
+  background: radial-gradient(circle,
+    rgba(124,58,237,0.38) 0%, rgba(124,58,237,0.12) 50%, transparent 70%);
+}
+[data-theme="light"] .orb-br {
+  background: radial-gradient(circle,
+    rgba(6,182,212,0.30) 0%, rgba(6,182,212,0.09) 50%, transparent 70%);
 }
 </style>
 
@@ -727,9 +794,9 @@ footer a:hover { color: #7c6dfe; }
 </main>
 
 <footer>
-  Hecho con ganas ·
-  <a href={PROFILE_URL} target="_blank" rel="noopener">jxliian</a> ·
-  <a href={REPO_URL} target="_blank" rel="noopener">Código en GitHub</a>
+  <p>Hecho con ganas · <a href={PROFILE_URL} target="_blank" rel="noopener">jxliian</a> · <a href={REPO_URL} target="_blank" rel="noopener">GitHub</a></p>
+  <p class="footer-meta">© {year} · Universidad de Granada · Doble Grado ADE + Informática</p>
+  <p class="footer-links"><a href={`${base}privacidad/`}>Privacidad</a> · <a href={`${base}mapa/`}>Mapa web</a></p>
 </footer>
 
 <!-- ══════════════════════════════════════════════════

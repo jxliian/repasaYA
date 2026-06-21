@@ -1,0 +1,215 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const year = new Date().getFullYear();
+---
+<Base title="Privacidad" description="Política de privacidad de repasaYA — qué datos se recogen y cómo se usan.">
+<style>
+html, body { height: auto; overflow: visible; }
+
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+}
+#particles-bg { position: absolute; inset: 0; }
+.orb { position: absolute; border-radius: 50%; pointer-events: none; }
+.orb-tl {
+  width: 600px; height: 600px; top: -15%; left: -8%;
+  background: radial-gradient(circle,rgba(124,58,237,0.18) 0%,rgba(124,58,237,0.05) 50%,transparent 70%);
+  filter: blur(100px);
+}
+.orb-br {
+  width: 550px; height: 550px; bottom: -12%; right: -8%;
+  background: radial-gradient(circle,rgba(6,182,212,0.13) 0%,rgba(6,182,212,0.04) 50%,transparent 70%);
+  filter: blur(100px);
+}
+
+.page-hdr {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(5,5,5,0.80);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 28px; height: 60px;
+  display: flex; align-items: center; gap: 14px;
+}
+.page-logo {
+  font-size: 1.2rem; font-weight: 800; letter-spacing: -1px;
+  background: linear-gradient(135deg,#7c6dfe,#c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.back-link {
+  font-size: .8rem; color: var(--text-muted);
+  transition: color .2s; margin-left: auto;
+}
+.back-link:hover { color: var(--accent); }
+
+main {
+  position: relative; z-index: 1;
+  max-width: 780px; margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.page-title {
+  font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800;
+  letter-spacing: -1.2px; margin-bottom: 6px;
+  background: linear-gradient(135deg,#7c6dfe,#c4b5fd,#22d3ee);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-subtitle { font-size: .88rem; color: var(--text-muted); margin-bottom: 32px; }
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.50);
+}
+
+.privacy-card {
+  padding: 36px 40px;
+  display: flex; flex-direction: column; gap: 28px;
+}
+
+.priv-section { display: flex; flex-direction: column; gap: 10px; }
+.priv-h {
+  font-size: .65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 2px;
+}
+.priv-h::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+.priv-h2 {
+  font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px;
+}
+.priv-p {
+  font-size: .87rem; color: var(--text-muted); line-height: 1.7;
+}
+.priv-p a { color: var(--accent2); text-decoration: underline; text-underline-offset: 3px; }
+.priv-p a:hover { color: var(--accent); }
+.tag {
+  display: inline-block; font-size: .68rem; font-weight: 700;
+  background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.22);
+  color: #4ade80; border-radius: 99px; padding: 2px 10px;
+  vertical-align: middle; margin-left: 4px;
+}
+
+footer {
+  position: relative; z-index: 1;
+  text-align: center; padding: 20px 24px 28px;
+  font-size: .72rem; color: rgba(255,255,255,0.25);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; flex-direction: column; gap: 5px;
+}
+.footer-meta { font-size: .66rem; color: rgba(255,255,255,0.15); }
+footer a { color: #c4b5fd; }
+footer a:hover { color: #7c6dfe; }
+
+@media (max-width: 600px) {
+  .privacy-card { padding: 24px 22px; }
+}
+
+/* Light mode */
+[data-theme="light"] .page-hdr { background: rgba(244,242,255,0.92); border-bottom-color: rgba(0,0,0,0.07); }
+[data-theme="light"] footer { color: rgba(30,27,75,0.38); border-top-color: rgba(0,0,0,0.07); }
+[data-theme="light"] .footer-meta { color: rgba(30,27,75,0.26); }
+[data-theme="light"] footer a { color: var(--accent); }
+[data-theme="light"] .orb-tl {
+  background: radial-gradient(circle,rgba(124,58,237,0.38) 0%,rgba(124,58,237,0.12) 50%,transparent 70%);
+}
+[data-theme="light"] .orb-br {
+  background: radial-gradient(circle,rgba(6,182,212,0.30) 0%,rgba(6,182,212,0.09) 50%,transparent 70%);
+}
+</style>
+
+<div class="bg-layer" aria-hidden="true">
+  <div id="particles-bg"></div>
+  <div class="orb orb-tl"></div>
+  <div class="orb orb-br"></div>
+</div>
+
+<header class="page-hdr">
+  <a class="page-logo" href={base}>repasaYA</a>
+  <a class="back-link" href={base}>← Volver al inicio</a>
+</header>
+
+<main>
+  <h1 class="page-title">Privacidad</h1>
+  <p class="page-subtitle">Última actualización: {year}. Esta página explica qué datos recoge repasaYA y cómo se tratan.</p>
+
+  <div class="glass privacy-card">
+
+    <div class="priv-section">
+      <span class="priv-h">Resumen rápido</span>
+      <p class="priv-p">
+        repasaYA <strong>no requiere registro</strong>, <strong>no almacena información personal</strong> y
+        <strong>no vende datos a terceros</strong>. Es una web estática alojada en GitHub Pages.
+        <span class="tag">✓ Sin cookies de seguimiento</span>
+      </p>
+    </div>
+
+    <div class="priv-section">
+      <span class="priv-h">Datos que recogemos</span>
+      <h2 class="priv-h2">Ninguno de forma directa</h2>
+      <p class="priv-p">
+        repasaYA no tiene formularios de registro, no almacena respuestas de tests ni usa bases de datos propias.
+        La única preferencia guardada localmente es el <strong>tema visual (claro/oscuro)</strong>, que se guarda
+        en <code>localStorage</code> de tu navegador y nunca sale de tu dispositivo.
+      </p>
+    </div>
+
+    <div class="priv-section">
+      <span class="priv-h">Servicios de terceros</span>
+      <h2 class="priv-h2">Contador de visitas — hits.sh</h2>
+      <p class="priv-p">
+        Usamos <a href="https://hits.sh" target="_blank" rel="noopener">hits.sh</a> para mostrar el contador de visitas
+        visible en la página principal. Este servicio puede registrar la IP y la URL solicitada de forma anónima para
+        calcular el total. No recibe datos personales. Puedes consultar su política en
+        <a href="https://hits.sh" target="_blank" rel="noopener">hits.sh</a>.
+      </p>
+      <h2 class="priv-h2" style="margin-top:14px">Hospedaje — GitHub Pages</h2>
+      <p class="priv-p">
+        El sitio está alojado en <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>
+        (Microsoft). GitHub puede registrar logs de acceso estándar (IP, navegador, URL) como parte de su
+        infraestructura. Consulta la
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+          target="_blank" rel="noopener">política de privacidad de GitHub</a>.
+      </p>
+    </div>
+
+    <div class="priv-section">
+      <span class="priv-h">Cookies</span>
+      <p class="priv-p">
+        repasaYA <strong>no usa cookies propias</strong>. La preferencia de tema se guarda en
+        <code>localStorage</code>, que no es una cookie y no se envía al servidor en ninguna petición.
+        GitHub Pages y hits.sh pueden establecer cookies técnicas propias; consulta sus políticas para más detalle.
+      </p>
+    </div>
+
+    <div class="priv-section">
+      <span class="priv-h">Tus derechos</span>
+      <p class="priv-p">
+        Como no almacenamos datos personales, no hay registros que consultar, rectificar ni eliminar.
+        Para borrar la preferencia de tema almacenada localmente, borra los datos del sitio desde los ajustes
+        de tu navegador (<em>Configuración → Privacidad → Datos del sitio</em>).
+      </p>
+    </div>
+
+    <div class="priv-section">
+      <span class="priv-h">Contacto</span>
+      <p class="priv-p">
+        Para cualquier consulta sobre privacidad, abre un issue en
+        <a href="https://github.com/jxliian/repasaYA/issues" target="_blank" rel="noopener">github.com/jxliian/repasaYA</a>.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>Hecho con ganas · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a></p>
+  <p class="footer-meta">© {year} · Universidad de Granada · Doble Grado ADE + Informática</p>
+  <p><a href={`${base}privacidad/`}>Privacidad</a> · <a href={`${base}mapa/`}>Mapa web</a></p>
+</footer>
+</Base>

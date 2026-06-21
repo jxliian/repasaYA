@@ -21,6 +21,13 @@ const pageTitle =
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Apply saved theme before first paint to avoid FOUC -->
+  <script is:inline>
+    (function(){
+      var t=localStorage.getItem('repasaya-theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',t);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{pageTitle}</title>
@@ -40,12 +47,12 @@ const pageTitle =
   <meta name="twitter:description" content={description} />
   <ClientRouter />
   <style is:global>
+    /* ── Dark mode (default) ── */
     :root {
-      --bg:           #050505;               /* #050505 — near-pure black */
-      --surface:      #0a0a10;               /* solid surface for non-glass pages */
+      --bg:           #050505;
+      --surface:      #0a0a10;
       --surface2:     #111118;
       --border:       rgba(255,255,255,0.10);
-      /* EXACT glassmorphism spec: bg-white/5 backdrop-blur-xl border-white/10 */
       --glass:        rgba(255,255,255,0.05);
       --glass-hi:     rgba(255,255,255,0.10);
       --glass-border: rgba(255,255,255,0.10);
@@ -57,10 +64,24 @@ const pageTitle =
       --wrong:        #ef4444;
       --reveal:       #f59e0b;
       --text:         #ffffff;
-      --text-muted:   #9ca3af;               /* gray-400 — ~7:1 on #050505 ✓ WCAG AA */
+      --text-muted:   #9ca3af;
       --radius:       16px;
-      --radius-lg:    24px;                  /* rounded-3xl */
+      --radius-lg:    24px;
     }
+
+    /* ── Light mode ── */
+    [data-theme="light"] {
+      --bg:           #f4f2ff;
+      --surface:      #ffffff;
+      --surface2:     #ede8ff;
+      --border:       rgba(0,0,0,0.09);
+      --glass:        rgba(255,255,255,0.65);
+      --glass-hi:     rgba(255,255,255,0.85);
+      --glass-border: rgba(0,0,0,0.09);
+      --text:         #1e1b4b;
+      --text-muted:   #6b7280;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; }
     body {
@@ -75,9 +96,86 @@ const pageTitle =
       outline-offset: 3px;
       border-radius: 4px;
     }
+
+    /* ── Theme toggle FAB ── */
+    .theme-fab {
+      position: fixed; bottom: 20px; right: 20px;
+      z-index: 400;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.80);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.40);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .theme-fab:hover {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.12);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.50);
+    }
+    [data-theme="light"] .theme-fab {
+      background: rgba(30,27,75,0.07);
+      border-color: rgba(30,27,75,0.14);
+      color: rgba(30,27,75,0.75);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    [data-theme="light"] .theme-fab:hover {
+      background: rgba(30,27,75,0.12);
+    }
+    .fab-moon { display: none; }
+    [data-theme="light"] .fab-sun  { display: none; }
+    [data-theme="light"] .fab-moon { display: block; }
   </style>
 </head>
 <body>
   <slot />
+
+  <!-- Light/dark toggle (shown on all pages) -->
+  <button class="theme-fab" id="theme-fab" aria-label="Cambiar a modo claro">
+    <!-- Sun: shown in dark mode (click → go light) -->
+    <svg class="fab-sun" width="17" height="17" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <!-- Moon: shown in light mode (click → go dark) -->
+    <svg class="fab-moon" width="17" height="17" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <script>
+    function initThemeFab() {
+      const fab = document.getElementById('theme-fab');
+      if (!fab) return;
+      fab.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('repasaya-theme', next);
+        fab.setAttribute('aria-label', next === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      });
+      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      fab.setAttribute('aria-label', cur === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+    initThemeFab();
+    document.addEventListener('astro:after-swap', () => {
+      const saved = localStorage.getItem('repasaya-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+      initThemeFab();
+    });
+  </script>
 </body>
 </html>
