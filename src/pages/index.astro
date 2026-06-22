@@ -237,7 +237,7 @@ main {
   padding: 40px 44px;
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
-  min-height: 340px;
+  min-height: 500px;
 }
 /* subtle inner glow on hero only */
 .b-hero::before {
@@ -250,8 +250,8 @@ main {
 /* Animated avatar — rests on the hero's bottom-right corner */
 .hero-avatar {
   position: absolute;
-  right: 8px; bottom: 0;
-  width: 600px; height: auto; display: block;
+  right: 18px; bottom: 0;
+  width: 470px; height: auto; display: block;
   z-index: 2; pointer-events: none;
   /* halo claro/brillante (sigue la silueta) para disimular el filo blanco */
   filter:
@@ -261,11 +261,12 @@ main {
 }
 /* keep hero text clear of the avatar (tablet + desktop) */
 @media (min-width: 701px) {
+  .b-hero { justify-content: center; }
   .b-hero .live-pill,
   .b-hero .hero-h1,
   .b-hero .hero-desc,
   .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 560px); }
+  .b-hero .hero-actions { max-width: calc(100% - 510px); }
 }
 
 /* CTA cards — col-span-6 each (two halves below hero) */
@@ -557,9 +558,9 @@ footer a:hover { color: #7c6dfe; }
 @media (max-width: 1100px) {
   .bento { grid-template-columns: repeat(6, 1fr); gap: 16px; }
   .b-timeline { grid-column: span 6; }
-  .b-hero     { grid-column: span 6; padding: 32px 36px; }
+  .b-hero     { grid-column: span 6; padding: 32px 36px; min-height: 435px; }
   .b-cta      { grid-column: span 3; }
-  .hero-avatar { width: 460px; }
+  .hero-avatar { width: 400px; right: 8px; }
   .b-hero .live-pill,
   .b-hero .hero-h1,
   .b-hero .hero-desc,
@@ -574,9 +575,16 @@ footer a:hover { color: #7c6dfe; }
   main { padding: 20px 14px 60px; gap: 14px; }
   .bento { grid-template-columns: 1fr; gap: 14px; }
   .b-timeline { grid-column: span 1; }
-  .b-hero     { grid-column: span 1; padding: 28px 22px; min-height: auto; }
+  .b-hero     { grid-column: span 1; padding: 28px 22px 0; min-height: auto; }
   .b-cta      { grid-column: span 1; }
-  .hero-avatar { width: 230px; right: 2px; opacity: .95; }
+  /* En móvil: avatar en flujo, debajo del texto, a todo el ancho */
+  .hero-avatar {
+    position: static;
+    width: 100%; max-width: 460px;
+    right: auto; bottom: auto;
+    margin: 18px auto 0; align-self: center;
+    opacity: 1;
+  }
   .tl-item    { min-width: 88px; }
   .stats-row  { gap: 6px; }
   .stat-chip  { padding: 10px 14px; }
@@ -718,7 +726,7 @@ footer a:hover { color: #7c6dfe; }
 
       <!-- Avatar animado (WebP con transparencia) — funciona igual en Chrome,
            Firefox, Edge y Safari 14+/iOS, apoyado en el borde inferior derecho -->
-      <img class="hero-avatar" src={`${base}yo.webp`} alt="Avatar animado de jxliian estudiando" width="600" height="394" loading="eager" decoding="async" />
+      <img class="hero-avatar" src={`${base}yo.webp`} alt="Avatar animado de jxliian estudiando" width="436" height="462" loading="eager" decoding="async" />
     </article>
 
     <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
