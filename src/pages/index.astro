@@ -211,33 +211,33 @@ main {
 }
 
 /* ═══════════════════════════════════════════════════════
-   BENTO BOX — 12-column CSS grid (strict, as specified)
+   BENTO BOX — 12-column CSS grid
 
-   Mapping:
-     Hero        col-span-12 lg:col-span-8  → span 8
-     Novedades   col-span-12 lg:col-span-4 lg:row-span-2 → span 4, row-span 2
-     Profile     col-span-12 lg:col-span-4  → span 4
-     Star        col-span-12 lg:col-span-4  → span 4
-
-   Auto-placement result on desktop (12 cols):
-     Row 1: [Hero: cols 1-8] [Novedades: cols 9-12]
-     Row 2: [Profile: 1-4] [Star: 5-8] [Novedades: 9-12 ↕]
-   → No blank cells, no huecos
+   Stacked full-width layout:
+     Row 1: [Timeline: cols 1-12]   ← commit progress bar
+     Row 2: [Hero:     cols 1-12]   ← "Estudia mejor" (full width)
+     Row 3: [Profile 1-6] [Star 7-12]  ← two halves = full width
 ═══════════════════════════════════════════════════════ */
 .bento {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 24px;         /* gap-6 */
-  /* NO align-items override → default=stretch so rows fill height */
 }
 
-/* Hero — col-span-8 */
+/* Commit timeline — full width, on top */
+.b-timeline {
+  grid-column: span 12;
+  padding: 18px 26px 22px;
+  position: relative; overflow: hidden;
+}
+
+/* Hero — full width */
 .b-hero {
-  grid-column: span 8;
+  grid-column: span 12;
   padding: 40px 44px;
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
-  min-height: 300px;
+  min-height: 280px;
 }
 /* subtle inner glow on hero only */
 .b-hero::before {
@@ -247,17 +247,9 @@ main {
   pointer-events: none; border-radius: inherit;
 }
 
-/* Novedades — col-span-4, row-span-2 (tall right column) */
-.b-changelog {
-  grid-column: span 4;
-  grid-row: span 2;
-  display: flex; flex-direction: column;
-  overflow: hidden;
-}
-
-/* CTA cards — col-span-4 each (sit below hero in row 2) */
+/* CTA cards — col-span-6 each (two halves below hero) */
 .b-cta {
-  grid-column: span 4;
+  grid-column: span 6;
   padding: 28px;
   display: flex; flex-direction: column; gap: 10px;
   position: relative; overflow: hidden;
@@ -383,32 +375,75 @@ main {
 }
 .wa-btn:hover { background: rgba(37,211,102,0.16); transform: translateY(-1px); }
 
-/* ─── Novedades content ─── */
-.clog-hdr {
+/* ─── Commit timeline (progress bar) ─── */
+.tl-hdr {
   display: flex; align-items: center; gap: 8px;
-  padding: 16px 20px; flex-shrink: 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 20px;
   font-size: .67rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .9px; color: rgba(255,255,255,0.40);
+  letter-spacing: .9px; color: rgba(255,255,255,0.45);
 }
-.clog-since {
+.tl-since {
   margin-left: auto; font-size: .64rem; color: #c4b5fd;
   font-weight: 600; text-transform: none; letter-spacing: 0;
 }
-.clog-list { list-style: none; flex: 1; overflow-y: auto; }
-.clog-item {
-  display: grid;
-  grid-template-columns: auto auto 1fr auto;
-  align-items: center; gap: 7px;
-  padding: 11px 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  transition: background .15s;
+
+/* Horizontal track of commit nodes */
+.tl-track {
+  list-style: none;
+  display: flex; align-items: flex-start;
+  position: relative;
+  padding: 4px 8px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
-.clog-item:last-child { border-bottom: none; }
-.clog-item:hover { background: rgba(255,255,255,0.04); }
-.upd-badge {
+.tl-track::-webkit-scrollbar { display: none; }
+/* the connecting line that runs through every node */
+.tl-track::before {
+  content: ''; position: absolute;
+  top: 9px; left: 8px; right: 8px; height: 2px;
+  background: linear-gradient(90deg,
+    rgba(124,109,254,0.15) 0%,
+    rgba(124,109,254,0.45) 50%,
+    rgba(34,211,238,0.55) 100%);
+  border-radius: 2px;
+}
+
+.tl-item {
+  position: relative; z-index: 1;
+  flex: 1 1 0; min-width: 96px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; text-align: center;
+  padding: 0 4px;
+}
+
+/* Node dot on the line */
+.tl-node {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 3px solid var(--bg);
+  background: #94a3b8;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+  transition: transform .2s, box-shadow .2s;
+}
+.tl-item:hover .tl-node { transform: scale(1.25); }
+
+/* Node colors by commit type (reuse upd-* palette) */
+.tl-node.upd-green  { background:#22c55e; box-shadow:0 0 10px rgba(34,197,94,.6); }
+.tl-node.upd-orange { background:#f97316; box-shadow:0 0 10px rgba(249,115,22,.6); }
+.tl-node.upd-blue   { background:#3b82f6; box-shadow:0 0 10px rgba(59,130,246,.6); }
+.tl-node.upd-purple { background:#a855f7; box-shadow:0 0 10px rgba(168,85,247,.6); }
+.tl-node.upd-cyan   { background:#22d3ee; box-shadow:0 0 10px rgba(34,211,238,.6); }
+.tl-node.upd-gray   { background:#94a3b8; }
+
+/* newest commit pulses */
+.tl-item.is-latest .tl-node { animation: tlPulse 2s ease-in-out infinite; }
+@keyframes tlPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(124,109,254,.55); }
+  50%     { box-shadow: 0 0 0 7px rgba(124,109,254,0); }
+}
+
+.tl-badge {
   font-size: .58rem; font-weight: 800; border-radius: 99px;
-  padding: 2px 8px; white-space: nowrap; flex-shrink: 0;
+  padding: 2px 9px; white-space: nowrap;
 }
 .upd-green  { background:rgba(34,197,94,.15);  color:#4ade80; border:1px solid rgba(34,197,94,.25);  }
 .upd-orange { background:rgba(249,115,22,.15); color:#fb923c; border:1px solid rgba(249,115,22,.25); }
@@ -416,14 +451,16 @@ main {
 .upd-purple { background:rgba(168,85,247,.15); color:#d8b4fe; border:1px solid rgba(168,85,247,.25); }
 .upd-cyan   { background:rgba(34,211,238,.12); color:#67e8f9; border:1px solid rgba(34,211,238,.22); }
 .upd-gray   { background:rgba(148,163,184,.10);color:#94a3b8; border:1px solid rgba(148,163,184,.18);}
-.clog-scope {
-  font-size: .6rem; font-weight: 800; color: #c4b5fd;
-  background: rgba(124,109,254,.10); border: 1px solid rgba(124,109,254,.20);
-  border-radius: 4px; padding: 1px 6px; font-family:'Courier New',monospace;
-  white-space: nowrap; flex-shrink: 0;
+
+.tl-date {
+  font-size: .6rem; font-weight: 600; color: rgba(255,255,255,0.40);
+  white-space: nowrap;
 }
-.clog-text { font-size: .77rem; color: rgba(255,255,255,0.80); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.clog-date { font-size: .6rem; color: rgba(255,255,255,0.30); white-space: nowrap; flex-shrink: 0; }
+.tl-text {
+  font-size: .68rem; color: rgba(255,255,255,0.55); line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* ═══════════════════════════════════════════════════════
    FILTER BAR — glass + filter chips
@@ -498,9 +535,9 @@ footer a:hover { color: #7c6dfe; }
 ═══════════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
   .bento { grid-template-columns: repeat(6, 1fr); gap: 16px; }
-  .b-hero      { grid-column: span 6; padding: 32px 36px; }
-  .b-changelog { grid-column: span 6; grid-row: span 1; }
-  .b-cta       { grid-column: span 3; }
+  .b-timeline { grid-column: span 6; }
+  .b-hero     { grid-column: span 6; padding: 32px 36px; }
+  .b-cta      { grid-column: span 3; }
 }
 @media (max-width: 700px) {
   .site-header { padding: 0 16px; }
@@ -509,15 +546,16 @@ footer a:hover { color: #7c6dfe; }
   .btn-neon { padding: 7px 11px; }
   main { padding: 20px 14px 60px; gap: 14px; }
   .bento { grid-template-columns: 1fr; gap: 14px; }
-  .b-hero      { grid-column: span 1; padding: 28px 22px; min-height: auto; }
-  .b-changelog { grid-column: span 1; grid-row: span 1; }
-  .b-cta       { grid-column: span 1; }
-  .stats-row   { gap: 6px; }
-  .stat-chip   { padding: 10px 14px; }
-  .stat-num    { font-size: 1.5rem; }
-  .filter-bar  { gap: 12px; }
+  .b-timeline { grid-column: span 1; }
+  .b-hero     { grid-column: span 1; padding: 28px 22px; min-height: auto; }
+  .b-cta      { grid-column: span 1; }
+  .tl-item    { min-width: 88px; }
+  .stats-row  { gap: 6px; }
+  .stat-chip  { padding: 10px 14px; }
+  .stat-num   { font-size: 1.5rem; }
+  .filter-bar { gap: 12px; }
   .subject-grid { grid-template-columns: 1fr; }
-  .hits-pill   { display: none; }
+  .hits-pill  { display: none; }
 }
 </style>
 
@@ -574,13 +612,37 @@ footer a:hover { color: #7c6dfe; }
 ═══════════════════════════════════════════════════ -->
 <main>
 
-  <!-- ─── BENTO 12-COL GRID ─────────────────────── -->
+  <!-- ─── BENTO GRID ─────────────────────── -->
   <div class="bento" role="region" aria-label="Panel principal">
 
     <!--
-      HERO — col-span-12 lg:col-span-8
-      On desktop: spans cols 1-8
+      COMMIT TIMELINE — full width, on top.
+      Progress bar of recent commits: type (badge) + date + text.
+      Oldest → newest (left → right); newest node pulses.
     -->
+    <article class="b-timeline glass" data-spot aria-label="Novedades recientes">
+      <div class="tl-hdr">
+        <span class="live-dot" aria-hidden="true"></span>
+        Novedades
+        {lastUpdate && <span class="tl-since">Actualizado · {lastUpdate}</span>}
+      </div>
+      {commits.length > 0 ? (
+        <ol class="tl-track">
+          {[...commits].reverse().map((c, i, arr) => (
+            <li class={`tl-item${i === arr.length - 1 ? ' is-latest' : ''}`} title={c.text}>
+              <span class={`tl-node ${c.cls}`} aria-hidden="true"></span>
+              <span class={`tl-badge ${c.cls}`}>{c.badge}</span>
+              <time class="tl-date">{c.date}</time>
+              <span class="tl-text">{c.text}</span>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p style="color:rgba(255,255,255,.3);font-size:.82rem">Sin historial disponible.</p>
+      )}
+    </article>
+
+    <!-- HERO — full width -->
     <article class="b-hero glass" data-spot aria-label="Bienvenida">
       <span class="live-pill">
         <span class="live-dot" aria-hidden="true"></span>
@@ -627,36 +689,7 @@ footer a:hover { color: #7c6dfe; }
       </div>
     </article>
 
-    <!--
-      NOVEDADES — col-span-12 lg:col-span-4 lg:row-span-2
-      On desktop: spans cols 9-12, rows 1 AND 2 (tall right column)
-    -->
-    <article class="b-changelog glass" data-spot aria-label="Novedades recientes">
-      <div class="clog-hdr">
-        <span class="live-dot" aria-hidden="true"></span>
-        Novedades
-        {lastUpdate && <span class="clog-since">{lastUpdate}</span>}
-      </div>
-      {commits.length > 0 ? (
-        <ul class="clog-list">
-          {commits.map(c => (
-            <li class="clog-item">
-              <span class={`upd-badge ${c.cls}`}>{c.badge}</span>
-              {c.scope && <span class="clog-scope">{c.scope}</span>}
-              <span class="clog-text">{c.text}</span>
-              <time class="clog-date">{c.date}</time>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p style="padding:24px 18px;color:rgba(255,255,255,.3);font-size:.82rem">Sin historial disponible.</p>
-      )}
-    </article>
-
-    <!--
-      PERFIL GITHUB — col-span-12 lg:col-span-4
-      Auto-placed in row 2, cols 1-4
-    -->
+    <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
     <a class="b-cta cta-gh glass" href={PROFILE_URL}
       target="_blank" rel="noopener" data-spot aria-label="Perfil GitHub de jxliian">
       <span class="cta-kicker">Sígueme</span>
@@ -670,10 +703,7 @@ footer a:hover { color: #7c6dfe; }
       </span>
     </a>
 
-    <!--
-      REPOSITORIO STAR — col-span-12 lg:col-span-4
-      Auto-placed in row 2, cols 5-8
-    -->
+    <!-- REPOSITORIO STAR — col-span-6 (right half of row 3) -->
     <a class="b-cta cta-star glass" href={REPO_URL}
       target="_blank" rel="noopener" data-spot aria-label="Dar estrella al repositorio en GitHub">
       <span class="cta-kicker">Repositorio</span>
