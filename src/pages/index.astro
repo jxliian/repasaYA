@@ -250,8 +250,8 @@ main {
 /* Animated avatar — rests on the hero's bottom-right corner */
 .hero-avatar {
   position: absolute;
-  right: 24px; bottom: 0;
-  width: 340px; height: auto;
+  right: 16px; bottom: 0;
+  width: 440px; height: auto; display: block;
   z-index: 2; pointer-events: none;
   filter: drop-shadow(0 16px 26px rgba(0,0,0,0.5));
   /* gentle float so it feels alive */
@@ -267,7 +267,7 @@ main {
   .b-hero .hero-h1,
   .b-hero .hero-desc,
   .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 360px); }
+  .b-hero .hero-actions { max-width: calc(100% - 440px); }
 }
 
 /* CTA cards — col-span-6 each (two halves below hero) */
@@ -572,7 +572,7 @@ footer a:hover { color: #7c6dfe; }
   .b-timeline { grid-column: span 1; }
   .b-hero     { grid-column: span 1; padding: 28px 22px; min-height: auto; }
   .b-cta      { grid-column: span 1; }
-  .hero-avatar { width: 180px; right: 6px; opacity: .92; }
+  .hero-avatar { width: 230px; right: 2px; opacity: .95; }
   .tl-item    { min-width: 88px; }
   .stats-row  { gap: 6px; }
   .stat-chip  { padding: 10px 14px; }
@@ -712,8 +712,11 @@ footer a:hover { color: #7c6dfe; }
         </a>
       </div>
 
-      <!-- Avatar animado (sin fondo) apoyado en el borde inferior derecho -->
-      <img class="hero-avatar" src={`${base}yo.webp`} alt="Avatar animado de jxliian estudiando" width="380" height="209" loading="eager" decoding="async" />
+      <!-- Avatar animado (WebM con transparencia) apoyado en el borde inferior derecho -->
+      <video class="hero-avatar" autoplay loop muted playsinline disablepictureinpicture aria-label="Avatar animado de jxliian estudiando" width="1280" height="720">
+        <source src={`${base}yo.webm`} type="video/webm" />
+        <img src={`${base}yo.webp`} alt="Avatar de jxliian estudiando" width="380" height="209" />
+      </video>
     </article>
 
     <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
