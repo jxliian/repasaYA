@@ -716,11 +716,9 @@ footer a:hover { color: #7c6dfe; }
         </a>
       </div>
 
-      <!-- Avatar animado (WebM con transparencia) apoyado en el borde inferior derecho -->
-      <video class="hero-avatar" autoplay loop muted playsinline disablepictureinpicture aria-label="Avatar animado de jxliian estudiando" width="1280" height="720">
-        <source src={`${base}yo.webm`} type="video/webm" />
-        <img src={`${base}yo.webp`} alt="Avatar de jxliian estudiando" width="380" height="209" />
-      </video>
+      <!-- Avatar animado (WebP con transparencia) — funciona igual en Chrome,
+           Firefox, Edge y Safari 14+/iOS, apoyado en el borde inferior derecho -->
+      <img class="hero-avatar" src={`${base}yo.webp`} alt="Avatar animado de jxliian estudiando" width="600" height="394" loading="eager" decoding="async" />
     </article>
 
     <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
