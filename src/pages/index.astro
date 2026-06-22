@@ -60,7 +60,7 @@ html, body { height: auto; overflow: visible; }
 
 /* ═══════════════════════════════════════════════════════
    BACKGROUND LAYER
-   - #particles-bg: empty hook for tsparticles/particles.js
+   - #particles-bg: interactive canvas (reacts to mouse)
    - Two subtle radial orbs, one per corner
    position:fixed so they show THROUGH glass during scroll
 ═══════════════════════════════════════════════════════ */
@@ -68,8 +68,8 @@ html, body { height: auto; overflow: visible; }
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none; overflow: hidden;
 }
-/* Particles placeholder — add tsparticles here later */
-#particles-bg { position: absolute; inset: 0; }
+/* Interactive particle canvas */
+#particles-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 .orb {
   position: absolute; border-radius: 50%;
@@ -95,8 +95,6 @@ html, body { height: auto; overflow: visible; }
     transparent 70%);
   filter: blur(100px);
 }
-/* Center orb — only shown in light mode (see light-mode overrides) */
-.orb-mid { display: none; }
 
 /* ═══════════════════════════════════════════════════════
    GLASSMORPHISM UTILITY
@@ -521,139 +519,6 @@ footer a:hover { color: #7c6dfe; }
   .subject-grid { grid-template-columns: 1fr; }
   .hits-pill   { display: none; }
 }
-
-/* ═══════════════════════════════════════════════════════
-   LIGHT MODE OVERRIDES
-   (header background uses CSS var --header-bg → no override needed here)
-═══════════════════════════════════════════════════════ */
-
-/* Header border adapts */
-[data-theme="light"] .site-header {
-  border-bottom-color: rgba(124,58,237,0.15);
-}
-
-/* Search bar */
-[data-theme="light"] .search-wrap {
-  background: rgba(180,168,255,0.22);
-  border-color: rgba(124,58,237,0.20);
-}
-[data-theme="light"] .search-icon { color: rgba(30,27,75,0.50); }
-[data-theme="light"] .search-input { color: #1e1b4b; }
-[data-theme="light"] .search-input::placeholder { color: rgba(30,27,75,0.40); }
-[data-theme="light"] .search-kbd {
-  color: rgba(30,27,75,0.45);
-  background: rgba(124,58,237,0.10);
-  border-color: rgba(124,58,237,0.18);
-}
-
-/* Hero text */
-[data-theme="light"] .hero-h1   { color: #1e1640; }
-[data-theme="light"] .hero-desc { color: rgba(30,22,64,0.72); }
-/* Gradient text: usar tonos profundos para que contraste sobre blanco/lavanda */
-[data-theme="light"] .hero-grad {
-  background: linear-gradient(135deg,#6d28d9 0%,#7c3aed 50%,#0891b2 100%);
-  -webkit-background-clip: text; background-clip: text;
-}
-
-/* Stat chips */
-[data-theme="light"] .stat-chip {
-  background: rgba(124,58,237,0.07);
-  border-color: rgba(124,58,237,0.16);
-}
-[data-theme="light"] .stat-num {
-  background: linear-gradient(135deg,#6d28d9 0%,#0891b2 100%);
-  -webkit-background-clip: text; background-clip: text;
-}
-[data-theme="light"] .stat-lbl { color: rgba(30,22,64,0.58); }
-
-/* CTA cards */
-[data-theme="light"] .b-cta      { color: #1e1b4b; }
-[data-theme="light"] .cta-kicker { color: rgba(30,27,75,0.50); }
-[data-theme="light"] .cta-title  { color: #1e1b4b; }
-[data-theme="light"] .cta-hint   { color: rgba(30,27,75,0.55); }
-/* Star CTA has its own gradient bg — override to use tinted glass */
-[data-theme="light"] .b-cta.cta-star {
-  background: var(--glass);
-}
-[data-theme="light"] .b-cta.cta-gh:hover,
-[data-theme="light"] .b-cta.cta-star:hover {
-  border-color: rgba(124,58,237,0.40);
-}
-
-/* Novedades / Changelog */
-[data-theme="light"] .clog-hdr {
-  border-bottom-color: rgba(124,58,237,0.12);
-  color: rgba(30,27,75,0.50);
-  background: rgba(124,58,237,0.05);
-}
-[data-theme="light"] .clog-item { border-bottom-color: rgba(124,58,237,0.07); }
-[data-theme="light"] .clog-item:hover { background: rgba(124,58,237,0.06); }
-[data-theme="light"] .clog-text { color: rgba(30,22,64,0.88); }
-[data-theme="light"] .clog-date { color: rgba(30,22,64,0.45); }
-[data-theme="light"] .clog-scope {
-  color: #6d28d9; background: rgba(124,58,237,0.10); border-color: rgba(124,58,237,0.22);
-}
-/* Changelog badges: deepen text colors for white bg */
-[data-theme="light"] .upd-green  { color:#15803d; background:rgba(34,197,94,.12);  border-color:rgba(34,197,94,.30);  }
-[data-theme="light"] .upd-orange { color:#c2410c; background:rgba(249,115,22,.12); border-color:rgba(249,115,22,.30); }
-[data-theme="light"] .upd-blue   { color:#1d4ed8; background:rgba(59,130,246,.12); border-color:rgba(59,130,246,.30); }
-[data-theme="light"] .upd-purple { color:#7c3aed; background:rgba(168,85,247,.12); border-color:rgba(168,85,247,.30); }
-[data-theme="light"] .upd-cyan   { color:#0e7490; background:rgba(34,211,238,.12); border-color:rgba(34,211,238,.30); }
-[data-theme="light"] .upd-gray   { color:#475569; background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.32);}
-[data-theme="light"] .clog-since { color: #6d28d9; }
-/* Green accents (live pill, whatsapp) */
-[data-theme="light"] .live-pill { color:#15803d; background:rgba(34,197,94,.10); border-color:rgba(34,197,94,.30); }
-[data-theme="light"] .wa-btn    { color:#15803d; background:rgba(37,211,102,.10); border-color:rgba(37,211,102,.32); }
-[data-theme="light"] .btn-neon  { color:#047857; }
-
-/* Filter bar */
-[data-theme="light"] .fgroup-label {
-  color: rgba(30,27,75,0.40);
-  border-right-color: rgba(124,58,237,0.14);
-}
-[data-theme="light"] .fchip {
-  border-color: rgba(124,58,237,0.18);
-  color: rgba(30,27,75,0.60);
-}
-[data-theme="light"] .fchip:hover:not(.on) { color: rgba(30,27,75,0.90); }
-
-/* Sections */
-[data-theme="light"] .section-label { color: rgba(30,27,75,0.45); }
-[data-theme="light"] .section-label::after { background: rgba(124,58,237,0.14); }
-[data-theme="light"] .no-results { color: rgba(30,27,75,0.40); }
-
-/* Footer */
-[data-theme="light"] footer { color: rgba(30,27,75,0.45); border-top-color: rgba(124,58,237,0.12); }
-[data-theme="light"] .footer-meta { color: rgba(30,27,75,0.32); }
-[data-theme="light"] footer a { color: var(--accent); }
-
-/* Glass shadow: purple-tinted depth */
-[data-theme="light"] .glass {
-  box-shadow: 0 8px 32px rgba(90,50,200,0.12), 0 2px 8px rgba(90,50,200,0.06);
-}
-
-/* Neon button: reduce glow on light bg */
-[data-theme="light"] .btn-neon {
-  box-shadow: 0 0 8px rgba(16,185,129,0.25);
-}
-
-/* Hits badge: dark external image — hide */
-[data-theme="light"] .hits-pill { display: none; }
-
-/* Orbs: moderate purple/cyan tint to give the lavender bg some life.
-   (Cards are opaque white now, so orbs only colour the gaps/edges.) */
-[data-theme="light"] .orb-tl {
-  width: 700px; height: 700px;
-  top: -12%; left: -10%;
-  background: radial-gradient(circle,
-    rgba(124,58,237,0.45) 0%, rgba(124,58,237,0.15) 45%, transparent 70%);
-}
-[data-theme="light"] .orb-br {
-  width: 680px; height: 680px;
-  bottom: -5%; right: -10%;
-  background: radial-gradient(circle,
-    rgba(8,145,178,0.42) 0%, rgba(8,145,178,0.14) 45%, transparent 70%);
-}
 </style>
 
 <!-- ══════════════════════════════════════════════════
@@ -662,10 +527,9 @@ footer a:hover { color: #7c6dfe; }
      - 2 corner orbs (subtle, NOT vivid)
 ═══════════════════════════════════════════════════ -->
 <div class="bg-layer" aria-hidden="true">
-  <div id="particles-bg"></div>
+  <canvas id="particles-bg"></canvas>
   <div class="orb orb-tl"></div>
   <div class="orb orb-br"></div>
-  <div class="orb orb-mid"></div>
 </div>
 
 <!-- ══════════════════════════════════════════════════
@@ -950,5 +814,157 @@ footer a:hover { color: #7c6dfe; }
 
   input?.addEventListener('input', applyFilters);
   document.addEventListener('astro:after-swap', applyFilters);
+</script>
+
+<!-- ══════════════════════════════════════════════════
+     INTERACTIVE PARTICLE BACKGROUND
+     Vanilla canvas — floating nodes connected by lines,
+     reacting to the mouse (connect + gentle attraction).
+═══════════════════════════════════════════════════ -->
+<script>
+  interface P { x:number; y:number; vx:number; vy:number; r:number; }
+
+  function initParticles() {
+    const canvas = document.getElementById('particles-bg') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    // Tear down any previous instance (View Transitions re-init)
+    const prev = (window as any).__particles;
+    if (prev) { cancelAnimationFrame(prev.raf); prev.cleanup(); }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let particles: P[] = [];
+    const mouse = { x: -9999, y: -9999, active: false };
+
+    const LINK_DIST = 130;       // px between particles to draw a link
+    const MOUSE_DIST = 180;      // px around cursor that affects particles
+
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas!.width  = Math.floor(w * dpr);
+      canvas!.height = Math.floor(h * dpr);
+      canvas!.style.width  = w + 'px';
+      canvas!.style.height = h + 'px';
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Density scales with viewport area (capped)
+      const count = Math.min(110, Math.floor((w * h) / 16000));
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.6 + 0.8,
+        });
+      }
+    }
+
+    function step() {
+      ctx!.clearRect(0, 0, w, h);
+
+      for (const p of particles) {
+        // Mouse attraction (subtle pull toward cursor)
+        if (mouse.active) {
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < MOUSE_DIST * MOUSE_DIST && d2 > 1) {
+            const d = Math.sqrt(d2);
+            const force = (1 - d / MOUSE_DIST) * 0.6;
+            p.vx += (dx / d) * force * 0.05;
+            p.vy += (dy / d) * force * 0.05;
+          }
+        }
+
+        // Move + damping
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.99; p.vy *= 0.99;
+
+        // Wrap around edges
+        if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10; else if (p.y > h + 10) p.y = -10;
+
+        // Draw node
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx!.fillStyle = 'rgba(168,150,255,0.55)';
+        ctx!.fill();
+      }
+
+      // Links between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < LINK_DIST * LINK_DIST) {
+            const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.22;
+            ctx!.strokeStyle = `rgba(124,109,254,${alpha})`;
+            ctx!.lineWidth = 1;
+            ctx!.beginPath();
+            ctx!.moveTo(a.x, a.y);
+            ctx!.lineTo(b.x, b.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      // Links from cursor to nearby particles (cyan highlight)
+      if (mouse.active) {
+        for (const p of particles) {
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < MOUSE_DIST * MOUSE_DIST) {
+            const alpha = (1 - Math.sqrt(d2) / MOUSE_DIST) * 0.45;
+            ctx!.strokeStyle = `rgba(34,211,238,${alpha})`;
+            ctx!.lineWidth = 1;
+            ctx!.beginPath();
+            ctx!.moveTo(mouse.x, mouse.y);
+            ctx!.lineTo(p.x, p.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      state.raf = requestAnimationFrame(step);
+    }
+
+    function onMove(e: PointerEvent) { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; }
+    function onLeave() { mouse.active = false; mouse.x = -9999; mouse.y = -9999; }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerout', onLeave);
+
+    const state: any = {
+      raf: 0,
+      cleanup() {
+        window.removeEventListener('resize', resize);
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerout', onLeave);
+      },
+    };
+    (window as any).__particles = state;
+
+    resize();
+    if (reduce) {
+      // Static frame for users who prefer reduced motion
+      step();
+      cancelAnimationFrame(state.raf);
+    } else {
+      step();
+    }
+  }
+
+  initParticles();
+  document.addEventListener('astro:after-swap', initParticles);
 </script>
 </Base>

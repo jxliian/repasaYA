@@ -179,30 +179,6 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
     transition: opacity .2s, transform .2s; flex-shrink: 0;
   }
   .scard:hover .scard-arrow { opacity: 1; transform: translateX(0); }
-
-  /* ── Light mode: texto/badges con contraste sobre tarjeta blanca ── */
-  [data-theme="light"] .scard-icon {
-    background: rgba(124,58,237,0.08);
-    border-color: rgba(124,58,237,0.16);
-  }
-  [data-theme="light"] .chip {
-    background: rgba(124,58,237,0.10);
-    border-color: rgba(124,58,237,0.22);
-    color: #6d28d9;
-  }
-  [data-theme="light"] .b-purple {
-    background: rgba(124,58,237,0.12); color: #6d28d9; border-color: rgba(124,58,237,0.30);
-  }
-  [data-theme="light"] .b-cyan {
-    background: rgba(8,145,178,0.12); color: #0e7490; border-color: rgba(8,145,178,0.28);
-  }
-  [data-theme="light"] .b-multi {
-    background: linear-gradient(135deg,rgba(124,58,237,0.14),rgba(8,145,178,0.10));
-    color: #6d28d9; border-color: rgba(124,58,237,0.28);
-  }
-  [data-theme="light"] .scard:hover {
-    border-color: rgba(124,58,237,0.45);
-  }
 </style>
 
 <!-- Single deduped spotlight script targeting ALL [data-spot] on the page -->
