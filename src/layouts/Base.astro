@@ -71,18 +71,19 @@ const pageTitle =
     }
 
     /* ── Light mode ── */
-    /* Tinted lavender glass: más visible en fondos claros que el blanco puro */
+    /* Tarjetas BLANCAS opacas que resaltan sobre fondo lavanda definido.
+       (El vidrio translúcido lavanda sobre fondo lavanda no daba contraste.) */
     [data-theme="light"] {
-      --bg:           #dbd4ff;
-      --surface:      #e8e2ff;
-      --surface2:     #d4ccff;
-      --border:       rgba(124,58,237,0.18);
-      --glass:        rgba(229,222,255,0.72);
-      --glass-hi:     rgba(229,222,255,0.90);
-      --glass-border: rgba(124,58,237,0.22);
-      --text:         #1e1b4b;
-      --text-muted:   #5b5585;
-      --header-bg:    rgba(208,200,255,0.88);
+      --bg:           #cfc7f0;
+      --surface:      #ffffff;
+      --surface2:     #f1eefb;
+      --border:       rgba(76,40,150,0.16);
+      --glass:        rgba(255,255,255,0.86);
+      --glass-hi:     rgba(255,255,255,0.97);
+      --glass-border: rgba(76,40,150,0.16);
+      --text:         #1e1640;
+      --text-muted:   #4a4470;
+      --header-bg:    rgba(207,199,240,0.85);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

@@ -547,15 +547,24 @@ footer a:hover { color: #7c6dfe; }
 }
 
 /* Hero text */
-[data-theme="light"] .hero-h1   { color: #1e1b4b; }
-[data-theme="light"] .hero-desc { color: rgba(30,27,75,0.60); }
+[data-theme="light"] .hero-h1   { color: #1e1640; }
+[data-theme="light"] .hero-desc { color: rgba(30,22,64,0.72); }
+/* Gradient text: usar tonos profundos para que contraste sobre blanco/lavanda */
+[data-theme="light"] .hero-grad {
+  background: linear-gradient(135deg,#6d28d9 0%,#7c3aed 50%,#0891b2 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
 
 /* Stat chips */
 [data-theme="light"] .stat-chip {
-  background: rgba(124,58,237,0.08);
+  background: rgba(124,58,237,0.07);
   border-color: rgba(124,58,237,0.16);
 }
-[data-theme="light"] .stat-lbl { color: rgba(30,27,75,0.50); }
+[data-theme="light"] .stat-num {
+  background: linear-gradient(135deg,#6d28d9 0%,#0891b2 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+[data-theme="light"] .stat-lbl { color: rgba(30,22,64,0.58); }
 
 /* CTA cards */
 [data-theme="light"] .b-cta      { color: #1e1b4b; }
@@ -579,8 +588,23 @@ footer a:hover { color: #7c6dfe; }
 }
 [data-theme="light"] .clog-item { border-bottom-color: rgba(124,58,237,0.07); }
 [data-theme="light"] .clog-item:hover { background: rgba(124,58,237,0.06); }
-[data-theme="light"] .clog-text { color: rgba(30,27,75,0.82); }
-[data-theme="light"] .clog-date { color: rgba(30,27,75,0.40); }
+[data-theme="light"] .clog-text { color: rgba(30,22,64,0.88); }
+[data-theme="light"] .clog-date { color: rgba(30,22,64,0.45); }
+[data-theme="light"] .clog-scope {
+  color: #6d28d9; background: rgba(124,58,237,0.10); border-color: rgba(124,58,237,0.22);
+}
+/* Changelog badges: deepen text colors for white bg */
+[data-theme="light"] .upd-green  { color:#15803d; background:rgba(34,197,94,.12);  border-color:rgba(34,197,94,.30);  }
+[data-theme="light"] .upd-orange { color:#c2410c; background:rgba(249,115,22,.12); border-color:rgba(249,115,22,.30); }
+[data-theme="light"] .upd-blue   { color:#1d4ed8; background:rgba(59,130,246,.12); border-color:rgba(59,130,246,.30); }
+[data-theme="light"] .upd-purple { color:#7c3aed; background:rgba(168,85,247,.12); border-color:rgba(168,85,247,.30); }
+[data-theme="light"] .upd-cyan   { color:#0e7490; background:rgba(34,211,238,.12); border-color:rgba(34,211,238,.30); }
+[data-theme="light"] .upd-gray   { color:#475569; background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.32);}
+[data-theme="light"] .clog-since { color: #6d28d9; }
+/* Green accents (live pill, whatsapp) */
+[data-theme="light"] .live-pill { color:#15803d; background:rgba(34,197,94,.10); border-color:rgba(34,197,94,.30); }
+[data-theme="light"] .wa-btn    { color:#15803d; background:rgba(37,211,102,.10); border-color:rgba(37,211,102,.32); }
+[data-theme="light"] .btn-neon  { color:#047857; }
 
 /* Filter bar */
 [data-theme="light"] .fgroup-label {
@@ -616,28 +640,19 @@ footer a:hover { color: #7c6dfe; }
 /* Hits badge: dark external image — hide */
 [data-theme="light"] .hits-pill { display: none; }
 
-/* Orbs: vivid purple/cyan in light mode so glass has color to blur through */
+/* Orbs: moderate purple/cyan tint to give the lavender bg some life.
+   (Cards are opaque white now, so orbs only colour the gaps/edges.) */
 [data-theme="light"] .orb-tl {
-  width: 800px; height: 800px;
-  top: -10%; left: -10%;
+  width: 700px; height: 700px;
+  top: -12%; left: -10%;
   background: radial-gradient(circle,
-    rgba(124,58,237,0.65) 0%, rgba(124,58,237,0.25) 45%, transparent 70%);
+    rgba(124,58,237,0.45) 0%, rgba(124,58,237,0.15) 45%, transparent 70%);
 }
 [data-theme="light"] .orb-br {
-  width: 750px; height: 750px;
-  bottom: 0%; right: -10%;
+  width: 680px; height: 680px;
+  bottom: -5%; right: -10%;
   background: radial-gradient(circle,
-    rgba(6,182,212,0.60) 0%, rgba(6,182,212,0.20) 45%, transparent 70%);
-}
-
-/* Center orb: fills the bento grid center area */
-[data-theme="light"] .orb-mid {
-  display: block;
-  width: 700px; height: 700px;
-  top: 8%; left: 28%;
-  background: radial-gradient(circle,
-    rgba(168,85,247,0.28) 0%, rgba(124,58,237,0.10) 50%, transparent 70%);
-  filter: blur(90px);
+    rgba(8,145,178,0.42) 0%, rgba(8,145,178,0.14) 45%, transparent 70%);
 }
 </style>
 
