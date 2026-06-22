@@ -247,6 +247,29 @@ main {
   pointer-events: none; border-radius: inherit;
 }
 
+/* Animated avatar — rests on the hero's bottom-right corner */
+.hero-avatar {
+  position: absolute;
+  right: 28px; bottom: 0;
+  width: 230px; height: auto;
+  z-index: 2; pointer-events: none;
+  filter: drop-shadow(0 14px 22px rgba(0,0,0,0.45));
+  /* gentle float so it feels alive */
+  animation: avatarFloat 5s ease-in-out infinite;
+}
+@keyframes avatarFloat {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-6px); }
+}
+/* keep hero text clear of the avatar (tablet + desktop) */
+@media (min-width: 701px) {
+  .b-hero .live-pill,
+  .b-hero .hero-h1,
+  .b-hero .hero-desc,
+  .b-hero .stats-row,
+  .b-hero .hero-actions { max-width: calc(100% - 250px); }
+}
+
 /* CTA cards — col-span-6 each (two halves below hero) */
 .b-cta {
   grid-column: span 6;
@@ -549,6 +572,7 @@ footer a:hover { color: #7c6dfe; }
   .b-timeline { grid-column: span 1; }
   .b-hero     { grid-column: span 1; padding: 28px 22px; min-height: auto; }
   .b-cta      { grid-column: span 1; }
+  .hero-avatar { width: 130px; right: 10px; opacity: .9; }
   .tl-item    { min-width: 88px; }
   .stats-row  { gap: 6px; }
   .stat-chip  { padding: 10px 14px; }
@@ -687,6 +711,9 @@ footer a:hover { color: #7c6dfe; }
           Comparte con tus compañeros
         </a>
       </div>
+
+      <!-- Avatar animado (sin fondo) apoyado en el borde inferior derecho -->
+      <img class="hero-avatar" src={`${base}yo.webp`} alt="Avatar animado de jxliian estudiando" width="380" height="209" loading="eager" decoding="async" />
     </article>
 
     <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
