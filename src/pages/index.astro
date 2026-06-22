@@ -237,7 +237,7 @@ main {
   padding: 40px 44px;
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
-  min-height: 280px;
+  min-height: 340px;
 }
 /* subtle inner glow on hero only */
 .b-hero::before {
@@ -250,16 +250,14 @@ main {
 /* Animated avatar — rests on the hero's bottom-right corner */
 .hero-avatar {
   position: absolute;
-  right: 16px; bottom: 0;
-  width: 440px; height: auto; display: block;
+  right: 8px; bottom: 0;
+  width: 600px; height: auto; display: block;
   z-index: 2; pointer-events: none;
-  filter: drop-shadow(0 16px 26px rgba(0,0,0,0.5));
-  /* gentle float so it feels alive */
-  animation: avatarFloat 5s ease-in-out infinite;
-}
-@keyframes avatarFloat {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-6px); }
+  /* halo claro/brillante (sigue la silueta) para disimular el filo blanco */
+  filter:
+    drop-shadow(0 0 5px rgba(255,255,255,0.65))
+    drop-shadow(0 0 22px rgba(196,181,253,0.6))
+    drop-shadow(0 0 55px rgba(124,109,254,0.45));
 }
 /* keep hero text clear of the avatar (tablet + desktop) */
 @media (min-width: 701px) {
@@ -267,7 +265,7 @@ main {
   .b-hero .hero-h1,
   .b-hero .hero-desc,
   .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 440px); }
+  .b-hero .hero-actions { max-width: calc(100% - 560px); }
 }
 
 /* CTA cards — col-span-6 each (two halves below hero) */
@@ -561,6 +559,12 @@ footer a:hover { color: #7c6dfe; }
   .b-timeline { grid-column: span 6; }
   .b-hero     { grid-column: span 6; padding: 32px 36px; }
   .b-cta      { grid-column: span 3; }
+  .hero-avatar { width: 460px; }
+  .b-hero .live-pill,
+  .b-hero .hero-h1,
+  .b-hero .hero-desc,
+  .b-hero .stats-row,
+  .b-hero .hero-actions { max-width: calc(100% - 420px); }
 }
 @media (max-width: 700px) {
   .site-header { padding: 0 16px; }
