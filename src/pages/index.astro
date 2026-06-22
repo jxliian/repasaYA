@@ -237,7 +237,7 @@ main {
   padding: 40px 44px;
   position: relative; overflow: hidden;
   display: flex; flex-direction: column;
-  min-height: 500px;
+  min-height: 470px;
 }
 /* subtle inner glow on hero only */
 .b-hero::before {
@@ -251,7 +251,7 @@ main {
 .hero-avatar {
   position: absolute;
   right: 18px; bottom: 0;
-  width: 470px; height: auto; display: block;
+  width: 400px; height: auto; display: block;
   z-index: 2; pointer-events: none;
   /* halo claro/brillante (sigue la silueta) para disimular el filo blanco */
   filter:
@@ -266,7 +266,7 @@ main {
   .b-hero .hero-h1,
   .b-hero .hero-desc,
   .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 510px); }
+  .b-hero .hero-actions { max-width: calc(100% - 460px); }
 }
 
 /* CTA cards — col-span-6 each (two halves below hero) */
@@ -558,14 +558,14 @@ footer a:hover { color: #7c6dfe; }
 @media (max-width: 1100px) {
   .bento { grid-template-columns: repeat(6, 1fr); gap: 16px; }
   .b-timeline { grid-column: span 6; }
-  .b-hero     { grid-column: span 6; padding: 32px 36px; min-height: 435px; }
+  .b-hero     { grid-column: span 6; padding: 32px 36px; min-height: 400px; }
   .b-cta      { grid-column: span 3; }
-  .hero-avatar { width: 400px; right: 8px; }
+  .hero-avatar { width: 360px; right: 8px; }
   .b-hero .live-pill,
   .b-hero .hero-h1,
   .b-hero .hero-desc,
   .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 420px); }
+  .b-hero .hero-actions { max-width: calc(100% - 400px); }
 }
 @media (max-width: 700px) {
   .site-header { padding: 0 16px; }
@@ -577,6 +577,12 @@ footer a:hover { color: #7c6dfe; }
   .b-timeline { grid-column: span 1; }
   .b-hero     { grid-column: span 1; padding: 28px 22px 0; min-height: auto; }
   .b-cta      { grid-column: span 1; }
+  /* Reset: en móvil el texto ocupa todo el ancho (sin el clearance del avatar) */
+  .b-hero .live-pill,
+  .b-hero .hero-h1,
+  .b-hero .hero-desc,
+  .b-hero .stats-row,
+  .b-hero .hero-actions { max-width: none; }
   /* En móvil: avatar en flujo, debajo del texto, a todo el ancho */
   .hero-avatar {
     position: static;
