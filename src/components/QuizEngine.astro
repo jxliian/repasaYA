@@ -215,6 +215,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div id="test-controls" style="display:none">
           <div class="options" id="options-container"></div>
           <div class="feedback" id="feedback"></div>
+          <div class="justification" id="test-just"><div id="test-just-text"></div></div>
         </div>
         <!-- Quizz reveal controls -->
         <div id="quizz-controls" style="display:none">
@@ -382,6 +383,7 @@ function showQ(){
       btn.addEventListener('click',()=>answerTest(i));container.appendChild(btn);
     });
     document.getElementById('feedback').className='feedback';
+    document.getElementById('test-just').className='justification';
     if(answers[idx]!==undefined){
       answered=true;
       const {chosen,wasCorrect}=answers[idx];
@@ -392,6 +394,7 @@ function showQ(){
       const fb=document.getElementById('feedback');
       fb.className='feedback show '+(wasCorrect?'correct':'wrong');
       fb.textContent=wasCorrect?`✓ Correcto — ${q.opts[q.correct]}`:`✗ Incorrecto — Era: ${q.opts[q.correct]}`;
+      showTestJust(q,wasCorrect);
       show_el('btn-next');
     }
   } else {
@@ -439,9 +442,17 @@ function answerTest(chosen){
   const fb=document.getElementById('feedback');
   fb.className='feedback show '+(ok?'correct':'wrong');
   fb.textContent=ok?`✓ Correcto — ${q.opts[q.correct]}`:`✗ Incorrecto — Era: ${q.opts[q.correct]}`;
+  showTestJust(q,ok);
   answers[idx]={chosen,wasCorrect:ok};
   document.getElementById('q-score').textContent=`✓${correct}  ✗${wrong}`;
   show_el('btn-next');
+}
+function showTestJust(q,wasCorrect){
+  const tj=document.getElementById('test-just');
+  if(q && q.justification){
+    tj.className='justification show '+(wasCorrect?'correct-just':'wrong-just');
+    document.getElementById('test-just-text').textContent=q.justification;
+  } else { tj.className='justification'; }
 }
 function answerReveal(){
   if(answered)return;answered=true;
