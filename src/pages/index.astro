@@ -1030,7 +1030,7 @@ footer a:hover { color: #b4e02e; }
     if (!ctx) return;
 
     const prev = (window as any).__constellation;
-    if (prev) cancelAnimationFrame(prev.raf);
+    if (prev) { cancelAnimationFrame(prev.raf); prev.cleanup && prev.cleanup(); }
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1112,7 +1112,15 @@ footer a:hover { color: #b4e02e; }
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('pointerout', onLeave);
 
-    const state: any = { raf: 0 };
+    window.addEventListener('resize', build);
+    const state: any = {
+      raf: 0,
+      cleanup() {
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerout', onLeave);
+        window.removeEventListener('resize', build);
+      },
+    };
     (window as any).__constellation = state;
     const R = 70 * dpr;
 
@@ -1143,8 +1151,6 @@ footer a:hover { color: #b4e02e; }
       for (const p of parts) { p.x = p.tx; p.y = p.ty; }
       frame(); cancelAnimationFrame(state.raf);
     } else frame();
-
-    window.addEventListener('resize', build);
   }
   initConstellation();
   document.addEventListener('astro:after-swap', initConstellation);
