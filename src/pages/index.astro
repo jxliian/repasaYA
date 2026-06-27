@@ -1017,4 +1017,136 @@ footer a:hover { color: #b4e02e; }
   initParticles();
   document.addEventListener('astro:after-swap', initParticles);
 </script>
+
+<!-- ══════════════════════════════════════════════════
+     CONSTELLATION — particle silhouette (isotipo ✓↗ + birrete)
+     Animates toward target pixels; mouse repulsion.
+═══════════════════════════════════════════════════ -->
+<script>
+  function initConstellation() {
+    const canvas = document.getElementById('hero-constellation') as HTMLCanvasElement | null;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const prev = (window as any).__constellation;
+    if (prev) cancelAnimationFrame(prev.raf);
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const ACCENT = '198,241,53';
+
+    function size() {
+      const r = canvas!.getBoundingClientRect();
+      canvas!.width = Math.max(1, Math.floor(r.width * dpr));
+      canvas!.height = Math.max(1, Math.floor(r.height * dpr));
+    }
+    size();
+
+    // 1) Dibuja la silueta objetivo en un canvas offscreen y muestrea píxeles
+    function sampleTargets(W: number, H: number) {
+      const off = document.createElement('canvas');
+      off.width = W; off.height = H;
+      const o = off.getContext('2d')!;
+      o.fillStyle = '#fff';
+      o.strokeStyle = '#fff';
+      o.lineJoin = 'round'; o.lineCap = 'round';
+      const cx = W / 2, cy = H / 2, s = Math.min(W, H);
+
+      // Birrete (mortarboard): rombo + base
+      o.beginPath();
+      o.moveTo(cx, cy - s * 0.34);
+      o.lineTo(cx + s * 0.26, cy - s * 0.22);
+      o.lineTo(cx, cy - s * 0.10);
+      o.lineTo(cx - s * 0.26, cy - s * 0.22);
+      o.closePath(); o.fill();
+      o.lineWidth = s * 0.05;
+      o.beginPath(); // borla
+      o.moveTo(cx + s * 0.26, cy - s * 0.22);
+      o.lineTo(cx + s * 0.26, cy - s * 0.04);
+      o.stroke();
+
+      // Check + flecha ascendente (isotipo)
+      o.lineWidth = s * 0.085;
+      o.beginPath();
+      o.moveTo(cx - s * 0.24, cy + s * 0.06);
+      o.lineTo(cx - s * 0.06, cy + s * 0.24); // valle del check
+      o.lineTo(cx + s * 0.30, cy - s * 0.18); // sube a la punta (flecha)
+      o.stroke();
+      // Punta de flecha
+      o.lineWidth = s * 0.06;
+      o.beginPath();
+      o.moveTo(cx + s * 0.30, cy - s * 0.18);
+      o.lineTo(cx + s * 0.16, cy - s * 0.20);
+      o.moveTo(cx + s * 0.30, cy - s * 0.18);
+      o.lineTo(cx + s * 0.28, cy - s * 0.03);
+      o.stroke();
+
+      const img = o.getImageData(0, 0, W, H).data;
+      const pts: { x: number; y: number }[] = [];
+      const gap = Math.max(3, Math.floor(s / 90));
+      for (let y = 0; y < H; y += gap)
+        for (let x = 0; x < W; x += gap)
+          if (img[(y * W + x) * 4 + 3] > 128) pts.push({ x, y });
+      return pts;
+    }
+
+    type P = { x: number; y: number; tx: number; ty: number; vx: number; vy: number };
+    let parts: P[] = [];
+    function build() {
+      size();
+      const targets = sampleTargets(canvas!.width, canvas!.height);
+      parts = targets.map(t => ({
+        x: Math.random() * canvas!.width, y: Math.random() * canvas!.height,
+        tx: t.x, ty: t.y, vx: 0, vy: 0,
+      }));
+    }
+    build();
+
+    const mouse = { x: -9999, y: -9999 };
+    function onMove(e: PointerEvent) {
+      const r = canvas!.getBoundingClientRect();
+      mouse.x = (e.clientX - r.left) * dpr; mouse.y = (e.clientY - r.top) * dpr;
+    }
+    function onLeave() { mouse.x = -9999; mouse.y = -9999; }
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerout', onLeave);
+
+    const state: any = { raf: 0 };
+    (window as any).__constellation = state;
+    const R = 70 * dpr;
+
+    function frame() {
+      ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
+      for (const p of parts) {
+        // retorno al destino
+        p.vx += (p.tx - p.x) * 0.012;
+        p.vy += (p.ty - p.y) * 0.012;
+        // repulsión del ratón
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < R * R && d2 > 1) {
+          const d = Math.sqrt(d2), f = (1 - d / R) * 2.2;
+          p.vx += (dx / d) * f; p.vy += (dy / d) * f;
+        }
+        p.vx *= 0.86; p.vy *= 0.86;
+        p.x += p.vx; p.y += p.vy;
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, 1.5 * dpr, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(${ACCENT},0.9)`;
+        ctx!.fill();
+      }
+      state.raf = requestAnimationFrame(frame);
+    }
+
+    if (reduce) {
+      for (const p of parts) { p.x = p.tx; p.y = p.ty; }
+      frame(); cancelAnimationFrame(state.raf);
+    } else frame();
+
+    window.addEventListener('resize', build);
+  }
+  initConstellation();
+  document.addEventListener('astro:after-swap', initConstellation);
+</script>
 </Base>
