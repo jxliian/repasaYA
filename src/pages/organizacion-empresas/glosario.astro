@@ -17,17 +17,17 @@ const totalTerms = flashcardData.length;
   .panel{display:none;flex-direction:column;gap:20px}.panel.active{display:flex}
   .start{display:flex;flex-direction:column;gap:24px;padding:8px 0}
   .sel-label{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px}
-  .btn-start{width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:#fff;border:none;font-weight:800;cursor:pointer;transition:all .2s}
-  .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(108,99,255,.4);transform:translateY(-1px)}
+  .btn-start{width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:var(--on-accent);border:none;font-weight:800;cursor:pointer;transition:all .2s}
+  .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(198,241,53,.3);transform:translateY(-1px)}
   .tema-chips{display:flex;flex-wrap:wrap;gap:8px}
   .tema-chip{padding:6px 14px;border:1.5px solid var(--border);border-radius:99px;background:var(--surface2);color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s;user-select:none;line-height:1.5}
   .tema-chip:hover{border-color:var(--accent);color:var(--accent2)}
-  .tema-chip.chip-on{border-color:var(--accent);background:rgba(108,99,255,.14);color:var(--accent2)}
-  .chip-all.chip-on{background:var(--accent);color:#fff}
+  .tema-chip.chip-on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent2)}
+  .chip-all.chip-on{background:var(--accent);color:var(--on-accent)}
   .chip-count{font-size:.65rem;opacity:.7;margin-left:4px}
   .q-header{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)}
   .progress-bar{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:6px}
-  .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .3s}
+  .progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
   .flip-wrap{perspective:1200px;cursor:pointer;margin-top:16px;min-height:260px}
   .flip-inner{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
   .flip-inner.flipped{transform:rotateY(180deg)}
@@ -41,7 +41,7 @@ const totalTerms = flashcardData.length;
   .flip-def{font-size:.88rem;line-height:1.7;color:var(--text)}
   .q-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
   .btn{padding:11px 22px;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}
-  .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+  .btn-primary{background:var(--accent);color:var(--on-accent)}.btn-primary:hover{background:var(--accent-hover)}
   .btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
   .stats-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
   .stats-row{display:flex;justify-content:space-around;gap:12px;flex-wrap:wrap}
