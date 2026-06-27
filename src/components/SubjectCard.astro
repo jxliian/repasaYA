@@ -72,9 +72,7 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
     position: relative;
     display: flex; flex-direction: column;
 
-    background: var(--glass);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: var(--surface);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
@@ -91,11 +89,11 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
 
   .scard:hover {
     transform: translateY(-5px);
-    background: var(--glass-hi);
-    border-color: rgba(168,85,247,0.50);
+    background: var(--surface2);
+    border-color: rgba(198,241,53,0.50);
     box-shadow:
       0 25px 50px -12px rgba(0,0,0,0.65),
-      0 0 0 1px rgba(168,85,247,0.18);
+      0 0 0 1px rgba(198,241,53,0.18);
   }
 
   /* Radial spotlight (follows cursor) */
@@ -103,7 +101,7 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
     position: absolute; inset: 0; z-index: 1;
     background: radial-gradient(
       220px circle at var(--mx) var(--my),
-      rgba(168,85,247,0.14),
+      rgba(198,241,53,0.14),
       transparent 70%
     );
     opacity: 0; transition: opacity .35s; pointer-events: none;
@@ -113,7 +111,7 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
   /* Top gradient accent line */
   .scard-line {
     position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2;
-    background: linear-gradient(90deg,#7c6dfe,#c4b5fd,#22d3ee);
+    background: var(--accent);
     opacity: 0; transition: opacity .22s;
   }
   .scard:hover .scard-line { opacity: 1; }
@@ -129,14 +127,15 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
   .scard-icon {
     width: 42px; height: 42px; flex-shrink: 0;
     border-radius: 10px;
-    background: rgba(124,109,254,0.10);
-    border: 1px solid rgba(124,109,254,0.18);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
     display: flex; align-items: center; justify-content: center;
     font-size: 1.15rem;
   }
 
   .scard-meta { flex: 1; min-width: 0; }
   .scard-code {
+    font-family: var(--font-mono);
     font-size: .63rem; font-weight: 700; letter-spacing: .9px;
     text-transform: uppercase; color: var(--text-muted);
     margin-bottom: 3px;
@@ -152,11 +151,11 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
     flex-shrink: 0; font-size: .6rem; font-weight: 700;
     border-radius: 99px; padding: 3px 9px; white-space: nowrap;
   }
-  .b-purple { background:rgba(124,109,254,.15); color:#c4b5fd; border:1px solid rgba(124,109,254,.28); }
-  .b-cyan   { background:rgba(34,211,238,.12);  color:#67e8f9; border:1px solid rgba(34,211,238,.22); }
+  .b-purple { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-line); }
+  .b-cyan   { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-line); }
   .b-multi  {
-    background: linear-gradient(135deg,rgba(124,109,254,.12),rgba(34,211,238,.08));
-    color:#c4b5fd; border:1px solid rgba(124,109,254,.25);
+    background: var(--accent-soft);
+    color: var(--accent); border: 1px solid var(--accent-line);
   }
 
   .scard-desc {
@@ -170,11 +169,11 @@ const badge = typeBadge[s.type] ?? { label: s.type, cls: 'b-purple' };
   }
   .chip {
     font-size: .63rem; font-weight: 600;
-    background: rgba(124,109,254,.10); border: 1px solid rgba(124,109,254,.20);
-    color: #c4b5fd; border-radius: 99px; padding: 2px 9px; white-space: nowrap;
+    background: var(--accent-soft); border: 1px solid var(--accent-line);
+    color: var(--accent); border-radius: 99px; padding: 2px 9px; white-space: nowrap;
   }
   .scard-arrow {
-    margin-left: auto; font-size: .95rem; color: #7c6dfe;
+    margin-left: auto; font-size: .95rem; color: var(--accent);
     opacity: 0; transform: translateX(-5px);
     transition: opacity .2s, transform .2s; flex-shrink: 0;
   }
