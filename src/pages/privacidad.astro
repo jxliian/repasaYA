@@ -16,28 +16,25 @@ html, body { height: auto; overflow: visible; }
 .orb { position: absolute; border-radius: 50%; pointer-events: none; }
 .orb-tl {
   width: 600px; height: 600px; top: -15%; left: -8%;
-  background: radial-gradient(circle,rgba(124,58,237,0.18) 0%,rgba(124,58,237,0.05) 50%,transparent 70%);
+  background: radial-gradient(circle,rgba(198,241,53,0.18) 0%,rgba(198,241,53,0.05) 50%,transparent 70%);
   filter: blur(100px);
 }
 .orb-br {
   width: 550px; height: 550px; bottom: -12%; right: -8%;
-  background: radial-gradient(circle,rgba(6,182,212,0.13) 0%,rgba(6,182,212,0.04) 50%,transparent 70%);
+  background: radial-gradient(circle,rgba(198,241,53,0.13) 0%,rgba(198,241,53,0.04) 50%,transparent 70%);
   filter: blur(100px);
 }
 
 .page-hdr {
   position: sticky; top: 0; z-index: 200;
   background: rgba(5,5,5,0.80);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0 28px; height: 60px;
   display: flex; align-items: center; gap: 14px;
 }
 .page-logo {
   font-size: 1.2rem; font-weight: 800; letter-spacing: -1px;
-  background: linear-gradient(135deg,#7c6dfe,#c4b5fd);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent);
 }
 .back-link {
   font-size: .8rem; color: var(--text-muted);
@@ -54,15 +51,12 @@ main {
 .page-title {
   font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800;
   letter-spacing: -1.2px; margin-bottom: 6px;
-  background: linear-gradient(135deg,#7c6dfe,#c4b5fd,#22d3ee);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent);
 }
 .page-subtitle { font-size: .88rem; color: var(--text-muted); margin-bottom: 32px; }
 
 .glass {
-  background: var(--glass);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  background: var(--surface);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.50);
@@ -103,8 +97,8 @@ footer {
   display: flex; flex-direction: column; gap: 5px;
 }
 .footer-meta { font-size: .66rem; color: rgba(255,255,255,0.15); }
-footer a { color: #c4b5fd; }
-footer a:hover { color: #7c6dfe; }
+footer a { color: var(--accent); }
+footer a:hover { color: var(--accent-hover); }
 
 @media (max-width: 600px) {
   .privacy-card { padding: 24px 22px; }
