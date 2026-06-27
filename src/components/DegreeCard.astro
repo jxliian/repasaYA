@@ -37,7 +37,7 @@ const { title, icon, subjects } = Astro.props;
   }
   .degree-card:hover {
     border-color: var(--accent);
-    box-shadow: 0 4px 20px rgba(108,99,255,.08);
+    box-shadow: 0 4px 20px var(--accent-soft);
   }
   .degree-header {
     display: flex;
@@ -58,8 +58,8 @@ const { title, icon, subjects } = Astro.props;
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: rgba(108,99,255,.1);
-    border: 1px solid rgba(108,99,255,.2);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
     border-radius: 10px;
     flex-shrink: 0;
   }
@@ -89,14 +89,12 @@ const { title, icon, subjects } = Astro.props;
     color: var(--accent);
   }
   details[open] .degree-icon {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    background: var(--accent);
+    color: var(--on-accent);
     border-color: transparent;
   }
   details[open] .degree-title {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
   }
   .degree-content {
     padding: 0 20px 20px 20px;
