@@ -122,7 +122,7 @@ html, body { height: auto; overflow: visible; }
 .search-wrap {
   flex: 1; max-width: 460px; min-width: 120px;
   display: flex; align-items: center; gap: 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: 12px; padding: 0 14px; height: 40px;
   transition: border-color .2s, box-shadow .2s; cursor: text;
@@ -140,7 +140,7 @@ html, body { height: auto; overflow: visible; }
 .search-kbd {
   flex-shrink: 0; font-size: .64rem; font-weight: 700;
   color: var(--text-muted);
-  background: #f0f0f6; border: 1px solid var(--border);
+  background: var(--surface2); border: 1px solid var(--border);
   border-radius: 5px; padding: 2px 7px; font-family: inherit;
   transition: opacity .2s;
 }
@@ -155,7 +155,7 @@ html, body { height: auto; overflow: visible; }
   border: 1.5px solid transparent; transition: all .18s;
 }
 .hbtn:hover { transform: translateY(-1px); }
-.b-ghost  { background: #fff; border-color: var(--border); color: var(--text); }
+.b-ghost  { background: var(--surface); border-color: var(--border); color: var(--text); }
 .b-ghost:hover { border-color: var(--accent-line); }
 .b-star   { background: #fff8e8; border-color: #f0d699; color: #9a6b00; }
 .b-accent { background: var(--accent); color: var(--on-accent);
@@ -169,7 +169,7 @@ html, body { height: auto; overflow: visible; }
 .hits-lbl {
   font-family: var(--font-mono); font-size: .66rem; font-weight: 700;
   letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted);
-  background: #efedf6; padding: 6px 9px;
+  background: var(--surface2); padding: 6px 9px;
 }
 .hits-num { display: block; background: var(--accent); }
 
