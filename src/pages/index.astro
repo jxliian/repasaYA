@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SubjectCarousel from '../components/SubjectCarousel.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import { execSync } from 'child_process';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
@@ -388,6 +389,7 @@ footer a:hover { color: var(--accent-strong); }
       <span>Seguir</span>
     </a>
     <a class="hbtn b-star gh-only" href={REPO_URL} target="_blank" rel="noopener" aria-label="Dar estrella en GitHub">★ <span>Star</span></a>
+    <ThemeToggle />
     <a class="hbtn b-accent" href={ISSUE_URL} target="_blank" rel="noopener" aria-label="Solicitar asignatura">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
       <span>Solicitar</span>
