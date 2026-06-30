@@ -66,6 +66,7 @@ const pageTitle =
       --reveal:       #c98a00;
       --text:         #1b1b2e;
       --text-muted:   #6b6f86;
+      --particle:     60,52,110;          /* RGB (sin alpha) para el canvas de fondo */
       --radius:       18px;
       --radius-lg:    26px;
       --header-bg:    rgba(255,255,255,0.78);
@@ -73,6 +74,31 @@ const pageTitle =
       --font-body:    'Space Grotesk Variable', system-ui, sans-serif;
       --font-mono:    'JetBrains Mono Variable', ui-monospace, monospace;
     }
+    :root[data-theme="dark"] {
+      --bg:           #0e0e15;
+      --surface:      #181826;
+      --surface2:     #21212f;
+      --border:       rgba(255,255,255,0.10);
+      --glass:        #181826;
+      --glass-hi:     #21212f;
+      --glass-border: rgba(255,255,255,0.10);
+      --accent:       #a78bea;
+      --accent2:      #a78bea;
+      --accent-strong:#b89bf0;
+      --accent-hover: #b89bf0;
+      --accent-soft:  rgba(167,139,234,0.16);
+      --accent-line:  rgba(167,139,234,0.34);
+      --on-accent:    #15101f;
+      --cyan:         #a78bea;
+      --correct:      #2fbf6c;
+      --wrong:        #f0595e;
+      --reveal:       #e0a93a;
+      --text:         #f3f2fa;
+      --text-muted:   #a3a0b5;
+      --header-bg:    rgba(18,18,30,0.78);
+      --particle:     167,139,234;
+    }
+    html { color-scheme: light dark; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; }
     body {
@@ -95,8 +121,34 @@ const pageTitle =
       border-radius: 4px;
     }
   </style>
+  <script is:inline>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      } catch (e) { document.documentElement.dataset.theme = 'light'; }
+    })();
+  </script>
 </head>
 <body>
   <slot />
+  <script>
+    // Delegación en document: un solo listener que sobrevive a navegación (View Transitions).
+    function applyTheme(t: string) {
+      document.documentElement.dataset.theme = t;
+      try { localStorage.setItem('theme', t); } catch (e) {}
+      window.dispatchEvent(new Event('themechange'));
+    }
+    if (!(window as any).__themeBound) {
+      (window as any).__themeBound = true;
+      document.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement)?.closest('[data-theme-toggle]');
+        if (!btn) return;
+        const cur = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+        applyTheme(cur === 'dark' ? 'light' : 'dark');
+      });
+    }
+  </script>
 </body>
 </html>
