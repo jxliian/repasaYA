@@ -30,6 +30,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     if (prev) { try { cancelAnimationFrame(prev.raf); prev.dispose(); } catch (e) {} }
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarse = matchMedia('(pointer: coarse)').matches || Math.min(window.innerWidth, window.innerHeight) < 700;
+    const usePost = !coarse && !reduce;
     const fontUrl = wrap.dataset.font || '';
 
     (async () => {
@@ -38,6 +40,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
         const opentype: any = await import('opentype.js');
         const parse = opentype.parse || opentype.default?.parse;
+        const EC: any = usePost ? await import('three/addons/postprocessing/EffectComposer.js') : null;
+        const RP: any = usePost ? await import('three/addons/postprocessing/RenderPass.js') : null;
+        const SP: any = usePost ? await import('three/addons/postprocessing/ShaderPass.js') : null;
+        const RGB: any = usePost ? await import('three/addons/shaders/RGBShiftShader.js') : null;
 
         const buf = await fetch(fontUrl).then(r => r.arrayBuffer());
         const font = parse(buf);
@@ -75,37 +81,101 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         const bb = geo.boundingBox!;
         const wordW = bb.max.x - bb.min.x;
 
+        // Distorsión (wobble) controlada por uHover
+        const uniforms = { uTime: { value: 0 }, uHover: { value: 0 } };
         const mat = new THREE.MeshPhysicalMaterial({
           color: 0x8a6bd8, metalness: 0, roughness: 0.16,
           clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1.1,
         });
+        mat.onBeforeCompile = (shader: any) => {
+          shader.uniforms.uTime = uniforms.uTime;
+          shader.uniforms.uHover = uniforms.uHover;
+          shader.vertexShader = 'uniform float uTime;uniform float uHover;\n' + shader.vertexShader;
+          shader.vertexShader = shader.vertexShader.replace(
+            '#include <begin_vertex>',
+            '#include <begin_vertex>\nfloat w = sin(position.x*2.2 + uTime*2.0)*cos(position.y*2.6 + uTime*1.6);\ntransformed += normal * w * 0.10 * uHover;'
+          );
+        };
         const mesh = new THREE.Mesh(geo, mat);
         const group = new THREE.Group(); group.add(mesh); scene.add(group);
+
+        let composer: any = null, rgb: any = null;
 
         function resize() {
           const r = wrap!.getBoundingClientRect();
           renderer.setSize(r.width, r.height, false);
+          if (composer) composer.setSize(r.width, r.height);
           camera.aspect = r.width / r.height;
           const fitW = wordW / 0.82;
           const dist = (fitW / 2) / Math.tan((camera.fov * Math.PI / 180) / 2) / camera.aspect;
           camera.position.z = Math.max(4, dist);
           camera.updateProjectionMatrix();
-          renderer.render(scene, camera);
+        }
+
+        if (usePost && EC && RP && SP && RGB) {
+          composer = new EC.EffectComposer(renderer);
+          composer.addPass(new RP.RenderPass(scene, camera));
+          rgb = new SP.ShaderPass(RGB.RGBShiftShader);
+          rgb.uniforms.amount.value = 0.0;
+          composer.addPass(rgb);
         }
         resize();
         window.addEventListener('resize', resize);
 
+        // Puntero (tilt + intensidad de distorsión)
+        const pointer = { x: 0, y: 0, inside: false };
+        function onMove(e: PointerEvent) {
+          const r = canvas!.getBoundingClientRect();
+          pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+          pointer.y = ((e.clientY - r.top) / r.height) * 2 - 1;
+          pointer.inside = true;
+        }
+        function onLeave() { pointer.inside = false; }
+        wrap!.addEventListener('pointermove', onMove);
+        wrap!.addEventListener('pointerleave', onLeave);
+
+        const clock = new THREE.Clock();
         const state: any = {
           raf: 0,
           dispose() {
             window.removeEventListener('resize', resize);
+            wrap!.removeEventListener('pointermove', onMove);
+            wrap!.removeEventListener('pointerleave', onLeave);
+            if (composer && composer.dispose) composer.dispose();
             geo.dispose(); mat.dispose(); renderer.dispose(); pmrem.dispose();
           },
         };
         (window as any).__heroLogo = state;
         wrap!.classList.add('gl-on');
 
-        renderer.render(scene, camera);   // render estático (la interacción llega en T5)
+        function renderFrame() { if (composer) composer.render(); else renderer.render(scene, camera); }
+
+        function frame() {
+          const t = clock.getElapsedTime();
+          uniforms.uTime.value = t;
+          const targetHover = pointer.inside ? 1 : 0;
+          uniforms.uHover.value += (targetHover - uniforms.uHover.value) * 0.08;
+          const tiltX = pointer.inside ? -pointer.y * 0.5 : Math.sin(t * 0.6) * 0.06;
+          const tiltY = pointer.inside ?  pointer.x * 0.6 : Math.sin(t * 0.5) * 0.10;
+          group.rotation.x += (tiltX - group.rotation.x) * 0.06;
+          group.rotation.y += (tiltY - group.rotation.y) * 0.06;
+          if (rgb) rgb.uniforms.amount.value = uniforms.uHover.value * 0.0026;
+          renderFrame();
+          state.raf = requestAnimationFrame(frame);
+        }
+
+        if (reduce) { renderFrame(); }
+        else {
+          const io = new IntersectionObserver((ents) => {
+            ents.forEach((en) => {
+              if (en.isIntersecting && !state.raf) frame();
+              else if (!en.isIntersecting && state.raf) { cancelAnimationFrame(state.raf); state.raf = 0; }
+            });
+          });
+          io.observe(wrap!);
+          const baseDispose = state.dispose;
+          state.dispose = () => { io.disconnect(); baseDispose(); };
+        }
       } catch (e) { /* sin WebGL/Three/font → fallback CSS visible */ }
     })();
   }
