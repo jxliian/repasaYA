@@ -75,23 +75,23 @@ html, body { height: auto; overflow: visible; }
   position: absolute; border-radius: 50%;
   pointer-events: none;
 }
-/* Top-left: lime tenue */
+/* Top-left: lavanda tenue */
 .orb-tl {
   width: 600px; height: 600px;
   top: -15%; left: -8%;
   background: radial-gradient(circle,
-    rgba(198,241,53,0.10) 0%,
-    rgba(198,241,53,0.03) 50%,
+    rgba(138,107,216,0.10) 0%,
+    rgba(138,107,216,0.03) 50%,
     transparent 70%);
   filter: blur(100px);
 }
-/* Bottom-right: very dim lime */
+/* Bottom-right: lavanda muy tenue */
 .orb-br {
   width: 550px; height: 550px;
   bottom: -12%; right: -8%;
   background: radial-gradient(circle,
-    rgba(198,241,53,0.06) 0%,
-    rgba(198,241,53,0.02) 50%,
+    rgba(138,107,216,0.06) 0%,
+    rgba(138,107,216,0.02) 50%,
     transparent 70%);
   filter: blur(100px);
 }
@@ -192,6 +192,47 @@ html, body { height: auto; overflow: visible; }
   background: #efedf6; padding: 6px 9px;
 }
 .hits-num { display: block; background: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════
+   HERO — a pantalla completa (aurora derivando)
+═══════════════════════════════════════════════════════ */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  overflow: hidden; padding: 24px;
+}
+.hero-inner { position: relative; z-index: 3; max-width: 18ch; }
+.hero-h1 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(34px,6vw,72px); letter-spacing: -0.02em;
+  line-height: 1.02; color: var(--text);
+}
+.hero-grad { color: var(--accent); }
+.hero-desc {
+  margin-top: 18px; color: var(--text-muted);
+  font-size: clamp(15px,2vw,18px); line-height: 1.6;
+}
+.hero-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; z-index: 1; }
+.hero-blob.b1 { width: 46%; height: 60%; left: -6%; top: -10%; background: #dcd2ff; animation: drift1 14s ease-in-out infinite; }
+.hero-blob.b2 { width: 48%; height: 64%; right: -8%; top: 4%; background: #ffd9e4; animation: drift2 17s ease-in-out infinite; }
+.hero-blob.b3 { width: 42%; height: 58%; left: 24%; bottom: -22%; background: #cfeede; animation: drift3 20s ease-in-out infinite; }
+@keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(8%,6%) scale(1.12)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-7%,8%) scale(1.1)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(5%,-7%) scale(1.14)} }
+.hero-scroll {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 4;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  color: var(--text-muted); font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+}
+.hero-scroll .chev {
+  width: 18px; height: 18px;
+  border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+  transform: rotate(45deg); animation: bob 1.5s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:rotate(45deg) translate(0,0); opacity:.5} 50%{transform:rotate(45deg) translate(3px,3px); opacity:1} }
+@media (prefers-reduced-motion: reduce){ .hero-blob,.hero-scroll .chev{ animation:none } }
 
 /* ═══════════════════════════════════════════════════════
    MAIN WRAPPER — z:1 keeps it above bg-layer (z:0)
@@ -626,6 +667,18 @@ footer a:hover { color: #b4e02e; }
 </header>
 
 <!-- ══════════════════════════════════════════════════
+     HERO — a pantalla completa
+═══════════════════════════════════════════════════ -->
+<section class="hero" aria-label="Bienvenida">
+  <div class="hero-blob b1"></div><div class="hero-blob b2"></div><div class="hero-blob b3"></div>
+  <div class="hero-inner">
+    <h1 class="hero-h1">Estudia mejor,<br><span class="hero-grad">aprueba de verdad.</span></h1>
+    <p class="hero-desc">Tests interactivos, V/F y flashcards para las asignaturas de la carrera. Gratis, sin registro, sin anuncios.</p>
+  </div>
+  <a class="hero-scroll" href="#carrusel" aria-label="Bajar a las asignaturas">baja<span class="chev" aria-hidden="true"></span></a>
+</section>
+
+<!-- ══════════════════════════════════════════════════
      MAIN
 ═══════════════════════════════════════════════════ -->
 <main>
@@ -658,55 +711,6 @@ footer a:hover { color: #b4e02e; }
       ) : (
         <p style="color:rgba(255,255,255,.3);font-size:.82rem">Sin historial disponible.</p>
       )}
-    </article>
-
-    <!-- HERO — full width -->
-    <article class="b-hero glass" data-spot aria-label="Bienvenida">
-      <span class="live-pill">
-        <span class="live-dot" aria-hidden="true"></span>
-        Open Source · GitHub
-      </span>
-
-      <h1 class="hero-h1">
-        Estudia mejor,<br>
-        <span class="hero-grad">aprueba de verdad.</span>
-      </h1>
-
-      <p class="hero-desc">
-        Tests interactivos, V/F y flashcards para las asignaturas de la carrera.
-        Gratis, sin registro, sin anuncios.
-      </p>
-
-      <div class="stats-row" role="list">
-        <div class="stat-chip" role="listitem">
-          <span class="stat-num">{subjects.length}</span>
-          <span class="stat-lbl">Asignaturas</span>
-        </div>
-        <div class="stat-chip" role="listitem">
-          <span class="stat-num">+1000</span>
-          <span class="stat-lbl">Preguntas</span>
-        </div>
-        <div class="stat-chip" role="listitem">
-          <span class="stat-num">+{Math.floor(totalFlash / 10) * 10}</span>
-          <span class="stat-lbl">Flashcards</span>
-        </div>
-        <div class="stat-chip" role="listitem">
-          <span class="stat-num">+25</span>
-          <span class="stat-lbl">Temas</span>
-        </div>
-      </div>
-
-      <div class="hero-actions">
-        <a class="wa-btn" href={WA_URL} target="_blank" rel="noopener" aria-label="Compartir por WhatsApp">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.121 1.529 5.852L.057 23.786a.5.5 0 0 0 .609.637l6.089-1.595A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.524-5.231-1.435l-.375-.223-3.878 1.016 1.034-3.773-.245-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-          </svg>
-          Comparte con tus compañeros
-        </a>
-      </div>
-
-      <canvas class="hero-art" id="hero-constellation" aria-hidden="true"></canvas>
     </article>
 
     <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
@@ -944,7 +948,7 @@ footer a:hover { color: #b4e02e; }
         // Draw node
         ctx!.beginPath();
         ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx!.fillStyle = 'rgba(198,241,53,0.55)';
+        ctx!.fillStyle = 'rgba(60,52,110,0.5)';
         ctx!.fill();
       }
 
@@ -957,7 +961,7 @@ footer a:hover { color: #b4e02e; }
           const d2 = dx * dx + dy * dy;
           if (d2 < LINK_DIST * LINK_DIST) {
             const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.22;
-            ctx!.strokeStyle = `rgba(198,241,53,${alpha})`;
+            ctx!.strokeStyle = `rgba(70,60,120,${alpha})`;
             ctx!.lineWidth = 1;
             ctx!.beginPath();
             ctx!.moveTo(a.x, a.y);
@@ -974,7 +978,7 @@ footer a:hover { color: #b4e02e; }
           const d2 = dx * dx + dy * dy;
           if (d2 < MOUSE_DIST * MOUSE_DIST) {
             const alpha = (1 - Math.sqrt(d2) / MOUSE_DIST) * 0.45;
-            ctx!.strokeStyle = `rgba(198,241,53,${alpha})`;
+            ctx!.strokeStyle = `rgba(110,95,200,${alpha})`;
             ctx!.lineWidth = 1;
             ctx!.beginPath();
             ctx!.moveTo(mouse.x, mouse.y);
@@ -1016,146 +1020,5 @@ footer a:hover { color: #b4e02e; }
 
   initParticles();
   document.addEventListener('astro:after-swap', initParticles);
-</script>
-
-<!-- ══════════════════════════════════════════════════
-     CONSTELLATION — particle silhouette (isotipo ✓↗ + birrete)
-     Animates toward target pixels; mouse repulsion.
-═══════════════════════════════════════════════════ -->
-<script>
-  function initConstellation() {
-    const canvas = document.getElementById('hero-constellation') as HTMLCanvasElement | null;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const prev = (window as any).__constellation;
-    if (prev) { cancelAnimationFrame(prev.raf); prev.cleanup && prev.cleanup(); }
-
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const ACCENT = '198,241,53';
-
-    function size() {
-      const r = canvas!.getBoundingClientRect();
-      canvas!.width = Math.max(1, Math.floor(r.width * dpr));
-      canvas!.height = Math.max(1, Math.floor(r.height * dpr));
-    }
-    size();
-
-    // 1) Dibuja la silueta objetivo en un canvas offscreen y muestrea píxeles
-    function sampleTargets(W: number, H: number) {
-      const off = document.createElement('canvas');
-      off.width = W; off.height = H;
-      const o = off.getContext('2d')!;
-      o.fillStyle = '#fff';
-      o.strokeStyle = '#fff';
-      o.lineJoin = 'round'; o.lineCap = 'round';
-      const cx = W / 2, cy = H / 2, s = Math.min(W, H);
-
-      // ── "R" de repasaYA — rasterizada con fuente bold (R legible de verdad) ──
-      // Composición (birrete + R) centrada verticalmente sobre cy.
-      const R_CY = cy + s * 0.34;          // baseline alfabética de la R
-      o.font = '900 ' + Math.floor(s * 0.7) + "px 'Space Grotesk Variable', system-ui, sans-serif";
-      o.textAlign = 'center';
-      o.textBaseline = 'alphabetic';
-      o.fillText('R', cx, R_CY);
-
-      // ── Birrete posado ENCIMA de la R ──
-      const capY = cy - s * 0.235;         // tabla justo sobre la corona de la R
-      const bw = s * 0.28, bh = s * 0.085; // tabla (rombo en perspectiva)
-      o.beginPath();
-      o.moveTo(cx, capY - bh);
-      o.lineTo(cx + bw, capY);
-      o.lineTo(cx, capY + bh);
-      o.lineTo(cx - bw, capY);
-      o.closePath(); o.fill();
-      // botón central de la tabla
-      o.beginPath();
-      o.arc(cx, capY, s * 0.024, 0, Math.PI * 2);
-      o.fill();
-      // borla: cae desde el botón hasta la esquina derecha y cuelga
-      o.lineWidth = s * 0.022;
-      o.beginPath();
-      o.moveTo(cx, capY);
-      o.lineTo(cx + bw, capY);
-      o.lineTo(cx + bw, capY + s * 0.13);
-      o.stroke();
-      o.beginPath();
-      o.arc(cx + bw, capY + s * 0.15, s * 0.03, 0, Math.PI * 2);
-      o.fill();
-
-      const img = o.getImageData(0, 0, W, H).data;
-      const pts: { x: number; y: number }[] = [];
-      const gap = Math.max(4, Math.floor(s / 70));
-      for (let y = 0; y < H; y += gap)
-        for (let x = 0; x < W; x += gap)
-          if (img[(y * W + x) * 4 + 3] > 128) pts.push({ x, y });
-      return pts;
-    }
-
-    type P = { x: number; y: number; tx: number; ty: number; vx: number; vy: number };
-    let parts: P[] = [];
-    function build() {
-      size();
-      const targets = sampleTargets(canvas!.width, canvas!.height);
-      parts = targets.map(t => ({
-        x: Math.random() * canvas!.width, y: Math.random() * canvas!.height,
-        tx: t.x, ty: t.y, vx: 0, vy: 0,
-      }));
-    }
-    build();
-
-    const mouse = { x: -9999, y: -9999 };
-    function onMove(e: PointerEvent) {
-      const r = canvas!.getBoundingClientRect();
-      mouse.x = (e.clientX - r.left) * dpr; mouse.y = (e.clientY - r.top) * dpr;
-    }
-    function onLeave() { mouse.x = -9999; mouse.y = -9999; }
-    window.addEventListener('pointermove', onMove, { passive: true });
-    window.addEventListener('pointerout', onLeave);
-
-    window.addEventListener('resize', build);
-    const state: any = {
-      raf: 0,
-      cleanup() {
-        window.removeEventListener('pointermove', onMove);
-        window.removeEventListener('pointerout', onLeave);
-        window.removeEventListener('resize', build);
-      },
-    };
-    (window as any).__constellation = state;
-    const R = 70 * dpr;
-
-    function frame() {
-      ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
-      for (const p of parts) {
-        // retorno al destino
-        p.vx += (p.tx - p.x) * 0.012;
-        p.vy += (p.ty - p.y) * 0.012;
-        // repulsión del ratón
-        const dx = p.x - mouse.x, dy = p.y - mouse.y;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < R * R && d2 > 1) {
-          const d = Math.sqrt(d2), f = (1 - d / R) * 2.2;
-          p.vx += (dx / d) * f; p.vy += (dy / d) * f;
-        }
-        p.vx *= 0.86; p.vy *= 0.86;
-        p.x += p.vx; p.y += p.vy;
-        ctx!.beginPath();
-        ctx!.arc(p.x, p.y, 1.5 * dpr, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(${ACCENT},0.9)`;
-        ctx!.fill();
-      }
-      state.raf = requestAnimationFrame(frame);
-    }
-
-    if (reduce) {
-      for (const p of parts) { p.x = p.tx; p.y = p.ty; }
-      frame(); cancelAnimationFrame(state.raf);
-    } else frame();
-  }
-  initConstellation();
-  document.addEventListener('astro:after-swap', initConstellation);
 </script>
 </Base>
