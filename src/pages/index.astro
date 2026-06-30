@@ -89,23 +89,7 @@ html, body { height: auto; overflow: visible; }
 }
 
 /* ═══════════════════════════════════════════════════════
-   GLASSMORPHISM UTILITY
-   EXACT Tailwind equivalents requested:
-     bg-white/5       → rgba(255,255,255,0.05)
-     backdrop-blur-xl → blur(24px)
-     border-white/10  → rgba(255,255,255,0.10)
-     rounded-3xl      → 24px
-     shadow-2xl       → 0 25px 50px -12px rgba(0,0,0,0.5)
-═══════════════════════════════════════════════════════ */
-.glass {
-  background:           var(--surface);
-  border:               1px solid var(--glass-border);
-  border-radius:        24px;
-  box-shadow:           0 25px 50px -12px rgba(0,0,0,0.50);
-}
-
-/* ═══════════════════════════════════════════════════════
-   HEADER — sticky glass nav
+   HEADER — sticky nav (claro)
 ═══════════════════════════════════════════════════════ */
 .site-header {
   position: sticky; top: 0; z-index: 200;
@@ -237,192 +221,31 @@ main {
 }
 
 /* ═══════════════════════════════════════════════════════
-   BENTO BOX — 12-column CSS grid
-
-   Stacked full-width layout:
-     Row 1: [Timeline: cols 1-12]   ← commit progress bar
-     Row 2: [Hero:     cols 1-12]   ← "Estudia mejor" (full width)
-     Row 3: [Profile 1-6] [Star 7-12]  ← two halves = full width
+   NOVEDADES — timeline de commits (sección propia, clara)
 ═══════════════════════════════════════════════════════ */
-.bento {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 24px;         /* gap-6 */
-}
-
-/* Commit timeline — full width, on top */
-.b-timeline {
-  grid-column: span 12;
+.novedades {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   padding: 18px 26px 22px;
   position: relative; overflow: hidden;
-}
-
-/* Hero — full width */
-.b-hero {
-  grid-column: span 12;
-  padding: 40px 44px;
-  position: relative; overflow: hidden;
-  display: flex; flex-direction: column;
-  min-height: 470px;
-}
-/* subtle inner glow on hero only */
-.b-hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 0% 0%,
-    rgba(198,241,53,0.06) 0%, transparent 60%);
-  pointer-events: none; border-radius: inherit;
-}
-
-/* Canvas art — rests on the hero's bottom-right corner (Task 5 will animate it) */
-.hero-art {
-  position: absolute; right: 18px; bottom: 0;
-  width: 480px; height: 480px; display: block;
-  z-index: 2; pointer-events: none;
-}
-/* keep hero text clear of the art (tablet + desktop) */
-@media (min-width: 701px) {
-  .b-hero { justify-content: center; }
-  .b-hero .live-pill,
-  .b-hero .hero-h1,
-  .b-hero .hero-desc,
-  .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 520px); }
-}
-
-/* CTA cards — col-span-6 each (two halves below hero) */
-.b-cta {
-  grid-column: span 6;
-  padding: 28px;
-  display: flex; flex-direction: column; gap: 10px;
-  position: relative; overflow: hidden;
-  color: #fff;
-  transition: transform .22s, border-color .22s, background .22s, box-shadow .22s;
-  --mx: 50%; --my: 50%;
-  min-height: 170px;
-}
-/* CTA spotlight (same --mx/--my mechanism) */
-.b-cta::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: radial-gradient(180px circle at var(--mx) var(--my),
-    rgba(198,241,53,.10), transparent 70%);
-  opacity: 0; transition: opacity .35s; pointer-events: none;
-}
-.b-cta:hover { transform: translateY(-4px); }
-.b-cta:hover::after { opacity: 1; }
-.b-cta.cta-gh:hover {
-  border-color: rgba(255,255,255,0.25);
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.65);
-}
-.b-cta.cta-star {
-  background: linear-gradient(135deg,
-    rgba(251,191,36,0.05), rgba(255,255,255,0.04));
-}
-.b-cta.cta-star:hover {
-  border-color: rgba(250,204,21,0.40);
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.65), 0 0 30px rgba(250,204,21,0.07);
-}
-
-/* Large decorative icon in CTA */
-.cta-bg-icon {
-  position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
-  opacity: 0.08; transition: opacity .2s; pointer-events: none; z-index: 0;
-}
-.b-cta:hover .cta-bg-icon { opacity: 0.16; }
-
-.cta-kicker {
-  font-size: .64rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .8px; color: rgba(255,255,255,0.40);
-  position: relative; z-index: 2;
-}
-.cta-title {
-  font-size: 1rem; font-weight: 800; color: #fff; line-height: 1.2;
-  position: relative; z-index: 2;
-}
-.cta-hint {
-  font-size: .78rem; color: rgba(255,255,255,0.45);
-  position: relative; z-index: 2;
-}
-.cta-arrow {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: .7rem; font-weight: 700;
-  background: rgba(198,241,53,0.10); border: 1px solid rgba(198,241,53,0.22);
-  color: #c6f135; border-radius: 99px; padding: 4px 12px;
-  width: fit-content; margin-top: auto;
-  position: relative; z-index: 2;
-  transition: background .2s, border-color .2s;
-}
-.b-cta:hover .cta-arrow { background: rgba(198,241,53,0.20); border-color: rgba(198,241,53,0.4); }
-.cta-star .cta-arrow { color:#fde68a; background:rgba(251,191,36,0.10); border-color:rgba(251,191,36,0.22); }
-.b-cta.cta-star:hover .cta-arrow { background:rgba(251,191,36,0.20); }
-
-/* ─── Hero content ─── */
-.live-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.22);
-  border-radius: 99px; padding: 5px 14px; width: fit-content;
-  font-size: .72rem; font-weight: 700; color: #4ade80; margin-bottom: 22px;
-  position: relative; z-index: 2;
+  box-shadow: 0 10px 26px rgba(70,60,120,0.06);
 }
 .live-dot {
   width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
   background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,.8);
   animation: dotPulse 2.4s ease-in-out infinite;
 }
-.hero-h1 {
-  font-size: clamp(2.4rem,5vw,4rem);
-  font-weight: 800; letter-spacing: -2px; line-height: 1.1;
-  color: #fff; margin-bottom: 14px;
-  position: relative; z-index: 2;
-}
-.hero-grad {
-  color: var(--accent);
-}
-.hero-desc {
-  font-size: .95rem; color: rgba(255,255,255,0.50); line-height: 1.65;
-  max-width: 500px; margin-bottom: 28px;
-  position: relative; z-index: 2;
-}
-
-/* Stats — gradient numbers (as specified in brief) */
-.stats-row {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
-  position: relative; z-index: 2;
-}
-.stat-chip {
-  display: flex; flex-direction: column; gap: 3px;
-  padding: 12px 18px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-}
-.stat-num {
-  font-size: 1.85rem; font-weight: 800; letter-spacing: -1px; line-height: 1;
-  color: var(--accent);
-  font-family: var(--font-mono);
-}
-.stat-lbl {
-  font-size: .62rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .8px; color: rgba(255,255,255,0.38);
-  font-family: var(--font-mono);
-}
-.hero-actions { position: relative; z-index: 2; }
-.wa-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(37,211,102,0.07); border: 1px solid rgba(37,211,102,0.22);
-  border-radius: 99px; padding: 9px 20px;
-  color: #4ade80; font-size: .82rem; font-weight: 700; transition: all .2s;
-}
-.wa-btn:hover { background: rgba(37,211,102,0.16); transform: translateY(-1px); }
 
 /* ─── Commit timeline (progress bar) ─── */
 .tl-hdr {
   display: flex; align-items: center; gap: 8px;
   margin-bottom: 20px;
   font-size: .67rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .9px; color: rgba(255,255,255,0.45);
+  letter-spacing: .9px; color: var(--text-muted);
 }
 .tl-since {
-  margin-left: auto; font-size: .64rem; color: #c6f135;
+  margin-left: auto; font-size: .64rem; color: var(--accent);
   font-weight: 600; text-transform: none; letter-spacing: 0;
 }
 
@@ -440,7 +263,7 @@ main {
 .tl-track::before {
   content: ''; position: absolute;
   top: 9px; left: 8px; right: 8px; height: 2px;
-  background: rgba(198,241,53,0.25);
+  background: var(--accent-line);
   border-radius: 2px;
 }
 
@@ -455,45 +278,45 @@ main {
 /* Node dot on the line */
 .tl-node {
   width: 14px; height: 14px; border-radius: 50%;
-  border: 3px solid var(--bg);
+  border: 3px solid var(--surface);
   background: #94a3b8;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+  box-shadow: 0 0 0 1px var(--border);
   transition: transform .2s, box-shadow .2s;
 }
 .tl-item:hover .tl-node { transform: scale(1.25); }
 
 /* Node colors by commit type (reuse upd-* palette) */
-.tl-node.upd-green  { background:#22c55e; box-shadow:0 0 10px rgba(34,197,94,.6); }
-.tl-node.upd-orange { background:#f97316; box-shadow:0 0 10px rgba(249,115,22,.6); }
-.tl-node.upd-blue   { background:#3b82f6; box-shadow:0 0 10px rgba(59,130,246,.6); }
-.tl-node.upd-purple { background:#c6f135; box-shadow:0 0 10px rgba(198,241,53,.6); }
-.tl-node.upd-cyan   { background:#c6f135; box-shadow:0 0 10px rgba(198,241,53,.6); }
+.tl-node.upd-green  { background:#1f9d57; box-shadow:0 0 10px rgba(31,157,87,.45); }
+.tl-node.upd-orange { background:#ea7a17; box-shadow:0 0 10px rgba(234,122,23,.45); }
+.tl-node.upd-blue   { background:#3b82f6; box-shadow:0 0 10px rgba(59,130,246,.45); }
+.tl-node.upd-purple { background:var(--accent); box-shadow:0 0 10px rgba(138,107,216,.5); }
+.tl-node.upd-cyan   { background:var(--accent); box-shadow:0 0 10px rgba(138,107,216,.5); }
 .tl-node.upd-gray   { background:#94a3b8; }
 
 /* newest commit pulses */
 .tl-item.is-latest .tl-node { animation: tlPulse 2s ease-in-out infinite; }
 @keyframes tlPulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(198,241,53,.55); }
-  50%     { box-shadow: 0 0 0 7px rgba(198,241,53,0); }
+  0%,100% { box-shadow: 0 0 0 0 rgba(138,107,216,.5); }
+  50%     { box-shadow: 0 0 0 7px rgba(138,107,216,0); }
 }
 
 .tl-badge {
   font-size: .58rem; font-weight: 800; border-radius: 99px;
   padding: 2px 9px; white-space: nowrap;
 }
-.upd-green  { background:rgba(34,197,94,.15);  color:#4ade80; border:1px solid rgba(34,197,94,.25);  }
-.upd-orange { background:rgba(249,115,22,.15); color:#fb923c; border:1px solid rgba(249,115,22,.25); }
-.upd-blue   { background:rgba(59,130,246,.15); color:#93c5fd; border:1px solid rgba(59,130,246,.25); }
-.upd-purple { background:rgba(198,241,53,.12); color:#c6f135; border:1px solid rgba(198,241,53,.25); }
-.upd-cyan   { background:rgba(198,241,53,.10); color:#c6f135; border:1px solid rgba(198,241,53,.22); }
-.upd-gray   { background:rgba(148,163,184,.10);color:#94a3b8; border:1px solid rgba(148,163,184,.18);}
+.upd-green  { background:rgba(31,157,87,.12);  color:#157f43; border:1px solid rgba(31,157,87,.25);  }
+.upd-orange { background:rgba(234,122,23,.12); color:#b45309; border:1px solid rgba(234,122,23,.25); }
+.upd-blue   { background:rgba(59,130,246,.12); color:#1d4ed8; border:1px solid rgba(59,130,246,.25); }
+.upd-purple { background:var(--accent-soft);   color:var(--accent-strong); border:1px solid var(--accent-line); }
+.upd-cyan   { background:var(--accent-soft);   color:var(--accent-strong); border:1px solid var(--accent-line); }
+.upd-gray   { background:rgba(107,111,134,.10);color:#6b6f86; border:1px solid rgba(107,111,134,.20);}
 
 .tl-date {
-  font-size: .6rem; font-weight: 600; color: rgba(255,255,255,0.40);
+  font-size: .6rem; font-weight: 600; color: var(--text-muted);
   white-space: nowrap;
 }
 .tl-text {
-  font-size: .68rem; color: rgba(255,255,255,0.55); line-height: 1.35;
+  font-size: .68rem; color: var(--text-muted); line-height: 1.35;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -504,33 +327,18 @@ main {
 footer {
   position: relative; z-index: 1;
   text-align: center; padding: 22px 24px 32px;
-  font-size: .74rem; color: rgba(255,255,255,0.28);
-  border-top: 1px solid rgba(255,255,255,0.07);
+  font-size: .74rem; color: var(--text-muted);
+  border-top: 1px solid var(--border);
   display: flex; flex-direction: column; gap: 6px;
 }
-.footer-meta { font-size: .68rem; color: rgba(255,255,255,0.18); }
+.footer-meta { font-size: .68rem; color: #a8acbb; }
 .footer-links { font-size: .72rem; }
-footer a { color: #c6f135; }
-footer a:hover { color: #b4e02e; }
+footer a { color: var(--accent); }
+footer a:hover { color: var(--accent-strong); }
 
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE
-   lg = 1100px+  →  12-col bento
-   md = 700-1099 →  2-col (hero full, cta half)
-   sm = <700     →  single column
 ═══════════════════════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .bento { grid-template-columns: repeat(6, 1fr); gap: 16px; }
-  .b-timeline { grid-column: span 6; }
-  .b-hero     { grid-column: span 6; padding: 32px 36px; min-height: 400px; }
-  .b-cta      { grid-column: span 3; }
-  .hero-art { width: 400px; right: 8px; }
-  .b-hero .live-pill,
-  .b-hero .hero-h1,
-  .b-hero .hero-desc,
-  .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: calc(100% - 440px); }
-}
 @media (max-width: 700px) {
   .site-header { padding: 0 16px; }
   .search-wrap { max-width: none; }
@@ -538,22 +346,7 @@ footer a:hover { color: #b4e02e; }
   .b-accent span { display: none; }        /* Solicitar solo icono */
   .b-accent { padding: 8px 11px; }
   main { padding: 20px 14px 60px; gap: 14px; }
-  .bento { grid-template-columns: 1fr; gap: 14px; }
-  .b-timeline { grid-column: span 1; }
-  .b-hero     { grid-column: span 1; padding: 28px 22px 0; min-height: auto; }
-  .b-cta      { grid-column: span 1; }
-  /* Reset: en móvil el texto ocupa todo el ancho (sin el clearance del arte) */
-  .b-hero .live-pill,
-  .b-hero .hero-h1,
-  .b-hero .hero-desc,
-  .b-hero .stats-row,
-  .b-hero .hero-actions { max-width: none; }
-  /* En móvil: canvas en flujo, debajo del texto */
-  .hero-art { position: static; width: 100%; max-width: 400px; height: 340px; margin: 12px auto 0; }
   .tl-item    { min-width: 88px; }
-  .stats-row  { gap: 6px; }
-  .stat-chip  { padding: 10px 14px; }
-  .stat-num   { font-size: 1.5rem; }
 }
 </style>
 
@@ -623,64 +416,31 @@ footer a:hover { color: #b4e02e; }
 ═══════════════════════════════════════════════════ -->
 <main>
 
-  <!-- ─── BENTO GRID ─────────────────────── -->
-  <div class="bento" role="region" aria-label="Panel principal">
-
-    <!--
-      COMMIT TIMELINE — full width, on top.
-      Progress bar of recent commits: type (badge) + date + text.
-      Oldest → newest (left → right); newest node pulses.
-    -->
-    <article class="b-timeline glass" data-spot aria-label="Novedades recientes">
-      <div class="tl-hdr">
-        <span class="live-dot" aria-hidden="true"></span>
-        Novedades
-        {lastUpdate && <span class="tl-since">Actualizado · {lastUpdate}</span>}
-      </div>
-      {commits.length > 0 ? (
-        <ol class="tl-track">
-          {[...commits].reverse().map((c, i, arr) => (
-            <li class={`tl-item${i === arr.length - 1 ? ' is-latest' : ''}`} title={c.text}>
-              <span class={`tl-node ${c.cls}`} aria-hidden="true"></span>
-              <span class={`tl-badge ${c.cls}`}>{c.badge}</span>
-              <time class="tl-date">{c.date}</time>
-              <span class="tl-text">{c.text}</span>
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <p style="color:rgba(255,255,255,.3);font-size:.82rem">Sin historial disponible.</p>
-      )}
-    </article>
-
-    <!-- PERFIL GITHUB — col-span-6 (left half of row 3) -->
-    <a class="b-cta cta-gh glass" href={PROFILE_URL}
-      target="_blank" rel="noopener" data-spot aria-label="Perfil GitHub de jxliian">
-      <span class="cta-kicker">Sígueme</span>
-      <span class="cta-title">@jxliian en GitHub</span>
-      <span class="cta-hint">Todos mis proyectos open source</span>
-      <span class="cta-arrow">Ver perfil ↗</span>
-      <span class="cta-bg-icon" aria-hidden="true">
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
-          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-        </svg>
-      </span>
-    </a>
-
-    <!-- REPOSITORIO STAR — col-span-6 (right half of row 3) -->
-    <a class="b-cta cta-star glass" href={REPO_URL}
-      target="_blank" rel="noopener" data-spot aria-label="Dar estrella al repositorio en GitHub">
-      <span class="cta-kicker">Repositorio</span>
-      <span class="cta-title" style="color:#fde68a">⭐ Star en GitHub</span>
-      <span class="cta-hint">Apoya el proyecto open source</span>
-      <span class="cta-arrow">Ver repo ↗</span>
-      <span class="cta-bg-icon" aria-hidden="true" style="font-size:54px">⭐</span>
-    </a>
-
-  </div><!-- /bento -->
-
   <!-- ─── CARRUSEL DUAL DE ASIGNATURAS ────────────── -->
   <SubjectCarousel />
+
+  <!-- ─── NOVEDADES (timeline de commits) ──────────── -->
+  <section class="novedades" aria-label="Novedades recientes">
+    <div class="tl-hdr">
+      <span class="live-dot" aria-hidden="true"></span>
+      Novedades
+      {lastUpdate && <span class="tl-since">Actualizado · {lastUpdate}</span>}
+    </div>
+    {commits.length > 0 ? (
+      <ol class="tl-track">
+        {[...commits].reverse().map((c, i, arr) => (
+          <li class={`tl-item${i === arr.length - 1 ? ' is-latest' : ''}`} title={c.text}>
+            <span class={`tl-node ${c.cls}`} aria-hidden="true"></span>
+            <span class={`tl-badge ${c.cls}`}>{c.badge}</span>
+            <time class="tl-date">{c.date}</time>
+            <span class="tl-text">{c.text}</span>
+          </li>
+        ))}
+      </ol>
+    ) : (
+      <p style="color:var(--text-muted);font-size:.82rem">Sin historial disponible.</p>
+    )}
+  </section>
 
 </main>
 
