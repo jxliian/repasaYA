@@ -182,11 +182,6 @@ html, body { height: auto; overflow: visible; }
   align-items: center; justify-content: center; text-align: center;
   overflow: hidden; padding: 24px;
 }
-.hero-inner {
-  position: relative; z-index: 3;
-  width: 100%; max-width: 920px;
-  display: flex; align-items: center; justify-content: center;
-}
 /* Fundido inferior → disuelve la aurora hacia la zona del carrusel */
 .hero::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0;
@@ -415,9 +410,7 @@ footer a:hover { color: var(--accent-strong); }
 ═══════════════════════════════════════════════════ -->
 <section class="hero" aria-label="Bienvenida">
   <div class="hero-blob b1"></div><div class="hero-blob b2"></div><div class="hero-blob b3"></div>
-  <div class="hero-inner">
-    <HeroLogo3D />
-  </div>
+  <HeroLogo3D />
   <a class="hero-scroll" href="#carrusel" aria-label="Bajar a las asignaturas">baja<span class="chev" aria-hidden="true"></span></a>
 </section>
 
