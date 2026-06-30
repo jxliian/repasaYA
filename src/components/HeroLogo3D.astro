@@ -1,0 +1,122 @@
+---
+// Wordmark "repasaYA" en 3D glossy (Three.js). Geometría extruida desde la fuente
+// real Unbounded vía opentype.js. Todo self-hosted; fallback CSS si no hay WebGL.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<div class="hero3d" id="hero3d" data-font={`${base}fonts/unbounded-800.woff`}>
+  <canvas id="hero3d-canvas" aria-hidden="true"></canvas>
+  <div class="hero3d-fallback" aria-label="repasaYA">repasaYA</div>
+</div>
+
+<style>
+  .hero3d { position: relative; width: min(880px, 92vw); height: clamp(150px, 30vh, 320px); }
+  #hero3d-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero3d-fallback {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em;
+    font-size: clamp(38px, 8vw, 92px); color: var(--accent);
+    text-shadow: 0 6px 30px rgba(138,107,216,.35);
+  }
+  .hero3d.gl-on .hero3d-fallback { display: none; }
+</style>
+
+<script>
+  function initHeroLogo() {
+    const wrap = document.getElementById('hero3d');
+    const canvas = document.getElementById('hero3d-canvas') as HTMLCanvasElement | null;
+    if (!wrap || !canvas) return;
+
+    const prev = (window as any).__heroLogo;
+    if (prev) { try { cancelAnimationFrame(prev.raf); prev.dispose(); } catch (e) {} }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fontUrl = wrap.dataset.font || '';
+
+    (async () => {
+      try {
+        const THREE = await import('three');
+        const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
+        const opentype: any = await import('opentype.js');
+        const parse = opentype.parse || opentype.default?.parse;
+
+        const buf = await fetch(fontUrl).then(r => r.arrayBuffer());
+        const font = parse(buf);
+
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        if (!renderer.getContext()) return;            // sin WebGL → deja el fallback
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+        camera.position.set(0, 0, 9);
+
+        const pmrem = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+        scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+        const key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(3, 5, 6); scene.add(key);
+
+        // ── Geometría inflada desde el contorno de Unbounded ──
+        const size = 1;
+        const path = font.getPath('repasaYA', 0, 0, size);
+        const sp = new THREE.ShapePath();
+        for (const c of path.commands) {
+          if (c.type === 'M') sp.moveTo(c.x, -c.y);
+          else if (c.type === 'L') sp.lineTo(c.x, -c.y);
+          else if (c.type === 'Q') sp.quadraticCurveTo(c.x1, -c.y1, c.x, -c.y);
+          else if (c.type === 'C') sp.bezierCurveTo(c.x1, -c.y1, c.x2, -c.y2, c.x, -c.y);
+        }
+        const shapes = sp.toShapes(true);
+        const geo = new THREE.ExtrudeGeometry(shapes, {
+          depth: size * 0.32, bevelEnabled: true,
+          bevelThickness: size * 0.085, bevelSize: size * 0.055, bevelSegments: 6, curveSegments: 8,
+        });
+        geo.center();
+        geo.computeBoundingBox();
+        const bb = geo.boundingBox!;
+        const wordW = bb.max.x - bb.min.x;
+
+        const mat = new THREE.MeshPhysicalMaterial({
+          color: 0x8a6bd8, metalness: 0, roughness: 0.16,
+          clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1.1,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        const group = new THREE.Group(); group.add(mesh); scene.add(group);
+
+        function resize() {
+          const r = wrap!.getBoundingClientRect();
+          renderer.setSize(r.width, r.height, false);
+          camera.aspect = r.width / r.height;
+          const fitW = wordW / 0.82;
+          const dist = (fitW / 2) / Math.tan((camera.fov * Math.PI / 180) / 2) / camera.aspect;
+          camera.position.z = Math.max(4, dist);
+          camera.updateProjectionMatrix();
+          renderer.render(scene, camera);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const state: any = {
+          raf: 0,
+          dispose() {
+            window.removeEventListener('resize', resize);
+            geo.dispose(); mat.dispose(); renderer.dispose(); pmrem.dispose();
+          },
+        };
+        (window as any).__heroLogo = state;
+        wrap!.classList.add('gl-on');
+
+        renderer.render(scene, camera);   // render estático (la interacción llega en T5)
+      } catch (e) { /* sin WebGL/Three/font → fallback CSS visible */ }
+    })();
+  }
+
+  function deferHeroLogo() {
+    if (document.readyState === 'complete') {
+      (window as any).requestIdleCallback ? (window as any).requestIdleCallback(initHeroLogo) : setTimeout(initHeroLogo, 200);
+    } else {
+      window.addEventListener('load', () => setTimeout(initHeroLogo, 150), { once: true });
+    }
+  }
+  deferHeroLogo();
+  document.addEventListener('astro:after-swap', deferHeroLogo);
+</script>
