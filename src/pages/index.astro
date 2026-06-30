@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import SubjectCarousel from '../components/SubjectCarousel.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import HeroLogo3D from '../components/HeroLogo3D.astro';
 import { execSync } from 'child_process';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
@@ -181,16 +182,16 @@ html, body { height: auto; overflow: visible; }
   align-items: center; justify-content: center; text-align: center;
   overflow: hidden; padding: 24px;
 }
-.hero-inner { position: relative; z-index: 3; max-width: 18ch; }
-.hero-h1 {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(34px,6vw,72px); letter-spacing: -0.02em;
-  line-height: 1.02; color: var(--text);
+.hero-inner {
+  position: relative; z-index: 3;
+  width: 100%; max-width: 920px;
+  display: flex; align-items: center; justify-content: center;
 }
-.hero-grad { color: var(--accent); }
-.hero-desc {
-  margin-top: 18px; color: var(--text-muted);
-  font-size: clamp(15px,2vw,18px); line-height: 1.6;
+/* Fundido inferior → disuelve la aurora hacia la zona del carrusel */
+.hero::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 28%; z-index: 2; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--bg));
 }
 .hero-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; z-index: 1; }
 .hero-blob.b1 { width: 46%; height: 60%; left: -6%; top: -10%; background: #dcd2ff; animation: drift1 14s ease-in-out infinite; }
@@ -212,6 +213,12 @@ html, body { height: auto; overflow: visible; }
 }
 @keyframes bob { 0%,100%{transform:rotate(45deg) translate(0,0); opacity:.5} 50%{transform:rotate(45deg) translate(3px,3px); opacity:1} }
 @media (prefers-reduced-motion: reduce){ .hero-blob,.hero-scroll .chev{ animation:none } }
+
+.lead-tagline {
+  text-align: center; max-width: 60ch; margin: 0 auto;
+  color: var(--text-muted); font-size: clamp(15px,1.6vw,18px); line-height: 1.6;
+}
+.lead-tagline strong { color: var(--text); font-weight: 700; }
 
 /* ═══════════════════════════════════════════════════════
    MAIN WRAPPER — z:1 keeps it above bg-layer (z:0)
@@ -409,8 +416,7 @@ footer a:hover { color: var(--accent-strong); }
 <section class="hero" aria-label="Bienvenida">
   <div class="hero-blob b1"></div><div class="hero-blob b2"></div><div class="hero-blob b3"></div>
   <div class="hero-inner">
-    <h1 class="hero-h1">Estudia mejor,<br><span class="hero-grad">aprueba de verdad.</span></h1>
-    <p class="hero-desc">Tests interactivos, V/F y flashcards para las asignaturas de la carrera. Gratis, sin registro, sin anuncios.</p>
+    <HeroLogo3D />
   </div>
   <a class="hero-scroll" href="#carrusel" aria-label="Bajar a las asignaturas">baja<span class="chev" aria-hidden="true"></span></a>
 </section>
@@ -421,6 +427,7 @@ footer a:hover { color: var(--accent-strong); }
 <main>
 
   <!-- ─── CARRUSEL DUAL DE ASIGNATURAS ────────────── -->
+  <p class="lead-tagline">Tests interactivos, V/F y flashcards para las asignaturas de la carrera. <strong>Gratis, sin registro, sin anuncios.</strong></p>
   <SubjectCarousel />
 
   <!-- ─── NOVEDADES (timeline de commits) ──────────── -->
