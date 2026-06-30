@@ -1,0 +1,306 @@
+---
+import { subjects, type Subject } from '../data/subjects';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const ade = subjects.filter(s => s.group === 'ade');
+const ing = subjects.filter(s => s.group === 'ing');
+const href = (s: Subject) => s.external ?? `${base}${s.slug}/`;
+const hasFlash = (s: Subject) => s.chips.some(c => c.toLowerCase().includes('flashcard'));
+const card = (s: Subject, group: 'ade' | 'ing') => ({ s, group });
+const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'))];
+---
+
+<section id="carrusel" class="cz-section" aria-label="Asignaturas por grado">
+  <div class="cz-board" id="cz-stage">
+    <div class="cz-blob x1" aria-hidden="true"></div>
+    <div class="cz-blob x2" aria-hidden="true"></div>
+
+    <button type="button" class="cz-back" id="cz-back">← Volver a los grados</button>
+
+    <div class="cz-lab" id="cz-labA"><div class="nm">ADE</div><div class="ct"><span id="cz-ctA">{ade.length}</span> asignaturas</div></div>
+    <div class="cz-lab ing" id="cz-labI"><div class="nm">Ingeniería</div><div class="ct"><span id="cz-ctI">{ing.length}</span> asignaturas</div></div>
+
+    <div class="cz-panel" id="cz-panel">
+      <h4>Filtros</h4>
+      <div class="psub" id="cz-psub">ADE / Economía</div>
+      <div class="cz-fg"><div class="gl">Tipo</div><div class="cz-pills" data-group="type">
+        <span class="cz-pill" data-v="test">Test</span><span class="cz-pill" data-v="vf">V/F</span><span class="cz-pill" data-v="both">Ambos</span>
+      </div></div>
+      <div class="cz-fg"><div class="gl">Extras</div><div class="cz-pills" data-group="fc">
+        <span class="cz-pill" data-v="1">Con flashcards</span>
+      </div></div>
+      <div class="cz-fg"><div class="gl">Buscar</div>
+        <div class="cz-search2">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9b9fb2" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="cz-cq" type="search" placeholder="Busca aquí…" autocomplete="off" aria-label="Buscar dentro del grado" />
+        </div>
+      </div>
+      <div class="cz-pcount" id="cz-pcount">{ade.length} asignaturas</div>
+    </div>
+
+    {allCards.map(({ s, group }) => (
+      <a class="ccard" data-group={group} data-type={s.type} data-fc={hasFlash(s) ? '1' : '0'}
+         data-title={s.title.toLowerCase()} data-code={s.code.toLowerCase()}
+         href={href(s)} {...(s.external ? { target: '_blank', rel: 'noopener' } : {})}>
+        <div class="cc-icon">{s.icon}</div>
+        <div class="cc-title">{s.title}</div>
+        <div class="cc-area">{s.code}</div>
+        <div class="cc-extra">
+          <div class="cc-desc">{s.description}</div>
+          <div class="cc-chips">{s.chips.map(c => <span class="cc-chip">{c}</span>)}</div>
+          <span class="cc-cta">Entrar →</span>
+        </div>
+      </a>
+    ))}
+
+    <div class="cz-toast" id="cz-toast" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<style>
+  .cz-section { position: relative; z-index: 1; }
+
+  .cz-board {
+    position: relative; overflow: hidden; height: 580px;
+    border-radius: 26px; cursor: pointer;
+    background: linear-gradient(135deg, #fcfbff 0%, #f4eefe 55%, #fbeef4 100%);
+    border: 2px solid var(--border);
+  }
+  .cz-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; pointer-events: none; }
+  .cz-blob.x1 { width: 340px; height: 340px; left: -80px; top: -120px; background: #dcd2ff; }
+  .cz-blob.x2 { width: 320px; height: 320px; right: -70px; bottom: -130px; background: #cfeede; }
+
+  /* ── Tarjetas (tintes por grupo) ── */
+  .ccard[data-group="ade"] { --tint: #efe9ff; --accent: #7b6cf0; }
+  .ccard[data-group="ing"] { --tint: #e7f1ff; --accent: #4f8fd1; }
+
+  .ccard {
+    position: absolute; left: 0; top: 0; width: 150px; opacity: 0;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 18px; padding: 15px 14px; cursor: pointer;
+    box-shadow: 0 10px 26px rgba(70,60,120,0.10); color: var(--text);
+    will-change: transform, opacity;
+    transition: width .45s cubic-bezier(.4,0,.2,1), box-shadow .25s, border-color .25s;
+  }
+  .ccard::before {
+    content: ''; position: absolute; inset: 0; border-radius: 18px;
+    background: radial-gradient(120px circle at 50% 0, var(--tint), transparent 70%);
+    opacity: .7; pointer-events: none;
+  }
+  .ccard:hover { box-shadow: 0 18px 40px rgba(70,60,120,0.20); border-color: var(--accent); }
+  .cc-icon { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 19px; background: var(--tint); position: relative; z-index: 1; }
+  .cc-title { margin-top: 9px; font-weight: 600; font-size: 13.5px; line-height: 1.18; color: var(--text); position: relative; z-index: 1; }
+  .cc-area { margin-top: 5px; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); position: relative; z-index: 1; }
+  .cc-extra { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .45s, opacity .35s; position: relative; z-index: 1; }
+  .cc-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin-top: 10px; }
+  .cc-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+  .cc-chip { font-size: 10px; font-weight: 600; color: var(--accent); background: var(--tint); border-radius: 999px; padding: 3px 9px; }
+  .cc-cta { display: inline-block; margin-top: 11px; font-family: var(--font-display); font-size: 12px; font-weight: 500; color: #fff; background: var(--accent); border-radius: 999px; padding: 8px 16px; }
+  .ccard.solo { width: 330px; border-color: var(--accent); box-shadow: 0 26px 60px rgba(70,60,120,0.26); }
+  .ccard.solo .cc-extra { max-height: 320px; opacity: 1; }
+  .ccard.solo .cc-title { font-family: var(--font-display); font-weight: 500; font-size: 20px; }
+
+  /* ── Etiquetas de grado ── */
+  .cz-lab { position: absolute; left: 0; top: 0; transform: translate(-50%,-50%); text-align: center; cursor: pointer; transition: opacity .3s; z-index: 1; }
+  .cz-lab .nm { font-family: var(--font-display); font-weight: 700; font-size: 26px; color: var(--text); line-height: 1; }
+  .cz-lab .ct { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
+  .cz-lab.ing .nm { color: #274a6b; }
+
+  /* ── Volver ── */
+  .cz-back {
+    position: absolute; left: 16px; top: 14px; z-index: 5;
+    display: flex; align-items: center; gap: 7px; cursor: pointer;
+    background: rgba(255,255,255,0.85); border: 1.5px solid var(--border);
+    border-radius: 999px; padding: 8px 14px 8px 11px;
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+    font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text);
+  }
+  .cz-back.on { opacity: 1; pointer-events: auto; }
+
+  /* ── Panel de filtros ── */
+  .cz-panel {
+    position: absolute; right: 16px; top: 16px; width: 200px; z-index: 4;
+    opacity: 0; pointer-events: none; transform: translateX(12px);
+    transition: opacity .3s, transform .3s;
+    background: rgba(255,255,255,0.85); border: 1.5px solid var(--border);
+    border-radius: 18px; padding: 15px; backdrop-filter: blur(4px);
+    box-shadow: 0 12px 34px rgba(80,70,140,0.12);
+  }
+  .cz-panel.on { opacity: 1; pointer-events: auto; transform: none; }
+  .cz-panel h4 { font-family: var(--font-display); font-weight: 500; font-size: 13px; margin: 0 0 2px; color: var(--text); }
+  .cz-panel .psub { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .cz-fg { margin-top: 13px; }
+  .cz-fg .gl { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; }
+  .cz-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cz-pill { font-size: 12px; font-weight: 500; color: var(--text-muted); background: var(--surface); border: 1.5px solid var(--border); border-radius: 999px; padding: 5px 11px; cursor: pointer; transition: all .15s; }
+  .cz-pill:hover { border-color: var(--accent); }
+  .cz-pill.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .cz-search2 { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 999px; padding: 8px 12px; }
+  .cz-search2 input { border: 0; outline: none; background: transparent; width: 100%; font-family: var(--font-body); font-size: 13px; color: var(--text); }
+  .cz-pcount { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); text-align: center; }
+
+  /* ── Toast (fallback) ── */
+  .cz-toast {
+    position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%) translateY(10px);
+    z-index: 6; opacity: 0; background: #2a2440; color: #fff; font-size: 13px;
+    padding: 9px 16px; border-radius: 999px; transition: opacity .25s, transform .25s; pointer-events: none;
+  }
+  .cz-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 700px) {
+    .cz-board { height: 540px; }
+    .cz-panel { width: 168px; padding: 13px; }
+    .cz-lab .nm { font-size: 22px; }
+  }
+</style>
+
+<script>
+  function initCarousel() {
+    const stage = document.getElementById('cz-stage');
+    if (!stage) return;
+
+    // Cancela cualquier rAF anterior (View Transitions)
+    const prev = (window as any).__carousel;
+    if (prev) cancelAnimationFrame(prev.raf);
+
+    const labA = document.getElementById('cz-labA') as HTMLElement;
+    const labI = document.getElementById('cz-labI') as HTMLElement;
+    const back = document.getElementById('cz-back') as HTMLElement;
+    const panel = document.getElementById('cz-panel') as HTMLElement;
+    const cq = document.getElementById('cz-cq') as HTMLInputElement | null;
+    const hq = document.getElementById('search-input') as HTMLInputElement | null;
+    const toast = document.getElementById('cz-toast') as HTMLElement;
+    const psub = document.getElementById('cz-psub') as HTMLElement;
+    const pcount = document.getElementById('cz-pcount') as HTMLElement;
+    const ctA = document.getElementById('cz-ctA') as HTMLElement | null;
+    const ctI = document.getElementById('cz-ctI') as HTMLElement | null;
+
+    const ftype = new Set<string>(), ffc = new Set<string>();
+    let mode = 'over', query = '', spin = 0;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    type Card = { group: string; el: HTMLAnchorElement; cur: any; tgt: any };
+    const cards: Card[] = [...stage.querySelectorAll<HTMLAnchorElement>('.ccard')].map(el => ({
+      group: el.dataset.group || 'ade', el,
+      cur: { x: 0, y: 0, s: 0.6, o: 0 }, tgt: { x: 0, y: 0, s: 0.6, o: 0 },
+    }));
+
+    cards.forEach(c => {
+      c.el.addEventListener('click', ev => {
+        if (mode === 'over') { ev.preventDefault(); ev.stopPropagation(); focus(c.group); }
+        // en modo enfocado: navegación nativa del <a>
+      });
+    });
+
+    function pass(c: Card) {
+      const t = query.toLowerCase().trim();
+      const title = c.el.dataset.title || '', code = c.el.dataset.code || '';
+      if (t && !(title.includes(t) || code.includes(t))) return false;
+      if (mode !== 'over') {
+        if (ftype.size && !ftype.has(c.el.dataset.type || '')) return false;
+        if (ffc.size && c.el.dataset.fc !== '1') return false;
+      }
+      return true;
+    }
+    function ringPos(cx: number, cy: number, R: number, i: number, N: number) {
+      const a = spin + i * (2 * Math.PI / N) - Math.PI / 2;
+      return { x: cx + Math.cos(a) * R, y: cy + Math.sin(a) * R };
+    }
+
+    function layout() {
+      const W = stage!.clientWidth, H = stage!.clientHeight;
+      if (mode === 'over') {
+        labA.style.opacity = labI.style.opacity = '1';
+        labA.style.pointerEvents = labI.style.pointerEvents = 'auto';
+        back.classList.remove('on'); panel.classList.remove('on');
+        const cAx = W * 0.27, cIx = W * 0.73, cy = H * 0.60;
+        labA.style.transform = `translate(${cAx}px,60px) translate(-50%,-50%)`;
+        labI.style.transform = `translate(${cIx}px,60px) translate(-50%,-50%)`;
+        ([['ade', cAx, ctA], ['ing', cIx, ctI]] as [string, number, HTMLElement | null][]).forEach(([g, cx, ctEl]) => {
+          const list = cards.filter(c => c.group === g);
+          const vis = list.filter(pass); const N = vis.length;
+          const R = Math.max(95, Math.min((W / 2) / 2 - 70, H * 0.6 - 185, 55 + N * 16));
+          if (ctEl) ctEl.textContent = String(N);
+          list.forEach(c => { c.tgt.o = 0; c.tgt.s = 0.6; c.tgt.x = cx; c.tgt.y = cy; c.el.classList.remove('solo'); });
+          vis.forEach((c, i) => { const p = ringPos(cx, cy, R, i, N); c.tgt = { x: p.x, y: p.y, s: 0.8, o: 1 }; });
+        });
+      } else {
+        labA.style.opacity = labI.style.opacity = '0';
+        labA.style.pointerEvents = labI.style.pointerEvents = 'none';
+        back.classList.add('on'); panel.classList.add('on');
+        const G = mode, cx = W * 0.42, cy = H / 2;
+        psub.textContent = (G === 'ade' ? 'ADE / Economía' : 'Ingeniería');
+        cards.filter(c => c.group !== G).forEach(c => { c.tgt = { x: cx, y: cy, s: 0.5, o: 0 }; c.el.classList.remove('solo'); });
+        const list = cards.filter(c => c.group === G);
+        const vis = list.filter(pass); const N = vis.length;
+        pcount.textContent = N + (N === 1 ? ' resultado' : ' asignaturas');
+        list.forEach(c => c.el.classList.remove('solo'));
+        if (N === 1) {
+          const c = vis[0]; c.el.classList.add('solo'); c.tgt = { x: cx, y: cy, s: 1, o: 1 };
+          list.filter(x => x !== c).forEach(x => { x.tgt = { x: cx, y: cy, s: 0.5, o: 0 }; });
+        } else if (N > 0) {
+          const R = Math.max(115, Math.min(Math.min(W, H) / 2 - 95, 75 + N * 20));
+          list.forEach(c => { c.tgt.o = 0; c.tgt.s = 0.5; c.tgt.x = cx; c.tgt.y = cy; });
+          vis.forEach((c, i) => { const p = ringPos(cx, cy, R, i, N); c.tgt = { x: p.x, y: p.y, s: 1, o: 1 }; });
+        } else {
+          list.forEach(c => { c.tgt.o = 0; c.tgt.s = 0.5; c.tgt.x = cx; c.tgt.y = cy; });
+        }
+      }
+      cards.forEach(c => c.el.style.pointerEvents = c.tgt.o > 0.5 ? 'auto' : 'none');
+    }
+
+    function clearFilters() {
+      query = ''; if (cq) cq.value = ''; if (hq) hq.value = '';
+      ftype.clear(); ffc.clear();
+      panel.querySelectorAll('.cz-pill.on').forEach(p => p.classList.remove('on'));
+    }
+    function focus(g: string) { mode = g; clearFilters(); }
+    function reset() { mode = 'over'; clearFilters(); }
+
+    function onStageClick(e: MouseEvent) {
+      if (mode !== 'over') return;
+      const r = stage!.getBoundingClientRect();
+      focus((e.clientX - r.left) < stage!.clientWidth / 2 ? 'ade' : 'ing');
+    }
+    stage.addEventListener('click', onStageClick);
+    back.addEventListener('click', e => { e.stopPropagation(); reset(); });
+
+    function setQ(v: string) { query = v; if (cq) cq.value = v; if (hq) hq.value = v; }
+    function onCq(e: Event) { setQ((e.target as HTMLInputElement).value); }
+    function onHq(e: Event) { setQ((e.target as HTMLInputElement).value); }
+    cq && cq.addEventListener('input', onCq);
+    hq && hq.addEventListener('input', onHq);
+    panel.addEventListener('click', e => e.stopPropagation());
+
+    panel.querySelectorAll<HTMLElement>('.cz-pills').forEach(g => {
+      const set = g.dataset.group === 'type' ? ftype : ffc;
+      g.querySelectorAll<HTMLElement>('.cz-pill').forEach(p => p.addEventListener('click', ev => {
+        ev.stopPropagation();
+        p.classList.toggle('on'); const v = p.dataset.v || '';
+        set.has(v) ? set.delete(v) : set.add(v);
+      }));
+    });
+
+    const state: any = {
+      raf: 0,
+      cleanup() { hq && hq.removeEventListener('input', onHq); },
+    };
+    (window as any).__carousel = state;
+
+    function frame() {
+      if (!reduce) spin += 0.0015;
+      layout();
+      const k = 0.13;
+      cards.forEach(c => {
+        c.cur.x += (c.tgt.x - c.cur.x) * k; c.cur.y += (c.tgt.y - c.cur.y) * k;
+        c.cur.s += (c.tgt.s - c.cur.s) * k; c.cur.o += (c.tgt.o - c.cur.o) * 0.18;
+        c.el.style.transform = `translate(${c.cur.x.toFixed(1)}px,${c.cur.y.toFixed(1)}px) translate(-50%,-50%) scale(${c.cur.s.toFixed(3)})`;
+        c.el.style.opacity = c.cur.o.toFixed(3);
+      });
+      state.raf = requestAnimationFrame(frame);
+    }
+    frame();
+  }
+
+  initCarousel();
+  document.addEventListener('astro:after-swap', initCarousel);
+</script>

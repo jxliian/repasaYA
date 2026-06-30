@@ -1,15 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import SubjectCard from '../components/SubjectCard.astro';
-import { subjects } from '../data/subjects';
+import SubjectCarousel from '../components/SubjectCarousel.astro';
 import { execSync } from 'child_process';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-
-const adeSubjects  = subjects.filter(s =>
-  ['economia-espanola','rrhh','organizacion-empresas','do1','aef'].includes(s.slug));
-const infoSubjects = subjects.filter(s =>
-  ['sibw','mp','dsd'].includes(s.slug));
 
 /* ── Parse git log → human-readable Novedades ── */
 type Commit = { date: string; badge: string; cls: string; scope: string; text: string };
@@ -43,13 +37,11 @@ try {
 } catch { /* build CI */ }
 
 const lastUpdate = commits[0]?.date ?? null;
-const totalFlash = 128 + 40 + 63;
 
 const year = new Date().getFullYear();
 const ISSUE_URL   = 'https://github.com/jxliian/repasaYA/issues/new?title=Solicitud%3A+%5BNombre%5D&body=%23%23+Datos%0A-%20**Asignatura**%3A+%0A-%20**Curso**%3A+';
 const REPO_URL    = 'https://github.com/jxliian/repasaYA';
 const PROFILE_URL = 'https://github.com/jxliian';
-const WA_URL      = 'https://wa.me/?text=%F0%9F%93%9A+*repasaYA*+%E2%80%94+Tests+y+flashcards+para+la+carrera.+Gratis+%E2%86%92+https%3A%2F%2Fjxliian.github.io%2FrepasaYA%2F';
 ---
 <Base title="repasaYA" description="Tipo test, V/F y flashcards para ADE e Informática. +1000 preguntas, +200 flashcards. Gratis.">
 <style>
@@ -507,56 +499,6 @@ main {
 }
 
 /* ═══════════════════════════════════════════════════════
-   FILTER BAR — glass + filter chips
-═══════════════════════════════════════════════════════ */
-.filter-bar {
-  display: flex; align-items: center; gap: 20px;
-  padding: 14px 22px; flex-wrap: wrap;
-}
-.fgroup { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.fgroup-label {
-  font-size: .65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .8px; color: rgba(255,255,255,0.30); white-space: nowrap;
-  padding-right: 6px; border-right: 1px solid rgba(255,255,255,0.08);
-}
-.fchips { display: flex; gap: 6px; flex-wrap: wrap; }
-.fchip {
-  font-size: .77rem; font-weight: 600; border-radius: 99px;
-  padding: 5px 14px;
-  background: transparent; border: 1px solid rgba(255,255,255,0.10);
-  color: rgba(255,255,255,0.45); cursor: pointer; transition: all .18s;
-  font-family: inherit;
-}
-.fchip:hover:not(.on) {
-  border-color: rgba(198,241,53,.40); color: rgba(255,255,255,0.80);
-}
-.fchip.on {
-  background: rgba(198,241,53,0.12);
-  border-color: rgba(198,241,53,0.50);
-  color: #c6f135;
-}
-
-/* ═══════════════════════════════════════════════════════
-   SUBJECT SECTIONS
-═══════════════════════════════════════════════════════ */
-.subject-section { display: flex; flex-direction: column; gap: 14px; }
-.section-label {
-  display: flex; align-items: center; gap: 10px;
-  font-size: .69rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1.1px; color: rgba(255,255,255,0.30); padding: 0 2px;
-}
-.section-label::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.08); }
-.subject-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 16px;
-}
-
-/* No results */
-.no-results { text-align:center; padding:48px 24px; color:rgba(255,255,255,0.35); font-size:.9rem; }
-.no-results[hidden] { display:none; }
-
-/* ═══════════════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════════════ */
 footer {
@@ -612,8 +554,6 @@ footer a:hover { color: #b4e02e; }
   .stats-row  { gap: 6px; }
   .stat-chip  { padding: 10px 14px; }
   .stat-num   { font-size: 1.5rem; }
-  .filter-bar { gap: 12px; }
-  .subject-grid { grid-template-columns: 1fr; }
 }
 </style>
 
@@ -739,47 +679,8 @@ footer a:hover { color: #b4e02e; }
 
   </div><!-- /bento -->
 
-  <!-- ─── FILTER BAR ─────────────────────────────── -->
-  <nav class="filter-bar glass" aria-label="Filtros de asignaturas">
-    <div class="fgroup">
-      <span class="fgroup-label" id="lbl-grado">Grado</span>
-      <div class="fchips" role="group" aria-labelledby="lbl-grado">
-        <button class="fchip on" data-degree=""     aria-pressed="true">Todos</button>
-        <button class="fchip"    data-degree="ade"  aria-pressed="false">📊 ADE</button>
-        <button class="fchip"    data-degree="info" aria-pressed="false">💻 Informática</button>
-      </div>
-    </div>
-    <div class="fgroup">
-      <span class="fgroup-label" id="lbl-tipo">Tipo</span>
-      <div class="fchips" role="group" aria-labelledby="lbl-tipo">
-        <button class="fchip on" data-mtype=""           aria-pressed="true">Todo</button>
-        <button class="fchip"    data-mtype="test"       aria-pressed="false">Tipo Test</button>
-        <button class="fchip"    data-mtype="vf"         aria-pressed="false">V/F</button>
-        <button class="fchip"    data-mtype="flashcards" aria-pressed="false">Flashcards</button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- No results -->
-  <div class="no-results" id="no-results" role="status" hidden>
-    <p>Sin resultados para "<strong id="no-q"></strong>".</p>
-    <p style="font-size:.8rem;margin-top:6px">Prueba otro filtro o borra la búsqueda.</p>
-  </div>
-
-  <!-- ─── SUBJECT SECTIONS ────────────────────────── -->
-  <section class="subject-section" data-section="ade" aria-labelledby="lbl-ade">
-    <h2 class="section-label" id="lbl-ade">📊 Administración de Empresas</h2>
-    <div class="subject-grid">
-      {adeSubjects.map(s => <SubjectCard subject={s} degree="ade" />)}
-    </div>
-  </section>
-
-  <section class="subject-section" data-section="info" aria-labelledby="lbl-info">
-    <h2 class="section-label" id="lbl-info">💻 Ingeniería Informática</h2>
-    <div class="subject-grid">
-      {infoSubjects.map(s => <SubjectCard subject={s} degree="info" />)}
-    </div>
-  </section>
+  <!-- ─── CARRUSEL DUAL DE ASIGNATURAS ────────────── -->
+  <SubjectCarousel />
 
 </main>
 
@@ -797,77 +698,17 @@ footer a:hover { color: #b4e02e; }
   const kbd = document.getElementById('search-kbd');
   if (kbd) kbd.textContent = /Mac|iPhone|iPod|iPad/.test(navigator.platform) ? '⌘K' : 'Ctrl K';
 
-  /* Cmd/Ctrl+K → focus search */
+  /* Cmd/Ctrl+K → focus search; Escape → limpiar (el carrusel reacciona al input) */
   const input = document.getElementById('search-input') as HTMLInputElement | null;
   document.addEventListener('keydown', (e: KeyboardEvent) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
       e.preventDefault(); input?.focus(); input?.select();
     }
     if (e.key === 'Escape' && document.activeElement === input) {
-      input?.blur(); if (input) input.value = ''; applyFilters();
+      input?.blur();
+      if (input) { input.value = ''; input.dispatchEvent(new Event('input', { bubbles: true })); }
     }
   });
-
-  /* Filter state */
-  let activeDeg   = '';
-  let activeMtype = '';
-
-  function applyFilters() {
-    const q = input?.value.toLowerCase().trim() ?? '';
-    let visible = 0;
-
-    document.querySelectorAll<HTMLElement>('[data-slug]').forEach(card => {
-      let show = true;
-      if (q && !(card.dataset.title ?? '').includes(q)) show = false;
-      if (activeDeg   && card.dataset.degree !== activeDeg) show = false;
-      if (activeMtype === 'test'
-        && !['test','both'].includes(card.dataset.type ?? '')) show = false;
-      if (activeMtype === 'vf'
-        && !['vf','both'].includes(card.dataset.type ?? '')) show = false;
-      if (activeMtype === 'flashcards' && card.dataset.flashcards !== '1') show = false;
-
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-
-    document.querySelectorAll<HTMLElement>('[data-section]').forEach(sec => {
-      const any = [...sec.querySelectorAll<HTMLElement>('[data-slug]')]
-        .some(c => c.style.display !== 'none');
-      sec.style.display = any ? '' : 'none';
-    });
-
-    const nr = document.getElementById('no-results') as HTMLElement | null;
-    const nq = document.getElementById('no-q') as HTMLElement | null;
-    if (nr) {
-      if (visible === 0) { nr.removeAttribute('hidden'); if (nq) nq.textContent = q || '(filtro)'; }
-      else { nr.setAttribute('hidden',''); }
-    }
-  }
-
-  document.querySelectorAll<HTMLButtonElement>('[data-degree]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeDeg = btn.dataset.degree ?? '';
-      document.querySelectorAll<HTMLButtonElement>('[data-degree]').forEach(b => {
-        b.classList.toggle('on', b === btn);
-        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-      });
-      applyFilters();
-    });
-  });
-
-  document.querySelectorAll<HTMLButtonElement>('[data-mtype]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeMtype = btn.dataset.mtype ?? '';
-      document.querySelectorAll<HTMLButtonElement>('[data-mtype]').forEach(b => {
-        b.classList.toggle('on', b === btn);
-        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-      });
-      applyFilters();
-    });
-  });
-
-  input?.addEventListener('input', applyFilters);
-  document.addEventListener('astro:after-swap', applyFilters);
 </script>
 
 <!-- ══════════════════════════════════════════════════
