@@ -2,6 +2,9 @@
 import { ClientRouter } from 'astro:transitions';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/jetbrains-mono';
+import '@fontsource/unbounded/500.css';
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/800.css';
 
 interface Props {
   title: string;
@@ -43,35 +46,37 @@ const pageTitle =
   <ClientRouter />
   <style is:global>
     :root {
-      --bg:           #060608;
-      --surface:      #0d0d12;
-      --surface2:     #15151c;
-      --border:       rgba(255,255,255,0.08);
-      --glass:        #0d0d12;            /* compat: ya no es cristal, es sólido */
-      --glass-hi:     #15151c;
-      --glass-border: rgba(255,255,255,0.08);
-      --accent:       #c6f135;            /* lima eléctrica */
-      --accent2:      #c6f135;            /* compat: ya no hay 2º color de gradiente */
-      --accent-hover: #b4e02e;
-      --accent-soft:  rgba(198,241,53,0.12);
-      --accent-line:  rgba(198,241,53,0.30);
-      --on-accent:    #0c1400;            /* texto sobre fondos lima */
-      --cyan:         #c6f135;            /* compat */
-      --correct:      #3ddc84;
-      --wrong:        #ff5468;
-      --reveal:       #f5b800;
-      --text:         #f4f5f0;
-      --text-muted:   #8b8f86;
-      --radius:       16px;
-      --radius-lg:    24px;
-      --header-bg:    rgba(6,6,8,0.80);
-      --font-display: 'Space Grotesk Variable', system-ui, -apple-system, sans-serif;
+      --bg:           #faf9fe;
+      --surface:      #ffffff;
+      --surface2:     #f5f1fd;
+      --border:       rgba(20,20,40,0.08);
+      --glass:        #ffffff;            /* compat */
+      --glass-hi:     #f5f1fd;
+      --glass-border: rgba(20,20,40,0.08);
+      --accent:       #8a6bd8;            /* lavanda */
+      --accent2:      #8a6bd8;            /* compat (ya no hay 2º color) */
+      --accent-strong:#7a5bcf;
+      --accent-hover: #7a5bcf;
+      --accent-soft:  #ece6fb;
+      --accent-line:  #d7ccf5;
+      --on-accent:    #ffffff;
+      --cyan:         #8a6bd8;            /* compat */
+      --correct:      #1f9d57;
+      --wrong:        #e5484d;
+      --reveal:       #c98a00;
+      --text:         #1b1b2e;
+      --text-muted:   #6b6f86;
+      --radius:       18px;
+      --radius-lg:    26px;
+      --header-bg:    rgba(255,255,255,0.78);
+      --font-display: 'Unbounded', system-ui, -apple-system, sans-serif;
+      --font-body:    'Space Grotesk Variable', system-ui, sans-serif;
       --font-mono:    'JetBrains Mono Variable', ui-monospace, monospace;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; }
     body {
-      font-family: var(--font-display);
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -79,7 +84,7 @@ const pageTitle =
     /* Grano editorial — película sutil sobre todo, no bloquea clics */
     body::after {
       content: ''; position: fixed; inset: 0; z-index: 9999;
-      pointer-events: none; opacity: 0.045; mix-blend-mode: overlay;
+      pointer-events: none; opacity: 0.02;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     @media (prefers-reduced-motion: reduce) { body::after { display: none; } }
