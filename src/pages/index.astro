@@ -88,6 +88,8 @@ html, body { height: auto; overflow: visible; }
     transparent 70%);
   filter: blur(100px);
 }
+:root[data-theme="dark"] .orb-tl,
+:root[data-theme="dark"] .orb-br { opacity: 1.5; }
 
 /* ═══════════════════════════════════════════════════════
    HEADER — sticky nav (claro)
@@ -494,6 +496,10 @@ footer a:hover { color: var(--accent-strong); }
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    let pRGB = getComputedStyle(document.documentElement).getPropertyValue('--particle').trim() || '60,52,110';
+    const onTheme = () => { pRGB = getComputedStyle(document.documentElement).getPropertyValue('--particle').trim() || pRGB; };
+    window.addEventListener('themechange', onTheme);
+
     let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
     let particles: P[] = [];
     const mouse = { x: -9999, y: -9999, active: false };
@@ -551,7 +557,7 @@ footer a:hover { color: var(--accent-strong); }
         // Draw node
         ctx!.beginPath();
         ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx!.fillStyle = 'rgba(60,52,110,0.5)';
+        ctx!.fillStyle = `rgba(${pRGB},0.5)`;
         ctx!.fill();
       }
 
@@ -564,7 +570,7 @@ footer a:hover { color: var(--accent-strong); }
           const d2 = dx * dx + dy * dy;
           if (d2 < LINK_DIST * LINK_DIST) {
             const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.22;
-            ctx!.strokeStyle = `rgba(70,60,120,${alpha})`;
+            ctx!.strokeStyle = `rgba(${pRGB},${alpha})`;
             ctx!.lineWidth = 1;
             ctx!.beginPath();
             ctx!.moveTo(a.x, a.y);
@@ -581,7 +587,7 @@ footer a:hover { color: var(--accent-strong); }
           const d2 = dx * dx + dy * dy;
           if (d2 < MOUSE_DIST * MOUSE_DIST) {
             const alpha = (1 - Math.sqrt(d2) / MOUSE_DIST) * 0.45;
-            ctx!.strokeStyle = `rgba(110,95,200,${alpha})`;
+            ctx!.strokeStyle = `rgba(${pRGB},${Math.min(alpha * 1.6, 0.6)})`;
             ctx!.lineWidth = 1;
             ctx!.beginPath();
             ctx!.moveTo(mouse.x, mouse.y);
@@ -607,6 +613,7 @@ footer a:hover { color: var(--accent-strong); }
         window.removeEventListener('resize', resize);
         window.removeEventListener('pointermove', onMove);
         window.removeEventListener('pointerout', onLeave);
+        window.removeEventListener('themechange', onTheme);
       },
     };
     (window as any).__particles = state;

@@ -151,6 +151,20 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
     .cz-panel { width: 168px; padding: 13px; }
     .cz-lab .nm { font-size: 22px; }
   }
+
+  /* ── Tema oscuro ── */
+  :global(html[data-theme="dark"]) .cz-board {
+    background: linear-gradient(135deg, #171622 0%, #1c1830 55%, #241a2b 100%);
+  }
+  :global(html[data-theme="dark"]) .cz-blob { opacity: .34; }
+  :global(html[data-theme="dark"]) .cz-blob.x1 { background: #4b3a86; }
+  :global(html[data-theme="dark"]) .cz-blob.x2 { background: #2f5a47; }
+  :global(html[data-theme="dark"]) .cz-back,
+  :global(html[data-theme="dark"]) .cz-panel { background: rgba(28,26,42,0.86); }
+  :global(html[data-theme="dark"]) .ccard[data-group="ade"] { --tint: #241d3a; --accent: #a78bea; }
+  :global(html[data-theme="dark"]) .ccard[data-group="ing"] { --tint: #18283c; --accent: #6ea6dd; }
+  :global(html[data-theme="dark"]) .cc-cta { color: #15101f; }
+  :global(html[data-theme="dark"]) .cz-toast { background: var(--surface2); border: 1px solid var(--border); }
 </style>
 
 <script>
