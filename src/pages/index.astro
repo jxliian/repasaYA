@@ -118,7 +118,8 @@ html, body { height: auto; overflow: visible; }
 .site-header {
   position: sticky; top: 0; z-index: 200;
   background: var(--header-bg);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(6px);
   padding: 0 28px; height: 64px;
   display: flex; align-items: center; gap: 16px;
 }
@@ -126,13 +127,13 @@ html, body { height: auto; overflow: visible; }
 .site-logo {
   font-size: 1.4rem; font-weight: 800; letter-spacing: -1.2px;
   flex-shrink: 0; display: flex; align-items: center; gap: 2px;
-  color: var(--text);
+  color: var(--text); font-family: var(--font-display);
 }
 .logo-dot {
   display: inline-block; width: 7px; height: 7px; border-radius: 50%;
   background: var(--accent); flex-shrink: 0;
   margin-bottom: 6px; margin-left: 1px;
-  box-shadow: 0 0 10px rgba(198,241,53,.9);
+  box-shadow: 0 0 8px rgba(138,107,216,.7);
   animation: dotPulse 2.4s ease-in-out infinite;
 }
 @keyframes dotPulse { 0%,100%{opacity:1} 50%{opacity:.4} }
@@ -141,25 +142,25 @@ html, body { height: auto; overflow: visible; }
 .search-wrap {
   flex: 1; max-width: 460px; min-width: 120px;
   display: flex; align-items: center; gap: 10px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: #fff;
+  border: 1.5px solid var(--border);
   border-radius: 12px; padding: 0 14px; height: 40px;
   transition: border-color .2s, box-shadow .2s; cursor: text;
 }
 .search-wrap:focus-within {
-  border-color: rgba(198,241,53,.50);
-  box-shadow: 0 0 0 3px rgba(198,241,53,.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
-.search-icon { color: rgba(255,255,255,0.35); flex-shrink: 0; }
+.search-icon { color: #9b9fb2; flex-shrink: 0; }
 .search-input {
   flex: 1; background: none; border: none; outline: none;
-  color: #fff; font-size: .88rem; font-family: inherit;
+  color: var(--text); font-size: .88rem; font-family: inherit;
 }
-.search-input::placeholder { color: rgba(255,255,255,0.30); }
+.search-input::placeholder { color: #9b9fb2; }
 .search-kbd {
   flex-shrink: 0; font-size: .64rem; font-weight: 700;
-  color: rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-muted);
+  background: #f0f0f6; border: 1px solid var(--border);
   border-radius: 5px; padding: 2px 7px; font-family: inherit;
   transition: opacity .2s;
 }
@@ -167,32 +168,30 @@ html, body { height: auto; overflow: visible; }
 
 .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
-/* ── NEON BUTTON "Solicitar" (cybersecurity style) ── */
-/* shadow-[0_0_15px_rgba(16,185,129,0.5)] text-emerald-400 border-emerald-500 */
-.btn-neon {
-  display: inline-flex; align-items: center; gap: 6px;
-  background:   rgba(6,78,59,0.20);
-  border:       1px solid #10b981;
-  border-radius: 99px; padding: 7px 16px;
-  color:        #34d399;
-  font-size: .78rem; font-weight: 700; white-space: nowrap;
-  box-shadow: 0 0 15px rgba(16,185,129,0.50),
-              inset 0 0 12px rgba(16,185,129,0.05);
-  transition: all .22s;
+/* ── Botones del header (paleta clara) ── */
+.hbtn {
+  display: inline-flex; align-items: center; gap: 7px; border-radius: 999px;
+  padding: 8px 14px; font-size: .82rem; font-weight: 600; white-space: nowrap;
+  border: 1.5px solid transparent; transition: all .18s;
 }
-.btn-neon:hover {
-  background: rgba(6,78,59,0.35);
-  border-color: #34d399;
-  box-shadow: 0 0 25px rgba(16,185,129,0.70),
-              0 0 60px rgba(16,185,129,0.20);
-  transform: translateY(-1px);
-}
+.hbtn:hover { transform: translateY(-1px); }
+.b-ghost  { background: #fff; border-color: var(--border); color: var(--text); }
+.b-ghost:hover { border-color: var(--accent-line); }
+.b-star   { background: #fff8e8; border-color: #f0d699; color: #9a6b00; }
+.b-accent { background: var(--accent); color: var(--on-accent);
+  box-shadow: 0 6px 16px rgba(138,107,216,.32); }
+.b-accent:hover { background: var(--accent-strong); }
+
 .hits-pill {
-  display: flex; align-items: center; height: 32px; overflow: hidden;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 99px; padding: 0 10px;
+  display: inline-flex; align-items: center; border-radius: 8px; overflow: hidden;
+  border: 1.5px solid var(--border);
 }
-.hits-pill img { display: block; }
+.hits-lbl {
+  font-family: var(--font-mono); font-size: .66rem; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted);
+  background: #efedf6; padding: 6px 9px;
+}
+.hits-num { display: block; background: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════
    MAIN WRAPPER — z:1 keeps it above bg-layer (z:0)
@@ -552,8 +551,9 @@ footer a:hover { color: #b4e02e; }
 @media (max-width: 700px) {
   .site-header { padding: 0 16px; }
   .search-wrap { max-width: none; }
-  .btn-neon span { display: none; }
-  .btn-neon { padding: 7px 11px; }
+  .gh-only { display: none; }              /* Seguir, Star y Visitas fuera en móvil */
+  .b-accent span { display: none; }        /* Solicitar solo icono */
+  .b-accent { padding: 8px 11px; }
   main { padding: 20px 14px 60px; gap: 14px; }
   .bento { grid-template-columns: 1fr; gap: 14px; }
   .b-timeline { grid-column: span 1; }
@@ -573,7 +573,6 @@ footer a:hover { color: #b4e02e; }
   .stat-num   { font-size: 1.5rem; }
   .filter-bar { gap: 12px; }
   .subject-grid { grid-template-columns: 1fr; }
-  .hits-pill  { display: none; }
 }
 </style>
 
@@ -610,17 +609,18 @@ footer a:hover { color: #b4e02e; }
   </div>
 
   <div class="header-right">
-    <!-- NEON BUTTON: emerald border + glow (cybersecurity style) -->
-    <a class="btn-neon" href={ISSUE_URL} target="_blank" rel="noopener" aria-label="Solicitar asignatura">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    <a class="hbtn b-ghost gh-only" href={PROFILE_URL} target="_blank" rel="noopener" aria-label="Seguir en GitHub">
+      <svg class="gh" width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span>Seguir</span>
+    </a>
+    <a class="hbtn b-star gh-only" href={REPO_URL} target="_blank" rel="noopener" aria-label="Dar estrella en GitHub">★ <span>Star</span></a>
+    <a class="hbtn b-accent" href={ISSUE_URL} target="_blank" rel="noopener" aria-label="Solicitar asignatura">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
       <span>Solicitar</span>
     </a>
-    <div class="hits-pill" aria-label="Visitas">
-      <img
-        src="https://hits.sh/jxliian.github.io/repasaYA/.svg?style=flat-square&label=visitas&color=c6f135&labelColor=050505"
-        alt="visitas" height="18" loading="lazy"
-      />
+    <div class="hits-pill gh-only" aria-label="Visitas">
+      <span class="hits-lbl">👁 Visitas</span>
+      <img class="hits-num" src="https://hits.sh/jxliian.github.io/repasaYA.svg?style=flat-square&label=&color=8a6bd8&labelColor=8a6bd8" alt="visitas" height="20" loading="lazy" />
     </div>
   </div>
 </header>
