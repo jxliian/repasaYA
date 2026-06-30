@@ -7,6 +7,7 @@ export interface Subject {
   icon: string;
   description: string;
   type: QuizType;
+  group: 'ade' | 'ing'; // carrusel: ADE/Economía vs Ingeniería
   chips: string[];       // etiquetas bajo la card
   external?: string;     // si ya existe en otro repo
   dataFile?: string;     // nombre del json en src/data/
@@ -21,6 +22,7 @@ export const subjects: Subject[] = [
     icon: '🇪🇸',
     description: 'Tests por tema, banco de preguntas, flashcards y exámenes oficiales.',
     type: 'test',
+    group: 'ade',
     chips: ['+300 preguntas', '9 temas'],
     external: 'https://jxliian.github.io/EE_tipotest/',
   },
@@ -31,6 +33,7 @@ export const subjects: Subject[] = [
     icon: '👥',
     description: '312 V/F con justificación + tipo test. 11 bloques y exámenes.',
     type: 'both',
+    group: 'ade',
     chips: ['312 V/F', 'Tipo test'],
     dataFile: 'rrhh.json',
   },
@@ -41,6 +44,7 @@ export const subjects: Subject[] = [
     icon: '🏢',
     description: '397 preguntas tipo test y 128 flashcards sobre Mintzberg: configuraciones, parámetros de diseño, mecanismos de coordinación y más.',
     type: 'test',
+    group: 'ade',
     chips: ['397 preguntas', '128 flashcards', '20 bloques'],
     dataFile: 'oe.json',
   },
@@ -51,6 +55,7 @@ export const subjects: Subject[] = [
     icon: '⚙️',
     description: '80 V/F con justificación. T1-T7: Intro, Cadena de Suministro, Diseño de Producto, Estrategia de Proceso, Capacidad, Localización y Layout.',
     type: 'vf',
+    group: 'ade',
     chips: ['80 V/F', '7 temas'],
     dataFile: 'do1.json',
   },
@@ -61,6 +66,7 @@ export const subjects: Subject[] = [
     icon: '🌐',
     description: '286 preguntas tipo test y 40 flashcards sobre HTTP, SEO, UX, XML, RGPD y normativa web.',
     type: 'test',
+    group: 'ing',
     chips: ['286 preguntas', '40 flashcards', '4 temas'],
     dataFile: 'sibw.json',
   },
@@ -71,6 +77,7 @@ export const subjects: Subject[] = [
     icon: '🖧',
     description: 'Resumen de los temas 4 y 5 en PDF. Temario completo para repasar antes del examen.',
     type: 'test',
+    group: 'ing',
     chips: ['Resumen T4+T5', 'PDF'],
   },
   {
@@ -80,6 +87,7 @@ export const subjects: Subject[] = [
     icon: '💻',
     description: '67 preguntas tipo test con código C++. Punteros, clases dinámicas, sobrecarga de operadores y ficheros.',
     type: 'test',
+    group: 'ing',
     chips: ['67 preguntas', '9 temas', 'C++'],
     dataFile: 'mp-test.json',
   },
@@ -90,6 +98,7 @@ export const subjects: Subject[] = [
     icon: '📈',
     description: '38 preguntas tipo test con casos reales (Dulcesol, Viscofan, Mercadona…) y 63 flashcards de ratios, PMM, NOF y rentabilidad.',
     type: 'test',
+    group: 'ade',
     chips: ['38 preguntas', '63 flashcards', 'Casos reales'],
     dataFile: 'aef-test.json',
   },
@@ -101,6 +110,7 @@ export const subjects: Subject[] = [
   //   icon: '📈',
   //   description: '...',
   //   type: 'vf',
+  //   group: 'ade',          // 'ade' | 'ing'
   //   chips: ['XX preguntas'],
   //   dataFile: 'macro.json',
   // },
