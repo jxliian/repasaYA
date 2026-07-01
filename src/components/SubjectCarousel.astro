@@ -1,5 +1,6 @@
 ---
 import { subjects, type Subject } from '../data/subjects';
+import SubjectCard from './SubjectCard.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const ade = subjects.filter(s => s.group === 'ade');
 const ing = subjects.filter(s => s.group === 'ing');
@@ -53,6 +54,23 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
     ))}
 
     <div class="cz-toast" id="cz-toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- ── Móvil: rejilla estática de tarjetas (sin carrusel orbital) ── -->
+  <div class="cz-mobile" id="cz-mobile">
+    <div class="czm-group">
+      <div class="czm-lab"><span class="nm">ADE / Economía</span><span class="ct">{ade.length} asignaturas</span></div>
+      <div class="czm-grid">
+        {ade.map(s => <SubjectCard subject={s} degree="ade" />)}
+      </div>
+    </div>
+    <div class="czm-group">
+      <div class="czm-lab ing"><span class="nm">Ingeniería</span><span class="ct">{ing.length} asignaturas</span></div>
+      <div class="czm-grid">
+        {ing.map(s => <SubjectCard subject={s} degree="info" />)}
+      </div>
+    </div>
+    <p class="czm-empty" id="cz-mobile-empty" hidden>Sin resultados para tu búsqueda.</p>
   </div>
 </section>
 
@@ -152,6 +170,24 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
     .cz-lab .nm { font-size: 22px; }
   }
 
+  /* ── Móvil: rejilla estática (sustituye al carrusel orbital) ── */
+  .cz-mobile { display: none; }
+  .czm-group + .czm-group { margin-top: 28px; }
+  .czm-lab { display: flex; align-items: baseline; gap: 10px; margin: 0 4px 14px; }
+  .czm-lab .nm { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--text); line-height: 1; }
+  .czm-lab .ct { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
+  .czm-lab.ing .nm { color: #274a6b; }
+  .czm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .czm-empty { text-align: center; color: var(--text-muted); font-size: 14px; padding: 24px 0; }
+  @media (max-width: 440px) { .czm-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 768px) {
+    .cz-board { display: none; }
+    .cz-mobile { display: block; }
+  }
+
+  :global(html[data-theme="dark"]) .czm-lab.ing .nm { color: #8fbce8; }
+
   /* ── Tema oscuro ── */
   :global(html[data-theme="dark"]) .cz-board {
     background: linear-gradient(135deg, #171622 0%, #1c1830 55%, #241a2b 100%);
@@ -168,13 +204,21 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
 </style>
 
 <script>
+  const MOBILE = '(max-width: 768px)';
+
   function initCarousel() {
     const stage = document.getElementById('cz-stage');
     if (!stage) return;
 
-    // Cancela cualquier rAF anterior (View Transitions)
+    // Cancela cualquier rAF/listeners anteriores (View Transitions o cambio de tamaño)
     const prev = (window as any).__carousel;
-    if (prev) cancelAnimationFrame(prev.raf);
+    if (prev) { cancelAnimationFrame(prev.raf); prev.ac?.abort(); (window as any).__carousel = null; }
+
+    // En móvil mostramos una rejilla estática de tarjetas — no animamos el carrusel orbital
+    if (matchMedia(MOBILE).matches) return;
+
+    const ac = new AbortController();
+    const signal = ac.signal;
 
     const labA = document.getElementById('cz-labA') as HTMLElement;
     const labI = document.getElementById('cz-labI') as HTMLElement;
@@ -202,7 +246,7 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
       c.el.addEventListener('click', ev => {
         if (mode === 'over') { ev.preventDefault(); ev.stopPropagation(); focus(c.group); }
         // en modo enfocado: navegación nativa del <a>
-      });
+      }, { signal });
     });
 
     function pass(c: Card) {
@@ -275,15 +319,15 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
       const r = stage!.getBoundingClientRect();
       focus((e.clientX - r.left) < stage!.clientWidth / 2 ? 'ade' : 'ing');
     }
-    stage.addEventListener('click', onStageClick);
-    back.addEventListener('click', e => { e.stopPropagation(); reset(); });
+    stage.addEventListener('click', onStageClick, { signal });
+    back.addEventListener('click', e => { e.stopPropagation(); reset(); }, { signal });
 
     function setQ(v: string) { query = v; if (cq) cq.value = v; if (hq) hq.value = v; }
     function onCq(e: Event) { setQ((e.target as HTMLInputElement).value); }
     function onHq(e: Event) { setQ((e.target as HTMLInputElement).value); }
-    cq && cq.addEventListener('input', onCq);
-    hq && hq.addEventListener('input', onHq);
-    panel.addEventListener('click', e => e.stopPropagation());
+    cq && cq.addEventListener('input', onCq, { signal });
+    hq && hq.addEventListener('input', onHq, { signal });
+    panel.addEventListener('click', e => e.stopPropagation(), { signal });
 
     panel.querySelectorAll<HTMLElement>('.cz-pills').forEach(g => {
       const set = g.dataset.group === 'type' ? ftype : ffc;
@@ -291,13 +335,10 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
         ev.stopPropagation();
         p.classList.toggle('on'); const v = p.dataset.v || '';
         set.has(v) ? set.delete(v) : set.add(v);
-      }));
+      }, { signal }));
     });
 
-    const state: any = {
-      raf: 0,
-      cleanup() { hq && hq.removeEventListener('input', onHq); },
-    };
+    const state: any = { raf: 0, ac };
     (window as any).__carousel = state;
 
     function frame() {
@@ -315,6 +356,38 @@ const allCards = [...ade.map(s => card(s, 'ade')), ...ing.map(s => card(s, 'ing'
     frame();
   }
 
+  // Filtra la rejilla móvil con el buscador de la cabecera (el carrusel usa su propio filtro)
+  function initMobileSearch() {
+    const grid = document.getElementById('cz-mobile');
+    const hq = document.getElementById('search-input') as HTMLInputElement | null;
+    if (!grid || !hq || (hq as any).__czMobileSearch) return;
+    (hq as any).__czMobileSearch = true;
+    const empty = document.getElementById('cz-mobile-empty') as HTMLElement | null;
+    hq.addEventListener('input', () => {
+      const t = hq.value.toLowerCase().trim();
+      let any = false;
+      grid.querySelectorAll<HTMLElement>('.czm-group').forEach(g => {
+        let gAny = false;
+        g.querySelectorAll<HTMLElement>('.scard').forEach(c => {
+          const hit = !t || (c.dataset.title || '').includes(t);
+          c.style.display = hit ? '' : 'none';
+          if (hit) gAny = true;
+        });
+        g.style.display = gAny ? '' : 'none';
+        if (gAny) any = true;
+      });
+      if (empty) empty.hidden = any;
+    });
+  }
+
+  // Rehace el carrusel al cruzar el punto de ruptura (p. ej. girar el móvil)
+  if (!(window as any).__czMql) {
+    const mql = matchMedia(MOBILE);
+    mql.addEventListener('change', () => initCarousel());
+    (window as any).__czMql = mql;
+  }
+
   initCarousel();
-  document.addEventListener('astro:after-swap', initCarousel);
+  initMobileSearch();
+  document.addEventListener('astro:after-swap', () => { initCarousel(); initMobileSearch(); });
 </script>
