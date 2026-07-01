@@ -150,6 +150,12 @@ const pageTitle =
       try { localStorage.setItem('theme', t); } catch (e) {}
       window.dispatchEvent(new Event('themechange'));
     }
+    function currentTheme(): string {
+      try {
+        return localStorage.getItem('theme')
+          || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      } catch (e) { return 'light'; }
+    }
     if (!(window as any).__themeBound) {
       (window as any).__themeBound = true;
       document.addEventListener('click', (e) => {
@@ -157,6 +163,11 @@ const pageTitle =
         if (!btn) return;
         const cur = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
         applyTheme(cur === 'dark' ? 'light' : 'dark');
+      });
+      // Preserva el tema al navegar con View Transitions: el documento entrante
+      // no trae data-theme y volvería a claro. Lo fijamos antes del swap (sin parpadeo).
+      document.addEventListener('astro:before-swap', (e) => {
+        (e as any).newDocument.documentElement.dataset.theme = currentTheme();
       });
     }
   </script>

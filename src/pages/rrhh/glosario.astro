@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
 import glosarioData from '../../data/rrhh-glosario.json';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const totalTerms = glosarioData.length;
@@ -73,7 +74,10 @@ const totalTerms = glosarioData.length;
     <span style="color:var(--border)">|</span>
     <div class="logo"><span>RRHH</span> · Glosario</div>
   </div>
-  <div style="font-size:.78rem;color:var(--text-muted)">{totalTerms} términos</div>
+  <div style="display:flex;align-items:center;gap:12px">
+  <span style="font-size:.78rem;color:var(--text-muted)">{totalTerms} términos</span>
+  <ThemeToggle />
+</div>
 </header>
 
 <div class="tabs">

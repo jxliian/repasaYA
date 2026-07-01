@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
 import flashcardData from '../../data/oe-flashcards.json';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const totalTerms = flashcardData.length;
@@ -66,7 +67,10 @@ const totalTerms = flashcardData.length;
     <span style="color:var(--border)">|</span>
     <div class="logo"><span>OE</span> · Flashcards Mintzberg</div>
   </div>
-  <div style="font-size:.78rem;color:var(--text-muted)">{totalTerms} términos</div>
+  <div style="display:flex;align-items:center;gap:12px">
+  <span style="font-size:.78rem;color:var(--text-muted)">{totalTerms} términos</span>
+  <ThemeToggle />
+</div>
 </header>
 
 <div class="tabs">

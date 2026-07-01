@@ -345,8 +345,10 @@ footer a:hover { color: var(--accent-strong); }
    RESPONSIVE
 ═══════════════════════════════════════════════════════ */
 @media (max-width: 700px) {
-  .site-header { padding: 0 16px; }
-  .search-wrap { max-width: none; }
+  .site-header { padding: 0 14px; gap: 10px; }
+  .search-wrap { max-width: none; min-width: 0; }  /* deja que el buscador encoja: los botones no se salen */
+  .search-kbd { display: none; }                   /* ⌘K no aplica en móvil */
+  .header-right { gap: 8px; }
   .gh-only { display: none; }              /* Seguir, Star y Visitas fuera en móvil */
   .b-accent span { display: none; }        /* Solicitar solo icono */
   .b-accent { padding: 8px 11px; }
