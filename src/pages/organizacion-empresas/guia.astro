@@ -89,6 +89,93 @@ const trampas = [
   { t: 'Híbridas y misionera', d: 'Burocracia <b>duplicada</b> (divisional≈maquinal), adhocracia <b>emprendedora</b> (adhocracia operativa + estructura simple), <b>buro-adhocracia</b>. Misionera: reformadora / conversora / claustro.' },
 ];
 
+// ── Cada configuración a fondo (respuestas clave por config) ──
+const cfgDetalle = [
+  { n: 'Estructura simple', c: '#10b981', pts: [
+    'Poca elaboración: apenas hay tecnoestructura ni staff, y muy poca formalización.',
+    'Todo el poder lo concentra el <b>ápice estratégico</b> (el empresario) → centralización vertical y horizontal.',
+    'Ágil y flexible, pero arriesgada: depende de una sola persona.',
+    'Entorno <b>simple y dinámico</b>; típica de organizaciones jóvenes o pequeñas.',
+  ]},
+  { n: 'Burocracia maquinal', c: '#3b82f6', pts: [
+    'Producción en masa con división del trabajo <b>muy extensa y formalizada</b>.',
+    'La <b>tecnoestructura</b> gana poder al normalizar los procesos → descentralización horizontal <b>limitada</b>.',
+    'Ventaja: eficiencia y <b>homogeneidad e imparcialidad</b> en el trato. Problema: conflictos humanos en el núcleo.',
+    'Sistema técnico <b>regulador pero poco sofisticado</b>. Entorno simple y estable.',
+  ]},
+  { n: 'Burocracia profesional', c: '#8b5cf6', pts: [
+    'Coordina por <b>normalización de habilidades</b>: los profesionales se forman fuera antes de entrar.',
+    'La parte clave es el <b>núcleo de operaciones</b> (NO la tecnoestructura), con gran autonomía para decidir cómo trabajar.',
+    'Descentralizada vertical y horizontalmente; jerarquías paralelas (profesional y administrativa).',
+    'Entorno <b>complejo pero estable</b>.',
+  ]},
+  { n: 'Forma divisional', c: '#f59e0b', pts: [
+    'Divisiones cuasi-autónomas coordinadas por <b>normalización de resultados</b>; poder en la <b>línea media</b>.',
+    'La sede central controla el <b>rendimiento</b> → descentralización vertical <b>limitada y paralela</b>.',
+    'Etapas de transición: funcional → subproductos → productos relacionados → conglomerado.',
+    'Las divisiones tienden a la <b>burocracia maquinal</b> (facilita el control por resultados).',
+    '⚠️ NO es una ventaja mover personal entre divisiones: son independientes. Sí: reparte riesgos y asigna capital.',
+  ]},
+  { n: 'Adhocracia', c: '#ec4899', pts: [
+    'Coordina por <b>adaptación mutua</b>; muchos dispositivos de enlace y estructura matricial. Poca formalización.',
+    '<b>Operativa</b>: núcleo y administración fusionados en una «masa orgánica»; trabaja por encargo del cliente.',
+    '<b>Administrativa</b>: núcleo de operaciones <b>tronchado o automatizado</b>, separado del componente administrativo.',
+    'Descentralización <b>selectiva</b>; entorno <b>complejo y dinámico</b>.',
+  ]},
+  { n: 'Misionera / ideológica', c: '#14b8a6', pts: [
+    'Une a sus miembros por la <b>ideología (misión)</b>; coordina por <b>normalización de normas/valores</b>.',
+    'Usa <b>adoctrinamiento</b> (formal) y <b>socialización</b> (informal). Descentralización total (poder igualitario).',
+    'Tipos: <b>reformadora</b> (cambiar la sociedad), <b>conversora</b> (cambiar a los miembros), <b>enclaustrada</b> (aislarse del exterior).',
+  ]},
+];
+
+// ── Parámetros de diseño (los 4 grupos) ──
+const parametros = [
+  { g: '① Diseño de puestos', items: [
+    { t: 'Especialización horizontal', d: 'Amplitud del puesto (nº de tareas). Muy especializado = <b>pocas tareas repetitivas</b> y con poco contenido.' },
+    { t: 'Especialización vertical', d: 'Profundidad: separa <b>ejecutar</b> de <b>controlar/administrar</b>. Muy especializado verticalmente = poco control sobre el propio trabajo (puede incluso estar poco formalizado).' },
+    { t: 'Formalización del comportamiento', d: 'Normaliza los <b>procesos</b> mediante descripciones que indican en todo momento qué hacer. La diseña la <b>tecnoestructura</b>.' },
+    { t: 'Preparación y adoctrinamiento', d: '<b>Preparación</b> = normalización de habilidades (formación externa). <b>Adoctrinamiento</b> = normalización de normas (interiorizar la ideología dentro de la organización).' },
+  ]},
+  { g: '② Diseño de la superestructura', items: [
+    { t: 'Agrupación de unidades', d: '<b>Funcional</b> (por función/proceso → economías de escala y especialización) vs <b>Mercado</b> (por producto/cliente/lugar → adaptación al cliente; la favorece la <b>diversidad</b> del entorno).' },
+    { t: 'Tamaño de la unidad (tramo de control)', d: 'Tramo <b>amplio</b> → estructura <b>plana</b>. Tramo <b>estrecho</b> → estructura <b>alta</b>. La adaptación mutua y la supervisión directa reducen el tramo; la normalización lo amplía.' },
+  ]},
+  { g: '③ Diseño de vínculos laterales', items: [
+    { t: 'Sistemas de planificación y control', d: '<b>Planificación de acciones</b> = determina las acciones necesarias para alcanzar los objetivos (antes de actuar). <b>Control del rendimiento</b> = mide resultados a posteriori (propio de la forma divisional).' },
+    { t: 'Dispositivos de enlace', d: 'Puestos de enlace (<b>sin</b> autoridad formal, sólo poder informal), grupos de trabajo (temporales), comités permanentes, directivos integradores y estructura matricial.' },
+  ]},
+  { g: '④ Diseño del sistema decisor', items: [
+    { t: 'Descentralización', d: 'Reparto del poder de decisión. Se detalla en la sección siguiente (vertical/horizontal, selectiva/paralela).' },
+  ]},
+];
+
+// ── Descentralización (tipos) ──
+const descentralizacion = [
+  { t: 'Vertical', d: 'Se delega poder <b>hacia abajo</b> en la cadena de mando (a la línea media).' },
+  { t: 'Horizontal', d: 'El poder pasa de los directivos de línea a los <b>analistas/staff</b> (tecnoestructura o apoyo).' },
+  { t: 'Selectiva', d: 'Se descentralizan <b>sólo ciertos tipos de decisión</b> a distintas partes (adhocracia).' },
+  { t: 'Paralela', d: 'Se delega <b>todo el poder junto</b> sobre las mismas decisiones a un mismo sitio (forma divisional).' },
+];
+
+// ── Factores de contingencia ──
+const factores = [
+  { t: 'Edad y tamaño', d: 'A más edad y tamaño → estructura <b>más formalizada, elaborada y burocrática</b> (más partes y unidades mayores).' },
+  { t: 'Sistema técnico', d: '<b>Regulador</b>: controla/condiciona el trabajo del operario. <b>Sofisticado</b>: difícil de entender y mantener (da poder al staff de apoyo). <b>Automatizado</b>: convierte la burocracia en estructura orgánica.' },
+  { t: 'Entorno', d: '<b>Dinámico</b> → orgánica; <b>estable</b> → burocrática. <b>Complejo</b> → descentralizada; <b>simple</b> → centralizada. <b>Hostilidad</b> extrema → centralización temporal. <b>Diversidad</b> de mercados → divisionalización.' },
+  { t: 'Poder', d: 'El <b>control externo</b> aumenta la centralización y la formalización. La <b>moda</b> también empuja hacia estructuras «de moda» aunque no encajen.' },
+];
+
+// ── Partes de la organización ──
+const partes = [
+  { t: 'Ápice estratégico', d: 'Alta dirección: supervisión directa y relación con el entorno. Parte clave de la <b>estructura simple</b>.' },
+  { t: 'Línea media', d: 'Directivos que enlazan el ápice con el núcleo. Parte clave de la <b>forma divisional</b>.' },
+  { t: 'Núcleo de operaciones', d: 'Operarios que realizan el trabajo básico. <b>No tiene directivos.</b> Parte clave de la <b>burocracia profesional</b>.' },
+  { t: 'Tecnoestructura', d: 'Analistas que normalizan (procesos, resultados, habilidades). Es <b>staff</b>. Parte clave de la <b>burocracia maquinal</b>.' },
+  { t: 'Staff de apoyo', d: 'Servicios indirectos (limpieza, cafetería, asesoría jurídica). Es <b>staff</b>. Parte clave de la <b>adhocracia</b>.' },
+  { t: 'Ideología', d: '6ª parte: creencias y valores compartidos. Parte clave de la <b>misionera</b>.' },
+];
+
 // ── "Casi seguro que caen" (aparecen en los dos años) ──
 const caen = [
   'Estructuras <b>planas</b> = tramos de control amplios + pocos niveles; <b>altas</b> = tramos estrechos + muchos niveles.',
@@ -188,6 +275,19 @@ const caen = [
   .gx-ctac h4{font-size:.95rem;font-weight:800}
   .gx-ctac p{font-size:.76rem;color:var(--text-muted);margin-top:2px}
 
+  /* Deep config cards (respuestas por configuración) */
+  .gx-deep{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .gx-dcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px 8px;overflow:hidden}
+  .gx-dcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
+  .gx-dcard h3{font-size:.98rem;font-weight:800;letter-spacing:-.3px;margin-bottom:10px;color:color-mix(in srgb,var(--c) 65%,var(--text))}
+  .gx-dcard ul{list-style:none;display:grid;gap:8px}
+  .gx-dcard li{font-size:.82rem;color:var(--text-muted);line-height:1.5;padding-left:16px;position:relative}
+  .gx-dcard li::before{content:'▸';position:absolute;left:0;color:var(--c)}
+  .gx-dcard li b{color:var(--text);font-weight:700}
+  /* Grouped parameters */
+  .gx-group{margin-top:16px}
+  .gx-group-t{font-size:.78rem;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin:0 0 10px 2px}
+
   @media(max-width:600px){
     .gx-wrap{padding:26px 15px 64px}
     .gx-lead{margin-left:0}
@@ -247,9 +347,90 @@ const caen = [
       </div>
     </section>
 
-    <!-- 2. FORMATOS DE PREGUNTA -->
+    <!-- 2. CADA CONFIGURACIÓN A FONDO -->
     <section class="gx-sec">
-      <div class="gx-h2"><span class="gx-num">2</span><h2>Los 5 formatos de pregunta</h2></div>
+      <div class="gx-h2"><span class="gx-num">2</span><h2>Cada configuración a fondo</h2></div>
+      <p class="gx-lead">Los datos exactos que preguntan de cada una (mecanismo, parte clave, particularidades y trampas típicas).</p>
+      <div class="gx-deep">
+        {cfgDetalle.map(cfg => (
+          <article class="gx-dcard" style={`--c:${cfg.c}`}>
+            <h3>{cfg.n}</h3>
+            <ul>
+              {cfg.pts.map(p => <li set:html={p} />)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- 3. PARÁMETROS DE DISEÑO -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">3</span><h2>Los parámetros de diseño</h2></div>
+      <p class="gx-lead">Las herramientas con las que se construye la estructura. Memoriza la <b>definición</b> de cada una: caen como «¿cómo se denomina el parámetro que…?».</p>
+      {parametros.map(grp => (
+        <div class="gx-group">
+          <p class="gx-group-t">{grp.g}</p>
+          <div class="gx-cards two">
+            {grp.items.map(it => (
+              <div class="gx-item">
+                <span class="tag">◆</span>
+                <div>
+                  <h4 set:html={it.t} />
+                  <p set:html={it.d} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- 4. FACTORES DE CONTINGENCIA Y DESCENTRALIZACIÓN -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">4</span><h2>Factores de contingencia y descentralización</h2></div>
+      <p class="gx-lead">La estructura eficaz <b>ajusta</b> sus parámetros a estos factores. Y la descentralización es la trampa nº 1 del examen.</p>
+      <p class="gx-group-t">Factores de contingencia</p>
+      <div class="gx-cards two">
+        {factores.map(f => (
+          <div class="gx-item">
+            <span class="tag">◆</span>
+            <div><h4 set:html={f.t} /><p set:html={f.d} /></div>
+          </div>
+        ))}
+      </div>
+      <p class="gx-group-t" style="margin-top:18px">Tipos de descentralización</p>
+      <div class="gx-cards two">
+        {descentralizacion.map(d => (
+          <div class="gx-item">
+            <span class="tag">◆</span>
+            <div><h4 set:html={d.t} /><p set:html={d.d} /></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 5. PARTES DE LA ORGANIZACIÓN -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">5</span><h2>Partes de la organización y organigrama</h2></div>
+      <p class="gx-lead">Las 5 partes (+ ideología), qué es <b>línea</b> y qué es <b>staff</b>, y qué muestra —y qué NO— el organigrama.</p>
+      <div class="gx-cards two">
+        {partes.map(p => (
+          <div class="gx-item">
+            <span class="tag">◆</span>
+            <div><h4 set:html={p.t} /><p set:html={p.d} /></div>
+          </div>
+        ))}
+      </div>
+      <ul class="gx-check" style="margin-top:14px">
+        <li><span class="ck">✓</span><span><b>Línea</b> = ápice, línea media y núcleo de operaciones (cadena de autoridad formal, «línea»). <b>Staff</b> = tecnoestructura y staff de apoyo (asesoran, no mandan).</span></li>
+        <li><span class="ck">✓</span><span>El <b>organigrama SÍ</b> muestra: la autoridad formal, la división del trabajo, los niveles jerárquicos y los responsables de cada unidad.</span></li>
+        <li><span class="ck">✓</span><span>El <b>organigrama NO</b> muestra: los flujos informales ni las <b>constelaciones de trabajo</b> (eso es adaptación mutua, no autoridad formal).</span></li>
+      </ul>
+    </section>
+
+    <!-- 6. FORMATOS DE PREGUNTA -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">6</span><h2>Los 5 formatos de pregunta</h2></div>
       <p class="gx-lead">Reconocer el formato te dice cómo atacarlo antes de leer las opciones.</p>
       <div class="gx-cards">
         {formatos.map((f, i) => (
@@ -266,7 +447,7 @@ const caen = [
 
     <!-- 3. TRAMPAS -->
     <section class="gx-sec">
-      <div class="gx-h2"><span class="gx-num">3</span><h2>Los 6 focos de trampa</h2></div>
+      <div class="gx-h2"><span class="gx-num">7</span><h2>Los 6 focos de trampa</h2></div>
       <p class="gx-lead">Donde se pierden los aprobados justos. Repásalos el día antes.</p>
       <div class="gx-cards two">
         {trampas.map(t => (
@@ -283,7 +464,7 @@ const caen = [
 
     <!-- 4. CASI SEGURO -->
     <section class="gx-sec">
-      <div class="gx-h2"><span class="gx-num">4</span><h2>Casi seguro que caen</h2></div>
+      <div class="gx-h2"><span class="gx-num">8</span><h2>Casi seguro que caen</h2></div>
       <p class="gx-lead">Aparecen en las dos convocatorias analizadas. Datos exactos, memorízalos tal cual.</p>
       <ul class="gx-check">
         {caen.map(c => (
@@ -294,17 +475,18 @@ const caen = [
 
     <!-- 5. CONCEPTOS EXPRESS -->
     <section class="gx-sec">
-      <div class="gx-h2"><span class="gx-num">5</span><h2>Conceptos clave express</h2></div>
+      <div class="gx-h2"><span class="gx-num">9</span><h2>Conceptos clave express</h2></div>
       <p class="gx-lead">Las listas base que hay que tener frías.</p>
       <div class="gx-express">
         <div class="gx-xb">
-          <h4>5 mecanismos de coordinación</h4>
+          <h4>6 mecanismos de coordinación</h4>
           <div class="gx-flow">
             <span class="gx-pill">Adaptación mutua</span><span class="gx-arrow">→</span>
             <span class="gx-pill">Supervisión directa</span><span class="gx-arrow">→</span>
             <span class="gx-pill">Norm. procesos</span><span class="gx-arrow">→</span>
             <span class="gx-pill">Norm. resultados</span><span class="gx-arrow">→</span>
-            <span class="gx-pill">Norm. habilidades</span>
+            <span class="gx-pill">Norm. habilidades</span><span class="gx-arrow">→</span>
+            <span class="gx-pill">Norm. normas/valores</span>
           </div>
         </div>
         <div class="gx-xb">
@@ -359,7 +541,7 @@ const caen = [
 
     <!-- 6. ESTRATEGIA -->
     <section class="gx-sec">
-      <div class="gx-h2"><span class="gx-num">6</span><h2>Plan de estudio</h2></div>
+      <div class="gx-h2"><span class="gx-num">10</span><h2>Plan de estudio</h2></div>
       <div class="gx-steps">
         <div class="gx-step"><p><b>Domina la tabla de las 6 configuraciones.</b> Es el 70% del examen. Tápala y recítala en las dos direcciones.</p></div>
         <div class="gx-step"><p>En las de <b>«analice la afirmación»</b>, entrena a detectar el concepto cambiado, no la frase entera.</p></div>
