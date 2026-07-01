@@ -42,10 +42,10 @@ export const subjects: Subject[] = [
     title: 'Organización de Empresas',
     code: 'ADE · Organización',
     icon: '🏢',
-    description: '437 preguntas tipo test y 128 flashcards sobre Mintzberg: configuraciones, parámetros de diseño, mecanismos de coordinación y más.',
+    description: '397 preguntas tipo test y 128 flashcards sobre Mintzberg: configuraciones, parámetros de diseño, mecanismos de coordinación y más.',
     type: 'test',
     group: 'ade',
-    chips: ['437 preguntas', '128 flashcards', '21 bloques'],
+    chips: ['397 preguntas', '128 flashcards', '20 bloques'],
     dataFile: 'oe.json',
   },
   {
