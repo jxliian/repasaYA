@@ -1,0 +1,385 @@
+---
+import Base from '../../layouts/Base.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+// ── Las 6 configuraciones de Mintzberg (confirmadas con los exámenes) ──
+const configs = [
+  {
+    n: 'Estructura simple', alias: 'Empresarial', icon: '🌱', c: '#10b981',
+    coord: 'Supervisión directa',
+    parte: 'Ápice estratégico',
+    desc: 'Centralización vertical y horizontal',
+    entorno: 'Simple + dinámico',
+    param: 'Poca formalización · división del trabajo poco estricta',
+  },
+  {
+    n: 'Burocracia maquinal', icon: '⚙️', c: '#3b82f6',
+    coord: 'Normalización de procesos',
+    parte: 'Tecnoestructura',
+    desc: 'Centr. vertical + descentr. horizontal limitada (→ tecnoestructura)',
+    entorno: 'Simple + estable',
+    param: 'Formalización alta · sistema técnico regulador y poco sofisticado',
+  },
+  {
+    n: 'Burocracia profesional', icon: '🎓', c: '#8b5cf6',
+    coord: 'Normalización de habilidades',
+    parte: 'Núcleo de operaciones',
+    desc: 'Descentralización vertical y horizontal',
+    entorno: 'Complejo + estable',
+    param: 'Preparación/formación externa · jerarquías paralelas · poca formalización',
+  },
+  {
+    n: 'Forma divisional', icon: '🏢', c: '#f59e0b',
+    coord: 'Normalización de resultados',
+    parte: 'Línea media',
+    desc: 'Descentr. vertical limitada y paralela (sede → divisiones)',
+    entorno: 'Mercados diversificados',
+    param: 'Agrupación por mercado · sistema de control del rendimiento',
+  },
+  {
+    n: 'Adhocracia', icon: '🚀', c: '#ec4899',
+    coord: 'Adaptación mutua',
+    parte: 'Staff de apoyo (operativa: + núcleo de operaciones)',
+    desc: 'Descentralización selectiva (vertical y horizontal)',
+    entorno: 'Complejo + dinámico',
+    param: 'Dispositivos de enlace · estructura matricial · poca formalización',
+  },
+  {
+    n: 'Misionera', alias: 'Ideológica', icon: '🕊️', c: '#14b8a6',
+    coord: 'Normalización de normas (valores)',
+    parte: 'Ideología',
+    desc: 'Descentralización total (poder igualitario)',
+    entorno: 'Cualquiera (une por la misión)',
+    param: 'Adoctrinamiento y socialización · cultura/misión fuerte',
+  },
+];
+
+// ── Los 5 formatos de pregunta ──
+const formatos = [
+  {
+    t: 'Señale la INCORRECTA / FALSA',
+    d: 'Te dan 3 afirmaciones verdaderas y 1 falsa. Suelen falsear cambiando <b>una sola palabra</b> (p. ej. «adaptación mutua» donde debía decir «normalización»). Lee las 4 y descarta las que sabes ciertas.',
+  },
+  {
+    t: 'Analice la afirmación: «…»',
+    d: 'Opciones del tipo «Es falsa porque…» / «Es verdadera». El truco es detectar <b>qué concepto han intercambiado</b>. Ej.: «la socialización es un proceso formal» → falso, es informal (el formal es el adoctrinamiento).',
+  },
+  {
+    t: 'Emparejar configuración ↔ dimensión',
+    d: '«¿Qué mecanismo / parte / descentralización corresponde a X?» Se resuelven directas con la <b>tabla de configuraciones</b> de arriba, en las dos direcciones.',
+  },
+  {
+    t: 'Definición → nombre',
+    d: '«¿Cómo se denomina el parámetro que indica en todo momento lo que hay que hacer?» → <b>Formalización</b>. Memoriza las definiciones de cada parámetro de diseño.',
+  },
+  {
+    t: 'Factor de contingencia → configuración',
+    d: 'Te describen el <b>entorno</b> (simple/complejo, estable/dinámico) y preguntan la configuración. Memoriza la columna «Entorno».',
+  },
+];
+
+// ── Los 6 focos de trampa ──
+const trampas = [
+  { t: 'Descentralización (la nº 1)', d: 'Distingue <b>vertical</b> (arriba↔abajo) vs <b>horizontal</b> (línea↔staff), y <b>selectiva</b> (por tipo de decisión) vs <b>paralela</b> (todo el poder junto).' },
+  { t: 'Tipos de normalización y su autonomía', d: 'De más a menos libertad del trabajador: <b>habilidades > resultados > procesos</b>. Y la de <b>normas/valores</b> = misionera.' },
+  { t: 'Especialización horizontal vs vertical', d: '<b>Horizontal</b> = amplitud (nº de tareas, «pocas tareas/poco contenido»). <b>Vertical</b> = profundidad (separa ejecutar de controlar).' },
+  { t: 'Parte fundamental de cada config', d: 'Ápice, tecnoestructura, núcleo de operaciones, línea media, staff de apoyo, ideología. Cae siempre.' },
+  { t: 'Qué muestra el organigrama', d: '<b>Sí:</b> autoridad formal + división del trabajo. <b>No:</b> flujos informales, constelaciones de trabajo ni adaptación mutua.' },
+  { t: 'Híbridas y misionera', d: 'Burocracia <b>duplicada</b> (divisional≈maquinal), adhocracia <b>emprendedora</b> (adhocracia operativa + estructura simple), <b>buro-adhocracia</b>. Misionera: reformadora / conversora / claustro.' },
+];
+
+// ── "Casi seguro que caen" (aparecen en los dos años) ──
+const caen = [
+  'Estructuras <b>planas</b> = tramos de control amplios + pocos niveles; <b>altas</b> = tramos estrechos + muchos niveles.',
+  'Burocracia maquinal: sistema técnico <b>regulador y poco sofisticado</b>.',
+  'Adhocracia <b>operativa</b>: núcleo fusionado en «masa orgánica» (no se distingue línea/staff). <b>Administrativa</b>: núcleo <b>tronchado/automatizado</b>.',
+  'Dispositivo de enlace que se convoca y se <b>desagrupa</b> = <b>grupo de trabajo</b>; el permanente = <b>comité</b>.',
+  'Hipótesis de <b>congruencia</b>: a mayor control externo → estructura <b>más centralizada y formalizada</b>.',
+  'Hipótesis de <b>configuración</b> (extendida): eficaz = consistencia interna <b>+</b> adecuación a los factores de contingencia.',
+  'Misionera <b>reformadora</b> = busca cambios radicales en la sociedad.',
+];
+---
+
+<Base title="OE · Guía de examen" description="Guía de examen de Organización de Empresas: las 6 configuraciones de Mintzberg, patrones de pregunta, trampas frecuentes y conceptos clave para aprobar el tipo test.">
+<style is:global>
+  html,body{height:100%}
+  body{display:flex;flex-direction:column;overflow:hidden}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;flex-shrink:0}
+  .logo{font-size:1.1rem;font-weight:800}.logo span{color:var(--accent)}
+  .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}.back:hover{color:var(--accent)}
+  .hdr-right{display:flex;align-items:center;gap:12px}
+  main{flex:1;min-height:0;overflow-y:auto;scroll-behavior:smooth}
+  .gx-wrap{max-width:960px;margin:0 auto;padding:36px 22px 80px}
+
+  /* Hero */
+  .gx-hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:40px}
+  .gx-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:99px;padding:5px 14px;font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:.3px}
+  .gx-title{font-family:var(--font-display);font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;letter-spacing:-1px;line-height:1.1}
+  .gx-title span{color:var(--accent)}
+  .gx-sub{font-size:.92rem;color:var(--text-muted);max-width:560px;line-height:1.65}
+  .gx-note{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:14px;padding:14px 16px;max-width:620px;margin-top:6px}
+  .gx-note b{color:var(--text)}
+  .gx-note .ico{font-size:1.2rem;line-height:1.4}
+  .gx-note p{font-size:.83rem;color:var(--text-muted);line-height:1.6}
+
+  /* Section heading */
+  .gx-sec{margin-top:48px}
+  .gx-h2{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .gx-num{width:30px;height:30px;flex-shrink:0;border-radius:9px;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;font-family:var(--font-mono)}
+  .gx-h2 h2{font-family:var(--font-display);font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;letter-spacing:-.4px}
+  .gx-lead{font-size:.86rem;color:var(--text-muted);line-height:1.6;margin:0 0 18px 42px}
+
+  /* Config cards */
+  .gx-cfgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .gx-cfg{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 18px 6px;overflow:hidden;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .gx-cfg::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
+  .gx-cfg:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 45%,var(--border));box-shadow:0 14px 30px color-mix(in srgb,var(--c) 20%,transparent)}
+  .gx-cfg-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .gx-cfg-ico{width:44px;height:44px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:color-mix(in srgb,var(--c) 15%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+  .gx-cfg-head h3{font-size:1rem;font-weight:800;letter-spacing:-.3px;line-height:1.15}
+  .gx-cfg-alias{font-size:.7rem;color:var(--text-muted);font-weight:600}
+  .gx-dl>div{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid var(--border)}
+  .gx-dl>div:first-child{border-top:none}
+  .gx-dl dt{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:color-mix(in srgb,var(--c) 60%,var(--text-muted))}
+  .gx-dl dd{font-size:.82rem;color:var(--text);line-height:1.45;font-weight:500}
+
+  /* Generic content cards */
+  .gx-cards{display:grid;gap:12px}
+  .gx-cards.two{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+  .gx-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 17px;display:flex;gap:13px;align-items:flex-start;transition:border-color .18s,transform .18s}
+  .gx-item:hover{border-color:var(--accent-line);transform:translateY(-2px)}
+  .gx-item .tag{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;font-family:var(--font-mono);margin-top:1px}
+  .gx-item .tag.warn{background:color-mix(in srgb,var(--reveal) 16%,transparent);border-color:color-mix(in srgb,var(--reveal) 40%,transparent);color:var(--reveal)}
+  .gx-item h4{font-size:.9rem;font-weight:800;margin-bottom:4px;letter-spacing:-.2px}
+  .gx-item p{font-size:.82rem;color:var(--text-muted);line-height:1.55}
+  .gx-item p b,.gx-item h4 b{color:var(--text);font-weight:700}
+
+  /* Check list ("casi seguro") */
+  .gx-check{list-style:none;display:grid;gap:10px}
+  .gx-check li{display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 15px;font-size:.84rem;line-height:1.55;color:var(--text-muted)}
+  .gx-check li b{color:var(--text);font-weight:700}
+  .gx-check .ck{flex-shrink:0;color:var(--correct);font-weight:800;margin-top:1px}
+
+  /* Express concept blocks */
+  .gx-express{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .gx-xb{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:15px 16px}
+  .gx-xb h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:var(--accent);font-weight:800;margin-bottom:10px}
+  .gx-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .gx-pill{font-size:.74rem;font-weight:600;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:4px 11px;color:var(--text)}
+  .gx-arrow{color:var(--text-muted);font-size:.7rem}
+  .gx-xb ul{list-style:none;display:grid;gap:7px}
+  .gx-xb li{font-size:.8rem;color:var(--text);line-height:1.45;padding-left:15px;position:relative}
+  .gx-xb li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+  .gx-xb li span{color:var(--text-muted)}
+
+  /* Strategy steps */
+  .gx-steps{display:grid;gap:12px;counter-reset:step}
+  .gx-step{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 17px}
+  .gx-step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--font-mono);font-size:.85rem}
+  .gx-step p{font-size:.85rem;line-height:1.55;color:var(--text-muted)}
+  .gx-step p b{color:var(--text)}
+
+  /* CTA */
+  .gx-cta{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .gx-ctac{display:flex;align-items:center;gap:14px;background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:18px 20px;transition:all .2s}
+  .gx-ctac:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-3px);box-shadow:0 12px 30px rgba(138,107,216,.14)}
+  .gx-ctac .em{font-size:1.7rem;width:48px;height:48px;flex-shrink:0;border-radius:12px;background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center}
+  .gx-ctac h4{font-size:.95rem;font-weight:800}
+  .gx-ctac p{font-size:.76rem;color:var(--text-muted);margin-top:2px}
+
+  @media(max-width:600px){
+    .gx-wrap{padding:26px 15px 64px}
+    .gx-lead{margin-left:0}
+    .gx-cta{grid-template-columns:1fr}
+  }
+</style>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="back" href={`${base}organizacion-empresas/`}>← OE</a>
+    <span style="color:var(--border)">|</span>
+    <div class="logo"><span>Guía</span> · de examen</div>
+  </div>
+  <div class="hdr-right">
+    <span style="font-size:.75rem;color:var(--text-muted)">Mintzberg</span>
+    <ThemeToggle />
+  </div>
+</header>
+
+<main>
+  <div class="gx-wrap">
+
+    <!-- HERO -->
+    <div class="gx-hero">
+      <span class="gx-badge">📌 Todo lo que necesitas para el tipo test</span>
+      <h1 class="gx-title">Guía de examen — <span>Mintzberg</span></h1>
+      <p class="gx-sub">Las 6 configuraciones estructurales, los patrones de pregunta, las trampas de siempre y los conceptos que caen todos los años. Si dominas esta página, tienes el examen casi hecho.</p>
+      <div class="gx-note">
+        <span class="ico">💡</span>
+        <p><b>El examen es el mismo banco cada año.</b> Comparando la convocatoria ordinaria con la de 21-22, las preguntas se repiten casi 1:1 (flujos regulados, especialización, tramos de control, organigrama, socialización…). Memorizar este repertorio es rentabilísimo.</p>
+      </div>
+    </div>
+
+    <!-- 1. CONFIGURACIONES -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">1</span><h2>Las 6 configuraciones</h2></div>
+      <p class="gx-lead">El 70% del examen. Cada pregunta ataca una configuración por una de sus dimensiones. Apréndelas en las dos direcciones: <b>config → dimensión</b> y <b>dimensión → config</b>.</p>
+      <div class="gx-cfgs">
+        {configs.map(cfg => (
+          <article class="gx-cfg" style={`--c:${cfg.c}`}>
+            <div class="gx-cfg-head">
+              <span class="gx-cfg-ico">{cfg.icon}</span>
+              <div>
+                <h3>{cfg.n}</h3>
+                {cfg.alias && <span class="gx-cfg-alias">También: {cfg.alias}</span>}
+              </div>
+            </div>
+            <dl class="gx-dl">
+              <div><dt>Coordinación</dt><dd>{cfg.coord}</dd></div>
+              <div><dt>Parte clave</dt><dd>{cfg.parte}</dd></div>
+              <div><dt>Descentralización</dt><dd>{cfg.desc}</dd></div>
+              <div><dt>Entorno</dt><dd>{cfg.entorno}</dd></div>
+              <div><dt>Parámetros</dt><dd>{cfg.param}</dd></div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- 2. FORMATOS DE PREGUNTA -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">2</span><h2>Los 5 formatos de pregunta</h2></div>
+      <p class="gx-lead">Reconocer el formato te dice cómo atacarlo antes de leer las opciones.</p>
+      <div class="gx-cards">
+        {formatos.map((f, i) => (
+          <div class="gx-item">
+            <span class="tag">{i + 1}</span>
+            <div>
+              <h4>{f.t}</h4>
+              <p set:html={f.d} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 3. TRAMPAS -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">3</span><h2>Los 6 focos de trampa</h2></div>
+      <p class="gx-lead">Donde se pierden los aprobados justos. Repásalos el día antes.</p>
+      <div class="gx-cards two">
+        {trampas.map(t => (
+          <div class="gx-item">
+            <span class="tag warn">!</span>
+            <div>
+              <h4 set:html={t.t} />
+              <p set:html={t.d} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 4. CASI SEGURO -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">4</span><h2>Casi seguro que caen</h2></div>
+      <p class="gx-lead">Aparecen en las dos convocatorias analizadas. Datos exactos, memorízalos tal cual.</p>
+      <ul class="gx-check">
+        {caen.map(c => (
+          <li><span class="ck">✓</span><span set:html={c} /></li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- 5. CONCEPTOS EXPRESS -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">5</span><h2>Conceptos clave express</h2></div>
+      <p class="gx-lead">Las listas base que hay que tener frías.</p>
+      <div class="gx-express">
+        <div class="gx-xb">
+          <h4>5 mecanismos de coordinación</h4>
+          <div class="gx-flow">
+            <span class="gx-pill">Adaptación mutua</span><span class="gx-arrow">→</span>
+            <span class="gx-pill">Supervisión directa</span><span class="gx-arrow">→</span>
+            <span class="gx-pill">Norm. procesos</span><span class="gx-arrow">→</span>
+            <span class="gx-pill">Norm. resultados</span><span class="gx-arrow">→</span>
+            <span class="gx-pill">Norm. habilidades</span>
+          </div>
+        </div>
+        <div class="gx-xb">
+          <h4>Partes de la organización</h4>
+          <ul>
+            <li>Ápice estratégico</li>
+            <li>Línea media</li>
+            <li>Núcleo de operaciones</li>
+            <li>Tecnoestructura <span>(analistas)</span></li>
+            <li>Staff de apoyo</li>
+            <li>Ideología <span>(6ª parte)</span></li>
+          </ul>
+        </div>
+        <div class="gx-xb">
+          <h4>Descentralización</h4>
+          <ul>
+            <li>Vertical <span>· delega hacia abajo</span></li>
+            <li>Horizontal <span>· hacia línea/staff</span></li>
+            <li>Selectiva <span>· por tipo de decisión</span></li>
+            <li>Paralela <span>· todo el poder junto</span></li>
+          </ul>
+        </div>
+        <div class="gx-xb">
+          <h4>Normalización (+ autonomía →)</h4>
+          <ul>
+            <li>Procesos <span>· menos autonomía</span></li>
+            <li>Resultados</li>
+            <li>Habilidades <span>· más autonomía</span></li>
+            <li>Normas/valores <span>· misionera</span></li>
+          </ul>
+        </div>
+        <div class="gx-xb">
+          <h4>Dispositivos de enlace</h4>
+          <ul>
+            <li>Puestos de enlace</li>
+            <li>Grupos de trabajo <span>· temporales</span></li>
+            <li>Comités <span>· permanentes</span></li>
+            <li>Directivos integradores</li>
+            <li>Estructura matricial</li>
+          </ul>
+        </div>
+        <div class="gx-xb">
+          <h4>Especialización del puesto</h4>
+          <ul>
+            <li>Horizontal <span>· amplitud (nº tareas)</span></li>
+            <li>Vertical <span>· profundidad (control)</span></li>
+            <li>Ampliar = enriquecer el puesto</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ESTRATEGIA -->
+    <section class="gx-sec">
+      <div class="gx-h2"><span class="gx-num">6</span><h2>Plan de estudio</h2></div>
+      <div class="gx-steps">
+        <div class="gx-step"><p><b>Domina la tabla de las 6 configuraciones.</b> Es el 70% del examen. Tápala y recítala en las dos direcciones.</p></div>
+        <div class="gx-step"><p>En las de <b>«analice la afirmación»</b>, entrena a detectar el concepto cambiado, no la frase entera.</p></div>
+        <div class="gx-step"><p>Repasa las <b>6 trampas</b> y los datos de «casi seguro que caen» el día antes.</p></div>
+        <div class="gx-step"><p><b>Practica con tu propio banco</b> de esta asignatura: 397 preguntas tipo test + 128 flashcards. El drill es lo que fija los conceptos.</p></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="gx-cta">
+      <a class="gx-ctac" href={`${base}organizacion-empresas/quiz/`}>
+        <span class="em">🧠</span>
+        <div><h4>Tipo Test →</h4><p>397 preguntas · 20 bloques</p></div>
+      </a>
+      <a class="gx-ctac" href={`${base}organizacion-empresas/glosario/`}>
+        <span class="em">🃏</span>
+        <div><h4>Flashcards →</h4><p>128 tarjetas · conceptos clave</p></div>
+      </a>
+    </div>
+
+  </div>
+</main>
+</Base>

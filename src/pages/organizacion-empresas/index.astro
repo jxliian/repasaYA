@@ -14,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .hub-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-1px;font-family:var(--font-display)}
   .hub-title span{color:var(--accent)}
   .hub-desc{font-size:.9rem;color:var(--text-muted);max-width:520px;line-height:1.6}
-  .hub-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%;max-width:880px}
+  .hub-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:100%;max-width:720px}
   .hub-card-secret{border-color:rgba(245,158,11,.35)}
   .hub-card-secret:hover{border-color:rgba(245,158,11,.7);background:#241f12;box-shadow:0 12px 32px rgba(245,158,11,.18)}
   .hub-card-secret::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
@@ -50,6 +50,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   </div>
 
   <div class="hub-cards">
+    <a class="hub-card" href={`${base}organizacion-empresas/guia/`}>
+      <div class="hub-card-icon">📌</div>
+      <div class="hub-card-title">Guía de examen</div>
+      <p class="hub-card-desc">Todo lo necesario para aprobar: las 6 configuraciones de Mintzberg, los patrones de pregunta, las trampas frecuentes y los datos que caen todos los años.</p>
+      <div class="hub-card-chips">
+        <span class="hub-chip">Chuleta</span>
+        <span class="hub-chip">Mintzberg</span>
+        <span class="hub-chip">Patrones</span>
+      </div>
+      <span class="hub-card-arrow">→</span>
+    </a>
+
     <a class="hub-card" href={`${base}organizacion-empresas/quiz/`}>
       <div class="hub-card-icon">🧠</div>
       <div class="hub-card-title">Tipo Test</div>
