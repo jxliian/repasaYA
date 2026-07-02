@@ -111,6 +111,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .stat-item{text-align:center}.stat-num{font-size:2.2rem;font-weight:800;letter-spacing:-1px;font-family:var(--font-mono)}
   .stat-lbl{font-size:.75rem;color:var(--text-muted);margin-top:2px}
   .c-num{color:var(--correct)}.w-num{color:var(--wrong)}.p-num{color:var(--accent2)}
+  /* Desglose por categoría */
+  .cat-list{display:flex;flex-direction:column;gap:14px}
+  .cat-row{display:flex;flex-direction:column;gap:6px}
+  .cat-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .cat-name{font-size:.86rem;font-weight:700;color:var(--text)}
+  .cat-meta{font-size:.8rem;font-weight:700;font-family:var(--font-mono);white-space:nowrap}
+  .cat-meta .frac{color:var(--text-muted);font-weight:600;margin-left:6px}
+  .cat-bar{height:8px;border-radius:99px;background:var(--surface2);border:1px solid var(--border);overflow:hidden}
+  .cat-fill{height:100%;border-radius:99px;transition:width .5s ease}
+  .cat-fill.hi{background:var(--correct)}
+  .cat-fill.mid{background:var(--reveal)}
+  .cat-fill.lo{background:var(--wrong)}
   /* BANCO */
   .controls{display:flex;gap:10px;flex-wrap:wrap}
   .search-box{flex:1;min-width:180px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s}
@@ -250,6 +262,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           <div class="stat-item"><div class="stat-num w-num" id="r-fail"></div><div class="stat-lbl">Incorrectas</div></div>
           <div class="stat-item"><div class="stat-num" id="r-total"></div><div class="stat-lbl">Total</div></div>
         </div>
+      </div>
+      <div class="stats-box" id="cat-breakdown" style="display:none">
+        <div style="font-size:1rem;font-weight:800;margin-bottom:16px">Acierto por categoría</div>
+        <div id="cat-list" class="cat-list"></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn btn-primary" id="btn-repeat">Repetir todo</button>
@@ -487,6 +503,37 @@ function showResults(){
     document.getElementById('btn-repeat-wrong').style.display=wrong>0?'':'none';
   }
   document.getElementById('r-total').textContent=questions.length;
+  renderCatBreakdown();
+}
+function renderCatBreakdown(){
+  const box=document.getElementById('cat-breakdown');
+  const list=document.getElementById('cat-list');
+  if(!box||!list)return;
+  // Agrupa por categoría (tema), contando solo respuestas evaluables (V/F y Test).
+  const stats={};const order=[];
+  questions.forEach((q,i)=>{
+    const a=answers[i];
+    if(!a||a.wasCorrect===undefined)return;
+    const t=q.tema||'Sin categoría';
+    if(!stats[t]){stats[t]={ok:0,total:0};order.push(t);}
+    stats[t].total++; if(a.wasCorrect)stats[t].ok++;
+  });
+  // Solo tiene sentido en modos con acierto/fallo (no en "revelar")
+  if(order.length===0){box.style.display='none';return;}
+  list.innerHTML='';
+  order.forEach(t=>{
+    const {ok,total}=stats[t];
+    const pct=Math.round(ok/total*100);
+    const cls=pct>=70?'hi':pct>=40?'mid':'lo';
+    const row=document.createElement('div');row.className='cat-row';
+    row.innerHTML=
+      '<div class="cat-head"><span class="cat-name"></span>'+
+      '<span class="cat-meta">'+pct+'%<span class="frac">'+ok+'/'+total+'</span></span></div>'+
+      '<div class="cat-bar"><div class="cat-fill '+cls+'" style="width:'+pct+'%"></div></div>';
+    row.querySelector('.cat-name').textContent=t;
+    list.appendChild(row);
+  });
+  box.style.display='';
 }
 function repeatWrong(){
   const wrongQs=questions.filter((_,i)=>answers[i]!==undefined&&answers[i].wasCorrect===false);
