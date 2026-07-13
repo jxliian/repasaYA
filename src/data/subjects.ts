@@ -75,10 +75,10 @@ export const subjects: Subject[] = [
     title: 'Desarrollo de Sistemas Distribuidos',
     code: 'Informática · DSD',
     icon: '🖧',
-    description: 'Resumen de los temas 4 y 5 en PDF. Temario completo para repasar antes del examen.',
-    type: 'test',
+    description: 'Apuntes en PDF (resumen T4+T5) y 114 preguntas de verdadero/falso con justificación sobre sistemas distribuidos.',
+    type: 'vf',
     group: 'ing',
-    chips: ['Resumen T4+T5', 'PDF'],
+    chips: ['Apuntes', '114 V/F'],
   },
   {
     slug: 'mp',
