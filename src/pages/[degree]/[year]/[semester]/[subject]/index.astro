@@ -61,6 +61,7 @@ const PRESENTATION: Record<string, { icon: string; blurb: string }> = {
   flashcards: { icon: '🃏', blurb: 'Tarjetas para repasar en cinco minutos' },
   glosario: { icon: '📖', blurb: 'Los términos que caen sí o sí' },
   apuntes: { icon: '📄', blurb: 'Resúmenes en PDF, listos para imprimir' },
+  examen: { icon: '📑', blurb: 'Examen de otros años, resuelto' },
   guia: { icon: '🧭', blurb: 'Por dónde empezar y qué pesa más' },
 };
 
@@ -76,7 +77,7 @@ const materials = entries
       type: m.data.type,
       label: m.data.title,
       icon: PRESENTATION[m.data.type]?.icon ?? '📚',
-      blurb: PRESENTATION[m.data.type]?.blurb ?? '',
+      blurb: m.data.description ?? PRESENTATION[m.data.type]?.blurb ?? '',
       count: 'items' in m.data ? m.data.items.length : 0,
       // Las guías viven en su propia página; el resto tiene ruta generada
       href:

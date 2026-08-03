@@ -22,6 +22,7 @@ export const MATERIAL_TYPES = [
   'flashcards',
   'glosario',
   'apuntes',
+  'examen',
   'guia',
 ] as const;
 
@@ -106,6 +107,8 @@ const cardItem = z.object({
 const materialBase = {
   subject: reference('subjects'),
   title: z.string(),
+  /** Descripción propia. Si falta, el hub usa la genérica del tipo. */
+  description: z.string().optional(),
   /** Orden dentro del hub de la asignatura. Menor, antes. */
   order: z.number().int().default(0),
   /**
@@ -131,8 +134,9 @@ const materials = defineCollection({
       type: z.literal('glosario'),
       items: z.array(cardItem).min(1),
     }),
-    // Los apuntes no llevan preguntas: apuntan a un PDF de `public/`
+    // Apuntes y exámenes no llevan preguntas: apuntan a un PDF de `public/`
     z.object({ ...materialBase, type: z.literal('apuntes'), pdf: z.string() }),
+    z.object({ ...materialBase, type: z.literal('examen'), pdf: z.string() }),
     // Una guía es una página propia: la colección solo guarda el enlace
     z.object({ ...materialBase, type: z.literal('guia'), href: z.string() }),
   ]),

@@ -22,7 +22,7 @@ import {
  * Tres presentaciones según el tipo:
  *   test | vf | reveal  → QuizEngine, a pantalla completa y sin cromo
  *   flashcards | glosario → CardDeck, dentro del layout normal
- *   apuntes → visor de PDF
+ *   apuntes | examen → visor de PDF
  */
 
 export async function getStaticPaths() {
@@ -81,9 +81,11 @@ const NOUN: Record<string, string> = {
   glosario: 'términos',
 };
 
-const description = isEngine || isDeck
-  ? `${items.length} ${NOUN[type]} de ${subjectTitle} (${degree.data.short}, ${year}º). Gratis y sin registro.`
-  : `Apuntes de ${subjectTitle} en PDF. Gratis y sin registro.`;
+const description =
+  material.data.description ??
+  (isEngine || isDeck
+    ? `${items.length} ${NOUN[type]} de ${subjectTitle} (${degree.data.short}, ${year}º). Gratis y sin registro.`
+    : `${material.data.title} de ${subjectTitle} en PDF. Gratis y sin registro.`);
 
 const crumbs = [
   { label: 'Inicio', href: base },
@@ -94,7 +96,7 @@ const crumbs = [
   { label: material.data.title, href: null },
 ];
 
-const pdf = type === 'apuntes' ? `${base}${material.data.pdf}` : null;
+const pdf = 'pdf' in material.data ? `${base}${material.data.pdf}` : null;
 const hidden = material.data.hidden;
 ---
 

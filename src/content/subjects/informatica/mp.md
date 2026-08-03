@@ -6,6 +6,6 @@ semester: 2
 credits: 6
 icon: "💻"
 status: available
-description: "67 preguntas tipo test con código C++. Punteros, clases dinámicas, sobrecarga de operadores y ficheros."
-materials: [test]
+description: "192 preguntas tipo test con código C++ y tres exámenes de repaso resueltos. Punteros, clases dinámicas, sobrecarga de operadores y ficheros."
+materials: [test, examen]
 ---

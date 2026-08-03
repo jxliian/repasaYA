@@ -17,6 +17,7 @@ const MATERIAL_LABEL: Record<string, string> = {
   flashcards: 'Flashcards',
   glosario: 'Glosario',
   apuntes: 'Apuntes',
+  examen: 'Exámenes',
 };
 
 /** Quita tildes y baja a minúsculas: "Economía" y "economia" deben empatar. */
