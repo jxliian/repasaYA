@@ -1,0 +1,208 @@
+/* ═══════════════════════════════════════════════════════════════
+   repasaYA — BASE
+   Reset, tipografía, grano, cursor y las primitivas compartidas
+   (.glass, .pill, .btn). Todo lo que se repite en 3+ componentes
+   vive aquí; lo que no, se queda en el <style> del componente.
+   ═══════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark light;
+  scroll-behavior: smooth;
+}
+:root[data-theme='light'] html {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Cursor estrella ✦ — seña de identidad, se mantiene */
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='28'%20height='28'%20viewBox='0%200%2028%2028'%3E%3Cpath%20d='M14,1L16.4,11.6L27,14L16.4,16.4L14,27L11.6,16.4L1,14L11.6,11.6Z'%20fill='%23a78bea'%20stroke='%23ffffff'%20stroke-width='1.3'%20stroke-linejoin='round'/%3E%3C/svg%3E")
+      14 14,
+    auto;
+}
+
+/* Grano de película — encima de todo, nunca bloquea clics */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-theme='light'] body::after {
+  opacity: 0.02;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a,
+button,
+summary,
+label,
+select,
+[role='button'] {
+  cursor: pointer;
+}
+input,
+textarea {
+  cursor: text;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Primitiva: cristal ──────────────────────────────────────── */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(var(--blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--glass-hi);
+}
+
+/* Borde que se enciende al hover — el "neon accent" del brief */
+.glow-hover {
+  transition: border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-snap);
+}
+.glow-hover:hover {
+  border-color: var(--glass-border-hi);
+  box-shadow: var(--shadow-md), var(--glow-md), inset 0 1px 0 var(--glass-hi);
+  transform: translateY(-2px);
+}
+
+/* ── Primitiva: etiqueta / chip ──────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--radius-pill);
+  padding: 5px 11px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  white-space: nowrap;
+}
+
+/* ── Primitiva: botón ────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 12px 22px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: transform var(--dur) var(--ease-snap),
+    box-shadow var(--dur) var(--ease-out),
+    background var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-bright), var(--accent-deep));
+  color: var(--on-accent);
+  box-shadow: var(--glow-sm);
+}
+.btn-primary:hover {
+  box-shadow: var(--glow-md);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: var(--glass);
+  border-color: var(--glass-border);
+  color: var(--text);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+.btn-ghost:hover {
+  border-color: var(--glass-border-hi);
+  box-shadow: var(--glow-sm);
+  transform: translateY(-2px);
+}
+
+/* ── Utilidades ──────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--w-content);
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Respeto por prefers-reduced-motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  body::after {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

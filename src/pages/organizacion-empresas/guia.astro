@@ -1,6 +1,6 @@
 ---
-import Base from '../../layouts/Base.astro';
-import ThemeToggle from '../../components/ThemeToggle.astro';
+import Shell from '../../layouts/Shell.astro';
+import Breadcrumbs from '../../components/nav/Breadcrumbs.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 // ── Las 6 configuraciones de Mintzberg (confirmadas con los exámenes) ──
@@ -188,11 +188,11 @@ const caen = [
 ];
 ---
 
-<Base title="OE · Guía de examen" description="Guía de examen de Organización de Empresas: las 6 configuraciones de Mintzberg, patrones de pregunta, trampas frecuentes y conceptos clave para aprobar el tipo test.">
+<Shell title="OE · Guía de examen" description="Guía de examen de Organización de Empresas: las 6 configuraciones de Mintzberg, patrones de pregunta, trampas frecuentes y conceptos clave para aprobar el tipo test.">
 <style is:global>
-  html,body{height:100%}
+  
   body{display:flex;flex-direction:column;overflow:hidden}
-  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;flex-shrink:0}
+  
   .logo{font-size:1.1rem;font-weight:800}.logo span{color:var(--accent)}
   .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}.back:hover{color:var(--accent)}
   .hdr-right{display:flex;align-items:center;gap:12px}
@@ -295,17 +295,18 @@ const caen = [
   }
 </style>
 
-<header>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="back" href={`${base}organizacion-empresas/`}>← OE</a>
-    <span style="color:var(--border)">|</span>
-    <div class="logo"><span>Guía</span> · de examen</div>
-  </div>
-  <div class="hdr-right">
-    <span style="font-size:.75rem;color:var(--text-muted)">Mintzberg</span>
-    <ThemeToggle />
-  </div>
-</header>
+<div class="container">
+  <Breadcrumbs
+    crumbs={[
+      { label: 'Inicio', href: base },
+      { label: 'ADE', href: `${base}ade/` },
+      { label: '4º', href: `${base}ade/4/` },
+      { label: 'Cuatri 2', href: `${base}ade/4/c2/` },
+      { label: 'Organización de Empresas', href: `${base}ade/4/c2/organizacion-empresas/` },
+      { label: 'Guía de estudio', href: null },
+    ]}
+  />
+</div>
 
 <main>
   <div class="gx-wrap">
@@ -552,11 +553,11 @@ const caen = [
 
     <!-- CTA -->
     <div class="gx-cta">
-      <a class="gx-ctac" href={`${base}organizacion-empresas/quiz/`}>
+      <a class="gx-ctac" href={`${base}ade/4/c2/organizacion-empresas/test/`}>
         <span class="em">🧠</span>
         <div><h4>Tipo Test →</h4><p>397 preguntas · 20 bloques</p></div>
       </a>
-      <a class="gx-ctac" href={`${base}organizacion-empresas/glosario/`}>
+      <a class="gx-ctac" href={`${base}ade/4/c2/organizacion-empresas/flashcards/`}>
         <span class="em">🃏</span>
         <div><h4>Flashcards →</h4><p>128 tarjetas · conceptos clave</p></div>
       </a>
@@ -564,4 +565,4 @@ const caen = [
 
   </div>
 </main>
-</Base>
+</Shell>

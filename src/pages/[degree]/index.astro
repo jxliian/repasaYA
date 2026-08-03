@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Shell from '../../layouts/Shell.astro';
+import Breadcrumbs from '../../components/nav/Breadcrumbs.astro';
+import PageHead from '../../components/catalog/PageHead.astro';
+import FilterBar from '../../components/catalog/FilterBar.astro';
+import SubjectGrid from '../../components/catalog/SubjectGrid.astro';
+import { degreeSlug } from '../../lib/routes';
+
+export async function getStaticPaths() {
+  const degrees = await getCollection('degrees');
+  const subjects = await getCollection('subjects');
+
+  return degrees.map((degree) => ({
+    params: { degree: degree.id },
+    props: {
+      degree,
+      subjects: subjects.filter((s) => s.data.degree.id === degree.id),
+    },
+  }));
+}
+
+const { degree, subjects } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const ready = subjects.filter((s) => s.data.status === 'available');
+const years = [...new Set(subjects.map((s) => s.data.year))].sort((a, b) => a - b);
+const materials = [...new Set(ready.flatMap((s) => s.data.materials))];
+
+const crumbs = [
+  { label: 'Inicio', href: base },
+  { label: degree.data.short, href: null },
+];
+---
+
+<Shell
+  title={degree.data.short}
+  description={`Todas las asignaturas de ${degree.data.name}: ${ready.length} con material y el plan completo de ${degree.data.years} cursos.`}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <PageHead
+      kicker="Grado"
+      icon={degree.data.icon}
+      title={degree.data.name}
+      lede={`${degree.data.blurb}. Aquí está el plan entero: las que ya tienen material y las que faltan, para que sepas qué hay y qué puedes aportar.`}
+      stats={[
+        { value: ready.length, label: 'con material' },
+        { value: subjects.length, label: 'asignaturas' },
+        { value: degree.data.years, label: 'cursos' },
+      ]}
+    />
+
+    <FilterBar years={years} materials={materials} />
+
+    <SubjectGrid
+      subjects={subjects}
+      degreeName={degree.data.name}
+      degreeShort={degree.data.short}
+      groupBy="year"
+    />
+  </div>
+</Shell>

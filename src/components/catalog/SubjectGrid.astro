@@ -1,0 +1,151 @@
+---
+import SubjectCard from './SubjectCard.astro';
+import type { Subject } from '../../lib/routes';
+import { semesterPath, yearPath, degreeSlug } from '../../lib/routes';
+
+/**
+ * Listado de asignaturas, agrupado según el nivel en el que estemos.
+ *
+ * Es el contenedor que lee FilterBar (`data-filter-scope`), y cada grupo
+ * lleva `data-group` para que un curso sin resultados no deje su título
+ * colgando.
+ */
+interface Props {
+  subjects: Subject[];
+  degreeName: string;
+  degreeShort: string;
+  groupBy?: 'year' | 'semester' | 'none';
+}
+
+const { subjects, degreeName, degreeShort, groupBy = 'none' } = Astro.props;
+
+const sorted = [...subjects].sort(
+  (a, b) =>
+    a.data.year - b.data.year ||
+    a.data.semester - b.data.semester ||
+    a.data.title.localeCompare(b.data.title, 'es')
+);
+
+type Group = { key: string; label: string; href: string | null; items: Subject[] };
+
+function build(): Group[] {
+  if (groupBy === 'none') {
+    return [{ key: 'all', label: '', href: null, items: sorted }];
+  }
+
+  const map = new Map<string, Group>();
+  for (const s of sorted) {
+    const d = degreeSlug(s);
+    const key =
+      groupBy === 'year' ? `y${s.data.year}` : `s${s.data.year}-${s.data.semester}`;
+
+    if (!map.has(key)) {
+      map.set(key, {
+        key,
+        label:
+          groupBy === 'year'
+            ? `${s.data.year}º curso`
+            : `Cuatrimestre ${s.data.semester}`,
+        href:
+          groupBy === 'year'
+            ? yearPath(d, s.data.year)
+            : semesterPath(d, s.data.year, s.data.semester),
+        items: [],
+      });
+    }
+    map.get(key)!.items.push(s);
+  }
+  return [...map.values()];
+}
+
+const groups = build();
+const showPlace = groupBy !== 'semester';
+---
+
+<div data-filter-scope>
+  {
+    groups.map((g) => (
+      <section class="group" data-group>
+        {g.label && (
+          <div class="group-head">
+            <h2>{g.label}</h2>
+            <span class="line" aria-hidden="true" />
+            {g.href && (
+              <a class="group-link" href={g.href}>
+                ver solo esto →
+              </a>
+            )}
+          </div>
+        )}
+
+        <div class="grid">
+          {g.items.map((s) => (
+            <SubjectCard
+              subject={s}
+              degreeName={degreeName}
+              degreeShort={degreeShort}
+              showPlace={showPlace}
+            />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <p class="no-results" data-filter-empty hidden>
+    Con esos filtros no queda nada. Quita alguno y vuelve a mirar.
+  </p>
+</div>
+
+<style>
+  .group + .group {
+    margin-top: 38px;
+  }
+  .group[hidden] {
+    display: none;
+  }
+
+  .group-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .group-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--glass-border), transparent);
+  }
+  .group-link {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    transition: color var(--dur) var(--ease-out);
+  }
+  .group-link:hover {
+    color: var(--accent);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
+    gap: 14px;
+  }
+
+  .no-results {
+    padding: 60px 0;
+    text-align: center;
+    color: var(--text-muted);
+  }
+  .no-results[hidden] {
+    display: none;
+  }
+</style>

@@ -1,0 +1,218 @@
+---
+/**
+ * Campo de partículas del fondo.
+ *
+ * Nodos flotando unidos por líneas, que se enganchan al cursor. Lee el
+ * color de `--particle`, así que cambia solo al alternar tema.
+ *
+ * Es `position: fixed` y va por detrás de todo (`z-index: -2`, debajo de
+ * la nebulosa del Shell), para que se vea a través del cristal al scrollear.
+ */
+---
+
+<canvas id="particles-bg" aria-hidden="true"></canvas>
+
+<style is:global>
+  #particles-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  interface P {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    r: number;
+  }
+
+  const LINK_DIST = 130; // px entre partículas para dibujar el enlace
+  const MOUSE_DIST = 180; // radio de influencia del cursor
+
+  function initParticles() {
+    const canvas = document.getElementById('particles-bg') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    // Mata la instancia anterior (View Transitions vuelve a montar esto)
+    const prev = (window as any).__particles;
+    if (prev) {
+      cancelAnimationFrame(prev.raf);
+      prev.cleanup();
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const readColor = () =>
+      getComputedStyle(document.documentElement).getPropertyValue('--particle').trim() ||
+      '167,139,234';
+    let pRGB = readColor();
+    const onTheme = () => {
+      pRGB = readColor();
+      if (reduce) step(); // sin animación hay que repintar a mano
+    };
+    window.addEventListener('themechange', onTheme);
+
+    let w = 0;
+    let h = 0;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let particles: P[] = [];
+    const mouse = { x: -9999, y: -9999, active: false };
+
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas!.width = Math.floor(w * dpr);
+      canvas!.height = Math.floor(h * dpr);
+      canvas!.style.width = w + 'px';
+      canvas!.style.height = h + 'px';
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // La densidad va con el área, con tope: en un 4K no queremos 400 nodos
+      const count = Math.min(110, Math.floor((w * h) / 16000));
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.6 + 0.8,
+        });
+      }
+    }
+
+    function step() {
+      ctx!.clearRect(0, 0, w, h);
+
+      for (const p of particles) {
+        // Atracción suave hacia el cursor
+        if (mouse.active) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < MOUSE_DIST * MOUSE_DIST && d2 > 1) {
+            const d = Math.sqrt(d2);
+            const force = (1 - d / MOUSE_DIST) * 0.6;
+            p.vx += (dx / d) * force * 0.05;
+            p.vy += (dy / d) * force * 0.05;
+          }
+        }
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.99;
+        p.vy *= 0.99;
+
+        // Se asoman por el lado contrario
+        if (p.x < -10) p.x = w + 10;
+        else if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        else if (p.y > h + 10) p.y = -10;
+
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(${pRGB},0.5)`;
+        ctx!.fill();
+      }
+
+      // Enlaces entre partículas cercanas
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < LINK_DIST * LINK_DIST) {
+            const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * 0.22;
+            ctx!.strokeStyle = `rgba(${pRGB},${alpha})`;
+            ctx!.lineWidth = 1;
+            ctx!.beginPath();
+            ctx!.moveTo(a.x, a.y);
+            ctx!.lineTo(b.x, b.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      // Enlaces del cursor a lo que tenga cerca
+      if (mouse.active) {
+        for (const p of particles) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < MOUSE_DIST * MOUSE_DIST) {
+            const alpha = (1 - Math.sqrt(d2) / MOUSE_DIST) * 0.45;
+            ctx!.strokeStyle = `rgba(${pRGB},${Math.min(alpha * 1.6, 0.6)})`;
+            ctx!.lineWidth = 1;
+            ctx!.beginPath();
+            ctx!.moveTo(mouse.x, mouse.y);
+            ctx!.lineTo(p.x, p.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      state.raf = requestAnimationFrame(step);
+    }
+
+    function onMove(e: PointerEvent) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    }
+    function onLeave() {
+      mouse.active = false;
+      mouse.x = -9999;
+      mouse.y = -9999;
+    }
+    // En una pestaña de fondo no hay nada que animar: se para el rAF
+    function onVisibility() {
+      if (reduce) return;
+      if (document.hidden) {
+        cancelAnimationFrame(state.raf);
+        state.raf = 0;
+      } else if (!state.raf) {
+        step();
+      }
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerout', onLeave);
+    document.addEventListener('visibilitychange', onVisibility);
+
+    const state: any = {
+      raf: 0,
+      cleanup() {
+        window.removeEventListener('resize', resize);
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerout', onLeave);
+        window.removeEventListener('themechange', onTheme);
+        document.removeEventListener('visibilitychange', onVisibility);
+      },
+    };
+    (window as any).__particles = state;
+
+    resize();
+    step();
+    if (reduce) {
+      // Un fotograma fijo y se acabó
+      cancelAnimationFrame(state.raf);
+      state.raf = 0;
+    }
+  }
+
+  initParticles();
+  document.addEventListener('astro:after-swap', initParticles);
+</script>

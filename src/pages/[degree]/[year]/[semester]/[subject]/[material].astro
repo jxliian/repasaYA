@@ -1,0 +1,189 @@
+---
+import { getCollection } from 'astro:content';
+import QuizShell from '../../../../../layouts/QuizShell.astro';
+import Shell from '../../../../../layouts/Shell.astro';
+import QuizEngine from '../../../../../components/QuizEngine.astro';
+import CardDeck from '../../../../../components/study/CardDeck.astro';
+import Breadcrumbs from '../../../../../components/nav/Breadcrumbs.astro';
+import PageHead from '../../../../../components/catalog/PageHead.astro';
+import {
+  degreePath,
+  hasHub,
+  semesterPath,
+  subjectCode,
+  subjectPath,
+  subjectSlug,
+  yearPath,
+} from '../../../../../lib/routes';
+
+/**
+ * Página de un material: /ade/4/c2/rrhh/vf/
+ *
+ * Tres presentaciones según el tipo:
+ *   test | vf | reveal  → QuizEngine, a pantalla completa y sin cromo
+ *   flashcards | glosario → CardDeck, dentro del layout normal
+ *   apuntes → visor de PDF
+ */
+
+export async function getStaticPaths() {
+  // Dentro de la función a propósito: Astro extrae `getStaticPaths` a su
+  // propio ámbito y no ve las constantes del frontmatter.
+  const subjects = await getCollection('subjects');
+  const degrees = await getCollection('degrees');
+  const materials = await getCollection('materials');
+
+  const degreeById = new Map(degrees.map((d) => [d.id, d]));
+  const subjectById = new Map(subjects.map((s) => [s.id, s]));
+
+  return materials.flatMap((material) => {
+    // Las guías son páginas propias: la colección solo guarda su enlace
+    if (material.data.type === 'guia') return [];
+
+    const subject = subjectById.get(material.data.subject.id);
+    // Un material de una asignatura sin hub (externa o sin publicar) no
+    // genera página: sería una ruta huérfana.
+    if (!subject || !hasHub(subject)) return [];
+
+    const degree = degreeById.get(subject.data.degree.id)!;
+    return [
+      {
+        params: {
+          degree: degree.id,
+          year: String(subject.data.year),
+          semester: `c${subject.data.semester}`,
+          subject: subjectSlug(subject),
+          material: material.id.split('/').pop()!,
+        },
+        props: { material, subject, degree },
+      },
+    ];
+  });
+}
+
+const { material, subject, degree } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const type = material.data.type;
+const items = 'items' in material.data ? material.data.items : [];
+const { year, semester, title: subjectTitle } = subject.data;
+const slug = subjectSlug(subject);
+
+const isEngine = type === 'test' || type === 'vf' || type === 'reveal';
+const isDeck = type === 'flashcards' || type === 'glosario';
+
+const back = subjectPath(degree.id, year, semester, slug);
+
+const NOUN: Record<string, string> = {
+  test: 'preguntas tipo test',
+  vf: 'preguntas de verdadero/falso',
+  reveal: 'preguntas con respuesta',
+  flashcards: 'flashcards',
+  glosario: 'términos',
+};
+
+const description = isEngine || isDeck
+  ? `${items.length} ${NOUN[type]} de ${subjectTitle} (${degree.data.short}, ${year}º). Gratis y sin registro.`
+  : `Apuntes de ${subjectTitle} en PDF. Gratis y sin registro.`;
+
+const crumbs = [
+  { label: 'Inicio', href: base },
+  { label: degree.data.short, href: degreePath(degree.id) },
+  { label: `${year}º`, href: yearPath(degree.id, year) },
+  { label: `Cuatri ${semester}`, href: semesterPath(degree.id, year, semester) },
+  { label: subjectTitle, href: back },
+  { label: material.data.title, href: null },
+];
+
+const pdf = type === 'apuntes' ? `${base}${material.data.pdf}` : null;
+const hidden = material.data.hidden;
+---
+
+{
+  isEngine ? (
+    <QuizShell title={`${subjectTitle} · ${material.data.title}`} description={description} noindex={hidden}>
+      <QuizEngine
+        title={subjectTitle}
+        code={subjectCode(subject)}
+        testData={type === 'test' ? items : []}
+        vfData={type === 'vf' ? items : []}
+        quizzData={type === 'reveal' ? items : []}
+        backHref={back}
+        backLabel={subjectTitle}
+      />
+    </QuizShell>
+  ) : (
+    <Shell title={`${subjectTitle} · ${material.data.title}`} description={description} noindex={hidden}>
+      <div class="container">
+        <Breadcrumbs crumbs={crumbs} />
+
+        <PageHead
+          kicker={`${degree.data.short} · ${year}º · Cuatrimestre ${semester}`}
+          title={material.data.title}
+          lede={subjectTitle}
+          stats={
+            isDeck
+              ? [{ value: items.length, label: type === 'glosario' ? 'términos' : 'tarjetas' }]
+              : []
+          }
+        />
+
+        {isDeck && <CardDeck cards={items as any} variant={type as any} />}
+
+        {
+          pdf && (
+            <div class="pdf">
+              <div class="pdf-bar glass">
+                <span class="pdf-name">{material.data.title}</span>
+                <a class="btn btn-ghost" href={pdf} download>
+                  Descargar PDF
+                </a>
+              </div>
+              <iframe src={pdf} title={`${material.data.title} — ${subjectTitle}`} />
+              <p class="pdf-fallback">
+                ¿No se ve? <a href={pdf} target="_blank" rel="noopener">Ábrelo en una pestaña</a>.
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </Shell>
+  )
+}
+
+<style>
+  .pdf {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pdf-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+  }
+  .pdf-name {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .pdf iframe {
+    width: 100%;
+    height: min(78vh, 900px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+  }
+  .pdf-fallback {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+  .pdf-fallback a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

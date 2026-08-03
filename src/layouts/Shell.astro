@@ -1,0 +1,159 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/800.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import SiteHeader from '../components/nav/SiteHeader.astro';
+import ParticleField from '../components/fx/ParticleField.astro';
+
+/**
+ * Shell — layout de las páginas del catálogo nuevo (oscuro por defecto).
+ *
+ * Convive con `Base.astro`, que sigue sirviendo las páginas de material
+ * antiguas. Cuando se migre el último quiz, `Base.astro` desaparece y
+ * esto se queda como layout único.
+ */
+interface Props {
+  title: string;
+  description?: string;
+  /** Fondo de nebulosa suave. Off en páginas largas de listado. */
+  ambient?: boolean;
+  /** Fuera del índice de Google (páginas de prueba, duplicados). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Tests, verdadero/falso y flashcards para ADE e Ingeniería Informática. Gratis, sin registro y sin anuncios.',
+  ambient = true,
+  noindex = false,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const canonical = `https://jxliian.github.io/repasaYA${Astro.url.pathname}`;
+const pageTitle = title === 'repasaYA' ? 'repasaYA — Aprueba sin pagar ni un duro' : `${title} — repasaYA`;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={`${base}logo.png`} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="repasaYA" />
+    <meta name="twitter:card" content="summary" />
+    <ClientRouter />
+    <script is:inline>
+      // Oscuro por defecto; el claro es opt-in y se recuerda.
+      (function () {
+        try {
+          document.documentElement.dataset.theme =
+            localStorage.getItem('theme') || 'dark';
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <ParticleField />
+    {ambient && <div class="ambient" aria-hidden="true" />}
+
+    <SiteHeader />
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Hecho con ganas por <strong>Julián Carrión</strong> ·
+          <a href="https://github.com/jxliian" target="_blank" rel="noopener">@jxliian</a>
+          · <a href="https://github.com/jxliian/repasaYA" target="_blank" rel="noopener">
+            código en GitHub
+          </a>
+        </p>
+        <p class="meta">
+          © {year} · Universidad de Granada · Doble Grado ADE + Ingeniería Informática
+        </p>
+        <p class="meta">
+          <a href={`${base}#sobre-mi`}>Sobre mí</a> ·
+          <a href="mailto:e.carrionjuliann@go.ugr.es">Contacto</a> ·
+          <a href={`${base}privacidad/`}>Privacidad</a> ·
+          <a href={`${base}mapa/`}>Mapa web</a>
+        </p>
+      </div>
+    </footer>
+
+    <style is:global>
+      /* Nebulosa de fondo, fija: se ve a través del cristal al hacer scroll */
+      .ambient {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse 70% 50% at 15% 0%,
+            rgba(124, 92, 255, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 50% at 90% 15%,
+            rgba(79, 220, 210, 0.09),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 80% 60% at 50% 100%,
+            rgba(255, 111, 216, 0.06),
+            transparent 65%
+          );
+      }
+      :root[data-theme='light'] .ambient {
+        opacity: 0.5;
+      }
+
+      main {
+        min-height: 60vh;
+        padding-bottom: 90px;
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--glass-border);
+        padding: 34px 0 46px;
+        text-align: center;
+        font-size: 0.84rem;
+        color: var(--text-muted);
+      }
+      .site-footer p + p {
+        margin-top: 6px;
+      }
+      .site-footer .meta {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-dim);
+      }
+      .site-footer a {
+        color: var(--accent);
+      }
+      .site-footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </body>
+</html>

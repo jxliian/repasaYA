@@ -1,0 +1,244 @@
+---
+import { subjectUrl, subjectSlug, degreeSlug, contributeUrl } from '../../lib/routes';
+import type { Subject } from '../../lib/routes';
+
+/**
+ * Tarjeta de asignatura del catálogo.
+ *
+ * Dos estados: con material (cristal vivo, borde que se enciende) y sin
+ * material (apagada, enlaza al issue para aportarlo). Las vacías se
+ * muestran igual a propósito: enseñan el plan completo y son la vía
+ * más directa para que alguien contribuya.
+ *
+ * Los `data-*` son los que lee FilterBar para filtrar sin recargar.
+ */
+interface Props {
+  subject: Subject;
+  degreeName: string;
+  degreeShort: string;
+  /** Mostrar el curso/cuatrimestre (útil en listados mezclados) */
+  showPlace?: boolean;
+}
+
+const { subject, degreeName, degreeShort, showPlace = false } = Astro.props;
+
+const MATERIAL_LABEL: Record<string, string> = {
+  test: 'Tipo test',
+  vf: 'V/F',
+  reveal: 'Quiz',
+  flashcards: 'Flashcards',
+  glosario: 'Glosario',
+  apuntes: 'Apuntes',
+};
+
+const url = subjectUrl(subject);
+const available = url !== null;
+const href = url ?? contributeUrl(subject, degreeName);
+const isExternal = Boolean(subject.data.external) || !available;
+const { title, icon, year, semester, credits, description, materials } = subject.data;
+---
+
+<a
+  class:list={['card', 'glass', { 'is-planned': !available, 'glow-hover': available }]}
+  href={href}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
+  data-subject
+  data-slug={subjectSlug(subject)}
+  data-degree={degreeSlug(subject)}
+  data-year={year}
+  data-semester={semester}
+  data-status={available ? 'available' : 'planned'}
+  data-materials={materials.join(' ')}
+>
+  <div class="top">
+    <span class="icon" aria-hidden="true">{icon}</span>
+    {
+      showPlace && (
+        <span class="place">
+          {year}º · C{semester}
+        </span>
+      )
+    }
+  </div>
+
+  <h3 class="title">{title}</h3>
+
+  {description && <p class="desc">{description}</p>}
+
+  {
+    !available && (
+      <p class="desc empty">
+        Todavía no hay material. Si la has cursado, súbelo tú.
+      </p>
+    )
+  }
+
+  <div class="foot">
+    {
+      available ? (
+        <span class="tags">
+          {materials.map((m) => (
+            <span class="tag">{MATERIAL_LABEL[m] ?? m}</span>
+          ))}
+          {subject.data.external && <span class="tag tag-ext">repo aparte</span>}
+        </span>
+      ) : (
+        <span class="tags">
+          <span class="tag tag-empty">súbela tú</span>
+        </span>
+      )
+    }
+    <span class="credits">{credits} ECTS</span>
+  </div>
+
+  <span class="sr-only">
+    {degreeShort} · {year}º curso · cuatrimestre {semester}
+  </span>
+</a>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  /* Halo que aparece al pasar por encima */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      420px circle at 50% 0%,
+      var(--accent-soft),
+      transparent 70%
+    );
+    transition: opacity var(--dur) var(--ease-out);
+  }
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: var(--radius-sm);
+    background: var(--glass-hi);
+    border: 1px solid var(--glass-border);
+  }
+  .place {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .desc {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .desc.empty {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: var(--radius-xs);
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+  }
+  .tag-ext {
+    color: var(--neon-cyan);
+    background: color-mix(in srgb, var(--neon-cyan) 12%, transparent);
+    border-color: color-mix(in srgb, var(--neon-cyan) 32%, transparent);
+  }
+  .tag-empty {
+    color: var(--text-dim);
+    background: var(--glass-hi);
+    border-color: var(--glass-border);
+  }
+  .credits {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Sin material ──────────────────────────────────────────── */
+  .card.is-planned {
+    background: transparent;
+    border-style: dashed;
+    box-shadow: none;
+    transition: border-color var(--dur) var(--ease-out),
+      background var(--dur) var(--ease-out);
+  }
+  .card.is-planned .icon,
+  .card.is-planned .title {
+    opacity: 0.6;
+  }
+  .card.is-planned:hover {
+    border-color: var(--glass-border-hi);
+    border-style: solid;
+    background: var(--glass);
+  }
+  .card.is-planned:hover .icon,
+  .card.is-planned:hover .title {
+    opacity: 1;
+  }
+
+  /* Oculta por el filtro */
+  .card[hidden] {
+    display: none;
+  }
+</style>

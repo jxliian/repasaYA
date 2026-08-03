@@ -1,0 +1,255 @@
+---
+/**
+ * Barra de filtros del catálogo.
+ *
+ * Filtra en cliente las tarjetas `[data-subject]` que haya dentro del
+ * contenedor `[data-filter-scope]`. Sin recargas ni framework: con 64
+ * asignaturas (y con 600) esto va sobrado y funciona sin JS activado,
+ * porque por defecto se ve todo.
+ */
+interface Props {
+  /** Muestra los chips de curso (1º-5º). Off dentro de un curso concreto. */
+  years?: number[];
+  /** Tipos de material presentes en este listado */
+  materials?: string[];
+}
+
+const { years = [], materials = [] } = Astro.props;
+
+const MATERIAL_LABEL: Record<string, string> = {
+  test: 'Tipo test',
+  vf: 'V/F',
+  reveal: 'Quiz rápido',
+  flashcards: 'Flashcards',
+  glosario: 'Glosario',
+  apuntes: 'Apuntes',
+};
+---
+
+<div class="filters glass" data-filters>
+  <div class="row">
+    <span class="mono-label">Ver</span>
+    <div class="chips" role="group" aria-label="Filtrar por estado">
+      <button class="chip active" type="button" data-filter="status" data-value="all">
+        Todas
+      </button>
+      <button class="chip" type="button" data-filter="status" data-value="available">
+        Solo con material
+      </button>
+    </div>
+  </div>
+
+  {
+    materials.length > 0 && (
+      <div class="row">
+        <span class="mono-label">Material</span>
+        <div class="chips" role="group" aria-label="Filtrar por tipo de material">
+          {materials.map((m) => (
+            <button class="chip" type="button" data-filter="material" data-value={m}>
+              {MATERIAL_LABEL[m] ?? m}
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    years.length > 1 && (
+      <div class="row">
+        <span class="mono-label">Curso</span>
+        <div class="chips" role="group" aria-label="Filtrar por curso">
+          {years.map((y) => (
+            <button class="chip" type="button" data-filter="year" data-value={String(y)}>
+              {y}º
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  <div class="row count-row">
+    <output class="count" data-filter-count aria-live="polite"></output>
+    <button class="reset" type="button" data-filter-reset hidden>Quitar filtros</button>
+  </div>
+</div>
+
+<style>
+  .filters {
+    position: sticky;
+    top: calc(var(--header-h) + 10px);
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 22px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 26px;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    padding: 6px 13px;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    transition: color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .chip:hover {
+    color: var(--text);
+    border-color: var(--glass-border-hi);
+  }
+  .chip.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent-line);
+    box-shadow: var(--glow-sm);
+  }
+
+  .count-row {
+    margin-left: auto;
+  }
+  .count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .reset {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    background: none;
+    border: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .reset[hidden] {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .filters {
+      position: static;
+      gap: 12px;
+    }
+    .row {
+      width: 100%;
+      align-items: flex-start;
+    }
+    .count-row {
+      margin-left: 0;
+      justify-content: space-between;
+    }
+  }
+</style>
+
+<script>
+  function initFilters() {
+    const bar = document.querySelector<HTMLElement>('[data-filters]');
+    const scope = document.querySelector<HTMLElement>('[data-filter-scope]');
+    if (!bar || !scope) return;
+
+    const cards = Array.from(scope.querySelectorAll<HTMLElement>('[data-subject]'));
+    const groups = Array.from(scope.querySelectorAll<HTMLElement>('[data-group]'));
+    const countEl = bar.querySelector<HTMLElement>('[data-filter-count]');
+    const resetEl = bar.querySelector<HTMLElement>('[data-filter-reset]');
+    const emptyEl = scope.querySelector<HTMLElement>('[data-filter-empty]');
+
+    // status es excluyente; material y year son multiselección (OR dentro,
+    // AND entre grupos): "V/F o Flashcards" Y "3º o 4º".
+    let status = 'all';
+    const material = new Set<string>();
+    const year = new Set<string>();
+
+    function apply() {
+      let visible = 0;
+
+      for (const card of cards) {
+        const okStatus = status === 'all' || card.dataset.status === 'available';
+        const okYear = year.size === 0 || year.has(card.dataset.year ?? '');
+        const mats = (card.dataset.materials ?? '').split(' ').filter(Boolean);
+        const okMaterial =
+          material.size === 0 || mats.some((m) => material.has(m));
+
+        const show = okStatus && okYear && okMaterial;
+        card.hidden = !show;
+        if (show) visible++;
+      }
+
+      // Un curso o cuatrimestre sin resultados no debe dejar un título huérfano
+      for (const g of groups) {
+        const any = g.querySelector<HTMLElement>('[data-subject]:not([hidden])');
+        g.hidden = !any;
+      }
+
+      if (countEl) {
+        countEl.textContent =
+          visible === cards.length
+            ? `${cards.length} asignaturas`
+            : `${visible} de ${cards.length}`;
+      }
+      const dirty = status !== 'all' || material.size > 0 || year.size > 0;
+      if (resetEl) resetEl.hidden = !dirty;
+      if (emptyEl) emptyEl.hidden = visible > 0;
+    }
+
+    bar.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-filter]');
+      if (btn) {
+        const kind = btn.dataset.filter!;
+        const value = btn.dataset.value!;
+
+        if (kind === 'status') {
+          status = value;
+          bar
+            .querySelectorAll('[data-filter="status"]')
+            .forEach((b) => b.classList.toggle('active', b === btn));
+        } else {
+          const set = kind === 'material' ? material : year;
+          if (set.has(value)) set.delete(value);
+          else set.add(value);
+          btn.classList.toggle('active', set.has(value));
+        }
+        apply();
+        return;
+      }
+
+      if ((e.target as HTMLElement).closest('[data-filter-reset]')) {
+        status = 'all';
+        material.clear();
+        year.clear();
+        bar.querySelectorAll<HTMLElement>('[data-filter]').forEach((b) => {
+          b.classList.toggle(
+            'active',
+            b.dataset.filter === 'status' && b.dataset.value === 'all'
+          );
+        });
+        apply();
+      }
+    });
+
+    apply();
+  }
+
+  initFilters();
+  document.addEventListener('astro:page-load', initFilters);
+</script>

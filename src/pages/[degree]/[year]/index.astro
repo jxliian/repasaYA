@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Shell from '../../../layouts/Shell.astro';
+import Breadcrumbs from '../../../components/nav/Breadcrumbs.astro';
+import PageHead from '../../../components/catalog/PageHead.astro';
+import FilterBar from '../../../components/catalog/FilterBar.astro';
+import SubjectGrid from '../../../components/catalog/SubjectGrid.astro';
+import { degreePath } from '../../../lib/routes';
+
+export async function getStaticPaths() {
+  const degrees = await getCollection('degrees');
+  const subjects = await getCollection('subjects');
+  const paths = [];
+
+  for (const degree of degrees) {
+    const mine = subjects.filter((s) => s.data.degree.id === degree.id);
+    // Se generan los cursos del plan, aunque alguno esté vacío: la
+    // jerarquía tiene que ser navegable de arriba abajo sin 404.
+    for (let year = 1; year <= degree.data.years; year++) {
+      paths.push({
+        params: { degree: degree.id, year: String(year) },
+        props: { degree, year, subjects: mine.filter((s) => s.data.year === year) },
+      });
+    }
+  }
+  return paths;
+}
+
+const { degree, year, subjects } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const ready = subjects.filter((s) => s.data.status === 'available');
+const materials = [...new Set(ready.flatMap((s) => s.data.materials))];
+
+const crumbs = [
+  { label: 'Inicio', href: base },
+  { label: degree.data.short, href: degreePath(degree.id) },
+  { label: `${year}º`, href: null },
+];
+---
+
+<Shell
+  title={`${year}º de ${degree.data.short}`}
+  description={`Asignaturas de ${year}º curso de ${degree.data.name} en repasaYA.`}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <PageHead
+      kicker={degree.data.short}
+      title={`${year}º curso`}
+      lede={`Las ${subjects.length} asignaturas de ${year}º, repartidas por cuatrimestre.`}
+      stats={[
+        { value: ready.length, label: 'con material' },
+        { value: subjects.length, label: 'asignaturas' },
+      ]}
+    />
+
+    <FilterBar materials={materials} />
+
+    <SubjectGrid
+      subjects={subjects}
+      degreeName={degree.data.name}
+      degreeShort={degree.data.short}
+      groupBy="semester"
+    />
+  </div>
+</Shell>

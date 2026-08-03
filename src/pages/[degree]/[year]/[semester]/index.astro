@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import Shell from '../../../../layouts/Shell.astro';
+import Breadcrumbs from '../../../../components/nav/Breadcrumbs.astro';
+import PageHead from '../../../../components/catalog/PageHead.astro';
+import FilterBar from '../../../../components/catalog/FilterBar.astro';
+import SubjectGrid from '../../../../components/catalog/SubjectGrid.astro';
+import { degreePath, yearPath } from '../../../../lib/routes';
+
+export async function getStaticPaths() {
+  const degrees = await getCollection('degrees');
+  const subjects = await getCollection('subjects');
+  const paths = [];
+
+  for (const degree of degrees) {
+    const mine = subjects.filter((s) => s.data.degree.id === degree.id);
+    for (let year = 1; year <= degree.data.years; year++) {
+      for (const semester of [1, 2] as const) {
+        paths.push({
+          params: { degree: degree.id, year: String(year), semester: `c${semester}` },
+          props: {
+            degree,
+            year,
+            semester,
+            subjects: mine.filter(
+              (s) => s.data.year === year && s.data.semester === semester
+            ),
+          },
+        });
+      }
+    }
+  }
+  return paths;
+}
+
+const { degree, year, semester, subjects } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const ready = subjects.filter((s) => s.data.status === 'available');
+const materials = [...new Set(ready.flatMap((s) => s.data.materials))];
+const credits = subjects.reduce((n, s) => n + s.data.credits, 0);
+
+const crumbs = [
+  { label: 'Inicio', href: base },
+  { label: degree.data.short, href: degreePath(degree.id) },
+  { label: `${year}º`, href: yearPath(degree.id, year) },
+  { label: `Cuatri ${semester}`, href: null },
+];
+---
+
+<Shell
+  title={`${year}º C${semester} · ${degree.data.short}`}
+  description={`Asignaturas del cuatrimestre ${semester} de ${year}º de ${degree.data.name}.`}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <PageHead
+      kicker={`${degree.data.short} · ${year}º curso`}
+      title={`Cuatrimestre ${semester}`}
+      lede={
+        subjects.length
+          ? `${subjects.length} asignaturas, ${credits} créditos. Lo que te toca este cuatri.`
+          : 'Este cuatrimestre todavía no tiene asignaturas cargadas.'
+      }
+      stats={[
+        { value: ready.length, label: 'con material' },
+        { value: subjects.length, label: 'asignaturas' },
+        { value: credits, label: 'ECTS' },
+      ]}
+    />
+
+    {subjects.length > 0 && <FilterBar materials={materials} />}
+
+    <SubjectGrid
+      subjects={subjects}
+      degreeName={degree.data.name}
+      degreeShort={degree.data.short}
+    />
+  </div>
+</Shell>

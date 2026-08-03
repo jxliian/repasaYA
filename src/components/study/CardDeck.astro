@@ -1,0 +1,522 @@
+---
+/**
+ * CardDeck — flashcards y glosarios.
+ *
+ * Dos modos sobre los mismos datos: tarjetas (una a una, se giran) y
+ * lista (todo de golpe, para buscar un término concreto). Filtra por tema
+ * y baraja. Sin JS solo se ve la lista, que sigue siendo útil.
+ */
+interface Card {
+  tema: string;
+  term: string;
+  def: string;
+}
+interface Props {
+  cards: Card[];
+  /** 'glosario' cambia el modo por defecto a lista */
+  variant?: 'flashcards' | 'glosario';
+}
+
+const { cards, variant = 'flashcards' } = Astro.props;
+
+const temas = [...new Set(cards.map((c) => c.tema))];
+const counts = new Map<string, number>();
+for (const c of cards) counts.set(c.tema, (counts.get(c.tema) ?? 0) + 1);
+---
+
+<div class="deck" data-deck data-default-mode={variant} data-cards={JSON.stringify(cards)}>
+  <!-- ── Controles ─────────────────────────────────────────── -->
+  <div class="bar glass">
+    <div class="modes" role="group" aria-label="Modo de estudio">
+      <button class="mode" type="button" data-mode="cards">🃏 Tarjetas</button>
+      <button class="mode" type="button" data-mode="list">📋 Lista</button>
+    </div>
+
+    <div class="right">
+      <output class="count" data-count aria-live="polite"></output>
+      <button class="ghost" type="button" data-shuffle>🔀 Barajar</button>
+    </div>
+  </div>
+
+  {
+    temas.length > 1 && (
+      <div class="temas" role="group" aria-label="Filtrar por tema">
+        <button class="chip on" type="button" data-tema="*">
+          Todos <span>{cards.length}</span>
+        </button>
+        {temas.map((t) => (
+          <button class="chip" type="button" data-tema={t}>
+            {t} <span>{counts.get(t)}</span>
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <!-- ── Modo tarjetas ─────────────────────────────────────── -->
+  <div class="cards-mode" data-view="cards" hidden>
+    <div class="card-stage">
+      <button class="flip-card" type="button" data-card aria-live="polite">
+        <span class="face front">
+          <span class="tema" data-tema-label></span>
+          <span class="term" data-term></span>
+          <span class="hint">pulsa para ver la definición</span>
+        </span>
+        <span class="face back">
+          <span class="def" data-def></span>
+        </span>
+      </button>
+    </div>
+
+    <div class="nav">
+      <button class="ghost" type="button" data-prev aria-label="Anterior">←</button>
+      <div class="progress">
+        <div class="bar-track"><div class="bar-fill" data-progress></div></div>
+        <span class="pos" data-position></span>
+      </div>
+      <button class="ghost" type="button" data-next aria-label="Siguiente">→</button>
+    </div>
+
+    <p class="keys">
+      <kbd>←</kbd> <kbd>→</kbd> moverte · <kbd>espacio</kbd> girar · <kbd>s</kbd> barajar
+    </p>
+  </div>
+
+  <!-- ── Modo lista (también es el fallback sin JS) ────────── -->
+  <div class="list-mode" data-view="list">
+    <dl class="list">
+      {
+        cards.map((c) => (
+          <div class="entry" data-entry data-tema={c.tema}>
+            <dt>
+              {c.term}
+              <span class="entry-tema">{c.tema}</span>
+            </dt>
+            <dd>{c.def}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="no-results" data-empty hidden>Ningún término con ese filtro.</p>
+  </div>
+</div>
+
+<style>
+  .deck {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── Barra ─────────────────────────────────────────────────── */
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+  }
+  .modes {
+    display: flex;
+    gap: 6px;
+  }
+  .mode {
+    padding: 8px 15px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    background: none;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-weight: 600;
+    transition: all var(--dur-fast) var(--ease-out);
+  }
+  .mode:hover {
+    color: var(--text);
+  }
+  .mode.on {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent-line);
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+  .ghost {
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    background: var(--glass-hi);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all var(--dur-fast) var(--ease-out);
+  }
+  .ghost:hover {
+    color: var(--accent);
+    border-color: var(--glass-border-hi);
+    box-shadow: var(--glow-sm);
+  }
+
+  /* ── Chips de tema ─────────────────────────────────────────── */
+  .temas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .chip {
+    padding: 6px 13px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: all var(--dur-fast) var(--ease-out);
+  }
+  .chip span {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    opacity: 0.7;
+    margin-left: 3px;
+  }
+  .chip:hover {
+    color: var(--text);
+    border-color: var(--glass-border-hi);
+  }
+  .chip.on {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent-line);
+  }
+
+  [data-view][hidden] {
+    display: none;
+  }
+
+  /* ── Tarjeta que gira ──────────────────────────────────────── */
+  .card-stage {
+    perspective: 1400px;
+    margin-top: 6px;
+  }
+  .flip-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 320px;
+    padding: 0;
+    background: none;
+    border: none;
+    transform-style: preserve-3d;
+    transition: transform 0.55s var(--ease-snap);
+  }
+  .flip-card.flipped {
+    transform: rotateY(180deg);
+  }
+  .face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 34px;
+    text-align: center;
+    border-radius: var(--radius-lg);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--blur)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
+    box-shadow: var(--shadow-md), inset 0 1px 0 var(--glass-hi);
+    backface-visibility: hidden;
+  }
+  .back {
+    transform: rotateY(180deg);
+    border-color: var(--accent-line);
+    box-shadow: var(--shadow-md), var(--glow-sm);
+  }
+  .flip-card:hover .front {
+    border-color: var(--glass-border-hi);
+  }
+
+  .tema {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .term {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 3.6vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .hint {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .def {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: var(--text);
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+
+  /* ── Navegación ────────────────────────────────────────────── */
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .nav .ghost {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  .progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bar-track {
+    flex: 1;
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background: var(--glass-border);
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+    box-shadow: 0 0 10px var(--accent);
+    transition: width var(--dur) var(--ease-out);
+  }
+  .pos {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .keys {
+    margin-top: 12px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--text-dim);
+  }
+  .keys kbd {
+    font-family: inherit;
+    background: var(--glass-hi);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+  @media (max-width: 620px) {
+    .keys {
+      display: none;
+    }
+  }
+
+  /* ── Lista ─────────────────────────────────────────────────── */
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+  }
+  .entry {
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    transition: border-color var(--dur) var(--ease-out);
+  }
+  .entry:hover {
+    border-color: var(--glass-border-hi);
+  }
+  .entry[hidden] {
+    display: none;
+  }
+  .entry dt {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    letter-spacing: -0.025em;
+    margin-bottom: 7px;
+  }
+  .entry-tema {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+  }
+  .entry dd {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+  .no-results {
+    padding: 50px 0;
+    text-align: center;
+    color: var(--text-muted);
+  }
+  .no-results[hidden] {
+    display: none;
+  }
+</style>
+
+<script>
+  interface Card {
+    tema: string;
+    term: string;
+    def: string;
+  }
+
+  function initDeck() {
+    const root = document.querySelector<HTMLElement>('[data-deck]');
+    if (!root || root.dataset.ready === '1') return;
+    root.dataset.ready = '1';
+
+    const all: Card[] = JSON.parse(root.dataset.cards || '[]');
+
+    const views = {
+      cards: root.querySelector<HTMLElement>('[data-view="cards"]')!,
+      list: root.querySelector<HTMLElement>('[data-view="list"]')!,
+    };
+    const card = root.querySelector<HTMLElement>('[data-card]')!;
+    const termEl = root.querySelector<HTMLElement>('[data-term]')!;
+    const defEl = root.querySelector<HTMLElement>('[data-def]')!;
+    const temaEl = root.querySelector<HTMLElement>('[data-tema-label]')!;
+    const posEl = root.querySelector<HTMLElement>('[data-position]')!;
+    const progEl = root.querySelector<HTMLElement>('[data-progress]')!;
+    const countEl = root.querySelector<HTMLElement>('[data-count]')!;
+    const emptyEl = root.querySelector<HTMLElement>('[data-empty]')!;
+    const entries = Array.from(root.querySelectorAll<HTMLElement>('[data-entry]'));
+
+    let mode: 'cards' | 'list' = (root.dataset.defaultMode as any) === 'glosario' ? 'list' : 'cards';
+    let tema = '*';
+    let deck: Card[] = [];
+    let i = 0;
+
+    function filtered(): Card[] {
+      return tema === '*' ? all : all.filter((c) => c.tema === tema);
+    }
+
+    function paint() {
+      const c = deck[i];
+      if (!c) return;
+      card.classList.remove('flipped');
+      temaEl.textContent = c.tema;
+      termEl.textContent = c.term;
+      defEl.textContent = c.def;
+      posEl.textContent = `${i + 1} / ${deck.length}`;
+      progEl.style.width = `${((i + 1) / deck.length) * 100}%`;
+    }
+
+    function refresh() {
+      deck = filtered();
+      i = 0;
+
+      // La lista se filtra en su sitio; las tarjetas se rehacen
+      for (const el of entries) el.hidden = tema !== '*' && el.dataset.tema !== tema;
+      emptyEl.hidden = deck.length > 0;
+
+      countEl.textContent = `${deck.length} ${deck.length === 1 ? 'término' : 'términos'}`;
+      if (deck.length) paint();
+    }
+
+    function setMode(next: 'cards' | 'list') {
+      mode = next;
+      views.cards.hidden = next !== 'cards';
+      views.list.hidden = next !== 'list';
+      root
+        .querySelectorAll<HTMLElement>('[data-mode]')
+        .forEach((b) => b.classList.toggle('on', b.dataset.mode === next));
+    }
+
+    function move(step: number) {
+      if (!deck.length) return;
+      i = (i + step + deck.length) % deck.length;
+      paint();
+    }
+
+    function shuffle() {
+      // Fisher-Yates: barajado uniforme, no `sort(() => Math.random() - .5)`,
+      // que sesga el resultado.
+      for (let k = deck.length - 1; k > 0; k--) {
+        const j = Math.floor(Math.random() * (k + 1));
+        [deck[k], deck[j]] = [deck[j], deck[k]];
+      }
+      i = 0;
+      paint();
+    }
+
+    root.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+
+      const modeBtn = t.closest<HTMLElement>('[data-mode]');
+      if (modeBtn) return setMode(modeBtn.dataset.mode as any);
+
+      const chip = t.closest<HTMLElement>('[data-tema]');
+      if (chip && chip.dataset.tema !== undefined && chip.tagName === 'BUTTON') {
+        tema = chip.dataset.tema!;
+        root
+          .querySelectorAll<HTMLElement>('.chip')
+          .forEach((c) => c.classList.toggle('on', c === chip));
+        return refresh();
+      }
+
+      if (t.closest('[data-shuffle]')) return shuffle();
+      if (t.closest('[data-prev]')) return move(-1);
+      if (t.closest('[data-next]')) return move(1);
+      if (t.closest('[data-card]')) card.classList.toggle('flipped');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (mode !== 'cards' || !deck.length) return;
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowLeft') move(-1);
+      else if (e.key === 'ArrowRight') move(1);
+      else if (e.key === ' ') {
+        e.preventDefault();
+        card.classList.toggle('flipped');
+      } else if (e.key.toLowerCase() === 's') shuffle();
+    });
+
+    setMode(mode);
+    refresh();
+  }
+
+  initDeck();
+  document.addEventListener('astro:page-load', initDeck);
+</script>

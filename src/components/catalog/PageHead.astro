@@ -1,0 +1,105 @@
+---
+/** Cabecera de las páginas de catálogo: título, frase y cifras. */
+interface Props {
+  kicker?: string;
+  icon?: string;
+  title: string;
+  lede?: string;
+  stats?: { value: string | number; label: string }[];
+}
+
+const { kicker, icon, title, lede, stats = [] } = Astro.props;
+---
+
+<header class="page-head">
+  {kicker && <p class="mono-label">{kicker}</p>}
+
+  <h1>
+    {icon && <span class="icon" aria-hidden="true">{icon}</span>}
+    <span>{title}</span>
+  </h1>
+
+  {lede && <p class="lede">{lede}</p>}
+
+  {
+    stats.length > 0 && (
+      <dl class="stats">
+        {stats.map((s) => (
+          <div>
+            <dt>{s.value}</dt>
+            <dd>{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+</header>
+
+<style>
+  .page-head {
+    /* Aire generoso arriba y abajo: pegado a las migas y a las tarjetas
+       de material se leía como un solo bloque apelotonado. */
+    padding-block: 30px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.7rem, 4.6vw, 2.9rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+  .icon {
+    display: grid;
+    place-items: center;
+    width: 1.55em;
+    height: 1.55em;
+    flex-shrink: 0;
+    font-size: 0.62em;
+    border-radius: var(--radius);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glow-sm);
+  }
+  .lede {
+    max-width: 62ch;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .stats div {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+  }
+  .stats dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.94rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats dd {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+</style>

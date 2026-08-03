@@ -2,6 +2,14 @@
   "name": "repasaya",
   "type": "module",
   "version": "1.0.0",
+  "description": "Tests, verdadero/falso y flashcards para el Doble Grado ADE + Ingeniería Informática de la UGR. Gratis, sin registro y sin anuncios.",
+  "license": "MIT",
+  "author": "Julián Carrión <e.carrionjuliann@go.ugr.es>",
+  "homepage": "https://jxliian.github.io/repasaYA/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jxliian/repasaYA.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

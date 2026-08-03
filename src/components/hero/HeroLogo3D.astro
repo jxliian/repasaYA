@@ -1,0 +1,142 @@
+---
+/**
+ * Logo 3D del hero — versión pequeña, encima del pill.
+ *
+ * Gira despacio por su cuenta y se inclina hacia el cursor. Comparte el
+ * montaje de Three.js con la pantalla de carga (`lib/wordmark3d.ts`), que
+ * además ya lo ha descargado: aquí llega de caché y no cuesta nada.
+ *
+ * Sin WebGL o con `prefers-reduced-motion`, queda el wordmark en CSS.
+ */
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<div class="logo3d" data-hero-logo data-font={`${base}fonts/unbounded-800.woff`}>
+  <canvas aria-hidden="true"></canvas>
+  <span class="fallback">repasaYA</span>
+</div>
+
+<style>
+  .logo3d {
+    position: relative;
+    width: clamp(190px, 30vw, 280px);
+    aspect-ratio: 2.6 / 1;
+    filter: drop-shadow(0 12px 34px rgba(124, 92, 255, 0.45));
+  }
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Visible hasta que WebGL toma el relevo → nunca hay hueco vacío */
+  .fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 4.6vw, 40px);
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+  .logo3d.gl-on .fallback {
+    display: none;
+  }
+</style>
+
+<script>
+  import { createWordmark } from '../../lib/wordmark3d';
+
+  function initHeroLogo() {
+    const wrap = document.querySelector<HTMLElement>('[data-hero-logo]');
+    const canvas = wrap?.querySelector('canvas');
+    if (!wrap || !canvas) return;
+
+    // Limpia la instancia anterior (View Transitions vuelve a montar esto)
+    const prev = (window as any).__heroLogo;
+    if (prev) {
+      cancelAnimationFrame(prev.raf);
+      prev.cleanup();
+    }
+
+    const state: any = { raf: 0, cleanup() {} };
+    (window as any).__heroLogo = state;
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    createWordmark(canvas, wrap.dataset.font || '', { fill: 0.84 }).then((mark) => {
+      if (!mark) return; // se queda el texto CSS
+      wrap.classList.add('gl-on');
+
+      const fit = () => {
+        const r = wrap.getBoundingClientRect();
+        mark.resize(r.width, r.height);
+      };
+      fit();
+      window.addEventListener('resize', fit);
+
+      // Puntero relativo al logo: -1..1 en cada eje
+      const pointer = { x: 0, y: 0, inside: false };
+      const onMove = (e: PointerEvent) => {
+        const r = wrap.getBoundingClientRect();
+        pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+        pointer.y = ((e.clientY - r.top) / r.height) * 2 - 1;
+        pointer.inside = true;
+      };
+      const onLeave = () => {
+        pointer.inside = false;
+      };
+      wrap.addEventListener('pointermove', onMove);
+      wrap.addEventListener('pointerleave', onLeave);
+
+      let rotX = 0;
+      let rotY = 0;
+      const started = performance.now();
+
+      function frame() {
+        const t = (performance.now() - started) / 1000;
+
+        // Sin cursor: cabeceo lento y continuo. Con cursor: sigue al puntero.
+        const targetX = pointer.inside ? -pointer.y * 0.26 : Math.sin(t * 0.6) * 0.06;
+        const targetY = pointer.inside ? pointer.x * 0.42 : Math.sin(t * 0.45) * 0.32;
+        rotX += (targetX - rotX) * 0.07;
+        rotY += (targetY - rotY) * 0.07;
+
+        // Respiración: le da vida sin llamar la atención
+        const scale = 1 + Math.sin(t * 1.3) * 0.014;
+
+        mark!.render({ rotX, rotY, scale });
+        state.raf = requestAnimationFrame(frame);
+      }
+
+      // Fuera de pantalla o en pestaña oculta no se pinta nada
+      const io = new IntersectionObserver((entries) => {
+        for (const en of entries) {
+          if (en.isIntersecting && !state.raf && !document.hidden) frame();
+          else if (!en.isIntersecting && state.raf) {
+            cancelAnimationFrame(state.raf);
+            state.raf = 0;
+          }
+        }
+      });
+
+      state.cleanup = () => {
+        io.disconnect();
+        window.removeEventListener('resize', fit);
+        wrap.removeEventListener('pointermove', onMove);
+        wrap.removeEventListener('pointerleave', onLeave);
+        mark.dispose();
+      };
+
+      if (reduce) mark.render({ rotY: 0.2 });
+      else io.observe(wrap);
+    });
+  }
+
+  initHeroLogo();
+  document.addEventListener('astro:page-load', initHeroLogo);
+</script>

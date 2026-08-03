@@ -1,200 +1,387 @@
 ---
-import Base from '../layouts/Base.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import Shell from '../layouts/Shell.astro';
+import Breadcrumbs from '../components/nav/Breadcrumbs.astro';
+import PageHead from '../components/catalog/PageHead.astro';
 
+/**
+ * Política de privacidad.
+ *
+ * Escrita a partir de lo que el sitio hace de verdad, comprobado en el
+ * código: solo dos claves de almacenamiento (`theme` y `ry_boot`), cero
+ * cookies y cero peticiones a terceros. Si algún día se añade una
+ * dependencia externa, hay que actualizar esta página el mismo día.
+ */
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const year = new Date().getFullYear();
+const EMAIL = 'e.carrionjuliann@go.ugr.es';
+const updated = '3 de agosto de 2026';
+
+const NEVER = [
+  'Cuentas de usuario, registro o inicio de sesión',
+  'Cookies, ni propias ni de terceros',
+  'Analítica, píxeles de seguimiento o huella digital del navegador',
+  'Publicidad, patrocinios o venta de datos',
+  'Registro de tus respuestas, tu nota o tu progreso',
+];
+
+const STORAGE = [
+  {
+    key: 'theme',
+    where: 'localStorage',
+    what: 'Si prefieres el tema claro u oscuro.',
+    life: 'Hasta que borres los datos del navegador.',
+  },
+  {
+    key: 'ry_boot',
+    where: 'sessionStorage',
+    what: 'Marca que la animación de bienvenida ya se ha visto, para no repetirla.',
+    life: 'Se borra al cerrar la pestaña.',
+  },
+];
 ---
-<Base title="Privacidad" description="Política de privacidad de repasaYA — qué datos se recogen y cómo se usan.">
-<style>
-html, body { height: auto; overflow: visible; }
 
-.bg-layer {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; overflow: hidden;
-}
-#particles-bg { position: absolute; inset: 0; }
-.orb { position: absolute; border-radius: 50%; pointer-events: none; }
-.orb-tl {
-  width: 600px; height: 600px; top: -15%; left: -8%;
-  background: radial-gradient(circle,rgba(138,107,216,0.12) 0%,rgba(138,107,216,0.04) 50%,transparent 70%);
-  filter: blur(100px);
-}
-.orb-br {
-  width: 550px; height: 550px; bottom: -12%; right: -8%;
-  background: radial-gradient(circle,rgba(138,107,216,0.09) 0%,rgba(138,107,216,0.03) 50%,transparent 70%);
-  filter: blur(100px);
-}
+<Shell
+  title="Privacidad"
+  description="Qué datos trata repasaYA: ninguno. Sin cuentas, sin cookies, sin analítica y sin anuncios."
+>
+  <div class="container">
+    <Breadcrumbs
+      crumbs={[{ label: 'Inicio', href: base }, { label: 'Privacidad', href: null }]}
+    />
 
-.page-hdr {
-  position: sticky; top: 0; z-index: 200;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(6px);
-  padding: 0 28px; height: 60px;
-  display: flex; align-items: center; gap: 14px;
-}
-.page-logo {
-  font-size: 1.2rem; font-weight: 800; letter-spacing: -1px;
-  color: var(--accent);
-}
-.back-link {
-  font-size: .8rem; color: var(--text-muted);
-  transition: color .2s; margin-left: auto;
-}
-.back-link:hover { color: var(--accent); }
+    <PageHead
+      kicker={`Actualizada el ${updated}`}
+      title="Privacidad"
+      lede="La versión corta: repasaYA no sabe quién eres y no tiene forma de averiguarlo. Abajo está la versión larga, con lo que hace exactamente."
+    />
 
-main {
-  position: relative; z-index: 1;
-  max-width: 780px; margin: 0 auto;
-  padding: 40px 24px 80px;
-}
-
-.page-title {
-  font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800;
-  letter-spacing: -1.2px; margin-bottom: 6px;
-  color: var(--accent);
-}
-.page-subtitle { font-size: .88rem; color: var(--text-muted); margin-bottom: 32px; }
-
-.glass {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  box-shadow: 0 10px 26px rgba(70,60,120,0.10);
-}
-
-.privacy-card {
-  padding: 36px 40px;
-  display: flex; flex-direction: column; gap: 28px;
-}
-
-.priv-section { display: flex; flex-direction: column; gap: 10px; }
-.priv-h {
-  font-size: .65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--text-muted);
-  display: flex; align-items: center; gap: 8px; margin-bottom: 2px;
-}
-.priv-h::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
-.priv-h2 {
-  font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px;
-}
-.priv-p {
-  font-size: .87rem; color: var(--text-muted); line-height: 1.7;
-}
-.priv-p a { color: var(--accent2); text-decoration: underline; text-underline-offset: 3px; }
-.priv-p a:hover { color: var(--accent); }
-.tag {
-  display: inline-block; font-size: .68rem; font-weight: 700;
-  background: rgba(31,157,87,0.12); border: 1px solid rgba(31,157,87,0.28);
-  color: var(--correct); border-radius: 99px; padding: 2px 10px;
-  vertical-align: middle; margin-left: 4px;
-}
-
-footer {
-  position: relative; z-index: 1;
-  text-align: center; padding: 20px 24px 28px;
-  font-size: .72rem; color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 5px;
-}
-.footer-meta { font-size: .66rem; color: #a8acbb; }
-footer a { color: var(--accent); }
-footer a:hover { color: var(--accent-strong); }
-
-@media (max-width: 600px) {
-  .privacy-card { padding: 24px 22px; }
-}
-</style>
-
-<div class="bg-layer" aria-hidden="true">
-  <div id="particles-bg"></div>
-  <div class="orb orb-tl"></div>
-  <div class="orb orb-br"></div>
-</div>
-
-<header class="page-hdr">
-  <a class="page-logo" href={base}>repasaYA</a>
-  <a class="back-link" href={base}>← Volver al inicio</a>
-  <ThemeToggle />
-</header>
-
-<main>
-  <h1 class="page-title">Privacidad</h1>
-  <p class="page-subtitle">Última actualización: {year}. Esta página explica qué datos recoge repasaYA y cómo se tratan.</p>
-
-  <div class="glass privacy-card">
-
-    <div class="priv-section">
-      <span class="priv-h">Resumen rápido</span>
-      <p class="priv-p">
-        repasaYA <strong>no requiere registro</strong>, <strong>no almacena información personal</strong> y
-        <strong>no vende datos a terceros</strong>. Es una web estática alojada en GitHub Pages.
-        <span class="tag">✓ Sin cookies de seguimiento</span>
+    <section class="highlight glass">
+      <p class="big">
+        No se recoge <strong>ningún dato personal</strong>. No hay cuentas, no hay
+        cookies, no hay analítica y no hay anuncios.
       </p>
-    </div>
-
-    <div class="priv-section">
-      <span class="priv-h">Datos que recogemos</span>
-      <h2 class="priv-h2">Ninguno de forma directa</h2>
-      <p class="priv-p">
-        repasaYA no tiene formularios de registro, no almacena respuestas de tests ni usa bases de datos propias.
-        La única preferencia guardada localmente es el <strong>tema visual (claro/oscuro)</strong>, que se guarda
-        en <code>localStorage</code> de tu navegador y nunca sale de tu dispositivo.
+      <p class="small">
+        Es un sitio estático: archivos que tu navegador descarga y ejecuta. No existe
+        un servidor de repasaYA al que puedan llegar tus datos, porque no existe un
+        servidor de repasaYA.
       </p>
-    </div>
+    </section>
 
-    <div class="priv-section">
-      <span class="priv-h">Servicios de terceros</span>
-      <h2 class="priv-h2">Contador de visitas — hits.sh</h2>
-      <p class="priv-p">
-        Usamos <a href="https://hits.sh" target="_blank" rel="noopener">hits.sh</a> para mostrar el contador de visitas
-        visible en la página principal. Este servicio puede registrar la IP y la URL solicitada de forma anónima para
-        calcular el total. No recibe datos personales. Puedes consultar su política en
-        <a href="https://hits.sh" target="_blank" rel="noopener">hits.sh</a>.
-      </p>
-      <h2 class="priv-h2" style="margin-top:14px">Hospedaje — GitHub Pages</h2>
-      <p class="priv-p">
-        El sitio está alojado en <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>
-        (Microsoft). GitHub puede registrar logs de acceso estándar (IP, navegador, URL) como parte de su
-        infraestructura. Consulta la
-        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-          target="_blank" rel="noopener">política de privacidad de GitHub</a>.
-      </p>
-    </div>
+    <section class="block">
+      <h2>Lo que no hay</h2>
+      <ul class="never">
+        {
+          NEVER.map((x) => (
+            <li>
+              <span class="x" aria-hidden="true">
+                ✕
+              </span>
+              {x}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-    <div class="priv-section">
-      <span class="priv-h">Cookies</span>
-      <p class="priv-p">
-        repasaYA <strong>no usa cookies propias</strong>. La preferencia de tema se guarda en
-        <code>localStorage</code>, que no es una cookie y no se envía al servidor en ninguna petición.
-        GitHub Pages y hits.sh pueden establecer cookies técnicas propias; consulta sus políticas para más detalle.
+    <section class="block">
+      <h2>Lo que se guarda en tu navegador</h2>
+      <p class="lede">
+        Dos cosas, y las dos se quedan en tu dispositivo. No viajan a ninguna parte
+        porque no hay a dónde enviarlas.
       </p>
-    </div>
 
-    <div class="priv-section">
-      <span class="priv-h">Tus derechos</span>
-      <p class="priv-p">
-        Como no almacenamos datos personales, no hay registros que consultar, rectificar ni eliminar.
-        Para borrar la preferencia de tema almacenada localmente, borra los datos del sitio desde los ajustes
-        de tu navegador (<em>Configuración → Privacidad → Datos del sitio</em>).
+      <div class="table" role="table">
+        <div class="row head" role="row">
+          <span role="columnheader">Clave</span>
+          <span role="columnheader">Dónde</span>
+          <span role="columnheader">Para qué</span>
+          <span role="columnheader">Cuánto dura</span>
+        </div>
+        {
+          STORAGE.map((s) => (
+            <div class="row" role="row">
+              <span role="cell"><code>{s.key}</code></span>
+              <span role="cell" class="mono">{s.where}</span>
+              <span role="cell">{s.what}</span>
+              <span role="cell" class="dim">{s.life}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="foot-note">
+        Ninguna de las dos es una cookie, así que no hace falta pedirte permiso: la
+        normativa exige consentimiento para el almacenamiento no imprescindible, y
+        aquí solo se guarda lo que tú mismo has elegido al pulsar un botón.
       </p>
-    </div>
+    </section>
 
-    <div class="priv-section">
-      <span class="priv-h">Contacto</span>
-      <p class="priv-p">
-        Para cualquier consulta sobre privacidad, abre un issue en
-        <a href="https://github.com/jxliian/repasaYA/issues" target="_blank" rel="noopener">github.com/jxliian/repasaYA</a>.
+    <section class="block">
+      <h2>Terceros</h2>
+
+      <div class="third">
+        <h3>GitHub Pages — alojamiento</h3>
+        <p>
+          El sitio se sirve desde
+          <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>
+          (Microsoft). Como cualquier servidor web, GitHub registra las peticiones que
+          recibe: dirección IP, navegador y URL solicitada. Eso escapa a mi control y se
+          rige por la
+          <a
+            href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement"
+            target="_blank"
+            rel="noopener">declaración de privacidad de GitHub</a>.
+        </p>
+      </div>
+
+      <div class="third">
+        <h3>Ninguno más</h3>
+        <p>
+          Las tipografías están alojadas aquí mismo, no se piden a Google Fonts. No hay
+          CDN, ni incrustaciones, ni contador de visitas, ni scripts externos. Si abres
+          las herramientas de desarrollo, verás que esta web no hace ni una sola
+          petición fuera de su propio dominio.
+        </p>
+      </div>
+
+      <div class="third">
+        <h3>Enlaces salientes</h3>
+        <p>
+          Hay enlaces a GitHub y a alguna asignatura alojada en otro repositorio. En
+          cuanto los pulsas, sales de repasaYA y se aplica la política del sitio al que
+          llegues.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>El formulario de contacto</h2>
+      <p class="lede">
+        El formulario de <a href={`${base}#sobre-mi`}>la página de inicio</a> no envía
+        nada por su cuenta: monta un mensaje y abre tu programa de correo con él ya
+        escrito. Tú decides si lo mandas. Lo que me llegue será el correo que tú hayas
+        enviado, con tu dirección, y lo usaré solo para responderte.
       </p>
-    </div>
+    </section>
 
+    <section class="block">
+      <h2>Contenido y derechos de autor</h2>
+      <p class="lede">
+        El material son resúmenes y preguntas elaborados a partir del temario de las
+        asignaturas, con fines de estudio. Si eres docente o titular de derechos y
+        consideras que algo no debería estar publicado, escríbeme y lo retiro sin
+        discusión.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Menores</h2>
+      <p class="lede">
+        El sitio está pensado para estudiantes universitarios, pero no recoge datos de
+        nadie, así que no hay tratamiento de información de menores que gestionar.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Cambios en esta política</h2>
+      <p class="lede">
+        Si algún día se añade algo que trate datos, se actualiza esta página y cambia
+        la fecha de arriba. El historial completo está en
+        <a href="https://github.com/jxliian/repasaYA/commits/main" target="_blank" rel="noopener">
+          los commits del repositorio</a>, así que puedes comprobar tú mismo qué cambió y cuándo.
+      </p>
+    </section>
+
+    <aside class="contact glass">
+      <div>
+        <h2>¿Alguna duda?</h2>
+        <p>Sobre privacidad, contenido o cualquier otra cosa.</p>
+      </div>
+      <a class="btn btn-ghost" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </aside>
   </div>
-</main>
+</Shell>
 
-<footer>
-  <p>Hecho con ganas · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a></p>
-  <p class="footer-meta">© {year} · Universidad de Granada · Doble Grado ADE + Informática</p>
-  <p><a href={`${base}privacidad/`}>Privacidad</a> · <a href={`${base}mapa/`}>Mapa web</a></p>
-</footer>
-</Base>
+<style>
+  .highlight {
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 12px;
+  }
+  .big {
+    font-size: 1.18rem;
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+  .big strong {
+    color: var(--accent);
+  }
+  .small {
+    margin-top: 12px;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+
+  .block {
+    padding-block: 30px;
+    border-top: 1px solid var(--glass-border);
+  }
+  .block h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .lede {
+    max-width: 72ch;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+  .lede a,
+  .third a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .never {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+  }
+  .never li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .x {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    margin-top: 1px;
+    border-radius: 50%;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--wrong);
+    background: color-mix(in srgb, var(--wrong) 14%, transparent);
+  }
+
+  /* Tabla con grid: en móvil las columnas se apilan sin romperse */
+  .table {
+    margin-top: 18px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2.4fr 1.4fr;
+    gap: 14px;
+    padding: 13px 16px;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .row + .row {
+    border-top: 1px solid var(--glass-border);
+  }
+  .row.head {
+    background: var(--glass);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .row code,
+  .row .mono {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+  .row .mono {
+    color: var(--text-dim);
+  }
+  .row .dim {
+    color: var(--text-dim);
+  }
+  @media (max-width: 760px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+    .row.head {
+      display: none;
+    }
+  }
+
+  .foot-note {
+    margin-top: 14px;
+    max-width: 72ch;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .third + .third {
+    margin-top: 20px;
+  }
+  .third h3 {
+    font-size: 0.94rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 6px;
+  }
+  .third p {
+    max-width: 72ch;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 34px;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border-style: dashed;
+    background: transparent;
+    box-shadow: none;
+  }
+  .contact h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.025em;
+  }
+  .contact p {
+    margin-top: 4px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .contact .btn {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+  }
+</style>

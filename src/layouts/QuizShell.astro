@@ -1,0 +1,87 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/800.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+
+/**
+ * QuizShell — layout de las páginas de material.
+ *
+ * A diferencia de `Shell`, aquí no hay cabecera ni pie: `QuizEngine` se
+ * pinta su propia barra y declara `body{display:flex;flex-direction:column}`
+ * con `overflow:hidden`, porque funciona como una aplicación a pantalla
+ * completa. Meterle el cromo del catálogo encima le rompe el scroll.
+ */
+interface Props {
+  title: string;
+  description?: string;
+  /** Fuera del índice de Google (material oculto). */
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const canonical = `https://jxliian.github.io/repasaYA${Astro.url.pathname}`;
+---
+
+<!doctype html>
+<html lang="es" data-quiz>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — repasaYA</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={`${base}logo.png`} />
+    <meta property="og:title" content={`${title} — repasaYA`} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+    <meta property="og:type" content="website" />
+    <ClientRouter />
+    <script is:inline>
+      (function () {
+        try {
+          document.documentElement.dataset.theme =
+            localStorage.getItem('theme') || 'dark';
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <slot />
+
+    <script>
+      // Mismo interruptor de tema que el resto del sitio: el motor pinta
+      // su propio botón con `data-theme-toggle`, así que basta con el
+      // listener delegado.
+      if (!(window as any).__themeBound) {
+        (window as any).__themeBound = true;
+        document.addEventListener('click', (e) => {
+          if (!(e.target as HTMLElement)?.closest('[data-theme-toggle]')) return;
+          const next =
+            document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          try {
+            localStorage.setItem('theme', next);
+          } catch (err) {}
+          window.dispatchEvent(new Event('themechange'));
+        });
+        document.addEventListener('astro:before-swap', (e) => {
+          let t = 'dark';
+          try {
+            t = localStorage.getItem('theme') || 'dark';
+          } catch (err) {}
+          (e as any).newDocument.documentElement.dataset.theme = t;
+        });
+      }
+    </script>
+  </body>
+</html>

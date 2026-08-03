@@ -1,0 +1,106 @@
+---
+/**
+ * Migas de pan. El último elemento va sin `href` y se marca como
+ * página actual. Emite también JSON-LD para que Google pinte la
+ * jerarquía en los resultados.
+ */
+export interface Crumb {
+  label: string;
+  href: string | null;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+const site = 'https://jxliian.github.io';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    ...(c.href ? { item: site + c.href } : {}),
+  })),
+};
+---
+
+<nav class="crumbs" aria-label="Ruta de navegación">
+  <ol>
+    {
+      crumbs.map((c, i) => (
+        <li>
+          {c.href ? (
+            <a href={c.href}>{c.label}</a>
+          ) : (
+            <span aria-current="page">{c.label}</span>
+          )}
+          {i < crumbs.length - 1 && (
+            <span class="sep" aria-hidden="true">
+              /
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+<style>
+  .crumbs {
+    padding-block: 26px 0;
+  }
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+  .crumbs li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .crumbs a {
+    color: var(--text-dim);
+    padding: 2px 4px;
+    border-radius: 5px;
+    transition: color var(--dur) var(--ease-out),
+      background var(--dur) var(--ease-out);
+  }
+  .crumbs a:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .crumbs [aria-current='page'] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .sep {
+    color: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  /* En móvil la ruta puede ser larga: se deja desplazable en horizontal */
+  @media (max-width: 560px) {
+    .crumbs ol {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .crumbs ol::-webkit-scrollbar {
+      display: none;
+    }
+    .crumbs li {
+      white-space: nowrap;
+    }
+  }
+</style>

@@ -1,0 +1,301 @@
+---
+import { getCollection } from 'astro:content';
+import Shell from '../../../../../layouts/Shell.astro';
+import Breadcrumbs from '../../../../../components/nav/Breadcrumbs.astro';
+import PageHead from '../../../../../components/catalog/PageHead.astro';
+import SubjectCard from '../../../../../components/catalog/SubjectCard.astro';
+import {
+  contributeUrl,
+  degreePath,
+  hasHub,
+  materialPath,
+  semesterPath,
+  subjectSlug,
+  yearPath,
+} from '../../../../../lib/routes';
+
+export async function getStaticPaths() {
+  const degrees = await getCollection('degrees');
+  const subjects = await getCollection('subjects');
+  const materials = await getCollection('materials');
+  const byId = new Map(degrees.map((d) => [d.id, d]));
+
+  // Solo las que tienen material propio. Las externas viven en otro repo
+  // y las vacías no merecen una página en blanco indexable.
+  return subjects.filter(hasHub).map((subject) => {
+    const degree = byId.get(subject.data.degree.id)!;
+    return {
+      params: {
+        degree: degree.id,
+        year: String(subject.data.year),
+        semester: `c${subject.data.semester}`,
+        subject: subjectSlug(subject),
+      },
+      props: {
+        degree,
+        subject,
+        materials: materials
+          .filter((m) => m.data.subject.id === subject.id)
+          .sort((a, b) => a.data.order - b.data.order),
+        siblings: subjects.filter(
+          (s) =>
+            s.data.degree.id === degree.id &&
+            s.data.year === subject.data.year &&
+            s.data.semester === subject.data.semester &&
+            s.id !== subject.id
+        ),
+      },
+    };
+  });
+}
+
+const { degree, subject, siblings, materials: entries } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const { title, icon, year, semester, credits, description } = subject.data;
+
+/* Cómo se presenta cada tipo de material en el hub */
+const PRESENTATION: Record<string, { icon: string; blurb: string }> = {
+  test: { icon: '📝', blurb: 'Corrección al momento y desglose por tema' },
+  vf: { icon: '⚖️', blurb: 'Cada respuesta viene con su justificación' },
+  reveal: { icon: '⚡', blurb: 'Pregunta, piensa, destapa la respuesta' },
+  flashcards: { icon: '🃏', blurb: 'Tarjetas para repasar en cinco minutos' },
+  glosario: { icon: '📖', blurb: 'Los términos que caen sí o sí' },
+  apuntes: { icon: '📄', blurb: 'Resúmenes en PDF, listos para imprimir' },
+  guia: { icon: '🧭', blurb: 'Por dónde empezar y qué pesa más' },
+};
+
+const slug = subjectSlug(subject);
+
+const materials = entries
+  // Lo oculto genera página pero no se lista: solo se llega con el enlace
+  .filter((m) => !m.data.hidden)
+  .map((m) => {
+    const key = m.id.split('/').pop()!;
+    return {
+      key,
+      type: m.data.type,
+      label: m.data.title,
+      icon: PRESENTATION[m.data.type]?.icon ?? '📚',
+      blurb: PRESENTATION[m.data.type]?.blurb ?? '',
+      count: 'items' in m.data ? m.data.items.length : 0,
+      // Las guías viven en su propia página; el resto tiene ruta generada
+      href:
+        'href' in m.data
+          ? m.data.href
+          : materialPath(degree.id, year, semester, slug, key),
+    };
+  });
+
+const crumbs = [
+  { label: 'Inicio', href: base },
+  { label: degree.data.short, href: degreePath(degree.id) },
+  { label: `${year}º`, href: yearPath(degree.id, year) },
+  { label: `Cuatri ${semester}`, href: semesterPath(degree.id, year, semester) },
+  { label: title, href: null },
+];
+---
+
+<Shell title={title} description={description ?? `Material de ${title} en repasaYA.`}>
+  <div class="container">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <PageHead
+      kicker={`${degree.data.short} · ${year}º · Cuatrimestre ${semester}`}
+      icon={icon}
+      title={title}
+      lede={description}
+      stats={[
+        { value: materials.length, label: materials.length === 1 ? 'recurso' : 'recursos' },
+        { value: credits, label: 'ECTS' },
+      ]}
+    />
+
+    <section class="materials" aria-label="Material disponible">
+      {
+        materials.map((m) => (
+          <a class="mat glass glow-hover" href={m.href}>
+            <span class="mat-icon" aria-hidden="true">
+              {m.icon}
+            </span>
+            <span class="mat-body">
+              <span class="mat-label">{m.label}</span>
+              <span class="mat-blurb">
+                {m.count > 0 && <b>{m.count} {m.type === 'glosario' ? 'términos' : m.type === 'flashcards' ? 'tarjetas' : 'preguntas'} · </b>}
+                {m.blurb}
+              </span>
+            </span>
+            <svg
+              class="mat-arrow"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        ))
+      }
+    </section>
+
+    <aside class="contribute glass">
+      <div>
+        <h2>¿Falta algo?</h2>
+        <p>
+          Si tienes exámenes, apuntes o preguntas de {title}, mándalos. Se suben con
+          tu nombre si quieres, y sin él si no.
+        </p>
+      </div>
+      <a
+        class="btn btn-ghost"
+        href={contributeUrl(subject, degree.data.name)}
+        target="_blank"
+        rel="noopener"
+      >
+        Aportar material
+      </a>
+    </aside>
+
+    {
+      siblings.length > 0 && (
+        <section class="siblings">
+          <div class="sib-head">
+            <h2>Lo demás de este cuatrimestre</h2>
+            <a href={semesterPath(degree.id, year, semester)}>ver el cuatri entero →</a>
+          </div>
+          <div class="sib-grid">
+            {siblings.map((s) => (
+              <SubjectCard
+                subject={s}
+                degreeName={degree.data.name}
+                degreeShort={degree.data.short}
+              />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Shell>
+
+<style>
+  .materials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 14px;
+  }
+
+  .mat {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: var(--radius);
+  }
+  .mat-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    font-size: 1.35rem;
+    border-radius: var(--radius-sm);
+    background: var(--glass-hi);
+    border: 1px solid var(--glass-border);
+  }
+  .mat-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .mat-label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.025em;
+  }
+  .mat-blurb {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  .mat-blurb b {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .mat-arrow {
+    flex-shrink: 0;
+    color: var(--text-dim);
+    transition: transform var(--dur) var(--ease-snap), color var(--dur) var(--ease-out);
+  }
+  .mat:hover .mat-arrow {
+    transform: translateX(4px);
+    color: var(--accent);
+  }
+
+  .contribute {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 34px;
+    padding: 22px;
+    border-radius: var(--radius);
+    border-style: dashed;
+    background: transparent;
+    box-shadow: none;
+  }
+  .contribute h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .contribute p {
+    margin-top: 5px;
+    max-width: 58ch;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  .siblings {
+    margin-top: 56px;
+  }
+  .sib-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .sib-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: -0.02em;
+  }
+  .sib-head a {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    transition: color var(--dur) var(--ease-out);
+  }
+  .sib-head a:hover {
+    color: var(--accent);
+  }
+  .sib-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
+    gap: 14px;
+  }
+</style>

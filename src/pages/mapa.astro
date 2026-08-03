@@ -1,270 +1,318 @@
 ---
-import Base from '../layouts/Base.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
-import { subjects } from '../data/subjects';
+import { getCollection } from 'astro:content';
+import Shell from '../layouts/Shell.astro';
+import Breadcrumbs from '../components/nav/Breadcrumbs.astro';
+import PageHead from '../components/catalog/PageHead.astro';
+import {
+  degreePath,
+  materialPath,
+  semesterPath,
+  subjectSlug,
+  subjectUrl,
+  yearPath,
+} from '../lib/routes';
 
+/**
+ * Mapa web.
+ *
+ * Se genera entero desde las colecciones: añades una asignatura y aparece
+ * aquí sin tocar este archivo. Antes era una lista escrita a mano con los
+ * slugs en duro, que se quedaba desfasada al primer cambio.
+ */
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const year = new Date().getFullYear();
 
-const adeSlugOrder = ['economia-espanola','rrhh','organizacion-empresas','do1','aef'];
-const infoSlugOrder = ['sibw','mp','dsd'];
+const subjects = await getCollection('subjects');
+const degrees = await getCollection('degrees');
+const materials = await getCollection('materials');
 
-const ade  = adeSlugOrder.map(slug => subjects.find(s => s.slug === slug)).filter(Boolean);
-const info = infoSlugOrder.map(slug => subjects.find(s => s.slug === slug)).filter(Boolean);
+const ENGINE_TYPES = new Set(['test', 'vf', 'reveal']);
 
-function hasFlashcards(s: typeof subjects[0]) {
-  return s.chips.some(c => c.toLowerCase().includes('flashcard'));
-}
-function hasQuiz(s: typeof subjects[0]) {
-  return !s.external && !!s.dataFile;
-}
-function isHub(s: typeof subjects[0]) {
-  return hasFlashcards(s) || s.type === 'both';
-}
+const tree = degrees
+  .map((degree) => {
+    const mine = subjects.filter((s) => s.data.degree.id === degree.id);
+
+    const years = Array.from({ length: degree.data.years }, (_, i) => i + 1).map((year) => ({
+      year,
+      semesters: ([1, 2] as const).map((semester) => ({
+        semester,
+        subjects: mine
+          .filter((s) => s.data.year === year && s.data.semester === semester)
+          .sort((a, b) => a.data.title.localeCompare(b.data.title, 'es'))
+          .map((s) => ({
+            entry: s,
+            url: subjectUrl(s),
+            materials: materials
+              .filter((m) => m.data.subject.id === s.id && !m.data.hidden && ENGINE_TYPES.has(m.data.type))
+              .sort((a, b) => a.data.order - b.data.order)
+              .map((m) => ({
+                title: m.data.title,
+                count: 'items' in m.data ? m.data.items.length : 0,
+                href: materialPath(
+                  degree.id,
+                  s.data.year,
+                  s.data.semester,
+                  subjectSlug(s),
+                  m.id.split('/').pop()!
+                ),
+              })),
+          })),
+      })),
+    }));
+
+    return {
+      degree,
+      years,
+      total: mine.length,
+      ready: mine.filter((s) => s.data.status === 'available').length,
+    };
+  })
+  .sort((a, b) => b.ready - a.ready);
+
+const totalItems = materials.reduce(
+  (n, m) => n + ('items' in m.data ? m.data.items.length : 0),
+  0
+);
+const es = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 ---
-<Base title="Mapa web" description="Mapa web de repasaYA — todas las asignaturas y páginas disponibles.">
-<style>
-html, body { height: auto; overflow: visible; }
 
-.bg-layer {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; overflow: hidden;
-}
-#particles-bg { position: absolute; inset: 0; }
-.orb { position: absolute; border-radius: 50%; pointer-events: none; }
-.orb-tl {
-  width: 600px; height: 600px; top: -15%; left: -8%;
-  background: radial-gradient(circle,rgba(138,107,216,0.12) 0%,rgba(138,107,216,0.04) 50%,transparent 70%);
-  filter: blur(100px);
-}
-.orb-br {
-  width: 550px; height: 550px; bottom: -12%; right: -8%;
-  background: radial-gradient(circle,rgba(138,107,216,0.09) 0%,rgba(138,107,216,0.03) 50%,transparent 70%);
-  filter: blur(100px);
-}
+<Shell
+  title="Mapa web"
+  description="Todas las páginas de repasaYA: grados, cursos, cuatrimestres, asignaturas y material disponible."
+>
+  <div class="container">
+    <Breadcrumbs
+      crumbs={[{ label: 'Inicio', href: base }, { label: 'Mapa web', href: null }]}
+    />
 
-.page-hdr {
-  position: sticky; top: 0; z-index: 200;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(6px);
-  padding: 0 28px; height: 60px;
-  display: flex; align-items: center; gap: 14px;
-}
-.page-logo {
-  font-size: 1.2rem; font-weight: 800; letter-spacing: -1px;
-  color: var(--accent);
-}
-.back-link {
-  font-size: .8rem; color: var(--text-muted);
-  transition: color .2s; margin-left: auto;
-}
-.back-link:hover { color: var(--accent); }
+    <PageHead
+      kicker="Índice completo"
+      title="Mapa web"
+      lede="Todo lo que hay en repasaYA, de un vistazo. Esta página se genera sola a partir del contenido, así que no se queda desfasada."
+      stats={[
+        { value: subjects.length, label: 'asignaturas' },
+        { value: materials.length, label: 'materiales' },
+        { value: es(totalItems), label: 'preguntas' },
+      ]}
+    />
 
-main {
-  position: relative; z-index: 1;
-  max-width: 780px; margin: 0 auto;
-  padding: 40px 24px 80px;
-}
-
-.page-title {
-  font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800;
-  letter-spacing: -1.2px; margin-bottom: 6px;
-  color: var(--accent);
-}
-.page-subtitle { font-size: .88rem; color: var(--text-muted); margin-bottom: 32px; }
-
-.glass {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  box-shadow: 0 10px 26px rgba(70,60,120,0.10);
-}
-
-.sitemap-card { padding: 32px 36px; display: flex; flex-direction: column; gap: 28px; }
-
-.sm-section { display: flex; flex-direction: column; gap: 12px; }
-.sm-section-title {
-  font-size: .65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--text-muted);
-  display: flex; align-items: center; gap: 8px;
-}
-.sm-section-title::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
-
-.sm-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
-.sm-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; border-radius: 12px;
-  transition: background .15s;
-}
-.sm-item:hover { background: var(--surface2); }
-.sm-icon { font-size: 1rem; flex-shrink: 0; width: 24px; text-align: center; }
-.sm-info { flex: 1; min-width: 0; }
-.sm-name {
-  font-size: .88rem; font-weight: 600; color: var(--text);
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; transition: color .2s;
-}
-.sm-name:hover { color: var(--accent); }
-.sm-sub-links {
-  display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap;
-}
-.sm-sub-link {
-  font-size: .68rem; font-weight: 600;
-  background: var(--accent-soft); border: 1px solid var(--accent-line);
-  color: var(--accent); border-radius: 99px; padding: 2px 10px;
-  transition: background .15s;
-  text-decoration: none;
-}
-.sm-sub-link:hover { background: var(--accent-line); }
-.ext-badge {
-  font-size: .63rem; font-weight: 700;
-  background: var(--accent-soft); border: 1px solid var(--accent-line);
-  color: var(--accent); border-radius: 99px; padding: 2px 9px;
-}
-.sm-static-link {
-  font-size: .88rem; font-weight: 600; color: var(--text);
-  display: flex; align-items: center; gap: 6px;
-  text-decoration: none; transition: color .2s;
-}
-.sm-static-link:hover { color: var(--accent); }
-
-footer {
-  position: relative; z-index: 1;
-  text-align: center; padding: 20px 24px 28px;
-  font-size: .72rem; color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 5px;
-}
-.footer-meta { font-size: .66rem; color: #a8acbb; }
-footer a { color: var(--accent); }
-footer a:hover { color: var(--accent-strong); }
-</style>
-
-<div class="bg-layer" aria-hidden="true">
-  <div id="particles-bg"></div>
-  <div class="orb orb-tl"></div>
-  <div class="orb orb-br"></div>
-</div>
-
-<header class="page-hdr">
-  <a class="page-logo" href={base}>repasaYA</a>
-  <a class="back-link" href={base}>← Volver al inicio</a>
-  <ThemeToggle />
-</header>
-
-<main>
-  <h1 class="page-title">Mapa web</h1>
-  <p class="page-subtitle">Todas las asignaturas y páginas disponibles en repasaYA. Se actualiza automáticamente.</p>
-
-  <div class="glass sitemap-card">
-
-    <!-- Inicio -->
-    <div class="sm-section">
-      <span class="sm-section-title">Inicio</span>
-      <ul class="sm-list">
-        <li class="sm-item">
-          <span class="sm-icon">🏠</span>
-          <div class="sm-info">
-            <a class="sm-name" href={base}>repasaYA — Inicio</a>
-          </div>
+    <section class="block">
+      <h2>Páginas generales</h2>
+      <ul class="plain">
+        <li><a href={base}>Inicio</a></li>
+        <li><a href={`${base}#sobre-mi`}>Sobre mí y contacto</a></li>
+        <li><a href={`${base}mapa/`} aria-current="page">Mapa web</a></li>
+        <li><a href={`${base}privacidad/`}>Privacidad</a></li>
+        <li>
+          <a href={`${base}sitemap-index.xml`}>Sitemap XML</a>
+          <span class="note">buscadores</span>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <!-- ADE -->
-    <div class="sm-section">
-      <span class="sm-section-title">📊 Administración de Empresas</span>
-      <ul class="sm-list">
-        {ade.map(s => (
-          <li class="sm-item">
-            <span class="sm-icon">{s!.icon}</span>
-            <div class="sm-info">
-              {s!.external
-                ? <a class="sm-name" href={s!.external} target="_blank" rel="noopener">
-                    {s!.title} <span class="ext-badge">↗ Externo</span>
-                  </a>
-                : <a class="sm-name" href={isHub(s!) ? `${base}${s!.slug}/` : `${base}${s!.slug}/`}>{s!.title}</a>
-              }
-              {!s!.external && (
-                <div class="sm-sub-links">
-                  {isHub(s!)
-                    ? <a class="sm-sub-link" href={`${base}${s!.slug}/`}>Hub</a>
-                    : null
-                  }
-                  {hasQuiz(s!) && (
-                    <a class="sm-sub-link" href={isHub(s!) ? `${base}${s!.slug}/quiz/` : `${base}${s!.slug}/`}>
-                      {s!.type === 'both' ? 'Test + V/F' : s!.type === 'vf' ? 'V/F' : 'Quiz'}
-                    </a>
-                  )}
-                  {hasFlashcards(s!) && (
-                    <a class="sm-sub-link" href={`${base}${s!.slug}/glosario/`}>Flashcards</a>
-                  )}
-                </div>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    {
+      tree.map(({ degree, years, total, ready }) => (
+        <section class="block">
+          <h2>
+            <span aria-hidden="true">{degree.data.icon}</span>
+            <a href={degreePath(degree.id)}>{degree.data.name}</a>
+            <span class="note">
+              {ready} de {total} con material
+            </span>
+          </h2>
 
-    <!-- Informática -->
-    <div class="sm-section">
-      <span class="sm-section-title">💻 Ingeniería Informática</span>
-      <ul class="sm-list">
-        {info.map(s => (
-          <li class="sm-item">
-            <span class="sm-icon">{s!.icon}</span>
-            <div class="sm-info">
-              <a class="sm-name" href={`${base}${s!.slug}/`}>{s!.title}</a>
-              <div class="sm-sub-links">
-                {isHub(s!) && <a class="sm-sub-link" href={`${base}${s!.slug}/`}>Hub</a>}
-                {hasQuiz(s!) && (
-                  <a class="sm-sub-link" href={isHub(s!) ? `${base}${s!.slug}/quiz/` : `${base}${s!.slug}/`}>Quiz</a>
-                )}
-                {hasFlashcards(s!) && (
-                  <a class="sm-sub-link" href={`${base}${s!.slug}/glosario/`}>Flashcards</a>
-                )}
+          <div class="years">
+            {years.map(({ year, semesters }) => (
+              <div class="year">
+                <h3>
+                  <a href={yearPath(degree.id, year)}>{year}º curso</a>
+                </h3>
+
+                {semesters.map(({ semester, subjects: list }) => (
+                  <div class="sem">
+                    <h4>
+                      <a href={semesterPath(degree.id, year, semester)}>
+                        Cuatrimestre {semester}
+                      </a>
+                    </h4>
+
+                    {list.length === 0 ? (
+                      <p class="empty">Sin asignaturas cargadas.</p>
+                    ) : (
+                      <ul class="subjects">
+                        {list.map(({ entry, url, materials: mats }) => (
+                          <li>
+                            {url ? (
+                              <a
+                                class="subject"
+                                href={url}
+                                target={entry.data.external ? '_blank' : undefined}
+                                rel={entry.data.external ? 'noopener' : undefined}
+                              >
+                                {entry.data.title}
+                              </a>
+                            ) : (
+                              <span class="subject off">{entry.data.title}</span>
+                            )}
+
+                            {mats.length > 0 && (
+                              <ul class="mats">
+                                {mats.map((m) => (
+                                  <li>
+                                    <a href={m.href}>{m.title}</a>
+                                    <span class="note">{m.count}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
               </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    <!-- Información -->
-    <div class="sm-section">
-      <span class="sm-section-title">📄 Información</span>
-      <ul class="sm-list">
-        <li class="sm-item">
-          <span class="sm-icon">🔒</span>
-          <div class="sm-info">
-            <a class="sm-static-link" href={`${base}privacidad/`}>Política de Privacidad</a>
+            ))}
           </div>
-        </li>
-        <li class="sm-item">
-          <span class="sm-icon">🗺️</span>
-          <div class="sm-info">
-            <a class="sm-static-link" href={`${base}mapa/`}>Mapa web <em style="font-size:.75em;opacity:.6">(esta página)</em></a>
-          </div>
-        </li>
-        <li class="sm-item">
-          <span class="sm-icon">🤖</span>
-          <div class="sm-info">
-            <a class="sm-static-link" href="/repasaYA/sitemap-index.xml" target="_blank" rel="noopener">
-              Sitemap XML <span class="ext-badge">↗</span>
-            </a>
-          </div>
-        </li>
-      </ul>
-    </div>
-
+        </section>
+      ))
+    }
   </div>
-</main>
+</Shell>
 
-<footer>
-  <p>Hecho con ganas · <a href="https://github.com/jxliian" target="_blank" rel="noopener">jxliian</a></p>
-  <p class="footer-meta">© {year} · Universidad de Granada · Doble Grado ADE + Informática</p>
-  <p><a href={`${base}privacidad/`}>Privacidad</a> · <a href={`${base}mapa/`}>Mapa web</a></p>
-</footer>
-</Base>
+<style>
+  .block {
+    padding-block: 30px;
+    border-top: 1px solid var(--glass-border);
+  }
+  .block h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  .block h2 a:hover {
+    color: var(--accent);
+  }
+
+  .note {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    white-space: nowrap;
+  }
+
+  .plain {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+  }
+  .plain li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+  .plain a {
+    color: var(--text-muted);
+  }
+  .plain a:hover,
+  .plain [aria-current='page'] {
+    color: var(--accent);
+  }
+
+  /* Cursos en columnas: 5 cursos × 2 cuatrimestres en vertical sería
+     una lista interminable. */
+  .years {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 28px;
+  }
+  .year h3 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--accent-line);
+  }
+  .sem + .sem {
+    margin-top: 18px;
+  }
+  .sem h4 {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .sem h4 a:hover,
+  .year h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .subjects {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .subject {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  a.subject:hover {
+    color: var(--accent);
+  }
+  /* Sin material todavía: se lista igual, pero sin enlace */
+  .subject.off {
+    color: var(--text-dim);
+    opacity: 0.7;
+  }
+
+  .mats {
+    list-style: none;
+    margin: 6px 0 4px 6px;
+    padding-left: 13px;
+    border-left: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .mats li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mats a {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .mats a:hover {
+    color: var(--accent);
+  }
+
+  .empty {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+</style>
