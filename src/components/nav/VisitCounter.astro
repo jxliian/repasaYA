@@ -1,0 +1,43 @@
+---
+import { HITS_SVG } from '../../lib/hits';
+
+/**
+ * Registra la visita en hits.sh.
+ *
+ * El número se muestra como una cifra más del hero (leída en build, ver
+ * `lib/hits.ts`). Esta imagen es la que hace que la visita **cuente**: el
+ * contador se incrementa al servir el SVG, así que hay que pedirlo desde
+ * el navegador.
+ *
+ * Va en un tamaño mínimo y sin ocupar hueco en lugar de mostrarse, porque
+ * su badge trae su propia tipografía y rompería la fila de cifras.
+ *
+ * ⚠️ Es el único tercero de la web y ve la IP de quien entra. Está
+ * declarado en /privacidad; si se quita, hay que actualizar esa página.
+ *
+ * Solo se pone en la portada: con View Transitions, cada navegación
+ * interna volvería a pedirlo y el número dejaría de significar nada.
+ */
+---
+
+<img
+  class="hit"
+  src={HITS_SVG}
+  alt=""
+  aria-hidden="true"
+  width="1"
+  height="1"
+  loading="lazy"
+  decoding="async"
+  referrerpolicy="no-referrer"
+/>
+
+<style>
+  .hit {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>

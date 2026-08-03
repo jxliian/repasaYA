@@ -7,13 +7,14 @@ import PageHead from '../components/catalog/PageHead.astro';
  * Política de privacidad.
  *
  * Escrita a partir de lo que el sitio hace de verdad, comprobado en el
- * código: solo dos claves de almacenamiento (`theme` y `ry_boot`), cero
- * cookies y cero peticiones a terceros. Si algún día se añade una
- * dependencia externa, hay que actualizar esta página el mismo día.
+ * código: dos claves de almacenamiento (`theme` y `ry_boot`), cero cookies
+ * y un único tercero (hits.sh, solo en la portada). Si se añade o se quita
+ * una dependencia externa, hay que actualizar esta página el mismo día.
  */
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const EMAIL = 'e.carrionjuliann@go.ugr.es';
 const updated = '3 de agosto de 2026';
+// Cambia si se añade o quita algún tercero.
 
 const NEVER = [
   'Cuentas de usuario, registro o inicio de sesión',
@@ -62,7 +63,8 @@ const STORAGE = [
       <p class="small">
         Es un sitio estático: archivos que tu navegador descarga y ejecuta. No existe
         un servidor de repasaYA al que puedan llegar tus datos, porque no existe un
-        servidor de repasaYA.
+        servidor de repasaYA. La única excepción es el contador de visitas de la
+        portada, que te explico más abajo.
       </p>
     </section>
 
@@ -134,12 +136,29 @@ const STORAGE = [
       </div>
 
       <div class="third">
+        <h3>hits.sh — contador de visitas</h3>
+        <p>
+          En <strong>la portada, y solo ahí</strong>, se carga una imagen de
+          <a href="https://hits.sh" target="_blank" rel="noopener">hits.sh</a>: es lo que
+          hace que tu visita cuente en el total que ves entre las cifras. Para servirla,
+          hits.sh recibe tu dirección IP y suma uno. No guarda perfiles, no pone cookies
+          y no distingue quién eres: solo cuenta. Se pide con
+          <code>referrerpolicy="no-referrer"</code>, así que ni siquiera sabe desde qué
+          página vienes.
+        </p>
+        <p class="tight">
+          Es el único tercero de toda la web. Si prefieres que no se cargue, cualquier
+          bloqueador de contenido lo detiene y la página funciona exactamente igual.
+        </p>
+      </div>
+
+      <div class="third">
         <h3>Ninguno más</h3>
         <p>
           Las tipografías están alojadas aquí mismo, no se piden a Google Fonts. No hay
-          CDN, ni incrustaciones, ni contador de visitas, ni scripts externos. Si abres
-          las herramientas de desarrollo, verás que esta web no hace ni una sola
-          petición fuera de su propio dominio.
+          CDN, ni incrustaciones, ni scripts externos, ni analítica. Fuera de la portada,
+          esta web no hace ni una sola petición fuera de su propio dominio: puedes
+          comprobarlo en las herramientas de desarrollo.
         </p>
       </div>
 
@@ -342,11 +361,23 @@ const STORAGE = [
   .third + .third {
     margin-top: 20px;
   }
+  .third code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    border-radius: 5px;
+    padding: 1px 6px;
+  }
   .third h3 {
     font-size: 0.94rem;
     font-weight: 700;
     letter-spacing: -0.015em;
     margin-bottom: 6px;
+  }
+  .third p.tight {
+    margin-top: 10px;
   }
   .third p {
     max-width: 72ch;

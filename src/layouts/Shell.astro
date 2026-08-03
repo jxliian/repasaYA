@@ -10,11 +10,10 @@ import SiteHeader from '../components/nav/SiteHeader.astro';
 import ParticleField from '../components/fx/ParticleField.astro';
 
 /**
- * Shell — layout de las páginas del catálogo nuevo (oscuro por defecto).
+ * Shell — layout del catálogo (oscuro por defecto).
  *
- * Convive con `Base.astro`, que sigue sirviendo las páginas de material
- * antiguas. Cuando se migre el último quiz, `Base.astro` desaparece y
- * esto se queda como layout único.
+ * `QuizShell` es su equivalente para las páginas de material, que van sin
+ * cabecera ni pie porque el motor ocupa la pantalla entera.
  */
 interface Props {
   title: string;

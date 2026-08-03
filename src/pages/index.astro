@@ -13,6 +13,8 @@ import Hero from '../components/hero/Hero.astro';
 import SubjectCard from '../components/catalog/SubjectCard.astro';
 import Changelog from '../components/sections/Changelog.astro';
 import About from '../components/sections/About.astro';
+import VisitCounter from '../components/nav/VisitCounter.astro';
+import { fetchHits } from '../lib/hits';
 import { degreePath } from '../lib/routes';
 
 const allSubjects = await getCollection('subjects');
@@ -51,10 +53,15 @@ function countBy(types: string[]): number {
    que ejecute el build y en CI puede devolver "1935" en vez de "1.935". */
 const es = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
+/* Visitas: se lee de hits.sh en build. Si no responde, la cifra
+   simplemente no sale — un contador caído no rompe la portada. */
+const visits = await fetchHits();
+
 const stats = [
   { value: es(countBy(['test', 'vf', 'reveal'])), label: 'preguntas' },
   { value: es(countBy(['flashcards', 'glosario'])), label: 'fichas' },
   { value: String(allSubjects.length), label: 'asignaturas' },
+  ...(visits ? [{ value: visits, label: 'visitas' }] : []),
   { value: '0', label: 'anuncios' },
 ];
 ---
@@ -99,6 +106,7 @@ const stats = [
     </p>
   </section>
 
+  <VisitCounter />
   <Changelog />
   <About />
 </Shell>

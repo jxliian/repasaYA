@@ -210,7 +210,9 @@ Las rutas planas anteriores (`/repasaYA/rrhh/quiz/`) siguen funcionando: son red
 
 ## Privacidad
 
-Sin cuentas, sin cookies, sin analítica y sin anuncios. Lo único que se guarda son dos claves en tu navegador: el tema elegido y una marca para no repetir la animación de bienvenida. Detalle completo en [/privacidad](https://jxliian.github.io/repasaYA/privacidad/).
+Sin cuentas, sin cookies, sin analítica y sin anuncios. Lo único que se guarda son dos claves en tu navegador: el tema elegido y una marca para no repetir la animación de bienvenida.
+
+El único tercero es el contador de visitas de [hits.sh](https://hits.sh), que se carga solo en la portada y recibe la IP para sumar uno. Detalle completo en [/privacidad](https://jxliian.github.io/repasaYA/privacidad/).
 
 ---
 
