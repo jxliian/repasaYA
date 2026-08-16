@@ -5,9 +5,8 @@ year: 4
 semester: 1
 credits: 6
 icon: "🗂️"
-status: planned
-materials: []
+status: available
+description: "Proyectos prácticos de referencia y repositorio del proyecto final."
+materials: [guia]
 ---
 
-<!-- Sin material todavía. Para añadirlo: crea un JSON en
-     src/content/materials/informatica/diseno-y-desarrollo-de-sistemas-de-informacion/ y abre un PR. -->
