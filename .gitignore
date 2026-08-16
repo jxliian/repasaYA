@@ -1,7 +1,9 @@
 node_modules/
 dist/
 .astro/
-yo_gif.gif
-/yo.webm
-lv_0_*.mp4
+*.gif
+*.mp4
+*.webm
+.DS_Store
 .superpowers/brainstorm/
+
