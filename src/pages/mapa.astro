@@ -68,10 +68,14 @@ const tree = degrees
   })
   .sort((a, b) => b.ready - a.ready);
 
-const totalItems = materials.reduce(
-  (n, m) => n + ('items' in m.data ? m.data.items.length : 0),
-  0
-);
+const totalQuestions = materials
+  .filter((m) => ENGINE_TYPES.has(m.data.type))
+  .reduce((n, m) => n + ('items' in m.data ? m.data.items.length : 0), 0);
+
+const totalCards = materials
+  .filter((m) => ['flashcards', 'glosario'].includes(m.data.type))
+  .reduce((n, m) => n + ('items' in m.data ? m.data.items.length : 0), 0);
+
 const es = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 ---
 
@@ -91,7 +95,8 @@ const es = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
       stats={[
         { value: subjects.length, label: 'asignaturas' },
         { value: materials.length, label: 'materiales' },
-        { value: es(totalItems), label: 'preguntas' },
+        { value: es(totalQuestions), label: 'preguntas' },
+        { value: es(totalCards), label: 'fichas' },
       ]}
     />
 
