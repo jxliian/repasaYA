@@ -54,6 +54,28 @@ const year = new Date().getFullYear();
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="repasaYA" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+
+    <!-- Datos estructurados Schema.org para Google -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalApplication",
+        "name": "repasaYA",
+        "url": "https://jxliian.github.io/repasaYA/",
+        "description": "Tests interactivos, verdadero/falso y flashcards para el Doble Grado ADE + Ingeniería Informática de la UGR.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All",
+        "inLanguage": "es",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        }
+      }
+    </script>
     <ClientRouter />
     <script is:inline>
       // Oscuro por defecto; el claro es opt-in y se recuerda.

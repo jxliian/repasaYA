@@ -42,6 +42,24 @@ const canonical = `https://jxliian.github.io/repasaYA${Astro.url.pathname}`;
     {description && <meta property="og:description" content={description} />}
     <meta property="og:image" content="https://jxliian.github.io/repasaYA/logo.png" />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} — repasaYA`} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Quiz",
+        "name": title,
+        "url": canonical,
+        "educationalAlignment": {
+          "@type": "AlignmentObject",
+          "alignmentType": "educationalSubject",
+          "targetName": title
+        }
+      }
+    </script>
     <ClientRouter />
     <script is:inline>
       (function () {
