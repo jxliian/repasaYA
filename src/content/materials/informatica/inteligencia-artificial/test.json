@@ -1,0 +1,2734 @@
+{
+  "subject": "informatica/inteligencia-artificial",
+  "type": "test",
+  "title": "Tipo Test Interactivo (265 preguntas)",
+  "order": 1,
+  "items": [
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de los siguientes métodos de búsqueda es un caso particular de búsqueda primero el mejor?:",
+      "opts": [
+        "Algoritmo A*.",
+        "Búsqueda en profundidad.",
+        "Algortimo genético.",
+        "El algoritmo de búsqueda en profundidad retroactiva."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?:",
+      "opts": [
+        "Siempre.",
+        "Nunca.",
+        "Depende del algoritmo y de la heurística."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo A* ABIERTOS representa:",
+      "opts": [
+        "El conjunto de nodos generados y explorados.",
+        "El conjunto de nodos generados y no explorados.",
+        "El conjunto de nodos no generados y explorados.",
+        "El conjunto de nodos no generados y no explorados."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo A* cuando un sucesor corresponde con un nodo que ya estaba en CERRADOS:",
+      "opts": [
+        "el nodo se revisa para determinar cuál es su mejor sucesor, y en el caso de que haya cambio se propaga al padre del nodo.",
+        "el nodo se revisa para determinar cuál es su mejor padre.",
+        "el nodo de elimina.",
+        "el nodo se revisa para determinar cuál es su mejor padre, y en el caso de que haya cambio se propaga dicho cambio a los sucesores."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo A* el enlace al mejor padre determina una estructura de:",
+      "opts": [
+        "árbol representando los mejores caminos desde cualquier nodo a la raíz.",
+        "árbol representando los mejores descendientes de cada nodo.",
+        "grafo con todos los descendientes desde cualquier nodo al objetivo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las heurísticas son:",
+      "opts": [
+        "funciones usadas en algunos problemas.",
+        "criterios, métodos o principios para decidir cuál de entre varias acciones promete ser la mejor para alcanzar una meta.",
+        "criterios, métodos o principios para obtener el óptimo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un juego es determinístico porque:",
+      "opts": [
+        "Siempre se puede determinar una solución.",
+        "Siempre se pueden determinar los resultados de los movimientos de los jugadores.",
+        "Un jugador puede determinar siempre una estrategia ganadora."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Hay una diferencia destacable entre un estado de un juego y un estado de un problema de búsqueda heurística y es que:",
+      "opts": [
+        "En un estado de un juego no se representa la situación del mundo.",
+        "En un estado de un juego no se representa una valoración numérica sobre el estado.",
+        "En un estado de un juego hay que representar el jugador que le toca mover."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un juego puede considerarse como un caso de sistema multiagente_:",
+      "opts": [
+        "Competitivo.",
+        "Cooperativo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un juego inicialmente hay 3 palillos sobre la mesa, y dos jugadoresMAXyMIN.MAXcomienza el juego, y podrá quitar 1, 2 o 3 palillos. Le sigue Min, que también podrá quitar 1, 2 ó 3 palillos. Estas acciones se repiten hasta que se quite un jugador quite un último palillo, en cuyo caso pierde el juego. ¿La figura muestra el árbol de este juego?:",
+      "opts": [
+        "Sí, porque todos los nodosMINestán bien valorados.",
+        "Sí, porque los nodosMINson terminales.",
+        "No, porque no todos los nodos terminales están etiquetados.",
+        "No, porque faltan operadores por aplicar al nodoMAX."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las técnicas de juegos se llaman de búsqueda con adversario porque:",
+      "opts": [
+        "Los agentes usan valoraciones de los estados terminales opuestas.",
+        "Los agentes usan repertorios de acciones opuestos.",
+        "Los agentes usan estados iniciales opuestos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un estado terminal en un juego bipersonal es un estado en el que:",
+      "opts": [
+        "hay empate entre los jugadores.",
+        "los dos jugadores ganan.",
+        "los dos jugadores pierden.",
+        "no hay más movimientos aplicables y el juego finaliza."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un juego bipersonal con información perfecta se considera un laboratorio de interés para la IA porque:",
+      "opts": [
+        "Tiene un repertorio de acciones pequeño y aun así son duros de resolver.",
+        "Siempre se puede encontrar una solución óptima con una buena heurística.",
+        "Es más difícil de representar que juegos físicos, como el “RoboSoccer” o Fútbol Robótico."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Al inicio de la exploración de un árbol de juego:",
+      "opts": [
+        "Todos los nodos valen inicialmente 0.",
+        "Todos los nodos valen inicialmente 0 menos los terminales.",
+        "Todos los nodos tienen un valor desconocido menos los terminales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El tamaño aproximado del espacio de nodos a explorar en el ajedrez, que tiene un factor de ramificación promedio de 35 y una profundidad media de 50 movimientos por cada jugador es de:",
+      "opts": [
+        "\\(O(35^{100})\\).",
+        "\\(O(100^{35})\\).",
+        "\\(O(35*{100})\\).",
+        "\\(O(e^{-\\frac{35}{100}})\\)."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un juego una estrategia contingente:",
+      "opts": [
+        "Es un camino lineal entre el estado inicial y un estado terminal que incluye nodosMAXy nodoosMIN.",
+        "Es un grafo Y/O que representa movimientos deMAXy todos los posibles movimientos de oposición deMIN."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La solución de un juego permite indicar a cada jugador:",
+      "opts": [
+        "Qué resultado puede esperar y cómo alcanzarlo.",
+        "Un camino lineal para encontrar un estado ganador."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las valoraciones de los nodos terminales de un juego se realizan considerando el punto de vista de _:",
+      "opts": [
+        "MAX.",
+        "MIN."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En los juegos bipersonales con información perfecta:",
+      "opts": [
+        "Los jugadores actúan cada uno racionalmente, es decir, cada uno trata de obtener el máximo beneficio.",
+        "Los jugadores actúan cada uno racionalmente, es decir, cada uno trata de maximizar su pérdida."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un juego de suma nula:",
+      "opts": [
+        "Hay reparto de beneficio entre los jugadores y la suma de beneficios es 0.",
+        "El resultado final del juego es 0.",
+        "Cada situación final el beneficio de un jugador es total y la pérdida del oponente es total."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Es necesario valorar  situaciones o asociar una utilidad a situaciones distintas a las terminales  para poder resolver un juego:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un juego con información perfecta es un caso de sistema multiagente con dos jugadores en el toda la información del tablero está disponible para cada jugador:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El caso promedio la poda alfa beta permite profundizar:",
+      "opts": [
+        "el triple que un procedimientoMinimaxcon el mismo esfuerzo.",
+        "un \\(33 \\%\\) más que un procedimientoMinimaxcon el mismo esfuerzo.",
+        "el doble que un procedimientoMinimaxcon el mismo esfuerzo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmoMinimaxpodemos cambiar el jugadorMAXpor el jugadorMINsin más que:",
+      "opts": [
+        "Cambiar el orden de la exploración sin alterar ningún otro elemento.",
+        "Modificar la función heurística sumando-1a todos sus valores.",
+        "Cambiar el orden de la exploración y el signo de la función heurística."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En teoría de juegos,Minimaxes:",
+      "opts": [
+        "un método para encontrar la salida a un laberinto.",
+        "un algoritmo para resolver una partida de ajedrez.",
+        "un método de decisión para minimizar la pérdida máxima esperada en juegos con adversario, perfecta y suma nula.",
+        "un tipo de agente deliberativo.",
+        "un método de decisión para maximizar la pérdida mínima esperada en juegos con adversario, perfecta y suma nula."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un juego con componente aleatoria, si realizamos un cambio de escala en los valores mediante una función real creciente (escala lineal, escala logarítmicas, etc..), ¿la variante delMinimaxpara este tipo de juegos elegirá la misma jugada?:",
+      "opts": [
+        "Si, no depende de los cambios de escala siempre que se conserve el orden de los valores.",
+        "No siempre, pues puede cambiar el orden de la esperanza matemática de las opciones de una jugada aunque se conserve el orden de los valores.",
+        "No siempre, pero si el cambio de escala consiste en multiplicar por un número positivo si."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La cota alfa se calcula como el:",
+      "opts": [
+        "el valor máximo de los nodosMAXen el camino del nodo a la raíz.",
+        "el valor máximo de los nodosMINen el camino del nodo a la raíz.",
+        "el valor mínimo de los nodosMINen el camino del nodo a la raíz.",
+        "el valor mínimo de los nodosMINen el árbol del juego.",
+        "el valor máximo de los nodosMAXdel árbol del juego."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La efectividad de la poda alfa-beta del algoritmoMinimaxdepende del orden en que se exploren las jugadas:",
+      "opts": [
+        "cierto.",
+        "falso.",
+        "depende de la función de evaluación estática usada."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el contexto de búsqueda en juegos con una profundidad de corte o limitada, una posición estable es:",
+      "opts": [
+        "Una posición del juego en la que la valoración de sus sucesores no cambia respecto a la posicion actual.",
+        "Una posición del juego desde la no se producen variaciones drásticas de la valoración de sus posición actual.",
+        "Una posición a la que se puede volver para iniciar una nueva estrategia contingente."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Una función de valoración de nodos intermedios de un juego:",
+      "opts": [
+        "No tiene que contemplar situaciones terminales del juego.",
+        "Tiene que contemplar situaciones terminales del juego, valorándolas con  \\(-\\infty\\) si ganaMINy  \\(+\\infty\\) si pierdeMIN.",
+        "Tiene que contemplar situaciones terminales del juego, valorándolas con  \\(-\\infty\\) si pierdeMINy  \\(+\\infty\\) si ganaMIN."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Una regla general como \"Todas las casillas azules de un mapa pueden transitarse si el agente tiene bikini\":",
+      "opts": [
+        "se puede representar más adecuadamente con un modelo icónico que con un modelo descriptrivo.",
+        "se puede representar más adecuadamente con un modelo descriptivo que con un modelo icónico.",
+        "no puede representarse ni con un modelo descriptivo ni con un modelo icónico."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La información que se almacena en un nodo de un espacio de estados es un ejemplo de:",
+      "opts": [
+        "un modelo de representación icónico.",
+        "un modelo de representación descriptivo.",
+        "un modelo de presentación ad-hoc."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El cálculo proposicional es decidible, lo cual significa que:",
+      "opts": [
+        "Se puede usar para tomar decisiones a partir de un conjunto de fórmulas.",
+        "Se puede determinar en tiempo finito si una proposición es deducible de un conjunto de fórmulas.",
+        "Se puede garantizar que si una fórmula es cierta entonces se puede decidir su certeza."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La relación “X es el padre de Y”:",
+      "opts": [
+        "se puede representar más adecuadamente con proposiciones que con predicados.",
+        "se puede representar más adecuadamente con predicados que con proposiciones.",
+        "solo puede representarse con predicados."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un árbol de demostración:",
+      "opts": [
+        "es una representación del proceso de demostración de una fórmula bien formada.",
+        "es una representación del espacio de estados en la búsqueda de una fórmula bien formada.",
+        "es una representación del espacio de fórmulas donde se debe encontrar una demostración."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El modus ponens:",
+      "opts": [
+        "es una regla de inferencia para modelos icónicos.",
+        "es una regla de inferencia en lógica en lógica proposicional y de predicados.",
+        "es una regla de inferencia solo aplicable en lógica proposicional."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Si partimos de dos cláusulas, una en la que se afirma que \"no llueve o hace frío\" y otra que en la que \"hace frío\", la regla de resolución aplicada a ambas establece que:",
+      "opts": [
+        "hace frío.",
+        "no llueve.",
+        "no se pueden resolver, son cláusulas inconsistentes."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La instanciación universal nos permite deducir:",
+      "opts": [
+        "reglas generales a partir de casos particulares.",
+        "casos particulares a partir de reglas generales.",
+        "la instanciación no nos permite deducir, nos permite inferir."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Para representar con predicados la información sobre una Asignatura, el Curso en que se imparte y el cuatrimestre:",
+      "opts": [
+        "se puede usar un único predicadoasignatura(A,C,Cu)dondeAes una variable que representa yCuel cuatrimestre.",
+        "se pueden usar dos predicados,asignatura-curso(A,C)yasignatura-cuatrimestre(A,Cu)donde representa la asignatura,Cel curso yCuel cuatrimestre.",
+        "ninguna de las otras respuestas es cierta porque no se pueden usar predicados para represenen una base de datos.",
+        "se puede usar un único predicado o dos, tal y como se explica en las otras dos opciones."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Es eficiente la resolución en lógica de predicados?:",
+      "opts": [
+        "No, solo sirve como concepto teórico.",
+        "Si, siempre que nos limitemos a utilizar cláusulas de Horn.",
+        "Si, siempre encuentra en tiempo eficiente las demostraciones."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de los siguientes es un tipo de aprendizaje?:",
+      "opts": [
+        "Aprendizaje normal.",
+        "Aprendizae por eliminación.",
+        "Aprendizaje supervisado."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un sistema basado en el conocimiento, el motor de inferencia:",
+      "opts": [
+        "contiene los hechos inferidos y las reglas para inferir.",
+        "permite razonar sobre el conocimiento de la base de conocimiento y los datos proporcionados por un usuario.",
+        "es independiente del modelo de representación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuáles son los dos métodos de aprendizaje supervisado?:",
+      "opts": [
+        "Métodos basados en instancias.",
+        "Métodos basado en grafos.",
+        "Métodos basados en modelos.",
+        "Métodos basados en funciones."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles de las siguientes afirmaciones acerca de los algoritmos de búsqueda no informada son ciertas?:",
+      "opts": [
+        "La búsqueda en anchura garantiza obtener la solución óptima siempre y cuando el coste sea unitario.",
+        "Los algoritmos de búsqueda no informada requieren de información heurística para que funcionen.",
+        "La búsqueda en profundidad garantiza obtener la solución óptima siempre que el coste sea unitario."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuáles de las siguientes opciones son correctas?",
+      "opts": [
+        "El agente deliberativo dispone de un modelo de los efectos de sus acciones sobre el mundo.",
+        "El agente deliberativo dispone de un modelo en el mundo que habita.",
+        "El agente deliberativo reacciona a los cambios que percibe, aunque no estén en modelo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuáles  de los siguientes métodos son búsqueda sin información?:",
+      "opts": [
+        "búsqueda en profundidad pero no búsqueda en anchura.",
+        "búsqueda en anchura, pero no búsqueda en profundidad.",
+        "búsqueda en anchura, búsqueda en profundidad."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuántos caminos se mantendrán en memoria en la búsqueda en profundidad retroactiva?:",
+      "opts": [
+        "2.",
+        "1.",
+        "todos.",
+        "3."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué estrategia de control utiliza un método de escalada?:",
+      "opts": [
+        "Exploración de grafos.",
+        "Irrevocable.",
+        "Retroactiva."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué representan los nodos cuando se usa la estructura de grafo dirigido para representar un problema de Inteligencia Artificial? ¿Y los arcos?:",
+      "opts": [
+        "Nodos: un objeto; Arcos: un camino.",
+        "Nodos: un estado del sistema; Arcos: una posible acción.",
+        "Nodos: una posible acción; Arcos: un estado del sistema.",
+        "Ninguna de las respuestas anteriores es cierta."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Sería viable generar el grafo completo para representar el espacio de estados del ajedrez?:",
+      "opts": [
+        "Si, pero es más eficiente trabajar con el grafo implícito.",
+        "No, tendría demasiados nodos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿De entre la búsqueda en anchura y en profundidad retroactiva, ¿cuál de los dos usa menos memoria?:",
+      "opts": [
+        "La búsqueda en anchura.",
+        "La búsqueda en profundidad retroactiva.",
+        "Los dos usan la misma cantidad de memoria.",
+        "No usan memoria."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En la búsqueda en anchura es necesario ir analizando desde el estado inicial todos los sucesos para pasar al nivel siguiente en el árbol de búsqueda?:",
+      "opts": [
+        "solo en los primeros pasos.",
+        "no.",
+        "si."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En la búsqueda en profundidad retroactiva, el contenido de la memoria almacenada es?:",
+      "opts": [
+        "el camino que se está explorando.",
+        "el nodo actual.",
+        "todos los caminos que se han explorado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿La búsqueda en profundidad retroactiva es una estrategia de búsqueda:",
+      "opts": [
+        "especulativa.",
+        "tentativa.",
+        "explicativa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La principal diferencia entre el algoritmo de escalada simple y el algoritmo de escalada por la máxima pendiente es:",
+      "opts": [
+        "el uso de la heurística sobre los nodos sucesores y el criterio de parada.",
+        "los estados que se tienen en cuenta para la generación del siguiente estado.",
+        "la posibilidad de vuelta atrás y el criterio de parada."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Los métodos heurísticos en general no garantizan la solución óptima, pero producen resultados que satisfacen la resolución del problema?:",
+      "opts": [
+        "Falso.",
+        "Verdadero."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Los problemas fundamentales de un método de escalada son?:",
+      "opts": [
+        "Cálculo de la heurística.",
+        "Mesetas.",
+        "Máximos locales.",
+        "Mesetas y Máximos Locales."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué tipo de aprendizaje aprende una función a partir de ejemplos de sus entradas y salidas?:",
+      "opts": [
+        "Aprendizaje por refuerzo.",
+        "Aprendizaje no supervisado.",
+        "Aprendizaje supervisado."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Selecciona la definición que mejor se ajusta al concepto de espacio de estados:",
+      "opts": [
+        "Grafo cuyos nodos representan las configuraciones alcanzables (los estados válidos) y explicitan las acciones posibles.",
+        "Es la representación de conocimientos del problema, ya generada al inicio del problema en la ejecución del agente.",
+        "Grafo cuyos nodos representan acciones, algunas imposibles y otras posibles; el agente elige la que mejora le satisfaga."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Una ventaja de los métodos de escalada es que son siempre fáciles de implementar:",
+      "opts": [
+        "tan solo los métodos de escalada simples.",
+        "tan solo cuando no se incluyen probabilidades.",
+        "siempre."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de entre los siguientes algoritmos de escalada tiene más probabilidad de caer en un óptimo local?:",
+      "opts": [
+        "escalada por máxima pendiente.",
+        "enfriamiento simulado.",
+        "escalada simple."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de entre los siguientes algoritmos de escalada reduce la posibilidad de caer en óptimos locales?:",
+      "opts": [
+        "escalada simple.",
+        "escalada por máxima pendiente.",
+        "enfriamiento simulado."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Cuando la salida de un árbol de decisión es una variable continua, el problema se denomina:",
+      "opts": [
+        "Completo.",
+        "continuo.",
+        "regresión."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué hace diferente a los algoritmos genéticos de los otros métodos de escalada?:",
+      "opts": [
+        "el uso de conjuntos de estados y operaciones sobre conjuntos de estados.",
+        "el uso de decisiones probabilísticas.",
+        "el uso de estrategias irrevocables."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué representa en el problema la adecuación con el entorno en un algoritmo genético?:",
+      "opts": [
+        "el valor de la función heurística.",
+        "la población.",
+        "el operador de selección."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Cuando se resuelve un problema con un algoritmo genético tanto la codificación del problema como los operadores:",
+      "opts": [
+        "es conveniente que se adapten al modelo definido por el algoritmo genético.",
+        "no es necesario que se adapten al modelo definido por el algoritmo genético.",
+        "es necesario que se adapten al modelo definido por el algoritmo genético."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿De los siguientes algoritmos ¿cuál tiene más posibilidades de caer en un máximo o mínimo local?:",
+      "opts": [
+        "Escalada máxima pendiente.",
+        "Profundizaje iterativo.",
+        "Algoritmos genéticos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿El algoritmo de enfriamiento simulado es una variante de los métodos de escalada que se cambia en algunos casos?:",
+      "opts": [
+        "estados diferentes al actual.",
+        "estados mejores que el actual.",
+        "estados peores que el actual."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El algoritmo de escalada estocástico selecciona el siguiente estado...",
+      "opts": [
+        "Aleatoriamente entre todos los descendientes.",
+        "Aleatoriamente entre todos los descendientes que mejoran al actual y con una probabilidad constante.",
+        "Aleatoriamente entre todos los descendientes que mejoran al actual y con una probabilidad descendiente proporcional al valor de la heurística del mismo.",
+        "Aleatoriamente entre todos los descendientes que mejoran al actual."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En el algoritmo de enfriamiento simulado la energía representa?:",
+      "opts": [
+        "un valor global del sistema.",
+        "la cercanía al óptimo.",
+        "la función heurística."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo de enfriamento simulado la temperatura representa:",
+      "opts": [
+        "la cercanía al óptimo.",
+        "un parámetro artificial que permite controlar la conducta del algoritmo a lo largo del tiempo.",
+        "el incremento de la función heurística.",
+        "un parámetro artificial que permite controlar la definición de la función heurística a lo largo del tiempo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los métodos de escalada tienen como objetivo pasar irrevocablemente desde un nodo al nodo siguiente:",
+      "opts": [
+        "a todos los nodos sucesores.",
+        "que mejore al nodo actual.",
+        "ninguna de las anteriores."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo de búsqueda A*, \\(g(n)\\) expresa el coste estimado desde el nodo \\(n\\) hasta el nodo del mejor camino hasta el momento desde el nodo inicial al \\(n\\):",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Para un nodo, el algoritmo A* la función \\(h\\) es un valor que no cambia a lo largo del algoritmo:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Si realizamos un cambio de escala en los valores de la función de evaluación estática, por ejemplo, multiplicar el valor por 10, ¿el algoritmoMinimaxelige la misma jugada?:",
+      "opts": [
+        "Solo si el cambio de escala aumenta el valor actual.",
+        "Solo si el cambio de escala disminuye el valor actual.",
+        "Sí, no depende de los cambios de escala."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un problema para el que existe una resolución algorítmica ¿podría ser un problema de Inteligencia Artificial?:",
+      "opts": [
+        "Si, esos problemas se incluyen siempre en Inteligencia Artificial.",
+        "Podría ser, dependiendo del tipo de solución que tenga el problema.",
+        "No, ya existe un algoritmo que lo resuelve."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En qué consiste actuar racionalmente?:",
+      "opts": [
+        "en percibir y actuar.",
+        "en dar una solución aunque no sea la mejor.",
+        "en resolver el problema de forma óptima.",
+        "en actuar de la forma correcta según la información que se posee."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El aprendizaje basado en instancias:",
+      "opts": [
+        "representa el conocimiento mediante reglas.",
+        "representa el conocimiento mediante los mismos ejemplos.",
+        "representa el conocimiento mediante árboles de decisión."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La búsqueda primero el mejor o por el mejor nodo hace uso de una estrategia de control:",
+      "opts": [
+        "de exploración en grafos.",
+        "irrevocable.",
+        "retroactiva."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de los siguientes algoritmos tienen una componente aleatoria?:",
+      "opts": [
+        "Algoritmo A*.",
+        "Algoritmos genéticos.",
+        "Algoritmo de escalada por la máxima pendiente.",
+        "Algoritmo de escalada simple."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Es esencial el uso de memoria en un agente reactivo?:",
+      "opts": [
+        "no, porque seguiría siendo inteligente, aunque no tuviera memoria.",
+        "no, pero incluirla provocaría una mejora de la eficiencia y el comportamiento del agente.",
+        "no, porque si se incluye dicha memoria pasa a ser un agente deliberativo.",
+        "si, porque es imposible que un agente funcione sin memoria."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Todo juego bipersonal con información perfecta y suma nula tiene solución:",
+      "opts": [
+        "La afirmación es cierta pero no podemos conseguir resolver de forma práctica juegos complejos.",
+        "La afirmación es falsa, el ajedrez es un ejemplo de juego que no se puede resolver.",
+        "La verdad de la afirmación depende de la complejidad del juego y de la implementación del algoritmo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el contexto del aprendizaje automático, ¿Qué es una instancia?:",
+      "opts": [
+        "Una observación de una situación conocida en un problema.",
+        "Un recurso del sistema.",
+        "Un algoritmo de búsqueda."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Con qué método de búsqueda se obtienen siempre la solución con un número menor de pasos?:",
+      "opts": [
+        "Descenso iterativo.",
+        "Búsqueda en profundidad.",
+        "Búsqueda en anchura.",
+        "Enfriamento simulado.",
+        "Algoritmo genético.",
+        "Descenso iterativo y Búsqueda en anchura."
+      ],
+      "correct": 5
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El test de Turing tiene que ver con:",
+      "opts": [
+        "sistemas que piensan como humanos.",
+        "sistemas que actúan racionalmente.",
+        "sistemas que actúan como humanos.",
+        "sistemas que piensan racionalmente."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Cuando se dice que un agente es capaz de razonar sobre un modelo del mundo para decidir qué hacer para lograr un objetivo, estamos hablando de un agente:",
+      "opts": [
+        "reactivo.",
+        "social.",
+        "deliberativo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El subsistema de explicación de un sistema experto basado en reglas tiene como misión:",
+      "opts": [
+        "deducir los hechos más importantes que se han utilizado en el proceso.",
+        "justificar como se ha llegado a la decisión propuesta por el sistema.",
+        "obtener una retroalimentación de la decisión tomada."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo A* usando \\(f = g+h\\), la función \\(g\\) es un valor asociado a cada estado que no cambia a lo largo del tiempo:",
+      "opts": [
+        "Es falso, el valor cambia en función de la heurística empleada.",
+        "Es falso, el valor puede cambiar.",
+        "Es cierto, ese valor nunca cambia."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo de poda alfa-beta, un nodoMINse puede podar cuando:",
+      "opts": [
+        "su valor actual es menor o igual que la cota beta.",
+        "su valor actual es mayor que la cota alfa.",
+        "su valor actual es menor o igual que la cota alfa.",
+        "su valor actual es mayor que la cota beta."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Cuando tengamos más de una hipótesis que satisfaga todos los ejemplos debemos elegir:",
+      "opts": [
+        "la más simple.",
+        "la más difícil.",
+        "la primera que se haya obtenido.",
+        "la última que se haya obtenido.",
+        "podemos elegir cualquiera."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Señalar de entre los siguientes cuál es un modelo de representación del conocimiento:",
+      "opts": [
+        "el campo de potencial.",
+        "la lógica de predicados.",
+        "los algoritmos genéticos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un grafo Y/O si tenemos un nodo O, debemos:",
+      "opts": [
+        "resolver el subproblema asociado y devolverlo.",
+        "resolver todos sus hijos por separado, si todos están resueltos el nodo padre está resuelto, en otro caso el nodo padre no se puede resolver.",
+        "resolver un nodo hijo para ver si está resuelto, si es así, el padre está resuelto, en caso contrario comprobar con otro hijo, si ninguno de los nodos hijos se puede resolver, el nodo padre tampoco."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El enfriamiento simulado consiste en:",
+      "opts": [
+        "definir los valores de las probabilidades del modelo.",
+        "definir el número de iteraciones y el valor de la constante K.",
+        "definir la temperatura de inicio y el cambio de temperatura en las diferentes iteraciones."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo A* usando la fórmula \\(f = g+h\\) en cada nodo, ¿qué es la función \\(g\\)?:",
+      "opts": [
+        "Es una estimación del mejor coste para ir desde el nodo actual al nodo objetivo.",
+        "Es una estimación del mejor coste para ir desde el estado inicial al estado objetivo pasando por el nodo actual.",
+        "Es una estimación del mejor coste para ir desde el estado inicial hasta el nodo actual."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un juego la incertidumbre producida por la tirada de un dado se mide:",
+      "opts": [
+        "con el caso promedio.",
+        "con el caso más desfavorable.",
+        "con el caso más favorable."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes herramientas no debería emplearse para construir un agente reactivo?:",
+      "opts": [
+        "Un sistema basado en reglas de producción.",
+        "Variables de estado.",
+        "Una tabla entrada-salida.",
+        "Un sistema de búsqueda."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo de poda alfa-beta, beta es:",
+      "opts": [
+        "el mayor valor actual de entre los nodosMAXen el camino que hay desde el nodo actual al nodo solución.",
+        "el menor valor actual de entre los nodosMINen el camino que hay desde el nodo actual al nodo de inicio.",
+        "el menor valor actual de entre los nodosMINen el camino que hay desde el nodo actual al nodo solución.",
+        "el mayor valor actual de entre los nodosMAXen el camino que hay desde el nodo actual al nodo de inicio."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La búsqueda en anchura permite obtener la solución con menor número de acciones:",
+      "opts": [
+        "Sí.",
+        "depende del problema.",
+        "no."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el problema del mono y los plátanos, donde el mono tiene que determinar una serie de acciones para coger un plátano colgado del techo conociendo los objetos presentes en la habitación, ¿qué tipo de agente sería más apropiado?:",
+      "opts": [
+        "Un agente social.",
+        "Un agente deliberativo.",
+        "Un agente reactivo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La arquitectura de subsunción:",
+      "opts": [
+        "consiste en usar ejemplos para aprender el comportamiento del agente y usar ese comportamiento para determinar la acción más apropiada.",
+        "consiste en seleccionar reglas usando una determinada ordenación y comprobar si se cumple una condición para asociarle la acción correspondiente.",
+        "consiste en usar módulos de comportamiento que se activan y que con una determinada prioridad devuelven una acción a aplicar."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un algoritmo de aprendizaje es bueno si:",
+      "opts": [
+        "produce hipótesis que hacen un buen trabajo al evaluar clasificaciones de ejemplos observados previamente.",
+        "produce hipótesis que hacen un buen trabajo al evaluar clasificaciones de ejemplos no han sido observados.",
+        "hace un buen trabajo produciendo clasificaciones de las diferentes hipótesis observadas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Se dice que un problema de aprendizaje es realizable si el espacio de hipotesis:",
+      "opts": [
+        "contiene a la función verdadera.",
+        "es lo suficientemente grande.",
+        "es continuo.",
+        "se representa mediante un modelo.",
+        "es finito."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Una hipótesis es consistente si:",
+      "opts": [
+        "es completa.",
+        "satisface a los datos.",
+        "generaliza el conocimiento."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmo A* CERRADOS representa:",
+      "opts": [
+        "el conjunto de nodos no generados y explorados.",
+        "el conjunto de nodos no generados y no explorados.",
+        "el conjunto de nodos generados y no explorados.",
+        "el conjunto de nodos generados y explorados."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmoMinimaxel valorMinimaxV(J)de un nodoJde la frontera de búsqueda es ___ al de su función de evaluación estática:",
+      "opts": [
+        "menor.",
+        "diferente.",
+        "mayor.",
+        "igual."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La complejidad de un juego se mide:",
+      "opts": [
+        "con el resultado de multiplicar la profundidad por la anchura del árbol del juego.",
+        "con la profundidad del árbol del juego.",
+        "con la anchura del árbol del juego.",
+        "con el número de nodos que se procesan.",
+        "con \\(B^P\\) donde \\(B\\) es el factor de ramificación y \\(P\\) la profundidad."
+      ],
+      "correct": 4
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las bases de conocimiento:",
+      "opts": [
+        "son dinámicas, pueden incorporar siempre nuevos datos a lo largo del tiempo.",
+        "son estáticas, no varían a lo largo del tiempo dado que pueden deducir nuevo conocimiento en cualquier momento.",
+        "pueden ser estáticas o dinámicas dependiendo del campo que trate y las necesidades que se tengan que cubrir."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el contexto de los problemas de búsqueda ¿qué es el factor de ramificación?:",
+      "opts": [
+        "El número promedio de descendientes por nodo.",
+        "Un parámetro que determina la probabilidad de mutación en un algoritmo genético.",
+        "Una constante asociada al algoritmo de enfriamiento simulado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de estos problemas no es de interés para la inteligencia artificial?:",
+      "opts": [
+        "Apagar automáticamente un calefactor cuando haya más de 30ºC.",
+        "Jugar al ajedrez.",
+        "Apagar automáticamente un calefactor cuando se perciba sensación de calor.",
+        "Invertir en bolsa."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los sistemas expertos son un ejemplo de:",
+      "opts": [
+        "Sistemas que actúan racionalmente.",
+        "Sistemas que piensan como humanos.",
+        "Sistemas que actúan como humanos.",
+        "Ninguna de las otras respuestas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La denominada edad oscura de la I.A., fue debida a que:",
+      "opts": [
+        "Se necesitaba un gran conocimiento para resolver problemas específicos y se descubrió la complejidad de algunos problemas.",
+        "El trabajo de investigación sobre la IA se desarrollaba en sótanos oscuros.",
+        "Se perdió totalmente el interés por la IA, debido a su dificultad."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La Inteligencia Artificial surge a partir (seleccionar solo una opción):",
+      "opts": [
+        "La informática y la electrónica.",
+        "Filosofía, psicología y neurociencia.",
+        "Todas las mencionadas y algunas más."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes respuestas representa mejor los pasos que lleva a cabo un agente reactivo?:",
+      "opts": [
+        "percibir y buscar la mejor alternativa.",
+        "percibir, procesar la información percibida, seleccionar la acción usando esa información y realizar la acción.",
+        "percibir y actuar."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿ Cuál de las siguientes no es una característica propia de los agentes?:",
+      "opts": [
+        "Proactividad.",
+        "Capacidad individualista.",
+        "Autonomía.",
+        "Capacidad estímulo-respuesta."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cómo podría beneficiar el uso de una arquitectura de subsunción en un robot aspirador?:",
+      "opts": [
+        "El comportamiento sería emergente y permitiría entender fácilmente el comportamiento global esperado.",
+        "Las decisiones se basan en información local.",
+        "Los estímulos del exterior se procesan por capas especializadas de modo que se siguen unas prioridades a la hora de actuar."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué es un agente inteligente o racional?:",
+      "opts": [
+        "es el estudio de cómo hacer que los ordenadores hagan cosas que por el momento son realizadas mejor por los seres humanos.",
+        "es un sistema de ordenador, situado en algún entorno, que es capaz de realizar acciones de forma autónoma y que es flexible para lograr los objetivos planteados.",
+        "es el sentido en que se puede tomar una sentencia, un dicho o una expresión.",
+        "es un sistema robótico que se desplaza de forma segura por un entorno de habitaciones realizando diversas tareas.",
+        "es un sistema de diagnóstico de medicina interna con capacidad de explicar sus razonamientos a los expertos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de los siguientes problemas no debería modelizarse como un agente reactivo?:",
+      "opts": [
+        "un robot aspirador.",
+        "una casa domotizada.",
+        "un robot que recorre el centro de un pasillo.",
+        "un navegador GPS que recomienda rutas."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles de los siguientes juegos son bipersonales con información perfecta? (marcar todos los que sean):",
+      "opts": [
+        "Backgammon.",
+        "Damas.",
+        "Poker.",
+        "Ajedrez."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el algoritmoMinimaxse parte de la hipótesis de que los dos jugadores juegan de manera perfecta. ¿Qué ocurre si uno de ellos falla y no actúa según lo previsto? Seleccione una:",
+      "opts": [
+        "Ese fallo no afecta al contrincante.",
+        "El contrincante se perjudica.",
+        "El contricante se beneficia."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La cota beta es:",
+      "opts": [
+        "una cota inferior.",
+        "una cota superior.",
+        "la representación del último movimiento realizado.",
+        "una aproximación heurística de la jugada media según partidas anteriores."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un juego con componente aleatoria los valores de los estados se propagan hacia arriba en las capas aleatorias usando:",
+      "opts": [
+        "una variación de la función heurística.",
+        "la esperanza matemática.",
+        "las cotas alfa o beta según corresponda."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Entre las múltiples formas de inferir un árbol de decisión la más usada y eficaz consiste en:",
+      "opts": [
+        "seleccionar el atributo en cada nivel del árbol en función de la calidad de la división que produce.",
+        "crear una ruta del árbol para cada instancia de entrenamiento.",
+        "inferir el árbol más pequeño posible que sea compatible con todas las instancias."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En aprendizaje una hipótesis estará bien generalizada si:",
+      "opts": [
+        "es consistente con los datos del conjunto de entrenamiento.",
+        "es la más simple.",
+        "puede predecir ejemplos que no se conocen."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué dice el principio conocido como Navaja de Ockham (cuando dos teorías explican los hechos observados)?:",
+      "opts": [
+        "Que la teoría más simple tiene más probabilidades de ser correcta que la compleja.",
+        "Que la teoría más simple siempre y en todos los casos es la mejor.",
+        "Que la teoría más simple tiene más probabilidades de ser incorrecta que la compleja.",
+        "Que la teoría más compleja tiene más probabilidades de ser correcta que la simple."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El aprendizaje inductivo se basa en:",
+      "opts": [
+        "aprender en base a prueba y error.",
+        "resolver problemas exactamente iguales a los resueltos anteriormente.",
+        "aprender a partir de ejemplos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un aprendizaje que se basa en aprender a partir de patrones de entradas sin especificar sus salidas es un aprendizaje:",
+      "opts": [
+        "Por refuerzo.",
+        "Supervisado.",
+        "No supervisado."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Según su funcionamiento, ¿qué estructura de datos sería más apropiada para implementar la búsqueda en profundidad sobre grafos?:",
+      "opts": [
+        "Una cola con prioridad.",
+        "Una pila.",
+        "Una cola.",
+        "Una lista."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La Inteligencia Articial se basa en:",
+      "opts": [
+        "Conocimiento y razonamiento.",
+        "Razonamiento e información.",
+        "Conocimiento e información."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles son los componentes esenciales que necesita un Sistema Basado en el Conocimiento?",
+      "opts": [
+        "Subsistema de explicación",
+        "Base de Conocimiento",
+        "Motor de inferencia",
+        "Interfaz de usuario"
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Desde el punto de vista de la ingeniería cúal de estas afirmaciones representa mejor lo que pretende la Inteligencia Artificial",
+      "opts": [
+        "Simular la inteligencia humana",
+        "Simular el comportamiento humano",
+        "Resolver problemas simulando a humanos",
+        "Resolver problemas mediante comportamiento racional"
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué tipo de agente conlleva una mayor complejidad?",
+      "opts": [
+        "Deliberativo",
+        "Reactivo",
+        "Los dos tienen la misma complejidad"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente ___ actúa en cualquier situación mediante un proceso estímulo/respuesta ante el estado actual del entorno en el cual está situado",
+      "opts": [
+        "Deliberativo",
+        "Híbrido",
+        "Reactivo"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Un agente que sea pro­activo debe ser capaz de exhibir comportamientos dirigidos a lograr los objetivos que se plantee?",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En la ___, los agentes llegan a un acuerdo que sea aceptable por todas las partes implicadas en la interacción.",
+      "opts": [
+        "Cooperación",
+        "Negociación",
+        "Coordinación"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente inteligente es aquel que ___ ante una situación dada.",
+      "opts": [
+        "emprende una acción razonable",
+        "hace lo que le indiques",
+        "no hace nada"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las leyes del pensamiento se asocian con los:",
+      "opts": [
+        "Sistemas que piensan como humanos",
+        "Sistemas que actúan como humanos",
+        "Sistemas que piensan racionalmente",
+        "Sistemas que actúan racionalmente"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los sistemas multi­agente son interesantes para representar problemas que tienen:",
+      "opts": [
+        "Solo una forma de ser resuelto y múltiples perspectivas y/o entidades para resolverlo",
+        "Múltiples formas de ser resueltos o múltiples perspectivas y/o entidades para resolverlo",
+        "Múltiples formas de ser resueltos y una sola perspectiva y/o entidad para resolverlo",
+        "Ninguna forma de ser resuelto y ninguna perspectiva y/o entidad para resolverlo"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Aplicaciones de la IA. ¿Cúal de las siguientes es un campo de aplicación de la IA?",
+      "opts": [
+        "Robótica",
+        "Gestión del software de una empresa",
+        "Estudio de la forma de vida de una región",
+        "Mejoras de seguridad en los aviones"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La llamada época oscura de la IA ocurrió durante",
+      "opts": [
+        "1952-1969",
+        "1969-1979",
+        "1966-1973",
+        "Ninguna"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de estas áreas de desarrollo se ha mencionado en clase específicamente como importantes para el desarrollo de la IA?",
+      "opts": [
+        "Biología",
+        "Economía",
+        "Aeronáutica",
+        "Ninguna"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La Evolución Histórica de la IA:",
+      "opts": [
+        "Ha tenido altibajos en la historia y se ha enfocado de distintas formas",
+        "Ha tenido un desarrollo progresivo y de manera muy uniforme",
+        "Ha tenido altibajos, pero en los últimos está teniendo un desarrollo progresivo y rápido"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En realidad los hombres no son inteligentes, hacen solamente lo que le dicen sus genes",
+      "opts": [
+        "Verdadera, el hombre es una máquina biológica muy avanzada",
+        "Falso, los seres humanos aprenden, se adaptan y forman su inteligencia y capacidades a partir de su herencia genética, pero en función del contexto y las experiencias"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Puede llegar a poseer un receptor de TDT técnicas de la Inteligencia Artificial",
+      "opts": [
+        "Si, por ejemplo para recomendar que ver",
+        "No, en esos procesadores tan limitados no se puede implementar",
+        "Si, por ejemplo para descomprimir la señal de video",
+        "Si, por ejemplo para procesar la señal de video y mejorar la calidad de imagen"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Son los robots que participan en la robocup agentes reactivos, deliberativos o híbridos?",
+      "opts": [
+        "Reactivos",
+        "Híbridos",
+        "Deliberativos"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En qué tipo de interacción los agentes organizan una actividad para evitar las interacciones perjudiciales y explotar las beneficiosas?",
+      "opts": [
+        "Coordinación",
+        "Negociación",
+        "Cooperación"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué arquitectura de Agentes contiene un modelo simbólico del mundo explícitamente representado, y cuyas decisiones se realizan a través de un razonamiento lógico basado en emparejamientos de patrones y manipulaciones simbólicas?",
+      "opts": [
+        "Arquitectura Híbrida",
+        "Arquitectura Reactiva",
+        "Arquitectura Deliberativa"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un robot diseñado para jugar al futbol",
+      "opts": [
+        "Necesita de un agente social",
+        "Necesita de un agente reactivo",
+        "Necesita de ambos agentes"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuáles de estas características pertenecen a un agente deliberativo?",
+      "opts": [
+        "Genera y trata de alcanzar sus propios objetivos",
+        "Reconoce oportunidades",
+        "Toma la iniciativa",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de estas propiedades de agentes implica un funcionamiento más simple?",
+      "opts": [
+        "Reactivo",
+        "Proactivo",
+        "Ninguno de los anteriores"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Para una partida de ajedrez, por ejemplo, ¿cuál es el agente mas idóneo para realizarla?",
+      "opts": [
+        "Reactivo",
+        "Deliberativo",
+        "Ninguno de los anteriores"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un entorno cooperativo, ¿los agentes pueden comunicarse o no entre ellos?",
+      "opts": [
+        "Sí",
+        "No",
+        "Solo pueden comunicarse",
+        "En un entorno cooperativo no hay agentes"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué es un sistema multiagente?",
+      "opts": [
+        "Los entornos en los que dos o más agentes intervienen simultáneamente",
+        "Un tipo de mapa para un agente deliberativo",
+        "Un algoritmo para resolver problemas matemáticos, y que para ello hace uso del algoritmo Minimax",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El Test de Turing tiene como finalidad:",
+      "opts": [
+        "Comprobar si una maquina puede ser más inteligente que un humano",
+        "Comprobar que un humano puede ser más inteligente que una maquina",
+        "Demostrar la existencia de inteligencia (artificial) en una máquina",
+        "Comprobar si las maquinas puede hablar con los humanos"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Mediante qué forma o formas de interacción, interactúan fundamentalmente los agentes en la RoboCup?",
+      "opts": [
+        "Cooperación",
+        "Coordinación",
+        "Negociación",
+        "Todas a la vez"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Un programa de Inteligencia Artificial debe resolver un problema de la misma forma que lo haría un ser humano?",
+      "opts": [
+        "Sí",
+        "No",
+        "No, pero en en muchos casos la forma humana de resolver un problema ayuda a desarrollar la técnica de IA"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los agentes interactúan con los ambientes a través de sensores y efectores",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un Sistema Multiagente, la principal ventaja es la centralización de los datos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente es un sistema hardware capaz de percibir un entorno y actuar en él, se caracteriza por ser autónomo, reactivo, pro­activo y racional",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cual de las siguientes características NO es imprescindible en un agente?",
+      "opts": [
+        "Reactivo",
+        "Proactivo",
+        "Social"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente es autónomo cuando se apoya más en el conocimiento inicial que le proporciona un humano que en sus propias percepciones",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuándo y dónde se considera que se inició la Inteligencia Artificial como disciplina o campo de actividad?",
+      "opts": [
+        "1952, Conferencia de Turing",
+        "1956, Conferencia de Dartmouth",
+        "1962, Conferencia de Dartmoor",
+        "1959, Conferencia de Baltimore"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Gracias a las increíbles capacidades de cálculo que tienen los ordenadores de hoy en día podemos decir que son capaces de demostrar inteligencia",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Marque todas las respuestas correctas: En un SMA....",
+      "opts": [
+        "No hay un sistema de control global",
+        "Hay un sistema de control global",
+        "Cada agente tiene un punto de vista total del problema",
+        "Cada agente tiene un punto de vista parcial del problema",
+        "Los datos están centralizados",
+        "Los datos no están centralizados",
+        "La computación es asíncrona",
+        "La computación es síncrona"
+      ],
+      "correct": 6
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El agente reactivo percibe su entorno a través de...",
+      "opts": [
+        "Actuadores",
+        "Sensores",
+        "Representadores"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un espacio de estados es la representación del ___ que se va generando a través de las acciones del agente.",
+      "opts": [
+        "estado",
+        "conocimiento",
+        "problema"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qúe es más complejo en el diseño de un agente reactivo?",
+      "opts": [
+        "Responder a los cambios que ocurren en el entorno",
+        "Percibir correctamente el entorno",
+        "Ninguna de las dos"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En que fase de un agente reactivo percibe el entorno del mundo a través de sus sensores?",
+      "opts": [
+        "Fase de acción",
+        "Fase de Percepción"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles de las siguientes características son de un agente deliberativo?:",
+      "opts": [
+        "Elementos centralizados.",
+        "Interacción con otros agentes sencilla.",
+        "Arquitectura en capas.",
+        "Razonamiento lógico."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles de los siguientes elementos son los más adecuados para representar la situación en la que nos encontramos jugando al \"tres en raya\"?:",
+      "opts": [
+        "Matriz 3x3.",
+        "Array de 9 elementos.",
+        "Variable turno.",
+        "Ninguno de los anteriores."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes opciones sería esencial implementarla en módulos de conocimiento (MC) basado en pizarras?:",
+      "opts": [
+        "Un sistema de memoria que por ejemplo almacene la última decisión tomada por el agente.",
+        "Un filtro sensorial para corregir errores.",
+        "Un programa de resolución de conflictos cuando dos MCs puedan actuar simultáneamente.",
+        "Ninguna de las anteriores es esencial."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál es el mejor método para buscar secuencias de acciones que nos lleven al objetivo final en problemas de gran complejidad?:",
+      "opts": [
+        "Una estructura de bloques.",
+        "Una secuencia de elementos.",
+        "Una tabla enumerada.",
+        "Un grafo implícito."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un robot programado para jugar a las damas, normalmente hace uso de un:",
+      "opts": [
+        "Agente social.",
+        "Agente reactivo.",
+        "Agente deliberativo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuáles son las fases de proceso en un agente reactivo?:",
+      "opts": [
+        "Procesamiento perceptual y Fase de cálculo de la acción.",
+        "Comprueba la memoria y calcula la acción."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un sistema de navegación GPS, ¿se podría realizar un Backtracking para encontrar una posible ruta hacia el destino?:",
+      "opts": [
+        "Sí, además también se podría hacer con un sistema de búsqueda en anchura hasta encontrar nuestro destino.",
+        "Sí, pero no nos asegura encontrar la mejor solución de nuestro problema.",
+        "No, porque no podría encontrar ninguna ruta."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente reactivo:",
+      "opts": [
+        "No mantienen historia pasada ni estado.",
+        "Mantiene historia pero no estado.",
+        "No mantiene historia pasada ni estado pero sí una historia futura.",
+        "Mantiene historia y estado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un agente reactivo basado en un modelo icónico, la memoria:",
+      "opts": [
+        "Es la representación icónica previa.",
+        "Es la acción previa.",
+        "Es la conjunción de ambas cosas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál es el principal problema a tener en cuenta al realizar el diseño de un agente deliberativo?:",
+      "opts": [
+        "La implementación.",
+        "La complejidad de la búsqueda del estado objetivo.",
+        "La captación de información."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes características no pertenece al diseño de un agente reactivo?:",
+      "opts": [
+        "El agente reactivo percibe su entorno a través de sensores.",
+        "El agente tiene conocimiento de sí mismo y de su entorno.",
+        "Transforma la acción escogida en señales para los actuadores y la realiza."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Grafo Y/O. ¿En qué tipo de nodos para resolver la tarea del nodo padre, es necesario resolver primero todas las tareas de los nodos hijos?:",
+      "opts": [
+        "Nodos Y.",
+        "Nodos O.",
+        "Nodos Y/O.",
+        "Grafo en anchura."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "A aquellos grafos que, por su reducido tamaño, representan la totalidad del problema y puede buscarse un camino sobre el mismo que nos lleve desde el estado original hasta el estado objetivo, se les denomina::",
+      "opts": [
+        "Grafos explícitos.",
+        "Grafos de Hamilton.",
+        "Grafos implícitos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En la fase de búsqueda de la solución, ¿Puede ocurrir que aunque se use un grafo implícito, se desborde la memoria?:",
+      "opts": [
+        "No, los grafos implícito se usan para evitar el desbordamiento de memoria que se produce con los grafos explícitos.",
+        "Sí, porque puede ocurrir que el tamaño del subgrafo implícito que se va explorando sea tan grande que no pueda guardarse en memoria.",
+        "No, porque los grafos implícitos nunca pueden ocasionar un fallo en la memoria de un agente."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La búsqueda retroactiva o backtracking pertenece a:",
+      "opts": [
+        "Búsqueda en anchura.",
+        "Búsqueda en profundidad."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Agentes Reactivos. Un agente reactivo con memoria con representaciones icónicas, siempre encuentra su destino:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué es un MC?:",
+      "opts": [
+        "Modelo de creación.",
+        "Modulo de competencia.",
+        "Modelo de conocimiento."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En Inteligencia Artificial los Árboles de Decisión son una técnica encuadrada dentro del Aprendizaje Automático. ¿Sabría decir a qué se dedica este campo?:",
+      "opts": [
+        "estudia los procesos o técnicas que permiten al software \"aprender\" o adquirir conocimientos que le permitan resolver problemas en un futuro, o bien adaptarse a partir de la experiencia.",
+        "estudia los procesos o técnicas que permiten al software \"aprender\" conocimientos desde un principio sin poder coger más experiencia.",
+        "estudia la facilidad que proporciona el software para adquirir conocimientos que le permitan resolver problemas en un futuro.",
+        "ninguna de las anteriores es totalmente cierta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Agente Deliberativo. Los agentes deliberativos como norma general consumen menos memoria que los agentes reactivos:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Para el funcionamiento de un GPS, este debe disponer:",
+      "opts": [
+        "Unicamente de un Geolocalizador, que le proporcione las coordenadas.",
+        "Unicamente de la cartografía completa y actualizada de su espacio de trabajo.",
+        "Ambas anteriores.",
+        "Ninguna de las anteriores, el GPS tiene la capacidad de reconocer su entorno e ir aprendiendo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El algoritmo ID3:",
+      "opts": [
+        "tiende a elegir atributos con muchos valores posibles.",
+        "tiende a obtener árboles especialmente pequeños.",
+        "ninguna de las anteriores."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "No siempre es necesario usar una función heurística para evaluar los estados de un árbol de juego:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El algoritmoMinimax.",
+      "opts": [
+        "escoge siempre la opcion con la que se maximiza el resultado suponiendo que el contrincante intenta minimizarlo.",
+        "evalua los estados de la frontera de búsqueda con una función heuristica.",
+        "da a cada nodo siempre el valor del maximo de sus hijos y cambia el signo de los valores de los nodosMAX.",
+        "suele ser empleado para estrategias optimas en juegos de suma cero."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál es el tipo de valores que pueden tomar las entradas y salidas de un árbol de decisión?:",
+      "opts": [
+        "Verdaderos y falsos.",
+        "Positivos y negativos.",
+        "Discretos y continuos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La notaciónMINMAXpara cuantos jugadores se puede usar?:",
+      "opts": [
+        "Ninguno, esa notación no existe.",
+        "1.",
+        "2.",
+        "Todos los que sean necesarios."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un árbol de decisión...:",
+      "opts": [
+        "toma como entrada un objeto descrito por una serie de atributos y devuelve una decisión que es el valor previsto para la salida con la entrada que se da.",
+        "Explora las posibles decisiones.",
+        "ordena las decisiones sin dar valores para cada una.",
+        "No se usa en aprendizaje automático."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los seres humanos podemos construir agentes inteligentes, ya que conocemos y sabemos qué es la inteligencia:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La Habitación China. A principios de los 80, John Searle propone el ejemplo de La Habitación China como crítica al Test de Turing:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La heurística dada para el mapa de carreteras (distancia en línea recta desde la ciudad actual a la de destino) permite obtener la solución óptima al problema si utilizamos el algoritmo A*:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El algoritmo alfa-beta calcula el mismo movimiento que el algoritmoMinimaxpero con mayor eficiencia:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El procedimientoMinimaxy el procedimiento de poda alfa beta obtienen exactamente el mismo valorMinimaxpara todos los nodos del árbol:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las reglas obtenidas a partir de un árbol de decisión no son excluyentes:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿El aprendizaje por corrección de error, aprendizaje por refuerzo y el aprendizaje estocástico, son aprendizajes de tipo no supervisado?:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes es la palabra clave o el concepto que mejor definiría globalmente la IA en la actualidad?:",
+      "opts": [
+        "Búsqueda.",
+        "Sistemas expertos.",
+        "Agente inteligente.",
+        "Aprendizaje."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles de las siguiente características son propias de problemas de IA?:",
+      "opts": [
+        "No tienen una solución exacta que sea eficiente.",
+        "Si tienen una solución exacta.",
+        "Difíciles.",
+        "Largos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué fue llamado originalmente \"el juego de la imitación\" por su creador?:",
+      "opts": [
+        "El test de Turing.",
+        "La teoría de control y cibernética.",
+        "La lingüística computacional.",
+        "La teoría de la lógica."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los robots autónomos de exploración de Marte no son reactivos porque:",
+      "opts": [
+        "no necesitan una representación simbólica explícita para actuar inteligentemente.",
+        "tienen un modelo simbólico del mundo.",
+        "no hacen uso de razonamiento complejo.",
+        "deciden su comportamiento de la forma que mejor satisfaga sus objetivos."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Definición de IA. ¿Qué es la IA?:",
+      "opts": [
+        "Es un sistema de ordenador, situado en algún entorno, que es capaz de realizar acciones de forma autónoma y que es flexible para lograr los objetivos planteados.",
+        "Disciplina científico-técnica que se ocupa de la comprensión de los mecanismos subyacentes en el pensamiento y la conducta inteligente y su incorporación en las máquinas.",
+        "Es una red más o menos unida de resolutores de problemas que trabajan conjuntamente para resolver problemas que están más allá de las capacidades individuales o del conocimiento de cada resolutor del problema.",
+        "Es aquella que no incluye ninguna clase de modelo centralizado de representación simbólica del mundo, y no hace uso de razonamiento complejo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En qué modelo de interacción entre agentes se trabaja conjuntamente?:",
+      "opts": [
+        "Coordinación.",
+        "Cooperación.",
+        "Negociación.",
+        "Las tres son correctas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de estas características no corresponde a un sistema multi-agente?:",
+      "opts": [
+        "Centralización.",
+        "Visión local.",
+        "Autonomía.",
+        "Ninguna."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un aspecto a tener en cuenta en el diseño de uno horno es que éste debe de estar en un cierto equilibrio. De los problemas en IA de los trabajos de la vida diaria, ¿cuál crees que aborda este tema?:",
+      "opts": [
+        "Percepción.",
+        "Control.",
+        "Lenguaje natural."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "De los siguientes ejemplos cuál sería un producto propio del desarrollo de la IA:",
+      "opts": [
+        "Un reloj despertador usual.",
+        "Una calculadora de bolsillo.",
+        "Un navegador GPS."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué respuesta se adecua mejor a la relación que tiene cualquier persona con la IA?:",
+      "opts": [
+        "Casi ninguna, la IA solo se da en actividades científicas propias de las universidades.",
+        "En la mayoría de las actividades cotidianas con elementos tecnológicos de manera directa o indirecta.",
+        "Solo tenemos contacto cuando utilizamos una computadora."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un problema concreto, ¿qué es más apropiado utilizar, agentes reactivos, deliberativos o híbridos?:",
+      "opts": [
+        "Depende del problema, de los requisitos de la solución y del conocimiento de que se disponga.",
+        "Los agentes deliberativos o híbridos son siempre mejores en todos los trabajos.",
+        "Es mejor utilizar siempre agentes reactivos para mejorar la velocidad y la facilidad en el desarrollo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Actualmente, ¿cuáles de estos son campos de aplicación de la IA?:",
+      "opts": [
+        "Aplicaciones en e-Salud.",
+        "Sistemas empresariales.",
+        "Visión artificial.",
+        "Desarrollo de modelos de inteligencia.",
+        "Gestión de nóminas."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de los siguientes tipos de agente utilizan un modelo simbólico explícito del mundo?",
+      "opts": [
+        "Agentes reactivos.",
+        "Agentes deliberativos.",
+        "Agentes híbridos.",
+        "Ninguno de los anteriores."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes opciones sobre las características de un SMA no es correcta?",
+      "opts": [
+        "La computación es asíncrona.",
+        "Los datos están centralizados.",
+        "Cada agente tiene información incompleta, o no todas las capacidades para resolver el problema, así cada agente tiene un punto de vista limitado.",
+        "No hay un sistema de control global."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál fue la principal razón de la entrada en la edad oscura de la IA?",
+      "opts": [
+        "La pérdida de interés y financiación.",
+        "El optimismo excesivo en las primeras etapas del desarrollo de la IA.",
+        "La falta de recursos físicos para sostener los algoritmos.",
+        "Las discrepancias sobre qué es la IA."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La característica capacidad estímulo-respuesta de un agente se define como:",
+      "opts": [
+        "El agente debe percibir el entorno y responder de una forma temporal a los cambios que ocurren en dicho entorno.",
+        "El agente solamente debe responder de una forma temporal a los cambios que ocurren en dicho entorno.",
+        "El agente no debe simplemente actuar en respuesta a su entorno, debe de ser capaz de exhibir comportamientos dirigidos a lograr objetivos, y tomar la iniciativa cuando sea apropiado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En realidad los computadores no son inteligentes, hacen solamente lo que le dicen los programadores:",
+      "opts": [
+        "Verdadero, pero se pueden comportar, actuar o responder 'de forma inteligente'.",
+        "Falso, resuelven problemas que solo alguien muy inteligente puede hacerlo.",
+        "Verdadero, no pueden aprender ni mejorar.",
+        "Falso, pueden simular a una persona inteligente."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las características indispensables que tiene que tener cualquier sistema (de cualquier tipo) para ser considerado como un agente son:",
+      "opts": [
+        "Que sea autónomo, capacidad social y sea pro-activo.",
+        "Que tenga capacidad social, capacidad estímulo-respuesta y sea pro-activo.",
+        "Que sea autónomo, sea pro-activo y tenga capacidad de estímulo-respuesta.",
+        "Que sea autónomo y sea pro-activo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Una arquitectura reactiva es aquella que...",
+      "opts": [
+        "Incluye una clase de modelo centralizado de representación simbólica del mundo, y hace uso de razonamiento complejo.",
+        "No incluye ninguna clase de modelo centralizado de representación simbólica del mundo, y hace uso de razonamiento complejo.",
+        "Incluye una clase de modelo centralizado de representación simbólica del mundo, y no hace uso de razonamiento complejo.",
+        "No incluye ninguna clase de modelo centralizado de representación simbólica del mundo, y no hace uso de razonamiento complejo."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué tipo de agente utilizarías para implementar un robot dedicado a la limpieza del fondo de una piscina?",
+      "opts": [
+        "Reactivo, por su bajo coste y fácil implementación.",
+        "Deliberativo, porque necesita un modelo del mundo en el que trabaja.",
+        "Social, para que colaborase con la gente que se bañase en la piscina."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los agentes reactivos:",
+      "opts": [
+        "No deben simplemente actuar en respuesta a su entorno, deben ser capaces de exhibir comportamientos dirigidos a lograr que sean oportunos, y tomar la iniciativa cuando sea apropiado.",
+        "Deben percibir el entorno y responder de una forma temporal a los cambios que ocurren en dicho entorno.",
+        "Deben ser capaces de interactuar, cuando sea apropiado, con otros agentes artificiales o humanos para completar su propio proceso de resolución del problema y ayudar a otros con sus actividades."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Hay tres tipos de agentes: agentes sociales, agentes reactivos y ...",
+      "opts": [
+        "Deliberativos",
+        "Imperativos"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Las interacciones entre agentes ¿En qué tipo de agentes se dan?",
+      "opts": [
+        "Reactivos",
+        "Deliberativos",
+        "Sociales"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente_____ tiene la iniciativa y es capaz de aprovechar oportunidades.",
+      "opts": [
+        "Deliberativo",
+        "Reactivo"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En qué basa sus decisiones un agente?",
+      "opts": [
+        "Aleatoriedad",
+        "Entorno",
+        "Órdenes predefinidas"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los agentes deliberativos, en comparación con los agentes reactivos, son complejos y tardan más en reaccionar ya que tienen un modelo del mundo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "De las siguientes opciones, señale las que sean ciertas para un agente:",
+      "opts": [
+        "Un agente reactivo puede pasar a ser deliberativo si crea una representación del mundo que lo rodea",
+        "Un agente reactivo, por norma general, será más rápido en dar una respuesta a un estímulo que un agente deliberativo",
+        "Un agente reactivo puede contener algunas fórmulas lógicas y mecanismos deductivos para decidir cómo actuar sobre su entorno",
+        "Un agente que toma decisiones en función de los estímulos que recibe y siguiendo un comportamiento programado sin realizar ningún tipo de deducción lógica es un agente reactivo"
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un hipotético sistema de transporte de trenes en el cual puede haber tanto locomotoras automatizadas como locomotoras controladas por humanos es...",
+      "opts": [
+        "Un sistema multi-agente exclusivamente deliberativo",
+        "Un sistema de computación distribuida con funcionamiento de paso de mensajes",
+        "Un sistema multi-agente híbrido con una potente capacidad reactiva",
+        "Un sistema controlado por árbitros humanos"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los principales problemas de los agentes reactivos son:",
+      "opts": [
+        "Necesitan disponer de suficiente información sobre su entorno para actuar adecuadamente",
+        "No hay metodologías claras para crear este tipo de agentes: sigo siendo un desarrollo por prueba y error",
+        "Es difícil el aprendizaje y la mejora de las capacidades de los agentes con el tiempo",
+        "Son robustos, tratables computacionalmente y tolerantes a fallos"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un modelo cognitivo se asocia con:",
+      "opts": [
+        "Sistemas que piensan como humanos.",
+        "Sistemas que actúan como humanos.",
+        "Sistemas que piensan racionalmente.",
+        "Sistemas que actúan racionalmente."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Es posible un agente sin sensores?",
+      "opts": [
+        "Sí, porque si tiene un modelo del mundo no le hacen falta sensores para actuar en base a él.",
+        "No, porque dejaría de ser un agente al no percibir el entorno en el que se encuentra.",
+        "No, porque dejaría de ser un agente al no tener autonomía.",
+        "No, porque dejaría de ser un agente al actuar siempre de la misma manera en cualquier situación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Un agente que sea pro-activo debe ser capaz de exhibir comportamientos dirigidos a lograr los objetivos que se plantee?",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "El periodo de gestación de la IA fue_____.",
+      "opts": [
+        "(1979–1975).",
+        "(1943–1955).",
+        "(1900–1905).",
+        "(2000–2020)."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "La cota alfa es:",
+      "opts": [
+        "una cota inferior.",
+        "una cota superior."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué tipo de agente sería un sistema GPS de planificación de ruta?:",
+      "opts": [
+        "Agente reactivo.",
+        "Agente social.",
+        "Agente pro-activo.",
+        "Agente deliberativo."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Tendría sentido la utilización de un agente para la resolución de un laberinto?:",
+      "opts": [
+        "No, es demasiado complejo.",
+        "Sí, porque habría que actuar en función del entorno.",
+        "Dependiendo del tipo de agente.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Empleando técnicas de Inteligencia Artificial podemos construir:",
+      "opts": [
+        "Sistemas que actúan racionalmente.",
+        "Sistemas que actúan como humanos.",
+        "Sistemas que piensan racionalmente.",
+        "Sistemas que piensan como humanos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Un agente que juega al ajedrez es de tipo...?:",
+      "opts": [
+        "Deliberativo.",
+        "Reactivo.",
+        "Híbrido."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "De las siguientes afirmaciones, ¿cuál no está relacionada en general con los Agentes Reactivos?:",
+      "opts": [
+        "Buen desarrollo de sus funcionalidades en entornos altamente dinámicos.",
+        "Sólo puede ser utilizado para un propósito concreto.",
+        "Eficiencia, reacciones con respuesta rápida.",
+        "Problemas en trasladar el entorno a una representación simbólica."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "“El intercambio de información mediante símbolos puede producir fallos lógicos” es una objeción al Test de Turing del tipo:",
+      "opts": [
+        "Religioso.",
+        "Matemático.",
+        "Técnico.",
+        "Filosófico."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál o cuáles de estas capacidades son necesarias para pasar el Test de Turing?:",
+      "opts": [
+        "Razonamiento.",
+        "Información.",
+        "Representación del conocimiento.",
+        "Autonomía.",
+        "Todas son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Según el test de Alang Turing, una máquina es inteligente cuando:",
+      "opts": [
+        "Es capaz de interactuar con la realidad de forma autónoma.",
+        "No necesita a un ser humano para su mantenimiento.",
+        "No se puede diferenciar su comportamiento del de un ser humano.",
+        "Puede resolver problemas difíciles sin la intervención humana."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En un sistema multiagente (SMA), ¿tiene sentido que todos los agentes tengan información completa de todo su entorno?:",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes características de los agentes, no es indispensable?:",
+      "opts": [
+        "Capacidad Estímulo-Respuesta.",
+        "Pro-activo.",
+        "Capacidad Social.",
+        "Autonomía."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente es un sistema que____:",
+      "opts": [
+        "Piensa racionalmente.",
+        "Actúa racionalmente.",
+        "Piensa como un humano.",
+        "Actúa como un humano."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué enfoque de Inteligencia Artificial es el que se usa en agentes reactivos?:",
+      "opts": [
+        "Sistemas que piensan como humanos.",
+        "Sistemas que actúan como humanos.",
+        "Sistemas que piensan racionalmente.",
+        "Sistemas que actúan racionalmente."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Análisis de enfoques. ¿Qué enfoque de la IA podemos realmente abordar? Es decir, ¿qué clase de sistemas son los que realmente podemos diseñar hoy en día con los conocimientos actuales del campo de la IA?",
+      "opts": [
+        "Sistemas que piensan como humanos.",
+        "Sistemas que actúan como humanos.",
+        "Sistemas que piensan racionalmente.",
+        "Sistemas que actúan racionalmente."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Características de un sistema multiagente. ¿Cuál de las siguientes afirmaciones no hace referencia a una característica de un sistema multiagente?:",
+      "opts": [
+        "Cada agente tiene información incompleta, o no todas las capacidades para resolver el problema, así cada agente tiene un punto de vista limitado.",
+        "Cada agente tiene una serie de elementos que están conectados entre sí.",
+        "No hay un sistema de control global.",
+        "Los datos no están centralizados."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un agente proactivo al percibir un entorno:",
+      "opts": [
+        "Reacciona con una acción factible escogida al azar.",
+        "Tiene comportamientos que le permiten lograr objetivos usando el conocimiento del mundo.",
+        "No puede percibir su entorno pero reacciona según su modelo del mundo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Actualmente, ¿cuál es el mayor campo de aplicación de la IA?:",
+      "opts": [
+        "Aplicaciones en e-Salud.",
+        "Sistemas empresariales.",
+        "Actualmente, la I.A. se encuentra presente en prácticamente todos los ámbitos del conocimiento."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿La Inteligencia Artificial puede ser de utilidad para la realización de páginas web?:",
+      "opts": [
+        "No, una página web es una descripción de un contenido.",
+        "Sí, se puede utilizar para mostrar un contenido dinámico adecuado al usuario, fecha, etc.",
+        "Sí se puede utilizar para producir contenido de forma automática."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Características de un Sistema Multi-Agente:",
+      "opts": [
+        "No hay un sistema de control global.",
+        "Los datos no están centralizados.",
+        "Tienen flexibilidad.",
+        "Cada agente tiene información incompleta, o no todas las capacidades para resolver el problema, así cada agente tiene un punto de vista limitado."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Además de cooperación y negociación, ¿cuál es la interacción entre agentes que falta?:",
+      "opts": [
+        "Impresión.",
+        "Coordinación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un árbol del juego es",
+      "opts": [
+        "una representación explícita de todas las formas de jugar a un juego para los dos jugadores.",
+        "una representación explícita de la forma de ganar el juego paraMIN.",
+        "una representación explícita de la forma de ganar el juego paraMAX."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Por qué es importante considerar la ética en el desarrollo y la implementación de la inteligencia artificial?",
+      "opts": [
+        "Para minimizar los costos asociados con el desarrollo de sistemas de IA.",
+        "Porque garantiza la máxima eficiencia en los algoritmos de IA.",
+        "Para abordar preocupaciones sobre la privacidad, la equidad y el impacto social de la IA."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Funcionaría correctamente un algoritmo minimax para un juego del tres en raya que utilizara la siguiente función heurística \\(f(T)=\\)(número de filas, columna o diagonales aún libres para el jugadorMAX) para un cierto tablero \\(T\\)?",
+      "opts": [
+        "Sí, pero la estimación de los tableros que benefician al primer jugador se podría mejorar usando más información.",
+        "No, esta función no permitiría realizar buenas jugadas al primer jugador.",
+        "Sí, ya que representa una buena forma de estimar tableros que benefician al primer jugador."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué frase describe mejor el algoritmo de escalada estocástico?",
+      "opts": [
+        "Es una versión del algoritmo de escalada simple que elige cambiar a un estado vecino mejor que el actual de forma probabilística y teniendo en cuenta la heurística de los nodos vecinos.",
+        "Es una versión del algoritmo de escalada por la máxima pendiente que elige cambiar a un estado vecino mejor que el actual de forma probabilística y teniendo en cuenta la heurística de los nodos vecinos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Qué se consigue con el aprendizaje automático?",
+      "opts": [
+        "Encontrar la mejor solución posible.",
+        "Optimizar una solución aproximada dada por los datos.",
+        "Mejorar la descripción del problema.",
+        "El perfeccionamiento de la habilidad y la adquisición del conocimiento."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de estas características es propia de un agente deliberativo?",
+      "opts": [
+        "Colabora con otros agentes.",
+        "Se propone metas y trata de alcanzarlas.",
+        "Responde a los estímulos con acciones."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿En qué influye el factor de ramificación en un proceso de búsqueda?",
+      "opts": [
+        "En la complejidad del espacio de estados.",
+        "En la completitud del algoritmo de búsqueda.",
+        "En la posibilidad de encontrar la solución óptima del algoritmo de búsqueda."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Los agentes deliberativos se diferencian de los agentes reactivos en que los primeros disponen de:",
+      "opts": [
+        "un mapa del mundo en el que habita.",
+        "memoria.",
+        "un modelo de los efectos de sus acciones en el mundo.",
+        "un conjunto de sensores para reconocer el mundo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Un conjunto de reglas de inferencia es sólido si",
+      "opts": [
+        "si toda fórmula que se sigue lógicamente de un conjunto de fórmulas se puede demostrar a partir de las reglas de inferencia.",
+        "todo teorema que se puede obtener a partir de un conjunto es una consecuencia lógica de ese conjunto.",
+        "todo lo que puede ser demostrado se puede obtener de una forma eficiente."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "En el proceso de construcción de un árbol de decisión, ¿qué técnica se utiliza para reducir la complejidad del modelo y evitar el sobreajuste?",
+      "opts": [
+        "Aumentar la profundidad del árbol.",
+        "Incrementar el número de nodos de decisión.",
+        "Realizar una búsqueda heurística.",
+        "Aplicar podas sobre el árbol."
+      ],
+      "correct": 3
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "Cuando un juego no es de información perfecta",
+      "opts": [
+        "se utiliza la poda alfa beta y se puede obtener la mejor jugada.",
+        "no se puede obtener la mejor jugada.",
+        "es necesario adaptar los algoritmos para que representen la incertidumbre y/o la falta de información."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes IA",
+      "q": "¿Cuál de las siguientes características es la que mejor representa a los problemas que incluimos dentro de la Inteligencia Artificial?",
+      "opts": [
+        "Problemas que no tienen una solución exacta.",
+        "Problemas que sí tienen una solución exacta, pero aún no se ha implementado.",
+        "Problemas que no tienen una solución exacta y que sea eficiente.",
+        "Problemas con una descripción compleja que requieren mucho tiempo para ser resueltos."
+      ],
+      "correct": 2
+    }
+  ]
+}
