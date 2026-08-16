@@ -11,10 +11,12 @@
  */
 import { Image } from 'astro:assets';
 import avatar from '../../assets/julian-avatar.jpg';
+import qrImg from '../../assets/qr-repasaYA.png';
 
 const EMAIL = 'e.carrionjuliann@go.ugr.es';
 const GITHUB = 'https://github.com/jxliian';
 const REPO = 'https://github.com/jxliian/repasaYA';
+const PDF_LINK = import.meta.env.BASE_URL.replace(/\/?$/, '/') + 'Cartel_Anuncio_repasaYA.pdf';
 
 const SUBJECTS = [
   'Aportar material',
@@ -53,19 +55,21 @@ const SUBJECTS = [
         <p>
           Todo lo que hay aquí lo uso yo para estudiar lo mismo que tú. Por eso es
           gratis, no pide registro y no tiene un solo anuncio: no hay nada que
+          monetizar, solo apuntes que ya existían.
+        </p>
       </div>
 
       <div class="bio-qr">
-        <img
-          src={import.meta.env.BASE_URL + 'qr-repasaYA.png'}
+        <Image
+          src={qrImg}
           alt="Código QR repasaYA"
           class="qr-img"
-          width="170"
-          height="170"
+          width={180}
+          height={180}
           loading="lazy"
         />
         <a
-          href={import.meta.env.BASE_URL + 'Cartel_Anuncio_repasaYA.pdf'}
+          href={PDF_LINK}
           target="_blank"
           rel="noopener"
           class="btn btn-primary qr-btn"
@@ -73,6 +77,7 @@ const SUBJECTS = [
           📄 Descargar Cartel para Imprimir (PDF)
         </a>
       </div>
+
 
 
       <div class="bio-links">
@@ -210,24 +215,26 @@ const SUBJECTS = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 14px;
-    margin-top: 20px;
-    padding: 20px;
-    background: var(--glass-hi);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-md);
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    padding: 0;
+    background: transparent;
+    border: none;
     text-align: center;
   }
   .qr-img {
-    width: 170px;
-    height: 170px;
-    border-radius: var(--radius-sm);
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border-hi);
     box-shadow: var(--glow-sm);
   }
   .qr-btn {
-    font-size: 0.88rem;
-    padding: 10px 18px;
+    font-size: 0.9rem;
+    padding: 12px 22px;
   }
+
 
 
   .bio-links {
