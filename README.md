@@ -26,9 +26,10 @@
 
 |  |  |
 |---|---|
-| **64 asignaturas** | El plan completo de los dos grados: 5 cursos × 2 cuatrimestres |
-| **2.045 preguntas y fichas** | Tipo test, V/F con justificación, flashcards, glosarios y apuntes |
-| **8 asignaturas con material** | El resto está listado y esperando a que alguien lo suba |
+| **Plan completo** | Todas las asignaturas del Doble Grado ADE + Ingeniería Informática (5 cursos × 2 cuatrimestres) |
+| **Materiales interactivos** | Preguntas tipo test, V/F con justificación, flashcards, glosarios y apuntes en PDF |
+| **Código abierto y colaborativo** | Asignaturas listas para estudiar y estructura preparada para seguir añadiendo contenido |
+
 
 Todo el contenido vive en archivos de texto bajo `src/content/`. **Añadir material es abrir un JSON y mandar un pull request** — no hace falta tocar ni un componente.
 
