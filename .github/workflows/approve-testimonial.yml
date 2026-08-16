@@ -1,0 +1,99 @@
+name: Aprobar Reseña de Usuario
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  add-testimonial:
+    if: github.event.label.name == 'aprobado' && contains(github.event.issue.labels.*.name, 'reseña')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Procesar e Insertar Reseña
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+        run: |
+          python3 -c "
+          import json
+          import os
+          import re
+          from datetime import datetime
+
+          body = os.environ.get('ISSUE_BODY', '')
+          username = os.environ.get('ISSUE_USER', 'estudiante')
+          avatar = f'https://github.com/{username}.png'
+
+          # Parse degree
+          degree_match = re.search(r'### Grado o Titulación\s*\n+([^\n#]+)', body)
+          degree = degree_match.group(1).strip() if degree_match else 'Estudiante UGR'
+
+          # Parse rating (1-5)
+          rating_match = re.search(r'### Valoración\s*\n+([1-5])', body)
+          stars = int(rating_match.group(1)) if rating_match else 5
+
+          # Parse comment
+          comment_match = re.search(r'### Tu opinión / comentario\s*\n+([\s\S]+)', body)
+          comment = comment_match.group(1).strip() if comment_match else '¡Excelente plataforma para estudiar!'
+
+          json_path = 'src/data/testimonials.json'
+          os.makedirs('src/data', exist_ok=True)
+
+          data = []
+          if os.path.exists(json_path):
+              try:
+                  with open(json_path, 'r', encoding='utf-8') as f:
+                      data = json.load(f)
+              except Exception:
+                  data = []
+
+          # Remove prior review from same user if exists
+          data = [item for item in data if item.get('username') != username]
+
+          new_entry = {
+              'username': username,
+              'name': f'@{username}',
+              'avatar': avatar,
+              'degree': degree,
+              'stars': stars,
+              'comment': comment,
+              'date': datetime.now().strftime('%Y-%m-%d')
+          }
+
+          # Insert at beginning
+          data.insert(0, new_entry)
+
+          with open(json_path, 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          print(f'Reseña de @{username} insertada correctamente.')
+          "
+
+      - name: Commit y Push de los datos
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/testimonials.json
+          git commit -m "feat(testimonials): agregar reseña de @${{ github.event.issue.user.login }}"
+          git push
+
+      - name: Comentar y cerrar Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          USERNAME: ${{ github.event.issue.user.login }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --body "¡Muchas gracias @$USERNAME! 🎉 Tu reseña ha sido aprobada y ya aparece publicada en el carrusel de la portada de **repasaYA**."
+          gh issue close "$ISSUE_NUMBER"

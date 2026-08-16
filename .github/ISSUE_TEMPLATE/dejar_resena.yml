@@ -1,0 +1,42 @@
+name: ⭐ Dejar una reseña / opinión sobre repasaYA
+description: Comparte tu experiencia estudiando con repasaYA para que aparezca en el carrusel de la web.
+title: "[RESEÑA]: Opinión de @username"
+labels: ["reseña"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por compartir tu opinión sobre **repasaYA**! 🚀
+        Una vez enviada y revisada por el equipo, aparecerá automáticamente en el carrusel de recomendaciones de la portada con tu avatar de GitHub.
+  - type: dropdown
+    id: degree
+    attributes:
+      label: Grado o Titulación
+      description: Selecciona tu grado en la UGR o titulación.
+      options:
+        - Doble Grado ADE + Informática
+        - Grado en Ingeniería Informática
+        - Grado en Administración y Dirección de Empresas (ADE)
+        - Otro Grado / Máster
+    validations:
+      required: true
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Valoración
+      options:
+        - "5 ⭐⭐⭐⭐⭐"
+        - "4 ⭐⭐⭐⭐"
+        - "3 ⭐⭐⭐"
+        - "2 ⭐⭐"
+        - "1 ⭐"
+    validations:
+      required: true
+  - type: textarea
+    id: comment
+    attributes:
+      label: Tu opinión / comentario
+      description: Cuéntanos cómo te ha ayudado repasaYA, qué es lo que más te gusta o qué recomendarías a otros compañeros.
+      placeholder: "¡Los tests interactivos me salvaron en la semana de exámenes! Super limpia la web y sin anuncios..."
+    validations:
+      required: true

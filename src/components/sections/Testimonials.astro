@@ -1,0 +1,379 @@
+---
+/**
+ * Carrusel de Testimonios y Recomendaciones de estudiantes.
+ *
+ * Muestra las opiniones aprobadas desde `src/data/testimonials.json`
+ * en un carrusel interactivo con auto-scroll, pausa al pasar el ratón,
+ * botones de control y botón para enviar nueva reseña en GitHub.
+ */
+import testimonialsData from '../../data/testimonials.json';
+
+const ISSUE_URL = 'https://github.com/jxliian/repasaYA/issues/new?template=dejar_resena.yml';
+
+interface Testimonial {
+  username: string;
+  name: string;
+  avatar: string;
+  degree: string;
+  stars: number;
+  comment: string;
+  date: string;
+}
+
+const testimonials: Testimonial[] = testimonialsData;
+---
+
+<section class="testimonials container" aria-labelledby="testimonials-title">
+  <div class="sec-head">
+    <div>
+      <p class="mono-label">Comunidad & Recomendaciones</p>
+      <h2 id="testimonials-title">Lo que dicen los estudiantes</h2>
+      <p class="subtitle">Opiniones reales de compañeros que repasan sus asignaturas en repasaYA.</p>
+    </div>
+    <div class="actions-head">
+      <a class="btn btn-primary" href={ISSUE_URL} target="_blank" rel="noopener">
+        💬 Dejar mi opinión en GitHub
+      </a>
+    </div>
+  </div>
+
+  <div class="carousel-wrapper" data-testimonials-carousel>
+    <button class="nav-btn prev" data-prev aria-label="Reseña anterior">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+
+    <div class="carousel-track" data-track>
+      {testimonials.map((t) => (
+        <article class="card glass">
+          <div class="card-head">
+            <img class="avatar" src={t.avatar} alt={t.name} width="48" height="48" loading="lazy" />
+            <div class="user-info">
+              <div class="user-top">
+                <a href={`https://github.com/${t.username}`} target="_blank" rel="noopener" class="user-name">
+                  {t.name}
+                </a>
+                <span class="stars" aria-label={`${t.stars} de 5 estrellas`}>
+                  {'★'.repeat(t.stars)}
+                </span>
+              </div>
+              <p class="degree">{t.degree}</p>
+            </div>
+          </div>
+
+          <p class="comment">“{t.comment}”</p>
+
+          <div class="card-foot">
+            <span class="verified-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Estudiante de la UGR
+            </span>
+            <time class="date">{t.date}</time>
+          </div>
+        </article>
+      ))}
+
+      <!-- Tarjeta invitando a dejar reseña -->
+      <article class="card glass cta-card">
+        <div class="cta-content">
+          <span class="cta-icon">⭐</span>
+          <h3>¿Te ayuda repasaYA?</h3>
+          <p>Tu opinión ayuda a otros estudiantes a encontrar la plataforma.</p>
+          <a class="btn btn-primary cta-btn" href={ISSUE_URL} target="_blank" rel="noopener">
+            Escribir una reseña
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <button class="nav-btn next" data-next aria-label="Siguiente reseña">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    padding-block: 40px 80px;
+  }
+
+  .sec-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+
+  .sec-head h2 {
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    letter-spacing: -0.035em;
+  }
+
+  .subtitle {
+    margin-top: 6px;
+    font-size: 1.02rem;
+    color: var(--text-muted);
+  }
+
+  .actions-head .btn {
+    font-size: 0.92rem;
+    padding: 11px 20px;
+  }
+
+  /* ── Carrusel ────────────────────────────────────────────────── */
+  .carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 8px 4px 20px 4px;
+    scrollbar-width: none; /* Firefox */
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .card {
+    flex: 0 0 340px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+  }
+
+  @media (max-width: 540px) {
+    .card {
+      flex: 0 0 285px;
+    }
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--glass-border-hi);
+    box-shadow: var(--glow-sm);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--glass-border-hi);
+    background: var(--bg-elevated);
+  }
+
+  .user-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .user-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .user-name {
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-name:hover {
+    color: var(--accent);
+  }
+
+  .stars {
+    color: #f59e0b;
+    font-size: 0.88rem;
+    letter-spacing: 1px;
+  }
+
+  .degree {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .comment {
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+
+  .card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    border-top: 1px solid var(--glass-border);
+    padding-top: 12px;
+  }
+
+  .verified-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--correct);
+    font-weight: 500;
+  }
+
+  /* ── Botón CTA dentro de tarjeta ───────────────────────────── */
+  .cta-card {
+    background: linear-gradient(135deg, rgba(var(--accent-rgb, 99, 102, 241), 0.12), rgba(var(--accent-rgb, 99, 102, 241), 0.03));
+    border-color: rgba(var(--accent-rgb, 99, 102, 241), 0.25);
+    text-align: center;
+  }
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 12px;
+  }
+  .cta-icon {
+    font-size: 2.2rem;
+  }
+  .cta-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .cta-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .cta-btn {
+    margin-top: 8px;
+    font-size: 0.88rem;
+    padding: 10px 18px;
+  }
+
+  /* ── Botones de navegación ─────────────────────────────────── */
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--glass-border-hi);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--glow-sm);
+    transition: background var(--dur), transform var(--dur), border-color var(--dur);
+  }
+
+  .nav-btn:hover {
+    background: var(--glass-hi);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .nav-btn.prev {
+    left: -18px;
+  }
+  .nav-btn.next {
+    right: -18px;
+  }
+
+  @media (max-width: 768px) {
+    .nav-btn {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initTestimonials() {
+    const container = document.querySelector('[data-testimonials-carousel]');
+    if (!container || container.getAttribute('data-ready') === '1') return;
+    container.setAttribute('data-ready', '1');
+
+    const track = container.querySelector<HTMLElement>('[data-track]');
+    const prevBtn = container.querySelector<HTMLButtonElement>('[data-prev]');
+    const nextBtn = container.querySelector<HTMLButtonElement>('[data-next]');
+
+    if (!track) return;
+
+    const scrollAmount = 358; // Ancho tarjeta (340) + gap (18)
+
+    prevBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Auto-scroll automático con pausa al pasar el ratón
+    let autoScrollInterval: ReturnType<typeof setInterval> | None = null;
+
+    function startAutoScroll() {
+      stopAutoScroll();
+      autoScrollInterval = setInterval(() => {
+        if (!track) return;
+        const maxScrollLeft = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScrollLeft - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }, 5000);
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    }
+
+    startAutoScroll();
+
+    track.addEventListener('mouseenter', stopAutoScroll);
+    track.addEventListener('mouseleave', startAutoScroll);
+    track.addEventListener('touchstart', stopAutoScroll, { passive: true });
+  }
+
+  initTestimonials();
+  document.addEventListener('astro:page-load', initTestimonials);
+</script>
