@@ -53,9 +53,27 @@ const SUBJECTS = [
         <p>
           Todo lo que hay aquí lo uso yo para estudiar lo mismo que tú. Por eso es
           gratis, no pide registro y no tiene un solo anuncio: no hay nada que
-          monetizar, solo apuntes que ya existían.
-        </p>
       </div>
+
+      <div class="bio-qr">
+        <img
+          src={import.meta.env.BASE_URL + 'qr-repasaYA.png'}
+          alt="Código QR repasaYA"
+          class="qr-img"
+          width="170"
+          height="170"
+          loading="lazy"
+        />
+        <a
+          href={import.meta.env.BASE_URL + 'Cartel_Anuncio_repasaYA.pdf'}
+          target="_blank"
+          rel="noopener"
+          class="btn btn-primary qr-btn"
+        >
+          📄 Descargar Cartel para Imprimir (PDF)
+        </a>
+      </div>
+
 
       <div class="bio-links">
         <a class="btn btn-ghost" href={GITHUB} target="_blank" rel="noopener">
@@ -186,6 +204,31 @@ const SUBJECTS = [
   .bio-text p + p {
     margin-top: 14px;
   }
+
+  .bio-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--glass-hi);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+  .qr-img {
+    width: 170px;
+    height: 170px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--glow-sm);
+  }
+  .qr-btn {
+    font-size: 0.88rem;
+    padding: 10px 18px;
+  }
+
 
   .bio-links {
     display: flex;
