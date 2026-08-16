@@ -25,23 +25,5 @@
     "stars": 5,
     "comment": "Creé repasaYA para dejar de estudiar con 200 diapositivas sueltas. Tener todos los tests interactivos ordenados por asignatura y sin anuncios ha cambiado por completo la forma de repasar.",
     "date": "2026-08-16"
-  },
-  {
-    "username": "alumni-inf",
-    "name": "@alumni-inf",
-    "avatar": "https://github.com/octocat.png",
-    "degree": "Grado en Ingeniería Informática",
-    "stars": 5,
-    "comment": "¡Los test de FIS e Inteligencia Artificial son una pasada! Te permiten repasar en cualquier sitio desde el móvil antes de entrar al examen.",
-    "date": "2026-08-15"
-  },
-  {
-    "username": "estudiante-ade",
-    "name": "@estudiante-ade",
-    "avatar": "https://github.com/github.png",
-    "degree": "Grado en ADE",
-    "stars": 5,
-    "comment": "Las fichas y test de Contabilidad y Métodos Cuantitativos vienen explicados de diez. No hay otra web así de rápida y limpia.",
-    "date": "2026-08-14"
   }
 ]
