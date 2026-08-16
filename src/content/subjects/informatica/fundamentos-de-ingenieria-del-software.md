@@ -5,9 +5,9 @@ year: 3
 semester: 2
 credits: 6
 icon: "🧩"
-status: planned
-materials: []
+status: available
+materials: ["test"]
 ---
 
-<!-- Sin material todavía. Para añadirlo: crea un JSON en
-     src/content/materials/informatica/fundamentos-de-ingenieria-del-software/ y abre un PR. -->
+Colección interactiva de 213 preguntas tipo test para repasar los temas de Fundamentos de Ingeniería del Software (FIS) del Grado en Ingeniería Informática.
+

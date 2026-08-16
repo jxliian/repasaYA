@@ -1,0 +1,1940 @@
+{
+  "subject": "informatica/fundamentos-de-ingenieria-del-software",
+  "type": "test",
+  "title": "Tipo Test Interactivo (213 preguntas)",
+  "order": 1,
+  "items": [
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Todos los sustantivos que se identifiquen en los casos de uso se representan como conceptos en el diagrama conceptual.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El diagrama de componentes especifica el hardware físico sobre el que se ejecutará el sistema software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Uno de los objetivos de la fase de inicio del proceso unificado es el estudio de viabilidad del sistema a desarrollar.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Durante la etapa de definición hay que conseguir encontrar la solución software al sistema analizado.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las clases del diagrama de clases del diseño toman sus atributos de los diagramas de comunicación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Todos los enlaces estereotipados con <<L>>, <<P>> o <<G>> estarán en el diagrama de clases del diseño como una asociación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El usuario es una pieza importante en el proceso de validación de las especificaciones del software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El uso de mecanismos de abstracción en el diseño permiten obtener la modularidad adecuada de un sistema software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Uno de los problemas más importantes en el proceso de desarrollo del software es el incumplimiento de la planificación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo de prototipos es un buen método para validar los requisitos de los usuarios en cualquier proyecto de desarrollo de software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En la arquitectura multicapa las capas deben estar lo más acopladas posible.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los requisitos no funcionales definen los criterios de calidad del sistema software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las asociaciones de navegación se obtienen a partir de las asociaciones del modelo conceptual.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los requisitos no funcionales no tienen ninguna relación con los funcionales.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de clases del diseño pueden aparecer clases que no estaban en el diagrama de conceptos construido en el modelo de análisis.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una de las funciones de la relación de inclusión en los casos de uso es descomponer un caso de uso complejo y largo en varios, para facilitar su comprensión.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las bases principales para obtener los diagramas de comunicación son los contratos y el modelo conceptual.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso sólo puede tener un actor principal que coincide con el que inicia el caso de uso.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El uso de métodos de desarrollo ágiles rompen con la filosofía de equipos de trabajo organizados de forma jerárquica.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una de las ventajas al incluir las relaciones entre los casos de uso es que se reduce el texto generado en la descripción de los casos de uso.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Uno de los pasos a realizar en la elaboración del modelo de interacción de objetos es la incorporación de las asociaciones entre las clases de objetos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los diagramas de actividad se usan como complemento a la descripción de un caso de uso complejo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El uso del patrón controlador en la elaboración del modelo de diseño se hace para reducir el nivel de acoplamiento entre los elementos de la interfaz de usuario y los que modelan la solución.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los proyectos software reales raramente se adaptan a un modelo de ciclo de vida clásico o en cascada.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Durante el análisis no se estudia la solución que se va a proponer al problema planteado, eso se deja a la fase de diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Con el análisis orientado a objetos sólo se modelan las propiedades estáticas del ámbito del problema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los casos de uso “esenciales” son los procedimientos comunes más importantes del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "No se deben usar atributos de un concepto como clave de acceso desde otro concepto.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo conceptual se representa usando un diagrama de clases que contiene las clases con sus atributos, métodos y asociaciones.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En un diagrama de secuencia del sistema pueden aparecer tantos objetos como se necesiten para modelar la interacción entre ellos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso puede generar más de una operación en el diagrama de secuencia del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los patrones de diseño para la asignación de responsabilidades a objetos ayudan a obtener el diagrama de clases del diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una asociación es una conexión significativa y relevante entre conceptos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo estructural del análisis está representado por el/los diagramas de secuencia del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Antes de definir una subclase en un modelo conceptual se debe comprobar que cumple las reglas del 100% y del “es-un”.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El diseño es una tarea clave para la calidad del producto software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un cambio de estado que se describe en las poscondiciones de un contrato es la creación de un atributo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Cuando se construye un modelo conceptual es mejor añadir el mayor número posible de asociaciones entre conceptos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un participante en un diagrama de secuencia puede ser un objeto individual o un multiobjeto.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La diferencia entre una precondición y una excepción es que la precondición no tiene que comprobarse en la operación que se está definiendo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de clases del diseño, la multiplicidad se obtiene de la existencia o no de multiobjetos en los diagramas de comunicación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La etnografía es una técnica de obtención de requisitos que consiste en preguntar a los trabajadores de un negocio sobre la forma en que realizan sus tareas.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El incumplimiento de la planificación lleva de forma inmediata al aumento de personal en el equipo de desarrollo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una característica de los métodos ágiles es las entregas frecuentes.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un diagrama de secuencia del sistema es un diagrama de secuencia de UML en el que se muestran los eventos generados por los actores.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los requisitos de un proyecto software pueden cambiar continuamente, pero esto no es un problema ya que los sistemas software son flexibles (se adaptan a los cambios).",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Para obtener un buen diseño, cada módulo debe presentar un bajo nivel de cohesión.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La arquitectura de un sistema software facilita la comprensión de la estructura global del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los modelos del análisis pueden contener tantas inconsistencias como consideremos oportunas, puesto que no son la solución del problema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Uno de los objetivos del análisis es conseguir los requisitos del software a partir de los requisitos de usuario mediante un proceso de refinamiento.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un Diagrama de Secuencia del Sistema se puede corresponder con un caso de uso, con un diagrama de casos de uso o con todo el sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El nombre que le demos al sistema en el DSS se va a corresponder con el nombre de una clase que va a formar parte de nuestra solución.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El Contrato de una operación debe indicar qué hace una operación sin decir cómo lo hace.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los modelos de AER son: Modelo conceptual, diagramas de casos de uso y los contratos de las operaciones principales.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo conceptual debe representar cualquier tipo de relación que se dé entre los conceptos que forman parte de él.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un concepto debe incluir los atributos que indiquen las asociaciones que tienen otros conceptos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En un contrato si está relleno el apartado de las excepciones, el apartado de las precondiciones debe estar vacío.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Lo siguiente es una poscondición correcta: \"se creó una lista en la que se incluye el nombre del cliente, dirección y teléfono, que se proporciona como salida de la operación\".",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "A la hora de elaborar el diagrama de comunicación de una operación son esenciales los siguientes apartados del contrato correspondiente: excepciones, precondiciones y poscondiciones.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Con la abstracción de datos se abstraen sobre el funcionamiento para conseguir una estructura modular basada en procedimientos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El análisis de la productividad permite realizar una buena gestión de proyectos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El diagrama de clases de diseño se deduce de los diagramas de comunicación. Se elaboran los diagramas de comunicación y después el diagrama de clases del diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "EL diseño es el proceso de refinamiento, en el que partiendo de modelos del análisis vamos añadiendo información hasta completar el diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El mayor esfuerzo durante el proceso de producción del software se realiza en la etapa de desarrollo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El mayor esfuerzo realizado durante el mantenimiento de un software es para adaptar el software a nuevos requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelado de casos de uso solo puede ser usado en la etapa de detección de requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo conceptual no debe incluir los nombres de rol de las asociaciones.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo conceptual no puede contener las navegabilidades de las asociaciones.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo conceptual o modelo de dominio es básico para especifiar las postcondiciones de un contrato.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo de casos de uso permite determinar con facilidad los requisitos no funcionales del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo de casos de uso se usa exclusivamente para la obtención de requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El número de módulos de un sistema software debe ser cuantos más mejor, pues así garantizamos la independencia modular de cada uno de ellos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El número de operaciones principales de un sistema es el mismo que el número de casos de usos que tengamos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El proceso unificado es un modelo de proceso dirigido por casos de uso.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El resultado del diseño de la arquitectura del software es un conjunto de subsistemas y las relaciones entre ellos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el modelo conceptual hay que definir los atributos y los métodos de todas las clases.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En los diagramas de clases de diseño no se deben representar las relaciones de dependencia entre clases, solo se deben representar las de asociación y de generalización.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En los diagramas de clases de diseño pueden aparecer relaciones de dependencia.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Es posible que en un caso de uso no tenga que intervenir el sistema software a modelar.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La arquitectura cliente-servidor favorece la escalabilidad de los sistemas software, porque permite la reconfiguración añadiendo clientes y servidores extra.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La forma más directa de identificar casos de uso es identificando los objetivos y necesidades de los actores del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La navegabilidad de las asociaciones en el diagrama de clases del diseño se obtiene teniendo en cuenta la dirección en los envíos de mensaje en los diagramas de comunicación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La primera tarea del diseño es encontrar el diseño de la arquitectura del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las relaciones entre actores y casos de uso son la asociación y la dependencia.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las relaciones entre los casos de uso pueden ser asociación, generalización y dependencia.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las relaciones que se dan entre casos de uso es la dependencia y la generalización.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las tareas principales de la ingeniería de requisitos son detección, análisis, especificación, revisión y reacción de requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las vías de comunicación o enlaces entre objetos en un diagrama de colaboración son bidireccionales.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Lo siguiente es un requisito funcional \"las reservas de préstamos de libros caducan a los 10 días a partir del momento que el libro esté a disposición del usuario\".",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Lo siguiente es un requisito NO funcional de facilidad de uso \"el entorno debe avisar al usuario mediante email tres días antes de que finalice el plazo del préstamo\".",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los actores representan roles que son interpretados por personas, dispositivos, otros sistemas... cuando el sistema está en uso.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los actores tienen que ser necesariamente los identificados como usuarios del sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los diagramas de actividad de UML es una herramienta muy adecuada para el diseño del flujo de control.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los diagramas de interacción y los diagramas de actividad UML son herramientas de diseño que permiten representar lo mismo, son equivalentes.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los prototipos siempre se transforman hasta convertirse en el programa que se entrega al cliente.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los requisitos no funcionales determinan los objetivos del diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los requisitos no funcionales suponen limitaciones para el diseño de un sistema software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los tipos de requisitos son funcionales, no funcionales y FURPS+.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Para elaborar el modelo de análisis es fundamental el modelo de casos de uso.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Para incorporar generalizaciones es necesario encontrar clases conceptuales con elementos comunes.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Si una función del sistema no cambia nada de lo especificado en el modelo conceptual su contrato no tendrá poscondiciones.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso esencial describe qué hace el sistema como respuesta a una petición de algún actor, pero no cómo lo hace.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso produce algo de valor para un actor.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso puede ser iniciado por un actor o por un usuario.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un modelo de casos de uso lo componen los diagramas de casos de uso y la especificación de actores y casos de uso.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un modelo de casos de uso se centra en las necesidades que el usuario espera lograr al utilizar el sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un nivel de acoplamiento alto y de cohesión bajo en un módulo garantiza un diseño de calidad.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una mala solución para remediar el retraso en la entrega de un proyecto software es la llamada \"horda mongoliana\".",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En los diagramas de clases no pueden aparecer relaciones de generalización.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El principio de modularidad es básico, sin él no tienen sentido los demás principios.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El tipo de relación entre actor y CU es de asociación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el MC (modelo conceptual) se deben incluir las relaciones de generalización entre conceptos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El acoplamiento indica dependencia entre módulos. Cuanto más alto mejor es el diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La cohesión es indicador de la unión formal de los elementos que forman un módulo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un patrón de diseño es la descripción del problema con su solución en un determinado contexto.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Hacer diagramas de comunicación es sitemático, no interviene la creatividad del diseñador.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Nivel de acoplamiento nulo de un módulo nos garantiza un diseño de calidad.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Diseño es el proceso de aplicar distintos métodos, herramientas y principios con el propósito de definir un dispositivo, proceso o sistema con el suficiente detalle como para permitir su realización física.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El patrón experto en información propone asignar una responsabilidad a la clase que conoce la información necesaria para llevarla a cabo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El uso de los diagramas de comunicación o de secuencia UML para representar el modelo de interacción de objetos nos va a proporcionar distintos resultados de diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las relaciones de dependencia en el diagrama de clases del diseño se obtienen de las asociaciones de tipo agregación fuerte.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un enlace entre objetos estereotipado como local <<L>> nos está indicando que esa vía de comunicación queda establecida para cualquier otra colaboración entre esos objetos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El uso del patrón controlador aumenta el número de conexiones entre las capas de interfaz de dominio. Esto implica que aumenta su acoplamiento.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una de las principales tareas del diseño de la arquitectura es refinar la descomposición del sistema en subsistemas.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El patrón experto en información nos dice que el objeto responsable de hacer las cosas es el que tiene el control.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El patrón experto en información nos ayuda a conocer qué clases son las encargadas de crear y destruir objetos en un DC (diagrama de comunicación).",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Contra del patrón experto en información: va en contra de principios de acoplamiento y cohesión.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un enlace entre objetos en un diagrama de colaboración especifica un camino a lo largo del cual un objeto puede enviar mensajes a otro o a sí mismo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La restricción de UML {new } se usa en los DC (diagramas de comunicación) para representar la creación de un objeto o la creación de un enlace entre 2 objetos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El ocultamiento de información limita el impacto global de las decisiones de diseño locales.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las clases que aparezcan en el modelo de dominio son las únicas que tendrán el diagrama de clases del diseño.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Cuando un objeto se pasa como parámetro, en el diagrama de comunicación de la operación los enlaces con ese objeto tendrán una visibilidad del tipo <<A>>.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La herramienta para representar el modelo de diseño de la interacción de objetos son los diagramas de clases UML.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las clases del diagrama de clases del diseño toman todos sus atributos de los diagramas de conceptos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Qué principio del diseño facilita el trabajo independiente y concurrente de un equipo software?",
+      "opts": [
+        "Abstracción",
+        "Modularidad",
+        "Alta cohesión"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el proceso de diseño, a mayor refinamiento...",
+      "opts": [
+        "el nivel de abstracción es independiente del nivel de refinamiento.",
+        "el nivel de abstracción es más alto.",
+        "el nivel de abstracción es más bajo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Cuál de las siguientes acciones empeoran el ocultamiento de información?",
+      "opts": [
+        "Declarar atributos con visibilidad pública.",
+        "Utilizar variables globales.",
+        "Todas son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Respecto a la independencia modular, rasgos en diseño de un módulo:",
+      "opts": [
+        "Alta cohesión y bajo acoplamiento.",
+        "Alta cohesión y alto acoplamiento.",
+        "Baja cohesión y bajo acoplamiento."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El diagrama de clases del diseño describe la estructura:",
+      "opts": [
+        "Del modelo de análisis.",
+        "En el dominio del problema.",
+        "En el dominio de la solución."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Cuál de los siguientes modelos es más importante para realizar el diagrama de clases de diseño?",
+      "opts": [
+        "Diagramas de interacción del diseño.",
+        "Todas son correctas.",
+        "El modelo conceptual"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de clases del diseño:",
+      "opts": [
+        "Las clases se obtienen del MC y los atributos del DC.",
+        "Las clases y atributos se obtienen de DC.",
+        "Clases se obtienen de DC y atributos de MC."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de clases del diseño, los métodos:",
+      "opts": [
+        "Se obtienen del MC.",
+        "Se obtienen de los DC.",
+        "No se especifican."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Las relaciones de generalización en el diagrama de clases del diseño son:",
+      "opts": [
+        "Las que había en el MC.",
+        "Las identificadas con <<G>> en los diagramas de interacción.",
+        "Las que se pueden extraer al encontrar atributos y/o métodos comunes a varias clases."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Cuándo el diseño de la arquitectura no es conveniente?",
+      "opts": [
+        "Subsistemas están muy acoplados.",
+        "Ninguna es verdad.",
+        "Subsistemas tienen alta cohesión."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los estereotipos de visibilidad representan tipo de acceso que se da entre objetos en los DC.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La validación de la especificación no forma parte de la Ingeniería de requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo de casos de uso puede ser usado como guía para el diseño de la interfaz de usuario y para facilitar la construcción de prototipos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La entrevista es una técnica encaminada a obtener información sobre el sistema mediante el diálogo con los expertos en el dominio del problema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La Especificación de Requisitos es un documento en el que se dice qué debe hacer el sistema software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un sistema informático externo a la aplicación con el que ésta debe interaccionar puede definirse como actor.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Ejemplo de requisito funcional: La aplicación debe ser fácil de utilizar, e incluir ayudas en línea fáciles de entender.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Es mejor que las actividades de verificación las lleve a cabo el mismo equipo que haya hecho el desarrollo.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los actores de un modelo de casos de uso son siempre humanos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso esencial describe una actividad que es imprescindible para el funcionamiento del sistema que modela.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El numero de iteraciones en las fases de elaboración y construcción del proceso unificado deben ser las mismas.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La identificación de los implicados facilita la obtención de requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La clasificación de los requisitos según su ámbito distingue entre requisitos funcionales, no funcionales y de información.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El nodo 5 es un nodo join.",
+      "opts": [
+        "Sí",
+        "No"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Cuando se alcanza el nodo 6 termina la actividad \"Carrera de F1\".",
+      "opts": [
+        "Sí",
+        "No"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Cuando comienza la actividad \"Carrera de F1\" se activan las calles \"Dirección de carrera\" y SI \"Dirección de equipo\".",
+      "opts": [
+        "Sí",
+        "No"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Este modelo conceptual está mal, faltaría incluir la navegabilidad que hay entre Pizza y Masa, pues una pizza es la que está formada por la masa, igualmente ocurre entre Pizza e Ingrediente.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un objeto pedido puede incluir más de una pizza.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un ingrediente puede tener un precio diferente dependiendo de la pizza en la que esté.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un diagrama de conceptos sin operaciones es incorrecto.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La semántica de la composición no permite que las partes existan independientemente del compuesto",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el DSS tratamos el sistema como si fuera una caja negra.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Cuando establecemos una relación de generalización entre clases todas las subclases deben cumplir con la regla “es-un”.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de conceptos no deben aparecer atributos no primitivos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los paquetes durante el diseño arquitectónico son una representación física de los subsistemas.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En la arquitectura MVC (Model View Controller) para cambiar la interfaz de usuario es necesario cambiar el subsistema del modelo ya que este incluye la lógica de funcionamiento del programa.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El rendimiento es uno de los problemas importantes del diseño arquitectónico usando multicapas.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En la arquitectura MVC (Model View Controller) los subsistemas de vista y controlador son los que hacen uso más extensivo de componentes reutilizables.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Al usar una arquitectura cliente-servidor es necesario diseñar e implementar los servidores previamente a poder probar los clientes.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿En cuál de las siguientes relaciones de asociación entre conceptos no es conveniente aplicar el patrón creador?",
+      "opts": [
+        "Asignatura 1..n - 1..m Alumno",
+        "Casa - 1..n Habitación",
+        "en ninguna de las dos"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Por qué en el diseño de la operación incluirAsignatura la clase GEA tiene baja cohesión?",
+      "opts": [
+        "porque crea la Asignatura asig, y esto lo debería hacer el objeto pe",
+        "porque crea la Asignatura asig, y esto lo debería hacer el multi-objeto de PlanEstudios",
+        "porque crea la Asignatura asig, y esto lo debería hacer el multi-objeto de Asignaturas"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un mensaje enviado a un multi-objeto de la clase X:",
+      "opts": [
+        "no se convierte en un método porque se supone que es un método de la clase contenedora",
+        "hay que convertirlo en un método de la clase que representa al sistema",
+        "hay que convertirlo en un método de la clase X"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Es obligatorio incluir los tipos de datos de los atributos y los parámetros en los diagramas de clases del diseño?",
+      "opts": [
+        "depende del destinatario del programa (herramienta CASE con generación automática de código, equipo de desarrollo del proyecto, etc.)",
+        "siempre",
+        "nunca"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "¿Por qué hay doble navegabilidad en la asociación entre Profesor y Proyecto?",
+      "opts": [
+        "por los mensajes 4.1 y 4.1.1",
+        "sólo por el mensaje 4.1",
+        "sólo por el mensaje 4.1.1"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El análisis y especificación de requisitos es una de las fases de la ingeniería de requisitos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El modelo de casos de uso utiliza un lenguaje próximo al desarrollador, mientras que el modelo de análisis usa un lenguaje más próximo al cliente.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de conceptos se indican las multiplicidades de las asociaciones.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el diagrama de secuencia del sistema también se representa la interacción entre actores.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En las poscondiciones de un contrato únicamente hay que indicar los objetos que se construyen y los atributos que se modifican.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El Diagrama de Secuencia del Sistema (DSS) forma parte del modelo estático de análisis.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El software de gestión se caracteriza por la complejidad de sus algoritmos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El proceso unificado lo componen 5 fases que son: inicio, elaboración, construcción, transición y producción.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los casos de uso los empieza el sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Lo siguiente es un requisito no funcional \"El sistema debe cumplir las disposiciones recogidas en la ley orgánica de datos personales y en el régimen de medidas de seguridad\".",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un sistema basado en computadora incluye sistemas software.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Definición de Ingeniería del Software: Disciplina de ingeniería que se interesa por todos aspectos de la producción de software, desde las primeras etapas de la especificación hasta el mantenimiento del sistema después de su puesta en operación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Los requisitos no funcionales describen la estructura de la información que se debe almacenar en el sistema.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Ejemplo de requisito no funcional: la aplicación se encargará de gestionar los alquileres de material deportivo en una tienda.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La única clasificación de tipos de requisitos aceptada por la comunidad de Ingenieros de Requisitos son los requisitos funcionales y los no funcionales.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Conocer el vocabulario propio del sistema forma parte de la preparación y realización de las sesiones de elicitación/negociación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Durante la obtención de requisitos ha de obtenerse información sobre el alcance del sistema o producto",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La demanda creciente de nuevo software hizo evidente la necesidad de adoptar un enfoque de desarrollo informal.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el modelo de los prototipos no se hace especificación de requerimientos.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Tanto principio como heurística son reglas que se han obtenido a través del conocimiento/experiencia.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Llamamos \"Software hecho a medida\" al desarrollado bajo pedido a un desarrollador específico.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un requisito es una propiedad o restricción, determinada con precisión, que un producto software debe satisfacer.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un prototipo nunca llega a ser el producto final.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un caso de uso sólo puede tener un actor secundario.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un modelo es una representación de un sistema en un determinado lenguaje.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un diagrama de secuencia del sistema muestra la interacción entre los objetos más importantes del sistema software para llevar a cabo una operación.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "El atributo numeroUnidades representa el número de ingredientes de una pizza",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Obligatoriamente uno de los atributos que debe incluir un concepto es su identificador que permita identificar al objeto de forma única.",
+      "opts": [
+        "Verdadero",
+        "Falso"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En un diagrama de comunicación, todos los enlaces estereotipados con <<P>> estarán en el diagrama de clases del diseño como una dependencia.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una técnica es un instrumento que permite la representación de modelos.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Una característica de los métodos ágiles es la abundante documentación que se genera durante el proceso.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "La detección de conflictos entre los requisitos no es una de las principales actividades del diseño arquitectónico.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Un diagrama de secuencia del sistema es un diagrama de secuencia de UML en el que se muestran los eventos generados por el sistema.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "Para obtener un buen diseño, entre otras cosas, cada módulo debe presentar un alto nivel de cohesión.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Colección Exámenes FIS",
+      "q": "En el proceso de desarrollo del software, una tarea se centra en un objetivo pequeño, pero bien definido que no produce un resultado tangible.",
+      "opts": [
+        "Verdadero.",
+        "Falso."
+      ],
+      "correct": 1
+    }
+  ]
+}
