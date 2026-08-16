@@ -1,0 +1,43 @@
+name: 📚 Pedir o Aportar Material / Asignatura
+description: Solicita la inclusión de una asignatura o aporta nuevo contenido de estudio.
+title: "[SOLICITUD]: Nombre de la Asignatura"
+labels: ["enhancement", "material"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por querer mejorar repasaYA! Completa el siguiente formulario para que podamos procesar tu solicitud.
+  - type: input
+    id: subject_name
+    attributes:
+      label: Nombre de la Asignatura
+      description: Ejemplo - Econometría, Algorítmica, etc.
+      placeholder: Ej: Sistemas Distribuidos
+    validations:
+      required: true
+  - type: dropdown
+    id: degree
+    attributes:
+      label: Grado
+      options:
+        - Doble Grado ADE + Informática
+        - Grado en Administración y Dirección de Empresas (ADE)
+        - Grado en Ingeniería Informática
+    validations:
+      required: true
+  - type: checkboxes
+    id: material_types
+    attributes:
+      label: Tipo de material que tienes o solicitas
+      options:
+        - label: Preguntas Tipo Test
+        - label: Verdadero / Falso
+        - label: Flashcards / Glosario
+        - label: Apuntes o Exámenes en PDF
+        - label: Repositorio o Enlace Práctico
+  - type: textarea
+    id: details
+    attributes:
+      label: Detalles adicionales o enlaces
+      description: Puedes adjuntar enlaces a PDFs, aclaraciones sobre el curso o temario.
+      placeholder: "Tengo los tests del curso 24/25 de..."

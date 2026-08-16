@@ -1,0 +1,23 @@
+name: 🐛 Reportar una errata o fallo técnico
+description: Informa de una pregunta incorrecta, errata en la solución o fallo en la web.
+title: "[BUG]: Descripcion breve del error"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Si has encontrado una errata en una pregunta o un error en la plataforma, por favor indícalo a continuación.
+  - type: input
+    id: location
+    attributes:
+      label: URL o Asignatura donde ocurre
+      placeholder: "Ej: /ade/3/c1/econometria/test/"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del problema o errata
+      placeholder: "La pregunta X del Tema 2 marca como correcta la opción B cuando la justificación indica A..."
+    validations:
+      required: true
