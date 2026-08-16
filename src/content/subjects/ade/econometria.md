@@ -5,9 +5,8 @@ year: 3
 semester: 1
 credits: 6
 icon: "📊"
-status: planned
-materials: []
+status: available
+description: "Apuntes de teoría de Econometría (Temas 1 al 6)."
+materials: [apuntes]
 ---
 
-<!-- Sin material todavía. Para añadirlo: crea un JSON en
-     src/content/materials/ade/econometria/ y abre un PR. -->
