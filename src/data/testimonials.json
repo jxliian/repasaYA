@@ -11,7 +11,7 @@
   {
     "username": "alumni-inf",
     "name": "@alumni-inf",
-    "avatar": "https://github.com/github.png",
+    "avatar": "https://github.com/octocat.png",
     "degree": "Grado en Ingeniería Informática",
     "stars": 5,
     "comment": "¡Los test de FIS e Inteligencia Artificial son una pasada! Te permiten repasar en cualquier sitio desde el móvil antes de entrar al examen.",
@@ -20,7 +20,7 @@
   {
     "username": "estudiante-ade",
     "name": "@estudiante-ade",
-    "avatar": "https://github.com/torvalds.png",
+    "avatar": "https://github.com/github.png",
     "degree": "Grado en ADE",
     "stars": 5,
     "comment": "Las fichas y test de Contabilidad y Métodos Cuantitativos vienen explicados de diez. No hay otra web así de rápida y limpia.",
