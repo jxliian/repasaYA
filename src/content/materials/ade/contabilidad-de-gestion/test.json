@@ -1,0 +1,2697 @@
+{
+  "subject": "ade/contabilidad-de-gestion",
+  "type": "test",
+  "title": "Tipo Test Interactivo (269 preguntas)",
+  "order": 1,
+  "items": [
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de las siguientes afirmaciones es errónea en relación a los objetivos de la contabilidad interna o de costes:",
+      "opts": [
+        "Suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión.",
+        "Análisis, evaluación y control de las actividades productivas.",
+        "Determinar información a agentes externos de la empresa en base a la legislación contable vigente, cuyo principal exponente son las cuentas anuales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Las magnitudes de flujo dentro del ámbito externo son:",
+      "opts": [
+        "Inversiones financieras de la empresa (en sentido estático), débitos o derechos de cobro a favor de la empresa y créditos y obligaciones de pago a cargo de la empresa.",
+        "Comprar y gastos; ventas e ingresos; pagos y cobros; inversiones financieras de la empresa (en sentido dinámico).",
+        "Dinero en existencia; inversiones económicas positivas y negativas; resultados."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Las magnitudes de fondo fundamentales en el ámbito interno son:",
+      "opts": [
+        "Comprar y gastos; ventas e ingresos; pagos y cobros; inversiones financieras de la empresa (en sentido dinámico).",
+        "Producción o trabajos en curso; producción en stock.",
+        "Consumos y costes; producción y valor de la producción; colocación y calor de la colocación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la asignación de costes en el direct cost simple, los costes fijos:",
+      "opts": [
+        "Son calificados de costes del producto, son costes que se asignan a la producción.",
+        "En ningún caso intervienen en el valor de la producción; no son costes del producto. Son costes del periodo.",
+        "Influyen en el cálculo del coste variable de fabricación unitario."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el tratamiento de los costes en el full cost atenuado:",
+      "opts": [
+        "Son costes del producto aquellos del ciclo de producción; entre los que se encuentran compras y transformación.",
+        "Son costes del periodo aquellos del ciclo de producción (compras y transformación).",
+        "Son costes del producto aquellos del ciclo de comercialización (ventas y administración)."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Las magnitudes fundamentales de flujo de ámbito externo son:",
+      "opts": [
+        "Compras y gastos, ventas e ingresos, pagos y cobros, inversiones financieras, en la empresa y de la empresa en sentido estático.",
+        "Consumo y costes, producción y valor de producción, colocación y valor de la colocación.",
+        "Compras y gastos, ventas e ingresos, pagos y cobros, inversiones financieras, en la empresa y de la empresa en sentido dinámico."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La vinculación temporal de gasto, compra y pago en relación al bonobús para viajes futuros es:",
+      "opts": [
+        "Primero pago y después gasto y compra.",
+        "Gasto y compra al mismo tiempo pago.",
+        "Primero gasto y compra y después pago."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la respuesta correcta:",
+      "opts": [
+        "La contabilidad interna pertenece a la microcontabilidad privada y a su vez a la contabilidad aplicada.",
+        "La contabilidad externa pertenece a la macrocontabilidad y a su vez a la contabilidad aplicada.",
+        "La contabilidad externa pertenece a la microcontabilidad pública y a su vez a la contabilidad genera."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación a las siguientes magnitudes:",
+      "opts": [
+        "Compra y gasto siempre coinciden.",
+        "El pago siempre coincide con el gasto.",
+        "El pago siempre coincide con la compra."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el ámbito interno de la empresa:",
+      "opts": [
+        "Se produce la circulación económica y financiera.",
+        "Se produce circulación económica.",
+        "Se producirá una u otra dependiendo de la actividad a que se dedique la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entre los objetivos de la Contabilidad de Costes, se encuentra:",
+      "opts": [
+        "La captación, medida, valoración y representación de la problemática económico-técnica de la empresa.",
+        "Suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Respecto al ámbito interno y externo de la circulación de valores en la empresa decimos que:",
+      "opts": [
+        "Existe tanto corriente financiera como económica en el ámbito interno de la circulación.",
+        "En el ámbito externo solo hay corriente financiera y en el interno, económica.",
+        "Solo tenemos circulación financiera en el ámbito interno."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿A qué nos referimos cuando utilizamos la palabra “cobro”?",
+      "opts": [
+        "A las cantidades de bienes o servicios que pasan de la empresa al mundo exterior.",
+        "Al equivalente de lo vendido por la empresa expresado en unidades monetarias.",
+        "A la entrada de dinero real en la empresa."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La definición: “rama de la contabilidad aplicada que, con respecto a una microunidad económica, nos permite el conocimiento cualitativo y cuantitativo de su realidad económico-técnica…” se corresponde con:",
+      "opts": [
+        "La Contabilidad interna o de costes.",
+        "La Macrocontabilidad.",
+        "La Contabilidad externa."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la respuesta correcta:",
+      "opts": [
+        "La compra y el pago se producen siempre simultáneamente.",
+        "La venta y el ingreso se producen simultáneamente.",
+        "El gasto es la magnitud que representa la salida de efectivo (dinero) por parte de la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el ámbito interno de la circulación de la empresa, el coste es:",
+      "opts": [
+        "La expresión del consumo.",
+        "El precio de venta de un bien.",
+        "Es una magnitud relativa."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La Contabilidad interna o de costes:",
+      "opts": [
+        "Se ocupa del estudio del movimiento interno de valores de la transformación productiva operada por la empresa, a fin de conocer las magnitudes técnicas y económicas que lo configuran.",
+        "Lleva a cabo el análisis, evaluación y control de las actividades productivas.",
+        "Las dos respuestas son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Un gasto es:",
+      "opts": [
+        "Cuando se produce la transferencia monetaria.",
+        "El equivalente monetario de la compra.",
+        "La adquisición de bienes o servicios."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Seleccione cuál de estas afirmaciones es verdadera:",
+      "opts": [
+        "La contabilidad interna nos permite en todo momento el conocimiento cualitativo y cuantitativo de la de la realidad económico-técnica con el fin específico de permitir el control de la producción y los costes de dicha unidad.",
+        "La contabilidad interna nos permite en todo momento el conocimiento cualitativo y cuantitativo de la realidad económico-financiera con el fin específico de permitir el control de la producción y los costes de dicha unidad.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estos pertenece a los fines de la contabilidad interna o de costes:",
+      "opts": [
+        "Captación, medida, valoración y representación de la problemática económico-técnica de la empresa.",
+        "Análisis, evaluación y control de las actividades productivas.",
+        "Las dos respuestas anteriores son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La expresión monetaria del consumo son:",
+      "opts": [
+        "Gastos.",
+        "Pagos.",
+        "Costes."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La contabilidad interna o de costes:",
+      "opts": [
+        "Permite el conocimiento de su realidad económico-técnica con el fin de controlar la producción y llevar a cabo la medida de la eficiencia.",
+        "Permite el conocimiento de su realidad económico-financiera con el fin de poner de relieve la situación de su unidad y su evolución.",
+        "Las opciones A y B son correctas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Las magnitudes de fondo en el ámbito interno:",
+      "opts": [
+        "Visión dinámica: van a la cuenta de P y G o flujos de caja.",
+        "Visión estática: van al balance de situación.",
+        "Incluyen inversiones financieras de la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Marque la respuesta correcta:",
+      "opts": [
+        "Siempre que tiene lugar una compra tiene lugar un gasto.",
+        "Siempre que tiene lugar una venta tiene lugar un ingreso.",
+        "A y B son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál es una diferencia esencial en el tratamiento contable de las transacciones de los ámbitos interno y externo?",
+      "opts": [
+        "Similares objetivos y destinatarios de la información elaborada.",
+        "Libertad de interpretación frente al cumplimiento de la norma.",
+        "A y B son correctas"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Objetivos de la contabilidad interna o de costes:",
+      "opts": [
+        "Suministrar la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión.",
+        "Captación, medida, valoración y representación de la problemática económico-financiera de la empresa.",
+        "Determinación del resultado periódico externo con criterios económicos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿En qué ámbito de la empresa no existe circulación financiera?",
+      "opts": [
+        "En el ámbito externo de la circulación.",
+        "En el ámbito interno de la circulación.",
+        "En ninguno de los dos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale aquella magnitud que no pertenezca a las magnitudes de fondo en el ámbito interno:",
+      "opts": [
+        "Producción en curso de fabricación.",
+        "Producción en stock.",
+        "Resultados."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El cobro se da cuando…",
+      "opts": [
+        "Se produce la transferencia monetaria del ingreso.",
+        "Se realiza la cesión de bienes y servicios de la empresa al mundo externo.",
+        "Se adquieren bienes o servicios, se haya o no realizado la ocupación material de los mismos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "De las siguientes afirmaciones, señale la opción correcta:",
+      "opts": [
+        "El full cost valora por un importe mayor las existencias finales de productos acabados que el direct cost.",
+        "El full cost valora por un importe inferior las existencias finales de productos acabados que el direct cost.",
+        "Tanto el enfoque del full cost como el direct cost valoran las existencias finales de productos acabados por el mismo importe."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el enfoque del direct cost simple, ¿con qué se identifican los costes del periodo?",
+      "opts": [
+        "Con los costes fijos.",
+        "Con los costes variables.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la correcta. Definición de contabilidad interna o de costes:",
+      "opts": [
+        "“Rama de la Contabilidad aplicada que, con respecto a una microunidad económica, nos permite en todo momento el conocimiento cualitativo y cuantitativo de su realidad económico-financiera, con el fin específico de poner de relieve la situación de dicha unidad y su evolución en el tiempo”.",
+        "“Rama de la Contabilidad aplicada que, con respecto a una microunidad económica, nos permite en todo momento el conocimiento cualitativo y cuantitativo de su realidad económico-técnica, con el fin específico de permitir el control de la producción y los costes de dicha unidad y llevar a cabo la medida de la eficiencia técnico-productiva de la misma”.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Las magnitudes fundamentales del ámbito interno se clasifican en magnitudes flujo y magnitudes fondo. Marque la verdadera:",
+      "opts": [
+        "Son magnitudes flujo el ámbito interno: Los consumos y costes, producción y valor de la producción y colocación y valor de la colocación.",
+        "Son magnitudes fondo del ámbito interno: Dinero en existencia y débitos o derechos de cobro a favor de la empresa.",
+        "Son magnitudes flujo del ámbito interno: Comprar y gastos, ventas e ingresos, pagos y cobros, inversiones financieras, en la empresa y de la empresa (en sentido dinámico)."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la opción no correcta. Son objetivos de la contabilidad interna o de costes:",
+      "opts": [
+        "Descomposición del resultado interno en forma tal que permita conocer la contribución a su generación.",
+        "Suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión.",
+        "Suministro de la información relevante necesaria a todos los posibles grupos interesados (stakeholders) conforme al PCG."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Cuál de las siguientes opciones no es una de las diferencias esenciales en el tratamiento contable de los ámbitos interno y externo:",
+      "opts": [
+        "Diferente naturaleza de las transacciones abarcadas.",
+        "Diferente periodicidad en el tiempo.",
+        "Libertad de interpretación frente al incumplimiento de la norma."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El orden de las fases en los subsistemas de una unidad económica de producción son:",
+      "opts": [
+        "Financiación, producción, inversión, desinversión.",
+        "Financiación, inversión, producción, desinversión.",
+        "Inversión, financiación, producción, desinversión."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Cuál de las siguientes opciones no constituye una magnitud de flujo fundamental del ámbito externo:",
+      "opts": [
+        "Débitos o derechos de cobro a favor de la empresa.",
+        "Compra y gastos.",
+        "Pagos y cobros."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El subsistema de producción de la empresa pertenece a:",
+      "opts": [
+        "La corriente económica del ámbito interno de la empresa.",
+        "La circulación financiera del ámbito interno de la empresa.",
+        "Al ámbito externo de la empresa."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son dos magnitudes de flujo del ámbito interno:",
+      "opts": [
+        "El stock de bienes y servicios en un momento determinado.",
+        "El traspaso de bienes y servicios en un momento de tiempo entre dos agentes económicos o partes de una empresa.",
+        "Ninguna de las afirmaciones anteriores es correcta"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La contabilidad interna o de costes:",
+      "opts": [
+        "Nos permite el conocimiento cualitativo y cuantitativo de su realidad económico-financiera o externa con el fin de poner en relieve la situación de dicha unidad y su evolución en el tiempo.",
+        "Nos permite el conocimiento cualitativo y cuantitativo de su realidad económico-técnica o interna con el fin de controlar la producción y los costes de dicha unidad y llevar a cabo la medida de la eficiencia técnico- productiva de la misma.",
+        "Solo realiza un conocimiento cuantitativo de su realidad económico-técnica o interna."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de las siguientes no es una magnitud del ámbito externo:",
+      "opts": [
+        "Ventas e ingresos.",
+        "Pagos y cobros.",
+        "Consumos y costes."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Qué subsistema, dentro del orden establecido, viene después de la desinversión?",
+      "opts": [
+        "Financiación.",
+        "Inversión.",
+        "Producción."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál de las opciones siguientes será contabilizada dentro del periodo, en direct cost desarrollado?",
+      "opts": [
+        "Costes Variables de Fabricación.",
+        "Costes Fijos Comunes.",
+        "Costes Fijos Propios."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál de las siguientes opciones está encuadrada dentro de los costes intrínsecos?",
+      "opts": [
+        "Costes Comerciales.",
+        "Costes de Administración.",
+        "Costes de Transformación."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Dentro de la estructura del proceso de cálculo de costes, la clasificación:",
+      "opts": [
+        "Se basa en medir y valorar el consumo de los factores productivos.",
+        "Consiste en afectar el coste directo e imputación de los restantes costes acumulados en los centros principales.",
+        "No se encuentra dentro del proceso de cálculo de costes."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En cuanto al tratamiento de los distintos costes en el full costing atenuado:",
+      "opts": [
+        "Los costes intrínsecos y costes a reintegrar ambos pertenecen al ciclo de producción.",
+        "Los costes a reintegrar no pertenecen al full costing atenuado sino al direct cost desarrolladoe.",
+        "Los costes intrínsecos pertenecen al ciclo de producción antes de su colocación en la empresa y los costes a reintegrar son costes del periodo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Toda cesión de productos:",
+      "opts": [
+        "Constituye una venta e implica un ingreso.",
+        "Constituye una venta, implica un ingreso y da derecho a un cobro.",
+        "Constituye una venta, implica un ingreso y obliga a un pago."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La corriente en términos reales:",
+      "opts": [
+        "Conlleva la compra de factores productivos y la venta de productos.",
+        "Conlleva unos pagos y expectativas de pagos y unos cobros y expectativas de cobros.",
+        "Es aquella en la que se produce la circulación monetaria."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Respecto a los portadores de coste cabe afirmar que:",
+      "opts": [
+        "A cada manifestación de la producción corresponderá un portador de coste.",
+        "Cumplen la función acumulativa del valor de la totalidad del consumo de factores productivos.",
+        "A y B son correctas"
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El full costing atenuado:",
+      "opts": [
+        "Implica que tanto costes fijos como variables se imputan a la producción, la cuál va directamente a la colocación.",
+        "Distingue el ciclo productivo, constituido por las comprar y la transformación, y el ciclo de la comercialización, constituido por las ventas y la administración.",
+        "Supone que los costes variables se dividan en costes variables de comercialización y costes variables de fabricación, los cuales se dirigen a colocación, mientras que los costes fijos van directamente al periodo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la correcta. ¿Cuál enfoque de asignación de costes arrojará un resultado más favorable para la empresa?",
+      "opts": [
+        "El full costing atenuado pues carga menos costes al resultado que los demás enfoques.",
+        "El direct costing simple pues carga más costes al resultado que los demás enfoques.",
+        "El full costing radical pues carga menos costes al resultado que los demás enfoques."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Afectan las distintas corrientes de asignación en la partida de ingresos?",
+      "opts": [
+        "Sí.",
+        "No.",
+        "A veces."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Dentro del doble enfoque del coste encontramos:",
+      "opts": [
+        "Coste Directo e Indirecto.",
+        "Coste Real y Monetario.",
+        "Costes intrínsecos y extrínsecos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Un coste caracterizado como fijo a nivel global de la empresa puede…",
+      "opts": [
+        "Que lo sea como variable al nivel de un centro de actividad particular.",
+        "No puede ser variable dentro del centro de actividad particular.",
+        "Ha de ser variable al nivel de un centro de actividad."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes fijos son…",
+      "opts": [
+        "Aquellos que no fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.",
+        "Aquellos que fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.",
+        "Aquellos que no fluctúan frente a una variación en el volumen de producción, sin límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son factores condicionantes del proceso de segmentación:",
+      "opts": [
+        "Factores directos e indirectos.",
+        "Factores objetivos y subjetivos.",
+        "Factores extrínsecos e intrínsecos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Las claves de distribución son…",
+      "opts": [
+        "Claves primarias y secundarias de distribución.",
+        "Claves objetivas y subjetivas de distribución.",
+        "Claves fijas y variables de distribución."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Qué relación entre el CF-CV y CD-CI?",
+      "opts": [
+        "Los costes variables vienen determinados por costes directos.",
+        "No se puede hacer una relación de correspondencia entre ambos.",
+        "A y B son incorrectas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Marque la respuesta incorrecta:",
+      "opts": [
+        "Los costes indirectos quedan acumulados en los centros principales que mantienen relacione directas con el producto.",
+        "En el full cost radical el coste unitario fluctúa ya que depende del nivel de producción que tiene la empresa.",
+        "En el direct cost simple los CF de fabricación van a parar a la producción."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La medición y valoración del consumo de los factores productivos pertenece a la fase de:",
+      "opts": [
+        "Clasificación.",
+        "Localización.",
+        "Imputación."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el método del full cost radical:",
+      "opts": [
+        "Se centra en la exclusión de los costes fijos, sólo los costes variables deben reintegrarse en el coste del producto.",
+        "Persigue la incorporación al producto de la totalidad de los costes, tanto fijos como variables, sin discriminación.",
+        "El tratamiento de las distintas clases de costes debe ser distinto según el ciclo donde incida."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes directos:",
+      "opts": [
+        "No deben atribuirse de forma inequívoca a los productos, asique no resulta factible hacer un seguimiento pormenorizado de ellos.",
+        "No contribuyen directamente a la transformación del producto sino que son facilitadas por un centro de apoyo.",
+        "Se les atribuye una materia prima de manera inequívoca para un producto."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La fase de localización del proceso de formación y asignación de costes consiste en la:",
+      "opts": [
+        "Afectación del coste directo e imputación de los restantes costes acumulados en los centros principales.",
+        "Distribución del coste de los factores entre los centros de redistribución del coste y los centros auxiliares.",
+        "Medición y valoración del consumo de los factores productivos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El método direct costing desarrollado:",
+      "opts": [
+        "Distingue entre Costes fijos comunes aquellos otros que puedan asignarse a un elemento concreto, de manera que si se eliminase de la producción se evitaría ese coste.",
+        "Es igual que el direct costing simple.",
+        "Las dos respuestas son falsas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Respecto al método full costing radical:",
+      "opts": [
+        "Asigna todos los costes a la producción.",
+        "No tiene en cuenta los costes de administración.",
+        "Las dos respuestas son correctas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la respuesta incorrecta:",
+      "opts": [
+        "En el direct costing simple los únicos costes ligados a la producción son los costes variables de fabricación.",
+        "En el full costing radical, todos los costes incurridos se imputan a la producción excepto los costes de administración.",
+        "Para el direct costing los costes fijos son costes del periodo, no importa cuál sea la producción ya que se van a trasladar directamente al resultado."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Podemos considerar como centro auxiliar de coste…",
+      "opts": [
+        "Los distintos departamentos que componen una empresa.",
+        "Al mantenimiento y limpieza de un gimnasio.",
+        "A la sección de aprovisionamiento de un pub."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Diferencia entre full cost full cost y direct cost:",
+      "opts": [
+        "El segundo tiene en cuenta la estructura organizativa de la empresa mientras que el primero no.",
+        "El segundo no tiene en cuenta la estructura organizativa de la empresa mientras que el primero sí.",
+        "No hay ninguna diferencia, en la relación a la estructura organizativa entre ambos enfoques."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La operación de afectación consiste en relacionar:",
+      "opts": [
+        "Los costes indirectos con los portadores.",
+        "Los costes directos con los portadores.",
+        "Los costes directos con los indirectos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El proceso mediante el cual se relacionan los costes de las secciones a los portadores se denomina:",
+      "opts": [
+        "Afectación.",
+        "Producción.",
+        "Imputación."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los elementos, tangibles e intangibles, que la empresa adquiere del exterior con el fin de utilizarlos en el proceso productivo, bien para la obtención de productos o bien para el mantenimiento de los equipos productivos son:",
+      "opts": [
+        "Suministros.",
+        "Materiales.",
+        "Materias primas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de la mano de obra, cuando la empresa emplea un sistema de retribución a destajo es siempre tratado como:",
+      "opts": [
+        "Un coste indirecto.",
+        "Un coste directo.",
+        "Un coste directo o indirecto."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la presentación de resultados del full cost atenuado, al margen le debemos restar:",
+      "opts": [
+        "No debemos restarle nada.",
+        "Los costes intrínsecos de colocación.",
+        "Los costes a reintegrar del periodo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Dentro de las fases del proceso de cálculo de costes, la medición es:",
+      "opts": [
+        "Medición y valoración del consumo de los factores productivos.",
+        "Distribución del coste de los factores entre los centros y redistribución del coste de los centros auxiliares.",
+        "Afectación del coste directo e imputación de los restantes costes acumulados en los centros principales."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entre el full cost radical y el direct cost simple:",
+      "opts": [
+        "El full cost radical lleva menos costes al stock final.",
+        "El direct cost simple dentro del Estado de Pérdidas y Ganancias posee un margen bruto y semibruto.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coeficiente de actividad se define como:",
+      "opts": [
+        "Actividad/Tiempo.",
+        "Actividad real/Actividad normal.",
+        "Actividad con mayor coste/Actividad con menos coste."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Una de las críticas al full cost radical es:",
+      "opts": [
+        "Arbitrariedad en la atribución de los costes variables a nivel unitario.",
+        "Dependencia del coste unitario respecto de las fluctuaciones del nivel de actividad.",
+        "Excesiva importancia de la inventarización de los costes fijos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el enfoque del full cost radical en comparación con el direct cost simple:",
+      "opts": [
+        "Valora las existencias finales de productos acabados por un importe mayor.",
+        "Valora las existencias finales de producto acabados por un importe menor.",
+        "Valora las existencias finales de productos acabados por el mismo importe."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la afirmación correcta:",
+      "opts": [
+        "Los suministros son vienen almacenables, tangibles o intangibles.",
+        "En los suministros, al encontrarse ausente la función de almacenamiento, se registra una coincidencia temporal entre las magnitudes compra y consumo.",
+        "Su consumo se puede medir a través de contador, requiriendo asimismo de otra red de distribución exterior a la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Qué elementos componen el coste de personal?",
+      "opts": [
+        "A el salario base, los complementos salariales, y las aportaciones de la empresa y del trabajador a la Seguridad Social.",
+        "El salario base, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.",
+        "El salario base, las gratificaciones o pagas extraordinarias, los complementos salariales y las aportaciones de la empresa a la Seguridad Social."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La regla general respecto de los materiales establece que…",
+      "opts": [
+        "Las materias primas se consideran costes directos y el resto de materiales se consideran costes indirectos.",
+        "Las materias primas se consideran costes indirectos y el resto de materiales se consideran costes directos.",
+        "Todos los materiales se consideran costes directos por depender de la producción de la empresa."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cómo se realizan las remuneraciones en el sistema de retribución jornal?",
+      "opts": [
+        "Se remunera al trabajador según el tiempo trabajado eficientemente y la cantidad producida en dicho tiempo.",
+        "Se remunera a los trabajadores según el precio establecido a la unidad de producto terminado, teniendo en cuenta el tiempo empleado.",
+        "Solo se remunera el tiempo empleado sin tender a la calidad o cantidad de la prestación realizada."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cómo se definen las percepciones económicas extrasalariales?",
+      "opts": [
+        "Son todos aquellos complementos salariales del trabajador vinculados a su persona o al trabajo.",
+        "Aquellas cuyo origen no se encuentra en el trabajo, sino que obedece a circunstancias extraordinarias o gastos que el trabajador ha soportado como consecuencia de su actividad laboral.",
+        "Ninguna de las definiciones se corresponde con las percepciones económicas extrasalariales."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Qué tipo de material se consideraría el haba que viene escondida en el interior del Roscón de Reyes, a efectos de la contabilidad de una pastelería dedicada a su producción?",
+      "opts": [
+        "Materia Prima.",
+        "Material Auxiliar.",
+        "Material Incorporable."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál supone un ejemplo de Sistema de Retribución del Trabajo Humano en función de la cantidad:",
+      "opts": [
+        "Sistema de Tarifa Diferencial de Taylor.",
+        "Sistema de Primas Emerson.",
+        "Sistema de Retribución a Jornal."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál de estos tres sistemas emplea un coeficiente de participación del operado en el valor de la economía variable?",
+      "opts": [
+        "Sistema de Halsey.",
+        "Sistema de Rowan.",
+        "Sistema de Taylor."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de las siguientes opciones no supone un servicio exterior ocasional:",
+      "opts": [
+        "Reparaciones.",
+        "Servicios de Profesionales Independientes.",
+        "Arrendamientos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La depreciación por “evolución técnica o del comportamiento” recibe el nombre de:",
+      "opts": [
+        "Funcional.",
+        "Económica.",
+        "Física."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el criterio de valoración de Precio Última Compra:",
+      "opts": [
+        "No existe homogeneidad en los criterios de valoración, por eso, el saldo se dice que no es representativo.",
+        "Es el criterio de valoración más optativo que existe.",
+        "A y B son incorrectas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Marca la opción incorrecta sobre los rasgos característicos de los suministros:",
+      "opts": [
+        "Su conexión se efectúa habitualmente mediante la conexión de una red de distribución.",
+        "Son bienes almacenables.",
+        "Las magnitudes compra y consumo coinciden en el tiempo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El sistema de tarifa diferencial de Taylor:",
+      "opts": [
+        "Perjudica al mal trabajador.",
+        "Incentiva al buen trabajador.",
+        "A y B son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de amortización:",
+      "opts": [
+        "El propio uso es el único factor que afecta al coste de amortización.",
+        "Es una magnitud relativa ya que da la posibilidad de elegir el criterio de amortización.",
+        "A y B son correctas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El criterio simple de amortización se caracteriza por:",
+      "opts": [
+        "No poder ser usado para un grado de rendimiento diferente durante la vida del bien.",
+        "Si puede ser utilizado para un grado de ocupación diferente.",
+        "Si puede ser utilizado para un grado de ocupación diferente."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Criterio tecnificado de amortización:",
+      "opts": [
+        "Tiene un tiempo base homogéneo.",
+        "No puede ser utilizado para un grado de ocupación diferente.",
+        "A y B son correctas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Se entiende por coste:",
+      "opts": [
+        "Siempre que hablamos de coste existe un sacrificio de factores.",
+        "Necesariamente tenemos que valorarlo monetariamente.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En cuanto a la conceptualización del coste:",
+      "opts": [
+        "El coste real depende del consumo y de los precios.",
+        "El coste real depende del consumo.",
+        "El coste real expresa las cantidades de factores consumidos en la producción y valorados."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estas afirmaciones es correcta:",
+      "opts": [
+        "Un coste caracterizado como fijo a nivel global de la empresa puede que lo sea como variable al nivel de un centro de actividad particular.",
+        "La fijeza de un coste implica que necesariamente se mantenga constante en sucesivos periodos.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estos requisitos no es necesario de la unidad de medida de la actividad:",
+      "opts": [
+        "Ser representativa de las condiciones tecnológicas imperantes en el centro.",
+        "Facilitar la imputación al coste total del centro a los receptores de sus prestaciones.",
+        "Que exista un reparto equitativo entre todos los receptores."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estos costes se asigna a los centros mediante claves de distribución:",
+      "opts": [
+        "Servicios de limpieza.",
+        "Mano de obra.",
+        "Amortización del equipo productivo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los criterios políticos o convenidos de valoración aplicables a los consumos de materiales:",
+      "opts": [
+        "Siempre toman como referencia los precios de adquisición.",
+        "Valor del stock inicial + Valor de las comprar · Valor de los consumos = Valor del stock final.",
+        "Se aplican con la finalidad de proteger a la empresa llevando a cabo una infravaloración de los materiales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En los sistemas de retribución del trabajo humano, la prima:",
+      "opts": [
+        "Se recibe cuando el ejercicio del trabajo excede del volumen de producción programado.",
+        "Es un porcentaje variable del valor de la economía de tiempo logra en función de la antigüedad del operario en la empresa.",
+        "Consiste en la remuneración mínima garantizada en función del tiempo trabajado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Inciden en el coste horario:",
+      "opts": [
+        "El tiempo en estado parado y el tiempo inactivo.",
+        "El tiempo inhábil y el tiempo no aplicado.",
+        "El tiempo complementario y el tiempo de preparación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Para el criterio tecnificado de amortización en función del uso:",
+      "opts": [
+        "El coste estimado de la unidad genérica del servicio es la relación entre el valor amortizable y la vida útil expresada en unidades de servicio.",
+        "No se utilizan coeficientes correctores expresivos del grado de ocupación.",
+        "Hay que determinar el tiempo homogéneo correspondiente al periodo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los recursos financieros:",
+      "opts": [
+        "No constituye un factor de coste para la empresa.",
+        "Se entiende su coste como el sacrificio que supone renunciar a invertidos y darles un rendimiento.",
+        "Las respuestas A y B son incorrectas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la opción correcta en relación a los criterios políticos o convenidos:",
+      "opts": [
+        "Precio medio continuo.",
+        "Precio FIFO, modalidad estricta.",
+        "Precio del día actual o de reposición."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estas opciones es falsa en relación a los suministros:",
+      "opts": [
+        "Bienes no almacenables, tangibles o intangibles.",
+        "Su consumo no requiere de una red de distribución interior en la empresa.",
+        "Existe una coincidencia temporal entre las magnitudes compra y consumo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la opción correcta en relación al sistema de primas Rowan:",
+      "opts": [
+        "Es un sistema de retribución del trabajo humano en función de la cantidad.",
+        "Es un sistema de retribución del trabajo humano en función del tiempo.",
+        "Es un sistema de retribución del trabajo humano mixto individual."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los viajes son:",
+      "opts": [
+        "Son un tipo de servicio ocasional.",
+        "Son un tipo de servicio habitual.",
+        "Son un tipo de servicio mixto."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En los criterios reales de valoración aplicables a los consumos de materiales:",
+      "opts": [
+        "Su valor inicial más el valor de las compras menos el valor de los consumos es igual al valor del stock final.",
+        "Su valor inicial más el valor de las compras menos el valor de los consumos es distinto al valor del stock final.",
+        "Los criterios reales no son criterios de valoración aplicables a los consumos de materiales."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Precio de última compra, precio de reposición, precio NIFO y precio LIFO:",
+      "opts": [
+        "Están dentro de los criterios reales de valoración.",
+        "Están dentro de los criterios políticos convenidos.",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El sistema de retribución del trabajo humano de las primas de Halsey:",
+      "opts": [
+        "Es un sistema de retribución en función de la cantidad.",
+        "Es un sistema de retribución mixto.",
+        "Es un sistema de retribución en función del tiempo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los criterios de amortización en función del uso pueden ser:",
+      "opts": [
+        "Constantes y variables.",
+        "Constantes y simples.",
+        "Simples y tecnificados."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La depreciación ordinaria o económica:",
+      "opts": [
+        "Es la pérdida de valor por la evolución técnica o del comportamiento.",
+        "Es la pérdida de valor por el mero trascurso del tiempo o por su uso.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Hablamos de materiales incorporables cuando nos referimos a:",
+      "opts": [
+        "Materiales que son centro de la actividad productiva.",
+        "Materiales que no constituyendo la base de la actividad productiva aparecen en el producto al final de su transformación.",
+        "Materiales que no aparecen en la configuración final del producto pero que su consumo está relacionado con la actividad de la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Un rasgo no característico de los suministros es:",
+      "opts": [
+        "Son bienes adquiridos por la empresa al mundo extremo, susceptibles de almacenamiento.",
+        "Se consideran costes indirectos.",
+        "Pueden ser tangibles o intangibles."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Dentro de los sistemas de retribución del trabajo humano sabemos que la prima Halsey:",
+      "opts": [
+        "Se halla con la diferencia entre el tiempo previsto y el real multiplicado por la retribución por unidad de tiempo.",
+        "Es el producto de la diferencia entre el tiempo previsto y el tiempo real, el coeficiente de participación y la retribución por unidad de tiempo.",
+        "Se expresa tal que así: Prima = (MOr - MOs) x p x k."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Rechaza la expresión errónea:",
+      "opts": [
+        "1 > r > 0.",
+        "0 < q > 0.",
+        "1 < q > 0."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuándo hablamos de depreciación por reducción de capacidad de uso de un factor productivo?",
+      "opts": [
+        "Cuando nos referimos a depreciación ordinaria física.",
+        "Cuando estamos hablando de depreciación ordinaria funcional.",
+        "Cuando nos hallamos ante depreciación económica."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En cuál de estos sistemas de retribución del trabajo el coeficiente de participación del operario en el valor de la economía de tiempo es variable de forma directamente proporcional al tiempo realmente empleado e inversamente proporcional al tiempo previsto:",
+      "opts": [
+        "Tarifa diferencial de Taylor.",
+        "Sistema de Rowan.",
+        "Sistema Halsey."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La “ineficiencia norma” que pueden sufrir los materiales durante su aplicación al proceso productivo:",
+      "opts": [
+        "Por tratarse de una ineficiencia normal se trasladan directamente al resultado periódico.",
+        "Si es de carácter regular debe repercutirse de forma homogénea entre los diferentes órdenes de fabricación a través de un coeficiente corrector que se aplicará a cada orden de fabricación en función de su respectiva producción.",
+        "Si es de carácter irregular debe repercutirse de forma homogénea entre los diferentes órdenes de fabricación a través de un coeficiente corrector que se aplicara a cada orden de fabricación en función de su respectiva producción."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación al coste de personal:",
+      "opts": [
+        "Se considera siempre como gasto de personal.",
+        "No se puede tomar el coste de personal como gasto de personal.",
+        "El coste de personal nunca se considera como un gasto."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál es el significado de la amortización técnica de un inmovilizado?",
+      "opts": [
+        "La estimación de la depreciación del inmovilizado.",
+        "La estimación del tiempo que durará su actividad en la empresa.",
+        "La devolución del dinero que nos han prestado para comprar el inmovilizado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Para la valoración del consumo de materiales:",
+      "opts": [
+        "Existen dos criterios, reales y políticos o convenidos.",
+        "El precio de la última compra es una opción dentro del criterio real.",
+        "Ninguna respuesta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Respecto a los suministros de la empresa:",
+      "opts": [
+        "Son bienes almacenables.",
+        "Para su consumo no es necesario la instalación de una red de distribución en la empresa.",
+        "Se produce, temporalmente, una coincidencia entre las magnitudes compra y consumo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entre los componentes del coste de personal se encuentran:",
+      "opts": [
+        "Las pagas extraordinarias.",
+        "Aportaciones a la Seguridad Social.",
+        "Las dos respuestas anteriores son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de amortización:",
+      "opts": [
+        "Es un coste referente al área comercial.",
+        "Representa la cuantificación del valor sacrificado por su utilización productiva.",
+        "Ninguna respuesta es incorrecta."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entendemos por Periodo Medio de Maduración (PMM):",
+      "opts": [
+        "Tiempo medio que tarda una empresa en recuperar una unidad invertida.",
+        "Tiempo que permanecen en el almacén los inputs.",
+        "Tiempo que dura el proceso productivo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Según el Plan General de Contabilidad (2007), los combustibles…",
+      "opts": [
+        "Se definen como la electricidad y cualquier otro abastecimiento que no tuviera la condición de almacenable.",
+        "Se definen como materias energéticas susceptibles de almacenamiento.",
+        "Son principalmente la electricidad, el agua, gas (ciudad o natural)."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Forman parte de los componentes del coste de personal:",
+      "opts": [
+        "Salario base, gratificaciones o pagas extraordinarias, aportaciones de la empresa a la Seguridad Social.",
+        "Componentes salariales: i. Complementos vinculados a la persona. ii. Complementos vinculados al trabajo realizado. iii. Complementos vinculados a la situación y resultados de la empresa.",
+        "Las dos anteriores son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cómo se calcula el coste horario de personal?",
+      "opts": [
+        "Coste estimado anual / Tiempo estimado de prestación real.",
+        "Tiempo estimado de prestación real / Coste estimado anual.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale el enunciado incorrecto respecto a las características del coste de amortización:",
+      "opts": [
+        "Representa la cuantificación del valor sacrificado por su utilización.",
+        "Es una magnitud exacta desde el inicio de la vida del bien.",
+        "Es una magnitud esencialmente relativa, pues su determinación se basa en una serie de hipótesis incontrastables hasta el término de la vida útil del bien."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El valor a amortizar es:",
+      "opts": [
+        "La diferencia entre el valor inicial y el valor residual (Vo - Vr).",
+        "La diferencia entre el valor residual y el calor inicial (Vr - Vo).",
+        "Es la vida útil del equipo (n)."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Para determinar el valor de adquisición de materiales de la empresa:",
+      "opts": [
+        "Al importe bruto convenido con el proveedor se le descontarán además de los gastos adicionales los descuentos y bonificaciones comerciales.",
+        "En el valor de la compra no se tienen en cuenta los impuestos no recuperables.",
+        "Al importe bruto convenido con el proveedor hay que añadirle los distintos gastos adicionales entre ellos los gastos en seguro y acarreos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación con los criterios de valoración del consumo de materiales:",
+      "opts": [
+        "Distinguiremos entre un criterio convenido y un criterio real en tanto para que el primero (valor del stock inicial más las compras menos el valor de lo consumo equivale al valor del stock final y para el segundo no.",
+        "Hay que tener en cuenta que estamos hablando de unidades monetarias, ya que la igualdad en términos de unidades físicas siempre se cumpliría.",
+        "En el criterio político podemos encontrarnos con los criterios de agotamiento de existencias."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Forma parte la Seguridad Social a cargo de la empresa también del coste de personal?",
+      "opts": [
+        "Sí, lo que no se incluye es el coste de la Seguridad Social a cargo del trabajador.",
+        "Sí, lo que no se incluye es el complemento vinculado a la situación de la empresa.",
+        "No, siempre será considerado como coste a cargo del trabajador."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de amortización se caracteriza:",
+      "opts": [
+        "Por aplicarse al proceso de producción de factores estructurales con una vida útil ilimitada.",
+        "Su criterio tecnificado persigue el mismo coste de amortización a un objeto de coste con independencia del momento de su vida útil.",
+        "Dentro de los criterios de amortización destacan los criterios de amortización en función del uso: simple, tecnificado, ambos tienen carácter financiero."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El flujo periódico de un inmovilizado es:",
+      "opts": [
+        "La amortización, para la que la empresa debe mantener una inmovilización tanto mayor en cuanto nos indique el cociente entre la inversión media en inmovilizado y la cuota anual de amortización.",
+        "La amortización, para la que la empresa debe mantenerse una inmovilización tanto mayor en cuanto mayor es la vida útil del mismo si se calcula por el método lineal.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Se entiende por coste:",
+      "opts": [
+        "Siempre que hablamos de coste existe un sacrificio de factores.",
+        "Necesariamente tenemos que valorarlo monetariamente.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En cuanto a la conceptualización del coste:",
+      "opts": [
+        "El coste real depende del consumo y de los precios.",
+        "El coste real depende del consumo.",
+        "El coste real expresa las cantidades de factores consumidos en la producción y valorados."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señala cuál de estas afirmaciones es correcta:",
+      "opts": [
+        "Un coste caracterizado como fijo a nivel global de la empresa puede que lo sea como variable al nivel de un centro de actividad particular.",
+        "La fijeza de un coste implica que necesariamente se mantenga constante en sucesivos periodos.",
+        "Ambas respuestas son correctas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estos requisitos no es necesario de la unidad de medida de la actividad:",
+      "opts": [
+        "Ser representativa de las condiciones tecnológicas imperantes en el centro.",
+        "Facilitar la imputación al coste total del centro a los receptores de sus prestaciones.",
+        "Que exista un reparto equitativo entre todos los receptores."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de estos costes se asigna a los centros mediante claves de distribución:",
+      "opts": [
+        "Servicios de limpieza.",
+        "Mano de obra.",
+        "Amortización del equipo productivo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la afirmación falsa:",
+      "opts": [
+        "El coste real depende del consumo y de los precios.",
+        "El coste real depende del consumo.",
+        "El coste monetario depende del consumo y de los precios."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cómo se denomina a los costes que permanecen inalterados durante un periodo o intervalo y que superan con un salto?",
+      "opts": [
+        "Costes de estructura o en estado parado.",
+        "Costes semifijos o variables a saltos.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste intermedio de un lugar es…",
+      "opts": [
+        "La suma de su coste primario y el coste secundario de otros lugares auxiliares con los que se mantienen relaciones recíprocas.",
+        "La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que se mantienen relaciones recíprocas.",
+        "La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no se mantienen relaciones recíprocas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuáles son los factores subjetivos condicionantes del proceso de segmentación?",
+      "opts": [
+        "El tipo de actividad desarrollada, la dimensión de la empresa, las peculiaridades organizativas y el nivel tecnológico.",
+        "La finalidad perseguida con la implantación de un sistema informativo para el ámbito interno y la experiencia y competencia del personal técnico.",
+        "La experiencia y competencia del personal técnico y las peculiaridades organizativas de la producción."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son costes fijos:",
+      "opts": [
+        "Costes de estructura.",
+        "Costes proporcionales.",
+        "Costes reversibles."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son costes variables:",
+      "opts": [
+        "Costes irreversibles.",
+        "Costes de puesta en marcha.",
+        "Costes de estructura."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la respuesta incorrecta:",
+      "opts": [
+        "Un proceso productivo puede caracterizarse como una transformación, según una determinada técnica de factores productivos en producto.",
+        "Los factores productivos son cada uno de los recursos económicos o medios de producción naturales o previamente elaborados, que son utilizados en la función de transformación económica, sea esta industrial, comercial o financiera.",
+        "Los costes fijos son aquellos que fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de amortización sea lineal o en función de su utilización será:",
+      "opts": [
+        "Siempre un coste fijo.",
+        "Siempre un coste variable.",
+        "Podrá ser tanto un coste fijo como un coste variable."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Como unidades de cantidad se pueden tomar las siguientes (señale la respuesta incorrecta):",
+      "opts": [
+        "El valor de los materiales consumidos.",
+        "Kilogramos comprados.",
+        "Peso."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes fijos se caracterizan por:",
+      "opts": [
+        "Ser iguales en una empresa durante varios ejercicios.",
+        "Son independientes de la producción y no varían en la empresa durante varios ejercicios.",
+        "Aquellos que no fluctúan frente a una variación en el volumen de producción."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Marque la opción correcta:",
+      "opts": [
+        "La empresa incurre en costes de estructura cuando lleva a cabo una actividad.",
+        "Los costes semifijos o variables a saltos se caracterizan por ser inalterables durante un ejercicio.",
+        "Los costes no necesarios son los que soporta la empresa y tienen que ser identificables para saber los excesos que tiene en un periodo determinado."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El concepto de Rotación:",
+      "opts": [
+        "Se refiere al tiempo en que una unidad monetaria permanece dentro de la empresa.",
+        "El aumento de este provocará un empeoramiento en la productividad.",
+        "Proceso por el cual se renueva el número de existencias dentro de la empresa."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los requisitos de la unidad de medida de la actividad:",
+      "opts": [
+        "Representar cualitativamente las prestaciones realizadas por el centro.",
+        "Tener en cuenta los cambios en la estructura de la empresa.",
+        "Ser apta para formular el coste total del centro como una función del número de unidades de actividad."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son costes que se asignan a los centros mediante claves de distribución:",
+      "opts": [
+        "La mano de obra a través de la estadística.",
+        "Los materiales de conservación a través de la estadística de consumos.",
+        "El servicio de limpieza a través de una superficie ocupada (m^2)."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste semifijo:",
+      "opts": [
+        "Es el que una empresa soporta en caso de inactividad total.",
+        "Es el incremento del valor entre el coste total de un volumen de producción a otro mayor.",
+        "Se mantiene inalterado durante un tiempo hasta que sufren un brusco cambio (variable a saltos)."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El fenómeno de la histéresis de los costes consiste en que:",
+      "opts": [
+        "Al descender el volumen de producción, los costes totales son mayores que los correspondientes a esos mismos niveles cuando la producción era creciente.",
+        "Los costes de la mano de obra y el equipo productivo no existirán al comienzo del periodo.",
+        "El coste asociado a un volumen concreto no depende de cómo se alcanza."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la producción paralela:",
+      "opts": [
+        "Técnicamente cada rama puede desenvolverse, pero se llega a la conclusión de que los distintos medios pueden llegar a productos diferentes en l misma planta de producción.",
+        "Cada rama de producción da lugar a un producto y los medios que intervienen no afectan al resto (no hay interacción aunque coexistan en la empresa).",
+        "Es acumulativa, ocurre con subproductos (ej: la industria del mueble, donde el mueble es el producto principal y el serrín subproducto)."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La operación de redistribución:",
+      "opts": [
+        "Traslada los costes de los centros principales al producto.",
+        "Se realiza para los costes directos.",
+        "La llevan a cabo los lugares auxiliares en la fase de localización."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los coeficientes de participación:",
+      "opts": [
+        "Son lo mismo que las unidades de actividad.",
+        "Sobre su base se pueden liquidar las prestaciones internas a costes retrospectivos.",
+        "Las respuestas A y B son correctas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste real:",
+      "opts": [
+        "Se refiere a las cantidades de factores consumidos o sacrificados en la producción.",
+        "Depende del consumo.",
+        "A y B son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Halamos de costes semifijos reversibles:",
+      "opts": [
+        "Al referirnos a los costes no necesarios o de subactividad.",
+        "Cuando podemos volver a la situación anterior.",
+        "Cuando nos referimos a aquellos costes que la empresa debe soportar aun en el caso de inactividad total."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la respuesta correcta:",
+      "opts": [
+        "La unidad de trabajo es la célula básica de actividad, integrada generalmente por uno o más medios estructurales y su correspondiente dotación de personal.",
+        "La productividad es la medida del grado de aprovechamiento del potencial productivo de los factores.",
+        "La producción alternativa es aquella en la que no hay interferencias entre las distintas ramas de producción."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entre los costes que se asignan directamente a los centros en función del consumo registrado en cada uno de los mismos nos encontramos:",
+      "opts": [
+        "Materiales de conservación, servicios de limpieza y energía eléctrica.",
+        "Energía eléctrica, seguros y servicios de limpieza.",
+        "Materiales de conservación, mano de obra y amortización del equipo productivo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste intermedio:",
+      "opts": [
+        "Es el coste que tenemos de un lugar antes de sumarle sus costes auxiliares.",
+        "Es la suma del coste primario de un lugar y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no mantienen relaciones recíprocas.",
+        "Es la suma del coste primario y de los costes secundarios recibidos de otros lugares auxiliares con los que se mantienen relaciones recíprocas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El comportamiento de una empresa ante hipotéticas variaciones en su volumen de producción dependerá del horizonte temporal considerado, realizando una adaptación parcial a corto plazo o una adaptación total a largo plazo. Señale la opción correcta:",
+      "opts": [
+        "La adaptación parcial incidirá solamente sobre los costes variables.",
+        "La adaptación total incidirá solamente sobre los costes variables.",
+        "La aportación total incidirá solamente sobre los costes fijos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Se consideran costes variables:",
+      "opts": [
+        "Los costes de puesta en marcha o de preparación de la producción.",
+        "Los costes reversibles.",
+        "Los costes degresivos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Es un método para analizar el comportamiento de los costes:",
+      "opts": [
+        "FIFO.",
+        "Precio medio ponderado.",
+        "Mínimo cuadrados."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los factores condicionantes del proceso de segmentación pueden ser objetivos o subjetivos. Es un factos objetivo:",
+      "opts": [
+        "El tipo de actividad desarrollada.",
+        "La comprensión de la realidad técnico-económica de la empresa.",
+        "La capacidad para interpretar las relaciones técnicas en términos de costes."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son costes que se asignan a los centros mediante claves de distribución:",
+      "opts": [
+        "La energía eléctrica: potencia instalada.",
+        "Amortización del equipo productivo: mediante la identificación del centro que se utiliza.",
+        "Mano de obra: a través de la estadística de tiempo aplicado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste monetario es:",
+      "opts": [
+        "La cantidad de factores consumidos o sacrificados en la producción. Dependen del consumo.",
+        "La valoración de la cantidad de factores consumidos en la producción. Depende del consumo y de los precios.",
+        "Las respuestas A y B son falsas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En los costes de estructura o en estado parado:",
+      "opts": [
+        "Aunque no se produzca nada, se incurre en determinados costes (caso de inactividad total).",
+        "Se activan los costes fijos desde que se produzca una unidad.",
+        "Dependen del volumen de producción."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La productividad es:",
+      "opts": [
+        "La medida o grado de aprovechamiento del potencial productivo de los factores.",
+        "Cada uno de los recursos económicos o medios de producción, utilizados en la función de transformación económica.",
+        "Capacidad o aptitud que poseen los factores para la obtención de uno o más bienes."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Dos de los requisitos de la unidad de medida de la cantidad son:",
+      "opts": [
+        "Debe ser apta para formular el CT del centro como una función del número de unidades de actividad y además debe facilitar la imputación del CT del centro a los receptores de sus prestaciones.",
+        "La relevancia del montante del CT del centro y la posibilidad de identificar los consumos de factores por el centro.",
+        "Ninguna de las respuestas anteriores es la correcta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de centros auxiliares:",
+      "opts": [
+        "Es un coste indirecto que se imputa directamente al coste del producto a través de la distribución.",
+        "Es un coste directo que se afecta directamente al coste de los productos.",
+        "Es un coste indirecto que se redistribuye al coste de los centros principales para ser imputados entonces al coste de los productos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes fijos:",
+      "opts": [
+        "Son aquellos que no fluctúan frente a una variación en el volumen de producción.",
+        "Varían en función de la producción.",
+        "No se consideran como un coste para la empresa."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Indique la respuesta correcta:",
+      "opts": [
+        "El coste real depende del consumo y de los precios.",
+        "El coste real depende del consumo.",
+        "El coste monetario es igual que el coste real."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Respecto a los costes no necesarios, de la subjetividad o costes por exceso de capacidad:",
+      "opts": [
+        "Su existencia se basa en las decisiones adoptadas en el pasado que reducen el campo de actuación del empresario en el presente.",
+        "Son costes asociados a la mano de obra y al equipo productivo existentes al comienzo de un periodo y deben permanecer durante el mismo en la empresa.",
+        "Las dos respuestas anteriores son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "A la hora de liquidar los costes de los centros auxiliares:",
+      "opts": [
+        "Es indiferente siempre el orden en que se lleve a cabo.",
+        "Cuando existen lugares recíprocos, la liquidación se realiza en paralelo.",
+        "Las dos respuestas anteriores son incorrectas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste intermedio de un centro se define como:",
+      "opts": [
+        "La suma de su coste primario y el coste secundario de otros lugares auxiliares con los que se mantienen relaciones recíprocas.",
+        "La suma de su coste primario y la parte del coste secundario correspondiente la valoración de las prestaciones recibidas de otros lugares auxiliares con los que se mantienen relaciones recíprocas.",
+        "La suma de su coste primario y la parte del coste secundario con los que no se mantienen relaciones reciprocas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la opción correcta en relación al coste real:",
+      "opts": [
+        "Son cantidades de factores consumidos en la producción, valorados.",
+        "Depende del consumo.",
+        "Depende del consumo y de los precios."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la opción correcta en torno a la precisión de la fijeza o variabilidad de los costes:",
+      "opts": [
+        "Un coste caracterizado como fijo a nivel global de la empresa también lo será a nivel de un centro de actividad particular.",
+        "La fijeza de un coste implica necesariamente que se mantenga constante en sucesivos periodos.",
+        "Conviene precisar la variable independiente en base a la cual se establece la relación funcional: alternativas y dificultades en su elección."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son costes semifijos:",
+      "opts": [
+        "Costes de estructura o en estado parado.",
+        "Costes reversibles.",
+        "Costes degresivos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de las siguientes alternativas está considerada como coste variable:",
+      "opts": [
+        "Coste progresivo.",
+        "Coste reversible.",
+        "Coste en estado parado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Atendiendo a la clasificación según el modelo de participación en el proceso productivo, distinguimos:",
+      "opts": [
+        "Factores estructurales, para perfeccionamiento y colaboradores.",
+        "Factores limitativos y sustitutivos.",
+        "Ambas son incorrectas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El tiempo material es la suma de:",
+      "opts": [
+        "Tiempo de transporte más Tiempo de estacionamiento más Tiempo de inspección.",
+        "El Tiempo de elaboración más el Tiempo sin valor añadido.",
+        "El Tiempo sin valor añadido menos el Tiempo de elaboración."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale cuál de los siguientes factores condicionantes del proceso de segmentación es un factor objetivo:",
+      "opts": [
+        "La experiencia y competencia del personal técnico.",
+        "La dimensión de la empresa.",
+        "Ambas incorrectas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál de los siguientes pertenece a la categoría de coste que se asigna directamente a los centros, en función del consumo registrado en ellos?",
+      "opts": [
+        "Coste de energía eléctrica.",
+        "Amortización del equipo productivo.",
+        "Servicios de limpieza."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste monetario:",
+      "opts": [
+        "Únicamente depende del consumo.",
+        "Depende del consumo y de los precios.",
+        "Solo depende de los precios."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste es una magnitud esencialmente relativa, debido a:",
+      "opts": [
+        "La indeterminación a menudo asociada a la medida y valoración de los consumos.",
+        "La indeterminación inherente a la asignación del coste incurrido a los centros de actividad y a los productos.",
+        "Las dos anteriores son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes fijos:",
+      "opts": [
+        "No fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.",
+        "Fluctúan frente a una variación en el volumen de producción.",
+        "Nunca van a ser costes de estructura."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los centros de coste formales o virtuales:",
+      "opts": [
+        "Carecen de vinculación con la realidad organizativa de una empresa.",
+        "Su razón de ser ha de buscarse en a utilidad que reportan, y en las necesidades derivadas de las características de los modelos contables donde se inscriben.",
+        "Las dos anteriores son correctas."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Respecto a la liquidación interna de los lugares de coste:",
+      "opts": [
+        "Puede describirse como el proceso en virtud del cual se lleva a cabo la redistribución del coste primario de mantenimiento de los lugares auxiliares hasta su total absorción, en la medida que corresponda, por los lugares principales con los que interrelacione.",
+        "Existe un único método para poder realizar la liquidación: con el procedimiento del tanteo.",
+        "Cuando existen lugares de coste auxiliares recíprocos, no podemos liquidar paralelamente."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Cuál de las siguientes acepciones de coste no es correcta?",
+      "opts": [
+        "Coste real: son cantidades de factores consumido o sacrificados en la producción.",
+        "El coste real no depende del consumo.",
+        "El coste monetario depende del consumo y de los precios."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Alguna de esta magnitud no es considerada para calcular el rendimiento de una unidad de trabajo, ¿de cuál estaríamos hablando?",
+      "opts": [
+        "Consumo real.",
+        "Tiempo programado.",
+        "Tiempo empleado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los factores de producción clasificados según el modo de participación en el proceso productivo son:",
+      "opts": [
+        "Factores estructurales, colaboradores y sustitutivos.",
+        "Factores sustitutivos y limitativos.",
+        "Factores estructurales, para el perfeccionamiento y colaboradores."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "¿Qué consideramos por coste intermedio de un lugar?",
+      "opts": [
+        "Son los costes primarios de ese lugar más una parte de sus costes secundarios correspondientes a la valoración de las prestaciones recibidas de los centros principales.",
+        "Son los costes primarios de ese lugar más una parte de sus costes secundarios correspondientes a la valoración de las prestaciones recibidas de los centros auxiliares con los que mantiene relaciones recíprocas.",
+        "Es su coste primario más todo su coste secundario."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la cuestión errónea:",
+      "opts": [
+        "La estadística de costes es un documento que contiene la distribución de todos los costes indirectos entre los distintos centros de la empresa y la redistribución del coste de los centros auxiliares al resto de centros.",
+        "Los centros de coste virtuales no tienen vinculación alguna con la realidad organizativa de la empresa.",
+        "Liquidar un centro de coste significa dejar el coste de los centros auxiliares en signo negativo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el proceso de cálculo:",
+      "opts": [
+        "La fase de clasificación tiene por objeto la identificación, delimitación y cálculo del valor de los factores adquiridos en un periodo.",
+        "En la fase de localización tiene lugar la distribución entre los centros de coste de los factores adquiridos en el periodo.",
+        "La fase de imputación consiste en el reparto de los costes incurridos en el periodo entre los portadores finales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste y el ingreso siempre coinciden en el tiempo, respectivamente, con:",
+      "opts": [
+        "La compra y la colocación.",
+        "El pago y el cobro.",
+        "El consumo y la venta."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entre los objetivos perseguidos con la Contabilidad de gestión se encuentran:",
+      "opts": [
+        "La determinación del resultado periódico externo, con criterios económicos.",
+        "El análisis, la evaluación y el control de las actividades productivas.",
+        "La descomposición del resultado externo en forma tal, que permita conocer la forma en que se ha generado."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Según que fluctúen más o menos que proporcionalmente frente a las variaciones en el volumen de producción, los costes variables se escinden en costes:",
+      "opts": [
+        "Regresivos y progresivos, respectivamente.",
+        "Progresivos y degresivos, respectivamente.",
+        "Degresivos y regresivos, respectivamente."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Entre los rasgos característicos de los suministros puede destacarse que en cada periodo se registra su coincidencia cuantitativa respecto de las magnitudes:",
+      "opts": [
+        "Gasto y compra.",
+        "Coste y consumo.",
+        "Gasto y coste."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Cuando se utiliza el criterio tecnificado de amortización en función del uso para una máquina, se persigue que si coste horario homogéneo:",
+      "opts": [
+        "No varíe según el tramo de la vida útil en la que nos encontremos.",
+        "Varíe según el tramo de la vida útil en la que nos encontremos.",
+        "Varíe según el coeficiente de rendimiento del activo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Si comparamos los resultados contables que se obtienen al aplicar a una misma empresa diferentes criterios de valoración de las salidas de almacén de los materiales, puede observarse que si la tendencia que siguen los precios de adquisición es bajista, el resultado del periodo será más favorable aplicando:",
+      "opts": [
+        "El criterio FIFO que el criterio NIFO.",
+        "El criterio LIFO que el criterio FIFO.",
+        "El criterio FIFO que el criterio del precio medio del periodo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste intermedio de un lugar recíproco se corresponde con:",
+      "opts": [
+        "La suma de su coste primario y de su coste secundario.",
+        "La suma de su coste primario y del valor de las prestaciones reciprocas recibidas.",
+        "La diferencia entre su coste total y el valor de las prestaciones recibidas de otros lugares recíprocos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la operación de distribución de las clases de coste entre los centros:",
+      "opts": [
+        "El orden a seguir resulta indiferente.",
+        "Debe comenzarse por los costes que se asignan directamente a los centros en función del consumo registrado en cada uno de los mismos.",
+        "Debe comenzarse por los costes que se asignan a los centros mediante claves de distribución."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En una estadística de costes:",
+      "opts": [
+        "Cuando se opera sobre la base de costes retrospectivos, incluso en el caso de existencia de autoconsumo, la totalidad de los costes de los centros auxiliares revierte sobre los principales.",
+        "Los costes secundarios representan los costes soportados por los centros en la operación de imputación.",
+        "Los costes primarios derivan de las prestaciones internas realizadas por los centros auxiliares."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Una empresa, después de hallar la ecuación representativa de sus costes totales, calculó el correspondiente coeficiente de determinación a efectos de juzgar la bondad del ajuste. Si el referido coeficiente fue de -0.98, el mismo podrá clasificarse de:",
+      "opts": [
+        "Pésimo.",
+        "Erróneo.",
+        "Excelente."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "De acuerdo con los defensores del enfoque del direct costing, los costes fijos derivan de la creación y mantenimiento de una determinada capacidad productiva, por lo que:",
+      "opts": [
+        "Su montante (de los costes fijos) se ve afectado por el grado de aprovechamiento de dicha capacidad.",
+        "Su montante (de los costes fijos) es independiente del grado de aprovechamiento de dicha capacidad.",
+        "Puesto que la posibilidad de utilizar dicha capacidad expira con el periodo, los costes fijos incurridos en cada periodo deben cargarse a la producción obtenida a lo largo del mismo."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La producción que, en un instante determinado, se encuentra dentro de una fase en estado de transformación, se denomina:",
+      "opts": [
+        "Producción semiacabada.",
+        "Producción a medias.",
+        "Producción en curso."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación con el tiempo operario, la suma del tiempo preparación y del tiempo transformación recibe el nombre de:",
+      "opts": [
+        "Tiempo activo.",
+        "Tiempo hábil.",
+        "Tiempo principal."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El sistema de retribución sobre la base de primas individuales con mínimo garantizado en el cual el coeficiente de participación del operario en la economía del tiempo es proporcional al tiempo real e inversamente proporcional al tiempo previsto se denomina:",
+      "opts": [
+        "Sistema de Rowan.",
+        "Sistema de Halsey.",
+        "Las dos respuestas anteriores son correctas."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación a los principios aplicables en el proceso de cálculo de costes:",
+      "opts": [
+        "El principio de proporcionalidad no tiene aplicabilidad en los sistemas inorgánicos de Contabilidad de gestión.",
+        "Todo método de cálculo se apoya en una hipótesis de proporcionalidad.",
+        "El principio de proporcionalidad sólo resulta aplicable en la fase de imputación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El método de cálculo de división por equivalencias:",
+      "opts": [
+        "Por sus propias características, presenta como limitación que si aplicación en la empresa no permite un cálculo diferenciado.",
+        "Es un método idóneo para empresas que operan en régimen de producción simple con presencia de producción intermedia.",
+        "Resulta incompatible con los sistemas orgánicos, dada su inevitable aplicación en forma globalizada."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el direct costing desarrollado:",
+      "opts": [
+        "Los costes son reclasificados en costes fijos comunes y costes fijos propios o específicos.",
+        "El margen semibruto se calcula restando a los ingresos por ventas los costes variables de producción y comercialización.",
+        "Se distingue entre costes intrínsecos y costes a reintegrar."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el contexto de la aplicación a un equipo productivo del criterio tecnificado de amortización en función del uso, se verifica que:",
+      "opts": [
+        "La duración del tiempo de aplicación efectiva y del tiempo real de aplicación puedan coincidir.",
+        "La duración del tiempo de aplicación efectiva es siempre inferior al tiempo real de aplicación.",
+        "La duración del tiempo de aplicación efectiva es siempre superior al tiempo real de aplicación."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el enfoque de full costing radical:",
+      "opts": [
+        "Los costes de distribución son auténticos costes del producto y, por tanto, se incluyen en el valor de la producción obtenida en el periodo.",
+        "Los costes intrínsecos fijos constituyen desinversiones de la empresa y, en consecuencia, no son inventariables.",
+        "Ninguna de las dos respuestas anteriores es correcta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La magnitud gasto representa:",
+      "opts": [
+        "El equivalente monetario de la compra de bienes o servicios, correspondiente a un periodo.",
+        "El equivalente monetario del consumo de factores realizados en un periodo.",
+        "En términos reales, la corriente de bienes y servicios adquiridos en un periodo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La magnitud colocación es una magnitud fundamental en el ámbito interno que:",
+      "opts": [
+        "Coincide con su equivalencia monetaria, el ingreso.",
+        "Siempre tiene lugar de forma simultánea a la venta.",
+        "Puede coincidir, o puede ser posterior, al momento de la venta."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El ámbito externo de la circulación económica está integrado por los subsistemas de:",
+      "opts": [
+        "Desinversión, financiación e inversión.",
+        "Inversión, producción y desinversión.",
+        "Financiación, inversión y producción."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes semivariables son aquellos que:",
+      "opts": [
+        "Están formados por una parte fija y otra variable.",
+        "Crecen de forma variable a saltos, comportándose de forma fija por intervalos.",
+        "Crecen y decrecen a saltos, comportándose de forma fija por intervalos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La caracterización de un coste como fijo:",
+      "opts": [
+        "Si es a nivel global de la empresa implica que también lo es a nivel de un centro de actividad particular.",
+        "No presupone que su importe se mantenga constante en sucesivos periodos.",
+        "Es independiente de las decisiones adoptadas en la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el ámbito de la contabilidad de gestión, el coste diferencial:",
+      "opts": [
+        "Equivale, en cierto modo, al coste marginal de la Teoría Económica.",
+        "Es conocido también como coste suplementario marginal.",
+        "Resulta del cociente entre el incremento del coste medio y el incremento de la producción que lo haya originado."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el proceso de cálculo de costes:",
+      "opts": [
+        "La fase de clasificación consiste en la identificación, la delimitación y el cálculo del valor de los factores adquiridos en un periodo.",
+        "La fase de localización consiste en la distribución entre los centros de coste de los factores adquiridos en el periodo.",
+        "La fase de imputación consiste en el reparto de los costes incurridos en el periodo a los portadores finales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Como enfoque de asignación de costes:",
+      "opts": [
+        "El full costing radical asigna a todos los costes del periodo a la producción colocada durante el mismo.",
+        "El direct costing simple asigna todos los costes variables a la producción del periodo.",
+        "El full costing atenuado asigna los costes intrínsecos a la producción del periodo."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El análisis de los enfoques de asignación de costes pone de manifiesto que:",
+      "opts": [
+        "Tanto en el direct costing simple como en el full costing atenuado, la totalidad de los costes comerciales incurridos en el periodo inciden en el resultado del ejercicio.",
+        "El direct costing simple valora la producción del periodo por un importe inferior que el direct costing desarrollado.",
+        "En el direct costing desarrollado los costes del periodo son inferiores a los computados como tales por el direct costing simple."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El criterio FIFO modalidad estricta:",
+      "opts": [
+        "Es un criterio político de valoración de los consumos que valora las existencias en almacén a los precios más recientes.",
+        "Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más recientes. E",
+        "Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más desfasados. &q los más desfasadas salan , Vansumo si a p desfasados"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El sistema de primas de Halsey:",
+      "opts": [
+        "Supone la aplicación de dos tipos diferentes de tarifas, de manera que la tarifa menor será de aplicación para aquellos casos en los que el trabajador tenga una labor deficiente, mientras que la mayor se aplicará si la labor de los operarios es satisfactoria.",
+        "Garantiza una remuneración mínima al operario en función del tiempo trabajado y establece una prima que consiste en un porcentaje variable del valor de la economía de tiempo lograda.",
+        "Garantiza una remuneración mínima al operario en función del tiempo trabajado y establece una prima que consiste en un porcentaje fijo del valor de la economía de tiempo lograda."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el contexto del cálculo del coste de los recursos financieros sobre la base de magnitudes flujo, en un periodo:",
+      "opts": [
+        "El montante de la inversión en factores circulantes es inferior al coste derivado de los factores circulantes.",
+        "El montante de la inversión en factores circulantes es igual al coste derivado de los factores circulantes.",
+        "El montante de la inversión en factores circulantes es superior al coste derivado de los factores circulantes."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El criterio tecnificado de amortización en función del uso es aplicable cuando:",
+      "opts": [
+        "Existe una disminución del rendimiento del bien hasta su retirada o fin de su vida útil.",
+        "Durante la vida útil del bien la productividad de la maquinaria sea constante.",
+        "Ninguna de las dos respuestas anteriores es correcta."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la determinación del coste de los recursos financieros propios, el tipo de interés calculatorio se aplicará sobre:",
+      "opts": [
+        "El montante del activo necesario para la actividad productiva.",
+        "El montante del activo necesario para la actividad productiva minorado en los fondos ajenos.",
+        "El montante del neto patrimonial."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la clasificación de los centros de coste en función de su nivel de agregación:",
+      "opts": [
+        "Las unidades de coste siempre coinciden con sus homólogas unidades de trabajo.",
+        "Los lugares de coste siempre coinciden con sus homólogos lugares de trabajo.",
+        "Las secciones de coste siempre coinciden con sus homólogas secciones de trabajo."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En una estadística de costes:",
+      "opts": [
+        "Cuando se opera sobre la base de costes retrospectivo, incluso en el caso de existencia de autoconsumo la totalidad de los costes de los centros auxiliares revierte sobre los principales.",
+        "Los costes secundarios representan los costes soportados por los centros en la operación de imputación.",
+        "Los costes primarios derivan de las prestaciones internas realizadas por los centros auxiliares."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la liquidación de una estadística de costes:",
+      "opts": [
+        "Caso de existencia exclusivamente de centros auxiliares de los principales, el orden de liquidación resulta indiferente.",
+        "Caso de existencia tanto de centros auxiliares de los principales como de centros auxiliares propiamente dichos, deben ser liquidados en primer término los primeros.",
+        "Caso de existencia tanto de centros auxiliares de los principales como de centros auxiliares propiamente dichos, el orden de liquidación resulta indiferente."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Portadores de coste ligados a la colocación:",
+      "opts": [
+        "En el enfoque del full costing radical serían, por ejemplo, los costes a reintegrar.",
+        "En el enfoque del direct costing simple serían, por ejemplo, el coste de trabajos realizados por la propia empresa para su inmovilizado.",
+        "En el enfoque del full costing atenuado serían, por ejemplo, los costes comerciales directos."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El método puro de división:",
+      "opts": [
+        "Consiste en dividir el número de unidades de producto tratadas entre el coste total.",
+        "Resulta inaplicable en aquellos centros donde los diferentes productos reciben un tratamiento uniforme a nivel individual.",
+        "Resulta desaconsejable, a nivel global, cuando la empresa opera en régimen de producción simple con existencias de producción en curso."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Señale la respuesta correcta:",
+      "opts": [
+        "El coste básico se forma por el coste de materia prima y el coste de la mano de obra indirecta.",
+        "Bajo el modelo inorgánico se prescinde de la fase de localización en el cálculo del coste del portados.",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En un determinado periodo una empresa ha adquirido 5000 kg de materiales a 4 €/kg, quedando pendiente de pago la cuarta parte al finalizar el periodo. Si el stock final asciende a 2000 kg, puede afirmarse respecto a los VeitVcompro materiales y el periodo considerado que: veg a a) El coste ascendió a 12000 €. -Consumo Usalidas no el anterio = ,",
+      "opts": [
+        "El consumo ascendió a 12000 €. [Sería correcta si dijera que ascendió a 3000 kg]",
+        "La compra ascendió a 20000€. [Sería correcta si dijera que el gasto ascendió a 20000 €]"
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El cobro y el pago son dos magnitudes flujo:",
+      "opts": [
+        "Inherentes al ámbito externo de la empresa.",
+        "Inherentes al ámbito interno de la empresa.",
+        "Coinciden en el tiempo con los gastos e ingresos."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Según que fluctúen más o menos que proporcionalmente frente a las variaciones en el volumen de producción los costes variables se escinden:",
+      "opts": [
+        "Regresivos y progresivos.",
+        "Progresivos y degresivos.",
+        "Regresivos y degresivos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes regresivos son aquellos que:",
+      "opts": [
+        "Decrecen de forma variable a saltos.",
+        "Decrecen al aumentar la producción.",
+        "Decrecen al disminuir la producción."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La magnitud coste:",
+      "opts": [
+        "Es una magnitud relativa debido a la indeterminación asociada a la medida y valoración de los consumos.",
+        "Es una magnitud relativa debido a la arbitrariedad de asignación de costes directos.",
+        "No es una magnitud relativa sino totalmente objetiva."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación con el tiempo operario, la suma del tiempo preparación y del tiempo transformación recibe el normbre de:",
+      "opts": [
+        "Principal.",
+        "Activo.",
+        "Hábil."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La producción que en un instante determinado se encuentra dentro de una fase en estado de transformación se denomina:",
+      "opts": [
+        "Producción a medias.",
+        "Producción en curso.",
+        "Producción semiacabada."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el direct cost desarrollado",
+      "opts": [
+        "Se introduce un paso intermedio entre el margen semibruto y el resultado del periodo que se denomina margen bruto.",
+        "Frente al margen semibruto, el margen bruto constituye un indicador más ajustado de la contribución de un producto al resultado alcanzado.",
+        "Los costes fijos son reclasificados en costes fijos comunes y costes fijos propios."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el método de imputación racional:",
+      "opts": [
+        "Se opera con un coste fijo unitario variable con el nivel de actividad alcanzado en el periodo.",
+        "Si la actividad real es inferior a la normal, una parte de los costes fijos no será absorbida por la producción.",
+        "Si la actividad real es inferior a la normal, todos los costes fijos del periodo serán absorbidos por la producción."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Cuando una empresa utiliza el criterio de amortización basado en el tiempo, el coste horario de amortización de un equipo productivo:",
+      "opts": [
+        "Variará en función de la productividad del tramo de la vida útil considerado.",
+        "Dependerá en cada periodo del nivel de utilización de su capacidad productiva.",
+        "No se verá afectado ni por la productividad ni por el nivel de utilización de su capacidad productiva."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El coste de amortización presenta entre otras las siguientes características:",
+      "opts": [
+        "Procede de la aplicación al proceso de producción de los factores estructurales con una vida útil limitada. [Si fuese ilimitada no habría amortización, por eso no es correcta]",
+        "Deriva del carácter pluri-periódico del consumo del equipo productivo.",
+        "Representa la cuantificación del valor sacrificado por su utilización improductiva. [Productiva, no improductiva]"
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El método de división por equivalencias:",
+      "opts": [
+        "Tiene una relación proporcional variable. [Es fija]",
+        "Se fundamenta en la relación empírica de las relaciones económicas existentes. [Son técnicas]",
+        "Pretende homogeneizar los productos al establecer las cifras de equivalencia."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En relación con los centros de costes ficticios o virtuales, escoja la incorrecta:",
+      "opts": [
+        "Carecen de vinculación con la realidad organizativa de la empresa",
+        "Agrupan costes de la empresa que nos interesa repartir para distribuir entre los centros de coste.",
+        "Son centros auxiliares de los principales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En la estadística de costes se cumple que:",
+      "opts": [
+        "La suma de los costes primarios de los centros principales coincide con la suma de los costes totales de los centros auxiliares.",
+        "La suma de costes indirectos coincide con la suma de los costes primarios asignados a los centros principales.",
+        "La suma de los costes primarios de todos los centros coincide con la suma de los costes totales de los centros principales."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El método de cálculo de suplementos electivos:",
+      "opts": [
+        "Se aplica tanto a empresas con un modelo orgánico de costes como a aquellas que usan un modelo inorgánico de costes. [Es propio de los inorgánicos, pero no exclusivo]",
+        "Imputa los costes indirectos eligiendo una base de reparto adecuada acudiendo normalmente para su elección a un análisis de regresión.",
+        "Ninguna de las dos anteriores es correcta."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el criterio del precio medio del periodo:",
+      "opts": [
+        "Puedo determinar simultáneamente el valor del consumo de materiales y el valor de las existencias que quedan en el almacén.",
+        "No puedo determinar el valor del consumo hasta que finalice el periodo.",
+        "Las dos anteriores son falsas."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El fenómeno de histéresis de costes tiene su causa en la existencia de:",
+      "opts": [
+        "Costes regresivos.",
+        "Costes semifijos irreversibles.",
+        "Costes degresivos."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los costes de subactividad forman parte del coste del producto:",
+      "opts": [
+        "En los sistemas de costes completos.",
+        "En los sistemas de costes parciales.",
+        "Los costes de subactividad no se asignan al producto."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Dentro del ámbito interno:",
+      "opts": [
+        "Consumo y gasto suponen magnitudes corrientes.",
+        "Producción y valor de la producción de un periodo suponen magnitudes corrientes.",
+        "Producción en stock y valor de la producción en stock suponen magnitudes corrientes."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los portadores de coste:",
+      "opts": [
+        "Son elementos conceptuales de la fase de imputación.",
+        "Siempre integran costes que valoran la producción.",
+        "Son exclusivamente los productos de la empresa."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Son entre otros fines de la contabilidad de gestión:",
+      "opts": [
+        "Estudio de las transacciones referentes a las inversiones que debe realizar la empresa.",
+        "La determinación del resultado externo de la empresa.",
+        "El suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los centros de coste recíprocos son centros:",
+      "opts": [
+        "Cuya actividad revierte directamente en centros principales.",
+        "Cuya actividad revierte directamente en la producción.",
+        "Que se encuentran dentro de la categoría de auxiliares comunes."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Los materiales auxiliares son materiales:",
+      "opts": [
+        "Que no se encuentran presentes en el producto final y cuyo coste guarda relación con el volumen de producción.",
+        "Presentes en el producto final y cuyo coste no guarda relación con el volumen de producción.",
+        "Presentes en el producto final y cuyo coste guarda relación con el volumen de producción."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "El precio de adquisición de una partida de materiales se calcula en relación a la cantidad de material:",
+      "opts": [
+        "Que figura en la factura del proveedor.",
+        "Efectivamente recibida en la empresa.",
+        "Solicitada por la empresa en el pedido al proveedor."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En un modelo orgánico a coste histórico y que sigue un enfoque de asignación de coste completo:",
+      "opts": [
+        "Se utilizan valores prospectivos en magnitudes relativas a los costes.",
+        "Se utilizan centros de coste, como elementos acumuladores intermedios de los costes.",
+        "No utiliza el portador de coste del producto, en la fase de imputación."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el marco del análisis de un proceso de producción:",
+      "opts": [
+        "El tiempo de sucesión es la suma del tiempo principal y del tiempo complementario.",
+        "El tiempo de sucesión es la suma del tiempo activo y del tiempo inactivo.",
+        "El tiempo de sucesión es la suma del tiempo de preparación y del tiempo transformación."
+      ],
+      "correct": 1
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En los suministros se registra una coincidencia temporal entre las magnitudes:",
+      "opts": [
+        "Compra y consumo.",
+        "Pago y consumo.",
+        "Pago y compra."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "En el sistema diferencial de Taylor, la tarifa retributiva superior se aplica a los trabajadores cuya producción se haya situado:",
+      "opts": [
+        "Bajo estándar.",
+        "En el estándar.",
+        "Sobre el estándar."
+      ],
+      "correct": 2
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "Cuando se utiliza un sistema de destajo puro, el coste de retribución del personal se comporta como:",
+      "opts": [
+        "Coste fijo.",
+        "Coste variable.",
+        "Coste semivariable."
+      ],
+      "correct": 0
+    },
+    {
+      "tema": "Contabilidad de Gestión - Examen",
+      "q": "La amortización es la expresión contable:",
+      "opts": [
+        "De la depreciación financiera que experimentan los medio estructurales.",
+        "De la depreciación ordinaria que experimentan los medios estructurales.",
+        "De la depreciación extraordinaria que experimentan los medios estructurales."
+      ],
+      "correct": 0
+    }
+  ]
+}

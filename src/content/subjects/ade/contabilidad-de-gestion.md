@@ -5,9 +5,8 @@ year: 4
 semester: 1
 credits: 6
 icon: "📒"
-status: planned
-materials: []
+status: available
+description: "Test interactivo con 269 preguntas corregidas al momento y PDF original de la asignatura."
+materials: [test, examen]
 ---
 
-<!-- Sin material todavía. Para añadirlo: crea un JSON en
-     src/content/materials/ade/contabilidad-de-gestion/ y abre un PR. -->
