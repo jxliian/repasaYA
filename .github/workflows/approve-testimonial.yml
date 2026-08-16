@@ -6,7 +6,7 @@ on:
 
 jobs:
   add-testimonial:
-    if: github.event.label.name == 'aprobado' && contains(github.event.issue.labels.*.name, 'reseña')
+    if: github.event.label.name == 'aprobado'
     runs-on: ubuntu-latest
     permissions:
       contents: write
