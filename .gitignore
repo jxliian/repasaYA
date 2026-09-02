@@ -5,5 +5,5 @@ dist/
 *.mp4
 *.webm
 .DS_Store
-.superpowers/brainstorm/
-
+.superpowers/
+docs/superpowers/
