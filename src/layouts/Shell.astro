@@ -32,7 +32,7 @@ const {
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const canonical = `https://jxliian.github.io/repasaYA${Astro.url.pathname}`;
+const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
 const pageTitle = title === 'repasaYA' ? 'repasaYA — Aprueba sin pagar ni un duro' : `${title} — repasaYA`;
 const year = new Date().getFullYear();
 ---

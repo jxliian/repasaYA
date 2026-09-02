@@ -25,7 +25,7 @@ interface Props {
 const { title, description, noindex = false } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const canonical = `https://jxliian.github.io/repasaYA${Astro.url.pathname}`;
+const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
 ---
 
 <!doctype html>
