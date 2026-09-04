@@ -432,10 +432,21 @@ const logoUrl = `${base}favicon.svg`;
       });
     }
 
-    // Formateador de texto Markdown a HTML limpio
-    function formatText(str) {
+    function escapeHtml(str) {
       if (!str) return '';
       return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Formateador de texto Markdown a HTML limpio (escapando código usuario)
+    function formatText(str, isUser = false) {
+      if (!str) return '';
+      const safeStr = isUser ? escapeHtml(str) : str;
+      return safeStr
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:0.8em">$1</code>');
@@ -489,7 +500,7 @@ const logoUrl = `${base}favicon.svg`;
         html = `
           <div class="msg-content">
             <span class="msg-sender">Tú</span>
-            <div class="msg-bubble">${formatText(text)}</div>
+            <div class="msg-bubble">${formatText(text, true)}</div>
           </div>
         `;
       } else {
@@ -499,7 +510,7 @@ const logoUrl = `${base}favicon.svg`;
           </div>
           <div class="msg-content">
             <span class="msg-sender">RepasaBot</span>
-            <div class="msg-bubble">${formatText(text)}</div>
+            <div class="msg-bubble">${formatText(text, false)}</div>
           </div>
         `;
       }
