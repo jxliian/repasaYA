@@ -249,14 +249,28 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
   .toast-notice.show { opacity: 1; }
 
+  #print-container {
+    display: none !important;
+  }
+
   @media print {
-    body * { visibility: hidden; }
-    #print-container, #print-container * { visibility: visible; }
-    #print-container { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; padding: 20px; font-family: sans-serif; }
+    body > * { visibility: hidden !important; }
+    #print-container, #print-container * { visibility: visible !important; display: block !important; }
+    #print-container {
+      display: block !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      color: #000;
+      background: #fff;
+      padding: 20px;
+      font-family: sans-serif;
+    }
     .print-q { margin-bottom: 18px; page-break-inside: avoid; }
     .print-q-title { font-weight: bold; margin-bottom: 6px; }
     .print-opt { margin-left: 16px; margin-bottom: 4px; }
-    .print-key { margin-top: 40px; border-top: 2px solid #333; padding-top: 16px; page-break-before: always; }
+    .print-key { margin-top: 40px; border-top: 2px solid #333; padding-top: 16px; page-break-before: auto; }
   }
 </style>
 
@@ -291,7 +305,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="usb-item"><span class="usb-val" id="usb-avg">-</span><span class="usb-lbl">Nota Media UGR</span></div>
         <div class="usb-item"><span class="usb-val" id="usb-streak">0</span><span class="usb-lbl">Racha Máx 🔥</span></div>
         <div class="usb-item"><span class="usb-val" id="usb-total">0</span><span class="usb-lbl">Simulacros</span></div>
-        <button class="btn-reset-stats" id="btn-reset-stats" title="Reiniciar estadísticas">🗑️</button>
+        <button class="btn-reset-stats" id="btn-reset-stats" onclick="resetUserStats(event)" title="Reiniciar estadísticas de esta asignatura">🗑️</button>
       </div>
 
       <div>
@@ -373,7 +387,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="tema-chips" id="tema-chips"></div>
       </div>
       <button class="btn-start" id="btn-start">Empezar →</button>
-      <button class="btn-print" id="btn-print">🖨️ Versión para Imprimir / PDF</button>
+      <button class="btn-print" id="btn-print" onclick="printExamSheet(event)">🖨️ Versión para Imprimir / PDF</button>
     </div>
 
     <div id="quiz-view" style="display:none">
@@ -390,7 +404,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="q-meta-line">
           <div class="q-tema-tag" id="q-tema"></div>
           <div style="display:flex;align-items:center;gap:8px">
-            <button class="btn-star-q" id="btn-star-q" title="Guardar pregunta favorita">⭐ <span id="star-txt">Favorita</span></button>
+            <button class="btn-star-q" id="btn-star-q" onclick="toggleStarCurrentQ(event)" title="Guardar pregunta favorita">⭐ <span id="star-txt">Favorita</span></button>
             <div class="q-type-badge" id="q-type-badge"></div>
           </div>
         </div>
@@ -542,12 +556,16 @@ function updateWeakChipCount() {
 function getStarredQuestions() {
   try {
     const raw = localStorage.getItem(STAR_KEY);
-    return raw ? JSON.parse(raw) : [];
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.filter(x => typeof x === 'string' && x.trim()) : [];
   } catch (e) { return []; }
 }
-function toggleStarCurrentQ() {
+function toggleStarCurrentQ(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
   if (!questions || !questions[idx]) return;
-  const qText = questions[idx].q;
+  const qText = String(questions[idx].q || '').trim();
+  if (!qText) return;
+
   let list = getStarredQuestions();
   if (list.includes(qText)) {
     list = list.filter(t => t !== qText);
@@ -564,7 +582,8 @@ function updateStarredState() {
   if (!questions || !questions[idx]) return;
   const btn = document.getElementById('btn-star-q');
   if (!btn) return;
-  const isStarred = getStarredQuestions().includes(questions[idx].q);
+  const qText = String(questions[idx].q || '').trim();
+  const isStarred = getStarredQuestions().includes(qText);
   btn.classList.toggle('is-starred', isStarred);
   const txt = document.getElementById('star-txt');
   if (txt) txt.textContent = isStarred ? 'Guardada' : 'Favorita';
@@ -610,13 +629,18 @@ function renderUserStats() {
     bar.style.display = 'none';
   }
 }
-function resetUserStats() {
+function resetUserStats(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
   if (confirm('¿Quieres reiniciar las estadísticas de esta asignatura?')) {
     localStorage.removeItem(STATS_KEY);
     renderUserStats();
     showToast('Estadísticas reiniciadas 🗑️');
   }
 }
+
+// Exponer en window para onclicks inline
+window.resetUserStats = resetUserStats;
+window.toggleStarCurrentQ = toggleStarCurrentQ;
 
 // Toast
 function showToast(msg) {
@@ -640,10 +664,11 @@ function selectMode(mode){
   });
   const examBox = document.querySelector('.exam-options-box');
   if (examBox) {
-    examBox.style.display = mode === 'quizz' ? 'none' : '';
+    examBox.style.display = (mode === 'quizz' || mode === 'starred' || mode === 'weak') ? 'none' : '';
   }
   renderChips();
 }
+window.selectMode = selectMode;
 selectMode(selectedMode);
 
 function getSourceForMode() {
@@ -655,12 +680,12 @@ function getSourceForMode() {
   if (selectedMode === 'weak') {
     const weakTexts = getWeakQuestions();
     const all = [...VF_DATA, ...TEST_DATA, ...QUIZZ_DATA];
-    return all.filter(q => weakTexts.includes(q.q));
+    return all.filter(q => q && q.q && weakTexts.includes(String(q.q).trim()));
   }
   if (selectedMode === 'starred') {
     const starredTexts = getStarredQuestions();
     const all = [...VF_DATA, ...TEST_DATA, ...QUIZZ_DATA];
-    return all.filter(q => starredTexts.includes(q.q));
+    return all.filter(q => q && q.q && starredTexts.includes(String(q.q).trim()));
   }
   return [...VF_DATA, ...TEST_DATA];
 }
@@ -1063,10 +1088,9 @@ function printExamSheet() {
   html += `</div></div>`;
 
   pContainer.innerHTML = html;
-  pContainer.style.display = 'block';
   window.print();
-  setTimeout(() => { pContainer.style.display = 'none'; }, 1000);
 }
+window.printExamSheet = printExamSheet;
 
 function shareResultWhatsApp() {
   const subjTitle = document.title.split('·')[0].trim();
