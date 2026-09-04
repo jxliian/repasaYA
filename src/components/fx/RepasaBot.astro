@@ -1,0 +1,440 @@
+---
+/**
+ * RepasaBot — Asistente Inteligente Flotante para repasaYA.
+ * Ubicado en la esquina inferior izquierda (bottom-left).
+ * 100% Client-side (0€ costes, respuesta instantánea, privacidad total).
+ */
+---
+
+<div id="repasa-bot-root">
+  <!-- Botón Flotante -->
+  <button id="repasa-bot-toggle" aria-label="Abrir asistente inteligente RepasaBot" title="RepasaBot — Asistente de estudio">
+    <span class="bot-icon">🤖</span>
+    <span class="bot-badge">¿Dudas? 💬</span>
+  </button>
+
+  <!-- Ventana desplegable del Chatbot -->
+  <div id="repasa-bot-window" class="repasa-bot-hidden" role="dialog" aria-label="RepasaBot Chat">
+    <div class="bot-header">
+      <div class="bot-title-group">
+        <div class="bot-avatar">🤖</div>
+        <div>
+          <div class="bot-name">RepasaBot</div>
+          <div class="bot-status"><span class="status-dot"></span> En línea · UGR</div>
+        </div>
+      </div>
+      <div class="bot-actions">
+        <button id="repasa-bot-close" title="Cerrar chat">✕</button>
+      </div>
+    </div>
+
+    <div class="bot-body" id="repasa-bot-messages">
+      <div class="msg msg-bot">
+        <div class="msg-bubble">
+          ¡Hola! 👋 Soy <strong>RepasaBot</strong>, el asistente de repasaYA. ¿En qué te puedo ayudar con tu estudio en la UGR?
+        </div>
+      </div>
+    </div>
+
+    <!-- Chips de sugerencias rápidas -->
+    <div class="bot-chips" id="repasa-bot-chips">
+      <button class="chip-btn" data-query="descuento ugr">💬 ¿Cómo restan los fallos UGR?</button>
+      <button class="chip-btn" data-query="favoritas">⭐ ¿Cómo guardo Favoritas?</button>
+      <button class="chip-btn" data-query="imprimir">🖨️ ¿Cómo imprimo en PDF?</button>
+      <button class="chip-btn" data-query="asignaturas">📚 Apuntes de ADE e Informática</button>
+      <button class="chip-btn" data-query="privacidad">🔒 ¿Es gratis y sin registro?</button>
+    </div>
+
+    <form class="bot-input-area" id="repasa-bot-form">
+      <input
+        type="text"
+        id="repasa-bot-input"
+        placeholder="Escribe tu duda o pregunta..."
+        autocomplete="off"
+      />
+      <button type="submit" id="repasa-bot-send" aria-label="Enviar mensaje">➤</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  #repasa-bot-root {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 9999;
+    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  }
+
+  /* Botón Flotante */
+  #repasa-bot-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 10px 12px;
+    border-radius: 99px;
+    background: var(--surface, #12151e);
+    border: 1px solid var(--accent, #7c5cff);
+    color: var(--text, #fff);
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(124, 92, 255, 0.25);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  }
+  #repasa-bot-toggle:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(124, 92, 255, 0.4);
+  }
+  .bot-icon {
+    font-size: 1.35rem;
+    animation: botPulse 3s infinite ease-in-out;
+  }
+  .bot-badge {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--accent, #7c5cff);
+  }
+
+  @keyframes botPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15) rotate(4deg); }
+  }
+
+  /* Ventana emergente */
+  #repasa-bot-window {
+    position: absolute;
+    bottom: 62px;
+    left: 0;
+    width: 350px;
+    max-width: calc(100vw - 32px);
+    height: 470px;
+    max-height: calc(100vh - 100px);
+    background: color-mix(in srgb, var(--surface, #12151e) 92%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.12));
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(124, 92, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+    transform-origin: bottom left;
+  }
+
+  #repasa-bot-window.repasa-bot-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: scale(0.85) translateY(20px);
+  }
+
+  /* Cabecera */
+  .bot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: color-mix(in srgb, var(--surface2, #181c28) 80%, transparent);
+    border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+  }
+  .bot-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bot-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent-soft, rgba(124, 92, 255, 0.2));
+    border: 1px solid var(--accent, #7c5cff);
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+  }
+  .bot-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: var(--text, #fff);
+  }
+  .bot-status {
+    font-size: 0.72rem;
+    color: var(--text-muted, #94a3b8);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+  }
+  .bot-actions button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .bot-actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text, #fff);
+  }
+
+  /* Cuerpo del Chat */
+  .bot-body {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+  }
+  .msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+  }
+  .msg-bot {
+    align-self: flex-start;
+  }
+  .msg-user {
+    align-self: flex-end;
+  }
+  .msg-bubble {
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+  .msg-bot .msg-bubble {
+    background: var(--surface2, #1b202e);
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    color: var(--text, #e2e8f0);
+    border-bottom-left-radius: 4px;
+  }
+  .msg-user .msg-bubble {
+    background: var(--accent, #7c5cff);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+  }
+
+  .typing-dots span {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--text-muted, #94a3b8);
+    margin: 0 2px;
+    animation: typingBounce 1.2s infinite ease-in-out;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+  }
+
+  /* Chips */
+  .bot-chips {
+    padding: 6px 12px 10px;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .bot-chips::-webkit-scrollbar { display: none; }
+  .chip-btn {
+    flex-shrink: 0;
+    background: var(--accent-soft, rgba(124, 92, 255, 0.12));
+    border: 1px solid var(--accent-line, rgba(124, 92, 255, 0.3));
+    color: var(--text, #e2e8f0);
+    padding: 6px 10px;
+    border-radius: 99px;
+    font-size: 0.76rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .chip-btn:hover {
+    background: var(--accent, #7c5cff);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  /* Input Form */
+  .bot-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: color-mix(in srgb, var(--surface2, #181c28) 90%, transparent);
+    border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+  }
+  .bot-input-area input {
+    flex: 1;
+    background: var(--surface, #12151e);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.15));
+    color: var(--text, #fff);
+    padding: 8px 12px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    outline: none;
+  }
+  .bot-input-area input:focus {
+    border-color: var(--accent, #7c5cff);
+  }
+  .bot-input-area button {
+    background: var(--accent, #7c5cff);
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: transform 0.15s ease;
+  }
+  .bot-input-area button:hover {
+    transform: scale(1.08);
+  }
+
+  @media (max-width: 480px) {
+    #repasa-bot-root {
+      left: 14px;
+      bottom: 14px;
+    }
+    #repasa-bot-window {
+      width: calc(100vw - 28px);
+      bottom: 60px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const toggleBtn = document.getElementById('repasa-bot-toggle');
+    const win = document.getElementById('repasa-bot-window');
+    const closeBtn = document.getElementById('repasa-bot-close');
+    const form = document.getElementById('repasa-bot-form');
+    const input = document.getElementById('repasa-bot-input');
+    const msgBox = document.getElementById('repasa-bot-messages');
+    const chipsBox = document.getElementById('repasa-bot-chips');
+
+    if (!toggleBtn || !win || !msgBox) return;
+
+    // Abrir/Cerrar
+    toggleBtn.addEventListener('click', () => {
+      win.classList.toggle('repasa-bot-hidden');
+      if (!win.classList.contains('repasa-bot-hidden')) {
+        if (input) input.focus();
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        win.classList.add('repasa-bot-hidden');
+      });
+    }
+
+    // Reglas de conocimiento NLP Local
+    function getBotResponse(rawQuery) {
+      const q = rawQuery.toLowerCase().trim();
+
+      if (q.includes('descuento') || q.includes('penaliza') || q.includes('resta') || q.includes('formula') || q.includes('fórmula') || q.includes('ugr') || q.includes('mal')) {
+        return "En la UGR, los exámenes tipo test aplican penalización oficial: normalmente **3 fallos restan 1 acierto (-0.33 por fallo)** o **2 fallos restan 1 (-0.50 en V/F)**.<br><br>En repasaYA puedes activar el modificador <em>'Descuento por fallo UGR'</em> para ensayar con la nota real de la universidad sobre 10.";
+      }
+
+      if (q.includes('favorit') || q.includes('estrella') || q.includes('marcar') || q.includes('guardar')) {
+        return "Para guardar una pregunta como favorita, pulsa el botón **⭐ Favorita** en la parte superior de la tarjeta durante el test.<br><br>Luego, en la pantalla principal de la asignatura, selecciona la tarjeta **⭐ Mis Favoritas** para repasar solo tus preguntas guardadas.";
+      }
+
+      if (q.includes('imprimir') || q.includes('pdf') || q.includes('papel') || q.includes('descargar') || q.includes('exportar')) {
+        return "En la pantalla de cada asignatura dispones del botón **🖨️ Versión para Imprimir / PDF**.<br><br>Genera un documento maquetado en blanco y negro con la hoja de preguntas vacías y la **hoja de soluciones correctas al final**, listo para imprimir o guardar en PDF.";
+      }
+
+      if (q.includes('racha') || q.includes('estadística') || q.includes('estadistica') || q.includes('nota media') || q.includes('papelera') || q.includes('reset') || q.includes('reiniciar')) {
+        return "repasaYA guarda de forma privada tu **Nota Media UGR**, tu **Racha Máxima 🔥** y tus **Simulacros**.<br><br>Si quieres reiniciar el contador de una asignatura, haz clic en la papelera 🗑️ que aparece en la barra superior de estadísticas.";
+      }
+
+      if (q.includes('ade') || q.includes('informática') || q.includes('informatica') || q.includes('apuntes') || q.includes('asignatura') || q.includes('grado') || q.includes('dsd') || q.includes('sibw') || q.includes('aef') || q.includes('rrhh') || q.includes('contabilidad')) {
+        return "repasaYA contiene material interactivo para el **Doble Grado ADE + Ingeniería Informática UGR**.<br><br>Incluye asignaturas como DSD, SIBW, AEF, RRHH, Contabilidad de Gestión, Métodos Cuantitativos, MP e IA. Puedes explorar todo el catálogo desde la portada.";
+      }
+
+      if (q.includes('gratis') || q.includes('pago') || q.includes('precio') || q.includes('registro') || q.includes('cuenta') || q.includes('privacidad') || q.includes('cookie') || q.includes('datos')) {
+        return "repasaYA es **100% gratuito, sin registro, sin anuncios y sin cookies**.<br><br>Tus datos de progreso y favoritas se guardan únicamente en el almacenamiento local de tu navegador (<code>localStorage</code>), sin enviar nada a servidores externos.";
+      }
+
+      if (q.includes('quien') || q.includes('quién') || q.includes('creador') || q.includes('autor') || q.includes('julian') || q.includes('julián') || q.includes('carrion') || q.includes('carrión') || q.includes('contacto') || q.includes('bug')) {
+        return "repasaYA ha sido creado por **Julián Carrión** (@jxliian), estudiante de la UGR.<br><br>Puedes contactar para sugerencias o aportar apuntes enviando un correo a <code>e.carrionjuliann@go.ugr.es</code> o en la sección *Sobre Mí* al pie de la web.";
+      }
+
+      if (q.includes('debiles') || q.includes('débiles') || q.includes('fallos') || q.includes('punto')) {
+        return "Las preguntas que fallas durante los tests se guardan automáticamente en **Puntos Débiles 🎯**.<br><br>Accede a este modo para repetir y machacar solo tus preguntas más difíciles hasta dominarlas.";
+      }
+
+      return "Puedo ayudarte con dudas sobre el **descuento UGR**, guardar **favoritas ⭐**, **imprimir en PDF 🖨️**, ver **apuntes de ADE e Informática** o sobre la **privacidad y uso** de repasaYA.<br><br>¿Quieres probar con alguna de las preguntas rápidas de abajo?";
+    }
+
+    function addMessage(text, isUser = false) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `msg ${isUser ? 'msg-user' : 'msg-bot'}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.innerHTML = text;
+      msgDiv.appendChild(bubble);
+      msgBox.appendChild(msgDiv);
+      msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
+    function showTypingAndRespond(query) {
+      // Agregar mensaje usuario
+      addMessage(query, true);
+
+      // Crear indicador de escritura
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'msg msg-bot';
+      typingDiv.id = 'bot-typing';
+      typingDiv.innerHTML = '<div class="msg-bubble typing-dots"><span></span><span></span><span></span></div>';
+      msgBox.appendChild(typingDiv);
+      msgBox.scrollTop = msgBox.scrollHeight;
+
+      setTimeout(() => {
+        const el = document.getElementById('bot-typing');
+        if (el) el.remove();
+        const resp = getBotResponse(query);
+        addMessage(resp, false);
+      }, 450);
+    }
+
+    if (form && input) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const val = input.value.trim();
+        if (!val) return;
+        input.value = '';
+        showTypingAndRespond(val);
+      });
+    }
+
+    if (chipsBox) {
+      chipsBox.addEventListener('click', (e) => {
+        const btn = e.target.closest('.chip-btn');
+        if (!btn) return;
+        const q = btn.getAttribute('data-query') || btn.textContent.trim();
+        showTypingAndRespond(q);
+      });
+    }
+  })();
+</script>

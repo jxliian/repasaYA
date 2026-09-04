@@ -9,6 +9,7 @@ import '../styles/base.css';
 import SiteHeader from '../components/nav/SiteHeader.astro';
 import ParticleField from '../components/fx/ParticleField.astro';
 import About from '../components/sections/About.astro';
+import RepasaBot from '../components/fx/RepasaBot.astro';
 
 /**
  * Shell — layout del catálogo (oscuro por defecto).
@@ -176,6 +177,8 @@ const favicon512 = `${siteUrl}favicon-512.png`;
         </p>
       </div>
     </footer>
+
+    <RepasaBot />
 
     <style is:global>
       /* Nebulosa de fondo, fija: se ve a través del cristal al hacer scroll */

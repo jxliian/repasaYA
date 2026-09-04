@@ -6,6 +6,7 @@ import '@fontsource/unbounded/700.css';
 import '@fontsource/unbounded/800.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
+import RepasaBot from '../components/fx/RepasaBot.astro';
 
 /**
  * QuizShell — layout de las páginas de material.
@@ -83,6 +84,7 @@ const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
 
   <body>
     <slot />
+    <RepasaBot />
 
     <script>
       // Mismo interruptor de tema que el resto del sitio: el motor pinta
