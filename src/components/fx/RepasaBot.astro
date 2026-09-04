@@ -246,24 +246,24 @@
 
   /* Chips */
   .bot-chips {
-    padding: 6px 12px 10px;
+    padding: 8px 12px 10px;
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    max-height: 120px;
+    overflow-y: auto;
+    border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.06));
   }
-  .bot-chips::-webkit-scrollbar { display: none; }
   .chip-btn {
-    flex-shrink: 0;
     background: var(--accent-soft, rgba(124, 92, 255, 0.12));
     border: 1px solid var(--accent-line, rgba(124, 92, 255, 0.3));
     color: var(--text, #e2e8f0);
-    padding: 6px 10px;
+    padding: 5px 10px;
     border-radius: 99px;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
-    white-space: nowrap;
+    line-height: 1.25;
   }
   .chip-btn:hover {
     background: var(--accent, #7c5cff);
