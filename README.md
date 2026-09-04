@@ -147,7 +147,7 @@ src/
 │  └─ QuizShell.astro         Material interactivo: sin cromo, pantalla completa
 │
 ├─ components/
-│  ├─ boot/                   Secuencia de carga con el logo 3D
+│  ├─ boot/                   Secuencia de carga de la web
 │  ├─ hero/                   Portada
 │  ├─ search/                 Buscador global (⌘K)
 │  ├─ nav/                    Cabecera, migas de pan, tema
@@ -158,8 +158,7 @@ src/
 │  └─ QuizEngine.astro        Motor de tests, V/F y quiz
 │
 ├─ lib/
-│  ├─ routes.ts               Único sitio donde se construyen URLs
-│  └─ wordmark3d.ts           Wordmark 3D compartido (Three.js)
+│  └─ routes.ts               Único sitio donde se construyen URLs
 │
 ├─ styles/
 │  ├─ tokens.css              Colores, radios, sombras y easings
@@ -194,7 +193,7 @@ Las rutas planas anteriores (`/repasaYA/rrhh/quiz/`) siguen funcionando: son red
 
 **El buscador no lastra la portada.** `search-index.json` se genera en build (~21 KB) y solo se descarga la primera vez que escribes algo.
 
-**Three.js solo cuando toca.** El logo 3D se importa de forma dinámica y lo comparten la pantalla de carga y la portada. Sin WebGL o con `prefers-reduced-motion`, cae a un wordmark en CSS y no descarga nada.
+**Diseño de marca ligero.** La tipografía e identidad oficial se renderizan 100% con CSS nativo sin dependencias de motores 3D como Three.js.
 
 **El CSS del motor de tests está acotado** bajo `:root[data-quiz]`. Sus reglas globales (`html,body{overflow:hidden}`, `main{max-width:860px}`) se colaban en cualquier página que lo importase —aunque no lo pintara— y le rompían el layout.
 
