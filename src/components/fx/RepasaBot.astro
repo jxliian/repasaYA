@@ -48,6 +48,7 @@ const logoUrl = `${base}favicon.svg`;
 
     <!-- Chips de sugerencias rápidas -->
     <div class="bot-chips" id="repasa-bot-chips">
+      <button class="chip-btn" data-query="quien es julian">👑 ¿Quién es Julián?</button>
       <button class="chip-btn" data-query="descuento ugr">💬 ¿Cómo restan los fallos UGR?</button>
       <button class="chip-btn" data-query="favoritas">⭐ ¿Cómo guardo Favoritas?</button>
       <button class="chip-btn" data-query="imprimir">🖨️ ¿Cómo imprimo en PDF?</button>
@@ -450,8 +451,8 @@ const logoUrl = `${base}favicon.svg`;
         return "repasaYA es **100% gratuito, sin registro, sin anuncios y sin cookies**.<br><br>Tus datos de progreso y favoritas se guardan únicamente en el almacenamiento local de tu navegador (<code>localStorage</code>), sin enviar nada a servidores externos.";
       }
 
-      if (q.includes('quien') || q.includes('quién') || q.includes('creador') || q.includes('autor') || q.includes('julian') || q.includes('julián') || q.includes('carrion') || q.includes('carrión') || q.includes('contacto') || q.includes('bug')) {
-        return "repasaYA ha sido creado por **Julián Carrión** (@jxliian), estudiante de la UGR.<br><br>Puedes contactar para sugerencias o aportar apuntes enviando un correo a <code>e.carrionjuliann@go.ugr.es</code> o en la sección *Sobre Mí* al pie de la web.";
+      if (q.includes('quien') || q.includes('quién') || q.includes('julian') || q.includes('julián') || q.includes('carrion') || q.includes('carrión')) {
+        return "👑 **¡Julián Carrión (@jxliian)!**<br><br>Es el programador todoterreno y estudiante del Doble Grado en ADE + Ingeniería Informática UGR que ha diseñado y programado repasaYA desde cero para salvarte el cuatrimestre a ti y a media universidad 🚀.<br><br>Leyendas universitarias dicen que programa alimentado por Red Bull y cafeína, y que sueña en código Astro ☕💻.";
       }
 
       if (q.includes('debiles') || q.includes('débiles') || q.includes('fallos') || q.includes('punto')) {
