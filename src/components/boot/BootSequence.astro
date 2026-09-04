@@ -1,18 +1,16 @@
 ---
 /**
- * BootSequence — la nueva (y única) casa del logo 3D.
+ * BootSequence — pantalla de carga inicial de repasaYA.
  *
- * Al entrar en la web: overlay a pantalla completa con el wordmark 3D
- * dando UNA vuelta completa mientras la barra carga. Al terminar se
- * desvanece y te deja en la landing, ya sin logo.
+ * Muestra el logo oficial en CSS con el punto intermitente (idéntico al navbar)
+ * mientras se llena la barra de progreso. Al terminar se desvanece y deja la landing.
  *
- * Reglas que se respetan sí o sí:
- *  - Solo una vez por sesión (sessionStorage). Navegar por la web no lo repite.
+ * Reglas:
+ *  - Solo una vez por sesión (sessionStorage).
  *  - prefers-reduced-motion → no aparece.
  *  - Sin JS → no aparece (el overlay nace con [hidden]).
  *  - Se puede saltar con click o cualquier tecla.
- *  - Tope duro de 2.4s: si Three tarda, se va igual.
- *  - La barra mide carga REAL (fuentes, Three, geometría, load), no es decorativa.
+ *  - Tope duro de 2.4s.
  */
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
@@ -20,15 +18,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <div
   class="boot"
   id="boot"
-  data-font={`${base}fonts/unbounded-800.woff`}
   role="status"
   aria-live="polite"
   hidden
 >
   <div class="boot-stage">
-    <canvas class="boot-canvas" id="boot-canvas" aria-hidden="true"></canvas>
-    <div class="boot-fallback" aria-hidden="true">
-      repasaYA<span class="dot"></span>
+    <div class="boot-brand">
+      repasaYA<span class="dot" aria-hidden="true"></span>
     </div>
   </div>
 
@@ -46,7 +42,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 </div>
 
 <style is:global>
-  /* El overlay solo existe si el script inline lo activa */
   :root[data-boot='on'] body {
     overflow: hidden;
   }
@@ -113,42 +108,39 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   .boot-stage {
     position: relative;
-    width: min(340px, 72vw);
-    height: min(170px, 36vw);
-  }
-  .boot-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  /* Visible hasta que WebGL toma el relevo → nunca hay hueco en blanco */
-  .boot-fallback {
-    position: absolute;
-    inset: 0;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
+  }
+  .boot-brand {
+    display: inline-flex;
+    align-items: flex-end;
     gap: 4px;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(28px, 8vw, 44px);
+    font-size: clamp(36px, 8vw, 56px);
     letter-spacing: -0.055em;
     color: var(--text);
     text-shadow: 0 8px 40px rgba(124, 92, 255, 0.55);
+    user-select: none;
   }
-  .boot-fallback .dot {
+  .boot-brand .dot {
     width: 0.22em;
     height: 0.22em;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 14px var(--accent);
+    box-shadow: 0 0 16px var(--accent);
     margin-bottom: 0.18em;
     animation: dotPulse 2.4s var(--ease-out) infinite;
   }
-  .boot.gl-on .boot-fallback {
-    display: none;
+  @keyframes dotPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
   }
 
   .boot-meter {
@@ -215,8 +207,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 </style>
 
-<!-- Decide ANTES de pintar si arranca la secuencia. Va inline y sin
-     defer para que no haya parpadeo de la landing por debajo. -->
 <script is:inline>
   (function () {
     try {
@@ -232,11 +222,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 </script>
 
 <script>
-  import { createWordmark } from '../../lib/wordmark3d';
-
-  const MIN_MS = 900; // nunca menos: un flash de 200ms es peor que nada
-  const MAX_MS = 2400; // nunca más: si Three tarda, nos vamos igual
-  const TAU = Math.PI * 2;
+  const MIN_MS = 800;
+  const MAX_MS = 2000;
 
   const STATUS = [
     'encendiendo motores',
@@ -252,17 +239,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     const fill = document.getElementById('boot-fill') as HTMLElement | null;
     const pctEl = document.getElementById('boot-pct') as HTMLElement | null;
     const statusEl = document.getElementById('boot-status') as HTMLElement | null;
-    const canvas = document.getElementById('boot-canvas') as HTMLCanvasElement | null;
 
     const started = performance.now();
     let finished = false;
     let raf = 0;
-    let teardown3D: (() => void) | null = null;
 
-    /* ── Progreso real, por pesos ─────────────────────────────
-       Cada hito suma lo suyo; `shown` persigue a `target` con
-       easing para que la barra se mueva suave y no a saltos. */
-    const WEIGHTS = { fonts: 0.15, wordmark: 0.55, load: 0.3 };
+    const WEIGHTS = { fonts: 0.3, load: 0.7 };
     let target = 0;
     let shown = 0;
     const done: Record<string, boolean> = {};
@@ -276,7 +258,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     if (document.readyState === 'complete') reach('load');
     else window.addEventListener('load', () => reach('load'), { once: true });
 
-    /* ── Salida ───────────────────────────────────────────── */
     function finish() {
       if (finished) return;
       finished = true;
@@ -284,12 +265,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         sessionStorage.setItem('ry_boot', 'done');
       } catch (e) {}
       cancelAnimationFrame(raf);
-      teardown3D?.();
       window.removeEventListener('keydown', onSkip);
       wrap!.removeEventListener('click', onSkip);
       wrap!.classList.add('is-leaving');
       delete document.documentElement.dataset.boot;
-      // Avisa a la landing para que entre con su animación
       window.dispatchEvent(new CustomEvent('repasaya:boot-done'));
       setTimeout(() => wrap!.remove(), 600);
     }
@@ -300,17 +279,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
     window.addEventListener('keydown', onSkip);
     wrap.addEventListener('click', onSkip);
-    setTimeout(finish, MAX_MS); // red de seguridad
+    setTimeout(finish, MAX_MS);
 
-    /* ── Bucle: barra + rotación del logo ─────────────────── */
-    let spin = 0;
     let statusIdx = -1;
     function tick() {
       const elapsed = performance.now() - started;
-      // El tiempo mínimo también empuja, así la barra nunca se congela
       const floor = Math.min(0.92, elapsed / MIN_MS);
       const t = Math.max(target, floor);
-      shown += (t - shown) * 0.09;
+      shown += (t - shown) * 0.1;
 
       const pct = Math.min(100, Math.round(shown * 100));
       if (fill) fill.style.width = pct + '%';
@@ -322,45 +298,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         statusEl.textContent = STATUS[nextStatus];
       }
 
-      // Una vuelta exacta, atada al progreso de la barra
-      spin = shown * TAU;
-      render?.(spin);
-
       if (shown > 0.995 && elapsed > MIN_MS) return finish();
       raf = requestAnimationFrame(tick);
     }
 
-    let render: ((rotY: number) => void) | null = null;
     raf = requestAnimationFrame(tick);
-
-    /* ── Logo 3D (opcional: si falla, queda el wordmark CSS) ── */
-    (async () => {
-      if (!canvas) return;
-      const mark = await createWordmark(canvas, wrap!.dataset.font || '');
-      reach('wordmark');
-      if (!mark || finished) {
-        mark?.dispose();
-        return;
-      }
-
-      const stage = wrap!.querySelector('.boot-stage')!;
-      const fit = () => {
-        const r = stage.getBoundingClientRect();
-        mark.resize(r.width, r.height);
-      };
-      fit();
-      window.addEventListener('resize', fit);
-      wrap!.classList.add('gl-on');
-
-      // Una vuelta exacta atada a la barra, con cabeceo para que no sea plana
-      render = (rotY: number) => mark.render({ rotY, rotX: Math.sin(rotY) * 0.12 });
-
-      teardown3D = () => {
-        render = null;
-        window.removeEventListener('resize', fit);
-        mark.dispose();
-      };
-    })();
   }
 
   boot();
