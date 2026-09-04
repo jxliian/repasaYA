@@ -27,7 +27,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 >
   <div class="boot-stage">
     <canvas class="boot-canvas" id="boot-canvas" aria-hidden="true"></canvas>
-    <div class="boot-fallback" aria-hidden="true">repasaYA</div>
+    <div class="boot-fallback" aria-hidden="true">
+      repasaYA<span class="dot"></span>
+    </div>
   </div>
 
   <div class="boot-meter">
@@ -126,14 +128,24 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    gap: 4px;
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(28px, 8vw, 44px);
-    letter-spacing: -0.03em;
-    color: var(--accent);
+    letter-spacing: -0.055em;
+    color: var(--text);
     text-shadow: 0 8px 40px rgba(124, 92, 255, 0.55);
+  }
+  .boot-fallback .dot {
+    width: 0.22em;
+    height: 0.22em;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent);
+    margin-bottom: 0.18em;
+    animation: dotPulse 2.4s var(--ease-out) infinite;
   }
   .boot.gl-on .boot-fallback {
     display: none;

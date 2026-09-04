@@ -13,7 +13,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 <div class="logo3d" data-hero-logo data-font={`${base}fonts/unbounded-800.woff`}>
   <canvas aria-hidden="true"></canvas>
-  <span class="fallback">repasaYA</span>
+  <span class="fallback">
+    repasaYA<span class="dot" aria-hidden="true"></span>
+  </span>
 </div>
 
 <style>
@@ -35,13 +37,33 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .fallback {
     position: absolute;
     inset: 0;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3px;
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(26px, 4.6vw, 40px);
-    letter-spacing: -0.04em;
-    color: var(--accent);
+    letter-spacing: -0.055em;
+    color: var(--text);
+  }
+  .fallback .dot {
+    width: 0.22em;
+    height: 0.22em;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    margin-bottom: 0.18em;
+    animation: dotPulse 2.4s var(--ease-out) infinite;
+  }
+  @keyframes dotPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
   }
   .logo3d.gl-on .fallback {
     display: none;
