@@ -97,6 +97,16 @@ const crumbs = [
 ];
 
 const pdf = 'pdf' in material.data ? `${base}${material.data.pdf}` : null;
+const allMaterials = isEngine ? await getCollection('materials') : [];
+const subjectMaterials = isEngine ? allMaterials.filter((m) => m.data.subject.id === subject.id) : [];
+
+const testMat = subjectMaterials.find((m) => m.data.type === 'test');
+const vfMat = subjectMaterials.find((m) => m.data.type === 'vf');
+const revealMat = subjectMaterials.find((m) => m.data.type === 'reveal');
+
+const testItems = testMat && 'items' in testMat.data ? testMat.data.items : (type === 'test' ? items : []);
+const vfItems = vfMat && 'items' in vfMat.data ? vfMat.data.items : (type === 'vf' ? items : []);
+const revealItems = revealMat && 'items' in revealMat.data ? revealMat.data.items : (type === 'reveal' ? items : []);
 const hidden = material.data.hidden;
 ---
 
@@ -106,9 +116,9 @@ const hidden = material.data.hidden;
       <QuizEngine
         title={subjectTitle}
         code={subjectCode(subject)}
-        testData={type === 'test' ? items : []}
-        vfData={type === 'vf' ? items : []}
-        quizzData={type === 'reveal' ? items : []}
+        testData={testItems as any[]}
+        vfData={vfItems as any[]}
+        quizzData={revealItems as any[]}
         backHref={back}
         backLabel={subjectTitle}
       />

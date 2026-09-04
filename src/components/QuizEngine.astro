@@ -432,8 +432,13 @@ function selectMode(mode){
     const el = document.getElementById('card-'+m);
     if(el) el.classList.toggle('selected', m===mode);
   });
+  const examBox = document.querySelector('.exam-options-box');
+  if (examBox) {
+    examBox.style.display = mode === 'quizz' ? 'none' : '';
+  }
   renderChips();
 }
+selectMode(selectedMode);
 
 function getSourceForMode() {
   if (selectedMode === 'vf') return VF_DATA;
