@@ -253,63 +253,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .logo-slot {
     display: flex;
     justify-content: center;
-    margin-bottom: -6px;
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 7px 16px;
-    border-radius: var(--radius-pill);
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--blur));
-    -webkit-backdrop-filter: blur(var(--blur));
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--text-muted);
-  }
-  .live-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--correct);
-    box-shadow: 0 0 10px var(--correct-glow);
-    animation: pulse 2.4s var(--ease-out) infinite;
-  }
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.35;
-    }
-  }
-
-  .headline {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(2.5rem, 7.4vw, 5.2rem);
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-  }
-  .grad {
-    background: linear-gradient(
-      100deg,
-      var(--accent-bright) 0%,
-      var(--accent) 40%,
-      var(--neon-cyan) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    /* Halo detrás del texto en degradado */
-    filter: drop-shadow(0 6px 34px rgba(124, 92, 255, 0.45));
+    margin-bottom: 16px;
   }
 
   .lede {
@@ -318,6 +262,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     line-height: 1.62;
     color: var(--text-muted);
     text-wrap: pretty;
+    margin-top: 8px;
   }
 
   .search-slot {
