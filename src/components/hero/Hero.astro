@@ -53,29 +53,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <HeroLogo3D />
     </div>
 
-    <p class="eyebrow" data-rise="2">
-      <span class="live-dot" aria-hidden="true"></span>
-      Gratis · Sin registro · Sin anuncios · Sin letra pequeña
-    </p>
-
-    <h1 class="headline" data-rise="3">
-      Aprueba sin pagar<br />
-      <span class="grad">ni un duro</span>
-    </h1>
-
-    <p class="lede" data-rise="4">
+    <p class="lede" data-rise="2">
       Tests, verdadero/falso y flashcards de tus asignaturas. Los hago mientras me
       examino de lo mismo que tú, así que si algo está mal, se arregla esa semana.
     </p>
 
-    <div class="search-slot" data-rise="5">
+    <div class="search-slot" data-rise="3">
       <GlobalSearch variant="hero" id="hero-search" />
       <p class="search-hint">
         o dale a <kbd>⌘</kbd><kbd>K</kbd> desde cualquier parte
       </p>
     </div>
 
-    <div class="degrees" data-rise="6">
+    <div class="degrees" data-rise="4">
       {
         degrees.map((d) => (
           <a class="degree glass glow-hover" href={`${base}${d.slug}/`}>

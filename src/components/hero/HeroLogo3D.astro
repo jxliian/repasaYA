@@ -1,34 +1,36 @@
 ---
 /**
- * Logo del hero — versión plana idéntica a la del navbar,
- * pero escalada para presidir la portada de repasaYA.
+ * Logo principal del hero — versión plana idéntica a la del navbar,
+ * pero escalada en grande para presidir la portada de repasaYA.
  */
 ---
 
-<div class="hero-brand">
+<h1 class="hero-brand">
   repasaYA<span class="dot" aria-hidden="true"></span>
-</div>
+</h1>
 
 <style>
   .hero-brand {
     display: inline-flex;
     align-items: flex-end;
-    gap: 4px;
+    gap: 6px;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(32px, 5.8vw, 52px);
+    font-size: clamp(48px, 10vw, 92px);
     letter-spacing: -0.055em;
     color: var(--text);
-    filter: drop-shadow(0 12px 34px rgba(124, 92, 255, 0.45));
+    filter: drop-shadow(0 14px 40px rgba(124, 92, 255, 0.5));
     user-select: none;
+    line-height: 1;
+    margin: 0;
   }
   .hero-brand .dot {
     width: 0.22em;
     height: 0.22em;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 14px var(--accent);
-    margin-bottom: 0.18em;
+    box-shadow: 0 0 22px var(--accent);
+    margin-bottom: 0.16em;
     animation: dotPulse 2.4s var(--ease-out) infinite;
   }
   @keyframes dotPulse {
