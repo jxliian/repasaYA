@@ -4,20 +4,24 @@
  * Ubicado en la esquina inferior izquierda (bottom-left).
  * 100% Client-side (0€ costes, respuesta instantánea, privacidad total).
  */
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const logoUrl = `${base}favicon.svg`;
 ---
 
-<div id="repasa-bot-root">
+<div id="repasa-bot-root" data-logo={logoUrl}>
   <!-- Botón Flotante -->
-  <button id="repasa-bot-toggle" aria-label="Abrir asistente inteligente RepasaBot" title="RepasaBot — Asistente de estudio">
-    <span class="bot-icon">🤖</span>
+  <button id="repasa-bot-toggle" aria-label="Abrir asistente repasaBot" title="RepasaBot — Asistente de estudio">
+    <img src={logoUrl} alt="repasaYA" class="bot-icon-img" width="24" height="24" />
     <span class="bot-badge">¿Dudas? 💬</span>
   </button>
 
-  <!-- Ventana desplegable del Chatbot -->
+  <!-- Ventana desplegable del Chatbot (Redimensionable) -->
   <div id="repasa-bot-window" class="repasa-bot-hidden" role="dialog" aria-label="RepasaBot Chat">
     <div class="bot-header">
       <div class="bot-title-group">
-        <div class="bot-avatar">🤖</div>
+        <div class="bot-avatar">
+          <img src={logoUrl} alt="repasaYA" width="22" height="22" />
+        </div>
         <div>
           <div class="bot-name">RepasaBot</div>
           <div class="bot-status"><span class="status-dot"></span> En línea · UGR</div>
@@ -30,8 +34,14 @@
 
     <div class="bot-body" id="repasa-bot-messages">
       <div class="msg msg-bot">
-        <div class="msg-bubble">
-          ¡Hola! 👋 Soy <strong>RepasaBot</strong>, el asistente de repasaYA. ¿En qué te puedo ayudar con tu estudio en la UGR?
+        <div class="msg-avatar-mini">
+          <img src={logoUrl} alt="R" width="16" height="16" />
+        </div>
+        <div class="msg-content">
+          <span class="msg-sender">RepasaBot</span>
+          <div class="msg-bubble">
+            ¡Hola! 👋 Soy <strong>RepasaBot</strong>, tu asistente de repasaYA. ¿En qué te puedo ayudar con tu estudio en la UGR?
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +80,7 @@
   #repasa-bot-toggle {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     padding: 10px 16px 10px 12px;
     border-radius: 99px;
     background: var(--surface, #12151e);
@@ -84,12 +94,12 @@
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(124, 92, 255, 0.4);
   }
-  .bot-icon {
-    font-size: 1.35rem;
+  .bot-icon-img {
+    border-radius: 50%;
     animation: botPulse 3s infinite ease-in-out;
   }
   .bot-badge {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     color: var(--accent, #7c5cff);
@@ -97,27 +107,30 @@
 
   @keyframes botPulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15) rotate(4deg); }
+    50% { transform: scale(1.12) rotate(3deg); }
   }
 
-  /* Ventana emergente */
+  /* Ventana emergente con redimensionamiento controlado */
   #repasa-bot-window {
     position: absolute;
     bottom: 62px;
     left: 0;
-    width: 350px;
-    max-width: calc(100vw - 32px);
-    height: 470px;
-    max-height: calc(100vh - 100px);
-    background: color-mix(in srgb, var(--surface, #12151e) 92%, transparent);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.12));
+    width: 370px;
+    height: 490px;
+    min-width: 320px;
+    max-width: min(560px, calc(100vw - 32px));
+    min-height: 400px;
+    max-height: min(720px, calc(100vh - 90px));
+    resize: both;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--surface, #12151e) 94%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.14));
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(124, 92, 255, 0.15);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(124, 92, 255, 0.18);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
     transform-origin: bottom left;
   }
@@ -134,9 +147,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 16px;
-    background: color-mix(in srgb, var(--surface2, #181c28) 80%, transparent);
-    border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    padding: 12px 16px;
+    background: color-mix(in srgb, var(--surface2, #181c28) 85%, transparent);
+    border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+    flex-shrink: 0;
   }
   .bot-title-group {
     display: flex;
@@ -147,11 +161,14 @@
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: var(--accent-soft, rgba(124, 92, 255, 0.2));
+    background: var(--surface, #12151e);
     border: 1px solid var(--accent, #7c5cff);
     display: grid;
     place-items: center;
-    font-size: 1.1rem;
+    padding: 4px;
+  }
+  .bot-avatar img {
+    border-radius: 50%;
   }
   .bot-name {
     font-weight: 700;
@@ -197,34 +214,78 @@
     gap: 12px;
     scroll-behavior: smooth;
   }
+
   .msg {
     display: flex;
-    flex-direction: column;
-    max-width: 85%;
+    gap: 8px;
+    max-width: 88%;
   }
   .msg-bot {
     align-self: flex-start;
   }
   .msg-user {
     align-self: flex-end;
+    flex-direction: row-reverse;
   }
+
+  .msg-avatar-mini {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--surface2, #181c28);
+    border: 1px solid var(--accent, #7c5cff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    padding: 3px;
+  }
+
+  .msg-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .msg-user .msg-content {
+    align-items: flex-end;
+  }
+
+  .msg-sender {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted, #94a3b8);
+    margin-bottom: 3px;
+    padding: 0 4px;
+  }
+
+  .msg-user .msg-sender {
+    color: var(--accent, #7c5cff);
+  }
+
   .msg-bubble {
     padding: 10px 14px;
     border-radius: 16px;
     font-size: 0.86rem;
-    line-height: 1.45;
+    line-height: 1.5;
+    word-break: break-word;
   }
+
+  /* Diferenciación visual clara: Bot vs Usuario */
   .msg-bot .msg-bubble {
-    background: var(--surface2, #1b202e);
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    background: color-mix(in srgb, var(--surface2, #1b202e) 90%, #000);
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.12));
     color: var(--text, #e2e8f0);
-    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
+
   .msg-user .msg-bubble {
-    background: var(--accent, #7c5cff);
-    color: #fff;
-    border-bottom-right-radius: 4px;
-    font-weight: 500;
+    background: linear-gradient(135deg, #7c5cff 0%, #6366f1 100%);
+    color: #ffffff;
+    border-top-right-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(124, 92, 255, 0.35);
   }
 
   .typing-dots span {
@@ -250,9 +311,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    max-height: 120px;
+    max-height: 115px;
     overflow-y: auto;
-    border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.06));
+    border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    flex-shrink: 0;
   }
   .chip-btn {
     background: var(--accent-soft, rgba(124, 92, 255, 0.12));
@@ -277,15 +339,16 @@
     align-items: center;
     gap: 8px;
     padding: 10px 12px;
-    background: color-mix(in srgb, var(--surface2, #181c28) 90%, transparent);
-    border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    background: color-mix(in srgb, var(--surface2, #181c28) 95%, transparent);
+    border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+    flex-shrink: 0;
   }
   .bot-input-area input {
     flex: 1;
     background: var(--surface, #12151e);
-    border: 1px solid var(--border, rgba(255, 255, 255, 0.15));
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.18));
     color: var(--text, #fff);
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 99px;
     font-size: 0.85rem;
     outline: none;
@@ -331,6 +394,8 @@
     const input = document.getElementById('repasa-bot-input');
     const msgBox = document.getElementById('repasa-bot-messages');
     const chipsBox = document.getElementById('repasa-bot-chips');
+    const root = document.getElementById('repasa-bot-root');
+    const logoUrl = root ? root.getAttribute('data-logo') : '';
 
     if (!toggleBtn || !win || !msgBox) return;
 
@@ -348,12 +413,21 @@
       });
     }
 
+    // Formateador de texto Markdown a HTML limpio
+    function formatText(str) {
+      if (!str) return '';
+      return str
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:0.8em">$1</code>');
+    }
+
     // Reglas de conocimiento NLP Local
     function getBotResponse(rawQuery) {
       const q = rawQuery.toLowerCase().trim();
 
       if (q.includes('descuento') || q.includes('penaliza') || q.includes('resta') || q.includes('formula') || q.includes('fórmula') || q.includes('ugr') || q.includes('mal')) {
-        return "En la UGR, los exámenes tipo test aplican penalización oficial: normalmente **3 fallos restan 1 acierto (-0.33 por fallo)** o **2 fallos restan 1 (-0.50 en V/F)**.<br><br>En repasaYA puedes activar el modificador <em>'Descuento por fallo UGR'</em> para ensayar con la nota real de la universidad sobre 10.";
+        return "En la UGR, los exámenes tipo test aplican penalización oficial: normalmente **3 fallos restan 1 acierto (-0.33 por fallo)** o **2 fallos restan 1 (-0.50 en V/F)**.<br><br>En repasaYA puedes activar la opción <em>'Descuento por fallo UGR'</em> para ensayar con la nota real de la universidad sobre 10.";
       }
 
       if (q.includes('favorit') || q.includes('estrella') || q.includes('marcar') || q.includes('guardar')) {
@@ -390,10 +464,28 @@
     function addMessage(text, isUser = false) {
       const msgDiv = document.createElement('div');
       msgDiv.className = `msg ${isUser ? 'msg-user' : 'msg-bot'}`;
-      const bubble = document.createElement('div');
-      bubble.className = 'msg-bubble';
-      bubble.innerHTML = text;
-      msgDiv.appendChild(bubble);
+
+      let html = '';
+      if (isUser) {
+        html = `
+          <div class="msg-content">
+            <span class="msg-sender">Tú</span>
+            <div class="msg-bubble">${formatText(text)}</div>
+          </div>
+        `;
+      } else {
+        html = `
+          <div class="msg-avatar-mini">
+            <img src="${logoUrl}" alt="R" width="16" height="16" />
+          </div>
+          <div class="msg-content">
+            <span class="msg-sender">RepasaBot</span>
+            <div class="msg-bubble">${formatText(text)}</div>
+          </div>
+        `;
+      }
+
+      msgDiv.innerHTML = html;
       msgBox.appendChild(msgDiv);
       msgBox.scrollTop = msgBox.scrollHeight;
     }
@@ -406,7 +498,15 @@
       const typingDiv = document.createElement('div');
       typingDiv.className = 'msg msg-bot';
       typingDiv.id = 'bot-typing';
-      typingDiv.innerHTML = '<div class="msg-bubble typing-dots"><span></span><span></span><span></span></div>';
+      typingDiv.innerHTML = `
+        <div class="msg-avatar-mini">
+          <img src="${logoUrl}" alt="R" width="16" height="16" />
+        </div>
+        <div class="msg-content">
+          <span class="msg-sender">RepasaBot</span>
+          <div class="msg-bubble typing-dots"><span></span><span></span><span></span></div>
+        </div>
+      `;
       msgBox.appendChild(typingDiv);
       msgBox.scrollTop = msgBox.scrollHeight;
 
