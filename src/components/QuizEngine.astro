@@ -305,7 +305,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="usb-item"><span class="usb-val" id="usb-avg">-</span><span class="usb-lbl">Nota Media UGR</span></div>
         <div class="usb-item"><span class="usb-val" id="usb-streak">0</span><span class="usb-lbl">Racha Máx 🔥</span></div>
         <div class="usb-item"><span class="usb-val" id="usb-total">0</span><span class="usb-lbl">Simulacros</span></div>
-        <button class="btn-reset-stats" id="btn-reset-stats" onclick="resetUserStats(event)" title="Reiniciar estadísticas de esta asignatura">🗑️</button>
+        <button class="btn-reset-stats" id="btn-reset-stats" title="Reiniciar estadísticas de esta asignatura">🗑️</button>
       </div>
 
       <div>
@@ -387,7 +387,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="tema-chips" id="tema-chips"></div>
       </div>
       <button class="btn-start" id="btn-start">Empezar →</button>
-      <button class="btn-print" id="btn-print" onclick="printExamSheet(event)">🖨️ Versión para Imprimir / PDF</button>
+      <button class="btn-print" id="btn-print">🖨️ Versión para Imprimir / PDF</button>
     </div>
 
     <div id="quiz-view" style="display:none">
@@ -404,7 +404,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="q-meta-line">
           <div class="q-tema-tag" id="q-tema"></div>
           <div style="display:flex;align-items:center;gap:8px">
-            <button class="btn-star-q" id="btn-star-q" onclick="toggleStarCurrentQ(event)" title="Guardar pregunta favorita">⭐ <span id="star-txt">Favorita</span></button>
+            <button class="btn-star-q" id="btn-star-q" title="Guardar pregunta favorita">⭐ <span id="star-txt">Favorita</span></button>
             <div class="q-type-badge" id="q-type-badge"></div>
           </div>
         </div>
