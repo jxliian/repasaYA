@@ -75,9 +75,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   /* VF CONTROLS */
   .vf-buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
   :root[data-quiz] .vf-btn{padding:16px;border:2px solid var(--border);border-radius:var(--radius);background:var(--surface2);color:var(--text);font-size:1rem;font-weight:700;cursor:pointer;transition:all .18s;position:relative}
-  :root[data-quiz] .vf-btn:hover:not(:disabled){transform:translateY(-2px)}
-  :root[data-quiz] .vf-btn.v-btn:hover:not(:disabled){border-color:var(--correct);background:rgba(34,197,94,.08);color:var(--correct)}
-  :root[data-quiz] .vf-btn.f-btn:hover:not(:disabled){border-color:var(--wrong);background:rgba(239,68,68,.08);color:var(--wrong)}
+  :root[data-quiz] .vf-btn:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft);color:var(--accent2);transform:translateY(-2px)}
   :root[data-quiz] .vf-btn:disabled{cursor:default;transform:none}
   :root[data-quiz] .vf-btn.chosen-correct{border-color:var(--correct);background:rgba(34,197,94,.12);color:var(--correct)}
   :root[data-quiz] .vf-btn.chosen-wrong{border-color:var(--wrong);background:rgba(239,68,68,.12);color:var(--wrong)}
@@ -534,6 +532,20 @@ function handleTimeout() {
   else answerReveal();
 }
 
+function updateLiveScore() {
+  const isDeferred = document.getElementById('chk-deferred')?.checked;
+  const scoreEl = document.getElementById('q-score');
+  if (!scoreEl) return;
+  if (selectedMode === 'streak') {
+    scoreEl.textContent = `🔥 Racha: ${correct}`;
+  } else if (isDeferred) {
+    const totalAnswered = answers.filter(Boolean).length;
+    scoreEl.textContent = `Respondidas: ${totalAnswered} / ${questions.length}`;
+  } else {
+    scoreEl.textContent = `✓${correct}  ✗${wrong}`;
+  }
+}
+
 function showQ(){
   answered = false;
   clearInterval(timerInterval);
@@ -545,11 +557,7 @@ function showQ(){
   document.getElementById('q-text').textContent = q.q;
   document.getElementById('q-counter').textContent = `${idx+1} / ${questions.length}`;
 
-  if (selectedMode === 'streak') {
-    document.getElementById('q-score').textContent = `🔥 Racha: ${correct}`;
-  } else {
-    document.getElementById('q-score').textContent = `✓${correct}  ✗${wrong}`;
-  }
+  updateLiveScore();
 
   document.getElementById('q-progress').style.width = `${(idx/questions.length)*100}%`;
   hide_el('btn-next');
@@ -672,9 +680,9 @@ function answerVF(chosen){
     document.getElementById('just-text').textContent = q.justification;
   }
 
+  updateLiveScore();
   show_el('btn-next');
 
-  // Modo Racha: si falla 1, termina inmediatamente
   if (selectedMode === 'streak' && !ok) {
     setTimeout(showResults, 1200);
   }
@@ -711,6 +719,7 @@ function answerTest(chosen){
     showTestJust(q, ok);
   }
 
+  updateLiveScore();
   show_el('btn-next');
 
   if (selectedMode === 'streak' && !ok) {
