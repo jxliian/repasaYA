@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Outer background gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1438"/>
+      <stop offset="50%" stop-color="#0e0a22"/>
+      <stop offset="100%" stop-color="#06040d"/>
+    </linearGradient>
+
+    <!-- Glowing purple border gradient -->
+    <linearGradient id="border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bea" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#7c5cff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff6fd8" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Thick 'R' gradient -->
+    <linearGradient id="r-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2d9ff"/>
+      <stop offset="45%" stop-color="#a78bea"/>
+      <stop offset="100%" stop-color="#7c5cff"/>
+    </linearGradient>
+
+    <!-- Outer Glow Filter -->
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background squircle -->
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#bg-grad)" stroke="url(#border-grad)" stroke-width="12" />
+
+  <!-- Inner subtle glow circle -->
+  <circle cx="256" cy="256" r="180" fill="#7c5cff" opacity="0.15" filter="url(#purple-glow)" />
+
+  <!-- Thick Bold 'R' Path -->
+  <!-- Designed with thick proportions, rounded joints & sleek modern geometry -->
+  <path d="
+    M 148 110 
+    H 275 
+    C 345 110, 395 145, 395 212 
+    C 395 268, 355 302, 298 312 
+    L 390 402 
+    H 318 
+    L 236 320 
+    H 214 
+    V 402 
+    H 148 
+    V 110 
+    Z 
+    M 214 168 
+    V 262 
+    H 268 
+    C 308 262, 330 244, 330 215 
+    C 330 186, 308 168, 268 168 
+    H 214 
+    Z" 
+    fill="url(#r-grad)" 
+    stroke="#c7b2ff" 
+    stroke-width="4" 
+    stroke-linejoin="round" 
+    stroke-linecap="round"
+  />
+</svg>

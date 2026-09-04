@@ -101,9 +101,14 @@ const SUBJECTS = [
       </p>
 
       <form class="form" data-contact data-email={EMAIL} novalidate>
+        <!-- Campo trampa Anti-Spam (Honeypot) para bots -->
+        <div class="hp-slot" aria-hidden="true">
+          <input type="text" name="b_hp" tabindex="-1" autocomplete="off" />
+        </div>
+
         <div class="field">
           <label for="c-name">Cómo te llamas</label>
-          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre (o un alias, me da igual)" required />
+          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre (o un alias, me da igual)" maxlength="80" required />
         </div>
 
         <div class="field">
@@ -114,8 +119,11 @@ const SUBJECTS = [
         </div>
 
         <div class="field">
-          <label for="c-message">Cuéntame</label>
-          <textarea id="c-message" name="message" rows="6" placeholder="Sin formalismos, al grano." required></textarea>
+          <div class="label-row">
+            <label for="c-message">Cuéntame</label>
+            <span class="char-count" data-char-count>0 / 1500</span>
+          </div>
+          <textarea id="c-message" name="message" rows="6" placeholder="Sin formalismos, al grano." maxlength="1500" required></textarea>
         </div>
 
         <p class="disclaimer">
@@ -146,7 +154,8 @@ const SUBJECTS = [
   }
 
   .about {
-    padding-block: 84px 52px;
+    padding-block: 20px 30px;
+    text-align: left;
   }
   .grid {
     display: grid;
@@ -275,6 +284,21 @@ const SUBJECTS = [
     flex-direction: column;
     gap: 8px;
   }
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .char-count {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+  }
+  .hp-slot {
+    display: none !important;
+    position: absolute;
+    left: -9999px;
+  }
   label {
     font-family: var(--font-mono);
     font-size: 0.74rem;
@@ -299,6 +323,7 @@ const SUBJECTS = [
   textarea {
     resize: vertical;
     min-height: 132px;
+    max-height: 260px; /* Evita que la caja de texto se estire infinitamente */
     line-height: 1.55;
   }
   input::placeholder,
@@ -379,10 +404,20 @@ const SUBJECTS = [
     const name = form.querySelector<HTMLInputElement>('#c-name')!;
     const subject = form.querySelector<HTMLSelectElement>('#c-subject')!;
     const message = form.querySelector<HTMLTextAreaElement>('#c-message')!;
+    const hp = form.querySelector<HTMLInputElement>('[name="b_hp"]');
+    const charCount = form.querySelector<HTMLElement>('[data-char-count]');
 
     function say(text: string, error = false) {
       status.textContent = text;
       status.toggleAttribute('data-error', error);
+    }
+
+    function updateCounter() {
+      if (charCount && message) {
+        const len = message.value.length;
+        charCount.textContent = `${len} / 1500`;
+        charCount.style.color = len >= 1450 ? 'var(--wrong)' : 'var(--text-dim)';
+      }
     }
 
     // Validación propia (novalidate) para poder escribir los mensajes
@@ -399,10 +434,21 @@ const SUBJECTS = [
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      // Bloqueo de spambots que rellenan el campo trampa (honeypot)
+      if (hp && hp.value.trim() !== '') {
+        say('Envío bloqueado.');
+        return;
+      }
+
       if (!check(name, 'Ponme al menos un nombre.')) return;
       if (!check(message, 'El mensaje está vacío.')) return;
 
-      const body = `${message.value.trim()}\n\n—\n${name.value.trim()}\nEnviado desde repasaYA`;
+      // Truncar si supera los límites máximos por seguridad de URL mailto:
+      const cleanName = name.value.trim().slice(0, 80);
+      const cleanMessage = message.value.trim().slice(0, 1500);
+
+      const body = `${cleanMessage}\n\n—\n${cleanName}\nEnviado desde repasaYA`;
       const url =
         `mailto:${email}` +
         `?subject=${encodeURIComponent(`[repasaYA] ${subject.value}`)}` +
@@ -421,7 +467,10 @@ const SUBJECTS = [
       }
     });
 
-    // Al escribir se limpia el aviso de campo vacío
+    // Contador y limpieza de avisos al escribir
+    message.addEventListener('input', updateCounter);
+    updateCounter();
+
     for (const el of [name, message]) {
       el.addEventListener('input', () => {
         if (el.value.trim()) el.setAttribute('aria-invalid', 'false');

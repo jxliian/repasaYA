@@ -8,6 +8,7 @@ import '../styles/tokens.css';
 import '../styles/base.css';
 import SiteHeader from '../components/nav/SiteHeader.astro';
 import ParticleField from '../components/fx/ParticleField.astro';
+import About from '../components/sections/About.astro';
 
 /**
  * Shell — layout del catálogo (oscuro por defecto).
@@ -26,15 +27,18 @@ interface Props {
 
 const {
   title,
-  description = 'Tests, verdadero/falso y flashcards para ADE e Ingeniería Informática. Gratis, sin registro y sin anuncios.',
+  description = 'Tests interactivos, verdadero/falso, flashcards y apuntes para ADE e Ingeniería Informática UGR. Plataforma 100% gratis, sin registro y sin anuncios.',
   ambient = true,
   noindex = false,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
-const pageTitle = title === 'repasaYA' ? 'repasaYA — Aprueba sin pagar ni un duro' : `${title} — repasaYA`;
+const canonical = `https://jxliian.github.io${Astro.url.pathname.replace(/\/$/, '')}/`;
+const pageTitle = title === 'repasaYA' ? 'repasaYA — Tests, Flashcards y Apuntes UGR | Aprueba sin pagar ni un duro' : `${title} — repasaYA UGR`;
 const year = new Date().getFullYear();
+
+const siteUrl = 'https://jxliian.github.io/repasaYA/';
+const favicon512 = `${siteUrl}favicon-512.png`;
 ---
 
 <!doctype html>
@@ -44,38 +48,89 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="keywords" content="repasaYA, repasaya ugr, tests ugr, apuntes ugr, ade ugr, informatica ugr, flashcards ugr, examenes ugr" />
+    <meta name="author" content="Julián Carrión" />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    )}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href={`${base}logo.png`} />
+
+    <!-- Favicon e Iconos oficiales para Google Search y Navegadores -->
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/png" sizes="512x512" href={`${base}favicon-512.png`} />
+    <link rel="icon" type="image/png" sizes="192x192" href={`${base}favicon-192.png`} />
+    <link rel="icon" type="image/png" sizes="48x48" href={`${base}favicon-48.png`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon-32.png`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
+    <link rel="shortcut icon" href={`${base}favicon.ico`} />
+
+    <!-- Open Graph & Twitter Cards -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+    <meta property="og:image" content={favicon512} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="repasaYA" />
+    <meta property="og:locale" content="es_ES" />
+
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+    <meta name="twitter:image" content={favicon512} />
 
-    <!-- Datos estructurados Schema.org para Google -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "EducationalApplication",
-        "name": "repasaYA",
-        "url": "https://jxliian.github.io/repasaYA/",
-        "description": "Tests interactivos, verdadero/falso y flashcards para el Doble Grado ADE + Ingeniería Informática de la UGR.",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "All",
-        "inLanguage": "es",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "EUR"
+    <!-- Datos estructurados Schema.org para Google (Entidad WebSite + Organization oficial) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://jxliian.github.io/repasaYA/#website",
+          "url": "https://jxliian.github.io/repasaYA/",
+          "name": "repasaYA",
+          "alternateName": ["repasa YA", "repasaYA UGR", "repasaYA ADE e Informática"],
+          "description": "Plataforma oficial de tests interactivos, verdadero/falso, flashcards y apuntes para ADE e Ingeniería Informática UGR.",
+          "inLanguage": "es-ES",
+          "publisher": {
+            "@id": "https://jxliian.github.io/repasaYA/#organization"
+          }
+        },
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://jxliian.github.io/repasaYA/#organization",
+          "name": "repasaYA",
+          "url": "https://jxliian.github.io/repasaYA/",
+          "logo": favicon512,
+          "image": favicon512,
+          "sameAs": [
+            "https://github.com/jxliian/repasaYA",
+            "https://github.com/jxliian"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Julián Carrión",
+            "sameAs": "https://github.com/jxliian"
+          }
+        },
+        {
+          "@type": "EducationalApplication",
+          "name": "repasaYA",
+          "url": "https://jxliian.github.io/repasaYA/",
+          "description": "Tests interactivos, verdadero/falso y flashcards para el Doble Grado ADE + Ingeniería Informática de la UGR.",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "All",
+          "inLanguage": "es",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+          }
         }
-      }
-    </script>
+      ]
+    })} />
     <ClientRouter />
     <script is:inline>
       // Oscuro por defecto; el claro es opt-in y se recuerda.
@@ -101,7 +156,8 @@ const year = new Date().getFullYear();
     </main>
 
     <footer class="site-footer">
-      <div class="container">
+      <About />
+      <div class="container footer-meta">
         <p>
           Hecho con ganas por <strong>Julián Carrión</strong> ·
           <a href="https://github.com/jxliian" target="_blank" rel="noopener">@jxliian</a>
@@ -150,16 +206,21 @@ const year = new Date().getFullYear();
       }
 
       main {
-        min-height: 60vh;
-        padding-bottom: 90px;
+        min-height: 50vh;
+        padding-bottom: 40px;
       }
 
       .site-footer {
         border-top: 1px solid var(--glass-border);
-        padding: 34px 0 46px;
+        padding: 40px 0 46px;
         text-align: center;
         font-size: 0.84rem;
         color: var(--text-muted);
+      }
+      .site-footer .footer-meta {
+        margin-top: 36px;
+        padding-top: 28px;
+        border-top: 1px solid var(--glass-border);
       }
       .site-footer p + p {
         margin-top: 6px;

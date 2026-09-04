@@ -149,6 +149,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 65%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent 98%);
   }
 
   /* Rejilla técnica, casi imperceptible, se disuelve hacia abajo */
@@ -221,11 +223,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     animation: float 26s var(--ease-out) infinite;
   }
   .orb-b {
-    width: 540px;
-    height: 540px;
-    bottom: -22%;
-    right: -8%;
-    background: radial-gradient(circle, rgba(79, 220, 210, 0.16), transparent 68%);
+    width: 500px;
+    height: 500px;
+    bottom: -10%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(79, 220, 210, 0.14), transparent 70%);
     animation: float 34s var(--ease-out) infinite reverse;
   }
   .orb-c {

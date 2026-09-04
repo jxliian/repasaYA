@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
 Sitemap: https://jxliian.github.io/repasaYA/sitemap-index.xml

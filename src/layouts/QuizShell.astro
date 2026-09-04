@@ -37,15 +37,23 @@ const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href={`${base}logo.png`} />
-    <meta property="og:title" content={`${title} — repasaYA`} />
+    <!-- Favicon e Iconos oficiales para Google Search y Navegadores -->
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/png" sizes="512x512" href={`${base}favicon-512.png`} />
+    <link rel="icon" type="image/png" sizes="192x192" href={`${base}favicon-192.png`} />
+    <link rel="icon" type="image/png" sizes="48x48" href={`${base}favicon-48.png`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicon-32.png`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
+    <link rel="shortcut icon" href={`${base}favicon.ico`} />
+
+    <meta property="og:title" content={`${title} — repasaYA UGR`} />
     {description && <meta property="og:description" content={description} />}
-    <meta property="og:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+    <meta property="og:image" content="https://jxliian.github.io/repasaYA/favicon-512.png" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={`${title} — repasaYA`} />
+    <meta name="twitter:title" content={`${title} — repasaYA UGR`} />
     {description && <meta name="twitter:description" content={description} />}
-    <meta name="twitter:image" content="https://jxliian.github.io/repasaYA/logo.png" />
+    <meta name="twitter:image" content="https://jxliian.github.io/repasaYA/favicon-512.png" />
 
     <script type="application/ld+json" is:inline>
       {
