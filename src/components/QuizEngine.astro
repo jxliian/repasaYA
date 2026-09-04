@@ -167,7 +167,97 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
   :root[data-quiz][data-theme="dark"] .theme-toggle .ic-sun{display:none}
   :root[data-quiz][data-theme="dark"] .theme-toggle .ic-moon{display:inline !important}
-  @media(max-width:560px){:root[data-quiz],:root[data-quiz] body{height:auto;overflow:visible}:root[data-quiz] main{overflow:visible;padding-bottom:80px}:root[data-quiz] .mode-grid{grid-template-columns:1fr}:root[data-quiz] .github-fab{bottom:14px;right:14px;padding:9px 14px 9px 12px;font-size:.78rem}}
+  /* NUEVAS FUNCIONALIDADES: FAVORITAS, STATS, PRINT, SHARE */
+  .btn-star-q {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .btn-star-q:hover {
+    border-color: #f59e0b;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.08);
+  }
+  .btn-star-q.is-starred {
+    border-color: #f59e0b;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+  }
+
+  .user-stats-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .usb-item { display: flex; flex-direction: column; align-items: center; }
+  .usb-val { font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: var(--accent); }
+  .usb-lbl { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .btn-reset-stats { background: transparent; border: none; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; font-size: 0.9rem; }
+  .btn-reset-stats:hover { opacity: 1; }
+
+  .btn-print {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-radius: var(--radius);
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-print:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .toast-notice {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 10px 20px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .toast-notice.show { opacity: 1; }
+
+  @media print {
+    body * { visibility: hidden; }
+    #print-container, #print-container * { visibility: visible; }
+    #print-container { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; padding: 20px; font-family: sans-serif; }
+    .print-q { margin-bottom: 18px; page-break-inside: avoid; }
+    .print-q-title { font-weight: bold; margin-bottom: 6px; }
+    .print-opt { margin-left: 16px; margin-bottom: 4px; }
+    .print-key { margin-top: 40px; border-top: 2px solid #333; padding-top: 16px; page-break-before: always; }
+  }
 </style>
 
 <header>
@@ -197,6 +287,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <div id="panel-test" class="panel active">
 
     <div id="selector-view" class="start">
+      <div class="user-stats-bar" id="user-stats-bar" style="display:none">
+        <div class="usb-item"><span class="usb-val" id="usb-avg">-</span><span class="usb-lbl">Nota Media UGR</span></div>
+        <div class="usb-item"><span class="usb-val" id="usb-streak">0</span><span class="usb-lbl">Racha Máx 🔥</span></div>
+        <div class="usb-item"><span class="usb-val" id="usb-total">0</span><span class="usb-lbl">Simulacros</span></div>
+        <button class="btn-reset-stats" id="btn-reset-stats" title="Reiniciar estadísticas">🗑️</button>
+      </div>
+
       <div>
         <p class="start-title">Modo de preguntas</p>
         <div class="mode-grid">
@@ -236,6 +333,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <div class="mc-desc">Preguntas falladas guardadas.</div>
             <span class="mc-chip" id="chip-weak-count">0 acumuladas</span>
           </div>
+          <div class="mode-card" id="card-starred" onclick="selectMode('starred')">
+            <div class="mc-icon">⭐</div>
+            <div class="mc-title">Mis Favoritas</div>
+            <div class="mc-desc">Preguntas guardadas con estrella.</div>
+            <span class="mc-chip" id="chip-starred-count">0 guardadas</span>
+          </div>
           {hasQuizz && (
             <div class="mode-card" id="card-quizz" onclick="selectMode('quizz')">
               <div class="mc-icon">💡</div>
@@ -270,6 +373,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="tema-chips" id="tema-chips"></div>
       </div>
       <button class="btn-start" id="btn-start">Empezar →</button>
+      <button class="btn-print" id="btn-print">🖨️ Versión para Imprimir / PDF</button>
     </div>
 
     <div id="quiz-view" style="display:none">
@@ -285,7 +389,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <div class="q-card">
         <div class="q-meta-line">
           <div class="q-tema-tag" id="q-tema"></div>
-          <div class="q-type-badge" id="q-type-badge"></div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <button class="btn-star-q" id="btn-star-q" title="Guardar pregunta favorita">⭐ <span id="star-txt">Favorita</span></button>
+            <div class="q-type-badge" id="q-type-badge"></div>
+          </div>
         </div>
         <div class="q-text" id="q-text"></div>
         <!-- VF controls -->
@@ -345,6 +452,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn btn-primary" id="btn-repeat">Repetir todo</button>
         <button class="btn btn-danger" id="btn-repeat-wrong" style="display:none">↺ Solo fallos</button>
+        <button class="btn btn-ghost" id="btn-share-wa" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.3);color:#25D366;font-weight:700">📲 Compartir WhatsApp</button>
+        <button class="btn btn-ghost" id="btn-copy-result">📋 Copiar nota</button>
         <button class="btn btn-ghost" id="btn-back2">← Volver</button>
       </div>
     </div>
@@ -368,6 +477,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <div class="cnt" id="b-count"></div>
     <div class="bank-list" id="b-list"></div>
   </div>
+  <div class="toast-notice" id="toast-notice"></div>
+  <div id="print-container" style="display:none"></div>
 </main>
 
 <a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
@@ -392,8 +503,11 @@ let selectedTemas = new Set();
 let timerInterval = null;
 let timeLeft = 30;
 
-// Local storage storage key for weak questions
+// Local storage keys
 const WEAK_KEY = 'ry_weak_' + code;
+const STAR_KEY = 'ry_star_' + code;
+const STATS_KEY = 'ry_stats_' + code;
+
 function getWeakQuestions() {
   try {
     const raw = localStorage.getItem(WEAK_KEY);
@@ -423,12 +537,104 @@ function updateWeakChipCount() {
     chip.textContent = count > 0 ? `${count} falladas` : '0 acumuladas';
   }
 }
+
+// Favoritas (Starred)
+function getStarredQuestions() {
+  try {
+    const raw = localStorage.getItem(STAR_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) { return []; }
+}
+function toggleStarCurrentQ() {
+  if (!questions || !questions[idx]) return;
+  const qText = questions[idx].q;
+  let list = getStarredQuestions();
+  if (list.includes(qText)) {
+    list = list.filter(t => t !== qText);
+    showToast('Estrella quitada ⭐');
+  } else {
+    list.push(qText);
+    showToast('¡Guardada en Favoritas! ⭐');
+  }
+  localStorage.setItem(STAR_KEY, JSON.stringify(list));
+  updateStarredState();
+  updateStarredChipCount();
+}
+function updateStarredState() {
+  if (!questions || !questions[idx]) return;
+  const btn = document.getElementById('btn-star-q');
+  if (!btn) return;
+  const isStarred = getStarredQuestions().includes(questions[idx].q);
+  btn.classList.toggle('is-starred', isStarred);
+  const txt = document.getElementById('star-txt');
+  if (txt) txt.textContent = isStarred ? 'Guardada' : 'Favorita';
+}
+function updateStarredChipCount() {
+  const chip = document.getElementById('chip-starred-count');
+  if (chip) {
+    const count = getStarredQuestions().length;
+    chip.textContent = count > 0 ? `${count} guardadas` : '0 guardadas';
+  }
+}
+
+// Estadísticas de usuario
+function getUserStats() {
+  try {
+    const raw = localStorage.getItem(STATS_KEY);
+    return raw ? JSON.parse(raw) : { attempts: 0, totalScore: 0, maxStreak: 0 };
+  } catch (e) { return { attempts: 0, totalScore: 0, maxStreak: 0 }; }
+}
+function saveUserAttempt(finalNote, streakAchieved) {
+  try {
+    const stats = getUserStats();
+    stats.attempts = (stats.attempts || 0) + 1;
+    stats.totalScore = (stats.totalScore || 0) + finalNote;
+    if (streakAchieved > (stats.maxStreak || 0)) {
+      stats.maxStreak = streakAchieved;
+    }
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+    renderUserStats();
+  } catch (e) {}
+}
+function renderUserStats() {
+  const bar = document.getElementById('user-stats-bar');
+  if (!bar) return;
+  const stats = getUserStats();
+  if (stats.attempts > 0 || stats.maxStreak > 0) {
+    bar.style.display = 'flex';
+    const avg = (stats.totalScore / stats.attempts).toFixed(1);
+    document.getElementById('usb-avg').textContent = `${avg}/10`;
+    document.getElementById('usb-streak').textContent = stats.maxStreak || 0;
+    document.getElementById('usb-total').textContent = stats.attempts || 0;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+function resetUserStats() {
+  if (confirm('¿Quieres reiniciar las estadísticas de esta asignatura?')) {
+    localStorage.removeItem(STATS_KEY);
+    renderUserStats();
+    showToast('Estadísticas reiniciadas 🗑️');
+  }
+}
+
+// Toast
+function showToast(msg) {
+  const toast = document.getElementById('toast-notice');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
 updateWeakChipCount();
+updateStarredChipCount();
+renderUserStats();
 
 function selectMode(mode){
   selectedMode = mode;
   selectedTemas.clear();
-  ['vf','test','mix','streak','weak','quizz'].forEach(m=>{
+  ['vf','test','mix','streak','weak','starred','quizz'].forEach(m=>{
     const el = document.getElementById('card-'+m);
     if(el) el.classList.toggle('selected', m===mode);
   });
@@ -450,6 +656,11 @@ function getSourceForMode() {
     const weakTexts = getWeakQuestions();
     const all = [...VF_DATA, ...TEST_DATA, ...QUIZZ_DATA];
     return all.filter(q => weakTexts.includes(q.q));
+  }
+  if (selectedMode === 'starred') {
+    const starredTexts = getStarredQuestions();
+    const all = [...VF_DATA, ...TEST_DATA, ...QUIZZ_DATA];
+    return all.filter(q => starredTexts.includes(q.q));
   }
   return [...VF_DATA, ...TEST_DATA];
 }
@@ -493,6 +704,10 @@ function startQuiz(){
   const src = getSourceForMode();
   if (selectedMode === 'weak' && src.length === 0) {
     alert('¡Enhorabuena! No tienes ninguna pregunta fallada acumulada en esta asignatura.');
+    return;
+  }
+  if (selectedMode === 'starred' && src.length === 0) {
+    alert('Aún no has guardado ninguna pregunta favorita con la estrella ⭐.');
     return;
   }
 
@@ -563,6 +778,7 @@ function showQ(){
   document.getElementById('q-counter').textContent = `${idx+1} / ${questions.length}`;
 
   updateLiveScore();
+  updateStarredState();
 
   document.getElementById('q-progress').style.width = `${(idx/questions.length)*100}%`;
   hide_el('btn-next');
@@ -753,6 +969,8 @@ function answerReveal(){
 function prevQ(){ if(idx > 0){ idx--; showQ(); } }
 function nextQ(){ idx++; if(idx >= questions.length){ showResults(); return; } showQ(); }
 
+let currentResultNote = '10.0';
+
 function showResults(){
   clearInterval(timerInterval);
   hide('quiz-view');
@@ -764,12 +982,15 @@ function showResults(){
   const isPenaltyOn = document.getElementById('chk-penalty')?.checked;
   const ugrContainer = document.getElementById('ugr-note-container');
 
+  let calculatedNote = 0;
+
   if (selectedMode === 'quizz') {
     document.getElementById('r-pct').textContent = questions.length + ' ✓';
     document.getElementById('r-ok').textContent = questions.length;
     document.getElementById('r-fail').textContent = 0;
     document.getElementById('btn-repeat-wrong').style.display = 'none';
     if (ugrContainer) ugrContainer.style.display = 'none';
+    calculatedNote = 10;
   } else if (selectedMode === 'streak') {
     document.getElementById('r-pct').textContent = `🔥 ${correct}`;
     document.getElementById('r-pct-lbl').textContent = 'Racha Aciertos';
@@ -777,6 +998,7 @@ function showResults(){
     document.getElementById('r-fail').textContent = wrong;
     document.getElementById('btn-repeat-wrong').style.display = 'none';
     if (ugrContainer) ugrContainer.style.display = 'none';
+    calculatedNote = Math.min(10, Math.round((correct / 10) * 10) / 10);
   } else {
     document.getElementById('r-pct-lbl').textContent = 'Nota Final';
     document.getElementById('r-ok').textContent = correct;
@@ -787,17 +1009,79 @@ function showResults(){
       // Penalización UGR: -0.33 por fallo
       const penaltyFactor = 0.33;
       const rawScore = Math.max(0, correct - (wrong * penaltyFactor));
-      const finalNote = Math.max(0, Math.round((rawScore / questions.length) * 100) / 10);
-      document.getElementById('r-pct').textContent = `${finalNote} / 10`;
+      calculatedNote = Math.max(0, Math.round((rawScore / questions.length) * 100) / 10);
+      document.getElementById('r-pct').textContent = `${calculatedNote} / 10`;
       if (ugrContainer) ugrContainer.style.display = 'block';
     } else {
-      document.getElementById('r-pct').textContent = `${Math.round((correct / questions.length) * 100) / 10} / 10`;
+      calculatedNote = Math.round((correct / questions.length) * 100) / 10;
+      document.getElementById('r-pct').textContent = `${calculatedNote} / 10`;
       if (ugrContainer) ugrContainer.style.display = 'none';
     }
   }
 
+  currentResultNote = calculatedNote.toFixed(1);
+  saveUserAttempt(calculatedNote, correct);
+
   document.getElementById('r-total').textContent = questions.length;
   renderCatBreakdown();
+}
+
+function printExamSheet() {
+  const src = getSourceForMode();
+  const pool = selectedTemas.size === 0 ? src : src.filter(q => selectedTemas.has(q.tema));
+  if (!pool.length) {
+    alert('No hay preguntas seleccionadas para imprimir.');
+    return;
+  }
+  const pContainer = document.getElementById('print-container');
+  if (!pContainer) return;
+
+  const subjTitle = document.title.split('·')[0].trim();
+  let html = `<div class="print-header" style="margin-bottom:20px;border-bottom:2px solid #000;padding-bottom:10px">`;
+  html += `<h2 style="margin:0">${code} — ${subjTitle}</h2>`;
+  html += `<p style="margin:4px 0 0 0;font-size:14px">Simulacro impreso | repasaYA.com · Fecha: ${new Date().toLocaleDateString('es-ES')}</p></div>`;
+
+  let solutions = [];
+  pool.forEach((q, i) => {
+    html += `<div class="print-q"><div class="print-q-title">${i + 1}. [${q.tema}] ${q.q}</div>`;
+    if (q.qType === 'vf') {
+      html += `<div class="print-opt">[ &nbsp; ] VERDADERO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ] FALSO</div>`;
+      solutions.push(`${i + 1}: ${q.answer === 'V' ? 'VERDADERO' : 'FALSO'}`);
+    } else if (q.qType === 'test') {
+      q.opts.forEach((opt, idx) => {
+        html += `<div class="print-opt">[ &nbsp; ] ${LETTERS[idx]}) ${opt}</div>`;
+      });
+      solutions.push(`${i + 1}: Opción ${LETTERS[q.correct]}`);
+    } else {
+      solutions.push(`${i + 1}: Ver temario`);
+    }
+    html += `</div>`;
+  });
+
+  html += `<div class="print-key"><h3>HOJA DE SOLUCIONES CORRECCIÓN</h3><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:13px">`;
+  solutions.forEach(s => html += `<div>${s}</div>`);
+  html += `</div></div>`;
+
+  pContainer.innerHTML = html;
+  pContainer.style.display = 'block';
+  window.print();
+  setTimeout(() => { pContainer.style.display = 'none'; }, 1000);
+}
+
+function shareResultWhatsApp() {
+  const subjTitle = document.title.split('·')[0].trim();
+  const text = `🎓 ¡He sacado un ${currentResultNote}/10 en el Simulacro UGR de ${subjTitle} en repasaYA! (🔥 Racha: ${correct} aciertos). ¡Demuestra lo que sabes en: ${window.location.href}`;
+  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function copyResultText() {
+  const subjTitle = document.title.split('·')[0].trim();
+  const text = `🎓 ¡He sacado un ${currentResultNote}/10 en el Simulacro UGR de ${subjTitle} en repasaYA! (🔥 Racha: ${correct} aciertos). ¡Demuestra lo que sabes en: ${window.location.href}`;
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('¡Resultado copiado al portapapeles! 📋');
+  }).catch(() => {
+    showToast('Error al copiar');
+  });
 }
 
 function renderCatBreakdown(){
@@ -844,6 +1128,8 @@ function backToSelector(){
   clearInterval(timerInterval);
   hide('quiz-view'); hide('results-view'); show('selector-view');
   updateWeakChipCount();
+  updateStarredChipCount();
+  renderUserStats();
 }
 
 function hide(id){ document.getElementById(id).style.display = 'none'; }
@@ -862,6 +1148,12 @@ document.getElementById('btn-back').addEventListener('click', backToSelector);
 document.getElementById('btn-back2').addEventListener('click', backToSelector);
 document.getElementById('btn-repeat').addEventListener('click', startQuiz);
 document.getElementById('btn-repeat-wrong').addEventListener('click', repeatWrong);
+
+document.getElementById('btn-star-q')?.addEventListener('click', toggleStarCurrentQ);
+document.getElementById('btn-reset-stats')?.addEventListener('click', resetUserStats);
+document.getElementById('btn-print')?.addEventListener('click', printExamSheet);
+document.getElementById('btn-share-wa')?.addEventListener('click', shareResultWhatsApp);
+document.getElementById('btn-copy-result')?.addEventListener('click', copyResultText);
 
 // Keyboard Navigation
 window.addEventListener('keydown', (e) => {
@@ -891,7 +1183,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 // Mode Cards
-['vf','test','mix','streak','weak','quizz'].forEach(m => {
+['vf','test','mix','streak','weak','starred','quizz'].forEach(m => {
   const card = document.getElementById('card-' + m);
   if (card) card.addEventListener('click', () => selectMode(m));
 });
