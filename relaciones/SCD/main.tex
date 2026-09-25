@@ -1,0 +1,52 @@
+\documentclass[11pt,a4paper,twoside,openright]{report}
+
+\input{config/estilo}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.5cm}
+    
+    {\Huge\bfseries\color{scdDarkBlue}\textsf{Sistemas Concurrentes y Distribuidos}}\\[0.8cm]
+    {\Large\textsf{Relaciones de Problemas y Ejercicios Resueltos}}\\[0.4cm]
+    {\large\textsf{Grado en Ingeniería Informática + Doble Grado DGIIM / ADE}}\\[0.2cm]
+    {\normalsize\textsf{Universidad de Granada (UGR)}}\\[1.5cm]
+    
+    \rule{0.8\textwidth}{1.5pt}\\[2.5cm]
+    
+    \begin{tcolorbox}[
+        colback=scdLightAccent,
+        colframe=scdAccent,
+        width=0.85\textwidth,
+        arc=4pt,
+        halign=center
+    ]
+        \large\textbf{\color{scdDarkBlue}Resolución Exhaustiva y Explicada:}\\[6pt]
+        \normalsize
+        Relaciones Oficiales de Problemas del Profesor (Manuel I. Capel Tuñón)\\[2pt]
+        Soluciones Formadas y Verificadas de Infomates (LosDelDGIIM)\\[2pt]
+        Aportes Didácticos de Ismael Sallami Moreno
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\large\textsf{Plataforma \textbf{repasaYA}}}\\[0.2cm]
+    {\small\textsf{Curso Académico 2024--2025 / 2025--2026}}\\[0.8cm]
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% ÍNDICE GENERAL
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% RELACIONES
+% ------------------------------------------------------------------------------
+\include{temas/relacion1}
+
+\end{document}
