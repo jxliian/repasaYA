@@ -1,0 +1,470 @@
+\chapter{Exclusión Mutua y Mecanismos de Sincronización Básicos}
+\label{cap:tema2_parte1}
+
+\cuadrofuentes{
+    \textbf{Fuentes utilizadas:} Transparencias Oficiales del Profesor (Manuel I. Capel Tuñón), Temario Completo de Infomates (LosDelDGIIM) y Apuntes de Ismael Sallami Moreno.
+}
+
+% ==============================================================================
+% 2.1. EL PROBLEMA DE LA EXCLUSIÓN MUTUA
+% ==============================================================================
+\section{El Problema de la Exclusión Mutua}
+
+Cuando dos o más procesos o hebras se ejecutan concurrentemente y comparten datos o recursos en memoria, surge la necesidad de coordinar sus accesos para evitar que interfieran mutuamente de manera destructiva.
+
+\begin{definicion}[Sección Crítica (SC) y Sección No Crítica (SNC)]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Sección Crítica (SC):} Es la porción de código de un proceso en la cual se accede y manipula uno o más recursos o variables compartidas. Para evitar inconsistencias de datos, debe cumplirse la propiedad de que en cualquier instante de tiempo a lo sumo un solo proceso se encuentre ejecutando su sección crítica.
+    \item \textbf{Sección No Crítica (SNC):} Cualquier porción del código en la que el proceso trabaja únicamente con variables locales privadas o recursos no compartidos. Las acciones en la SNC no interfieren con otros procesos.
+\end{itemize}
+\end{definicion}
+
+\subsection{Estructura Canónica de un Proceso Concurrente}
+Cualquier proceso que compita por una sección crítica responde al siguiente esquema cíclico:
+
+\begin{lstlisting}[language=C++]
+void Proceso(int i) {
+    while (true) {
+        // 1. Protocolo de entrada: solicita permiso y espera si la SC esta ocupada
+        protocolo_entrada(i);
+        
+        // 2. Seccion Critica (SC): acceso seguro a variables compartidas
+        seccion_critica();
+        
+        // 3. Protocolo de salida: libera el recurso y avisa a otros procesos
+        protocolo_salida(i);
+        
+        // 4. Seccion No Critica (SNC): computo independiente
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+
+\subsection{Las Cuatro Condiciones de Dijkstra}
+Edsger W. Dijkstra formuló en 1965 los cuatro requisitos formales indispensables que cualquier protocolo de entrada y salida debe satisfacer obligatoriamente para considerarse una solución válida y correcta al problema de la exclusión mutua:
+
+\begin{definicion}[Condiciones de Dijkstra]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Exclusión Mutua Estricta (Seguridad):} Nunca puede haber más de un proceso simultáneamente dentro de la sección crítica ($N_{SC} \le 1$).
+    \item \textbf{No Suposiciones sobre el Hardware ni Velocidades:} No se puede asumir ninguna hipótesis sobre el número de procesadores, ni sobre la velocidad relativa de ejecución de los procesos.
+    \item \textbf{Progreso / Ausencia de Interbloqueo (Seguridad/Vivacidad):} Un proceso que se encuentre ejecutando en su sección no crítica (SNC) o que haya terminado no puede impedir que otros procesos interesados accedan a la sección crítica. Si ningún proceso está en la SC y hay procesos intentando entrar, la decisión de cuál entra debe tomarse en un tiempo finito.
+    \item \textbf{Espera Limitada / Ausencia de Inanición (Vivacidad):} Ningún proceso que desee entrar a la sección crítica debe ser postergado indefinidamente. El tiempo de espera para entrar debe ser finito.
+\end{enumerate}
+\end{definicion}
+
+% ==============================================================================
+% 2.2. ALGORITMOS SOFTWARE CON ESPERA ACTIVA
+% ==============================================================================
+\section{Algoritmos Software con Espera Activa (Spinlocks)}
+
+En los inicios de la computación, antes de que los sistemas operativos y los procesadores ofrecieran instrucciones de sincronización dedicadas, se investigó cómo resolver la exclusión mutua exclusivamente mediante instrucciones de lectura y escritura ordinarias sobre memoria compartida.
+
+\subsection{El Método del Refinamiento Sucesivo: Los Cuatro Intentos}
+Para comprender la lógica de los algoritmos correctos, es clásico analizar los cuatro intentos fallidos para 2 procesos ($P_0$ y $P_1$):
+
+\subsubsection{Intento 1: Alternancia Estricta (Variable Turno)}
+\begin{lstlisting}[language=C++]
+int turno = 0; // Variable compartida
+
+// Proceso P0:
+while (turno != 0) { /* Espera activa */ }
+seccion_critica();
+turno = 1;
+
+// Proceso P1:
+while (turno != 1) { /* Espera activa */ }
+seccion_critica();
+turno = 0;
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Cumple:} Exclusión mutua estricta.
+    \item \textbf{Falla:} \textbf{Viola la condición de progreso}. Si $P_0$ ejecuta su SC, pone \texttt{turno = 1}, pero $P_1$ se queda permanentemente en su sección no crítica, $P_0$ jamás podrá volver a entrar a la SC porque \texttt{turno} sigue siendo 1. La velocidad de un proceso queda atada a la del otro.
+\end{itemize}
+
+\subsubsection{Intento 2: Banderas de Estado}
+Se sustituye el turno por dos variables booleanas de presencia: \texttt{bool en\_sc[2] = \{false, false\};}
+\begin{lstlisting}[language=C++]
+// Proceso Pi:
+while (en_sc[1 - i]) { /* Espera a que el otro salga */ }
+en_sc[i] = true;
+seccion_critica();
+en_sc[i] = false;
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Falla:} \textbf{Viola la exclusión mutua}. Si ambos procesos evalúan el bucle \texttt{while} a la vez cuando ambas banderas son \texttt{false}, ambos salen del bucle, ambos escriben \texttt{true} y ambos entran a la SC a la vez.
+\end{itemize}
+
+\subsubsection{Intento 3: Banderas de Intención Previas}
+Para evitar el fallo del Intento 2, cada proceso declara su intención de entrar \textit{antes} de comprobar al otro:
+\begin{lstlisting}[language=C++]
+bool quiere_entrar[2] = {false, false};
+
+// Proceso Pi:
+quiere_entrar[i] = true;
+while (quiere_entrar[1 - i]) { /* Espera */ }
+seccion_critica();
+quiere_entrar[i] = false;
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Falla:} \textbf{Sufre de Interbloqueo (Deadlock)}. Si $P_0$ y $P_1$ ejecutan \texttt{quiere\_entrar[i] = true} simultáneamente, ambos encuentran la bandera del vecino en \texttt{true} y ambos entran en bucle infinito de espera activa, bloqueándose para siempre.
+\end{itemize}
+
+\subsubsection{Intento 4: Retirada de Cortesía}
+Para solucionar el interbloqueo del Intento 3, si un proceso ve que el otro también quiere entrar, baja su bandera momentáneamente para cederle el paso:
+\begin{lstlisting}[language=C++]
+// Proceso Pi:
+quiere_entrar[i] = true;
+while (quiere_entrar[1 - i]) {
+    quiere_entrar[i] = false;
+    sleep(random);
+    quiere_entrar[i] = true;
+}
+seccion_critica();
+quiere_entrar[i] = false;
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Falla:} \textbf{Sufre de Bloqueo Activo (Livelock)}. Si ambos procesos ejecutan a la par, pueden levantar y bajar sus banderas al unísono infinitamente sin que ninguno llegue a entrar jamás a la SC.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{El Algoritmo de Dekker (1965)}
+Fue el primer algoritmo completamente correcto conocido en la historia de la computación para resolver el problema de la exclusión mutua para 2 procesos. Combina las banderas de intención del Intento 3 con una variable de desempate (\texttt{turno}) para romper la simetría cuando ambos desean entrar a la vez.
+
+\begin{algoritmo}[Algoritmo de Dekker para 2 Procesos]
+\begin{lstlisting}[language=C++]
+bool quiere[2] = {false, false};
+int turno = 0;
+
+void Proceso(int i) {
+    int j = 1 - i; // Identificador del otro proceso
+    while (true) {
+        quiere[i] = true;
+        while (quiere[j]) {
+            if (turno != i) {
+                quiere[i] = false;
+                while (turno != i) { /* Espera pasiva de su turno */ }
+                quiere[i] = true;
+            }
+        }
+        
+        seccion_critica();
+        
+        turno = j;          // Cede el turno al otro proceso
+        quiere[i] = false;  // Indica que ya ha salido
+        
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+
+% ------------------------------------------------------------------------------
+\subsection{El Algoritmo de Peterson para 2 Procesos (1981)}
+Gary L. Peterson simplificó drásticamente la solución de Dekker en 1981 con un algoritmo sumamente elegante, considerado una obra maestra de la programación concurrente.
+
+\begin{algoritmo}[Algoritmo de Peterson para 2 Procesos]
+\begin{lstlisting}[language=C++]
+bool quiere[2] = {false, false};
+int turno = 0;
+
+void Proceso(int i) {
+    int j = 1 - i;
+    while (true) {
+        // PROTOCOLO DE ENTRADA:
+        quiere[i] = true;  // 1. Declaro mi intencion de entrar
+        turno = j;         // 2. Cortesamente ofrezco el turno al otro
+        while (quiere[j] && turno == j) {
+            // Espera activa mientras el otro quiera Y mantenga el turno
+        }
+        
+        seccion_critica();
+        
+        // PROTOCOLO DE SALIDA:
+        quiere[i] = false; // Indico que he salido de la SC
+        
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+
+\subsubsection{Demostración Formal de la Exclusión Mutua en Peterson}
+Demostremos que $P_0$ y $P_1$ nunca pueden estar juntos en la SC por reducción al absurdo:
+\begin{proof}
+Supongamos que ambos procesos están en la SC simultáneamente. Para que $P_0$ haya salido de su bucle de espera, debe haber evaluado como falsa la condición:
+\[
+\text{quiere}[1] == \text{false} \quad \lor \quad \text{turno} == 0
+\]
+Como ambos están en la SC, obligatoriamente $\text{quiere}[0] == \text{true}$ y $\text{quiere}[1] == \text{true}$. Por consiguiente, la única forma de que $P_0$ entrara es que viera $\text{turno} == 0$.
+Análogamente, para que $P_1$ haya entrado, debe haber visto $\text{turno} == 1$.
+Sin embargo, \texttt{turno} es una variable atómica escalar que solo puede tener un único valor (0 o 1). El valor de \texttt{turno} corresponde a la **última asignación realizada**.
+Si $P_0$ asignó $\text{turno} = 1$ en último lugar, entonces $\text{turno} == 1$, lo que impidió entrar a $P_0$ y permitió entrar solo a $P_1$. Es imposible que $\text{turno} == 0$ y $\text{turno} == 1$ simultáneamente. Contradicción. Por tanto, se garantiza la exclusión mutua.
+\end{proof}
+
+% ------------------------------------------------------------------------------
+\subsection{Exclusión Mutua para N Procesos}
+Para extender la exclusión mutua por software a $N$ procesos existen dos algoritmos célebres:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Filtro de Peterson:} Generaliza el algoritmo para 2 procesos creando $N-1$ etapas o niveles de competición. En cada nivel, al menos un proceso queda esperando en el filtro, de forma que a la etapa $N-1$ solo llega un único ganador.
+    \item \textbf{Algoritmo de la Panadería de Lamport (\textit{Bakery Algorithm}):} Simula el sistema de turnos de una panadería:
+    \begin{enumerate}
+        \item Cada proceso $i$ que desea entrar toma un número de turno: $\text{turno}[i] = 1 + \max(\text{turno}[0], \dots, \text{turno}[n-1])$.
+        \item Se atiende a los procesos por orden lexicográfico estricto del par $(\text{turno}[i], i)$.
+        \item \textbf{Propiedad excepcional:} Es correcto incluso si las lecturas y escrituras en memoria no son estrictamente atómicas (tolera lecturas solapadas con escrituras en variables compartidas).
+    \end{enumerate}
+\end{itemize}
+
+% ==============================================================================
+% 2.3. SOPORTE HARDWARE PARA EXCLUSIÓN MUTUA
+% ==============================================================================
+\section{Soporte Hardware para Exclusión Mutua}
+
+Aunque los algoritmos de software puros son teóricamente fascinantes, en la práctica presentan graves inconvenientes: consumen el 100\% de CPU en bucles de espera activa (\textit{busy waiting}), son complejos para $N$ procesos y en los procesadores modernos con ejecución fuera de orden (\textit{out-of-order execution}) requieren barreras de memoria explícitas (\textit{memory fences}).
+
+Por ello, los procesadores modernos incorporan instrucciones atómicas a nivel de instrucción máquina:
+
+\subsection{1. Deshabilitación de Interrupciones}
+En sistemas monoprocesador clásicos, un proceso de nivel núcleo puede deshabilitar las interrupciones hardware antes de entrar a la SC y rehabilitarlas al salir. Sin embargo:
+\begin{itemize}
+    \item Es inaceptable en espacio de usuario (un proceso con bucle infinito congelaría el sistema entero).
+    \item Es completamente inútil en sistemas multiprocesador multinúcleo (deshabilitar interrupciones en el Core 1 no impide que el Core 2 acceda a la misma memoria RAM).
+\end{itemize}
+
+\subsection{2. Instrucciones Atómicas Read-Modify-Write (RMW)}
+Estas instrucciones ejecutan una lectura y una modificación de una posición de memoria de forma indivisible a nivel de bus de memoria o caché:
+
+\begin{definicion}[Test-and-Set (TAS)]
+Lee el valor original de una variable booleana en memoria y escribe incondicionalmente \texttt{true}, devolviendo el valor anterior de forma atómica:
+\begin{lstlisting}[language=C++]
+bool TestAndSet(bool &cerrojo) {
+    bool anterior = cerrojo;
+    cerrojo = true;
+    return anterior;
+}
+\end{lstlisting}
+Implementación de un cerrojo simple de exclusión mutua (\textit{Spinlock}):
+\begin{lstlisting}[language=C++]
+bool cerrojo = false; // Libre
+
+void entrar() {
+    while (TestAndSet(cerrojo)) { /* Espera activa */ }
+}
+void salir() {
+    cerrojo = false; // Liberacion atomica
+}
+\end{lstlisting}
+\end{definicion}
+
+\begin{definicion}[Compare-and-Swap (CAS)]
+Instrucción más potente y flexible. Compara el contenido de una dirección de memoria con un valor esperado; solo si coinciden, almacena el nuevo valor:
+\begin{lstlisting}[language=C++]
+bool CompareAndSwap(int *dir, int valor_esperado, int nuevo_valor) {
+    if (*dir == valor_esperado) {
+        *dir = nuevo_valor;
+        return true;
+    }
+    return false;
+}
+\end{lstlisting}
+El CAS es la piedra angular de las estructuras de datos concurrentes libres de bloqueos (\textit{lock-free programming}) y de la biblioteca \texttt{<atomic>} de C++11 (como \texttt{std::atomic<T>::compare\_exchange\_weak}).
+\end{definicion}
+
+% ==============================================================================
+% 2.4. SEMÁFOROS DE DIJKSTRA
+% ==============================================================================
+\section{Semáforos de Dijkstra}
+
+Para superar el grave problema del desperdicio de CPU que produce la espera activa, Edsger Dijkstra introdujo en 1965 el concepto de **Semáforo**.
+
+\begin{definicion}[Semáforo]
+Un semáforo $S$ es una variable protegida especial con valor entero que dispone de una cola de espera de procesos bloqueados y sobre la que **únicamente se permiten tres operaciones**:
+\begin{enumerate}
+    \item \textbf{Inicialización:} Establece el valor inicial no negativo de $S$.
+    \item \textbf{Operación P(S) / wait(S):} (Del holandés \textit{proberen}, probar/decrementar). Decrementa el valor del semáforo. Si el valor resultante es negativo (o si valía 0), el proceso invocador suspende su ejecución y pasa a la cola de bloqueados del semáforo.
+    \item \textbf{Operación V(S) / signal(S) / post(S):} (Del holandés \textit{verhogen}, incrementar). Incrementa el valor del semáforo. Si hay procesos esperando en la cola, despierta a uno de ellos y lo pasa a estado listo.
+\end{enumerate}
+Tanto $P(S)$ como $V(S)$ son operaciones **estrictamente atómicas**.
+\end{definicion}
+
+\subsection{Tipos de Semáforos}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Semáforo Binario (Mutex):} Su valor solo puede ser 0 o 1. Se utiliza típicamente para exclusión mutua (inicializado a 1).
+    \item \textbf{Semáforo General o Contador:} Su valor es un entero mayor o igual que 0. Se inicializa al número $K$ de unidades disponibles de un recurso compartido.
+\end{itemize}
+
+\subsection{El Invariante del Semáforo}
+Sea $S_{init}$ el valor inicial del semáforo, $N_P$ el número de operaciones $P$ completadas con éxito y $N_V$ el número de operaciones $V$ completadas. Se verifica siempre la siguiente propiedad invariante fundamental:
+\begin{equation}
+S_{actual} = S_{init} + N_V - N_P \ge 0
+\end{equation}
+Por tanto, si un semáforo se inicializa a 1 (para exclusión mutua):
+\begin{equation}
+N_P - N_V \le 1
+\end{equation}
+Como los procesos en la SC corresponden a los que han completado $P$ y no han hecho $V$, el número de procesos en la SC cumple $N_{SC} = N_P - N_V \le 1$, garantizando formalmente la exclusión mutua.
+
+\subsection{Semáforos en la Práctica: POSIX y C++20}
+En entornos UNIX/Linux se utiliza la API POSIX (\texttt{semaphore.h}):
+\begin{lstlisting}[language=C++,caption={Uso de semáforos POSIX en C++}]
+#include <semaphore.h>
+
+sem_t sem_mutex;
+
+int main() {
+    sem_init(&sem_mutex, 0, 1); // Inicializa a 1 (compartido entre hebras)
+    
+    // Protocolo de entrada:
+    sem_wait(&sem_mutex); // Equivale a P()
+    
+    // Seccion Critica...
+    
+    // Protocolo de salida:
+    sem_post(&sem_mutex); // Equivale a V()
+    
+    sem_destroy(&sem_mutex);
+}
+\end{lstlisting}
+
+\subsection{Limitaciones de los Semáforos}
+Aunque los semáforos son muy potentes y resuelven el problema de la espera activa, su uso en proyectos grandes resulta muy propenso a errores:
+\begin{itemize}
+    \item \textbf{Falta de Estructura:} Son variables globales dispersas por el código; no existe asociación sintáctica entre el semáforo y los datos que protege.
+    \item \textbf{Fragilidad:} Un error de programación en un solo proceso (olvidar un \texttt{sem\_post}, invertir el orden de dos \texttt{sem\_wait} o duplicar una llamada) provoca inmediatamente interbloqueo o violación de la exclusión mutua en todo el sistema.
+    \item \textbf{Doble Propósito Confuso:} Se usan tanto para exclusión mutua como para sincronización condicional, haciendo el código difícil de mantener y verificar.
+\end{itemize}
+
+% ==============================================================================
+% 2.5. FUNDAMENTOS DE LOS MONITORES
+% ==============================================================================
+\section{Introducción a los Monitores como Mecanismo de Alto Nivel}
+
+Para superar las deficiencias de los semáforos, C.A.R. Hoare (1974) y Per Brinch Hansen diseñaron los **Monitores**: un mecanismo de sincronización estructurado de alto nivel integrado en el propio lenguaje de programación.
+
+\begin{definicion}[Monitor]
+Un monitor es un Tipo de Dato Abstracto (TDA) concurrente que encapsula:
+\begin{enumerate}
+    \item Las variables compartidas que definen el estado del recurso protegido (variables permanentes privadas).
+    \item Un conjunto de procedimientos públicos accesibles por los procesos externos.
+    \item Un bloque de inicialización de las variables internas.
+\end{enumerate}
+\textbf{Regla de Oro del Monitor:} El propio compilador o entorno de ejecución garantiza de forma automática e implícita la **exclusión mutua** en el acceso a sus procedimientos. En ningún momento puede haber más de un proceso ejecutándose activamente dentro del monitor.
+\end{definicion}
+
+\subsection{Estructura Interna de un Monitor}
+Todo monitor dispone de dos niveles de colas:
+\begin{itemize}
+    \item \textbf{Cola de Entrada al Monitor:} Donde esperan los procesos que intentan invocar un procedimiento del monitor mientras otro proceso ya está dentro de él.
+    \item \textbf{Variables Condición (\texttt{cond}):} Colas internas donde se suspenden los procesos que ya están dentro del monitor pero que no pueden continuar porque no se cumple una condición lógica sobre las variables del monitor.
+\end{itemize}
+
+\subsection{Variables Condición y sus Primitivas}
+Una variable de tipo \texttt{cond} (o \texttt{condition\_variable}) no guarda un valor booleano ni numérico; representa exclusivamente una **cola de espera**.
+Sobre una variable condición $c$ se definen dos operaciones básicas:
+\begin{itemize}
+    \item \texttt{c.wait():} El proceso que la invoca se bloquea en la cola de $c$ y **libera automáticamente la exclusión mutua del monitor**, permitiendo que otro proceso entre a modificar el estado.
+    \item \texttt{c.signal():} Despierta a uno de los procesos suspendidos en la cola de $c$. Si no hay ningún proceso esperando en $c$, la llamada a \texttt{signal()} no tiene efecto (se pierde, a diferencia de un semáforo que incrementaría su valor).
+\end{itemize}
+
+% ==============================================================================
+% 2.6. SEMÁNTICAS DE SEÑALIZACIÓN EN MONITORES
+% ==============================================================================
+\section{Semánticas de Señalización en Monitores}
+
+El dilema fundamental en el diseño de un monitor ocurre en el instante exacto en que un proceso $P$ dentro del monitor ejecuta \texttt{c.signal()} y despierta al proceso suspendido $Q$. En ese instante habría **dos procesos dentro del monitor** ($P$ y $Q$), lo que violaría la exclusión mutua implícita.
+
+Para resolver este conflicto, existen cuatro semánticas principales:
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lp{4.2cm}p{4.2cm}c@{}}
+\toprule
+\textbf{Semántica} & \textbf{Acción sobre el señalador ($P$)} & \textbf{Acción sobre el despertado ($Q$)} & \textbf{¿Desplazante?} \\ \midrule
+\textbf{SU} (Señalar y Espera Urgente) & Pasa a una cola prioritaria de procesos urgentes. & Entra inmediatamente al monitor y reanuda su ejecución. & \textbf{Sí} (Hoare) \\
+\textbf{SC} (Señalar y Continuar) & Continúa ejecutando dentro del monitor hasta salir o esperar. & Pasa a la cola general de entrada o lista de listos. & \textbf{No} (Mesa/Java) \\
+\textbf{SS} (Señalar y Salir) & Debe salir del monitor en ese mismo instante. & Entra inmediatamente al monitor. & \textbf{Sí} \\
+\textbf{SE} (Señalar y Esperar) & Pasa a la cola ordinaria de entrada. & Reanuda la ejecución dentro del monitor. & \textbf{Sí} \\ \bottomrule
+\end{tabular}
+\caption{Comparativa de semánticas de señalización en monitores.}
+\end{table}
+
+\begin{aviso}[La Regla de Oro: \texttt{if} vs. \texttt{while} al evaluar la condición]
+\begin{itemize}[leftmargin=*]
+    \item En la semántica **SU (Hoare)**, el proceso despertado se ejecuta de inmediato sin que nadie modifique el estado entre la señal y su reanudación. Por tanto, basta con comprobar la condición con un condicional:
+    \begin{lstlisting}[language=C++]
+    if (!condicion_cumplida) c.wait(); // Valido en semantica SU (Hoare)
+    \end{lstlisting}
+    \item En la semántica **SC (Mesa / Hansen / C++ / Java)**, otros procesos pueden intercalarse y consumir el recurso antes de que el proceso despertado consiga retomar el monitor. Por ello, **es estrictamente obligatorio reevaluar la condición en un bucle \texttt{while}**:
+    \begin{lstlisting}[language=C++]
+    while (!condicion_cumplida) c.wait(); // OBLIGATORIO en semantica SC
+    \end{lstlisting}
+\end{itemize}
+\end{aviso}
+
+% ==============================================================================
+% 2.7. IMPLEMENTACIÓN DE MONITORES CON SEMÁFOROS
+% ==============================================================================
+\section{Implementación de Monitores usando Semáforos}
+
+Para entender cómo el sistema operativo o el runtime de un lenguaje materializa un monitor (con semántica SU de Hoare), se utiliza la construcción clásica de C.A.R. Hoare basada en semáforos:
+
+\begin{algoritmo}[Esquema de Hoare para Implementar Monitores con Semáforos]
+Se definen las siguientes variables de sincronización internas:
+\begin{lstlisting}[language=C++]
+sem_t mutex;       // Controla la entrada al monitor (inicializado a 1)
+sem_t urgente;     // Cola para procesos que cedieron el monitor por signal (inic. a 0)
+int num_urgentes = 0; // Contador de procesos en la cola urgente
+
+// Por cada variable condicion c:
+sem_t c_sem;       // Cola del semaforo para c.wait() (inic. a 0)
+int c_count = 0;   // Contador de procesos esperando en c
+\end{lstlisting}
+
+\textbf{1. Entrada y Salida de cada Procedimiento del Monitor:}
+\begin{lstlisting}[language=C++]
+void Procedimiento_Monitor() {
+    // ENTRADA AL PROCEDIMIENTO:
+    sem_wait(&mutex);
+    
+    // ... Codigo del procedimiento ...
+    
+    // SALIDA DEL PROCEDIMIENTO:
+    // Si hay procesos en la cola urgente, tienen prioridad sobre los de entrada:
+    if (num_urgentes > 0) {
+        sem_post(&urgente);
+    } else {
+        sem_post(&mutex);
+    }
+}
+\end{lstlisting}
+
+\textbf{2. Implementación de \texttt{c.wait()}:}
+\begin{lstlisting}[language=C++]
+void wait_c() {
+    c_count++;
+    // Si habia procesos urgentes, cede a uno urgente; si no, libera la entrada:
+    if (num_urgentes > 0) {
+        sem_post(&urgente);
+    } else {
+        sem_post(&mutex);
+    }
+    sem_wait(&c_sem); // Se bloquea en la condicion
+    c_count--;
+}
+\end{lstlisting}
+
+\textbf{3. Implementación de \texttt{c.signal()} (Semántica SU):}
+\begin{lstlisting}[language=C++]
+void signal_c() {
+    if (c_count > 0) {
+        num_urgentes++;
+        sem_post(&c_sem);    // Despierta al proceso en la condicion
+        sem_wait(&urgente);  // El proceso senalador se bloquea en urgentes
+        num_urgentes--;
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+Este esquema demuestra de forma transparente cómo se garantiza tanto la exclusión mutua del monitor como la prioridad absoluta de la semántica urgente de Hoare.

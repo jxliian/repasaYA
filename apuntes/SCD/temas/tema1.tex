@@ -1,0 +1,299 @@
+\chapter{Introducción a la Programación Concurrente}
+\label{cap:tema1}
+
+\cuadrofuentes{
+    \textbf{Fuentes utilizadas:} Transparencias Oficiales del Profesor (Manuel I. Capel Tuñón), Temario Completo de Infomates (LosDelDGIIM) y Apuntes de Ismael Sallami Moreno.
+}
+
+% ==============================================================================
+% 1.1. MOTIVACIÓN Y CONCEPTOS FUNDAMENTALES
+% ==============================================================================
+\section{Motivación y Conceptos Fundamentales}
+
+En la computación secuencial tradicional, un programa consiste en una secuencia única y totalmente ordenada de instrucciones que se ejecutan una tras otra en un procesador. La corrección de dicho programa depende exclusivamente del estado inicial y de la transformación lógica que realiza cada instrucción.
+
+Sin embargo, el mundo real es inherentemente concurrente, y el hardware moderno ha alcanzado los límites físicos de disipación térmica y frecuencia de reloj (\textit{Power Wall}), obligando a la transición hacia arquitecturas multinúcleo y sistemas distribuidos.
+
+\begin{definicion}[Concurrencia vs. Paralelismo]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Concurrencia:} Es la propiedad de un sistema en el que múltiples tareas o secuencias de instrucciones están en progreso simultáneamente. No implica necesariamente ejecución física simultánea en el mismo instante de tiempo; puede lograrse mediante \textit{intercalación} (\textit{interleaving}) o multiprogramación en un único procesador mediante multiplexación temporal.
+    \item \textbf{Paralelismo:} Es la ejecución estrictamente simultánea en el tiempo de dos o más secuencias de cálculo, requiriendo necesariamente soporte físico de hardware (múltiples núcleos, múltiples procesadores o sistemas distribuidos).
+\end{itemize}
+\textit{«La concurrencia trata sobre la estructura de un programa; el paralelismo trata sobre la ejecución física simultánea».}
+\end{definicion}
+
+\subsection{Procesos y Hebras (Hilos de Ejecución)}
+Para modelar y estructurar la ejecución concurrente, los sistemas operativos y los lenguajes de programación proporcionan abstracciones de ejecución:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Proceso (Proceso Pesado):} Es un programa en ejecución con su propio espacio de direcciones de memoria virtual aislado (código, datos, pila, montículo o \textit{heap}), tabla de descriptores de ficheros y contexto en el sistema operativo. La comunicación entre procesos distintos requiere mecanismos explícitos de comunicación interproceso (IPC: memoria compartida, tuberías, sockets o paso de mensajes).
+    \item \textbf{Hebra o Hilo (\textit{Thread} / Proceso Ligero):} Unidad básica de asignación de CPU dentro de un proceso. Todas las hebras creadas dentro de un mismo proceso comparten el mismo espacio de direcciones (memoria global y montículo) y recursos del proceso, pero cada hebra dispone de su propio contador de programa (PC), conjunto de registros de la CPU y pila de llamadas (\textit{call stack}).
+\end{itemize}
+
+\begin{aviso}[Consecuencia del Espacio Compartido]
+Dado que las hebras de un mismo proceso comparten la memoria global, el intercambio de datos entre ellas es instantáneo y muy eficiente. No obstante, esto introduce el peligro crítico de la concurrencia: el acceso simultáneo no sincronizado a variables compartidas provoca \textbf{condiciones de carrera} e inconsistencia de datos.
+\end{aviso}
+
+% ==============================================================================
+% 1.2. AXIOMAS Y PRINCIPIOS CLAVE DE LA CONCURRENCIA
+% ==============================================================================
+\section{Axiomas y Principios Clave de la Concurrencia}
+
+Para razonar formalmente sobre programas concurrentes, se asume un modelo abstracto de computación basado en los siguientes principios fundamentales:
+
+\subsection{1. Atomicidad e Intercalación (Interleaving)}
+En ausencia de soporte de memoria transaccional, las instrucciones complejas de un lenguaje de alto nivel no se ejecutan de un solo golpe.
+
+\begin{definicion}[Acción Atómica]
+Una acción o instrucción es \textbf{atómica} si se ejecuta como una unidad indivisible e indivisa: ningún otro proceso puede observar estados intermedios de dicha operación, y su ejecución no puede ser interrumpida por otras instrucciones que accedan a los mismos datos.
+\end{definicion}
+
+\begin{ejemplo}[La ilusión de la asignación simple]
+Consideremos la instrucción en C/C++:
+\begin{lstlisting}[language=C++]
+x = x + 1;
+\end{lstlisting}
+Aunque parece una sola sentencia, a nivel de máquina (código ensamblador) se descompone típicamente en tres operaciones elementales atómicas:
+\begin{enumerate}
+    \item \texttt{LOAD  R1, [x]}  \quad (Carga el valor de la memoria a un registro)
+    \item \texttt{ADD   R1, 1}     \quad (Incrementa el valor en el registro)
+    \item \texttt{STORE R1, [x]}  \quad (Escribe el nuevo valor en la memoria)
+\end{enumerate}
+Si dos hebras ejecutan simultáneamente $x = x + 1$ partiendo de $x = 0$, la intercalación de sus instrucciones en la CPU puede dar lugar a que el resultado final sea $x = 1$ en lugar de $x = 2$, perdiéndose una actualización.
+\end{ejemplo}
+
+\subsection{2. Consistencia de Datos tras Acceso Simultáneo}
+Cuando dos instrucciones se ejecutan de manera concurrente sobre la misma variable compartida:
+\begin{itemize}
+    \item Si ambas son de \textbf{lectura}, la operación es completamente segura.
+    \item Si al menos una es de \textbf{escritura} y no existe sincronización, se produce una \textbf{condición de carrera} (\textit{race condition}), dejando la variable en un estado impredecible y no determinista.
+\end{itemize}
+
+\subsection{3. Irrepetibilidad de las Secuencias y Trazas de Ejecución}
+\begin{definicion}[Traza de Ejecución]
+Una \textbf{traza} es una secuencia temporal de estados del sistema producida por un orden específico de intercalación de las instrucciones atómicas de los procesos concurrentes.
+\end{definicion}
+
+Dado que la planificación de la CPU, las interrupciones del hardware y las velocidades relativas de los núcleos son variables, un mismo programa concurrente ejecutado con las mismas entradas puede generar millones de trazas distintas. Por ello:
+\begin{itemize}
+    \item Las secuencias de ejecución son \textbf{irrepetibles}.
+    \item Los errores concurrentes son \textbf{transitorios} (\textit{Heisenbugs}): aparecen esporádicamente en unas ejecuciones y desaparecen al intentar depurarlos con herramientas convencionales (p.~ej., al introducir un \texttt{printf} o un punto de ruptura, se altera la temporización y el error se oculta).
+\end{itemize}
+
+\subsection{4. Independencia de la Velocidad de Ejecución}
+La corrección lógica de un programa concurrente debe ser **independiente de la velocidad relativa** de los procesos. No se puede suponer que un proceso es «más rápido» o «más lento» que otro, ni diseñar la sincronización basándose en bucles de retardo temporales (\textit{sleeps}). El programa debe funcionar correctamente tanto si un proceso se ejecuta en microsegundos como si se detiene durante segundos debido a una interrupción.
+
+\subsection{5. Hipótesis del Progreso Finito}
+Para poder garantizar que un sistema concurrente avanza hacia su meta, se asume el siguiente axioma:
+\begin{definicion}[Hipótesis del Progreso Finito]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Progreso Global:} Se garantiza que, en cualquier instante en que existan procesos listos para ejecutarse, al menos uno de ellos ejecutará su siguiente instrucción en un tiempo finito.
+    \item \textbf{Progreso Individual (Equidad / Fairness):} Si un proceso está listo para ejecutarse de forma continuada, el planificador le asignará la CPU en algún momento en tiempo finito, evitando que quede postergado indefinidamente.
+\end{itemize}
+\end{definicion}
+
+% ==============================================================================
+% 1.3. MODELOS Y NOTACIONES DE CONCURRENCIA
+% ==============================================================================
+\section{Modelos y Notaciones para Expresar Concurrencia}
+
+A lo largo de la historia de la computación se han formalizado diferentes estructuras sintácticas para modelar la concurrencia:
+
+\subsection{1. Grafos de Sincronización (DAG)}
+Un grafo de sincronización es un Grafo Dirigido Acíclico (DAG, \textit{Directed Acyclic Graph}) donde los nodos representan bloques de instrucciones o procesos, y las aristas dirigidas $(u, v)$ representan relaciones de precedencia temporal: la tarea $v$ solo puede comenzar una vez que la tarea $u$ haya concluido por completo.
+
+\subsection{2. Notaciones Estructuradas: Cobegin / Coend}
+Propuesta originalmente por Dijkstra (\texttt{parbegin} / \texttt{parend}), define bloques donde las sentencias interiores se ejecutan en paralelo y el bloque finaliza cuando todas las ramas internas han concluido:
+\begin{lstlisting}[language=C++]
+S0;
+cobegin
+    S1;
+    S2;
+    S3;
+coend;
+S4; // S4 solo se ejecuta tras finalizar S1, S2 y S3
+\end{lstlisting}
+
+\subsection{3. Notaciones No Estructuradas: Fork y Join}
+Introducidas por Dennis y Van Horn (1966) y adoptadas por UNIX:
+\begin{itemize}
+    \item \texttt{fork(etiqueta):} Inicia un nuevo flujo de ejecución concurrente en la etiqueta indicada, mientras el proceso actual continúa en la siguiente instrucción.
+    \item \texttt{join(contador):} Sincroniza múltiples flujos concurrentes, reduciendo un contador atómico y bloqueando hasta que todas las ramas hayan alcanzado este punto.
+\end{itemize}
+
+\subsection{4. Hebras Modernas en C++11 y OpenMP}
+En los estándares modernos, la concurrencia se gestiona mediante bibliotecas del lenguaje:
+
+\begin{lstlisting}[language=C++,caption={Concurrencia estándar con hebras en C++11}]
+#include <iostream>
+#include <thread>
+#include <vector>
+
+void tarea(int id) {
+    std::cout << "Hebra " << id << " ejecutandose.\n";
+}
+
+int main() {
+    std::vector<std::thread> hebras;
+    for (int i = 0; i < 4; ++i) {
+        hebras.emplace_back(tarea, i); // Creacion concurrente (Fork)
+    }
+    for (auto& h : hebras) {
+        h.join(); // Sincronizacion de finalizacion (Join)
+    }
+    return 0;
+}
+\end{lstlisting}
+
+% ==============================================================================
+% 1.4. EXCLUSIÓN MUTUA Y CONDICIONES DE SINCRONIZACIÓN
+% ==============================================================================
+\section{Exclusión Mutua y Sincronización}
+
+Los dos problemas fundamentales en programación concurrente son:
+
+\subsection{1. El Problema de la Exclusión Mutua}
+Surge cuando dos o más procesos acceden a un recurso compartido (variable, fichero, dispositivo de hardware) y al menos uno de ellos realiza operaciones de modificación.
+\begin{definicion}[Sección Crítica (SC)]
+Segmento de código de un proceso que accede a uno o varios recursos compartidos y que **no debe ser ejecutado por más de un proceso de forma simultánea**.
+\end{definicion}
+
+Estructura canónica de un proceso con sección crítica:
+\begin{lstlisting}[language=C++]
+while (true) {
+    < Protocolo de Entrada a la SC >
+        Seccion_Critica();
+    < Protocolo de Salida de la SC >
+        Seccion_No_Critica();
+}
+\end{lstlisting}
+
+\subsection{2. Condición de Sincronización}
+A diferencia de la exclusión mutua (donde la restricción es de competencia por recursos), la \textbf{sincronización condicional} es una relación de \textbf{cooperación}: un proceso debe suspender su ejecución hasta que otro proceso colaborador produzca un evento o modifique el estado del sistema satisfaciendo una condición boolean $B$.
+
+\begin{ejemplo}[Paradigma Productor-Consumidor Elemental]
+Dos procesos cooperantes comparten un búfer de tamaño 1:
+\begin{itemize}
+    \item El \textbf{Productor} genera un dato y lo deposita en el búfer. No puede volver a producir si el búfer aún contiene un dato no leído (riesgo de sobrescritura).
+    \item El \textbf{Consumidor} retira el dato del búfer. No puede consumir si el búfer está vacío (riesgo de lectura espuria).
+\end{itemize}
+Ambos procesos deben sincronizarse condicionalmente sobre los predicados \textit{«búfer lleno»} y \textit{«búfer vacío»}.
+\end{ejemplo}
+
+% ==============================================================================
+% 1.5. PROPIEDADES DE LOS SISTEMAS CONCURRENTES
+% ==============================================================================
+\section{Propiedades de los Sistemas Concurrentes}
+
+Formalizadas por Leslie Lamport, las propiedades que determinan la corrección de un sistema concurrente se dividen en dos categorías complementarias:
+
+\subsection{1. Propiedades de Seguridad (Safety)}
+\begin{definicion}[Propiedad de Seguridad]
+Establece que **«nada malo ocurrirá durante la ejecución»**. Si una propiedad de seguridad se viola, la violación ocurre en un instante temporal discreto y finito, siendo observable en un prefijo de la traza de ejecución.
+\end{definicion}
+
+Ejemplos clave de seguridad:
+\begin{itemize}
+    \item \textbf{Exclusión Mutua:} Nunca hay dos procesos simultáneamente dentro de la sección crítica ($N_{SC} \le 1$).
+    \item \textbf{Ausencia de Interbloqueo (\textit{Deadlock}):} El sistema no alcanza ningún estado donde todos los procesos queden bloqueados esperando recursos que otros tienen asignados, impidiendo cualquier avance.
+    \item \textbf{Consistencia de Datos:} Las invariantes de integridad de los datos compartidos se mantienen intactas tras cada operación.
+\end{itemize}
+
+\subsection{2. Propiedades de Vivacidad (Liveness)}
+\begin{definicion}[Propiedad de Vivacidad]
+Establece que **«algo bueno terminará ocurriendo eventualmente»**. No puede refutarse observando una traza finita; solo se viola si transcurre un tiempo infinito sin que el evento deseado suceda.
+\end{definicion}
+
+Ejemplos clave de vivacidad:
+\begin{itemize}
+    \item \textbf{Ausencia de Inanición (\textit{Starvation-Freedom}):} Si un proceso solicita acceder a la sección crítica o a un recurso, se le concede el acceso en un tiempo finito.
+    \item \textbf{Equidad (\textit{Fairness}):} Ningún proceso listo es ignorado arbitrariamente por el planificador mientras otros procesos progresan de forma indefinida.
+    \item \textbf{Terminación:} Un algoritmo o tarea eventualmente completa su ejecución y finaliza.
+\end{itemize}
+
+\begin{aviso}[Seguridad vs. Vivacidad en el Diseño]
+Un sistema que no hace nada en absoluto (por ejemplo, todos los procesos bloqueados permanentemente) cumple trivialmente todas las propiedades de seguridad (¡nada malo ocurre!), pero fracasa estrepitosamente en las de vivacidad. El reto de la programación concurrente es garantizar ambas simultáneamente.
+\end{aviso}
+
+% ==============================================================================
+% 1.6. VERIFICACIÓN FORMAL DE PROGRAMAS CONCURRENTES
+% ==============================================================================
+\section{Verificación Formal de Programas Concurrentes}
+
+Para garantizar la corrección de un programa concurrente, las pruebas convencionales de software (\textit{testing}) son insuficientes debido a la explosión combinatoria del número de trazas posibles. Se requieren métodos formales.
+
+\subsection{Enfoque Operacional vs. Enfoque Axiomático}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Enfoque Operacional (Model Checking):} Construye el grafo explícito de todos los estados alcanzables del sistema. Aunque es automático, sufre del problema de la \textbf{explosión del espacio de estados}: para $n$ procesos de $k$ instrucciones, el número de estados puede crecer exponencialmente como $(k!)^n$.
+    \item \textbf{Enfoque Axiomático (Lógica de Hoare):} Utiliza un sistema lógico-deductivo basado en reglas de inferencia y asertos sobre las variables del programa, demostrando matemáticamente que el código satisface sus especificaciones independientemente de la velocidad de ejecución.
+\end{itemize}
+
+\subsection{Fundamentos de la Lógica de Hoare}
+La lógica de Hoare se fundamenta en los \textbf{tripletes de Hoare}:
+\begin{equation}
+\{P\} \; C \; \{Q\}
+\end{equation}
+Donde:
+\begin{itemize}
+    \item $P$ es la \textbf{Precondición}: predicado lógico que describe el estado del sistema antes de ejecutar $C$.
+    \item $C$ es el \textbf{Comando} o bloque de código que se ejecuta.
+    \item $Q$ es la \textbf{Postcondición}: predicado lógico que debe ser verdadero inmediatamente después de que $C$ concluya.
+\end{itemize}
+
+\begin{definicion}[Corrección Parcial vs. Corrección Total]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Corrección Parcial:} Si la precondición $P$ es cierta antes de $C$, y **si la ejecución de $C$ termina**, entonces la postcondición $Q$ será cierta al finalizar.
+    \item \textbf{Corrección Total:} Corrección parcial + Demostración de que el programa **garantiza la terminación** en tiempo finito.
+\end{itemize}
+\end{definicion}
+
+\subsection{Axiomas Fundamentales para Programas Secuenciales}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Axioma de la Asignación:}
+    \begin{equation}
+    \{P[x \leftarrow E]\} \; x := E \; \{P\}
+    \end{equation}
+    Donde $P[x \leftarrow E]$ denota la fórmula obtenida al sustituir todas las apariciones libres de la variable $x$ por la expresión $E$ en la fórmula $P$.
+    
+    \item \textbf{Regla de la Composición Secuencial:}
+    \begin{equation}
+    \frac{\{P\} \; S_1 \; \{R\} \quad\quad \{R\} \; S_2 \; \{Q\}}{\{P\} \; S_1; S_2 \; \{Q\}}
+    \end{equation}
+    
+    \item \textbf{Regla de la Sentencia Condicional:}
+    \begin{equation}
+    \frac{\{P \land B\} \; S_1 \; \{Q\} \quad\quad \{P \land \neg B\} \; S_2 \; \{Q\}}{\{P\} \; \text{\textbf{if} } B \text{ \textbf{then} } S_1 \text{ \textbf{else} } S_2 \; \{Q\}}
+    \end{equation}
+    
+    \item \textbf{Regla del Bucle While (Invariante de Bucle):}
+    \begin{equation}
+    \frac{\{I \land B\} \; S \; \{I\}}{\{I\} \; \text{\textbf{while} } B \text{ \textbf{do} } S \; \{I \land \neg B\}}
+    \end{equation}
+    Donde $I$ es el \textbf{invariante de bucle}: un aserto que permanece verdadero antes, durante y después de cada iteración del ciclo.
+\end{enumerate}
+
+\subsection{Extensión a Programas Concurrentes: No Interferencia de Owicki-Gries}
+Para extender la lógica de Hoare a sentencias concurrentes compuestas (\texttt{cobegin $S_1 \parallel S_2$ coend}):
+\begin{equation}
+\frac{\{P_1\} \; S_1 \; \{Q_1\} \quad\quad \{P_2\} \; S_2 \; \{Q_2\}}{\{P_1 \land P_2\} \; \text{\textbf{cobegin} } S_1 \parallel S_2 \text{ \textbf{coend}} \; \{Q_1 \land Q_2\}}
+\end{equation}
+Esta regla es válida \textbf{únicamente si se cumple el Teorema de No Interferencia de Owicki-Gries}:
+
+\begin{definicion}[Condición de No Interferencia de Owicki-Gries]
+Dadas las demostraciones secuenciales de dos procesos concurrentes, la prueba del proceso 1 no es interferida por el proceso 2 si, para cada aserto intermedio $\{A\}$ en la traza de $S_1$ y cada acción atómica elemental $T$ perteneciente a $S_2$ con precondición $\{pre(T)\}$, se verifica:
+\begin{equation}
+\{A \land pre(T)\} \; T \; \{A\}
+\end{equation}
+Es decir, la ejecución de cualquier acción de un proceso vecino preserva la validez de los asertos lógicos intermedios de los demás procesos.
+\end{definicion}
+
+\subsection{Técnica del Invariante Global}
+Cuando los procesos comparten múltiples variables y la comprobación de no interferencia de Owicki-Gries se vuelve inmanejable por el número cruzado de asertos, se utiliza la **Técnica del Invariante Global**:
+\begin{itemize}
+    \item Se define un predicado lógico global $I_{glob}$ que involucra a las variables compartidas y debe mantenerse invariante en todo estado accesible.
+    \item Cada proceso garantiza que sus transiciones atómicas preservan $I_{glob}$:
+    \begin{equation}
+    \{I_{glob} \land P_i\} \; \langle S_i \rangle \; \{I_{glob} \land Q_i\}
+    \end{equation}
+    \item De este modo, la consistencia de las variables compartidas queda demostrada para cualquier intercalación posible.
+\end{itemize}

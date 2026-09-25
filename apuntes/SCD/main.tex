@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper,twoside,openright]{report}
+
+% Cargar configuración y estilos visuales
+\input{config/estilo}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.5cm}
+    
+    {\Huge\bfseries\color{scdDarkBlue}\textsf{Sistemas Concurrentes y Distribuidos}}\\[0.8cm]
+    {\Large\textsf{Apuntes Completos de Teoría y Práctica}}\\[0.4cm]
+    {\large\textsf{Grado en Ingeniería Informática + Doble Grado DGIIM / ADE}}\\[0.2cm]
+    {\normalsize\textsf{Universidad de Granada (UGR)}}\\[1.5cm]
+    
+    \rule{0.8\textwidth}{1.5pt}\\[2.5cm]
+    
+    \begin{tcolorbox}[
+        colback=scdLightAccent,
+        colframe=scdAccent,
+        width=0.85\textwidth,
+        arc=4pt,
+        halign=center
+    ]
+        \large\textbf{\color{scdDarkBlue}Síntesis Integral de Contenidos:}\\[6pt]
+        \normalsize
+        Transparencias Oficiales del Profesor (Manuel I. Capel Tuñón)\\[2pt]
+        Temario Completo de Infomates (LosDelDGIIM)\\[2pt]
+        Apuntes de Ismael Sallami Moreno
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\large\textsf{Plataforma \textbf{repasaYA}}}\\[0.2cm]
+    {\small\textsf{Curso Académico 2024--2025 / 2025--2026}}\\[0.8cm]
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% ÍNDICE GENERAL
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% TEMAS
+% ------------------------------------------------------------------------------
+\include{temas/tema1}
+\include{temas/tema2_parte1}
+\include{temas/tema2_parte2}
+\include{temas/tema3}
+\include{temas/tema4}
+
+\end{document}

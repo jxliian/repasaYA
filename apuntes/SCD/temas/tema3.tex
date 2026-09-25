@@ -1,0 +1,527 @@
+\chapter{Sistemas Basados en el Paso de Mensajes y MPI}
+\label{cap:tema3}
+
+\cuadrofuentes{\textbf{Fuentes utilizadas:} Apuntes de Ismael Sallami y Temario de Infomates (LosDelDGIIM). Pendiente de incorporar transparencias originales del profesor.}
+
+% ==============================================================================
+\section{Fundamentos de Arquitecturas Paralelas y Distribuidas}
+% ==============================================================================
+
+\subsection{El Cuello de Botella de Von Neumann}
+En la arquitectura clásica propuesta por John von Neumann en 1945, un computador digital consta de una Unidad Central de Procesamiento (CPU), una memoria principal que almacena tanto las instrucciones del programa como los datos, y un subsistema de entrada/salida. 
+
+Ambos flujos de información —las instrucciones a ejecutar y los operandos o datos leídos y escritos en memoria— deben transitar obligatoriamente a través del \textbf{mismo bus físico de interconexión}.
+
+\begin{definicion}[Cuello de Botella de Von Neumann]
+El \textbf{cuello de botella de Von Neumann} es la limitación física estructural del rendimiento de un computador debida a la contención en el bus compartido entre la CPU y la memoria. Puesto que el bus no puede transferir simultáneamente una instrucción y un dato, la velocidad de procesamiento queda restringida por la tasa de transferencia (\emph{throughput}) y la latencia del bus, independientemente de la potencia de cálculo bruta de la CPU.
+\end{definicion}
+
+Con el paso de las décadas, la velocidad de conmutación de los transistores en las CPUs creció exponencialmente siguiendo la Ley de Moore, mientras que la latencia de acceso a la memoria DRAM mejoró a un ritmo significativamente más lento. Esta brecha creciente (conocida en la literatura como el \emph{Memory Wall} o muro de la memoria) convirtió al acceso a memoria en el factor limitante absoluto del rendimiento secuencial.
+
+La solución arquitectónica moderna a este estancamiento no radica en seguir acelerando un único procesador, sino en la \textbf{computación paralela y distribuida}: disponer de múltiples unidades de procesamiento que operen simultáneamente, descomponiendo el flujo único de cómputo en múltiples flujos concurrentes.
+
+\subsection{Clasificación de Flynn}
+En 1966, Michael J. Flynn propuso una taxonomía fundamental que clasifica las arquitecturas computacionales a partir de dos dimensiones independientes: el número de \textbf{flujos de instrucciones} (\emph{Instruction Streams}) y el número de \textbf{flujos de datos} (\emph{Data Streams}) que el hardware puede procesar simultáneamente.
+
+\begin{figure}[htbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}}
+\toprule
+& \textbf{Un Solo Flujo de Datos (SD)} & \textbf{Múltiples Flujos de Datos (MD)} \\
+\midrule
+\textbf{Un Solo Flujo de Instrucciones (SI)} & \textbf{SISD} (\emph{Single Instruction, Single Data})\newline Computador secuencial convencional (Von Neumann monoprocesador). & \textbf{SIMD} (\emph{Single Instruction, Multiple Data})\newline Procesadores vectoriales, extensiones multimedia (AVX/SSE), GPUs masivas. \\
+\addlinespace
+\textbf{Múltiples Flujos de Instrucciones (MI)} & \textbf{MISD} (\emph{Multiple Instruction, Single Data})\newline Muy infrecuente. Utilizado en sistemas redundantes de alta tolerancia a fallos (aeroespacial). & \textbf{MIMD} (\emph{Multiple Instruction, Multiple Data})\newline Multiprocesadores multinúcleo (\emph{multicore}), supercomputadores y clusters distribuidos. \\
+\bottomrule
+\end{tabular}
+\caption{Matriz de la Clasificación de Flynn.}
+\label{tab:flynn}
+\end{figure}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{SISD:} Una única unidad de control emite un único flujo de instrucciones que operan secuencialmente sobre un único flujo de datos.
+    \item \textbf{SIMD:} Una única unidad de control emite la misma instrucción en cada ciclo de reloj, pero esta se ejecuta en paralelo sobre múltiples elementos de datos independientes distribuidos en múltiples unidades aritmético-lógicas (ALUs).
+    \item \textbf{MISD:} Múltiples unidades de control ejecutan instrucciones distintas sobre el mismo flujo de datos. Es un modelo marginal cuya aplicación principal es la verificación cruzada por redundancia en sistemas críticos (por ejemplo, tres algoritmos distintos calculando la trayectoria de un cohete con los mismos datos de sensores).
+    \item \textbf{MIMD:} Múltiples procesadores autónomos ejecutan diferentes secuencias de instrucciones sobre flujos de datos distintos. Es la base de todos los sistemas distribuidos y paralelos actuales.
+\end{itemize}
+
+\begin{aviso}[El Paradigma SPMD]
+Dentro de las arquitecturas MIMD, el modelo dominante de programación es \textbf{SPMD} (\emph{Single Program, Multiple Data}): se escribe un único código fuente binario que se carga en todos los nodos de cómputo, pero cada proceso ejecuta bifurcaciones condicionales distintas en función de su identificador único (\emph{rank}) y procesa una porción distinta del conjunto de datos.
+\end{aviso}
+
+\subsection{Memoria Compartida vs. Memoria Distribuida (SMP vs. AMP)}
+En función de cómo está interconectada físicamente la memoria con los procesadores, los sistemas MIMD se dividen en dos categorías arquitectónicas:
+
+\begin{definicion}[SMP - Multiprocesamiento Simétrico]
+En una arquitectura \textbf{SMP} (\emph{Symmetric Multiprocessing}), todos los procesadores comparten un único espacio de direcciones de memoria física global a través de un bus común o una red de conmutación cruzada (\emph{crossbar}). Todos los procesadores son funcionalmente idénticos y tienen tiempos de acceso uniformes a cualquier celda de memoria (arquitecturas UMA - \emph{Uniform Memory Access}).
+\end{definicion}
+
+\begin{definicion}[AMP / Memoria Distribuida / Clusters]
+En una arquitectura de \textbf{Memoria Distribuida} (o multiprocesamiento asimétrico / multicomputadores), cada nodo de procesamiento posee su propia memoria local privada. No existe un espacio de direccionamiento global compartido: un procesador no puede acceder directamente a las variables en la memoria física de otro nodo. La cooperación, compartición de datos y sincronización se realizan obligatoriamente mediante el \textbf{intercambio explícito de mensajes a través de una red de comunicaciones}.
+\end{definicion}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}}
+\toprule
+\textbf{Criterio} & \textbf{Memoria Compartida (SMP)} & \textbf{Memoria Distribuida (Clusters / AMP)} \\
+\midrule
+\textbf{Espacio de memoria} & Único y global a todos los procesadores. & Local y privado a cada nodo de cómputo. \\
+\addlinespace
+\textbf{Mecanismo de comunicación} & Lectura y escritura en variables compartidas protegidas por cerrojos o monitores. & Envío y recepción explícita de mensajes (\texttt{send} / \texttt{receive}) por red. \\
+\addlinespace
+\textbf{Escalabilidad} & Muy limitada (máximo decenas de núcleos) por contención del bus y coherencia de caché. & Prácticamente ilimitada (cientos de miles de nodos en supercomputadores Top500). \\
+\addlinespace
+\textbf{Coste de hardware} & Alto para sistemas grandes (placas base y conmutadores de memoria complejos). & Muy bajo por nodo (posibilidad de usar ordenadores comerciales \emph{Commodity / Beowulf}). \\
+\addlinespace
+\textbf{Complejidad de software} & Sincronización delicada (condiciones de carrera, interbloqueos de memoria). & Obliga a particionar los datos y gestionar la topología de red explícitamente. \\
+\bottomrule
+\end{tabular}
+\caption{Comparativa entre arquitecturas SMP y Memoria Distribuida.}
+\label{tab:smp_vs_amp}
+\end{table}
+
+% ==============================================================================
+\section{Mecanismos y Semántica del Paso de Mensajes}
+% ==============================================================================
+
+\subsection{Primitivas Fundamentales: Send y Receive}
+En un sistema distribuido sin memoria compartida, toda interacción entre dos procesos $P$ y $Q$ se reduce a dos primitivas elementales:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{send(destino, mensaje)}: El proceso emisor solicita el envío de un paquete de datos hacia el proceso destino.
+    \item \texttt{receive(origen, variable)}: El proceso receptor solicita la llegada de datos procedentes del proceso origen y los almacena en su memoria local.
+\end{itemize}
+
+La semántica de estas dos operaciones varía drásticamente en función de dos factores ortogonales:
+\begin{enumerate}
+    \item Si la comunicación utiliza un \textbf{búfer intermedio} en el sistema de transporte.
+    \item Si las operaciones son \textbf{bloqueantes o no bloqueantes}.
+\end{enumerate}
+
+\subsection{Mecanismo de Citas (Rendez-vous) / Comunicación Síncrona sin Búfer}
+Propuesto por Hoare en el modelo CSP (\emph{Communicating Sequential Processes}, 1978) y adoptado por el lenguaje Ada:
+
+\begin{definicion}[Mecanismo de Citas (\emph{Rendez-vous})]
+El \textbf{mecanismo de citas} es una comunicación síncrona, bloqueante y \textbf{sin búfer intermedio}. Tanto el emisor como el receptor deben coincidir en el tiempo para que la transferencia de datos tenga lugar:
+\begin{itemize}[leftmargin=*]
+    \item Si el emisor ejecuta \texttt{send} antes de que el receptor ejecute \texttt{receive}, el emisor se suspende en la cita hasta que el receptor llegue.
+    \item Si el receptor ejecuta \texttt{receive} antes de que el emisor ejecute \texttt{send}, el receptor se suspende en la cita hasta que el emisor llegue.
+    \item En el instante en que ambos procesos se encuentran en la cita, los datos se copian directamente del espacio de memoria del emisor al del receptor sin pasar por búferes intermedios del sistema operativo, y ambos procesos reanudan su ejecución simultáneamente.
+\end{itemize}
+\end{definicion}
+
+\subsection{Paso de Mensajes Bloqueante con Búfer}
+En este modelo, el sistema operativo o el hardware de red proporciona una cola o búfer de mensajes intermedio:
+\begin{itemize}[leftmargin=*]
+    \item El emisor ejecuta \texttt{send}. Si hay espacio libre en el búfer del sistema, deposita el mensaje y \textbf{continúa su ejecución inmediatamente sin esperar} a que el receptor haya leído el dato. El emisor solo se bloquea si el búfer del canal está completamente lleno.
+    \item El receptor ejecuta \texttt{receive}. Si hay al menos un mensaje en el búfer, lo extrae y continúa; si el búfer está vacío, se bloquea hasta que llegue un mensaje.
+\end{itemize}
+
+\subsection{Paso de Mensajes No Bloqueante}
+En aplicaciones de alto rendimiento, bloquear un proceso mientras se transmite un mensaje a través de una red lenta degrada notablemente el rendimiento. Las primitivas no bloqueantes resuelven este problema desacoplando la iniciación de la transferencia de su finalización:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{asynchronous\_send(destino, mensaje)}: La llamada regresa al instante de forma inmediata. El hardware de red (mediante DMA o hilos en segundo plano) transfiere los datos mientras la CPU del proceso sigue ejecutando cálculos útiles en paralelo.
+    \item \textbf{Condición de peligro:} El proceso emisor no debe modificar el búfer del mensaje en memoria hasta que la transferencia subyacente haya concluido con certeza; de lo contrario, se enviarían datos corruptos.
+    \item Para sincronizar y confirmar la finalización de la transferencia se utilizan operaciones de comprobación (\texttt{wait} o \texttt{test}).
+\end{itemize}
+
+% ==============================================================================
+\section{El Estándar MPI (Message Passing Interface)}
+% ==============================================================================
+
+\subsection{Filosofía y Conceptos Clave de MPI}
+MPI (\emph{Message Passing Interface}) es el estándar industrial por excelencia para la programación paralela en arquitecturas de memoria distribuida. No es un lenguaje de programación nuevo, sino una biblioteca portable y estandarizada con interfaces para C, C++ y Fortran.
+
+En MPI, los procesos se ejecutan bajo el modelo SPMD. Cada proceso se identifica mediante:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Comunicador (\texttt{MPI\_Comm}):} Representa un grupo de procesos y define el contexto cerrado dentro del cual pueden intercambiar mensajes. El comunicador por defecto que engloba a todos los procesos lanzados al arrancar el programa es \texttt{MPI\_COMM\_WORLD}.
+    \item \textbf{Rango (\texttt{rank}):} Un entero identificador único asignado a cada proceso dentro de un comunicador, en el rango $[0, \text{size}-1]$.
+    \item \textbf{Tamaño (\texttt{size}):} Número total de procesos que componen el comunicador.
+    \item \textbf{Etiqueta (\texttt{tag}):} Un entero que clasifica el tipo o propósito del mensaje, permitiendo al receptor discriminar entre diferentes tipos de datos que provienen del mismo emisor.
+    \item \textbf{Tipo de dato (\texttt{MPI\_Datatype}):} MPI define tipos primitivos para garantizar la portabilidad entre arquitecturas con distinto orden de bytes (\emph{endianness}): \texttt{MPI\_INT}, \texttt{MPI\_FLOAT}, \texttt{MPI\_DOUBLE}, \texttt{MPI\_CHAR}, \texttt{MPI\_BYTE}, etc.
+\end{itemize}
+
+\subsection{Estructura Mínima de un Programa MPI}
+Todo programa paralelo con MPI debe seguir un ciclo de vida estrictamente regulado:
+
+\begin{lstlisting}[language=C++, caption={Estructura canónica de un programa MPI en C++}]
+#include <mpi.h>
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+    // 1. Inicializar el entorno de ejecucion MPI
+    MPI_Init(&argc, &argv);
+
+    // 2. Obtener el numero total de procesos
+    int size;
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    // 3. Obtener el identificador unico (rank) de este proceso
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+    std::cout << "Hola desde el proceso " << rank << " de un total de " << size << std::endl;
+
+    // 4. Finalizar el entorno MPI antes de terminar el programa
+    MPI_Finalize();
+    return 0;
+}
+\end{lstlisting}
+
+\subsection{Comunicaciones Punto a Punto Bloqueantes}
+Las dos funciones fundamentales para enviar y recibir datos entre dos procesos específicos son:
+
+\begin{lstlisting}[language=C++]
+int MPI_Send(const void* buf, int count, MPI_Datatype datatype, 
+             int dest, int tag, MPI_Comm comm);
+
+int MPI_Recv(void* buf, int count, MPI_Datatype datatype, 
+             int source, int tag, MPI_Comm comm, MPI_Status* status);
+\end{lstlisting}
+
+\subsubsection{Semántica de Bloqueo en \texttt{MPI\_Send} y \texttt{MPI\_Recv}}
+\begin{itemize}[leftmargin=*]
+    \item \texttt{MPI\_Send}: Es bloqueante en el sentido de que \textbf{no retorna hasta que el búfer de memoria del emisor puede ser reutilizado de forma segura}. Esto ocurre cuando el mensaje ha sido transmitido a la red o copiado a un búfer interno del sistema. No garantiza necesariamente que el receptor haya recibido el dato.
+    \item \texttt{MPI\_Recv}: No retorna hasta que el mensaje completo ha llegado desde la red y ha sido copiado en el búfer receptor local \texttt{buf}.
+\end{itemize}
+
+\subsubsection{Comodines y la Estructura \texttt{MPI\_Status}}
+El receptor puede no conocer de antemano qué proceso le va a enviar datos o qué etiqueta tendrá el mensaje. Para ello, MPI proporciona comodines:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{MPI\_ANY\_SOURCE}: Acepta un mensaje proveniente de cualquier proceso del comunicador.
+    \item \texttt{MPI\_ANY\_TAG}: Acepta un mensaje con cualquier identificador de etiqueta.
+\end{itemize}
+
+Cuando se usan comodines, la información real del mensaje recibido se inspecciona a través del parámetro \texttt{MPI\_Status}:
+\begin{lstlisting}[language=C++]
+MPI_Status status;
+int dato;
+MPI_Recv(&dato, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+
+int emisor_real = status.MPI_SOURCE; // Quien envio el mensaje
+int etiqueta_real = status.MPI_TAG;  // Que etiqueta tenia
+int rec_count;
+MPI_Get_count(&status, MPI_INT, &rec_count); // Cuantos enteros se recibieron
+\end{lstlisting}
+
+\subsection{Comunicaciones No Bloqueantes: \texttt{MPI\_Isend} e \texttt{MPI\_Irecv}}
+Para evitar interbloqueos mutuos causados por envíos cruzados y para solapar cómputo matemático con latencias de red, MPI proporciona operaciones inmediatas (prefijo \texttt{I}):
+
+\begin{lstlisting}[language=C++]
+int MPI_Isend(const void* buf, int count, MPI_Datatype datatype, int dest, 
+              int tag, MPI_Comm comm, MPI_Request* request);
+
+int MPI_Irecv(void* buf, int count, MPI_Datatype datatype, int source, 
+              int tag, MPI_Comm comm, MPI_Request* request);
+\end{lstlisting}
+
+Ambas funciones retornan inmediatamente, devolviendo un manipulador de petición (\texttt{MPI\_Request}). Para verificar y esperar la finalización de la transferencia se emplean:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{MPI\_Wait(\&request, \&status)}: Bloquea el proceso hasta que la operación asociada a \texttt{request} se ha completado definitivamente.
+    \item \texttt{MPI\_Test(\&request, \&flag, \&status)}: Operación no bloqueante. Consulta el estado de la transferencia y asigna \texttt{flag = true} si la operación ha concluido, o \texttt{flag = false} si aún está en curso.
+\end{itemize}
+
+\subsection{Sondeo de Mensajes: \texttt{MPI\_Probe} e \texttt{MPI\_Iprobe}}
+En ocasiones, un proceso necesita saber si hay mensajes pendientes en la red y qué tamaño tienen antes de asignar memoria y llamar a \texttt{MPI\_Recv}:
+
+\begin{lstlisting}[language=C++]
+int MPI_Probe(int source, int tag, MPI_Comm comm, MPI_Status* status);
+int MPI_Iprobe(int source, int tag, MPI_Comm comm, int* flag, MPI_Status* status);
+\end{lstlisting}
+
+\begin{definicion}[Sondeo de Mensajes (\emph{Probing})]
+\texttt{MPI\_Probe} bloquea el proceso hasta que llega un mensaje que coincida con \texttt{source} y \texttt{tag}, rellenando la estructura \texttt{status} \textbf{sin extraer el mensaje de la cola de red}. A continuación, el proceso puede averiguar el tamaño exacto del mensaje con \texttt{MPI\_Get\_count}, reservar un vector del tamaño exacto mediante \texttt{malloc} o \texttt{std::vector}, e invocar finalmente a \texttt{MPI\_Recv} para consumirlo limpiamente.
+\end{definicion}
+
+% ==============================================================================
+\section{Algoritmos Prácticos Clásicos en MPI}
+% ==============================================================================
+
+\subsection{Algoritmo 1: La Criba de Eratóstenes en Pipeline / Anillo}
+
+\subsubsection{Fundamento Teórico del Algoritmo}
+La criba de Eratóstenes es el método clásico para encontrar números primos hasta un límite $M$. En un entorno distribuido con paso de mensajes, la criba se estructura de forma extraordinariamente elegante como una \textbf{tubería de procesos (pipeline)}:
+
+\begin{itemize}[leftmargin=*]
+    \item Cada proceso del pipeline representa un \textbf{filtro primo}.
+    \item El proceso 0 (Generador) genera la secuencia de impares candidatos ($3, 5, 7, 9, 11, \dots$) y los inyecta en el extremo inicial de la tubería.
+    \item Cada proceso filtro $i$ en la tubería almacena un número primo $P_i$. Cuando recibe un número candidato $x$:
+    \begin{itemize}
+        \item Si $x$ es divisible por $P_i$ ($x \pmod{P_i} == 0$), el número queda descartado (es compuesto) y no se propaga más.
+        \item Si $x$ no es divisible por $P_i$, el proceso $i$ reenvía $x$ hacia el siguiente proceso filtro $i+1$.
+    \end{itemize}
+    \item Cuando un proceso filtro aún no tiene asignado su primo, el primer número que recibe se convierte en su número primo asignado.
+    \item \textbf{Protocolo de Terminación:} Al finalizar la generación, el proceso 0 envía un testigo de terminación (una marca centinela, habitualmente el valor $-1$). Cada proceso filtro, al recibir el $-1$, imprime su número primo, lo propaga al siguiente proceso de la cadena y finaliza ordenadamente.
+\end{itemize}
+
+\subsubsection{Implementación Completa en C++ / MPI}
+\begin{lstlisting}[language=C++, caption={Criba de Eratóstenes distribuida en Pipeline con MPI}]
+#include <mpi.h>
+#include <iostream>
+
+const int TAG_DATO = 0;
+const int CENTINELA_FIN = -1;
+const int LIMITE_MAX = 50;
+
+void proceso_generador(int rank, int size) {
+    std::cout << "[Generador " << rank << "] Primo encontrado: 2" << std::endl;
+    for (int num = 3; num <= LIMITE_MAX; num += 2) {
+        MPI_Send(&num, 1, MPI_INT, rank + 1, TAG_DATO, MPI_COMM_WORLD);
+    }
+    // Enviar marca de terminacion
+    int fin = CENTINELA_FIN;
+    MPI_Send(&fin, 1, MPI_INT, rank + 1, TAG_DATO, MPI_COMM_WORLD);
+}
+
+void proceso_filtro(int rank, int size) {
+    int mi_primo = 0;
+    int numero_recibido;
+    MPI_Status status;
+
+    // El primer numero recibido que no sea centinela es mi primo
+    MPI_Recv(&numero_recibido, 1, MPI_INT, rank - 1, TAG_DATO, MPI_COMM_WORLD, &status);
+
+    if (numero_recibido == CENTINELA_FIN) {
+        if (rank + 1 < size) {
+            MPI_Send(&numero_recibido, 1, MPI_INT, rank + 1, TAG_DATO, MPI_COMM_WORLD);
+        }
+        return;
+    }
+
+    mi_primo = numero_recibido;
+    std::cout << "[Filtro " << rank << "] Primo asignado: " << mi_primo << std::endl;
+
+    while (true) {
+        MPI_Recv(&numero_recibido, 1, MPI_INT, rank - 1, TAG_DATO, MPI_COMM_WORLD, &status);
+
+        if (numero_recibido == CENTINELA_FIN) {
+            // Propagar centinela al siguiente filtro si existe
+            if (rank + 1 < size) {
+                MPI_Send(&numero_recibido, 1, MPI_INT, rank + 1, TAG_DATO, MPI_COMM_WORLD);
+            }
+            break;
+        }
+
+        // Si no es divisible, propagar hacia el siguiente proceso de la tuberia
+        if (numero_recibido % mi_primo != 0) {
+            if (rank + 1 < size) {
+                MPI_Send(&numero_recibido, 1, MPI_INT, rank + 1, TAG_DATO, MPI_COMM_WORLD);
+            }
+        }
+    }
+}
+
+int main(int argc, char* argv[]) {
+    MPI_Init(&argc, &argv);
+    int rank, size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    if (rank == 0) {
+        proceso_generador(rank, size);
+    } else {
+        proceso_filtro(rank, size);
+    }
+
+    MPI_Finalize();
+    return 0;
+}
+\end{lstlisting}
+
+\subsection{Algoritmo 2: El Problema del Museo con MPI}
+
+\subsubsection{Planteamiento Arquitectónico}
+El problema del museo modela un sistema distribuido Cliente-Servidor donde se controla el aforo de una sala con capacidad máxima $C$:
+\begin{itemize}[leftmargin=*]
+    \item Un proceso centralizado denominado \textbf{Controlador de Sala} (\emph{Servidor}).
+    \item Múltiples procesos concurrentes denominados \textbf{Visitantes} (\emph{Clientes}).
+    \item Dos tipos de acciones diferenciadas por etiquetas:
+    \begin{itemize}
+        \item \texttt{TAG\_ENTRADA}: Un visitante solicita entrar.
+        \item \texttt{TAG\_SALIDA}: Un visitante comunica que sale de la sala.
+    \end{itemize}
+    \item \textbf{Regla de Sincronización:} El controlador acepta salidas incondicionalmente (decrementando el aforo). Sin embargo, solo acepta peticiones de entrada si el aforo actual es menor estrictamente que la capacidad máxima ($aforo < C$).
+\end{itemize}
+
+\subsubsection{Implementación en C++ / MPI}
+\begin{lstlisting}[language=C++, caption={Controlador de Aforo del Museo con MPI}]
+#include <mpi.h>
+#include <iostream>
+#include <unistd.h>
+
+const int RANK_CONTROLADOR = 0;
+const int CAPACIDAD_MUSEO = 3;
+const int TAG_ENTRADA = 1;
+const int TAG_PERMISO = 2;
+const int TAG_SALIDA = 3;
+
+void controlador_museo(int total_procesos) {
+    int aforo = 0;
+    int dummy;
+    MPI_Status status;
+
+    // Bucle de atencion a peticiones
+    while (true) {
+        // Si el aforo esta lleno, solo podemos recibir SALIDAS
+        // Si hay espacio, podemos recibir tanto ENTRADAS como SALIDAS
+        if (aforo == CAPACIDAD_MUSEO) {
+            MPI_Recv(&dummy, 1, MPI_INT, MPI_ANY_SOURCE, TAG_SALIDA, MPI_COMM_WORLD, &status);
+            aforo--;
+            std::cout << "[Museo] Visitante " << status.MPI_SOURCE 
+                      << " ha salido. Aforo actual: " << aforo << std::endl;
+        } else {
+            // Recepcion con comodin de etiqueta
+            MPI_Recv(&dummy, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+            if (status.MPI_TAG == TAG_ENTRADA) {
+                aforo++;
+                std::cout << "[Museo] Visitante " << status.MPI_SOURCE 
+                          << " entra al museo. Aforo actual: " << aforo << std::endl;
+                // Enviar confirmacion al visitante
+                MPI_Send(&dummy, 1, MPI_INT, status.MPI_SOURCE, TAG_PERMISO, MPI_COMM_WORLD);
+            } else if (status.MPI_TAG == TAG_SALIDA) {
+                aforo--;
+                std::cout << "[Museo] Visitante " << status.MPI_SOURCE 
+                          << " ha salido. Aforo actual: " << aforo << std::endl;
+            }
+        }
+    }
+}
+
+void visitante(int rank) {
+    int dummy = 0;
+    MPI_Status status;
+
+    // 1. Solicitar entrada
+    MPI_Send(&dummy, 1, MPI_INT, RANK_CONTROLADOR, TAG_ENTRADA, MPI_COMM_WORLD);
+
+    // 2. Esperar confirmacion de acceso
+    MPI_Recv(&dummy, 1, MPI_INT, RANK_CONTROLADOR, TAG_PERMISO, MPI_COMM_WORLD, &status);
+
+    // 3. Estancia en el museo
+    std::cout << "Visitante " << rank << " esta disfrutando del museo..." << std::endl;
+    sleep(1);
+
+    // 4. Notificar salida
+    MPI_Send(&dummy, 1, MPI_INT, RANK_CONTROLADOR, TAG_SALIDA, MPI_COMM_WORLD);
+}
+\end{lstlisting}
+
+% ==============================================================================
+\section{La Orden \texttt{select} y Recepción Selectiva}
+% ==============================================================================
+
+\subsection{Motivación: Recepción No Determinista en Servidores}
+En un sistema basado en paso de mensajes, un proceso servidor a menudo necesita escuchar peticiones provenientes de múltiples clientes a través de diferentes canales o interfaces. 
+
+Si el servidor ejecuta un \texttt{receive} secuencial clásico sobre un canal $A$:
+\[
+\text{receive}(A, \text{msg});
+\]
+quedará bloqueado esperando a $A$. Si mientras tanto un cliente envía un mensaje urgente por el canal $B$, el servidor \textbf{no se enterará y no lo procesará} hasta que $A$ termine. Este acoplamiento temporal estricto bloquea innecesariamente el sistema.
+
+Para resolver este problema en sistemas concurrentes y distribuidos, C.A.R. Hoare (en CSP) y Jean Ichbiah (en el lenguaje Ada) introdujeron la \textbf{orden de espera selectiva} o sentencia \texttt{select}.
+
+\subsection{Sintaxis y Semántica Formal de las Guardas}
+La estructura general de una sentencia de espera selectiva está formada por un conjunto de ramas o alternativas:
+
+\begin{lstlisting}[language=C++]
+select
+    when condicion_1; receive(msg_1, proceso_1) do
+        sentencias_1;
+    or
+    when condicion_2; receive(msg_2, proceso_2) do
+        sentencias_2;
+    ...
+    or
+    when condicion_n; receive(msg_n, proceso_n) do
+        sentencias_n;
+    else
+        sentencias_alternativas;
+end select;
+\end{lstlisting}
+
+Cada rama está encabezada por una \textbf{guarda}. Una guarda se compone de:
+\begin{enumerate}
+    \item Una \textbf{expresión booleana} opcional (\texttt{when condicion}). Si se omite, equivale a \texttt{when true}.
+    \item Una \textbf{instrucción de entrada o recepción} (\texttt{receive}).
+\end{enumerate}
+
+\subsection{Estados de una Guarda y Criterio de Selección}
+En el instante en que el flujo de ejecución alcanza la sentencia \texttt{select}, el sistema evalúa todas las expresiones booleanas de las guardas. Se distinguen formalmente los siguientes estados:
+
+\begin{definicion}[Clasificación de Guardas]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Guarda Abierta:} La expresión booleana se evalúa a \texttt{true}.
+    \item \textbf{Guarda Cerrada:} La expresión booleana se evalúa a \texttt{false}. La alternativa completa se descarta en este ciclo.
+    \item \textbf{Guarda Ejecutable:} Está abierta y el proceso emisor correspondiente ya ha iniciado la transmisión del mensaje (el mensaje ya está disponible en el canal).
+    \item \textbf{Guarda Potencialmente Ejecutable:} Está abierta y tiene instrucción \texttt{receive}, pero el proceso emisor aún no ha enviado el mensaje correspondiente.
+\end{itemize}
+\end{definicion}
+
+\subsubsection{Algoritmo de Determinación de la Alternativa a Ejecutar}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Si existen una o más guardas ejecutables:} El entorno de ejecución selecciona una de ellas de forma \textbf{no determinista}. Se extrae el mensaje de esa alternativa y se ejecuta el bloque de sentencias asociado. El no determinismo es crucial para evitar que el servidor favorezca arbitrariamente a un canal sobre los demás.
+    \item \textbf{Si no hay ninguna guarda ejecutable, pero sí hay guardas potencialmente ejecutables:}
+    \begin{itemize}
+        \item Si existe una rama \texttt{else}, el proceso ejecuta inmediatamente el bloque del \texttt{else} sin bloquearse.
+        \item Si no existe rama \texttt{else}, el proceso se suspende en el \texttt{select} hasta que alguno de los procesos emisores de las guardas abiertas inicie un envío, convirtiendo esa guarda en ejecutable.
+    \end{itemize}
+    \item \textbf{Si todas las guardas están cerradas:} Si no existe rama \texttt{else}, se produce un error fatal en tiempo de ejecución (\emph{Program\_Error} o excepción de selección).
+\end{enumerate}
+
+\subsection{Guardas Indexadas y Sentencia \texttt{else}}
+
+\subsubsection{Guardas Indexadas}
+Cuando un servidor atiende a una familia de $N$ clientes idénticos, expandir las ramas a mano resulta inviable. Se utilizan \textbf{guardas indexadas}:
+
+\begin{lstlisting}[language=C++]
+select
+    for i in 1..N generate
+        when canal_activo[i]; receive(msg, cliente[i]) do
+            atender_peticion(i, msg);
+end select;
+\end{lstlisting}
+Esta notación compacta equivale a declarar $N$ alternativas \texttt{or} separadas, donde el índice $i$ instancia dinámicamente cada rama.
+
+\subsubsection{Sentencia \texttt{else}}
+La presencia de una cláusula \texttt{else} transforma la espera selectiva en una operación de \textbf{sondeo no bloqueante}: si ninguna guarda está lista de inmediato, no se espera y se realiza trabajo alternativo en segundo plano.
+
+\subsection{Ejemplo Clásico: Productor-Consumidor con Búfer FIFO mediante \texttt{select}}
+A continuación se presenta el diseño canónico de un proceso intermedio (el Búfer FIFO) que media entre productores y consumidores utilizando la orden \texttt{select}:
+
+\begin{lstlisting}[language=C++, caption={Búfer FIFO con Orden Select en Pseudocódigo Distribuido}]
+process Intermedio_Buffer {
+    const int TAM = 10;
+    int buffer[TAM];
+    int esc = 0;   // Indice de escritura
+    int lec = 0;   // Indice de lectura
+    int cont = 0;  // Numero de elementos en el bufer
+    int valor;
+    int peticion;
+
+    while (true) {
+        select
+            // Guarda del Productor: solo abierta si el bufer no esta lleno
+            when cont < TAM; receive(valor, Productor) do
+                buffer[esc] = valor;
+                esc = (esc + 1) % TAM;
+                cont = cont + 1;
+            or
+            // Guarda del Consumidor: solo abierta si el bufer no esta vacio
+            when cont > 0; receive(peticion, Consumidor) do
+                // Enviar el dato extraido al consumidor
+                send(buffer[lec], Consumidor);
+                lec = (lec + 1) % TAM;
+                cont = cont - 1;
+        end select;
+    }
+}
+\end{lstlisting}
+
+\begin{aviso}[Elegancia de la Sincronización con Select]
+Nótese cómo la condición booleana de la guarda (\texttt{cont < TAM} y \texttt{cont > 0}) modela de forma natural y transparente las condiciones de sincronización que en monitores requerían cerrojos y variables de condición. El propio lenguaje gestiona el bloqueo y la activación segura.
+\end{aviso}

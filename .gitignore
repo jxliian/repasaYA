@@ -10,3 +10,12 @@ docs/superpowers/
 scratch/
 __pycache__/
 *.pyc
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk

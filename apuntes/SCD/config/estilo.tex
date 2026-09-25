@@ -1,0 +1,207 @@
+% ==============================================================================
+% CONFIGURACIÓN Y ESTILO VISUAL — SISTEMAS CONCURRENTES Y DISTRIBUIDOS (SCD)
+% ==============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Configuración de márgenes
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.8cm,right=2.8cm,headheight=24pt]{geometry}
+
+% Hipervínculos
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=scdDarkBlue,
+    citecolor=scdTeal,
+    urlcolor=scdAccent,
+    pdfauthor={repasaYA - UGR},
+    pdftitle={Sistemas Concurrentes y Distribuidos - Apuntes Completos},
+    pdfsubject={Sistemas Concurrentes y Distribuidos},
+    pdfkeywords={SCD, Concurrencia, Semáforos, Monitores, MPI, Tiempo Real}
+}
+
+% Paleta de colores profesionales
+\definecolor{scdDarkBlue}{RGB}{20, 35, 60}
+\definecolor{scdPrimary}{RGB}{35, 75, 135}
+\definecolor{scdAccent}{RGB}{108, 99, 255}
+\definecolor{scdLightAccent}{RGB}{240, 242, 255}
+\definecolor{scdGreen}{RGB}{28, 140, 72}
+\definecolor{scdLightGreen}{RGB}{240, 253, 244}
+\definecolor{scdOrange}{RGB}{217, 119, 6}
+\definecolor{scdLightOrange}{RGB}{255, 251, 235}
+\definecolor{scdRed}{RGB}{185, 28, 28}
+\definecolor{scdLightRed}{RGB}{254, 242, 242}
+\definecolor{scdGray}{RGB}{245, 247, 250}
+\definecolor{scdBorderGray}{RGB}{215, 222, 232}
+\definecolor{scdTeal}{RGB}{15, 118, 110}
+\definecolor{codeBg}{RGB}{248, 249, 252}
+
+% Configuración de Encabezados y Pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\footnotesize\textsf{\thepage}}
+\fancyhead[LO]{\footnotesize\textsf{\rightmark}}
+\fancyhead[RE]{\footnotesize\textsf{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Configuración de títulos de sección
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{scdDarkBlue}\sffamily}
+  {\Large\textsf{Tema \thechapter}}{1ex}
+  {\titlerule[1.5pt]\vspace{1ex}\huge}
+  [\vspace{1ex}\titlerule]
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{scdPrimary}\sffamily}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{scdDarkBlue}\sffamily}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{scdAccent}\sffamily}
+  {\thesubsubsection}{1em}{}
+
+% Entorno: Caja de Fuentes al inicio de cada tema
+\newcommand{\cuadrofuentes}[1]{%
+  \begin{tcolorbox}[
+    colback=scdLightAccent,
+    colframe=scdAccent,
+    boxrule=1pt,
+    arc=4pt,
+    left=12pt,
+    right=12pt,
+    top=8pt,
+    bottom=8pt,
+    breakable
+  ]
+    \small
+    \noindent\textbf{\color{scdAccent}\large\textsf{Metadatos del Tema y Fuentes:}}\\[4pt]
+    #1
+  \end{tcolorbox}
+  \vspace{10pt}
+}
+
+% Entorno: Definición
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  colback=scdGray,
+  colframe=scdPrimary,
+  boxrule=1pt,
+  leftrule=4pt,
+  arc=3pt,
+  title=\textbf{\textsf{Definición\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=scdPrimary,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Ejemplo Explicado
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  colback=scdLightGreen,
+  colframe=scdGreen,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Ejemplo Práctico\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=scdGreen,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Aviso / Ojo Examen
+\newtcolorbox{aviso}[1][]{
+  enhanced,
+  colback=scdLightOrange,
+  colframe=scdOrange,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Importante / Ojo Examen\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=scdOrange,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Algoritmo / Pseudocódigo
+\newtcolorbox{algoritmo}[1][]{
+  enhanced,
+  colback=codeBg,
+  colframe=scdDarkBlue,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Algoritmo / Protocolo\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=scdDarkBlue,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Configuración de listings para código (C++, MPI, etc.)
+\lstset{
+  backgroundcolor=\color{codeBg},
+  basicstyle=\ttfamily\footnotesize\color{black},
+  keywordstyle=\bfseries\color{scdPrimary},
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{scdGreen},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  stepnumber=1,
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  frame=none,
+  tabsize=2,
+  captionpos=b,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1
+    {«}{{\guillemotleft}}1 {»}{{\guillemotright}}1
+}

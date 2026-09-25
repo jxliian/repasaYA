@@ -1,0 +1,638 @@
+\chapter{Sistemas de Tiempo Real (STR)}
+\label{cap:tema4}
+
+\cuadrofuentes{\textbf{Fuentes utilizadas:} Apuntes de Ismael Sallami y Temario de Infomates (LosDelDGIIM). Pendiente de incorporar transparencias originales del profesor.}
+
+% ==============================================================================
+% 1. INTRODUCCIÓN Y FUNDAMENTOS DE LOS STR
+% ==============================================================================
+\section{Introducción y Fundamentos de los Sistemas de Tiempo Real}
+
+\begin{definicion}[Sistema de Tiempo Real (STR)]
+Un \textbf{Sistema de Tiempo Real} (STR) es aquel sistema informático en el que la corrección del sistema no solo depende del resultado lógico o funcional del cómputo, sino también del \textbf{instante temporal} en el que dicho resultado es producido y entregado.
+\end{definicion}
+
+En un sistema informático convencional (de propósito general o por lotes), la métrica fundamental de optimización es el rendimiento promedio (\textit{throughput}) o el tiempo medio de respuesta: una respuesta computacionalmente correcta entregada con retraso sigue siendo válida y valiosa. Por el contrario, en un STR una respuesta computacionalmente perfecta que se entrega fuera de su ventana temporal límite (\textit{deadline}) se considera un fallo del sistema, pudiendo ocasionar desde una degradación de la calidad de servicio hasta catástrofes físicas o humanas.
+
+\subsection{Distinción con otros tipos de sistemas}
+En la literatura y en la práctica industrial, los STR se confunden habitualmente con otras arquitecturas computacionales. Es crucial establecer las siguientes distinciones:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Sistemas Rápidos vs. Sistemas de Tiempo Real:} Un sistema de tiempo real no es simplemente un sistema de cómputo ultrarrápido. La rapidez por sí sola no garantiza predictibilidad. Un supercomputador puede procesar billones de operaciones de coma flotante por segundo pero sufrir oscilaciones impredecibles en el despacho de hilos debido a la memoria caché o al planificador. Lo esencial en un STR es el \textbf{determinismo temporal} y la garantía formal de cumplimiento de plazos en el peor caso previsible (\textit{Worst-Case Execution Time}, WCET).
+    \item \textbf{Sistemas en Línea (\textit{On-line}):} Los sistemas en línea están permanentemente disponibles y conectados a transacciones o sensores (por ejemplo, una base de datos bancaria), pero no necesariamente garantizan plazos máximos inflexibles en cada transacción particular.
+    \item \textbf{Sistemas Interactivos:} Diseñados para responder a peticiones humanas directas (como un procesador de textos o un navegador web). Aunque requieren agilidad para evitar frustración en el usuario, un retraso de unos milisegundos no compromete la integridad del sistema.
+\end{itemize}
+
+\subsection{Definición de Sistema Operativo de Tiempo Real (RTOS)}
+\begin{definicion}[RTOS — Real-Time Operating System]
+Un \textbf{Sistema Operativo de Tiempo Real} es aquel que tiene la capacidad demostrable de suministrar un nivel de servicio requerido a todos sus procesos de tiempo real en un tiempo limitado y \textbf{especificado a priori}, independientemente de la carga instantánea o de las perturbaciones del entorno.
+\end{definicion}
+
+\subsection{Propiedades Fundamentales de los STR}
+Un STR debe reunir cuatro cualidades primordiales:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Determinismo:} Dada una entrada en un estado determinado, el sistema produce siempre la misma secuencia de salidas en los mismos instantes temporales predecibles. El comportamiento es calculable analíticamente con antelación.
+    \item \textbf{Reactividad:} Capacidad de detectar eventos del entorno externo físico (mediante interrupciones de sensores o periféricos) y responder de forma coordinada a la velocidad que exige dicho entorno.
+    \item \textbf{Responsabilidad y Predictibilidad:} Capacidad de garantizar matemáticamente que todas las tareas concurrentes finalizarán dentro de sus plazos establecidos, incluso bajo condiciones de sobrecarga máxima prevista.
+    \item \textbf{Confiabilidad y Tolerancia a Fallos (\textit{Dependability}):} Comportamiento robusto y seguro (\textit{fail-safe}) ante anomalías de hardware o software, evitando que un fallo parcial desencadene una parada total o una catástrofe.
+\end{enumerate}
+
+\subsection{Clasificación según la Criticidad Temporal}
+Atendiendo a las consecuencias que produce el incumplimiento de un plazo límite (\textit{deadline}), los STR se clasifican rigurosamente en tres categorías:
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{p{3cm}p{5.5cm}p{5.5cm}}
+\toprule
+\textbf{Categoría} & \textbf{Consecuencia del Fallo de Deadline} & \textbf{Ejemplos Representativos} \\
+\midrule
+\textbf{Misión Crítica}\newline (\textit{Hard Real-Time}) & El incumplimiento de un solo plazo puede provocar consecuencias catastróficas, daños materiales irreversibles o pérdida de vidas humanas. & Control de vuelo fly-by-wire, sistemas de frenado ABS, reactores nucleares, marcapasos. \\
+\addlinespace
+\textbf{Estrictos}\newline (\textit{Firm Real-Time}) & El incumplimiento del plazo invalida el resultado por completo (utilidad nula), pero no desencadena un desastre catastrófico. & Transmisión de vídeo en tiempo real sin búfer, control de inyección en motores industriales. \\
+\addlinespace
+\textbf{Permisivos}\newline (\textit{Soft Real-Time}) & El incumplimiento esporádico del plazo es tolerable; el resultado tardío aún posee utilidad decreciente y solo degrada la calidad del servicio. & Adquisición de datos meteorológicos, streaming multimedia con búfer, servidores de videojuegos. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ==============================================================================
+% 2. MEDICIÓN DEL TIEMPO, RELOJES Y TEMPORIZADORES
+% ==============================================================================
+\section{Medición del Tiempo, Relojes y Temporizadores}
+
+\subsection{Tiempo Absoluto frente a Tiempo Relativo}
+En el modelado de STR intervienen dos concepciones del tiempo:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tiempo Absoluto:} Medido con respecto a una escala universal de referencia externa, invariante y continua, como el Tiempo Universal Coordinado (UTC), el Tiempo Atómico Internacional (TAI, basado en transiciones cuánticas del átomo de cesio-133) o las señales horarias de constelaciones GPS.
+    \item \textbf{Tiempo Relativo o Intervalos:} Medición del tiempo transcurrido entre dos eventos dentro del propio sistema computacional (por ejemplo: «esperar 15 milisegundos a partir de ahora»). Es la métrica predominante en la programación de retardos y periodos.
+\end{itemize}
+
+\subsection{Módulos de Reloj de Hardware}
+Un reloj en tiempo real físico consta de un oscilador de cuarzo a frecuencia fija que incrementa o decrementa un registro contador en cada ciclo. Sus atributos fundamentales son:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Resolución o Granularidad ($\Delta t$):} El intervalo temporal mínimo que el reloj puede discriminar entre dos eventos sucesivos.
+    \item \textbf{Precisión y Deriva (\textit{Drift}):} Desviación entre la frecuencia real de oscilación y la nominal teórica, provocada por temperatura, envejecimiento del cristal o variaciones de voltaje.
+    \item \textbf{Rango antes de Desbordamiento (\textit{Overflow}):} Intervalo máximo medible antes de que el registro de $k$ bits vuelva a cero. Para un contador clásico de 32 bits sin signo ($2^{32} - 1 \approx 4.295 \times 10^9$ pulsos):
+\end{itemize}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{p{3cm} p{5.5cm} p{5.5cm}}
+\toprule
+\textbf{Resolución del Tick} & \textbf{Rango Máximo de Medición (32 bits)} & \textbf{Ámbito de Aplicación} \\
+\midrule
+$100\text{ ns}$ & $429{,}5\text{ segundos} \approx 7{,}15\text{ minutos}$ & Medición de buses de comunicaciones ultrarrápidos \\
+$1\ \mu\text{s}$ & $4.294{,}9\text{ s} \approx 71{,}58\text{ minutos}$ & Control de actuadores mecánicos de precisión \\
+$100\ \mu\text{s}$ & $429.496\text{ s} \approx 119{,}3\text{ horas} \approx 4{,}97\text{ días}$ & Planificación clásica de RTOS \\
+$1\text{ ms}$ & $49{,}71\text{ días}$ & Sistemas embebidos con ticks milimétricos \\
+$1\text{ s}$ & $136{,}18\text{ años}$ & Relojes de calendario y registro histórico \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Temporizadores y Eliminación de la Deriva Acumulativa}
+Los temporizadores de software se gestionan mediante interrupciones del kernel. Se distinguen temporizadores \textbf{de un solo disparo} (\textit{one-shot}) y \textbf{periódicos} (\textit{periodic}).
+
+\begin{aviso}[El Peligro de la Deriva Acumulativa en Bucles Periódicos]
+Si una tarea periódica se implementa encadenando tiempos de espera relativos mediante llamadas tipo \texttt{sleep\_for(T)}, el periodo real resultante sufrirá una \textbf{deriva acumulativa} inevitable debida al tiempo que consume la propia computación del cuerpo del bucle y al tiempo de despacho del planificador:
+$$T_{\text{real}} = T_{\text{deseado}} + C_{\text{cuerpo}} + t_{\text{cambio-contexto}}$$
+En unos pocos minutos, la tarea se habrá desfasado completamente de su frecuencia de muestreo prescrita.
+\end{aviso}
+
+Para eliminar de raíz la deriva acumulativa, los estándares modernos de tiempo real (POSIX y C++11 en adelante con \texttt{<chrono>}) proporcionan primitivas de espera absoluta como \texttt{std::this\_thread::sleep\_until}:
+
+\begin{lstlisting}[language=C++, caption={Implementación rigurosa de tarea periódica sin deriva acumulativa}]
+#include <chrono>
+#include <thread>
+
+void TareaPeriodica(const int periodo_ms) {
+    using namespace std::chrono;
+    // Seleccionar siempre un reloj monotono inmune a cambios horarios
+    auto siguiente_activacion = steady_clock::now();
+
+    while (true) {
+        // 1. Ejecucion del trabajo periodico
+        realizar_muestreo();
+
+        // 2. Calculo exacto del proximo instante absoluto
+        siguiente_activacion += milliseconds(periodo_ms);
+
+        // 3. Suspension hasta el instante absoluto precalculado
+        // Esto compensa automaticamente el tiempo gastado en realizar_muestreo()
+        std::this_thread::sleep_until(siguiente_activacion);
+    }
+}
+\end{lstlisting}
+
+% ==============================================================================
+% 3. MODELO DE TAREAS Y ATRIBUTOS TEMPORALES
+% ==============================================================================
+\section{Modelo de Tareas y Atributos Temporales}
+
+Un programa de tiempo real se modela formalmente como un conjunto finito de $n$ tareas concurrentes:
+$$\Gamma = \{ \tau_1, \tau_2, \dots, \tau_n \}$$
+
+\subsection{Clasificación de Tareas por su Patrón de Activación}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tareas Periódicas:} Se activan en intervalos regulares e idénticos de tiempo $T_i$. Son la columna vertebral de los sistemas de muestreo digital y control por retroalimentación.
+    \item \textbf{Tareas Aperiódicas:} Se activan como respuesta a eventos externos aleatorios o esporádicos del entorno. Sus instantes de activación son impredecibles.
+    \item \textbf{Tareas Esporádicas:} Tareas aperiódicas que cuentan con una garantía física o de diseño de un \textbf{intervalo mínimo entre activaciones sucesivas} ($T_{i,\min}$). Gracias a este límite mínimo, pueden ser sometidas a tests matemáticos de planificabilidad en el peor caso tratándolas como tareas periódicas de periodo $T_{i,\min}$.
+\end{itemize}
+
+\subsection{Parámetros y Atributos Temporales de una Tarea \texorpdfstring{$\tau_i$}{tau\_i}}
+Para cada tarea $\tau_i$ se definen las siguientes variables formales:
+
+\begin{itemize}[leftmargin=*]
+    \item $T_i$ (\textbf{Periodo}): Tiempo transcurrido entre dos activaciones sucesivas de la tarea.
+    \item $C_i$ (\textbf{Tiempo de Cómputo en el Peor Caso} o WCET): Cota superior del tiempo de CPU que consume una instancia de la tarea sin considerar interferencias ni bloqueos.
+    \item $D_i$ (\textbf{Plazo de Respuesta Relativo} o \textit{Deadline}): Tiempo máximo transcurrido desde que la tarea se activa hasta que completa su ejecución. En el modelo clásico simple, $D_i = T_i$; en modelos generales, $D_i \le T_i$.
+    \item $t_{a,k}$ (\textbf{Instante de Activación} de la instancia $k$): Momento en que la tarea pasa al estado de lista para ejecutar.
+    \item $d_k = t_{a,k} + D_i$ (\textbf{Plazo Absoluto}): Momento temporal antes del cual debe finalizar la instancia $k$.
+    \item $R_i$ (\textbf{Tiempo de Respuesta en el Peor Caso} o WCRT): Tiempo máximo real transcurrido entre la activación y la finalización, teniendo en cuenta la interferencia de otras tareas del sistema.
+    \item $J_i$ (\textbf{Fluctuación o Jitter}): Variación máxima en el tiempo de comienzo efectivo o de finalización de una tarea entre diferentes ciclos.
+    \item $H_i = D_i - C_i$ (\textbf{Holgura o Slack Time}): Margen temporal disponible antes de que la tarea incurra en incumplimiento de plazo si no sufre interferencias.
+    \item $\phi_i$ (\textbf{Fase o Desplazamiento Inicial}): Instante en el que se produce la primera activación de la tarea $\tau_i$ tras el arranque del sistema.
+\end{itemize}
+
+\begin{definicion}[Factor de Utilización del Procesador]
+El factor de utilización del procesador $U_i$ correspondiente a una tarea periódica $\tau_i$, y la utilización global $U$ del sistema, se definen como la fracción del tiempo de CPU requerida para su ejecución:
+\begin{equation}
+U_i = \frac{C_i}{T_i}, \qquad U = \sum_{i=1}^n \frac{C_i}{T_i}
+\end{equation}
+Una condición obvia y necesaria para la viabilidad de cualquier sistema monoprocesador es que $U \le 1$ ($100\%$).
+\end{definicion}
+
+% ==============================================================================
+% 4. PLANIFICACIÓN CÍCLICA Y EJECUTIVOS CÍCLICOS
+% ==============================================================================
+\section{Planificación Cíclica y Ejecutivos Cíclicos}
+
+\subsection{Concepto y Funcionamiento}
+La \textbf{Planificación Cíclica} (o Ejecutivo Cíclico) es una técnica estática y determinista, gobernada por una tabla precalculada fuera de línea (\textit{off-line}) que dicta con exactitud qué tareas deben ejecutarse y en qué orden dentro de intervalos regulares impulsados por las interrupciones del reloj hardware.
+
+No existe un planificador dinámico en tiempo de ejecución: el ejecutivo cíclico se implementa típicamente como un bucle determinista sin hilos ni cambios de contexto complejos, lo que minimiza la sobrecarga computacional.
+
+\subsection{Parámetros de Diseño: Ciclo Mayor y Ciclo Menor}
+La línea temporal de ejecución se estructura en dos niveles:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Ciclo Mayor o Hiperperiodo ($M$):} Intervalo temporal tras el cual el patrón de ejecución de todas las tareas periódicas se repite de forma idéntica. Se calcula como el mínimo común múltiplo de los periodos:
+    \begin{equation}
+    M = \text{mcm}(T_1, T_2, \dots, T_n)
+    \end{equation}
+    \item \textbf{Ciclo Menor o Marco Temporal / Frame ($m$):} Subdivisión regular del ciclo mayor. El reloj del sistema genera una interrupción periódica cada $m$ unidades de tiempo, marcando el inicio de un nuevo marco temporal (\textit{minor cycle}).
+\end{itemize}
+
+\subsection{Las Cuatro Condiciones de Diseño del Ciclo Menor}
+Para que un ejecutivo cíclico sea válido y garantice que ninguna tarea sobrepase su plazo de respuesta, el tamaño del ciclo menor $m$ debe satisfacer estrictamente cuatro restricciones:
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdAccent,title=\textbf{Condiciones de Diseño del Ciclo Menor $m$},arc=3pt]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Regla del Tiempo de Cómputo Máximo:}
+    \begin{equation}
+    m \ge \max_{1 \le i \le n} (C_i)
+    \end{equation}
+    Cada tarea debe caber íntegramente dentro de un ciclo menor sin ser expulsada (a menos que se divida artificialmente en subtareas).
+    
+    \item \textbf{Regla de Periodicidad Armónica:}
+    \begin{equation}
+    M \pmod m = 0
+    \end{equation}
+    El ciclo mayor debe ser un múltiplo entero exacto del ciclo menor, es decir, el número de ciclos menores por ciclo mayor es un entero $K = M / m$.
+    
+    \item \textbf{Regla del Plazo de Respuesta Mínimo:}
+    \begin{equation}
+    m \le \min_{1 \le i \le n} (D_i)
+    \end{equation}
+    Debe transcurrir como máximo un ciclo menor antes de que expire el deadline más exigente del sistema.
+    
+    \item \textbf{Regla de Garantía de Cumplimiento de Deadline:}
+    Para toda tarea $\tau_i$, entre la activación de la tarea y su plazo de respuesta debe existir al menos un ciclo menor completo disponible para su ejecución:
+    \begin{equation}
+    2m - \gcd(m, T_i) \le D_i, \qquad \forall i \in \{1, \dots, n\}
+    \end{equation}
+    donde $\gcd(m, T_i)$ representa el máximo común divisor entre el marco $m$ y el periodo $T_i$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{ejemplo}[Diseño Completo de un Ejecutivo Cíclico]
+Consideremos un conjunto de tres tareas periódicas independientes con $D_i = T_i$:
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Tarea} & \textbf{Cómputo ($C_i$)} & \textbf{Periodo ($T_i$)} & \textbf{Plazo ($D_i$)} \\
+\midrule
+$\tau_1$ & 1 & 4 & 4 \\
+$\tau_2$ & 2 & 10 & 10 \\
+$\tau_3$ & 1 & 20 & 20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Paso 1: Cálculo del Ciclo Mayor ($M$)}
+$$M = \text{mcm}(4, 10, 20) = 20$$
+
+\textbf{Paso 2: Evaluación de las condiciones sobre el Ciclo Menor ($m$)}
+\begin{itemize}
+    \item Condición 1: $m \ge \max(C_i) = \max(1, 2, 1) = 2$.
+    \item Condición 2: $20 \pmod m = 0 \implies m \in \{2, 4, 5, 10, 20\}$.
+    \item Condición 3: $m \le \min(D_i) = \min(4, 10, 20) = 4$.
+    \item Cruzando las condiciones 1, 2 y 3: los candidatos viables son $m = 2$ o $m = 4$.
+    \item Condición 4 para $m = 4$:
+    \begin{itemize}
+        \item Para $\tau_1$: $2(4) - \gcd(4, 4) = 8 - 4 = 4 \le 4$ \textbf{(Se cumple)}.
+        \item Para $\tau_2$: $2(4) - \gcd(4, 10) = 8 - 2 = 6 \le 10$ \textbf{(Se cumple)}.
+        \item Para $\tau_3$: $2(4) - \gcd(4, 20) = 8 - 4 = 4 \le 20$ \textbf{(Se cumple)}.
+    \end{itemize}
+\end{itemize}
+Por tanto, elegimos $m = 4$. El ciclo mayor consta de $K = M / m = 20 / 4 = 5$ ciclos menores.
+
+\textbf{Paso 3: Construcción de la Tabla de Despacho (Cuadro de Ejecución)}
+En cada ciclo menor de duración 4 disponemos de tiempo suficiente para asignar las instancias:
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\textbf{Marco ($k$)} & \textbf{Intervalo} & \textbf{Tareas Asignadas} & \textbf{Tiempo Ocupado / Capacidad} \\
+\midrule
+Marco 1 & $[0, 4)$ & $\tau_1, \tau_2$ & $1 + 2 = 3 \le 4$ \\
+Marco 2 & $[4, 8)$ & $\tau_1, \tau_3$ & $1 + 1 = 2 \le 4$ \\
+Marco 3 & $[8, 12)$ & $\tau_1$ & $1 \le 4$ \\
+Marco 4 & $[12, 16)$ & $\tau_1, \tau_2$ & $1 + 2 = 3 \le 4$ \\
+Marco 5 & $[16, 20)$ & $\tau_1$ & $1 \le 4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Todas las instancias se ejecutan sin interferencias y cumpliendo sus plazos de forma determinista.
+\end{ejemplo}
+
+\subsection{Ventajas y Desventajas del Ejecutivo Cíclico}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Ventajas:} Cero sobrecarga por cambio de contexto; determinismo absoluto y ausencia de condiciones de carrera sobre variables compartidas; no requiere primitivas complejas de sincronización en el sistema operativo.
+    \item \textbf{Inconvenientes:} Extrema rigidez. Si una tarea excede su $C_i$ o si se añade una nueva tarea con periodo primo, todo el plan se desmorona y exige recalcular $M$ y $m$. Si una tarea tiene un $C_i$ mayor que $m$, debe dividirse artificialmente en subtareas (\textit{task slicing}), lo que complica la arquitectura del software.
+\end{itemize}
+
+% ==============================================================================
+% 5. PLANIFICACIÓN CON PRIORIDADES ESTÁTICAS: RMS
+% ==============================================================================
+\section{Planificación con Prioridades Estáticas: Cadencia Monótona (RMS)}
+
+El algoritmo de \textbf{Cadencia Monótona} (\textit{Rate Monotonic Scheduling}, RMS), introducido formalmente por C. L. Liu y J. W. Layland en su trabajo seminal de 1973, es el estándar por excelencia de la planificación estática expulsiva.
+
+\subsection{Regla de Asignación de Prioridades}
+\begin{definicion}[Regla de Asignación RMS]
+A cada tarea periódica $\tau_i$ se le asigna de manera fija una prioridad estática $P_i$ que es monótona respecto a su frecuencia de activación (inversamente proporcional a su periodo):
+\begin{equation}
+\forall i, j: \quad T_i < T_j \implies P_i > P_j
+\end{equation}
+La tarea con menor periodo (mayor frecuencia de repetición) tiene siempre la mayor prioridad.
+\end{definicion}
+
+\begin{aviso}[Urgencia frente a Criticidad]
+La prioridad en RMS modela la \textbf{urgencia temporal} de la tarea (con qué frecuencia debe despacharse), \textbf{no su criticidad}. Una tarea que monitoriza una válvula crítica cada 500 ms tendrá menor prioridad bajo RMS que una tarea de lectura de teclado que se activa cada 50 ms.
+\end{aviso}
+
+\subsection{Hipótesis Fundamentales de Liu y Layland}
+El análisis formal clásico de RMS descansa sobre las siguientes hipótesis:
+\begin{enumerate}[leftmargin=*]
+    \item Todas las tareas son rigurosamente periódicas e independientes entre sí (no existen relaciones de precedencia ni exclusión mutua con bloqueos por recursos).
+    \item Para cada tarea, el plazo de respuesta relativo coincide exactamente con su periodo: $D_i = T_i$.
+    \item El tiempo de cómputo en el peor caso $C_i$ es constante y conocido a priori.
+    \item El planificador es con expulsión (\textit{preemptive}): una tarea de mayor prioridad interrumpe de inmediato a una de menor prioridad.
+    \item La sobrecarga del sistema operativo por cambios de contexto e interrupciones es despreciable.
+\end{enumerate}
+
+Bajo estas hipótesis, Liu y Layland demostraron que RMS es un \textbf{algoritmo óptimo} en monoprocesador entre todos los esquemas de prioridad estática: si un conjunto de tareas con $D_i = T_i$ es planificable mediante alguna asignación fija de prioridades, también lo es asignando prioridades según RMS.
+
+\subsection{Test I de Liu y Layland: Condición Suficiente por Factor de Utilización}
+\begin{definicion}[Teorema de Utilización Límites de RMS]
+Un conjunto de $n$ tareas periódicas independientes que satisface las hipótesis de Liu y Layland es \textbf{garantizadamente planificable} bajo RMS si la utilización global del procesador $U$ no supera la cota $U_0(n)$:
+\begin{equation}
+U = \sum_{i=1}^n \frac{C_i}{T_i} \le U_0(n) = n \left( 2^{1/n} - 1 \right)
+\end{equation}
+\end{definicion}
+
+La función $U_0(n)$ decrece monótonamente conforme crece el número de tareas $n$, convergiendo asintóticamente a $\ln 2$:
+\begin{equation}
+\lim_{n \to \infty} U_0(n) = \lim_{n \to \infty} n \left( 2^{1/n} - 1 \right) = \ln 2 \approx 0{,}69315 \quad (69{,}3\%)
+\end{equation}
+
+\begin{center}
+\begin{tabular}{ccccccc}
+\toprule
+$n = 1$ & $n = 2$ & $n = 3$ & $n = 4$ & $n = 5$ & $n = 10$ & $n \to \infty$ \\
+\midrule
+$100{,}0\%$ & $82{,}84\%$ & $77{,}98\%$ & $75{,}68\%$ & $74{,}35\%$ & $71{,}77\%$ & $69{,}31\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Inexactitud del Test de Utilización de Liu y Layland}
+Es vital comprender que el test del factor de utilización es una \textbf{condición suficiente, pero NO necesaria}:
+\begin{itemize}[leftmargin=*]
+    \item Si $U \le U_0(n)$, el conjunto de tareas es \textbf{garantizadamente planificable}.
+    \item Si $U > 1$, el conjunto es \textbf{no planificable} en monoprocesador bajo ningún algoritmo.
+    \item Si $U_0(n) < U \le 1$, el test es \textbf{no concluyente}: el sistema puede ser planificable o no, requiriendo un análisis más profundo.
+\end{itemize}
+
+Por ejemplo, un conjunto de tareas cuyos periodos son múltiplos armónicos exactos (ej. $T = \{10, 20, 40\}$) puede alcanzar una utilización de hasta el $100\%$ ($U = 1$) bajo RMS sin perder ningún plazo.
+
+\subsection{Test II: Análisis Exacto del Tiempo de Respuesta en el Peor Caso \texorpdfstring{($R_i$)}{(Ri)}}
+Para obtener una condición \textbf{necesaria y suficiente} para cualquier conjunto de tareas bajo asignación estática de prioridades (incluso cuando $D_i \le T_i$, conocido como \textit{Deadline Monotonic Scheduling} o DMS), se utiliza el método de análisis del tiempo de respuesta introducido por Joseph y Pandya (1986) y refinado por Audsley.
+
+El instante de máxima exigencia para una tarea $\tau_i$ se produce en el llamado \textbf{instante crítico}: cuando se activa simultáneamente junto a todas las tareas de mayor prioridad que ella.
+
+El tiempo de respuesta en el peor caso $R_i$ satisface la ecuación recurrente de punto fijo:
+\begin{equation}
+\label{eq:response_time}
+R_i = C_i + \sum_{j \in hp(i)} \left\lceil \frac{R_i}{T_j} \right\rceil C_j
+\end{equation}
+donde $hp(i)$ denota el conjunto de tareas con prioridad estrictamente mayor que $\tau_i$, y $\lceil x \rceil$ es la función techo (número entero inmediatamente superior o igual a $x$). El término $\lceil R_i / T_j \rceil C_j$ representa la interferencia máxima que la tarea $\tau_j$ ejerce sobre $\tau_i$.
+
+\begin{algoritmo}[Algoritmo Iterativo de Punto Fijo para $R_i$]
+Para calcular $R_i$, se genera una sucesión monótona no decreciente $R_i^{(0)}, R_i^{(1)}, R_i^{(2)}, \dots$:
+\begin{align}
+R_i^{(0)} &= C_i \\
+R_i^{(k+1)} &= C_i + \sum_{j \in hp(i)} \left\lceil \frac{R_i^{(k)}}{T_j} \right\rceil C_j
+\end{align}
+El algoritmo finaliza cuando:
+\begin{enumerate}
+    \item $R_i^{(k+1)} = R_i^{(k)}$: El proceso converge al valor exacto del tiempo de respuesta $R_i$. Si $R_i \le D_i$, la tarea $\tau_i$ es planificable.
+    \item $R_i^{(k+1)} > D_i$: La tarea incumple su plazo; el sistema es no planificable.
+\end{enumerate}
+\end{algoritmo}
+
+\begin{ejemplo}[Aplicación Práctica del Análisis de Tiempo de Respuesta]
+Sean tres tareas periódicas:
+\begin{itemize}
+    \item $\tau_1: C_1 = 2, T_1 = 5 \implies U_1 = 0{,}40$ (Mayor prioridad por RMS).
+    \item $\tau_2: C_2 = 2, T_2 = 8 \implies U_2 = 0{,}25$ (Prioridad media).
+    \item $\tau_3: C_3 = 2, T_3 = 10 \implies U_3 = 0{,}20$ (Menor prioridad).
+\end{itemize}
+La utilización global es $U = 0{,}40 + 0{,}25 + 0{,}20 = 0{,}85$ ($85\%$).
+Como $U_0(3) = 3(2^{1/3} - 1) \approx 0{,}7798$ ($78\%$), tenemos $U > U_0(3)$, por lo que el test de Liu y Layland \textbf{no es concluyente}. Aplicamos la recurrencia exacta:
+
+\textbf{1. Para $\tau_1$:}
+Como no tiene tareas de mayor prioridad ($hp(1) = \emptyset$), $R_1 = C_1 = 2 \le 5$ \textbf{(Planificable)}.
+
+\textbf{2. Para $\tau_2$ ($hp(2) = \{\tau_1\}$):}
+\begin{itemize}
+    \item $R_2^{(0)} = C_2 = 2$.
+    \item $R_2^{(1)} = 2 + \lceil 2 / 5 \rceil \cdot 2 = 2 + 1 \cdot 2 = 4$.
+    \item $R_2^{(2)} = 2 + \lceil 4 / 5 \rceil \cdot 2 = 2 + 1 \cdot 2 = 4$.
+    \item Convergencia alcanzada: $R_2 = 4 \le 8$ \textbf{(Planificable)}.
+\end{itemize}
+
+\textbf{3. Para $\tau_3$ ($hp(3) = \{\tau_1, \tau_2\}$):}
+\begin{itemize}
+    \item $R_3^{(0)} = C_3 = 2$.
+    \item $R_3^{(1)} = 2 + \lceil 2 / 5 \rceil \cdot 2 + \lceil 2 / 8 \rceil \cdot 2 = 2 + 2 + 2 = 6$.
+    \item $R_3^{(2)} = 2 + \lceil 6 / 5 \rceil \cdot 2 + \lceil 6 / 8 \rceil \cdot 2 = 2 + 2(2) + 1(2) = 2 + 4 + 2 = 8$.
+    \item $R_3^{(3)} = 2 + \lceil 8 / 5 \rceil \cdot 2 + \lceil 8 / 8 \rceil \cdot 2 = 2 + 2(2) + 1(2) = 8$.
+    \item Convergencia: $R_3 = 8 \le 10$ \textbf{(Planificable)}.
+\end{itemize}
+\textbf{Conclusión:} A pesar de superar la cota de Liu y Layland ($85\% > 78\%$), el sistema es \textbf{completamente planificable} porque todas las tareas cumplen $R_i \le D_i$.
+\end{ejemplo}
+
+% ==============================================================================
+% 6. PLANIFICACIÓN CON PRIORIDADES DINÁMICAS: EDF
+% ==============================================================================
+\section{Planificación con Prioridades Dinámicas: Earliest Deadline First (EDF)}
+
+\subsection{Principio del Algoritmo EDF}
+A diferencia de los esquemas estáticos, en el algoritmo \textbf{Earliest Deadline First} (EDF) las prioridades se asignan de forma \textbf{dinámica} en tiempo de ejecución. 
+
+\begin{definicion}[Regla de Asignación EDF]
+En cada instante de planificación, el procesador se asigna a la tarea activa cuyo \textbf{plazo de respuesta absoluto} ($d_k = t_{a,k} + D_i$) sea más inminente o próximo en el tiempo.
+\end{definicion}
+
+\subsection{Teorema de Planificabilidad de EDF}
+Bajo las hipótesis de Liu y Layland con $D_i = T_i$, EDF es óptimo en monoprocesador y presenta un resultado extraordinario:
+
+\begin{definicion}[Condición Necesaria y Suficiente para EDF]
+Un conjunto de $n$ tareas periódicas independientes con $D_i = T_i$ es planificable bajo EDF si y solo si:
+\begin{equation}
+U = \sum_{i=1}^n \frac{C_i}{T_i} \le 1
+\end{equation}
+\end{definicion}
+Esto significa que EDF permite aprovechar teóricamente el \textbf{100\% de la capacidad del procesador}, eliminando la restricción del $69{,}3\%$ de RMS.
+
+\subsection{Comparativa Detallada: RMS frente a EDF}
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{p{3.2cm}p{5.4cm}p{5.4cm}}
+\toprule
+\textbf{Característica} & \textbf{Cadencia Monótona (RMS)} & \textbf{Earliest Deadline First (EDF)} \\
+\midrule
+\textbf{Tipo de Prioridad} & Estática (inversa al periodo $T_i$) & Dinámica (según deadline absoluto $d_k$) \\
+\textbf{Utilización Máxima} & $n(2^{1/n}-1) \to 69{,}3\%$ ($100\%$ en armónicos) & $100\%$ ($U \le 1$) para $D_i = T_i$ \\
+\textbf{Sobrecarga de Gestión} & Mínima: ordenación estática fija & Mayor: requiere actualizar y reordenar colas de prioridad en cada evento \\
+\textbf{Sobrecarga Transitoria} & \textbf{Predecible y Controlada:} solo sufren las tareas de menor prioridad & \textbf{Efecto Dominó Impredecible:} una tarea retrasada puede hacer fallar en cascada a tareas críticas \\
+\textbf{Implementación} & Soportada nativamente en cualquier RTOS con prioridades fijas & Requiere soporte de colas dinámicas \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ==============================================================================
+% 7. INVERSIÓN DE PRIORIDADES Y COMPARTICIÓN DE RECURSOS
+% ==============================================================================
+\section{Inversión de Prioridades y Compartición de Recursos}
+
+En aplicaciones reales de tiempo real, las tareas no son enteramente independientes: deben coordinarse y compartir recursos pasivos en exclusión mutua (variables compartidas, puertos serie, buses de comunicación) protegidos mediante cerrojos o semáforos.
+
+\subsection{El Problema de la Inversión de Prioridad No Acotada}
+\begin{definicion}[Inversión de Prioridad]
+Se dice que se produce una \textbf{inversión de prioridad} cuando una tarea de alta prioridad se ve demorada en su ejecución esperando que una tarea de menor prioridad libere un recurso compartido, permitiendo que tareas de prioridad intermedia (que no usan dicho recurso) se ejecuten y prolonguen el bloqueo de forma arbitraria.
+\end{definicion}
+
+Consideremos el siguiente escenario clásico con tres tareas concurrentes:
+\begin{itemize}
+    \item $\tau_A$: Tarea de alta prioridad (\textit{High}).
+    \item $\tau_M$: Tarea de prioridad media (\textit{Medium}).
+    \item $\tau_B$: Tarea de baja prioridad (\textit{Low}).
+\end{itemize}
+
+\begin{enumerate}
+    \item En $t_0$, $\tau_B$ entra en ejecución y adquiere el cerrojo de un recurso compartido $R$.
+    \item En $t_1$, se activa $\tau_A$. Al ser de mayor prioridad, expulsa a $\tau_B$ y comienza a ejecutarse.
+    \item En $t_2$, $\tau_A$ solicita acceder al recurso compartido $R$. Al estar bloqueado por $\tau_B$, $\tau_A$ se suspende. El procesador pasa de nuevo a $\tau_B$ para que termine su sección crítica.
+    \item En $t_3$, antes de que $\tau_B$ libere el recurso, se activa una tarea de prioridad intermedia $\tau_M$ que \textbf{no utiliza el recurso $R$}.
+    \item Como $\tau_M$ tiene mayor prioridad que $\tau_B$, el planificador expulsa a $\tau_B$ y cede la CPU a $\tau_M$.
+    \item \textbf{Efecto catastrófico:} $\tau_A$ (alta prioridad) queda bloqueada indirectamente esperando a $\tau_M$ (prioridad media), a pesar de que no comparten ningún recurso. Si existen múltiples tareas intermedias, $\tau_A$ puede sufrir un retraso no acotado que la conduzca al fallo de su deadline.
+\end{enumerate}
+
+\begin{ejemplo}[Caso Real Histórico: La Misión Mars Pathfinder de la NASA (1997)]
+El incidente más famoso de inversión de prioridad en la historia aeroespacial ocurrió en julio de 1997 a millones de kilómetros de la Tierra. El vehículo \textit{Mars Pathfinder} comenzó a sufrir reinicios espontáneos periódicos de su ordenador de a bordo, paralizando la misión.
+
+\textbf{Diagnóstico:} El sistema ejecutaba el RTOS VxWorks con tres hilos clave:
+\begin{itemize}
+    \item $\tau_A$ (Alta prioridad): Hilo del bus de información (gestor de comunicaciones del bus de datos).
+    \item $\tau_M$ (Prioridad media): Tareas de cómputo científico y comunicaciones de radio que tomaban mucho tiempo de CPU.
+    \item $\tau_B$ (Baja prioridad): Tarea meteorológica de adquisición de datos (\textit{ASI/MET thread}) que ocasionalmente tomaba el mutex del bus.
+\end{itemize}
+Cuando $\tau_B$ tomaba el mutex y $\tau_A$ intentaba acceder, $\tau_A$ se bloqueaba. En ese instante, las tareas intermedias $\tau_M$ expulsaban a $\tau_B$. Un temporizador de vigilancia (\textit{watchdog timer}) detectaba que el hilo de alta prioridad $\tau_A$ no se ejecutaba durante demasiado tiempo, asumía que el sistema se había congelado y forzaba un reinicio total de la sonda.
+
+\textbf{Solución enviada desde la Tierra:} Los ingenieros de la NASA reprodujeron el fallo en réplicas terrestres y enviaron un parche de código que activó el \textbf{Protocolo de Herencia de Prioridad} en el mutex de VxWorks, resolviendo el problema definitivamente.
+\end{ejemplo}
+
+\subsection{Solución 1: Sección Crítica No Expulsable (SCNE)}
+El enfoque más elemental consiste en elevar la prioridad de cualquier tarea a la prioridad máxima del sistema durante la ejecución de su sección crítica, o deshabilitar las interrupciones del procesador.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Cálculo del Bloqueo:} El tiempo de bloqueo $B_i$ que sufre una tarea $\tau_i$ es como máximo la duración de la sección crítica más larga de cualquier tarea de menor prioridad:
+    \begin{equation}
+    B_i = \max_{j > i, k} \text{Dur}(s_{j,k})
+    \end{equation}
+    \item \textbf{Inconveniente:} Penaliza severamente a tareas de alta prioridad que no utilizan ningún recurso compartido, las cuales sufren bloqueos artificiales prolongados.
+\end{itemize}
+
+\subsection{Solución 2: Protocolo de Herencia de Prioridad (PIP)}
+\begin{definicion}[Protocolo de Herencia de Prioridad — PIP]
+Bajo el protocolo PIP (\textit{Priority Inheritance Protocol}), si una tarea de baja prioridad $\tau_B$ mantiene bloqueado un recurso que es solicitado por una tarea de mayor prioridad $\tau_A$, la tarea $\tau_B$ \textbf{hereda dinámicamente} la prioridad de $\tau_A$ mientras dure la retención del recurso.
+\end{definicion}
+
+Al heredar la prioridad máxima de las tareas a las que mantiene bloqueadas:
+$$\text{prio}_{\text{act}}(\tau_B) = \max \left( \text{prio}_{\text{est}}(\tau_B), \max_{\tau_k \in \text{bloqueadas}(\tau_B)} \text{prio}(\tau_k) \right)$$
+las tareas intermedias $\tau_M$ ya no pueden expulsar a $\tau_B$, permitiendo que esta finalice rápidamente su sección crítica, libere el recurso y devuelva el control a $\tau_A$.
+
+\subsubsection{Tipos de Bloqueo en PIP}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Bloqueo Directo:} Cuando una tarea solicita un recurso que está actualmente ocupado.
+    \item \textbf{Bloqueo Indirecto (\textit{Push-through Blocking}):} Cuando una tarea de mayor prioridad se ve demorada porque una de menor prioridad está ejecutando una sección crítica con prioridad heredada para desbloquear a otra tarea.
+\end{itemize}
+
+\begin{aviso}[Limitaciones Críticas de PIP]
+Aunque PIP mitiga la inversión de prioridad no acotada, sufre dos problemas graves:
+\begin{enumerate}
+    \item \textbf{No evita el Interbloqueo (\textit{Deadlock}):} Si dos tareas intentan acceder a dos recursos compartidos en orden inverso, PIP no previene el abrazo mortal.
+    \item \textbf{Bloqueo Encadenado (\textit{Chained Blocking}):} Si una tarea de alta prioridad necesita acceder a $m$ recursos compartidos diferentes, en el peor caso puede sufrir el bloqueo secuencial sucesivo de $m$ secciones críticas de tareas de menor prioridad.
+\end{enumerate}
+\end{aviso}
+
+\subsection{Solución 3: Protocolos de Techo de Prioridad (PCP y PPP)}
+Para erradicar por completo los interbloqueos y el bloqueo encadenado, se introdujeron los protocolos basados en techo de prioridad (Sha, Rajkumar y Lehoczky, 1990).
+
+\begin{definicion}[Techo de Prioridad de un Recurso]
+El \textbf{techo de prioridad} (\textit{Priority Ceiling}) de un recurso compartido $R_k$ se define estáticamente como la máxima prioridad de todas aquellas tareas que pueden llegar a solicitarlo en algún momento de su ejecución:
+\begin{equation}
+\text{Ceiling}(R_k) = \max \{ \text{prio}(\tau) \mid \tau \text{ utiliza el recurso } R_k \}
+\end{equation}
+\end{definicion}
+
+\subsubsection{Protocolo de Techo de Prioridad Inmediato (Immediate Priority Ceiling / PPP)}
+En los estándares POSIX (\texttt{PTHREAD\_PRIO\_PROTECT}) y en el lenguaje Ada (objetos protegidos), el protocolo predominante es el \textbf{Techo de Prioridad Inmediato} (también conocido como \textit{Priority Protect Protocol}, PPP):
+
+\begin{tcolorbox}[colback=scdLightGreen,colframe=scdGreen,title=\textbf{Mecanismo del Techo de Prioridad Inmediato (PPP)},arc=3pt]
+\begin{enumerate}[leftmargin=*]
+    \item Cada tarea posee una prioridad estática base por defecto.
+    \item Cada recurso tiene asignado estáticamente su techo de prioridad $\text{Ceiling}(R_k)$.
+    \item Tan pronto como una tarea $\tau$ adquiere el cerrojo del recurso $R_k$, su prioridad dinámica se eleva \textbf{inmediatamente} a $\text{Ceiling}(R_k)$, sin esperar a que otra tarea intente acceder al recurso.
+    \item Cuando la tarea libera el recurso, su prioridad vuelve instantáneamente a su nivel previo a la entrada a la sección crítica.
+\end{enumerate}
+\end{tcolorbox}
+
+\subsubsection{Propiedades Demostradas de los Protocolos de Techo}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Ausencia Absoluta de Interbloqueo (\textit{Deadlock-free}):} Queda matemáticamente garantizado que ningún conjunto de tareas puede caer en interbloqueo mutuo.
+    \item \textbf{Eliminación del Bloqueo Encadenado:} Una tarea de alta prioridad $\tau_i$ solo puede sufrir, \textbf{como máximo, el bloqueo de una única sección crítica} de cualquier tarea de menor prioridad durante toda su activación.
+\end{enumerate}
+
+\subsection{Cálculo del Factor de Bloqueo \texorpdfstring{$B_i$}{Bi} y Extensión del Análisis \texorpdfstring{$R_i$}{Ri}}
+Bajo los protocolos de techo de prioridad, el factor de bloqueo en el peor caso $B_i$ que puede experimentar una tarea $\tau_i$ se calcula como la duración de la sección crítica más larga ejecutada por cualquier tarea de menor prioridad sobre un recurso cuyo techo sea igual o superior a la prioridad de $\tau_i$:
+\begin{equation}
+B_i = \max_{\substack{j > i \\ k \mid \text{Ceiling}(R_k) \ge P_i}} \text{Dur}(s_{j,k})
+\end{equation}
+
+Incorporando el factor de bloqueo $B_i$, la ecuación de análisis del tiempo de respuesta en el peor caso de Joseph y Pandya se generaliza como:
+\begin{equation}
+\label{eq:response_time_blocking}
+R_i^{(0)} = C_i + B_i, \qquad R_i^{(k+1)} = C_i + B_i + \sum_{j \in hp(i)} \left\lceil \frac{R_i^{(k)}}{T_j} \right\rceil C_j
+\end{equation}
+El sistema con recursos compartidos es garantizadamente planificable si y solo si $\forall i, R_i \le D_i$.
+
+% ==============================================================================
+% 8. TRATAMIENTO DE TAREAS APERIÓDICAS Y ESPORÁDICAS
+% ==============================================================================
+\section{Tratamiento de Tareas Aperiódicas y Esporádicas}
+
+En casi todo sistema de tiempo real coexisten tareas de control periódicas con eventos externos aperiódicos (peticiones de usuario, alarmas de red, comandos de depuración). El desafío consiste en responder a las peticiones aperiódicas con la mínima latencia posible sin comprometer jamás las garantías temporales de las tareas periódicas críticas.
+
+\subsection{1. Servicio en Segundo Plano (\textit{Background Processing})}
+Es el mecanismo más elemental: las tareas aperiódicas se ejecutan con la prioridad más baja del sistema.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Ventajas:} No interfiere en absoluto con la planificabilidad de las tareas periódicas.
+    \item \textbf{Inconvenientes:} Tiempos de respuesta para las tareas aperiódicas inaceptablemente largos, especialmente cuando la utilización periódica $U_p$ es elevada. Si el sistema está al $100\%$ de carga periódica, las aperiódicas sufren inanición.
+\end{itemize}
+
+\subsection{2. Servidor por Sondeo (\textit{Polling Server})}
+Se introduce en el sistema una tarea periódica ficticia $\tau_s = (C_s, T_s)$ denominada \textbf{servidor por sondeo}:
+\begin{itemize}[leftmargin=*]
+    \item En cada activación periódica (cada $T_s$), el servidor comprueba si hay peticiones aperiódicas en la cola.
+    \item Si hay peticiones pendientes, las atiende consumiendo hasta un máximo de $C_s$ unidades de tiempo de cómputo.
+    \item \textbf{Deficiencia fundamental:} Si en el instante de activación del servidor la cola aperiódica está vacía, el servidor suspende inmediatamente su ejecución y \textbf{pierde todo su saldo de cómputo} $C_s$ hasta el siguiente periodo $T_s$. Si una petición llega inmediatamente después (en $t = \epsilon$), deberá esperar un periodo completo hasta la próxima activación.
+\end{itemize}
+
+\subsection{3. Servidor Diferido (\textit{Deferred Server})}
+El \textbf{Servidor Diferido} (Strosnider, Lehoczky y Sha, 1995) resuelve brillantemente la deficiencia del servidor por sondeo mediante la preservación de capacidad.
+
+\begin{definicion}[Servidor Diferido — DS]
+Un Servidor Diferido es una tarea periódica de alta prioridad caracterizada por una capacidad máxima de cómputo $C_s$ y un periodo de recarga $T_s$. Si al activarse no existen peticiones aperiódicas, el servidor \textbf{conserva su capacidad intacta} durante todo el periodo $T_s$, disponible para atender inmediatamente cualquier petición que aparezca de manera imprevista.
+\end{definicion}
+
+El saldo de cómputo del servidor se recarga periódicamente a su valor nominal $C_s$ al comienzo de cada periodo $T_s$ (a menos que no se haya consumido, en cuyo caso no se acumula por encima de $C_s$).
+
+\subsubsection{Análisis de Planificabilidad del Servidor Diferido}
+Dado que el Servidor Diferido puede retener su saldo de cómputo y consumirlo en el instante más desfavorable (interfiriendo dos veces con una tarea periódica en una ventana temporal), el factor de utilización máximo tolerable por RMS para un conjunto de $n$ tareas periódicas junto al servidor diferido debe corregirse analíticamente.
+
+Definiendo la utilización del servidor $U_s = C_s / T_s$ y la utilización periódica $U_p = \sum_{i=1}^n C_i / T_i$, la cota superior de utilización modificada $U_{mls}$ para $n$ tareas viene dada por:
+\begin{equation}
+U_{mls}(n) = U_s + n \left[ \left( \frac{U_s + 2}{2U_s + 1} \right)^{1/n} - 1 \right]
+\end{equation}
+
+Cuando el número de tareas periódicas tiende a infinito ($n \to \infty$), el límite asintótico se convierte en:
+\begin{equation}
+\lim_{n \to \infty} U_{mls}(n) = U_s + \ln \left( \frac{U_s + 2}{2U_s + 1} \right)
+\end{equation}
+
+\begin{tcolorbox}[colback=scdLightOrange,colframe=scdOrange,title=\textbf{Condición de Planificabilidad con Servidor Diferido},arc=3pt]
+El conjunto de $n$ tareas periódicas junto al Servidor Diferido es garantizadamente planificable bajo RMS si:
+\begin{equation}
+U_p \le \ln \left( \frac{U_s + 2}{2U_s + 1} \right)
+\end{equation}
+\end{tcolorbox}
+
+\begin{ejemplo}[Diseño de un Servidor Diferido]
+Supongamos un sistema con tareas periódicas cuya utilización acumulada es $U_p = 0{,}50$ ($50\%$). Deseamos incorporar un Servidor Diferido de alta prioridad y determinar la máxima utilización $U_s$ que podemos asignarle garantizando el cumplimiento de plazos periódicos.
+
+Aplicamos la condición de planificabilidad asintótica:
+$$0{,}50 \le \ln \left( \frac{U_s + 2}{2U_s + 1} \right) \implies e^{0{,}50} \le \frac{U_s + 2}{2U_s + 1}$$
+Sabiendo que $e^{0{,}50} \approx 1{,}6487$:
+$$1{,}6487 (2U_s + 1) \le U_s + 2 \implies 3{,}2974 U_s + 1{,}6487 \le U_s + 2$$
+$$2{,}2974 U_s \le 2 - 1{,}6487 = 0{,}3513 \implies U_s \le \frac{0{,}3513}{2{,}2974} \approx 0{,}1529 \quad (15{,}3\%)$$
+Podemos dimensionar con total seguridad un Servidor Diferido con una utilización de hasta el $15{,}2\%$ (por ejemplo, con $T_s = 20\text{ ms}$ y capacidad de cómputo $C_s = 3\text{ ms}$), garantizando tiempos de respuesta ultrarrápidos para eventos aperiódicos sin que ninguna tarea periódica falle jamás su plazo.
+\end{ejemplo}
+
+% ==============================================================================
+% RESUMEN Y SÍNTESIS DEL TEMA
+% ==============================================================================
+\section*{Síntesis del Tema y Fórmulas Clave de Examen}
+\addcontentsline{toc}{section}{Síntesis del Tema y Fórmulas Clave de Examen}
+
+\begin{tcolorbox}[colback=scdGray,colframe=scdDarkBlue,title=\textbf{\textsf{Formulario Rápido de Sistemas de Tiempo Real}},arc=4pt]
+\small
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Condición necesaria monoprocesador:} $U = \sum_{i=1}^n \frac{C_i}{T_i} \le 1$.
+    \item \textbf{Ejecutivo Cíclico:}
+    $M = \text{mcm}(T_i)$, con restricciones sobre $m$:
+    $$m \ge \max(C_i), \quad M \pmod m = 0, \quad m \le \min(D_i), \quad 2m - \gcd(m, T_i) \le D_i$$
+    \item \textbf{Cota de Liu y Layland (RMS, $D_i = T_i$):}
+    $$U \le n(2^{1/n} - 1) \xrightarrow{n \to \infty} \ln 2 \approx 69{,}3\%$$
+    \item \textbf{Análisis de Tiempo de Respuesta en el Peor Caso ($R_i$):}
+    $$R_i^{(k+1)} = C_i + B_i + \sum_{j \in hp(i)} \left\lceil \frac{R_i^{(k)}}{T_j} \right\rceil C_j, \qquad R_i \le D_i$$
+    \item \textbf{EDF ($D_i = T_i$):} Condición necesaria y suficiente: $U \le 1$.
+    \item \textbf{Techo de Prioridad Inmediato (PPP):} 
+    $$\text{Ceiling}(R_k) = \max_{\tau \text{ usa } R_k} \text{prio}(\tau), \quad B_i = \max_{\substack{j > i \\ k \mid \text{Ceiling}(R_k) \ge P_i}} \text{Dur}(s_{j,k}) \quad (\text{máximo 1 bloqueo})$$
+    \item \textbf{Servidor Diferido (DS):}
+    $$U_p \le \ln \left( \frac{U_s + 2}{2U_s + 1} \right)$$
+\end{enumerate}
+\end{tcolorbox}

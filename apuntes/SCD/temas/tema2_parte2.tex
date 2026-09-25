@@ -1,0 +1,641 @@
+\chapter{Sincronización en Memoria Compartida (Parte II): Monitores y Patrones Clásicos}
+\label{cap:tema2_parte2}
+
+\cuadrofuentes{\textbf{Fuentes utilizadas:} Apuntes de Ismael Sallami y Temario de Infomates (LosDelDGIIM). Pendiente de incorporar transparencias originales del profesor.}
+
+% ==============================================================================
+\section{Monitores como Mecanismo de Alto Nivel}
+% ==============================================================================
+
+\subsection{Limitaciones de los Semáforos y Motivación}
+En la primera parte de este tema se estudiaron los semáforos como primitiva clásica de sincronización en memoria compartida. Aunque los semáforos representan un avance fundamental frente a los algoritmos de espera activa (como Dekker, Dijkstra o Peterson), presentan serios inconvenientes en el desarrollo de software concurrente a media y gran escala:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Falta de encapsulación y modularidad:} Los semáforos son variables globales que deben ser compartidas por todos los hilos del sistema. El estado de la sincronización y los datos compartidos residen separados, rompiendo los principios de la programación estructurada y orientada a objetos.
+    \item \textbf{Operaciones dispersas en el código:} Las operaciones de sincronización (\texttt{sem\_wait} y \texttt{sem\_post}) se encuentran dispersas por los cuerpos de las diferentes funciones de los hilos. No existe una localización centralizada de la política de sincronización.
+    \item \textbf{Vulnerabilidad ante errores de programación:} Olvidar una llamada a \texttt{signal}, intercambiar el orden de dos llamadas a \texttt{wait}, o invocar una operación en el lugar equivocado conduce de forma casi inmediata a situaciones de interbloqueo (\emph{deadlock}), violación de la exclusión mutua o inanición (\emph{starvation}). La depuración de estos fallos es extremadamente compleja debido a su naturaleza no determinista.
+\end{enumerate}
+
+\begin{aviso}[El Peligro del Código Disperso]
+Con semáforos, la corrección del programa depende de que \textbf{todos} los hilos colaboren de forma impecable. Si un solo hilo de un sistema de miles de líneas comete un error al manipular un semáforo compartido, el sistema entero colapsa.
+\end{aviso}
+
+Por estas razones, la comunidad de ciencias de la computación buscó un mecanismo estructurado que encapsulara los datos protegidos y sus operaciones de sincronización en un único módulo seguro.
+
+\subsection{Definición Formal de Monitor}
+El concepto de \textbf{Monitor} fue propuesto por C.A.R. Hoare en 1974 y consolidado experimentalmente por Per Brinch Hansen en el diseño del lenguaje Concurrent Pascal.
+
+\begin{definicion}[Monitor]
+Un \textbf{Monitor} es un Tipo de Dato Abstracto (TDA) concurrente que encapsula:
+\begin{itemize}[leftmargin=*]
+    \item Un conjunto de \textbf{variables privadas} que representan el estado interno del recurso compartido.
+    \item Un conjunto de \textbf{procedimientos públicos} (métodos) mediante los cuales los procesos concurrentes pueden interactuar con los datos.
+    \item Un \textbf{código de inicialización} que establece el estado de arranque de las variables antes de que cualquier proceso acceda al monitor.
+    \item Una política de \textbf{exclusión mutua implícita} garantizada por el compilador y el entorno de ejecución.
+\end{itemize}
+\end{definicion}
+
+\subsection{Exclusión Mutua Implícita y Reentrancia}
+La característica esencial que distingue a un monitor de una clase u objeto secuencial convencional es la \textbf{exclusión mutua implícita}:
+
+\begin{itemize}[leftmargin=*]
+    \item En cualquier instante de tiempo, \textbf{a lo sumo un proceso o hilo puede estar ejecutando activamente dentro de cualquiera de los procedimientos del monitor}.
+    \item Si un proceso invoca un procedimiento del monitor mientras otro proceso se encuentra ejecutando dentro de él, el proceso invocador queda automáticamente suspendido en una \textbf{cola de entrada al monitor} gestionada por el runtime.
+    \item Cuando el proceso activo abandona el procedimiento (o cede el control voluntariamente), el sistema operativo o runtime selecciona automáticamente a uno de los procesos de la cola de entrada para que tome posesión del monitor.
+\end{itemize}
+
+\begin{aviso}[Exclusión Mutua Automática]
+A diferencia de los semáforos o cerrojos explícitos (\emph{mutex}), el programador \textbf{no tiene que invocar explícitamente} operaciones de bloqueo al entrar ni de desbloqueo al salir. La exclusión mutua es una propiedad estructural garantizada por la arquitectura del monitor.
+\end{aviso}
+
+Para que esta propiedad funcione correctamente en entornos multiprocesador, los procedimientos del monitor deben ser \textbf{reentrantes}: el código ejecutable debe residir en memoria compartida de solo lectura y las variables locales de cada procedimiento deben residir en la pila privada (\emph{stack}) de cada hilo que lo invoca, mientras que las variables permanentes del monitor residen en memoria estática o en el montón (\emph{heap}) común.
+
+% ==============================================================================
+\section{Mecanismos de Sincronización Condicional: Variables Condición}
+% ==============================================================================
+
+\subsection{Por qué la Exclusión Mutua no es Suficiente}
+La exclusión mutua garantiza que dos procesos no interfieran destructivamente al leer o escribir variables compartidas. Sin embargo, en la mayoría de problemas de sincronización, un proceso necesita esperar a que el estado del sistema satisfaga una \textbf{condición lógica booleana} antes de poder proceder.
+
+\begin{ejemplo}[La Necesidad de Espera Condicional]
+Pensemos en un búfer compartido. Un consumidor que entra en el monitor en exclusión mutua puede encontrarse con que el búfer está vacío. No puede extraer nada. Si simplemente ejecuta un bucle activo comprobando si el búfer se llena:
+\[
+\text{while } (\text{tam} == 0) \{ \text{/* espera activa */} \}
+\]
+cometerá un error catastrófico: como él retiene la exclusión mutua del monitor, \textbf{ningún productor podrá entrar al monitor para insertar un dato}. El sistema queda irremediablemente interbloqueado.
+\end{ejemplo}
+
+Por tanto, el monitor necesita una facilidad que permita a un proceso activo \textbf{suspenderse temporalmente y liberar de forma atómica la exclusión mutua del monitor}, permitiendo que otros procesos entren, modifiquen el estado y eventualmente le avisen cuando la condición se cumpla.
+
+\subsection{El Tipo de Dato Abstracto \texttt{cond}}
+Para resolver esta necesidad, Hoare introdujo las \textbf{variables de condición} (representadas habitualmente como variables de tipo \texttt{cond} o \texttt{condition\_variable}).
+
+\begin{definicion}[Variable Condición]
+Una variable de condición es una cola abstracta de procesos bloqueados asociada a una condición lógica del monitor. Sobre una variable de condición $c$ se definen exclusivamente dos operaciones fundamentales:
+\begin{enumerate}[leftmargin=*]
+    \item \texttt{c.wait()}: El proceso invocador suspende su ejecución, cede de forma atómica la exclusión mutua del monitor y se coloca a la cola de espera de la variable $c$.
+    \item \texttt{c.signal()} (o \texttt{c.notify\_one()}): Si existen procesos esperando en la cola de $c$, despierta a uno de ellos. Si no hay ningún proceso esperando en $c$, la operación \textbf{no tiene ningún efecto y se descarta}.
+\end{enumerate}
+Adicionalmente, se define la operación \texttt{c.signal\_all()} (o \texttt{c.notify\_all()}), que despierta a todos los procesos actualmente bloqueados en la cola de $c$.
+\end{definicion}
+
+\subsection{Diferencias Críticas entre Variables Condición y Semáforos}
+Es uno de los errores conceptuales más frecuentes en exámenes confundir una variable condición con un semáforo binario o contador. La siguiente tabla clarifica las diferencias intrínsecas:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{5.4cm}>{\raggedright\arraybackslash}p{5.4cm}}
+\toprule
+\textbf{Característica} & \textbf{Semáforo} & \textbf{Variable Condición (\texttt{cond})} \\
+\midrule
+\textbf{Memoria / Contador} & \textbf{Sí tiene memoria.} Posee un contador entero ($S \ge 0$). Un \texttt{signal} incrementa el contador aunque no haya nadie esperando. & \textbf{No tiene memoria.} Si se ejecuta \texttt{c.signal()} y la cola de $c$ está vacía, la señal \textbf{se pierde para siempre}. \\
+\addlinespace
+\textbf{Efecto de Wait} & Puede no bloquear si el contador $S > 0$. & \textbf{Siempre bloquea} incondicionalmente al proceso que lo invoca. \\
+\addlinespace
+\textbf{Contexto de ejecución} & Se puede invocar desde cualquier parte del código global. & Solo tiene sentido y validez sintáctica \textbf{dentro de un procedimiento del monitor}. \\
+\addlinespace
+\textbf{Gestión de exclusión} & El programador debe coordinar manualmente la exclusión mutua. & \texttt{c.wait()} \textbf{libera automáticamente} la exclusión mutua del monitor y la readquiere al despertar. \\
+\bottomrule
+\end{tabular}
+\caption{Comparativa estricta entre Semáforos y Variables de Condición.}
+\label{tab:semaforos_vs_cond}
+\end{table}
+
+% ==============================================================================
+\section{Semánticas de Señalización: Hoare vs. Mesa / Hansen}
+% ==============================================================================
+
+\subsection{El Gran Dilema de la Señalización}
+Supongamos que un proceso $Q$ está bloqueado en una variable condición $c$ esperando que se cumpla la propiedad lógica $B$. En un instante dado, otro proceso $P$ entra al monitor, ejecuta código que hace verdadera la propiedad $B$, e invoca la instrucción:
+\[
+c.\text{signal}();
+\]
+En este instante surge un dilema fundamental:
+\begin{itemize}[leftmargin=*]
+    \item El proceso $Q$ acaba de ser despertado y está listo para continuar ejecutando dentro del monitor.
+    \item Pero el proceso $P$ también está dentro del monitor y aún tiene instrucciones pendientes tras el \texttt{signal}.
+    \item \textbf{Conflicto de exclusión mutua:} Dos procesos no pueden estar simultáneamente activos dentro del monitor. Uno de los dos debe ceder el paso.
+\end{itemize}
+
+La decisión de cuál de los dos procesos ejecuta inmediatamente y qué sucede con el otro da lugar a las diferentes \textbf{semánticas de señalización}.
+
+\subsection{Semántica de Hoare (Señalar y Espera Urgente - SU)}
+En la semántica original propuesta por Hoare (1974), también conocida como \textbf{Signal-and-Urgent-Wait (SU)}:
+
+\begin{enumerate}[leftmargin=*]
+    \item El proceso señalador $P$ \textbf{cede inmediatamente la posesión del monitor} al proceso recién despertado $Q$.
+    \item $P$ queda suspendido en una cola especial de alta prioridad denominada \textbf{Cola de Espera Urgente} (\emph{Urgent Queue}).
+    \item El proceso despertado $Q$ toma el control del monitor de manera instantánea, sin que ningún otro proceso pueda intercalarse entre el \texttt{signal} de $P$ y la reanudación de $Q$.
+    \item Cuando $Q$ sale del monitor (o hace un nuevo wait), los procesos de la cola urgente tienen prioridad absoluta sobre los procesos que esperan en la cola de entrada del monitor.
+\end{enumerate}
+
+\begin{aviso}[La Consecuencia Lógica de la Semántica de Hoare]
+Bajo la semántica de Hoare, cuando $Q$ despierta tras \texttt{c.wait()}, tiene la certeza matemática de que la condición $B$ que provocó su señalización \textbf{sigue siendo exactamente verdadera}. Por tanto, en semántica de Hoare es formalmente correcto utilizar una sentencia condicional simple:
+\begin{lstlisting}[language=C++]
+if (!condicion) {
+    c.wait();
+}
+// Al llegar aqui, la condicion es verdadera garantizada
+\end{lstlisting}
+\end{aviso}
+
+\subsection{Semántica de Mesa / Hansen (Señalar y Continuar - SC)}
+Desarrollada en el Centro de Investigación de Xerox PARC para el lenguaje Mesa (Lampson y Redell, 1980) y adoptada por Per Brinch Hansen:
+
+\begin{enumerate}[leftmargin=*]
+    \item El proceso señalador $P$ \textbf{continúa su ejecución dentro del monitor} hasta completar su procedimiento o realizar un \texttt{wait}.
+    \item El proceso despertado $Q$ no toma el monitor inmediatamente: simplemente pasa de la cola de la variable de condición a la cola de listos (o a la cola de entrada ordinaria del monitor).
+    \item Cuando $P$ finalmente abandona el monitor, $Q$ debe competir con los demás procesos de la cola de entrada para volver a adquirir la exclusión mutua.
+\end{enumerate}
+
+\subsection{Por Qué Cambia el \texttt{if} por \texttt{while} (La Regla de Oro)}
+La semántica Señalar y Continuar (SC) es la que implementan los lenguajes industriales modernos:
+\begin{itemize}[leftmargin=*]
+    \item C++11 (\texttt{std::condition\_variable})
+    \item Java (\texttt{synchronized}, \texttt{wait()}, \texttt{notify()})
+    \item POSIX Threads (\texttt{pthread\_cond\_wait}, \texttt{pthread\_cond\_signal})
+    \item C\# (\texttt{Monitor.Wait}, \texttt{Monitor.Pulse})
+\end{itemize}
+
+En esta semántica surge el fenómeno de \textbf{robo de condición} (\emph{condition stealing}) y los \textbf{despertares espurios} (\emph{spurious wakeups}):
+
+\begin{ejemplo}[Robo de la Condición en Semántica SC]
+Consideremos un búfer de tamaño 1 con un elemento disponible:
+\begin{enumerate}
+    \item Consumidor $C_1$ ve el búfer vacío y se bloquea en \texttt{puede\_leer.wait()}.
+    \item Productor $P$ inserta un elemento en el búfer y ejecuta \texttt{puede\_leer.signal()}. Con semántica SC, $P$ no se suspende; sigue ejecutando y sale del monitor. El consumidor $C_1$ es movido a la cola de entrada.
+    \item Justo antes de que el planificador de la CPU le conceda el turno a $C_1$, entra un segundo consumidor $C_2$ recién llegado desde la cola de entrada, comprueba que el búfer está lleno, extrae el dato y sale del monitor.
+    \item Ahora, el planificador le da el turno a $C_1$. Si $C_1$ hubiera utilizado un \texttt{if}:
+    \begin{lstlisting}[language=C++]
+    if (tam == 0) puede_leer.wait();
+    dato = buffer[0]; // ERROR: Buffer vacio! Segment violation o dato invalido
+    \end{lstlisting}
+    ¡$C_1$ intentaría extraer de un búfer que ya fue vaciado por $C_2$!
+\end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}[La Regla de Oro de la Sincronización en Monitores SC]
+En semántica Señalar y Continuar (SC), todo \texttt{wait()} debe estar obligatoriamente envuelto en un bucle \texttt{while}:
+\begin{lstlisting}[language=C++]
+while (!condicion) {
+    c.wait(lock);
+}
+// Al salir del bucle, se ha REEVALUADO y confirmado que la condicion es cierta
+\end{lstlisting}
+De este modo, cuando el proceso despierta, vuelve a evaluar la condición. Si otro proceso robó el recurso o si ocurrió un despertar espurio, vuelve a dormirse de forma segura.
+\end{definicion}
+
+\subsection{Comparativa de Semánticas de Señalización}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{3.8cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.4cm}}
+\toprule
+\textbf{Semántica} & \textbf{¿Quién ejecuta tras signal?} & \textbf{Destino del señalador} & \textbf{Estructura de comprobación} \\
+\midrule
+\textbf{SU (Hoare)} & Proceso señalado ($Q$) & Pasa a Cola de Espera Urgente & \texttt{if (!cond) wait();} \\
+\addlinespace
+\textbf{SC (Mesa/Hansen)} & Proceso señalador ($P$) & Continúa en el monitor & \texttt{while (!cond) wait();} \\
+\addlinespace
+\textbf{SS (Signal-Exit)} & Proceso señalado ($Q$) & El señalador debe salir inmediatamente (\texttt{signal} es la última instrucción) & \texttt{if (!cond) wait();} \\
+\addlinespace
+\textbf{SE (Signal-Wait)} & Proceso señalado ($Q$) & El señalador pasa a la cola de entrada general & \texttt{while (!cond) wait();} \\
+\bottomrule
+\end{tabular}
+\caption{Comparativa rigurosa de las cuatro semánticas clásicas de señalización.}
+\label{tab:semanticas_senales}
+\end{table}
+
+% ==============================================================================
+\section{Patrones Clásicos de Concurrencia con Monitores}
+% ==============================================================================
+
+A continuación se analizan, deducen formalmente y resuelven en C++11 los cinco problemas canónicos de la programación concurrente utilizando la arquitectura de monitores con semántica SC (Mesa/Hansen).
+
+% ------------------------------------------------------------------------------
+\subsection{Patrón 1: Productor-Consumidor con Búfer Acotado}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Planteamiento e Invariante de Estado}
+Uno o varios procesos productores generan datos y los almacenan en un búfer circular de capacidad fija $N$. Simultáneamente, uno o varios procesos consumidores extraen los datos en el mismo orden (política FIFO).
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Condición de parada del Productor:} No se puede escribir si el búfer está lleno ($\text{num\_items} == N$).
+    \item \textbf{Condición de parada del Consumidor:} No se puede leer si el búfer está vacío ($\text{num\_items} == 0$).
+    \item \textbf{Invariante de Seguridad:}
+    \[
+    \begin{aligned}
+    \mathcal{I}_{PC} \equiv \; & (0 \le \text{num\_items} \le N) \land (\text{primera\_ocupada} \in [0, N-1]) \\
+    & \land (\text{num\_items} = (\text{primera\_libre} - \text{primera\_ocupada}) \pmod N)
+    \end{aligned}
+    \]
+\end{itemize}
+
+\subsubsection{Implementación en C++11 con Monitor}
+\begin{lstlisting}[language=C++, caption={Monitor Productor-Consumidor con Búfer Acotado}]
+#include <iostream>
+#include <mutex>
+#include <condition_variable>
+#include <vector>
+
+template <typename T, size_t CAPACIDAD>
+class MonitorBufferFIFO {
+private:
+    T buffer[CAPACIDAD];
+    size_t primera_ocupada;
+    size_t primera_libre;
+    size_t num_items;
+
+    std::mutex cerrojo_monitor;
+    std::condition_variable puede_escribir;
+    std::condition_variable puede_leer;
+
+public:
+    MonitorBufferFIFO() : primera_ocupada(0), primera_libre(0), num_items(0) {}
+
+    void escribir(const T& valor) {
+        std::unique_lock<std::mutex> lock(cerrojo_monitor);
+
+        // Semantica SC: Obligatorio 'while' para verificar la condicion
+        while (num_items == CAPACIDAD) {
+            puede_escribir.wait(lock);
+        }
+
+        // Seccion critica: insertar en posicion circular
+        buffer[primera_libre] = valor;
+        primera_libre = (primera_libre + 1) % CAPACIDAD;
+        num_items++;
+
+        // Notificar al consumidor que ahora seguro hay al menos un elemento
+        puede_leer.notify_one();
+    }
+
+    T leer() {
+        std::unique_lock<std::mutex> lock(cerrojo_monitor);
+
+        while (num_items == 0) {
+            puede_leer.wait(lock);
+        }
+
+        T valor = buffer[primera_ocupada];
+        primera_ocupada = (primera_ocupada + 1) % CAPACIDAD;
+        num_items--;
+
+        // Notificar al productor que ahora seguro hay al menos un hueco libre
+        puede_escribir.notify_one();
+        return valor;
+    }
+};
+\end{lstlisting}
+
+\subsubsection{Análisis de Funcionamiento}
+La exclusión mutua está garantizada por el cerrojo RAII \texttt{std::unique\_lock}. Cuando el productor se bloquea en \texttt{puede\_escribir.wait(lock)}, libera atómicamente el cerrojo, permitiendo que un consumidor entre y ejecute \texttt{leer()}, el cual decrementa \texttt{num\_items} y avisa al productor con \texttt{puede\_escribir.notify\_one()}.
+
+% ------------------------------------------------------------------------------
+\subsection{Patrón 2: Lectores-Escritores}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Planteamiento del Problema}
+Varios procesos acceden a una estructura de datos compartida (archivo, base de datos). Existen dos tipos de procesos:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Lectores:} Pueden leer simultáneamente el recurso sin interferirse entre sí.
+    \item \textbf{Escritores:} Modifican el recurso. Requieren exclusión mutua absoluta: ningún lector ni ningún otro escritor puede acceder mientras un escritor está activo.
+\end{itemize}
+
+El invariante de seguridad fundamental para cualquier variante es:
+\[
+\mathcal{I}_{LE} \equiv (n_{\text{lectores}} \ge 0) \land (n_{\text{escritores}} \in \{0, 1\}) \land (n_{\text{escritores}} = 1 \implies n_{\text{lectores}} = 0)
+\]
+
+\subsubsection{Variante 1: Prioridad a los Lectores}
+Si un lector está leyendo y llega otro lector, este último entra directamente sin esperar, aunque haya escritores esperando. Los escritores solo entran si no hay ningún lector en la sala.
+
+\begin{aviso}[Inanición de Escritores]
+La prioridad a los lectores puede provocar \textbf{inanición total} (\emph{starvation}) de los escritores si el flujo de lectores es continuo.
+\end{aviso}
+
+\begin{lstlisting}[language=C++, caption={Monitor Lectores-Escritores con Prioridad a Lectores}]
+class MonitorLectoresEscritores_PrioridadLectores {
+private:
+    int n_lectores = 0;
+    bool escribiendo = false;
+    std::mutex cerrojo;
+    std::condition_variable puede_leer;
+    std::condition_variable puede_escribir;
+
+public:
+    void iniciar_lectura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        // Esperar mientras haya un escritor activo
+        while (escribiendo) {
+            puede_leer.wait(lock);
+        }
+        n_lectores++;
+        // Con prioridad lectores, despertamos en cadena a otros posibles lectores
+        puede_leer.notify_one();
+    }
+
+    void fin_lectura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        n_lectores--;
+        if (n_lectores == 0) {
+            // El ultimo lector en salir despierta a un escritor
+            puede_escribir.notify_one();
+        }
+    }
+
+    void iniciar_escritura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        // Esperar mientras haya lectores o alguien escribiendo
+        while (n_lectores > 0 || escribiendo) {
+            puede_escribir.wait(lock);
+        }
+        escribiendo = true;
+    }
+
+    void fin_escritura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        escribiendo = false;
+        // Prioridad lectores: intentar despertar lectores primero
+        // Si no hay lectores esperando, se despertara un escritor
+        puede_leer.notify_one();
+        puede_escribir.notify_one();
+    }
+};
+\end{lstlisting}
+
+\subsubsection{Variante 2: Prioridad a los Escritores}
+Para proteger a los escritores, si un escritor llega y desea acceder, se bloquea la entrada a los \textbf{nuevos lectores que vayan llegando}. Los lectores ya activos terminan su lectura, tras lo cual el escritor entra de inmediato.
+
+\begin{lstlisting}[language=C++, caption={Monitor Lectores-Escritores con Prioridad a Escritores}]
+class MonitorLectoresEscritores_PrioridadEscritores {
+private:
+    int n_lectores = 0;
+    bool escribiendo = false;
+    int escritores_esperando = 0;
+    std::mutex cerrojo;
+    std::condition_variable puede_leer;
+    std::condition_variable puede_escribir;
+
+public:
+    void iniciar_lectura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        // Bloquear si hay un escritor activo O si hay escritores esperando
+        while (escribiendo || escritores_esperando > 0) {
+            puede_leer.wait(lock);
+        }
+        n_lectores++;
+    }
+
+    void fin_lectura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        n_lectores--;
+        if (n_lectores == 0) {
+            puede_escribir.notify_one();
+        }
+    }
+
+    void iniciar_escritura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        escritores_esperando++;
+        while (n_lectores > 0 || escribiendo) {
+            puede_escribir.wait(lock);
+        }
+        escritores_esperando--;
+        escribiendo = true;
+    }
+
+    void fin_escritura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        escribiendo = false;
+        if (escritores_esperando > 0) {
+            puede_escribir.notify_one(); // Siguiente escritor prioritario
+        } else {
+            puede_leer.notify_all();     // No hay escritores: pasar a todos los lectores
+        }
+    }
+};
+\end{lstlisting}
+
+\subsubsection{Variante 3: Solución Equitativa (Sin Inanición)}
+En la variante equitativa se utiliza un esquema de turnos o FIFO donde las peticiones se atienden en orden estricto de llegada, impidiendo que grupos continuos de lectores o escritores monopolicen el recurso.
+
+% ------------------------------------------------------------------------------
+\subsection{Patrón 3: La Cena de los Filósofos}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Planteamiento e Interbloqueo}
+Cinco filósofos se sientan alrededor de una mesa redonda alternando entre dos actividades: pensar y comer espaguetis. Entre cada par de filósofos adyacentes hay un único tenedor (en total 5 tenedores). Para comer, cada filósofo necesita tomar simultáneamente los dos tenedores adyacentes: el izquierdo ($i$) y el derecho ($(i+1) \pmod 5$).
+
+\begin{aviso}[Condición de Interbloqueo Canónico]
+Si los cinco filósofos tienen hambre al mismo tiempo y cada uno toma simultáneamente su tenedor izquierdo, todos quedan reteniendo un recurso y esperando indefinidamente por el tenedor derecho que retiene su vecino. Se produce una espera circular: \textbf{Interbloqueo total (Deadlock)}.
+\end{aviso}
+
+\subsubsection{Estrategias de Solución}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Estrategia Asimétrica (Sin Camarero):} Romper la simetría circular haciendo que los filósofos pares tomen primero el tenedor izquierdo y luego el derecho, mientras que los filósofos impares tomen primero el derecho y luego el izquierdo.
+    \item \textbf{Estrategia con Camarero (Limitación de Aforo):} Un árbitro o camarero monitoriza la mesa y solo permite que se sienten simultáneamente a la mesa a lo sumo $N-1$ filósofos (en este caso 4). Por el Principio del Palomar, si hay 4 filósofos y 5 tenedores, al menos uno de ellos podrá tomar ambos tenedores y comer, rompiendo la espera circular.
+    \item \textbf{Estrategia de Asignación Atómica en Monitor:} El filósofo solicita ambos tenedores a la vez dentro de un monitor. Si los dos no están disponibles, no toma ninguno y espera en una variable condición propia.
+\end{enumerate}
+
+\subsubsection{Implementación del Monitor con Asignación Atómica}
+\begin{lstlisting}[language=C++, caption={Monitor de la Cena de los Filósofos}]
+class MonitorFilosofos {
+private:
+    static const int N = 5;
+    enum Estado { PENSANDO, HAMBRIENTO, COMIENDO };
+    Estado estado[N];
+    std::condition_variable puede_comer[N];
+    std::mutex cerrojo;
+
+    int izq(int i) { return (i + N - 1) % N; }
+    int der(int i) { return (i + 1) % N; }
+
+    void comprobar(int i) {
+        // Solo puede comer si esta hambriento y ningun vecino esta comiendo
+        if (estado[i] == HAMBRIENTO && 
+            estado[izq(i)] != COMIENDO && 
+            estado[der(i)] != COMIENDO) 
+        {
+            estado[i] = COMIENDO;
+            puede_comer[i].notify_one();
+        }
+    }
+
+public:
+    MonitorFilosofos() {
+        for (int i = 0; i < N; i++) estado[i] = PENSANDO;
+    }
+
+    void coger_tenedores(int i) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        estado[i] = HAMBRIENTO;
+        comprobar(i);
+        while (estado[i] != COMIENDO) {
+            puede_comer[i].wait(lock);
+        }
+    }
+
+    void dejar_tenedores(int i) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        estado[i] = PENSANDO;
+        // Al terminar, comprueba si sus dos vecinos ahora pueden comer
+        comprobar(izq(i));
+        comprobar(der(i));
+    }
+};
+\end{lstlisting}
+
+% ------------------------------------------------------------------------------
+\subsection{Patrón 4: El Estanco y los Fumadores}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Planteamiento del Problema (Patil-Dijkstra)}
+En un estanco hay un estanquero y tres fumadores. Para liar un cigarrillo se necesitan tres ingredientes:
+\begin{itemize}[leftmargin=*]
+    \item Ingrediente 0: \textbf{Tabaco}
+    \item Ingrediente 1: \textbf{Papel}
+    \item Ingrediente 2: \textbf{Cerillas}
+\end{itemize}
+Cada fumador posee infinitos suministros de uno de los ingredientes: el fumador 0 posee tabaco, el 1 posee papel y el 2 posee cerillas.
+El estanquero coloca en el mostrador \textbf{dos ingredientes distintos} de forma aleatoria. El fumador que posee el ingrediente faltante debe recoger los dos suministros del mostrador, liar su cigarrillo, fumar y avisar al estanquero para que vuelva a colocar ingredientes.
+
+\subsubsection{Implementación del Monitor Estanco}
+\begin{lstlisting}[language=C++, caption={Monitor para el Problema de los Fumadores del Estanco}]
+class MonitorEstanco {
+private:
+    int mostrador; // -1: vacio, 0: falta tabaco (hay papel y cerillas),
+                   // 1: falta papel, 2: falta cerillas
+    std::mutex cerrojo;
+    std::condition_variable puede_poner;
+    std::condition_variable fumador_puede_fumar[3];
+
+public:
+    MonitorEstanco() : mostrador(-1) {}
+
+    // Invocado por el fumador 'i' (0 <= i < 3)
+    void obtenerIngrediente(int i) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        // El fumador 'i' solo puede actuar si en el mostrador falta su ingrediente
+        while (mostrador != i) {
+            fumador_puede_fumar[i].wait(lock);
+        }
+        // Retira los ingredientes del mostrador
+        mostrador = -1;
+        // Notifica al estanquero de que el mostrador esta libre
+        puede_poner.notify_one();
+    }
+
+    // Invocado por el estanquero generando el ingrediente faltante 'i'
+    void ponerIngrediente(int i) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        while (mostrador != -1) {
+            puede_poner.wait(lock);
+        }
+        mostrador = i;
+        // Despierta exclusivamente al fumador que necesita los ingredientes puestos
+        fumador_puede_fumar[i].notify_one();
+    }
+};
+\end{lstlisting}
+
+% ------------------------------------------------------------------------------
+\subsection{Patrón 5: El Barbero Durmiente}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Planteamiento del Problema}
+Una barbería consta de una sala con una silla de barbero y una sala de espera con $N$ sillas.
+\begin{itemize}[leftmargin=*]
+    \item Si no hay clientes en la barbería, el barbero se sienta en su silla y se duerme.
+    \item Cuando llega un cliente:
+    \begin{itemize}
+        \item Si el barbero duerme, el cliente lo despierta y se sienta en la silla de pelar.
+        \item Si el barbero está pelando a otro y hay sillas libres en la sala de espera, el cliente se sienta a esperar su turno.
+        \item Si todas las $N$ sillas están ocupadas, el cliente se marcha inmediatamente sin esperar (\emph{balking}).
+    \end{itemize}
+    \item Cuando el barbero termina un corte, despide al cliente, cobra, y si hay clientes en la sala de espera, llama al siguiente; si no hay nadie, vuelve a dormirse.
+\end{itemize}
+
+\subsubsection{Implementación del Monitor de la Barbería}
+\begin{lstlisting}[language=C++, caption={Monitor del Barbero Durmiente}]
+class MonitorBarberia {
+private:
+    const int max_sillas_espera;
+    int clientes_esperando;
+    bool barbero_dormido;
+    bool silla_barbero_ocupada;
+    bool corte_terminado;
+
+    std::mutex cerrojo;
+    std::condition_variable cola_espera;
+    std::condition_variable despertar_barbero;
+    std::condition_variable silla_pelar;
+    std::condition_variable cliente_espera_fin_corte;
+
+public:
+    MonitorBarberia(int n_sillas) : 
+        max_sillas_espera(n_sillas), clientes_esperando(0), 
+        barbero_dormido(true), silla_barbero_ocupada(false), corte_terminado(false) {}
+
+    bool cortarPelo(int id_cliente) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+
+        if (clientes_esperando == max_sillas_espera && silla_barbero_ocupada) {
+            // No hay sitio: se marcha
+            return false;
+        }
+
+        clientes_esperando++;
+
+        // Si el barbero duerme, lo despertamos
+        if (barbero_dormido) {
+            barbero_dormido = false;
+            despertar_barbero.notify_one();
+        }
+
+        // Esperar a que la silla de pelar quede libre
+        while (silla_barbero_ocupada) {
+            cola_espera.wait(lock);
+        }
+
+        clientes_esperando--;
+        silla_barbero_ocupada = true;
+        corte_terminado = false;
+
+        // Esperar a que el barbero termine de cortar el pelo
+        while (!corte_terminado) {
+            cliente_espera_fin_corte.wait(lock);
+        }
+
+        silla_barbero_ocupada = false;
+        // Avisar al siguiente cliente en espera
+        cola_espera.notify_one();
+        return true;
+    }
+
+    void siguienteCliente() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+
+        // Si no hay nadie esperando ni en la silla, dormir
+        while (clientes_esperando == 0 && !silla_barbero_ocupada) {
+            barbero_dormido = true;
+            despertar_barbero.wait(lock);
+        }
+    }
+
+    void finCliente() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        corte_terminado = true;
+        cliente_espera_fin_corte.notify_one();
+    }
+};
+\end{lstlisting}
+
+\begin{aviso}[Sincronización Bilateral en el Barbero Durmiente]
+Nótese que en este patrón coexisten dos fases de sincronización distintas:
+\begin{enumerate}
+    \item La sincronización de entrada (despertar al barbero y ocupar la silla de corte).
+    \item La sincronización de terminación (el cliente no puede marcharse hasta que el barbero complete el corte, y el barbero no puede llamar al siguiente hasta que el actual abandone la silla).
+\end{enumerate}
+\end{aviso}
