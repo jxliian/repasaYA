@@ -1,0 +1,1539 @@
+[
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué significa «irrepetibilidad de las secuencias de instrucciones» en la programación concurrente?",
+    "opts": [
+      "Los programas concurrentes nunca tienen errores.",
+      "La velocidad de ejecución determina la secuencia de instrucciones.",
+      "Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos.",
+      "Los procesos siguen siempre la misma secuencia de ejecución.",
+      "Dos ejecuciones seguirán probablemente el mismo camino."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué reto presentan las trazas de ejecución de los programas concurrentes?",
+    "opts": [
+      "Siempre conducen a un punto muerto.",
+      "Las trazas garantizan que se producirán errores.",
+      "Generan numerosas secuencias de intercalación posibles, lo que complica la predicción.",
+      "Las trazas no pueden utilizarse con fines de depuración.",
+      "Siguen un patrón predecible y repetible."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué son los «errores transitorios» en el contexto de los programas concurrentes?",
+    "opts": [
+      "Errores que son fáciles de detectar y solucionar.",
+      "Errores que se producen aleatoriamente y no tienen solución.",
+      "Errores que nunca se producen en los programas concurrentes.",
+      "Errores que aparecen siempre en la misma ejecución.",
+      "Errores que aparecen en algunas ejecuciones pero no en otras, lo que dificulta su detección."
+    ],
+    "correct": 4
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Por qué es difícil depurar programas concurrentes?",
+    "opts": [
+      "Debido a la previsibilidad de las secuencias de ejecución.",
+      "Porque los errores transitorios aparecen en cada traza.",
+      "La depuración de programas concurrentes no difiere de la de los secuenciales.",
+      "Debido a la imprevisibilidad de las secuencias de ejecución y a la posibilidad de que haya trazas diferentes en cada ejecución.",
+      "Porque los programas concurrentes siempre se ejecutan sin errores."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Cuál de las siguientes es una solución para garantizar la corrección de los programas concurrentes?",
+    "opts": [
+      "Confiar sólo en la comprobación manual de errores.",
+      "Utilizar métodos formales basados en la lógica matemática para verificar la corrección.",
+      "Ignorar los errores transitorios porque ocurren raramente.",
+      "Se puede garantizar la corrección sin ningún método formal.",
+      "Utilizar la fuerza bruta para reejecutar el programa varias veces."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué es una traza en el contexto de la programación concurrente?",
+    "opts": [
+      "Una secuencia de estados del programa producidos por un intercalado específico de instrucciones.",
+      "El historial de cómo se modifican las variables durante la compilación.",
+      "Un registro de todos los errores en la ejecución de un programa.",
+      "La ejecución de un único proceso de forma aislada.",
+      "Una secuencia de operaciones atómicas de un único proceso."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Por qué es peligroso hacer suposiciones sobre la velocidad de ejecución de los procesos en los programas concurrentes?",
+    "opts": [
+      "Siempre conduce a un mejor rendimiento en todas las plataformas.",
+      "Los procesos más rápidos siempre garantizan mejores resultados del programa.",
+      "Las suposiciones de velocidad siempre aumentan la eficacia del programa.",
+      "Los procesos pueden no funcionar correctamente en diferentes plataformas si se hacen suposiciones sobre la velocidad de ejecución.",
+      "La velocidad de ejecución es irrelevante para la programación concurrente."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué es una «condición de carrera» en los programas concurrentes?",
+    "opts": [
+      "Una situación en la que dos procesos nunca interactúan con recursos compartidos.",
+      "Una situación en la que el orden de ejecución de los procesos no afecta a la salida final del programa.",
+      "Un escenario en el que la velocidad de ejecución es siempre constante.",
+      "Cuando dos procesos se ejecutan siempre en un orden fijo y predecible.",
+      "Cuando dos procesos acceden a variables compartidas en un orden impredecible en función de la velocidad de ejecución."
+    ],
+    "correct": 4
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué efecto pueden tener las condiciones de carrera en los programas concurrentes?",
+    "opts": [
+      "Reducen el riesgo de errores en el programa.",
+      "Producen resultados impredecibles o incorrectos según el orden de ejecución de los procesos.",
+      "Producen resultados predecibles y correctos.",
+      "Facilitan la depuración debido a su comportamiento coherente.",
+      "Garantizan que todos los procesos se ejecuten de forma predecible."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿En qué tipo de sistema es crítica la velocidad y el orden de ejecución de los procesos?",
+    "opts": [
+      "En cualquier sistema con procesos concurrentes.",
+      "En los sistemas en tiempo real, donde la velocidad y el orden de ejecución son críticos.",
+      "Sistemas operativos de propósito general.",
+      "Sólo sistemas distribuidos.",
+      "Sólo en sistemas \"multicore\"."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué implica la «independencia de la velocidad del proceso» en la programación concurrente?",
+    "opts": [
+      "Los procesos más lentos garantizan una mayor estabilidad del programa.",
+      "La velocidad de ejecución siempre determina la corrección del programa.",
+      "La corrección del proceso debe depender de la velocidad relativa de los procesos.",
+      "La corrección del proceso debe ser independiente de la velocidad de ejecución, evitando las condiciones de carrera.",
+      "Los procesos deben ejecutarse siempre lo más rápido posible."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué importancia tiene la «hipótesis de progreso finito» en los programas concurrentes?",
+    "opts": [
+      "Sólo es aplicable a los programas secuenciales.",
+      "Garantiza que los procesos se completen siempre a la misma velocidad.",
+      "Garantiza que todos los procesos completen la ejecución y progresen, evitando el bloqueo.",
+      "Permite que algunos procesos no terminen nunca sus tareas.",
+      "Permite que los procesos se detengan indefinidamente sin afectar a la corrección del programa."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué es el «progreso global» en el contexto de la ejecución concurrente?",
+    "opts": [
+      "Requiere que todos los procesos se ejecuten al mismo tiempo.",
+      "Garantiza que todos los procesos terminen la ejecución inmediatamente.",
+      "Es específico sólo de los sistemas en tiempo real.",
+      "Garantiza que al menos un proceso listo para ejecutarse llegue a ejecutarse, evitando el bloqueo.",
+      "Garantiza que ningún proceso pueda bloquear la ejecución de otro."
+    ],
+    "correct": 3
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué significa «progreso local» en la programación concurrente?",
+    "opts": [
+      "Un proceso puede detenerse a mitad de ejecución y reanudarse más tarde sin completar la sección actual.",
+      "Un proceso debe completar siempre todo el programa sin pausa.",
+      "Los procesos deben comunicarse con otros procesos para continuar la ejecución.",
+      "Una vez que un proceso comienza a ejecutarse, debe terminar todo el programa.",
+      "Una vez que un proceso empieza a ejecutar una sección de código, debe completarla sin interrupción."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Cómo evita la hipótesis del progreso finito el bloqueo en los programas concurrentes?",
+    "opts": [
+      "Poniendo en pausa algunos procesos para permitir que otros terminen primero.",
+      "Imponiendo límites temporales estrictos a la ejecución de los procesos.",
+      "Limitando el número de procesos que pueden ejecutarse simultáneamente.",
+      "Garantizando que los procesos puedan detenerse en cualquier momento.",
+      "Garantizando que todos los procesos acaben progresando, evitando que se atasquen."
+    ],
+    "correct": 4
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Cuál es la definición de «propiedad de vivacidad»?",
+    "opts": [
+      "Una condición que sólo se aplica a los programas secuenciales.",
+      "Una condición que establece que algo bueno debe suceder eventualmente en el futuro.",
+      "Una condición que debe cumplirse en cada instante de la ejecución del programa.",
+      "Una propiedad que define cuántos procesos pueden ejecutarse simultáneamente.",
+      "Una propiedad que garantiza que los procesos pueden pausarse indefinidamente."
+    ],
+    "correct": 1
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Qué significa el triple {P}C {Q} en el contexto de la lógica de Hoare?",
+    "opts": [
+      "Si el programa C comienza en un estado en el que P es verdadero, entonces Q será verdadero después de que C termine de ejecutarse.",
+      "Garantiza que en la ejecución de varios procesos contenidos C no existen interferencias.",
+      "P y Q son variables que representan el tiempo de ejecución de C.",
+      "Si el programa C se ejecuta, siempre terminará.",
+      "Si el programa C se ejecuta con la máxima velocidad, P siempre será igual a Q."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Cuál es el principal reto de aplicar la lógica de Hoare a los programas concurrentes?",
+    "opts": [
+      "Es difícil definir precondiciones y postcondiciones para cada proceso.",
+      "No puede manejar programas sin memoria compartida.",
+      "La interferencia entre procesos de ejecución concurrente complica el razonamiento.",
+      "La lógica de Hoare requiere un número infinito de trazas de ejecución para verificar la corrección.",
+      "La lógica de Hoare sólo es aplicable a los programas secuenciales, no a los concurrentes."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "¿Cuál es la principal característica de la regla de no interferencia de la lógica de Hoare para programas concurrentes?",
+    "opts": [
+      "Sólo se aplica a los programas secuenciales, no a los concurrentes.",
+      "Garantiza que cada proceso termina de ejecutarse antes de que comience el siguiente.",
+      "Garantiza que dos procesos no interfieran entre sí en sus precondiciones y postcondiciones cuando se ejecutan simultáneamente.",
+      "Garantiza que todos los procesos accedan a los recursos compartidos al mismo tiempo.",
+      "Permite que los procesos se ejecuten sin sincronización y sigue garantizando la corrección."
+    ],
+    "correct": 2
+  },
+  {
+    "tema": "T1: Conceptos Básicos y Concurrencia",
+    "q": "En la lógica de Hoare, ¿qué se necesita para verificar la corrección de una composición concurrente de procesos?",
+    "opts": [
+      "Las precondiciones y postcondiciones de los procesos deben combinarse, y ningún proceso debe invalidar las afirmaciones de los demás.",
+      "El sistema debe probarse con todas las configuraciones de hardware posibles para garantizar su corrección.",
+      "La composición sólo debe implicar a un único proceso a la vez.",
+      "Los procesos deben ejecutarse secuencialmente, sin solapar instrucciones.",
+      "Cada proceso debe tener su propio espacio de memoria independiente."
+    ],
+    "correct": 0
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál es la principal limitación de los semáforos en sistemas concurrentes?",
+    "opts": [
+      "Solo funcionan con variables estáticas.",
+      "Dependen de variables locales.",
+      "Requieren mucho espacio de memoria.",
+      "Son difíciles de implementar en hardware.",
+      "No permiten encapsulación de la sincronización."
+    ],
+    "correct": 4,
+    "justification": "Los semáforos no permiten encapsulación de la sincronización, lo que puede llevar a errores difíciles de detectar."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué es un monitor en programación concurrente?",
+    "opts": [
+      "Un dispositivo de entrada de datos.",
+      "Un controlador de semáforos.",
+      "Un mecanismo de programación que permite sincronización de procesos.",
+      "Un programa antivirus.",
+      "Una interfaz gráfica de usuario."
+    ],
+    "correct": 2,
+    "justification": "Un monitor es un mecanismo de programación que permite la sincronización de procesos en sistemas concurrentes."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Quién introdujo el concepto de monitor y en qué año?",
+    "opts": [
+      "C.A.R. Hoare, en 1974.",
+      "Donald Knuth, en 1975.",
+      "Edsger Dijkstra, en 1972.",
+      "John von Neumann, en 1965.",
+      "Alan Turing, en 1970."
+    ],
+    "correct": 0,
+    "justification": "C.A.R. Hoare introdujo el concepto de monitor en 1974."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué es una variable permanente en un monitor?",
+    "opts": [
+      "Una variable que cambia continuamente.",
+      "Una variable local a cada procedimiento del monitor.",
+      "Una variable de solo lectura.",
+      "Una variable utilizada solo para imprimir.",
+      "La variable que guarda el estado interno del monitor."
+    ],
+    "correct": 4,
+    "justification": "Una variable permanente en un monitor guarda el estado interno del monitor."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué garantiza la exclusión mutua en los monitores?",
+    "opts": [
+      "Las interrupciones de hardware.",
+      "Los procedimientos dentro del monitor.",
+      "Los semáforos externos que se usan para implementar los monitores.",
+      "El sistema operativo.",
+      "Las condiciones de sincronización."
+    ],
+    "correct": 1,
+    "justification": "Los procedimientos dentro del monitor garantizan la exclusión mutua."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál de los siguientes NO es un componente de los monitores?",
+    "opts": [
+      "Variables permanentes.",
+      "Variables temporales.",
+      "Condiciones de sincronización.",
+      "Procedimientos.",
+      "Código de inicialización."
+    ],
+    "correct": 1,
+    "justification": "Las variables temporales no son un componente de los monitores."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué función cumple la operación c.wait() en un monitor?",
+    "opts": [
+      "Bloquear al proceso que llama al procedimiento que la ejecuta hasta que se cumpla una condición.",
+      "Liberar todos los procesos en la cola.",
+      "Permitir la sincronización sin bloquear.",
+      "Bloquear el monitor hasta que se libere.",
+      "Incrementar el valor de una variable."
+    ],
+    "correct": 0,
+    "justification": "La operación c.wait() bloquea al proceso que llama al procedimiento hasta que se cumpla una condición."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué sucede cuando se ejecuta c.signal() y la cola está vacía?",
+    "opts": [
+      "Se libera un recurso de memoria.",
+      "La operación se descarta sin efecto.",
+      "Se bloquea el monitor.",
+      "Se activa el primer proceso de la cola.",
+      "Cambia el valor de la variable de condición."
+    ],
+    "correct": 1,
+    "justification": "Si la cola está vacía, la operación c.signal() se descarta sin efecto."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué asegura el \"invariante del monitor\" en un sistema concurrente?",
+    "opts": [
+      "Que el monitor mantenga una propiedad específica siempre que no esté en uso.",
+      "La reusabilidad de las variables.",
+      "La verificación de sincronización.",
+      "La exclusión mutua de procesos.",
+      "El acceso constante a las variables."
+    ],
+    "correct": 0,
+    "justification": "El invariante del monitor asegura que el monitor mantenga una propiedad específica siempre que no esté en uso."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál de las siguientes es una característica de la \"señal automática\" (SA)?",
+    "opts": [
+      "Se ejecuta una señal implícita sin desplazamiento.",
+      "Los procesos señaladores esperan en la cola.",
+      "El monitor entra en espera forzada.",
+      "Se reinicia el monitor automáticamente.",
+      "El proceso señalador continúa su ejecución tras signal."
+    ],
+    "correct": 0,
+    "justification": "Sin desplazamiento."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué significa la semántica de \"Señalar y Continuar\" (SC)?",
+    "opts": [
+      "Todos los procesos en la cola se desbloquean.",
+      "El proceso señalador continúa su ejecución después de signal.",
+      "La operación signal se omite.",
+      "El proceso señalador espera en la cola.",
+      "El monitor se reinicia."
+    ],
+    "correct": 1,
+    "justification": "En la semántica de Señalar y Continuar (SC), el proceso señalador continúa su ejecución después de signal."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué significa la semántica de \"Señalar y Esperar\" (SE)?",
+    "opts": [
+      "No se permite el acceso a la exclusión mutua del monitor.",
+      "El proceso señalado abandona el monitor.",
+      "El proceso señalador se bloquea después de signal.",
+      "Los procesos en cola no se despiertan.",
+      "El proceso señalador sigue ejecutando código del monitor."
+    ],
+    "correct": 2,
+    "justification": "En la semántica de Señalar y Esperar (SE), el proceso señalador se bloquea después de signal."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Para qué tipo de problemas es útil el patrón de Exclusión Mutua (EM)?",
+    "opts": [
+      "Para asignación de memoria dinámica.",
+      "Para acceso exclusivo a una sección crítica.",
+      "Para sincronización de semáforos.",
+      "Para desbloquear colas de procesos.",
+      "Para almacenamiento de variables compartidas."
+    ],
+    "correct": 1,
+    "justification": "El patrón de Exclusión Mutua (EM) es útil para acceso exclusivo a una sección crítica."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál es el invariante del monitor de exclusión mutua?",
+    "opts": [
+      "num_sc >= 2.",
+      "libre + num_sc == 2.",
+      "ocupada == false.",
+      "num_sc > 1.",
+      "ocupada == true cuando hay un proceso en SC."
+    ],
+    "correct": 4,
+    "justification": "El invariante del monitor de exclusión mutua es que ocupada == true cuando hay un proceso en SC."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué define la operación escribir en un monitor Productor-Consumidor?",
+    "opts": [
+      "Borra el valor compartido.",
+      "Inicia una señal de bloqueo.",
+      "Desbloquea el monitor.",
+      "Escribe el valor en una variable compartida.",
+      "Lee el valor de la variable compartida."
+    ],
+    "correct": 3,
+    "justification": "La operación escribir en un monitor Productor-Consumidor escribe el valor en una variable compartida."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué hace la operación leer() en el monitor de Productor-Consumidor?",
+    "opts": [
+      "Limpia la cola de procesos.",
+      "Elimina el valor de la variable.",
+      "Activa al proceso productor.",
+      "Lee el valor compartido y lo devuelve.",
+      "Bloquea al proceso productor."
+    ],
+    "correct": 3,
+    "justification": "La operación leer() en el monitor de Productor-Consumidor lee el valor compartido y lo devuelve."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál es el propósito de la variable pendiente en el monitor Productor-Consumidor?",
+    "opts": [
+      "Indicar que el valor ha sido leído y no escrito.",
+      "Indicar si hay procesos señaladores.",
+      "Guardar el número de procesos en cola.",
+      "Mostrar si el monitor está activo.",
+      "Controlar el estado de las operaciones de lectura y escritura."
+    ],
+    "correct": 4,
+    "justification": "La variable pendiente en el monitor Productor-Consumidor controla el estado de las operaciones de lectura y escritura."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué es una cola de prioridad en monitores?",
+    "opts": [
+      "Una lista de operaciones de señal.",
+      "Un grupo de semáforos.",
+      "Un tipo de variable temporal.",
+      "Una cola que permite ordenar procesos según prioridad.",
+      "Una cola para ejecutar en último lugar."
+    ],
+    "correct": 3,
+    "justification": "Una cola de prioridad en monitores permite ordenar procesos según prioridad."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué es el Patrón de Espera Única (EU) en programación concurrente?",
+    "opts": [
+      "Un proceso bloquea a otro.",
+      "Un proceso finaliza antes de que inicie otro.",
+      "Un proceso espera indefinidamente en una cola.",
+      "Un proceso espera que otro finalice antes de iniciar una acción.",
+      "Un proceso se elimina automáticamente."
+    ],
+    "correct": 3,
+    "justification": "El Patrón de Espera Única (EU) es cuando un proceso espera que otro finalice antes de iniciar una acción."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál de las siguientes NO es una operación de sincronización en monitores?",
+    "opts": [
+      "signal_all().",
+      "wait().",
+      "signal().",
+      "queue().",
+      "init()."
+    ],
+    "correct": 4
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué sucede en la semántica de Señalar y Salir (SS)?",
+    "opts": [
+      "El proceso señalador sale del monitor después de signal.",
+      "El proceso señalado queda en espera.",
+      "El proceso señalador continúa ejecutando.",
+      "Todos los procesos son liberados.",
+      "Se detiene la ejecución del monitor."
+    ],
+    "correct": 0,
+    "justification": "En la semántica de Señalar y Salir (SS), el proceso señalador sale del monitor después de signal."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál es el propósito de c.signal_all() en un monitor?",
+    "opts": [
+      "Liberar todos los procesos en la cola de condición.",
+      "Reiniciar el monitor.",
+      "Bloquear todos los procesos.",
+      "Cambiar el valor de las variables permanentes.",
+      "Liberar sólo el primer proceso en cola."
+    ],
+    "correct": 0,
+    "justification": "El propósito de c.signal_all() en un monitor es liberar todos los procesos en la cola de condición."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué es un Monitor de Barrera Parcial?",
+    "opts": [
+      "Un monitor que bloquea procesos hasta que un grupo alcanza un estado.",
+      "Un monitor que reduce el tiempo de espera.",
+      "Un monitor que libera procesos en intervalos.",
+      "Un monitor que libera a todos los procesos al mismo tiempo.",
+      "Un monitor que detiene todos los procesos."
+    ],
+    "correct": 0,
+    "justification": "Un Monitor de Barrera Parcial bloquea procesos hasta que un grupo alcanza un estado."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Cuál es la semántica ideal para el monitor de barrera parcial?",
+    "opts": [
+      "SU.",
+      "SA.",
+      "SE.",
+      "SS.",
+      "SC."
+    ],
+    "correct": 0,
+    "justification": "La semántica ideal para el monitor de barrera parcial es SU."
+  },
+  {
+    "tema": "T2: Monitores",
+    "q": "¿Qué sucede con un proceso en cola cuando se usa signal en una semántica SC?",
+    "opts": [
+      "Se ejecuta automáticamente.",
+      "Permanece bloqueado indefinidamente.",
+      "Se despierta y sale inmediatamente.",
+      "Ignora la operación signal.",
+      "Se mueve a la cola de entrada del monitor."
+    ],
+    "correct": 4
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué garantiza el algoritmo de Dijkstra para N procesos?",
+    "opts": [
+      "Acceso simultáneo a la sección crítica",
+      "Eliminación de la necesidad de turnos",
+      "Exclusión mutua con tiempo de espera limitado",
+      "Uso de variables globales compartidas",
+      "Exclusión mutua sin control de inanición"
+    ],
+    "correct": 4,
+    "justification": "Exclusión mutua sin control de inanición."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué propiedad NO es garantizada por el algoritmo de Dijkstra?",
+    "opts": [
+      "Uso equitativo de los recursos",
+      "Alcanzabilidad de la sección crítica",
+      "Exclusión mutua",
+      "Ausencia de inanición",
+      "Seguridad en el acceso a recursos compartidos"
+    ],
+    "correct": 3,
+    "justification": "El algoritmo de Dijkstra no garantiza la ausencia de inanición."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué representa el turno en un algoritmo de exclusión mutua?",
+    "opts": [
+      "La señal para finalizar el programa",
+      "La prioridad fija de un proceso",
+      "El permiso para acceder a la sección crítica",
+      "La posición en la cola de espera",
+      "La cantidad de procesos activos en el sistema"
+    ],
+    "correct": 2,
+    "justification": "El permiso para acceder a la sección crítica."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué asegura el algoritmo de Peterson al pasar entre etapas?",
+    "opts": [
+      "La etapa más alta siempre está vacía",
+      "Los procesos se bloquean indefinidamente",
+      "El acceso a la sección crítica se distribuye aleatoriamente",
+      "Los procesos siempre progresan de forma equitativa",
+      "Un proceso no avanza sólo si no está más adelantado que los demás y es el último en asignar el turno"
+    ],
+    "correct": 4,
+    "justification": "El algoritmo de Peterson asegura que un proceso no avanza solo si no está más adelantado que los demás y es el último en asignar el turno."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué asegura el uso de etapas en el algoritmo de Peterson?",
+    "opts": [
+      "Interrupción de procesos de bajo nivel",
+      "Eliminación de etapas redundantes",
+      "Mayor velocidad de procesamiento",
+      "Eliminación del uso de tokens",
+      "Exclusión mutua y equidad"
+    ],
+    "correct": 4,
+    "justification": "El uso de etapas en el algoritmo de Peterson asegura la exclusión mutua y equidad."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Cuál es una de las condiciones de Dijkstra para la exclusión mutua?",
+    "opts": [
+      "Un proceso fuera de la sección crítica no debe bloquear a otros procesos",
+      "Asignar recursos de manera aleatoria",
+      "Usar variables globales como única solución",
+      "Los procesos deben ejecutarse secuencialmente",
+      "Los procesos pueden detenerse indefinidamente"
+    ],
+    "correct": 0,
+    "justification": "Una de las condiciones de Dijkstra para la exclusión mutua es que un proceso fuera de la sección crítica no debe bloquear a otros procesos."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Cómo maneja el algoritmo de Dijkstra las prioridades entre procesos?",
+    "opts": [
+      "Asignando turnos de manera fija",
+      "Permitiendo que los procesos esperen indefinidamente",
+      "Usando una cola FIFO",
+      "Asignando valores aleatorios a los procesos",
+      "Implementando un contador global de turnos"
+    ],
+    "correct": 4,
+    "justification": "El algoritmo de Dijkstra maneja las prioridades entre procesos implementando un contador global de turnos."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué propiedad asegura el algoritmo de Peterson?",
+    "opts": [
+      "Solo funciona con dos procesos",
+      "Necesita una red de comunicaciones",
+      "Garantiza exclusión mutua y evita inanición",
+      "Depende de semáforos externos",
+      "Permite acceso prioritario a un proceso"
+    ],
+    "correct": 2,
+    "justification": "El algoritmo de Peterson garantiza exclusión mutua y evita inanición."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué significa \"progreso finito\" en el contexto de Dijkstra?",
+    "opts": [
+      "La ejecución de un proceso no se interrumpe",
+      "Todos los procesos se ejecutan en paralelo",
+      "Los procesos avanzan indefinidamente sin detenerse",
+      "Los procesos tienen un tiempo finito para entrar a la sección crítica",
+      "El acceso a la memoria es constante"
+    ],
+    "correct": 3,
+    "justification": "Progreso finito significa que los procesos tienen un tiempo finito para entrar a la sección crítica."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué mejora introduce el algoritmo de Peterson para N procesos?",
+    "opts": [
+      "Sustituye la necesidad de semáforos por variables clave locales",
+      "Requiere menos pasos que el algoritmo de Dekker",
+      "Permite acceso simultáneo a la sección crítica",
+      "Garantiza exclusión mutua para cualquier cantidad de procesos",
+      "Elimina la inanición en sistemas distribuidos"
+    ],
+    "correct": 3,
+    "justification": "El algoritmo de Peterson para N procesos garantiza exclusión mutua para cualquier cantidad de procesos."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Cómo soluciona el algoritmo de Knuth la inanición en exclusión mutua?",
+    "opts": [
+      "Eliminando los procesos en espera",
+      "Permitiendo que todos los procesos avancen simultáneamente",
+      "Garantizando que el tiempo de espera sea limitado para cada proceso",
+      "Bloqueando procesos con menor prioridad",
+      "Usando turnos circulares para la asignación de recursos"
+    ],
+    "correct": 2,
+    "justification": "El algoritmo de Knuth soluciona la inanición garantizando que el tiempo de espera sea limitado para cada proceso y usando turnos circulares para la asignación de recursos."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué hace un proceso después de usar la sección crítica en el algoritmo de Peterson?",
+    "opts": [
+      "Solicita nuevamente el turno",
+      "Envía mensajes a otros procesos",
+      "Libera su bandera de \"solicitado\"",
+      "Bloquea a los otros procesos",
+      "Incrementa un contador global"
+    ],
+    "correct": 2,
+    "justification": "Después de usar la sección crítica, un proceso en el algoritmo de Peterson libera su bandera de 'solicitado'."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué ocurre si dos procesos intentan acceder simultáneamente en el algoritmo de Peterson?",
+    "opts": [
+      "Se produce un interbloqueo",
+      "Se respetan las reglas de exclusión mutua",
+      "Ambos procesos fallan",
+      "Ambos entran a la sección crítica",
+      "Uno de ellos puede quedar bloqueado indefinidamente"
+    ],
+    "correct": 1,
+    "justification": "Si dos procesos intentan acceder simultáneamente en el algoritmo de Peterson, se respetan las reglas de exclusión mutua."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué técnica introduce el algoritmo de Knuth?",
+    "opts": [
+      "Uso de prioridad fija entre procesos",
+      "Uso de semáforos para exclusión mutua",
+      "Solución parcial para sistemas distribuidos",
+      "Retraso limitado en el acceso a la sección crítica",
+      "Inanición de procesos"
+    ],
+    "correct": 3,
+    "justification": "El algoritmo de Knuth introduce la técnica de retraso limitado en el acceso a la sección crítica."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Cómo resuelve el método de refinamiento sucesivo el problema de exclusión mutua?",
+    "opts": [
+      "Eliminando el uso de turnos",
+      "Permitiendo que dos procesos entren simultáneamente",
+      "Usando semáforos binarios",
+      "Implementando bucles de espera activa para decidir el acceso",
+      "Dividiendo el problema en múltiples secciones críticas"
+    ],
+    "correct": 3,
+    "justification": "El método de refinamiento sucesivo resuelve el problema de exclusión mutua implementando bucles de espera activa para decidir el acceso."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué es una \"etapa\" en el algoritmo de Peterson para N procesos?",
+    "opts": [
+      "Un mecanismo de exclusión global",
+      "Un nivel de prioridad fijo para los procesos",
+      "Un bucle infinito en la ejecución",
+      "Una fase de sincronización antes de la sección crítica",
+      "Una señal de error en el sistema"
+    ],
+    "correct": 3,
+    "justification": "Una 'etapa' en el algoritmo de Peterson para N procesos es un nivel de prioridad fijo para los procesos y una fase de sincronización antes de la sección crítica."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué condición debe cumplirse para que un proceso entre a la sección crítica en el algoritmo de Peterson?",
+    "opts": [
+      "Su turno no debe coincidir o la clave del otro proceso debe ser falsa",
+      "Su contador debe superar al de los demás procesos",
+      "Su clave de solicitud debe ser verdadera",
+      "Su prioridad debe ser la más alta",
+      "Su solicitud debe ser la primera en la cola"
+    ],
+    "correct": 0,
+    "justification": "Para que un proceso entre a la sección crítica en el algoritmo de Peterson, su turno no debe coincidir o la clave del otro proceso debe ser falsa."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué problema puede surgir al verificar las claves en algoritmos de refinamiento sucesivo?",
+    "opts": [
+      "Los turnos se asignan de manera inconsistente",
+      "No se realiza la salida de la espera activa de forma atómica",
+      "Se producen interrupciones aleatorias",
+      "Bloqueo mutuo al intercambiar turnos",
+      "Los procesos entran en la sección crítica sin permiso"
+    ],
+    "correct": 1,
+    "justification": "No se realiza la salida de la espera activa de forma atómica."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué problema intenta resolver la exclusión mutua?",
+    "opts": [
+      "Bloquear indefinidamente todos los procesos",
+      "Evitar el uso de recursos por parte de un proceso",
+      "Permitir que todos los procesos accedan a la sección crítica simultáneamente",
+      "Acelerar el acceso de los procesos a la memoria compartida",
+      "Evitar el acceso simultáneo de múltiples procesos a una sección crítica"
+    ],
+    "correct": 4,
+    "justification": "La exclusión mutua intenta evitar el acceso simultáneo de múltiples procesos a una sección crítica."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué ocurre si todos los procesos solicitan acceso simultáneamente en el algoritmo de Dijkstra?",
+    "opts": [
+      "Los procesos se ordenan en cola de prioridad",
+      "Se produce un interbloqueo",
+      "Uno de ellos accede según el turno asignado",
+      "El sistema queda bloqueado indefinidamente",
+      "Todos acceden simultáneamente"
+    ],
+    "correct": 2,
+    "justification": "Si todos los procesos solicitan acceso simultáneamente en el algoritmo de Dijkstra, uno de ellos accede según el turno asignado."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué condición garantiza el algoritmo de Knuth?",
+    "opts": [
+      "Reducción del tiempo de espera a 0",
+      "Eliminación de procesos en espera",
+      "Inanición de procesos",
+      "Interbloqueo constante",
+      "Exclusión mutua"
+    ],
+    "correct": 4,
+    "justification": "El algoritmo de Knuth garantiza la exclusión mutua."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué garantiza el algoritmo de Dekker?",
+    "opts": [
+      "Equidad completa entre procesos",
+      "Inanición de todos los procesos",
+      "Una solución distribuida",
+      "Ejecución simultánea en la sección crítica",
+      "Exclusión mutua, pero puede causar inanición"
+    ],
+    "correct": 4,
+    "justification": "El algoritmo de Dekker garantiza la exclusión mutua, pero puede causar inanición."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué garantiza la propiedad de equidad en exclusión mutua?",
+    "opts": [
+      "Todos los procesos son bloqueados simultáneamente",
+      "Todos los procesos avanzan al mismo tiempo",
+      "Solo un proceso ejecuta indefinidamente",
+      "Los procesos acceden en orden sin preferencia indebida",
+      "No hay necesidad de sincronización"
+    ],
+    "correct": 3,
+    "justification": "La propiedad de equidad en exclusión mutua garantiza que los procesos acceden en orden sin preferencia indebida."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Qué asegura la verificación de exclusión mutua en un algoritmo para N procesos?",
+    "opts": [
+      "Bloquear indefinidamente los procesos que esperan",
+      "Garantizar que solo un proceso entre en la sección crítica a la vez",
+      "Asignar recursos de manera aleatoria",
+      "Permitir acceso simultáneo a múltiples procesos",
+      "Prohibir la entrada de todos los procesos"
+    ],
+    "correct": 1,
+    "justification": "La verificación de exclusión mutua en un algoritmo para N procesos garantiza que solo un proceso entre en la sección crítica a la vez."
+  },
+  {
+    "tema": "T2: Exclusión Mutua",
+    "q": "¿Cuál es el principal problema de los bucles de espera activa?",
+    "opts": [
+      "Reducen el tiempo de espera de los procesos",
+      "Facilitan la exclusión mutua",
+      "Pueden generar uso innecesario de recursos",
+      "Eliminan la necesidad de sincronización",
+      "Incrementan la equidad del sistema"
+    ],
+    "correct": 2,
+    "justification": "El principal problema de los bucles de espera activa es que pueden generar uso innecesario de recursos."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué problema resuelve la espera selectiva?",
+    "opts": [
+      "La recepción no determinística de señales.",
+      "La prioridad entre alternativas.",
+      "La reducción de recursos de hardware.",
+      "El uso de búferes compartidos.",
+      "La sincronización entre nodos paralelos."
+    ],
+    "correct": 0,
+    "justification": "La espera selectiva resuelve la recepción no determinística de señales."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué ocurre si ninguna guarda es ejecutable en un select?",
+    "opts": [
+      "Se selecciona una guarda potencialmente ejecutable.",
+      "La instrucción select se bloquea.",
+      "La instrucción termina inmediatamente.",
+      "Se genera un error o excepción.",
+      "El proceso emisor se bloquea."
+    ],
+    "correct": 3,
+    "justification": "Si ninguna guarda es ejecutable en un select, se genera un error o excepción."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿En qué caso la sentencia select selecciona no determinísticamente una alternativa?",
+    "opts": [
+      "Cuando todas las alternativas contienen condiciones lógicas falsas.",
+      "Cuando ninguna alternativa es ejecutable ni potencialmente ejecutable.",
+      "Cuando hay alternativas potencialmente ejecutables sin una orden de recibir mensajes en la guarda.",
+      "Cuando todas las alternativas son ejecutables y tienen una orden de recibir mensajes."
+    ],
+    "correct": 2,
+    "justification": "La sentencia select selecciona no determinísticamente una alternativa cuando hay alternativas potencialmente ejecutables sin una orden de recibir mensajes en la guarda."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Cuál es una ventaja principal de las arquitecturas con múltiples elementos de cómputo?",
+    "opts": [
+      "Mayor costo de producción.",
+      "Menor escalabilidad.",
+      "Requieren más energía.",
+      "Uso exclusivo de hardware especializado.",
+      "Mejor rendimiento al evitar el cuello de botella."
+    ],
+    "correct": 4,
+    "justification": "Una ventaja principal de las arquitecturas con múltiples elementos de cómputo es el mejor rendimiento al evitar el cuello de botella."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "En el modelo SPMD, ¿qué característica principal lo distingue?",
+    "opts": [
+      "Comunicación asíncrona entre nodos.",
+      "Uso exclusivo de hardware SIMD.",
+      "Uso de un procesador único.",
+      "Código idéntico ejecutado sobre diferentes datos.",
+      "Código único ejecutado sobre datos idénticos."
+    ],
+    "correct": 3,
+    "justification": "En el modelo SPMD, la característica principal es el código idéntico ejecutado sobre diferentes datos."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué problema es común en sistemas distribuidos con paso de mensajes?",
+    "opts": [
+      "Complejidad en la sincronización.",
+      "Facilidad de depuración.",
+      "Baja interoperabilidad.",
+      "Escalabilidad ilimitada.",
+      "Dependencia de memoria compartida."
+    ],
+    "correct": 0,
+    "justification": "Un problema común en sistemas distribuidos con paso de mensajes es la complejidad en la sincronización."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué tipo de operación de paso de mensajes no bloquea al emisor?",
+    "opts": [
+      "Operación con comunicación garantizada.",
+      "Operación no bloqueante.",
+      "Operación de cita.",
+      "Operación síncrona.",
+      "Operación en búfer."
+    ],
+    "correct": 1,
+    "justification": "Una operación de paso de mensajes no bloqueante no bloquea al emisor."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué define una comunicación con cita en paso de mensajes?",
+    "opts": [
+      "Comunicación de baja latencia.",
+      "Comunicación síncrona sin búfer.",
+      "Comunicación no bloqueante con hardware especializado.",
+      "Comunicación asíncrona sin búfer.",
+      "Comunicación síncrona con búfer."
+    ],
+    "correct": 1,
+    "justification": "Una comunicación con cita en paso de mensajes se define como comunicación síncrona sin búfer."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Cuál de los siguientes lenguajes utiliza bindings para MPI?",
+    "opts": [
+      "PHP.",
+      "FORTRAN.",
+      "Ruby.",
+      "JavaScript.",
+      "Python."
+    ],
+    "correct": 1,
+    "justification": "FORTRAN utiliza bindings para MPI."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué significa MPI_Comm_size en el contexto de MPI?",
+    "opts": [
+      "Calcula el tamaño máximo del mensaje.",
+      "Establece las etiquetas de los mensajes.",
+      "Determina el número de procesos en un comunicador.",
+      "Inicia la comunicación entre procesos.",
+      "Define el tamaño del búfer de mensajes."
+    ],
+    "correct": 2,
+    "justification": "MPI_Comm_size en el contexto de MPI determina el número de procesos en un comunicador."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué es un cuello de botella en arquitecturas de programa único almacenado?",
+    "opts": [
+      "Limitación en el número de instrucciones ejecutadas simultáneamente.",
+      "Uso excesivo de la memoria compartida.",
+      "Baja velocidad de las operaciones en paralelo.",
+      "Alta latencia de las operaciones aritméticas.",
+      "Lentitud en el bus de datos."
+    ],
+    "correct": 4,
+    "justification": "Un cuello de botella en arquitecturas de programa único almacenado es la lentitud en el bus de datos."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué es una guarda en una instrucción select?",
+    "opts": [
+      "Un protocolo de comunicación síncrono.",
+      "Un identificador único para procesos.",
+      "Una sentencia que fuerza una condición.",
+      "Una condición lógica que habilita una alternativa.",
+      "Un mecanismo para evitar interbloqueos."
+    ],
+    "correct": 3,
+    "justification": "Una guarda en una instrucción select es una condición lógica que habilita una alternativa."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué alternativa es correcta para sistemas con paso de mensajes?",
+    "opts": [
+      "Siempre dependen de memoria compartida.",
+      "Permiten comunicación entre procesos independientes.",
+      "Limitan la cantidad de procesos en ejecución.",
+      "No requieren sincronización entre procesos.",
+      "Excluyen operaciones síncronas."
+    ],
+    "correct": 1,
+    "justification": "Una alternativa correcta para sistemas con paso de mensajes es que permiten comunicación entre procesos independientes."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué instrucción de MPI inicia una comunicación no bloqueante?",
+    "opts": [
+      "MPI_Send.",
+      "MPI_Irecv.",
+      "MPI_Recv.",
+      "MPI_Isend.",
+      "MPI_Wait."
+    ],
+    "correct": 3,
+    "justification": "MPI_Isend inicia una comunicación no bloqueante en MPI."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué ventaja ofrece el paso de mensajes con búfer?",
+    "opts": [
+      "Mejora en la eficiencia del hardware.",
+      "Reducción del tiempo de espera.",
+      "Reducción de memoria utilizada.",
+      "Mayor flexibilidad en el código.",
+      "Eliminación de interbloqueos."
+    ],
+    "correct": 1,
+    "justification": "El paso de mensajes con búfer ofrece la ventaja de reducción del tiempo de espera."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué herramienta facilita la ejecución de programas MPI?",
+    "opts": [
+      "mpirun.",
+      "MPI_Get_Count.",
+      "PVM.",
+      "mpicc.",
+      "mpi.h."
+    ],
+    "correct": 0,
+    "justification": "mpirun facilita la ejecución de programas MPI."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Cuál es un ejemplo de comunicación síncrona en sistemas distribuidos?",
+    "opts": [
+      "Intercambio de mensajes en paralelo.",
+      "Comunicación basada en búferes internos.",
+      "Operaciones de cita entre procesos.",
+      "Comunicación con operaciones no bloqueantes.",
+      "Comunicación con hardware especializado."
+    ],
+    "correct": 2,
+    "justification": "Un ejemplo de comunicación síncrona en sistemas distribuidos son las operaciones de cita entre procesos."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué define el término \"cliente\" en un modelo cliente/servidor?",
+    "opts": [
+      "Un proceso que almacena mensajes.",
+      "Un proceso activo que solicita servicios.",
+      "Un proceso intermedio entre servidor y base de datos.",
+      "Un proceso pasivo que recibe datos.",
+      "Un controlador centralizado."
+    ],
+    "correct": 1,
+    "justification": "En un modelo cliente/servidor, un cliente es un proceso activo que solicita servicios."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué representa una alternativa indexada en un select?",
+    "opts": [
+      "Varias alternativas combinadas en una sola.",
+      "Una forma de replicar alternativas con índices.",
+      "Una instrucción para manejar errores.",
+      "Una comunicación síncrona.",
+      "Un índice que prioriza procesos."
+    ],
+    "correct": 1,
+    "justification": "Una alternativa indexada en un select es una forma de replicar alternativas con índices."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué tipo de mensajes permite el uso de MPI_ANY_SOURCE?",
+    "opts": [
+      "Mensajes de cualquier origen.",
+      "Mensajes sin etiquetas.",
+      "Mensajes con etiquetas específicas.",
+      "Mensajes de un único proceso.",
+      "Mensajes bloqueados."
+    ],
+    "correct": 0,
+    "justification": "MPI_ANY_SOURCE permite mensajes de cualquier origen."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué proceso controla la sincronización en un sistema productor-consumidor?",
+    "opts": [
+      "Consumidor.",
+      "Productor.",
+      "Búfer intermedio.",
+      "Coordinador externo.",
+      "Cliente."
+    ],
+    "correct": 2,
+    "justification": "En un sistema productor-consumidor, el búfer intermedio controla la sincronización."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué modelo de multiprocesamiento utiliza múltiples procesadores para ejecutar instrucciones independientes?",
+    "opts": [
+      "MIMD.",
+      "SISD.",
+      "SIMD.",
+      "MISD.",
+      "SPMD."
+    ],
+    "correct": 0,
+    "justification": "El modelo de multiprocesamiento MIMD utiliza múltiples procesadores para ejecutar instrucciones independientes."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué asegura una guarda ejecutable en un select?",
+    "opts": [
+      "La transmisión directa de datos sin validación.",
+      "La ejecución inmediata del proceso emisor.",
+      "La ejecución de varias alternativas nodeterminísticamente.",
+      "Que el proceso receptor esté listo para recibir.",
+      "La sincronización de todos los procesos."
+    ],
+    "correct": 3,
+    "justification": "Una guarda ejecutable en un select asegura que el proceso receptor esté listo para recibir."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué mecanismo minimiza interbloqueos en comunicación no bloqueante?",
+    "opts": [
+      "MPI_Test.",
+      "MPI_Get_Count.",
+      "MPI_Comm_rank.",
+      "MPI_Wait.",
+      "MPI_Recv."
+    ],
+    "correct": 0,
+    "justification": "MPI_Test minimiza interbloqueos en comunicación no bloqueante."
+  },
+  {
+    "tema": "T3: Paso de Mensajes",
+    "q": "¿Qué instrucción libera una solicitud en MPI?",
+    "opts": [
+      "MPI_Finalize.",
+      "MPI_Wait.",
+      "MPI_Request_free.",
+      "MPI_Recv.",
+      "MPI_Send."
+    ],
+    "correct": 2,
+    "justification": "MPI_Request_free libera una solicitud en MPI."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "Una tarea espaciada por \"Jitter\" o deriva tiene:",
+    "opts": [
+      "Activaciones a intervalos exactos",
+      "Holgura máxima constante",
+      "Prioridades dinámicas en cada activación",
+      "Variaciones en su tiempo de activación",
+      "Plazos de respuesta arbitrarios"
+    ],
+    "correct": 3,
+    "justification": "Las tareas espaciadas por 'Jitter' tienen variaciones en su tiempo de activación."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué propiedad define el determinismo en los STR?",
+    "opts": [
+      "Interrupciones rápidas y eficientes",
+      "Ejecutar tareas concurrentes",
+      "Acceso a recursos compartidos",
+      "Predecir con certeza los tiempos de respuesta",
+      "Asignación dinámica de prioridades"
+    ],
+    "correct": 3,
+    "justification": "El determinismo en los STR permite predecir con certeza los tiempos de respuesta."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "El modelo de tareas simples asume:",
+    "opts": [
+      "Dependencia entre todas las tareas",
+      "Exclusión mutua en tiempo real",
+      "Acceso concurrente a recursos compartidos",
+      "Tareas periódicas con plazos iguales a su periodo",
+      "Activaciones dinámicas no predecibles"
+    ],
+    "correct": 3,
+    "justification": "El modelo de tareas simples asume tareas periódicas con plazos iguales a su periodo."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué factor reduce los bloqueos en sistemas STR?",
+    "opts": [
+      "Uso de algoritmos dinámicos",
+      "Planificación con servidores diferidos",
+      "Protocolos de techo de prioridad",
+      "Todas las anteriores",
+      "Exclusión mutua en todos los recursos"
+    ],
+    "correct": 2,
+    "justification": "Los protocolos de techo de prioridad reducen los bloqueos en sistemas STR."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "La prioridad relativa en un esquema RMS se basa en:",
+    "opts": [
+      "Número de recursos compartidos",
+      "Tiempo de respuesta más corto",
+      "Periodos más pequeños",
+      "Uso eficiente de CPU",
+      "Plazos de respuesta máximos"
+    ],
+    "correct": 2,
+    "justification": "En un esquema RMS, la prioridad relativa se basa en periodos más pequeños."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "El bloqueo indirecto ocurre cuando:",
+    "opts": [
+      "Dos tareas tienen igual prioridad",
+      "Las tareas tienen restricciones temporales flexibles",
+      "Ninguna de las anteriores",
+      "Una tarea depende de múltiples recursos",
+      "Un recurso compartido interfiere en tareas no relacionadas"
+    ],
+    "correct": 4,
+    "justification": "El bloqueo indirecto ocurre cuando un recurso compartido interfiere en tareas no relacionadas."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué ocurre en un STR durante una sobrecarga transitoria?",
+    "opts": [
+      "La planificación dinámica falla",
+      "La prioridad máxima se asigna automáticamente",
+      "Los esquemas estáticos son más predecibles",
+      "Todas las tareas se reinician",
+      "Las tareas de menor prioridad se descartan"
+    ],
+    "correct": 2,
+    "justification": "Durante una sobrecarga transitoria, los esquemas estáticos son más predecibles."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "El análisis de planificabilidad con servidor diferido garantiza:",
+    "opts": [
+      "Mayor flexibilidad en tareas aperiódicas",
+      "Exclusión de tareas esporádicas",
+      "Uso máximo de CPU",
+      "Bloqueos mínimos en recursos compartidos",
+      "Plazos cumplidos para tareas periódicas"
+    ],
+    "correct": 4,
+    "justification": "El análisis de planificabilidad con servidor diferido garantiza plazos cumplidos para tareas periódicas."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "Un sistema operativo de tiempo real garantiza:",
+    "opts": [
+      "Multitarea ilimitada",
+      "Exclusión mutua en todos los recursos",
+      "Acceso prioritario a memoria",
+      "Máxima utilización de CPU",
+      "Respuesta dentro de un tiempo limitado predefinido"
+    ],
+    "correct": 4,
+    "justification": "Un sistema operativo de tiempo real garantiza respuesta dentro de un tiempo limitado predefinido."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué significa STR de misión crítica?",
+    "opts": [
+      "Tareas con tiempo límite flexible",
+      "Tareas donde la falla puede tener consecuencias graves",
+      "Tareas con alta tolerancia a fallos",
+      "Planificación exclusivamente dinámica",
+      "Aplicaciones que solo usan recursos compartidos"
+    ],
+    "correct": 1,
+    "justification": "STR de misión crítica significa tareas donde la falla puede tener consecuencias graves."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "Un ejemplo de STR permisivo es:",
+    "opts": [
+      "Monitoreo de redes",
+      "Control de tráfico aéreo",
+      "Adquisición de datos meteorológicos",
+      "Reservas de vuelos",
+      "Planificación de producción"
+    ],
+    "correct": 2,
+    "justification": "Un ejemplo de STR permisivo es la adquisición de datos meteorológicos."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué tipo de tiempo NO es usado en los STR?",
+    "opts": [
+      "Relativo",
+      "Incremental",
+      "Absoluto",
+      "GPS",
+      "Atómico"
+    ],
+    "correct": 1,
+    "justification": "El tiempo incremental no es usado en los STR."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Cuál es una característica clave de los relojes de tiempo real?",
+    "opts": [
+      "Sincronización con tiempo relativo",
+      "Deriva acumulativa constante",
+      "Tiempo de desbordamiento definido",
+      "Baja precisión",
+      "Granularidad variable"
+    ],
+    "correct": 2,
+    "justification": "Una característica clave de los relojes de tiempo real es el tiempo de desbordamiento definido."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "Un temporizador periódico se caracteriza por:",
+    "opts": [
+      "Activarse una vez y detenerse",
+      "Presentar una deriva acumulativa constante",
+      "Realizar activaciones repetitivas en intervalos definidos",
+      "Permitir modificaciones dinámicas de los intervalos",
+      "Interrumpir la planificación actual"
+    ],
+    "correct": 2,
+    "justification": "Un temporizador periódico se caracteriza por realizar activaciones repetitivas en intervalos definidos."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué atributo temporal tiene una tarea de tiempo real?",
+    "opts": [
+      "Periodo mínimo de activación",
+      "Prioridad dinámica asignada",
+      "Tiempo de cómputo máximo",
+      "Número máximo de interrupciones",
+      "Tiempo de respuesta variable"
+    ],
+    "correct": 2,
+    "justification": "Una tarea de tiempo real tiene como atributo temporal el tiempo de cómputo máximo."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Cuál es una característica clave de los STR?",
+    "opts": [
+      "Exclusión de tareas concurrentes",
+      "Uso de sistemas operativos generales",
+      "Uso exclusivo de tareas periódicas",
+      "Respuesta correcta dentro de un tiempo límite",
+      "Alta disponibilidad de memoria"
+    ],
+    "correct": 3,
+    "justification": "Una característica clave de los STR es la respuesta correcta dentro de un tiempo límite."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué tipo de tarea se activa en instantes arbitrarios?",
+    "opts": [
+      "Esporádica",
+      "Aperiódica",
+      "Periódica",
+      "Asíncrona",
+      "Sincrónica"
+    ],
+    "correct": 1,
+    "justification": "Una tarea aperiódica se activa en instantes arbitrarios."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "La planificación cíclica usa:",
+    "opts": [
+      "Exclusión de tareas esporádicas",
+      "Prioridades dinámicas",
+      "Acceso a múltiples procesadores",
+      "Hiperperiodos basados en MCM",
+      "Algoritmos de análisis temporal"
+    ],
+    "correct": 3,
+    "justification": "La planificación cíclica usa hiperperiodos basados en MCM."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "Un algoritmo dinámico como EDF asigna prioridad según:",
+    "opts": [
+      "Uso del procesador más bajo",
+      "Tiempo límite más próximo",
+      "Periodos más cortos",
+      "Requerimientos de memoria",
+      "Holgura más alta"
+    ],
+    "correct": 1,
+    "justification": "Un algoritmo dinámico como EDF asigna prioridad según el tiempo límite más próximo."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿En qué consiste la inversión de prioridad?",
+    "opts": [
+      "Un error en el orden de asignación de prioridades",
+      "Una tarea prioritaria puede quedar bloqueada indefinidamente",
+      "La planificación cíclica falla en el análisis de Gantt",
+      "Ninguna de las anteriores",
+      "Las tareas menos críticas interrumpen las más importantes"
+    ],
+    "correct": 1,
+    "justification": "La inversión de prioridad ocurre cuando una tarea prioritaria puede quedar bloqueada indefinidamente."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "El protocolo de herencia de prioridad:",
+    "opts": [
+      "Garantiza exclusión mutua completa",
+      "Desactiva tareas aperiódicas",
+      "Asigna prioridad máxima a todas las tareas",
+      "Reduce las prioridades de tareas esporádicas",
+      "Dinamiza prioridades según el bloqueo de recursos"
+    ],
+    "correct": 4,
+    "justification": "El protocolo de herencia de prioridad dinamiza prioridades según el bloqueo de recursos."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Qué es el \"techo de prioridad\" de un recurso?",
+    "opts": [
+      "Un atributo dinámico definido por EDF",
+      "La prioridad mínima que puede acceder al recurso",
+      "La prioridad asignada por el sistema operativo",
+      "La prioridad más alta que puede bloquear",
+      "La prioridad promedio de las tareas que lo usan"
+    ],
+    "correct": 3,
+    "justification": "El 'techo de prioridad' de un recurso es la prioridad más alta que puede bloquear."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "Un servidor diferido es útil para:",
+    "opts": [
+      "Sincronizar relojes del sistema",
+      "Gestionar peticiones aperiódicas",
+      "Sustituir el protocolo de herencia",
+      "Optimizar los tiempos de cómputo máximo",
+      "Tareas periódicas críticas"
+    ],
+    "correct": 1,
+    "justification": "Un servidor diferido es útil para gestionar peticiones aperiódicas."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "El test de Liu y Layland (RMS) es aplicable a:",
+    "opts": [
+      "Sistemas distribuidos concurrentes",
+      "Tareas esporádicas con plazos variables",
+      "Tareas periódicas independientes",
+      "Procesos con múltiples recursos compartidos",
+      "Tareas aperiódicas con plazos fijos"
+    ],
+    "correct": 2,
+    "justification": "El test de Liu y Layland (RMS) es aplicable a tareas periódicas independientes."
+  },
+  {
+    "tema": "T4: Sistemas de Tiempo Real",
+    "q": "¿Cuál es el límite de utilización de CPU para N tareas según RMS?",
+    "opts": [
+      "U0 × N",
+      "N × 2^(1/N)",
+      "N(3^(1/N))",
+      "N^2 × T",
+      "N(2^(1/N) − 1)"
+    ],
+    "correct": 4,
+    "justification": "El límite de utilización de CPU para N tareas según RMS es N(2^(1/N) − 1)."
+  }
+]

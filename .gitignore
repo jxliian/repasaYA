@@ -8,3 +8,5 @@ dist/
 .superpowers/
 docs/superpowers/
 scratch/
+__pycache__/
+*.pyc
