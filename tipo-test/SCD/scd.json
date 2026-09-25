@@ -267,7 +267,7 @@
     "tema": "T2: Monitores y Sincronización",
     "q": "¿Quién introdujo el concepto de monitor y en qué año?",
     "opts": [
-      "A.R. Hoare, en 1974.",
+      "C.A.R. Hoare (o A.R. Hoare), en 1974.",
       "Donald Knuth, en 1975.",
       "Edsger Dijkstra, en 1972.",
       "John von Neumann, en 1965.",
@@ -1140,7 +1140,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "Una tarea espaciada por \"Jitter\" o deriva tiene",
+    "q": "Una tarea espaciada por \"Jitter\" o deriva tiene:",
     "opts": [
       "Holgura máxima constante.",
       "Prioridades dinámicas en cada activación.",
@@ -1164,7 +1164,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "El modelo de tareas simples asume",
+    "q": "El modelo de tareas simples asume:",
     "opts": [
       "Tareas periódicas con plazos iguales a su periodo.",
       "Dependencia entre todas las tareas.",
@@ -1188,7 +1188,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "La prioridad relativa en un esquema RMS se basa en",
+    "q": "La prioridad relativa en un esquema RMS se basa en:",
     "opts": [
       "Periodos más pequeños.",
       "Plazos de respuesta máximos.",
@@ -1200,7 +1200,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "El bloqueo indirecto ocurre cuando",
+    "q": "El bloqueo indirecto ocurre cuando:",
     "opts": [
       "Dos tareas tienen igual prioridad.",
       "Un recurso compartido interfiere en tareas no relacionadas.",
@@ -1224,7 +1224,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "El análisis de planificabilidad con servidor diferido garantiza",
+    "q": "El análisis de planificabilidad con servidor diferido garantiza:",
     "opts": [
       "Plazos cumplidos para tareas periódicas.",
       "Uso máximo de CPU.",
@@ -1236,7 +1236,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "Un sistema operativo de tiempo real garantiza",
+    "q": "Un sistema operativo de tiempo real garantiza:",
     "opts": [
       "Máxima utilización de CPU.",
       "Acceso prioritario a memoria.",
@@ -1260,7 +1260,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "Un ejemplo de STR permisivo es",
+    "q": "Un ejemplo de STR permisivo es:",
     "opts": [
       "Reservas de vuelos.",
       "Adquisición de datos meteorológicos.",
@@ -1296,7 +1296,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "Un temporizador periódico se caracteriza por",
+    "q": "Un temporizador periódico se caracteriza por:",
     "opts": [
       "Permitir modificaciones dinámicas de los intervalos.",
       "Presentar una deriva acumulativa constante.",
@@ -1344,7 +1344,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "La planificación cíclica usa",
+    "q": "La planificación cíclica usa:",
     "opts": [
       "Hiperperiodos basados en MCM.",
       "Prioridades dinámicas.",
@@ -1356,7 +1356,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "Un algoritmo dinámico como EDF asigna prioridad según",
+    "q": "Un algoritmo dinámico como EDF asigna prioridad según:",
     "opts": [
       "Holgura más alta.",
       "Requerimientos de memoria.",
@@ -1368,7 +1368,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "En qué consiste la inversión de prioridad",
+    "q": "¿En qué consiste la inversión de prioridad?",
     "opts": [
       "Un error en el orden de asignación de prioridades.",
       "La planificación cíclica falla en el análisis de Gantt.",
@@ -1380,7 +1380,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "El protocolo de herencia de prioridad",
+    "q": "El protocolo de herencia de prioridad:",
     "opts": [
       "Desactiva tareas aperiódicas.",
       "Reduce las prioridades de tareas esporádicas.",
@@ -1404,7 +1404,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "Un servidor diferido es útil para",
+    "q": "Un servidor diferido es útil para:",
     "opts": [
       "Gestionar peticiones aperiódicas.",
       "Sustituir el protocolo de herencia.",
@@ -1416,7 +1416,7 @@
   },
   {
     "tema": "T4: Sistemas de Tiempo Real",
-    "q": "El test de Liu y Layland (RMS) es aplicable a",
+    "q": "El test de Liu y Layland (RMS) es aplicable a:",
     "opts": [
       "Tareas aperiódicas con plazos fijos.",
       "Tareas esporádicas con plazos variables.",
@@ -1863,10 +1863,10 @@
     "tema": "Examen Parcial II",
     "q": "Seleccionar el valor correcto de las 2 variables (x e y) tras: int x=5, y=2; cobegin ⟨x=x+y⟩; ⟨y=x*y⟩; ⟨x=x-y⟩; coend;:",
     "opts": [
-      "X==7, y==14.",
-      "X==5, y==10.",
-      "X==-7, y==14.",
-      "X==-3, y==10."
+      "x==7, y==14.",
+      "x==5, y==10.",
+      "x==-7, y==14.",
+      "x==-3, y==10."
     ],
     "correct": 2
   },
@@ -1884,7 +1884,7 @@
   },
   {
     "tema": "InfoAdeHub · Temas 1 y 2",
-    "q": "En el mismo algoritmo (esquema s[i]), ¿hay ausencia de interbloqueo?",
+    "q": "En el algoritmo del esquema s[i] (problema 74, relación 2-2), ¿hay ausencia de interbloqueo?",
     "opts": [
       "Sólo con turn",
       "Depende del planificador",
@@ -1923,10 +1923,10 @@
     "q": "En el monitor Cuenta de Ahorros con colas normales sin prioridad, retirar(c) debe...",
     "opts": [
       "Dividir la retirada",
-      "Bloquear hasta que saldo-c",
+      "Bloquear hasta que saldo ≥ c (fondos suficientes)",
       "Abortar la operación",
       "Elevar la prioridad del cliente",
-      "Fallar si c>saldo"
+      "Fallar si c > saldo"
     ],
     "correct": 1
   },
@@ -1944,7 +1944,7 @@
   },
   {
     "tema": "InfoAdeHub · Temas 1 y 2",
-    "q": "En ese algoritmo (Dijkstra N), las asignaciones n1:=1 y n2:=1 son",
+    "q": "En el algoritmo de exclusión mutua para dos procesos con variables de intención (n1 y n2), las asignaciones n1:=1 y n2:=1 son:",
     "opts": [
       "Innecesarias si turn=1",
       "Sólo n2:=1 necesaria",
@@ -1992,13 +1992,13 @@
   },
   {
     "tema": "InfoAdeHub · Temas 1 y 2",
-    "q": "La seguridad (EM) es una prioridad de...",
+    "q": "La exclusión mutua (EM) es una propiedad de:",
     "opts": [
-      "Equidad",
-      "Alcanzabilidad",
-      "Perfomance",
-      "Seguridad (safety)",
-      "Vivacidad"
+      "Equidad.",
+      "Alcanzabilidad.",
+      "Rendimiento (performance).",
+      "Seguridad (safety).",
+      "Vivacidad (liveness)."
     ],
     "correct": 3
   },
@@ -2054,9 +2054,9 @@
     "tema": "InfoAdeHub · Temas 1 y 2",
     "q": "En el baño, la restricción de capacidad correcta es...",
     "opts": [
-      "Chicas: 1; chicos:<=5 simultáneos",
+      "Chicas: 1; chicos: ≤ 5 simultáneos",
       "Sólo uno total",
-      "Chicas:<=5; chicos: 1",
+      "Chicas: ≤ 5; chicos: 1",
       "Ambas capacidades iguales",
       "Chicas y chicos ilimitado"
     ],
@@ -2243,7 +2243,7 @@
   },
   {
     "tema": "InfoAdeHub · Temas 1 y 2",
-    "q": "Para evitar el interbloqueo de petición doble/simultánea, la política correcta es....",
+    "q": "Para evitar el interbloqueo de petición doble/simultánea, la política correcta es...",
     "opts": [
       "Alternar por turnos entre simples y dobles",
       "Dar prioridad a quien libere más tarde",
