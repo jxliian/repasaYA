@@ -5,7 +5,7 @@
   <p>Gratis, sin registro, sin anuncios y sin cuentas premium de nada.</p>
 
   <p>
-    <a href="https://jxliian.github.io/repasaYA/"><strong>Abrir repasaYA</strong></a>
+    <a href="https://repasaya.juliancarrion.dev/"><strong>Abrir repasaYA</strong></a>
     ·
     <a href="#cómo-contribuir-material">Contribuir</a>
     ·
@@ -212,7 +212,7 @@ Las rutas planas anteriores (`/repasaYA/rrhh/quiz/`) siguen funcionando: son red
 
 Sin cuentas, sin cookies, sin analítica y sin anuncios. Lo único que se guarda son dos claves en tu navegador: el tema elegido y una marca para no repetir la animación de bienvenida.
 
-El único tercero es el contador de visitas de [hits.sh](https://hits.sh), que se carga solo en la portada y recibe la IP para sumar uno. Detalle completo en [/privacidad](https://jxliian.github.io/repasaYA/privacidad/).
+El único tercero es el contador de visitas de [hits.sh](https://hits.sh), que se carga solo en la portada y recibe la IP para sumar uno. Detalle completo en [/privacidad](https://repasaya.juliancarrion.dev/privacidad/).
 
 ---
 

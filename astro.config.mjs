@@ -31,36 +31,34 @@ function hiddenSlugs() {
 const HIDDEN = hiddenSlugs();
 
 export default defineConfig({
-  site: 'https://jxliian.github.io',
-  base: '/repasaYA',
+  site: 'https://repasaya.juliancarrion.dev',
+  base: '/',
   output: 'static',
   integrations: [sitemap({ filter: (page) => ![...HIDDEN].some((s) => page.endsWith(`/${s}/`)) })],
 
   /* Las rutas planas antiguas están indexadas desde hace meses. En estático
      Astro las convierte en páginas meta-refresh, que es lo máximo que
-     permite GitHub Pages (no hay forma de devolver un 301 real).
-
-     OJO: la clave va relativa al `base`, pero el destino NO — Astro lo
-     escribe literal en el meta refresh, así que hay que incluir /repasaYA. */
+     permite GitHub Pages (no hay forma de devolver un 301 real). */
   redirects: {
-    '/rrhh': '/repasaYA/ade/4/c2/rrhh/',
-    '/rrhh/quiz': '/repasaYA/ade/4/c2/rrhh/test/',
-    '/rrhh/glosario': '/repasaYA/ade/4/c2/rrhh/glosario/',
-    '/organizacion-empresas': '/repasaYA/ade/4/c2/organizacion-empresas/',
-    '/organizacion-empresas/secreto': '/repasaYA/ade/4/c2/organizacion-empresas/secreto/',
-    '/organizacion-empresas/quiz': '/repasaYA/ade/4/c2/organizacion-empresas/test/',
-    '/organizacion-empresas/glosario': '/repasaYA/ade/4/c2/organizacion-empresas/flashcards/',
-    '/do1': '/repasaYA/ade/4/c1/do1/',
-    '/aef': '/repasaYA/ade/4/c2/aef/',
-    '/aef/quiz': '/repasaYA/ade/4/c2/aef/test/',
-    '/aef/glosario': '/repasaYA/ade/4/c2/aef/flashcards/',
-    '/mp': '/repasaYA/informatica/1/c2/mp/',
-    '/mp/quiz': '/repasaYA/informatica/1/c2/mp/test/',
-    '/sibw': '/repasaYA/informatica/4/c2/sibw/',
-    '/sibw/quiz': '/repasaYA/informatica/4/c2/sibw/test/',
-    '/sibw/glosario': '/repasaYA/informatica/4/c2/sibw/flashcards/',
-    '/dsd': '/repasaYA/informatica/4/c2/dsd/',
-    '/dsd/vf': '/repasaYA/informatica/4/c2/dsd/vf/',
-    '/dsd/apuntes': '/repasaYA/informatica/4/c2/dsd/apuntes-t4-t5/',
+    '/repasaYA': '/',
+    '/rrhh': '/ade/4/c2/rrhh/',
+    '/rrhh/quiz': '/ade/4/c2/rrhh/test/',
+    '/rrhh/glosario': '/ade/4/c2/rrhh/glosario/',
+    '/organizacion-empresas': '/ade/4/c2/organizacion-empresas/',
+    '/organizacion-empresas/secreto': '/ade/4/c2/organizacion-empresas/secreto/',
+    '/organizacion-empresas/quiz': '/ade/4/c2/organizacion-empresas/test/',
+    '/organizacion-empresas/glosario': '/ade/4/c2/organizacion-empresas/flashcards/',
+    '/do1': '/ade/4/c1/do1/',
+    '/aef': '/ade/4/c2/aef/',
+    '/aef/quiz': '/ade/4/c2/aef/test/',
+    '/aef/glosario': '/ade/4/c2/aef/flashcards/',
+    '/mp': '/informatica/1/c2/mp/',
+    '/mp/quiz': '/informatica/1/c2/mp/test/',
+    '/sibw': '/informatica/4/c2/sibw/',
+    '/sibw/quiz': '/informatica/4/c2/sibw/test/',
+    '/sibw/glosario': '/informatica/4/c2/sibw/flashcards/',
+    '/dsd': '/informatica/4/c2/dsd/',
+    '/dsd/vf': '/informatica/4/c2/dsd/vf/',
+    '/dsd/apuntes': '/informatica/4/c2/dsd/apuntes-t4-t5/',
   },
 });

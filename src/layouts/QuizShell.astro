@@ -26,7 +26,8 @@ interface Props {
 const { title, description, noindex = false } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
+const siteUrl = 'https://repasaya.juliancarrion.dev/';
+const canonical = `${siteUrl}${Astro.url.pathname.replace(/^\/|\/$/g, '')}${Astro.url.pathname === '/' ? '' : '/'}`;
 ---
 
 <!doctype html>
@@ -49,12 +50,12 @@ const canonical = `https://jxliian.github.io${Astro.url.pathname}`;
 
     <meta property="og:title" content={`${title} — repasaYA UGR`} />
     {description && <meta property="og:description" content={description} />}
-    <meta property="og:image" content="https://jxliian.github.io/repasaYA/favicon-512.png" />
+    <meta property="og:image" content={`${siteUrl}favicon-512.png`} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={`${title} — repasaYA UGR`} />
     {description && <meta name="twitter:description" content={description} />}
-    <meta name="twitter:image" content="https://jxliian.github.io/repasaYA/favicon-512.png" />
+    <meta name="twitter:image" content={`${siteUrl}favicon-512.png`} />
 
     <script type="application/ld+json" is:inline>
       {

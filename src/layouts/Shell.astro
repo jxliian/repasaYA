@@ -34,11 +34,11 @@ const {
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const canonical = `https://jxliian.github.io${Astro.url.pathname.replace(/\/$/, '')}/`;
+const siteUrl = 'https://repasaya.juliancarrion.dev/';
+const canonical = `${siteUrl}${Astro.url.pathname.replace(/^\/|\/$/g, '')}${Astro.url.pathname === '/' ? '' : '/'}`;
 const pageTitle = title === 'repasaYA' ? 'repasaYA — Tests, Flashcards y Apuntes UGR | Aprueba sin pagar ni un duro' : `${title} — repasaYA UGR`;
 const year = new Date().getFullYear();
 
-const siteUrl = 'https://jxliian.github.io/repasaYA/';
 const favicon512 = `${siteUrl}favicon-512.png`;
 ---
 
@@ -89,21 +89,21 @@ const favicon512 = `${siteUrl}favicon-512.png`;
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "https://jxliian.github.io/repasaYA/#website",
-          "url": "https://jxliian.github.io/repasaYA/",
+          "@id": `${siteUrl}#website`,
+          "url": siteUrl,
           "name": "repasaYA",
           "alternateName": ["repasa YA", "repasaYA UGR", "repasaYA ADE e Informática"],
           "description": "Plataforma oficial de tests interactivos, verdadero/falso, flashcards y apuntes para ADE e Ingeniería Informática UGR.",
           "inLanguage": "es-ES",
           "publisher": {
-            "@id": "https://jxliian.github.io/repasaYA/#organization"
+            "@id": `${siteUrl}#organization`
           }
         },
         {
           "@type": "EducationalOrganization",
-          "@id": "https://jxliian.github.io/repasaYA/#organization",
+          "@id": `${siteUrl}#organization`,
           "name": "repasaYA",
-          "url": "https://jxliian.github.io/repasaYA/",
+          "url": siteUrl,
           "logo": favicon512,
           "image": favicon512,
           "sameAs": [
@@ -119,7 +119,7 @@ const favicon512 = `${siteUrl}favicon-512.png`;
         {
           "@type": "EducationalApplication",
           "name": "repasaYA",
-          "url": "https://jxliian.github.io/repasaYA/",
+          "url": siteUrl,
           "description": "Tests interactivos, verdadero/falso y flashcards para el Doble Grado ADE + Ingeniería Informática de la UGR.",
           "applicationCategory": "EducationalApplication",
           "operatingSystem": "All",
