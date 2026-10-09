@@ -54,6 +54,8 @@ Detalle de archivos creados, modificados o eliminados.
 | [`spec_002`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_002_constitucion_y_principios_fundamentales.md) | 2026-10-09 | Constitución y Principios Fundamentales del Proyecto | Gobernanza / Principios | Implementado |
 | [`spec_003`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_003_orquestacion_agentes_revision_auditoria.md) | 2026-10-09 | Orquestación Multiagente con Ciclos de Revisión y Auditoría | Arquitectura / Agentes | Implementado |
 | [`spec_004`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_004_skill_orquestacion_compleja.md) | 2026-10-09 | Skill de Orquestación para Tareas de Alta Complejidad | Automatización / Skills | Implementado |
+| [`spec_005`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_005_orquestacion_concurrente_simultanea.md) | 2026-10-09 | Modelo de Orquestación Concurrente y Simultánea Multiagente | Rendimiento / Paralelismo | Implementado |
+
 
 
 
