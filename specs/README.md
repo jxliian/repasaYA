@@ -52,4 +52,6 @@ Detalle de archivos creados, modificados o eliminados.
 | :--- | :--- | :--- | :--- | :--- |
 | [`spec_001`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_001_sistema_metricas_y_especificaciones.md) | 2026-10-09 | Inicialización del Sistema de Especificaciones y Control de Métricas | Infraestructura / Specs | Implementado |
 | [`spec_002`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_002_constitucion_y_principios_fundamentales.md) | 2026-10-09 | Constitución y Principios Fundamentales del Proyecto | Gobernanza / Principios | Implementado |
+| [`spec_003`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_003_orquestacion_agentes_revision_auditoria.md) | 2026-10-09 | Orquestación Multiagente con Ciclos de Revisión y Auditoría | Arquitectura / Agentes | Implementado |
+
 
