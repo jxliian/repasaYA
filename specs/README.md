@@ -1,0 +1,53 @@
+# 📋 Sistema de Especificaciones (`specs/`)
+
+La carpeta `specs/` almacena el histórico formal de cambios, diseños técnicos y evoluciones de **repasaYA**. Funciona como la memoria a largo plazo pública del proyecto para garantizar la trazabilidad de cada cambio significativo.
+
+---
+
+## 📌 Formato y Nomenclatura
+
+Cada especificación sigue el formato:
+```text
+specs/spec_XXX_<nombre_descriptivo>.md
+```
+Donde `XXX` es un número secuencial de tres dígitos con ceros a la izquierda (ej. `spec_001_...`, `spec_002_...`).
+
+---
+
+## 📑 Estructura Estándar de una Especificación
+
+Cada archivo debe contener las siguientes secciones:
+
+```markdown
+# Spec XXX: [Título de la Especificación]
+
+- **Fecha**: AAAA-MM-DD
+- **Estado**: Implementado | En progreso | Propuesto
+- **Ámbito**: Contenido | Arquitectura | UI/UX | Infraestructura
+
+---
+
+## 1. Contexto y Motivación
+¿Por qué se realiza este cambio o adición?
+
+## 2. Descripción de los Cambios
+Detalle de archivos creados, modificados o eliminados.
+
+## 3. Estado de Métricas de Contenido
+- Total Preguntas: [Número]
+- Total Fichas: [Número]
+- Total Asignaturas: [Número]
+- Bloques de Material: [Número]
+
+## 4. Verificación y Pruebas
+- Resultado de `npm run stats`
+- Resultado de `npm run build`
+```
+
+---
+
+## 🗂️ Registro de Especificaciones
+
+| ID | Fecha | Título | Ámbito | Estado |
+| :--- | :--- | :--- | :--- | :--- |
+| [`spec_001`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_001_sistema_metricas_y_especificaciones.md) | 2026-10-09 | Inicialización del Sistema de Especificaciones y Control de Métricas | Infraestructura / Specs | Implementado |

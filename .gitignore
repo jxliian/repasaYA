@@ -19,3 +19,9 @@ __pycache__/
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+
+# Agentes y directrices privadas
+.agents/
+AGENTS.md
+GEMINI.md
+.claude/
