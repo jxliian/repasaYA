@@ -1,7 +1,7 @@
 \chapter{Sincronización en Memoria Compartida (Parte II): Monitores y Patrones Clásicos}
 \label{cap:tema2_parte2}
 
-\cuadrofuentes{\textbf{Fuentes utilizadas:} Apuntes de Ismael Sallami y Temario de Infomates (LosDelDGIIM). Pendiente de incorporar transparencias originales del profesor.}
+\cuadrofuentes{\textbf{Fuentes utilizadas:} Transparencias Oficiales del Profesor (Manuel I. Capel Tuñón), Temario Completo de Infomates (LosDelDGIIM) y Apuntes de Ismael Sallami Moreno.}
 
 % ==============================================================================
 \section{Monitores como Mecanismo de Alto Nivel}
@@ -208,10 +208,128 @@ De este modo, cuando el proceso despierta, vuelve a evaluar la condición. Si ot
 \end{table}
 
 % ==============================================================================
+\section{Verificación Formal de Monitores y Reglas Axiomáticas}
+% ==============================================================================
+
+\subsection{El Invariante del Monitor (\texorpdfstring{$I$}{I})}
+Al igual que en los bucles secuenciales se define un invariante que se preserva en cada iteración, para un monitor se define el \textbf{Invariante del Monitor} $I$, un aserto lógico sobre las variables permanentes del monitor que debe satisfacer:
+\begin{enumerate}[leftmargin=*]
+    \item $I$ se hace verdadero tras ejecutar el código de \textbf{inicialización} del monitor.
+    \item $I$ es verdadero a la \textbf{entrada} y debe restablecerse a la \textbf{salida} de cada procedimiento exportado.
+    \item $I$ debe mantenerse verdadero en cada punto donde un proceso suspende voluntariamente su ejecución dentro del monitor (\texttt{c.wait()}) y cede la exclusión mutua a otro proceso.
+\end{enumerate}
+
+\subsection{Axiomas para Operaciones de Sincronización Desplazantes (SU)}
+En monitores con semántica desplazante (Señalar y Espera Urgente - SU), la reanudación inmediata del proceso suspendido tras la señal permite formular axiomas de verificación muy rigurosos y elegantes:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Axioma de la operación \texttt{wait}:}
+    \[
+    \{I\} \quad c.\text{wait}() \quad \{I \land B_c\}
+    \]
+    donde $B_c$ es la condición lógica de sincronización asociada a la cola de condición $c$. Al reanudar tras el \texttt{wait}, el proceso tiene la certeza matemática de que tanto el invariante del monitor como la condición de desbloqueo $B_c$ se verifican.
+    \item \textbf{Axioma de la operación \texttt{signal}:}
+    \[
+    \{I \land B\} \quad c.\text{signal}() \quad \{I\}
+    \]
+    El proceso señalador solo debe invocar \texttt{c.signal()} si ha establecido la condición $B$. Tras la señalización, el señalador cede el monitor a la cola urgente garantizando que el invariante se preserva.
+\end{itemize}
+
+\subsection{Caso de Estudio Canónico: El Semáforo de Habermann}
+A. N. Habermann propuso modelar formalmente el comportamiento de un semáforo general como un monitor con variables enteras permanentes:
+\begin{itemize}[leftmargin=*]
+    \item $na$: número de intentos de ejecución de la operación $P$ (solicitudes de entrada).
+    \item $np$: número de operaciones $P$ que han completado con éxito su paso por el semáforo.
+    \item $nv$: número de operaciones $V$ que se han completado.
+\end{itemize}
+
+De la semántica canónica de los semáforos se deducen directamente los invariantes de seguridad y vivacidad:
+\begin{itemize}[leftmargin=*]
+    \item $np \le na$: un proceso no puede haber completado $P$ sin haberlo solicitado previamente.
+    \item $np \le nv$: el número de procesos que superan $P$ no puede exceder el número de señales $V$ concedidas (asumiendo semáforo inicialmente a 0).
+    \item $np \ge \min(na, nv)$: garantiza vivacidad; si hay procesos esperando y fichas disponibles, alguno debe avanzar.
+\end{itemize}
+Combinando estos requisitos, obtenemos el invariante exacto del monitor de Habermann:
+\[
+I_{\text{Habermann}} \equiv np = \min(na, nv)
+\]
+
+\begin{algoritmo}[Monitor Semáforo de Habermann y su Verificación Formal]
+\begin{lstlisting}[language=C++]
+Monitor Semaforo {
+    int na = 0, np = 0, nv = 0; // Inicializacion: {np == min(na, nv)}
+    cond c;
+
+    procedure P() {
+        // {I: np == min(na, nv)}
+        na = na + 1;
+        // {np == min(na - 1, nv)}
+        if (na > nv) {
+            // {(na > nv) and np == min(na - 1, nv)} => np == nv
+            c.wait();
+            // Tras wait con senal desplazante: {na > np and np == nv - 1}
+        }
+        // {np + 1 == min(na, nv)}
+        np = np + 1;
+        // {I: np == min(na, nv)}
+    }
+
+    procedure V() {
+        // {I: np == min(na, nv)}
+        nv = nv + 1;
+        // {np == min(na, nv - 1)}
+        if (na > np) {
+            // {(na > np) and np == min(na, nv - 1)} => na > np and np == nv - 1
+            c.signal();
+        }
+        // {I: np == min(na, nv)}
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+
+\subsection{Regla de la Concurrencia para Programas con Monitores}
+El gran valor metodológico de los monitores radica en cómo transforman la verificación de programas concurrentes. Recordemos que en memoria compartida sin modularidad, la regla de Owicki-Gries exige demostrar que \textbf{ninguna instrucción atómica de un proceso invalida las precondiciones intermedias de los demás} (ausencia de interferencia).
+
+Con monitores, las variables compartidas residen \textbf{estrictamente encapsuladas} en variables privadas locales a cada monitor. Como consecuencia:
+\begin{teorema}[Regla de la Concurrencia de Hoare para Monitores]
+Si cada proceso $S_i$ se puede verificar de forma aislada respetando la lógica secuencial:
+\[
+\{P_i\} \; S_i \; \{Q_i\}, \quad 1 \le i \le n
+\]
+y se cumplen las condiciones:
+\begin{enumerate}[leftmargin=*]
+    \item Ninguna variable libre en $P_i$ o $Q_i$ es modificada por otro proceso $S_j$ ($j \ne i$).
+    \item Todas las variables involucradas en el invariante $IM_k$ son \textbf{locales y privadas} al monitor $m_k$.
+\end{enumerate}
+Entonces el programa concurrente completo es directamente correcto por construcción:
+\[
+\frac{\{P_i\} \; S_i \; \{Q_i\}, \quad 1 \le i \le n}{\{IM_1 \land \dots \land IM_m \land P_1 \land \dots \land P_n\} \quad \text{cobegin } S_1 \parallel \dots \parallel S_n \text{ coend} \quad \{IM_1 \land \dots \land IM_m \land Q_1 \land \dots \land Q_n\}}
+\]
+\end{teorema}
+Los procedimientos del monitor actúan como cajas negras atómicas: la concurrencia entre procesos \textbf{elimina la interferencia cruzada}, haciendo que las demostraciones individuales cooperen automáticamente sin necesidad de teoremas de no-interferencia externos.
+
+\subsection{Patrón de Espera Única (EU)}
+El patrón de \textbf{Espera Única} (\emph{Single Wait}) es la forma más simple de sincronización condicional: un proceso cliente debe esperar a que un proceso servidor o suministrador haya alcanzado un hito y notificado el evento antes de poder continuar su ejecución.
+\begin{itemize}[leftmargin=*]
+    \item Variable permanente: \texttt{bool hecho = false;}
+    \item Invariante: $I \equiv \text{hecho} \implies (\text{el proceso notificador ha completado la fase previa})$.
+    \item Operación \texttt{esperar()}: \texttt{if (!hecho) c.wait();}
+    \item Operación \texttt{avisar()}: \texttt{hecho = true; c.signal();}
+\end{itemize}
+
+\subsection{Señales y Colas de Prioridad en Monitores}
+En sistemas de tiempo real y en asignación de recursos escasos con diferentes rangos de urgencia, el orden FIFO de desbloqueo de las variables de condición resulta insuficiente o inaceptable. Para ello, Hoare introdujo las \textbf{colas de prioridad}:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{c.wait(p)}: el proceso invocador se bloquea en la cola de la variable de condición $c$ ordenado de forma creciente según el parámetro de prioridad entera $p$. Un valor numérico menor representa habitualmente una mayor prioridad de servicio.
+    \item \texttt{c.min\_p()}: función de inspección que devuelve el valor de prioridad del proceso más prioritario esperando en la cola de $c$, sin extraerlo ni modificar el estado del monitor.
+\end{itemize}
+Cuando se ejecuta \texttt{c.signal()}, el runtime del monitor selecciona y despierta al proceso situado a la cabeza de la cola ordenada, es decir, aquel cuyo valor de prioridad $p$ es estrictamente mínimo.
+
+% ==============================================================================
 \section{Patrones Clásicos de Concurrencia con Monitores}
 % ==============================================================================
 
-A continuación se analizan, deducen formalmente y resuelven en C++11 los cinco problemas canónicos de la programación concurrente utilizando la arquitectura de monitores con semántica SC (Mesa/Hansen).
+A continuación se analizan, deducen formalmente y resuelven en C++11 los principales problemas canónicos de la programación concurrente utilizando la arquitectura de monitores con semántica SC (Mesa/Hansen).
 
 % ------------------------------------------------------------------------------
 \subsection{Patrón 1: Productor-Consumidor con Búfer Acotado}
@@ -639,3 +757,47 @@ Nótese que en este patrón coexisten dos fases de sincronización distintas:
     \item La sincronización de terminación (el cliente no puede marcharse hasta que el barbero complete el corte, y el barbero no puede llamar al siguiente hasta que el actual abandone la silla).
 \end{enumerate}
 \end{aviso}
+
+% ------------------------------------------------------------------------------
+\subsection{Patrón 6: La Barrera Parcial y Sincronización en Fase}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Planteamiento del Problema}
+Una \textbf{Barrera Parcial} es un mecanismo de sincronización que bloquea a los procesos conforme van llegando a un punto de control, hasta que un subgrupo de tamaño fijado $K$ (o un número par de procesos, como en la \emph{Barrera de Parejas} o \emph{Barrera2}) ha alcanzado el punto de sincronización. En ese instante, todos los procesos del grupo son liberados conjuntamente para iniciar la siguiente fase del cómputo.
+
+\subsubsection{Comportamiento según la Semántica de Señales}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Bajo Semántica SU (Hoare):} El proceso que completa el aforo de la fase ejecuta una secuencia de llamadas a \texttt{signal()} en cadena (cascada de señales). Gracias a la cola urgente, los procesos van despertando y reanudando de forma atómica en exclusión mutua, garantizando que ninguno de ellos pueda adelantar a los demás ni entrar a la siguiente ronda antes de que todos hayan salido.
+    \item \textbf{Bajo Semántica SC (Mesa/C++11):} El último proceso invoca \texttt{cola.notify\_all()}. Para evitar que un hilo rápido que termine velozmente la siguiente fase regrese a la barrera y se mezcle con los hilos que aún no han salido de la fase anterior, es indispensable introducir un \textbf{contador de generación o época} (\emph{generation counter}).
+\end{itemize}
+
+\begin{algoritmo}[Implementación de la Barrera de Parejas (Barrera2) en C++11]
+\begin{lstlisting}[language=C++]
+class Barrera2 {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola;
+    int esperando = 0;
+    int generacion = 0;
+
+public:
+    void llegar() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        int gen_actual = generacion;
+        esperando++;
+
+        if (esperando == 2) {
+            // Se completa la pareja: reiniciamos el contador de espera y avanzamos de fase
+            esperando = 0;
+            generacion++;
+            cola.notify_all(); // Despertar a la pareja sincronizada
+        } else {
+            // El primer hilo en llegar espera a que cambie la generacion
+            while (gen_actual == generacion) {
+                cola.wait(lock);
+            }
+        }
+    }
+};
+\end{lstlisting}
+\end{algoritmo}

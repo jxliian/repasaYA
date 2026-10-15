@@ -6,7 +6,7 @@ semester: 1
 credits: 6
 icon: "🖧"
 status: available
-description: "207 preguntas tipo test y apuntes completos de teoría (71 páginas) sobre concurrencia, monitores, paso de mensajes y tiempo real."
+description: "207 preguntas tipo test verificadas sobre concurrencia, monitores, paso de mensajes y tiempo real."
 materials: [test, apuntes]
 ---
 

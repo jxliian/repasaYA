@@ -55,6 +55,7 @@ Detalle de archivos creados, modificados o eliminados.
 | [`spec_003`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_003_orquestacion_agentes_revision_auditoria.md) | 2026-10-09 | Orquestación Multiagente con Ciclos de Revisión y Auditoría | Arquitectura / Agentes | Implementado |
 | [`spec_004`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_004_skill_orquestacion_compleja.md) | 2026-10-09 | Skill de Orquestación para Tareas de Alta Complejidad | Automatización / Skills | Implementado |
 | [`spec_005`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_005_orquestacion_concurrente_simultanea.md) | 2026-10-09 | Modelo de Orquestación Concurrente y Simultánea Multiagente | Rendimiento / Paralelismo | Implementado |
+| [`spec_006`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_006_scd_auditoria_test_apuntes_y_relaciones.md) | 2026-10-16 | Auditoría de Tests, Apuntes Teóricos y Solucionario de Relaciones de SCD | Contenido / SCD | Implementado |
 
 
 

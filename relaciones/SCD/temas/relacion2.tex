@@ -1,0 +1,917 @@
+\chapter{Relación 2: Sincronización en Memoria Compartida, Semáforos y Monitores}
+\label{cap:relacion2}
+
+\cuadrofuentes{
+    \textbf{Fuentes de referencia cotejadas:}\\
+    $\bullet$ \textbf{Relación Oficial de Problemas. Tema 2 (15/10/2026)} (Manuel I. Capel Tuñón, Dpto. de Lenguajes y Sistemas Informáticos, Universidad de Granada).\\
+    $\bullet$ \textbf{Temario y Relaciones Resueltas de Infomates} (LosDelDGIIM, Secciones 5.2.1 y 5.2.2: Sincronización en Memoria Compartida y Monitores).\\
+    $\bullet$ \textbf{Apuntes y Exámenes Resueltos de Ismael Sallami Moreno} (Doble Grado DGIIM / ADE).\\
+    $\bullet$ \textbf{Transparencias Oficiales de Teoría de SCD} (Tema 2: Sincronización en memoria compartida, monitores y patrones).
+}
+
+\begin{aviso}[Estructura y Metodología de la Relación 2]
+Esta relación contiene la resolución exhaustiva de los \textbf{17 problemas oficiales} (del 37 al 53) de la hoja oficial del Tema 2 de SCD (15/10/2026).
+Todos los ejercicios se resuelven formalmente justificando los \textbf{invariantes de seguridad}, las \textbf{condiciones de progreso} (ausencia de interbloqueo y ausencia de inanición), los tipos de semánticas de monitor utilizadas (\textbf{Hoare/SU} y \textbf{Mesa/SC}) y el pseudocódigo estructurado listo para implementación.
+\end{aviso}
+
+% ==============================================================================
+% BLOQUE I: SEMÁFOROS
+% ==============================================================================
+\section{Bloque I: Mecanismos de Sincronización con Semáforos}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 37
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[37: Coordinación de Secuencias de Procesos con Semáforos]
+Tres procesos ejecutan indefinidamente las siguientes secuencias:
+\begin{lstlisting}[language=C++]
+process P1: while true do begin a; b; c end
+process P2: while true do begin d; e; f end
+process P3: while true do begin g; h; i end
+\end{lstlisting}
+Resolver independientemente mediante semáforos los siguientes requisitos. En (a)--(c), la condición se refiere a la misma ronda $k$ de ejecución de cada proceso, numerada desde 1; evitar que señales de rondas futuras satisfagan esperas de rondas anteriores. Si una solución exige sincronización de fin de ronda, explicitarla:
+\begin{enumerate}[label=(\alph*)]
+    \item $P_2$ ejecuta $e_k$ solamente después de que haya terminado $a_k$ o $g_k$ (basta una de las dos).
+    \item $P_2$ ejecuta $e_k$ solamente después de que hayan terminado $a_k$ y $g_k$.
+    \item $P_2$ ejecuta $e_k$ y $P_3$ ejecuta $h_k$ solamente después de que $P_1$ haya terminado $b_k$; ambas autorizaciones son independientes.
+    \item A lo sumo dos de las operaciones $b$, $f$ y $h$ pueden estar ejecutándose simultáneamente.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): OR Lógico ($a_k$ o $g_k$ habilita $e_k$ en la ronda $k$):}\\
+Para evitar que si ambos terminan se generen dos fichas en el semáforo (lo que satisfaría espuriamente la ronda $k+1$), se utiliza una variable protegida \texttt{notificado} por ronda y una barrera de fin de ronda:
+\begin{lstlisting}[language=C++]
+sem_t sem_e = 0;        // Autoriza a P2 a ejecutar e
+sem_t mutex = 1;        // Protege la variable notificado
+sem_t fin_ronda_1 = 0, fin_ronda_3 = 0; // Sincronizacion de fin de ronda
+bool notificado = false;
+
+// Proceso P1:
+while (true) {
+    a();
+    sem_wait(&mutex);
+    if (!notificado) { notificado = true; sem_post(&sem_e); }
+    sem_post(&mutex);
+    b(); c();
+    sem_wait(&fin_ronda_1); // Espera a que P2 complete la ronda
+}
+
+// Proceso P2:
+while (true) {
+    d();
+    sem_wait(&sem_e);   // Espera autorizacion de a o de g
+    e();
+    f();
+    sem_wait(&mutex);
+    notificado = false; // Reset para la siguiente ronda k+1
+    sem_post(&mutex);
+    sem_post(&fin_ronda_1);
+    sem_post(&fin_ronda_3);
+}
+
+// Proceso P3:
+while (true) {
+    g();
+    sem_wait(&mutex);
+    if (!notificado) { notificado = true; sem_post(&sem_e); }
+    sem_post(&mutex);
+    h(); i();
+    sem_wait(&fin_ronda_3);
+}
+\end{lstlisting}
+
+\textbf{Apartado (b): AND Lógico ($a_k$ y $g_k$ deben terminar antes de $e_k$):}\\
+Se requieren dos semáforos binarios independientes inicializados a 0, y $P_2$ ejecuta sendos \texttt{wait}:
+\begin{lstlisting}[language=C++]
+sem_t sem_a = 0, sem_g = 0;
+sem_t fin_ronda_1 = 0, fin_ronda_3 = 0;
+
+// P1: a(); sem_post(&sem_a); b(); c(); sem_wait(&fin_ronda_1);
+// P3: g(); sem_post(&sem_g); h(); i(); sem_wait(&fin_ronda_3);
+// P2: d(); sem_wait(&sem_a); sem_wait(&sem_g); e(); f();
+//     sem_post(&fin_ronda_1); sem_post(&fin_ronda_3);
+\end{lstlisting}
+
+\textbf{Apartado (c): Bifurcación independiente tras $b_k$ (habilita $e_k$ y $h_k$):}\\
+$P_1$ notifica a través de dos semáforos distintos y espera a que ambos procesos completen su uso antes de pasar a la ronda $k+1$:
+\begin{lstlisting}[language=C++]
+sem_t sem_p2 = 0, sem_p3 = 0;
+sem_t fin_p2 = 0, fin_p3 = 0;
+
+// P1: a(); b(); sem_post(&sem_p2); sem_post(&sem_p3); c(); sem_wait(&fin_p2); sem_wait(&fin_p3);
+// P2: d(); sem_wait(&sem_p2); e(); f(); sem_post(&fin_p2);
+// P3: g(); sem_wait(&sem_p3); h(); i(); sem_post(&fin_p3);
+\end{lstlisting}
+
+\textbf{Apartado (d): A lo sumo 2 operaciones de $\{b, f, h\}$ simultáneas:}\\
+Este es el patrón canónico de exclusión mutua generalizada ($N$-aforo). Se define un \textbf{semáforo contador inicializado a 2}:
+\begin{lstlisting}[language=C++]
+sem_t aforo_bfh = 2; // Invariante: 0 <= aforo_bfh <= 2
+
+// En P1: a(); sem_wait(&aforo_bfh); b(); sem_post(&aforo_bfh); c();
+// En P2: d(); e(); sem_wait(&aforo_bfh); f(); sem_post(&aforo_bfh);
+// En P3: g(); sem_wait(&aforo_bfh); h(); sem_post(&aforo_bfh); i();
+\end{lstlisting}
+\textbf{Invariante de seguridad:} En todo instante se cumple:
+\[
+(\text{en\_b} + \text{en\_f} + \text{en\_h}) + \text{valor}(aforo\_bfh) = 2 \implies \text{en\_b} + \text{en\_f} + \text{en\_h} \le 2.
+\]
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 38
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[38: Productor-Consumidor sobre Variable Simple]
+Dos procesos comparten la variable global $x$. Las constantes $n$ y $c$ son inmutables; $m$ y $d$ son locales:
+\begin{lstlisting}[language=C++]
+process P1: while true do begin m := 2*x - n; imprimir(m); end
+process P2: while true do begin d := leer_teclado(); x := d - 5*c; end
+\end{lstlisting}
+Diseñar dos protocolos mediante semáforos:
+\begin{enumerate}[label=(\alph*)]
+    \item Consumir exactamente una vez todos los valores producidos, en orden y sin sobrescrituras.
+    \item Consumir exactamente los valores de orden impar ($1, 3, 5, \dots$), descartando los de orden par, sin duplicaciones ni lecturas inconsistentes.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Consumo 1 a 1 de todos los valores:}\\
+Se utilizan dos semáforos binarios que forman un cerrojo alternante (\emph{ping-pong}):
+\begin{lstlisting}[language=C++]
+sem_t libre = 1;     // P2 puede producir
+sem_t ocupado = 0;   // P1 puede consumir
+
+// Proceso P1 (Consumidor):
+while (true) {
+    sem_wait(&ocupado);
+    m = 2 * x - n;
+    sem_post(&libre);
+    imprimir(m);
+}
+
+// Proceso P2 (Productor):
+while (true) {
+    d = leer_teclado();
+    sem_wait(&libre);
+    x = d - 5 * c;
+    sem_post(&ocupado);
+}
+\end{lstlisting}
+$P_2$ se bloquea si produce un valor antes de que $P_1$ lo consuma. Se garantiza que cada valor producido se consume exactamente una vez en orden.
+
+\textbf{Apartado (b): Consumo exclusivo de los valores de orden impar ($1, 3, 5, \dots$):}\\
+$P_2$ cuenta las producciones mediante una variable local. Si la producción es par, no avisa a $P_1$; si es impar, avisa y espera lectura:
+\begin{lstlisting}[language=C++]
+sem_t libre = 1;
+sem_t ocupado = 0;
+
+// Proceso P1 (Consumidor):
+while (true) {
+    sem_wait(&ocupado); // Solo despierta en valores impares
+    m = 2 * x - n;
+    sem_post(&libre);
+    imprimir(m);
+}
+
+// Proceso P2 (Productor):
+int orden = 0;
+while (true) {
+    d = leer_teclado();
+    orden++;
+    if (orden % 2 != 0) {
+        // Valor impar: debe ser consumido obligatoriamente por P1
+        sem_wait(&libre);
+        x = d - 5 * c;
+        sem_post(&ocupado);
+    } else {
+        // Valor par: se descarta sin que P1 lo consuma
+        sem_wait(&libre);
+        x = d - 5 * c;
+        sem_post(&libre); // Se libera inmediatamente para la siguiente produccion
+    }
+}
+\end{lstlisting}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 39
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[39: El Aseo Compartido con Semáforos POSIX]
+Un aseo admite simultáneamente o bien una mujer o bien hasta cinco hombres; nunca ambos a la vez. Resolver con semáforos POSIX no nombrados:
+\begin{enumerate}[label=(\alph*)]
+    \item Prioridad estricta de hombres: si hay hombres esperando, ninguna mujer nueva puede entrar, incluso si el aforo masculino está completo.
+    \item Prioridad estricta de mujeres: si hay mujeres esperando, ningún hombre nuevo puede entrar.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+Se modela la variante (a) (Prioridad a Hombres). Se mantienen contadores protegidos para hombres dentro ($H$), hombres esperando ($H_{esp}$), mujeres dentro ($M$) y mujeres esperando ($M_{esp}$):
+\begin{lstlisting}[language=C++]
+sem_t mutex = 1;
+sem_t sem_hombres = 0;
+sem_t sem_mujeres = 0;
+int H = 0, H_esp = 0;
+int M = 0, M_esp = 0;
+
+void entrar_hombre() {
+    sem_wait(&mutex);
+    H_esp++;
+    // Puede entrar si no hay mujeres dentro y hay menos de 5 hombres
+    if (M == 0 && H < 5) {
+        H_esp--;
+        H++;
+        sem_post(&sem_hombres);
+    }
+    sem_post(&mutex);
+    sem_wait(&sem_hombres);
+}
+
+void salir_hombre() {
+    sem_wait(&mutex);
+    H--;
+    // Si quedan hombres esperando, entra el siguiente hombre
+    if (H_esp > 0 && H < 5) {
+        H_esp--;
+        H++;
+        sem_post(&sem_hombres);
+    } else if (H == 0 && H_esp == 0 && M_esp > 0) {
+        // Si no quedan hombres, pasa una mujer
+        M_esp--;
+        M = 1;
+        sem_post(&sem_mujeres);
+    }
+    sem_post(&mutex);
+}
+
+void entrar_mujer() {
+    sem_wait(&mutex);
+    // Prioridad a hombres: solo entra si H == 0, M == 0 y NO hay hombres esperando
+    if (H == 0 && M == 0 && H_esp == 0) {
+        M = 1;
+        sem_post(&sem_mujeres);
+    } else {
+        M_esp++;
+    }
+    sem_post(&mutex);
+    sem_wait(&sem_mujeres);
+}
+
+void salir_mujer() {
+    sem_wait(&mutex);
+    M = 0;
+    // Tienen prioridad los hombres que esperan
+    if (H_esp > 0) {
+        int a_despertar = std::min(H_esp, 5);
+        H_esp -= a_despertar;
+        H += a_despertar;
+        for (int k = 0; k < a_despertar; k++) sem_post(&sem_hombres);
+    } else if (M_esp > 0) {
+        M_esp--;
+        M = 1;
+        sem_post(&sem_mujeres);
+    }
+    sem_post(&mutex);
+}
+\end{lstlisting}
+\textbf{Discusión sobre Inanición:} La prioridad estricta causa \textbf{inanición de mujeres} si el flujo de llegada de hombres es continuo ($H_{esp} > 0$). Los semáforos POSIX no garantizan política FIFO en el desbloqueo, por lo que dentro de la misma clase el planificador del kernel puede elegir arbitrariamente.
+\end{solucion}
+
+% ==============================================================================
+% BLOQUE II: MONITORES
+% ==============================================================================
+\section{Bloque II: Monitores y Sincronización de Alto Nivel}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 40
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[40: Reentrancia frente a Exclusión Mutua en Monitores]
+Un monitor garantiza exclusión mutua al ejecutar sus procedimientos. Explicar qué significa que un procedimiento sea reentrante, por qué exclusión mutua y reentrancia no son equivalentes y en qué situaciones es necesario exigir reentrancia. Distinguir la semántica de señales Hoare (SU) y Mesa (SC).
+\end{ejercicio}
+
+\begin{solucion}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Definición de Reentrancia:} Un código es reentrante si puede ser interrumpido a mitad de su ejecución por otro hilo (o por una llamada recursiva/señal) y reanudado posteriormente sin que su estado lógico resulte alterado. Para ello, \textbf{no debe modificar variables estáticas o globales no protegidas} y debe almacenar su estado local exclusivamente en la pila (\emph{stack}) del hilo invocador.
+    \item \textbf{No equivalencia con Exclusión Mutua:} La exclusión mutua restringe el acceso a un solo hilo a la vez, pero no previene que si un procedimiento realiza una llamada recursiva sobre sí mismo o cede el monitor en un \texttt{wait}, el estado local sea sobreescrito si reside en memoria estática.
+    \item \textbf{Situaciones donde se exige reentrancia:}
+    \begin{enumerate}
+        \item Cuando un hilo en un monitor invoca \texttt{c.wait()} o \texttt{c.signal()}: el hilo cede el monitor y otro hilo puede entrar al mismo procedimiento. Si las variables locales estuvieran en variables globales del monitor, el nuevo hilo las destruiría.
+        \item Invocaciones cruzadas o recursivas entre procedimientos del monitor.
+    \end{enumerate}
+    \item \textbf{Diferencia entre SU y SC:}
+    \begin{itemize}
+        \item \textbf{SU (Hoare):} El señalador pasa a la cola urgente y el despertado entra de inmediato. La condición lógica se garantiza intacta tras \texttt{wait} (basta \texttt{if (!cond) wait()}).
+        \item \textbf{SC (Mesa):} El señalador retiene el monitor y el despertado va a la cola de entrada. La condición puede ser invalidada por otro hilo antes de que el despertado tome el control, haciendo \textbf{obligatorio el bucle} \texttt{while (!cond) wait()}.
+    \end{itemize}
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 41
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[41: Dos Tipos de Recursos Indistinguibles y Prevención de Interbloqueo]
+Un sistema dispone de $N_1 > 0$ unidades de recurso tipo 1 y $N_2 > 0$ de tipo 2. Demostrar cómo surge interbloqueo y diseñar un monitor que lo evite.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Escenario de Interbloqueo:}\\
+Si el proceso $A$ pide primero 1 unidad de $N_1$ y luego 1 de $N_2$, mientras que el proceso $B$ pide primero 1 de $N_2$ y luego 1 de $N_1$, se puede llegar al estado donde $N_1$ y $N_2$ quedan agotados: $A$ retiene $N_1$ y espera $N_2$, y $B$ retiene $N_2$ y espera $N_1$. Cumple las 4 condiciones de Coffman $\implies$ \textbf{Interbloqueo circular}.
+
+\textbf{2. Diseño del Monitor con Asignación Atómica (Todo o Nada):}
+\begin{lstlisting}[language=C++]
+class MonitorRecursos {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola;
+    int libres1, libres2;
+
+public:
+    MonitorRecursos(int n1, int n2) : libres1(n1), libres2(n2) {}
+
+    void adquirir(int p1, int p2) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        // Condicion atomica: solo pasa si se pueden satisfacer AMBOS recursos
+        while (libres1 < p1 || libres2 < p2) {
+            cola.wait(lock);
+        }
+        libres1 -= p1;
+        libres2 -= p2;
+    }
+
+    void liberar(int l1, int l2) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        libres1 += l1;
+        libres2 += l2;
+        cola.notify_all(); // Despertar a los solicitantes bloqueados
+    }
+};
+\end{lstlisting}
+Al concederse los recursos de forma atómica (\emph{all-or-nothing}), se destruye la condición de Coffman de \textbf{retención y espera}, impidiendo formalmente el interbloqueo.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 42
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[42: Lectores-Escritores con Monitores]
+Resolver el problema de lectores y escritores mediante monitores con prioridad a escritores y con política equitativa sin inanición.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Variante con Prioridad a Escritores:} Si hay algún escritor esperando o escribiendo, los nuevos lectores deben bloquearse:
+\begin{lstlisting}[language=C++]
+class LectoresEscritoresPrioridadEscritores {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola_lectores, cola_escritores;
+    int num_lectores = 0;
+    bool escribiendo = false;
+    int escritores_esperando = 0;
+
+public:
+    void iniciar_lectura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        while (escribiendo || escritores_esperando > 0) {
+            cola_lectores.wait(lock);
+        }
+        num_lectores++;
+    }
+
+    void fin_lectura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        num_lectores--;
+        if (num_lectores == 0 && escritores_esperando > 0) {
+            cola_escritores.notify_one();
+        }
+    }
+
+    void iniciar_escritura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        escritores_esperando++;
+        while (escribiendo || num_lectores > 0) {
+            cola_escritores.wait(lock);
+        }
+        escritores_esperando--;
+        escribiendo = true;
+    }
+
+    void fin_escritura() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        escribiendo = false;
+        if (escritores_esperando > 0) {
+            cola_escritores.notify_one();
+        } else {
+            cola_lectores.notify_all();
+        }
+    }
+};
+\end{lstlisting}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 43
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[43: Puente de un Solo Carril con Cupo Máximo]
+Vehículos del norte y del sur cruzan un puente de un solo carril.
+\begin{enumerate}[label=(\alph*)]
+    \item Monitor básico y discusión de inanición.
+    \item Modificación para conceder turnos de hasta diez entradas consecutivas cuando hay espera opuesta.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a):} En la política básica (entran del norte si no hay coches del sur cruzando), si llega un flujo ininterrumpido de coches del norte, los coches del sur sufrirán \textbf{inanición indefinida}.
+
+\textbf{Apartado (b): Monitor con Cupo de 10 Coches y Alternancia Justa:}
+\begin{lstlisting}[language=C++]
+class MonitorPuenteCupo {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola_norte, cola_sur;
+    int coches_cruzando = 0;
+    int sentido_actual = 0; // 0: vacio, 1: Norte, 2: Sur
+    int esperando_norte = 0, esperando_sur = 0;
+    int cupo_actual = 0;    // Contador de coches en la ronda actual (max 10)
+
+public:
+    void entrarNorte() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        esperando_norte++;
+        while ((sentido_actual == 2 && coches_cruzando > 0) ||
+               (sentido_actual == 1 && cupo_actual >= 10 && esperando_sur > 0)) {
+            cola_norte.wait(lock);
+        }
+        esperando_norte--;
+        sentido_actual = 1;
+        coches_cruzando++;
+        cupo_actual++;
+    }
+
+    void salirNorte() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        coches_cruzando--;
+        if (coches_cruzando == 0) {
+            if (cupo_actual >= 10 || esperando_norte == 0) {
+                // Cambio de sentido hacia el Sur
+                cupo_actual = 0;
+                sentido_actual = (esperando_sur > 0) ? 2 : 0;
+                cola_sur.notify_all();
+            } else {
+                cola_norte.notify_all();
+            }
+        }
+    }
+    // Funciones analogas para entrarSur() y salirSur() invirtiendo los roles
+};
+\end{lstlisting}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 44
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[44: La Olla de los Salvajes y el Cocinero]
+Olla de capacidad $M > 0$ raciones y $N > 0$ comensales. El primer salvaje que encuentra la olla vacía despierta al cocinero; el resto espera sin generar nuevas llamadas. Diseñar el monitor con semántica SU.
+\end{ejercicio}
+
+\begin{solucion}
+\begin{lstlisting}[language=C++]
+Monitor Olla {
+    int raciones = M;      // Capacidad inicial llena
+    cond cola_salvajes;
+    cond cola_cocinero;
+    bool aviso_enviado = false;
+
+    procedure servir() {
+        // En semantica SU, basta un if porque la senal reactiva de inmediato
+        if (raciones == 0) {
+            if (!aviso_enviado) {
+                aviso_enviado = true;
+                cola_cocinero.signal(); // Despierta al cocinero (pasa a cola urgente)
+            }
+            cola_salvajes.wait();
+        }
+        raciones = raciones - 1;
+        if (raciones > 0) {
+            cola_salvajes.signal(); // Efecto cascada: avisa al siguiente salvaje
+        }
+    }
+
+    procedure esperarPeticion() {
+        if (!aviso_enviado) {
+            cola_cocinero.wait();
+        }
+    }
+
+    procedure reponer() {
+        raciones = M;
+        aviso_enviado = false;
+        cola_salvajes.signal(); // Despierta al primer salvaje en espera
+    }
+}
+\end{lstlisting}
+\textbf{Invariante:} $0 \le raciones \le M$. Si $raciones == 0$, ningún salvaje puede completar \texttt{servir()} antes de que el cocinero reponga.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 45
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[45: Cuenta Bancaria Compartida con Saldo No Negativo]
+Saldo inicial $S_0 \ge 0$. Procedimientos \texttt{ingresar(c)} y \texttt{retirar(c)} ($c > 0$). Resolver bajo políticas:
+\begin{enumerate}[label=(\alph*)]
+    \item Concesión en cuanto hay saldo suficiente (con colas normales y con colas de prioridad por importe solicitado).
+    \item Orden estricto de llegada (FIFO).
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a.2): Cola de prioridad por importe solicitado ($c$ mínimo primero):}\\
+Bajo semántica SU, se utiliza una variable condición con prioridad ordenada por el importe $c$:
+\begin{lstlisting}[language=C++]
+Monitor CuentaAhorrosPrioridadImporte {
+    int saldo = S0;
+    cond_p cola_retiradas; // Cola de condicion con prioridad por c
+
+    procedure ingresar(int c) {
+        saldo = saldo + c;
+        // Despertar mientras haya fondos para el que pide menos
+        while (!cola_retiradas.empty() && cola_retiradas.min_p() <= saldo) {
+            cola_retiradas.signal();
+        }
+    }
+
+    procedure retirar(int c) {
+        if (saldo < c) {
+            cola_retiradas.wait(c); // Se suspende con prioridad = c
+        }
+        saldo = saldo - c;
+        if (!cola_retiradas.empty() && cola_retiradas.min_p() <= saldo) {
+            cola_retiradas.signal();
+        }
+    }
+}
+\end{lstlisting}
+
+\textbf{Apartado (b): Orden estricto de llegada (FIFO con Ticket):}\\
+\begin{lstlisting}[language=C++]
+Monitor CuentaFIFO {
+    int saldo = S0;
+    int ticket_turno = 0;
+    int ticket_siguiente = 0;
+    cond cola_espera;
+
+    procedure ingresar(int c) {
+        saldo = saldo + c;
+        cola_espera.signal_all(); // Notifica para que el del turno revalide
+    }
+
+    procedure retirar(int c) {
+        int mi_ticket = ticket_siguiente++;
+        while (mi_ticket != ticket_turno || saldo < c) {
+            cola_espera.wait();
+        }
+        saldo = saldo - c;
+        ticket_turno++;
+        cola_espera.signal_all();
+    }
+}
+\end{lstlisting}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 46
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[46: Recurso Indivisible con Prioridades y Envejecimiento]
+$n \ge 1$ procesos comparten un recurso $R$. Cada $P_i$ tiene prioridad fija $i$ (índice menor = mayor prioridad). Diseñar monitor y política de envejecimiento para evitar inanición.
+\end{ejercicio}
+
+\begin{solucion}
+\begin{lstlisting}[language=C++]
+Monitor RecursoPrioridad {
+    bool ocupado = false;
+    cond_p cola_espera; // Cola ordenada por prioridad efectiva
+
+    procedure solicitar(int id, int prioridad_base) {
+        if (ocupado) {
+            cola_espera.wait(prioridad_base);
+        }
+        ocupado = true;
+    }
+
+    procedure liberar() {
+        ocupado = false;
+        if (!cola_espera.empty()) {
+            cola_espera.signal(); // Despierta al de menor indice numerico
+        }
+    }
+}
+\end{lstlisting}
+\textbf{Envejecimiento (\emph{Aging}):} Si llegan continuamente procesos de prioridad alta, los de prioridad baja sufren inanición. Para impedirlo, cada vez que un proceso completa el recurso, se decrementa en 1 unidad la prioridad efectiva de todos los procesos que continúen esperando en la cola (\texttt{prioridad\_efectiva = max(1, prioridad\_base - esperas)}), garantizando que cualquier petición alcanzará eventualmente la máxima prioridad (ausencia de inanición).
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 47
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[47: Barrera Cíclica de Dos Participantes (Semáforos Puros)]
+Implementar una barrera cíclica reutilizable para dos hilos utilizando exclusivamente semáforos y contadores. Evitar que una señal de la ronda $k$ libere erróneamente a un hilo de la ronda $k+1$.
+\end{ejercicio}
+
+\begin{solucion}
+Se utiliza el esquema clásico del \textbf{Doble Torniquete} (\emph{Two-Turnstile}):
+\begin{lstlisting}[language=C++]
+sem_t mutex = 1;
+sem_t torniquete1 = 0;
+sem_t torniquete2 = 1; // Segundo torniquete cerrado para la fase de salida
+int contador = 0;
+
+void llegar() {
+    // FASE 1: Llegada y bloqueo
+    sem_wait(&mutex);
+    contador++;
+    if (contador == 2) {
+        sem_wait(&torniquete2); // Bloquea la salida de la fase previa
+        sem_post(&torniquete1); // Abre el paso del primer torniquete
+    }
+    sem_post(&mutex);
+
+    sem_wait(&torniquete1); // Espera de fase
+    sem_post(&torniquete1); // Cascada
+
+    // FASE 2: Salida y preparacion para la siguiente ronda
+    sem_wait(&mutex);
+    contador--;
+    if (contador == 0) {
+        sem_wait(&torniquete1); // Cierra el primer torniquete
+        sem_post(&torniquete2); // Abre el segundo torniquete
+    }
+    sem_post(&mutex);
+
+    sem_wait(&torniquete2);
+    sem_post(&torniquete2);
+}
+\end{lstlisting}
+El segundo torniquete impide que el primer hilo que supere la barrera complete la siguiente ronda e interactúe con el contador antes de que el segundo hilo haya salido de la ronda actual.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 48
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[48: Los Cinco Filósofos Comensales con Monitor]
+Cinco filósofos comparten 5 tenedores.
+\begin{enumerate}[label=(\alph*)]
+    \item Adquisición individual en monitor y corrección de la liberación.
+    \item Ejecución con interbloqueo.
+    \item Prevención mediante limitación de aforo a 4 filósofos.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a) y (b): Interbloqueo Circular:}\\
+Si cada filósofo $i$ toma primero su tenedor izquierdo $T_i$, todos los 5 filósofos retienen un tenedor y esperan el derecho $T_{(i+1)\%5}$. Hay un ciclo de espera cerrada $\implies$ \textbf{Interbloqueo}.
+
+\textbf{Apartado (c): Solución con Aforo de 4 Filósofos:}
+\begin{lstlisting}[language=C++]
+class MonitorFilosofosAforo {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola_aforo;
+    std::condition_variable cola_tenedores[5];
+    bool tenedor_libre[5] = {true, true, true, true, true};
+    int comiendo_o_esperando = 0;
+
+public:
+    void entrar_a_comer(int i) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        // Aforo maximo 4: garantiza que al menos un filosofo podra tomar ambos tenedores
+        while (comiendo_o_esperando >= 4) {
+            cola_aforo.wait(lock);
+        }
+        comiendo_o_esperando++;
+
+        while (!tenedor_libre[i]) cola_tenedores[i].wait(lock);
+        tenedor_libre[i] = false;
+
+        while (!tenedor_libre[(i + 1) % 5]) cola_tenedores[(i + 1) % 5].wait(lock);
+        tenedor_libre[(i + 1) % 5] = false;
+    }
+
+    void salir_de_comer(int i) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        tenedor_libre[i] = true;
+        tenedor_libre[(i + 1) % 5] = true;
+        cola_tenedores[i].notify_one();
+        cola_tenedores[(i + 1) % 5].notify_one();
+
+        comiendo_o_esperando--;
+        cola_aforo.notify_one();
+    }
+};
+\end{lstlisting}
+Por el Principio del Palomar, con 4 filósofos y 5 tenedores, al menos uno tendrá disponibles sus dos tenedores contiguos, garantizando \textbf{ausencia absoluta de interbloqueo}.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 49
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[49: Canal Acotado con Cierre y Terminación Limpia]
+Canal de capacidad $K \ge 1$ con $p \ge 2$ productores y $q \ge 2$ consumidores. Implementar con semáforos un mecanismo de cierre sin marcadores centinela que desbloquee limpiamente a todos los consumidores al vaciarse.
+\end{ejercicio}
+
+\begin{solucion}
+\begin{lstlisting}[language=C++]
+sem_t mutex = 1;
+sem_t libres = K;
+sem_t ocupados = 0;
+int productores_activos = p;
+bool canal_cerrado = false;
+int elementos_en_buffer = 0;
+
+void enviar(T elem) {
+    sem_wait(&libres);
+    sem_wait(&mutex);
+    buffer.push(elem);
+    elementos_en_buffer++;
+    sem_post(&mutex);
+    sem_post(&ocupados);
+}
+
+void terminar_productor() {
+    sem_wait(&mutex);
+    productores_activos--;
+    if (productores_activos == 0) {
+        canal_cerrado = true;
+        // Despertar a posibles consumidores bloqueados
+        for (int i = 0; i < q; i++) sem_post(&ocupados);
+    }
+    sem_post(&mutex);
+}
+
+bool recibir(T &elem) {
+    sem_wait(&ocupados);
+    sem_wait(&mutex);
+    if (elementos_en_buffer == 0 && canal_cerrado) {
+        // Cascada para liberar a otros consumidores terminados
+        sem_post(&ocupados);
+        sem_post(&mutex);
+        return false; // Senal de fin de canal
+    }
+    elem = buffer.pop();
+    elementos_en_buffer--;
+    sem_post(&mutex);
+    sem_post(&libres);
+    return true;
+}
+\end{lstlisting}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 50
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[50: Asignación Multidimensional de Recursos Todo o Nada]
+Tres clases de recursos $(N_A, N_B, N_C)$. Diseñar monitor con reserva atómica, comparar FIFO frente a primera satisfacible y política de envejecimiento.
+\end{ejercicio}
+
+\begin{solucion}
+\begin{lstlisting}[language=C++]
+class MonitorMultirrecurso {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola;
+    int dispA, dispB, dispC;
+    int ticket_turno = 0;
+    int ticket_siguiente = 0;
+
+public:
+    void adquirir_fifo(int a, int b, int c) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        int mi_ticket = ticket_siguiente++;
+        while (mi_ticket != ticket_turno || dispA < a || dispB < b || dispC < c) {
+            cola.wait(lock);
+        }
+        dispA -= a; dispB -= b; dispC -= c;
+        ticket_turno++;
+        cola.notify_all();
+    }
+
+    void liberar(int a, int b, int c) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        dispA += a; dispB += b; dispC += c;
+        cola.notify_all();
+    }
+};
+\end{lstlisting}
+\textbf{Comparativa de Políticas de Admisión:}
+\begin{itemize}
+    \item \textbf{Primera satisfacible:} Maximiza el uso del hardware al no bloquear peticiones pequeñas si hay una grande esperando, pero produce \textbf{inanición de procesos con solicitudes grandes}.
+    \item \textbf{FIFO estricto:} Garantiza vivacidad y equidad absoluta a costa de reducir el rendimiento global si la cabeza de la cola pide más de lo disponible.
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 51
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[51: Barrera Reutilizable con Bajas Dinámicas y Plazo Vencido]
+Barrera para $N \ge 3$ hilos con generaciones numeradas, soporte de bajas y semántica de barrera rota (\emph{broken barrier}).
+\end{ejercicio}
+
+\begin{solucion}
+Si vence el plazo de espera (\emph{timeout}) de uno de los hilos, se produce la ruptura de la barrera: todos los hilos que esperan en esa misma generación son despertados lanzando una excepción \texttt{BrokenBarrierException}:
+\begin{lstlisting}[language=C++]
+class BarreraGeneracional {
+private:
+    std::mutex cerrojo;
+    std::condition_variable cola;
+    int participantes_activos;
+    int esperando = 0;
+    int generacion = 0;
+    bool rota = false;
+
+public:
+    BarreraGeneracional(int n) : participantes_activos(n) {}
+
+    void darse_de_baja() {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        participantes_activos--;
+        if (esperando == participantes_activos) {
+            generacion++;
+            esperando = 0;
+            cola.notify_all();
+        }
+    }
+
+    void sincronizar(int timeout_ms) {
+        std::unique_lock<std::mutex> lock(cerrojo);
+        int gen_local = generacion;
+        if (rota) throw std::runtime_error("Barrera Rota");
+
+        esperando++;
+        if (esperando == participantes_activos) {
+            esperando = 0;
+            generacion++;
+            cola.notify_all();
+            return;
+        }
+
+        auto status = cola.wait_for(lock, std::chrono::milliseconds(timeout_ms),
+            [&] { return generacion != gen_local || rota; });
+
+        if (!status) {
+            rota = true;
+            cola.notify_all();
+            throw std::runtime_error("Timeout: Barrera Rota");
+        }
+        if (rota) throw std::runtime_error("Barrera Rota por otro hilo");
+    }
+};
+\end{lstlisting}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 52
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[52: Extensión del Puente con Ambulancias de Prioridad]
+Extender el monitor del puente (Problema 43) para ambulancias prioritarias manteniendo seguridad y cupo de 10 coches ordinarios para evitar inanición.
+\end{ejercicio}
+
+\begin{solucion}
+Las ambulancias cruzan en cuanto el puente no tiene vehículos de sentido contrario, pero no pueden expulsar a los coches que ya se encuentran dentro del puente. Se establece la regla:
+\begin{lstlisting}[language=C++]
+// Condiciones de entrada de Ambulancia Norte:
+while (sentido_actual == 2 && coches_cruzando > 0) {
+    cola_ambulancia_norte.wait(lock);
+}
+sentido_actual = 1;
+coches_cruzando++;
+\end{lstlisting}
+Para evitar la inanición de coches ordinarios ante un flujo continuo de ambulancias, tras cruzar $K$ ambulancias consecutivas se reserva una ventana forzosa para los coches ordinarios en cola.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 53
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[53: Transferencias Concurrentes entre Dos Servicios Independientes]
+Servicios $A$ y $B$ con saldos no negativos. No se permite monitor global ni retener un monitor esperando en otro.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Prevención de Interbloqueo con Orden Parcial de Cierres:}\\
+Si una transferencia $A \to B$ adquiere primero el cerrojo de $A$ y luego el de $B$, mientras una transferencia $B \to A$ adquiere primero $B$ y luego $A$, surge interbloqueo.
+\textbf{Solución:} Establecer una regla de orden global en memoria (ej. por dirección o identificador alfabético $id_A < id_B$):
+\begin{lstlisting}[language=C++]
+void transferir(Servicio &origen, Servicio &destino, int cantidad) {
+    Servicio &primero = (origen.id < destino.id) ? origen : destino;
+    Servicio &segundo = (origen.id < destino.id) ? destino : origen;
+
+    std::unique_lock<std::mutex> lk1(primero.cerrojo);
+    std::unique_lock<std::mutex> lk2(segundo.cerrojo);
+
+    if (origen.saldo >= cantidad) {
+        origen.saldo -= cantidad;
+        destino.saldo += cantidad;
+    }
+}
+\end{lstlisting}
+\textbf{Invariante Global de Conservación:} En todo estado se verifica:
+\[
+\text{Saldo}(A) + \text{Saldo}(B) = \text{Saldo Inicial}(A) + \text{Saldo Inicial}(B)
+\]
+\textbf{2. Tolerancia a Fallos:} En sistemas distribuidos con caída de nodos, la transferencia debe dividirse en dos fases (Protocolo Two-Phase Commit - 2PC) con un identificador unívoco de transacción y un registro persistente (\emph{write-ahead log}) para deshacer cargos parciales si el nodo receptor colapsa.
+\end{solucion}

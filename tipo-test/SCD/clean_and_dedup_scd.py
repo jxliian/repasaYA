@@ -129,6 +129,34 @@ def main():
                 "con la precondición del proceso ⟨y = x + b⟩. Para a ≠ 0 existe interferencia entre los procesos "
                 "y la regla de composición concurrente directa no es aplicable sin variables auxiliares."
             )
+
+        elif "Qué reto presentan las trazas de ejecución" in q:
+            correct = 2
+            item["justification"] = (
+                "[Nota de corrección repasaYA: En los cuestionarios web de autoevaluación figuraba erróneamente "
+                "marcada la opción 0 ('Las trazas no pueden utilizarse con fines de depuración'). La clave correcta "
+                "es la opción 2: el reto inherente de las trazas de ejecución en concurrencia es el tamaño exponencial "
+                "del espacio de intercalaciones posibles (interleaving), lo que impide predecir trayectorias de ejecución "
+                "y dificulta reproducir errores transitorios.]"
+            )
+
+        elif "Qué significa \"progreso local\" en la programación concurrente" in q:
+            correct = 1
+            item["justification"] = (
+                "[Nota de corrección repasaYA: En las autoevaluaciones web previas figuraba incorrectamente la opción 3 "
+                "('puede detenerse a mitad de ejecución...'). La respuesta correcta es la opción 1 ('debe completarla sin interrupción'), "
+                "siguiendo textualmente la definición del Prof. Manuel Capel en la transparencia 1.14 de T1.pdf y el temario oficial "
+                "de UGR: progreso local exige que una vez que un proceso inicia la ejecución de una sección de código, "
+                "debe finalizar dicha sección.]"
+            )
+
+        elif "Qué garantiza el algoritmo de Dekker" in q:
+            item["justification"] = (
+                "[Aclaración didáctica repasaYA: En las plataformas de autoevaluación se daba como clave esta opción de compromiso. "
+                "No obstante, en la teoría clásica de concurrencia y en el temario oficial de SCD (Dijkstra y Capel), el algoritmo "
+                "de Dekker para 2 procesos garantiza exclusión mutua, ausencia de interbloqueo y ausencia de inanición (starvation-freedom), "
+                "si bien no garantiza equidad estricta en orden FIFO.]"
+            )
             
         # Puntos de mejora en opciones
         new_opts = []

@@ -180,6 +180,26 @@
   breakable
 }
 
+% Entorno: Teorema / Regla Formal
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  colback=scdLightAccent,
+  colframe=scdAccent,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Teorema / Regla Formal\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=scdAccent,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
 % Configuración de listings para código (C++, MPI, etc.)
 \lstset{
   backgroundcolor=\color{codeBg},

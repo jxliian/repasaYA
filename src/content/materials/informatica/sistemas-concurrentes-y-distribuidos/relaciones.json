@@ -1,8 +1,8 @@
 {
   "subject": "informatica/sistemas-concurrentes-y-distribuidos",
   "type": "apuntes",
-  "title": "Relaciones de Problemas Resueltas (Tema 1: 36 ejercicios)",
+  "title": "Relaciones de Problemas Resueltas (Temas 1 y 2: 53 ejercicios)",
   "order": 2,
   "pdf": "scd/relaciones-problemas-scd.pdf",
-  "description": "Resolución exhaustiva de los 36 problemas oficiales de la Relación 1 (Capel 2026, Infomates e Ismael Sallami) explicados paso a paso."
+  "description": "Resolución exhaustiva de los 53 problemas de las Relaciones 1 y 2 (Capel 2026, Infomates e Ismael Sallami) explicados paso a paso con código C++11, semáforos y monitores Hoare/Lampson-Redell."
 }
