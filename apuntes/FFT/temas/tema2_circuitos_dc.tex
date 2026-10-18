@@ -14,357 +14,260 @@
 
 Un circuito eléctrico es una interconexión de componentes con terminales a través de los cuales fluye carga eléctrica. En corriente continua (DC), las tensiones y corrientes no varían con el tiempo en régimen permanente.
 
-\subsection{Convención de Signos y Balance de Potencia}
+\subsection{Convención de Signos y Fuentes de Energía}
 \begin{definicion}[Convención de Signos Pasiva y Activa]
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Criterio Pasivo (Consumidor / Receptor):} La corriente $I$ entra por el terminal de mayor potencial positivo ($+$) del elemento:
-    \begin{equation}
-        P = V \cdot I
-    \end{equation}
-    Si $P > 0$, el elemento absorbe y disipa energía (p.~ej., una resistencia disipando calor por efecto Joule). Si $P < 0$, el elemento está cediendo potencia a la red.
-    \item \textbf{Criterio Activo (Generador / Fuente):} La corriente $I$ sale por el terminal positivo ($+$) del dispositivo:
-    \begin{equation}
-        P_{entregada} = V \cdot I
-    \end{equation}
-    \item \textbf{Teorema de Tellegen (Balance Global de Potencias):} En cualquier instante, la suma algebraica de potencias absorbidas por todos los elementos de un circuito es idénticamente nula (conservación rigurosa de la energía):
-    \begin{equation}
-        \sum_{k} P_{k} = 0 \iff \sum P_{suministrada} = \sum P_{absorbida}
-    \end{equation}
+    \item \textbf{Criterio Pasivo (Receptor):} La corriente $I$ entra por el terminal positivo ($+$). La potencia absorbida es $P = V \cdot I$. Si $P > 0$, el elemento disipa o almacena energía.
+    \item \textbf{Criterio Activo (Generador):} La corriente $I$ sale por el terminal positivo ($+$). La potencia entregada es $P_{entregada} = V \cdot I$.
 \end{itemize}
 \end{definicion}
 
-\subsection{Elementos Activos e Ideales}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Fuente Ideal de Tensión Independiente:} Mantiene una diferencia de potencial fija entre sus bornes ($V(t) = V_s$) con independencia absoluta de la corriente que circule a través de ella. Su resistencia interna equivalente es nula ($R_{in} = 0$).
-    \item \textbf{Fuente Ideal de Corriente Independiente:} Inyecta una corriente fija e invariable ($I(t) = I_s$) a través de su rama, cualquiera que sea la tensión requerida entre sus terminales. Su resistencia interna equivalente es infinita ($R_{in} \to \infty$).
-    \item \textbf{Fuentes Dependientes o Controladas:} La magnitud entregada es proporcional a una tensión o corriente existente en otra rama del circuito:
-    \begin{enumerate}[label=\alph*)]
-        \item Fuente de Tensión Controlada por Tensión (VCVS): $v = \mu \cdot v_x$ (ganancia adimensional $\mu$).
-        \item Fuente de Tensión Controlada por Corriente (CCVS): $v = r_m \cdot i_x$ (transresistencia $r_m$ en $[\si{\ohm}]$).
-        \item Fuente de Corriente Controlada por Tensión (VCCS): $i = g_m \cdot v_x$ (transconductancia $g_m$ en $[\si{\siemens}]$).
-        \item Fuente de Corriente Controlada por Corriente (CCCS): $i = \beta \cdot i_x$ (ganancia en corriente adimensional $\beta$).
-    \end{enumerate}
-\end{itemize}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Convenio pasivo
+    \draw (-4,0) to[R, l=$R$, v=$V$, i=$I$] (-1,0);
+    \node[below=8pt] at (-2.5,-0.6) {\small\textbf{Convenio Pasivo} ($P = VI \ge 0$, absorbe)};
 
-\subsection{Elementos Pasivos Lineales}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Resistencia ($R$):} Satisface la ley de Ohm $V = I R$. La potencia instantánea disipada es siempre no negativa:
-    \begin{equation}
-        P_R = V I = I^2 R = \frac{V^2}{R} \ge 0
-    \end{equation}
-    \item \textbf{Condensador ($C$):} La corriente es la derivada temporal de la tensión:
-    \begin{equation}
-        i(t) = C \frac{dv(t)}{dt}
-    \end{equation}
-    \textbf{Comportamiento en DC Permanente:} Al ser las tensiones constantes ($dv/dt = 0$), la corriente es nula ($i=0$). Por tanto, \textbf{en régimen permanente de continua un condensador actúa como un circuito abierto}.
-    \item \textbf{Bobina o Inductor ($L$):} La tensión inducida es proporcional a la derivada de la corriente:
-    \begin{equation}
-        v(t) = L \frac{di(t)}{dt}
-    \end{equation}
-    \textbf{Comportamiento en DC Permanente:} Al ser las corrientes constantes ($di/dt = 0$), la caída de tensión en la bobina es nula ($v=0$). Por tanto, \textbf{en régimen permanente de continua una bobina ideal actúa como un cortocircuito}.
-\end{itemize}
+    % Convenio activo
+    \draw (1,0) to[V, v=$V_s$, i=$I$] (4,0);
+    \node[below=8pt] at (2.5,-0.6) {\small\textbf{Convenio Activo} ($P = V_s I$, entrega)};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Tipos de Fuentes en Circuitos}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Fuente de tensión independiente
+    \draw (-4.5,1) to[V, v=$V_s$] (-4.5,-1);
+    \node[below=4pt] at (-4.5,-1) {\footnotesize Tensión Independiente};
+
+    % Fuente de corriente independiente
+    \draw (-1.5,1) to[I, i=$I_s$] (-1.5,-1);
+    \node[below=4pt] at (-1.5,-1) {\footnotesize Corriente Independiente};
+
+    % Fuente de tensión controlada
+    \draw (1.5,1) to[cV, v=$\mu v_x$] (1.5,-1);
+    \node[below=4pt] at (1.5,-1) {\footnotesize Tensión Controlada (VCVS)};
+
+    % Fuente de corriente controlada
+    \draw (4.5,1) to[cI, i=$\beta i_x$] (4.5,-1);
+    \node[below=4pt] at (4.5,-1) {\footnotesize Corriente Controlada (CCCS)};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
 % 2.2. LEYES DE KIRCHHOFF Y REGLAS DE DIVISIÓN
 % ==============================================================================
 \section{Leyes de Kirchhoff y Divisores de Tensión y Corriente}
 
-Gustav Kirchhoff formalizó en 1845 las dos leyes topológicas fundamentales que gobiernan cualquier red eléctrica interconectada:
-
 \begin{ley}[Leyes Fundamentales de Kirchhoff]
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Primera Ley de Kirchhoff o Ley de Corrientes (LCK):} En cualquier nudo del circuito, la suma algebraica de las corrientes que convergen es idénticamente nula (consecuencia de la conservación de la carga eléctrica):
-    \begin{equation}
-        \sum_{k=1}^N I_k = 0 \iff \sum I_{entrantes} = \sum I_{salientes}
-    \end{equation}
-    \item \textbf{Segunda Ley de Kirchhoff o Ley de Tensiones (LTK):} A lo largo de cualquier lazo o malla cerrada orientada, la suma algebraica de las caídas y subidas de potencial es nula (consecuencia del carácter conservativo del campo electrostático):
-    \begin{equation}
-        \sum_{m=1}^M V_m = 0 \iff \sum V_{subidas} = \sum V_{caidas}
-    \end{equation}
+    \item \textbf{Primera Ley de Kirchhoff o Ley de Corrientes (LCK):} En cualquier nudo, la suma de corrientes entrantes es igual a la suma de salientes: $\sum I_{entrantes} = \sum I_{salientes}$.
+    \item \textbf{Segunda Ley de Kirchhoff o Ley de Tensiones (LTK):} A lo largo de cualquier lazo cerrado, la suma de caídas y subidas de potencial es nula: $\sum V_k = 0$.
 \end{itemize}
 \end{ley}
 
-\subsection{Asociación de Resistencias y Fórmulas de División}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Resistencias en Serie:} Circula la misma corriente por todas ellas:
-    \begin{equation}
-        R_{eq} = \sum_{i=1}^n R_i = R_1 + R_2 + \dots + R_n
-    \end{equation}
-    \item \textbf{Divisor de Tensión:} Para $n$ resistencias en serie conectadas a una tensión total $V_T$, la caída de tensión en la resistencia $R_k$ es directamente proporcional a su valor:
-    \begin{equation}
-        V_k = V_T \frac{R_k}{\sum_{i=1}^n R_i} \implies V_1 = V_T \frac{R_1}{R_1 + R_2} \quad (\text{para dos resistencias})
-    \end{equation}
-    \item \textbf{Resistencias en Paralelo:} Soportan exactamente la misma diferencia de potencial:
-    \begin{equation}
-        \frac{1}{R_{eq}} = \sum_{i=1}^n \frac{1}{R_i} \implies R_{eq} = \frac{R_1 R_2}{R_1 + R_2} \quad (\text{para dos resistencias})
-    \end{equation}
-    \item \textbf{Divisor de Corriente:} Para dos resistencias en paralelo alimentadas por una corriente total $I_T$, la corriente que atraviesa cada rama es inversamente proporcional a su resistencia:
-    \begin{equation}
-        I_1 = I_T \frac{R_2}{R_1 + R_2}, \qquad I_2 = I_T \frac{R_1}{R_1 + R_2}
-    \end{equation}
-\end{itemize}
+\subsection{Divisor de Tensión y Divisor de Corriente}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Divisor de tensión
+    \node[font=\bfseries] at (-3,2.2) {Divisor de Tensión};
+    \draw (-4.5,0) to[V, v=$V_s$] (-4.5,1.5)
+          -- (-3.5,1.5) to[R, l=$R_1$] (-2,1.5)
+          to[R, l=$R_2$, v=$V_2$] (-2,0)
+          -- (-4.5,0);
+    \node[below=6pt] at (-3.25,-0.2) {$V_2 = V_s \frac{R_2}{R_1 + R_2}$};
+
+    % Divisor de corriente
+    \node[font=\bfseries] at (3.5,2.2) {Divisor de Corriente};
+    \draw (2,0) to[I, i=$I_s$] (2,1.5)
+          -- (3.2,1.5) to[R, l=$R_1$, i=$I_1$] (3.2,0) -- (2,0);
+    \draw (3.2,1.5) -- (4.8,1.5) to[R, l=$R_2$, i=$I_2$] (4.8,0) -- (3.2,0);
+    \node[below=6pt] at (3.4,-0.2) {$I_1 = I_s \frac{R_2}{R_1 + R_2}, \quad I_2 = I_s \frac{R_1}{R_1 + R_2}$};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
-% 2.3. MÉTODOS SISTEMÁTICOS DE ANÁLISIS
+% 2.3. TEOREMAS DE THÉVENIN Y NORTON
 % ==============================================================================
-\section{Métodos Sistemáticos de Análisis: Nudos y Mallas}
+\section{Teoremas de Thévenin, Norton y Máxima Potencia}
 
-Para circuitos complejos con múltiples lazos y ramas, el análisis intuitivo se vuelve inviable y se recurre a metodologías matriciales sistemáticas.
-
-\begin{metodo}[Método de los Nudos (Tensiones de Nudo)]
-Es el método más eficiente cuando el circuito posee pocas conexiones y muchas fuentes de corriente.
-\begin{enumerate}[leftmargin=*]
-    \item Se escoge un nudo común como \textbf{nudo de referencia o masa} ($V_0 = 0\ \si{\volt}$).
-    \item Se asigna una variable de tensión $V_1, V_2, \dots, V_{n-1}$ al resto de nudos esenciales respecto a la masa.
-    \item Se plantea la LCK en cada nudo, expresando las corrientes de rama según la ley de Ohm:
-    \begin{equation}
-        I_{saliente} = \frac{V_{nodo} - V_{vecino}}{R}
-    \end{equation}
-    \item \textbf{Tratamiento de Fuentes de Tensión (Supernudos):}
-    \begin{itemize}
-        \item Si una fuente de tensión ideal está entre un nudo $k$ y la masa, el potencial de ese nudo queda inmediatamente fijado: $V_k = V_s$.
-        \item Si una fuente de tensión ideal conecta dos nudos no de referencia $A$ y $B$, se forma un \textbf{supernudo} englobando la fuente. Se escribe la ecuación constitutiva $V_A - V_B = V_s$ y se aplica la LCK a la superficie cerrada que envuelve conjuntamente a $A$ y $B$.
-    \end{itemize}
-    \item Se resuelve el sistema lineal de $n-1$ ecuaciones algebraicas.
-\end{enumerate}
-\end{metodo}
-
-\begin{metodo}[Método de las Mallas (Corrientes de Malla)]
-Aplica a circuitos planares (que pueden dibujarse sobre un plano sin cruce de conductores).
-\begin{enumerate}[leftmargin=*]
-    \item Se asigna una corriente de malla ficticia circulante orientada en sentido horario a cada ventana elemental del circuito: $I_{(1)}, I_{(2)}, \dots, I_{(m)}$.
-    \item La corriente física real en cualquier rama es la suma o resta de las corrientes de malla que la atraviesan.
-    \item Se aplica la LTK a cada malla sumando las caídas de potencial debidas a las resistencias propias y mutuas:
-    \begin{equation}
-        R_{ii} I_{(i)} - \sum_{j \neq i} R_{ij} I_{(j)} = \sum V_{fuentes,i}
-    \end{equation}
-    \item \textbf{Tratamiento de Fuentes de Corriente (Supermallas):}
-    \begin{itemize}
-        \item Si una fuente de corriente está en una rama exterior, fija directamente la corriente de esa malla.
-        \item Si está compartida entre dos mallas $i$ y $j$, se forma una \textbf{supermalla} eliminando temporalmente la rama con la fuente de corriente, planteando la LTK alrededor del lazo combinado y añadiendo la ecuación de ligadura $I_{(j)} - I_{(i)} = I_s$.
-    \end{itemize}
-\end{enumerate}
-\end{metodo}
-
-% ==============================================================================
-% 2.4. TEOREMAS FUNDAMENTALES DE CIRCUITOS
-% ==============================================================================
-\section{Teoremas de Thévenin, Norton y Superposición}
-
-\subsection{Principio de Superposición}
-\begin{ley}[Principio de Superposición]
-En cualquier red eléctrica lineal compuesta por fuentes independientes, fuentes dependientes lineales y elementos pasivos ($R, L, C$), la respuesta total (tensión o corriente) en cualquier rama es la suma algebraica de las respuestas producidas individualmente por cada fuente independiente actuando por separado, anulando el resto de fuentes independientes:
-\begin{equation}
-    V_{total} = \sum_{k=1}^P V_k', \qquad I_{total} = \sum_{k=1}^P I_k'
-\end{equation}
-\textbf{Reglas de Anulación de Fuentes Independientes:}
-\begin{itemize}[leftmargin=*]
-    \item Anular una fuente de tensión ideal ($V_s = 0$) equivale a sustituirla por un \textbf{cortocircuito} (un cable conductor ideal de resistencia $0$).
-    \item Anular una fuente de corriente ideal ($I_s = 0$) equivale a sustituirla por un \textbf{circuito abierto} (una desconexión física de resistencia infinita).
-    \item \textbf{¡ATENCIÓN CRÍTICA!:} Las fuentes dependientes \textbf{nunca se anulan}; permanecen activas en todos los subcircuitos porque dependen de variables internas.
-\end{itemize}
+\begin{ley}[Teoremas de Thévenin y Norton]
+Cualquier red lineal de dos terminales $A$ y $B$ puede ser sustituida formalmente por un circuito equivalente de Thévenin (fuente de tensión $V_{th}$ en serie con $R_{th}$) o de Norton (fuente de corriente $I_N = V_{th}/R_{th}$ en paralelo con $R_N = R_{th}$).
 \end{ley}
 
-\begin{aviso}[La Potencia NO es Lineal]
-El principio de superposición \textbf{NO es aplicable directamente al cálculo de potencias}, dado que la potencia depende cuadráticamente de las variables ($P = I^2 R = V^2 / R$). Se deben calcular primero la corriente o tensión total superpuesta y luego calcular $P = I_{total}^2 R$.
-\end{aviso}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Equivalente Thévenin
+    \node[font=\bfseries] at (-3,2.2) {Equivalente de Thévenin};
+    \draw (-4.5,0) to[V, v=$V_{th}$] (-4.5,1.5)
+          to[R, l=$R_{th}$] (-2,1.5)
+          to[short, -o] (-1.2,1.5) node[right] {$A$};
+    \draw (-4.5,0) to[short, -o] (-1.2,0) node[right] {$B$};
+    \draw (-1.2,1.5) to[R, l=$R_L$, dashed] (-1.2,0);
 
-\subsection{Teoremas de Thévenin y Norton}
-\begin{ley}[Teorema de Thévenin]
-Cualquier circuito lineal de dos terminales accesibles $A$ y $B$ puede ser sustituido formalmente por un circuito equivalente simple formado por una única fuente ideal de tensión $V_{th}$ conectada en serie con una resistencia $R_{th}$:
-\begin{itemize}[leftmargin=*]
-    \item $V_{th}$ (\textbf{Tensión de Thévenin}): Es la diferencia de potencial medida en circuito abierto entre los bornes $A$ y $B$:
-    \begin{equation}
-        V_{th} = V_{AB,abierto} = V_A - V_B \quad (\text{sin carga conectada})
-    \end{equation}
-    \item $R_{th}$ (\textbf{Resistencia de Thévenin}): Es la resistencia equivalente vista desde los bornes $A$ y $B$ hacia el interior de la red.
-\end{itemize}
+    % Equivalente Norton
+    \node[font=\bfseries] at (3.5,2.2) {Equivalente de Norton};
+    \draw (1.8,0) to[I, i=$I_N$] (1.8,1.5)
+          -- (3.2,1.5) to[R, l=$R_N$] (3.2,0) -- (1.8,0);
+    \draw (3.2,1.5) to[short, -o] (4.2,1.5) node[right] {$A$};
+    \draw (3.2,0) to[short, -o] (4.2,0) node[right] {$B$};
+    \draw (4.2,1.5) to[R, l=$R_L$, dashed] (4.2,0);
+\end{tikzpicture}
+\end{center}
+
+\begin{ley}[Teorema de Máxima Transferencia de Potencia]
+La potencia transferida a una carga resistiva $R_L$ conectada a los terminales de Thévenin es máxima cuando la resistencia de carga se iguala exactamente a la resistencia interna de Thévenin:
+\begin{equation}
+    R_L = R_{th} \implies P_{max} = \frac{V_{th}^2}{4 R_{th}}
+\end{equation}
 \end{ley}
 
-\begin{ley}[Teorema de Norton]
-Dual del teorema de Thévenin. Cualquier red lineal de dos terminales puede sustituirse por una fuente ideal de corriente $I_N$ conectada en paralelo con una resistencia $R_N$:
-\begin{itemize}[leftmargin=*]
-    \item $I_N$ (\textbf{Corriente de Norton}): Es la corriente de cortocircuito que circula entre los terminales $A$ y $B$ al unirlos mediante un conductor ideal:
-    \begin{equation}
-        I_N = I_{sc} = I_{A \to B,cortocircuito}
-    \end{equation}
-    \item $R_N$ (\textbf{Resistencia de Norton}): Es exactamente idéntica a la de Thévenin:
-    \begin{equation}
-        R_N = R_{th}
-    \end{equation}
-    \item Relación de transformación de fuentes:
-    \begin{equation}
-        V_{th} = I_N \cdot R_{th} \iff I_N = \frac{V_{th}}{R_{th}}
-    \end{equation}
-\end{itemize}
-\end{ley}
-
-\begin{metodo}[Determinación de la Resistencia de Thévenin $R_{th}$]
-Existen tres procedimientos rigurosos según la naturaleza de las fuentes del circuito:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Caso 1: Solo Fuentes Independientes:}
-    Se desactivan todas las fuentes independientes (fuentes de tensión a cortocircuito, fuentes de corriente a circuito abierto) y se asocian en serie y paralelo las resistencias resultantes vistas desde los terminales $A-B$.
-    \item \textbf{Caso 2: Coexisten Fuentes Independientes y Dependientes:}
-    Se calcula la tensión de circuito abierto $V_{th} = V_{oc}$ y la corriente de cortocircuito $I_N = I_{sc}$. La resistencia es el cociente:
-    \begin{equation}
-        R_{th} = \frac{V_{oc}}{I_{sc}}
-    \end{equation}
-    \item \textbf{Caso 3: Circuito con Fuentes Dependientes pero sin Fuentes Independientes (o método de la fuente de prueba):}
-    Como no hay fuentes independientes, $V_{th} = 0$. Se conecta una fuente externa de prueba de tensión conocida $V_{test}$ (típicamente $1\ \si{\volt}$) o de corriente $I_{test}$ (típicamente $1\ \si{\ampere}$) entre los bornes $A$ y $B$. Tras resolver el circuito para determinar la corriente consumida $I_{test}$, la resistencia es:
-    \begin{equation}
-        R_{th} = \frac{V_{test}}{I_{test}}
-    \end{equation}
-\end{enumerate}
-\end{metodo}
-
-\subsection{Teorema de Máxima Transferencia de Potencia}
-\begin{ley}[Máxima Transferencia de Potencia]
-Si a un circuito equivalente de Thévenin ($V_{th}, R_{th}$) se le conecta una resistencia de carga variable $R_L$, la potencia transferida a la carga es:
-\begin{equation}
-    P_L = I^2 R_L = \left(\frac{V_{th}}{R_{th} + R_L}\right)^2 R_L
-\end{equation}
-Derivando respecto a $R_L$ e igualando a cero ($\frac{dP_L}{dR_L} = 0$), se demuestra que \textbf{la potencia entregada es máxima cuando la resistencia de carga se iguala a la resistencia interna de Thévenin}:
-\begin{equation}
-    R_L = R_{th}
-\end{equation}
-En dicha condición óptima de adaptación de impedancias, el valor de la máxima potencia transferida es:
-\begin{equation}
-    P_{max} = \frac{V_{th}^2}{4 R_{th}}
-\end{equation}
-En este régimen, la eficiencia de transferencia es del $50\%$ (la otra mitad de la potencia generada se disipa internamente en $R_{th}$).
-\end{ley}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw[->, thick] (0,0) -- (5,0) node[right] {$R_L$};
+    \draw[->, thick] (0,0) -- (0,3) node[above] {$P_L(R_L)$};
+    % Curva de potencia
+    \draw[very thick, fftAccent, domain=0.05:4.8, samples=80] 
+        plot (\x, {2.6 * 4 * 1.5 * \x / ((1.5 + \x)^2)});
+    % Líneas de trazo en el máximo
+    \draw[dashed, gray] (1.5,0) node[below, text=black] {$R_L = R_{th}$} -- (1.5,2.6);
+    \draw[dashed, gray] (0,2.6) node[left, text=black] {$P_{max} = \frac{V_{th}^2}{4 R_{th}}$} -- (1.5,2.6);
+    \filldraw[fftDarkBlue] (1.5,2.6) circle (2pt);
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
-% 2.5. RÉGIMEN TRANSITORIO DE PRIMER ORDEN
+% 2.4. RÉGIMEN TRANSITORIO DE PRIMER ORDEN
 % ==============================================================================
-\section{Régimen Transitorio de Primer Orden (Circuitos RC y RL)}
+\section{Régimen Transitorio de Primer Orden (RC y RL)}
 
-Cuando en un circuito se produce una conmutación brusca (cierre o apertura de interruptores), las tensiones y corrientes evolucionan desde su estado inicial hasta alcanzar el nuevo estado estacionario a través de una fase transitoria gobernada por ecuaciones diferenciales lineales de primer orden.
+\subsection{Circuito RC: Carga y Descarga}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Circuito RC
+    \draw (-4.5,0) to[V, v=$V_s$] (-4.5,1.8)
+          to[normal open switch, l={$t=0$}] (-3,1.8)
+          to[R, l=$R$] (-1,1.8)
+          to[C, l=$C$, v=$v_C(t)$] (-1,0)
+          -- (-4.5,0);
+    \node[below=6pt] at (-2.75,-0.2) {\small\textbf{Circuito RC Serie con Conmutación}};
 
-\begin{aviso}[Leyes de Continuidad en Elementos Almacenadores]
-Por razones de conservación de la energía:
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Condensador:} La energía almacenada $U_E = \frac{1}{2} C v_C^2$ debe ser continua en el tiempo. Por tanto, \textbf{la tensión en un condensador no puede cambiar instantáneamente}:
-    \begin{equation}
-        v_C(0^+) = v_C(0^-)
-    \end{equation}
-    \item \textbf{Bobina:} La energía magnética $U_B = \frac{1}{2} L i_L^2$ debe ser continua. Por tanto, \textbf{la corriente a través de una bobina no puede cambiar instantáneamente}:
-    \begin{equation}
-        i_L(0^+) = i_L(0^-)
-    \end{equation}
-\end{itemize}
-\end{aviso}
+    % Gráfica de evolución temporal
+    \draw[->, thick] (1.5,0) -- (6.5,0) node[right] {$t$};
+    \draw[->, thick] (1.5,0) -- (1.5,2.5) node[above] {$v_C(t)$};
+    \draw[very thick, fftGreen, domain=0:4.5, samples=60]
+        plot ({\x + 1.5}, {2.0 * (1 - exp(-\x/1.0))});
+    \draw[dashed, gray] (1.5,2.0) node[left, text=black] {$V_s$} -- (6.0,2.0);
+    \draw[dashed, gray] (2.5,0) node[below, text=black] {$\tau$} -- (2.5, 1.264);
+    \draw[dashed, gray] (1.5, 1.264) node[left, text=black] {$0{,}632 V_s$} -- (2.5, 1.264);
+    \filldraw[fftDarkBlue] (2.5, 1.264) circle (2pt);
+\end{tikzpicture}
+\end{center}
 
-\subsection{Transitorio de Carga y Descarga en Circuito RC}
-Consideremos una resistencia $R$ en serie con un condensador $C$ alimentados por una fuente $V_s$.
-Aplicando la LTK para $t \ge 0$:
-\begin{equation}
-    v_R(t) + v_C(t) = V_s \implies R C \frac{dv_C(t)}{dt} + v_C(t) = V_s
-\end{equation}
-Definiendo la constante de tiempo $\tau$:
-\begin{equation}
-    \tau = R \cdot C \quad [\si{\second}]
-\end{equation}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Proceso de Carga (con $v_C(0^-) = 0$):}
-    \begin{align}
-        v_C(t) &= V_s \left(1 - e^{-t/\tau}\right) \\
-        i_C(t) &= C \frac{dv_C}{dt} = \frac{V_s}{R} e^{-t/\tau}
-    \end{align}
-    \item \textbf{Proceso de Descarga (partiendo de $v_C(0^-) = V_0$, desconectando la fuente $V_s=0$):}
-    \begin{align}
-        v_C(t) &= V_0 e^{-t/\tau} \\
-        i_C(t) &= -\frac{V_0}{R} e^{-t/\tau}
-    \end{align}
-\end{itemize}
-
-\begin{definicion}[Fórmula Universal para Transitorios de Primer Orden]
-Para cualquier variable $x(t)$ (tensión o corriente) en un circuito de primer orden que evoluciona desde un valor inicial $x(0^+)$ hacia un valor final en régimen permanente $x(\infty)$:
-\begin{equation}
-    x(t) = x(\infty) + \left[x(0^+) - x(\infty)\right] e^{-t/\tau} \quad \text{para } t \ge 0
-\end{equation}
-\begin{itemize}[leftmargin=*]
-    \item Para circuitos RC: $\tau = R_{th} C$.
-    \item Para circuitos RL: $\tau = \frac{L}{R_{th}}$.
-\end{itemize}
-Donde $R_{th}$ es la resistencia equivalente de Thévenin calculada desde los terminales del elemento reactivo ($C$ o $L$).
+\begin{definicion}[Ecuaciones Fundamentales del Transitorio RC]
+\begin{align}
+    v_C(t) &= V_s \left(1 - e^{-t/\tau}\right), \quad \text{con } \tau = R C \\
+    i_C(t) &= \frac{V_s}{R} e^{-t/\tau}
+\end{align}
+Para $t \ge 5\tau$, $v_C \approx 0{,}993 V_s \approx V_s$, considerándose alcanzado el régimen permanente de continua (condensador cargado como circuito abierto).
 \end{definicion}
 
 % ==============================================================================
-% 2.6. EJERCICIOS RESUELTOS DE EXAMEN
+% 2.5. EJERCICIOS RESUELTOS DE EXAMEN
 % ==============================================================================
 \section{Ejercicios Resueltos de Exámenes de Circuitos DC}
 
 \begin{ejercicio}[Cálculo de Equivalente Thévenin y Máxima Potencia --- Examen UGR]
-Dado el circuito con los terminales $A$ y $B$, compuesto por una fuente de tensión independiente $V_1 = 20\ \si{\volt}$, una fuente de corriente independiente $I_1 = 2\ \si{\ampere}$ y tres resistencias $R_1 = 10\ \si{\ohm}$, $R_2 = 40\ \si{\ohm}$ y $R_3 = 12\ \si{\ohm}$:
-$R_1$ está en serie con la fuente $V_1$. En paralelo con esta rama se encuentra la fuente $I_1$ inyectando corriente hacia arriba, y la resistencia $R_2$. Finalmente, en serie hacia el terminal $A$ está $R_3$.
+Dado el circuito con bornes $A$ y $B$, compuesto por $V_1 = 20\ \si{\volt}$, $I_1 = 2\ \si{\ampere}$, $R_1 = 10\ \si{\ohm}$, $R_2 = 40\ \si{\ohm}$ y $R_3 = 12\ \si{\ohm}$:
 \begin{enumerate}[label=\alph*)]
     \item Calcular el equivalente de Thévenin entre los terminales $A$ y $B$.
-    \item Determinar la resistencia de carga $R_L$ a conectar entre $A$ y $B$ para absorber la máxima potencia posible, y el valor de dicha potencia.
+    \item Determinar la resistencia $R_L$ para absorber la máxima potencia y el valor de dicha potencia.
 \end{enumerate}
 \tcbline
-\textbf{Solución:}\\[4pt]
-a) \textbf{Tensión de Thévenin $V_{th}$:}
-En circuito abierto entre $A$ y $B$, por la resistencia $R_3$ no circula corriente ($I_{R3} = 0$), luego $V_A = V_{nudo}$ (tensión en el nudo superior común entre $R_1$, $I_1$ y $R_2$).
+\textbf{Paso 1: Esquema del Circuito Original Completo:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Fuente de tensión y R1
+    \draw (0,0) to[V, v=$V_1{=}20\si{\volt}$] (0,2.5)
+          to[R, l=$R_1{=}10\si{\ohm}$] (2.5,2.5);
+    % Fuente de corriente en paralelo
+    \draw (2.5,0) to[I, i=$I_1{=}2\si{\ampere}$] (2.5,2.5);
+    % Resistencia R2 en paralelo
+    \draw (4.5,2.5) to[R, l=$R_2{=}40\si{\ohm}$] (4.5,0);
+    \draw (2.5,2.5) -- (4.5,2.5);
+    % Resistencia R3 hacia el terminal A
+    \draw (4.5,2.5) to[R, l=$R_3{=}12\si{\ohm}$] (7,2.5) to[short, -o] (7.5,2.5) node[right] {$A$};
+    % Conductor de retorno hacia B
+    \draw (0,0) -- (7,0) to[short, -o] (7.5,0) node[right] {$B$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2: Cálculo de $V_{th}$ en Circuito Abierto:}\\[2pt]
+En circuito abierto entre $A$ y $B$, por $R_3$ no circula corriente ($I_{R3} = 0$), luego $V_A = V_{nudo}$ (potencial común entre $R_1, I_1, R_2$).
 Tomando el borne $B$ como referencia ($V_B = 0$):
-Aplicamos LCK al nudo superior:
 \begin{equation}
     \frac{V_{th} - V_1}{R_1} - I_1 + \frac{V_{th}}{R_2} = 0 \implies \frac{V_{th} - 20}{10} - 2 + \frac{V_{th}}{40} = 0
 \end{equation}
 Multiplicamos toda la ecuación por $40$:
 \begin{equation}
-    4(V_{th} - 20) - 80 + V_{th} = 0 \implies 5 V_{th} - 160 = 0 \implies V_{th} = \frac{160}{5} = 32\ \si{\volt}
+    4(V_{th} - 20) - 80 + V_{th} = 0 \implies 5 V_{th} - 160 = 0 \implies V_{th} = 32\ \si{\volt}
 \end{equation}
-\textbf{Resistencia de Thévenin $R_{th}$:}
-Desactivamos las fuentes independientes:
-\begin{itemize}[leftmargin=*]
-    \item Fuente de tensión $V_1$: se reemplaza por un cortocircuito.
-    \item Fuente de corriente $I_1$: se reemplaza por un circuito abierto (desconexión).
-\end{itemize}
-Desde los terminales $A-B$, observamos la resistencia $R_3$ en serie con el paralelo de $R_1$ y $R_2$:
+
+\textbf{Paso 3: Cálculo de $R_{th}$ con Fuentes Desactivadas:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Fuente V1 en cortocircuito
+    \draw (0,0) -- (0,2) to[R, l=$R_1{=}10\si{\ohm}$] (2,2);
+    % Fuente I1 en circuito abierto (omitida)
+    % R2 en paralelo
+    \draw (2,2) to[R, l=$R_2{=}40\si{\ohm}$] (2,0) -- (0,0);
+    % R3 hacia bornes
+    \draw (2,2) to[R, l=$R_3{=}12\si{\ohm}$] (4.5,2) to[short, -o] (5,2) node[right] {$A$};
+    \draw (2,0) -- (4.5,0) to[short, -o] (5,0) node[right] {$B$};
+    \node[right] at (5.2,1) {$\Longrightarrow R_{th} = R_3 + (R_1 \parallel R_2) = 12 + 8 = 20\ \si{\ohm}$};
+\end{tikzpicture}
+\end{center}
 \begin{equation}
-    R_{th} = R_3 + (R_1 \parallel R_2) = 12 + \frac{10 \times 40}{10 + 40} = 12 + \frac{400}{50} = 12 + 8 = 20\ \si{\ohm}
+    R_{th} = R_3 + \frac{R_1 R_2}{R_1 + R_2} = 12 + \frac{10 \times 40}{50} = 12 + 8 = 20\ \si{\ohm}
 \end{equation}
-El equivalente de Thévenin consiste en una fuente $V_{th} = 32\ \si{\volt}$ en serie con $R_{th} = 20\ \si{\ohm}$.\\[6pt]
-b) \textbf{Máxima Potencia Transferida:}
+
+\textbf{Paso 4: Equivalente de Thévenin con Carga Óptima:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) to[V, v=$V_{th}{=}32\si{\volt}$] (0,2)
+          to[R, l=$R_{th}{=}20\si{\ohm}$] (2.5,2)
+          to[short, -o] (3.2,2) node[above] {$A$}
+          to[R, l=$R_L{=}20\si{\ohm}$, i=$I_L$] (3.2,0)
+          to[short, o-] (2.5,0) -- (0,0);
+    \node[below] at (3.2,0) {$B$};
+\end{tikzpicture}
+\end{center}
 Por el teorema de máxima transferencia de potencia:
 \begin{equation}
-    R_L = R_{th} = 20\ \si{\ohm}
-\end{equation}
-La potencia máxima consumida por la carga es:
-\begin{equation}
-    P_{max} = \frac{V_{th}^2}{4 R_{th}} = \frac{32^2}{4 \times 20} = \frac{1024}{80} = 12{,}8\ \si{\watt}
+    R_L = R_{th} = 20\ \si{\ohm} \implies P_{max} = \frac{V_{th}^2}{4 R_{th}} = \frac{32^2}{4 \times 20} = \frac{1024}{80} = 12{,}8\ \si{\watt}
 \end{equation}
 \end{ejercicio}
 
 \begin{ejercicio}[Régimen Transitorio de Carga RC --- Examen Convocatoria Ordinaria]
-En un circuito de carga RC, $V_s = 12\ \si{\volt}$, $R = 100\ \si{\kilo\ohm}$ y $C = 50\ \si{\micro\farad}$. El condensador se encuentra inicialmente descargado ($v_C(0^-) = 0$). En el instante $t = 0$ se cierra el interruptor.
-\begin{enumerate}[label=\alph*)]
-    \item Hallar la constante de tiempo $\tau$ y la expresión analítica temporal de $v_C(t)$ e $i(t)$ para $t \ge 0$.
-    \item Calcular la tensión y corriente en el instante $t = 5\ \si{\second}$.
-    \item Determinar el tiempo necesario para que el condensador alcance el $90\%$ de su carga final.
-\end{enumerate}
+En un circuito de carga RC, $V_s = 12\ \si{\volt}$, $R = 100\ \si{\kilo\ohm}$ y $C = 50\ \si{\micro\farad}$ con $v_C(0^-) = 0$. En $t = 0$ se cierra el interruptor.
+Hallar $\tau$, las expresiones de $v_C(t)$ e $i(t)$, los valores en $t = 5\ \si{\second}$ y el tiempo para alcanzar el $90\%$ de la carga final.
 \tcbline
-\textbf{Solución:}\\[4pt]
-a) La constante de tiempo del circuito es:
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) Constante de tiempo:
 \begin{equation}
     \tau = R \cdot C = (100 \times 10^3\ \si{\ohm}) \times (50 \times 10^{-6}\ \si{\farad}) = 5{,}0\ \si{\second}
 \end{equation}
-Con $v_C(0) = 0$ y $v_C(\infty) = V_s = 12\ \si{\volt}$:
-\begin{align}
-    v_C(t) &= 12 \left(1 - e^{-t/5}\right)\ \si{\volt} \\
-    i(t) &= \frac{V_s}{R} e^{-t/5} = \frac{12}{100 \times 10^3} e^{-t/5} = 0{,}12 \cdot e^{-t/5}\ \si{\milli\ampere}
-\end{align}
-b) En $t = 5\ \si{\second} = \tau$:
-\begin{align}
-    v_C(5) &= 12 \left(1 - e^{-1}\right) = 12 \times (1 - 0{,}3679) = 12 \times 0{,}6321 \approx 7{,}59\ \si{\volt} \\
-    i(5) &= 0{,}12 \times e^{-1} \approx 0{,}12 \times 0{,}3679 = 0{,}0441\ \si{\milli\ampere} = 44{,}1\ \si{\micro\ampere}
-\end{align}
-c) Para alcanzar el $90\%$ de la tensión final ($v_C(t_1) = 0{,}90 \times 12 = 10{,}8\ \si{\volt}$):
+2) Ecuaciones temporales para $t \ge 0$:
 \begin{equation}
-    1 - e^{-t_1 / 5} = 0{,}90 \implies e^{-t_1 / 5} = 0{,}10 \implies -\frac{t_1}{5} = \ln(0{,}10) = -2{,}3026
+    v_C(t) = 12 \left(1 - e^{-t/5}\right)\ \si{\volt}, \qquad i(t) = \frac{12}{100 \times 10^3} e^{-t/5} = 0{,}12 \cdot e^{-t/5}\ \si{\milli\ampere}
 \end{equation}
+3) En $t = 5\ \si{\second} = \tau$:
 \begin{equation}
-    t_1 = 5 \times 2{,}3026 \approx 11{,}51\ \si{\second}
+    v_C(5) = 12 (1 - e^{-1}) \approx 7{,}59\ \si{\volt}, \qquad i(5) = 0{,}12 \cdot e^{-1} \approx 44{,}1\ \si{\micro\ampere}
+\end{equation}
+4) Para $v_C(t_1) = 0{,}90 \times 12 = 10{,}8\ \si{\volt}$:
+\begin{equation}
+    1 - e^{-t_1 / 5} = 0{,}90 \implies t_1 = -5 \ln(0{,}10) \approx 11{,}51\ \si{\second}
 \end{equation}
 \end{ejercicio}

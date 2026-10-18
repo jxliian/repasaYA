@@ -8,318 +8,227 @@
 }
 
 % ==============================================================================
-% 3.1. SEÑALES SINUSOIDALES Y VALOR EFICAZ
+% 3.1. SEÑALES SINUSOIDALES Y FASORES
 % ==============================================================================
-\section{Señales Sinusoidales en Régimen Permanente}
+\section{Señales Sinusoidales en Régimen Permanente y Fasores}
 
-En corriente alterna (AC), las fuentes generan tensiones y corrientes que varían sinusoidalmente en el tiempo. El estudio de circuitos en régimen permanente sinusoidal (RPS) es fundamental, ya que toda señal periódica real puede descomponerse en suma de sinusoides mediante series de Fourier.
-
-\subsection{Ecuación de una Señal Sinusoidal}
-Una tensión alterna sinusoidal se describe matemáticamente por:
+En corriente alterna (AC), las fuentes generan tensiones y corrientes que varían sinusoidalmente en el tiempo:
 \begin{equation}
-    v(t) = V_m \cos(\omega t + \varphi) \quad \text{o bien} \quad v(t) = V_m \sin(\omega t + \varphi')
+    v(t) = V_m \cos(\omega t + \varphi) \quad [\si{\volt}]
 \end{equation}
-donde:
-\begin{itemize}[leftmargin=*]
-    \item $V_m$ es la \textbf{amplitud pico} o valor máximo de la señal ($[\si{\volt}]$).
-    \item $\omega$ es la \textbf{frecuencia angular}:
-    \begin{equation}
-        \omega = 2\pi f = \frac{2\pi}{T} \quad \left[\si{\radian\per\second}\right]
-    \end{equation}
-    \item $f$ es la \textbf{frecuencia cíclica} ($[\si{\hertz}]$), que mide los ciclos por segundo. En la red eléctrica europea, $f = 50\ \si{\hertz}$ ($\omega \approx 314{,}16\ \si{\radian\per\second}$).
-    \item $T = 1/f$ es el \textbf{periodo} ($[\si{\second}]$), tiempo requerido para completar un ciclo completo.
-    \item $\varphi$ es la \textbf{fase inicial} o desfase en el instante $t = 0$ ($[\si{\radian}]$ o $[\si{\degree}]$).
-\end{itemize}
+donde $V_m$ es la amplitud pico, $\omega = 2\pi f = 2\pi/T$ la frecuencia angular y $\varphi$ la fase inicial.
 
-\subsection{Valor Medio y Valor Eficaz (RMS)}
-\begin{definicion}[Valor Eficaz o RMS ($V_{rms}$)]
-El valor medio de una sinusoide pura sobre un periodo completo es idénticamente nulo:
+\subsection{Valor Eficaz (RMS) y Fasores}
+El valor eficaz mide la equivalencia térmica con corriente continua:
 \begin{equation}
-    V_{med} = \frac{1}{T}\int_0^T v(t)\, dt = 0
+    V_{rms} = \frac{V_m}{\sqrt{2}} \approx 0{,}7071 \cdot V_m
 \end{equation}
-El \textbf{valor eficaz} (o RMS, \textit{Root Mean Square}) representa el valor de tensión continua (DC) equivalente que disiparía exactamente la misma potencia media sobre una misma resistencia óhmica:
+El fasor asociado a la sinusoide contiene la magnitud y fase en el plano complejo:
 \begin{equation}
-    V_{rms} = \sqrt{\frac{1}{T} \int_0^T v^2(t)\, dt} = \frac{V_m}{\sqrt{2}} \approx 0{,}7071 \cdot V_m
+    \mathbf{V} = V_{rms} e^{j\varphi} = V_{rms} \angle \varphi
 \end{equation}
-Análogamente, para la corriente:
-\begin{equation}
-    I_{rms} = \frac{I_m}{\sqrt{2}} \approx 0{,}7071 \cdot I_m
-\end{equation}
-\end{definicion}
-
-% ==============================================================================
-% 3.2. FASORES E IMPEDANCIA COMPLEJA
-% ==============================================================================
-\section{Representación Fasorial e Impedancia Compleja}
-
-Resolver circuitos en el dominio del tiempo con ecuaciones íntegro-diferenciales resulta engorroso. En 1893, Charles Proteus Steinmetz introdujo el método fasorial, transformando las ecuaciones diferenciales lineales en ecuaciones algebraicas complejas.
-
-\subsection{Concepto de Fasor}
-Utilizando la identidad de Euler ($e^{j\theta} = \cos \theta + j \sin \theta$, con $j = \sqrt{-1}$):
-\begin{equation}
-    v(t) = V_m \cos(\omega t + \varphi) = \text{Re}\left\{ V_m e^{j(\omega t + \varphi)} \right\} = \text{Re}\left\{ \left(V_m e^{j\varphi}\right) e^{j\omega t} \right\}
-\end{equation}
-
-\begin{definicion}[Fasor Asociado]
-El \textbf{fasor} $\mathbf{V}$ es un número complejo que contiene exclusivamente la información de la amplitud y la fase inicial de la sinusoide (omitiendo el factor temporal $e^{j\omega t}$ común a todo el circuito):
-\begin{equation}
-    \mathbf{V} = V_m e^{j\varphi} = V_m \angle \varphi = V_m (\cos \varphi + j \sin \varphi)
-\end{equation}
-En ingeniería eléctrica es habitual utilizar el \textbf{fasor eficaz}:
-\begin{equation}
-    \mathbf{V}_{rms} = \frac{V_m}{\sqrt{2}} \angle \varphi = V_{rms} \angle \varphi
-\end{equation}
-\end{definicion}
-
-\begin{aviso}[Propiedades Operacionales del Cálculo Fasorial]
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Derivada Temporal:} La derivada en el tiempo equivale algebraicamente a multiplicar por $j\omega$:
-    \begin{equation}
-        \frac{d v(t)}{dt} \longleftrightarrow j\omega \mathbf{V}
-    \end{equation}
-    \item \textbf{Integral Temporal:} La integración en el tiempo equivale a dividir por $j\omega$:
-    \begin{equation}
-        \int v(t)\, dt \longleftrightarrow \frac{\mathbf{V}}{j\omega} = -\frac{j}{\omega} \mathbf{V}
-    \end{equation}
-\end{itemize}
-\end{aviso}
 
 \subsection{Impedancia Compleja de los Elementos Básicos}
-\begin{definicion}[Impedancia Compleja $\mathbf{Z}$]
-Se define la impedancia compleja $\mathbf{Z}$ como el cociente fasorial entre la tensión y la corriente:
-\begin{equation}
-    \mathbf{Z} = \frac{\mathbf{V}}{\mathbf{I}} = R + jX = |\mathbf{Z}| \angle \theta_Z \quad [\si{\ohm}]
-\end{equation}
+\begin{definicion}[Impedancia Compleja $\mathbf{Z} = R + jX$]
 \begin{itemize}[leftmargin=*]
-    \item $R = \text{Re}\{\mathbf{Z}\}$ es la \textbf{Resistencia} ($[\si{\ohm}]$), siempre no negativa ($R \ge 0$).
-    \item $X = \text{Im}\{\mathbf{Z}\}$ es la \textbf{Reactancia} ($[\si{\ohm}]$). Si $X > 0$, es reactancia inductiva; si $X < 0$, es capacitiva.
-    \item $|\mathbf{Z}| = \sqrt{R^2 + X^2}$ es el módulo de la impedancia.
-    \item $\theta_Z = \arctan(X/R) = \theta_v - \theta_i$ es el ángulo de desfase entre tensión y corriente.
+    \item \textbf{Resistencia Pura ($R$):} $\mathbf{Z}_R = R \angle 0^\circ = R$ (Tensión y corriente están \textbf{en fase}).
+    \item \textbf{Bobina Pura ($L$):} $\mathbf{Z}_L = j\omega L = \omega L \angle 90^\circ$ (\textbf{La tensión adelanta $90^\circ$ a la corriente}).
+    \item \textbf{Condensador Puro ($C$):} $\mathbf{Z}_C = \frac{1}{j\omega C} = -\frac{j}{\omega C} = \frac{1}{\omega C} \angle -90^\circ$ (\textbf{La corriente adelanta $90^\circ$ a la tensión}).
 \end{itemize}
 \end{definicion}
 
-\begin{ley}[Impedancias Fundamentales en RPS]
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Resistencia Pura ($R$):}
-    \begin{equation}
-        v_R(t) = R i(t) \implies \mathbf{V}_R = R \mathbf{I} \implies \mathbf{Z}_R = R = R \angle 0^\circ
-    \end{equation}
-    La tensión y la corriente están estrictamente \textbf{en fase} ($\theta = 0^\circ$).
-    \item \textbf{Bobina o Inductor Puro ($L$):}
-    \begin{equation}
-        v_L(t) = L \frac{di}{dt} \implies \mathbf{V}_L = j\omega L \mathbf{I} \implies \mathbf{Z}_L = j\omega L = \omega L \angle 90^\circ
-    \end{equation}
-    La reactancia inductiva es $X_L = \omega L > 0$. \textbf{La tensión adelanta $90^\circ$ a la corriente} (o la corriente retrasa $90^\circ$ a la tensión).
-    \item \textbf{Condensador Puro ($C$):}
-    \begin{equation}
-        i(t) = C \frac{dv}{dt} \implies \mathbf{I} = j\omega C \mathbf{V} \implies \mathbf{Z}_C = \frac{1}{j\omega C} = -\frac{j}{\omega C} = \frac{1}{\omega C} \angle -90^\circ
-    \end{equation}
-    La reactancia capacitiva es $X_C = -\frac{1}{\omega C} < 0$. \textbf{La corriente adelanta $90^\circ$ a la tensión} (o la tensión retrasa $90^\circ$ a la corriente).
-\end{enumerate}
-\end{ley}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    % Ejes en el plano complejo
+    \draw[->, thick, gray] (-2.5,0) -- (3,0) node[right, text=black] {$\text{Re}$ (Eje Real)};
+    \draw[->, thick, gray] (0,-2.2) -- (0,2.5) node[above, text=black] {$\text{Im}$ (Eje Imaginario)};
 
-\begin{definicion}[Admitancia Compleja $\mathbf{Y}$]
-La admitancia es el inverso multiplicativo de la impedancia:
-\begin{equation}
-    \mathbf{Y} = \frac{1}{\mathbf{Z}} = G + jB \quad [\si{\siemens}]
-\end{equation}
-donde $G$ es la \textbf{conductancia} y $B$ es la \textbf{susceptancia}.
-\end{definicion}
+    % Referencia de corriente en el eje real
+    \draw[->, >=stealth, very thick, fftDarkBlue] (0,0) -- (2.0,0) node[below=2pt] {$\mathbf{I}$ (Referencia)};
+
+    % Resistencia: en fase
+    \draw[->, >=stealth, thick, fftPrimary] (0,0) -- (1.5,0) node[above] {$\mathbf{V}_R = R \mathbf{I}$};
+
+    % Inductancia: adelanta +90
+    \draw[->, >=stealth, very thick, fftAccent] (0,0) -- (0,1.8) node[left] {$\mathbf{V}_L = j\omega L \mathbf{I}$ ($+90^\circ$)};
+
+    % Capacidad: retrasa -90
+    \draw[->, >=stealth, very thick, fftGreen] (0,0) -- (0,-1.8) node[left] {$\mathbf{V}_C = -j\frac{1}{\omega C}\mathbf{I}$ ($-90^\circ$)};
+
+    \node[below=16pt] at (0,-2.2) {\small\textsf{Diagrama fasorial de tensiones relativas respecto a la corriente $\mathbf{I}$}};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
-% 3.3. POTENCIA EN CORRIENTE ALTERNA
+% 3.2. POTENCIA EN CORRIENTE ALTERNA
 % ==============================================================================
-\section{Potencia en Corriente Alterna y Corrección del Factor de Potencia}
+\section{Potencia en Corriente Alterna y Compensación Reactiva}
 
-\subsection{Potencia Instantánea, Activa y Reactiva}
-Sean la tensión y la corriente en un elemento dadas por:
-\begin{equation}
-    v(t) = V_m \cos(\omega t + \theta_v), \qquad i(t) = I_m \cos(\omega t + \theta_i)
-\end{equation}
-El desfase entre ambas es $\theta = \theta_v - \theta_i$. La potencia instantánea disipada es:
-\begin{align}
-    p(t) &= v(t) \cdot i(t) = V_m I_m \cos(\omega t + \theta_v) \cos(\omega t + \theta_i) \nonumber \\
-         &= \underbrace{V_{rms} I_{rms} \cos \theta \left[1 + \cos(2\omega t + 2\theta_v)\right]}_{\text{Término activo unidireccional}} - \underbrace{V_{rms} I_{rms} \sin \theta \sin(2\omega t + 2\theta_v)}_{\text{Término reactivo oscilante}}
-\end{align}
-
+\subsection{El Triángulo de Potencias}
 \begin{definicion}[Clasificación de Potencias en AC]
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Potencia Activa o Real ($P$):} Es el promedio temporal de la potencia instantánea. Representa la energía neta por unidad de tiempo transformada irreversiblemente en trabajo mecánico, calor o luz:
-    \begin{equation}
-        P = \frac{1}{T}\int_0^T p(t)\, dt = V_{rms} I_{rms} \cos \theta \quad [\si{\watt}]
-    \end{equation}
-    \item \textbf{Potencia Reactiva ($Q$):} Representa la tasa de intercambio oscilatorio de energía entre los campos magnéticos y eléctricos del circuito y la fuente generadora (no produce trabajo útil neto):
-    \begin{equation}
-        Q = V_{rms} I_{rms} \sin \theta \quad [\si{\VAR} \equiv \text{Voltio-Amperio Reactivo}]
-    \end{equation}
-    \begin{itemize}
-        \item Carga inductiva ($\theta > 0$, la corriente retrasa): $Q > 0$ (consume reactiva).
-        \item Carga capacitiva ($\theta < 0$, la corriente adelanta): $Q < 0$ (genera reactiva).
-    \end{itemize}
-    \item \textbf{Potencia Compleja ($\mathbf{S}$):}
-    \begin{equation}
-        \mathbf{S} = \mathbf{V}_{rms} \mathbf{I}_{rms}^* = P + jQ = S \angle \theta \quad [\si{\VA} \equiv \text{Voltio-Amperio}]
-    \end{equation}
-    donde $\mathbf{I}^*$ denota el conjugado complejo del fasor corriente.
-    \item \textbf{Potencia Aparente ($S$):} Módulo de la potencia compleja:
-    \begin{equation}
-        S = |\mathbf{S}| = \sqrt{P^2 + Q^2} = V_{rms} I_{rms} \quad [\si{\VA}]
-    \end{equation}
-    \item \textbf{Factor de Potencia ($\text{fp}$):}
-    \begin{equation}
-        \text{fp} = \cos \theta = \frac{P}{S} \quad (0 \le \text{fp} \le 1)
-    \end{equation}
+    \item \textbf{Potencia Activa ($P$):} Trabajo útil y pérdidas Joule: $P = V_{rms} I_{rms} \cos \theta \quad [\si{\watt}]$.
+    \item \textbf{Potencia Reactiva ($Q$):} Potencia fluctuante oscilante: $Q = V_{rms} I_{rms} \sin \theta \quad [\si{\VAR}]$.
+    \item \textbf{Potencia Compleja ($\mathbf{S}$):} $\mathbf{S} = P + jQ = S \angle \theta \quad [\si{\VA}]$.
+    \item \textbf{Potencia Aparente ($S$):} $S = |\mathbf{S}| = \sqrt{P^2 + Q^2} = V_{rms} I_{rms} \quad [\si{\VA}]$.
+    \item \textbf{Factor de Potencia ($\text{fp}$):} $\text{fp} = \cos \theta = P/S$.
 \end{itemize}
 \end{definicion}
 
-\subsection{Corrección del Factor de Potencia}
-Las cargas industriales (motores, transformadores) son fuertemente inductivas ($\text{fp} \approx 0{,}6 - 0{,}8$ inductivo). Un factor de potencia bajo obliga a las compañías eléctricas a inyectar corrientes elevadas para entregar la misma potencia activa $P$, provocando pérdidas óhmicas elevadas en las líneas de distribución ($P_{loss} = I^2 R_{linea}$) y caídas de tensión inadmisibles.
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    % Triángulo de potencias
+    \draw[thick] (0,0) -- (4,0) node[midway, below] {Potencia Activa $P\ [\si{\watt}]$};
+    \draw[thick] (4,0) -- (4,2.5) node[midway, right] {Potencia Reactiva $Q\ [\si{\VAR}]$};
+    \draw[very thick, fftAccent] (0,0) -- (4,2.5) node[midway, above left] {Potencia Aparente $S\ [\si{\VA}]$};
+    % Angulo theta
+    \draw[->, thick, fftPrimary] (0.8,0) arc (0:32:0.8);
+    \node at (1.1,0.25) {$\theta$};
+    \node[below=12pt] at (2,0) {\small\textbf{Triángulo de Potencias} ($S^2 = P^2 + Q^2, \quad \cos \theta = P/S$)};
+\end{tikzpicture}
+\end{center}
 
-\begin{metodo}[Cálculo de la Capacidad de Compensación]
-Para elevar el factor de potencia desde $\cos \theta_1$ hasta un nuevo valor óptimo $\cos \theta_2$ ($\approx 0{,}95 - 1{,}0$) sin alterar la potencia activa útil $P$, se conecta en paralelo una batería de condensadores que aporte la potencia reactiva de compensación:
-\begin{equation}
-    Q_C = Q_2 - Q_1 = P (\tan \theta_2 - \tan \theta_1) < 0
-\end{equation}
-Como la potencia reactiva de un condensador en paralelo sometido a una tensión eficaz $V_{rms}$ es $Q_C = -\omega C V_{rms}^2$:
+\subsection{Compensación del Factor de Potencia con Condensador en Paralelo}
+Para evitar sobrecargar las líneas eléctricas reduciendo la corriente absorbida de la red, se coloca un condensador en paralelo con la carga inductiva:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Esquema de conexión
+    \draw (-4,0) to[sV, v=$\mathbf{V}_{rms}$] (-4,2)
+          -- (-2.5,2);
+    \draw (-2.5,2) to[C, l=$C$] (-2.5,0);
+    \draw (-2.5,2) -- (-0.8,2)
+          to[generic, l=Carga Inductiva ($P{,} Q_1$)] (-0.8,0) -- (-4,0);
+
+    % Triángulo de compensación
+    \draw[thick] (1.5,0) -- (5,0) node[midway, below] {$P$};
+    \draw[thick] (5,0) -- (5,2.4) node[midway, right] {$Q_1$};
+    \draw[very thick, fftPrimary] (1.5,0) -- (5,2.4) node[above] {$S_1$};
+    \draw[thick, dashed, fftGreen] (5,0) -- (5,1.0) node[midway, left] {$Q_2$};
+    \draw[very thick, fftGreen] (1.5,0) -- (5,1.0) node[midway, above] {$S_2$};
+    \draw[->, >=stealth, very thick, fftRed] (5.2,2.4) -- (5.2,1.0) node[midway, right] {$|Q_C|$};
+\end{tikzpicture}
+\end{center}
 \begin{equation}
     C = \frac{P (\tan \theta_1 - \tan \theta_2)}{\omega V_{rms}^2} \quad [\si{\farad}]
 \end{equation}
-\end{metodo}
 
 % ==============================================================================
-% 3.4. RESPUESTA EN FRECUENCIA Y FILTROS PASIVOS
+% 3.3. FILTROS PASIVOS RC
 % ==============================================================================
-\section{Respuesta en Frecuencia y Filtros Pasivos RC}
+\section{Filtros Pasivos RC y Diagramas de Bode}
 
-Un filtro es un circuito diseñado para seleccionar o atenuar determinadas bandas de frecuencia de una señal de entrada compuesta.
-
-\begin{definicion}[Función de Transferencia $H(j\omega)$]
-Se define como la relación compleja entre el fasor de salida y el de entrada en régimen permanente:
+\subsection{Filtro RC Pasa-Bajos}
+La señal de salida se toma en bornes del condensador:
 \begin{equation}
-    H(j\omega) = \frac{\mathbf{V}_{out}(j\omega)}{\mathbf{V}_{in}(j\omega)} = |H(j\omega)| e^{j\angle H(j\omega)}
-\end{equation}
-La ganancia en decibelios (dB) se expresa como:
-\begin{equation}
-    |H(j\omega)|_{\si{\decibel}} = 20 \log_{10}|H(j\omega)|
-\end{equation}
-\end{definicion}
-
-\subsection{Filtro RC Pasa-Bajos (Low-Pass Filter)}
-Se toma la salida en bornes del condensador $C$ alimentado en serie con una resistencia $R$.
-Aplicando el divisor de tensión:
-\begin{equation}
-    H(j\omega) = \frac{\mathbf{Z}_C}{\mathbf{Z}_R + \mathbf{Z}_C} = \frac{\frac{1}{j\omega C}}{R + \frac{1}{j\omega C}} = \frac{1}{1 + j\omega R C} = \frac{1}{1 + j(\omega / \omega_c)}
+    H(j\omega) = \frac{\mathbf{V}_o}{\mathbf{V}_i} = \frac{\frac{1}{j\omega C}}{R + \frac{1}{j\omega C}} = \frac{1}{1 + j\omega RC} = \frac{1}{1 + j(\omega / \omega_c)}, \qquad \omega_c = \frac{1}{RC}
 \end{equation}
 
-\begin{ley}[Frecuencia de Corte a $-3\ \si{\decibel}$]
-La \textbf{frecuencia de corte} $\omega_c$ es aquella donde la potencia de salida se reduce a la mitad (atenuación de $-3\ \si{\decibel}$ respecto a la banda de paso):
-\begin{equation}
-    \omega_c = \frac{1}{R C} \implies f_c = \frac{1}{2\pi R C}
-\end{equation}
-\begin{itemize}[leftmargin=*]
-    \item Para $\omega \ll \omega_c$: $|H| \approx 1$ ($0\ \si{\decibel}$), la señal pasa prácticamente intacta.
-    \item Para $\omega = \omega_c$: $|H| = \frac{1}{\sqrt{1 + 1}} = \frac{1}{\sqrt{2}} \approx 0{,}707$ ($-3{,}01\ \si{\decibel}$), y el desfase es $\angle H = -45^\circ$.
-    \item Para $\omega \gg \omega_c$: $|H| \approx \frac{\omega_c}{\omega}$, la pendiente de atenuación asintótica es de \textbf{$-20\ \si{\decibel\per\text{década}}$} ($-6\ \si{\decibel\per\text{octava}}$), y el desfase tiende a $-90^\circ$.
-\end{itemize}
-\end{ley}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Esquema circuital
+    \draw (-5,0) to[sV, v=$\mathbf{V}_i$] (-5,2)
+          to[R, l=$R$] (-2.5,2)
+          to[C, l=$C$, v=$\mathbf{V}_o$] (-2.5,0)
+          -- (-5,0);
+    \node[below=6pt] at (-3.75,-0.2) {\small\textbf{Filtro RC Pasa-Bajos}};
 
-\subsection{Filtro RC Pasa-Altos (High-Pass Filter)}
-Se toma la salida en bornes de la resistencia $R$.
+    % Diagrama asintótico de Bode
+    \draw[->, thick] (0,0) -- (5,0) node[right] {$\log_{10}(\omega)$};
+    \draw[->, thick] (0,-2.5) -- (0,1) node[above] {$|H|_{\si{\decibel}}$};
+    \draw[very thick, fftPrimary] (0,0) -- (2,0) -- (4.5,-2.5);
+    \draw[dashed, gray] (2,-2.5) -- (2,0) node[above, text=black] {$\omega_c$};
+    \draw[dashed, gray] (0,-0.7) node[left, text=black] {$-3\si{\decibel}$} -- (2,-0.7);
+    \filldraw[fftAccent] (2,-0.7) circle (2pt);
+    \node[right, fftPrimary] at (3.2,-1.2) {$-20\ \si{\decibel\per\text{década}}$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Filtro RC Pasa-Altos}
+La salida se toma en bornes de la resistencia:
 \begin{equation}
-    H(j\omega) = \frac{\mathbf{Z}_R}{\mathbf{Z}_R + \mathbf{Z}_C} = \frac{R}{R + \frac{1}{j\omega C}} = \frac{j\omega R C}{1 + j\omega R C} = \frac{j(\omega / \omega_c)}{1 + j(\omega / \omega_c)}
+    H(j\omega) = \frac{\mathbf{V}_o}{\mathbf{V}_i} = \frac{R}{R + \frac{1}{j\omega C}} = \frac{j\omega RC}{1 + j\omega RC} = \frac{j(\omega / \omega_c)}{1 + j(\omega / \omega_c)}
 \end{equation}
-\begin{itemize}[leftmargin=*]
-    \item Para $\omega \ll \omega_c$: $|H| \approx \frac{\omega}{\omega_c} \to 0$ (atenuación de $+20\ \si{\decibel\per\text{década}}$ a bajas frecuencias).
-    \item Para $\omega = \omega_c$: $|H| = \frac{1}{\sqrt{2}} \approx 0{,}707$ ($-3\ \si{\decibel}$), con fase $+45^\circ$.
-    \item Para $\omega \gg \omega_c$: $|H| \to 1$ ($0\ \si{\decibel}$), la señal de alta frecuencia no sufre atenuación.
-\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (-5,0) to[sV, v=$\mathbf{V}_i$] (-5,2)
+          to[C, l=$C$] (-2.5,2)
+          to[R, l=$R$, v=$\mathbf{V}_o$] (-2.5,0)
+          -- (-5,0);
+    \node[below=6pt] at (-3.75,-0.2) {\small\textbf{Filtro RC Pasa-Altos}};
+
+    % Bode pasa altos
+    \draw[->, thick] (0,0) -- (5,0) node[right] {$\log_{10}(\omega)$};
+    \draw[->, thick] (0,-2.5) -- (0,1) node[above] {$|H|_{\si{\decibel}}$};
+    \draw[very thick, fftGreen] (0.5,-2.2) -- (2.5,0) -- (4.8,0);
+    \draw[dashed, gray] (2.5,-2.5) -- (2.5,0) node[above, text=black] {$\omega_c$};
+    \node[left, fftGreen] at (1.6,-1.2) {$+20\ \si{\decibel\per\text{década}}$};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
-% 3.5. EJERCICIOS RESUELTOS DE EXAMEN
+% 3.4. EJERCICIOS RESUELTOS DE EXAMEN
 % ==============================================================================
 \section{Ejercicios Resueltos de Exámenes de Circuitos AC}
 
 \begin{ejercicio}[Análisis Fasorial Completo de Circuito RLC --- Examen UGR]
-Una fuente sinusoidal de tensión $v_s(t) = 100 \sqrt{2} \cos(1000 t)\ \si{\volt}$ alimenta una asociación serie formada por una resistencia $R = 30\ \si{\ohm}$, una bobina $L = 80\ \si{\milli\henry}$ y un condensador $C = 25\ \si{\micro\farad}$.
-\begin{enumerate}[label=\alph*)]
-    \item Calcular la impedancia total compleja $\mathbf{Z}_{eq}$ del circuito.
-    \item Hallar la expresión temporal de la corriente $i(t)$ en régimen permanente.
-    \item Calcular las potencias activa $P$, reactiva $Q$ y aparente $S$, así como el factor de potencia.
-\end{enumerate}
+Una fuente sinusoidal de tensión $v_s(t) = 100 \sqrt{2} \cos(1000 t)\ \si{\volt}$ alimenta una asociación serie formada por $R = 30\ \si{\ohm}$, $L = 80\ \si{\milli\henry}$ y $C = 25\ \si{\micro\farad}$.
+Hallar la impedancia $\mathbf{Z}_{eq}$, la corriente temporal $i(t)$, las potencias $P, Q, S$ y el factor de potencia.
 \tcbline
-\textbf{Solución:}\\[4pt]
-a) Con $\omega = 1000\ \si{\radian\per\second}$ y fasor eficaz $\mathbf{V}_{rms} = 100 \angle 0^\circ\ \si{\volt}$:
+\textbf{Esquema Circuital en el Dominio Fasorial:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    \draw (0,0) to[sV, v=$\mathbf{V}_s{=}100\angle 0^\circ\si{\volt}$] (0,2)
+          to[R, l=$R{=}30\si{\ohm}$] (2.5,2)
+          to[L, l=$j\omega L{=}j80\si{\ohm}$] (5,2)
+          to[C, l=$-j\frac{1}{\omega C}{=}-j40\si{\ohm}$] (5,0)
+          -- (0,0);
+    \draw[->, >=stealth, very thick, fftAccent] (0.3,2.3) -- (1.5,2.3) node[midway, above] {$\mathbf{I}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) Con $\omega = 1000\ \si{\radian\per\second}$:
 \begin{align}
     \mathbf{Z}_R &= 30\ \si{\ohm} \\
-    \mathbf{Z}_L &= j\omega L = j (1000 \times 0{,}080) = j 80\ \si{\ohm} \\
-    \mathbf{Z}_C &= -\frac{j}{\omega C} = -\frac{j}{1000 \times (25 \times 10^{-6})} = -\frac{j}{0{,}025} = -j 40\ \si{\ohm}
+    \mathbf{Z}_L &= j(1000 \times 0{,}080) = j80\ \si{\ohm} \\
+    \mathbf{Z}_C &= -j\frac{1}{1000 \times (25 \times 10^{-6})} = -j40\ \si{\ohm}
 \end{align}
-La impedancia total en serie es:
 \begin{equation}
-    \mathbf{Z}_{eq} = \mathbf{Z}_R + \mathbf{Z}_L + \mathbf{Z}_C = 30 + j(80 - 40) = 30 + j 40\ \si{\ohm}
+    \mathbf{Z}_{eq} = 30 + j(80 - 40) = 30 + j40\ \si{\ohm} = 50 \angle 53{,}13^\circ\ \si{\ohm}
 \end{equation}
-Expresando en forma polar:
+
+2) Corriente fasorial y expresión temporal:
 \begin{equation}
-    |\mathbf{Z}_{eq}| = \sqrt{30^2 + 40^2} = \sqrt{900 + 1600} = \sqrt{2500} = 50\ \si{\ohm}
+    \mathbf{I}_{rms} = \frac{\mathbf{V}_s}{\mathbf{Z}_{eq}} = \frac{100 \angle 0^\circ}{50 \angle 53{,}13^\circ} = 2 \angle -53{,}13^\circ\ \si{\ampere}
 \end{equation}
 \begin{equation}
-    \theta_Z = \arctan\left(\frac{40}{30}\right) = \arctan(1{,}3333) \approx 53{,}13^\circ \approx 0{,}927\ \si{\radian}
+    i(t) = 2\sqrt{2} \cos(1000 t - 53{,}13^\circ)\ \si{\ampere}
 \end{equation}
-$\mathbf{Z}_{eq} = 50 \angle 53{,}13^\circ\ \si{\ohm}$ (carácter predominantemente inductivo).\\[6pt]
-b) Calculamos el fasor de corriente eficaz:
-\begin{equation}
-    \mathbf{I}_{rms} = \frac{\mathbf{V}_{rms}}{\mathbf{Z}_{eq}} = \frac{100 \angle 0^\circ}{50 \angle 53{,}13^\circ} = 2 \angle -53{,}13^\circ\ \si{\ampere}
-\end{equation}
-La amplitud máxima de la corriente es $I_m = 2 \times \sqrt{2} \approx 2{,}828\ \si{\ampere}$.
-La expresión temporal instantánea es:
-\begin{equation}
-    i(t) = 2 \sqrt{2} \cos(1000 t - 53{,}13^\circ)\ \si{\ampere}
-\end{equation}
-c) Cálculo de potencias:
+
+3) Potencias y Factor de Potencia:
 \begin{align}
-    P &= V_{rms} I_{rms} \cos(\theta_Z) = 100 \times 2 \times \cos(53{,}13^\circ) = 200 \times 0{,}60 = 120\ \si{\watt} \\
-    Q &= V_{rms} I_{rms} \sin(\theta_Z) = 100 \times 2 \times \sin(53{,}13^\circ) = 200 \times 0{,}80 = 160\ \si{\VAR} \\
-    S &= V_{rms} I_{rms} = 100 \times 2 = 200\ \si{\VA} \\
+    P &= V_{rms} I_{rms} \cos(\theta) = 100 \times 2 \times \cos(53{,}13^\circ) = 200 \times 0{,}60 = 120\ \si{\watt} \\
+    Q &= V_{rms} I_{rms} \sin(\theta) = 100 \times 2 \times \sin(53{,}13^\circ) = 200 \times 0{,}80 = 160\ \si{\VAR} \\
+    S &= V_{rms} I_{rms} = 200\ \si{\VA} \\
     \text{fp} &= \cos(53{,}13^\circ) = 0{,}60\quad (\text{en retraso / inductivo})
 \end{align}
-Nótese que también: $P = I_{rms}^2 R = 2^2 \times 30 = 120\ \si{\watt}$ y $Q = I_{rms}^2 X = 2^2 \times 40 = 160\ \si{\VAR}$.
 \end{ejercicio}
 
 \begin{ejercicio}[Diseño y Respuesta en Frecuencia de un Filtro RC Pasa-Bajos]
-Se dispone de un condensador $C = 10\ \si{\nano\farad}$.
-\begin{enumerate}[label=\alph*)]
-    \item Calcular la resistencia $R$ requerida para fijar la frecuencia de corte en $f_c = 10\ \si{\kilo\hertz}$.
-    \item Para una señal sinusoidal de entrada de amplitud $V_i = 5\ \si{\volt}$ y frecuencia $f_1 = 100\ \si{\kilo\hertz}$ ($10$ veces la frecuencia de corte), determinar analíticamente la amplitud y el desfase de la señal de salida.
-\end{enumerate}
+Diseñar un filtro RC con $C = 10\ \si{\nano\farad}$ para frecuencia de corte $f_c = 10\ \si{\kilo\hertz}$ y calcular la salida para $V_i = 5\ \si{\volt}$ a $f_1 = 100\ \si{\kilo\hertz}$.
 \tcbline
-\textbf{Solución:}\\[4pt]
-a) La frecuencia angular de corte es:
+\textbf{Solución Paso a Paso:}\\[4pt]
+a) Resistencia requerida:
 \begin{equation}
-    \omega_c = 2\pi f_c = 2\pi \times (10 \times 10^3) = 20000\pi \approx 62831{,}85\ \si{\radian\per\second}
+    R = \frac{1}{2\pi f_c C} = \frac{1}{2\pi \times 10^4 \times (10 \times 10^{-9})} \approx 1591{,}55\ \si{\ohm} \approx 1{,}59\ \si{\kilo\ohm}
 \end{equation}
-A partir de la condición $\omega_c = \frac{1}{R C}$:
+b) Para $f_1 = 10 f_c$ ($\omega / \omega_c = 10$):
 \begin{equation}
-    R = \frac{1}{\omega_c C} = \frac{1}{2\pi \times 10^4 \times 10 \times 10^{-9}} = \frac{1}{2\pi \times 10^{-4}} = \frac{10000}{2\pi} \approx 1591{,}55\ \si{\ohm} \approx 1{,}59\ \si{\kilo\ohm}
+    |H| = \frac{1}{\sqrt{1 + 10^2}} = \frac{1}{\sqrt{101}} \approx 0{,}0995 \implies V_o = 0{,}0995 \times 5 = 0{,}4975\ \si{\volt} \approx 0{,}50\ \si{\volt}
 \end{equation}
-b) Para la frecuencia $f_1 = 100\ \si{\kilo\hertz} = 10 f_c$, la relación de frecuencias normalizada es $\frac{\omega}{\omega_c} = 10$:
 \begin{equation}
-    H(j\omega_1) = \frac{1}{1 + j(10)}
+    \varphi_o = -\arctan(10) \approx -84{,}29^\circ
 \end{equation}
-El módulo de la ganancia es:
-\begin{equation}
-    |H(j\omega_1)| = \frac{1}{\sqrt{1^2 + 10^2}} = \frac{1}{\sqrt{101}} \approx \frac{1}{10{,}0499} \approx 0{,}0995
-\end{equation}
-En decibelios:
-\begin{equation}
-    |H|_{\si{\decibel}} = 20 \log_{10}(0{,}0995) \approx -20{,}04\ \si{\decibel}
-\end{equation}
-La amplitud de salida es:
-\begin{equation}
-    V_o = |H| \cdot V_i = 0{,}0995 \times 5 = 0{,}4975\ \si{\volt} \approx 0{,}50\ \si{\volt}
-\end{equation}
-El desfase de salida respecto a la entrada es:
-\begin{equation}
-    \varphi_o = -\arctan(10) \approx -84{,}29^\circ \approx -1{,}471\ \si{\radian}
-\end{equation}
-Se aprecia la atenuación de aproximadamente $-20\ \si{\decibel}$ por década a altas frecuencias.
 \end{ejercicio}

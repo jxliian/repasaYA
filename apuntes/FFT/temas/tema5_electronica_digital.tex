@@ -12,241 +12,209 @@
 % ==============================================================================
 \section{Parámetros Característicos de una Familia Lógica}
 
-En los sistemas digitales, la información se procesa mediante variables booleanas discretas que toman únicamente dos valores algebraicos: '0' lógico (falso) y '1' lógico (verdadero). En los circuitos físicos reales, estos estados se representan mediante rangos analógicos continuos de tensión eléctrica.
-
-\subsection{Niveles de Tensión Lógica y Márgenes de Ruido}
-Para asegurar que una puerta lógica reconozca sin ambigüedad el bit transmitido por otra puerta anterior, se definen cuatro umbrales de tensión normalizados:
-
-\begin{definicion}[Niveles de Tensión Estandarizados]
-\begin{itemize}[leftmargin=*]
-    \item $V_{OH}$ (\textit{Output High}): Tensión mínima garantizada en la salida de una puerta cuando entrega un '1' lógico.
-    \item $V_{OL}$ (\textit{Output Low}): Tensión máxima garantizada en la salida de una puerta cuando entrega un '0' lógico.
-    \item $V_{IH}$ (\textit{Input High}): Tensión mínima que debe aplicarse a la entrada de una puerta para que esta la interprete inequívocamente como un '1' lógico.
-    \item $V_{IL}$ (\textit{Input Low}): Tensión máxima que puede aplicarse a la entrada de una puerta para que esta la interprete inequívocamente como un '0' lógico.
-\end{itemize}
-La región intermedia comprendida entre $V_{IL}$ y $V_{IH}$ se denomina \textbf{zona de indeterminación o transición prohibida}; si una señal cae en este intervalo, el estado lógico de salida es impredecible.
-\end{definicion}
-
-\begin{ley}[Márgenes de Ruido de una Puerta Lógica]
-El margen de ruido mide la inmunidad de la puerta frente a perturbaciones electromagnéticas espurias presentes en las líneas de interconexión:
+\subsection{Niveles Lógicos y Márgenes de Ruido}
+\begin{definicion}[Niveles de Tensión y Márgenes de Ruido]
+Para garantizar la fiabilidad del bit transmitido entre puertas digitales:
 \begin{align}
     NM_H &= V_{OH} - V_{IH} \quad (\text{Margen de Ruido a Nivel Alto}) \\
     NM_L &= V_{IL} - V_{OL} \quad (\text{Margen de Ruido a Nivel Bajo})
 \end{align}
-Un circuito digital es robusto y fiable únicamente si ambos márgenes de ruido son estrictamente positivos ($NM_H > 0$ y $NM_L > 0$). El margen de ruido global de la familia lógica es:
-\begin{equation}
-    NM = \min(NM_H, NM_L)
-\end{equation}
-\end{ley}
-
-\subsection{Factor de Abanico de Salida (\textit{Fan-Out})}
-\begin{definicion}[Fan-Out]
-El \textbf{fan-out} (o factor de abanico de salida) es el número máximo de entradas de puertas lógicas idénticas que pueden conectarse en paralelo a la salida de una puerta conductora sin que los niveles de tensión se degraden fuera de las especificaciones:
-\begin{equation}
-    N = \min\left( \left\lfloor \frac{I_{OH}}{I_{IH}} \right\rfloor, \left\lfloor \frac{I_{OL}}{I_{IL}} \right\rfloor \right)
-\end{equation}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{En tecnología bipolar (TTL):} El fan-out viene limitado por las corrientes estáticas de entrada ($I_{IL}$ e $I_{IH}$).
-    \item \textbf{En tecnología CMOS:} Debido al aislamiento dieléctrico del óxido de puerta de los MOSFET ($I_G = 0$), las corrientes de entrada en continua son prácticamente nulas ($I_{in} \approx 10^{-12}\ \si{\ampere}$). Por tanto, \textbf{en régimen estático (DC) el fan-out de CMOS es prácticamente infinito}. Sin embargo, en alterna cada entrada aporta una capacidad parásita $C_{in}$; un fan-out elevado incrementa la carga capacitiva total $C_L = N \cdot C_{in}$, degradando la velocidad de conmutación.
-\end{itemize}
 \end{definicion}
 
-\subsection{Tiempos de Propagación y Consumo de Potencia}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Retardos de Propagación ($t_p$):}
-    \begin{itemize}
-        \item $t_{pHL}$: Tiempo transcurrido desde que la entrada alcanza el $50\%$ de su valor final hasta que la salida desciende al $50\%$ de su caída.
-        \item $t_{pLH}$: Tiempo transcurrido desde el $50\%$ de la entrada hasta que la salida asciende al $50\%$ de su subida.
-        \item Retardo medio: $t_p = \frac{t_{pHL} + t_{pLH}}{2}$. Determina la frecuencia máxima de reloj del sistema digital ($f_{max} \le \frac{1}{t_p}$).
-    \end{itemize}
-    \item \textbf{Disipación de Potencia en Tecnología CMOS:}
-    \begin{enumerate}[label=\alph*)]
-        \item \textbf{Potencia Estática ($P_{stat}$):} Cuando las entradas están fijas en reposo ('0' o '1'), en ningún momento existe un camino conductor simultáneo entre $V_{DD}$ y masa. La disipación estática es debida exclusivamente a corrientes de fuga subumbral ($I_{leakage}$), siendo extremadamente reducida:
-        \begin{equation}
-            P_{stat} = V_{DD} \cdot I_{leakage} \approx \text{fracción de microwatt}
-        \end{equation}
-        \item \textbf{Potencia Dinámica de Conmutación ($P_{dyn}$):} Se produce durante las transiciones lógicas al cargar y descargar la capacidad equivalente de salida $C_L$ a la frecuencia de reloj $f$:
-        \begin{equation}
-            P_{dyn} = C_L \cdot V_{DD}^2 \cdot f
-        \end{equation}
-        Esta dependencia cuadrática con $V_{DD}$ justifica por qué la industria microelectrónica ha ido reduciendo las tensiones de alimentación desde $5\ \si{\volt}$ hasta $0{,}8\ \si{\volt}$ en procesadores avanzados.
-    \end{enumerate}
-\end{itemize}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Barra de salida (Driver)
+    \node[font=\bfseries] at (-2.5,3.6) {Salida (Transmisor)};
+    \draw[thick] (-3.5,0) rectangle (-1.5,3.2);
+    \draw[fill=fftGreen!25] (-3.5,2.4) rectangle (-1.5,3.2) node[midway] {'1' Lógico ($V_{OH}$)};
+    \draw[fill=gray!20] (-3.5,0.8) rectangle (-1.5,2.4) node[midway] {\footnotesize Zona Transición};
+    \draw[fill=fftRed!25] (-3.5,0) rectangle (-1.5,0.8) node[midway] {'0' Lógico ($V_{OL}$)};
+    \node[left] at (-3.5,3.2) {$V_{DD}$};
+    \node[left] at (-3.5,2.4) {$V_{OH}$};
+    \node[left] at (-3.5,0.8) {$V_{OL}$};
+    \node[left] at (-3.5,0) {$0\si{\volt}$};
+
+    % Barra de entrada (Receiver)
+    \node[font=\bfseries] at (2.5,3.6) {Entrada (Receptor)};
+    \draw[thick] (1.5,0) rectangle (3.5,3.2);
+    \draw[fill=fftGreen!25] (1.5,1.9) rectangle (3.5,3.2) node[midway] {'1' Aceptado ($V_{IH}$)};
+    \draw[fill=fftOrange!25] (1.5,1.2) rectangle (3.5,1.9) node[midway] {\footnotesize Indeterminada};
+    \draw[fill=fftRed!25] (1.5,0) rectangle (3.5,1.2) node[midway] {'0' Aceptado ($V_{IL}$)};
+    \node[right] at (3.5,1.9) {$V_{IH}$};
+    \node[right] at (3.5,1.2) {$V_{IL}$};
+
+    % Márgenes de ruido entre ambas barras
+    \draw[<->, >=stealth, very thick, fftPrimary] (-1.2,2.4) -- (1.2,1.9) node[midway, above] {$NM_H$};
+    \draw[<->, >=stealth, very thick, fftAccent] (-1.2,0.8) -- (1.2,1.2) node[midway, below] {$NM_L$};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
 % 5.2. EL INVERSOR CMOS
 % ==============================================================================
 \section{El Inversor CMOS: Estructura y Funcionamiento}
 
-El inversor CMOS es la célula elemental de toda la tecnología digital VLSI actual.
+\subsection{Esquema Circuital a Nivel de Transistores}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    % Alimentación VDD
+    \draw (0,3.5) node[above] {$V_{DD}$} -- (0,3.0);
 
-\subsection{Estructura Circuital}
-Está constituido por una pareja complementaria de transistores:
-\begin{itemize}[leftmargin=*]
-    \item Un transistor **PMOS** superior conectado entre la alimentación $V_{DD}$ y el nudo de salida $V_{out}$ (red de \textit{Pull-Up}).
-    \item Un transistor **NMOS** inferior conectado entre el nudo de salida $V_{out}$ y masa (red de \textit{Pull-Down}).
-    \item Las puertas de ambos transistores están cortocircuitadas a la entrada común $V_{in}$.
-\end{itemize}
+    % Transistor PMOS (Pull-Up)
+    \draw (0,2.5) node[pmos] (p) {};
+    \draw (0,3.0) -- (p.source);
 
-\subsection{Análisis de los Estados Lógicos}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Entrada a Nivel Bajo ($V_{in} = 0\ \si{\volt} = \text{'0'}$):}
-    \begin{itemize}
-        \item Transistor NMOS: $V_{GSn} = V_{in} - 0 = 0\ \si{\volt} < V_{thn} \implies$ \textbf{CORTADO} ($I_{Dn} = 0$, interruptor abierto hacia masa).
-        \item Transistor PMOS: $V_{SGp} = V_{DD} - V_{in} = V_{DD} > |V_{thp}| \implies$ \textbf{CONDUCE EN REGIÓN ÓHMICA} ($R_{p} \approx 0$).
-        \item La salida se conecta rígidamente a $V_{DD}$:
-        \begin{equation}
-            V_{out} = V_{DD} \equiv \text{'1' lógico}, \qquad V_{OH} = V_{DD}
-        \end{equation}
-    \end{itemize}
-    \item \textbf{Entrada a Nivel Alto ($V_{in} = V_{DD} = \text{'1'}$):}
-    \begin{itemize}
-        \item Transistor NMOS: $V_{GSn} = V_{in} - 0 = V_{DD} > V_{thn} \implies$ \textbf{CONDUCE EN REGIÓN ÓHMICA} ($R_{n} \approx 0$).
-        \item Transistor PMOS: $V_{SGp} = V_{DD} - V_{in} = 0\ \si{\volt} < |V_{thp}| \implies$ \textbf{CORTADO} ($I_{Dp} = 0$, interruptor abierto hacia $V_{DD}$).
-        \item La salida se conecta rígidamente a masa:
-        \begin{equation}
-            V_{out} = 0\ \si{\volt} \equiv \text{'0' lógico}, \qquad V_{OL} = 0\ \si{\volt}
-        \end{equation}
-    \end{itemize}
-\end{itemize}
+    % Transistor NMOS (Pull-Down)
+    \draw (0,0.5) node[nmos] (n) {};
+    \draw (n.source) -- (0,0) node[ground] {};
 
-\begin{aviso}[Excursión Lógica Completa (\textit{Rail-to-Rail})]
-En el inversor CMOS:
-\begin{equation}
-    V_{OL} = 0\ \si{\volt}, \qquad V_{OH} = V_{DD}
-\end{equation}
-La excursión de tensión de salida abarca la totalidad del rango de alimentación (\textit{rail-to-rail}), lo que maximiza extraordinariamente los márgenes de ruido en comparación con tecnologías anteriores como NMOS con carga pasiva o TTL.
-\end{aviso}
+    % Conexión entre drenadores hacia la salida
+    \draw (p.drain) -- (n.drain);
+    \draw (0,1.5) to[short, -o] (1.8,1.5) node[right] {$V_{out}$};
+
+    % Conexión de puertas hacia la entrada
+    \draw (p.gate) -- (-1.2,2.5) -- (-1.2,0.5) -- (n.gate);
+    \draw (-1.2,1.5) to[short, -o] (-2.2,1.5) node[left] {$V_{in}$};
+
+    % Etiquetas de bloques
+    \node[right=8pt, fftPrimary] at (0.4,2.5) {PMOS (Pull-Up Network)};
+    \node[right=8pt, fftDarkBlue] at (0.4,0.5) {NMOS (Pull-Down Network)};
+\end{tikzpicture}
+\end{center}
 
 \subsection{Curva de Transferencia de Tensión (VTC)}
-A lo largo del barrido de $V_{in}$ desde $0$ hasta $V_{DD}$, los transistores atraviesan cinco regiones de operación características:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Región A ($0 \le V_{in} < V_{thn}$):} NMOS cortado, PMOS en tríodo $\implies V_{out} = V_{DD}$.
-    \item \textbf{Región B ($V_{thn} \le V_{in} < V_{M}$):} NMOS en saturación, PMOS en tríodo $\implies V_{out}$ empieza a caer suavemente.
-    \item \textbf{Región C ($V_{in} \approx V_{M}$):} \textbf{Ambos transistores están simultáneamente en saturación}. La ganancia en pequeña señal $A_v = \frac{dV_{out}}{dV_{in}}$ es máxima (pendiente vertical muy abrupta). Fluye un pico transitorio de corriente de cortocircuito entre $V_{DD}$ y masa.
-    \item \textbf{Región D ($V_{M} < V_{in} \le V_{DD} - |V_{thp}|$):} NMOS en tríodo, PMOS en saturación.
-    \item \textbf{Región E ($V_{in} > V_{DD} - |V_{thp}|$):} PMOS cortado, NMOS en tríodo $\implies V_{out} = 0\ \si{\volt}$.
-\end{enumerate}
-Para un diseño simétrico donde $k_n = k_p$ y $V_{thn} = |V_{thp}|$, la tensión de conmutación lógica es exactamente:
-\begin{equation}
-    V_{M} = \frac{V_{DD}}{2}
-\end{equation}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    \draw[->, thick] (0,0) -- (4.5,0) node[right] {$V_{in}$};
+    \draw[->, thick] (0,0) -- (0,4.5) node[above] {$V_{out}$};
+    \node[left] at (0,3.8) {$V_{DD}$};
+    \node[below] at (3.8,0) {$V_{DD}$};
+
+    % Curva VTC
+    \draw[very thick, fftAccent] (0,3.8) -- (1.0,3.8)
+          to[out=0, in=100] (1.9,1.9)
+          to[out=-80, in=180] (2.8,0) -- (3.8,0);
+
+    % Punto de conmutación VM
+    \draw[dashed, gray] (1.9,0) node[below, text=black] {$V_M{=}\frac{V_{DD}}{2}$} -- (1.9,1.9);
+    \draw[dashed, gray] (0,1.9) node[left, text=black] {$V_M$} -- (1.9,1.9);
+    \filldraw[fftDarkBlue] (1.9,1.9) circle (2pt);
+
+    % Regiones
+    \node[font=\footnotesize, fftPrimary] at (0.5,2.8) {A};
+    \node[font=\footnotesize, fftPrimary] at (1.4,2.2) {B};
+    \node[font=\footnotesize, fftAccent] at (2.2,2.0) {C};
+    \node[font=\footnotesize, fftPrimary] at (2.5,1.2) {D};
+    \node[font=\footnotesize, fftPrimary] at (3.4,0.6) {E};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
-% 5.3. SÍNTESIS DE PUERTAS LÓGICAS CMOS COMPLEJAS
+% 5.3. SÍNTESIS DE PUERTAS LÓGICAS CMOS
 % ==============================================================================
 \section{Síntesis de Puertas Lógicas CMOS Combinacionales}
 
-Toda puerta lógica en tecnología CMOS estática está estructurada en dos bloques complementarios:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Red de Pull-Down (PDN):} Conectada entre la salida y masa. Está constituida exclusivamente por transistores **NMOS**. Se encarga de descargar la salida a $0\ \si{\volt}$ cuando la función booleana evaluada es $0$.
-    \item \textbf{Red de Pull-Up (PUN):} Conectada entre la fuente $V_{DD}$ y la salida. Está constituida exclusivamente por transistores **PMOS**. Se encarga de cargar la salida a $V_{DD}$ cuando la función es $1$.
-\end{enumerate}
-
-\begin{ley}[Reglas de Dualidad de Síntesis CMOS]
-Debido a que un NMOS conduce con '1' y un PMOS conduce con '0', la tecnología CMOS es intrínsecamente \textbf{inversora} (sintetiza directamente funciones negadas $Y = \overline{F}$):
+\begin{ley}[Reglas de Dualidad de De Morgan en CMOS]
 \begin{itemize}[leftmargin=*]
-    \item \textbf{En la red PDN (NMOS):}
-    \begin{itemize}
-        \item La operación lógica **AND** ($A \cdot B$) se implementa conectando los transistores NMOS en **SERIE** (ambos deben conducir simultáneamente para conectar a masa).
-        \item La operación lógica **OR** ($A + B$) se implementa conectando los transistores NMOS en **PARALELO** (basta con que conduzca cualquiera de ellos).
-    \end{itemize}
-    \item \textbf{En la red PUN (PMOS) --- Principio de Dualidad de De Morgan:}
-    \begin{itemize}
-        \item Si en la PDN dos ramas están en serie, en la PUN los correspondientes PMOS deben disponerse en **PARALELO**.
-        \item Si en la PDN dos ramas están en paralelo, en la PUN los correspondientes PMOS deben disponerse en **SERIE**.
-    \end{itemize}
+    \item \textbf{En la red PDN (NMOS):} AND $\implies$ \textbf{Serie}; OR $\implies$ \textbf{Paralelo}.
+    \item \textbf{En la red PUN (PMOS):} AND $\implies$ \textbf{Paralelo}; OR $\implies$ \textbf{Serie}.
 \end{itemize}
 \end{ley}
 
-\subsection{Puertas Básicas: NAND y NOR}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Puerta NAND ($Y = \overline{A \cdot B}$):}
-    \begin{itemize}
-        \item Red PDN: Dos transistores NMOS ($N_A$ y $N_B$) conectados en \textbf{serie} entre la salida y masa.
-        \item Red PUN: Dos transistores PMOS ($P_A$ y $P_B$) conectados en \textbf{paralelo} entre $V_{DD}$ y la salida.
-        \item Si $A=1$ y $B=1$, ambos NMOS conducen $\implies Y = 0$. En cualquier otro caso, al menos un PMOS conduce $\implies Y = 1$.
-    \end{itemize}
-    \item \textbf{Puerta NOR ($Y = \overline{A + B}$):}
-    \begin{itemize}
-        \item Red PDN: Dos transistores NMOS en \textbf{paralelo} entre la salida y masa.
-        \item Red PUN: Dos transistores PMOS en \textbf{serie} entre $V_{DD}$ y la salida.
-        \item Si $A=1$ o $B=1$, conduce la PDN $\implies Y = 0$. Únicamente si $A=0$ y $B=0$, ambos PMOS conducen en serie $\implies Y = 1$.
-    \end{itemize}
-\end{itemize}
+\subsection{Estructuras de las Puertas NAND y NOR en CMOS}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % NAND CMOS (Y = not(A.B))
+    \node[font=\bfseries] at (-2.5,4.6) {Puerta NAND ($Y = \overline{A \cdot B}$)};
+    \draw (-2.5,4.0) node[above] {$V_{DD}$} -- (-2.5,3.6);
+    % PUN: 2 PMOS en paralelo
+    \draw (-2.5,3.6) -- (-3.5,3.6) node[pmos] (pa) {};
+    \draw (-2.5,3.6) -- (-1.5,3.6) node[pmos] (pb) {};
+    \draw (pa.drain) -- (-3.5,2.4) -- (-1.5,2.4) -- (pb.drain);
+    \draw (-2.5,2.4) -- (-2.5,1.8);
+    \draw (-2.5,2.1) to[short, -o] (-0.5,2.1) node[right] {$Y$};
+    % PDN: 2 NMOS en serie
+    \draw (-2.5,1.8) node[nmos] (na) {};
+    \draw (na.source) node[nmos] (nb) {};
+    \draw (nb.source) -- (-2.5,-0.6) node[ground] {};
+    \node[left] at (pa.gate) {$A$}; \node[left] at (na.gate) {$A$};
+    \node[right] at (pb.gate) {$B$}; \node[right] at (nb.gate) {$B$};
 
-\subsection{Lógica NMOS con Carga de Deplexión}
-Antes de la hegemonía de CMOS, se utilizaba la lógica NMOS donde la red PUN se reemplazaba por un único transistor NMOS de \textbf{deplexión} con su puerta cortocircuitada a su fuente ($V_{GS} = 0$).
-Como para un NMOS de deplexión la tensión umbral es negativa ($V_{th} < 0$), con $V_{GS} = 0 > V_{th}$ el transistor conduce permanentemente actuando como una fuente activa de corriente de carga (\textit{pull-up load}).
-\begin{itemize}[leftmargin=*]
-    \item Ventaja histórica: requiere menos transistores y evita el proceso de fabricación de pozos tipo N para PMOS.
-    \item Inconveniente crítico: cuando la salida está a nivel bajo ('0'), fluye corriente estática continua a través de la carga hacia masa, provocando un consumo de potencia estática inaceptable para chips de alta integración.
-\end{itemize}
+    % NOR CMOS (Y = not(A+B))
+    \node[font=\bfseries] at (3.5,4.6) {Puerta NOR ($Y = \overline{A + B}$)};
+    \draw (3.5,4.0) node[above] {$V_{DD}$} -- (3.5,3.8);
+    % PUN: 2 PMOS en serie
+    \draw (3.5,3.4) node[pmos] (p1) {};
+    \draw (p1.drain) node[pmos] (p2) {};
+    \draw (p2.drain) -- (3.5,1.5);
+    \draw (3.5,1.5) to[short, -o] (5.2,1.5) node[right] {$Y$};
+    % PDN: 2 NMOS en paralelo
+    \draw (3.5,1.5) -- (2.5,1.5) node[nmos] (n1) {};
+    \draw (3.5,1.5) -- (4.5,1.5) node[nmos] (n2) {};
+    \draw (n1.source) -- (2.5,0) -- (4.5,0) -- (n2.source);
+    \draw (3.5,0) -- (3.5,-0.4) node[ground] {};
+    \node[left] at (p1.gate) {$A$}; \node[left] at (n1.gate) {$A$};
+    \node[left] at (p2.gate) {$B$}; \node[right] at (n2.gate) {$B$};
+\end{tikzpicture}
+\end{center}
 
 % ==============================================================================
 % 5.4. EJERCICIOS RESUELTOS DE EXAMEN
 % ==============================================================================
 \section{Ejercicios Resueltos de Exámenes de Electrónica Digital}
 
-\begin{ejercicio}[Síntesis de Función Lógica Compleja en CMOS --- Examen Enero 2020 FFT]
-Diseñar a nivel de transistores el circuito de la puerta estática complementaria CMOS que implementa la función booleana:
+\begin{ejercicio}[Síntesis de Función Compleja CMOS --- Examen Enero 2020 FFT]
+Diseñar a nivel de transistores la puerta estática complementaria CMOS para:
 \begin{equation}
     Y = \overline{(A + B) \cdot C + D}
 \end{equation}
-\begin{enumerate}[label=\alph*)]
-    \item Determinar la topología de la red de Pull-Down (NMOS) indicando qué transistores van en serie y cuáles en paralelo.
-    \item Determinar la topología dual de la red de Pull-Up (PMOS).
-    \item Indicar el número total de transistores necesarios.
-\end{enumerate}
 \tcbline
-\textbf{Solución:}\\[4pt]
-a) \textbf{Diseño de la Red Pull-Down (PDN - NMOS):}
-La función dada ya se encuentra en forma negada natural $Y = \overline{F}$, con $F = (A + B) \cdot C + D$:
-\begin{itemize}[leftmargin=*]
-    \item Término $(A + B)$: se implementa mediante los transistores NMOS $N_A$ y $N_B$ conectados en \textbf{paralelo}.
-    \item Multiplicación $\cdot\, C$: el bloque paralelo $(N_A \parallel N_B)$ se conecta en \textbf{serie} con el transistor $N_C$.
-    \item Suma $+ D$: toda la rama anterior $[(N_A \parallel N_B) \text{ en serie con } N_C]$ se conecta en \textbf{paralelo} con el transistor $N_D$ hacia masa.
-\end{itemize}
-b) \textbf{Diseño de la Red Pull-Up (PUN - PMOS):}
-Aplicamos la regla del grafo dual sobre la red PDN:
-\begin{itemize}[leftmargin=*]
-    \item El paralelo $(N_A \parallel N_B)$ se convierte en la PUN en una conexión en \textbf{serie} de $P_A$ y $P_B$.
-    \item La conexión en serie con $C$ se convierte en la PUN en una conexión en \textbf{paralelo} del bloque $(P_A \text{ serie } P_B)$ con $P_C$.
-    \item El paralelo con $D$ se convierte en la PUN en una conexión en \textbf{serie} del bloque anterior con el transistor $P_D$ hacia la fuente $V_{DD}$:
-    \begin{equation}
-        \text{PUN} = P_D \text{ en serie con } \left[ P_C \parallel (P_A \text{ en serie con } P_B) \right]
-    \end{equation}
-\end{itemize}
-c) \textbf{Número Total de Transistores:}
-La función dispone de 4 variables de entrada $\{A, B, C, D\}$:
-\begin{itemize}[leftmargin=*]
-    \item Transistores NMOS en la PDN: 4 transistores ($N_A, N_B, N_C, N_D$).
-    \item Transistores PMOS en la PUN: 4 transistores ($P_A, P_B, P_C, P_D$).
-    \item \textbf{Total:} $4 + 4 = 8$ transistores MOSFET.
-\end{itemize}
-\end{ejercicio}
+\textbf{Esquema Circuital Completo en Tecnología CMOS (8 Transistores):}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % VDD arriba
+    \draw (0,5.8) node[above] {$V_{DD}$} -- (0,5.4);
 
-\begin{ejercicio}[Cálculo de Márgenes de Ruido y Disipación de Potencia Dinámica]
-Una familia lógica CMOS alimentada a $V_{DD} = 3{,}3\ \si{\volt}$ presenta los siguientes parámetros de catálogo:
-$V_{OH} = 3{,}0\ \si{\volt}$, $V_{OL} = 0{,}2\ \si{\volt}$, $V_{IH} = 2{,}0\ \si{\volt}$, $V_{IL} = 0{,}8\ \si{\volt}$.
-La capacidad total de carga en la salida es $C_L = 20\ \si{\pico\farad}$ y conmuta a una frecuencia $f = 50\ \si{\mega\hertz}$.
-\begin{enumerate}[label=\alph*)]
-    \item Calcular los márgenes de ruido a nivel alto y bajo ($NM_H$ y $NM_L$).
-    \item Calcular la potencia dinámica disipada por la puerta.
-\end{enumerate}
-\tcbline
-\textbf{Solución:}\\[4pt]
-a) Márgenes de ruido:
-\begin{align}
-    NM_H &= V_{OH} - V_{IH} = 3{,}0\ \si{\volt} - 2{,}0\ \si{\volt} = 1{,}0\ \si{\volt} \\
-    NM_L &= V_{IL} - V_{OL} = 0{,}8\ \si{\volt} - 0{,}2\ \si{\volt} = 0{,}6\ \si{\volt}
-\end{align}
-El margen de ruido global de la familia es $NM = \min(1{,}0; 0{,}6) = 0{,}6\ \si{\volt}$.\\[6pt]
-b) Potencia dinámica:
-\begin{align}
-    P_{dyn} &= C_L \cdot V_{DD}^2 \cdot f \\
-            &= (20 \times 10^{-12}\ \si{\farad}) \times (3{,}3\ \si{\volt})^2 \times (50 \times 10^6\ \si{\hertz}) \\
-            &= (20 \times 10^{-12}) \times (10{,}89) \times (50 \times 10^6) \\
-            &= 1000 \times 10^{-6} \times 10{,}89 = 10{,}89 \times 10^{-3}\ \si{\watt} = 10{,}89\ \si{\milli\watt}
-\end{align}
+    % RED PUN: PD en serie con [PC paralelo (PA serie PB)]
+    \draw (0,5.0) node[pmos] (pd) {};
+    \node[left] at (pd.gate) {$D$};
+
+    \draw (pd.drain) -- (0,4.2);
+    % Paralelo: PC a la izquierda, PA-PB a la derecha
+    \draw (0,4.2) -- (-1.6,4.2) node[pmos] (pc) {};
+    \node[left] at (pc.gate) {$C$};
+    \draw (0,4.2) -- (1.6,4.2) node[pmos] (pa) {};
+    \node[right] at (pa.gate) {$A$};
+    \draw (pa.drain) node[pmos] (pb) {};
+    \node[right] at (pb.gate) {$B$};
+
+    \draw (pc.drain) -- (-1.6,2.2) -- (1.6,2.2) -- (pb.drain);
+    \draw (0,2.2) -- (0,1.8);
+    \draw (0,2.0) to[short, -o] (2.8,2.0) node[right, font=\bfseries] {$Y = \overline{(A+B)C + D}$};
+
+    % RED PDN: [(NA paralelo NB) serie NC] paralelo ND
+    \draw (0,1.8) -- (-1.6,1.8);
+    % Rama ND
+    \draw (0,1.8) -- (1.6,1.8) node[nmos] (nd) {};
+    \node[right] at (nd.gate) {$D$};
+
+    % Rama NC serie (NA par NB)
+    \draw (-1.6,1.4) node[nmos] (nc) {};
+    \node[left] at (nc.gate) {$C$};
+    \draw (nc.source) -- (-1.6,0.6);
+    \draw (-1.6,0.6) -- (-2.4,0.6) node[nmos] (na) {};
+    \node[left] at (na.gate) {$A$};
+    \draw (-1.6,0.6) -- (-0.8,0.6) node[nmos] (nb) {};
+    \node[right] at (nb.gate) {$B$};
+
+    \draw (na.source) -- (-2.4,-0.4) -- (-0.8,-0.4) -- (nb.source);
+    \draw (-1.6,-0.4) -- (1.6,-0.4) -- (nd.source);
+    \draw (0,-0.4) -- (0,-0.8) node[ground] {};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[2pt]
+- \textbf{Red PDN (NMOS):} $N_A \parallel N_B$ en serie con $N_C$, y todo ello en paralelo con $N_D$ hacia masa.\\[2pt]
+- \textbf{Red PUN (PMOS):} Transistor $P_D$ en serie con el bloque $[P_C \parallel (P_A \text{ serie } P_B)]$ hacia $V_{DD}$.\\[2pt]
+- Total: 4 NMOS $+ 4$ PMOS = \textbf{8 transistores}.
 \end{ejercicio}
