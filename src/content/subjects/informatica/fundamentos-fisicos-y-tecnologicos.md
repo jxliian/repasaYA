@@ -10,4 +10,4 @@ description: "Apuntes completos de teoría, circuitos DC y AC, semiconductores, 
 materials: [apuntes]
 ---
 
-Apuntes completos en PDF y proyecto LaTeX modular (67 páginas) que cubren íntegramente los 6 temas del temario oficial impartido por el profesor Pedro Cartujo en la ETSII de la Universidad de Granada (UGR), junto a la resolución detallada paso a paso de problemas de exámenes parciales y convocatorias oficiales.
+Apuntes completos en PDF y proyecto LaTeX modular (153 páginas) que cubren íntegramente los 6 temas del temario oficial impartido por el profesor Pedro Cartujo en la ETSII de la Universidad de Granada (UGR), junto a la resolución detallada paso a paso de problemas de exámenes parciales y convocatorias oficiales.
