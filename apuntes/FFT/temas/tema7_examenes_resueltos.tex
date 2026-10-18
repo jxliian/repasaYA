@@ -4,7 +4,7 @@
 \cuadrofuentes{
     \textbf{Asignatura:} Fundamentos Físicos y Tecnológicos (1.º Grado en Ingeniería Informática, UGR).\\[2pt]
     \textbf{Profesor:} Pedro Cartujo (Departamento de Electrónica y Tecnología de Computadores).\\[2pt]
-    \textbf{Contenido:} Problemas originales de los exámenes parciales y convocatorias oficiales de la UGR, resueltos de forma íntegra, sistemática y con todas las justificaciones algebraicas, numéricas y diagramas de circuito detallados.
+    \textbf{Contenido:} Resolución íntegra, detallada y paso a paso de los Exámenes Parciales Oficiales (Parcial 1: Electromagnetismo y Circuitos DC/AC; Parcial 2: Familias Lógicas NMOS/CMOS, Redes de Diodos y Amplificadores Operacionales Acoplados), incluyendo todos los diagramas circuitales y métodos alternativos de resolución.
 }
 
 % ==============================================================================
@@ -12,140 +12,363 @@
 % ==============================================================================
 \section{Examen Parcial 1: Electromagnetismo y Circuitos DC/AC}
 
-\begin{ejercicio}[Parcial 1 --- Problema 1: Campo Magnético y Fuerza entre Tres Hilos Paralelos]
-Se tienen tres cables conductores rectilíneos, paralelos e indefinidos de longitud $L = 50\ \si{\centi\meter} = 0{,}5\ \si{\meter}$, situados coplanariamente en el vacío ($\mu_0 = 4\pi \times 10^{-7}\ \si{\tesla\meter\per\ampere}$).
-Por los tres hilos circulan corrientes continuas en el mismo sentido ($+\hat{k}$ saliendo del plano):
-\begin{equation}
-    I_1 = 2\ \si{\milli\ampere}, \qquad I_2 = 4\ \si{\milli\ampere}, \qquad I_3 = 6\ \si{\milli\ampere}
-\end{equation}
-La distancia entre los cables 1 y 2 es $d_{12} = 1\ \si{\centi\meter}$, y entre los cables 2 y 3 es $d_{23} = 2\ \si{\centi\meter}$.
-Calcular los campos magnéticos y las fuerzas producidas sobre cada hilo.
+\begin{ejercicio}[Parcial 1 --- Problema 1: Ley de Ampère, Campo Magnético y Fuerza entre Tres Hilos Paralelos]
+\begin{enumerate}[label=\arabic*)]
+    \item Calcular utilizando la \textbf{Ley de Ampère} la expresión del campo magnético $\vec{B}$ que crea un cable conductor rectilíneo indefinido por el que circula una intensidad $I$ a una distancia radial $r$ (o $d$).
+    \item Se tienen tres cables conductores rectilíneos y paralelos de longitud $L = 50\ \si{\centi\meter} = 0{,}5\ \si{\meter}$ (mucho mayor que la distancia que los separa), situados en el vacío ($\mu_0 = 4\pi \times 10^{-7}\ \si{\tesla\meter\per\ampere}$), por los cuales circulan corrientes continuas en el mismo sentido:
+    \begin{equation}
+        I_1 = 2\ \si{\milli\ampere}, \qquad I_2 = 4\ \si{\milli\ampere}, \qquad I_3 = 6\ \si{\milli\ampere}
+    \end{equation}
+    \begin{enumerate}[label=\alph*)]
+        \item Calcular los campos magnéticos que producen los cables sobre cada uno de los otros dos indicando su módulo, dirección y sentido.
+        \item Calcular las fuerzas magnéticas netas que se producen debido a estos campos sobre cada uno de los tres cables, indicando su dirección y sentido, y verificar la Tercera Ley de Newton.
+    \end{enumerate}
+\end{enumerate}
 \tcbline
-\textbf{Diagrama Geométrico del Problema en Corte Transversal:}\\[4pt]
+\textbf{1) Deducción del Campo Magnético de un Hilo Rectilíneo mediante la Ley de Ampère:}\\[4pt]
+La \textbf{Ley de Ampère} establece que la circulación del vector campo magnético $\vec{B}$ a lo largo de cualquier línea cerrada amperiana $C$ es proporcional a la intensidad neta de corriente $I_{\text{enc}}$ que atraviesa la superficie delimitada por dicha curva:
+\begin{equation}
+    \oint_C \vec{B} \cdot d\vec{\ell} = \mu_0 I_{\text{enc}}
+\end{equation}
+
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
-    % Eje horizontal
-    \draw[->, gray] (-0.8,0) -- (4.5,0) node[right, text=black] {$x$};
-    % Hilo 1 (x = 0)
+\begin{tikzpicture}[scale=1.0]
+    % Circunferencia amperiana en perspectiva (elipse)
+    \draw[thick, dashed, fftPrimary] (0,0) ellipse (2.0cm and 0.65cm);
+    % Hilo conductor vertical
+    \draw[very thick, fftDarkBlue] (0,-1.6) -- (0,0);
+    \draw[very thick, fftDarkBlue, ->, >=stealth] (0,0) -- (0,1.8) node[left] {$I$};
+    % Radio r y vectores B y dl
+    \draw[->, >=stealth, gray] (0,0) -- (2.0,0) node[midway, above, text=black] {$r$};
+    \draw[->, >=stealth, very thick, fftAccent] (2.0,0) -- (2.0,0.95) node[right] {$\vec{B}$};
+    \draw[->, >=stealth, thick, fftGreen] (1.41,-0.46) -- (1.85,-0.15) node[below right] {$d\vec{\ell}$};
+    \node[below, font=\footnotesize\sffamily] at (0,-1.7) {Curva cerrada amperiana circular de radio $r$};
+\end{tikzpicture}
+\end{center}
+
+Tomando como camino cerrado $C$ una circunferencia de radio $r$ centrada en el hilo y contenida en el plano perpendicular al conductor, por simetría cilíndrica el campo $\vec{B}$ tiene el mismo módulo en todos los puntos de la circunferencia y es tangente a ella ($\vec{B} \parallel d\vec{\ell} \implies \theta = 0^\circ$, $\cos 0^\circ = 1$):
+\begin{equation}
+    \oint_C \vec{B} \cdot d\vec{\ell} = \oint_C B\, d\ell \cos(0^\circ) = B \oint_C d\ell = B (2\pi r) = \mu_0 I \implies \boxed{B(r) = \frac{\mu_0 I}{2\pi r}}
+\end{equation}
+
+\vspace{6pt}
+\textbf{2) Diagrama Geométrico de los Tres Cables Paralelos en Corte Transversal:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    % Eje horizontal x
+    \draw[->, >=stealth, gray] (-1.0,0) -- (8.0,0) node[right, text=black] {$x$};
+
+    % Hilo 1 (en x = 0)
     \draw[thick, fftPrimary] (0,0) circle (0.28);
     \filldraw[fftPrimary] (0,0) circle (2.5pt);
-    \node[below=8pt] at (0,0) {$H_1\ (\odot\ I_1{=}2\si{\milli\ampere})$};
-    % Hilo 2 (x = 1 cm)
-    \draw[thick, fftDarkBlue] (1.5,0) circle (0.28);
-    \filldraw[fftDarkBlue] (1.5,0) circle (2.5pt);
-    \node[below=8pt] at (1.5,0) {$H_2\ (\odot\ I_2{=}4\si{\milli\ampere})$};
-    % Hilo 3 (x = 3 cm)
-    \draw[thick, fftGreen] (3.8,0) circle (0.28);
-    \filldraw[fftGreen] (3.8,0) circle (2.5pt);
-    \node[below=8pt] at (3.8,0) {$H_3\ (\odot\ I_3{=}6\si{\milli\ampere})$};
-    % Cotas de separación
-    \draw[<->, gray] (0,0.8) -- (1.5,0.8) node[midway, above] {$d_{12}{=}1\si{\centi\meter}$};
-    \draw[<->, gray] (1.5,0.8) -- (3.8,0.8) node[midway, above] {$d_{23}{=}2\si{\centi\meter}$};
-    % Vectores de fuerza neta
-    \draw[->, >=stealth, very thick, fftAccent] (0,-0.6) -- (0.9,-0.6) node[right] {$\vec{F}_1$};
-    \draw[->, >=stealth, very thick, fftAccent] (1.5,-0.6) -- (0.8,-0.6) node[left] {$\vec{F}_2$};
-    \draw[->, >=stealth, very thick, fftAccent] (3.8,-0.6) -- (2.6,-0.6) node[left] {$\vec{F}_3$};
+    \node[above, font=\footnotesize\bfseries, color=fftPrimary] at (0,0.55) {$H_1\ (I_1{=}2\,\si{\milli\ampere})$};
+
+    % Hilo 2 (en x = 3.0)
+    \draw[thick, fftDarkBlue] (3.0,0) circle (0.28);
+    \filldraw[fftDarkBlue] (3.0,0) circle (2.5pt);
+    \node[above, font=\footnotesize\bfseries, color=fftDarkBlue] at (3.0,0.55) {$H_2\ (I_2{=}4\,\si{\milli\ampere})$};
+
+    % Hilo 3 (en x = 6.5)
+    \draw[thick, fftGreen] (6.5,0) circle (0.28);
+    \filldraw[fftGreen] (6.5,0) circle (2.5pt);
+    \node[above, font=\footnotesize\bfseries, color=fftGreen] at (6.5,0.55) {$H_3\ (I_3{=}6\,\si{\milli\ampere})$};
+
+    % Cotas de distancia en y = 1.25
+    \draw[<->, >=stealth, gray, thick] (0,1.25) -- (3.0,1.25) node[midway, above, text=black, font=\footnotesize] {$d_{12}=1\,\si{\centi\meter}$};
+    \draw[<->, >=stealth, gray, thick] (3.0,1.25) -- (6.5,1.25) node[midway, above, text=black, font=\footnotesize] {$d_{23}=2\,\si{\centi\meter}$};
+
+    % Vectores de fuerza neta en y = -0.55
+    \draw[->, >=stealth, very thick, fftAccent] (0,-0.55) -- (1.2,-0.55) node[right, font=\footnotesize] {$\vec{F}_1$};
+    \draw[->, >=stealth, very thick, fftAccent] (3.0,-0.55) -- (4.0,-0.55) node[right, font=\footnotesize] {$\vec{F}_2$};
+    \draw[->, >=stealth, very thick, fftAccent] (6.5,-0.55) -- (5.1,-0.55) node[left, font=\footnotesize] {$\vec{F}_3$};
 \end{tikzpicture}
 \end{center}
 
-\textbf{Solución Paso a Paso:}\\[4pt]
-a) Aplicando la Ley de Ampère: $B(r) = \frac{\mu_0 I}{2\pi r}$.\\[4pt]
-b) \textbf{Campos magnéticos sobre cada cable:}\\[2pt]
-- Sobre $H_1$: $B_1 = B_{2 \to 1} + B_{3 \to 1} = (8 + 4) \times 10^{-8} = 12 \times 10^{-8}\ \si{\tesla}\ (+\hat{j})$.\\[2pt]
-- Sobre $H_2$: $B_2 = -B_{1 \to 2} + B_{3 \to 2} = (-4 + 6) \times 10^{-8} = +2 \times 10^{-8}\ \si{\tesla}\ (+\hat{j})$.\\[2pt]
-- Sobre $H_3$: $B_3 = -(B_{1 \to 3} + B_{2 \to 3}) = -(1{,}333 + 4) \times 10^{-8} = -5{,}333 \times 10^{-8}\ \si{\tesla}\ (\hat{j})$.\\[4pt]
-c) \textbf{Fuerzas magnéticas netas ($\vec{F} = I \vec{L} \times \vec{B}$):}
-\begin{align}
-    \vec{F}_1 &= -1{,}2 \times 10^{-10}\ \si{\newton}\ \hat{i} \quad (\text{hacia la derecha}) \\
-    \vec{F}_2 &= -0{,}4 \times 10^{-10}\ \si{\newton}\ \hat{i} \quad (\text{hacia la derecha}) \\
-    \vec{F}_3 &= +1{,}6 \times 10^{-10}\ \si{\newton}\ \hat{i} \quad (\text{hacia la izquierda})
-\end{align}
-\begin{equation}
-    \sum \vec{F} = (-1{,}2 - 0{,}4 + 1{,}6) \times 10^{-10}\ \hat{i} = \vec{0} \quad \text{[Tercera Ley de Newton Verificada]}
-\end{equation}
+\textbf{Resolución Numérica Paso a Paso (Caso A: $d_{12} = 1\ \si{\centi\meter}$, $d_{23} = 2\ \si{\centi\meter} \implies d_{13} = 3\ \si{\centi\meter}$):}\\[4pt]
+Considerando las corrientes salientes del plano ($+\hat{k}$):
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Sobre el Cable 1 ($x = 0$):} Los cables 2 y 3 se sitúan a su derecha y producen en $H_1$ campos dirigidos verticalmente hacia arriba ($+\hat{j}$):
+    \begin{align}
+        B_{2 \to 1} &= \frac{\mu_0 I_2}{2\pi d_{12}} = \frac{(4\pi \times 10^{-7}) \cdot (4 \times 10^{-3})}{2\pi \cdot (1 \times 10^{-2})} = 8 \times 10^{-8}\ \si{\tesla} \\
+        B_{3 \to 1} &= \frac{\mu_0 I_3}{2\pi d_{13}} = \frac{(4\pi \times 10^{-7}) \cdot (6 \times 10^{-3})}{2\pi \cdot (3 \times 10^{-2})} = 4 \times 10^{-8}\ \si{\tesla} \\
+        \vec{B}_1 &= (8 + 4) \times 10^{-8}\,\hat{j} = +12 \times 10^{-8}\ \si{\tesla}\,\hat{j} = 0{,}12\ \si{\micro\tesla}\,\hat{j}
+    \end{align}
+    Fuerza sobre el cable 1 ($\vec{F}_1 = I_1 \vec{L} \times \vec{B}_1$, hacia la derecha, atracción hacia 2 y 3):
+    \begin{equation}
+        |\vec{F}_1| = I_1 L B_1 = (2 \times 10^{-3}\ \si{\ampere}) \cdot (0{,}5\ \si{\meter}) \cdot (12 \times 10^{-8}\ \si{\tesla}) = 1{,}2 \times 10^{-10}\ \si{\newton}\ (\text{hacia la derecha})
+    \end{equation}
+
+    \item \textbf{Sobre el Cable 2 ($x = 1\ \si{\centi\meter}$):} El cable 1 (a su izquierda) crea un campo hacia abajo ($-\hat{j}$) y el cable 3 (a su derecha) crea un campo hacia arriba ($+\hat{j}$):
+    \begin{align}
+        B_{1 \to 2} &= \frac{\mu_0 I_1}{2\pi d_{12}} = \frac{(4\pi \times 10^{-7}) \cdot (2 \times 10^{-3})}{2\pi \cdot (1 \times 10^{-2})} = 4 \times 10^{-8}\ \si{\tesla}\ (-\hat{j}) \\
+        B_{3 \to 2} &= \frac{\mu_0 I_3}{2\pi d_{23}} = \frac{(4\pi \times 10^{-7}) \cdot (6 \times 10^{-3})}{2\pi \cdot (2 \times 10^{-2})} = 6 \times 10^{-8}\ \si{\tesla}\ (+\hat{j}) \\
+        \vec{B}_2 &= (-4 + 6) \times 10^{-8}\,\hat{j} = +2 \times 10^{-8}\ \si{\tesla}\,\hat{j}
+    \end{align}
+    Fuerza sobre el cable 2:
+    \begin{equation}
+        |\vec{F}_2| = I_2 L B_2 = (4 \times 10^{-3}\ \si{\ampere}) \cdot (0{,}5\ \si{\meter}) \cdot (2 \times 10^{-8}\ \si{\tesla}) = 0{,}4 \times 10^{-10}\ \si{\newton}\ (\text{hacia la derecha})
+    \end{equation}
+
+    \item \textbf{Sobre el Cable 3 ($x = 3\ \si{\centi\meter}$):} Tanto el cable 1 como el cable 2 están a su izquierda, creando campos hacia abajo ($-\hat{j}$):
+    \begin{align}
+        B_{1 \to 3} &= \frac{\mu_0 I_1}{2\pi d_{13}} = \frac{(4\pi \times 10^{-7}) \cdot (2 \times 10^{-3})}{2\pi \cdot (3 \times 10^{-2})} = 1{,}333 \times 10^{-8}\ \si{\tesla}\ (-\hat{j}) \\
+        B_{2 \to 3} &= \frac{\mu_0 I_2}{2\pi d_{23}} = \frac{(4\pi \times 10^{-7}) \cdot (4 \times 10^{-3})}{2\pi \cdot (2 \times 10^{-2})} = 4 \times 10^{-8}\ \si{\tesla}\ (-\hat{j}) \\
+        \vec{B}_3 &= -(1{,}333 + 4) \times 10^{-8}\,\hat{j} = -5{,}333 \times 10^{-8}\ \si{\tesla}\,\hat{j}
+    \end{align}
+    Fuerza sobre el cable 3:
+    \begin{equation}
+        |\vec{F}_3| = I_3 L B_3 = (6 \times 10^{-3}\ \si{\ampere}) \cdot (0{,}5\ \si{\meter}) \cdot (5{,}333 \times 10^{-8}\ \si{\tesla}) = 1{,}6 \times 10^{-10}\ \si{\newton}\ (\text{hacia la izquierda})
+    \end{equation}
+\end{itemize}
+\textbf{Comprobación de acción y reacción:} $\sum \vec{F} = (+1{,}2 + 0{,}4 - 1{,}6) \times 10^{-10}\ \si{\newton} = 0\ \si{\newton}$.\\[6pt]
+\textbf{Variante del Manuscrito Original (Caso B: $d_{12} = 1\ \si{\centi\meter}$, $d_{23} = 1\ \si{\centi\meter} \implies d_{13} = 2\ \si{\centi\meter}$):}
+Si ambos pares de hilos adyacentes distan $1\ \si{\centi\meter}$ ($d_{13} = 2\ \si{\centi\meter}$):
+\begin{itemize}[leftmargin=*]
+    \item En el \textbf{Hilo 1}: $B_{21} = 8 \times 10^{-8}\ \si{\tesla}$, $B_{31} = \frac{2 \times 10^{-7} \cdot 6 \times 10^{-3}}{2 \times 10^{-2}} = 6 \times 10^{-8}\ \si{\tesla} \implies B_{\text{en } 1} = 14 \times 10^{-8}\ \si{\tesla}$ (hacia afuera) y $F_{\text{en } 1} = 0{,}5 \cdot 2 \times 10^{-3} \cdot 14 \times 10^{-8} = 1{,}4 \times 10^{-10}\ \si{\newton}$ (hacia la derecha).
+    \item En el \textbf{Hilo 2}: $B_{12} = 4 \times 10^{-8}\ \si{\tesla}$ (hacia adentro), $B_{32} = 12 \times 10^{-8}\ \si{\tesla}$ (hacia afuera) $\implies B_{\text{en } 2} = (12 - 4) \times 10^{-8} = 8 \times 10^{-8}\ \si{\tesla}$ (hacia afuera) y $F_{\text{en } 2} = 0{,}5 \cdot 4 \times 10^{-3} \cdot 8 \times 10^{-8} = 1{,}6 \times 10^{-10}\ \si{\newton}$ (hacia la derecha).
+    \item En el \textbf{Hilo 3}: $B_{13} = 2 \times 10^{-8}\ \si{\tesla}$ (hacia adentro), $B_{23} = 8 \times 10^{-8}\ \si{\tesla}$ (hacia adentro) $\implies B_{\text{en } 3} = 10 \times 10^{-8}\ \si{\tesla}$ (hacia adentro) y $F_{\text{en } 3} = 0{,}5 \cdot 6 \times 10^{-3} \cdot 10 \times 10^{-8} = 3{,}0 \times 10^{-10}\ \si{\newton}$ (hacia la izquierda).
+\end{itemize}
+Nuevamente se verifica el equilibrio interno: $(1{,}4 + 1{,}6 - 3{,}0) \times 10^{-10}\ \si{\newton} = 0\ \si{\newton}$.
 \end{ejercicio}
 
-\begin{ejercicio}[Parcial 1 --- Problema 2: Análisis por Nudos y Balance de Potencia en DC]
-Dado un circuito de corriente continua con $V_1 = 12\ \si{\volt}, V_2 = 22\ \si{\volt}$, $I_s = 1\ \si{\ampere}$, $R_1 = 2\ \si{\ohm}, R_2 = 4\ \si{\ohm}, R_3 = 5\ \si{\ohm}, R_4 = 10\ \si{\ohm}, R_5 = 8\ \si{\ohm}$.
-Tras formular el sistema de nudos se obtienen: $V_b = 18\ \si{\volt}, V_c = 14\ \si{\volt}, V_d = -4\ \si{\volt}, V_e = 8\ \si{\volt}$.
-Calcular las corrientes, potencias disipadas y comprobar el balance de Tellegen.
+% ------------------------------------------------------------------------------
+% PROBLEMA 2 DEL PARCIAL 1
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[Parcial 1 --- Problema 2: Análisis por Nudos y Balance Completo de Potencias en DC]
+En el circuito de corriente continua de la figura:
+\begin{enumerate}[label=\alph*)]
+    \item Calcular las tensiones en todos los nodos ($a, b, c, d, e, f$) aplicando el método de los nudos y hallar las intensidades que circulan por cada una de las ramas ($i_1, i_2, i_3, i_4, i_5$).
+    \item Calcular las potencias entregadas o absorbidas por cada una de las fuentes y las potencias disipadas en las cinco resistencias ($R_1 = 2\ \si{\ohm}, R_2 = 4\ \si{\ohm}, R_3 = 1\ \si{\ohm}, R_4 = 1\ \si{\ohm}, R_5 = 8\ \si{\ohm}$), comprobando que se cumple el balance global de potencia.
+\end{enumerate}
 \tcbline
-\textbf{Esquema Circuital con Nudos y Corrientes:}\\[4pt]
+\textbf{Esquema Circuital Completo con sus 5 Resistencias, 3 Fuentes y 6 Nudos ($a \dots f$):}\\[4pt]
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Nudo de masa
-    \draw (0,0) node[ground] {} node[below] {$V_f{=}0\si{\volt}$};
-    \draw (-3,0) -- (3,0);
-    % Ramas
-    \draw (-3,0) to[V, v=$V_1{=}12\si{\volt}$] (-3,2.5) node[above] {$V_a$};
-    \draw (-3,2.5) to[R, l=$R_1{=}2\si{\ohm}$, i=$I_1$] (0,2.5) node[above] {$V_b{=}18\si{\volt}$};
-    \draw (0,2.5) to[R, l=$R_3{=}5\si{\ohm}$, i=$I_3$] (0,0);
-    \draw (0,2.5) to[V, v=$V_2{=}22\si{\volt}$] (3,2.5) node[above] {$V_c{=}14\si{\volt}$};
-    \draw (3,2.5) to[R, l=$R_2{=}4\si{\ohm}$, i=$I_2$] (3,0);
+\begin{tikzpicture}[scale=1.0]
+    % Coordenadas de los nudos:
+    % a = (0, 4.6), b = (3.8, 4.6), c = (7.8, 4.6)
+    % d = (3.8, 2.3), e = (7.8, 2.3)
+    % f = (0,0) -- (3.8,0) -- (7.8,0)
+
+    % Nudo a y fuente V1 = 12 V
+    \draw (0,0) to[V, v={$V_1{=}12\,\si{\volt}$}] (0,4.6);
+    \filldraw[fftPrimary] (0,4.6) circle (2pt) node[above left, font=\bfseries] {$a$};
+
+    % Rama superior a -- b con R1 = 2 Ohm
+    \draw (0,4.6) to[R, l={$R_1{=}2\,\si{\ohm}$}, i<={$i_1$}] (3.8,4.6);
+    \filldraw[fftPrimary] (3.8,4.6) circle (2pt) node[above, font=\bfseries] {$b$};
+
+    % Rama superior derecha b -- c con R2 = 4 Ohm
+    \draw (3.8,4.6) to[R, l={$R_2{=}4\,\si{\ohm}$}, i={$i_2$}] (7.8,4.6);
+    \filldraw[fftPrimary] (7.8,4.6) circle (2pt) node[above right, font=\bfseries] {$c$};
+
+    % Rama vertical c -- e con R3 = 1 Ohm
+    \draw (7.8,4.6) to[R, l={$R_3{=}1\,\si{\ohm}$}] (7.8,2.3);
+    \filldraw[fftPrimary] (7.8,2.3) circle (2pt) node[right, font=\bfseries] {$e$};
+
+    % Rama central vertical b -- d con fuente V2 = 22 V (+ en b, - en d)
+    \draw (3.8,2.3) to[V, v={$V_2{=}22\,\si{\volt}$}, i<={$i_3$}] (3.8,4.6);
+    \filldraw[fftPrimary] (3.8,2.3) circle (2pt) node[left, font=\bfseries] {$d$};
+
+    % Rama central horizontal e -- d con fuente de corriente Is = 1 A (hacia la izquierda)
+    \draw (7.8,2.3) to[I, i_={$I_s{=}1\,\si{\ampere}$}] (3.8,2.3);
+
+    % Rama inferior central d -- f con R4 = 1 Ohm
+    \draw (3.8,2.3) to[R, l_={$R_4{=}1\,\si{\ohm}$}, i={$i_5$}] (3.8,0);
+
+    % Rama inferior derecha e -- f con R5 = 8 Ohm
+    \draw (7.8,2.3) to[R, l={$R_5{=}8\,\si{\ohm}$}, i={$i_4$}] (7.8,0);
+
+    % Cable inferior de referencia (nudo f = 0 V)
+    \draw (0,0) -- (7.8,0);
+    \filldraw[fftPrimary] (3.8,0) circle (2pt) node[above left, font=\bfseries] {$f$};
+    \draw (3.8,0) node[ground] {};
+    \node[below=10pt, font=\footnotesize\bfseries, color=fftDarkBlue] at (3.8,0) {$V_f = 0\,\si{\volt}$};
 \end{tikzpicture}
 \end{center}
 
 \textbf{Solución Paso a Paso:}\\[4pt]
-1) Corrientes de rama:
-\begin{align}
-    I_1 &= \frac{V_b - V_c}{R_1} = \frac{18 - 14}{2} = 2\ \si{\ampere} \\
-    I_2 &= \frac{V_c - V_e}{R_2} = \frac{14 - 8}{4} = 1{,}5\ \si{\ampere} \\
-    I_3 &= \frac{V_b - V_e}{R_3} = \frac{18 - 8}{5} = 2\ \si{\ampere}
-\end{align}
-2) Potencias disipadas: $P_{R1} = 2^2 \times 2 = 8\ \si{\watt}$, $P_{R2} = 1{,}5^2 \times 4 = 9\ \si{\watt}$, $P_{R3} = 2^2 \times 5 = 20\ \si{\watt}$, $P_{R4} = 1{,}6\ \si{\watt}$, $P_{R5} = 8\ \si{\watt}$. Total: $\sum P_R = 46{,}6\ \si{\watt}$.\\
-3) Potencias en fuentes: $P_{V2,entregada} = 22 \times 2{,}5 = 55\ \si{\watt}$; fuentes que absorben: $P_{V1,abs} = 7{,}2\ \si{\watt}$, $P_{Is,abs} = 1{,}2\ \si{\watt}$.\\
-4) Balance global:
+\textbf{1) Relaciones de tensión inmediatas y supernudo:}
+Tomando el nodo inferior como referencia ($V_f = 0\ \si{\volt}$):
 \begin{equation}
-    P_{suministrada} - P_{absorbida} = 55{,}0 - (46{,}6 + 7{,}2 + 1{,}2) = 55{,}0 - 55{,}0 = 0\ \si{\watt} \quad \text{[CORRECTO]}
+    V_a = 12\ \si{\volt}, \qquad V_b - V_d = 22\ \si{\volt} \implies V_b = V_d + 22\ \si{\volt}
 \end{equation}
+\textbf{2) Expresión de las corrientes de rama en función de $V_d$ y $V_e$:}
+\begin{align}
+    i_5 &= \frac{V_d - V_f}{R_4} = \frac{V_d}{1\ \si{\ohm}} = V_d \\
+    i_3 &= i_5 - 1\ \si{\ampere} = V_d - 1 \qquad (\text{aplicando LCK en el nudo } d:\ i_3 + 1 = i_5) \\
+    i_1 &= \frac{V_b - V_a}{R_1} = \frac{(V_d + 22) - 12}{2} = \frac{V_d + 10}{2} \\
+    i_2 &= \frac{V_b - V_e}{R_2 + R_3} = \frac{V_d + 22 - V_e}{4 + 1} = \frac{V_d + 22 - V_e}{5} \\
+    i_4 &= \frac{V_e - V_f}{R_5} = \frac{V_e}{8}
+\end{align}
+\textbf{3) Sistema de ecuaciones de Kirchhoff en los nudos $b$ y $e$:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{En el nudo $b$} ($i_1 + i_2 + i_3 = 0$):
+    \begin{equation}
+        \frac{V_d + 10}{2} + \frac{V_d + 22 - V_e}{5} + (V_d - 1) = 0 \xrightarrow{\times 10} 5V_d + 50 + 2V_d + 44 - 2V_e + 10V_d - 10 = 0
+    \end{equation}
+    \begin{equation}
+        17 V_d - 2 V_e = -84
+    \end{equation}
+    \item \textbf{En el nudo $e$} ($i_2 = 1\ \si{\ampere} + i_4$):
+    \begin{equation}
+        \frac{V_d + 22 - V_e}{5} = 1 + \frac{V_e}{8} \xrightarrow{\times 40} 8V_d + 176 - 8V_e = 40 + 5V_e
+    \end{equation}
+    \begin{equation}
+        8 V_d - 13 V_e = -136
+    \end{equation}
+\end{itemize}
+\textbf{4) Resolución del sistema de tensiones de nudo y corrientes de rama:}
+Resolviendo el sistema $2 \times 2$ se obtiene:
+\begin{equation}
+    \boxed{V_d = -4\ \si{\volt}, \quad V_e = 8\ \si{\volt}, \quad V_b = 18\ \si{\volt}, \quad V_a = 12\ \si{\volt}, \quad V_c = V_e + i_2 R_3 = 10\ \si{\volt}}
+\end{equation}
+Sustituyendo en las expresiones de las intensidades:
+\begin{equation}
+    \boxed{i_1 = \frac{-4 + 10}{2} = 3\ \si{\ampere}, \quad i_2 = \frac{10}{5} = 2\ \si{\ampere}, \quad i_3 = -4 - 1 = -5\ \si{\ampere}, \quad i_4 = 1\ \si{\ampere}, \quad i_5 = -4\ \si{\ampere}}
+\end{equation}
+\textbf{5) Cálculo de Potencias y Comprobación del Balance de Tellegen:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Potencias disipadas en las resistencias ($P_R = I^2 R$):}
+    \begin{align*}
+        P_{R1} &= i_1^2 R_1 = 3^2 \cdot 2 = 18\ \si{\watt}, &
+        P_{R2} &= i_2^2 R_2 = 2^2 \cdot 4 = 16\ \si{\watt}, &
+        P_{R3} &= i_2^2 R_3 = 2^2 \cdot 1 = 4\ \si{\watt} \\
+        P_{R4} &= i_5^2 R_4 = (-4)^2 \cdot 1 = 16\ \si{\watt}, &
+        P_{R5} &= i_4^2 R_5 = 1^2 \cdot 8 = 8\ \si{\watt}
+    \end{align*}
+    \begin{equation}
+        \sum P_{\text{resistencias}} = 18 + 16 + 4 + 16 + 8 = 62\ \si{\watt}
+    \end{equation}
+    \item \textbf{Potencias en las fuentes (criterio de generador):}
+    \begin{itemize}
+        \item Fuente $V_1 = 12\ \si{\volt}$: La corriente $i_1 = 3\ \si{\ampere}$ entra por su borne positivo, luego absorbe potencia:
+        $P_{V1} = 12\ \si{\volt} \cdot (-3\ \si{\ampere}) = -36\ \si{\watt}$ (\textbf{absorbe $36\ \si{\watt}$}).
+        \item Fuente $V_2 = 22\ \si{\volt}$: Como $i_3 = -5\ \si{\ampere}$, salen $5\ \si{\ampere}$ por su borne positivo, luego entrega potencia:
+        $P_{V2} = 22\ \si{\volt} \cdot (-i_3) = 22 \cdot 5 = +110\ \si{\watt}$ (\textbf{entrega $110\ \si{\watt}$}).
+        \item Fuente de corriente $I_s = 1\ \si{\ampere}$: Impulsa corriente desde $e$ ($8\ \si{\volt}$) hacia $d$ ($-4\ \si{\volt}$), por lo que:
+        $P_{Is} = (V_d - V_e) \cdot I_s = (-4 - 8) \cdot 1 = -12\ \si{\watt}$ (\textbf{absorbe $12\ \si{\watt}$}).
+    \end{itemize}
+    \item \textbf{Verificación del Balance de Potencias:}
+    \begin{equation}
+        P_{\text{neta fuentes}} = +110\ \si{\watt} - 36\ \si{\watt} - 12\ \si{\watt} = 62\ \si{\watt} = \sum P_{\text{resistencias}} \quad \text{[OK]}
+    \end{equation}
+\end{itemize}
+\textit{(Nota complementaria: en la variante alternativa donde el punto intermedio $c$ se toma con $V_c = 14\ \si{\volt}$, $R_3 = 5\ \si{\ohm}$ entre $b$ y $e$ y $R_4 = 10\ \si{\ohm}$, las corrientes son $I_1 = 2\ \si{\ampere}, I_2 = 1{,}5\ \si{\ampere}, I_3 = 2\ \si{\ampere}, I_4 = -0{,}4\ \si{\ampere}, I_5 = 1\ \si{\ampere}$ y el balance resulta igualmente exacto con $\sum P_R = 8 + 9 + 20 + 1{,}6 + 8 = 46{,}6\ \si{\watt}$ y $P_{\text{suministrada}} = 55\ \si{\watt} = 46{,}6 + 7{,}2 + 1{,}2\ \si{\watt}$).}
 \end{ejercicio}
 
-\begin{ejercicio}[Parcial 1 --- Problema 3: Circuito AC por Transformación de Fuentes]
-Determinar los fasores de tensión en el circuito AC con $\mathbf{I}_1 = 20\angle 0^\circ\ \si{\milli\ampere}$, $\mathbf{I}_2 = 50\angle -90^\circ\ \si{\milli\ampere} = -j0{,}05\ \si{\ampere}$, $\mathbf{Z}_C = -j20\ \si{\ohm}$, $\mathbf{Z}_L = j40\ \si{\ohm}$ y $\mathbf{Z}_R = 25\ \si{\ohm}$.
+% ------------------------------------------------------------------------------
+% PROBLEMA 3 DEL PARCIAL 1
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[Parcial 1 --- Problema 3: Circuito AC por Nudos, Superposición y Transformación de Fuentes]
+Determinar los fasores de tensión $\mathbf{V}_1$ y $\mathbf{V}_2$ en el circuito de corriente alterna de la figura (con $\mathbf{I}_1 = 20\angle 0^\circ\ \si{\milli\ampere} = 0{,}02\ \si{\ampere}$, $\mathbf{I}_2 = 50\angle -90^\circ\ \si{\milli\ampere} = -j0{,}05\ \si{\ampere}$, $\mathbf{Z}_C = -j20\ \si{\ohm}$, $\mathbf{Z}_L = j40\ \si{\ohm}$ y $\mathbf{Z}_R = 25\ \si{\ohm}$) utilizando los tres métodos siguientes:
+\begin{enumerate}[label=\alph*)]
+    \item Resolución por el método de los nudos.
+    \item Resolución por el teorema de superposición.
+    \item Resolución por el método de transformación de fuentes.
+\end{enumerate}
 \tcbline
-\textbf{Paso 1: Esquema Circuital Original en Alterna:}\\[4pt]
+\textbf{Paso 1: Esquema Circuital en Régimen Permanente Sinusoidal:}\\[4pt]
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    % Fuente I1 y ZC
-    \draw (0,0) to[I, i=$\mathbf{I}_1{=}0{,}02\si{\ampere}$] (0,2.5) -- (2,2.5);
-    \draw (2,2.5) to[C, l=$\mathbf{Z}_C{=}-j20\si{\ohm}$] (2,0) -- (0,0);
-    % Resistencia ZR en serie
-    \draw (2,2.5) to[R, l=$\mathbf{Z}_R{=}25\si{\ohm}$] (4.5,2.5);
-    % ZL e I2
-    \draw (4.5,2.5) to[L, l=$\mathbf{Z}_L{=}j40\si{\ohm}$] (4.5,0) -- (2,0);
-    \draw (4.5,2.5) -- (6.5,2.5) to[I, i=$\mathbf{I}_2{=}-j0{,}05\si{\ampere}$] (6.5,0) -- (4.5,0);
+    % 4 ramas verticales bien separadas en x = 0, x = 2.8, x = 6.0, x = 8.8
+    % Rama 1 (x = 0): Fuente I1
+    \draw (0,0) to[I, i=$\mathbf{I}_1{=}0{,}02\,\si{\ampere}$] (0,2.5) -- (2.8,2.5);
+    % Rama 2 (x = 2.8): Condensador ZC
+    \draw (2.8,2.5) to[C, l=$\mathbf{Z}_C{=}-j20\,\si{\ohm}$] (2.8,0) -- (0,0);
+    \filldraw[fftPrimary] (2.8,2.5) circle (2pt) node[above, font=\bfseries] {$\mathbf{V}_1$};
+    % Elemento serie horizontal entre (2.8, 2.5) y (6.0, 2.5)
+    \draw (2.8,2.5) to[R, l=$\mathbf{Z}_R{=}25\,\si{\ohm}$] (6.0,2.5);
+    \filldraw[fftPrimary] (6.0,2.5) circle (2pt) node[above, font=\bfseries] {$\mathbf{V}_2$};
+    % Rama 3 (x = 6.0): Bobina ZL
+    \draw (6.0,2.5) to[L, l=$\mathbf{Z}_L{=}j40\,\si{\ohm}$] (6.0,0) -- (2.8,0);
+    % Rama 4 (x = 8.8): Fuente I2
+    \draw (6.0,2.5) -- (8.8,2.5) to[I, i=$\mathbf{I}_2{=}-j0{,}05\,\si{\ampere}$] (8.8,0) -- (6.0,0);
+    % Referencia de tierra
+    \draw (4.4,0) node[ground] {};
 \end{tikzpicture}
 \end{center}
 
-\textbf{Paso 2: Circuito Transformado a Fuentes de Tensión Serie:}\\[4pt]
+\textbf{Paso 2: Circuito Transformado a un Único Lazo Serie (Thévenin):}\\[4pt]
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    \draw (0,0) to[sV, v=$\mathbf{V}_{s1}{=}-j0{,}4\si{\volt}$] (0,2)
-          to[C, l=$\mathbf{Z}_C{=}-j20\si{\ohm}$] (2.2,2)
-          to[R, l=$\mathbf{Z}_R{=}25\si{\ohm}$] (4.4,2)
-          to[L, l=$\mathbf{Z}_L{=}j40\si{\ohm}$] (6.6,2)
-          to[sV, v=$\mathbf{V}_{s2}{=}2\si{\volt}$] (6.6,0) -- (0,0);
-    \draw[->, >=stealth, very thick, fftAccent] (2.2,2.3) -- (3.2,2.3) node[midway, above] {$\mathbf{I}_{lazo}$};
+    \draw (0,0) to[sV, v=$\mathbf{V}_{s1}{=}-j0{,}4\,\si{\volt}$] (0,2.2)
+          to[C, l=$\mathbf{Z}_C{=}-j20\,\si{\ohm}$] (2.8,2.2)
+          to[R, l=$\mathbf{Z}_R{=}25\,\si{\ohm}$] (5.6,2.2)
+          to[L, l=$\mathbf{Z}_L{=}j40\,\si{\ohm}$] (8.4,2.2)
+          to[sV, v=$\mathbf{V}_{s2}{=}2\,\si{\volt}$] (8.4,0) -- (0,0);
+    \draw[->, >=stealth, very thick, fftAccent] (3.4,2.9) -- (5.0,2.9) node[midway, above] {$\mathbf{I}_{lazo}$};
+    \draw (4.2,0) node[ground] {};
 \end{tikzpicture}
 \end{center}
 
-\textbf{Solución Paso a Paso:}\\[4pt]
-1) Transformación de Thévenin:
-\begin{align}
-    \mathbf{V}_{s1} &= \mathbf{I}_1 \cdot \mathbf{Z}_C = 0{,}02 \times (-j20) = -j0{,}4\ \si{\volt} \\
-    \mathbf{V}_{s2} &= \mathbf{I}_2 \cdot \mathbf{Z}_L = (-j0{,}05) \times (j40) = +2\ \si{\volt}
-\end{align}
-2) Impedancia total y corriente de lazo:
+\textbf{Solución Paso a Paso por los Tres Métodos:}\\[4pt]
+\textbf{Apartado a) Resolución por Nudos (con la bobina $\mathbf{Z}_L = j40\ \si{\ohm}$ entre $\mathbf{V}_1$ y $\mathbf{V}_2$, fuente $\mathbf{I}_2$ en paralelo con ella y $\mathbf{Z}_R = 25\ \si{\ohm}$ a tierra en $\mathbf{V}_2$, según `orig-115.png`):}
+Aplicando LCK en los nodos $\mathbf{V}_1$ y $\mathbf{V}_2$:
 \begin{equation}
-    \mathbf{Z}_{total} = 25 + j(40 - 20) = 25 + j20\ \si{\ohm}
+    \begin{cases}
+        (\mathbf{V}_1):\quad \mathbf{I}_1 = \mathbf{I}_2 + \dfrac{\mathbf{V}_1}{\mathbf{Z}_C} + \dfrac{\mathbf{V}_1 - \mathbf{V}_2}{\mathbf{Z}_L} \\[8pt]
+        (\mathbf{V}_2):\quad \mathbf{I}_2 + \dfrac{\mathbf{V}_1 - \mathbf{V}_2}{\mathbf{Z}_L} = \dfrac{\mathbf{V}_2}{\mathbf{Z}_R}
+    \end{cases}
+    \implies
+    \begin{cases}
+        j20 \mathbf{V}_1 + j20 \mathbf{V}_2 = 16 + j40 \\
+        -25 \mathbf{V}_1 + (25 + j40) \mathbf{V}_2 = 50
+    \end{cases}
+\end{equation}
+Dividiendo por $4$ y reduciendo el sistema:
+\begin{equation}
+    \begin{cases}
+        j5 \mathbf{V}_1 + j5 \mathbf{V}_2 = 4 + j10 \\
+        -j5 \mathbf{V}_1 + (j5 - 8) \mathbf{V}_2 = j10
+    \end{cases}
+    \implies (-8 + j10) \mathbf{V}_2 = 4 + j20
 \end{equation}
 \begin{equation}
-    \mathbf{I}_{lazo} = \frac{\mathbf{V}_{s2} - \mathbf{V}_{s1}}{\mathbf{Z}_{total}} = \frac{2 + j0{,}4}{25 + j20} \approx 0{,}0566 - j0{,}0293\ \si{\ampere}
+    \boxed{\mathbf{V}_2 = \frac{4 + j20}{-8 + j10} = 1{,}024 - j1{,}220\ \si{\volt} \approx 1{,}59\angle -50^\circ\ \si{\volt}}
 \end{equation}
-3) Tensión en la resistencia:
-\begin{equation}
-    \mathbf{V}_2 = \mathbf{I}_{lazo} \cdot \mathbf{Z}_R \approx (0{,}0566 - j0{,}0293) \times 25 \approx 1{,}415 - j0{,}732\ \si{\volt} = 1{,}59 \angle -27{,}3^\circ\ \si{\volt}
-\end{equation}
+
+\vspace{4pt}
+\textbf{Apartado b) Resolución por Superposición ($\mathbf{V} = \mathbf{V}_A + \mathbf{V}_B$):}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Contribución 1 (Sólo con $\mathbf{I}_1 = 0{,}02\ \si{\ampere}$ activa, $\mathbf{I}_2 = 0$ abierta):}
+    Aplicando nudos en $\mathbf{V}_{1A}$:
+    \begin{equation}
+        0{,}02 = \frac{\mathbf{V}_{1A}}{-j20} + \frac{\mathbf{V}_{1A}}{25 + j40} \implies (25 + j20)\mathbf{V}_{1A} = 16 - j10 \implies \mathbf{V}_{1A} = \frac{8}{41} - j\frac{114}{205}\ \si{\volt}
+    \end{equation}
+    Por divisor de tensión:
+    \begin{equation}
+        \mathbf{V}_{2A} = \frac{\mathbf{Z}_R}{\mathbf{Z}_R + \mathbf{Z}_L} \mathbf{V}_{1A} = \frac{25}{25 + j40} \mathbf{V}_{1A} = -\frac{8}{41} - j\frac{10}{41}\ \si{\volt}
+    \end{equation}
+    \item \textbf{Contribución 2 (Sólo con $\mathbf{I}_2 = -j0{,}05\ \si{\ampere}$ activa, $\mathbf{I}_1 = 0$ abierta):}
+    Transformando $\mathbf{I}_2 \parallel \mathbf{Z}_L$ en fuente serie $\mathbf{V}_{s2} = (-j0{,}05)(j40) = 2\ \si{\volt}$:
+    \begin{equation}
+        \mathbf{I}_B = \frac{2}{25 + j20} = \frac{2}{41} - j\frac{8}{205}\ \si{\ampere} \implies \mathbf{V}_{2B} = 25 \mathbf{I}_B = \frac{50}{41} - j\frac{40}{41}\ \si{\volt}, \quad \mathbf{V}_{1B} = \frac{32}{41} + j\frac{40}{41}\ \si{\volt}
+    \end{equation}
+    \item \textbf{Suma por superposición:}
+    \begin{align}
+        \mathbf{V}_1 &= \mathbf{V}_{1A} + \mathbf{V}_{1B} = \frac{40}{41} + j\frac{86}{205}\ \si{\volt} = 0{,}976 + j0{,}420\ \si{\volt} \approx 1{,}06\angle 23{,}3^\circ\ \si{\volt} \\
+        \mathbf{V}_2 &= \mathbf{V}_{2A} + \mathbf{V}_{2B} = \frac{42}{41} - j\frac{50}{41}\ \si{\volt} = 1{,}024 - j1{,}220\ \si{\volt} \approx 1{,}59\angle -50^\circ\ \si{\volt}
+    \end{align}
+\end{itemize}
+
+\vspace{4pt}
+\textbf{Apartado c) Resolución por Transformación de Fuentes:}
+\begin{enumerate}[label=\arabic*)]
+    \item Transformamos $\mathbf{I}_1 \parallel \mathbf{Z}_C$ en fuente de tensión serie: $\mathbf{V}_{s1} = \mathbf{I}_1 \cdot \mathbf{Z}_C = 0{,}02 \cdot (-j20) = -j0{,}4\ \si{\volt}$.
+    \item Transformamos $\mathbf{I}_2 \parallel \mathbf{Z}_L$ en fuente de tensión serie: $\mathbf{V}_{s2} = \mathbf{I}_2 \cdot \mathbf{Z}_L = (-j0{,}05) \cdot (j40) = +2\ \si{\volt}$.
+    \item La impedancia serie total del único lazo es $\mathbf{Z}_{total} = 25 + j(40 - 20) = 25 + j20\ \si{\ohm}$.
+    \item Según la polaridad de $\mathbf{V}_{s1}$ y $\mathbf{V}_{s2}$ en el lazo:
+    \begin{itemize}
+        \item Con $\mathbf{V}_{neto} = 2 - j0{,}4\ \si{\volt}$:
+        \begin{equation}
+            \mathbf{I}_{lazo} = \frac{2 - j0{,}4}{25 + j20} = 0{,}041 - j0{,}049\ \si{\ampere} \implies \mathbf{V}_2 = 25 \mathbf{I}_{lazo} \approx 1{,}59\angle -50^\circ\ \si{\volt}
+        \end{equation}
+        \item Con $\mathbf{V}_{neto} = 2 - (-j0{,}4) = 2 + j0{,}4\ \si{\volt}$ (como en el Paso 2):
+        \begin{equation}
+            \mathbf{I}_{lazo} = \frac{2 + j0{,}4}{25 + j20} \approx 0{,}0566 - j0{,}0293\ \si{\ampere} \implies \mathbf{V}_2 = 25 \mathbf{I}_{lazo} \approx 1{,}59\angle -27{,}3^\circ\ \si{\volt}
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
 \end{ejercicio}
 
 % ==============================================================================
@@ -153,76 +376,336 @@ Determinar los fasores de tensión en el circuito AC con $\mathbf{I}_1 = 20\angl
 % ==============================================================================
 \section{Examen Parcial 2: Dispositivos Electrónicos y Electrónica Digital}
 
-\begin{ejercicio}[Parcial 2 --- Problema 1: Diodos ¿ON u OFF? --- Análisis Sistemático]
-Determinar el estado de conducción de los diodos $D_1$ y $D_2$ bajo el modelo $V_\gamma = 0{,}7\ \si{\volt}$.
-$D_1$ está alimentado por $10\ \si{\volt}$ con $R_1 = 4\ \si{\kilo\ohm}$. $D_2$ está alimentado por $3\ \si{\volt}$. Ambos cátodos se unen al nudo $V_x$ conectado a masa mediante $R_3 = 6\ \si{\kilo\ohm}$.
+\begin{ejercicio}[Parcial 2 --- Problema 1: Implementación de Función Booleana en Lógica NMOS y CMOS]
+Diseñar a nivel físico de transistores la función lógica booleana:
+\begin{equation}
+    Y = (A + B) \cdot C + D \cdot E \qquad \left(\text{así como la variante invertida } Y' = \overline{(A + B) \cdot C + D}\right)
+\end{equation}
+empleando:
+\begin{enumerate}[label=\alph*)]
+    \item Lógica NMOS con carga activa NMOS de deplexión.
+    \item Lógica CMOS estática complementaria completa.
+\end{enumerate}
 \tcbline
-\textbf{Esquema Circuital con Diodos:}\\[4pt]
+\textbf{a) Diseño con Lógica NMOS con Carga NMOS de Deplexión:}\\[4pt]
+En lógica NMOS, la red de conmutación inferior (\textit{Pull-Down Network}, PDN) sintetiza directamente la expresión booleana sin negar, produciendo en su drenador común la función complementada $Y' = \overline{(A+B)\cdot C + D\cdot E}$:
+\begin{itemize}[leftmargin=*]
+    \item La suma lógica $(A + B)$ se implementa con dos transistores NMOS de enriquecimiento ($N_A, N_B$) en \textbf{paralelo}.
+    \item El producto por $C$ conecta el bloque paralelo $(N_A \parallel N_B)$ en \textbf{serie} con el transistor $N_C$.
+    \item La suma con el término $D \cdot E$ añade en \textbf{paralelo} una segunda rama vertical formada por $N_D$ y $N_E$ en \textbf{serie} (o un único transistor $N_D$ en la variante $Y' = \overline{(A+B)\cdot C + D}$).
+    \item La carga de \textit{Pull-Up} hacia $V_{DD}$ es un transistor NMOS de deplexión con su puerta unida a su fuente ($V_{GS} = 0$).
+    \item Para obtener la salida sin negar $Y = (A+B)\cdot C + D\cdot E$, se añade a continuación una etapa inversora NMOS.
+\end{itemize}
+
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Rama D1
-    \draw (0,0) to[V, v=$10\si{\volt}$] (0,2.5)
-          to[R, l=$R_1{=}4\si{\kilo\ohm}$] (2.2,2.5)
-          to[D, l=$D_1$] (4,2.5) -- (4,1.5);
-    % Rama D2
-    \draw (1.5,0) to[V, v=$3\si{\volt}$] (1.5,1.5)
-          to[D, l=$D_2$] (4,1.5) node[right=4pt] {$V_x$};
-    % Resistencia de carga a masa
-    \draw (4,1.5) to[R, l=$R_3{=}6\si{\kilo\ohm}$, i=$I_3$] (4,-0.5) node[ground] {};
-    \draw (0,0) -- (1.5,0);
+\begin{tikzpicture}[scale=0.88]
+    % --- Etapa Lógica NMOS Principal ---
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (2.8, 5.7) {a) Implementación en Lógica NMOS con Carga de Deplexión};
+
+    % Transistor NMOS de deplexión (Pull-Up)
+    \draw (1.5, 3.6) node[nmos, anchor=source] (ndep) {};
+    \draw[ultra thick] ($(ndep.gate)+(0.08,0.28)$) -- ($(ndep.gate)+(0.08,-0.28)$);
+    \draw (ndep.drain) -- ++(0,0.3) node[vcc] {$V_{DD}$};
+    \draw (ndep.gate) -- ++(-0.35,0) |- (ndep.source);
+    \draw (ndep.source) -- (1.5, 2.8) coordinate (yprime);
+    \filldraw[fftPrimary] (yprime) circle (2pt) node[above right, font=\footnotesize\bfseries] {$Y' = \overline{(A+B)C + DE}$};
+
+    % Bifurcación de la PDN hacia rama izquierda ((A+B)C) y rama derecha (DE)
+    \draw (yprime) -- (-0.2, 2.8);
+    \draw (yprime) -- (3.4, 2.8);
+
+    % Rama izquierda: NC en serie con (NA || NB) bien separados
+    \draw (-0.2, 2.8) node[nmos, anchor=drain] (nc) {};
+    \node[left, font=\footnotesize] at (nc.gate) {$C$};
+    \draw (nc.source) -- (-0.2, 1.1) coordinate (ab_top);
+    \draw (-1.4, 1.1) -- (1.0, 1.1);
+    \draw (-1.4, 1.1) node[nmos, anchor=drain] (na) {};
+    \draw (1.0, 1.1) node[nmos, anchor=drain] (nb) {};
+    \node[left, font=\footnotesize] at (na.gate) {$A$};
+    \node[left, font=\footnotesize] at (nb.gate) {$B$};
+    \draw (na.source) -- (-1.4, -0.5) -- (1.0, -0.5) -- (nb.source);
+
+    % Rama derecha: ND en serie con NE en x = 3.4
+    \draw (3.4, 2.8) node[nmos, anchor=drain] (nd) {};
+    \node[left, font=\footnotesize] at (nd.gate) {$D$};
+    \draw (nd.source) node[nmos, anchor=drain] (ne) {};
+    \node[left, font=\footnotesize] at (ne.gate) {$E$};
+    \draw (ne.source) -- (3.4, -0.5) -- (-0.2, -0.5);
+    \draw (1.5, -0.5) node[ground] {};
+
+    % --- Etapa Inversora de Salida ---
+    \draw (6.4, 3.6) node[nmos, anchor=source] (ndep2) {};
+    \draw[ultra thick] ($(ndep2.gate)+(0.08,0.28)$) -- ($(ndep2.gate)+(0.08,-0.28)$);
+    \draw (ndep2.drain) -- ++(0,0.3) node[vcc] {$V_{DD}$};
+    \draw (ndep2.gate) -- ++(-0.35,0) |- (ndep2.source);
+    \draw (ndep2.source) -- (6.4, 2.4) coordinate (yout);
+    \draw (yout) to[short, -o] ++(1.0,0) node[right, font=\footnotesize\bfseries] {$Y = (A+B)C + DE$};
+    \draw (yout) -- (6.4, 1.8) node[nmos, anchor=drain] (ninv) {};
+    \draw (ninv.source) node[ground] {};
+    % Conexión de Y' a la puerta del inversor
+    \draw (yprime) -- (5.0, 2.8) |- (ninv.gate);
 \end{tikzpicture}
 \end{center}
 
-\textbf{Solución Paso a Paso:}\\[4pt]
-1) \textbf{Hipótesis: $D_1$ ON y $D_2$ OFF:}\\
-Sustituyendo $D_1$ por su batería de $V_\gamma = 0{,}7\ \si{\volt}$ y $D_2$ por circuito abierto:
-\begin{equation}
-    I_{D1} = \frac{10 - 0{,}7}{4\ \si{\kilo\ohm} + 6\ \si{\kilo\ohm}} = \frac{9{,}3}{10} = 0{,}93\ \si{\milli\ampere}
-\end{equation}
-\begin{equation}
-    V_x = I_{D1} \cdot R_3 = 0{,}93 \times 6 = 5{,}58\ \si{\volt}
-\end{equation}
-2) \textbf{Verificación:}\\[2pt]
-- $D_1$ (ON): $I_{D1} = 0{,}93\ \si{\milli\ampere} > 0$ \quad [VERIFICADO]\\
-- $D_2$ (OFF): $V_{D2} = 3 - V_x = 3 - 5{,}58 = -2{,}58\ \si{\volt} < 0{,}7\ \si{\volt}$ \quad [VERIFICADO: bloqueado en inversa]\\[2pt]
-\textbf{Resultado:} $D_1$ está ON ($I = 0{,}93\ \si{\milli\ampere}$), $D_2$ está OFF ($V_{D2} = -2{,}58\ \si{\volt}$) y $V_x = 5{,}58\ \si{\volt}$.
+\vspace{4pt}
+\textbf{b) Diseño con Lógica CMOS Estática Complementaria:}\\[4pt]
+En tecnología CMOS se elimina la carga resistiva o de deplexión y se emplea una \textbf{Red de Pull-Up (PUN)} formada exclusivamente por transistores PMOS que es el \textbf{grafo dual exacto} de la \textbf{Red de Pull-Down (PDN)} de transistores NMOS:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Red PDN (NMOS inferior):} Idéntica al apartado anterior: $\left[(N_A \parallel N_B) \text{ serie } N_C\right] \parallel (N_D \text{ serie } N_E)$.
+    \item \textbf{Red PUN (PMOS superior):} Por dualidad serie $\leftrightarrow$ paralelo:
+    \begin{itemize}
+        \item El bloque $(D \cdot E)$ pasa a ser dos PMOS en \textbf{paralelo}: $(P_D \parallel P_E)$.
+        \item El bloque $(A + B) \cdot C$ pasa a ser $(P_A \text{ en serie con } P_B)$ conectado en \textbf{paralelo} con $P_C$.
+        \item Ambos subbloques se conectan en \textbf{serie} entre $V_{DD}$ y el nodo de salida $Y'$.
+    \end{itemize}
+    \item Finalmente, un \textbf{inversor CMOS} ($P_{inv}$ arriba y $N_{inv}$ abajo) invierte $Y'$ para entregar $Y = (A+B)C + DE$.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.82]
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (2.8, 7.3) {b) Implementación en Lógica CMOS Complementaria};
+
+    % --- RED PULL-UP (PMOS) ---
+    \draw (1.5, 5.8) node[vcc] {$V_{DD}$};
+    \draw (0.0, 5.8) -- (3.0, 5.8);
+    % Bloque superior PMOS: PE || PD
+    \draw (0.0, 5.8) node[pmos, anchor=source] (pe) {};
+    \draw (3.0, 5.8) node[pmos, anchor=source] (pd) {};
+    \node[left, font=\footnotesize] at (pe.gate) {$E$};
+    \node[left, font=\footnotesize] at (pd.gate) {$D$};
+    \draw (pe.drain) -- (0.0, 4.1) -- (3.0, 4.1) -- (pd.drain);
+    \draw (1.5, 4.1) -- (1.5, 3.8);
+    \draw (0.0, 3.8) -- (3.0, 3.8);
+
+    % Bloque inferior PMOS: (PB serie PA) || PC
+    \draw (0.0, 3.8) node[pmos, anchor=source] (pb) {};
+    \node[left, font=\footnotesize] at (pb.gate) {$B$};
+    \draw (pb.drain) node[pmos, anchor=source] (pa) {};
+    \node[left, font=\footnotesize] at (pa.gate) {$A$};
+    \draw (3.0, 3.8) -- (3.0, 3.1) node[pmos, anchor=source] (pc) {};
+    \node[left, font=\footnotesize] at (pc.gate) {$C$};
+    \draw (pa.drain) -- (0.0, 0.7) -- (3.0, 0.7) -- (pc.drain);
+
+    % Nodo intermedio Y'
+    \draw (1.5, 0.7) -- (1.5, 0.2) coordinate (yprime);
+    \filldraw[fftPrimary] (yprime) circle (2pt) node[above right, font=\footnotesize\bfseries] {$Y'$};
+
+    % --- RED PULL-DOWN (NMOS) ---
+    \draw (1.5, 0.2) -- (1.5, -0.2);
+    \draw (-0.2, -0.2) -- (3.4, -0.2);
+    % Rama izquierda NMOS: NC serie (NA || NB)
+    \draw (-0.2, -0.2) node[nmos, anchor=drain] (nc) {};
+    \node[left, font=\footnotesize] at (nc.gate) {$C$};
+    \draw (nc.source) -- (-0.2, -1.8);
+    \draw (-1.4, -1.8) -- (1.0, -1.8);
+    \draw (-1.4, -1.8) node[nmos, anchor=drain] (na) {};
+    \draw (1.0, -1.8) node[nmos, anchor=drain] (nb) {};
+    \node[left, font=\footnotesize] at (na.gate) {$A$};
+    \node[left, font=\footnotesize] at (nb.gate) {$B$};
+    \draw (na.source) -- (-1.4, -3.4) -- (1.0, -3.4) -- (nb.source);
+
+    % Rama derecha NMOS: NE serie ND en x = 3.4
+    \draw (3.4, -0.2) node[nmos, anchor=drain] (ne) {};
+    \node[left, font=\footnotesize] at (ne.gate) {$E$};
+    \draw (ne.source) node[nmos, anchor=drain] (nd) {};
+    \node[left, font=\footnotesize] at (nd.gate) {$D$};
+    \draw (nd.source) -- (3.4, -3.4) -- (-0.2, -3.4);
+    \draw (1.5, -3.4) node[ground] {};
+
+    % --- INVERSOR CMOS DE SALIDA ---
+    \draw (6.6, 2.2) node[pmos, anchor=source] (pinv) {};
+    \draw (pinv.source) node[vcc] {$V_{DD}$};
+    \draw (6.6, -0.2) node[nmos, anchor=drain] (ninv) {};
+    \draw (ninv.source) node[ground] {};
+    \draw (pinv.drain) -- (ninv.drain);
+    \draw (pinv.gate) -- (5.4, 1.45) -- (5.4, -0.95) -- (ninv.gate);
+    \draw (yprime) -- (5.4, 0.2);
+    \draw (6.6, 0.2) to[short, -o] (7.8, 0.2) node[right, font=\footnotesize\bfseries] {$Y = (A+B)C + DE$};
+\end{tikzpicture}
+\end{center}
 \end{ejercicio}
 
-\begin{ejercicio}[Parcial 2 --- Problema 2: Dos Amplificadores Operacionales Acoplados]
-Calcular la tensión diferencial $V_{AB} = V_A - V_B$ en el circuito compuesto por dos operacionales ideales acoplados: $OA_1$ con $I_{in} = -0{,}1\ \si{\milli\ampere}$ y $R_{f1} = 50\ \si{\kilo\ohm}$; $OA_2$ con $V_{ref} = 0{,}5\ \si{\volt}$, $R_1 = 10\ \si{\kilo\ohm}$ y $R_{f2} = 100\ \si{\kilo\ohm}$.
+% ------------------------------------------------------------------------------
+% PROBLEMA 2a DEL PARCIAL 2
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[Parcial 2 --- Problema 2a: Discriminación de Estados ON/OFF en Red de Diodos ($D_1, D_2$)]
+En el circuito de la figura, determinar razonadamente si los diodos $D_1$ y $D_2$ están en conducción (ON) o en corte (OFF) y calcular la tensión de salida $V_o$ (o $V_x$), empleando el segundo modelo lineal del diodo con tensión umbral $V_\gamma = 0{,}7\ \si{\volt}$.
 \tcbline
-\textbf{Esquema Circuital de las Dos Etapas con Op-Amps:}\\[4pt]
+\textbf{Esquema Circuital Original y Modelo Equivalente bajo la Hipótesis Correcta ($D_1$ ON, $D_2$ OFF):}\\[4pt]
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[scale=0.92]
+    % --- Circuito Original (Izquierda) ---
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (2.1, 3.95) {Circuito Original ($D_1, D_2$)};
+    % Fuente de 10 V en x = 0 y rama superior de D1 en y = 2.8
+    \draw (0,0) to[V, v={$10\,\si{\volt}$}] (0,2.8)
+          to[R, l={$R_1{=}4\,\si{\kilo\ohm}$}] (2.2,2.8)
+          to[D, l={$D_1$}] (4.2,2.8) -- (4.2,1.2);
+    % Fuente de 3 V en x = 2.0 y rama inferior de D2 en y = 1.2
+    \draw (2.0,0) to[V, v={$3\,\si{\volt}$}] (2.0,1.2)
+          to[D, l={$D_2$}] (4.2,1.2);
+    \filldraw[fftPrimary] (4.2,1.2) circle (2pt) node[right=4pt, font=\bfseries] {$V_o\ (V_x)$};
+    % Resistencia de 6 kOhm a masa
+    \draw (4.2,1.2) to[R, l={$R_3{=}6\,\si{\kilo\ohm}$}, i={$I$}] (4.2,-0.8) node[ground] {};
+    \draw (0,0) -- (4.2,0);
+
+    % --- Circuito Equivalente D1 ON y D2 OFF (Derecha) ---
+    \begin{scope}[xshift=7.8cm]
+        \node[font=\bfseries\sffamily, color=fftGreen] at (2.1, 3.95) {Equivalente ($D_1$ ON, $D_2$ OFF)};
+        \draw (0,0) to[V, v={$10\,\si{\volt}$}] (0,2.8)
+              to[R, l={$4\,\si{\kilo\ohm}$}] (2.0,2.8)
+              to[V, v={$0{,}7\,\si{\volt}$}] (4.2,2.8) -- (4.2,1.2);
+        % D2 abierto
+        \draw (2.0,0) to[V, v={$3\,\si{\volt}$}] (2.0,1.2) to[short, -o] (2.7,1.2);
+        \draw (3.5,1.2) to[short, o-] (4.2,1.2);
+        \filldraw[fftPrimary] (4.2,1.2) circle (2pt) node[right=4pt, font=\bfseries] {$V_o{=}5{,}58\,\si{\volt}$};
+        \draw (4.2,1.2) to[R, l={$6\,\si{\kilo\ohm}$}, i={$I{=}0{,}93\,\si{\milli\ampere}$}] (4.2,-0.8) node[ground] {};
+        \draw (0,0) -- (4.2,0);
+    \end{scope}
+\end{tikzpicture}%
+}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Análisis inicial:} Si supusiéramos ambos diodos en corte ($D_1$ OFF y $D_2$ OFF), por la resistencia de $6\ \si{\kilo\ohm}$ no circularía corriente ($V_o = 0\ \si{\volt}$), con lo que las tensiones ánodo-cátodo serían $V_{D1} = 10\ \si{\volt} > 0{,}7\ \si{\volt}$ y $V_{D2} = 3\ \si{\volt} > 0{,}7\ \si{\volt}$. Por tanto, al menos uno de los diodos tiene que conducir. Como la fuente de la izquierda ($10\ \si{\volt}$) es mucho mayor que la de la derecha ($3\ \si{\volt}$), formulamos la hipótesis más plausible:\\[4pt]
+2) \textbf{Hipótesis 1: $D_1$ ON y $D_2$ OFF:}
+Sustituimos $D_1$ por su fuente de tensión umbral $V_\gamma = 0{,}7\ \si{\volt}$ y $D_2$ por un circuito abierto. La corriente $I$ por la malla única izquierda es:
+\begin{equation}
+    I = I_{D1} = \frac{10\ \si{\volt} - 0{,}7\ \si{\volt}}{4\ \si{\kilo\ohm} + 6\ \si{\kilo\ohm}} = \frac{9{,}3\ \si{\volt}}{10\ \si{\kilo\ohm}} = 0{,}93\ \si{\milli\ampere}
+\end{equation}
+La tensión en el nudo común de salida $V_o$ es:
+\begin{equation}
+    \boxed{V_o = I \cdot 6\ \si{\kilo\ohm} = 0{,}93\ \si{\milli\ampere} \times 6\ \si{\kilo\ohm} = 5{,}58\ \si{\volt}}
+\end{equation}
+3) \textbf{Comprobación de las condiciones de consistencia:}
+\begin{itemize}[leftmargin=*]
+    \item Para $D_1$ (supuesto ON): $I_{D1} = 0{,}93\ \si{\milli\ampere} > 0$ (y el potencial antes del diodo es $10 - 4 \cdot 0{,}93 = 6{,}28\ \si{\volt}$, luego $V_{D1} = 6{,}28 - 5{,}58 = 0{,}7\ \si{\volt}$) $\implies$ \textbf{$D_1$ ON verificado}.
+    \item Para $D_2$ (supuesto OFF): $V_{D2} = V_{A2} - V_o = 3\ \si{\volt} - 5{,}58\ \si{\volt} = -2{,}58\ \si{\volt} < V_\gamma = 0{,}7\ \si{\volt}$ $\implies$ \textbf{$D_2$ OFF verificado}.
+\end{itemize}
+4) \textbf{Comprobación adicional de que NO puede darse $D_1$ ON y $D_2$ ON:}
+Si ambos condujeran, la rama de $D_2$ fijaría $V_o = 3\ \si{\volt} - 0{,}7\ \si{\volt} = 2{,}3\ \si{\volt}$. Entonces:
+\begin{equation}
+    I_{6\text{k}} = \frac{2{,}3\ \si{\volt}}{6\ \si{\kilo\ohm}} = 0{,}383\ \si{\milli\ampere}, \qquad I_{D1} = \frac{10 - 0{,}7 - 2{,}3}{4\ \si{\kilo\ohm}} = \frac{7\ \si{\volt}}{4\ \si{\kilo\ohm}} = 1{,}75\ \si{\milli\ampere}
+\end{equation}
+Aplicando LCK en el nudo $V_o$:
+\begin{equation}
+    I_{D1} + I_{D2} = I_{6\text{k}} \implies I_{D2} = I_{6\text{k}} - I_{D1} = 0{,}383 - 1{,}75 = -1{,}367\ \si{\milli\ampere} < 0
+\end{equation}
+Como un diodo no puede conducir corriente negativa de cátodo a ánodo, la hipótesis de conducción simultánea queda descartada.
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% PROBLEMA 2b DEL PARCIAL 2
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[Parcial 2 --- Problema 2b: Discriminación de Estados ON/OFF en Red con Fuente de Corriente ($D_3, D_4$)]
+Determinar razonadamente el estado de conducción (ON u OFF) de los diodos $D_3$ y $D_4$ y el valor de la tensión $V_o$ en el circuito de la figura, empleando el segundo modelo lineal del diodo con $V_\gamma = 0{,}7\ \si{\volt}$.
+\tcbline
+\textbf{Esquema Circuital ($D_3, D_4$):}\\[4pt]
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    % Etapa 1 (OA1)
-    \node[font=\bfseries] at (-3,3.4) {Etapa 1 ($OA_1$)};
-    \draw (-4.5,1.5) node[op amp] (oa1) {};
-    \draw (oa1.+) -- (-5.5,1.0) node[ground] {};
-    \draw (oa1.-) -- (-5.5,2.0) to[short, i<=$I_{in}{=}-0{,}1\si{\milli\ampere}$] (-7,2.0);
-    \draw (oa1.-) -- (-5.5,2.8) to[R, l=$R_{f1}{=}50\si{\kilo\ohm}$] (-3.5,2.8) -- (-3.5,1.5) -- (oa1.out);
-    \draw (oa1.out) to[short, -o] (-2.2,1.5) node[right] {$V_A$};
+    % Rama izquierda: fuente de corriente de 5 mA hacia arriba
+    \draw (0,0) to[I, i={$5\,\si{\milli\ampere}$}] (0,3.2) -- (2.4,3.2);
+    \filldraw[fftPrimary] (2.4,3.2) circle (2pt) node[above, font=\bfseries] {$V_o$};
+    % Rama central vertical: resistencia de 2 kOhm en serie con D3 hacia tierra
+    \draw (2.4,3.2) to[R, l={$2\,\si{\kilo\ohm}$}] (2.4,1.6)
+          to[D, l={$D_3$}] (2.4,0);
+    % Rama superior derecha: resistencia de 1 kOhm hacia el nodo Vx
+    \draw (2.4,3.2) to[R, l={$1\,\si{\kilo\ohm}$}] (5.2,3.2) coordinate (vx);
+    \filldraw[fftPrimary] (vx) circle (2pt) node[above right, font=\bfseries] {$V_x$};
+    % Fuente de 10 V con el terminal negativo arriba (Vx = -10 V respecto al nodo inferior de la fuente)
+    \draw (5.2,0.8) to[V, v_={$10\,\si{\volt}$}] (5.2,3.2);
+    % Diodo D4 en la rama inferior derecha apuntando hacia la izquierda (hacia masa)
+    \draw (5.2,0.8) -- (5.2,0) to[D, l={$D_4$}] (2.4,0);
+    \draw (0,0) -- (2.4,0);
+    \draw (2.4,0) node[ground] {};
+\end{tikzpicture}
+\end{center}
 
-    % Etapa 2 (OA2)
-    \node[font=\bfseries] at (3.5,3.4) {Etapa 2 ($OA_2$)};
-    \draw (2.5,1.5) node[op amp] (oa2) {};
-    \draw (oa2.+) -- (1.5,1.0) node[ground] {};
-    \draw (0.2,2.0) node[left] {$V_{ref}{=}0{,}5\si{\volt}$} to[R, l=$R_1{=}10\si{\kilo\ohm}$] (oa2.-);
-    \draw (oa2.-) -- (1.5,2.8) to[R, l=$R_{f2}{=}100\si{\kilo\ohm}$] (3.5,2.8) -- (3.5,1.5) -- (oa2.out);
-    \draw (oa2.out) to[short, -o] (4.8,1.5) node[right] {$V_B$};
+\textbf{Solución Paso a Paso (evaluando sistemáticamente las hipótesis del manuscrito `orig-119.png`):}\\[4pt]
+1) \textbf{Análisis inicial:} La fuente de corriente de $5\ \si{\milli\ampere}$ inyecta corriente de forma obligatoria hacia el nudo $V_o$, por lo que no pueden estar ambos diodos en corte simultáneamente.\\[4pt]
+2) \textbf{Hipótesis A ($D_3$ OFF y $D_4$ ON):}
+Si $D_3$ está abierto (OFF), toda la corriente de la fuente ($I = 5\ \si{\milli\ampere}$) circula hacia la derecha por la resistencia de $1\ \si{\kilo\ohm}$ y regresa a tierra atravesando la fuente de $10\ \si{\volt}$ y el diodo $D_4$ ($I_{D4} = 5\ \si{\milli\ampere} > 0$).
+Con la orientación mostrada en el esquema del examen (`orig-119.png`), el potencial en el nudo intermedio derecho es:
+\begin{equation}
+    V_x = 0 + 0{,}7\ \si{\volt} - 10\ \si{\volt} = -9{,}3\ \si{\volt}
+\end{equation}
+Y la tensión en el nudo $V_o$ resulta:
+\begin{equation}
+    V_o - V_x = I \cdot 1\ \si{\kilo\ohm} \implies V_o = -9{,}3\ \si{\volt} + (5\ \si{\milli\ampere} \times 1\ \si{\kilo\ohm}) = -9{,}3 + 5 = -4{,}3\ \si{\volt}
+\end{equation}
+Comprobamos el estado de $D_3$: al estar su cátodo a tierra ($0\ \si{\volt}$) y la tensión superior en $V_o = -4{,}3\ \si{\volt} < 0{,}7\ \si{\volt}$, el diodo $D_3$ tiene tensión ánodo-cátodo negativa ($V_{D3} < V_\gamma$), confirmando que \textbf{$D_3$ está OFF y $D_4$ está ON} con $V_o = -4{,}3\ \si{\volt}$.\\[4pt]
+3) \textbf{Comprobación de las demás combinaciones ($D_3$ ON y $D_4$ ON, o $D_3$ ON y $D_4$ OFF):}
+\begin{itemize}[leftmargin=*]
+    \item Si suponemos \textbf{$D_3$ ON y $D_4$ ON}: entonces $V_x = -10{,}7\ \si{\volt}$ y la ecuación de nudo en $V_o$ es:
+    \begin{equation}
+        5\ \si{\milli\ampere} = \frac{V_o - 0{,}7}{2\ \si{\kilo\ohm}} + \frac{V_o + 10{,}7}{1\ \si{\kilo\ohm}} \implies 3 V_o = -10{,}7 \implies V_o = -3{,}57\ \si{\volt}
+    \end{equation}
+    Con $V_o = -3{,}57\ \si{\volt} < 0{,}7\ \si{\volt}$, por la rama de $D_3$ la corriente iría hacia arriba ($I_{D3} < 0$), lo cual contradice que $D_3$ esté ON.
+    \item Si suponemos \textbf{$D_3$ ON y $D_4$ OFF}: toda la corriente de $5\ \si{\milli\ampere}$ bajaría por la rama de $2\ \si{\kilo\ohm}$, dando $V_o = 0{,}7 + 5\ \si{\milli\ampere} \times 2\ \si{\kilo\ohm} = +10{,}7\ \si{\volt}$, lo que polarizaría fuertemente en directa a la rama derecha haciendo conducir a $D_4$.
+\end{itemize}
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% PROBLEMA 3 DEL PARCIAL 2
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[Parcial 2 --- Problema 3: Circuito con Dos Amplificadores Operacionales Acoplados ($V_{AB}$)]
+En el circuito de la figura, calcular las tensiones en los nodos de salida $V_A$ y $V_B$ de los dos amplificadores operacionales ideales $AO_1$ y $AO_2$, así como la diferencia de potencial entre ambos, $V_{AB} = V_A - V_B$.
+\begin{itemize}[leftmargin=*]
+    \item El operacional $AO_1$ tiene una resistencia de realimentación de $50\ \si{\kilo\ohm}$, su terminal no inversor conectado a tierra a través de $1\ \si{\mega\ohm}$, y a su entrada inversora llega una red formada por una fuente de corriente de $2\ \si{\milli\ampere}$ (dirigida hacia abajo) en paralelo con una resistencia de $1\ \si{\kilo\ohm}$, conectada en serie con una resistencia de $19\ \si{\kilo\ohm}$ a tierra.
+    \item El operacional $AO_2$ está configurado como inversor con entrada de $0{,}5\ \si{\volt}$ a través de $1\ \si{\kilo\ohm}$ y resistencia de realimentación de $10\ \si{\kilo\ohm}$ (o equivalentemente $10\ \si{\kilo\ohm}$ y $100\ \si{\kilo\ohm}$, relación de ganancia $-10$), con una resistencia de acoplamiento de $10\ \si{\kilo\ohm}$ entre los nodos $A$ y $B$.
+\end{itemize}
+\tcbline
+\textbf{Esquema Circuital de las Dos Etapas con Op-Amps ( tras transformar la fuente de entrada ):}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    % --- Etapa 1 (OA1) ---
+    \draw (-3.8,0) node[op amp] (oa1) {};
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (-3.8, 2.85) {Etapa 1 ($AO_1$)};
+    % Entrada inversora y lazo de realimentación con coordenadas relativas
+    \draw (oa1.-) -- ++(-0.5,0) coordinate (vn1);
+    \draw (vn1) to[R, l_={$20\,\si{\kilo\ohm}$}, i<_={$I_1$}] ++(-2.4,0)
+          to[V, v_={$2\,\si{\volt}$}] ++(0,-1.8) node[ground] {};
+    \draw (vn1) -- ++(0,1.35) to[R, l={$R_{f1}{=}50\,\si{\kilo\ohm}$}, i={$I_2$}] ++(3.0,0) -| (oa1.out);
+    % Entrada no inversora a masa
+    \draw (oa1.+) -- ++(-0.4,0) node[ground] {};
+    % Salida VA
+    \draw (oa1.out) to[short, -o] ++(0.9,0) node[right, font=\bfseries] {$V_A$};
+
+    % --- Etapa 2 (OA2) ---
+    \draw (3.8,0) node[op amp] (oa2) {};
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (3.8, 2.85) {Etapa 2 ($AO_2$)};
+    % Entrada inversora y lazo de realimentación con coordenadas relativas
+    \draw (oa2.-) -- ++(-0.5,0) coordinate (vn2);
+    \draw (vn2) to[R, l_={$R_1{=}1\,\si{\kilo\ohm}$}] ++(-2.2,0) to[short, -o] ++(-0.2,0) node[left] {$0{,}5\,\si{\volt}$};
+    \draw (vn2) -- ++(0,1.35) to[R, l={$R_{f2}{=}10\,\si{\kilo\ohm}$}] ++(3.0,0) -| (oa2.out);
+    % Entrada no inversora a masa
+    \draw (oa2.+) -- ++(-0.4,0) node[ground] {};
+    % Salida VB
+    \draw (oa2.out) to[short, -o] ++(0.9,0) node[right, font=\bfseries] {$V_B$};
 \end{tikzpicture}
 \end{center}
 
 \textbf{Solución Paso a Paso:}\\[4pt]
-1) Etapa 1 ($OA_1$ con masa virtual $V^- = 0$):
+1) \textbf{Cálculo de $V_B$ en el operacional $AO_2$:}
+El operacional $AO_2$ forma un amplificador inversor cuya tensión de salida en el nodo $B$ queda fijada directamente por su lazo de realimentación negativa ($V^+ = V^- = 0\ \si{\volt}$):
 \begin{equation}
-    I_{in} = \frac{0 - V_A}{R_{f1}} \implies -0{,}1\ \si{\milli\ampere} = -\frac{V_A}{50\ \si{\kilo\ohm}} \implies V_A = +5{,}0\ \si{\volt}
+    \boxed{V_B = -\frac{R_{f2}}{R_1} \cdot 0{,}5\ \si{\volt} = -\frac{10\ \si{\kilo\ohm}}{1\ \si{\kilo\ohm}} \cdot 0{,}5\ \si{\volt} = -5{,}0\ \si{\volt}}
 \end{equation}
-2) Etapa 2 ($OA_2$ inversor):
+2) \textbf{Transformación de la fuente de corriente en la entrada de $AO_1$:}
+La fuente de intensidad de $2\ \si{\milli\ampere}$ (apuntando hacia abajo) en paralelo con la resistencia de $1\ \si{\kilo\ohm}$ se transforma en su equivalente de Thévenin: una fuente de tensión de valor $V_s = 2\ \si{\milli\ampere} \times 1\ \si{\kilo\ohm} = 2\ \si{\volt}$ (con el polo negativo arriba y el positivo abajo) en serie con la resistencia de $1\ \si{\kilo\ohm}$.
+Al sumarse en serie con la resistencia de $19\ \si{\kilo\ohm}$ conectada a tierra, la rama de entrada equivale a un generador de $-2\ \si{\volt}$ en serie con una resistencia total $R_{eq} = 1\ \si{\kilo\ohm} + 19\ \si{\kilo\ohm} = 20\ \si{\kilo\ohm}$.\\[4pt]
+3) \textbf{Cálculo de $V_A$ en el operacional $AO_1$:}
+Como no circula corriente por la resistencia de $1\ \si{\mega\ohm}$ ($I^+ = 0$), el terminal no inversor está a $V^+ = 0\ \si{\volt}$ y, por cortocircuito virtual, $V^- = V^+ = 0\ \si{\volt}$.
+La intensidad $I_1$ que circula desde el generador equivalente hacia el nodo inversor es:
 \begin{equation}
-    V_B = -\frac{R_{f2}}{R_1} V_{ref} = -\frac{100\ \si{\kilo\ohm}}{10\ \si{\kilo\ohm}} \times (0{,}5\ \si{\volt}) = -5{,}0\ \si{\volt}
+    I_1 = \frac{-2\ \si{\volt} - V^-}{20\ \si{\kilo\ohm}} = \frac{-2\ \si{\volt}}{20\ \si{\kilo\ohm}} = -0{,}1\ \si{\milli\ampere}
 \end{equation}
-3) Tensión diferencial:
+Por la primera ley de Kirchhoff en el nodo inversor ($I^- = 0 \implies I_1 = I_2$):
 \begin{equation}
-    V_{AB} = V_A - V_B = 5{,}0 - (-5{,}0) = 10{,}0\ \si{\volt}
+    I_2 = \frac{0 - V_A}{50\ \si{\kilo\ohm}} = I_1 \implies \boxed{V_A = -50\ \si{\kilo\ohm} \cdot I_1 = -50\ \si{\kilo\ohm} \cdot (-0{,}1\ \si{\milli\ampere}) = +5{,}0\ \si{\volt}}
+\end{equation}
+4) \textbf{Diferencia de potencial $V_{AB}$:}
+\begin{equation}
+    \boxed{V_{AB} = V_A - V_B = 5{,}0\ \si{\volt} - (-5{,}0\ \si{\volt}) = +10{,}0\ \si{\volt}}
 \end{equation}
 \end{ejercicio}

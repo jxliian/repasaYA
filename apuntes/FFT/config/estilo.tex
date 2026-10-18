@@ -9,11 +9,12 @@
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{lmodern}
 \usepackage{microtype}
-\usepackage[table,xcdraw]{xcolor}
+\usepackage[dvipsnames,svgnames,table,xcdraw]{xcolor}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{physics}
 \usepackage{siunitx}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{multirow}
@@ -21,10 +22,11 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{listings}
+\usepackage{varwidth}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{tikz}
-\usetikzlibrary{babel}
+\usetikzlibrary{babel,arrows.meta,positioning,calc,patterns}
 \usepackage[siunitx,european,cuteinductors]{circuitikz}
 
 % Configuración de márgenes
@@ -129,6 +131,7 @@
   colbacktitle=fftPrimary,
   attach boxed title to top left={yshift=-2mm, xshift=4mm},
   boxed title style={arc=2pt, boxrule=0pt},
+  varwidth boxed title*=-8mm,
   top=10pt,
   bottom=8pt,
   left=10pt,
@@ -144,11 +147,12 @@
   boxrule=0.8pt,
   leftrule=3.5pt,
   arc=3pt,
-  title=\textbf{\textsf{Ley / Teorema Fundamental\ifstrempty{#1}{}{: #1}}},
+  title=\textbf{\textsf{Ley / Teorema\ifstrempty{#1}{}{: #1}}},
   coltitle=white,
   colbacktitle=fftAccent,
   attach boxed title to top left={yshift=-2mm, xshift=4mm},
   boxed title style={arc=2pt, boxrule=0pt},
+  varwidth boxed title*=-8mm,
   top=10pt,
   bottom=8pt,
   left=10pt,
@@ -169,6 +173,7 @@
   colbacktitle=fftGreen,
   attach boxed title to top left={yshift=-2mm, xshift=4mm},
   boxed title style={arc=2pt, boxrule=0pt},
+  varwidth boxed title*=-8mm,
   top=10pt,
   bottom=8pt,
   left=10pt,
@@ -189,6 +194,7 @@
   colbacktitle=fftOrange,
   attach boxed title to top left={yshift=-2mm, xshift=4mm},
   boxed title style={arc=2pt, boxrule=0pt},
+  varwidth boxed title*=-8mm,
   top=10pt,
   bottom=8pt,
   left=10pt,
@@ -204,11 +210,12 @@
   boxrule=0.8pt,
   leftrule=3.5pt,
   arc=3pt,
-  title=\textbf{\textsf{Método de Resolución Sistemática\ifstrempty{#1}{}{: #1}}},
+  title=\textbf{\textsf{Método Sistemático\ifstrempty{#1}{}{: #1}}},
   coltitle=white,
   colbacktitle=fftDarkBlue,
   attach boxed title to top left={yshift=-2mm, xshift=4mm},
   boxed title style={arc=2pt, boxrule=0pt},
+  varwidth boxed title*=-8mm,
   top=10pt,
   bottom=8pt,
   left=10pt,
@@ -229,6 +236,7 @@
   colbacktitle=fftTeal,
   attach boxed title to top left={yshift=-2mm, xshift=4mm},
   boxed title style={arc=2pt, boxrule=0pt},
+  varwidth boxed title*=-8mm,
   top=10pt,
   bottom=8pt,
   left=10pt,

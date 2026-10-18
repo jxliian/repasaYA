@@ -1,234 +1,933 @@
-\chapter{Teoría de Circuitos: Corriente Alterna (AC)}
-\label{cap:tema3}
+\chapter{Fundamentos de Teoría de Circuitos: Corriente Alterna (AC)}
 
-\cuadrofuentes{
-    \textbf{Asignatura:} Fundamentos Físicos y Tecnológicos (1.º Grado en Ingeniería Informática, UGR).\\[2pt]
-    \textbf{Profesor:} Pedro Cartujo (Departamento de Electrónica y Tecnología de Computadores).\\[2pt]
-    \textbf{Bibliografía de Referencia:} Alexander, C. K., Sadiku, M. N. O., \textit{Fundamentos de Circuitos Eléctricos}, McGraw-Hill; Nilsson, J. W., Riedel, S. A., \textit{Circuitos Eléctricos}, Pearson.
-}
+\section{Señales Alternas Sinusoidales y Representación Fasorial}
 
-% ==============================================================================
-% 3.1. SEÑALES SINUSOIDALES Y FASORES
-% ==============================================================================
-\section{Señales Sinusoidales en Régimen Permanente y Fasores}
+En este tema estudiamos la resolución de circuitos excitados por fuentes de señal variable en el tiempo en \textbf{régimen permanente sinusoidal}. Las señales más empleadas en electrotecnia, electrónica y telecomunicaciones son las ondas periódicas senoidales (seno o coseno de periodo $2\pi$ radianes).
 
-En corriente alterna (AC), las fuentes generan tensiones y corrientes que varían sinusoidalmente en el tiempo:
+\subsection{Caracterización de una Señal Periódica Senoidal}
+
+Una magnitud eléctrica alterna sinusoidal (tensión o intensidad) se expresa en función del tiempo como:
 \begin{equation}
-    v(t) = V_m \cos(\omega t + \varphi) \quad [\si{\volt}]
-\end{equation}
-donde $V_m$ es la amplitud pico, $\omega = 2\pi f = 2\pi/T$ la frecuencia angular y $\varphi$ la fase inicial.
-
-\subsection{Valor Eficaz (RMS) y Fasores}
-El valor eficaz mide la equivalencia térmica con corriente continua:
-\begin{equation}
-    V_{rms} = \frac{V_m}{\sqrt{2}} \approx 0{,}7071 \cdot V_m
-\end{equation}
-El fasor asociado a la sinusoide contiene la magnitud y fase en el plano complejo:
-\begin{equation}
-    \mathbf{V} = V_{rms} e^{j\varphi} = V_{rms} \angle \varphi
+    x(t) = X_m \cos(\omega t + \phi)
 \end{equation}
 
-\subsection{Impedancia Compleja de los Elementos Básicos}
-\begin{definicion}[Impedancia Compleja $\mathbf{Z} = R + jX$]
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Resistencia Pura ($R$):} $\mathbf{Z}_R = R \angle 0^\circ = R$ (Tensión y corriente están \textbf{en fase}).
-    \item \textbf{Bobina Pura ($L$):} $\mathbf{Z}_L = j\omega L = \omega L \angle 90^\circ$ (\textbf{La tensión adelanta $90^\circ$ a la corriente}).
-    \item \textbf{Condensador Puro ($C$):} $\mathbf{Z}_C = \frac{1}{j\omega C} = -\frac{j}{\omega C} = \frac{1}{\omega C} \angle -90^\circ$ (\textbf{La corriente adelanta $90^\circ$ a la tensión}).
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \draw[-{Stealth}, thick] (-1.2,0) -- (7.5,0) node[right] {$t$};
+    \draw[-{Stealth}, thick] (0,-2.0) -- (0,2.3) node[above] {$x(t)$};
+    \draw[dashed, gray] (-0.8,1.5) -- (6.8,1.5) node[right, black, font=\footnotesize] {$+X_m$};
+    \draw[dashed, gray] (-0.8,-1.5) -- (6.8,-1.5) node[right, black, font=\footnotesize] {$-X_m$};
+    \draw[ultra thick, NavyBlue, domain=-0.9:6.7, samples=120] plot (\x, {1.5*cos(deg(1.8*\x + 0.8))});
+    \draw[dashed, BrickRed] (-0.444,0) -- (-0.444,1.5);
+    \draw[<->, thick, BrickRed] (-0.444,-0.35) -- (0,-0.35) node[midway, below, font=\footnotesize] {$t'$};
+    \draw[<->, thick, ForestGreen] (3.047,0) -- (3.047,1.5) node[midway, right, font=\footnotesize] {$X_m$};
+    \draw[<->, thick] (1.30,-1.8) -- (4.79,-1.8) node[midway, below, font=\footnotesize] {Periodo $T = \dfrac{2\pi}{\omega} = \dfrac{1}{f}$};
+    \draw[dashed, gray] (1.30,-1.5) -- (1.30,-1.85);
+    \draw[dashed, gray] (4.79,-1.5) -- (4.79,-1.85);
+\end{tikzpicture}
+\caption{Representación temporal de una onda periódica cosenoidal $x(t) = X_m\cos(\omega t + \phi)$ adelantada un tiempo $t'$.}
+\end{figure}
+
+Sus parámetros característicos fundamentales son:
+\begin{itemize}
+    \item \textbf{Amplitud o valor máximo ($X_m$)}: Valor de pico que alcanza la señal. El valor pico a pico es $X_{pp} = 2 X_m$.
+    \item \textbf{Periodo ($T$)}: Tiempo que tarda la señal en repetirse íntegramente ($\si{\second}$).
+    \item \textbf{Frecuencia lineal ($f$)}: Número de ciclos completos por segundo:
+    \begin{equation}
+        f = \frac{1}{T} \qquad [\text{SI: Hercio, }\si{\hertz} = \si{\second^{-1}}]
+    \end{equation}
+    \item \textbf{Frecuencia angular o pulsación ($\omega$)}: Velocidad de variación angular en radianes por segundo:
+    \begin{equation}
+        \omega T = 2\pi \implies \omega = \frac{2\pi}{T} = 2\pi f \qquad [\si{\radian/\second}]
+    \end{equation}
+    \item \textbf{Fase inicial en el origen ($\phi$)}: Representa la fracción del periodo en la cual la señal está desplazada (adelantada si $\phi > 0$ o retrasada si $\phi < 0$) respecto al origen de tiempos $t = 0$. Si el primer máximo ocurre un tiempo $t'$ antes del origen ($t = -t'$), se verifica:
+    \begin{equation}
+        \phi = \omega t' \implies \frac{t'}{T} = \frac{\phi}{2\pi}
+    \end{equation}
+    \item \textbf{Valor eficaz o RMS ($X_{\text{ef}}$ o $X_{\text{rms}}$)}: Es el valor de una corriente continua que disiparía la misma potencia media sobre una resistencia pura. Para una señal sinusoidal pura:
+    \begin{equation}
+        X_{\text{ef}} = \sqrt{\frac{1}{T}\int_0^T x^2(t)\,dt} = \frac{X_m}{\sqrt{2}} \approx 0{,}707\,X_m
+    \end{equation}
+\end{itemize}
+
+\begin{aviso}[Identidades trigonométricas para unificar senos y cosenos]
+Para operar con fasores en un mismo circuito, \textbf{todas las fuentes deben estar expresadas con la misma función trigonométrica} (habitualmente coseno). Recuerda las relaciones de conversión:
+\begin{equation}
+    \sin(\alpha) = \cos\left(\alpha - \frac{\pi}{2}\right) = \cos(\alpha - 90^\circ), \qquad -\sin(\alpha) = \cos\left(\alpha + \frac{\pi}{2}\right) = \cos(\alpha + 90^\circ)
+\end{equation}
+\end{aviso}
+
+\subsection{Repaso de Números Complejos para Circuitos AC}
+
+A la hora de trabajar en corriente alterna no operamos resolviendo ecuaciones diferenciales con funciones senoidales en el tiempo, sino con sus \textbf{fasores} asociados, que son números complejos $\mathbf{Z}$ con parte real $a$ y parte imaginaria $b$ (en electrotecnia se emplea la letra $j = \sqrt{-1}$, con $j^2 = -1$, para no confundirla con la intensidad $i$).
+
+\subsubsection{1. Las 4 Formas de Expresar un Número Complejo}
+\begin{equation}
+    \mathbf{Z} = \underbrace{a + j b}_{\text{Binomial}} = \underbrace{(a,\,b)}_{\text{Cartesiana}} = \underbrace{r\,e^{j\varphi}}_{\text{Exponencial (Euler)}} = \underbrace{r\angle\varphi}_{\text{Polar (Módulo y Fase)}}
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.46\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    \draw[-{Stealth}, thick] (-3.8,0) -- (3.5,0) node[right, font=\footnotesize] {Eje Real};
+    \draw[-{Stealth}, thick] (0,-4.4) -- (0,3.2) node[above, font=\footnotesize] {Eje Imaginario};
+    \draw[dashed, gray] (2.2,0) node[below, black, font=\footnotesize] {$a$} -- (2.2,2.0) -- (0,2.0) node[left, black, font=\footnotesize] {$b$};
+    \fill[NavyBlue] (2.2,2.0) circle (2.5pt) node[above right, font=\footnotesize] {$\mathbf{Z}_1 = a + jb$};
+    \draw[dashed, gray] (-3,0) node[below, black, font=\footnotesize] {$-3$} -- (-3,1) -- (0,1) node[right, black, font=\footnotesize] {$1$};
+    \fill[BrickRed] (-3,1) circle (2.5pt) node[above left, font=\footnotesize] {$\mathbf{Z}_2 = -3 + j$};
+    \fill[ForestGreen] (0,-4) circle (2.5pt) node[right, font=\footnotesize] {$\mathbf{Z}_3 = -j4$};
+    \node[left, font=\footnotesize] at (0,-4) {$-4$};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.50\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.85]
+    \draw[-{Stealth}, thick] (-0.8,0) -- (3.8,0) node[right, font=\footnotesize] {Real};
+    \draw[-{Stealth}, thick] (0,-0.6) -- (0,2.8) node[above, font=\footnotesize] {Img};
+    \draw[dashed, gray] (2.8,0) node[below, black] {$a$} -- (2.8,2.0) -- (0,2.0) node[left, black] {$b$};
+    \draw[-{Stealth}, ultra thick, NavyBlue] (0,0) -- (2.8,2.0) node[midway, above left] {$r$} node[above right] {$\mathbf{Z} = r\angle\varphi$};
+    \draw[thick, BrickRed] (0.75,0) arc (0:35.5:0.75);
+    \node[BrickRed] at (1.0,0.28) {$\varphi$};
+\end{tikzpicture}
+\end{minipage}
+\caption{Representación en el plano complejo de Argand (izquierda) y relación polar-binomial (derecha).}
+\end{figure}
+
+\begin{ley}[Conversión entre Forma Binomial y Forma Polar]
+\begin{itemize}
+    \item \textbf{Paso de Binomial ($a + jb$) a Polar ($r\angle\varphi$)}:
+    \begin{equation}
+        \text{Módulo: } r = |\mathbf{Z}| = \sqrt{a^2 + b^2}, \qquad \text{Fase: } \varphi = \begin{cases} \arctan\left(\dfrac{b}{a}\right) & \text{si } a > 0 \\[8pt] \arctan\left(\dfrac{b}{a}\right) + \pi\ (\text{o } +180^\circ) & \text{si } a < 0 \end{cases}
+    \end{equation}
+    \item \textbf{Paso de Polar ($r\angle\varphi$) a Binomial ($a + jb$)}:
+    \begin{equation}
+        a = r\cos\varphi, \qquad b = r\sin\varphi \implies \mathbf{Z} = r\cos\varphi + j\,r\sin\varphi
+    \end{equation}
+\end{itemize}
+\end{ley}
+
+\begin{ejemplo}[Paso de binomial a polar en el segundo cuadrante ($a < 0$)]
+Dado el número complejo $\mathbf{Z} = -3 + 4j$, halla su expresión en forma polar:
+\begin{itemize}
+    \item \textbf{Módulo}: $r = |\mathbf{Z}| = \sqrt{(-3)^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$.
+    \item \textbf{Fase}: Como la parte real es negativa ($a = -3 < 0$, segundo cuadrante), debemos sumar $\pi\,\si{\radian}$ ($180^\circ$) al resultado de la calculadora:
+    \begin{equation*}
+        \varphi = \arctan\left(\frac{4}{-3}\right) + 180^\circ = -53{,}13^\circ + 180^\circ = 126{,}87^\circ \implies \boxed{\mathbf{Z} = 5\angle 126{,}87^\circ}
+    \end{equation*}
+\end{itemize}
+\end{ejemplo}
+
+\subsubsection{2. Conjugado y Operaciones con Números Complejos}
+\begin{itemize}
+    \item \textbf{Complejo conjugado ($\mathbf{Z}^*$)}: Es el mismo número complejo pero con la parte imaginaria (o el ángulo de fase) cambiada de signo: si $\mathbf{Z} = a + jb = r\angle\varphi$, entonces $\mathbf{Z}^* = a - jb = r\angle -\varphi$. Se cumple siempre que el producto de un complejo por su conjugado es un número real puro igual al cuadrado de su módulo:
+    \begin{equation}
+        \mathbf{Z}\cdot\mathbf{Z}^* = (a + jb)(a - jb) = a^2 - j^2 b^2 = a^2 + b^2 = |\mathbf{Z}|^2
+    \end{equation}
+    \item \textbf{Suma y resta} (más sencillas en \textbf{forma binomial}):
+    \begin{equation}
+        \mathbf{Z}_1 \pm \mathbf{Z}_2 = (a + jb) \pm (c + jd) = (a \pm c) + j(b \pm d)
+    \end{equation}
+    \item \textbf{Multiplicación} (más sencilla en \textbf{forma polar o exponencial}):
+    \begin{equation}
+        \mathbf{Z}_1 \cdot \mathbf{Z}_2 = (r_1\angle\varphi_1)\cdot(r_2\angle\varphi_2) = (r_1 r_2)\angle(\varphi_1 + \varphi_2) = r_1 r_2\,e^{j(\varphi_1 + \varphi_2)}
+    \end{equation}
+    En forma binomial: $(a+jb)(c+jd) = (ac - bd) + j(ad + bc)$.
+    \item \textbf{División} (en forma polar se dividen módulos y se restan fases; en forma binomial se multiplica numerador y denominador por el \textbf{conjugado del denominador}):
+    \begin{equation}
+        \frac{\mathbf{Z}_1}{\mathbf{Z}_2} = \frac{r_1\angle\varphi_1}{r_2\angle\varphi_2} = \frac{r_1}{r_2}\angle(\varphi_1 - \varphi_2) = \frac{(a+jb)(c-jd)}{c^2 + d^2} = \left(\frac{ac + bd}{c^2 + d^2}\right) + j\left(\frac{bc - ad}{c^2 + d^2}\right)
+    \end{equation}
+\end{itemize}
+
+\subsection{El Fasor, la Impedancia Compleja ($\mathbf{Z}$) y la Admitancia ($\mathbf{Y}$)}
+
+Un \textbf{fasor} es el número complejo cuyo módulo es la amplitud ($V_m$ o $I_m$) y cuyo argumento es la fase en el origen ($\phi$) de una señal alterna sinusoidal de pulsación $\omega$:
+\begin{equation}
+    v(t) = V_m\cos(\omega t + \phi) \quad \longleftrightarrow \quad \mathbf{V} = V_m\angle\phi = V_m\,e^{j\phi} = V_m\cos\phi + j\,V_m\sin\phi
+\end{equation}
+
+\begin{definicion}[Impedancia ($\mathbf{Z}$) y Admitancia ($\mathbf{Y}$)]
+\begin{itemize}
+    \item La \textbf{impedancia compleja} $\mathbf{Z}$ de un elemento pasivo es el cociente entre el fasor de tensión $\mathbf{V}$ en sus extremos y el fasor de intensidad $\mathbf{I}$ que lo atraviesa (Ley de Ohm generalizada en CA):
+    \begin{equation}
+        \boxed{\mathbf{Z} = \frac{\mathbf{V}}{\mathbf{I}} = R + j X = |\mathbf{Z}|\angle\theta} \qquad [\si{\ohm}]
+    \end{equation}
+    donde $R = \text{Re}(\mathbf{Z})$ es la \textbf{parte resistiva} (resistencia) y $X = \text{Im}(\mathbf{Z})$ es la \textbf{parte reactiva} (reactancia).
+    \item La \textbf{admitancia compleja} $\mathbf{Y}$ es la inversa de la impedancia:
+    \begin{equation}
+        \boxed{\mathbf{Y} = \frac{1}{\mathbf{Z}} = \frac{\mathbf{I}}{\mathbf{V}} = G + j B} \qquad [\text{Siemens, }\si{\siemens} = \si{\ohm^{-1}}]
+    \end{equation}
 \end{itemize}
 \end{definicion}
 
-\begin{center}
-\begin{tikzpicture}[scale=1.1]
-    % Ejes en el plano complejo
-    \draw[->, thick, gray] (-2.5,0) -- (3,0) node[right, text=black] {$\text{Re}$ (Eje Real)};
-    \draw[->, thick, gray] (0,-2.2) -- (0,2.5) node[above, text=black] {$\text{Im}$ (Eje Imaginario)};
+\subsection{Relación Tensión-Intensidad en los Elementos Pasivos en CA}
 
-    % Referencia de corriente en el eje real
-    \draw[->, >=stealth, very thick, fftDarkBlue] (0,0) -- (2.0,0) node[below=2pt] {$\mathbf{I}$ (Referencia)};
+\begin{enumerate}
+    \item \textbf{Resistencia ideal ($R$)}:
+    \begin{equation}
+        \mathbf{Z}_R = R = R\angle 0^\circ, \qquad \mathbf{Y}_R = \frac{1}{R}
+    \end{equation}
+    Si $\mathbf{I}_R = I_m\angle\phi$, entonces $\mathbf{V}_R = \mathbf{I}_R \mathbf{Z}_R = (I_m R)\angle(\phi + 0^\circ)$. En una resistencia, \textbf{la tensión y la intensidad tienen exactamente la misma fase} (están en fase): si $i_R(t) = I_m\cos(\omega t + \phi)$, entonces $v_R(t) = I_m R\cos(\omega t + \phi)$.
 
-    % Resistencia: en fase
-    \draw[->, >=stealth, thick, fftPrimary] (0,0) -- (1.5,0) node[above] {$\mathbf{V}_R = R \mathbf{I}$};
+    \item \textbf{Condensador ideal ($C$)}:
+    \begin{equation}
+        \mathbf{Z}_C = \frac{1}{j\omega C} = \frac{-j}{\omega C} = \frac{1}{\omega C}\angle -90^\circ, \qquad \mathbf{Y}_C = j\omega C
+    \end{equation}
+    Si $\mathbf{I}_C = I_m\angle\phi$, entonces $\mathbf{V}_C = \mathbf{I}_C \mathbf{Z}_C = \frac{I_m}{\omega C}\angle(\phi - 90^\circ)$. En un condensador, \textbf{la tensión va retrasada $90^\circ$ ($\pi/2\,\si{\radian}$) respecto a la intensidad} (o equivalentemente, la intensidad adelanta $\pi/2\,\si{\radian}$ a la tensión): si $v_C(t) = V_m\cos(\omega t + \phi)$, entonces $i_C(t) = V_m C\omega\cos\left(\omega t + \phi + \frac{\pi}{2}\right)$.
 
-    % Inductancia: adelanta +90
-    \draw[->, >=stealth, very thick, fftAccent] (0,0) -- (0,1.8) node[left] {$\mathbf{V}_L = j\omega L \mathbf{I}$ ($+90^\circ$)};
+    \item \textbf{Bobina o inductor ideal ($L$)}:
+    \begin{equation}
+        \mathbf{Z}_L = j\omega L = \omega L\angle +90^\circ, \qquad \mathbf{Y}_L = \frac{1}{j\omega L} = \frac{-j}{\omega L}
+    \end{equation}
+    Si $\mathbf{I}_L = I_m\angle\phi$, entonces $\mathbf{V}_L = \mathbf{I}_L \mathbf{Z}_L = (\omega L I_m)\angle(\phi + 90^\circ)$. En una bobina, \textbf{la tensión va adelantada $90^\circ$ ($\pi/2\,\si{\radian}$) respecto a la intensidad}: si $i_L(t) = I_m\cos(\omega t + \phi)$, entonces $v_L(t) = I_m\omega L\cos\left(\omega t + \phi + \frac{\pi}{2}\right)$.
+\end{enumerate}
 
-    % Capacidad: retrasa -90
-    \draw[->, >=stealth, very thick, fftGreen] (0,0) -- (0,-1.8) node[left] {$\mathbf{V}_C = -j\frac{1}{\omega C}\mathbf{I}$ ($-90^\circ$)};
-
-    \node[below=16pt] at (0,-2.2) {\small\textsf{Diagrama fasorial de tensiones relativas respecto a la corriente $\mathbf{I}$}};
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.82]
+    \draw[-{Stealth}, gray] (-0.5,0) -- (2.8,0) node[right, black, font=\scriptsize] {Real};
+    \draw[-{Stealth}, gray] (0,-0.8) -- (0,2.2) node[above, black, font=\scriptsize] {Img};
+    \draw[-{Stealth}, ultra thick, NavyBlue] (0,0) -- (2.3,1.5) node[above right, font=\footnotesize] {$\mathbf{V}_R$};
+    \draw[-{Stealth}, ultra thick, BrickRed] (0,0) -- (1.4,0.91) node[below right, font=\footnotesize] {$\mathbf{I}_R$};
+    \draw[thick] (0.6,0) arc (0:33:0.6) node[midway, right, font=\scriptsize] {$\phi$};
+    \node[below, font=\footnotesize\bfseries] at (1.1,-0.9) {Resistencia (en fase)};
 \end{tikzpicture}
-\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.82]
+    \draw[-{Stealth}, gray] (-1.6,0) -- (2.4,0) node[right, black, font=\scriptsize] {Real};
+    \draw[-{Stealth}, gray] (0,-0.8) -- (0,2.2) node[above, black, font=\scriptsize] {Img};
+    \draw[-{Stealth}, ultra thick, NavyBlue] (0,0) -- (1.7,1.2) node[above right, font=\footnotesize] {$\mathbf{V}_C$};
+    \draw[-{Stealth}, ultra thick, BrickRed] (0,0) -- (-1.05,1.5) node[above left, font=\footnotesize] {$\mathbf{I}_C$};
+    \draw[thick] (0.35,0.25) -- (0.1,0.6) -- (-0.25,0.35);
+    \node[below, font=\footnotesize\bfseries] at (0.4,-0.9) {Condensador ($\mathbf{V}_C$ retrasa $90^\circ$)};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.82]
+    \draw[-{Stealth}, gray] (-1.6,0) -- (2.4,0) node[right, black, font=\scriptsize] {Real};
+    \draw[-{Stealth}, gray] (0,-0.8) -- (0,2.2) node[above, black, font=\scriptsize] {Img};
+    \draw[-{Stealth}, ultra thick, BrickRed] (0,0) -- (1.7,1.2) node[above right, font=\footnotesize] {$\mathbf{I}_L$};
+    \draw[-{Stealth}, ultra thick, NavyBlue] (0,0) -- (-1.05,1.5) node[above left, font=\footnotesize] {$\mathbf{V}_L$};
+    \draw[thick] (0.35,0.25) -- (0.1,0.6) -- (-0.25,0.35);
+    \node[below, font=\footnotesize\bfseries] at (0.4,-0.9) {Bobina ($\mathbf{V}_L$ adelanta $90^\circ$)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Diagramas fasoriales de tensión e intensidad en una resistencia, un condensador y una bobina.}
+\end{figure}
 
-% ==============================================================================
-% 3.2. POTENCIA EN CORRIENTE ALTERNA
-% ==============================================================================
-\section{Potencia en Corriente Alterna y Compensación Reactiva}
+\subsection{Análisis Completo del Circuito RC Serie en CA}
 
-\subsection{El Triángulo de Potencias}
-\begin{definicion}[Clasificación de Potencias en AC]
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Potencia Activa ($P$):} Trabajo útil y pérdidas Joule: $P = V_{rms} I_{rms} \cos \theta \quad [\si{\watt}]$.
-    \item \textbf{Potencia Reactiva ($Q$):} Potencia fluctuante oscilante: $Q = V_{rms} I_{rms} \sin \theta \quad [\si{\VAR}]$.
-    \item \textbf{Potencia Compleja ($\mathbf{S}$):} $\mathbf{S} = P + jQ = S \angle \theta \quad [\si{\VA}]$.
-    \item \textbf{Potencia Aparente ($S$):} $S = |\mathbf{S}| = \sqrt{P^2 + Q^2} = V_{rms} I_{rms} \quad [\si{\VA}]$.
-    \item \textbf{Factor de Potencia ($\text{fp}$):} $\text{fp} = \cos \theta = P/S$.
+Al trabajar con impedancias complejas es como si todos los elementos fueran resistivos y cumplen la Ley de Ohm y todas las reglas de asociación serie/paralelo, divisores, Kirchhoff, Mallas, Nudos, Superposición, Thévenin y Norton. Analicemos en detalle el circuito RC serie excitado por $v_s(t) = |\mathbf{V}_s|\cos(\omega t + \phi)$ ($\mathbf{V}_s = |\mathbf{V}_s|\angle\phi$):
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[scale=0.95, transform shape]
+    \draw (0,0) to[sV, l=$\mathbf{V}_s$] (0,2.2)
+          to[R, l=$R$] (3.0,2.2)
+          to[C, l=$C$, v=$\mathbf{V}_C$] (3.0,0) -- (0,0);
+    \draw[-{Stealth}, NavyBlue, thick] (1.1,1.1) arc (150:-150:0.45) node[midway, left] {$\mathbf{I}$};
+\end{circuitikz}
+\caption{Circuito RC en serie excitado por una fuente alterna sinusoidal $\mathbf{V}_s = |\mathbf{V}_s|\angle\phi$.}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Ecuación de malla e intensidad fasorial}: Con $\mathbf{Z}_R = R$ y $\mathbf{Z}_C = \frac{1}{j\omega C}$:
+    \begin{equation}
+        \mathbf{V}_s = \mathbf{I}(\mathbf{Z}_R + \mathbf{Z}_C) = \mathbf{I}\left(R + \frac{1}{j\omega C}\right) = \mathbf{I}\left(\frac{1 + j\omega C R}{j\omega C}\right) \implies \mathbf{I} = \frac{j\omega C}{1 + j\omega C R}\,\mathbf{V}_s
+    \end{equation}
+    \item \textbf{Caída de tensión en el condensador ($\mathbf{V}_C$)}:
+    \begin{equation}
+        \mathbf{V}_C = \mathbf{I}\cdot\mathbf{Z}_C = \frac{j\omega C\,\mathbf{V}_s}{1 + j\omega C R}\cdot\frac{1}{j\omega C} = \frac{1}{1 + j\omega C R}\,\mathbf{V}_s
+    \end{equation}
+    Racionalizando (multiplicando arriba y abajo por el conjugado $1 - j\omega C R$):
+    \begin{equation}
+        \mathbf{V}_C = \frac{\mathbf{V}_s(1 - j\omega C R)}{(1 + j\omega C R)(1 - j\omega C R)} = \frac{\mathbf{V}_s}{1 + (\omega C R)^2}\,(1 - j\omega C R)
+    \end{equation}
+    \item \textbf{Módulo, fase y expresión en el dominio del tiempo}:
+    \begin{equation}
+        |\mathbf{V}_C| = \frac{|\mathbf{V}_s|}{\sqrt{1 + (\omega C R)^2}}, \qquad \varphi_C = \phi - \arctan(\omega C R) \implies \mathbf{V}_C = \frac{|\mathbf{V}_s|}{\sqrt{1 + (\omega C R)^2}}\angle\big(\phi - \arctan(\omega C R)\big)
+    \end{equation}
+    Pasando al dominio del tiempo:
+    \begin{equation}
+        \boxed{v_C(t) = \frac{|\mathbf{V}_s|}{\sqrt{1 + (\omega C R)^2}}\,\cos\big[\omega t + \phi - \arctan(\omega C R)\big]}
+    \end{equation}
+\end{enumerate}
+
+\section{Función de Transferencia, Diagramas de Bode y Filtros Pasivos}
+
+\subsection{Función de Transferencia $\mathbf{T}(\omega)$ y Frecuencia de Corte $\omega_0$}
+
+\begin{definicion}[Función de Transferencia y Frecuencia de Corte]
+\begin{itemize}
+    \item La \textbf{función de transferencia} $\mathbf{T}(\omega)$ (o $\mathbf{H}(j\omega)$) es la relación entre el fasor de tensión de salida $\mathbf{V}_o(\omega)$ y el fasor de tensión de entrada $\mathbf{V}_i(\omega)$ en función de la frecuencia angular $\omega$:
+    \begin{equation}
+        \boxed{\mathbf{T}(\omega) = \frac{\mathbf{V}_o(\omega)}{\mathbf{V}_i(\omega)} = |\mathbf{T}(\omega)|\,\angle\text{Fase}\{\mathbf{T}(\omega)\}}
+    \end{equation}
+    \item La \textbf{frecuencia de corte} $\omega_0$ (o $\omega_c$) es aquella frecuencia angular para la cual el módulo de la función de transferencia cae a $\frac{1}{\sqrt{2}} \approx 0{,}707$ de su valor máximo (lo que equivale a una caída de $-3\,\si{\decibel}$ en amplitud o a la mitad de la potencia):
+    \begin{equation}
+        |\mathbf{T}(\omega_0)| = \frac{|\mathbf{T}|_{\max}}{\sqrt{2}} \approx 0{,}707\,|\mathbf{T}|_{\max} \qquad \left(\text{En un filtro RC: } \boxed{\omega_0 = \frac{1}{R C}}, \quad \text{En un filtro RL: } \boxed{\omega_0 = \frac{R}{L}}\right)
+    \end{equation}
 \end{itemize}
 \end{definicion}
 
-\begin{center}
-\begin{tikzpicture}[scale=1.1]
-    % Triángulo de potencias
-    \draw[thick] (0,0) -- (4,0) node[midway, below] {Potencia Activa $P\ [\si{\watt}]$};
-    \draw[thick] (4,0) -- (4,2.5) node[midway, right] {Potencia Reactiva $Q\ [\si{\VAR}]$};
-    \draw[very thick, fftAccent] (0,0) -- (4,2.5) node[midway, above left] {Potencia Aparente $S\ [\si{\VA}]$};
-    % Angulo theta
-    \draw[->, thick, fftPrimary] (0.8,0) arc (0:32:0.8);
-    \node at (1.1,0.25) {$\theta$};
-    \node[below=12pt] at (2,0) {\small\textbf{Triángulo de Potencias} ($S^2 = P^2 + Q^2, \quad \cos \theta = P/S$)};
+\subsection{Diagramas de Bode de Amplitud y de Fase}
+
+El \textbf{Diagrama de Bode} sirve para analizar y representar gráficamente el comportamiento en frecuencia de un circuito mediante dos gráficas frente a $\log_{10}(\omega)$ (o poniendo el eje $\omega$ en escala logarítmica, donde cada \textbf{década} multiplica la frecuencia por $10$, p. ej. de $100\,\si{\hertz}$ a $1000\,\si{\hertz}$):
+\begin{enumerate}
+    \item \textbf{Diagrama de Bode de amplitud}: Representa la ganancia en \textbf{decibelios ($\si{\decibel}$)}, definida como:
+    \begin{equation}
+        |\mathbf{T}(\omega)|_{\si{\decibel}} = 20\log_{10}|\mathbf{T}(\omega)| \qquad [\si{\decibel}]
+    \end{equation}
+    \item \textbf{Diagrama de Bode de fase}: Representa el desfase $\text{Fase}\{\mathbf{T}(\omega)\}$ (en radianes o grados) frente a $\log_{10}(\omega)$.
+\end{enumerate}
+
+\subsection{Filtro RC Paso Bajo (Salida en el Condensador: $\mathbf{V}_o = \mathbf{V}_C$)}
+Tomando como salida la tensión en el condensador ($\mathbf{V}_o = \mathbf{V}_C$) y como entrada la fuente ($\mathbf{V}_i = \mathbf{V}_s$), con $\omega_0 = \frac{1}{RC}$:
+\begin{equation}
+    \mathbf{T}(\omega) = \frac{1}{1 + j\omega R C} = \frac{1}{\sqrt{1 + (\omega R C)^2}}\,\angle\big(-\arctan(\omega R C)\big) = \frac{1}{\sqrt{1 + (\omega/\omega_0)^2}}\,\angle\left(-\arctan\frac{\omega}{\omega_0}\right)
+\end{equation}
+\begin{itemize}
+    \item \textbf{Para frecuencias bajas ($\omega \ll \omega_0$)}: $|\mathbf{T}(\omega)| \approx 1 \implies 20\log_{10}(1) = 0\,\si{\decibel}$, y $\text{Fase}\{\mathbf{T}(\omega)\} \approx -\arctan(0) = 0\,\si{\radian}$. Por tanto, para frecuencias bajas la señal de salida $v_o(t)$ y la de entrada $v_i(t)$ tienen \textbf{la misma amplitud y la misma fase} (pasan sin atenuación).
+    \item \textbf{En la frecuencia de corte ($\omega = \omega_0 = \frac{1}{RC}$)}: $|\mathbf{T}(\omega_0)| = \frac{1}{\sqrt{2}} \approx 0{,}707 \implies 20\log_{10}(1/\sqrt{2}) = -3\,\si{\decibel}$, y $\text{Fase}\{\mathbf{T}(\omega_0)\} = -\arctan(1) = -\frac{\pi}{4}\,\si{\radian} = -45^\circ$.
+    \item \textbf{Para frecuencias altas ($\omega \gg \omega_0$)}: $|\mathbf{T}(\omega)| \approx \frac{\omega_0}{\omega} \implies 20\log_{10}\left(\frac{\omega_0}{\omega}\right)$, que cae con una pendiente asintótica de \textbf{$-20\,\si{\decibel}/\text{década}$}, y $\text{Fase}\{\mathbf{T}(\omega)\} \approx -\arctan(\infty) = -\frac{\pi}{2}\,\si{\radian} = -90^\circ$. A altas frecuencias la amplitud de salida es mucho menor que la de entrada y va retrasada $\pi/2$.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.30\textwidth}
+\centering
+\begin{circuitikz}[scale=0.8, transform shape]
+    \draw (0,0) to[sV, l=$\mathbf{V}_i$] (0,2.2)
+          to[R, l=$R$] (2.4,2.2)
+          to[C, l=$C$] (2.4,0) -- (0,0);
+    \draw (2.4,2.2) to[short, -o] (3.2,2.2) node[above] {$\mathbf{V}_o$};
+    \draw (1.2,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.6,-0.45) {Filtro RC Paso Bajo};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.78]
+    \draw[-{Stealth}, thick] (-0.3,0) -- (4.2,0) node[right, font=\scriptsize] {$\log\omega$};
+    \draw[-{Stealth}, thick] (0,-2.3) -- (0,0.8) node[above, font=\scriptsize] {$20\log|\mathbf{T}(\omega)|\,[\si{\decibel}]$};
+    \draw[dashed, gray] (1.8,0) node[above, black, font=\scriptsize] {$\omega_0$} -- (1.8,-0.55) -- (0,-0.55) node[left, black, font=\scriptsize] {$-3\,\si{\decibel}$};
+    \draw[dashed, NavyBlue!50] (0,0) -- (1.8,0) -- (3.8,-2.0);
+    \draw[ultra thick, NavyBlue] (0,0) .. controls (1.3,0) and (1.5,-0.25) .. (1.8,-0.55) .. controls (2.2,-0.95) and (2.8,-1.25) .. (3.8,-2.1);
+    \node[right, font=\scriptsize, BrickRed] at (2.3,-1.6) {$-20\,\si{\decibel}/\text{déc}$};
+    \node[below, font=\footnotesize\bfseries] at (2.0,-2.4) {Bode de Amplitud};
 \end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.78]
+    \draw[-{Stealth}, thick] (-0.3,0) -- (4.2,0) node[right, font=\scriptsize] {$\log\omega$};
+    \draw[-{Stealth}, thick] (0,-2.3) -- (0,0.8) node[above, font=\scriptsize] {$\text{Fase}\{\mathbf{T}(\omega)\}$};
+    \draw[dashed, gray] (0,-1.8) node[left, black, font=\scriptsize] {$-\frac{\pi}{2}$} -- (4.0,-1.8);
+    \draw[dashed, gray] (1.8,0) node[above, black, font=\scriptsize] {$\omega_0$} -- (1.8,-0.9) -- (0,-0.9) node[left, black, font=\scriptsize] {$-\frac{\pi}{4}$};
+    \draw[ultra thick, BrickRed] (0,0) .. controls (1.2,0) and (1.5,-0.3) .. (1.8,-0.9) .. controls (2.1,-1.5) and (2.4,-1.8) .. (3.9,-1.8);
+    \node[below, font=\footnotesize\bfseries] at (2.0,-2.4) {Bode de Fase};
+\end{tikzpicture}
+\end{minipage}
+\caption{Esquema y diagramas de Bode de amplitud y fase del filtro RC paso bajo ($\omega_0 = 1/(RC)$).}
+\end{figure}
+
+\subsection{Filtro RC Paso Alto (Salida en la Resistencia: $\mathbf{V}_o = \mathbf{V}_R$)}
+Intercambiando la posición del condensador y la resistencia (tomando $\mathbf{V}_o = \mathbf{V}_R$):
+\begin{equation}
+    \mathbf{T}(\omega) = \frac{R}{R + \frac{1}{j\omega C}} = \frac{j\omega R C}{1 + j\omega R C} = \frac{\omega R C}{\sqrt{1 + (\omega R C)^2}}\,\angle\left(\frac{\pi}{2} - \arctan(\omega R C)\right)
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.30\textwidth}
+\centering
+\begin{circuitikz}[scale=0.8, transform shape]
+    \draw (0,0) to[sV, l=$\mathbf{V}_i$] (0,2.2)
+          to[C, l=$C$] (2.4,2.2)
+          to[R, l=$R$] (2.4,0) -- (0,0);
+    \draw (2.4,2.2) to[short, -o] (3.2,2.2) node[above] {$\mathbf{V}_o$};
+    \draw (1.2,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.6,-0.45) {Filtro RC Paso Alto};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.78]
+    \draw[-{Stealth}, thick] (-0.3,0) -- (4.2,0) node[right, font=\scriptsize] {$\log\omega$};
+    \draw[-{Stealth}, thick] (0,-2.3) -- (0,0.8) node[above, font=\scriptsize] {$20\log|\mathbf{T}(\omega)|\,[\si{\decibel}]$};
+    \draw[dashed, gray] (1.8,0) node[above, black, font=\scriptsize] {$\omega_0$} -- (1.8,-0.55) -- (0,-0.55) node[left, black, font=\scriptsize] {$-3\,\si{\decibel}$};
+    \draw[ultra thick, NavyBlue] (0.1,-2.1) .. controls (1.0,-1.2) and (1.4,-0.85) .. (1.8,-0.55) .. controls (2.2,-0.2) and (2.6,0) .. (3.9,0);
+    \node[below, font=\footnotesize\bfseries] at (2.0,-2.4) {Bode de Amplitud};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.33\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.78]
+    \draw[-{Stealth}, thick] (-0.3,0) -- (4.2,0) node[right, font=\scriptsize] {$\log\omega$};
+    \draw[-{Stealth}, thick] (0,-0.5) -- (0,2.2) node[above, font=\scriptsize] {$\text{Fase}\{\mathbf{T}(\omega)\}$};
+    \draw[dashed, gray] (0,1.6) node[left, black, font=\scriptsize] {$+\frac{\pi}{2}$} -- (1.8,1.6);
+    \draw[dashed, gray] (1.8,0) node[below, black, font=\scriptsize] {$\omega_0$} -- (1.8,0.8) -- (0,0.8) node[left, black, font=\scriptsize] {$+\frac{\pi}{4}$};
+    \draw[ultra thick, BrickRed] (0,1.6) .. controls (1.2,1.6) and (1.5,1.3) .. (1.8,0.8) .. controls (2.1,0.3) and (2.4,0) .. (3.9,0);
+    \node[below, font=\footnotesize\bfseries] at (2.0,-0.75) {Bode de Fase};
+\end{tikzpicture}
+\end{minipage}
+\caption{Esquema y diagramas de Bode de amplitud y fase del filtro RC paso alto ($\omega_0 = 1/(RC)$).}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Tipo de Filtro} & \textbf{Salida $\mathbf{V}_o$} & \textbf{Función $\mathbf{T}(\omega)$} & \textbf{Frec. corte $\omega_0$} & \textbf{Límites ($\omega\to 0$ / $\omega\to\infty$)} \\ \midrule
+\textbf{RC Paso Bajo} & En $C$ & $\dfrac{1}{1 + j\omega RC}$ & $\dfrac{1}{RC}$ & $|\mathbf{T}(0)|=1$, $|\mathbf{T}(\infty)|=0$ \\
+\textbf{RC Paso Alto} & En $R$ & $\dfrac{j\omega RC}{1 + j\omega RC}$ & $\dfrac{1}{RC}$ & $|\mathbf{T}(0)|=0$, $|\mathbf{T}(\infty)|=1$ \\
+\textbf{RL Paso Bajo} & En $R$ & $\dfrac{R}{R + j\omega L}$ & $\dfrac{R}{L}$ & $|\mathbf{T}(0)|=1$, $|\mathbf{T}(\infty)|=0$ \\
+\textbf{RL Paso Alto} & En $L$ & $\dfrac{j\omega L}{R + j\omega L}$ & $\dfrac{R}{L}$ & $|\mathbf{T}(0)|=0$, $|\mathbf{T}(\infty)|=1$ \\ \bottomrule
+\end{tabular}
+\caption{Cuadro comparativo de los cuatro filtros pasivos de primer orden.}
+\end{table}
+
+\section{Potencia en Corriente Alterna}
+
+\begin{aviso}[Regla Fundamental para la Potencia en CA]
+Para calcular la potencia instantánea en corriente alterna \textbf{debemos usar siempre las expresiones de tensión e intensidad en el dominio del tiempo}:
+\begin{equation}
+    p(t) = v(t) \cdot i(t)
+\end{equation}
+\textbf{No se pueden multiplicar directamente los fasores $\mathbf{V}\cdot\mathbf{I}$} sin conjugar, ya que el producto directo de dos fasores no coincide con el fasor ni con el valor medio de la potencia.
+\end{aviso}
+
+\subsection{Potencia Instantánea, Potencia Activa (Media) y Potencia Reactiva}
+
+Sean la tensión y la intensidad en un dipolo:
+\begin{equation}
+    v(t) = V_m\cos(\omega t + \theta_v), \qquad i(t) = I_m\cos(\omega t + \theta_i)
+\end{equation}
+Aplicando la identidad trigonométrica del producto de cosenos $\cos A\cdot\cos B = \frac{1}{2}\big[\cos(A+B) + \cos(A-B)\big]$, la \textbf{potencia instantánea} resulta:
+\begin{equation}
+    \boxed{p(t) = V_m\cos(\omega t + \theta_v)\cdot I_m\cos(\omega t + \theta_i) = \frac{V_m\,I_m}{2}\,\Big[\underbrace{\cos(2\omega t + \theta_v + \theta_i)}_{\substack{\text{Potencia reactiva}\\\text{o fluctuante (media nula)}}} + \underbrace{\cos(\theta_v - \theta_i)}_{\substack{\text{Potencia activa}\\\text{(constante)}}}\Big]}
+\end{equation}
+
+Al promediar a lo largo de un periodo completo $T$, el término cosenoidal de frecuencia doble $2\omega$ tiene media nula, por lo que la \textbf{potencia media o potencia activa} es:
+\begin{equation}
+    \boxed{P_{\text{media}} = P = \frac{V_m\,I_m}{2}\,\cos(\theta_v - \theta_i) = V_{\text{ef}}\,I_{\text{ef}}\,\cos\varphi} \qquad [\text{Vatio, }\si{\watt}]
+\end{equation}
+donde $\varphi = \theta_v - \theta_i$ es el ángulo de desfase entre tensión e intensidad y $\text{fp} = \cos\varphi$ es el \textbf{factor de potencia}.
+\begin{itemize}
+    \item \textbf{En una resistencia pura} ($\theta_v = \theta_i \implies \varphi = 0^\circ$): $\cos(0^\circ) = 1 \implies P_R = \frac{V_m I_m}{2} = \frac{1}{2}I_m^2 R > 0$.
+    \item \textbf{En una bobina o condensador ideal} ($\theta_v - \theta_i = \pm 90^\circ = \pm \frac{\pi}{2}$): $\cos(\pm\pi/2) = 0 \implies \boxed{P_{L,\text{media}} = P_{C,\text{media}} = 0\,\si{\watt}}$. Los elementos reactivos puros no disipan potencia media: la absorben durante un cuarto de ciclo y la devuelven íntegramente en el siguiente.
+\end{itemize}
+
+En ingeniería eléctrica se definen además la \textbf{potencia reactiva} $Q = \frac{V_m I_m}{2}\sin(\theta_v - \theta_i) = V_{\text{ef}}I_{\text{ef}}\sin\varphi$ $[\si{\volt\ampere\text{r}}]$ y la \textbf{potencia aparente} $S = \frac{V_m I_m}{2} = V_{\text{ef}}I_{\text{ef}} = \sqrt{P^2 + Q^2}$ $[\si{\volt\ampere}]$, que forman el \textbf{triángulo de potencias}:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.46\textwidth}
+\centering
+\begin{circuitikz}[scale=0.88, transform shape]
+    \draw (0,0) to[sV, l=$\mathbf{V}$] (0,2.2) -- (3.6,2.2);
+    \draw (1.8,2.2) to[C, l_=$C_{\text{comp}}$] (1.8,0);
+    \draw (3.6,2.2) to[generic, l={$P,\,Q_1$}] (3.6,0);
+    \draw (0,0) -- (3.6,0);
+    \node[below, font=\footnotesize\bfseries] at (1.8,-0.35) {Compensación con $C$ en paralelo};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.9]
+    \draw[-{Stealth}, ultra thick, NavyBlue] (0,0) -- (3.6,0) node[midway, below] {$P = S\cos\varphi\,[\si{\watt}]$};
+    \draw[-{Stealth}, ultra thick, BrickRed] (3.6,0) -- (3.6,2.2) node[midway, right] {$Q_1 = S\sin\varphi\,[\si{\volt\ampere\text{r}}]$};
+    \draw[-{Stealth}, ultra thick, ForestGreen] (0,0) -- (3.6,2.2) node[midway, above left] {$S\,[\si{\volt\ampere}]$};
+    \draw[thick] (0.8,0) arc (0:31.4:0.8) node[midway, right, xshift=2pt] {$\varphi$};
+    \node[below, font=\footnotesize\bfseries] at (1.8,-0.6) {Triángulo de Potencias ($S^2 = P^2 + Q^2$)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Compensación del factor de potencia en una carga inductiva y triángulo de potencias.}
+\end{figure}
+
+\section{Ejemplos y Ejercicios de Clase Resueltos Paso a Paso}
+
+\begin{ejemplo}[Análisis completo de un circuito RLC serie (pág. 65)]
+En el circuito RLC en serie de la figura, la fuente de tensión alterna tiene una amplitud de $100\,\si{\volt}$, frecuencia $f = 79{,}6\,\si{\hertz}$ y fase inicial nula, siendo $R = 100\,\si{\ohm}$, $L = 1\,\si{\henry}$ y $C = 5\,\si{\micro\farad}$. Calcula las expresiones temporales de la intensidad $i(t)$ y de las caídas de tensión en cada elemento: $v_R(t)$, $v_L(t)$ y $v_C(t)$.
+
+\begin{center}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[sV, l={$100\,\si{\volt},\,79{,}6\,\si{\hertz}$}] (0,2.2)
+          to[R, l={$R=100\,\si{\ohm}$}] (2.6,2.2)
+          to[L, l={$L=1\,\si{\henry}$}] (5.2,2.2)
+          to[C, l={$C=5\,\si{\micro\farad}$}] (5.2,0) -- (0,0);
+    \draw[-{Stealth}, NavyBlue, thick] (2.2,1.1) arc (150:-150:0.45) node[midway, left] {$\mathbf{I}$};
+\end{circuitikz}
 \end{center}
 
-\subsection{Compensación del Factor de Potencia con Condensador en Paralelo}
-Para evitar sobrecargar las líneas eléctricas reduciendo la corriente absorbida de la red, se coloca un condensador en paralelo con la carga inductiva:
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Cálculo de la pulsación $\omega$ y expresión temporal de la fuente}:
+    \begin{equation*}
+        \omega = 2\pi f = 2\pi \cdot 79{,}6\,\si{\hertz} = 500\,\si{\radian/\second} \implies v(t) = 100\cos(500 t + 0)\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Impedancias de cada elemento y su equivalente serie en forma binomial y polar}:
+    \begin{align*}
+        \mathbf{Z}_R &= 100\,\si{\ohm} = 100\angle 0^\circ\,\si{\ohm} \\
+        \mathbf{Z}_C &= \frac{1}{j\omega C} = \frac{-j}{500 \cdot 5\times 10^{-6}} = -j 400\,\si{\ohm} = 400\angle -90^\circ\,\si{\ohm} \\
+        \mathbf{Z}_L &= j\omega L = j\,500\cdot 1 = j 500\,\si{\ohm} = 500\angle 90^\circ\,\si{\ohm} \\
+        \mathbf{Z}_{eq} &= \mathbf{Z}_R + \mathbf{Z}_L + \mathbf{Z}_C = 100 + j 500 - j 400 = (100 + j 100)\,\si{\ohm}
+    \end{align*}
+    Pasando $\mathbf{Z}_{eq}$ a forma polar:
+    \begin{equation*}
+        |\mathbf{Z}_{eq}| = \sqrt{100^2 + 100^2} = 141{,}4\,\si{\ohm}, \quad \text{fase} = \arctan\left(\frac{100}{100}\right) = 45^\circ \implies \mathbf{Z}_{eq} = 141{,}4\angle 45^\circ\,\si{\ohm}
+    \end{equation*}
+    \item \textbf{Fasor de la fuente e intensidad de la malla}:
+    \begin{equation*}
+        \mathbf{V} = 100\angle 0^\circ\,\si{\volt} \implies \mathbf{I} = \frac{\mathbf{V}}{\mathbf{Z}_{eq}} = \frac{100\angle 0^\circ}{141{,}4\angle 45^\circ} = 0{,}707\angle -45^\circ\,\si{\ampere} \implies \boxed{i(t) = 0{,}707\cos\left(500 t - \frac{\pi}{4}\right)\,\si{\ampere}}
+    \end{equation*}
+    \item \textbf{Caídas de tensión en cada elemento (en fasor y en el dominio del tiempo)}:
+    \begin{itemize}
+        \item \textbf{Resistencia}: $\mathbf{V}_R = \mathbf{I}\cdot\mathbf{Z}_R = (0{,}707\angle -45^\circ)\cdot(100\angle 0^\circ) = 70{,}7\angle -45^\circ\,\si{\volt}$
+        \begin{equation*}
+            \boxed{v_R(t) = 70{,}7\cos\left(500 t - \frac{\pi}{4}\right)\,\si{\volt}}
+        \end{equation*}
+        \item \textbf{Bobina}: $\mathbf{V}_L = \mathbf{I}\cdot\mathbf{Z}_L = (0{,}707\angle -45^\circ)\cdot(500\angle 90^\circ) = 353{,}5\angle 45^\circ\,\si{\volt}$
+        \begin{equation*}
+            \boxed{v_L(t) = 353{,}5\cos\left(500 t + \frac{\pi}{4}\right)\,\si{\volt}}
+        \end{equation*}
+        \item \textbf{Condensador}: $\mathbf{V}_C = \mathbf{I}\cdot\mathbf{Z}_C = (0{,}707\angle -45^\circ)\cdot(400\angle -90^\circ) = 282{,}8\angle -135^\circ\,\si{\volt}$
+        \begin{equation*}
+            \boxed{v_C(t) = 282{,}8\cos\left(500 t - \frac{3\pi}{4}\right)\,\si{\volt}}
+        \end{equation*}
+    \end{itemize}
+\end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}[Cálculo de potencias instantáneas y medias con dos fuentes (pág. 66)]
+En el circuito de la figura se tienen dos fuentes $v_1(t) = 8\cos(\omega t)\,\si{\volt}$ y $v_2(t) = 6\cos\left(\omega t + \frac{\pi}{2}\right)\,\si{\volt}$ con $\omega = 200\,\si{\radian/\second}$, una resistencia $R = 600\,\si{\ohm}$ y una bobina $L = 4\,\si{\henry}$. Calcula la corriente $i(t)$ y las potencias instantáneas y medias en ambas fuentes y en la resistencia.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Esquema de conexión
-    \draw (-4,0) to[sV, v=$\mathbf{V}_{rms}$] (-4,2)
-          -- (-2.5,2);
-    \draw (-2.5,2) to[C, l=$C$] (-2.5,0);
-    \draw (-2.5,2) -- (-0.8,2)
-          to[generic, l=Carga Inductiva ($P{,} Q_1$)] (-0.8,0) -- (-4,0);
-
-    % Triángulo de compensación
-    \draw[thick] (1.5,0) -- (5,0) node[midway, below] {$P$};
-    \draw[thick] (5,0) -- (5,2.4) node[midway, right] {$Q_1$};
-    \draw[very thick, fftPrimary] (1.5,0) -- (5,2.4) node[above] {$S_1$};
-    \draw[thick, dashed, fftGreen] (5,0) -- (5,1.0) node[midway, left] {$Q_2$};
-    \draw[very thick, fftGreen] (1.5,0) -- (5,1.0) node[midway, above] {$S_2$};
-    \draw[->, >=stealth, very thick, fftRed] (5.2,2.4) -- (5.2,1.0) node[midway, right] {$|Q_C|$};
-\end{tikzpicture}
-\end{center}
-\begin{equation}
-    C = \frac{P (\tan \theta_1 - \tan \theta_2)}{\omega V_{rms}^2} \quad [\si{\farad}]
-\end{equation}
-
-% ==============================================================================
-% 3.3. FILTROS PASIVOS RC
-% ==============================================================================
-\section{Filtros Pasivos RC y Diagramas de Bode}
-
-\subsection{Filtro RC Pasa-Bajos}
-La señal de salida se toma en bornes del condensador:
-\begin{equation}
-    H(j\omega) = \frac{\mathbf{V}_o}{\mathbf{V}_i} = \frac{\frac{1}{j\omega C}}{R + \frac{1}{j\omega C}} = \frac{1}{1 + j\omega RC} = \frac{1}{1 + j(\omega / \omega_c)}, \qquad \omega_c = \frac{1}{RC}
-\end{equation}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Esquema circuital
-    \draw (-5,0) to[sV, v=$\mathbf{V}_i$] (-5,2)
-          to[R, l=$R$] (-2.5,2)
-          to[C, l=$C$, v=$\mathbf{V}_o$] (-2.5,0)
-          -- (-5,0);
-    \node[below=6pt] at (-3.75,-0.2) {\small\textbf{Filtro RC Pasa-Bajos}};
-
-    % Diagrama asintótico de Bode
-    \draw[->, thick] (0,0) -- (5,0) node[right] {$\log_{10}(\omega)$};
-    \draw[->, thick] (0,-2.5) -- (0,1) node[above] {$|H|_{\si{\decibel}}$};
-    \draw[very thick, fftPrimary] (0,0) -- (2,0) -- (4.5,-2.5);
-    \draw[dashed, gray] (2,-2.5) -- (2,0) node[above, text=black] {$\omega_c$};
-    \draw[dashed, gray] (0,-0.7) node[left, text=black] {$-3\si{\decibel}$} -- (2,-0.7);
-    \filldraw[fftAccent] (2,-0.7) circle (2pt);
-    \node[right, fftPrimary] at (3.2,-1.2) {$-20\ \si{\decibel\per\text{década}}$};
-\end{tikzpicture}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[sV, l=$v_1(t)$] (0,2.2)
+          to[R, l={$600\,\si{\ohm}$}] (3.2,2.2)
+          to[L, l={$4\,\si{\henry}$}] (3.2,1.1)
+          to[sV, l=$v_2(t)$] (3.2,0) -- (0,0);
+    \draw[-{Stealth}, NavyBlue, thick] (1.3,1.1) arc (150:-150:0.42) node[midway, left] {$i$};
+\end{circuitikz}
 \end{center}
 
-\subsection{Filtro RC Pasa-Altos}
-La salida se toma en bornes de la resistencia:
-\begin{equation}
-    H(j\omega) = \frac{\mathbf{V}_o}{\mathbf{V}_i} = \frac{R}{R + \frac{1}{j\omega C}} = \frac{j\omega RC}{1 + j\omega RC} = \frac{j(\omega / \omega_c)}{1 + j(\omega / \omega_c)}
-\end{equation}
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Impedancias y fasores de las fuentes}:
+    \begin{align*}
+        \mathbf{Z}_R &= 600\,\si{\ohm}, \qquad \mathbf{Z}_L = j\omega L = j\,200\cdot 4 = j 800\,\si{\ohm} \\
+        \mathbf{V}_1 &= 8\angle 0^\circ = 8 + j 0\,\si{\volt}, \qquad \mathbf{V}_2 = 6\angle 90^\circ = j 6\,\si{\volt}
+    \end{align*}
+    \item \textbf{Ecuación de malla por LTK}:
+    \begin{equation*}
+        \mathbf{V}_1 - \mathbf{V}_2 = \mathbf{I}(\mathbf{Z}_R + \mathbf{Z}_L) \implies 8 - j 6 = \mathbf{I}(600 + j 800) \implies \mathbf{I} = \frac{8 - j 6}{600 + j 800} = -j 0{,}01 = 0{,}01\angle -90^\circ\,\si{\ampere}
+    \end{equation*}
+    Pasando al dominio del tiempo:
+    \begin{equation*}
+        \boxed{i(t) = 0{,}01\cos\left(\omega t - \frac{\pi}{2}\right)\,\si{\ampere}}
+    \end{equation*}
+    \item \textbf{Cálculo de potencias instantáneas y medias}:
+    \begin{itemize}
+        \item \textbf{Fuente 1}:
+        \begin{equation*}
+            p_{V1}(t) = v_1(t)\cdot i(t) = 8\cos(\omega t)\cdot 0{,}01\cos\left(\omega t - \frac{\pi}{2}\right) = \frac{0{,}08}{2}\left[\cos\left(2\omega t - \frac{\pi}{2}\right) + \cos\left(\frac{\pi}{2}\right)\right]\,\si{\watt}
+        \end{equation*}
+        \begin{equation*}
+            \boxed{P_{V1,\text{media}} = 0{,}04\cos\left(\frac{\pi}{2}\right) = 0\,\si{\watt}}
+        \end{equation*}
+        \item \textbf{Fuente 2} (la corriente $i(t)$ entra por el terminal positivo de $v_2$, luego lleva signo menos):
+        \begin{equation*}
+            p_{V2}(t) = -v_2(t)\cdot i(t) = -6\cos\left(\omega t + \frac{\pi}{2}\right)\cdot 0{,}01\cos\left(\omega t - \frac{\pi}{2}\right) = -\frac{0{,}06}{2}\big[\cos(2\omega t) + \cos(\pi)\big]\,\si{\watt}
+        \end{equation*}
+        Como $\cos(\pi) = -1$:
+        \begin{equation*}
+            \boxed{P_{V2,\text{media}} = -0{,}03\cdot(-1) = +0{,}03\,\si{\watt}} \quad (\text{suministra } 30\,\si{\milli\watt})
+        \end{equation*}
+        \item \textbf{Resistencia} ($v_R(t) = R\cdot i(t) = 6\cos(\omega t - \pi/2)\,\si{\volt}$):
+        \begin{equation*}
+            p_R(t) = v_R(t)\cdot i(t) = \frac{6\cdot 0{,}01}{2}\big[\cos(2\omega t - \pi) + \cos(0)\big]\,\si{\watt} \implies \boxed{P_{R,\text{media}} = 0{,}03\,\si{\watt}}
+        \end{equation*}
+    \end{itemize}
+\end{enumerate}
+\end{ejemplo}
 
-\begin{center}
-\begin{tikzpicture}[scale=0.95]
-    \draw (-5,0) to[sV, v=$\mathbf{V}_i$] (-5,2)
-          to[C, l=$C$] (-2.5,2)
-          to[R, l=$R$, v=$\mathbf{V}_o$] (-2.5,0)
-          -- (-5,0);
-    \node[below=6pt] at (-3.75,-0.2) {\small\textbf{Filtro RC Pasa-Altos}};
+\begin{ejercicio}[Ejercicios cortos de fasores e identificación de elementos (Ejercicios 4, 8, 9 y 10)]
+\begin{enumerate}
+    \item \textbf{Ejercicio 4}: \emph{¿Cuál es el valor máximo y el periodo de la onda $v(t) = 100\sin(377 t)\,\si{\volt}$?}
+    \begin{itemize}
+        \item \textbf{Valor máximo (amplitud)}: $V_m = \boxed{100\,\si{\volt}}$ (valor cuando el seno vale $1$).
+        \item \textbf{Periodo}: Como $\omega = 377\,\si{\radian/\second}$:
+        \begin{equation*}
+            \boxed{T = \frac{2\pi}{\omega} = \frac{2\pi\,\si{\radian}}{377\,\si{\radian/\second}} \approx 0{,}0167\,\si{\second} = 16{,}7\,\si{\milli\second}}
+        \end{equation*}
+    \end{itemize}
 
-    % Bode pasa altos
-    \draw[->, thick] (0,0) -- (5,0) node[right] {$\log_{10}(\omega)$};
-    \draw[->, thick] (0,-2.5) -- (0,1) node[above] {$|H|_{\si{\decibel}}$};
-    \draw[very thick, fftGreen] (0.5,-2.2) -- (2.5,0) -- (4.8,0);
-    \draw[dashed, gray] (2.5,-2.5) -- (2.5,0) node[above, text=black] {$\omega_c$};
-    \node[left, fftGreen] at (1.6,-1.2) {$+20\ \si{\decibel\per\text{década}}$};
-\end{tikzpicture}
-\end{center}
+    \item \textbf{Ejercicio 8}: \emph{La corriente que atraviesa un condensador de $C = 50\,\si{\micro\farad}$ es $i(t) = 2\sin(1000 t)\,\si{\ampere}$. ¿Cuál es el valor del voltaje instantáneo $v_C(t)$?}
+    \begin{itemize}
+        \item La frecuencia angular es $\omega = 1000\,\si{\radian/\second}$, por lo que la impedancia del condensador vale:
+        \begin{equation*}
+            \mathbf{Z}_C = \frac{1}{j\omega C} = \frac{-j}{1000 \cdot 50\times 10^{-6}} = -j 20\,\si{\ohm} = 20\angle -90^\circ\,\si{\ohm}
+        \end{equation*}
+        \item Tomando el fasor de intensidad en base seno $\mathbf{I}_C = 2\angle 0^\circ\,\si{\ampere}$, aplicamos la Ley de Ohm:
+        \begin{equation*}
+            \mathbf{V}_C = \mathbf{I}_C \cdot \mathbf{Z}_C = (2\angle 0^\circ)\cdot(20\angle -90^\circ) = 40\angle -90^\circ\,\si{\volt} \implies \boxed{v_C(t) = 40\sin\left(1000 t - \frac{\pi}{2}\right)\,\si{\volt}}
+        \end{equation*}
+    \end{itemize}
 
-% ==============================================================================
-% 3.4. EJERCICIOS RESUELTOS DE EXAMEN
-% ==============================================================================
-\section{Ejercicios Resueltos de Exámenes de Circuitos AC}
+    \item \textbf{Ejercicio 9}: \emph{La diferencia de potencial entre los extremos de un elemento pasivo es $v(t) = 100\sin\left(377 t + \frac{\pi}{9}\right)\,\si{\volt}$ y su corriente es $i(t) = 4\sin\left(377 t - \frac{7\pi}{18}\right)\,\si{\ampere}$. ¿De qué elemento se trata y cuál es su valor?}
+    \begin{itemize}
+        \item Los fasores son $\mathbf{V} = 100\angle(\pi/9)\,\si{\volt}$ e $\mathbf{I} = 4\angle(-7\pi/18)\,\si{\ampere}$. Su impedancia es:
+        \begin{equation*}
+            \mathbf{Z} = \frac{\mathbf{V}}{\mathbf{I}} = \frac{100}{4}\angle\left(\frac{\pi}{9} - \left(-\frac{7\pi}{18}\right)\right) = 25\angle\left(\frac{9\pi}{18}\right) = 25\angle\frac{\pi}{2}\,\si{\ohm} = +j 25\,\si{\ohm}
+        \end{equation*}
+        \item Como el desfase es $+\pi/2$ ($+90^\circ$, la intensidad va retrasada $\pi/2$ respecto a la tensión), \textbf{se trata de una bobina} de inductancia:
+        \begin{equation*}
+            \omega L = 25\,\si{\ohm} \implies \boxed{L = \frac{25\,\si{\ohm}}{377\,\si{\radian/\second}} = 0{,}0663\,\si{\henry} = 66{,}3\,\si{\milli\henry}}
+        \end{equation*}
+    \end{itemize}
 
-\begin{ejercicio}[Análisis Fasorial Completo de Circuito RLC --- Examen UGR]
-Una fuente sinusoidal de tensión $v_s(t) = 100 \sqrt{2} \cos(1000 t)\ \si{\volt}$ alimenta una asociación serie formada por $R = 30\ \si{\ohm}$, $L = 80\ \si{\milli\henry}$ y $C = 25\ \si{\micro\farad}$.
-Hallar la impedancia $\mathbf{Z}_{eq}$, la corriente temporal $i(t)$, las potencias $P, Q, S$ y el factor de potencia.
-\tcbline
-\textbf{Esquema Circuital en el Dominio Fasorial:}\\[4pt]
-\begin{center}
-\begin{tikzpicture}[scale=1.0]
-    \draw (0,0) to[sV, v=$\mathbf{V}_s{=}100\angle 0^\circ\si{\volt}$] (0,2)
-          to[R, l=$R{=}30\si{\ohm}$] (2.5,2)
-          to[L, l=$j\omega L{=}j80\si{\ohm}$] (5,2)
-          to[C, l=$-j\frac{1}{\omega C}{=}-j40\si{\ohm}$] (5,0)
-          -- (0,0);
-    \draw[->, >=stealth, very thick, fftAccent] (0.3,2.3) -- (1.5,2.3) node[midway, above] {$\mathbf{I}$};
-\end{tikzpicture}
-\end{center}
-
-\textbf{Solución Paso a Paso:}\\[4pt]
-1) Con $\omega = 1000\ \si{\radian\per\second}$:
-\begin{align}
-    \mathbf{Z}_R &= 30\ \si{\ohm} \\
-    \mathbf{Z}_L &= j(1000 \times 0{,}080) = j80\ \si{\ohm} \\
-    \mathbf{Z}_C &= -j\frac{1}{1000 \times (25 \times 10^{-6})} = -j40\ \si{\ohm}
-\end{align}
-\begin{equation}
-    \mathbf{Z}_{eq} = 30 + j(80 - 40) = 30 + j40\ \si{\ohm} = 50 \angle 53{,}13^\circ\ \si{\ohm}
-\end{equation}
-
-2) Corriente fasorial y expresión temporal:
-\begin{equation}
-    \mathbf{I}_{rms} = \frac{\mathbf{V}_s}{\mathbf{Z}_{eq}} = \frac{100 \angle 0^\circ}{50 \angle 53{,}13^\circ} = 2 \angle -53{,}13^\circ\ \si{\ampere}
-\end{equation}
-\begin{equation}
-    i(t) = 2\sqrt{2} \cos(1000 t - 53{,}13^\circ)\ \si{\ampere}
-\end{equation}
-
-3) Potencias y Factor de Potencia:
-\begin{align}
-    P &= V_{rms} I_{rms} \cos(\theta) = 100 \times 2 \times \cos(53{,}13^\circ) = 200 \times 0{,}60 = 120\ \si{\watt} \\
-    Q &= V_{rms} I_{rms} \sin(\theta) = 100 \times 2 \times \sin(53{,}13^\circ) = 200 \times 0{,}80 = 160\ \si{\VAR} \\
-    S &= V_{rms} I_{rms} = 200\ \si{\VA} \\
-    \text{fp} &= \cos(53{,}13^\circ) = 0{,}60\quad (\text{en retraso / inductivo})
-\end{align}
+    \item \textbf{Ejercicio 10}: \emph{La diferencia de potencial entre los extremos de un elemento es $v(t) = 200\sin\left(314 t - \frac{\pi}{18}\right)\,\si{\volt}$ e $i(t) = 20\sin\left(314 t - \frac{\pi}{18}\right)\,\si{\ampere}$. ¿De qué elemento se trata y cuál es su valor?}
+    \begin{itemize}
+        \item Calculamos la impedancia dividiendo los fasores $\mathbf{V} = 200\angle(-\pi/18)\,\si{\volt}$ e $\mathbf{I} = 20\angle(-\pi/18)\,\si{\ampere}$:
+        \begin{equation*}
+            \mathbf{Z} = \frac{\mathbf{V}}{\mathbf{I}} = \frac{200}{20}\angle\left(-\frac{\pi}{18} - \left(-\frac{\pi}{18}\right)\right) = 10\angle 0^\circ\,\si{\ohm} = 10\,\si{\ohm}
+        \end{equation*}
+        \item Como la tensión y la intensidad están exactamente en fase ($\varphi = 0^\circ$), \textbf{se trata de una resistencia pura} de valor $\boxed{R = 10\,\si{\ohm}}$.
+    \end{itemize}
+\end{enumerate}
 \end{ejercicio}
 
-\begin{ejercicio}[Diseño y Respuesta en Frecuencia de un Filtro RC Pasa-Bajos]
-Diseñar un filtro RC con $C = 10\ \si{\nano\farad}$ para frecuencia de corte $f_c = 10\ \si{\kilo\hertz}$ y calcular la salida para $V_i = 5\ \si{\volt}$ a $f_1 = 100\ \si{\kilo\hertz}$.
-\tcbline
-\textbf{Solución Paso a Paso:}\\[4pt]
-a) Resistencia requerida:
-\begin{equation}
-    R = \frac{1}{2\pi f_c C} = \frac{1}{2\pi \times 10^4 \times (10 \times 10^{-9})} \approx 1591{,}55\ \si{\ohm} \approx 1{,}59\ \si{\kilo\ohm}
-\end{equation}
-b) Para $f_1 = 10 f_c$ ($\omega / \omega_c = 10$):
-\begin{equation}
-    |H| = \frac{1}{\sqrt{1 + 10^2}} = \frac{1}{\sqrt{101}} \approx 0{,}0995 \implies V_o = 0{,}0995 \times 5 = 0{,}4975\ \si{\volt} \approx 0{,}50\ \si{\volt}
-\end{equation}
-\begin{equation}
-    \varphi_o = -\arctan(10) \approx -84{,}29^\circ
-\end{equation}
+\begin{ejercicio}[Análisis de un circuito RL en serie (Ejercicio 13)]
+Una resistencia de $R = 4\,\si{\ohm}$ está conectada en serie con una bobina de $L = 7{,}96\,\si{\milli\henry}$ y una fuente de tensión alterna de $110\,\si{\volt}$ de amplitud y frecuencia $f = 60\,\si{\hertz}$. Calcula la impedancia equivalente, la intensidad $i(t)$ y las tensiones $v_R(t)$ y $v_L(t)$.
+
+\begin{center}
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,0) to[sV, l={$110\,\si{\volt},\,60\,\si{\hertz}$}] (0,2.2)
+          to[R, l={$R=4\,\si{\ohm}$}] (3.0,2.2)
+          to[L, l={$L=7{,}96\,\si{\milli\henry}$}] (3.0,0) -- (0,0);
+    \draw[-{Stealth}, NavyBlue, thick] (1.2,1.1) arc (150:-150:0.42) node[midway, left] {$\mathbf{I}$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Frecuencia angular y fasor de la fuente}:
+    \begin{equation*}
+        \omega = 2\pi f = 2\pi\cdot 60\,\si{\hertz} = 377\,\si{\radian/\second} \implies v_s(t) = 110\cos(377 t)\,\si{\volt} \longleftrightarrow \mathbf{V}_s = 110\angle 0^\circ\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Impedancias e impedancia equivalente serie}:
+    \begin{equation*}
+        \mathbf{Z}_R = 4\angle 0^\circ\,\si{\ohm}, \qquad \mathbf{Z}_L = j\omega L = j(377)(7{,}96\times 10^{-3}) = j 3\,\si{\ohm} = 3\angle 90^\circ\,\si{\ohm}
+    \end{equation*}
+    \begin{equation*}
+        \mathbf{Z}_{eq} = \mathbf{Z}_R + \mathbf{Z}_L = (4 + j 3)\,\si{\ohm} = \sqrt{4^2 + 3^2}\angle\arctan\left(\frac{3}{4}\right) = \boxed{5\angle 36{,}87^\circ\,\si{\ohm}}
+    \end{equation*}
+    \item \textbf{Intensidad del circuito}:
+    \begin{equation*}
+        \mathbf{I} = \frac{\mathbf{V}_s}{\mathbf{Z}_{eq}} = \frac{110\angle 0^\circ}{5\angle 36{,}87^\circ} = 22\angle -36{,}87^\circ\,\si{\ampere} \implies \boxed{i(t) = 22\cos\left(377 t - \frac{36{,}87\pi}{180}\right)\,\si{\ampere}}
+    \end{equation*}
+    \item \textbf{Tensiones en la resistencia y en la bobina}:
+    \begin{align*}
+        \mathbf{V}_R &= \mathbf{I}\cdot\mathbf{Z}_R = (22\angle -36{,}87^\circ)\cdot(4\angle 0^\circ) = 88\angle -36{,}87^\circ\,\si{\volt} \implies \boxed{v_R(t) = 88\cos\left(377 t - \frac{36{,}87\pi}{180}\right)\,\si{\volt}} \\
+        \mathbf{V}_L &= \mathbf{I}\cdot\mathbf{Z}_L = (22\angle -36{,}87^\circ)\cdot(3\angle 90^\circ) = 66\angle 53{,}13^\circ\,\si{\volt} \implies \boxed{v_L(t) = 66\cos\left(377 t + \frac{53{,}13\pi}{180}\right)\,\si{\volt}}
+    \end{align*}
+\end{enumerate}
 \end{ejercicio}
+
+\begin{ejercicio}[Red serie-paralelo alimentada por fuente de corriente (Ejercicio 15)]
+En el circuito de la figura, la fuente de corriente proporciona una intensidad $i_s(t) = 8\cos(200\,000 t)\,\si{\ampere}$, siendo $R_1 = 10\,\si{\ohm}$, $R_2 = 6\,\si{\ohm}$, $L = 40\,\si{\micro\henry}$ y $C = 1\,\si{\micro\farad}$. Calcula la diferencia de potencial $v_{AB}(t)$ entre los extremos de la fuente y las intensidades que pasan por cada elemento.
+
+\begin{center}
+\begin{circuitikz}[scale=0.88, transform shape]
+    \draw (0,0) to[isource, l=$i_s(t)$] (0,2.4) -- (4.8,2.4);
+    \draw (1.6,2.4) to[R, l=$R_1$] (1.6,0);
+    \draw (3.2,2.4) to[R, l=$R_2$] (3.2,1.2) to[L, l=$L$] (3.2,0);
+    \draw (4.8,2.4) to[C, l=$C$] (4.8,0);
+    \draw (0,0) -- (4.8,0);
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Fasor de corriente e impedancias individuales} ($\omega = 2\times 10^5\,\si{\radian/\second}$):
+    \begin{align*}
+        \mathbf{I}_s &= 8\angle 0^\circ = (8 + j 0)\,\si{\ampere}, \qquad \mathbf{Z}_{R1} = 10\,\si{\ohm}, \qquad \mathbf{Z}_{R2} = 6\,\si{\ohm} \\
+        \mathbf{Z}_L &= j\omega L = j(2\times 10^5)(40\times 10^{-6}) = j 8\,\si{\ohm} = 8\angle 90^\circ\,\si{\ohm} \\
+        \mathbf{Z}_C &= \frac{-j}{\omega C} = \frac{-j}{2\times 10^5 \cdot 10^{-6}} = -j 5\,\si{\ohm} = 5\angle -90^\circ\,\si{\ohm}
+    \end{align*}
+    \item \textbf{Asociación de impedancias}:
+    \begin{itemize}
+        \item Rama central en serie: $\mathbf{Z}_s = \mathbf{Z}_{R2} + \mathbf{Z}_L = (6 + j 8)\,\si{\ohm}$.
+        \item Paralelo de $R_1$ con $C$:
+        \begin{equation*}
+            \mathbf{Z}_{p1} = \mathbf{Z}_{R1} \parallel \mathbf{Z}_C = \frac{10\cdot(-j 5)}{10 - j 5} = \frac{-j 50(10 + j 5)}{100 + 25} = \frac{250 - j 500}{125} = (2 - j 4)\,\si{\ohm}
+        \end{equation*}
+        \item Impedancia total equivalente $\mathbf{Z}_{eq} = \mathbf{Z}_{p1} \parallel \mathbf{Z}_s$:
+        \begin{equation*}
+            \mathbf{Z}_{eq} = \frac{(2 - j 4)(6 + j 8)}{(2 - j 4) + (6 + j 8)} = \frac{44 - j 8}{8 + j 4} = \frac{(11 - j 2)(2 - j)}{4 + 1} = \frac{20 - j 15}{5} = \boxed{(4 - j 3)\,\si{\ohm}}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Diferencia de potencial entre los extremos de la fuente ($\mathbf{V}_{AB}$)}:
+    \begin{equation*}
+        \mathbf{V}_{AB} = \mathbf{I}_s \cdot \mathbf{Z}_{eq} = 8\cdot(4 - j 3) = (32 - j 24)\,\si{\volt} = 40\angle -36{,}87^\circ\,\si{\volt} \implies \boxed{v_{AB}(t) = 40\cos\left(2\cdot 10^5 t - \frac{36{,}87\pi}{180}\right)\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Intensidades por cada una de las tres ramas en paralelo}:
+    \begin{align*}
+        \mathbf{I}_{R1} &= \frac{\mathbf{V}_{AB}}{\mathbf{Z}_{R1}} = \frac{32 - j 24}{10} = (3{,}2 - j 2{,}4)\,\si{\ampere} = 4\angle -36{,}87^\circ\,\si{\ampere} \implies \boxed{i_{R1}(t) = 4\cos\left(2\cdot 10^5 t - \frac{36{,}87\pi}{180}\right)\,\si{\ampere}} \\
+        \mathbf{I}_{R2,L} &= \frac{\mathbf{V}_{AB}}{\mathbf{Z}_s} = \frac{32 - j 24}{6 + j 8} = -j 4\,\si{\ampere} = 4\angle -90^\circ\,\si{\ampere} \implies \boxed{i_{R2}(t) = 4\cos\left(2\cdot 10^5 t - \frac{\pi}{2}\right)\,\si{\ampere}} \\
+        \mathbf{I}_C &= \frac{\mathbf{V}_{AB}}{\mathbf{Z}_C} = \frac{32 - j 24}{-j 5} = (4{,}8 + j 6{,}4)\,\si{\ampere} = 8\angle 53{,}13^\circ\,\si{\ampere} \implies \boxed{i_C(t) = 8\cos\left(2\cdot 10^5 t + \frac{53{,}13\pi}{180}\right)\,\si{\ampere}}
+    \end{align*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Equivalente de Thévenin y de Norton en Corriente Alterna (Ejercicios 18 y 19)]
+Calcula el circuito equivalente de Thévenin y de Norton entre los terminales $a$ y $b$ del siguiente circuito:
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.85, transform shape]
+    \draw (0,0) to[isource, l={$1\angle 0^\circ\,\si{\ampere}$}] (0,2.2) -- (1.6,2.2)
+          to[L, l={$j 2\,\si{\ohm}$}] (3.6,2.2) to[short, -o] (4.2,2.2) node[right] {$a$};
+    \draw (1.6,2.2) to[R, l={$1\,\si{\ohm}$}] (1.6,0);
+    \draw (3.6,2.2) to[C, l={$-j 1\,\si{\ohm}$}] (3.6,0);
+    \draw (0,0) -- (3.6,0) to[short, -o] (4.2,0) node[right] {$b$};
+    \node[below, font=\footnotesize\bfseries] at (2.1,-0.35) {Circuito original};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.85, transform shape]
+    \draw (0,0) to[sV, l={$1\angle 0^\circ\,\si{\volt}$}] (0,2.2)
+          to[R, l={$1\,\si{\ohm}$}] (1.8,2.2)
+          to[L, l={$j 2\,\si{\ohm}$}] (3.6,2.2) to[short, -o] (4.2,2.2) node[right] {$a$};
+    \draw (3.6,2.2) to[C, l={$-j 1\,\si{\ohm}$}] (3.6,0);
+    \draw (0,0) -- (3.6,0) to[short, -o] (4.2,0) node[right] {$b$};
+    \node[below, font=\footnotesize\bfseries] at (2.1,-0.35) {Tras transformar la fuente};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Transformación de la fuente de corriente en paralelo con $1\,\si{\ohm}$}:
+    La fuente $\mathbf{I}_s = 1\angle 0^\circ\,\si{\ampere}$ en paralelo con $\mathbf{Z}_R = 1\,\si{\ohm}$ equivale a una fuente de tensión $\mathbf{V} = \mathbf{I}_s \cdot \mathbf{Z}_R = 1\angle 0^\circ\,\si{\volt}$ en serie con $1\,\si{\ohm}$.
+    \item \textbf{Cálculo de la tensión de Thévenin ($\mathbf{V}_{th} = \mathbf{V}_{ab}$)}:
+    En la única malla resultante, la corriente fasorial $\mathbf{I}$ y la caída en el condensador entre $a$ y $b$ son:
+    \begin{equation*}
+        \mathbf{I} = \frac{\mathbf{V}}{\mathbf{Z}_R + \mathbf{Z}_L + \mathbf{Z}_C} = \frac{1}{1 + j 2 - j 1} = \frac{1}{1 + j}\,\si{\ampere}
+    \end{equation*}
+    \begin{equation*}
+        \boxed{\mathbf{V}_{th} = \mathbf{V}_{ab} = \mathbf{I}\cdot\mathbf{Z}_C = \frac{1}{1 + j}\cdot(-j) = \frac{-j(1 - j)}{1^2 + 1^2} = \frac{-1 - j}{2}\,\si{\volt} = (-0{,}5 - j 0{,}5)\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Cálculo de la impedancia de Thévenin ($\mathbf{Z}_{th}$)}:
+    Anulando la fuente de corriente original (circuito abierto), entre $a$ y $b$ queda la rama serie $(1 + j 2)\,\si{\ohm}$ en paralelo con el condensador $(-j 1)\,\si{\ohm}$:
+    \begin{equation*}
+        \boxed{\mathbf{Z}_{th} = (1 + j 2) \parallel (-j 1) = \frac{(1 + j 2)(-j)}{1 + j 2 - j} = \frac{2 - j}{1 + j} = \frac{(2 - j)(1 - j)}{2} = \frac{1 - j 3}{2}\,\si{\ohm} = (0{,}5 - j 1{,}5)\,\si{\ohm}}
+    \end{equation*}
+    \item \textbf{Cálculo de la corriente de Norton ($\mathbf{I}_N$) (Ejercicio 19)}:
+    \begin{equation*}
+        \boxed{\mathbf{I}_N = \frac{\mathbf{V}_{th}}{\mathbf{Z}_{th}} = \frac{(-1 - j)/2}{(1 - j 3)/2} = \frac{-1 - j}{1 - j 3} = \frac{(-1 - j)(1 + j 3)}{1^2 + 3^2} = \frac{2 - j 4}{10} = \left(\frac{1}{5} - j\frac{2}{5}\right)\,\si{\ampere}}
+    \end{equation*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Transformación sucesiva de fuentes en CA (Ejercicio 16)]
+Utiliza el concepto de transformación de fuentes y asociación de impedancias para calcular el fasor correspondiente al voltaje de salida $\mathbf{V}_o$ en el circuito de la figura:
+
+\begin{center}
+\begin{circuitikz}[scale=0.88, transform shape]
+    \draw (0,0) to[sV, l={$40\angle 0^\circ\,\si{\volt}$}] (0,2.4)
+          to[R, l={$1\,\si{\ohm}$}] (1.8,2.4)
+          to[L, l={$j 3\,\si{\ohm}$}] (3.6,2.4)
+          to[R, l={$0{,}2\,\si{\ohm}$}] (5.4,2.4)
+          to[L, l={$j 0{,}6\,\si{\ohm}$}] (7.2,2.4)
+          to[short, -o] (8.2,2.4) node[right] {$+$};
+    \draw (3.6,2.4) to[R, l={$9\,\si{\ohm}$}] (3.6,1.2)
+          to[C, l={$-j 3\,\si{\ohm}$}] (3.6,0);
+    \draw (7.2,2.4) to[R, l={$10\,\si{\ohm}$}] (7.2,1.2)
+          to[C, l={$-j 19\,\si{\ohm}$}] (7.2,0);
+    \draw (0,0) -- (7.2,0) to[short, -o] (8.2,0) node[right] {$-$};
+    \node at (8.2,1.2) {$\mathbf{V}_o$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Paso 1: Agrupamos cada una de las 4 ramas en serie}:
+    \begin{equation*}
+        \mathbf{Z}_1 = (1 + j 3)\,\si{\ohm}, \quad \mathbf{Z}_2 = (0{,}2 + j 0{,}6)\,\si{\ohm}, \quad \mathbf{Z}_3 = (9 - j 3)\,\si{\ohm}, \quad \mathbf{Z}_4 = (10 - j 19)\,\si{\ohm}
+    \end{equation*}
+    \item \textbf{Paso 2: Transformamos la fuente de tensión $\mathbf{V}_s = 40\angle 0^\circ\,\si{\volt}$ en serie con $\mathbf{Z}_1$ en fuente de corriente en paralelo}:
+    \begin{equation*}
+        \mathbf{I}_{N1} = \frac{\mathbf{V}_s}{\mathbf{Z}_1} = \frac{40}{1 + j 3} = \frac{40(1 - j 3)}{1 + 9} = (4 - j 12)\,\si{\ampere}
+    \end{equation*}
+    \item \textbf{Paso 3: Asociamos en paralelo $\mathbf{Z}_1 \parallel \mathbf{Z}_3$ y volvemos a transformar a fuente de tensión $\mathbf{V}_{th1}$}:
+    \begin{equation*}
+        \mathbf{Z}_{p1} = \mathbf{Z}_1 \parallel \mathbf{Z}_3 = \frac{(1 + j 3)(9 - j 3)}{(1 + j 3) + (9 - j 3)} = \frac{18 + j 24}{10} = \frac{1}{5}(9 + j 12)\,\si{\ohm} = (1{,}8 + j 2{,}4)\,\si{\ohm}
+    \end{equation*}
+    \begin{equation*}
+        \mathbf{V}_{th1} = \mathbf{I}_{N1} \cdot \mathbf{Z}_{p1} = (4 - j 12)\cdot\frac{1}{5}(9 + j 12) = (36 - j 12)\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Paso 4: Sumamos en serie $\mathbf{Z}_{s1} = \mathbf{Z}_{p1} + \mathbf{Z}_2$ y aplicamos divisor de tensión con $\mathbf{Z}_4$}:
+    \begin{equation*}
+        \mathbf{Z}_{s1} = (1{,}8 + j 2{,}4) + (0{,}2 + j 0{,}6) = (2 + j 3)\,\si{\ohm}
+    \end{equation*}
+    \begin{equation*}
+        \mathbf{V}_o = \frac{\mathbf{Z}_4}{\mathbf{Z}_{s1} + \mathbf{Z}_4}\,\mathbf{V}_{th1} = \frac{10 - j 19}{(2 + j 3) + (10 - j 19)}\cdot(36 - j 12) = \frac{132 - j 804}{12 - j 16} = \frac{903 - j 471}{25} = \boxed{(36{,}12 - j 18{,}84)\,\si{\volt}}
+    \end{equation*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Método de las Corrientes de Malla en Corriente Alterna (Ejercicio 20)]
+Utiliza el método de mallas para calcular la expresión temporal de la corriente que pasa por las bobinas $L_1$ y $L_2$ en el circuito de la figura, sabiendo que:
+\begin{align*}
+    v_1(t) &= \frac{4}{\sqrt{2}}\cos\left(10^4 t - \frac{\pi}{4}\right)\,\si{\volt}, \qquad v_2(t) = -\frac{4}{\sqrt{2}}\sin\left(10^4 t + \frac{\pi}{4}\right)\,\si{\volt} \\
+    R_1 &= R_2 = 100\,\si{\ohm}, \quad R_3 = 800\,\si{\ohm}, \quad L_1 = 10\,\si{\milli\henry}, \quad L_2 = 40\,\si{\milli\henry}, \quad C_1 = 1\,\si{\micro\farad}, \quad C_2 = 0{,}25\,\si{\micro\farad}
+\end{align*}
+
+\begin{center}
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,1.4) to[sV, l=$v_1(t)$] (0,2.8)
+          to[R, l=$R_1$] (0,4.2)
+          to[L, l=$L_1$] (1.8,4.2)
+          to[C, l=$C_1$] (3.6,4.2)
+          to[R, l=$R_2$] (5.4,4.2)
+          to[sV, l=$v_2(t)$] (5.4,1.4);
+    \draw (0,1.4) to[C, l=$C_2$] (5.4,1.4);
+    \draw (0,1.4) -- (0,0)
+          to[R, l=$R_3$] (2.7,0)
+          to[L, l=$L_2$] (5.4,0) -- (5.4,1.4);
+    \draw[-{Stealth}, NavyBlue, thick] (2.4,2.8) arc (150:-150:0.42) node[midway, left] {$\mathbf{I}_1$};
+    \draw[-{Stealth}, BrickRed, thick] (2.4,0.7) arc (150:-150:0.42) node[midway, left] {$\mathbf{I}_2$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Expresamos $v_2(t)$ en función del coseno}: Usando $-\sin(\alpha) = \cos(\alpha + \pi/2)$:
+    \begin{equation*}
+        v_2(t) = \frac{4}{\sqrt{2}}\cos\left(10^4 t + \frac{\pi}{4} + \frac{\pi}{2}\right) = \frac{4}{\sqrt{2}}\cos\left(10^4 t + \frac{3\pi}{4}\right)\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Calculamos los fasores de las fuentes}:
+    \begin{equation*}
+        \mathbf{V}_1 = \frac{4}{\sqrt{2}}\angle -45^\circ = (2 - j 2)\,\si{\volt}, \qquad \mathbf{V}_2 = \frac{4}{\sqrt{2}}\angle 135^\circ = (-2 + j 2)\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Calculamos las impedancias de los elementos pasivos} ($\omega = 10^4\,\si{\radian/\second}$):
+    \begin{align*}
+        \mathbf{Z}_{R1} &= \mathbf{Z}_{R2} = 100\,\si{\ohm}, \qquad \mathbf{Z}_{R3} = 800\,\si{\ohm} \\
+        \mathbf{Z}_{L1} &= j\omega L_1 = j\,10^4\cdot 10^{-2} = j 100\,\si{\ohm}, \qquad \mathbf{Z}_{L2} = j\omega L_2 = j\,10^4\cdot 4\times 10^{-2} = j 400\,\si{\ohm} \\
+        \mathbf{Z}_{C1} &= \frac{-j}{10^4 \cdot 10^{-6}} = -j 100\,\si{\ohm}, \qquad \mathbf{Z}_{C2} = \frac{-j}{10^4 \cdot 0{,}25\times 10^{-6}} = -j 400\,\si{\ohm}
+    \end{align*}
+    \item \textbf{Planteamos y resolvemos las ecuaciones de malla}:
+    \begin{align*}
+        \mathbf{V}_1 - \mathbf{V}_2 &= \mathbf{I}_1(\mathbf{Z}_{R1} + \mathbf{Z}_{L1} + \mathbf{Z}_{C1} + \mathbf{Z}_{R2} + \mathbf{Z}_{C2}) - \mathbf{I}_2 \mathbf{Z}_{C2} \\
+        0 &= -\mathbf{I}_1 \mathbf{Z}_{C2} + \mathbf{I}_2(\mathbf{Z}_{C2} + \mathbf{Z}_{R3} + \mathbf{Z}_{L2})
+    \end{align*}
+    Sustituyendo los valores numéricos ($\mathbf{Z}_{L1} + \mathbf{Z}_{C1} = 0$ y $\mathbf{Z}_{L2} + \mathbf{Z}_{C2} = 0$, entran en resonancia):
+    \begin{align*}
+        (2 - j 2) - (-2 + j 2) &= (200 - j 400)\mathbf{I}_1 + j 400\,\mathbf{I}_2 \implies 4 - j 4 = (200 - j 400)\mathbf{I}_1 + j 400\,\mathbf{I}_2 \\
+        0 &= j 400\,\mathbf{I}_1 + 800\,\mathbf{I}_2 \implies \mathbf{I}_2 = \frac{-j 400}{800}\,\mathbf{I}_1 = -\frac{j}{2}\,\mathbf{I}_1
+    \end{align*}
+    Sustituyendo $\mathbf{I}_2$ en la primera ecuación:
+    \begin{equation*}
+        4 - j 4 = (200 - j 400)\mathbf{I}_1 + j 400\left(-\frac{j}{2}\,\mathbf{I}_1\right) = (400 - j 400)\mathbf{I}_1 \implies \boxed{\mathbf{I}_1 = \mathbf{I}_{L1} = 0{,}01\,\si{\ampere} = 0{,}01\angle 0^\circ\,\si{\ampere}}
+    \end{equation*}
+    \begin{equation*}
+        \boxed{\mathbf{I}_2 = \mathbf{I}_{L2} = -\frac{j}{2}\cdot 0{,}01 = -j\,5\times 10^{-3}\,\si{\ampere} = 5\times 10^{-3}\angle -90^\circ\,\si{\ampere}}
+    \end{equation*}
+    \item \textbf{Expresiones temporales de las corrientes por las bobinas}:
+    \begin{equation*}
+        \boxed{i_{L1}(t) = 0{,}01\cos(10^4 t)\,\si{\ampere}}, \qquad \boxed{i_{L2}(t) = 5\times 10^{-3}\cos\left(10^4 t - \frac{\pi}{2}\right)\,\si{\ampere}}
+    \end{equation*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Análisis por Nudos y Balance Completo de Potencias en CA (Ejercicio 31)]
+Determina las ecuaciones temporales de las tensiones e intensidades de rama y las potencias instantáneas y medias en todos los elementos del siguiente circuito:
+
+\begin{center}
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,0) to[C, l={$-j 2\,\si{\ohm}$}, i<_=$I_4$] (0,2.4) node[above left] {$V_B$}
+          to[R, l={$R_1=4\,\si{\ohm}$}] (2.4,2.4) -- (5.6,2.4);
+    \node[above] at (4.0,2.4) {$V_A$};
+    \draw (2.4,2.4) to[L, l={$j 1\,\si{\ohm}$}, i>^=$I_3$] (2.4,0);
+    \draw (4.0,0) to[isource, l={$4\angle 0^\circ\,\si{\ampere}$}, i>^=$I_1$] (4.0,2.4);
+    \draw (5.6,2.4) to[R, l={$R_2=2\,\si{\ohm}$}, i>^=$I_2$] (5.6,0);
+    \draw (0,0) -- (5.6,0);
+    \draw (4.0,0) node[ground] {} node[below right] {$0\,\si{\volt}$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Resolución por el método de nudos}: Referenciando el nudo inferior a tierra ($0\,\si{\volt}$), aplicamos LCK en el nudo principal superior $V_A$ ($\mathbf{I}_1 = \mathbf{I}_2 + \mathbf{I}_3 + \mathbf{I}_4$):
+    \begin{equation*}
+        4 = \frac{\mathbf{V}_A}{2} + \frac{\mathbf{V}_A}{j 1} + \frac{\mathbf{V}_A}{4 - j 2} = \frac{\mathbf{V}_A}{2} - j\mathbf{V}_A + \frac{\mathbf{V}_A(4 + j 2)}{20}
+    \end{equation*}
+    Multiplicando toda la ecuación por $20$:
+    \begin{equation*}
+        80 = 10\mathbf{V}_A - j 20\mathbf{V}_A + (4 + j 2)\mathbf{V}_A = (14 - j 18)\mathbf{V}_A \implies \mathbf{V}_A = \frac{80}{14 - j 18} = (2{,}154 + j 2{,}769)\,\si{\volt} = 3{,}508\angle 52{,}12^\circ\,\si{\volt}
+    \end{equation*}
+    Pasando a radianes ($52{,}12^\circ \approx 0{,}29\pi\,\si{\radian}$):
+    \begin{equation*}
+        \boxed{v_A(t) = 3{,}51\cos(\omega t + 0{,}29\pi)\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Intensidades de cada rama y tensiones $\mathbf{V}_B$ y $\mathbf{V}_{R1}$}:
+    \begin{align*}
+        \mathbf{I}_1 &= 4\angle 0^\circ\,\si{\ampere} &\implies i_1(t) &= 4\cos(\omega t)\,\si{\ampere} \\
+        \mathbf{I}_2 &= \frac{\mathbf{V}_A}{2\angle 0^\circ} = 1{,}754\angle 52{,}12^\circ\,\si{\ampere} &\implies i_2(t) &= 1{,}75\cos(\omega t + 0{,}29\pi)\,\si{\ampere} \\
+        \mathbf{I}_3 &= \frac{\mathbf{V}_A}{1\angle 90^\circ} = 3{,}51\angle -37{,}88^\circ\,\si{\ampere} &\implies i_3(t) &= 3{,}51\cos(\omega t - 0{,}21\pi)\,\si{\ampere} \\
+        \mathbf{I}_4 &= \frac{\mathbf{V}_A}{4 - j 2} = \frac{3{,}508\angle 52{,}12^\circ}{4{,}472\angle -26{,}56^\circ} = 0{,}784\angle 78{,}68^\circ\,\si{\ampere} &\implies i_4(t) &= 0{,}78\cos(\omega t + 0{,}437\pi)\,\si{\ampere}
+    \end{align*}
+    \begin{align*}
+        \mathbf{V}_B &= \mathbf{I}_4\cdot\mathbf{Z}_C = (0{,}784\angle 78{,}68^\circ)(2\angle -90^\circ) = 1{,}57\angle -11{,}32^\circ\,\si{\volt} \implies v_B(t) = 1{,}57\cos(\omega t - 0{,}063\pi)\,\si{\volt} \\
+        \mathbf{V}_{R1} &= \mathbf{V}_A - \mathbf{V}_B = (0{,}61 + j 3{,}08)\,\si{\volt} = 3{,}14\angle 78{,}68^\circ\,\si{\volt} \implies v_{R1}(t) = 3{,}14\cos(\omega t + 0{,}437\pi)\,\si{\volt}
+    \end{align*}
+    \item \textbf{Potencias medias y comprobación del balance energético}:
+    \begin{align*}
+        P_{\text{fuente,media}} &= \frac{4 \cdot 3{,}51}{2}\cos(0{,}29\pi) = 7{,}02\cdot 0{,}613 = \boxed{4{,}30\,\si{\watt}} \\
+        P_{R2,\text{media}} &= \frac{1{,}754 \cdot 3{,}508}{2}\cos(0) = \boxed{3{,}08\,\si{\watt}}, \qquad P_{R1,\text{media}} = \frac{0{,}784 \cdot 3{,}14}{2}\cos(0) = \boxed{1{,}22\,\si{\watt}} \\
+        P_{L,\text{media}} &= \frac{3{,}51\cdot 3{,}51}{2}\cos\left(\frac{\pi}{2}\right) = \boxed{0\,\si{\watt}}, \qquad P_{C,\text{media}} = \frac{0{,}784\cdot 1{,}57}{2}\cos\left(\frac{\pi}{2}\right) = \boxed{0\,\si{\watt}}
+    \end{align*}
+    Se comprueba exactamente que $P_{\text{fuente,media}} = P_{R1,\text{media}} + P_{R2,\text{media}} = 1{,}22 + 3{,}08 = 4{,}30\,\si{\watt}$.
+\end{enumerate}
+\end{ejercicio}
+
+\section{Formulario y Resumen General del Tema 3 (AC)}
+
+\begin{ley}[Formulario de Referencia Rápida de Corriente Alterna]
+\begin{itemize}
+    \item \textbf{Señal alterna y fasor}: $v(t) = V_m\cos(\omega t + \phi) \longleftrightarrow \mathbf{V} = V_m\angle\phi = V_m e^{j\phi} = V_m\cos\phi + j V_m\sin\phi$, con $\omega = \frac{2\pi}{T} = 2\pi f$.
+    \item \textbf{Impedancias ($\mathbf{Z} = \mathbf{V}/\mathbf{I}$) y Admitancias ($\mathbf{Y} = 1/\mathbf{Z}$)}:
+    \begin{equation*}
+        \mathbf{Z}_R = R\angle 0^\circ \;\left(\mathbf{Y}_R = \frac{1}{R}\right), \quad \mathbf{Z}_L = j\omega L = \omega L\angle 90^\circ \;\left(\mathbf{Y}_L = \frac{1}{j\omega L}\right), \quad \mathbf{Z}_C = \frac{-j}{\omega C} = \frac{1}{\omega C}\angle -90^\circ \;\left(\mathbf{Y}_C = j\omega C\right)
+    \end{equation*}
+    \item \textbf{Función de transferencia y frecuencia de corte}:
+    \begin{equation*}
+        \mathbf{T}(\omega) = \frac{\mathbf{V}_o(\omega)}{\mathbf{V}_i(\omega)}, \quad |\mathbf{T}(\omega_0)| = \frac{|\mathbf{T}|_{\max}}{\sqrt{2}} \approx 0{,}707\,|\mathbf{T}|_{\max} \;(-3\,\si{\decibel}), \quad |\mathbf{T}|_{\si{\decibel}} = 20\log_{10}|\mathbf{T}(\omega)|
+    \end{equation*}
+    \item \textbf{Potencia en CA (en el dominio del tiempo)}:
+    \begin{equation*}
+        p(t) = \frac{V_m I_m}{2}\big[\cos(2\omega t + \theta_v + \theta_i) + \cos(\theta_v - \theta_i)\big], \qquad P_{\text{media}} = \frac{V_m I_m}{2}\cos(\theta_v - \theta_i)
+    \end{equation*}
+\end{itemize}
+\end{ley}

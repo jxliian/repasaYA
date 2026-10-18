@@ -4,341 +4,1532 @@
 \cuadrofuentes{
     \textbf{Asignatura:} Fundamentos Físicos y Tecnológicos (1.º Grado en Ingeniería Informática, UGR).\\[2pt]
     \textbf{Profesor:} Pedro Cartujo (Departamento de Electrónica y Tecnología de Computadores).\\[2pt]
-    \textbf{Bibliografía de Referencia:} Sears, F. W., Zemansky, M. W., Young, H. D., Freedman, R. A., \textit{Física Universitaria con Física Moderna} (Vol. 2), Addison-Wesley.
+    \textbf{Bibliografía de Referencia:} Sears, F. W., Zemansky, M. W., Young, H. D., Freedman, R. A., \textit{Física Universitaria con Física Moderna} (Vol. 1 y 2), Addison-Wesley.\\[2pt]
+    \textbf{Contenido del Tema:} Basado íntegramente en el programa oficial del Tema 1 (Secciones 1.1 Electrostática y 1.2 Electrodinámica y Magnetismo, subapartados 1.1.1 a 1.2.18) y en la relación de problemas y exámenes resueltos en clase.
 }
 
 % ==============================================================================
-% 1.1. ELECTROSTÁTICA
+% 0. CONCEPTOS PRELIMINARES: UNIDADES SI Y REPASO DE ÁLGEBRA VECTORIAL
 % ==============================================================================
-\section{Electrostática: Carga Eléctrica, Fuerzas y Campo Eléctrico}
+\section*{Conceptos Preliminares: Sistema Internacional y Álgebra Vectorial}
+\addcontentsline{toc}{section}{Conceptos Preliminares: Sistema Internacional y Álgebra Vectorial}
 
-El electromagnetismo unifica los fenómenos eléctricos y magnéticos bajo un marco físico común. La electrostática se ocupa de las interacciones producidas por cargas eléctricas que se encuentran en reposo relativo (campo electrostático independiente del tiempo).
+Antes de abordar el estudio del electromagnetismo, el programa de la asignatura establece tres pilares instrumentales de repaso indispensables (Tema 1 de Sears-Zemansky):
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Unidades del Sistema Internacional (SI), múltiplos y submúltiplos:} En electromagnetismo y teoría de circuitos es fundamental operar siempre en unidades básicas del SI (metro $[\si{\meter}]$, kilogramo $[\si{\kilogram}]$, segundo $[\si{\second}]$, amperio $[\si{\ampere}]$, culombio $[\si{\coulomb}]$, voltio $[\si{\volt}]$, faradio $[\si{\farad}]$, ohmio $[\si{\ohm}]$, tesla $[\si{\tesla}]$, weber $[\si{\weber}]$, henrio $[\si{\henry}]$), convirtiendo previamente los prefijos habituales:
+    \begin{center}
+    \small
+    \begin{tabular}{ccccccc}
+        \toprule
+        \textbf{Submúltiplo} & mili ($\text{m}$) & micro ($\mu$) & nano ($\text{n}$) & pico ($\text{p}$) & femto ($\text{f}$) \\
+        \textbf{Factor} & $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ \\
+        \midrule
+        \textbf{Múltiplo} & kilo ($\text{k}$) & mega ($\text{M}$) & giga ($\text{G}$) & tera ($\text{T}$) & --- \\
+        \textbf{Factor} & $10^{3}$ & $10^{6}$ & $10^{9}$ & $10^{12}$ & --- \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    \item \textbf{Notación y operaciones con vectores en $\mathbb{R}^3$:} Dados dos vectores $\vec{a} = a_x\hat{i} + a_y\hat{j} + a_z\hat{k}$ y $\vec{b} = b_x\hat{i} + b_y\hat{j} + b_z\hat{k}$ en la base cartesiana ortonormal $\{\hat{i}, \hat{j}, \hat{k}\}$:
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Módulo y vector unitario:} $|\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}$. Todo vector unitario en la dirección y sentido de $\vec{a}$ se obtiene normalizando: $\hat{u}_a = \frac{\vec{a}}{|\vec{a}|}$.
+        \item \textbf{Suma y diferencia vectorial:} $\vec{a} \pm \vec{b} = (a_x \pm b_x)\hat{i} + (a_y \pm b_y)\hat{j} + (a_z \pm b_z)\hat{k}$.
+        \item \textbf{Producto escalar:} $\vec{a} \cdot \vec{b} = |\vec{a}|\,|\vec{b}|\cos\theta = a_x b_x + a_y b_y + a_z b_z$. Es un escalar positivo si el ángulo $\theta$ es agudo ($\theta < 90^\circ$), nulo si son perpendiculares ($\theta = 90^\circ$) y negativo si el ángulo es obtuso ($\theta > 90^\circ$).
+        \item \textbf{Producto vectorial:} $\vec{c} = \vec{a} \times \vec{b}$ es un vector perpendicular al plano formado por $\vec{a}$ y $\vec{b}$, de módulo $|\vec{a}\times\vec{b}| = |\vec{a}|\,|\vec{b}|\sin\theta$, anticonmutativo ($\vec{b}\times\vec{a} = -\vec{a}\times\vec{b}$), expresado mediante el determinante simbólico:
+        \begin{equation}
+            \vec{a} \times \vec{b} = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ a_x & a_y & a_z \\ b_x & b_y & b_z \end{vmatrix} = (a_y b_z - a_z b_y)\hat{i} - (a_x b_z - a_z b_x)\hat{j} + (a_x b_y - a_y b_x)\hat{k}
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
 
-\subsection{Concepto y Propiedades de la Carga Eléctrica}
-La carga eléctrica es una propiedad intrínseca y fundamental de la materia que determina su interacción electromagnética. Existen dos tipos de carga: positiva (asociada a los protones) y negativa (asociada a los electrones).
+\begin{ejercicio}[Operaciones con Vectores --- Ejercicio 5 de la Relación del Tema 1]
+Dados los vectores $\vec{a} = 2\hat{i} + \hat{j} + 3\hat{k}$ y $\vec{b} = -\hat{i} + 3\hat{j} - \hat{k}$, calcular:
+\begin{enumerate}[label=\alph*)]
+    \item El ángulo que forman ambos vectores.
+    \item El módulo del vector suma $\vec{a} + \vec{b}$.
+    \item Un vector unitario en la misma dirección y sentido de $\vec{a}$.
+    \item Un vector unitario en la misma dirección y sentido de $\vec{b}$.
+    \item Un vector unitario en la misma dirección y sentido de $\vec{a} \times \vec{b}$.
+    \item Un vector unitario en la misma dirección y sentido de $\vec{b} \times \vec{a}$.
+\end{enumerate}
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{a) Ángulo entre $\vec{a}$ y $\vec{b}$:} Calculamos primero los módulos y el producto escalar:
+\begin{equation}
+    |\vec{a}| = \sqrt{2^2 + 1^2 + 3^2} = \sqrt{4 + 1 + 9} = \sqrt{14}, \qquad |\vec{b}| = \sqrt{(-1)^2 + 3^2 + (-1)^2} = \sqrt{1 + 9 + 1} = \sqrt{11}
+\end{equation}
+\begin{equation}
+    \vec{a} \cdot \vec{b} = (2, 1, 3) \cdot (-1, 3, -1) = -2 + 3 - 3 = -2
+\end{equation}
+Como el producto escalar es negativo, el ángulo que forman es obtuso ($\theta > 90^\circ$):
+\begin{equation}
+    \cos\theta = \frac{\vec{a}\cdot\vec{b}}{|\vec{a}|\cdot|\vec{b}|} = \frac{-2}{\sqrt{14}\cdot\sqrt{11}} = \frac{-2}{\sqrt{154}} \approx -0{,}1612 \implies \theta = \arccos(-0{,}1612) \approx 99{,}27^\circ
+\end{equation}
+\textbf{b) Módulo del vector suma:}
+\begin{equation}
+    \vec{a} + \vec{b} = (2-1,\, 1+3,\, 3-1) = \hat{i} + 4\hat{j} + 2\hat{k} \implies |\vec{a}+\vec{b}| = \sqrt{1^2 + 4^2 + 2^2} = \sqrt{21} \approx 4{,}58
+\end{equation}
+\textbf{c) Vector unitario en la dirección de $\vec{a}$:}
+\begin{equation}
+    \vec{u}_a = \frac{\vec{a}}{|\vec{a}|} = \frac{2}{\sqrt{14}}\hat{i} + \frac{1}{\sqrt{14}}\hat{j} + \frac{3}{\sqrt{14}}\hat{k}
+\end{equation}
+\textbf{d) Vector unitario en la dirección de $\vec{b}$:}
+\begin{equation}
+    \vec{u}_b = \frac{\vec{b}}{|\vec{b}|} = \frac{-1}{\sqrt{11}}\hat{i} + \frac{3}{\sqrt{11}}\hat{j} - \frac{1}{\sqrt{11}}\hat{k}
+\end{equation}
+\textbf{e) Vector unitario en la dirección de $\vec{a} \times \vec{b}$:}
+\begin{equation}
+    \vec{c} = \vec{a} \times \vec{b} = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ 2 & 1 & 3 \\ -1 & 3 & -1 \end{vmatrix} = (-1 - 9)\hat{i} - (-2 + 3)\hat{j} + (6 + 1)\hat{k} = -10\hat{i} - \hat{j} + 7\hat{k}
+\end{equation}
+\begin{equation}
+    |\vec{c}| = \sqrt{(-10)^2 + (-1)^2 + 7^2} = \sqrt{100 + 1 + 49} = \sqrt{150} \implies \vec{u}_{\vec{a}\times\vec{b}} = \frac{-10}{\sqrt{150}}\hat{i} - \frac{1}{\sqrt{150}}\hat{j} + \frac{7}{\sqrt{150}}\hat{k}
+\end{equation}
+\textbf{f) Vector unitario en la dirección de $\vec{b} \times \vec{a}$:}
+Por la propiedad anticonmutativa del producto vectorial, $\vec{b} \times \vec{a} = -(\vec{a} \times \vec{b}) = 10\hat{i} + \hat{j} - 7\hat{k}$, con módulo $|\vec{b}\times\vec{a}| = \sqrt{150}$:
+\begin{equation}
+    \vec{u}_{\vec{b}\times\vec{a}} = -\vec{u}_{\vec{a}\times\vec{b}} = \frac{10}{\sqrt{150}}\hat{i} + \frac{1}{\sqrt{150}}\hat{j} - \frac{7}{\sqrt{150}}\hat{k}
+\end{equation}
+\footnotesize\textit{Nota sobre el cuaderno manuscrito:} En el apartado f) de los apuntes de clase se transcribió por error la tercera componente de $\vec{a}$ como $-1$ en lugar de $+3$ al plantear el determinante $\begin{vmatrix}\hat{i}&\hat{j}&\hat{k}\\-1&3&-1\\2&1&-1\end{vmatrix} = -2\hat{i} + 3\hat{j} - 7\hat{k}$ (de módulo $\sqrt{62}$). Usando el vector $\vec{a} = (2,1,3)$ del enunciado, el resultado exacto es el opuesto del apartado e).
+\end{ejercicio}
 
-\begin{definicion}[Propiedades Universales de la Carga Eléctrica]
+% ==============================================================================
+% SECCIÓN 1.1. ELECTROSTÁTICA: CAMPO ELÉCTRICO Y POTENCIAL ELÉCTRICO
+% ==============================================================================
+\section{Electrostática: Campo Eléctrico y Potencial Eléctrico}
+
+El \textbf{electromagnetismo} es la rama de la Física que estudia y unifica los fenómenos eléctricos y magnéticos en una sola teoría. Describe los fenómenos físicos macroscópicos en los cuales intervienen cargas eléctricas en reposo y en movimiento, usando para ello campos eléctricos y magnéticos y sus efectos sobre las sustancias sólidas, líquidas y gaseosas.
+
+En particular, la \textbf{electrostática} estudia los fenómenos que ocurren por la carga eléctrica de la materia cuando ésta es estacionaria (en reposo) y no depende del tiempo.
+
+% ------------------------------------------------------------------------------
+% 1.1.1. CONCEPTO DE CARGA
+% ------------------------------------------------------------------------------
+\subsection{Concepto de Carga Eléctrica y sus Propiedades}
+
+La unidad de carga elemental de la naturaleza es la magnitud de la carga del electrón. A escala atómica, la materia neutra posee igual número de protones (carga positiva en el núcleo) que de electrones (carga negativa en la corteza). Un cuerpo macroscópico está cargado eléctricamente cuando tiene exceso o falta de electrones:
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Ley de Conservación de la Carga:} En cualquier proceso físico que tenga lugar dentro de un sistema eléctricamente aislado, la carga eléctrica total neta permanece rigurosamente constante ($\sum q = \text{constante}$). La carga no se crea ni se destruye, únicamente se transfiere o redistribuye.
-    \item \textbf{Cuantización de la Carga:} La carga neta de cualquier cuerpo macroscópico o partícula subatómica observable es siempre un múltiplo entero de la carga elemental fundamental $e$:
-    \begin{equation}
-        q = \pm n \cdot e, \quad \text{con } n \in \mathbb{N}, \quad e \approx 1{,}602 \times 10^{-19}\ \si{\coulomb}
-    \end{equation}
-    \item \textbf{Invarianza Relativista:} La magnitud de la carga eléctrica de una partícula es independiente de su velocidad o del sistema de referencia inercial desde el cual se observe.
+    \item \textbf{Defecto de electrones} $\implies$ \textbf{Carga positiva ($+q$)}.
+    \item \textbf{Exceso de electrones} $\implies$ \textbf{Carga negativa ($-q$)}.
 \end{itemize}
+Dos cargas del mismo signo se repelen (positivo con positivo, negativo con negativo) y dos cargas de distinto signo se atraen (positivo con negativo).
+
+\begin{definicion}[Propiedades de las Cargas Eléctricas]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Conservación de la carga:} La carga eléctrica total no varía en un sistema eléctricamente aislado ($\sum q_{inicial} = \sum q_{final} = \text{constante}$). La carga no se crea ni se destruye, sólo se transfiere de un cuerpo a otro.
+    \item \textbf{Cuantización de la carga:} La carga eléctrica que posee cualquier cuerpo material es siempre un múltiplo entero de la unidad de carga elemental (la carga del electrón $e$):
+    \begin{equation}
+        q = \pm n \cdot e, \quad \text{con } n \in \mathbb{N}, \qquad e = 1{,}602 \times 10^{-19}\ \si{\coulomb} \approx 1{,}6 \times 10^{-19}\ \si{\coulomb}
+    \end{equation}
+    \item \textbf{Unidad en el Sistema Internacional:} Se mide en \textbf{culombios} ($\si{\coulomb}$), donde $1\ \si{\coulomb} = 1\ \si{\ampere\cdot\second}$.
+    \item \textbf{Invarianza relativista:} El valor de la carga eléctrica de una partícula no depende de su estado de movimiento.
+\end{enumerate}
 \end{definicion}
 
-En el Sistema Internacional (SI), la unidad de carga eléctrica es el \textbf{Culombio} (\si{\coulomb}), definido como la cantidad de carga que atraviesa la sección transversal de un conductor por el que circula una corriente constante de un Amperio durante un segundo ($1\ \si{\coulomb} = 1\ \si{\ampere\second}$).
-
+% ------------------------------------------------------------------------------
+% 1.1.2. LEY DE COULOMB
+% ------------------------------------------------------------------------------
 \subsection{Ley de Coulomb}
-En 1785, Charles-Augustin de Coulomb determinó experimentalmente la fuerza electrostática entre dos cargas puntuales en reposo en el vacío.
 
 \begin{ley}[Ley de Coulomb]
-La fuerza electrostática $\vec{F}_{12}$ que una carga puntual $q_1$ ejerce sobre otra carga puntual $q_2$ separadas por una distancia $r$ es directamente proporcional al producto de sus cargas e inversamente proporcional al cuadrado de la distancia que las separa:
+La fuerza electrostática de atracción o repulsión entre dos cargas puntuales en reposo $q_1$ y $q_2$ es directamente proporcional al producto de las dos cargas e inversamente proporcional al cuadrado de la distancia $r$ que las separa, actuando en la dirección de la recta que las une:
 \begin{equation}
-    \vec{F}_{12} = \frac{1}{4\pi\varepsilon_0} \frac{q_1 q_2}{r^2} \hat{r}_{12} = K_e \frac{q_1 q_2}{r^2} \hat{r}_{12}
+    \vec{F}_{1 \to 2} = K_0 \frac{q_1 q_2}{r^2} \hat{r} = \frac{1}{4\pi\varepsilon_0} \frac{q_1 q_2}{r^2} \hat{r}
 \end{equation}
 donde:
 \begin{itemize}[leftmargin=*]
-    \item $\hat{r}_{12} = \frac{\vec{r}_2 - \vec{r}_1}{|\vec{r}_2 - \vec{r}_1|}$ es el vector unitario dirigido desde la carga fuente $q_1$ hacia la carga testigo $q_2$.
-    \item $\varepsilon_0 \approx 8{,}854 \times 10^{-12}\ \si{\coulomb\squared\per\newton\per\meter\squared}$ es la permitividad dieléctrica del vacío.
-    \item $K_e = \frac{1}{4\pi\varepsilon_0} \approx 8{,}988 \times 10^9\ \si{\newton\meter\squared\per\coulomb\squared} \approx 9 \times 10^9\ \si{\newton\meter\squared\per\coulomb\squared}$.
+    \item $\hat{r} = \frac{\vec{r}_2 - \vec{r}_1}{|\vec{r}_2 - \vec{r}_1|}$ es el vector unitario dirigido desde la carga $q_1$ que crea la fuerza hacia la carga $q_2$ que la sufre.
+    \item $K_0 = \frac{1}{4\pi\varepsilon_0} \approx 8{,}988 \times 10^9\ \si{\newton\meter\squared\per\coulomb\squared} \approx 9 \times 10^9\ \si{\newton\meter\squared\per\coulomb\squared}$ es la \textbf{constante eléctrica del vacío}.
+    \item $\varepsilon_0 = 8{,}854 \times 10^{-12}\ \si{\farad\per\meter}\ (\equiv \si{\coulomb\squared\per(\newton\meter\squared)})$ es la \textbf{permitividad eléctrica del vacío}.
 \end{itemize}
 \end{ley}
 
+\begin{aviso}[Consecuencias Fundamentales de la Ley de Coulomb]
+Esta ley experimental demuestra que:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Criterio de signos:} Cargas del mismo signo ($q_1 q_2 > 0$) se repelen ($\vec{F}_{1\to 2}$ tiene el mismo sentido que $\hat{r}$); cargas de signo opuesto ($q_1 q_2 < 0$) se atraen ($\vec{F}_{1\to 2}$ tiene sentido opuesto a $\hat{r}$).
+    \item \textbf{Verifica la Tercera Ley de Newton (Principio de Acción y Reacción):} La fuerza que ejerce la primera carga sobre la segunda tiene exactamente el \textbf{mismo módulo} y la \textbf{misma dirección} que la fuerza que ejerce la segunda sobre la primera, pero en \textbf{sentido contrario}: $\vec{F}_{1\to 2} = -\vec{F}_{2\to 1}$.
+\end{itemize}
+\end{aviso}
+
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
+\begin{tikzpicture}[scale=1.05]
     % Carga q1
     \draw[fill=fftPrimary!20, draw=fftPrimary, thick] (-2.5,0) circle (0.35) node[fftPrimary] {\textbf{$+q_1$}};
     % Carga q2
     \draw[fill=fftPrimary!20, draw=fftPrimary, thick] (2.5,0) circle (0.35) node[fftPrimary] {\textbf{$+q_2$}};
     % Linea de separación
     \draw[dashed, gray] (-2.15,0) -- (2.15,0) node[midway, below=2pt, text=black] {$r$};
+    \draw[->, >=stealth, thick, fftDarkBlue] (-2.15,0.2) -- (-1.1,0.2) node[midway, above] {$\hat{r}$};
     % Fuerzas repulsivas
-    \draw[->, >=stealth, very thick, fftAccent] (-2.85,0) -- (-4.2,0) node[above] {$\vec{F}_{21}$};
-    \draw[->, >=stealth, very thick, fftAccent] (2.85,0) -- (4.2,0) node[above] {$\vec{F}_{12}$};
-    \node[below=14pt] at (0,0) {\small\textsf{Fuerzas electrostáticas repulsivas entre dos cargas del mismo signo ($\vec{F}_{21} = -\vec{F}_{12}$)}};
+    \draw[->, >=stealth, very thick, fftAccent] (-2.85,0) -- (-4.2,0) node[above] {$\vec{F}_{2\to 1}$};
+    \draw[->, >=stealth, very thick, fftAccent] (2.85,0) -- (4.2,0) node[above] {$\vec{F}_{1\to 2}$};
+    \node[below=14pt] at (0,0) {\small\textsf{Fuerzas electrostáticas repulsivas entre cargas del mismo signo ($\vec{F}_{2\to 1} = -\vec{F}_{1\to 2}$)}};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Campo Eléctrico y Principio de Superposición}
-Para evitar el concepto de acción a distancia instantánea, se define el campo eléctrico como una perturbación vectorial del espacio circundante provocada por la presencia de cargas eléctricas.
+\begin{ejercicio}[Fuerza de Coulomb y Contacto entre Esferas Metálicas --- Ejercicio 21 de la Relación]
+Calcular la fuerza con la que se atraen dos esferas metálicas $A$ y $B$ del mismo radio, sabiendo que están cargadas con $q_1 = 3\ \si{\micro\coulomb}$ y $q_2 = -9\ \si{\micro\coulomb}$ respectivamente, y colocadas en el vacío a una distancia de $30\ \si{\centi\meter}$ entre sus centros. Si las esferas anteriores se ponen en contacto y luego se colocan en las posiciones iniciales, calcular la nueva fuerza de interacción entre ambas.
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{1) Fuerza inicial antes del contacto:}
+Como $q_1 = +3 \times 10^{-6}\ \si{\coulomb}$ y $q_2 = -9 \times 10^{-6}\ \si{\coulomb}$ tienen signos opuestos y están separadas $r = 0{,}3\ \si{\meter}$, las esferas \textbf{se atraen} con un módulo dado por la Ley de Coulomb:
+\begin{equation}
+    |\vec{F}_{inicial}| = K \frac{|q_1 \cdot q_2|}{r^2} = 9 \times 10^9 \cdot \frac{(3 \times 10^{-6}) \cdot (9 \times 10^{-6})}{(0{,}3)^2} = \frac{0{,}243}{0{,}09} = 2{,}7\ \si{\newton}\quad (\text{atractiva})
+\end{equation}
+\textbf{2) Contacto entre las esferas y redistribución de carga:}
+Al juntar las dos esferas conductoras se produce una transferencia de electrones hasta que \textbf{se igualan sus potenciales eléctricos} ($V_A = V_B$). Dado que ambas esferas tienen exactamente el \textbf{mismo radio} $R$:
+\begin{equation}
+    V_A = V_B \implies \frac{K Q_1'}{R} = \frac{K Q_2'}{R} \implies Q_1' = Q_2'
+\end{equation}
+Por el \textbf{Principio de Conservación de la Carga}, la suma algebraica de las cargas iniciales debe ser igual a la suma de las cargas finales tras el contacto:
+\begin{equation}
+    Q_{total} = q_1 + q_2 = 3\ \si{\micro\coulomb} - 9\ \si{\micro\coulomb} = -6\ \si{\micro\coulomb} = Q_1' + Q_2' = 2 Q_1' \implies Q_1' = Q_2' = -3\ \si{\micro\coulomb}
+\end{equation}
+\textbf{3) Fuerza final al separarlas a la distancia inicial ($r = 0{,}3\ \si{\meter}$):}
+Ahora ambas esferas tienen carga negativa ($-3\ \si{\micro\coulomb}$ y $-3\ \si{\micro\coulomb}$), por lo que \textbf{se repelen} con fuerza:
+\begin{equation}
+    |\vec{F}_{final}| = K \frac{|Q_1' \cdot Q_2'|}{r^2} = 9 \times 10^9 \cdot \frac{(3 \times 10^{-6}) \cdot (3 \times 10^{-6})}{(0{,}3)^2} = \frac{0{,}081}{0{,}09} = 0{,}9\ \si{\newton}\quad (\text{repulsiva})
+\end{equation}
+\end{ejercicio}
 
-\begin{definicion}[Vector Campo Eléctrico $\vec{E}$ y Líneas de Campo]
-El campo eléctrico $\vec{E}$ en un punto $\vec{r}$ del espacio es la fuerza electrostática por unidad de carga positiva testigo $q_0$ situada en dicho punto:
+% ------------------------------------------------------------------------------
+% 1.1.3. CAMPO ELÉCTRICO Y LÍNEAS DE CAMPO
+% ------------------------------------------------------------------------------
+\subsection{Campo Eléctrico, Principio de Superposición y Líneas de Campo}
+
+El \textbf{campo eléctrico} es la región del espacio donde actúan las fuerzas eléctricas. Existe con que sólo haya una carga fuente: es una propiedad física que adquiere el espacio por el mero hecho de introducir una carga en él.
+
+\begin{definicion}[Intensidad de Campo Eléctrico $\vec{E}$]
+La intensidad de campo eléctrico $\vec{E}$ en un punto $P$ es una magnitud vectorial que representa la fuerza eléctrica que actúa por unidad de carga testigo positiva $q_0$ colocada en dicho punto:
 \begin{equation}
-    \vec{E}(\vec{r}) = \lim_{q_0 \to 0} \frac{\vec{F}}{q_0} \quad \left[\si{\newton\per\coulomb} \equiv \si{\volt\per\meter}\right]
+    \vec{E} = \frac{\vec{F}}{q_0} = K \frac{q}{r^2} \hat{r} = \frac{1}{4\pi\varepsilon_0} \frac{q}{r^2} \hat{r} \qquad \left[\si{\newton\per\coulomb} \equiv \si{\volt\per\meter}\right]
 \end{equation}
-Para una carga puntual aislada:
-\begin{equation}
-    \vec{E}(\vec{r}) = \frac{1}{4\pi\varepsilon_0} \frac{q}{r^2} \hat{r}
-\end{equation}
-Las líneas de campo eléctrico parten de las cargas positivas (fuentes) y convergen hacia las cargas negativas (sumideros).
+\begin{itemize}[leftmargin=*]
+    \item Si la carga fuente es \textbf{positiva ($q > 0$)}, el vector $\vec{E}$ en el punto $P$ es \textbf{radial saliente} (mismo sentido que el vector unitario $\hat{r}$).
+    \item Si la carga fuente es \textbf{negativa ($q < 0$)}, el vector $\vec{E}$ en el punto $P$ es \textbf{radial entrante} (apunta hacia la carga $q$, sentido opuesto a $\hat{r}$).
+\end{itemize}
 \end{definicion}
 
+\begin{ley}[Principio de Superposición y Densidades de Carga]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Distribución discreta de cargas:} El campo eléctrico total en un punto $\vec{r}_P$ es la suma vectorial de los campos eléctricos individuales generados por cada una de las $N$ cargas en dicho punto:
+    \begin{equation}
+        \vec{E}(\vec{r}_P) = \sum_{j=1}^N \vec{E}_j(\vec{r}_P) = K \sum_{j=1}^N \frac{q_j}{|\vec{r}_P - \vec{r}_j|^2}\, \hat{r}_{P-j}
+    \end{equation}
+    \item \textbf{Distribución continua de carga:} Cuando la carga está distribuida de forma continua, las cargas puntuales se transforman en diferenciales de carga $dQ$ y las sumatorias en integrales sobre la región cargada:
+    \begin{equation}
+        \vec{E}(\vec{r}_P) = K \int \frac{dQ}{|\vec{r}_P - \vec{r}'|^2}\, \hat{r}_{P-r'} = K \int_{V'} \frac{\rho(\vec{r}')}{|\vec{r}_P - \vec{r}'|^2}\, \hat{r}_{P-r'}\, dV'
+    \end{equation}
+\end{enumerate}
+Según la geometría del cuerpo cargado (1D, 2D o 3D), definimos tres \textbf{densidades de carga}:
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
-    % Carga positiva
-    \draw[fill=fftGreen!25, draw=fftGreen, thick] (-3.5,0) circle (0.3) node[fftGreen] {\textbf{$+$}};
-    \foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
-        \draw[->, >=stealth, thick, fftGreen] ({-3.5 + 0.35*cos(\angle)}, {0.35*sin(\angle)}) -- ({-3.5 + 1.2*cos(\angle)}, {1.2*sin(\angle)});
-    }
-    \node[below=12pt] at (-3.5,-1) {\footnotesize\textsf{Carga positiva (fuente)}};
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{0.30\textwidth}|p{0.31\textwidth}|p{0.30\textwidth}|}
+\hline
+\rowcolor{fftGray}
+\textbf{Densidad lineal ($\lambda$)} & \textbf{Densidad superficial ($\sigma$)} & \textbf{Densidad volumétrica ($\rho$)} \\
+\hline
+Carga por unidad de longitud: & Carga por unidad de superficie: & Carga por unidad de volumen: \\
+$\displaystyle \lambda = \frac{dQ}{d\ell} \implies dQ = \lambda\, d\ell$ & $\displaystyle \sigma = \frac{dQ}{dS} \implies dQ = \sigma\, dS$ & $\displaystyle \rho = \frac{dQ}{dV} \implies dQ = \rho\, dV$ \\
+Unidades: $[\si{\coulomb\per\meter}]$ & Unidades: $[\si{\coulomb\per\meter\squared}]$ & Unidades: $[\si{\coulomb\per\meter\cubed}]$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{ley}
 
-    % Carga negativa
-    \draw[fill=fftRed!25, draw=fftRed, thick] (3.5,0) circle (0.3) node[fftRed] {\textbf{$-$}};
-    \foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
-        \draw[<-, >=stealth, thick, fftRed] ({3.5 + 0.35*cos(\angle)}, {0.35*sin(\angle)}) -- ({3.5 + 1.2*cos(\angle)}, {1.2*sin(\angle)});
-    }
-    \node[below=12pt] at (3.5,-1) {\footnotesize\textsf{Carga negativa (sumidero)}};
+\subsubsection{Líneas de Campo Eléctrico}
+Una \textbf{línea de campo eléctrico} es una recta o curva imaginaria trazada en el espacio de tal manera que su vector tangente en cada punto $P$ tiene exactamente la dirección y el sentido del vector campo eléctrico $\vec{E}_P$ en ese punto.
+\begin{itemize}[leftmargin=*]
+    \item Nacen siempre en las cargas positivas (fuentes) y mueren en las cargas negativas (sumideros) o en el infinito.
+    \item El número de líneas por unidad de área transversal es proporcional a la intensidad $|\vec{E}|$ (donde las líneas están más juntas, el campo es más intenso). Dos líneas de campo \textbf{nunca pueden cortarse}.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.88]
+    % 1) Carga positiva
+    \begin{scope}[shift={(-5.2,0)}]
+        \draw[fill=fftGreen!25, draw=fftGreen, thick] (0,0) circle (0.28) node[fftGreen] {\textbf{$+$}};
+        \foreach \angle in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \draw[->, >=stealth, thick, fftGreen] ({0.32*cos(\angle)}, {0.32*sin(\angle)}) -- ({1.15*cos(\angle)}, {1.15*sin(\angle)});
+        }
+        \node[below] at (0,-1.3) {\footnotesize\textsf{Carga positiva}};
+    \end{scope}
+
+    % 2) Dipolo eléctrico (+ y -)
+    \begin{scope}[shift={(0,0)}]
+        \draw[fill=fftGreen!25, draw=fftGreen, thick] (-1.0,0) circle (0.25) node[fftGreen] {\textbf{$+$}};
+        \draw[fill=fftRed!25, draw=fftRed, thick] (1.0,0) circle (0.25) node[fftRed] {\textbf{$-$}};
+        \draw[->, >=stealth, thick, fftPrimary] (-0.75,0) -- (0.75,0);
+        \draw[->, >=stealth, thick, fftPrimary] (-0.85,0.18) .. controls (-0.3,0.7) and (0.3,0.7) .. (0.85,0.18);
+        \draw[->, >=stealth, thick, fftPrimary] (-0.85,-0.18) .. controls (-0.3,-0.7) and (0.3,-0.7) .. (0.85,-0.18);
+        \draw[->, >=stealth, thick, fftPrimary] (-0.95,0.22) .. controls (-0.4,1.25) and (0.4,1.25) .. (0.95,0.22);
+        \draw[->, >=stealth, thick, fftPrimary] (-0.95,-0.22) .. controls (-0.4,-1.25) and (0.4,-1.25) .. (0.95,-0.22);
+        \draw[->, >=stealth, thick, fftPrimary] (-1.25,0) -- (-1.8,0);
+        \draw[<-, >=stealth, thick, fftPrimary] (1.25,0) -- (1.8,0);
+        \node[below] at (0,-1.3) {\footnotesize\textsf{Dipolo eléctrico ($+q$ y $-q$)}};
+    \end{scope}
+
+    % 3) Dos cargas iguales positivas (+ y +)
+    \begin{scope}[shift={(5.4,0)}]
+        \draw[fill=fftGreen!25, draw=fftGreen, thick] (-0.9,0) circle (0.25) node[fftGreen] {\textbf{$+$}};
+        \draw[fill=fftGreen!25, draw=fftGreen, thick] (0.9,0) circle (0.25) node[fftGreen] {\textbf{$+$}};
+        \draw[->, >=stealth, thick, fftAccent] (-0.68,0.12) .. controls (-0.15,0.3) and (-0.15,0.8) .. (-0.2,1.25);
+        \draw[->, >=stealth, thick, fftAccent] (-0.68,-0.12) .. controls (-0.15,-0.3) and (-0.15,-0.8) .. (-0.2,-1.25);
+        \draw[->, >=stealth, thick, fftAccent] (0.68,0.12) .. controls (0.15,0.3) and (0.15,0.8) .. (0.2,1.25);
+        \draw[->, >=stealth, thick, fftAccent] (0.68,-0.12) .. controls (0.15,-0.3) and (0.15,-0.8) .. (0.2,-1.25);
+        \draw[->, >=stealth, thick, fftAccent] (-1.15,0) -- (-1.75,0);
+        \draw[->, >=stealth, thick, fftAccent] (1.15,0) -- (1.75,0);
+        \node[below] at (0,-1.3) {\footnotesize\textsf{Dos cargas positivas ($+q$ y $+q$)}};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 
-\begin{ley}[Principio de Superposición Lineal]
-El campo eléctrico neto generado por una distribución de $N$ cargas puntuales $\{q_1, q_2, \dots, q_N\}$ es la suma vectorial de los campos individuales generados por cada una de ellas:
+\begin{ejercicio}[Campo y Potencial de un Dipolo Eléctrico --- Ejercicio 16 de la Relación]
+Un dipolo eléctrico (dos cargas iguales y de signo contrario separadas por una pequeña distancia) está formado por dos cargas de $q_1 = +2\ \si{\micro\coulomb}$ y $q_2 = -2\ \si{\micro\coulomb}$ distantes entre sí $2\ \si{\meter}$. Calcular:
+\begin{enumerate}[label=\alph*)]
+    \item El campo eléctrico resultante y el potencial en un punto $P$ de la mediatriz del segmento que las une, distante $5\ \si{\meter}$ de cada carga.
+    \item Las mismas preguntas en el caso de que ambas cargas fueran positivas ($+2\ \si{\micro\coulomb}$ y $+2\ \si{\micro\coulomb}$).
+\end{enumerate}
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw[dashed, gray] (-2.5,0) -- (2.5,0);
+    \draw[dashed, gray] (0,0) -- (0,2.6);
+    \draw[fill=fftGreen!20, draw=fftGreen, thick] (-1.2,0) circle (0.22) node[font=\scriptsize] {$q_1$};
+    \node[below=5pt] at (-1.2,0) {\footnotesize $(-1,0),\ +2\ \si{\micro\coulomb}$};
+    \draw[fill=fftRed!20, draw=fftRed, thick] (1.2,0) circle (0.22) node[font=\scriptsize] {$q_2$};
+    \node[below=5pt] at (1.2,0) {\footnotesize $(1,0),\ -2\ \si{\micro\coulomb}$};
+    \draw[thick, gray] (-1.2,0) -- (0,2.2) node[midway, left] {\footnotesize $5\ \si{\meter}$};
+    \draw[thick, gray] (1.2,0) -- (0,2.2) node[midway, right] {\footnotesize $5\ \si{\meter}$};
+    \filldraw[black] (0,2.2) circle (2pt) node[above left] {$P(0,\sqrt{24})$};
+    \draw[->, >=stealth, thick, fftGreen] (0,2.2) -- (0.55,3.1) node[above] {$\vec{E}_1$};
+    \draw[->, >=stealth, thick, fftRed] (0,2.2) -- (0.55,1.3) node[right] {$\vec{E}_2$};
+    \draw[->, >=stealth, very thick, fftPrimary] (0,2.2) -- (1.1,2.2) node[right] {$\vec{E}_{total}$};
+\end{tikzpicture}
+\end{center}
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+Situamos $q_1$ en $(-1, 0)\ \si{\meter}$ y $q_2$ en $(1, 0)\ \si{\meter}$. Por el Teorema de Pitágoras, la ordenada del punto $P$ sobre la mediatriz ($x=0$) es:
 \begin{equation}
-    \vec{E}(\vec{r}) = \sum_{i=1}^N \vec{E}_i(\vec{r}) = \frac{1}{4\pi\varepsilon_0} \sum_{i=1}^N \frac{q_i}{|\vec{r} - \vec{r}_i|^2} \frac{\vec{r} - \vec{r}_i}{|\vec{r} - \vec{r}_i|}
+    5^2 = y^2 + 1^2 \implies y = \sqrt{24}\ \si{\meter} \implies P = (0, \sqrt{24})\ \si{\meter}
 \end{equation}
-Para distribuciones continuas de carga, se integra sobre la densidad correspondiente:
+Los vectores desplazamiento desde cada carga hasta $P$ y sus respectivos vectores unitarios ($\hat{r}_i = \vec{r}_i / 5$) son:
+\begin{equation}
+    \vec{r}_1 = (0, \sqrt{24}) - (-1, 0) = (1, \sqrt{24}) \implies \hat{r}_1 = \left(\frac{1}{5},\, \frac{\sqrt{24}}{5}\right)
+\end{equation}
+\begin{equation}
+    \vec{r}_2 = (0, \sqrt{24}) - (1, 0) = (-1, \sqrt{24}) \implies \hat{r}_2 = \left(-\frac{1}{5},\, \frac{\sqrt{24}}{5}\right)
+\end{equation}
+\textbf{a) Caso del dipolo ($q_1 = +2\ \si{\micro\coulomb}$, $q_2 = -2\ \si{\micro\coulomb}$):}
+\begin{equation}
+    \vec{E}_1 = K \frac{q_1}{r_1^2} \hat{r}_1 = 9\times 10^9 \cdot \frac{2\times 10^{-6}}{5^2} \left(\frac{1}{5}\hat{i} + \frac{\sqrt{24}}{5}\hat{j}\right) = 144\,\hat{i} + 705{,}5\,\hat{j}\ \si{\newton\per\coulomb}
+\end{equation}
+\begin{equation}
+    \vec{E}_2 = K \frac{q_2}{r_2^2} \hat{r}_2 = 9\times 10^9 \cdot \frac{-2\times 10^{-6}}{5^2} \left(-\frac{1}{5}\hat{i} + \frac{\sqrt{24}}{5}\hat{j}\right) = 144\,\hat{i} - 705{,}5\,\hat{j}\ \si{\newton\per\coulomb}
+\end{equation}
+Sumando ambos vectores, las componentes verticales se cancelan y las horizontales se duplican:
+\begin{equation}
+    \vec{E}_{total} = \vec{E}_1 + \vec{E}_2 = 288\,\hat{i}\ \si{\newton\per\coulomb}
+\end{equation}
+El potencial electrostático en $P$ es la suma algebraica escalar de los potenciales de cada carga:
+\begin{equation}
+    V_{total} = V_1 + V_2 = K\left(\frac{q_1}{r_1} + \frac{q_2}{r_2}\right) = 3600\ \si{\volt} + (-3600\ \si{\volt}) = 0\ \si{\volt}
+\end{equation}
+\textbf{b) Caso de dos cargas positivas iguales ($q_1 = +2\ \si{\micro\coulomb}$, $q_2 = +2\ \si{\micro\coulomb}$):}
+Ahora $\vec{E}_2$ invierte su signo respecto al apartado anterior: $\vec{E}_2 = -144\,\hat{i} + 705{,}5\,\hat{j}\ \si{\newton\per\coulomb}$. Por tanto, se anulan las componentes horizontales y se suman las verticales:
+\begin{equation}
+    \vec{E}_{total} = \vec{E}_1 + \vec{E}_2 = 1411\,\hat{j}\ \si{\newton\per\coulomb}, \qquad V_{total} = V_1 + V_2 = 3600 + 3600 = 7200\ \si{\volt}
+\end{equation}
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.1.4. FLUJO DE CAMPO ELÉCTRICO
+% ------------------------------------------------------------------------------
+\subsection{Flujo de Campo Eléctrico}
+
+\begin{definicion}[Flujo de Campo Eléctrico $\Phi_E$]
+El flujo de campo eléctrico $\Phi_E$ representa el número neto de líneas de campo que atraviesan una superficie de área $A$:
+\begin{equation}
+    \Phi_E = \int_S \vec{E} \cdot d\vec{A} = \int_S E \cos(\phi)\, dA \qquad \left[\si{\newton\meter\squared\per\coulomb} \equiv \si{\volt\meter}\right]
+\end{equation}
+donde $\phi$ es el ángulo que forma el vector campo eléctrico $\vec{E}$ con el vector diferencial de superficie $d\vec{A}$ (vector perpendicular o normal a la superficie en cada punto). Para un campo uniforme y una superficie plana de área $A$:
 \begin{itemize}[leftmargin=*]
-    \item Densidad lineal de carga: $\lambda = \frac{dq}{d\ell}\quad [\si{\coulomb\per\meter}] \implies dq = \lambda\, d\ell$.
-    \item Densidad superficial de carga: $\sigma = \frac{dq}{dA}\quad [\si{\coulomb\per\meter\squared}] \implies dq = \sigma\, dA$.
-    \item Densidad volumétrica de carga: $\rho = \frac{dq}{dV}\quad [\si{\coulomb\per\meter\cubed}] \implies dq = \rho\, dV$.
+    \item Si $\phi = 0^\circ$ ($\vec{E} \parallel \vec{A}$, campo perpendicular al plano de la superficie): $\Phi_E = \vec{E}\cdot\vec{A} = E \cdot A$ (flujo máximo).
+    \item Si $\phi = 90^\circ$ ($\vec{E} \perp \vec{A}$, campo paralelo o rasante a la superficie): $\Phi_E = 0$ (ninguna línea atraviesa la superficie).
+    \item Para cualquier otro ángulo $\phi$: $\Phi_E = \vec{E}\cdot\vec{A} = E \cdot A \cos(\phi)$.
+\end{itemize}
+\end{definicion}
+
+% ------------------------------------------------------------------------------
+% 1.1.5. LEY DE GAUSS
+% ------------------------------------------------------------------------------
+\subsection{Ley de Gauss y sus Aplicaciones Clásicas}
+
+\begin{ley}[Ley de Gauss]
+El flujo total de un campo eléctrico a través de cualquier superficie cerrada $S$ (superficie gaussiana) es igual al cociente entre la suma algebraica de las cargas contenidas en el volumen limitado por ella ($Q_{encerrada}$) y la permitividad eléctrica del vacío $\varepsilon_0$:
+\begin{equation}
+    \Phi_E = \oint_S \vec{E} \cdot d\vec{S} = 4\pi K_0\, Q_{encerrada} = \frac{Q_{encerrada}}{\varepsilon_0}
+\end{equation}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Flujo positivo ($\Phi_E > 0$):} Predominan cargas positivas dentro del volumen encerrado.
+    \item \textbf{Flujo negativo ($\Phi_E < 0$):} Predominan cargas negativas dentro del volumen encerrado.
+    \item \textbf{Flujo neto cero ($\Phi_E = 0$):} No hay carga en el volumen encerrado, o bien la suma algebraica neta de las cargas interiores es igual a cero ($\sum q_{int} = 0$).
 \end{itemize}
 \end{ley}
 
-% ==============================================================================
-% 1.2. LEY DE GAUSS
-% ==============================================================================
-\section{Flujo Eléctrico y Ley de Gauss}
+A continuación desarrollamos las tres demostraciones fundamentales de la Ley de Gauss exigidas en clase y en examen: el hilo rectilíneo infinito (simetría cilíndrica), el plano infinito (simetría plana) y la esfera dieléctrica uniformemente cargada (simetría esférica).
 
-\subsection{Concepto de Flujo Eléctrico y Ley de Gauss}
-\begin{ley}[Ley de Gauss]
-El flujo del campo eléctrico a través de cualquier superficie gaussiana cerrada $S_{cerrada}$ es directamente proporcional a la carga eléctrica neta total $Q_{enc}$ encerrada en el interior de dicha superficie:
-\begin{equation}
-    \Phi_E = \oint_S \vec{E} \cdot d\vec{A} = \frac{Q_{enc}}{\varepsilon_0}
-\end{equation}
-\end{ley}
-
+\begin{ejercicio}[Campo y Potencial de un Hilo Rectilíneo Infinito --- Ejercicio 23 de la Relación]
+Hallar mediante la Ley de Gauss el campo eléctrico creado por un hilo rectilíneo infinito con densidad lineal de carga uniforme $\lambda$. Si dicho hilo crea un potencial de $V_A = 20\ \si{\volt}$ en los puntos situados a una distancia $r_A = 2\ \si{\meter}$ de la recta y de $V_B = 10\ \si{\volt}$ en los situados a $r_B = 4\ \si{\meter}$ de la misma, ¿cuál es la densidad lineal de carga $\lambda$ del hilo?
+\tcbline
 \begin{center}
-\begin{tikzpicture}[scale=1.0]
+\begin{tikzpicture}[scale=0.95]
     % Hilo cargado con lambda
-    \draw[very thick, fftAccent] (-3,0) -- (3,0) node[right] {Hilo indefinido ($+\lambda$)};
-    \foreach \x in {-2.5,-1.8,...,2.5} {
+    \draw[very thick, fftAccent] (-3.2,0) -- (3.2,0) node[right] {Hilo infinito ($\lambda = dQ/d\ell$)};
+    \foreach \x in {-2.6,-1.9,...,2.6} {
         \node[above=2pt, fftAccent, font=\tiny] at (\x,0) {$+$};
     }
     % Superficie gaussiana cilíndrica
-    \draw[thick, fftPrimary, dashed] (-1.8,-1) rectangle (1.8,1);
-    \draw[thick, fftPrimary] (-1.8,0) ellipse (0.25 and 1);
-    \draw[thick, fftPrimary] (1.8,0) ellipse (0.25 and 1);
+    \draw[thick, fftPrimary, dashed] (-1.8,-0.9) rectangle (1.8,0.9);
+    \draw[thick, fftPrimary] (-1.8,0) ellipse (0.25 and 0.9);
+    \draw[thick, fftPrimary] (1.8,0) ellipse (0.25 and 0.9);
     % Vectores campo y área
-    \draw[->, >=stealth, very thick, fftGreen] (0,1) -- (0,2.1) node[above] {$\vec{E}$};
-    \draw[->, >=stealth, very thick, fftDarkBlue] (0,1) -- (0,1.6) node[right] {$d\vec{A}$};
-    \draw[<->, gray] (1.9,0) -- (1.9,1) node[midway, right] {$r$};
-    \draw[<->, gray] (-1.8,-1.2) -- (1.8,-1.2) node[midway, below] {$L$};
-    \node[below=16pt] at (0,-1.2) {\small\textsf{Superficie gaussiana cilíndrica coaxial para calcular el campo de un hilo indefinido}};
+    \draw[->, >=stealth, very thick, fftGreen] (0,0.9) -- (0,1.9) node[above] {$\vec{E}$};
+    \draw[->, >=stealth, very thick, fftDarkBlue] (0,0.9) -- (0,1.5) node[right] {$d\vec{S}$};
+    \draw[->, >=stealth, thick, fftDarkBlue] (2.05,0.3) -- (2.65,0.3) node[right] {$d\vec{S}_{tapa} \perp \vec{E}$};
+    \draw[<->, gray] (1.85,0) -- (1.85,0.9) node[midway, right] {$r$};
+    \draw[<->, gray] (-1.8,-1.15) -- (1.8,-1.15) node[midway, below] {$\ell$};
 \end{tikzpicture}
 \end{center}
-
-\subsection{Conductores en Equilibrio Electrostático y Condensadores}
-\begin{definicion}[Condensador de Placas Paralelas]
-Dispositivo formado por dos láminas conductoras paralelas de área $A$ separadas por una distancia $d$ que almacenan cargas opuestas $+Q$ y $-Q$.
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{Primera parte: Deducción del campo eléctrico con la Ley de Gauss.}
+Elegimos como superficie gaussiana un cilindro coaxial de radio $r$ y longitud $\ell$. Por simetría radial, el campo eléctrico $\vec{E}$ es perpendicular al hilo en todo punto: sólo atraviesa la superficie lateral del cilindro ($S_{lat} = 2\pi r \ell$), mientras que en las tapas superior e inferior el flujo es nulo ($\vec{E} \perp d\vec{S}_{tapas} \implies \cos 90^\circ = 0$). En la cara lateral, $\vec{E} \parallel d\vec{S}$ ($\cos 0^\circ = 1$) y $|\vec{E}|$ es constante en todos los puntos por estar a igual distancia $r$, por lo que sale fuera de la integral:
 \begin{equation}
-    C = \frac{Q}{\Delta V} = \varepsilon_r \varepsilon_0 \frac{A}{d} \quad [\si{\farad}]
+    \oint_S \vec{E} \cdot d\vec{S} = \int_{S_{lat}} E\, dS \cos(0^\circ) = E \oint_{S_{lat}} dS = E \cdot (2\pi r \ell)
+\end{equation}
+Expresando la carga encerrada en función de la densidad lineal $\lambda = \frac{dQ}{d\ell} \implies Q_{enc} = \lambda \cdot \ell$, aplicamos la Ley de Gauss:
+\begin{equation}
+    E \cdot (2\pi r \ell) = \frac{Q_{enc}}{\varepsilon_0} = \frac{\lambda \cdot \ell}{\varepsilon_0} \implies \boxed{E(r) = \frac{\lambda}{2\pi\varepsilon_0 r}} \quad (\text{se cancela la longitud }\ell)
+\end{equation}
+\textbf{Segunda parte: Cálculo de $\lambda$ a partir de la diferencia de potencial.}
+Integramos el campo eléctrico entre $r_A = 2\ \si{\meter}$ ($V_A = 20\ \si{\volt}$) y $r_B = 4\ \si{\meter}$ ($V_B = 10\ \si{\volt}$):
+\begin{equation}
+    V_A - V_B = \int_{r_A}^{r_B} \vec{E} \cdot d\vec{\ell} = \frac{\lambda}{2\pi\varepsilon_0} \int_{r_A}^{r_B} \frac{dr}{r} = \frac{\lambda}{2\pi\varepsilon_0} \Big[\ln(r)\Big]_{r_A}^{r_B} = \frac{\lambda}{2\pi\varepsilon_0} \ln\left(\frac{r_B}{r_A}\right)
+\end{equation}
+Despejando la densidad lineal de carga $\lambda$:
+\begin{equation}
+    \lambda = \frac{2\pi\varepsilon_0 (V_A - V_B)}{\ln(r_B / r_A)} = \frac{2\pi \cdot (8{,}854 \times 10^{-12}) \cdot (20 - 10)}{\ln(4 / 2)} = \frac{5{,}563 \times 10^{-10}}{\ln(2)} \approx 8{,}02 \times 10^{-10}\ \si{\coulomb\per\meter}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Campo y Potencial de un Plano Infinito Cargado --- Ejercicio 24 de la Relación]
+Hallar el campo eléctrico y el potencial creados por un plano infinito no conductor cuya densidad superficial de carga uniforme es $\sigma$.
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{1) Campo eléctrico mediante la Ley de Gauss:}
+Tomamos como superficie gaussiana un cilindro (o prisma) perpendicular al plano infinito, con tapas de área $S$ equidistantes a ambos lados de la lámina. Por simetría plana, el campo eléctrico $\vec{E}$ es perpendicular al plano hacia afuera en ambas caras y no atraviesa la pared lateral del cilindro. Por tanto, el flujo total es la suma del flujo a través de las dos tapas ($2S$), y la carga encerrada es $Q_{enc} = \sigma \cdot S$:
+\begin{equation}
+    \oint \vec{E} \cdot d\vec{S} = \frac{Q_{enc}}{\varepsilon_0} \implies E \cdot (2S) = \frac{\sigma \cdot S}{\varepsilon_0} \implies \boxed{E = \frac{\sigma}{2\varepsilon_0}}
+\end{equation}
+Observamos que el campo eléctrico creado por un plano infinito es \textbf{uniforme} (constante en módulo y dirección, independiente de la distancia $r$ al plano).\\[4pt]
+\textbf{2) Potencial eléctrico:}
+Como el plano se extiende hasta el infinito, no podemos tomar el origen de potencial en el infinito; tomamos como referencia de potencial cero el propio plano ($V_B = 0$ en $r_B = 0$). Integrando desde un punto $A$ a distancia $r_A$ hasta el punto $B$ sobre el plano:
+\begin{equation}
+    V_A - V_B = \int_{r_A}^{0} E\, dr = \frac{\sigma}{2\varepsilon_0} \Big[r\Big]_{r_A}^{0} = \frac{\sigma}{2\varepsilon_0} (0 - r_A) \implies \boxed{V_A = -\frac{\sigma}{2\varepsilon_0} r_A}
+\end{equation}
+A medida que nos alejamos del plano cargado positivamente en el sentido de las líneas de campo, el potencial eléctrico va disminuyendo linealmente con la distancia.
+\end{ejercicio}
+
+\begin{ejercicio}[Campo y Potencial de una Esfera Dieléctrica Cargada Uniformemente --- Ejercicio 25 de la Relación]
+Calcular el campo eléctrico y el potencial creados por una esfera dieléctrica (aislante) maciza de radio $R$ cargada uniformemente en todo su volumen con una carga total $Q$, a una distancia $r$ de su centro: a) fuera de la esfera ($r > R$), y b) dentro de la esfera ($r < R$).
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{a) Región exterior a la esfera ($r > R$):}
+Usamos como superficie de Gauss una esfera concéntrica de radio $r > R$. Por simetría esférica, $\vec{E}$ es radial y paralelo a $d\vec{S}$ en todo punto ($\vec{E}\cdot d\vec{S} = E\,dS$) y su módulo es constante sobre la esfera de área $4\pi r^2$. La carga total encerrada es toda la carga de la esfera ($Q_{enc} = Q$):
+\begin{equation}
+    \oint_S \vec{E}\cdot d\vec{S} = E \oint_S dS = E \cdot (4\pi r^2) = \frac{Q}{\varepsilon_0} \implies \boxed{E_{ext}(r) = \frac{1}{4\pi\varepsilon_0} \frac{Q}{r^2} = K \frac{Q}{r^2}} \quad (r > R)
+\end{equation}
+El potencial en el exterior (tomando $V(\infty) = 0$) es idéntico al de una carga puntual $Q$ situada en el centro:
+\begin{equation}
+    V_P(r) = \int_r^\infty E_{ext}(r)\, dr = \frac{Q}{4\pi\varepsilon_0} \int_r^\infty \frac{dr}{r^2} = \frac{Q}{4\pi\varepsilon_0} \left[-\frac{1}{r}\right]_r^\infty \implies \boxed{V_{ext}(r) = \frac{Q}{4\pi\varepsilon_0 r} = \frac{K Q}{r}} \quad (r \ge R)
+\end{equation}
+\textbf{b) Región interior a la esfera ($r < R$):}
+Al ser una esfera dieléctrica cargada uniformemente, definimos su densidad volumétrica de carga constante $\rho$:
+\begin{equation}
+    \rho = \frac{Q}{V_{esfera}} = \frac{Q}{\frac{4}{3}\pi R^3}
+\end{equation}
+Tomando una esfera gaussiana interior de radio $r < R$, la carga encerrada $Q_{enc}$ es únicamente la contenida en la esfera de radio $r$:
+\begin{equation}
+    Q_{enc} = \rho \cdot V_{gauss} = \left(\frac{Q}{\frac{4}{3}\pi R^3}\right) \cdot \left(\frac{4}{3}\pi r^3\right) = Q \frac{r^3}{R^3}
+\end{equation}
+Aplicando la Ley de Gauss en $r < R$:
+\begin{equation}
+    E \cdot (4\pi r^2) = \frac{Q_{enc}}{\varepsilon_0} = \frac{Q r^3}{\varepsilon_0 R^3} \implies \boxed{E_{int}(r) = \frac{Q \cdot r}{4\pi\varepsilon_0 R^3} = \frac{K Q}{R^3} r} \quad (r < R)
+\end{equation}
+Dentro de la esfera dieléctrica el campo crece linealmente con el radio $r$ (siendo cero en el centro $r=0$). Para hallar el potencial en un punto interior $r < R$, debemos partir la integral desde $r$ hasta $\infty$ en dos tramos (de $r$ a $R$ con $E_{int}$, y de $R$ a $\infty$ con $E_{ext}$):
+\begin{equation}
+    V_{int}(r) = \int_r^\infty E\, dr = \int_r^R E_{int}(r)\, dr + \int_R^\infty E_{ext}(r)\, dr = \frac{Q}{4\pi\varepsilon_0 R^3} \int_r^R r\, dr + \frac{Q}{4\pi\varepsilon_0 R}
+\end{equation}
+\begin{equation}
+    V_{int}(r) = \frac{Q}{4\pi\varepsilon_0 R^3} \frac{R^2 - r^2}{2} + \frac{Q}{4\pi\varepsilon_0 R} = \frac{Q}{8\pi\varepsilon_0 R} \left(3 - \frac{r^2}{R^2}\right) \implies \boxed{V_{int}(r) = \frac{3 Q}{8\pi\varepsilon_0 R} - \frac{Q r^2}{8\pi\varepsilon_0 R^3}}
+\end{equation}
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.1.6. CAMPO ELÉCTRICO Y CARGA EN CONDUCTORES
+% ------------------------------------------------------------------------------
+\subsection{Campo Eléctrico y Carga en Conductores en Equilibrio Electrostático}
+
+Según la conductividad eléctrica $\sigma_c$ de un material, éste se clasifica en:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Conductor:} Posee gran cantidad de cargas libres (electrones de conducción en metales) que se mueven libremente ante cualquier campo eléctrico.
+    \item \textbf{Aislante o dieléctrico:} Sus electrones están fuertemente ligados a los átomos y no permiten el paso de corriente.
+    \item \textbf{Semiconductor} (silicio, germanio): Puede comportarse como conductor o como aislante en función del campo eléctrico aplicado, la temperatura o el dopado (se estudia en detalle en el Tema 4).
+\end{itemize}
+
+\begin{definicion}[Propiedades de un Conductor en Equilibrio Electrostático]
+Si introducimos una carga neta en un conductor y esperamos a que alcance el equilibrio electrostático (cargas en reposo):
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Toda la carga libre se distribuye exclusivamente por la superficie exterior:} Las cargas del mismo signo tienden a repelerse entre sí lo máximo posible, emigrando hasta la superficie límite del material ($\rho_{int} = 0$).
+    \item \textbf{El campo eléctrico en el interior del material conductor es rigurosamente cero ($\vec{E}_{int} = \vec{0}$):} Si no fuese cero, las cargas libres interiores experimentarían fuerza $\vec{F}=q\vec{E}$ y habría corriente, contradiciendo el equilibrio.
+    \item \textbf{El campo eléctrico justo en la superficie exterior es perpendicular a ella:}
+    \begin{equation}
+        \vec{E}_{sup} = \frac{\sigma}{\varepsilon_0} \hat{n}
+    \end{equation}
+    Si el campo eléctrico no fuera perpendicular a la superficie, existiría una componente tangencial $\vec{E}_t$ que arrastraría las cargas superficiales y no habría equilibrio.
+    \item \textbf{El volumen y la superficie del conductor forman un volumen equipotencial:} Como $\vec{E}_{int} = \vec{0}$, no cuesta trabajo mover una carga por su interior, luego $V = \text{constante}$ en todo el conductor e igual al potencial de su superficie.
+    \item \textbf{Efecto de las puntas:} En un conductor de forma irregular, la densidad superficial de carga $\sigma$ se acumula preferentemente en las \textbf{zonas puntiagudas} (de menor radio de curvatura), donde las cargas equilibran las componentes tangenciales y el campo exterior es mucho más intenso.
+\end{enumerate}
+\end{definicion}
+
+\begin{ejercicio}[Campo y Potencial de una Esfera Conductora Cargada --- Ejercicio 26 de la Relación]
+Calcular el campo eléctrico y el potencial creados por una esfera conductora de radio $R$ cargada con una densidad superficial $\sigma$ (carga total $Q_{enc}$) a una distancia $r$ de su centro: a) si $r > R$ (fuera), y b) si $r < R$ (dentro).
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    % Esfera conductora
+    \draw[fill=fftPrimary!10, draw=fftPrimary, thick] (-3.2,0) circle (0.9);
+    \node at (-3.2,0) {$\vec{E}_{int}=\vec{0}$};
+    \foreach \ang in {0,45,...,315} {
+        \node[fftAccent, font=\scriptsize\bfseries] at ({-3.2+1.05*cos(\ang)}, {1.05*sin(\ang)}) {$+$};
+    }
+    % Gauss exterior
+    \draw[dashed, gray, thick] (-3.2,0) circle (1.6);
+    \draw[->, >=stealth, thick, fftDarkBlue] (-3.2,0) -- (-3.2+1.6,0) node[midway, below] {$r$};
+    \node[below] at (-3.2,-1.8) {\footnotesize\textsf{Esfera conductora ($Q$ en $r=R$)}};
+
+    % Gráfica E(r)
+    \begin{scope}[shift={(0.5,-1.2)}]
+        \draw[->, >=stealth] (0,0) -- (3.2,0) node[right] {\footnotesize $r$};
+        \draw[->, >=stealth] (0,0) -- (0,2.3) node[above] {\footnotesize $E(r)$};
+        \draw[very thick, fftAccent] (0,0) -- (1.1,0);
+        \draw[dashed, gray] (1.1,0) -- (1.1,1.8);
+        \draw[very thick, fftAccent, domain=1.1:2.9, samples=40] plot (\x, {1.8*(1.1/\x)^2});
+        \node[below] at (1.1,0) {\footnotesize $R$};
+        \node[left] at (0,1.8) {\footnotesize $\frac{KQ}{R^2}$};
+    \end{scope}
+
+    % Gráfica V(r)
+    \begin{scope}[shift={(4.8,-1.2)}]
+        \draw[->, >=stealth] (0,0) -- (3.2,0) node[right] {\footnotesize $r$};
+        \draw[->, >=stealth] (0,0) -- (0,2.3) node[above] {\footnotesize $V(r)$};
+        \draw[very thick, fftPrimary] (0,1.6) -- (1.1,1.6);
+        \draw[dashed, gray] (1.1,0) -- (1.1,1.6);
+        \draw[very thick, fftPrimary, domain=1.1:2.9, samples=40] plot (\x, {1.6*(1.1/\x)});
+        \node[below] at (1.1,0) {\footnotesize $R$};
+        \node[left] at (0,1.6) {\footnotesize $\frac{KQ}{R}$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+\textbf{Resolución Paso a Paso:}\\[4pt]
+\textbf{a) Campo y potencial en el exterior ($r > R$):}
+Envolvemos la esfera en una superficie gaussiana esférica concéntrica de radio $r > R$. Por simetría, $\vec{E} \parallel d\vec{S}$ y $E$ es uniforme a distancia $r$:
+\begin{equation}
+    \oint_S \vec{E}\cdot d\vec{S} = E \cdot (4\pi r^2) = \frac{Q_{enc}}{\varepsilon_0} \implies \boxed{E_{ext}(r) = \frac{1}{4\pi\varepsilon_0} \frac{Q_{enc}}{r^2} = K \frac{Q_{enc}}{r^2}} \quad (r > R)
+\end{equation}
+Integrando desde $r > R$ hasta el infinito ($V(\infty)=0$), el potencial en el exterior es el mismo que el de una carga puntual:
+\begin{equation}
+    V_{ext}(r) = \int_r^\infty E_{ext}(r)\, dr = \frac{Q_{enc}}{4\pi\varepsilon_0} \int_r^\infty \frac{dr}{r^2} = \boxed{\frac{K \cdot Q_{enc}}{r}} \quad (r \ge R)
+\end{equation}
+\textbf{b) Campo y potencial en el interior ($r < R$):}
+Al ser una esfera metálica (conductora), toda la carga se desplaza hacia la superficie ($r = R$). Por tanto, cualquier esfera gaussiana interior de radio $r < R$ encierra carga nula ($Q_{enc} = 0$):
+\begin{equation}
+    E \cdot (4\pi r^2) = \frac{0}{\varepsilon_0} = 0 \implies \boxed{\vec{E}_{int}(r) = \vec{0}} \quad (r < R)
+\end{equation}
+Para el potencial en un punto interior ($r < R$), desglosamos la integral desde $r$ hasta $\infty$ en el tramo interior ($r \to R$, donde $E_{int} = 0$) más el tramo exterior ($R \to \infty$):
+\begin{equation}
+    V_{int}(r) = \int_r^\infty E\, dr = \int_r^R \underbrace{E_{int}}_{=0}\, dr + \int_R^\infty E_{ext}\, dr = \int_R^\infty K \frac{Q_{enc}}{r^2}\, dr = \boxed{\frac{K \cdot Q_{enc}}{R} = V_{superficie}} \quad (r \le R)
+\end{equation}
+\footnotesize\textit{Ojo examen (Aclaración al margen del cuaderno):} En la página 15 del manuscrito original los títulos de los apartados de potencial aparecen intercambiados con la anotación al margen \textit{``no corregido''}. Como se demuestra arriba, para $r > R$ (fuera) el potencial decrece como $V(r) = \frac{K Q}{r}$, mientras que para $r < R$ (dentro) el potencial permanece constante e igual al potencial de la superficie $V(r) = \frac{K Q}{R}$.
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.1.7, 1.1.8 y 1.1.9. ENERGÍA POTENCIAL, TRABAJO Y POTENCIAL ELÉCTRICO
+% ------------------------------------------------------------------------------
+\subsection{Energía Potencial Eléctrica, Trabajo Eléctrico y Potencial Eléctrico}
+
+\subsubsection{1.1.7. Energía Potencial Eléctrica ($U$)}
+Cuando una partícula con carga $q$ se desplaza por un campo eléctrico, el campo ejerce sobre ella una fuerza capaz de realizar trabajo, lo cual permite asociarle una \textbf{energía potencial eléctrica} medida en \textbf{Julios} ($\si{\joule}$).
+
+\begin{definicion}[Energía Potencial Eléctrica en un Punto]
+La energía potencial eléctrica $U_r$ de una carga puntual $q$ situada a una distancia $r$ de una carga fuente $Q$ (tomando $U(\infty) = 0$) se define como el trabajo necesario que debe realizar una fuerza externa ($\vec{F}_{ext} = -\vec{F}_{elec}$) para traer la carga $q$ desde el infinito hasta dicho punto sin acelerarla; equivalentemente, es igual al trabajo que realiza la fuerza del campo eléctrico al llevar la carga desde ese punto hasta el infinito:
+\begin{equation}
+    U_r = W_{\infty \to r}^{ext} = W_{r \to \infty}^{campo} = \frac{Q \cdot q}{4\pi\varepsilon_0 r} = K \frac{Q \cdot q}{r} \qquad [\si{\joule}]
+\end{equation}
+\end{definicion}
+
+\subsubsection{1.1.8. Trabajo Eléctrico ($W_{AB}$)}
+La fuerza electrostática de Coulomb es una \textbf{fuerza conservativa}: al desplazarse una carga $q$ de un punto $A$ a otro punto $B$ dentro del campo eléctrico, el trabajo realizado por el campo no depende del camino seguido, sino exclusivamente de las posiciones inicial y final:
+\begin{equation}
+    W_{A \to B}^{campo} = \int_A^B \vec{F}_{elec} \cdot d\vec{\ell} = -\Delta U = U_A - U_B = \frac{Q \cdot q}{4\pi\varepsilon_0} \left(\frac{1}{r_A} - \frac{1}{r_B}\right)
+\end{equation}
+Por su parte, el trabajo realizado por un agente o fuerza externa en cuasi-equilibrio para llevar la carga desde $A$ hasta $B$ tiene el mismo valor absoluto y signo opuesto al trabajo del campo eléctrico:
+\begin{equation}
+    W_{A \to B}^{ext} = -W_{A \to B}^{campo} = \Delta U = U_B - U_A
+\end{equation}
+
+\subsubsection{1.1.9. Potencial Eléctrico ($V$) y Relación con el Campo Eléctrico}
+\begin{definicion}[Potencial Eléctrico y Diferencia de Potencial]
+El \textbf{potencial eléctrico} $V$ en cualquier punto de un campo eléctrico es la energía potencial eléctrica por unidad de carga de prueba $q$ situada en ese punto:
+\begin{equation}
+    V = \frac{U}{q} = \frac{1}{4\pi\varepsilon_0} \frac{Q}{r} = K \frac{Q}{r} \qquad \left[\text{Voltio: } 1\ \si{\volt} = 1\ \frac{\si{\joule}}{\si{\coulomb}}\right]
+\end{equation}
+La \textbf{diferencia de potencial} entre dos puntos $A$ y $B$ se relaciona con el trabajo externo $W_{AB}^{ext}$ (que es igual al trabajo que realiza el campo eléctrico para mover la carga de $B$ a $A$) y con la integral de línea del campo eléctrico mediante:
+\begin{equation}
+    V_B - V_A = \frac{W_{A \to B}^{ext}}{q} = -\frac{W_{A \to B}^{campo}}{q} = -\int_A^B \vec{E} \cdot d\vec{\ell}
+\end{equation}
+Equivalentemente, la caída de potencial de $A$ a $B$ y su relación diferencial son:
+\begin{equation}
+    \boxed{V_A - V_B = -\int_A^B dV = \int_A^B \vec{E} \cdot d\vec{\ell} \iff -dV = \vec{E} \cdot d\vec{\ell} \iff E_\ell = -\frac{dV}{d\ell} \quad (\vec{E} = -\vec{\nabla} V)}
+\end{equation}
+\end{definicion}
+
+\begin{ejercicio}[Potencial, Trabajo Externo y Energía Potencial --- Ejercicio 19 de la Relación]
+Una carga positiva $q_1 = 6\ \si{\micro\coulomb}$ se encuentra fija en el origen de coordenadas. Calcular:
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es el potencial eléctrico en un punto $P$ situado a una distancia de $4\ \si{\meter}$?
+    \item ¿Qué trabajo tenemos que hacer (fuerza externa) para traer otra carga positiva $q_2 = 2\ \si{\micro\coulomb}$ desde el infinito hasta esa distancia de $4\ \si{\meter}$?
+    \item ¿Cuál será la energía potencial eléctrica de esa segunda carga en dicha posición?
+\end{enumerate}
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{a) Potencial eléctrico a $r = 4\ \si{\meter}$:}
+\begin{equation}
+    V_P = K \frac{q_1}{r} = 9 \times 10^9 \cdot \frac{6 \times 10^{-6}}{4} = 13\,500\ \si{\volt} = 13{,}5\ \si{\kilo\volt}
+\end{equation}
+\textbf{b) Trabajo externo para traer $q_2 = 2\ \si{\micro\coulomb}$ desde el infinito hasta $P$:}
+El trabajo que realiza una fuerza externa desde el infinito hasta $P$ ($W_{\infty \to P}^{ext}$) es igual al trabajo que realiza el campo eléctrico al llevar la carga desde $P$ hasta el infinito ($W_{P \to \infty}^{campo}$):
+\begin{equation}
+    W_{\infty \to P}^{ext} = W_{P \to \infty}^{campo} = q_2 \cdot V_P = K \frac{q_1 \cdot q_2}{r} = 9 \times 10^9 \cdot \frac{(6 \times 10^{-6}) \cdot (2 \times 10^{-6})}{4} = 0{,}027\ \si{\joule}
+\end{equation}
+\textbf{c) Energía potencial de $q_2$ en dicha posición:}
+Por definición, la energía potencial electrostática en $P$ coincide con el trabajo realizado desde el infinito:
+\begin{equation}
+    U_P = W_{\infty \to P}^{ext} = 0{,}027\ \si{\joule}
+\end{equation}
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.1.10. CAPACITORES Y CAPACITANCIA
+% ------------------------------------------------------------------------------
+\subsection{Capacitores (Condensadores) y Capacitancia}
+
+Un \textbf{condensador} (o capacitor) es un dispositivo pasivo formado por dos conductores (denominados \textbf{placas} o \textbf{armaduras}) separados por un aislante (dieléctrico) o por el vacío a una determinada distancia $d$. Al aplicar una diferencia de potencial $V = V_+ - V_-$ entre las placas, éstas adquieren cargas de igual módulo y signo contrario ($+Q$ y $-Q$).
+
+\begin{definicion}[Capacitancia o Capacidad de un Condensador]
+La \textbf{capacitancia} o \textbf{capacidad} $C$ de un condensador es el cociente entre la magnitud de la carga $Q$ de una de sus placas y la diferencia de potencial $V$ entre las dos placas:
+\begin{equation}
+    C = \frac{Q}{V} \qquad \left[\text{Faradio: } 1\ \si{\farad} = 1\ \frac{\si{\coulomb}}{\si{\volt}}\right]
+\end{equation}
+La capacidad \textbf{sólo depende de la geometría del condensador} y de la permitividad del aislante entre sus placas (no depende de $Q$ ni de $V$). Para un \textbf{condensador de placas planas paralelas}, la capacidad es directamente proporcional al área $A$ de cada placa e inversamente proporcional a la distancia $d$ que las separa:
+\begin{equation}
+    C = \varepsilon_0 \frac{A}{d}\quad (\text{en el vacío}), \qquad C = \varepsilon \frac{A}{d} = \varepsilon_r \varepsilon_0 \frac{A}{d}\quad (\text{con dieléctrico de permitividad } \varepsilon)
+\end{equation}
+El campo eléctrico dentro del condensador es uniforme e igual a $E = \frac{\sigma}{\varepsilon}$, mientras que en el exterior del condensador es prácticamente nulo. La energía electrostática almacenada en el condensador es:
+\begin{equation}
+    U_E = \frac{1}{2} C V^2 = \frac{1}{2} \frac{Q^2}{C} = \frac{1}{2} Q V \qquad [\si{\joule}]
 \end{equation}
 \end{definicion}
 
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
-    % Placa positiva
-    \draw[fill=fftPrimary!20, thick] (-2,1) rectangle (2,1.3);
-    \node at (0,1.15) {\small\textbf{Placa Superior ($+Q$, densidad $+\sigma$)}};
-    % Placa negativa
-    \draw[fill=fftDarkBlue!20, thick] (-2,-1.3) rectangle (2,-1);
-    \node at (0,-1.15) {\small\textbf{Placa Inferior ($-Q$, densidad $-\sigma$)}};
+\begin{tikzpicture}[scale=1.05]
+    % Placa positiva ancha para que el texto quede holgado dentro
+    \draw[fill=fftPrimary!20, draw=fftPrimary, thick] (-3.2,1.0) rectangle (3.2,1.45);
+    \node at (0,1.225) {\small\textbf{Placa Superior ($+Q$, densidad $+\sigma$)}};
+    % Placa negativa ancha
+    \draw[fill=fftDarkBlue!20, draw=fftDarkBlue, thick] (-3.2,-1.45) rectangle (3.2,-1.0);
+    \node at (0,-1.225) {\small\textbf{Placa Inferior ($-Q$, densidad $-\sigma$)}};
     % Líneas de campo uniforme
-    \foreach \x in {-1.5,-1.0,-0.5,0,0.5,1.0,1.5} {
-        \draw[->, >=stealth, thick, fftAccent] (\x,1) -- (\x,-1);
+    \foreach \x in {-2.4,-1.6,-0.8,0,0.8,1.6,2.4} {
+        \draw[->, >=stealth, thick, fftAccent] (\x,1.0) -- (\x,-1.0);
     }
-    \node[right, fftAccent] at (1.6,0) {$\vec{E} = \frac{\sigma}{\varepsilon}$};
+    \node[right, fftAccent, font=\bfseries] at (2.6,0) {$\vec{E}_{int} = \dfrac{\sigma}{\varepsilon}$};
+    \node[left, gray, font=\footnotesize] at (-3.3,0.6) {$\vec{E}_{ext} \approx \vec{0}$};
     % Cota de separación
-    \draw[<->, gray, thick] (-2.3,-1) -- (-2.3,1) node[midway, left] {$d$};
+    \draw[<->, gray, thick] (-3.5,-1.0) -- (-3.5,1.0) node[midway, left] {$d$};
     % Conexión exterior
-    \draw[thick] (0,1.3) -- (0,1.8) node[above] {$V_+$};
-    \draw[thick] (0,-1.3) -- (0,-1.8) node[below] {$V_-$};
+    \draw[thick] (0,1.45) -- (0,1.9) node[above] {$V_+$};
+    \draw[thick] (0,-1.45) -- (0,-1.9) node[below] {$V_-$};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Asociación de Condensadores}
+\begin{ejercicio}[Deducción por Gauss del Campo y Capacidad de un Condensador Plano --- Examen Febrero 2017 / Ejercicio 27]
+Calcular el campo eléctrico en el interior y exterior de un condensador de placas planas paralelas usando la Ley de Gauss, y deducir la expresión de su capacidad en función del área $A$ de las placas y de la distancia $d$ que las separa (para el caso en que el área de las placas es mucho mayor que la distancia que las separa).
+\tcbline
+\textbf{Resolución Paso a Paso (Resuelto en clase y Examen Febrero 2017):}\\[4pt]
+\textbf{Paso 1: Campo eléctrico creado por una sola placa plana mediante la Ley de Gauss.}
+Consideramos primero un único plano conductor/cargado con densidad superficial $\sigma = \frac{dQ}{dS} = \frac{Q_{enc}}{A}$ y tomamos un cilindro gaussiano perpendicular a la placa cuyas tapas tienen área $A$. Por simetría, el flujo sólo atraviesa las dos tapas horizontales (arriba y abajo, flujo $E \cdot 2A$) y no atraviesa la pared lateral ($\vec{E} \perp d\vec{S}_{lat}$):
+\begin{equation}
+    \oint_S \vec{E}\cdot d\vec{S} = E \cdot 2A = \frac{Q_{enc}}{\varepsilon_0} = \frac{\sigma \cdot A}{\varepsilon_0} \iff E_{placa} = \frac{\sigma}{2\varepsilon_0}
+\end{equation}
+El campo resultante de cada placa es uniforme y no depende de la distancia a la placa (siempre que la distancia sea mucho menor que las dimensiones de la placa).\\[4pt]
+\textbf{Paso 2: Superposición de las dos placas del condensador ($+Q$ y $-Q$).}
+En un condensador tenemos dos placas paralelas: la placa $A$ cargada positivamente ($+\sigma$, cuyas líneas de campo $\vec{E}_A$ salen de ella hacia ambos lados) y la placa $B$ cargada negativamente ($-\sigma$, cuyas líneas de campo $\vec{E}_B$ entran hacia ella desde ambos lados):
+\begin{itemize}[leftmargin=*]
+    \item \textbf{En el exterior del condensador} (a la izquierda de $A$ y a la derecha de $B$): los vectores $\vec{E}_A$ y $\vec{E}_B$ tienen la misma dirección, el mismo módulo $\frac{\sigma}{2\varepsilon_0}$ y \textbf{sentidos opuestos}, por lo que \textbf{el campo eléctrico se anula en el exterior} ($E_{ext} = E_A - E_B = 0$).
+    \item \textbf{En el interior del condensador} (entre ambas placas): tanto $\vec{E}_A$ como $\vec{E}_B$ apuntan desde la placa positiva $A$ hacia la placa negativa $B$ (\textbf{mismo sentido}), sumándose sus módulos:
+    \begin{equation}
+        E_{int} = E_A + E_B = \frac{\sigma}{2\varepsilon_0} + \frac{\sigma}{2\varepsilon_0} \implies \boxed{E = \frac{\sigma}{\varepsilon_0}}
+    \end{equation}
+\end{itemize}
+\textbf{Paso 3: Deducción de la capacidad $C$ en función de $A$ y $d$.}
+Calculamos primero la diferencia de potencial $V_A - V_B$ entre las placas integrando el campo uniforme a lo largo de la distancia $d$ (donde $\vec{E}$ y $d\vec{\ell}$ llevan la misma dirección y sentido):
+\begin{equation}
+    V_A - V_B = \int_A^B \vec{E} \cdot d\vec{\ell} = E \cdot d = \frac{\sigma}{\varepsilon_0} d
+\end{equation}
+Sustituyendo en la definición de capacidad $C = \frac{Q}{V_A - V_B}$ junto con $Q = \sigma \cdot A$:
+\begin{equation}
+    C = \frac{Q}{V_A - V_B} = \frac{\sigma \cdot A}{\dfrac{\sigma}{\varepsilon_0} \cdot d} \implies \boxed{C = \frac{\varepsilon_0 \cdot A}{d}}
+\end{equation}
+\end{ejercicio}
+
+\subsubsection{Asociación de Condensadores en Paralelo y en Serie}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Asociación en Paralelo:} Todos los condensadores están sometidos a la misma diferencia de potencial ($V_1 = V_2 = V$). La carga total almacenada es la suma de las cargas individuales ($Q_{total} = Q_1 + Q_2 = C_1 V + C_2 V$), de modo que la capacidad equivalente es la suma de capacidades:
+    \begin{equation}
+        C_{eq} = C_1 + C_2 + \dots + C_N = \sum_{i=1}^N C_i
+    \end{equation}
+    \item \textbf{Asociación en Serie:} Por conservación de la carga en las armaduras intermedias aisladas, todos los condensadores en serie adquieren exactamente la misma carga ($Q_1 = Q_2 = Q$). La caída de tensión total es la suma de las tensiones de cada condensador ($V_{total} = V_1 + V_2 = \frac{Q}{C_1} + \frac{Q}{C_2}$):
+    \begin{equation}
+        \frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_N} = \sum_{i=1}^N \frac{1}{C_i} \implies C_{eq} = \frac{C_1 C_2}{C_1 + C_2}\quad (\text{para dos condensadores})
+    \end{equation}
+\end{itemize}
+
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
-    % En paralelo
-    \node[font=\bfseries] at (-3,1.8) {Asociación en Paralelo ($C_{eq} = C_1 + C_2$)};
-    \draw (-4.5,0) -- (-3.5,0);
-    \draw (-3.5,0) -- (-3.5,0.8) to[C, l=$C_1$] (-1.5,0.8) -- (-1.5,0);
-    \draw (-3.5,0) -- (-3.5,-0.8) to[C, l=$C_2$] (-1.5,-0.8) -- (-1.5,0);
-    \draw (-1.5,0) -- (-0.5,0);
-
-    % En serie
-    \node[font=\bfseries] at (3.5,1.8) {Asociación en Serie ($\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2}$)};
-    \draw (1.5,0) -- (2,0) to[C, l=$C_1$] (3.5,0) to[C, l=$C_2$] (5,0) -- (5.5,0);
+\begin{minipage}{0.48\textwidth}
+\centering
+\textbf{\small Asociación en Paralelo ($C_{eq} = C_1 + C_2$)}\\[6pt]
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) -- (0.8,0);
+    \draw (0.8,0) -- (0.8,0.85) to[C, l={$C_1$}] (3.2,0.85) -- (3.2,0);
+    \draw (0.8,0) -- (0.8,-0.85) to[C, l_={$C_2$}] (3.2,-0.85) -- (3.2,0);
+    \draw (3.2,0) -- (4.0,0);
+    \filldraw (0,0) circle (1.5pt) node[left] {$A$};
+    \filldraw (4.0,0) circle (1.5pt) node[right] {$B$};
 \end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\textbf{\small Asociación en Serie ($\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2}$)}\\[6pt]
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) to[C, l={$C_1$}] (2.2,0) to[C, l={$C_2$}] (4.4,0);
+    \filldraw (0,0) circle (1.5pt) node[left] {$A$};
+    \filldraw (4.4,0) circle (1.5pt) node[right] {$B$};
+    \node[below=14pt] at (2.2,0) {\footnotesize $Q_1 = Q_2 = Q$};
+\end{tikzpicture}
+\end{minipage}
 \end{center}
 
 % ==============================================================================
-% 1.3. CAMPO MAGNÉTICO Y LEYES FUNDAMENTALES
+% SECCIÓN 1.2. ELECTRODINÁMICA: CORRIENTE ELÉCTRICA Y CAMPO MAGNÉTICO
 % ==============================================================================
-\section{Campo Magnético, Ley de Lorentz y Ley de Biot-Savart}
+\section{Electrodinámica: Corriente Eléctrica y Campo Magnético}
 
-\begin{ley}[Fuerza de Lorentz y Ley de Biot-Savart]
-Una partícula con carga $q$ que se mueve con velocidad $\vec{v}$ en un campo $\vec{B}$ experimenta la fuerza:
+% ------------------------------------------------------------------------------
+% 1.2.11. CORRIENTE ELÉCTRICA Y LEY DE OHM
+% ------------------------------------------------------------------------------
+\subsection{Corriente Eléctrica, Velocidad de Deriva y Ley de Ohm}
+
+La \textbf{corriente eléctrica} es el flujo ordenado de portadores de carga eléctrica a través de un material conductor, y se debe a la existencia de una diferencia de potencial eléctrico entre dos puntos. Al aplicar una diferencia de tensión ($V_1 > V_2$), se crea en el interior del conductor un campo eléctrico $\vec{E}$ (dirigido de mayor a menor potencial, de $V_1$ hacia $V_2$) que ejerce fuerza eléctrica sobre las cargas libres y las pone en movimiento:
+\begin{itemize}[leftmargin=*]
+    \item Si el portador tiene \textbf{carga positiva ($+$)}, se mueve en el \textbf{mismo sentido que $\vec{E}$}.
+    \item Si el portador tiene \textbf{carga negativa ($-$)} (como los electrones en un metal), se mueve en \textbf{sentido contrario a $\vec{E}$}.
+    \item \textbf{Convenio de signos de la corriente:} Por convenio histórico, el sentido de la intensidad de corriente eléctrica $I$ se toma siempre igual al \textbf{mismo sentido del campo eléctrico $\vec{E}$} (sentido del flujo de cargas positivas, opuesto al movimiento real de los electrones).
+\end{itemize}
+
+\begin{definicion}[Intensidad de Corriente Eléctrica y Velocidad de Deriva]
+La medida de la corriente eléctrica es la \textbf{intensidad de corriente} $I$, definida como la cantidad de carga que atraviesa una sección transversal del conductor por unidad de tiempo:
 \begin{equation}
-    \vec{F}_B = q (\vec{v} \times \vec{B}) \implies |\vec{F}_B| = |q|\, v\, B \sin(\theta)
+    I = \frac{\Delta Q}{\Delta t}\quad (\text{corriente continua/uniforme}), \qquad I = \frac{dQ}{dt}\quad (\text{corriente variable}) \qquad \left[\text{Amperio: } 1\ \si{\ampere} = 1\ \frac{\si{\coulomb}}{\si{\second}}\right]
 \end{equation}
-El campo magnético generado por un conductor rectilíneo muy largo por el que circula una corriente $I$ viene dado por la Ley de Biot-Savart / Ampère:
+Debido a los continuos choques entre los portadores de carga y los átomos de la red cristalina del material, los portadores avanzan con una velocidad media constante denominada \textbf{velocidad de deriva o de arrastre} ($v_d$). En un diferencial de cable de sección transversal $A$ y grosor (rodaja) $d\ell = v_d\, dt$, la carga contenida es:
 \begin{equation}
-    B(r) = \frac{\mu_0 I}{2\pi r}
+    dQ = n \cdot q \cdot A \cdot d\ell = n \cdot q \cdot A \cdot (v_d\, dt)
 \end{equation}
+donde $n$ es la concentración de portadores de carga por unidad de volumen ($[\si{\meter^{-3}}]$) y $q$ es la carga del electrón. Dividiendo por $dt$, obtenemos la relación entre la intensidad y la velocidad de deriva:
+\begin{equation}
+    \boxed{I = \frac{dQ}{dt} = n \cdot q \cdot A \cdot \frac{d\ell}{dt} = n \cdot q \cdot v_d \cdot A}
+\end{equation}
+\end{definicion}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    % Cilindro conductor
+    \draw[thick, fftPrimary, fill=fftPrimary!5] (-3, -0.7) rectangle (3, 0.7);
+    \draw[thick, fftPrimary, fill=fftPrimary!12] (-3, 0) ellipse (0.25 and 0.7);
+    \draw[thick, fftPrimary, fill=fftPrimary!15] (3, 0) ellipse (0.25 and 0.7);
+    % Rodaja diferencial dl = vd dt
+    \draw[dashed, thick, fftAccent, fill=fftAccent!15] (0.2, -0.7) rectangle (1.3, 0.7);
+    \draw[dashed, thick, fftAccent] (0.2, 0) ellipse (0.2 and 0.7);
+    \draw[dashed, thick, fftAccent] (1.3, 0) ellipse (0.2 and 0.7);
+    \draw[<->, fftAccent, thick] (0.2, -0.95) -- (1.3, -0.95) node[midway, below] {\footnotesize $d\ell = v_d\, dt$};
+    % Portadores y vectores
+    \filldraw[fftDarkBlue] (-1.8, 0.25) circle (2pt) node[above] {\footnotesize $q$};
+    \draw[->, >=stealth, thick, fftDarkBlue] (-1.6, 0.25) -- (-0.8, 0.25) node[above] {\footnotesize $\vec{v}_d$};
+    \draw[->, >=stealth, very thick, fftGreen] (-2.2, -0.3) -- (-0.6, -0.3) node[below] {\footnotesize $\vec{E},\ \vec{J},\ I$};
+    \node[left] at (-3.3, 0) {$V_1$};
+    \node[right] at (3.3, 0) {$V_2\ (V_1 > V_2)$};
+    \node at (2.2, 0) {\footnotesize Área $A$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}[Densidad de Corriente $\vec{J}$ y Conductividad Eléctrica $\sigma$]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Densidad de corriente ($J$):} Es la intensidad de corriente $I$ por unidad de área de sección transversal:
+    \begin{equation}
+        J = \frac{I}{A} = n \cdot q \cdot v_d \quad \left[\si{\ampere\per\meter\squared}\right] \implies I = \int_S \vec{J} \cdot d\vec{A}
+    \end{equation}
+    \item \textbf{Relación entre $J$ y el campo eléctrico $E$ (Ley de Ohm microscópica):} En un material metálico u óhmico se cumple que la densidad de corriente es directamente proporcional al campo eléctrico:
+    \begin{equation}
+        \vec{J} = \sigma \cdot \vec{E} = \frac{1}{\rho} \vec{E}
+    \end{equation}
+    donde $\sigma$ es la \textbf{conductividad eléctrica} del material (medida de la capacidad de un material para dejar pasar la corriente eléctrica, en $[\si{\ohm^{-1}\meter^{-1}} \equiv \si{\siemens\per\meter}]$) y $\rho = \frac{1}{\sigma}$ es su inversa, la \textbf{resistividad eléctrica} ($[\si{\ohm\cdot\meter}]$).
+\end{itemize}
+\end{definicion}
+
+\begin{ejercicio}[Deducción Completa de la Ley de Ohm Macroscópica --- Examen Enero 2019 (Ejercicio 2)]
+Deducir la Ley de Ohm (relación entre la diferencia de potencial $V_1 - V_2$ y la intensidad $I$ en un conductor cilíndrico de longitud $L$ y sección $S$), usando la relación de la densidad de corriente con el campo eléctrico ($J = \sigma E$) y la relación entre el campo eléctrico y el potencial, suponiendo campo eléctrico uniforme en todo el conductor.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw[thick, fftDarkBlue, fill=fftGray] (-2.5,-0.5) rectangle (2.5,0.5);
+    \draw[thick, fftDarkBlue, fill=white] (-2.5,0) ellipse (0.2 and 0.5);
+    \draw[thick, fftDarkBlue] (2.5,-0.5) arc (-90:90:0.2 and 0.5);
+    \node at (-2.5,0) {\footnotesize $S$};
+    \draw[->, >=stealth, very thick, fftAccent] (-0.8,0) -- (0.8,0) node[midway, above] {$\vec{E}$};
+    \node[left] at (-2.8,0) {$V_1$};
+    \node[right] at (2.8,0) {$V_2\quad (V_1 > V_2)$};
+    \draw[<->, gray, thick] (-2.5,-0.8) -- (2.5,-0.8) node[midway, below] {$L$};
+\end{tikzpicture}
+\end{center}
+\textbf{Demostración Paso a Paso (Teoría y Examen Oficial FFT Enero 2019):}\\[4pt]
+\textbf{1.} Tomamos un hilo conductor de longitud $L$ y área de sección transversal $S$, sometido a potenciales $V_1 > V_2$, de modo que el campo eléctrico uniforme $\vec{E}$ va hacia la derecha. La relación entre la densidad de corriente y el campo eléctrico es:
+\begin{equation}
+    J = \sigma \cdot E \quad (\text{donde }\sigma\text{ es la conductividad del material})
+\end{equation}
+\textbf{2.} De la relación del campo eléctrico con la variación de potencial ($E = -\frac{dV}{d\ell}$), dado que el campo es uniforme a lo largo de la longitud $L$ y la variación de potencial entre los extremos es $\Delta V = V_2 - V_1$, sacamos el valor del campo eléctrico en el conductor:
+\begin{equation}
+    E = -\frac{\Delta V}{L} = \frac{-(V_2 - V_1)}{L} \implies E = \frac{V_1 - V_2}{L}
+\end{equation}
+\textbf{3.} Volviendo a la primera ecuación, relacionamos la densidad de corriente con la caída de potencial:
+\begin{equation}
+    J = \sigma \cdot \frac{V_1 - V_2}{L}
+\end{equation}
+\textbf{4.} Calculamos ahora la intensidad de corriente $I$ integrando la densidad de corriente sobre la sección transversal $S$:
+\begin{equation}
+    I = \int_S J\, dS = \int_S \sigma \frac{V_1 - V_2}{L}\, dS = \sigma \frac{V_1 - V_2}{L} \cdot S = J \cdot S
+\end{equation}
+\textbf{5.} Despejamos la caída de potencial $(V_1 - V_2)$ en función de la intensidad $I$, introduciendo la resistividad $\rho = \frac{1}{\sigma}$ (inversa de la conductividad):
+\begin{equation}
+    I = \sigma \frac{S}{L} (V_1 - V_2) \iff V_1 - V_2 = \left(\frac{1}{\sigma} \frac{L}{S}\right) \cdot I = \left(\rho \frac{L}{S}\right) \cdot I
+\end{equation}
+\textbf{6.} Definiendo la \textbf{resistencia eléctrica} del conductor como $R = \rho \frac{L}{S}$ (medida en ohmios, $[\si{\ohm}]$), obtenemos finalmente la \textbf{Ley de Ohm macroscópica}:
+\begin{equation}
+    \boxed{R = \rho \frac{L}{S} \qquad \implies \qquad V_1 - V_2 = R \cdot I}
+\end{equation}
+\end{ejercicio}
+
+\begin{aviso}[Dependencia con la Temperatura y Potencia Disipada (Efecto Joule)]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Variación térmica de la resistividad:} En los metales conductores, al aumentar la temperatura se incrementa la agitación térmica y los choques, aumentando la resistividad según $\rho(T) = \rho_0 [1 + \alpha(T - T_0)] \implies R(T) = R_0 [1 + \alpha(T - T_0)]$.
+    \item \textbf{Efecto Joule y Potencia Eléctrica:} La potencia eléctrica disipada en forma de calor en una resistencia $R$ recorrida por una corriente $I$ con caída de tensión $V$ es:
+    \begin{equation}
+        P = V \cdot I = I^2 \cdot R = \frac{V^2}{R} \qquad [\si{\watt} = \si{\joule\per\second}]
+    \end{equation}
+\end{itemize}
+\end{aviso}
+
+\begin{ejercicio}[Corriente y Campo Eléctrico en una Resistencia de Plomo --- Ejercicio 30 de la Relación]
+Calcular la intensidad de corriente que circula por una resistencia de plomo ($\rho = 2{,}2 \times 10^{-7}\ \si{\ohm\cdot\meter}$) con forma de paralelepípedo, con sección transversal de $S = 5 \times 10^{-4}\ \si{\milli\meter\squared}$ y longitud de $L = 3\ \si{\centi\meter}$, cuando se aplica una diferencia de potencial de $V_1 - V_2 = 5\ \si{\volt}$. ¿Cuánto vale el campo eléctrico en el interior de la resistencia? Indicar su módulo, dirección y sentido.
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{1) Conversión de datos al Sistema Internacional:}
+\begin{equation}
+    V_1 - V_2 = 5\ \si{\volt}, \quad S = 5 \times 10^{-4}\ \si{\milli\meter\squared} = 5 \times 10^{-10}\ \si{\meter\squared}, \quad L = 3\ \si{\centi\meter} = 0{,}03\ \si{\meter}, \quad \rho = 2{,}2 \times 10^{-7}\ \si{\ohm\cdot\meter}
+\end{equation}
+\textbf{2) Cálculo de la resistencia $R$ y de la intensidad $I$ (Ley de Ohm):}
+\begin{equation}
+    R = \rho \frac{L}{S} = (2{,}2 \times 10^{-7}\ \si{\ohm\cdot\meter}) \cdot \frac{0{,}03\ \si{\meter}}{5 \times 10^{-10}\ \si{\meter\squared}} = 13{,}2\ \si{\ohm}\quad (\text{en el cuaderno se redondea a } 13{,}26\ \si{\ohm})
+\end{equation}
+\begin{equation}
+    (V_1 - V_2) = R \cdot I \implies I = \frac{V_1 - V_2}{R} = \frac{5\ \si{\volt}}{13{,}2\ \si{\ohm}} = 0{,}3788\ \si{\ampere}\quad \left(\text{con } 13{,}26\ \si{\ohm} \implies I = 0{,}377\ \si{\ampere}\right)
+\end{equation}
+\textbf{3) Cálculo del campo eléctrico en el interior (por dos métodos equivalentes):}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Primera forma (usando la Ley de Ohm microscópica $J = \sigma E$):}
+    \begin{equation}
+        J = \sigma E \implies E = \frac{J}{\sigma} = J \cdot \rho = \frac{I}{S} \cdot \rho = \frac{0{,}3788}{5 \times 10^{-10}} \cdot (2{,}2 \times 10^{-7}) = 166{,}67\ \si{\volt\per\meter}
+    \end{equation}
+    \item \textbf{Segunda forma (usando la relación potencial--campo uniforme):}
+    \begin{equation}
+        E = \frac{V_1 - V_2}{L} = \frac{5\ \si{\volt}}{0{,}03\ \si{\meter}} = 166{,}67\ \si{\volt\per\meter}
+    \end{equation}
+\end{itemize}
+La dirección del campo eléctrico $\vec{E}$ es paralela al eje longitudinal del paralelepípedo y su sentido va desde el extremo de mayor potencial ($V_1$) hacia el de menor potencial ($V_2$).
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.2.12 y 1.2.13. CAMPO MAGNÉTICO Y LEY DE LORENTZ
+% ------------------------------------------------------------------------------
+\subsection{Campo Magnético y Ley de Lorentz}
+
+\subsubsection{1.2.12. Campo Magnético ($\vec{B}$)}
+Un \textbf{campo magnético} es un campo de fuerzas creado por imanes permanentes o por cargas eléctricas en movimiento (corrientes eléctricas). También es llamado \textbf{inducción magnética}, se representa con la letra $\vec{B}$ y se mide en el Sistema Internacional en \textbf{Teslas} ($\si{\tesla}$):
+\begin{equation}
+    1\ \si{\tesla} = 1\ \si{\newton\cdot\second\cdot\meter^{-1}\cdot\coulomb^{-1}} = 1\ \frac{\si{\newton}}{\si{\ampere\cdot\meter}} = 10^4\ \text{Gauss (G)} \iff 1\ \text{Gauss} = 10^{-4}\ \si{\tesla}
+\end{equation}
+Se cumplen dos principios fundamentales de interacción magnética:
+\begin{enumerate}[leftmargin=*]
+    \item Una carga en movimiento o una corriente eléctrica \textbf{crea} un campo magnético en el espacio circundante.
+    \item Una carga en movimiento o una corriente eléctrica inmersa en un campo magnético $\vec{B}$ \textbf{experimenta una fuerza magnética} perpendicular tanto a la velocidad de movimiento de la carga como al propio campo magnético:
+    \begin{equation}
+        \vec{F}_B = q \cdot (\vec{v} \times \vec{B}) \implies |\vec{F}_B| = |q| \cdot v \cdot B \cdot \sin(\phi)
+    \end{equation}
+    donde $\phi$ es el ángulo que forma el vector velocidad $\vec{v}$ con el vector campo magnético $\vec{B}$ ($v_\perp = v\sin\phi$).
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Caso A: v perpendicular a B
+    \begin{scope}[shift={(-5.0,0)}]
+        \node[draw, circle, inner sep=1.5pt, font=\footnotesize\bfseries] at (-1.2, 1.3) {A};
+        \draw[->, >=stealth, thick, fftPrimary] (0,0) -- (1.6,0) node[right] {$\vec{B}$};
+        \draw[->, >=stealth, thick, fftGreen] (0,0) -- (-0.9,-0.8) node[below left] {$\vec{v}$};
+        \draw[->, >=stealth, very thick, fftAccent] (0,0) -- (0,1.5) node[above] {$\vec{F}$};
+        \draw[fill=white, thick] (0,0) circle (0.18) node[font=\scriptsize] {$+$};
+        \node[below] at (0.2,-1.3) {\footnotesize $\phi = 90^\circ \implies F = q v B$};
+    \end{scope}
+
+    % Caso B: ángulo phi cualquiera
+    \begin{scope}[shift={(0,0)}]
+        \node[draw, circle, inner sep=1.5pt, font=\footnotesize\bfseries] at (-1.2, 1.3) {B};
+        \draw[->, >=stealth, thick, fftPrimary] (0,0) -- (1.6,0) node[right] {$\vec{B}$};
+        \draw[->, >=stealth, thick, fftGreen] (0,0) -- (0.8,-1.0) node[below right] {$\vec{v}$};
+        \draw[->, >=stealth, very thick, fftAccent] (0,0) -- (0,1.5) node[above] {$\vec{F}$};
+        \draw[gray, thick] (0.5,0) arc (0:-51:0.5) node[midway, right=1pt, font=\footnotesize] {$\phi$};
+        \draw[fill=white, thick] (0,0) circle (0.18) node[font=\scriptsize] {$+$};
+        \node[below] at (0.2,-1.3) {\footnotesize $F = q v B \sin\phi\ (v_\perp = v\sin\phi)$};
+    \end{scope}
+
+    % Caso C: v paralelo a B
+    \begin{scope}[shift={(5.0,0)}]
+        \node[draw, circle, inner sep=1.5pt, font=\footnotesize\bfseries] at (-1.2, 1.3) {C};
+        \draw[->, >=stealth, thick, fftPrimary] (-0.8,0) -- (1.6,0) node[right] {$\vec{B}$};
+        \draw[->, >=stealth, thick, fftGreen] (-0.2,0.4) -- (-1.3,0.4) node[left] {$\vec{v}$};
+        \draw[fill=white, thick] (-0.2,0.4) circle (0.16) node[font=\tiny] {$+$};
+        \draw[->, >=stealth, thick, fftGreen] (0.2,-0.4) -- (1.3,-0.4) node[right] {$\vec{v}$};
+        \draw[fill=white, thick] (0.2,-0.4) circle (0.16) node[font=\tiny] {$+$};
+        \node[below] at (0.2,-1.3) {\footnotesize $\phi = 0^\circ \text{ o } 180^\circ \implies F = 0$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{1.2.13. Ley de Lorentz y Fuerza Magnética sobre un Cable Conductor}
+
+\begin{ley}[Ley de Lorentz Generalizada y Movimiento Ciclotrónico]
+La fuerza electromagnética total que experimenta una carga $q$ que se mueve con velocidad $\vec{v}$ en presencia simultánea de un campo eléctrico $\vec{E}$ y un campo magnético $\vec{B}$ viene dada por la \textbf{Ecuación de Lorentz}:
+\begin{equation}
+    \vec{F} = q \cdot (\vec{E} + \vec{v} \times \vec{B})
+\end{equation}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Ausencia de trabajo magnético:} Como $\vec{F}_B \perp \vec{v}$, la potencia magnética es nula ($P = \vec{F}_B\cdot\vec{v} = 0$) y el campo magnético estático \textbf{no realiza trabajo} ($W_B = 0$), manteniendo constante el módulo de la velocidad y la energía cinética de la partícula.
+    \item \textbf{Radio de ciclotrón:} Cuando una partícula de masa $m$ y carga $q$ penetra perpendicularmente ($\vec{v} \perp \vec{B}$) en un campo magnético uniforme, describe un movimiento circular uniforme de radio $R$ y frecuencia angular $\omega_c$:
+    \begin{equation}
+        |q| v B = m \frac{v^2}{R} \implies R = \frac{m v}{|q| B}, \qquad \omega_c = \frac{|q| B}{m}, \qquad T = \frac{2\pi m}{|q| B}
+    \end{equation}
+\end{itemize}
 \end{ley}
+
+\begin{ley}[Fuerza que Ejerce un Campo Magnético sobre un Cable Conductor]
+Un cable conductor rectilíneo de longitud $L$ por el cual circula una corriente eléctrica $I$ dentro de un campo magnético uniforme $\vec{B}$ se ve sometido a una fuerza magnética. Para deducirla, consideramos primero un trozo elemental de cable de longitud $d\ell$ y sección $A$, el cual contiene una carga en movimiento $dQ = n q A\, d\ell$ desplazándose con velocidad $\vec{v}_d$:
+\begin{equation}
+    d\vec{F} = dQ \cdot (\vec{v}_d \times \vec{B}) = (n q A\, d\ell)\, \vec{v}_d \times \vec{B}
+\end{equation}
+En módulo, recordando que la intensidad es $I = n q A v_d$:
+\begin{equation}
+    dF = n q A v_d\, d\ell\, B \sin(\phi) = I\, d\ell\, B \sin(\phi) \implies d\vec{F} = I\, d\vec{\ell} \times \vec{B}
+\end{equation}
+Integrando para un cable rectilíneo de longitud $L$ (representado por el vector $\vec{\ell}$ de módulo $L$ y sentido el de la intensidad $I$):
+\begin{equation}
+    \boxed{\vec{F} = I \cdot (\vec{\ell} \times \vec{B}) \qquad \implies \qquad F = I \cdot L \cdot B \cdot \sin(\phi)}
+\end{equation}
+donde $\phi$ es el ángulo que forma el sentido de la corriente $I$ con el campo magnético $\vec{B}$. En particular, \textbf{si el campo magnético es perpendicular al cable} ($\phi = 90^\circ$), la fuerza es máxima: $F = I \cdot L \cdot B$.
+\end{ley}
+
+% ------------------------------------------------------------------------------
+% 1.2.14. LEY DE BIOT Y SAVART
+% ------------------------------------------------------------------------------
+\subsection{Ley de Biot y Savart y Aplicaciones Fundamentales}
+
+\subsubsection{Campo Magnético de una Carga en Movimiento y de un Elemento de Corriente}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Campo magnético de una carga puntual en movimiento:} Una carga $q$ que se desplaza a velocidad $\vec{v}$ crea en un punto $P$ situado a posición $\vec{r}$ un campo magnético cuyas líneas de campo son círculos concéntricos centrados en la línea de movimiento de la carga (siendo $B = 0$ a lo largo de la propia línea de movimiento):
+    \begin{equation}
+        \vec{B} = \frac{\mu_0}{4\pi} \frac{q (\vec{v} \times \hat{r})}{r^2} \implies B = \frac{\mu_0}{4\pi} \frac{|q| \cdot v \cdot \sin(\phi)}{r^2}
+    \end{equation}
+    donde $\mu_0 = 4\pi \times 10^{-7}\ \si{\tesla\cdot\meter\per\ampere}$ es la \textbf{permeabilidad magnética del vacío}.
+    \item \textbf{Campo magnético de un elemento de corriente (Ley de Biot y Savart):} En un trozo de cable de longitud $d\ell$ y sección $A$ tenemos una carga portadora $dQ = n q A\, d\ell$. Sustituyendo en la expresión anterior y usando la definición de intensidad $I = n q v_d A$:
+    \begin{equation}
+        dB = \frac{\mu_0}{4\pi} \frac{(n q A\, d\ell) \cdot v_d \cdot \sin(\phi)}{r^2} = \frac{\mu_0}{4\pi} \frac{I \cdot d\ell \cdot \sin(\phi)}{r^2}
+    \end{equation}
+    En forma vectorial, obtenemos la \textbf{Ley de Biot y Savart}:
+    \begin{equation}
+        \boxed{d\vec{B} = \frac{\mu_0}{4\pi} \frac{I (d\vec{\ell} \times \hat{r})}{r^2}}
+    \end{equation}
+\end{enumerate}
+
+\subsubsection{Campo Magnético de un Cable Rectilíneo de Longitud $2a$ e Infinito}
+Consideremos un cable rectilíneo dispuesto sobre el eje $Y$ desde $y = -a$ hasta $y = +a$ (longitud total $2a$) recorrido por una corriente $I$, y calculemos el campo magnético en un punto $P(x, 0)$ a distancia perpendicular $x$ sobre la mediatriz del cable.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    % Cable en eje Y
+    \draw[->, gray] (0,-2.0) -- (0,2.2) node[above] {$y$};
+    \draw[->, gray] (-0.5,0) -- (3.5,0) node[right] {$x$};
+    \draw[very thick, fftPrimary] (0,-1.6) -- (0,1.6);
+    \node[left] at (0,1.6) {$+a$};
+    \node[left] at (0,-1.6) {$-a$};
+    \node[left] at (0,0) {$O$};
+    % Elemento dl en y
+    \draw[line width=2.5pt, fftAccent] (0,0.7) -- (0,1.1) node[midway, left] {$d\vec{\ell}$};
+    \draw[->, >=stealth, thick, fftPrimary] (-0.25,-1.0) -- (-0.25,-0.2) node[midway, left] {$I$};
+    % Vector r hasta P
+    \filldraw[black] (2.4,0) circle (2pt) node[above right] {$P(x,0)$};
+    \draw[thick, fftDarkBlue] (0,0.9) -- (2.4,0) node[midway, above right] {$r = \sqrt{x^2+y^2}$};
+    \draw[->, >=stealth, thick, fftDarkBlue] (0,0.9) -- (0.65,0.656) node[below right=-2pt] {$\hat{r}$};
+    \draw[gray] (0,0.5) arc (-90:-20.5:0.4) node[midway, below right=-2pt, font=\footnotesize] {$\pi-\phi$};
+    \draw[gray] (0,1.25) arc (90:-20.5:0.35) node[midway, right, font=\footnotesize] {$\phi$};
+    \node[below] at (1.2,0) {$x$};
+    \node[left] at (0,0.45) {\footnotesize $y$};
+    % Campo dB entrante en P
+    \draw[thick, fftGreen] (2.4,-0.35) circle (0.16);
+    \draw[thick, fftGreen] (2.4-0.11,-0.35-0.11) -- (2.4+0.11,-0.35+0.11);
+    \draw[thick, fftGreen] (2.4-0.11,-0.35+0.11) -- (2.4+0.11,-0.35-0.11);
+    \node[right=4pt, fftGreen] at (2.5,-0.35) {$d\vec{B}$};
+\end{tikzpicture}
+\end{center}
+
+Integrando la expresión de Biot y Savart entre $y = -a$ e $y = +a$, con $r = \sqrt{x^2 + y^2}$ y $\sin(\phi) = \sin(\pi - \phi) = \frac{x}{r} = \frac{x}{\sqrt{x^2 + y^2}}$:
+\begin{equation}
+    B = \frac{\mu_0 I}{4\pi} \int_{-a}^{a} \frac{\sin(\phi)\, dy}{r^2} = \frac{\mu_0 I}{4\pi} \int_{-a}^{a} \frac{x\, dy}{(x^2 + y^2)^{3/2}} = \frac{\mu_0 I}{4\pi} \left[\frac{y}{x\sqrt{x^2 + y^2}}\right]_{-a}^{a} = \frac{\mu_0 I}{4\pi} \frac{2a}{x (x^2 + a^2)^{1/2}}
+\end{equation}
+Por tanto, en el límite de un \textbf{conductor rectilíneo muy largo o infinito ($a \gg x$)}, donde $\sqrt{x^2 + a^2} \approx a$, las longitudes $a$ se simplifican y obtenemos la célebre expresión a una distancia radial $x$ (o $r$) del hilo:
+\begin{equation}
+    \boxed{\text{Si } a \gg x \implies B = \frac{\mu_0 I}{2\pi x} \equiv \frac{\mu_0 I}{2\pi r}}
+\end{equation}
 
 \begin{center}
 \begin{tikzpicture}[scale=1.0]
     % Hilo con corriente
-    \draw[very thick, fftDarkBlue] (0,-1.8) -- (0,1.8) node[above] {$I$ (corriente)};
+    \draw[very thick, fftDarkBlue] (0,-1.6) -- (0,1.6) node[above] {$I$ (corriente)};
     \draw[->, >=stealth, very thick, fftDarkBlue] (0,-0.5) -- (0,0.6);
     % Líneas de campo circulares
     \draw[thick, fftAccent, ->, >=stealth] (0.8,0) arc (0:170:0.8 and 0.35);
     \draw[thick, fftAccent, dashed] (0.8,0) arc (0:-190:0.8 and 0.35);
     \draw[thick, fftAccent, ->, >=stealth] (1.5,0) arc (0:170:1.5 and 0.6);
     \draw[thick, fftAccent, dashed] (1.5,0) arc (0:-190:1.5 and 0.6);
-    \node[right, fftAccent] at (1.5,0.4) {$\vec{B}$ (Líneas concéntricas)};
-    \node[below=14pt] at (0,-1.8) {\small\textsf{Líneas de campo magnético según la Regla de la Mano Derecha}};
+    \node[right, fftAccent] at (1.55,0.35) {$\vec{B}$ (Circunferencias concéntricas)};
+    \node[below=10pt] at (0,-1.6) {\small\textsf{Sentido de $\vec{B}$ según la Regla de la Mano Derecha (pulgar con $I$, dedos con $\vec{B}$)}};
 \end{tikzpicture}
 \end{center}
 
-\begin{ley}[Fuerza entre Dos Conductores Paralelos]
-Para dos conductores rectilíneos paralelos separados una distancia $d$:
+\begin{ejercicio}[Campo Magnético de una Espira Circular en su Eje y en su Centro --- Ejercicio 32 de la Relación]
+Calcular mediante la Ley de Biot y Savart el campo magnético creado por un hilo conductor circular (espira de radio $a$) por el que circula una corriente $I$, tanto en un punto $P$ de su eje situado a una distancia $d$ del centro como en el propio centro de la espira ($d = 0$).
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    % Ejes
+    \draw[->, gray] (0,-1.8) -- (0,2.0) node[above] {$z$};
+    \draw[->, gray] (-0.5,0) -- (4.2,0) node[right] {$y$ (Eje de la espira)};
+    \draw[->, gray] (0,0) -- (-1.1,-1.1) node[below left] {$x$};
+    % Espira circular en plano XZ
+    \draw[very thick, fftPrimary] (0,0) ellipse (0.45 and 1.3);
+    \draw[->, >=stealth, very thick, fftPrimary] (-0.43,0.3) -- (-0.43,-0.3) node[left] {$I$};
+    % Elemento dl arriba
+    \draw[->, >=stealth, very thick, fftAccent] (0,1.3) -- (-0.35,1.0) node[above left=-2pt] {$d\vec{\ell}$};
+    \draw[<->, gray] (-0.15,0) -- (-0.15,1.3) node[midway, left] {$a$};
+    % Vector r hasta P(0,d,0)
+    \filldraw[black] (2.6,0) circle (2pt) node[below] {$P$};
+    \draw[<->, gray] (0,-0.25) -- (2.6,-0.25) node[midway, below] {$d$};
+    \draw[thick, fftDarkBlue] (0,1.3) -- (2.6,0) node[midway, above right=-2pt] {$r = \sqrt{a^2+d^2}$};
+    \draw[gray] (0.5,1.05) arc (-26.5:-90:0.55) node[midway, below right=-2pt, font=\footnotesize] {$\beta$};
+    % Vectores dB, dBy, dBz en P
+    \draw[->, >=stealth, very thick, fftGreen] (2.6,0) -- (3.25,1.3) node[above right] {$d\vec{B}$};
+    \draw[->, >=stealth, thick, fftGreen, dashed] (2.6,0) -- (2.6,1.3) node[above] {$dB_z$};
+    \draw[->, >=stealth, very thick, fftRed] (2.6,0) -- (3.25,0) node[below right] {$dB_y$};
+    \draw[gray] (3.0,0) arc (0:63.4:0.4) node[midway, right=1pt, font=\footnotesize] {$\alpha$};
+\end{tikzpicture}
+\end{center}
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{1.} Situamos la espira de radio $a$ en el plano $XZ$ centrada en el origen, y calculamos el campo en el punto $P(0, d, 0)$ sobre el eje $Y$. Por la geometría circular, el vector tangente a la espira $d\vec{\ell}$ y el vector unitario $\hat{r}$ que va hacia $P$ son siempre \textbf{perpendiculares entre sí} ($d\vec{\ell} \perp \hat{r} \implies \theta = 90^\circ$, $\sin 90^\circ = 1$ y $|\hat{r}| = 1$). Por tanto, el módulo del diferencial de campo es:
 \begin{equation}
-    \frac{F}{\ell} = \frac{\mu_0 I_1 I_2}{2\pi d}
+    |d\vec{B}| = \frac{\mu_0 I\, |d\vec{\ell}|\, |\hat{r}|\, \sin(90^\circ)}{4\pi r^2} = \frac{\mu_0 I\, d\ell}{4\pi r^2}
 \end{equation}
+\textbf{2.} El vector $d\vec{B}$ es perpendicular al plano que forman $d\vec{\ell}$ y $\hat{r}$. Al recorrer toda la espira, por la simetría axial del problema, todas las componentes perpendiculares al eje ($dB_x$ y $dB_z$) se anulan dos a dos, quedando únicamente la \textbf{componente a lo largo del eje $Y$ ($dB_y$)}:
+\begin{equation}
+    dB_y = dB \cdot \cos(\alpha) = dB \cdot \sin(\beta)
+\end{equation}
+En el triángulo rectángulo formado por el radio $a$, la distancia axial $d$ y la hipotenusa $r = \sqrt{a^2 + d^2}$, se cumple que $\sin(\beta) = \frac{a}{r} = \frac{a}{\sqrt{a^2 + d^2}}$. Sustituyendo:
+\begin{equation}
+    dB_y = dB \cdot \frac{a}{r} = \frac{\mu_0 I\, d\ell}{4\pi (\sqrt{a^2 + d^2})^2} \cdot \frac{a}{\sqrt{a^2 + d^2}} = \frac{\mu_0 I a}{4\pi (a^2 + d^2)^{3/2}}\, d\ell
+\end{equation}
+\textbf{3.} Integrando a lo largo de toda la espira, como $\mu_0, I, 4\pi, a, d$ son constantes, sólo integramos la longitud de la circunferencia $\oint d\ell = 2\pi a$:
+\begin{equation}
+    B_y = \oint dB_y = \frac{\mu_0 I a}{4\pi (a^2 + d^2)^{3/2}} \oint d\ell = \frac{\mu_0 I a \cdot (2\pi a)}{4\pi (a^2 + d^2)^{3/2}} \implies \boxed{B_{eje}(d) = \frac{\mu_0 I a^2}{2 (a^2 + d^2)^{3/2}}}
+\end{equation}
+\textbf{4. Caso particular en el centro de la espira ($d = 0$):}
+Si el punto $P$ está situado exactamente en el centro de la espira ($d = 0$), obtenemos:
+\begin{equation}
+    \boxed{\text{Si } d = 0 \implies B_{centro} = \frac{\mu_0 I a^2}{2 (a^2)^{3/2}} = \frac{\mu_0 I}{2a}}
+\end{equation}
+\end{ejercicio}
+
+\subsubsection{Fuerza Magnética entre Dos Conductores Paralelos}
+
+\begin{ejercicio}[Demostración de las Fuerzas entre Dos Cables Paralelos --- Exámenes Febrero 2017 y Enero 2019 / Ejercicio 33]
+Demostrar que el módulo de la fuerza magnética por unidad de longitud entre dos corrientes rectilíneas paralelas indefinidas por las que circulan intensidades $I_1$ e $I_2$ separadas una distancia $d$ es $\frac{F}{L} = \frac{\mu_0 I_1 I_2}{2\pi d}$, y explicar razonadamente qué fuerzas aparecen cuando las corrientes circulan: a) en el mismo sentido, y b) en sentidos contrarios.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+    % Caso a: Corrientes en el mismo sentido (Atracción)
+    \draw[very thick, fftPrimary] (-4.0,-1.3) -- (-4.0,1.3) node[above] {$I_1$};
+    \draw[->, >=stealth, very thick, fftPrimary] (-4.0,-0.5) -- (-4.0,0.5);
+    \draw[very thick, fftPrimary] (-1.4,-1.3) -- (-1.4,1.3) node[above] {$I_2$};
+    \draw[->, >=stealth, very thick, fftPrimary] (-1.4,-0.5) -- (-1.4,0.5);
+    % Flechas separadas con holgura para que nunca se toquen las puntas
+    \draw[->, >=stealth, very thick, fftGreen] (-4.0,0.1) -- (-2.95,0.1) node[midway, above] {$\vec{F}_{21}$};
+    \draw[->, >=stealth, very thick, fftGreen] (-1.4,0.1) -- (-2.45,0.1) node[midway, above] {$\vec{F}_{12}$};
+    % Campos B1 y B2
+    \filldraw[fftDarkBlue] (-4.0,-0.4) circle (1pt);
+    \node[left, fftDarkBlue, font=\footnotesize] at (-4.05,-0.4) {$\odot\,\vec{B}_2$};
+    \node[right, fftDarkBlue, font=\footnotesize] at (-1.35,-0.4) {$\otimes\,\vec{B}_1$};
+    \draw[<->, gray] (-4.0,-1.05) -- (-1.4,-1.05) node[midway, below] {$d$};
+    \node[below=14pt] at (-2.7,-1.1) {\small\textbf{a) Mismo sentido: Se atraen}};
+
+    % Caso b: Corrientes en sentidos contrarios (Repulsión)
+    \draw[very thick, fftDarkBlue] (1.4,-1.3) -- (1.4,1.3) node[above] {$I_1$};
+    \draw[->, >=stealth, very thick, fftDarkBlue] (1.4,-0.5) -- (1.4,0.5);
+    \draw[very thick, fftDarkBlue] (4.0,-1.3) -- (4.0,1.3) node[above] {$I_2$};
+    \draw[<-, >=stealth, very thick, fftDarkBlue] (4.0,-0.5) -- (4.0,0.5);
+    % Flechas hacia afuera
+    \draw[->, >=stealth, very thick, fftRed] (1.4,0.1) -- (0.35,0.1) node[midway, above] {$\vec{F}_{21}$};
+    \draw[->, >=stealth, very thick, fftRed] (4.0,0.1) -- (5.05,0.1) node[midway, above] {$\vec{F}_{12}$};
+    % Campos B1 y B2
+    \node[left, fftPrimary, font=\footnotesize] at (1.35,-0.4) {$\otimes\,\vec{B}_2$};
+    \node[right, fftPrimary, font=\footnotesize] at (4.05,-0.4) {$\otimes\,\vec{B}_1$};
+    \draw[<->, gray] (1.4,-1.05) -- (4.0,-1.05) node[midway, below] {$d$};
+    \node[below=14pt] at (2.7,-1.1) {\small\textbf{b) Sentidos contrarios: Se repelen}};
+\end{tikzpicture}
+\end{center}
+\textbf{Demostración Paso a Paso (Teoría y Exámenes Febrero 2017 / Enero 2019):}\\[4pt]
+\textbf{1. Cálculo del módulo de la fuerza mutua:}
+Cada conductor rectilíneo genera a una distancia $d$ (donde se sitúa el otro conductor) un campo magnético circular cuyo módulo viene dado por la ley de Biot-Savart/Ampère:
+\begin{equation}
+    B_1 = \frac{\mu_0 I_1}{2\pi d} \quad (\text{en la posición del hilo 2}), \qquad B_2 = \frac{\mu_0 I_2}{2\pi d} \quad (\text{en la posición del hilo 1})
+\end{equation}
+Dado que el campo magnético $\vec{B}_1$ es perpendicular al conductor 2 ($\phi = 90^\circ \implies \sin 90^\circ = 1$), la fuerza magnética $F = I L B \sin\phi$ que ejerce el conductor 1 sobre una longitud $L$ del conductor 2 (y recíprocamente el 2 sobre el 1) es:
+\begin{equation}
+    F_{12} = I_2 \cdot L \cdot B_1 = I_2 \cdot L \cdot \frac{\mu_0 I_1}{2\pi d} = \frac{\mu_0 I_1 I_2 L}{2\pi d}, \qquad F_{21} = I_1 \cdot L \cdot B_2 = I_1 \cdot L \cdot \frac{\mu_0 I_2}{2\pi d} = \frac{\mu_0 I_1 I_2 L}{2\pi d}
+\end{equation}
+Ambas fuerzas tienen idéntico módulo, y la fuerza por unidad de longitud es:
+\begin{equation}
+    \boxed{\frac{F}{L} = \frac{\mu_0 I_1 I_2}{2\pi d}}
+\end{equation}
+\textbf{2. Dirección y sentido de las fuerzas (Regla de la Mano Derecha):}
 \begin{itemize}[leftmargin=*]
-    \item Corrientes en el \textbf{mismo sentido}: fuerzas de \textbf{atracción mutua}.
-    \item Corrientes en \textbf{sentidos opuestos}: fuerzas de \textbf{repulsión mutua}.
+    \item \textbf{a) Corrientes en el mismo sentido:} Por la regla de la mano derecha, el hilo 1 crea sobre el hilo 2 un campo $\vec{B}_1$ entrante ($\otimes$), por lo que la fuerza $\vec{F}_{12} = I_2 \vec{L}_2 \times \vec{B}_1$ apunta hacia la izquierda (hacia el hilo 1). Análogamente, el hilo 2 crea sobre el hilo 1 un campo $\vec{B}_2$ saliente ($\odot$), y la fuerza $\vec{F}_{21}$ apunta hacia la derecha (hacia el hilo 2). Conclusión: \textbf{Si las corrientes van en el mismo sentido, los dos conductores se atraen}.
+    \item \textbf{b) Corrientes en sentidos contrarios:} Al invertir el sentido de $I_2$, se invierte el producto vectorial $\vec{F}_{12} = I_2 \vec{L}_2 \times \vec{B}_1$ (apunta hacia la derecha, alejándose de 1) y también se invierte el sentido de $\vec{B}_2$ (entrante $\otimes$ sobre 1, haciendo que $\vec{F}_{21}$ apunte hacia la izquierda). Conclusión: \textbf{Si las corrientes van en sentidos contrarios, los dos conductores se repelen}.
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[Campo Magnético de Dos Conductores Paralelos en Distintos Puntos --- Ejercicio 34 de la Relación]
+Dos conductores fijos rectilíneos y paralelos de gran longitud $A$ y $C$ distan entre sí $10\ \si{\centi\meter}$. Por el conductor $A$ circula una corriente $I_1 = 10\ \si{\ampere}$ y por el $C$ una corriente $I_2 = 15\ \si{\ampere}$ en el mismo sentido (hacia arriba). Hallar la inducción magnética resultante $\vec{B}_{total}$ en los siguientes puntos del plano de los conductores:
+\begin{enumerate}[label=\alph*)]
+    \item En un punto $P_1$ situado a $5\ \si{\centi\meter}$ a la izquierda de $A$ y a $15\ \si{\centi\meter}$ de $C$.
+    \item En el punto medio $P_2$ equidistante de ambos conductores ($5\ \si{\centi\meter}$ de $A$ y $5\ \si{\centi\meter}$ de $C$).
+    \item En un punto $P_3$ situado a $15\ \si{\centi\meter}$ de $A$ y a $5\ \si{\centi\meter}$ a la derecha de $C$.
+\end{enumerate}
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+Aplicando la regla de la mano derecha a una corriente vertical hacia arriba, el campo magnético \textbf{sale del papel ($\odot$)} a la izquierda del conductor y \textbf{entra al papel ($\otimes$)} a la derecha del conductor.\\[4pt]
+\textbf{a) En el punto $P_1$ ($x_1 = 0{,}05\ \si{\meter}$ a la izquierda de $A$, $x_2 = 0{,}15\ \si{\meter}$ a la izquierda de $C$):}
+Como $P_1$ está a la izquierda de ambos conductores, tanto $\vec{B}_1$ como $\vec{B}_2$ tienen el mismo sentido (salientes $\odot$), por lo que se suman sus módulos:
+\begin{equation}
+    B_1 = \frac{\mu_0 I_1}{2\pi x_1} = \frac{4\pi\times 10^{-7} \cdot 10}{2\pi \cdot 0{,}05} = 4 \times 10^{-5}\ \si{\tesla}, \qquad B_2 = \frac{\mu_0 I_2}{2\pi x_2} = \frac{4\pi\times 10^{-7} \cdot 15}{2\pi \cdot 0{,}15} = 2 \times 10^{-5}\ \si{\tesla}
+\end{equation}
+\begin{equation}
+    B_{total}(P_1) = B_1 + B_2 = (4 + 2) \times 10^{-5} = 6 \times 10^{-5}\ \si{\tesla}\quad (\text{saliente }\odot)
+\end{equation}
+\textbf{b) En el punto medio $P_2$ ($x_1 = 0{,}05\ \si{\meter}$ a la derecha de $A$, $x_2 = 0{,}05\ \si{\meter}$ a la izquierda de $C$):}
+Entre los dos cables, $\vec{B}_1$ es entrante ($\otimes$) y $\vec{B}_2$ es saliente ($\odot$). Como tienen sentidos opuestos, sus módulos se restan:
+\begin{equation}
+    B_1 = \frac{\mu_0 \cdot 10}{2\pi \cdot 0{,}05} = 4 \times 10^{-5}\ \si{\tesla}, \qquad B_2 = \frac{\mu_0 \cdot 15}{2\pi \cdot 0{,}05} = 6 \times 10^{-5}\ \si{\tesla}
+\end{equation}
+\begin{equation}
+    B_{total}(P_2) = B_1 - B_2 = -2 \times 10^{-5}\ \si{\tesla} \implies |\vec{B}_{total}(P_2)| = 2 \times 10^{-5}\ \si{\tesla}\quad (\text{predomina }\vec{B}_2\text{ saliente }\odot)
+\end{equation}
+\textbf{c) En el punto $P_3$ ($x_1 = 0{,}15\ \si{\meter}$ a la derecha de $A$, $x_2 = 0{,}05\ \si{\meter}$ a la derecha de $C$):}
+Como $P_3$ está a la derecha de ambos conductores, tanto $\vec{B}_1$ como $\vec{B}_2$ son entrantes ($\otimes$) y se suman:
+\begin{equation}
+    B_1 = \frac{\mu_0 \cdot 10}{2\pi \cdot 0{,}15} = 1{,}\hat{3} \times 10^{-5}\ \si{\tesla}, \qquad B_2 = \frac{\mu_0 \cdot 15}{2\pi \cdot 0{,}05} = 6 \times 10^{-5}\ \si{\tesla}
+\end{equation}
+\begin{equation}
+    B_{total}(P_3) = B_1 + B_2 = 7{,}\hat{3} \times 10^{-5}\ \si{\tesla}\quad (\text{entrante }\otimes)
+\end{equation}
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.2.15 y 1.2.16. FLUJO MAGNÉTICO Y LEY DE AMPÈRE
+% ------------------------------------------------------------------------------
+\subsection{Flujo de Campo Magnético y Ley de Ampère}
+
+\subsubsection{1.2.15. Flujo de Campo Magnético ($\Phi_B$)}
+\begin{definicion}[Flujo Magnético y Ley de Gauss del Magnetismo]
+El \textbf{flujo de campo magnético} $\Phi_B$ a través de una superficie $S$ mide la cantidad neta de magnetismo (líneas de campo $\vec{B}$) que atraviesa dicha superficie. Su unidad en el SI es el \textbf{Weber} ($\si{\weber}$), donde $1\ \si{\weber} = 1\ \si{\tesla\cdot\meter\squared}$:
+\begin{equation}
+    \Phi_B = \int_S \vec{B} \cdot d\vec{S} = \int_S B \cos(\theta)\, dS \qquad \left(\text{si }\vec{B}\text{ es uniforme y }S\text{ plana: }\Phi_B = B \cdot S \cdot \cos\theta\right)
+\end{equation}
+\textbf{Flujo magnético a través de una superficie cerrada:} Dado que no existen polos magnéticos aislados (monopolos magnéticos) y todas las líneas de campo magnético son curvas cerradas, el flujo magnético a través de cualquier superficie cerrada es siempre nulo:
+\begin{equation}
+    \boxed{\oint_S \vec{B} \cdot d\vec{S} = 0}
+\end{equation}
+\end{definicion}
+
+\subsubsection{1.2.16. Ley de Ampère}
+\begin{ley}[Ley de Ampère]
+La circulación del campo magnético $\vec{B}$ a lo largo de una línea cerrada $C$ (curva amperiana) es directamente proporcional a la intensidad de corriente neta $I$ que corta o atraviesa la superficie limitada por esa línea cerrada:
+\begin{equation}
+    \oint_C \vec{B} \cdot d\vec{\ell} = \mu_0 \cdot I_{encerrada}
+\end{equation}
+\end{ley}
+
+\begin{ejercicio}[Cálculo del Campo Magnético de un Hilo Infinito por la Ley de Ampère --- Ejercicio 31 de la Relación]
+Calcular aplicando la Ley de Ampère el campo magnético creado por un hilo conductor rectilíneo infinito de radio despreciable $a$ por el que circula una corriente $I$, a una distancia $d$ de su centro.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw[very thick, fftPrimary] (0,-1.4) -- (0,1.4) node[above] {$I$};
+    \draw[->, >=stealth, very thick, fftPrimary] (0,-0.4) -- (0,0.5);
+    \draw[thick, fftAccent] (0,0) ellipse (1.6 and 0.55);
+    \draw[<->, gray] (0,0) -- (1.6,0) node[midway, below] {$d$};
+    \filldraw[black] (1.6,0) circle (1.5pt) node[below right] {$P$};
+    \draw[->, >=stealth, very thick, fftGreen] (1.6,0) -- (1.9,0.75) node[right] {$\vec{B}$};
+    \draw[->, >=stealth, thick, fftDarkBlue] (1.6,0) -- (1.78,0.45) node[left] {$d\vec{\ell}$};
+\end{tikzpicture}
+\end{center}
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+Aplicamos la Ley de Ampère tomando como línea cerrada una circunferencia concéntrica con el hilo de radio $d$ que pasa por el punto $P$. En todos los puntos de dicha circunferencia:
+\begin{enumerate}[leftmargin=*]
+    \item Los vectores $\vec{B}$ y $d\vec{\ell}$ son tangentes a la circunferencia y llevan la \textbf{misma dirección y sentido} ($\theta = 0^\circ \implies \vec{B}\cdot d\vec{\ell} = B\, d\ell$, producto de módulos).
+    \item El módulo $B$ es \textbf{constante} en toda la curva por estar todos sus puntos a la misma distancia $d$ del hilo, por lo que sale fuera de la integral.
+    \item La integral $\oint d\ell$ es simplemente el perímetro o longitud de la circunferencia de radio $d$, que vale $2\pi d$.
+\end{enumerate}
+Por tanto:
+\begin{equation}
+    \oint \vec{B} \cdot d\vec{\ell} = \oint B\, d\ell = B \oint d\ell = B \cdot (2\pi d) = \mu_0 I \iff \boxed{B = \frac{\mu_0 \cdot I}{2\pi d}}
+\end{equation}
+\footnotesize\textit{Nota adicional:} Si el cable cilíndrico tiene radio finito $a$ con corriente uniformemente distribuida en su sección ($J = \frac{I}{\pi a^2}$), para un punto exterior ($d \ge a$) se encierra toda la corriente y $B_{ext} = \frac{\mu_0 I}{2\pi d}$, mientras que para un punto en el interior del cable ($d < a$) la corriente encerrada es $I_{enc} = I \frac{\pi d^2}{\pi a^2} = I\frac{d^2}{a^2}$, resultando $B_{int}(d) = \frac{\mu_0 I d}{2\pi a^2}$.
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.2.17. LEY DE FARADAY - LENZ
+% ------------------------------------------------------------------------------
+\subsection{Inducción Electromagnética: Ley de Faraday y Ley de Lenz}
+
+Se puede inducir una corriente eléctrica en una espira o circuito cerrado mediante el uso de campos magnéticos variables en el tiempo. Cuando varía el flujo del campo magnético $\Phi_B = \vec{B}\cdot\vec{A} = B A \cos\phi$ que atraviesa la superficie limitada por una espira, aparece en ella una \textbf{fuerza electromotriz inducida} $\mathcal{E}$ (f.e.m., medida en voltios $[\si{\volt}]$) que pone en movimiento las cargas en el circuito.
+
+\begin{ley}[Ley de Faraday-Lenz]
+La fuerza electromotriz inducida $\mathcal{E}$ en una espira es igual a la derivada temporal del flujo magnético cambiada de signo (y multiplicada por $N$ si se trata de una bobina de $N$ espiras):
+\begin{equation}
+    \mathcal{E} = -\frac{d\Phi_B}{dt} \quad (\text{1 espira}), \qquad \mathcal{E} = -N \frac{d\Phi_B}{dt} \quad (N\text{ espiras})
+\end{equation}
+\textbf{Criterio de sentido de la Ley de Lenz:} La corriente inducida se opone siempre a la causa (variación de flujo magnético) que la produce:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Si el flujo magnético aumenta ($\Delta\Phi_B > 0$):} Aparece una f.e.m. que provoca una corriente inducida cuyo campo magnético propio $B_{ind}$ tiene \textbf{sentido opuesto} al campo externo $\vec{B}$ para contrarrestar el aumento (ej. si $\vec{B}$ apunta hacia arriba y crece, la corriente inducida gira en \textbf{sentido horario} vista desde arriba; si $\vec{B}$ es entrante $\otimes$ y aumenta, la corriente inducida es \textbf{antihoraria}).
+    \item \textbf{Si el flujo magnético disminuye ($\Delta\Phi_B < 0$):} Aparece una f.e.m. que provoca una corriente inducida cuyo campo magnético propio $B_{ind}$ tiene el \textbf{mismo sentido} que el campo externo $\vec{B}$ para oponerse a la disminución (ej. si $\vec{B}$ apunta hacia arriba y decrece, la corriente inducida gira en \textbf{sentido antihorario} vista desde arriba; si $\vec{B}$ es entrante $\otimes$ y disminuye, la corriente inducida es \textbf{horaria}).
 \end{itemize}
 \end{ley}
 
 \begin{center}
-\begin{tikzpicture}[scale=1.0]
-    % Caso 1: Corrientes mismo sentido
-    \draw[very thick, fftPrimary] (-3.5,-1.2) -- (-3.5,1.2) node[above] {$I_1$};
-    \draw[->, >=stealth, very thick, fftPrimary] (-3.5,-0.4) -- (-3.5,0.4);
-    \draw[very thick, fftPrimary] (-1.5,-1.2) -- (-1.5,1.2) node[above] {$I_2$};
-    \draw[->, >=stealth, very thick, fftPrimary] (-1.5,-0.4) -- (-1.5,0.4);
-    \draw[->, >=stealth, very thick, fftGreen] (-3.5,0) -- (-2.4,0) node[midway, above] {$\vec{F}_{21}$};
-    \draw[->, >=stealth, very thick, fftGreen] (-1.5,0) -- (-2.6,0) node[midway, above] {$\vec{F}_{12}$};
-    \node[below=8pt] at (-2.5,-1.2) {\small\textbf{Atracción} (mismo sentido)};
+\begin{tikzpicture}[scale=0.95]
+    % Caso 1: B hacia arriba crece -> I horaria
+    \begin{scope}[shift={(-3.5,0)}]
+        \draw[thick, fftPrimary] (0,0) ellipse (1.4 and 0.45);
+        \draw[->, >=stealth, very thick, fftAccent] (0.9,-0.34) arc (-45:-135:1.25 and 0.45) node[midway, below=2pt] {$\mathcal{E}, I_{ind}$ (horaria)};
+        \draw[->, >=stealth, thick, fftDarkBlue] (0,0) -- (0,1.4) node[above] {$\vec{A}$};
+        \draw[->, >=stealth, very thick, fftGreen] (0,0) -- (-0.6,1.25) node[above left] {$\vec{B}$ crece};
+        \draw[gray] (0,0.6) arc (90:116:0.6) node[midway, above, font=\footnotesize] {$\phi$};
+    \end{scope}
 
-    % Caso 2: Corrientes sentido opuesto
-    \draw[very thick, fftDarkBlue] (1.5,-1.2) -- (1.5,1.2) node[above] {$I_1$};
-    \draw[->, >=stealth, very thick, fftDarkBlue] (1.5,-0.4) -- (1.5,0.4);
-    \draw[very thick, fftDarkBlue] (3.5,-1.2) -- (3.5,1.2) node[above] {$I_2$};
-    \draw[<-, >=stealth, very thick, fftDarkBlue] (3.5,-0.4) -- (3.5,0.4);
-    \draw[->, >=stealth, very thick, fftRed] (1.5,0) -- (0.6,0) node[midway, above] {$\vec{F}$};
-    \draw[->, >=stealth, very thick, fftRed] (3.5,0) -- (4.4,0) node[midway, above] {$\vec{F}$};
-    \node[below=8pt] at (2.5,-1.2) {\small\textbf{Repulsión} (sentidos opuestos)};
+    % Caso 2: B hacia arriba decrece -> I antihoraria
+    \begin{scope}[shift={(3.5,0)}]
+        \draw[thick, fftPrimary] (0,0) ellipse (1.4 and 0.45);
+        \draw[->, >=stealth, very thick, fftAccent] (-0.9,-0.34) arc (-135:-45:1.25 and 0.45) node[midway, below=2pt] {$\mathcal{E}, I_{ind}$ (antihoraria)};
+        \draw[->, >=stealth, thick, fftDarkBlue] (0,0) -- (0,1.4) node[above] {$\vec{A}$};
+        \draw[->, >=stealth, very thick, fftRed] (0,0) -- (-0.6,1.25) node[above left] {$\vec{B}$ decrece};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 
-\subsection{Inducción Electromagnética y Autoinducción}
-\begin{ley}[Ley de Faraday-Lenz y Autoinducción en Solenoide]
-La fuerza electromotriz inducida en un circuito cerrado de $N$ espiras ante una variación de flujo magnético es:
+\begin{ejercicio}[Barra Conductora Móvil sobre Raíl en Forma de U --- Ejercicio 38 de la Relación]
+Sobre un hilo conductor en forma de U como el de la figura se desplaza hacia la derecha una barra conductora móvil $PQ$ de longitud $L = 1\ \si{\meter}$ y resistencia eléctrica $R = 5\ \si{\ohm}$. Dicho montaje se encuentra inmerso en un campo magnético uniforme entrante al papel ($\otimes$) de valor $B = 100\ \text{Gauss}$ ($10\,000\ \text{Gauss} = 1\ \si{\tesla}$).
+\begin{enumerate}[label=\alph*)]
+    \item Calcular la fuerza electromotriz inducida en el circuito cuando la barra se desplaza hacia la derecha a una velocidad constante de $v = 1\ \si{\meter\per\second}$.
+    \item Calcular la intensidad de corriente que pasa por la barra móvil e indicar razonadamente el sentido de la corriente inducida.
+    \item ¿En qué cambiaría el problema si el movimiento de la barra fuese en sentido contrario (hacia la izquierda)?
+\end{enumerate}
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+    % Campo magnético entrante X
+    \foreach \x in {-2.2,-1.1,0,1.1,2.2} {
+        \foreach \y in {-0.8,0,0.8} {
+            \node[fftPrimary!60, font=\footnotesize] at (\x,\y) {$\times$};
+        }
+    }
+    \node[left, fftPrimary] at (-2.5,0.6) {$\vec{B}$ (hacia dentro, $\otimes$)};
+    % Raíl en U con resistencia R
+    \draw[very thick, fftDarkBlue] (2.5,1.1) -- (-1.8,1.1) node[above left] {$D$} to[R, l_={$R = 5\ \si{\ohm}$}] (-1.8,-1.1) node[below left] {$C$} -- (2.5,-1.1);
+    % Barra móvil PQ
+    \draw[line width=2.5pt, fftAccent] (0.8,-1.25) node[below] {$Q$} -- (0.8,1.25) node[above] {$P$};
+    % Velocidad v y diferencial dl
+    \draw[->, >=stealth, very thick, fftGreen] (0.8,0) -- (1.8,0) node[above] {$\vec{v}$};
+    \draw[<->, gray] (-1.4,-1.05) -- (-1.4,1.05) node[midway, right] {$L = 1\ \si{\meter}$};
+    % Corriente inducida antihoraria
+    \draw[->, >=stealth, thick, fftRed] (0.55,-0.5) -- (0.55,0.5) node[midway, left] {$I_{ind}$};
+\end{tikzpicture}
+\end{center}
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{a) Fuerza electromotriz inducida:}
+En primer lugar pasamos el campo magnético a Teslas: $B = 100\ \text{Gauss} = 0{,}01\ \si{\tesla}$. Al desplazarse la barra hacia la derecha una distancia $d\ell = v\, dt$, aumenta la superficie encerrada por el circuito en $dS = L \cdot d\ell = L \cdot v\, dt$, por lo que aumenta el flujo magnético:
 \begin{equation}
-    \mathcal{E} = -N \frac{d\Phi_B}{dt}
+    d\Phi_B = B \cdot dS = B \cdot L \cdot d\ell = B \cdot L \cdot v\, dt
 \end{equation}
-Para un solenoide de longitud $\ell$, área $A$ y $N$ espiras, el coeficiente de autoinducción es:
+Aplicando la Ley de Faraday:
 \begin{equation}
-    L = \frac{N \Phi_B}{I} = \mu_0 \frac{N^2 A}{\ell} \quad [\si{\henry}]
+    \mathcal{E} = \text{f.e.m.} = -\frac{d\Phi_B}{dt} = -B \cdot L \cdot v = -(0{,}01\ \si{\tesla}) \cdot (1\ \si{\meter}) \cdot (1\ \si{\meter\per\second}) \implies \boxed{\mathcal{E} = -0{,}01\ \si{\volt}\quad (|\mathcal{E}| = 0{,}01\ \si{\volt})}
 \end{equation}
-La tensión autoinducida al variar la corriente es $\mathcal{E}_L = -L \frac{di}{dt}$, almacenando la energía magnética $U_B = \frac{1}{2} L I^2$.
+\textbf{b) Intensidad de corriente y sentido (Ley de Lenz):}
+Como la resistencia del circuito es $R = 5\ \si{\ohm}$, la magnitud de la corriente inducida es:
+\begin{equation}
+    I = \frac{|\mathcal{E}|}{R} = \frac{0{,}01\ \si{\volt}}{5\ \si{\ohm}} = 0{,}002\ \si{\ampere} = 2\ \si{\milli\ampere}
+\end{equation}
+Como el campo externo $\vec{B}$ es entrante ($\otimes$) y el flujo $\Phi_B$ \textbf{aumenta} al crecer el área, por la Ley de Lenz la corriente inducida debe crear un campo magnético saliente ($\odot$) que se oponga a dicho aumento. Por la regla de la mano derecha, \textbf{el sentido de la corriente inducida es antihorario} (sube por la barra de $Q$ hacia $P$).\\[4pt]
+\textbf{c) Movimiento en sentido contrario (hacia la izquierda):}
+Al moverse la barra hacia la izquierda disminuiría el área encerrada y, por tanto, disminuiría el flujo de campo magnético entrante ($\Delta\Phi_B < 0$), apareciendo una fuerza electromotriz de signo opuesto ($+0{,}01\ \si{\volt}$) y una \textbf{corriente inducida en sentido horario} (para crear campo entrante $\otimes$ que contrarreste la pérdida de flujo).
+\end{ejercicio}
+
+\begin{ejercicio}[Bobina que Gira en un Campo Magnético Uniforme (Generador Alterno) --- Ejercicio 39 de la Relación]
+Una bobina plana de $N = 50$ espiras de $A = 200\ \si{\centi\meter\squared}$ cada una gira alrededor de un eje contenido en su plano con una velocidad constante de $\nu = 300\ \text{rpm}$ perpendicularmente a un campo magnético uniforme de $B = 0{,}5\ \si{\tesla}$. Hallar la expresión de la fuerza electromotriz inducida $\mathcal{E}(t)$.
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{1) Datos en el SI y cálculo de la velocidad angular de giro $\omega$:}
+Tenemos $N = 50\text{ espiras}$, $S = A = 200\ \si{\centi\meter\squared} = 0{,}02\ \si{\meter\squared}$ y $B = 0{,}5\ \si{\tesla}$. Como la bobina da $300$ vueltas en un minuto ($60\ \si{\second}$), el periodo $T$ (tiempo que tarda en dar 1 vuelta) y la velocidad angular $\omega = \frac{2\pi}{T}$ son:
+\begin{equation}
+    T = \frac{60\ \si{\second}}{300\ \text{vueltas}} = 0{,}2\ \si{\second} \implies \omega = \frac{2\pi}{T} = \frac{2\pi}{0{,}2} = 10\pi\ \si{\radian\per\second}
+\end{equation}
+\textbf{2) Flujo magnético y derivación mediante la Ley de Faraday:}
+Al girar la bobina, el ángulo entre el vector campo magnético $\vec{B}$ y el vector superficie $\vec{S}$ varía con el tiempo según $\phi(t) = \omega t = 10\pi t$. El flujo que atraviesa cada espira es:
+\begin{equation}
+    \Phi_B(t) = \vec{B} \cdot \vec{S} = B \cdot S \cdot \cos(\phi) = B \cdot S \cdot \cos(10\pi t)
+\end{equation}
+Derivando respecto al tiempo para las $N$ espiras, se obtiene una \textbf{señal de tensión alterna sinusoidal}:
+\begin{equation}
+    \mathcal{E}(t) = -N \frac{d\Phi_B}{dt} = -N \cdot B \cdot S \frac{d\cos(10\pi t)}{dt} = -N \cdot B \cdot S \cdot (-10\pi \sin(10\pi t)) = N \cdot B \cdot S \cdot 10\pi \sin(10\pi t)
+\end{equation}
+Sustituyendo los valores numéricos ($50 \cdot 0{,}5 \cdot 0{,}02 = 0{,}5$):
+\begin{equation}
+    \mathcal{E}(t) = 50 \cdot 0{,}5 \cdot 0{,}02 \cdot 10\pi \sin(10\pi t) \implies \boxed{\mathcal{E}(t) = 5\pi \sin(10\pi t)\ \si{\volt}}
+\end{equation}
+\end{ejercicio}
+
+% ------------------------------------------------------------------------------
+% 1.2.18. FENÓMENOS DE AUTOINDUCCIÓN. BOBINA O SOLENOIDE
+% ------------------------------------------------------------------------------
+\subsection{Fenómenos de Autoinducción: Bobina o Solenoide}
+
+\begin{ley}[Campo Magnético e Inductancia de una Bobina o Solenoide]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Campo magnético interior de una bobina o solenoide:} Aplicando la Ley de Ampère a un solenoide de longitud $L$ formado por $N$ espiras o vueltas por el que pasa una intensidad $I$, el campo magnético generado en su interior es uniforme y vale:
+    \begin{equation}
+        B = \frac{\mu_0 N I}{L} = \mu_0 n I, \qquad \text{siendo } n = \frac{N}{L}\ \text{el número de espiras por unidad de longitud}
+    \end{equation}
+    \item \textbf{Bobina con corriente variable / alterna (Autoinducción):} Cuando por una bobina circula una corriente que varía con el tiempo $I(t)$, se provoca un flujo magnético variable en la propia bobina. Por la Ley de Lenz, esta variación de flujo hace que aparezca una fuerza electromotriz autoinducida ($\mathcal{E}$) que \textbf{se opone a las variaciones de corriente}:
+    \begin{itemize}[leftmargin=*]
+        \item Si la corriente $I$ está \textbf{en aumento} ($dI/dt > 0$), la f.e.m. de la Ley de Lenz se opone al incremento polarizando positivamente el terminal de entrada.
+        \item Si la corriente $I$ está \textbf{disminuyendo} ($dI/dt < 0$), la f.e.m. invierte su polaridad tratando de mantener la corriente.
+    \end{itemize}
+    \item \textbf{Inductancia o Coeficiente de Autoinducción ($L$):} Es una medida de la oposición de un inductor o bobina a un cambio de corriente, y se define como:
+    \begin{equation}
+        L = \frac{N \cdot \Phi_B}{I} \qquad \left[\text{Unidad de autoinductancia: Henrio } (\si{\henry}) = \frac{\si{\weber}}{\si{\ampere}}\right]
+    \end{equation}
+    Sustituyendo el flujo de un solenoide ($\Phi_B = B \cdot A = \frac{\mu_0 N I}{\ell} A$), su inductancia geométrica es $L = \frac{\mu_0 N^2 A}{\ell}$.
+    \item \textbf{Relación entre la caída de tensión y la corriente en una bobina:} Derivando $N \Phi_B = L I$ respecto al tiempo:
+    \begin{equation}
+        N \frac{d\Phi_B}{dt} = L \frac{dI}{dt} \implies \mathcal{E} = -N \frac{d\Phi_B}{dt} = -L \frac{dI}{dt}
+    \end{equation}
+    La caída de tensión entre los terminales $a$ y $b$ de la bobina (en el sentido de la corriente $I$) y la energía magnética almacenada son:
+    \begin{equation}
+        \boxed{V_{ab} = V_a - V_b = L \frac{dI}{dt}}, \qquad U_B = \frac{1}{2} L I^2\ [\si{\joule}]
+    \end{equation}
+\end{enumerate}
 \end{ley}
 
-% ==============================================================================
-% 1.4. EJERCICIOS RESUELTOS DE EXAMEN
-% ==============================================================================
-\section{Ejercicios Resueltos de Exámenes de la UGR}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Bobina 1: I en aumento
+    \begin{scope}[shift={(-3.5,0)}]
+        \draw (0,0) -- (0,0.8) to[L, l={$L$}, v^>={$V_{ab} = L\frac{dI}{dt} > 0$}] (3.2,0.8) -- (3.2,0);
+        \draw[->, >=stealth, thick, fftPrimary] (0,0.1) -- (0,0.6) node[midway, left] {$I \uparrow$};
+        \draw[->, >=stealth, thick, fftPrimary] (3.2,0.6) -- (3.2,0.1);
+        \node[below] at (1.6,-0.1) {\footnotesize\textbf{a) $I$ en aumento: f.e.m. se opone al aumento}};
+    \end{scope}
 
-\begin{ejercicio}[Cálculo de Campo y Potencial de Hilo Finito e Infinito --- Examen Febrero 2017]
+    % Bobina 2: I disminuyendo
+    \begin{scope}[shift={(3.5,0)}]
+        \draw (0,0) -- (0,0.8) to[L, l={$L$}, v^<={$V_{ab} = L\frac{dI}{dt} < 0$}] (3.2,0.8) -- (3.2,0);
+        \draw[->, >=stealth, thick, fftRed] (0,0.1) -- (0,0.6) node[midway, left] {$I \downarrow$};
+        \draw[->, >=stealth, thick, fftRed] (3.2,0.6) -- (3.2,0.1);
+        \node[below] at (1.6,-0.1) {\footnotesize\textbf{b) $I$ disminuyendo: f.e.m. invierte su signo}};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{ejercicio}[F.e.m. Inducida y Autoinducción de una Bobina --- Ejercicio 37 de la Relación]
+Por una bobina de $N = 1000$ espiras circula una corriente constante de $I = 5\ \si{\ampere}$ que produce un flujo magnético de $\Phi_B = 10^{-4}\ \si{\weber}$ en cada espira. Calcular:
+\begin{enumerate}[label=\alph*)]
+    \item El valor medio de la f.e.m. inducida si se interrumpe la corriente en $\Delta t = 0{,}02\ \si{\second}$.
+    \item La autoinducción (inductancia $L$) de la bobina.
+\end{enumerate}
+\tcbline
+\textbf{Resolución Paso a Paso (Corregido en clase):}\\[4pt]
+\textbf{a) Valor medio de la f.e.m. al cortar la corriente:}
+Si se corta la corriente pasamos de tener un flujo inicial $\Phi_{B,inicial} = 10^{-4}\ \si{\weber}$ a un flujo final nulo $\Phi_{B,final} = 0\ \si{\weber}$, luego la variación de flujo es $\Delta\Phi_B = \Phi_{B,final} - \Phi_{B,inicial} = 0 - 10^{-4} = -10^{-4}\ \si{\weber}$. Aplicando la Ley de Faraday:
+\begin{equation}
+    \mathcal{E} = \text{f.e.m.} = -N \frac{\Delta\Phi_B}{\Delta t} = \frac{-1000 \cdot (-10^{-4}\ \si{\weber})}{0{,}02\ \si{\second}} = \frac{0{,}1}{0{,}02} = \boxed{5\ \si{\volt}}
+\end{equation}
+\textbf{b) Autoinducción de la bobina:}
+\begin{equation}
+    L = \frac{N \cdot \Phi_B}{I} = \frac{1000 \cdot 10^{-4}\ \si{\weber}}{5\ \si{\ampere}} = \boxed{0{,}02\ \si{\henry} = 20\ \si{\milli\henry}}
+\end{equation}
+\footnotesize\textit{Comprobación:} Usando directamente $|\mathcal{E}| = L \frac{|\Delta I|}{\Delta t} = 0{,}02\ \si{\henry} \cdot \frac{5\ \si{\ampere}}{0{,}02\ \si{\second}} = 5\ \si{\volt}$, obtenemos exactamente el mismo resultado.
+\end{ejercicio}
+
+% ==============================================================================
+% SECCIÓN 1.3. PROBLEMAS ADICIONALES DE EXÁMENES DE LA UGR
+% ==============================================================================
+\section{Problemas Adicionales de Exámenes Oficiales de la UGR}
+
+\begin{ejercicio}[Cálculo de Campo y Potencial de Hilo Infinito --- Examen Convocatoria Oficial]
 Se tiene un hilo rectilíneo de longitud infinita cargado uniformemente con densidad lineal constante $\lambda = 4 \times 10^{-9}\ \si{\coulomb\per\meter}$.
 \begin{enumerate}[label=\alph*)]
     \item Calcular el campo eléctrico a una distancia $r_1 = 0{,}05\ \si{\meter}$ del hilo.
     \item Calcular la diferencia de potencial entre los puntos $r_1 = 0{,}05\ \si{\meter}$ y $r_2 = 0{,}20\ \si{\meter}$.
 \end{enumerate}
 \tcbline
-\textbf{Esquema Geométrico del Problema:}\\[4pt]
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
+\begin{tikzpicture}[scale=1.05]
     % Hilo
-    \draw[very thick, fftAccent] (-3,0) -- (3,0) node[right] {Hilo con $\lambda$};
+    \draw[very thick, fftAccent] (-3,0) -- (3,0) node[right] {Hilo con $\lambda = 4\ \si{\nano\coulomb\per\meter}$};
     % Puntos r1 y r2
-    \draw[dashed, gray] (0,0) -- (0,2.5);
+    \draw[dashed, gray] (0,0) -- (0,2.4);
     \filldraw[fftPrimary] (0,0.8) circle (2pt) node[right=4pt] {$P_1\ (r_1 = 0{,}05\ \si{\meter})$};
-    \draw[->, >=stealth, thick, fftGreen] (0,0.8) -- (0,1.7) node[right] {$\vec{E}(r_1)$};
-    \filldraw[fftPrimary] (0,2.2) circle (2pt) node[right=4pt] {$P_2\ (r_2 = 0{,}20\ \si{\meter})$};
+    \draw[->, >=stealth, thick, fftGreen] (0,0.8) -- (0,1.65) node[right] {$\vec{E}(r_1)$};
+    \filldraw[fftPrimary] (0,2.1) circle (2pt) node[right=4pt] {$P_2\ (r_2 = 0{,}20\ \si{\meter})$};
     \draw[<->, gray] (-0.3,0) -- (-0.3,0.8) node[midway, left] {$r_1$};
-    \draw[<->, gray] (-0.7,0) -- (-0.7,2.2) node[midway, left] {$r_2$};
+    \draw[<->, gray] (-0.7,0) -- (-0.7,2.1) node[midway, left] {$r_2$};
 \end{tikzpicture}
 \end{center}
 \textbf{Solución Paso a Paso:}\\[4pt]
-a) Por simetría cilíndrica, aplicando la Ley de Gauss:
+\textbf{a)} Por simetría cilíndrica, aplicando la Ley de Gauss a un cilindro coaxial de radio $r$ y longitud $L$:
 \begin{equation}
-    E(r) = \frac{\lambda}{2\pi\varepsilon_0 r} = \frac{2 K_e \lambda}{r}
+    \oint \vec{E}\cdot d\vec{S} = E(r) \cdot (2\pi r L) = \frac{\lambda L}{\varepsilon_0} \implies E(r) = \frac{\lambda}{2\pi\varepsilon_0 r} = \frac{2 K_0 \lambda}{r}
 \end{equation}
 \begin{equation}
-    E(0{,}05) = \frac{2 \times (9 \times 10^9) \times (4 \times 10^{-9})}{0{,}05} = \frac{72}{0{,}05} = 1440\ \si{\volt\per\meter} \quad \implies \vec{E} = 1440\, \hat{u}_r\ \si{\volt\per\meter}
+    E(0{,}05) = \frac{2 \times (9 \times 10^9) \times (4 \times 10^{-9})}{0{,}05} = \frac{72}{0{,}05} = 1440\ \si{\volt\per\meter} \implies \vec{E}(r_1) = 1440\, \hat{u}_r\ \si{\volt\per\meter}
 \end{equation}
-b) Diferencia de potencial integrando el campo:
+\textbf{b)} Diferencia de potencial integrando el campo entre $r_1$ y $r_2$:
 \begin{equation}
-    V(r_1) - V(r_2) = \frac{\lambda}{2\pi\varepsilon_0} \ln\left(\frac{r_2}{r_1}\right) = 72 \cdot \ln\left(\frac{0{,}20}{0{,}05}\right) = 72 \cdot \ln(4) \approx 99{,}81\ \si{\volt}
+    V(r_1) - V(r_2) = \int_{r_1}^{r_2} E(r)\, dr = \frac{\lambda}{2\pi\varepsilon_0} \ln\left(\frac{r_2}{r_1}\right) = 72 \cdot \ln\left(\frac{0{,}20}{0{,}05}\right) = 72 \cdot \ln(4) \approx 99{,}81\ \si{\volt}
 \end{equation}
 \end{ejercicio}
 
-\begin{ejercicio}[Campo Magnético de Tres Hilos Paralelos --- Examen Enero 2021]
-Tres hilos conductores paralelos indefinidos pasan por $x_1 = -d$, $x_2 = 0$ y $x_3 = +d$ ($d = 0{,}10\ \si{\meter}$). Por 1 y 3 circulan $I_1 = 5\ \si{\ampere}$ e $I_3 = 5\ \si{\ampere}$ saliendo ($+\hat{k}$), y por 2 circula $I_2 = 10\ \si{\ampere}$ entrando ($-\hat{k}$).
-Determinar la fuerza magnética por unidad de longitud sobre el hilo 2 y sobre el hilo 3.
+\begin{ejercicio}[Fuerza Magnética entre Tres Hilos Paralelos --- Examen Enero 2021]
+Tres hilos conductores rectilíneos, paralelos y muy largos están dispuestos perpendicularmente al plano $XY$ pasando por las coordenadas $x_1 = -d$, $x_2 = 0$ y $x_3 = +d$ con $d = 0{,}10\ \si{\meter}$. Por los hilos 1 y 3 circulan corrientes $I_1 = 5\ \si{\ampere}$ e $I_3 = 5\ \si{\ampere}$ saliendo del papel ($+\hat{k}$). Por el hilo central 2 circula $I_2 = 10\ \si{\ampere}$ entrando al papel ($-\hat{k}$). Determinar la fuerza magnética por unidad de longitud sobre el hilo 2 y sobre el hilo 3.
 \tcbline
-\textbf{Diagrama de Fuerzas en Corte Transversal:}\\[4pt]
 \begin{center}
-\begin{tikzpicture}[scale=1.2]
-    % Eje horizontal
-    \draw[->, gray] (-2.2,0) -- (2.5,0) node[right] {$x$};
-    % Hilo 1 (x = -d)
-    \draw[thick, fftPrimary] (-1.5,0) circle (0.25);
-    \filldraw[fftPrimary] (-1.5,0) circle (2pt);
-    \node[below=8pt] at (-1.5,0) {$H_1\ (\odot\ I_1)$};
+\begin{tikzpicture}[scale=1.15]
+    % Eje horizontal amplio para separar holgadamente las etiquetas de los 3 hilos
+    \draw[->, gray] (-3.5,0) -- (3.8,0) node[right] {$x$};
+    % Hilo 1 (x = -2.5)
+    \draw[thick, fftPrimary, fill=white] (-2.5,0) circle (0.24);
+    \filldraw[fftPrimary] (-2.5,0) circle (2pt);
+    \node[below=9pt] at (-2.5,0) {$H_1\ (\odot\ I_1 = 5\ \si{\ampere})$};
     % Hilo 2 (x = 0)
-    \draw[thick, fftDarkBlue] (0,0) circle (0.25);
-    \draw[thick, fftDarkBlue] (-0.17,-0.17) -- (0.17,0.17);
-    \draw[thick, fftDarkBlue] (-0.17,0.17) -- (0.17,-0.17);
-    \node[below=8pt] at (0,0) {$H_2\ (\otimes\ I_2)$};
-    % Hilo 3 (x = +d)
-    \draw[thick, fftPrimary] (1.5,0) circle (0.25);
-    \filldraw[fftPrimary] (1.5,0) circle (2pt);
-    \node[below=8pt] at (1.5,0) {$H_3\ (\odot\ I_3)$};
+    \draw[thick, fftDarkBlue, fill=white] (0,0) circle (0.24);
+    \draw[thick, fftDarkBlue] (-0.16,-0.16) -- (0.16,0.16);
+    \draw[thick, fftDarkBlue] (-0.16,0.16) -- (0.16,-0.16);
+    \node[below=9pt] at (0,0) {$H_2\ (\otimes\ I_2 = 10\ \si{\ampere})$};
+    % Hilo 3 (x = +2.5)
+    \draw[thick, fftPrimary, fill=white] (2.5,0) circle (0.24);
+    \filldraw[fftPrimary] (2.5,0) circle (2pt);
+    \node[below=9pt] at (2.5,0) {$H_3\ (\odot\ I_3 = 5\ \si{\ampere})$};
     % Fuerzas en Hilo 2
-    \draw[->, >=stealth, very thick, fftAccent] (0,0.4) -- (0.8,0.4) node[above] {$\vec{F}_{1 \to 2}$};
-    \draw[->, >=stealth, very thick, fftGreen] (0,0.4) -- (-0.8,0.4) node[above] {$\vec{F}_{3 \to 2}$};
-    % Cotas
-    \draw[<->, gray] (-1.5,-0.7) -- (0,-0.7) node[midway, below] {$d$};
-    \draw[<->, gray] (0,-0.7) -- (1.5,-0.7) node[midway, below] {$d$};
+    \draw[->, >=stealth, very thick, fftAccent] (0,0.42) -- (1.1,0.42) node[above] {$\vec{F}_{1 \to 2}$};
+    \draw[->, >=stealth, very thick, fftGreen] (0,0.42) -- (-1.1,0.42) node[above] {$\vec{F}_{3 \to 2}$};
+    % Cotas inferiores separadas de los textos
+    \draw[<->, gray] (-2.5,-0.95) -- (0,-0.95) node[midway, below] {$d = 0{,}10\ \si{\meter}$};
+    \draw[<->, gray] (0,-0.95) -- (2.5,-0.95) node[midway, below] {$d = 0{,}10\ \si{\meter}$};
 \end{tikzpicture}
 \end{center}
 \textbf{Solución Paso a Paso:}\\[4pt]
-1) En el hilo central 2: el hilo 1 (corriente contraria) lo repele hacia la derecha ($+\hat{i}$) con $1 \times 10^{-4}\ \si{\newton\per\meter}$; el hilo 3 lo repele hacia la izquierda ($-\hat{i}$) con idéntica magnitud. Por simetría:
+\textbf{1) Fuerza neta por unidad de longitud sobre el hilo central 2 (en $x = 0$):}
+\begin{itemize}[leftmargin=*]
+    \item El hilo 1 ($+\hat{k}$) y el hilo 2 ($-\hat{k}$) tienen corrientes de sentidos opuestos $\implies$ se repelen. La fuerza que 1 ejerce sobre 2 apunta hacia la derecha ($+\hat{i}$):
+    \begin{equation}
+        \frac{\vec{F}_{1 \to 2}}{\ell} = +\frac{\mu_0 I_1 I_2}{2\pi d}\hat{i} = \frac{(4\pi \times 10^{-7}) \times 5 \times 10}{2\pi \times 0{,}10}\hat{i} = +1 \times 10^{-4}\ \si{\newton\per\meter}\ \hat{i}
+    \end{equation}
+    \item El hilo 3 ($+\hat{k}$) y el hilo 2 ($-\hat{k}$) también tienen sentidos opuestos $\implies$ se repelen. La fuerza que 3 ejerce sobre 2 apunta hacia la izquierda ($-\hat{i}$):
+    \begin{equation}
+        \frac{\vec{F}_{3 \to 2}}{\ell} = -\frac{\mu_0 I_3 I_2}{2\pi d}\hat{i} = -1 \times 10^{-4}\ \si{\newton\per\meter}\ \hat{i}
+    \end{equation}
+\end{itemize}
+Sumando ambas contribuciones, por simetría la fuerza neta sobre el hilo central 2 es nula:
 \begin{equation}
-    \vec{F}_2^{neta} / \ell = \vec{0}
+    \frac{\vec{F}_2^{neta}}{\ell} = \frac{\vec{F}_{1 \to 2}}{\ell} + \frac{\vec{F}_{3 \to 2}}{\ell} = \vec{0}
 \end{equation}
-2) En el hilo 3: el hilo 2 lo repele hacia la derecha ($+1 \times 10^{-4}\ \si{\newton\per\meter}\hat{i}$) y el hilo 1 (corriente en mismo sentido a distancia $2d$) lo atrae hacia la izquierda ($-0{,}25 \times 10^{-4}\ \si{\newton\per\meter}\hat{i}$):
+\textbf{2) Fuerza neta por unidad de longitud sobre el hilo 3 (en $x = +d$):}
+\begin{itemize}[leftmargin=*]
+    \item El hilo 2 (sentido contrario a distancia $d = 0{,}10\ \si{\meter}$) repele al hilo 3 hacia la derecha ($+\hat{i}$):
+    \begin{equation}
+        \frac{\vec{F}_{2 \to 3}}{\ell} = +\frac{\mu_0 I_2 I_3}{2\pi d}\hat{i} = +1 \times 10^{-4}\ \si{\newton\per\meter}\ \hat{i}
+    \end{equation}
+    \item El hilo 1 (mismo sentido a distancia $2d = 0{,}20\ \si{\meter}$) atrae al hilo 3 hacia la izquierda ($-\hat{i}$):
+    \begin{equation}
+        \frac{\vec{F}_{1 \to 3}}{\ell} = -\frac{\mu_0 I_1 I_3}{2\pi (2d)}\hat{i} = -\frac{(4\pi \times 10^{-7}) \times 5 \times 5}{2\pi \times 0{,}20}\hat{i} = -0{,}25 \times 10^{-4}\ \si{\newton\per\meter}\ \hat{i}
+    \end{equation}
+\end{itemize}
+Por tanto, la fuerza magnética total por unidad de longitud sobre el hilo 3 es:
 \begin{equation}
-    \frac{\vec{F}_3^{neta}}{\ell} = (1{,}00 - 0{,}25) \times 10^{-4}\ \hat{i} = +0{,}75 \times 10^{-4}\ \si{\newton\per\meter}\ \hat{i}
+    \boxed{\frac{\vec{F}_3^{neta}}{\ell} = (1{,}00 - 0{,}25) \times 10^{-4}\ \hat{i} = +0{,}75 \times 10^{-4}\ \si{\newton\per\meter}\ \hat{i}}
 \end{equation}
 \end{ejercicio}

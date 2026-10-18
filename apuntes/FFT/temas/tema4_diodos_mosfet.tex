@@ -8,254 +8,1045 @@
 }
 
 % ==============================================================================
-% 4.1. FÍSICA DE SEMICONDUCTORES Y UNIÓN PN
+% 4.1. CONCEPTOS BÁSICOS DE SEMICONDUCTORES Y UNIÓN PN
 % ==============================================================================
-\section{Física de Semiconductores y la Unión PN}
+\section{Conceptos Básicos de Semiconductores y la Unión PN}
 
-Los dispositivos electrónicos modernos basan su funcionamiento en las propiedades de conducción controlada de los materiales semiconductores (principalmente el Silicio, Si).
+Los dispositivos electrónicos de estado sólido basan su funcionamiento en la posibilidad de controlar mediante campos eléctricos o dopaje selectivo la conductividad de los materiales \textbf{semiconductores}, entre los cuales el \textbf{Silicio ($\text{Si}$)} es el más utilizado en la industria microelectrónica actual (seguido del Germanio, $\text{Ge}$, y compuestos como el Arseniuro de Galio, $\text{GaAs}$).
 
-\subsection{Estructura de la Unión PN en Equilibrio}
-Al poner en contacto un semiconductor tipo P (rico en huecos mayoritarios) con uno tipo N (rico en electrones libres):
+\subsection{Bandas de Energía y Semiconductores Intrínsecos}
+Desde el punto de vista cuántico, los electrones de un cristal sólido se agrupan en bandas de energía permitidas separadas por regiones prohibidas:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Banda de Valencia (BV):} Nivel energético ocupado por los electrones que forman los enlaces covalentes entre átomos vecinos de la red cristalina.
+    \item \textbf{Banda de Conducción (BC):} Banda energética superior donde los electrones se han desligado de su átomo de origen y pueden desplazarse libremente por el cristal produciendo corriente eléctrica.
+    \item \textbf{Banda Prohibida o \textit{Gap} de Energía ($E_g$):} Separación energética mínima entre el límite superior de la banda de valencia ($E_V$) y el límite inferior de la banda de conducción ($E_C$). En un aislante es muy grande ($E_g > 5\ \si{\electronvolt}$), en un conductor las bandas se solapan ($E_g = 0$), y en un semiconductor tiene un valor intermedio ($E_g \approx 1{,}12\ \si{\electronvolt}$ en el Silicio y $E_g \approx 0{,}67\ \si{\electronvolt}$ en el Germanio a $300\ \si{\kelvin}$).
+\end{itemize}
+
+Un semiconductor químicamente puro y con red cristalina perfecta se denomina \textbf{semiconductor intrínseco}:
 \begin{enumerate}[leftmargin=*]
-    \item Los electrones difunden hacia la zona P y los huecos hacia la zona N, recombinándose.
-    \item Queda al descubierto una \textbf{Zona de Carga Espacial (ZCE)} con iones fijos inmóviles ($N_A^-$ en el lado P y $N_D^+$ en el lado N).
-    \item Se origina un \textbf{campo eléctrico interno} $\vec{E}_{int}$ que frena la difusión y establece una barrera de potencial de contacto $V_{bi} \approx 0{,}6 - 0{,}7\ \si{\volt}$ para Silicio.
+    \item \textbf{A temperatura nula ($T = 0\ \si{\kelvin}$):} Cada átomo de Silicio (tetravalente, con $+4$ electrones en su capa exterior) comparte sus cuatro electrones de valencia formando cuatro \textbf{enlaces covalentes} estables con sus vecinos. La banda de valencia está completamente llena y la de conducción vacía: el cristal no conduce corriente (se comporta como un aislante perfecto).
+    \item \textbf{A temperatura ambiente ($T = 300\ \si{\kelvin}$):} La agitación térmica proporciona energía suficiente para romper algunos enlaces covalentes (\textbf{generación térmica}). Cuando un electrón salta a la banda de conducción convirtiéndose en un \textbf{electrón libre} (con carga $-q$), deja tras de sí una vacante de enlace en la banda de valencia denominada \textbf{hueco} ($h^+$, que se comporta como un portador móvil de carga efectiva $+q$). Simultáneamente ocurre el proceso inverso de \textbf{recombinación térmica} cuando un electrón libre cae en un hueco.
+\end{enumerate}
+
+\begin{ley}[Concentración Intrínseca y Ley de Acción de Masas]
+En un semiconductor intrínseco, dado que los electrones libres y los huecos se generan en parejas, sus concentraciones volumétricas ($n$ para electrones y $p$ para huecos) son idénticas e iguales a la \textbf{concentración intrínseca} $n_i(T)$:
+\begin{equation}
+    n = p = n_i \approx 1{,}5 \times 10^{10}\ \si{\centi\meter^{-3}} \quad (\text{en Silicio a } T = 300\ \si{\kelvin})
+\end{equation}
+En equilibrio térmico, el producto de las concentraciones de electrones y huecos en cualquier semiconductor (esté o no dopado) permanece constante para una temperatura dada, cumpliendo la \textbf{Ley de Acción de Masas}:
+\begin{equation}
+    n \cdot p = n_i^2(T)
+\end{equation}
+\end{ley}
+
+\subsection{Semiconductores Extrínsecos: Dopaje Tipo N y Tipo P}
+La conductividad del silicio intrínseco a temperatura ambiente es muy baja. Para aumentarla y controlarla con precisión, se introducen deliberadamente pequeñas cantidades de átomos de impurezas sustitucionales en la red cristalina, proceso denominado \textbf{dopaje}:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Semiconductor Extrínseco Tipo N (Dopado con Impurezas Donadoras):}
+    Se introducen átomos \textbf{pentavalentes} (grupo V de la tabla periódica, con $5$ electrones de valencia), tales como \textbf{Fósforo ($\text{P}$)}, \textbf{Arsénico ($\text{As}$)} o \textbf{Antimonio ($\text{Sb}$)}. Cuatro de sus electrones forman enlaces covalentes con los átomos de Silicio vecinos, mientras que el quinto electrón queda muy débilmente ligado y a temperatura ambiente pasa inmediatamente a la banda de conducción como \textbf{electrón libre extra}, sin haber creado un hueco. El átomo de impureza queda como un ion positivo fijo ($N_D^+$) en la red.
+    Si $N_D \gg n_i$ es la concentración de impurezas donadoras:
+    \begin{equation}
+        n \approx N_D \gg n_i, \qquad p \approx \frac{n_i^2}{N_D} \ll n_i \implies n > p
+    \end{equation}
+    En un semiconductor tipo N, los \textbf{electrones son los portadores mayoritarios} y los \textbf{huecos son los portadores minoritarios}.
+
+    \item \textbf{Semiconductor Extrínseco Tipo P (Dopado con Impurezas Aceptoras):}
+    Se introducen átomos \textbf{trivalentes} (grupo III de la tabla periódica, con $3$ electrones de valencia), tales como \textbf{Boro ($\text{B}$)}, \textbf{Aluminio ($\text{Al}$)}, \textbf{Galio ($\text{Ga}$)} o \textbf{Indio ($\text{In}$)}. Al tener solo tres electrones para cuatro enlaces covalentes, queda un enlace incompleto que captura fácilmente un electrón de un átomo de Silicio vecino, generando un \textbf{hueco libre} en la banda de valencia sin crear un electrón en la banda de conducción. El átomo de impureza queda como un ion negativo fijo ($N_A^-$).
+    Si $N_A \gg n_i$ es la concentración de impurezas aceptoras:
+    \begin{equation}
+        p \approx N_A \gg n_i, \qquad n \approx \frac{n_i^2}{N_A} \ll n_i \implies p > n
+    \end{equation}
+    En un semiconductor tipo P, los \textbf{huecos son los portadores mayoritarios} y los \textbf{electrones son los portadores minoritarios}.
+\end{itemize}
+
+\subsection{Mecanismos de Conducción en Semiconductores}
+El movimiento neto de cargas en un semiconductor se produce por dos mecanismos físicos independientes:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Corriente de Arrastre (o Deriva, \textit{Drift}):} Originada por la presencia de un campo eléctrico $\vec{E}$ que acelera los huecos en el sentido del campo y los electrones en sentido opuesto. La densidad de corriente total de arrastre y la conductividad $\sigma$ del semiconductor son:
+    \begin{equation}
+        \vec{J}_{\text{arrastre}} = \sigma \vec{E} = q (n \mu_n + p \mu_p) \vec{E}
+    \end{equation}
+    donde $\mu_n$ y $\mu_p$ son las movilidades de electrones y huecos respectivamente (en el Silicio $\mu_n \approx 1350\ \si{\centi\meter\squared\per\volt\per\second} > \mu_p \approx 480\ \si{\centi\meter\squared\per\volt\per\second}$, por lo que los electrones tienen mayor movilidad que los huecos).
+    \item \textbf{Corriente de Difusión:} Originada por la agitación térmica cuando existe un \textbf{gradiente espacial de concentración} de portadores ($\frac{dn}{dx}$ o $\frac{dp}{dx}$). Los portadores tienden estadísticamente a desplazarse desde las regiones de alta concentración hacia las de baja concentración:
+    \begin{equation}
+        J_{n,\text{dif}} = q D_n \frac{dn}{dx}, \qquad J_{p,\text{dif}} = -q D_p \frac{dp}{dx}
+    \end{equation}
+    donde $D_n$ y $D_p$ son las constantes de difusión, ligadas a las movilidades mediante la relación de Einstein: $\frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = V_T = \frac{k_B T}{q}$.
+\end{enumerate}
+
+\subsection{La Unión PN en Equilibrio y bajo Polarización}
+Cuando sobre un mismo monocristal de silicio se crean adyacentes una región dopada tipo P y una región dopada tipo N, la frontera metalúrgica constituye una \textbf{unión PN}:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Unión PN en Circuito Abierto (Equilibrio Térmico):}
+    Debido al enorme gradiente de concentración en la frontera, los huecos mayoritarios de la zona P difunden hacia la zona N y los electrones mayoritarios de la zona N difunden hacia la zona P. Al cruzarse en las inmediaciones de la unión, se recombinan entre sí, desapareciendo los portadores móviles libres en una franja central llamada \textbf{Zona de Carga Espacial (ZCE)}, \textbf{zona de deplexión} o de vaciamiento.
+    Al desaparecer los portadores móviles en la ZCE, quedan al descubierto los \textbf{iones fijos de la red}: iones negativos aceptores ($N_A^-$) en el lado P e iones positivos donadores ($N_D^+$) en el lado N. Esta distribución dipolar crea un \textbf{campo eléctrico interno} $\vec{E}_{int}$ dirigido de la zona N hacia la zona P, el cual se opone a que sigan difundiendo más mayoritarios y establece una \textbf{barrera de potencial de contacto} $V_0$ (o $V_{bi}$):
+    \begin{equation}
+        V_0 = V_T \ln\left(\frac{N_A N_D}{n_i^2}\right) \approx 0{,}6\text{ a }0{,}75\ \si{\volt} \quad (\text{en Silicio a } 300\ \si{\kelvin})
+    \end{equation}
+    siendo $V_T = \frac{k_B T}{q} \approx 26\ \si{\milli\volt}$ la tensión térmica a temperatura ambiente ($T = 300\ \si{\kelvin}$). En equilibrio, la corriente de difusión de mayoritarios queda exactamente compensada por la corriente de arrastre de minoritarios ($I_{\text{neta}} = 0$).
 \end{enumerate}
 
 \begin{center}
 \begin{tikzpicture}[scale=1.05]
-    % Bloque Semiconductor
-    \draw[thick] (-4,-1.2) rectangle (4,1.2);
+    % Bloque Semiconductor más ancho para holgura total
+    \draw[thick] (-4.8,-1.3) rectangle (4.8,1.3);
     % Separador de unión
-    \draw[thick, dashed] (0,-1.2) -- (0,1.2);
+    \draw[thick, dashed] (0,-1.3) -- (0,1.3);
     % Zona P
-    \node[font=\large\bfseries, fftPrimary] at (-3,0.7) {Zona P};
-    \node[font=\footnotesize] at (-3,-0.7) {Huecos ($h^+$)};
+    \node[font=\large\bfseries, fftPrimary] at (-3.1,0.7) {Zona P};
+    \node[font=\footnotesize] at (-3.1,-0.7) {Huecos ($h^+$)};
     % Zona N
-    \node[font=\large\bfseries, fftDarkBlue] at (3,0.7) {Zona N};
-    \node[font=\footnotesize] at (3,-0.7) {Electrones ($e^-$)};
+    \node[font=\large\bfseries, fftDarkBlue] at (3.1,0.7) {Zona N};
+    \node[font=\footnotesize] at (3.1,-0.7) {Electrones ($e^-$)};
     % ZCE sombreada
-    \draw[fill=fftAccent!15, draw=fftAccent, thick] (-1.2,-1.2) rectangle (1.2,1.2);
-    \node[above=2pt, font=\bfseries\footnotesize, fftAccent] at (0,1.2) {Zona de Carga Espacial (ZCE)};
+    \draw[fill=fftAccent!15, draw=fftAccent, thick] (-1.3,-1.3) rectangle (1.3,1.3);
+    \node[above=3pt, font=\bfseries\footnotesize, fftAccent] at (0,1.3) {Zona de Carga Espacial (ZCE)};
     % Iones fijos
-    \node[fftRed] at (-0.6,0.3) {$\mathbf{N_A^-}$};
-    \node[fftRed] at (-0.6,-0.3) {$\mathbf{N_A^-}$};
-    \node[fftGreen] at (0.6,0.3) {$\mathbf{N_D^+}$};
-    \node[fftGreen] at (0.6,-0.3) {$\mathbf{N_D^+}$};
+    \node[fftRed] at (-0.65,0.35) {$\mathbf{N_A^-}$};
+    \node[fftRed] at (-0.65,-0.35) {$\mathbf{N_A^-}$};
+    \node[fftGreen] at (0.65,0.35) {$\mathbf{N_D^+}$};
+    \node[fftGreen] at (0.65,-0.35) {$\mathbf{N_D^+}$};
     % Campo eléctrico interno
-    \draw[->, >=stealth, very thick, fftDarkBlue] (0.8,-0.9) -- (-0.8,-0.9) node[midway, below] {$\vec{E}_{int}$};
+    \draw[->, >=stealth, very thick, fftDarkBlue] (0.85,-0.95) -- (-0.85,-0.95) node[midway, below] {$\vec{E}_{int}$};
 \end{tikzpicture}
 \end{center}
 
-% ==============================================================================
-% 4.2. EL DIODO DE UNIÓN Y SUS MODELOS
-% ==============================================================================
-\section{El Diodo de Unión PN: Polarización y Modelos Circuitales}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Unión PN en Polarización Inversa ($V_D < 0$):}
+    Se aplica una fuente externa con el polo positivo en la zona N y el negativo en la zona P. El campo externo tiene el mismo sentido que $\vec{E}_{int}$, reforzando la barrera de potencial hasta $V_0 + |V_D|$ y \textbf{ensanchando la zona de deplexión}. La difusión de portadores mayoritarios queda completamente bloqueada y solo circula una debilísima \textbf{corriente inversa de saturación} $I_S \approx 10^{-14}\ \si{\ampere}$ ($10^{-11}\ \si{\milli\ampere}$) debida al arrastre de portadores minoritarios generados térmicamente.
+    \item \textbf{Unión PN en Polarización Directa ($V_D > 0$):}
+    Se conecta el polo positivo externo a la zona P y el negativo a la zona N. El campo externo se opone a $\vec{E}_{int}$, reduciendo la barrera de potencial a $V_0 - V_D$ y \textbf{estrechando la zona de deplexión}. Cuando $V_D$ supera el umbral $V_\gamma \approx 0{,}6 - 0{,}7\ \si{\volt}$, la barrera prácticamente desaparece y se produce una inyección masiva exponencial de portadores mayoritarios a través de la unión.
+\end{itemize}
 
-\subsection{Curva Característica $I-V$ y Modelos Lineales}
-La relación corriente-tensión real viene dada por la ecuación de Shockley:
+% ==============================================================================
+% 4.2. EL DIODO Y CIRCUITOS BÁSICOS
+% ==============================================================================
+\section{El Diodo y Circuitos Básicos}
+
+Un \textbf{diodo de unión} es una unión PN a la que se le añaden dos contactos óhmicos exteriores: el \textbf{Ánodo (A)} en la región P y el \textbf{Cátodo (K)} en la región N. Su tensión en bornes se define siempre de ánodo a cátodo ($V_D = V_{\text{Ánodo}} - V_{\text{Cátodo}}$) y su corriente positiva $I_D$ fluye de ánodo a cátodo (en el sentido de la flecha del símbolo).
+
+\subsection{Ecuación de Shockley y Curva Característica Real}
+\begin{ley}[Ecuación de Shockley del Diodo]
+En primera aproximación, la característica corriente-tensión ($I_D - V_D$) del diodo en las zonas directa e inversa viene descrita por la ecuación exponencial de Shockley:
 \begin{equation}
     I_D = I_S \left( e^{\frac{V_D}{n V_T}} - 1 \right)
 \end{equation}
+donde:
+\begin{itemize}[leftmargin=*]
+    \item $I_S$: corriente inversa de saturación (típicamente $I_S \approx 10^{-14}\ \si{\ampere} = 10^{-11}\ \si{\milli\ampere}$).
+    \item $V_T = \frac{k T}{q}$: tensión térmica, donde $k = 1{,}38 \times 10^{-23}\ \si{\joule\per\kelvin}$ es la constante de Boltzmann, $T$ la temperatura absoluta en Kelvin y $q = 1{,}6 \times 10^{-19}\ \si{\coulomb}$ la carga del electrón. A temperatura ambiente ($T = 300\ \si{\kelvin}$), $V_T \approx 26\ \si{\milli\volt} = 0{,}026\ \si{\volt}$.
+    \item $n$: factor de idealidad (en los apuntes de la asignatura se toma habitualmente $n = 1$).
+\end{itemize}
+\end{ley}
+
+En la curva característica real de un diodo se distinguen tres regiones:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Zona Directa ($V_D > 0$):} Para $V_D < V_\gamma \approx 0{,}6 - 0{,}7\ \si{\volt}$ la corriente es casi despreciable; al superar la tensión umbral $V_\gamma$, la intensidad crece exponencialmente con pendientes muy abruptas. En directa, el diodo no puede soportar tensiones mucho mayores que $V_\gamma$ porque la enorme corriente disiparía una potencia excesiva y fundiría el dispositivo.
+    \item \textbf{Zona Inversa ($-V_{ZK} < V_D < 0$):} Como $e^{V_D/V_T} \ll 1$, la corriente vale $I_D \approx -I_S \approx 0$. El diodo actúa prácticamente como un circuito abierto.
+    \item \textbf{Zona de Ruptura o Avalancha ($V_D \le -V_{ZK}$):} Si la tensión inversa supera un valor crítico denominado tensión de ruptura ($V_Z$ o $V_{BR}$, del orden de $-100\ \si{\volt}$ en diodos rectificadores comunes y entre $-3\ \si{\volt}$ y $-15\ \si{\volt}$ en diodos Zener), se produce una multiplicación por avalancha o efecto túnel Zener y circula una gran corriente inversa mientras la tensión permanece casi fija en $-V_Z$.
+\end{enumerate}
 
 \begin{center}
 \begin{tikzpicture}[scale=1.1]
     % Ejes
-    \draw[->, thick] (-3,0) -- (3,0) node[right] {$V_D\ [\si{\volt}]$};
-    \draw[->, thick] (0,-0.8) -- (0,3) node[above] {$I_D\ [\si{\milli\ampere}]$};
-    % Curva real Shockley
-    \draw[very thick, fftDarkBlue, domain=-2.5:1.1, samples=60]
+    \draw[->, thick] (-3.2,0) -- (3.2,0) node[right] {$V_D\ [\si{\volt}]$};
+    \draw[->, thick] (0,-1.2) -- (0,3.0) node[above] {$I_D\ [\si{\milli\ampere}]$};
+    % Curva real Shockley + ruptura
+    \draw[very thick, fftDarkBlue, domain=-2.2:1.1, samples=60]
         plot (\x, {0.05 * (exp(3.5*\x) - 1)});
+    \draw[very thick, fftDarkBlue] (-2.2,-0.05) -- (-2.4,-1.1);
+    \node[above left, font=\footnotesize, fftDarkBlue] at (-2.2,0) {$-V_Z$};
     \node[right, fftDarkBlue] at (1.1,2.5) {Curva Real};
     % Modelo lineal 2 (Vgamma = 0.7V)
-    \draw[very thick, fftAccent, dashed] (-3,0) -- (0.7,0) -- (0.7,2.8);
-    \draw[dashed, gray] (0.7,0) node[below=2pt, text=black] {$V_\gamma{=}0{,}7\si{\volt}$} -- (0.7,0.5);
-    \node[left, fftAccent] at (0.7,1.8) {Modelo $V_\gamma$};
+    \draw[very thick, fftAccent, dashed] (-2.2,0) -- (0.7,0) -- (0.7,2.8);
+    \draw[dashed, gray] (0.7,0) node[below=2pt, text=black, font=\footnotesize] {$V_\gamma{=}0{,}7\,\si{\volt}$} -- (0.7,0.5);
+    \node[right=4pt, fftAccent, font=\bfseries\footnotesize] at (0.7,1.6) {Modelo $V_\gamma$};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Esquemas Circuitales de los Modelos Lineales}
+\subsection{Los 3 Modelos Lineales por Tramos del Diodo}
+Dado que la ecuación de Shockley es no lineal, para resolver circuitos de forma rápida y sistemática sustituimos el diodo por uno de los tres \textbf{modelos lineales por tramos}:
+
+\begin{metodo}[Los 3 Modelos Lineales del Diodo]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Modelo 1: Diodo Ideal (no se suele usar salvo si $V \gg V_\gamma$):}
+    \begin{itemize}
+        \item \textbf{Diodo OFF (Corte):} Si $V_D < 0 \implies I_D = 0$ (equivalente a un \textbf{circuito abierto}).
+        \item \textbf{Diodo ON (Conducción):} Si $I_D > 0 \implies V_D = 0\ \si{\volt}$ (equivalente a un \textbf{cortocircuito / cable ideal}).
+    \end{itemize}
+    \item \textbf{Modelo 2: Caída de Tensión Constante $V_\gamma$ (el más utilizado con resistencias grandes):}
+    \begin{itemize}
+        \item \textbf{Diodo OFF (Corte):} Si $V_D < V_\gamma \implies I_D = 0$ (\textbf{circuito abierto}).
+        \item \textbf{Diodo ON (Conducción):} Si $I_D > 0 \implies V_D = V_\gamma$ constante (habitualmente $V_\gamma = 0{,}7\ \si{\volt}$ o $0{,}65\ \si{\volt}$). Se sustituye por una \textbf{fuente de tensión independiente $V_\gamma$} con el polo $+$ en el ánodo y el $-$ en el cátodo.
+    \end{itemize}
+    \item \textbf{Modelo 3: Tensión Variable con Resistencia Serie $r_d$ (usado con resistencias pequeñas):}
+    \begin{itemize}
+        \item \textbf{Diodo OFF (Corte):} Si $V_D < V_\gamma \implies I_D = 0$ (\textbf{circuito abierto}).
+        \item \textbf{Diodo ON (Conducción):} Si $I_D > 0$, el diodo se sustituye por una fuente $V_\gamma$ en serie con una resistencia interna $r_d$ (de unos pocos ohmios, p. ej. $10 - 20\ \si{\ohm}$):
+        \begin{equation}
+            V_D = V_\gamma + I_D r_d \iff I_D = \frac{V_D - V_\gamma}{r_d} \quad \left(\text{recta de pendiente } \frac{1}{r_d}\right)
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Modelo 1: Ideal
-    \node[font=\bfseries] at (-4,1.8) {1. Modelo Ideal};
-    \draw (-5,0.6) to[D, l=Diodo] (-3,0.6);
-    \draw (-5,-0.6) to[short, -*] (-4.3,-0.6) -- (-3.7,-0.6) to[short, *-] (-3,-0.6);
-    \node[below=2pt] at (-4,-0.6) {\footnotesize ON: Corto};
-    \draw (-5,-1.6) to[short, -o] (-4.2,-1.6);
-    \draw (-3.8,-1.6) to[short, o-] (-3,-1.6);
-    \node[below=2pt] at (-4,-1.6) {\footnotesize OFF: Abierto};
+\begin{tikzpicture}[scale=0.92]
+    % Modelo 1: Ideal (x = -5.2)
+    \node[font=\bfseries] at (-5.2,1.9) {1. Modelo Ideal};
+    \draw (-6.4,0.7) to[D, l=Diodo] (-4.0,0.7);
+    \draw (-6.4,-0.6) to[short, o-o] (-4.0,-0.6);
+    \node[below, yshift=-12pt, font=\footnotesize] at (-5.2,-0.6) {ON: Corto ($V_D = 0$)};
+    \draw (-6.4,-2.1) to[short, o-o] (-5.5,-2.1);
+    \draw (-4.9,-2.1) to[short, o-o] (-4.0,-2.1);
+    \node[below, yshift=-8pt, font=\footnotesize] at (-5.2,-2.1) {OFF: Abierto ($I_D = 0$)};
 
-    % Modelo 2: Caída constante Vgamma = 0.7V
-    \node[font=\bfseries] at (0,1.8) {2. Modelo $V_\gamma = 0{,}7\ \si{\volt}$};
-    \draw (-1,0.6) to[D, l=Diodo] (1,0.6);
-    \draw (-1,-0.6) to[battery2, v=$V_\gamma$] (1,-0.6);
-    \node[below=2pt] at (0,-0.6) {\footnotesize ON ($V_\gamma = 0{,}7\si{\volt}$)};
-    \draw (-1,-1.6) to[short, -o] (-0.2,-1.6);
-    \draw (0.2,-1.6) to[short, o-] (1,-1.6);
-    \node[below=2pt] at (0,-1.6) {\footnotesize OFF ($I_D = 0$)};
+    % Modelo 2: Caída constante Vgamma (x = 0)
+    \node[font=\bfseries] at (0,1.9) {2. Modelo $V_\gamma$};
+    \draw (-1.2,0.7) to[D, l=Diodo] (1.2,0.7);
+    \draw (-1.2,-0.6) to[V, l=$V_\gamma$, o-o] (1.2,-0.6);
+    \node[below, yshift=-12pt, font=\footnotesize] at (0,-0.6) {ON ($V_D = V_\gamma \approx 0{,}7\,\si{\volt}$)};
+    \draw (-1.2,-2.1) to[short, o-o] (-0.3,-2.1);
+    \draw (0.3,-2.1) to[short, o-o] (1.2,-2.1);
+    \node[below, yshift=-8pt, font=\footnotesize] at (0,-2.1) {OFF ($I_D = 0$)};
 
-    % Modelo 3: Resistencia interna rd
-    \node[font=\bfseries] at (4,1.8) {3. Modelo Lineal con $r_d$};
-    \draw (3,0.6) to[D, l=Diodo] (5,0.6);
-    \draw (3,-0.6) to[battery2, v=$V_\gamma$] (4.2,-0.6) to[R, l=$r_d$] (5.2,-0.6);
-    \node[below=2pt] at (4.1,-0.6) {\footnotesize ON ($V_D = V_\gamma + r_d I_D$)};
-    \draw (3,-1.6) to[short, -o] (3.8,-1.6);
-    \draw (4.4,-1.6) to[short, o-] (5.2,-1.6);
-    \node[below=2pt] at (4.1,-1.6) {\footnotesize OFF ($I_D = 0$)};
+    % Modelo 3: Resistencia interna rd (x = 5.2)
+    \node[font=\bfseries] at (5.2,1.9) {3. Modelo con $r_d$};
+    \draw (3.8,0.7) to[D, l=Diodo] (6.6,0.7);
+    \draw (3.6,-0.6) to[V, l=$V_\gamma$, o-] (5.2,-0.6) to[R, l=$r_d$, -o] (6.8,-0.6);
+    \node[below, yshift=-12pt, font=\footnotesize] at (5.2,-0.6) {ON ($V_D = V_\gamma + r_d I_D$)};
+    \draw (3.8,-2.1) to[short, o-o] (4.9,-2.1);
+    \draw (5.5,-2.1) to[short, o-o] (6.6,-2.1);
+    \node[below, yshift=-8pt, font=\footnotesize] at (5.2,-2.1) {OFF ($I_D = 0$)};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Circuitos Rectificadores y Filtrado}
+\subsection{Los 3 Métodos de Resolución de un Circuito con Diodo}
+Consideremos el circuito elemental formado por una fuente continua $V_{DD} = 5\ \si{\volt}$ en serie con una resistencia $R = 1\ \si{\kilo\ohm}$ y un diodo ($I_S = 10^{-11}\ \si{\milli\ampere} = 10^{-14}\ \si{\ampere}$, $V_T = 26\ \si{\milli\volt}$).
+
+\begin{aviso}[Convenio de Unidades en Electrónica]
+En todos los problemas de diodos y transistores trabajaremos sistemáticamente con:
+\begin{equation}
+    V \text{ en voltios } [\si{\volt}], \qquad I \text{ en miliamperios } [\si{\milli\ampere}], \qquad R \text{ en kiloohmios } [\si{\kilo\ohm}]
+\end{equation}
+ya que $\si{\volt} = \si{\milli\ampere} \times \si{\kilo\ohm}$ es un sistema de unidades internamente consistente.
+\end{aviso}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Método Analítico (con el diodo real):}
+    Planteamos simultáneamente la ecuación de malla del circuito y la ecuación de Shockley del dispositivo:
+    \begin{equation}
+        \left. \begin{aligned}
+            \text{Circuito:} \quad V_{DD} &= I_D R + V_D \\
+            \text{Dispositivo:} \quad I_D &= I_S \left(e^{V_D / V_T} - 1\right)
+        \end{aligned} \right\} \implies V_D = V_{DD} - R I_S \left(e^{V_D / V_T} - 1\right)
+    \end{equation}
+    Es una ecuación trascendente que se resuelve por \textbf{aproximaciones sucesivas} (iteración numérica) probando valores de $V_D$ entre $0{,}6\ \si{\volt}$ y $0{,}8\ \si{\volt}$ (por ejemplo $V_D^{(0)} = 0{,}65\ \si{\volt}$). Para $V_{DD} = 5\ \si{\volt}$ y $R = 1\ \si{\kilo\ohm}$ converge a:
+    \begin{equation}
+        V_D = 0{,}696\ \si{\volt}, \qquad I_D = \frac{5 - 0{,}696}{1\ \si{\kilo\ohm}} = 4{,}304\ \si{\milli\ampere} \approx 4{,}3\ \si{\milli\ampere}
+    \end{equation}
+
+    \item \textbf{Método Gráfico (Recta de Carga y Punto de Funcionamiento $Q$):}
+    Despejando $I_D$ de la ecuación de malla obtenemos la \textbf{recta de carga estática}:
+    \begin{equation}
+        I_D = -\frac{1}{R} V_D + \frac{V_{DD}}{R}
+    \end{equation}
+    Es una recta de pendiente $-\frac{1}{R}$ que corta al eje vertical en $\left(0, \frac{V_{DD}}{R}\right)$ y al eje horizontal en $(V_{DD}, 0)$. La intersección gráfica entre la recta de carga y la curva característica del diodo determina el \textbf{punto de trabajo o punto de operación $Q(V_{DQ}, I_{DQ})$}.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+        \draw[->, thick] (0,0) -- (4.8,0) node[right] {$V_D\ [\si{\volt}]$};
+        \draw[->, thick] (0,0) -- (0,3.4) node[above] {$I_D\ [\si{\milli\ampere}]$};
+        % Curva del diodo
+        \draw[very thick, fftDarkBlue, domain=0:1.65, samples=50]
+            plot (\x, {0.06 * (exp(2.4*\x) - 1)});
+        \node[right, font=\footnotesize, fftDarkBlue] at (1.65,3.0) {$I_D = I_S(e^{V_D/V_T}-1)$};
+        % Recta de carga
+        \draw[very thick, fftAccent] (0,2.8) node[left, text=black, font=\footnotesize] {$\dfrac{V_{DD}}{R}$}
+            -- (4.0,0) node[below, text=black, font=\footnotesize] {$V_{DD}$};
+        \node[above right, font=\footnotesize, fftAccent] at (2.1,1.3) {Recta de carga $\left(\text{pendiente } -\dfrac{1}{R}\right)$};
+        % Punto Q
+        \filldraw[fftRed] (1.38,1.83) circle (2.2pt);
+        \node[above left, font=\bfseries\footnotesize, fftRed] at (1.38,1.88) {Punto $Q$};
+        \draw[dashed, gray] (1.38,0) node[below, text=black, font=\footnotesize] {$V_{DQ}$} -- (1.38,1.83);
+        \draw[dashed, gray] (0,1.83) node[left, text=black, font=\footnotesize] {$I_{DQ}$} -- (1.38,1.83);
+    \end{tikzpicture}
+    \end{center}
+
+    \item \textbf{Método Lineal por Hipótesis y Comprobación (el más utilizado):}
+    \begin{enumerate}[label=\alph*)]
+        \item \textbf{Paso 1 (Hipótesis):} Suponer el estado de cada diodo (\textbf{OFF} u \textbf{ON}). Si no se ve claro a simple vista, es muy cómodo empezar suponiendo que los diodos están en \textbf{OFF} (circuito abierto) y calcular las tensiones en sus bornes para ver cuál tiene mayor tensión ánodo-cátodo.
+        \item \textbf{Paso 2 (Sustitución y cálculo):} Sustituir cada diodo según el modelo lineal indicado ($2.^{\circ}$ o $3.^{\text{er}}$ modelo) y resolver el circuito lineal resultante.
+        \item \textbf{Paso 3 (Comprobación obligatoria):}
+        \begin{itemize}
+            \item Si se supuso \textbf{Diodo OFF}: debe cumplirse que $V_D = V_{\text{Ánodo}} - V_{\text{Cátodo}} < V_\gamma$.
+            \item Si se supuso \textbf{Diodo ON}: debe cumplirse que la corriente $I_D$ circule de ánodo a cátodo con valor estrictamente positivo ($I_D > 0$).
+        \end{itemize}
+        Si no coincide con la suposición, la hipótesis es falsa y se cambia de estado.
+    \end{enumerate}
+    Aplicado al circuito con $V_{DD} = 5\ \si{\volt}$ y $R = 1\ \si{\kilo\ohm}$ ($V_\gamma = 0{,}65\ \si{\volt}, r_d = 10\ \si{\ohm} = 0{,}01\ \si{\kilo\ohm}$):
+    \begin{itemize}
+        \item Si suponemos $D\text{ OFF}$: $I_D = 0 \implies V_R = 0 \implies V_D = 5\ \si{\volt} > 0{,}65\ \si{\volt} \implies$ contradicción (la suposición OFF es falsa; el diodo conduce en ON).
+        \item Con el \textbf{2.º modelo} ($D\text{ ON} \equiv V_\gamma = 0{,}65\ \si{\volt}$):
+        \begin{equation}
+            I_D = \frac{V_{DD} - V_\gamma}{R} = \frac{5 - 0{,}65}{1\ \si{\kilo\ohm}} = 4{,}35\ \si{\milli\ampere} > 0, \qquad V_D = 0{,}65\ \si{\volt}
+        \end{equation}
+        \item Con el \textbf{3.er modelo} ($D\text{ ON} \equiv V_\gamma = 0{,}65\ \si{\volt}$ en serie con $r_d = 0{,}01\ \si{\kilo\ohm}$):
+        \begin{equation}
+            I_D = \frac{V_{DD} - V_\gamma}{R + r_d} = \frac{5 - 0{,}65}{1 + 0{,}01} = 4{,}307\ \si{\milli\ampere} > 0, \qquad V_D = V_\gamma + I_D r_d = 0{,}693\ \si{\volt}
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Aplicaciones Clásicas del Diodo: Limitadores, Rectificadores, Filtros y Zener}
+
+\subsubsection{1. Circuitos Limitadores o Recortadores (\textit{Clippers})}
+Los circuitos limitadores se emplean para recortar una porción de la señal de entrada por encima o por debajo de un nivel de referencia, protegiendo etapas posteriores.
+\begin{ejemplo}[Circuito Limitador Polarizado de los Apuntes]
+En el circuito de la figura, una entrada $V_i$ alimenta a través de una resistencia serie de $1\ \si{\kilo\ohm}$ el nudo de salida $V_o$, del cual cuelgan en paralelo una rama con un diodo $D$ ($V_\gamma = 0{,}65\ \si{\volt}$) en serie con una fuente continua de $7\ \si{\volt}$, y una resistencia de carga de $100\ \si{\kilo\ohm}$ a masa.
+
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Rectificador de onda completa en puente (Graetz)
-    \node[font=\bfseries] at (0,2.8) {Rectificador de Onda Completa en Puente con Filtro $C$};
-    \draw (-4.5,0) to[sV, v=$v_i(t)$] (-4.5,2) -- (-2,2) -- (-2,1);
-    \draw (-4.5,0) -- (-0.8,0);
-
-    % Puente de diodos
-    \draw (-2,1) -- (-1.4,1.6) to[D, l=$D_1$] (0,1.6) -- (0,2.2);
-    \draw (-2,1) -- (-1.4,0.4) to[D*, l=$D_3$] (0,0.4) -- (0,-0.2);
-    \draw (0,2.2) -- (0.6,2.2) to[D*, l=$D_2$] (2,1);
-    \draw (0,-0.2) -- (0.6,-0.2) to[D, l=$D_4$] (2,1);
-    \draw (-0.8,0) -- (2,0) -- (2,1);
-
-    % Filtro C y carga RL
-    \draw (0,2.2) -- (3,2.2) to[C, l=$C$] (3,-0.2) -- (0,-0.2);
-    \draw (3,2.2) -- (4.5,2.2) to[R, l=$R_L$, v=$v_o(t)$] (4.5,-0.2) -- (3,-0.2);
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[V, v=$V_i$] (0,2.4)
+          to[R, l=$1\,\si{\kilo\ohm}$] (2.6,2.4) -- (4.8,2.4);
+    \draw (4.8,2.4) to[short, -o] (5.5,2.4) node[right] {$V_o$};
+    % Rama del diodo y fuente de 7V
+    \draw (2.6,2.4) to[D, l=$D$] (2.6,1.2)
+          to[V, l=$7\,\si{\volt}$] (2.6,0) node[ground] {};
+    % Rama resistencia 100k
+    \draw (4.4,2.4) to[R, l=$100\,\si{\kilo\ohm}$] (4.4,0) node[ground] {};
 \end{tikzpicture}
 \end{center}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tramo a) Diodo en Corte (OFF):} Para que el diodo conduzca se necesita que el potencial de su ánodo ($V_o$) supere el potencial de su cátodo ($7\ \si{\volt}$) en al menos $V_\gamma = 0{,}65\ \si{\volt}$, es decir, $V_o \ge 7 + 0{,}65 = 7{,}65\ \si{\volt}$. Mientras $V_o < 7{,}65\ \si{\volt}$, el diodo está en \textbf{OFF} (abierto) y el circuito actúa como un simple divisor de tensión resistivo:
+    \begin{equation}
+        V_o = \frac{100\ \si{\kilo\ohm}}{1\ \si{\kilo\ohm} + 100\ \si{\kilo\ohm}} V_i = \frac{100}{101} V_i
+    \end{equation}
+    \item \textbf{Tramo b) Umbral de Conducción:} El diodo entra en conducción exactamente cuando $V_o = 7{,}65\ \si{\volt}$, lo que corresponde a una tensión de entrada:
+    \begin{equation}
+        V_i = \frac{101}{100} V_o = \frac{101}{100} \times 7{,}65 = 7{,}7265\ \si{\volt} \approx 7{,}73\ \si{\volt}
+    \end{equation}
+    \item \textbf{Tramo c) Diodo en Conducción (ON, para $V_i \ge 7{,}73\ \si{\volt}$):}
+    \begin{itemize}
+        \item Con el \textbf{3.er modelo} ($V_\gamma = 0{,}65\ \si{\volt}$ y resistencia dinámica $r_d$): aplicando la ley de corrientes de Kirchhoff en el nudo $V_o$:
+        \begin{equation}
+            \frac{V_i - V_o}{1} = \frac{V_o - 7{,}65}{r_d} + \frac{V_o}{100} \implies V_o = \frac{7{,}65 \times 100}{100 + 101 r_d} + \frac{100 r_d}{100 + 101 r_d} V_i
+        \end{equation}
+        \item Con el \textbf{2.º modelo} ($r_d = 0$, el más sencillo): la rama del diodo fija rígidamente la tensión de salida en:
+        \begin{equation}
+            V_o = 7 + 0{,}65 = 7{,}65\ \si{\volt} \quad (\text{fijo})
+        \end{equation}
+        Cualquier aumento adicional de $V_i$ incrementa la corriente por la resistencia de $1\ \si{\kilo\ohm}$ y se desvía íntegramente por el diodo, manteniendo limitada la tensión $V_o$.
+    \end{itemize}
+\end{itemize}
+\end{ejemplo}
+
+\subsubsection{2. Rectificador de Media Onda}
+Un circuito rectificador convierte una señal alterna sinusoidal ($v_i(t) = V_p \sin(\omega t)$, de valor medio nulo) en una señal unidireccional pulsante con componente continua no nula:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Con el 2.º modelo del diodo ($V_\gamma = 0{,}65 - 0{,}7\ \si{\volt}$):}
+    \begin{align}
+        \text{Si } v_i(t) < V_\gamma &\implies D\text{ OFF} \implies I_D = 0 \implies v_o(t) = I_D R = 0\ \si{\volt} \\
+        \text{Si } v_i(t) \ge V_\gamma &\implies D\text{ ON} \implies v_o(t) = v_i(t) - V_\gamma
+    \end{align}
+    El valor de pico de salida es $V_{o,\max} = V_p - V_\gamma$ y su valor medio en continua es $V_{dc} = \frac{V_p - V_\gamma}{\pi}$.
+    \item \textbf{Con el 1.er modelo (ideal):} Conduce durante todo el semiciclo positivo ($v_o(t) = v_i(t)$ para $v_i > 0$) y bloquea el semiciclo negativo ($v_o(t) = 0$ para $v_i < 0$).
+    \item \textbf{Con el 3.er modelo ($V_{D0}$ y $r_D$):} Para $v_i(t) \ge V_{D0}$, forma un divisor resistivo de pendiente $\frac{R}{R + r_D}$, dando $v_o(t) = \frac{R}{R + r_D}\left(v_i(t) - V_{D0}\right)$.
+\end{itemize}
+
+\subsubsection{3. Rectificador de Onda Completa y Filtrado por Condensador}
+Para aprovechar ambos semiciclos de la señal alterna se emplea el \textbf{rectificador de onda completa}, ya sea mediante un transformador de toma intermedia con 2 diodos, o mediante el \textbf{puente de Graetz de 4 diodos}:
+\begin{itemize}[leftmargin=*]
+    \item En cada semiciclo conducen \textbf{dos diodos en serie} ($D_1$ y $D_2$ cuando $v_i > 2V_\gamma$; $D_3$ y $D_4$ en el semiciclo opuesto cuando $|v_i| > 2V_\gamma$), de modo que la caída umbral total es $2V_\gamma \approx 1{,}3 - 1{,}4\ \si{\volt}$:
+    \begin{equation}
+        I = \frac{|v_i| - 2V_\gamma}{R_L}, \qquad V_{o,\max} = V_p - 2V_\gamma, \qquad V_{dc} = \frac{2(V_p - 2V_\gamma)}{\pi}
+    \end{equation}
+    Por ejemplo, con $V_\gamma = 0{,}7\ \si{\volt}$, cuando $V_i = 5\ \si{\volt}$ la salida toma el valor $V_o = 5 - 1{,}4 = 3{,}6\ \si{\volt}$.
+    \item \textbf{Filtro por Condensador ($C$ en paralelo con $R_L$):} Al colocar un condensador en paralelo con la resistencia de carga, el condensador se carga hasta el valor de pico $V_{\max}$ cuando los diodos conducen y, cuando la tensión de entrada desciende, los diodos entran en corte y el condensador se descarga lentamente a través de $R_L$ con constante de tiempo $\tau = R_L C \gg T$. Se obtiene así una tensión casi continua con un pequeño \textbf{rizado} pico a pico:
+    \begin{equation}
+        V_r \approx \frac{V_{\max}}{f_{\text{rizado}} R_L C} = \frac{I_{dc}}{f_{\text{rizado}} C}
+    \end{equation}
+    donde $f_{\text{rizado}} = f_{\text{red}}$ en media onda y $f_{\text{rizado}} = 2 f_{\text{red}}$ en onda completa.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    \node[font=\bfseries] at (1.5,3.2) {Rectificador de Onda Completa en Puente con Filtro $C$};
+    % Fuente alterna a la izquierda conectada a (-2,1) y (2,1)
+    \draw (-4.5,0.2) to[sV, v=$v_i(t)$] (-4.5,1.8) -- (-2,1.8) -- (-2,1);
+    \draw (-4.5,0.2) -- (-4.5,-0.9) -- (2,-0.9) -- (2,1);
+
+    % Puente en rombo limpio entre (-2,1), (0,2.5), (2,1), (0,-0.5)
+    \draw (-2,1) to[D, l=$D_1$] (0,2.5);
+    \draw (0,-0.5) to[D, l=$D_3$] (-2,1);
+    \draw (2,1) to[D*, l=$D_2$] (0,2.5);
+    \draw (0,-0.5) to[D*, l=$D_4$] (2,1);
+
+    % Conexión al filtro C (x = 3.5) y carga RL (x = 5.5)
+    \draw (0,2.5) -- (3.5,2.5) to[C, l=$C$] (3.5,-0.5) -- (0,-0.5);
+    \draw (3.5,2.5) -- (5.5,2.5) to[R, l=$R_L$, v=$v_o(t)$] (5.5,-0.5) -- (3.5,-0.5);
+    \draw (3.5,-0.5) node[ground] {};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{4. El Diodo Zener, LED y Fotodiodo}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Diodo Zener:} Es un diodo diseñado específicamente para trabajar también en la \textbf{región de ruptura inversa} a partir de una tensión de ruptura Zener controlada $V_Z$ (p. ej. $|V_Z| = 3\ \si{\volt}, 5\ \si{\volt}, 10\ \si{\volt}$). En el 2.º modelo lineal presenta \textbf{tres estados posibles}:
+    \begin{enumerate}
+        \item \textbf{Conducción Directa ($D\text{ ON directo}$):} Si $I_D > 0$ (de ánodo a cátodo), se comporta como un diodo normal con $V_D = V_{\text{Ánodo}} - V_{\text{Cátodo}} = V_\gamma = 0{,}7\ \si{\volt}$.
+        \item \textbf{Corte ($D\text{ OFF}$):} Si $-|V_Z| < V_D < V_\gamma$, no conduce ($I_D = I_Z = 0$, circuito abierto).
+        \item \textbf{Conducción en Ruptura Inversa ($D\text{ ON inverso / Zener}$):} Si la tensión inversa en el cátodo respecto al ánodo alcanza $|V_Z|$ ($V_D = -|V_Z|$, es decir, $V_{\text{Cátodo}} - V_{\text{Ánodo}} = |V_Z|$), conduce una corriente inversa $I_Z > 0$ de cátodo a ánodo manteniendo fija la caída $|V_Z|$ (se sustituye por una fuente independiente de valor $|V_Z|$ con el polo $+$ en el cátodo y el $-$ en el ánodo).
+    \end{enumerate}
+    \item \textbf{Diodo Emisor de Luz (LED) y Fotodiodo:} En un \textbf{LED} (fabricado con semiconductores de gap directo como $\text{GaAsP}$ o $\text{GaN}$), la recombinación de electrones y huecos en polarización directa libera fotones de luz ($h\nu \approx E_g$), presentando una caída umbral mayor ($V_\gamma \approx 1{,}8 - 3{,}2\ \si{\volt}$). En cambio, un \textbf{fotodiodo} opera polarizado en inversa: al incidir luz sobre la zona de deplexión se generan pares electrón-hueco que incrementan proporcionalmente la corriente inversa.
+\end{itemize}
+
+\begin{ejemplo}[Limitador de Doble Nivel con Diodo Zener de los Apuntes]
+En el circuito de la figura, las dos resistencias son iguales ($R_1$) y el diodo Zener tiene $V_\gamma = 0{,}7\ \si{\volt}$ y tensión de ruptura inversa $V_Z = -3\ \si{\volt}$ ($|V_Z| = 3\ \si{\volt}$), estando su ánodo conectado a una fuente de $5\ \si{\volt}$ y su cátodo al nudo de salida $V_o$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[V, v=$V_i$] (0,2.4)
+          to[R, l=$R_1$] (2.6,2.4) -- (4.8,2.4);
+    \draw (4.8,2.4) to[short, -o] (5.5,2.4) node[right] {$V_o$};
+    % Rama Zener (ánodo abajo hacia 5V, cátodo arriba en Vo)
+    \draw (2.6,1.2) to[zzD, l=$D_Z$] (2.6,2.4);
+    \draw (2.6,1.2) to[V, l=$5\,\si{\volt}$] (2.6,0) node[ground] {};
+    % Rama R1 a masa
+    \draw (4.4,2.4) to[R, l=$R_1$] (4.4,0) node[ground] {};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Zona en Corte (OFF):} Cuando el Zener no conduce, el circuito es un divisor de tensión con dos resistencias iguales $R_1$:
+    \begin{equation}
+        V_o = \frac{R_1}{R_1 + R_1} V_i = \frac{V_i}{2}
+    \end{equation}
+    Como el ánodo está a $5\ \si{\volt}$ y el cátodo a $V_o$, la tensión ánodo-cátodo es $V_D = 5 - V_o$. El Zener permanece en OFF mientras $-3\ \si{\volt} < 5 - V_o < 0{,}7\ \si{\volt}$, es decir:
+    \begin{equation}
+        4{,}3\ \si{\volt} < V_o < 8\ \si{\volt} \iff 8{,}6\ \si{\volt} < V_i < 16\ \si{\volt} \implies V_o = \frac{V_i}{2}
+    \end{equation}
+    \item \textbf{Conducción en Directa ($V_i \le 8{,}6\ \si{\volt}$):} Cuando $V_o$ intenta bajar de $4{,}3\ \si{\volt}$, el diodo entra en conducción directa fijando $V_o = 5 - 0{,}7 = 4{,}3\ \si{\volt}$.
+    \item \textbf{Conducción en Ruptura Inversa ($V_i \ge 16\ \si{\volt}$):} Cuando $V_o$ intenta superar $8\ \si{\volt}$, el Zener entra en ruptura inversa fijando $V_o = 5 + 3 = 8\ \si{\volt}$.
+\end{enumerate}
+\end{ejemplo}
 
 % ==============================================================================
-% 4.3. EL TRANSISTOR MOSFET
+% 4.3. EL TRANSISTOR MOSFET Y CIRCUITOS BÁSICOS
 % ==============================================================================
-\section{El Transistor MOSFET (Estructura, Modos y Curvas)}
+\section{El Transistor MOSFET y Circuitos Básicos}
 
-\subsection{Símbolos y Terminales Circuitales}
+El transistor de efecto de campo metal-óxido-semiconductor (\textbf{MOSFET}) es un dispositivo electrónico de cuatro terminales en el que la corriente que circula por un canal semiconductor entre el \textbf{Drenador (D)} y la \textbf{Fuente (S)} se controla mediante la tensión aplicada al terminal de \textbf{Puerta (G)}.
+
+\subsection{Estructura Física, Terminales y Símbolos}
+En un transistor \textbf{NMOS de enriquecimiento}:
+\begin{itemize}[leftmargin=*]
+    \item Sobre un \textbf{sustrato semiconductor tipo P} (\textit{Bulk} o \textit{Body}, terminal \textbf{B}) se difunden dos regiones fuertemente dopadas tipo $n^+$ que constituyen la \textbf{Fuente (S, \textit{Source})} y el \textbf{Drenador (D, \textit{Drain})}.
+    \item La región comprendida entre Fuente y Drenador (de longitud geométrica $L$ y anchura $W$) se recubre con una fina capa aislante de \textbf{dióxido de silicio ($\text{SiO}_2$, óxido de puerta)} sobre la que se deposita el electrodo conductor de \textbf{Puerta (G, \textit{Gate})}.
+    \item Como la puerta está separada del canal por un dieléctrico aislante ($\text{SiO}_2$), \textbf{la corriente de puerta es siempre rigurosamente nula en continua}:
+    \begin{equation}
+        I_G = 0 \implies I_D = I_S
+    \end{equation}
+    \item Habitualmente el sustrato \textbf{B} se conecta internamente al terminal de Fuente \textbf{S} ($B = S$), pasando de la notación de cuatro terminales a la de tres terminales ($G, D, S$).
+\end{itemize}
+
+\textbf{Clasificación de los transistores MOS:}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{NMOS de Enriquecimiento ($V_T > 0$):} Con $V_{GS} = 0$ no existe canal entre D y S (interruptor abierto). Hace falta aplicar una tensión positiva $V_{GS} > V_T$ en la puerta para atraer electrones e inducir el canal tipo N.
+    \item \textbf{PMOS de Enriquecimiento ($V_T < 0$):} Fabricado sobre sustrato tipo N con pozos $p^+$. Hace falta aplicar una tensión negativa en la puerta respecto a la fuente ($V_{GS} < V_{Tp} < 0$, o equivalentemente $V_{SG} > |V_{Tp}|$) para inducir un canal de huecos tipo P.
+    \item \textbf{MOSFET de Deplexión (p. ej. NMOS con $V_T < 0$):} El canal físico ya está implantado de fábrica, por lo que conduce corriente incluso sin aplicar tensión en la puerta ($V_{GS} = 0$). Para apagarlo hay que aplicar una tensión negativa $V_{GS} < V_T < 0$ que vacíe el canal. En su símbolo el trazo vertical del canal se dibuja continuo y más grueso.
+\end{enumerate}
+
 \begin{center}
 \begin{tikzpicture}[scale=1.0]
     % NMOS enriquecimiento
     \draw (-3.5,0) node[nmos] (nmos) {};
     \node[left] at (nmos.gate) {G (Puerta)};
-    \node[above] at (nmos.drain) {D (Drenador)};
-    \node[below] at (nmos.source) {S (Fuente)};
-    \node[below=14pt] at (-3.5,-0.6) {\small\textbf{NMOS} ($V_{th} > 0$)};
+    \draw (nmos.drain) node[above] {D (Drenador)};
+    \draw (nmos.source) node[below] {S (Fuente)};
+    \node[font=\small\bfseries] at (-3.5,-1.8) {NMOS ($V_T > 0$)};
 
     % PMOS enriquecimiento
     \draw (3.5,0) node[pmos] (pmos) {};
     \node[left] at (pmos.gate) {G (Puerta)};
-    \node[below] at (pmos.drain) {D (Drenador)};
-    \node[above] at (pmos.source) {S (Fuente)};
-    \node[below=14pt] at (3.5,-0.6) {\small\textbf{PMOS} ($|V_{thp}| > 0$)};
+    \draw (pmos.drain) node[below] {D (Drenador)};
+    \draw (pmos.source) node[above] {S (Fuente)};
+    \node[font=\small\bfseries] at (3.5,-1.8) {PMOS ($V_T < 0$)};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Curvas Características de Salida $I_D - V_{DS}$}
-\begin{center}
-\begin{tikzpicture}[scale=1.1]
-    \draw[->, thick] (0,0) -- (5.5,0) node[right] {$V_{DS}$};
-    \draw[->, thick] (0,0) -- (0,3.5) node[above] {$I_D$};
+\subsection{Regiones de Operación y Ecuaciones del NMOS y PMOS}
+Definimos el \textbf{parámetro de transconductancia} $k_n$ (denotado en las hojas manuscritas como $K_n$ o $K$) que mide cuánto conduce el transistor en función de su tecnología y geometría:
+\begin{equation}
+    k_n = \mu_n C_{ox} \frac{W}{L} \quad \left[\si{\ampere\per\volt\squared} \text{ o } \si{\milli\ampere\per\volt\squared}\right]
+\end{equation}
+donde $\mu_n$ es la movilidad de los portadores en el canal, $C_{ox} = \frac{\varepsilon_{ox}}{t_{ox}}$ es la capacidad del óxido de puerta por unidad de área, $W$ la anchura del canal y $L$ la longitud del canal (en tecnologías actuales del orden de nanómetros).
+\emph{Nota sobre notación:} En las hojas de problemas de la asignatura se escribe $I_D = \frac{K}{2}(V_{GS}-V_T)^2$ en saturación y $I_D = K\left[(V_{GS}-V_T)V_{DS} - \frac{1}{2}V_{DS}^2\right]$ en región lineal, donde el dato del enunciado $K \equiv k_n$.
 
-    % Parábola de saturación (pinch-off: Vds = Vgs - Vth)
-    \draw[dashed, fftAccent, thick, domain=0:2.6, samples=40]
-        plot (\x, {0.45 * \x * \x});
-    \node[above, fftAccent, font=\footnotesize] at (2.4,2.9) {Límite: $V_{DS} = V_{GS} - V_{th}$};
+\begin{ley}[Modos de Operación del Transistor NMOS ($V_{Tn} > 0$ en enriquecimiento)]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{1) Región de Corte (NMOS OFF):}
+    \begin{equation}
+        V_{GS} < V_{Tn} \implies I_D = 0
+    \end{equation}
+    El transistor equivale a un circuito abierto entre Drenador y Fuente ($I_D = I_S = 0$).
+
+    \item \textbf{2) Región Lineal, Óhmica o Tríodo (NMOS ON con $V_{DS}$ pequeña):}
+    \begin{equation}
+        V_{GS} \ge V_{Tn} \quad \text{y} \quad V_{DS} < V_{GS} - V_{Tn}
+    \end{equation}
+    El canal está abierto de extremo a extremo y la corriente depende tanto de $V_{GS}$ como de $V_{DS}$:
+    \begin{equation}
+        I_{DS} = k_n \left[ (V_{GS} - V_{Tn}) V_{DS} - \frac{1}{2} V_{DS}^2 \right]
+    \end{equation}
+
+    \item \textbf{3) Región de Saturación (NMOS ON con $V_{DS}$ grande):}
+    \begin{equation}
+        V_{GS} \ge V_{Tn} \quad \text{y} \quad V_{DS} \ge V_{GS} - V_{Tn}
+    \end{equation}
+    El canal se estrangula junto al drenador (\textit{pinch-off}) y la corriente depende cuadráticamente solo de $V_{GS}$:
+    \begin{equation}
+        I_{DS} = \frac{k_n}{2} (V_{GS} - V_{Tn})^2
+    \end{equation}
+\end{enumerate}
+\end{ley}
+
+\begin{ley}[Modos de Operación del Transistor PMOS ($V_{Tp} < 0$ en enriquecimiento)]
+En un transistor PMOS todas las desigualdades se invierten respecto al NMOS (o bien se trabaja con valores positivos invirtiendo los subíndices $V_{SG} = -V_{GS}$ y $V_{SD} = -V_{DS}$):
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{1) Región de Corte (PMOS OFF):}
+    \begin{equation}
+        V_{GS} > V_{Tp} \quad (\text{es decir, } V_{SG} < |V_{Tp}|) \implies I_{SD} = 0
+    \end{equation}
+    \item \textbf{2) Región Lineal o Tríodo (PMOS ON):}
+    \begin{equation}
+        V_{GS} \le V_{Tp} \quad \text{y} \quad V_{DS} > V_{GS} - V_{Tp} \quad \left(\text{es decir, } V_{SD} < V_{SG} - |V_{Tp}|\right)
+    \end{equation}
+    \begin{equation}
+        I_{SD} = k_p \left[ (V_{GS} - V_{Tp}) V_{DS} - \frac{1}{2} V_{DS}^2 \right] = k_p \left[ (V_{SG} - |V_{Tp}|) V_{SD} - \frac{1}{2} V_{SD}^2 \right]
+    \end{equation}
+    \item \textbf{3) Región de Saturación (PMOS ON):}
+    \begin{equation}
+        V_{GS} \le V_{Tp} \quad \text{y} \quad V_{DS} \le V_{GS} - V_{Tp} \quad \left(\text{es decir, } V_{SD} \ge V_{SG} - |V_{Tp}|\right)
+    \end{equation}
+    \begin{equation}
+        I_{SD} = \frac{k_p}{2} (V_{GS} - V_{Tp})^2 = \frac{k_p}{2} (V_{SG} - |V_{Tp}|)^2
+    \end{equation}
+\end{enumerate}
+\end{ley}
+
+\subsection{Curvas Características y Cuadro Resumen de Resolución}
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+    % Curva de transferencia ID vs VGS (izquierda)
+    \draw[->, thick] (-5.8,0) -- (-1.8,0) node[right] {$V_{GS}$};
+    \draw[->, thick] (-5.2,0) -- (-5.2,3.2) node[above] {$I_D$};
+    \draw[very thick, fftRed] (-5.2,0) -- (-4.0,0);
+    \draw[very thick, fftDarkBlue, domain=-4.0:-2.2, samples=40]
+        plot (\x, {0.85*(\x + 4.0)*(\x + 4.0)});
+    \node[below, font=\footnotesize] at (-4.0,0) {$V_T$};
+    \node[above, font=\bfseries\footnotesize] at (-3.6,3.2) {Transferencia ($I_D - V_{GS}$)};
+
+    % Curvas de salida ID vs VDS (derecha)
+    \draw[->, thick] (0,0) -- (5.2,0) node[right] {$V_{DS}$};
+    \draw[->, thick] (0,0) -- (0,3.2) node[above] {$I_D$};
+    \node[above, font=\bfseries\footnotesize] at (2.6,3.2) {Salida ($I_D - V_{DS}$)};
+
+    % Parábola límite Vds = Vgs - Vt
+    \draw[dashed, fftAccent, thick, domain=0:2.5, samples=40]
+        plot (\x, {0.42 * \x * \x});
+    \node[above, fftAccent, font=\footnotesize] at (2.4,2.65) {$V_{DS} = V_{GS} - V_T$};
 
     % Curvas para varios Vgs
     \foreach \vgs/\col in {1.5/fftPrimary, 2.0/fftDarkBlue, 2.5/fftGreen} {
         \draw[thick, \col] (0,0) to[out=60, in=180] ({0.7*\vgs}, {0.35*\vgs*\vgs})
-                          -- (5.0, {0.35*\vgs*\vgs}) node[right, font=\footnotesize] {$V_{GS\vgs}$};
+                          -- (4.6, {0.35*\vgs*\vgs}) node[right, font=\footnotesize] {$V_{GS\vgs}$};
     }
-    \node[font=\bfseries\footnotesize, fftPrimary] at (0.8,2.0) {Región Tríodo};
-    \node[font=\bfseries\footnotesize, fftPrimary] at (3.6,1.2) {Región Saturación};
+    \node[font=\bfseries\footnotesize, fftPrimary] at (0.8,1.8) {Lineal};
+    \node[font=\bfseries\footnotesize, fftPrimary] at (3.4,1.1) {Saturación};
 \end{tikzpicture}
 \end{center}
 
-% ==============================================================================
-% 4.4. EJERCICIOS RESUELTOS DE EXAMEN
-% ==============================================================================
-\section{Ejercicios Resueltos de Exámenes de Diodos y MOSFET}
-
-\begin{ejercicio}[Circuito con Diodos y Análisis de Estados --- Examen Parcial 2 FFT]
-Determinar el estado de conducción (ON/OFF), la corriente y las caídas de tensión en el circuito empleando $V_\gamma = 0{,}7\ \si{\volt}$.
-\tcbline
-\textbf{Esquema Circuital Completo:}\\[4pt]
+\begin{aviso}[Cuadro Resumen de Resolución de Circuitos con Diodos y MOSFET]
+\renewcommand{\arraystretch}{1.3}
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Fuente de 10V
-    \draw (0,0) to[V, v=$10\si{\volt}$] (0,2.5) -- (2,2.5) node[above] {$A$};
-    % Rama 1: D1 y R1
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{>{\bfseries}l l l}
+\toprule
+Dispositivo & Estado / Región & Condición y Modelo Circuital \\
+\midrule
+Diodo (Modelo 1) & OFF / ON & $V_D < 0 \implies I_D = 0$ (abierto) \quad / \quad $I_D > 0 \implies V_D = 0$ (corto) \\
+Diodo (Modelo 2) & OFF / ON & $V_D < V_\gamma \implies I_D = 0$ \quad / \quad $I_D > 0 \implies V_D = V_\gamma \approx 0{,}7\,\si{\volt}$ \\
+Diodo (Modelo 3) & OFF / ON & $V_D < V_\gamma \implies I_D = 0$ \quad / \quad $I_D > 0 \implies V_D = V_\gamma + I_D r_d$ \\
+Diodo Zener & Directo / OFF / Inverso & $V_D = 0{,}7\,\si{\volt}$ ($I_D>0$) \; / \; $-|V_Z|<V_D<0{,}7\,\si{\volt}$ \; / \; $V_D = -|V_Z|$ ($I_Z>0$) \\
+\midrule
+NMOS ($I_G = 0$) & 1) Corte (OFF) & $V_{GS} < V_{Tn} \implies I_D = 0$ \\
+                 & 2) Lineal (Tríodo) & $V_{GS} > V_{Tn}$ y $V_{DS} < V_{GS}-V_{Tn} \implies I_D = k_n\left[(V_{GS}-V_{Tn})V_{DS} - \frac{1}{2}V_{DS}^2\right]$ \\
+                 & 3) Saturación & $V_{GS} > V_{Tn}$ y $V_{DS} \ge V_{GS}-V_{Tn} \implies I_D = \frac{k_n}{2}(V_{GS}-V_{Tn})^2$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+\textbf{Regla de Oro para el MOSFET:}
+\begin{enumerate}[leftmargin=*]
+    \item Usar siempre que $I_G = 0$ para hallar $V_G$ (divisor de tensión en la puerta). Suponer inicialmente OFF ($I_D = 0$) para ver si $V_{GS} > V_T$.
+    \item Cuando el transistor conduce ($V_{GS} > V_T$), \textbf{se suele suponer primero que está en SATURACIÓN}, se resuelven las 3 ecuaciones con 3 incógnitas ($I_D, V_{GS}, V_{DS}$) y se comprueba si $V_{DS} \ge V_{GS} - V_T$. Si no se cumple, está en la región \textbf{lineal} y se recalculan las ecuaciones con la fórmula de tríodo.
+    \item \textbf{Caso especial (Puerta y Drenador cortocircuitados):} Si G y D están unidos (directamente o mediante una resistencia por la que no pasa corriente al ser $I_G = 0$), entonces $V_G = V_D \implies V_{DS} = V_{GS}$. Como $V_T > 0$, se cumple automáticamente que $V_{DS} > V_{GS} - V_T$, por lo que \textbf{si conduce, está garantizado en SATURACIÓN}.
+\end{enumerate}
+\end{aviso}
+
+% ==============================================================================
+% 4.4. COLECCIÓN COMPLETA DE EJERCICIOS RESUELTOS
+% ==============================================================================
+\section{Ejercicios Resueltos de Diodos y Transistores MOSFET}
+
+% --- EJERCICIO 1 (Parcial 2 FFT) ---
+\begin{ejercicio}[Circuito con Diodos de Dos Ramas --- Examen Parcial 2 FFT]
+Determinar el estado de conducción (ON/OFF), las corrientes por cada rama y las caídas de tensión en el circuito de la figura empleando el segundo modelo lineal con $V_\gamma = 0{,}7\ \si{\volt}$.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    \draw (0,0) to[V, v=$10\,\si{\volt}$] (0,2.5) -- (2,2.5) node[above] {$A$};
     \draw (2,2.5) to[D, l=$D_1$] (4,2.5)
-          to[R, l=$R_1{=}1\si{\kilo\ohm}$, i=$I_{D1}$] (4,0) -- (0,0);
-    % Rama 2: D2, V2 y R2
+          to[R, l=$R_1{=}1\,\si{\kilo\ohm}$, i=$I_{D1}$] (4,0) -- (0,0);
     \draw (2,2.5) -- (2,4) to[D, l=$D_2$] (4,4)
-          to[V, v=$V_2{=}4\si{\volt}$] (6,4)
-          to[R, l=$R_2{=}2\si{\kilo\ohm}$, i=$I_{D2}$] (6,0) -- (4,0);
+          to[V, l=$V_2{=}4\,\si{\volt}$] (6,4)
+          to[R, l=$R_2{=}2\,\si{\kilo\ohm}$, i=$I_{D2}$] (6,0) -- (4,0);
+    \draw (0,0) node[ground] {};
 \end{tikzpicture}
 \end{center}
-
 \textbf{Solución Paso a Paso:}\\[4pt]
-El potencial en el nudo $A$ común a ambos ánodos es $V_A = 10\ \si{\volt}$.\\
-\textbf{Hipótesis:} Ambos diodos conducen ($D_1$ ON y $D_2$ ON, sustituidos por baterías de $V_\gamma = 0{,}7\ \si{\volt}$).
+El potencial en el nudo $A$ común a ambos ánodos es $V_A = 10\ \si{\volt}$. Si suponemos ambos en OFF, $V_{K1} = 0\ \si{\volt}$ ($V_{D1} = 10\ \si{\volt} > 0{,}7\ \si{\volt}$) y $V_{K2} = 4\ \si{\volt}$ ($V_{D2} = 6\ \si{\volt} > 0{,}7\ \si{\volt}$). Por tanto, suponemos \textbf{$D_1$ ON y $D_2$ ON}:
 \begin{align}
-    V_{K1} &= V_A - V_\gamma = 10 - 0{,}7 = 9{,}3\ \si{\volt} \implies I_{D1} = \frac{9{,}3\ \si{\volt}}{1\ \si{\kilo\ohm}} = 9{,}3\ \si{\milli\ampere} > 0 \\
-    V_{K2} &= V_A - V_\gamma = 10 - 0{,}7 = 9{,}3\ \si{\volt} \implies I_{D2} = \frac{9{,}3 - 4}{2\ \si{\kilo\ohm}} = 2{,}65\ \si{\milli\ampere} > 0
+    V_{K1} &= V_A - V_\gamma = 10 - 0{,}7 = 9{,}3\ \si{\volt} \implies I_{D1} = \frac{9{,}3\ \si{\volt}}{1\ \si{\kilo\ohm}} = 9{,}3\ \si{\milli\ampere} > 0 \quad (\text{ON confirmado}) \\
+    V_{K2} &= V_A - V_\gamma = 10 - 0{,}7 = 9{,}3\ \si{\volt} \implies I_{D2} = \frac{9{,}3 - 4}{2\ \si{\kilo\ohm}} = 2{,}65\ \si{\milli\ampere} > 0 \quad (\text{ON confirmado})
 \end{align}
-Ambas corrientes son positivas $\implies$ Hipótesis confirmada.\\
-Corriente total: $I_{total} = I_{D1} + I_{D2} = 9{,}3 + 2{,}65 = 11{,}95\ \si{\milli\ampere}$.
+La corriente total suministrada por la fuente de $10\ \si{\volt}$ es $I_{\text{total}} = I_{D1} + I_{D2} = 9{,}3 + 2{,}65 = 11{,}95\ \si{\milli\ampere}$.
 \end{ejercicio}
 
-\begin{ejercicio}[Punto de Trabajo Q de Transistor NMOS --- Examen UGR]
-Determinar el punto de trabajo $Q(V_{GS}, I_D, V_{DS})$ en el circuito de polarización del transistor NMOS con $V_{th} = 1{,}5\ \si{\volt}$, $k_n = 1\ \si{\milli\ampere\per\volt\squared}$, $\lambda = 0$, $V_{DD} = 15\ \si{\volt}$, $R_1 = 10\ \si{\mega\ohm}$, $R_2 = 5\ \si{\mega\ohm}$, $R_D = 3\ \si{\kilo\ohm}$ y $R_S = 1\ \si{\kilo\ohm}$.
+% --- EJERCICIO 2 (Ejercicio 4 de los apuntes) ---
+\begin{ejercicio}[Característica de Transferencia de Limitador Simple --- Ejercicio 4 Apuntes]
+Calcular y representar la característica de transferencia $V_o$ en función de $V_i$ si se toma la salida en bornes del diodo usando el 2.º modelo lineal ($V_\gamma = 0{,}7\ \si{\volt}$). Ambas resistencias valen $R = 1\ \si{\kilo\ohm}$.
 \tcbline
-\textbf{Esquema Circuital de Polarización:}\\[4pt]
 \begin{center}
-\begin{tikzpicture}[scale=1.0]
-    % Fuente de alimentación VDD
-    \draw (0,4) node[above] {$V_{DD} = 15\si{\volt}$} -- (0,3.6);
-    \draw (3,4) node[above] {$V_{DD} = 15\si{\volt}$} -- (3,3.6);
-
-    % Divisor de puerta
-    \draw (0,3.6) to[R, l=$R_1{=}10\si{\mega\ohm}$] (0,2)
-          to[R, l=$R_2{=}5\si{\mega\ohm}$] (0,0) node[ground] {};
-    % Conexión a la puerta
-    \draw (0,2) -- (1.5,2);
-
-    % Transistor NMOS
-    \draw (2.0,2) node[nmos] (nmos) {};
-    \draw (1.5,2) -- (nmos.gate);
-
-    % Drenador
-    \draw (3,3.6) to[R, l=$R_D{=}3\si{\kilo\ohm}$] (3,2.5) -- (nmos.drain);
-
-    % Fuente
-    \draw (nmos.source) -- (2.0,1.2)
-          to[R, l=$R_S{=}1\si{\kilo\ohm}$] (2.0,0) node[ground] {};
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[V, v=$V_i$] (0,2.2)
+          to[R, l=$1\,\si{\kilo\ohm}$] (2.4,2.2) -- (4.2,2.2);
+    \draw (2.4,2.2) to[R, l=$1\,\si{\kilo\ohm}$] (2.4,0) node[ground] {};
+    \draw (4.2,2.2) to[D, l=$D$] (4.2,0) node[ground] {};
+    \draw (4.2,2.2) to[short, -o] (5.0,2.2) node[right] {$V_o$};
 \end{tikzpicture}
 \end{center}
-
 \textbf{Solución Paso a Paso:}\\[4pt]
-1) Tensión de Puerta ($I_G = 0$):
+Como el cátodo está a masa ($0\ \si{\volt}$), la tensión en el diodo es $V_D = V_{\text{Ánodo}} - V_{\text{Cátodo}} = V_o$.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Diodo OFF ($V_o < V_\gamma = 0{,}7\ \si{\volt}$):} El diodo es un circuito abierto y las dos resistencias de $1\ \si{\kilo\ohm}$ forman un divisor de tensión:
+    \begin{equation}
+        V_o = V_i \frac{R}{R + R} = \frac{V_i}{2}
+    \end{equation}
+    El diodo empieza a conducir cuando $V_o = 0{,}7\ \si{\volt} \implies V_i = 2 V_o = 2 \times 0{,}7 = 1{,}4\ \si{\volt}$.
+    \item \textbf{Resumen de tramos:}
+    \begin{itemize}
+        \item Para $V_i < 1{,}4\ \si{\volt}$: \textbf{Diodo OFF} $\implies V_o = \dfrac{V_i}{2}$ (recta de pendiente $1/2$ que pasa por el origen).
+        \item Para $V_i \ge 1{,}4\ \si{\volt}$: \textbf{Diodo ON} $\implies V_o = V_\gamma = 0{,}7\ \si{\volt}$ (constante fija sea cual sea $V_i$).
+    \end{itemize}
+\end{itemize}
+\end{ejercicio}
+
+% --- EJERCICIO 3 (Ejercicio 5 de los apuntes) ---
+\begin{ejercicio}[Característica de Transferencia con Dos Ramas Antiparalelas --- Ejercicio 5 Apuntes]
+Calcular y dibujar la característica de transferencia $V_o(V_i)$ del circuito de la figura usando el 2.º modelo lineal con $V_\gamma = 0{,}7\ \si{\volt}$ para $D_1$ y $D_2$. Todas las resistencias son de $R = 1\ \si{\kilo\ohm}$.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (-0.5,2.4) node[left] {$V_i$} to[R, l=$1\,\si{\kilo\ohm}$, o-] (2.0,2.4) -- (4.2,2.4);
+    \draw (4.2,2.4) to[short, -o] (5.0,2.4) node[right] {$V_o$};
+    % Rama D1 hacia abajo
+    \draw (2.0,2.4) to[D, l=$D_1$] (2.0,1.2) to[R, l=$1\,\si{\kilo\ohm}$] (2.0,0) node[ground] {};
+    % Rama D2 hacia arriba
+    \draw (3.8,1.2) to[D, l=$D_2$] (3.8,2.4);
+    \draw (3.8,1.2) to[R, l=$1\,\si{\kilo\ohm}$] (3.8,0) node[ground] {};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+\begin{enumerate}[label=\Alph*)]
+    \item \textbf{Región A ($-V_\gamma \le V_i \le V_\gamma$, es decir, $-0{,}7\ \si{\volt} \le V_i \le 0{,}7\ \si{\volt}$):}
+    Tanto $D_1$ como $D_2$ están en \textbf{OFF}. No circula corriente por ninguna rama ($I = 0$), luego no hay caída en la resistencia de entrada y:
+    \begin{equation}
+        V_o = V_i \quad (\text{recta de pendiente } 1)
+    \end{equation}
+    \item \textbf{Región B ($V_i > V_\gamma = 0{,}7\ \si{\volt}$):}
+    Conduce \textbf{$D_1$ ON} y \textbf{$D_2$ OFF}. La corriente que circula por la malla única (resistencia de entrada, $D_1$ y su resistencia inferior $R$) es:
+    \begin{equation}
+        I = \frac{V_i - V_\gamma}{2R} \implies V_o = V_\gamma + I R = V_\gamma + \frac{V_i - V_\gamma}{2} = \frac{V_i + V_\gamma}{2} = \frac{V_i + 0{,}7}{2} \quad \left(\text{pendiente } \frac{1}{2}\right)
+    \end{equation}
+    \item \textbf{Región C ($V_i < -V_\gamma = -0{,}7\ \si{\volt}$):}
+    Conduce \textbf{$D_2$ ON} y \textbf{$D_1$ OFF}. La corriente de malla es:
+    \begin{equation}
+        I = \frac{V_i + V_\gamma}{2R} \implies V_o = -V_\gamma + I R = \frac{V_i - V_\gamma}{2} = \frac{V_i - 0{,}7}{2} \quad \left(\text{pendiente } \frac{1}{2}\right)
+    \end{equation}
+\end{enumerate}
+\end{ejercicio}
+
+% --- EJERCICIO 4 (Ejercicio 6 de los apuntes) ---
+\begin{ejercicio}[Red en Escalera con Dos Diodos Zener --- Ejercicio 6 Apuntes]
+En el circuito de la figura, las tensiones inversas de ruptura de los diodos son $V_{Z1} = 10\ \si{\volt}$ y $V_{Z2} = 8\ \si{\volt}$, con $V_i = 20\ \si{\volt}$, $R_1 = 600\ \si{\ohm}$, $R_2 = 400\ \si{\ohm}$ y $R_3 = 300\ \si{\ohm}$. Calcular las corrientes que circulan a través de cada una de las resistencias.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[V, v=$20\,\si{\volt}$] (0,2.2)
+          to[R, l=$R_1{=}600\,\si{\ohm}$] (2.5,2.2) node[above] {$A$}
+          to[R, l=$R_2{=}400\,\si{\ohm}$] (5.0,2.2) node[above] {$B$}
+          to[R, l=$R_3{=}300\,\si{\ohm}$] (5.0,0) -- (0,0);
+    \draw (2.5,0) to[zzD, l=$D_1$] (2.5,2.2);
+    \draw (3.8,2.2) -- (3.8,2.2);
+    \draw (4.2,0) to[zzD, l=$D_2$] (4.2,2.2);
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Hipótesis inicial (ambos Zener en OFF):}
+Calculamos la corriente y las tensiones en los nudos $A$ y $B$ sin diodos:
 \begin{equation}
-    V_G = V_{DD} \frac{R_2}{R_1 + R_2} = 15 \times \frac{5}{15} = 5\ \si{\volt}
+    I = \frac{20\ \si{\volt}}{R_1 + R_2 + R_3} = \frac{20\ \si{\volt}}{0{,}6 + 0{,}4 + 0{,}3\ \si{\kilo\ohm}} = \frac{20}{1{,}3} = 15{,}38\ \si{\milli\ampere}
 \end{equation}
-2) Malla Puerta-Fuente ($V_S = I_D R_S = 1 \cdot I_D$):
+\begin{align}
+    V_B &= I \cdot R_3 = 15{,}38 \times 0{,}3 = 4{,}61\ \si{\volt} < 8\ \si{\volt} \implies D_2\text{ está en OFF } (V_{D2} = -4{,}61\ \si{\volt} > -8\ \si{\volt}) \\
+    V_A &= I (R_2 + R_3) = 15{,}38 \times 0{,}7 = 10{,}77\ \si{\volt} > 10\ \si{\volt} \implies D_1\text{ entra en ruptura inversa ON}
+\end{align}
+2) \textbf{Resolución con $D_1$ ON en Zener ($V_A = |V_{Z1}| = 10\ \si{\volt}$) y $D_2$ OFF:}
+\begin{align}
+    I_{R2} = I_{R3} &= \frac{V_A}{R_2 + R_3} = \frac{10\ \si{\volt}}{0{,}4 + 0{,}3\ \si{\kilo\ohm}} = \frac{10}{0{,}7} = 14{,}285\ \si{\milli\ampere} \\
+    V_B &= I_{R3} \cdot R_3 = 14{,}285 \times 0{,}3 = 4{,}285\ \si{\volt} < 8\ \si{\volt} \implies D_2\text{ sigue en OFF (confirmado)} \\
+    I_{R1} &= \frac{V_i - V_A}{R_1} = \frac{20 - 10}{0{,}6\ \si{\kilo\ohm}} = 16{,}67\ \si{\milli\ampere}
+\end{align}
+(La corriente inversa por el Zener $D_1$ es $I_{Z1} = I_{R1} - I_{R2} = 16{,}67 - 14{,}285 = 2{,}385\ \si{\milli\ampere} > 0$).
+\end{ejercicio}
+
+% --- EJERCICIO 5 (Ejercicio 8 de los apuntes) ---
+\begin{ejercicio}[Comparación de los 3 Modelos Lineales del Diodo --- Ejercicio 8 Apuntes]
+Calcular el valor de la tensión de salida $V_o$ en el circuito de la figura ($R_1 = R_2 = R_3 = 5\ \si{\kilo\ohm}$) sabiendo que el diodo $D_1$ cuando está en conducción se representa por:
+a) un cortocircuito (modelo 1); \quad b) una fuente de $0{,}7\ \si{\volt}$ (modelo 2); \quad c) una fuente de $0{,}7\ \si{\volt}$ y resistencia de $20\ \si{\ohm}$ (modelo 3).
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,3.6) node[above] {$10\,\si{\volt}$} to[R, l=$R_1$] (0,1.8) node[left] {$V_x$}
+          to[R, l=$R_2$] (0,0) node[ground] {};
+    % Diodo D1 con cátodo en Vx y ánodo en Vo
+    \draw (2.5,1.8) to[D, l_=$D_1$] (0,1.8);
+    \draw (2.5,1.8) to[short, -o] (3.3,1.8) node[right] {$V_o$};
+    \draw (2.5,1.8) to[R, l=$R_3$] (2.5,0.8) to[V, l=$6\,\si{\volt}$] (2.5,0) node[ground] {};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+Comprobamos primero el estado de $D_1$ suponiendo que está en \textbf{OFF}:
 \begin{equation}
-    V_{GS} = 5 - I_D
+    V_{\text{Ánodo}} = V_o = 6\ \si{\volt}, \qquad V_{\text{Cátodo}} = V_x = 10 \frac{R_2}{R_1 + R_2} = 5\ \si{\volt} \implies V_D = 6 - 5 = 1\ \si{\volt} > 0{,}7\ \si{\volt} \implies D_1\text{ ON}
 \end{equation}
-3) Hipótesis de Saturación:
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Modelo 1 (cortocircuito, $V_\gamma = 0$):} $V_o = V_x$. Por nudos en $V_x$:
+    \begin{equation}
+        \frac{10 - V_x}{5} + \frac{6 - V_x}{5} = \frac{V_x}{5} \implies 16 = 3 V_x \implies V_x = V_o = 5{,}33\ \si{\volt}
+    \end{equation}
+    \item \textbf{Modelo 2 (fuente de $0{,}7\ \si{\volt}$):} $V_o = V_x + 0{,}7$. Aplicando Kirchhoff en el supernudo:
+    \begin{equation}
+        \frac{10 - V_x}{5} + \frac{6 - (V_x + 0{,}7)}{5} = \frac{V_x}{5} \implies 3 V_x = 15{,}3 \implies V_x = 5{,}1\ \si{\volt} \implies V_o = 5{,}1 + 0{,}7 = 5{,}8\ \si{\volt}
+    \end{equation}
+    \item \textbf{Modelo 3 ($V_\gamma = 0{,}7\ \si{\volt}$ y $r_d = 20\ \si{\ohm} = 0{,}02\ \si{\kilo\ohm}$):} La resistencia total de la rama derecha es $R_3 + r_d = 5{,}02\ \si{\kilo\ohm}$:
+    \begin{equation}
+        \frac{10 - V_x}{5} + \frac{6 - V_x - 0{,}7}{5{,}02} = \frac{V_x}{5} \implies 15{,}04 V_x = 76{,}7 \implies V_x \approx 5{,}1\ \si{\volt}
+    \end{equation}
+    La corriente por el diodo es $I_D = \frac{6 - 5{,}8}{5{,}02\ \si{\kilo\ohm}} \approx 40\ \si{\micro\ampere}$, por lo que $V_o = V_x + 0{,}7 + I_D r_d \approx 5{,}8\ \si{\volt}$ (al ser las resistencias de $5\ \si{\kilo\ohm}$ mucho mayores que $r_d = 20\ \si{\ohm}$, los modelos 2 y 3 dan prácticamente el mismo resultado).
+\end{enumerate}
+\end{ejercicio}
+
+% --- EJERCICIO 6 (Ejercicio 9 de los apuntes) ---
+\begin{ejercicio}[Circuito con Fuente de Corriente y Diodo --- Ejercicio 9 Apuntes]
+Determinar el valor de la corriente $I$ y $I_2$ en el circuito de la figura suponiendo un diodo rectificador común ($V_\gamma = 0{,}7\ \si{\volt}$) con $I_1 = 8\ \si{\milli\ampere}$, $R_1 = 2{,}2\ \si{\kilo\ohm}$, $R_2 = 5{,}6\ \si{\kilo\ohm}$ y $R_3 = 3{,}3\ \si{\kilo\ohm}$.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[I, i=$I_1{=}8\,\si{\milli\ampere}$] (0,2.8)
+          to[R, l=$R_1{=}2{,}2\,\si{\kilo\ohm}$] (2.4,2.8) node[above] {$A$}
+          to[short, i=$I$] (4.4,2.8)
+          to[R, l=$R_3{=}3{,}3\,\si{\kilo\ohm}$] (4.4,0) -- (0,0);
+    \draw (2.4,2.8) to[D, l=$D_1$] (2.4,1.5) node[right] {$B$}
+          to[R, l=$R_2{=}5{,}6\,\si{\kilo\ohm}$, i=$I_2$] (2.4,0);
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+Si suponemos $D_1\text{ OFF}$, toda la corriente $I_1 = 8\ \si{\milli\ampere}$ pasa por $R_3$, luego $V_A = 8\ \si{\milli\ampere} \times 3{,}3\ \si{\kilo\ohm} = 26{,}4\ \si{\volt} > 0{,}7\ \si{\volt}$, por lo que \textbf{$D_1$ conduce en ON}.
+Sustituyendo $D_1$ por una fuente de $0{,}7\ \si{\volt}$ y aplicando LCK en el nudo $A$:
 \begin{equation}
-    I_D = \frac{1}{2} k_n (V_{GS} - V_{th})^2 = 0{,}5 (3{,}5 - I_D)^2 \implies I_D^2 - 9 I_D + 12{,}25 = 0
+    8 = \frac{V_A - 0{,}7}{5{,}6} + \frac{V_A}{3{,}3} \implies 147{,}84 = 3{,}3 V_A - 2{,}31 + 5{,}6 V_A \implies 8{,}9 V_A = 150{,}15 \implies V_A = 16{,}87\ \si{\volt}
 \end{equation}
-Raíz físicamente admisible:
+Conocida la tensión $V_A$, hallamos las corrientes:
 \begin{equation}
-    I_D = \frac{9 - \sqrt{32}}{2} \approx 1{,}67\ \si{\milli\ampere} \implies V_{GS} = 5 - 1{,}67 = 3{,}33\ \si{\volt} > V_{th}
+    I = \frac{V_A}{R_3} = \frac{16{,}87\ \si{\volt}}{3{,}3\ \si{\kilo\ohm}} = 5{,}11\ \si{\milli\ampere}, \qquad I_2 = \frac{V_A - 0{,}7}{R_2} = \frac{16{,}87 - 0{,}7}{5{,}6\ \si{\kilo\ohm}} = 2{,}89\ \si{\milli\ampere} > 0
 \end{equation}
-4) Comprobación de Saturación:
+\end{ejercicio}
+
+% --- EJERCICIO 7 (Ejercicio 10 de los apuntes) ---
+\begin{ejercicio}[Análisis con el 3.er Modelo Lineal para Dos Diodos --- Ejercicio 10 Apuntes]
+En el circuito de la figura, $D_1$ y $D_2$ se representan en conducción mediante una fuente de $0{,}7\ \si{\volt}$ en serie con $r_d = 20\ \si{\ohm} = 0{,}02\ \si{\kilo\ohm}$ ($R_1 = 5\ \si{\kilo\ohm}, R_2 = 2\ \si{\kilo\ohm}$). Determinar la tensión en el nudo $A$ si: a) $V_{in} = 10\ \si{\volt}$; \quad b) $V_{in} = -5\ \si{\volt}$.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[V, v=$V_{in}$] (0,2.0) -- (0.8,2.0);
+    % Paralelo D1 y R1
+    \draw (0.8,2.0) -- (0.8,2.8) to[D, l=$D_1$] (3.0,2.8) -- (3.0,2.0);
+    \draw (0.8,2.0) -- (0.8,1.3) to[R, l=$R_1{=}5\,\si{\kilo\ohm}$] (3.0,1.3) -- (3.0,2.0);
+    \draw (3.0,2.0) -- (4.0,2.0) node[above] {$A$} -- (5.2,2.0);
+    % Paralelo R2 y D2 a masa
+    \draw (3.8,2.0) to[R, l=$R_2{=}2\,\si{\kilo\ohm}$] (3.8,0) node[ground] {};
+    \draw (5.2,0) node[ground] {} to[D, l_=$D_2$] (5.2,2.0);
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+Si ambos diodos están en OFF, el divisor de tensión da $V_A = \frac{R_2}{R_1 + R_2} V_{in} = \frac{2}{7} V_{in}$.
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Cuando $V_{in} = 10\ \si{\volt}$:} Con ambos OFF sería $V_A = \frac{20}{7} = 2{,}86\ \si{\volt}$, luego $V_{D1} = 10 - 2{,}86 = 7{,}14\ \si{\volt} > 0{,}7\ \si{\volt}$ y $V_{D2} = -2{,}86\ \si{\volt} < 0{,}7\ \si{\volt}$. Por tanto, \textbf{$D_1$ ON y $D_2$ OFF}. Aplicando Kirchhoff en el nudo $A$:
+    \begin{equation}
+        \frac{10 - 0{,}7 - V_A}{0{,}02} + \frac{10 - V_A}{5} = \frac{V_A}{2} \implies V_A = 9{,}211\ \si{\volt}
+    \end{equation}
+    \item \textbf{Cuando $V_{in} = -5\ \si{\volt}$:} Con ambos OFF sería $V_A = -\frac{10}{7} = -1{,}43\ \si{\volt}$, luego $V_{D2} = 0 - (-1{,}43) = 1{,}43\ \si{\volt} > 0{,}7\ \si{\volt}$ y $V_{D1} < 0$. Ahora \textbf{$D_2$ ON y $D_1$ OFF}:
+    \begin{equation}
+        \frac{-0{,}7 - V_A}{0{,}02} = \frac{V_A - (-5)}{5} + \frac{V_A}{2} \implies V_A = -0{,}71\ \si{\volt}
+    \end{equation}
+    con corrientes $I_{R1} = \frac{-0{,}71 - (-5)}{5} = 0{,}858\ \si{\milli\ampere}$, $I_{R2} = \frac{0{,}71}{2} = 0{,}355\ \si{\milli\ampere}$ e $I_{D2} = 0{,}858 - 0{,}355 = 0{,}503\ \si{\milli\ampere} > 0$.
+\end{enumerate}
+\end{ejercicio}
+
+% --- EJERCICIO 8 (Polarización NMOS Examen UGR + Ejemplo orig-087) ---
+\begin{ejercicio}[Punto de Trabajo $Q$ de Transistor NMOS con Divisor de Puerta --- Examen UGR]
+Determinar el punto de reposo $Q(V_{GS}, I_D, V_{DS})$ y verificar la región de operación en el circuito de polarización de la figura, con $V_{DD} = 15\ \si{\volt}$, $V_T = 1{,}5\ \si{\volt}$, $k_n = 1\ \si{\milli\ampere\per\volt\squared}$, $R_1 = 10\ \si{\mega\ohm}$, $R_2 = 5\ \si{\mega\ohm}$, $R_D = 3\ \si{\kilo\ohm}$ y $R_S = 1\ \si{\kilo\ohm}$. (A continuación se incluye también la variante de clase con $R_1 = 150\ \si{\kilo\ohm}, R_2 = 100\ \si{\kilo\ohm}, R_D = 40\ \si{\kilo\ohm}, R_S = 5\ \si{\kilo\ohm}, k_n = 40\ \si{\micro\ampere\per\volt\squared}$ y $V_T = 2\ \si{\volt}$).
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Divisor de puerta a la izquierda
+    \draw (0,4.2) node[above] {$V_{DD}=15\,\si{\volt}$}
+          to[R, l={$R_1=10\,\si{\mega\ohm}$}] (0,2.0)
+          to[R, l={$R_2=5\,\si{\mega\ohm}$}] (0,-0.5) node[ground] {};
+    % Transistor NMOS en (2.5, 2.0)
+    \draw (2.5, 2.0) node[nmos] (M) {};
+    \draw (0,2.0) -- (M.gate);
+    % RD vertical desde (M.drain) hacia arriba y RS desde (M.source) hacia abajo
+    \draw (M.drain) to[R, l={$R_D=3\,\si{\kilo\ohm}$}] (2.5, 4.2) node[above] {$V_{DD}=15\,\si{\volt}$};
+    \draw (M.source) to[R, l={$R_S=1\,\si{\kilo\ohm}$}] (2.5, -0.5) node[ground] {};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Tensión en la Puerta ($I_G = 0$):}
 \begin{equation}
-    V_D = 15 - 3 \times 1{,}67 = 9{,}99\ \si{\volt}, \quad V_S = 1{,}67\ \si{\volt} \implies V_{DS} = 8{,}32\ \si{\volt}
+    V_G = V_{DD} \frac{R_2}{R_1 + R_2} = 15 \times \frac{5}{10 + 5} = 5\ \si{\volt}
 \end{equation}
-Como $V_{DS} = 8{,}32\ \si{\volt} \ge V_{GS} - V_{th} = 1{,}83\ \si{\volt}$, queda verificada la saturación.\\
-\textbf{Punto Q:} $I_D = 1{,}67\ \si{\milli\ampere}, \quad V_{GS} = 3{,}33\ \si{\volt}, \quad V_{DS} = 8{,}32\ \si{\volt}$.
+Si el transistor estuviese en corte ($I_D = 0 \implies V_S = 0$), sería $V_{GS} = 5\ \si{\volt} > V_T = 1{,}5\ \si{\volt}$, luego \textbf{el NMOS conduce (ON)}.\\[3pt]
+2) \textbf{Hipótesis de Saturación y Ecuaciones de Malla ($I_D = I_S$):}
+\begin{equation}
+    V_{GS} = V_G - I_D R_S = 5 - 1 \cdot I_D, \qquad I_D = \frac{k_n}{2}(V_{GS} - V_T)^2 = 0{,}5(3{,}5 - I_D)^2
+\end{equation}
+\begin{equation}
+    I_D^2 - 9 I_D + 12{,}25 = 0 \implies I_D = \frac{9 - \sqrt{32}}{2} \approx 1{,}67\ \si{\milli\ampere}, \qquad V_{GS} = 5 - 1{,}67 = 3{,}33\ \si{\volt} > 1{,}5\ \si{\volt}
+\end{equation}
+(La otra raíz $I_D = 7{,}33\ \si{\milli\ampere}$ daría $V_{GS} = -2{,}33\ \si{\volt} < V_T$, imposible).\\[3pt]
+3) \textbf{Cálculo de $V_{DS}$ y Comprobación de Saturación:}
+\begin{equation}
+    V_{DS} = V_{DD} - I_D(R_D + R_S) = 15 - 1{,}67 \times (3 + 1) = 8{,}32\ \si{\volt} \ge V_{GS} - V_T = 1{,}83\ \si{\volt} \quad (\text{Saturación OK})
+\end{equation}
+\textbf{Variante del Ejemplo de Clase (`orig-087.png`):} Con $R_1 = 150\ \si{\kilo\ohm}, R_2 = 100\ \si{\kilo\ohm}, R_D = 40\ \si{\kilo\ohm}, R_S = 5\ \si{\kilo\ohm}, k_n = 40 \times 10^{-6}\ \si{\ampere\per\volt\squared}$ y $V_T = 2\ \si{\volt}$:
+\begin{equation}
+    V_G = 15 \frac{100}{250} = 6\ \si{\volt}, \qquad \frac{6 - V_{GS}}{5\ \si{\kilo\ohm}} = 20 \times 10^{-6} (V_{GS} - 2)^2 \implies V_{GS}^2 + 6 V_{GS} - 56 = 0
+\end{equation}
+De donde $V_{GS} = 5{,}06\ \si{\volt} > 2\ \si{\volt}$, $I_D = \frac{6 - 5{,}06}{5\ \si{\kilo\ohm}} = 0{,}188\ \si{\milli\ampere}$ (o $0{,}1844\ \si{\milli\ampere}$ según redondeo) y $V_{DS} = 15 - I_D(45\ \si{\kilo\ohm}) = 6{,}54\ \si{\volt} > V_{GS} - V_T = 3{,}06\ \si{\volt}$ (\textbf{Saturación correcta}).
+\end{ejercicio}
+
+% --- EJERCICIO 9 (Ejercicio 12 de los apuntes) ---
+\begin{ejercicio}[Punto de Trabajo en las 3 Regiones según $V_{GG}$ --- Ejercicio 12 Apuntes]
+Hallar el punto de trabajo del MOSFET de canal N de la figura ($V_{SS} = -6\ \si{\volt}$, $R_1 = 5{,}6\ \si{\kilo\ohm}$ conectada entre masa $0\ \si{\volt}$ y drenador, $V_T = 2\ \si{\volt}$, $k_n = 2 \times 10^{-3}\ \si{\ampere\per\volt\squared} = 2\ \si{\milli\ampere\per\volt\squared}$) para:
+a) $V_{GG} = -3{,}5\ \si{\volt}$; \quad b) $V_{GG} = -3\ \si{\volt}$; \quad c) $V_{GG} = -4\ \si{\volt}$.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (2.5,1.8) node[nmos] (M) {};
+    \draw (1.2,1.8) node[left] {$V_{GG}$} to[short, o-] (M.gate);
+    \draw (M.drain) to[R, l=$R_1{=}5{,}6\,\si{\kilo\ohm}$] (2.5,3.8) node[ground] {};
+    \draw (M.source) -- (2.5,0.6) node[below] {$V_{SS} = -6\,\si{\volt}$};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+Como la fuente está fija a $V_S = V_{SS} = -6\ \si{\volt}$, tenemos siempre $V_{GS} = V_{GG} - (-6) = V_{GG} + 6$.
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Si $V_{GG} = -3{,}5\ \si{\volt}$:} $V_{GS} = -3{,}5 + 6 = 2{,}5\ \si{\volt} > V_T = 2\ \si{\volt} \implies \text{NMOS ON}$.
+    Suponemos \textbf{saturación}:
+    \begin{equation}
+        I_D = \frac{k_n}{2}(V_{GS} - V_T)^2 = \frac{2}{2}(2{,}5 - 2)^2 = 0{,}25\ \si{\milli\ampere}
+    \end{equation}
+    Como $0 - V_D = I_D R_1 \implies V_D = -0{,}25 \times 5{,}6 = -1{,}4\ \si{\volt}$, resulta:
+    \begin{equation}
+        V_{DS} = V_D - V_{SS} = -1{,}4 - (-6) = 4{,}6\ \si{\volt} > V_{GS} - V_T = 0{,}5\ \si{\volt} \implies \textbf{Saturación OK}
+    \end{equation}
+
+    \item \textbf{Si $V_{GG} = -3\ \si{\volt}$:} $V_{GS} = -3 + 6 = 3\ \si{\volt} > V_T = 2\ \si{\volt} \implies \text{NMOS ON}$.
+    Si suponemos saturación:
+    \begin{equation}
+        I_D = \frac{2}{2}(3 - 2)^2 = 1\ \si{\milli\ampere} \implies V_D = -1 \times 5{,}6 = -5{,}6\ \si{\volt} \implies V_{DS} = -5{,}6 - (-6) = 0{,}4\ \si{\volt}
+    \end{equation}
+    Como $V_{DS} = 0{,}4\ \si{\volt} < V_{GS} - V_T = 1\ \si{\volt}$, \textbf{NO está en saturación}, sino en la \textbf{región lineal (tríodo)}.
+    Planteamos las ecuaciones en región lineal ($V_D = V_{SS} + V_{DS} = -6 + V_{DS}$):
+    \begin{equation}
+        I_D = \frac{-V_{SS} - V_{DS}}{R_1} = k_n \left[ (V_{GS} - V_T) V_{DS} - \frac{1}{2} V_{DS}^2 \right] \implies \frac{6 - V_{DS}}{5{,}6} = 2 \left( 1 \cdot V_{DS} - \frac{1}{2} V_{DS}^2 \right)
+    \end{equation}
+    Resolviendo la ecuación de segundo grado se obtienen dos raíces: $V_{DS} = 1{,}43\ \si{\volt}$ (se descarta porque es mayor que $V_{GS}-V_T = 1\ \si{\volt}$) y la solución válida:
+    \begin{equation}
+        V_{DS} = 0{,}75\ \si{\volt} < 1\ \si{\volt}, \qquad I_D = \frac{6 - 0{,}75}{5{,}6} = 0{,}93\ \si{\milli\ampere}, \qquad V_D = -6 + 0{,}75 = -5{,}25\ \si{\volt}
+    \end{equation}
+
+    \item \textbf{Si $V_{GG} = -4\ \si{\volt}$:} $V_{GS} = -4 - (-6) = 2\ \si{\volt} = V_T \implies I_D = 0\ \si{\milli\ampere}$ (el transistor está en el umbral de \textbf{OFF / Corte}, con $V_D = 0\ \si{\volt}$ y $V_{DS} = 6\ \si{\volt}$).
+\end{enumerate}
+\end{ejercicio}
+
+% --- EJERCICIO 10 (Ejercicio 13 de los apuntes) ---
+\begin{ejercicio}[MOSFET con Puerta y Drenador Cortocircuitados --- Ejercicio 13 Apuntes]
+Determinar el valor de $I_D$, $V_{DS}$ y $V_{GS}$ en el circuito de la figura, sabiendo que $V_{DD} = 12\ \si{\volt}$, $V_{SS} = 0\ \si{\volt}$, $R_1 = 2\ \si{\kilo\ohm}$, $R_2 = 1\ \si{\mega\ohm}$, $V_T = 3\ \si{\volt}$ y $k_n = 0{,}48 \times 10^{-3}\ \si{\ampere\per\volt\squared} = 0{,}48\ \si{\milli\ampere\per\volt\squared}$.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (2.5,1.8) node[nmos] (M) {};
+    \draw (M.drain) -- (2.5,2.6) to[R, l_=$R_1{=}2\,\si{\kilo\ohm}$] (2.5,4.2) node[above] {$V_{DD}=12\,\si{\volt}$};
+    \draw (M.source) -- (2.5,0.6) node[ground] {} node[right=4pt] {$V_{SS}=0\,\si{\volt}$};
+    \draw (2.5,2.6) to[R, l_=$R_2{=}1\,\si{\mega\ohm}$] (0.5,2.6) -- (0.5,1.8) -- (M.gate);
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{¿Conduce el transistor?} Como la corriente de puerta es siempre nula ($I_G = 0 \implies I_{R2} = 0$), no cae tensión en $R_2$, lo que obliga a que $V_G = V_D$ y por tanto \textbf{$V_{GS} = V_{DS}$}. Si supusiéramos el transistor en OFF ($I_D = 0$), sería $V_D = V_{DD} = 12\ \si{\volt} \implies V_{GS} = 12\ \si{\volt} > V_T = 3\ \si{\volt}$, contradicción: el transistor está \textbf{ON}.\\[3pt]
+2) \textbf{¿En qué región conduce?} Al tener unidos drenador y puerta ($V_{DS} = V_{GS}$), se cumple siempre que $V_{DS} > V_{GS} - V_T$ (pues $V_T = 3\ \si{\volt} > 0$). Por tanto, \textbf{trabaja obligatoriamente en SATURACIÓN}.
+Igualando la corriente del transistor con la que baja por $R_1$:
+\begin{equation}
+    I_D = \frac{k_n}{2}(V_{GS} - V_T)^2 = \frac{V_{DD} - V_{DS}}{R_1} \implies \frac{0{,}48}{2}(V_{GS} - 3)^2 = \frac{12 - V_{GS}}{2}
+\end{equation}
+Despejando la raíz positiva ($V_{GS} > 3\ \si{\volt}$):
+\begin{equation}
+    V_{GS} = V_{DS} = 6{,}43\ \si{\volt}, \qquad I_D = \frac{12 - 6{,}43}{2\ \si{\kilo\ohm}} = 2{,}785\ \si{\milli\ampere}
+\end{equation}
+\end{ejercicio}
+
+% --- EJERCICIO 11 (Ejercicio 14 de los apuntes) ---
+\begin{ejercicio}[Umbral de Conducción de un MOSFET --- Ejercicio 14 Apuntes]
+En el circuito de la figura ($V_{DD} = 15\ \si{\volt}, V_{SS} = 5\ \si{\volt}, R_{G1} = 120\ \si{\ohm}, R_{G2} = 220\ \si{\ohm}, R_D = 4{,}7\ \si{\kilo\ohm}, V_T = 2\ \si{\volt}, k_n = 2\ \si{\milli\ampere\per\volt\squared}$):
+a) Si $V_{GG} = 0\ \si{\volt}$, ¿cuál es el estado del transistor?
+b) Si $V_{GG}$ aumenta desde $0$, ¿para qué tensión empieza a conducir?
+c) En el instante en que entra en conducción, ¿en qué región de trabajo se encuentra?
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (0,0) node[ground] {} to[V, v=$V_{GG}$] (0,1.8)
+          to[R, l=$R_{G1}{=}\SI{120}{\ohm}$] (2.0,1.8)
+          to[R, l=$R_{G2}{=}\SI{220}{\ohm}$] (2.0,0) node[ground] {};
+    \draw (3.5,1.8) node[nmos] (M) {};
+    \draw (2.0,1.8) -- (M.gate);
+    \draw (M.drain) to[R, l=$R_D{=}\SI{4.7}{\kilo\ohm}$] (3.5,3.8) node[above] {$V_{DD}=15\,\si{\volt}$};
+    \draw (M.source) -- (3.5,0.6) node[below] {$V_{SS}=5\,\si{\volt}$};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Para $V_{GG} = 0\ \si{\volt}$:} $V_G = 0\ \si{\volt}$ y $V_S = V_{SS} = 5\ \si{\volt} \implies V_{GS} = 0 - 5 = -5\ \si{\volt} < V_T = 2\ \si{\volt} \implies$ \textbf{NMOS OFF (en corte)}.
+    \item \textbf{Tensión $V_{GG}$ para empezar a conducir:} El transistor empieza a conducir cuando $V_{GS} = V_T = 2\ \si{\volt}$, lo que exige en la puerta un potencial $V_G = V_S + V_T = 5 + 2 = 7\ \si{\volt}$. Como $I_G = 0$, aplicamos el divisor de tensión entre $R_{G1}$ y $R_{G2}$:
+    \begin{equation}
+        \frac{V_{GG} - 7}{120} = \frac{7}{220} \implies V_{GG} = \frac{7 \times 120}{220} + 7 = 10{,}82\ \si{\volt} \quad (\text{conduce para } V_{GG} > 10{,}82\ \si{\volt})
+    \end{equation}
+    \item \textbf{Región al inicio de la conducción:} Justo cuando empieza a conducir ($V_G = 7{,}01\ \si{\volt}$, $V_{GS} - V_T \to 0^+$), la corriente $I_D$ es pequeñísima ($I_D \approx 0$), por lo que la caída en $R_D$ es casi nula y $V_D \approx 15\ \si{\volt}$. Así, $V_{DS} \approx 15 - 5 = 10\ \si{\volt} \gg V_{GS} - V_T \approx 0\ \si{\volt}$, luego entra directamente en \textbf{SATURACIÓN}.
+\end{enumerate}
+\end{ejercicio}
+
+% --- EJERCICIO 12 (Ejercicio 15 de los apuntes) ---
+\begin{ejercicio}[Dos Transistores NMOS en Serie y Límite Lineal-Saturación --- Ejercicio 15 Apuntes]
+En el circuito de la figura ($V_{DD} = 9\ \si{\volt}$; $M_1$: $V_{T1} = 1\ \si{\volt}, k_1 = 4\ \si{\milli\ampere\per\volt\squared}$; $M_2$: $V_{T2} = 2\ \si{\volt}, k_2 = 2\ \si{\milli\ampere\per\volt\squared}$):
+a) Hallar el punto de trabajo y la potencia disipada en cada transistor si $V_{GG} = 3\ \si{\volt}$.
+b) Calcular la tensión $V_{GG}$ máxima para que $M_1$ se mantenga en la región de saturación (límite lineal-saturación).
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw (2.5,1.2) node[nmos] (M1) {};
+    \draw (2.5,3.2) node[nmos] (M2) {};
+    \draw (1.2,1.2) node[left] {$V_{GG}=3\,\si{\volt}$} to[short, o-] (M1.gate);
+    \draw (M1.source) -- (2.5,0.2) node[ground] {};
+    \draw (M1.drain) -- (M2.source) node[midway, right] {$D_1$};
+    \draw (M2.drain) -- (2.5,4.2) node[above] {$V_{DD}=9\,\si{\volt}$};
+    \draw (2.5,3.9) -- (1.4,3.9) -- (1.4,3.2) -- (M2.gate);
+    \node[right=10pt] at (M1) {$M_1$};
+    \node[right=10pt] at (M2) {$M_2$};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Punto de trabajo y potencias para $V_{GG} = 3\ \si{\volt}$:}
+    El transistor $M_2$ tiene su puerta conectada a su drenador ($V_{G2} = V_{D2} = 9\ \si{\volt}$), luego conduce en \textbf{saturación}. Para $M_1$, $V_{GS1} = 3\ \si{\volt} > V_{T1} = 1\ \si{\volt}$ (ON). Suponemos que $M_1$ también está en \textbf{saturación} e igualamos $I_{D1} = I_{D2}$ (teniendo en cuenta que $V_{S2} = V_{D1}$):
+    \begin{equation}
+        \frac{k_1}{2}(V_{GS1} - V_{T1})^2 = \frac{k_2}{2}(V_{GS2} - V_{T2})^2 \implies \frac{4}{2}(3 - 1)^2 = \frac{2}{2}(9 - V_{D1} - 2)^2
+    \end{equation}
+    \begin{equation}
+        8 = (7 - V_{D1})^2 \implies V_{D1}^2 - 14 V_{D1} + 41 = 0 \implies V_{D1} = \frac{14 \pm \sqrt{32}}{2} = \begin{cases} 9{,}83\ \si{\volt} & (\text{NO, supera } 9\ \si{\volt}) \\ 4{,}17\ \si{\volt} & (\text{SÍ}) \end{cases}
+    \end{equation}
+    Comprobamos la saturación de $M_1$: $V_{DS1} = V_{D1} = 4{,}17\ \si{\volt} > V_{GS1} - V_{T1} = 3 - 1 = 2\ \si{\volt}$ (\textbf{Saturación OK}).
+    La corriente común es $I_D = 8\ \si{\milli\ampere}$, con $V_{DS1} = 4{,}17\ \si{\volt}$ y $V_{DS2} = 9 - 4{,}17 = 4{,}83\ \si{\volt}$. Las potencias disipadas son:
+    \begin{equation}
+        P_{M1} = I_D \cdot V_{DS1} = 8 \times 4{,}17 = 33{,}36\ \si{\milli\watt}, \qquad P_{M2} = I_D \cdot V_{DS2} = 8 \times 4{,}83 = 38{,}64\ \si{\milli\watt}
+    \end{equation}
+
+    \item \textbf{Frontera entre saturación y región lineal de $M_1$:}
+    El límite exacto ocurre cuando $V_{DS1} = V_{D1} = V_{GG} - V_{T1} = V_{GG} - 1$. Igualando de nuevo las corrientes $I_{D1} = I_{D2}$ en ese punto frontera:
+    \begin{equation}
+        \frac{4}{2}(V_{GG} - 1)^2 = \frac{2}{2}\left(9 - (V_{GG} - 1) - 2\right)^2 \implies 2(V_{GG} - 1)^2 = (8 - V_{GG})^2
+    \end{equation}
+    \begin{equation}
+        V_{GG}^2 + 12 V_{GG} - 62 = 0 \implies V_{GG} = \frac{-12 + \sqrt{392}}{2} = 3{,}9\ \si{\volt}
+    \end{equation}
+    (Para $V_{GG} < 3{,}9\ \si{\volt}$, $M_1$ opera en saturación; para $V_{GG} > 3{,}9\ \si{\volt}$, $M_1$ opera en la región lineal).
+\end{enumerate}
+\end{ejercicio}
+
+% --- EJERCICIO 13 (Ejercicio 17 de los apuntes) ---
+\begin{ejercicio}[Diseño de Polarización de Dos NMOS Idénticos --- Ejercicio 17 Apuntes]
+Los dos transistores NMOS del circuito de la figura son idénticos ($V_T = 0{,}6\ \si{\volt}$, $k_n = 4\ \si{\milli\ampere\per\volt\squared}$, $V_{DD} = 15\ \si{\volt}$, $R_2 = 1\ \si{\mega\ohm}$, $R_3 = 1{,}5\ \si{\kilo\ohm}$). Se desea que la corriente de drenador sea igual en ambos: $I_1 = I_2 = 2\ \si{\milli\ampere}$. Calcular $V_{GS}$ para $M_1$ y $M_2$, el valor de $R_1$ y justificar la zona de trabajo de ambos transistores.
+\tcbline
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Divisor R1, R2 a la izquierda
+    \draw (0,4.2) to[R, l_=$R_1$] (0,2.6) node[left] {$V_{G2}$}
+          to[R, l_=$R_2{=}1\,\si{\mega\ohm}$] (0,1.0) node[ground] {};
+    % M2 arriba a la izquierda, M1 a la derecha
+    \draw (1.8,2.6) node[nmos] (M2) {};
+    \draw (0,2.6) -- (M2.gate);
+    \draw (M2.source) -- (1.8,1.5) to[I, i=$I_1{=}2\,\si{\milli\ampere}$] (1.8,0) node[ground] {};
+    \draw (3.8,1.5) node[nmos] (M1) {};
+    \draw (1.8,1.5) -- (M1.gate) node[midway, above, font=\footnotesize] {$V_{S2}=V_{G1}$};
+    \draw (M1.source) to[R, l=$R_3{=}1{,}5\,\si{\kilo\ohm}$] (3.8,0) node[ground] {};
+    % Alimentación común VDD = 15V
+    \draw (0,4.2) -- (3.8,4.2) -- (M1.drain);
+    \draw (M2.drain) -- (1.8,4.2);
+    \node[above] at (2.0,4.2) {$V_{DD}=15\,\si{\volt}$};
+    \node[right=10pt] at (M2) {$M_2$};
+    \node[right=10pt] at (M1) {$M_1$};
+\end{tikzpicture}
+\end{center}
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Análisis de $M_1$:} La tensión en la fuente de $M_1$ es $V_{S1} = I_2 R_3 = 2\ \si{\milli\ampere} \times 1{,}5\ \si{\kilo\ohm} = 3\ \si{\volt}$. Como su drenador está conectado directamente a $V_{DD} = 15\ \si{\volt}$, tenemos $V_{DS1} = 15 - 3 = 12\ \si{\volt}$, que es muy grande, luego \textbf{$M_1$ trabaja en saturación}:
+\begin{equation}
+    I_2 = \frac{k_n}{2}(V_{GS1} - V_T)^2 \implies 2 = \frac{4}{2}(V_{GS1} - 0{,}6)^2 \implies V_{GS1} - 0{,}6 = 1 \implies V_{GS1} = 1{,}6\ \si{\volt}
+\end{equation}
+(Comprobación: $V_{DS1} = 12\ \si{\volt} > V_{GS1} - V_T = 1\ \si{\volt}$, saturación verificada).
+De aquí obtenemos la tensión en la puerta de $M_1$ (que es también la fuente de $M_2$):
+\begin{equation}
+    V_{G1} = V_{S2} = V_{S1} + V_{GS1} = 3 + 1{,}6 = 4{,}6\ \si{\volt}
+\end{equation}
+2) \textbf{Análisis de $M_2$ y cálculo de $R_1$:} Como ambos transistores son idénticos y queremos la misma corriente $I_1 = I_2 = 2\ \si{\milli\ampere}$ en saturación, debe cumplirse que:
+\begin{equation}
+    V_{GS2} = V_{GS1} = 1{,}6\ \si{\volt} \implies V_{G2} = V_{S2} + V_{GS2} = 4{,}6 + 1{,}6 = 6{,}2\ \si{\volt}
+\end{equation}
+Comprobamos la saturación de $M_2$: $V_{DS2} = V_{DD} - V_{S2} = 15 - 4{,}6 = 10{,}4\ \si{\volt} > V_{GS2} - V_T = 1\ \si{\volt}$ (\textbf{Saturación de $M_2$ OK}).
+Finalmente, como $I_{G2} = 0$, la corriente por $R_1$ y $R_2$ es la misma:
+\begin{equation}
+    I_{R1} = I_{R2} = \frac{V_{G2}}{R_2} = \frac{6{,}2\ \si{\volt}}{1\ \si{\mega\ohm}} = 6{,}2\ \si{\micro\ampere} \implies R_1 = \frac{V_{DD} - V_{G2}}{I_{R1}} = \frac{15 - 6{,}2}{6{,}2\ \si{\micro\ampere}} = 1{,}42\ \si{\mega\ohm}
+\end{equation}
 \end{ejercicio}

@@ -1,273 +1,1553 @@
-\chapter{Teoría de Circuitos: Corriente Continua (DC)}
-\label{cap:tema2}
+\chapter{Fundamentos de Teoría de Circuitos: Corriente Continua (DC)}
 
-\cuadrofuentes{
-    \textbf{Asignatura:} Fundamentos Físicos y Tecnológicos (1.º Grado en Ingeniería Informática, UGR).\\[2pt]
-    \textbf{Profesor:} Pedro Cartujo (Departamento de Electrónica y Tecnología de Computadores).\\[2pt]
-    \textbf{Bibliografía de Referencia:} Nilsson, J. W., Riedel, S. A., \textit{Circuitos Eléctricos}, Pearson Educación; Hayt, W. H., Kemmerly, J. E., Durbin, S. M., \textit{Análisis de Circuitos en Ingeniería}, McGraw-Hill.
-}
+\section{Elementos Lineales de Dos Terminales: Activos y Pasivos}
 
-% ==============================================================================
-% 2.1. ELEMENTOS DE CIRCUITO Y CONVENCIONES
-% ==============================================================================
-\section{Elementos del Circuito y Convención de Signos}
+Un circuito eléctrico es una interconexión cerrada de elementos de dos o más terminales a través de los cuales puede fluir carga eléctrica. Se denominan \textbf{elementos lineales de dos terminales} aquellos en los que la relación matemática entre la caída de tensión $v(t)$ entre sus extremos y la intensidad de corriente $i(t)$ que los atraviesa es directamente proporcional, diferencial, integral o una combinación lineal de ellas.
 
-Un circuito eléctrico es una interconexión de componentes con terminales a través de los cuales fluye carga eléctrica. En corriente continua (DC), las tensiones y corrientes no varían con el tiempo en régimen permanente.
-
-\subsection{Convención de Signos y Fuentes de Energía}
-\begin{definicion}[Convención de Signos Pasiva y Activa]
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Criterio Pasivo (Receptor):} La corriente $I$ entra por el terminal positivo ($+$). La potencia absorbida es $P = V \cdot I$. Si $P > 0$, el elemento disipa o almacena energía.
-    \item \textbf{Criterio Activo (Generador):} La corriente $I$ sale por el terminal positivo ($+$). La potencia entregada es $P_{entregada} = V \cdot I$.
+Atendiendo a su comportamiento energético global dentro del circuito, los elementos se clasifican en dos grandes familias:
+\begin{itemize}
+    \item \textbf{Elementos activos}: Son capaces de inyectar o suministrar energía eléctrica neta al sistema a lo largo del tiempo (generadores o fuentes independientes y dependientes de tensión y de corriente).
+    \item \textbf{Elementos pasivos}: No pueden generar energía por sí mismos; únicamente la disipan en forma de calor irreversible (resistencias) o la almacenan temporalmente en forma de campo eléctrico (condensadores) o campo magnético (bobinas o inductores) para devolverla posteriormente al circuito.
 \end{itemize}
-\end{definicion}
 
+\subsection{Potencia Eléctrica y Convenio de Signos (Pasivo vs. Activo)}
+
+La \textbf{potencia eléctrica instantánea} $p(t)$ representa la velocidad con la que se transfiere, consume o suministra energía eléctrica por unidad de tiempo. Aplicando la regla de la cadena a partir de las definiciones de potencial ($v = dW/dq$) e intensidad ($i = dq/dt$):
+\begin{equation}
+    p(t) = \frac{dW}{dt} = \frac{dW}{dq}\cdot\frac{dq}{dt} = v(t)\cdot i(t) \qquad [\text{SI: Vatio, }\si{\watt} = \si{\joule/\second} = \si{\volt\cdot\ampere}]
+\end{equation}
+
+Para determinar sin ambigüedad si un dipolo entre los terminales $A$ y $B$ (con tensión $V_{AB} = V_A - V_B$) está \textbf{absorbiendo} (consumiendo) o \textbf{cediendo} (generando) potencia, se emplea el criterio de signos:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.47\textwidth}
+\centering
+\begin{circuitikz}[scale=0.95, transform shape]
+    \draw (0,1.6) to[short, o-, i>^=$I$] (2.0,1.6)
+          to[generic, l=$Z$, v=$V_{AB}$] (2.0,0)
+          to[short, -o] (0,0);
+    \node[left] at (0,1.6) {$A\ (+)$};
+    \node[left] at (0,0) {$B\ (-)$};
+    \node[below, align=center, font=\small\bfseries, color=NavyBlue] at (1.1,-0.35)
+        {Convenio Pasivo (Receptor)\\$I$ entra por el terminal $+$ ($A$)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.47\textwidth}
+\centering
+\begin{circuitikz}[scale=0.95, transform shape]
+    \draw (0,1.6) to[short, o-, i<_=$I$] (2.0,1.6)
+          to[generic, l=$G$, v=$V_{AB}$] (2.0,0)
+          to[short, -o] (0,0);
+    \node[left] at (0,1.6) {$A\ (+)$};
+    \node[left] at (0,0) {$B\ (-)$};
+    \node[below, align=center, font=\small\bfseries, color=BrickRed] at (1.1,-0.35)
+        {Convenio Activo (Generador)\\$I$ sale por el terminal $+$ ($A$)};
+\end{circuitikz}
+\end{minipage}
+\caption{Referencia de signos pasiva (izquierda) y activa (derecha) en un elemento de dos terminales.}
+\end{figure}
+
+\begin{ley}[Balance de Potencias y Teorema de Tellegen]
+\begin{itemize}
+    \item \textbf{En una resistencia}: Siempre absorbe (disipa) potencia activa independientemente del sentido de la corriente:
+    \begin{equation}
+        P_R = V_R \cdot I_R = I_R^2 \cdot R = \frac{V_R^2}{R} \ge 0
+    \end{equation}
+    \item \textbf{En una fuente (criterio de signos de clase)}: Si la corriente $I$ circula a través de la fuente desde el terminal negativo ($B$) hacia el positivo ($A$, es decir, \emph{subiendo en potencial}), la potencia suministrada por la fuente al circuito es:
+    \begin{equation}
+        P_{\text{fuente}} = (V_A - V_B)\cdot I_{\text{subiendo}}
+    \end{equation}
+    Si al resolver el circuito este producto resulta \textbf{positivo} ($P_f > 0$), la fuente suministra efectivamente potencia al sistema. Si resulta \textbf{negativo} ($P_f < 0$), significa que la corriente real entra por el terminal positivo y la fuente está \textbf{absorbiendo} potencia (actuando como carga o batería en carga).
+    \item \textbf{Conservación de la potencia}: En todo circuito eléctrico cerrado se cumple en todo instante que la potencia total suministrada por las fuentes es exactamente igual a la potencia total disipada en las resistencias:
+    \begin{equation}
+        \sum P_{\text{fuentes}} = \sum P_{\text{resistencias}}
+    \end{equation}
+\end{itemize}
+\end{ley}
+
+\subsection{Elementos Activos: Fuentes Independientes y Dependientes}
+
+Las fuentes de tensión y de intensidad son elementos activos capaces de suministrar energía al sistema y se dividen en \textbf{independientes} y \textbf{dependientes} (o controladas).
+
+\subsubsection{1. Fuentes Independientes}
+\begin{itemize}
+    \item \textbf{Fuente independiente de tensión}: Proporciona una diferencia de potencial fija $V$ entre sus extremos, con independencia de la corriente $I$ que circule por ella.
+    \item \textbf{Fuente independiente de intensidad}: Fija el valor de la intensidad de corriente $I$ en toda la rama serie en la que se encuentra conectada, independientemente de la tensión que caiga entre sus bornes.
+\end{itemize}
+
+\begin{ejemplo}[Efecto de una fuente de corriente en una rama serie]
+En el siguiente circuito, la fuente de intensidad de $1\,\si{\milli\ampere}$ está conectada en la rama derecha en serie con las resistencias $R_4$ y $R_5$. Por tanto, \textbf{por $R_4$ y $R_5$ pasa obligatoriamente una corriente de $1\,\si{\milli\ampere}$}, sin importar los valores de las demás ramas:
 \begin{center}
+\begin{circuitikz}[scale=0.88, transform shape]
+    \draw (0,0) to[battery1, l=$3\,\si{\volt}$] (0,2.2)
+          to[R, l=$R_1$] (2.5,2.2)
+          to[R, l=$R_2$] (2.5,1.0)
+          to[battery1, l=$5\,\si{\volt}$] (2.5,0)
+          to[R, l=$R_3$] (0,0);
+    \draw (2.5,2.2) to[isource, l=$1\,\si{\milli\ampere}$] (5.2,2.2)
+          to[R, l=$R_4$] (5.2,0)
+          to[R, l=$R_5$] (2.5,0);
+\end{circuitikz}
+\end{center}
+\end{ejemplo}
+
+\subsubsection{2. Fuentes Dependientes o Controladas}
+Representadas mediante un símbolo romboidal, su tensión o intensidad depende proporcionalmente de la caída de potencial o de la corriente en otra parte del circuito. Existen 4 tipos fundamentales (donde $A_v, A_R, A_G, A_i$ son los factores o constantes de proporcionalidad):
+
+\begin{enumerate}
+    \item \textbf{Fuente de tensión dependiente de tensión (VCVS)}: El valor de la tensión de la fuente es proporcional a la caída de potencial $v$ en otra parte del circuito: $V_{\text{dep}} = A_v \cdot v$ ($A_v$ adimensional).
+    \item \textbf{Fuente de tensión dependiente de intensidad (CCVS)}: El valor de la tensión de la fuente es proporcional a la intensidad $i$ que pasa por otra rama del circuito: $V_{\text{dep}} = A_R \cdot i$ ($A_R$ en $\si{\ohm}$).
+    \item \textbf{Fuente de intensidad dependiente de tensión (VCCS)}: La intensidad de la fuente es proporcional a la caída de tensión $v$ de otra parte del circuito: $I_{\text{dep}} = A_G \cdot v$ ($A_G$ en $\si{\siemens} = \si{\ohm^{-1}}$).
+    \item \textbf{Fuente de intensidad dependiente de intensidad (CCCS)}: La intensidad de la fuente es proporcional a la intensidad $i$ en otra parte del circuito: $I_{\text{dep}} = A_i \cdot i$ ($A_i$ adimensional).
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[cV, v<={$A_v\,v$}] (0,2.2)
+          to[R, l=$R_1$] (2.6,2.2)
+          to[R, l=$R_2$] (2.6,1.0)
+          to[battery1, l=$5\,\si{\volt}$] (2.6,0) -- (0,0);
+    \draw (2.6,2.2) -- (4.4,2.2)
+          to[R, l=$R_3$, v=$v$] (4.4,0) -- (2.6,0);
+    \node[below, font=\footnotesize\bfseries] at (2.2,-0.3) {Ejemplo VCVS ($V = A_v\,v$)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[cV, v<={$A_R\,i$}] (0,2.2)
+          to[R, l=$R_1$] (2.2,2.2)
+          to[R, l=$R_3$] (2.2,1.0)
+          to[battery1, l=$2\,\si{\volt}$] (2.2,0) -- (0,0);
+    \draw (2.2,2.2) to[R, l=$R_2$] (4.2,2.2)
+          to[R, l=$R_4$] (4.2,1.0)
+          to[isource, l_=$3\,\si{\milli\ampere}$] (4.2,0) -- (2.2,0);
+    \draw (4.2,2.2) to[R, l=$R_5$] (6.0,2.2)
+          to[R, l=$R_6$, i>^=$i$] (6.0,0) -- (4.2,0);
+    \node[below, font=\footnotesize\bfseries] at (3.0,-0.3) {Ejemplo CCVS ($V = A_R\,i$)};
+\end{circuitikz}
+\end{minipage}
+\caption{Ejemplos de circuitos con fuentes controladas de tensión (VCVS y CCVS) de los apuntes de clase.}
+\end{figure}
+
+\subsection{Elementos Pasivos: Resistencia, Condensador y Bobina}
+
+\subsubsection{1. Resistencia ($R$) y Deducción Microscópica de la Ley de Ohm}
+Un resistor es un elemento tal que, al aplicar una diferencia de potencial $V_A - V_B$ entre sus terminales, deja pasar una corriente de intensidad $I$ directamente proporcional a la diferencia de potencial aplicada.
+
+Consideremos un hilo conductor cilíndrico de longitud $L$ y área transversal $S$, sometido a los potenciales $V_1 > V_2$, lo cual crea en su interior un campo eléctrico uniforme $\vec{E}$ dirigido hacia la derecha:
+
+\begin{figure}[H]
+\centering
 \begin{tikzpicture}[scale=0.95]
-    % Convenio pasivo
-    \draw (-4,0) to[R, l=$R$, v=$V$, i=$I$] (-1,0);
-    \node[below=8pt] at (-2.5,-0.6) {\small\textbf{Convenio Pasivo} ($P = VI \ge 0$, absorbe)};
-
-    % Convenio activo
-    \draw (1,0) to[V, v=$V_s$, i=$I$] (4,0);
-    \node[below=8pt] at (2.5,-0.6) {\small\textbf{Convenio Activo} ($P = V_s I$, entrega)};
+    \draw[thick, fill=gray!12] (0,0) ellipse (0.35 and 0.65);
+    \draw[thick, fill=gray!12] (0,0.65) -- (4.5,0.65) arc (90:-90:0.35 and 0.65) -- (0,-0.65) arc (-90:90:0.35 and 0.65);
+    \draw[thick] (0,0) ellipse (0.35 and 0.65);
+    \node at (0,0) {$S$};
+    \node[left] at (-0.45,0) {$V_1$};
+    \node[right] at (4.95,0) {$V_2 \quad (V_1 > V_2)$};
+    \draw[-{Stealth[length=2.5mm]}, thick, BrickRed] (1.4,0.15) -- (3.1,0.15) node[midway, above] {$\vec{E}$};
+    \draw[-{Stealth[length=2.5mm]}, thick, NavyBlue] (1.4,-0.25) -- (3.1,-0.25) node[midway, below] {$\vec{J}$};
+    \draw[<->, thick] (0,-1.05) -- (4.5,-1.05) node[midway, below] {$L$};
 \end{tikzpicture}
-\end{center}
+\caption{Conductor cilíndrico de longitud $L$, sección $S$ y conductividad $\sigma$ bajo una diferencia de potencial $V_1 - V_2$.}
+\end{figure}
 
-\subsection{Tipos de Fuentes en Circuitos}
-\begin{center}
-\begin{tikzpicture}[scale=0.9]
-    % Fuente de tensión independiente
-    \draw (-4.5,1) to[V, v=$V_s$] (-4.5,-1);
-    \node[below=4pt] at (-4.5,-1) {\footnotesize Tensión Independiente};
+\begin{enumerate}
+    \item La relación microscópica entre la densidad de corriente $\vec{J}$ y el campo eléctrico $\vec{E}$ es la Ley de Ohm local: $J = \sigma \cdot E$, donde $\sigma$ es la conductividad del material.
+    \item De la relación entre campo eléctrico y potencial ($E = -dV/dl$), dado que $\Delta V = V_2 - V_1$, el módulo del campo es:
+    \begin{equation}
+        E = -\frac{V_2 - V_1}{L} = \frac{V_1 - V_2}{L} \implies J = \sigma\,\frac{V_1 - V_2}{L}
+    \end{equation}
+    \item Integrando la densidad de corriente sobre la sección transversal $S$ del conductor:
+    \begin{equation}
+        I = \int_S J\,dS = \sigma\,\frac{V_1 - V_2}{L}\,S = J\cdot S \implies J = \frac{I}{S}
+    \end{equation}
+    \item Despejando la caída de potencial $(V_1 - V_2)$ e introduciendo la \textbf{resistividad} $\rho = \frac{1}{\sigma}$ ($\si{\ohm\cdot\meter}$):
+    \begin{equation}
+        V_1 - V_2 = \frac{1}{\sigma}\,\frac{L}{S}\,I = \rho\,\frac{L}{S}\,I \implies \boxed{V_1 - V_2 = R\cdot I} \quad \text{con} \quad \boxed{R = \rho\,\frac{L}{S}}
+    \end{equation}
+\end{enumerate}
 
-    % Fuente de corriente independiente
-    \draw (-1.5,1) to[I, i=$I_s$] (-1.5,-1);
-    \node[below=4pt] at (-1.5,-1) {\footnotesize Corriente Independiente};
+\begin{aviso}[Unidades prácticas en electrónica]
+En los problemas de circuitos es muy frecuente trabajar con tensiones en voltios ($\si{\volt}$), resistencias en kilohmios ($\si{\kilo\ohm} = 10^3\,\si{\ohm}$) e intensidades en miliamperios ($\si{\milli\ampere} = 10^{-3}\,\si{\ampere}$), ya que son unidades mutuamente coherentes:
+\begin{equation}
+    1\,\si{\volt} = 1\,\si{\kilo\ohm} \times 1\,\si{\milli\ampere} \qquad \Longleftrightarrow \qquad \si{\milli\ampere} = \frac{\si{\volt}}{\si{\kilo\ohm}}
+\end{equation}
+\end{aviso}
 
-    % Fuente de tensión controlada
-    \draw (1.5,1) to[cV, v=$\mu v_x$] (1.5,-1);
-    \node[below=4pt] at (1.5,-1) {\footnotesize Tensión Controlada (VCVS)};
+\subsubsection{2. Condensador ($C$)}
+Un condensador ideal consiste en dos armaduras conductoras próximas separadas por un aislante (dieléctrico) perfecto. La carga $Q$ almacenada en cualquiera de sus armaduras es proporcional a la diferencia de potencial entre ellas:
+\begin{equation}
+    Q = C\,(V_A - V_B) \qquad [\text{Capacidad } C \text{ en Faradios: } 1\,\si{\farad} = 1\,\si{\coulomb/\volt}]
+\end{equation}
+Aunque las cargas no pueden atravesar el aislante, un incremento de tensión $\Delta v$ produce un incremento de carga almacenada $\Delta Q = C\,\Delta v$. En el límite diferencial, esta variación temporal de carga se traduce en una corriente eléctrica:
+\begin{equation}
+    i_C(t) = \lim_{\Delta t \to 0} \frac{\Delta Q}{\Delta t} = C\,\frac{dv_C(t)}{dt}
+\end{equation}
+\textbf{Propiedad fundamental}: La tensión entre las armaduras de un condensador \textbf{no puede variar de forma discontinua} (salto brusco), sino que debe ser continua en todo instante: $v_C(0^-) = v_C(0^+)$.
 
-    % Fuente de corriente controlada
-    \draw (4.5,1) to[cI, i=$\beta i_x$] (4.5,-1);
-    \node[below=4pt] at (4.5,-1) {\footnotesize Corriente Controlada (CCCS)};
+\subsubsection{3. Inductor o Bobina ($L$)}
+Una bobina de $N$ espiras atravesada por una corriente $I$ genera un flujo magnético $\Phi_B$ proporcional a dicha corriente. Se define la \textbf{inductancia} o coeficiente de autoinducción $L$ (medida en Henrios, $1\,\si{\henry} = 1\,\si{\ohm\cdot\second} = 1\,\si{\weber/\ampere}$) como:
+\begin{equation}
+    L = \frac{N\,\Phi_B}{I}
+\end{equation}
+Por la Ley de Faraday-Lenz, una variación de corriente $\Delta I$ produce una variación de flujo $\Delta \Phi_B$ y, por tanto, una caída de tensión autoinducida entre sus extremos:
+\begin{equation}
+    v_L(t) = V_A - V_B = L\,\frac{di_L(t)}{dt}
+\end{equation}
+\textbf{Propiedad fundamental}: La intensidad de corriente que atraviesa una bobina \textbf{no puede cambiar instantáneamente}: $i_L(0^-) = i_L(0^+)$.
+
+\subsection{Asociación de Elementos y Teorema de Kennelly ($\Delta \leftrightarrow \text{Y}$)}
+
+\subsubsection{1. Asociación de Resistencias y Condensadores}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Elemento} & \textbf{Asociación en Serie} & \textbf{Asociación en Paralelo} \\ \midrule
+\textbf{Resistencias} & $\displaystyle R_{\text{total}} = R_1 + R_2 + \dots + R_N$ & $\displaystyle \frac{1}{R_{\text{total}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_N} \quad \left(R_1 \parallel R_2 = \frac{R_1 R_2}{R_1 + R_2}\right)$ \\
+\textbf{Condensadores} & $\displaystyle \frac{1}{C_{\text{total}}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_N}$ & $\displaystyle C_{\text{total}} = C_1 + C_2 + \dots + C_N$ \\
+\textbf{Fuentes} & Solo de tensión: $V_{\text{total}} = \sum V_k$ & Solo de intensidad: $I_{\text{total}} = \sum I_k$ \\ \bottomrule
+\end{tabular}%
+}
+\caption{Reglas de asociación equivalente de resistencias, condensadores y fuentes ideales.}
+\end{table}
+
+\subsubsection{2. Teorema de Kennelly: Transformación Triángulo ($\Delta$) $\leftrightarrow$ Estrella ($\text{Y}$)}
+Cuando en una red resistiva (como un puente de Wheatstone no equilibrado) las resistencias no están ni en serie ni en paralelo, el \textbf{Teorema de Kennelly} permite transformar una configuración en \textbf{Triángulo o Delta ($\Delta$)} entre tres nudos $(a, b, c)$ en una configuración equivalente en \textbf{Estrella ($\text{Y}$ o $\text{T}$)} y viceversa:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.95, transform shape]
+    % Triángulo (Delta)
+    \node[circle, fill=black, inner sep=1.5pt, label=above:$a$] (a1) at (-3.5,2.2) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=left:$b$] (b1) at (-5.2,0) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=right:$c$] (c1) at (-1.8,0) {};
+    \draw (a1) to[R, l_=$R_3$] (b1);
+    \draw (a1) to[R, l=$R_2$] (c1);
+    \draw (b1) to[R, l_=$R_1$] (c1);
+    \node[below, font=\small\bfseries, color=NavyBlue] at (-3.5,-0.55) {Red en Triángulo ($\Delta$)};
+
+    % Flecha doble
+    \node[font=\Large\bfseries] at (0,1.1) {$\Longleftrightarrow$};
+
+    % Estrella (Y)
+    \node[circle, fill=black, inner sep=1.5pt, label=above:$a$] (a2) at (3.5,2.4) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=left:$b$] (b2) at (1.8,0) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=right:$c$] (c2) at (5.2,0) {};
+    \coordinate (n) at (3.5,1.0);
+    \fill (n) circle (1.5pt);
+    \draw (a2) to[R, l=$R_A$] (n);
+    \draw (n) to[R, l_=$R_B$] (b2);
+    \draw (n) to[R, l=$R_C$] (c2);
+    \node[below, font=\small\bfseries, color=BrickRed] at (3.5,-0.55) {Red en Estrella ($\text{Y}$)};
 \end{tikzpicture}
-\end{center}
+\caption{Equivalencia entre una red en Triángulo ($\Delta$: $R_1, R_2, R_3$) y una red en Estrella ($\text{Y}$: $R_A, R_B, R_C$).}
+\end{figure}
 
-% ==============================================================================
-% 2.2. LEYES DE KIRCHHOFF Y REGLAS DE DIVISIÓN
-% ==============================================================================
-\section{Leyes de Kirchhoff y Divisores de Tensión y Corriente}
-
-\begin{ley}[Leyes Fundamentales de Kirchhoff]
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Primera Ley de Kirchhoff o Ley de Corrientes (LCK):} En cualquier nudo, la suma de corrientes entrantes es igual a la suma de salientes: $\sum I_{entrantes} = \sum I_{salientes}$.
-    \item \textbf{Segunda Ley de Kirchhoff o Ley de Tensiones (LTK):} A lo largo de cualquier lazo cerrado, la suma de caídas y subidas de potencial es nula: $\sum V_k = 0$.
+\begin{ley}[Fórmulas de Transformación de Kennelly]
+\begin{itemize}
+    \item \textbf{Paso de Triángulo ($\Delta$) a Estrella ($\text{Y}$)}: Cada resistencia de la estrella es el producto de las dos resistencias adyacentes del triángulo dividido entre la suma de las tres resistencias del triángulo:
+    \begin{equation}
+        R_A = \frac{R_2\cdot R_3}{R_1 + R_2 + R_3}, \qquad R_B = \frac{R_1\cdot R_3}{R_1 + R_2 + R_3}, \qquad R_C = \frac{R_1\cdot R_2}{R_1 + R_2 + R_3}
+    \end{equation}
+    \item \textbf{Paso de Estrella ($\text{Y}$) a Triángulo ($\Delta$)}: Cada resistencia del triángulo es la suma de los productos cruzados dos a dos de la estrella dividida entre la resistencia de la estrella opuesta:
+    \begin{equation}
+        R_1 = \frac{R_A R_B + R_A R_C + R_B R_C}{R_A}, \; R_2 = \frac{R_A R_B + R_A R_C + R_B R_C}{R_B}, \; R_3 = \frac{R_A R_B + R_A R_C + R_B R_C}{R_C}
+    \end{equation}
 \end{itemize}
+\end{ley}
+
+\subsection{Elementos Reales y Comportamiento en Señal Continua (DC)}
+
+\subsubsection{1. Efecto de la Temperatura en Resistencias Reales}
+En la realidad, las resistencias, condensadores y bobinas presentan efectos parásitos y dependen de la temperatura. El valor de una resistencia $R_H$ a una temperatura alta $T_H$ en función de su valor $R_L$ a una temperatura de referencia $T_L$ viene dado por:
+\begin{equation}
+    R_H = R_L\,\big[1 + \alpha\,(T_H - T_L)\big]
+\end{equation}
+donde $\alpha$ ($\si{\kelvin^{-1}}$ o $\si{\celsius^{-1}}$) es el coeficiente de temperatura del material.
+
+\subsubsection{2. Fuentes Reales de Tensión y de Intensidad y Transformación de Fuentes}
+\begin{itemize}
+    \item \textbf{Fuente de tensión real}: Se modela mediante una fuente ideal $V_s$ en \textbf{serie} con una resistencia interna $R_i$. Al conectar una carga entre $A$ y $B$, la tensión en bornes cae ($V_{AB} = V_s - I R_i$). Para que la fuente sea buena y la tensión varíe lo mínimo posible, \textbf{$R_i$ debe ser lo más pequeña posible} (idealmente $R_i = 0$).
+    \item \textbf{Fuente de intensidad real}: Se modela mediante una fuente ideal $I_s$ en \textbf{paralelo} con una resistencia interna $R_i$. Para que casi toda la corriente salga hacia la carga, \textbf{$R_i$ debe ser lo más grande posible} (idealmente $R_i \to \infty$).
+    \item \textbf{Transformación de fuentes}: Una fuente de tensión real $(V_s, R_i\text{ serie})$ es exactamente equivalente entre sus terminales $A$ y $B$ a una fuente de corriente real $(I_s, R_i\text{ paralelo})$ siempre que se cumpla:
+    \begin{equation}
+        V_s = I_s \cdot R_i \qquad \Longleftrightarrow \qquad I_s = \frac{V_s}{R_i}
+    \end{equation}
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.46\textwidth}
+\centering
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[V, v<=$V_s$] (0,2.0)
+          to[R, l=$R_i$] (2.8,2.0) to[short, -o] (3.2,2.0) node[right] {$A$};
+    \draw (0,0) to[short, -o] (3.2,0) node[right] {$B$};
+    \node[below, font=\small\bfseries] at (1.6,-0.3) {Fuente de tensión real ($R_i$ pequeña)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.46\textwidth}
+\centering
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[isource, l=$I_s$] (0,2.0) -- (2.8,2.0) to[short, -o] (3.2,2.0) node[right] {$A$};
+    \draw (1.6,2.0) to[R, l=$R_i$] (1.6,0);
+    \draw (0,0) to[short, -o] (3.2,0) node[right] {$B$};
+    \node[below, font=\small\bfseries] at (1.6,-0.3) {Fuente de corriente real ($R_i$ grande)};
+\end{circuitikz}
+\end{minipage}
+\caption{Modelos circuitales de fuentes reales y su equivalencia ($V_s = I_s R_i$).}
+\end{figure}
+
+\subsubsection{3. Elementos en Régimen Permanente de Corriente Continua (DC)}
+Cuando un circuito alimentado por fuentes continuas lleva mucho tiempo funcionando, todas las magnitudes se estabilizan ($V = \text{cte}, I = \text{cte}$):
+\begin{itemize}
+    \item \textbf{Resistencia}: Se comporta igual ($V = I R$).
+    \item \textbf{Condensador}: Se carga hasta una tensión constante ($dV/dt = 0 \implies I = C\frac{dV}{dt} = 0$). Por tanto, en continua estacionaria \textbf{un condensador equivale a un interruptor abierto (circuito abierto)}.
+    \item \textbf{Bobina}: La intensidad que pasa por ella es fija ($dI/dt = 0 \implies V = L\frac{dI}{dt} = 0$). Por tanto, en continua estacionaria \textbf{una bobina equivale a un hilo conductor ideal (cortocircuito)}.
+\end{itemize}
+
+\begin{ejemplo}[Análisis en régimen continuo estacionario con bobina y condensador]
+Calcula la tensión en el nudo $A$ y la carga acumulada en el condensador de $5\,\si{\nano\farad}$ del siguiente circuito cuando trabaja en corriente continua estacionaria:
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[V, v<=$5\,\si{\volt}$] (0,2.2)
+          to[R, l={$1\,\si{\kilo\ohm}$}] (2.2,2.2) node[above] {$A$}
+          to[L, l={$0{,}1\,\si{\henry}$}] (4.4,2.2)
+          to[R, l={$3\,\si{\kilo\ohm}$}] (4.4,0) -- (0,0);
+    \draw (2.2,2.2) to[C, l={$5\,\si{\nano\farad}$}] (2.2,0);
+    \node[below, font=\footnotesize\bfseries] at (2.2,-0.3) {Circuito original};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[V, v<=$5\,\si{\volt}$] (0,2.2)
+          to[R, l={$1\,\si{\kilo\ohm}$}] (2.2,2.2) node[above] {$A$}
+          to[short] (4.0,2.2)
+          to[R, l={$3\,\si{\kilo\ohm}$}] (4.0,0) -- (0,0);
+    \draw (2.0,0) node[ground] {};
+    \draw[-{Stealth}, NavyBlue, thick] (1.3,0.6) arc (-150:150:0.5) node[midway, right] {$I$};
+    \node[below, font=\footnotesize\bfseries] at (2.0,-0.45) {Equivalente en continua (DC)};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item En continua, sustituimos el condensador de $5\,\si{\nano\farad}$ por un circuito abierto y la bobina de $0{,}1\,\si{\henry}$ por un hilo conductor.
+    \item Referenciamos el conductor inferior a tierra ($0\,\si{\volt}$). Queda una única malla con las resistencias de $1\,\si{\kilo\ohm}$ y $3\,\si{\kilo\ohm}$ en serie:
+    \begin{equation*}
+        I = \frac{5\,\si{\volt}}{1\,\si{\kilo\ohm} + 3\,\si{\kilo\ohm}} = \frac{5}{4}\,\si{\milli\ampere} = 1{,}25\,\si{\milli\ampere}
+    \end{equation*}
+    \item La tensión en el nudo $A$ (que coincide con la tensión en bornes del condensador y de la resistencia de $3\,\si{\kilo\ohm}$) es:
+    \begin{equation*}
+        V_A = I \cdot 3\,\si{\kilo\ohm} = \frac{3}{4}\cdot 5\,\si{\volt} = \frac{15}{4}\,\si{\volt} = 3{,}75\,\si{\volt}
+    \end{equation*}
+    \item La carga acumulada en el condensador es:
+    \begin{equation*}
+        Q = C \cdot V_A = 5\,\si{\nano\farad} \cdot \frac{15}{4}\,\si{\volt} = 18{,}75\,\si{\nano\coulomb} = 1{,}875\times 10^{-8}\,\si{\coulomb}
+    \end{equation*}
+\end{enumerate}
+\end{ejemplo}
+
+\section{Leyes de Kirchhoff y Métodos Sistemáticos de Análisis}
+
+\subsection{Topología de Redes y Leyes de Kirchhoff}
+\begin{itemize}
+    \item \textbf{Nudo (o nodo)}: Punto de unión donde concurren dos o más elementos. Se llama \emph{nudo principal} a aquel que conecta tres o más ramas.
+    \item \textbf{Rama}: Conjunto de elementos conectados en serie entre dos nudos principales consecutivos (por todos ellos circula exactamente la misma corriente).
+    \item \textbf{Lazo}: Cualquier camino cerrado dentro del circuito.
+    \item \textbf{Malla}: Lazo cerrado que no contiene ningún otro lazo en su interior.
+\end{itemize}
+
+\begin{ley}[Leyes de Kirchhoff]
+\begin{enumerate}
+    \item \textbf{Primera Ley de Kirchhoff (Ley de Corrientes o de Nudos, LCK)}: Basada en la conservación de la carga eléctrica, establece que en cualquier nudo del circuito la suma algebraica de las corrientes que entran es igual a la suma de las corrientes que salen:
+    \begin{equation}
+        \sum_{\text{entran}} I_k = \sum_{\text{salen}} I_j \qquad \Longleftrightarrow \qquad \sum_{k=1}^{N} I_k = 0
+    \end{equation}
+    \item \textbf{Segunda Ley de Kirchhoff (Ley de Tensiones o de Mallas, LTK)}: Basada en el carácter conservativo del campo electrostático, establece que la suma algebraica de las diferencias de potencial a lo largo de cualquier trayectoria cerrada (lazo o malla) es nula:
+    \begin{equation}
+        \sum_{\text{malla}} V_k = 0 \qquad \Longleftrightarrow \qquad \sum V_{\text{fuentes}} = \sum I_k R_k
+    \end{equation}
+\end{enumerate}
 \end{ley}
 
 \subsection{Divisor de Tensión y Divisor de Corriente}
-\begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Divisor de tensión
-    \node[font=\bfseries] at (-3,2.2) {Divisor de Tensión};
-    \draw (-4.5,0) to[V, v=$V_s$] (-4.5,1.5)
-          -- (-3.5,1.5) to[R, l=$R_1$] (-2,1.5)
-          to[R, l=$R_2$, v=$V_2$] (-2,0)
-          -- (-4.5,0);
-    \node[below=6pt] at (-3.25,-0.2) {$V_2 = V_s \frac{R_2}{R_1 + R_2}$};
 
-    % Divisor de corriente
-    \node[font=\bfseries] at (3.5,2.2) {Divisor de Corriente};
-    \draw (2,0) to[I, i=$I_s$] (2,1.5)
-          -- (3.2,1.5) to[R, l=$R_1$, i=$I_1$] (3.2,0) -- (2,0);
-    \draw (3.2,1.5) -- (4.8,1.5) to[R, l=$R_2$, i=$I_2$] (4.8,0) -- (3.2,0);
-    \node[below=6pt] at (3.4,-0.2) {$I_1 = I_s \frac{R_2}{R_1 + R_2}, \quad I_2 = I_s \frac{R_1}{R_1 + R_2}$};
-\end{tikzpicture}
-\end{center}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+    \node[font=\small\bfseries, color=NavyBlue] at (1.6,2.7) {Divisor de Tensión};
+    \draw (0,0) to[V, v<=$V$] (0,2.1)
+          to[R, l=$R_1$] (3.0,2.1) node[right] {$A$}
+          to[R, l=$R_2$] (3.0,0) -- (0,0);
+    \draw (1.5,0) node[ground] {};
+    \draw[-{Stealth}, NavyBlue, thick] (1.1,0.6) arc (-150:150:0.45) node[midway, right] {$I$};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+    \node[font=\small\bfseries, color=NavyBlue] at (1.8,2.7) {Divisor de Corriente};
+    \draw (0,0) to[isource, l=$I_T$] (0,2.1) -- (3.6,2.1);
+    \draw (1.8,2.1) to[R, l=$R_1$, i>^=$I_1$] (1.8,0);
+    \draw (3.6,2.1) to[R, l=$R_2$, i>^=$I_2$] (3.6,0);
+    \draw (0,0) -- (3.6,0);
+\end{circuitikz}
+\end{minipage}
+\caption{Circuitos fundamentales de divisor de tensión resistivo (izquierda) y divisor de corriente (derecha).}
+\end{figure}
 
-% ==============================================================================
-% 2.3. TEOREMAS DE THÉVENIN Y NORTON
-% ==============================================================================
-\section{Teoremas de Thévenin, Norton y Máxima Potencia}
+\begin{itemize}
+    \item \textbf{Divisor de tensión}: En dos resistencias en serie alimentadas por una tensión total $V$, la corriente común es $I = \frac{V}{R_1 + R_2}$, por lo que la caída de tensión en cada resistencia es proporcional a su propio valor:
+    \begin{equation}
+        V_{R1} = I\cdot R_1 = \frac{R_1}{R_1 + R_2}\,V, \qquad V_{R2} = V_A = I\cdot R_2 = \frac{R_2}{R_1 + R_2}\,V
+    \end{equation}
+    \item \textbf{Divisor de corriente}: En dos resistencias en paralelo alimentadas por una corriente total $I_T$, la tensión común es $V = I_T (R_1 \parallel R_2) = I_T \frac{R_1 R_2}{R_1 + R_2}$, repartiéndose la corriente de forma inversamente proporcional a cada resistencia:
+    \begin{equation}
+        I_1 = \frac{R_2}{R_1 + R_2}\,I_T, \qquad I_2 = \frac{R_1}{R_1 + R_2}\,I_T
+    \end{equation}
+\end{itemize}
 
-\begin{ley}[Teoremas de Thévenin y Norton]
-Cualquier red lineal de dos terminales $A$ y $B$ puede ser sustituida formalmente por un circuito equivalente de Thévenin (fuente de tensión $V_{th}$ en serie con $R_{th}$) o de Norton (fuente de corriente $I_N = V_{th}/R_{th}$ en paralelo con $R_N = R_{th}$).
-\end{ley}
+\subsection{Método de las Corrientes de Malla}
 
-\begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Equivalente Thévenin
-    \node[font=\bfseries] at (-3,2.2) {Equivalente de Thévenin};
-    \draw (-4.5,0) to[V, v=$V_{th}$] (-4.5,1.5)
-          to[R, l=$R_{th}$] (-2,1.5)
-          to[short, -o] (-1.2,1.5) node[right] {$A$};
-    \draw (-4.5,0) to[short, -o] (-1.2,0) node[right] {$B$};
-    \draw (-1.2,1.5) to[R, l=$R_L$, dashed] (-1.2,0);
-
-    % Equivalente Norton
-    \node[font=\bfseries] at (3.5,2.2) {Equivalente de Norton};
-    \draw (1.8,0) to[I, i=$I_N$] (1.8,1.5)
-          -- (3.2,1.5) to[R, l=$R_N$] (3.2,0) -- (1.8,0);
-    \draw (3.2,1.5) to[short, -o] (4.2,1.5) node[right] {$A$};
-    \draw (3.2,0) to[short, -o] (4.2,0) node[right] {$B$};
-    \draw (4.2,1.5) to[R, l=$R_L$, dashed] (4.2,0);
-\end{tikzpicture}
-\end{center}
-
-\begin{ley}[Teorema de Máxima Transferencia de Potencia]
-La potencia transferida a una carga resistiva $R_L$ conectada a los terminales de Thévenin es máxima cuando la resistencia de carga se iguala exactamente a la resistencia interna de Thévenin:
-\begin{equation}
-    R_L = R_{th} \implies P_{max} = \frac{V_{th}^2}{4 R_{th}}
-\end{equation}
-\end{ley}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.9]
-    \draw[->, thick] (0,0) -- (5,0) node[right] {$R_L$};
-    \draw[->, thick] (0,0) -- (0,3) node[above] {$P_L(R_L)$};
-    % Curva de potencia
-    \draw[very thick, fftAccent, domain=0.05:4.8, samples=80] 
-        plot (\x, {2.6 * 4 * 1.5 * \x / ((1.5 + \x)^2)});
-    % Líneas de trazo en el máximo
-    \draw[dashed, gray] (1.5,0) node[below, text=black] {$R_L = R_{th}$} -- (1.5,2.6);
-    \draw[dashed, gray] (0,2.6) node[left, text=black] {$P_{max} = \frac{V_{th}^2}{4 R_{th}}$} -- (1.5,2.6);
-    \filldraw[fftDarkBlue] (1.5,2.6) circle (2pt);
-\end{tikzpicture}
-\end{center}
-
-% ==============================================================================
-% 2.4. RÉGIMEN TRANSITORIO DE PRIMER ORDEN
-% ==============================================================================
-\section{Régimen Transitorio de Primer Orden (RC y RL)}
-
-\subsection{Circuito RC: Carga y Descarga}
-\begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Circuito RC
-    \draw (-4.5,0) to[V, v=$V_s$] (-4.5,1.8)
-          to[normal open switch, l={$t=0$}] (-3,1.8)
-          to[R, l=$R$] (-1,1.8)
-          to[C, l=$C$, v=$v_C(t)$] (-1,0)
-          -- (-4.5,0);
-    \node[below=6pt] at (-2.75,-0.2) {\small\textbf{Circuito RC Serie con Conmutación}};
-
-    % Gráfica de evolución temporal
-    \draw[->, thick] (1.5,0) -- (6.5,0) node[right] {$t$};
-    \draw[->, thick] (1.5,0) -- (1.5,2.5) node[above] {$v_C(t)$};
-    \draw[very thick, fftGreen, domain=0:4.5, samples=60]
-        plot ({\x + 1.5}, {2.0 * (1 - exp(-\x/1.0))});
-    \draw[dashed, gray] (1.5,2.0) node[left, text=black] {$V_s$} -- (6.0,2.0);
-    \draw[dashed, gray] (2.5,0) node[below, text=black] {$\tau$} -- (2.5, 1.264);
-    \draw[dashed, gray] (1.5, 1.264) node[left, text=black] {$0{,}632 V_s$} -- (2.5, 1.264);
-    \filldraw[fftDarkBlue] (2.5, 1.264) circle (2pt);
-\end{tikzpicture}
-\end{center}
-
-\begin{definicion}[Ecuaciones Fundamentales del Transitorio RC]
-\begin{align}
-    v_C(t) &= V_s \left(1 - e^{-t/\tau}\right), \quad \text{con } \tau = R C \\
-    i_C(t) &= \frac{V_s}{R} e^{-t/\tau}
-\end{align}
-Para $t \ge 5\tau$, $v_C \approx 0{,}993 V_s \approx V_s$, considerándose alcanzado el régimen permanente de continua (condensador cargado como circuito abierto).
-\end{definicion}
-
-% ==============================================================================
-% 2.5. EJERCICIOS RESUELTOS DE EXAMEN
-% ==============================================================================
-\section{Ejercicios Resueltos de Exámenes de Circuitos DC}
-
-\begin{ejercicio}[Cálculo de Equivalente Thévenin y Máxima Potencia --- Examen UGR]
-Dado el circuito con bornes $A$ y $B$, compuesto por $V_1 = 20\ \si{\volt}$, $I_1 = 2\ \si{\ampere}$, $R_1 = 10\ \si{\ohm}$, $R_2 = 40\ \si{\ohm}$ y $R_3 = 12\ \si{\ohm}$:
-\begin{enumerate}[label=\alph*)]
-    \item Calcular el equivalente de Thévenin entre los terminales $A$ y $B$.
-    \item Determinar la resistencia $R_L$ para absorber la máxima potencia y el valor de dicha potencia.
+\begin{metodo}[Procedimiento General del Método de Mallas]
+\begin{enumerate}
+    \item Asignar una corriente ficticia de malla ($I_1, I_2, \dots, I_M$) a cada malla independiente del circuito (habitualmente todas en sentido horario).
+    \item Escribir la ecuación de la 2ª Ley de Kirchhoff para cada malla:
+    \begin{itemize}
+        \item En el miembro izquierdo se colocan las fuentes de tensión de la malla: con signo \textbf{positivo ($+$)} si la corriente de malla pasa de $-$ a $+$ por la fuente (a favor), y \textbf{negativo ($-$)} si pasa de $+$ a $-$ (en contra).
+        \item En el miembro derecho se suman las caídas de tensión en las resistencias: la corriente de la propia malla multiplica a la suma de todas las resistencias de esa malla, y se restan las corrientes de las mallas vecinas multiplicadas por la resistencia compartida.
+    \end{itemize}
+    \item Agrupar las incógnitas en forma matricial $[V] = [R][I]$ y resolver mediante la regla de Cramer o sustitución. Si alguna intensidad sale negativa, significa que su sentido físico real es el opuesto al supuesto inicialmente.
 \end{enumerate}
-\tcbline
-\textbf{Paso 1: Esquema del Circuito Original Completo:}\\[4pt]
+\end{metodo}
+
+\begin{ejemplo}[Resolución paso a paso por el método de mallas]
+Determina las corrientes de malla $I_1$, $I_2$ y la corriente que atraviesa la resistencia central $R_2$ en el siguiente circuito con $R_1 = 1\,\si{\kilo\ohm}$, $R_2 = 2\,\si{\kilo\ohm}$, $R_3 = 3\,\si{\kilo\ohm}$, $R_4 = 4\,\si{\kilo\ohm}$, $V_1 = 1\,\si{\volt}$, $V_2 = 2\,\si{\volt}$ y $V_3 = 3\,\si{\volt}$:
+
 \begin{center}
-\begin{tikzpicture}[scale=0.95]
-    % Fuente de tensión y R1
-    \draw (0,0) to[V, v=$V_1{=}20\si{\volt}$] (0,2.5)
-          to[R, l=$R_1{=}10\si{\ohm}$] (2.5,2.5);
-    % Fuente de corriente en paralelo
-    \draw (2.5,0) to[I, i=$I_1{=}2\si{\ampere}$] (2.5,2.5);
-    % Resistencia R2 en paralelo
-    \draw (4.5,2.5) to[R, l=$R_2{=}40\si{\ohm}$] (4.5,0);
-    \draw (2.5,2.5) -- (4.5,2.5);
-    % Resistencia R3 hacia el terminal A
-    \draw (4.5,2.5) to[R, l=$R_3{=}12\si{\ohm}$] (7,2.5) to[short, -o] (7.5,2.5) node[right] {$A$};
-    % Conductor de retorno hacia B
-    \draw (0,0) -- (7,0) to[short, -o] (7.5,0) node[right] {$B$};
-\end{tikzpicture}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[V, v<=$V_1$] (0,2.4)
+          to[R, l=$R_1$] (2.8,2.4)
+          to[R, l=$R_2$] (2.8,0)
+          to[R, l=$R_3$] (0,0);
+    \draw (2.8,2.4) to[V, v<=$V_2$] (5.6,2.4)
+          to[R, l=$R_4$] (5.6,0)
+          to[V, v=$V_3$] (2.8,0);
+    \draw[-{Stealth}, NavyBlue, thick] (1.0,1.2) arc (150:-150:0.45) node[midway, left] {$I_1$};
+    \draw[-{Stealth}, BrickRed, thick] (3.8,1.2) arc (150:-150:0.45) node[midway, left] {$I_2$};
+\end{circuitikz}
 \end{center}
 
-\textbf{Paso 2: Cálculo de $V_{th}$ en Circuito Abierto:}\\[2pt]
-En circuito abierto entre $A$ y $B$, por $R_3$ no circula corriente ($I_{R3} = 0$), luego $V_A = V_{nudo}$ (potencial común entre $R_1, I_1, R_2$).
-Tomando el borne $B$ como referencia ($V_B = 0$):
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Planteamiento de las ecuaciones de cada malla} (tomando $I_1$ e $I_2$ en sentido horario):
+    \begin{align*}
+        \text{Malla 1:} \quad V_1 &= I_1 R_1 + (I_1 - I_2) R_2 + I_1 R_3 \\
+        \text{Malla 2:} \quad V_2 - V_3 &= I_2 R_4 + (I_2 - I_1) R_2
+    \end{align*}
+    \item \textbf{Agrupación de incógnitas y sustitución de valores} (en $\si{\kilo\ohm}$, $\si{\volt}$ y $\si{\milli\ampere}$):
+    \begin{align*}
+        V_1 &= (R_1 + R_2 + R_3) I_1 - R_2 I_2 \implies 1 = 6 I_1 - 2 I_2 \\
+        V_2 - V_3 &= -R_2 I_1 + (R_2 + R_4) I_2 \implies 2 - 3 = -1 = -2 I_1 + 6 I_2
+    \end{align*}
+    En forma matricial:
+    \begin{equation*}
+        \begin{pmatrix} 1 \\ -1 \end{pmatrix} = \begin{pmatrix} 6 & -2 \\ -2 & 6 \end{pmatrix} \begin{pmatrix} I_1 \\ I_2 \end{pmatrix}
+    \end{equation*}
+    \item \textbf{Resolución por la regla de Cramer}:
+    \begin{equation*}
+        I_1 = \frac{\begin{vmatrix} 1 & -2 \\ -1 & 6 \end{vmatrix}}{\begin{vmatrix} 6 & -2 \\ -2 & 6 \end{vmatrix}} = \frac{6 - 2}{36 - 4} = \frac{4}{32} = \frac{1}{8}\,\si{\milli\ampere} = 0{,}125\,\si{\milli\ampere}
+    \end{equation*}
+    \begin{equation*}
+        I_2 = \frac{\begin{vmatrix} 6 & 1 \\ -2 & -1 \end{vmatrix}}{\begin{vmatrix} 6 & -2 \\ -2 & 6 \end{vmatrix}} = \frac{-6 + 2}{36 - 4} = \frac{-4}{32} = -\frac{1}{8}\,\si{\milli\ampere} = -0{,}125\,\si{\milli\ampere}
+    \end{equation*}
+    Como $I_2$ sale negativa, su sentido físico real es antihorario. La corriente total que baja por $R_2$ es:
+    \begin{equation*}
+        I_{R2} = I_1 - I_2 = \frac{1}{8} - \left(-\frac{1}{8}\right) = \frac{1}{4}\,\si{\milli\ampere} = 0{,}25\,\si{\milli\ampere}
+    \end{equation*}
+\end{enumerate}
+\end{ejemplo}
+
+\subsection{Método de las Tensiones de Nudos}
+
+\begin{metodo}[Procedimiento General del Método de Nudos]
+\begin{enumerate}
+    \item Identificar todos los nudos principales del circuito y elegir uno de ellos (habitualmente el que conecta más ramas o fuentes de tensión) como \textbf{nudo de referencia o tierra ($0\,\si{\volt}$)}.
+    \item Asignar una tensión incógnita ($V_a, V_b, V_c, \dots$) a cada uno de los demás nudos principales respecto a tierra.
+    \item Aplicar la 1ª Ley de Kirchhoff (LCK) en cada nudo principal expresando las corrientes de rama en función de las tensiones de nudo mediante la Ley de Ohm ($I_{ij} = \frac{V_i - V_j}{R_{ij}}$).
+\end{enumerate}
+\end{metodo}
+
+Por ejemplo, en una red en puente con nudos principales $a, b, c$ y tierra $d$ ($V_d = 0\,\si{\volt}$):
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,0) to[V, v<=$V_1$] (0,2.5)
+          to[R, l=$R_1$] (2.5,2.5) -- (4.2,2.5) node[above] {$a$};
+    \draw (4.2,2.5) to[R, l_=$R_2$] (2.6,1.25) node[left] {$b$};
+    \draw (4.2,2.5) to[R, l=$R_3$] (5.8,1.25) node[right] {$c$};
+    \draw (2.6,1.25) to[R, l=$R_6$] (5.8,1.25);
+    \draw (2.6,1.25) to[R, l_=$R_5$] (4.2,0) node[below right] {$d\ (0\,\si{\volt})$};
+    \draw (5.8,1.25) to[R, l=$R_4$] (4.2,0);
+    \draw (0,0) -- (4.2,0);
+    \draw (2.0,0) node[ground] {};
+\end{circuitikz}
+\caption{Red en puente para plantear las ecuaciones de nudos en $a$, $b$ y $c$.}
+\end{figure}
+
+Las ecuaciones de nudo (asumiendo todas las corrientes entrando al nudo o saliendo de él) son:
+\begin{align}
+    \text{Nudo } a: \quad & \frac{V_1 - V_a}{R_1} + \frac{V_b - V_a}{R_2} + \frac{V_c - V_a}{R_3} = 0 \\
+    \text{Nudo } b: \quad & \frac{V_a - V_b}{R_2} + \frac{V_c - V_b}{R_6} + \frac{0 - V_b}{R_5} = 0 \\
+    \text{Nudo } c: \quad & \frac{V_a - V_c}{R_3} + \frac{V_b - V_c}{R_6} + \frac{0 - V_c}{R_4} = 0
+\end{align}
+
+\begin{ejemplo}[Otro ejemplo resuelto por nudos con fuentes flotantes en las ramas]
+Resuelve por el método de nudos el circuito de la figura (con los mismos valores del ejemplo anterior: $V_1=1\,\si{\volt}, V_2=2\,\si{\volt}, V_3=3\,\si{\volt}, R_1=1\,\si{\kilo\ohm}, R_2=2\,\si{\kilo\ohm}, R_3=3\,\si{\kilo\ohm}, R_4=4\,\si{\kilo\ohm}$):
+
+\begin{center}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) node[below left] {$E$} to[V, v<=$V_1$] (0,2.4) node[above left] {$F$}
+          to[R, l=$R_1$, i>^=$I_1$] (2.8,2.4) node[above] {$V_A$}
+          to[R, l=$R_2$, i>^=$I_2$] (2.8,0) node[below right] {$B\ (0\,\si{\volt})$}
+          to[R, l=$R_3$, i>^=$I_1$] (0,0);
+    \draw (2.8,2.4) to[V, v<=$V_2$] (5.6,2.4) node[above right] {$C$}
+          to[R, l=$R_4$, i>^=$I_4$] (5.6,0) node[below right] {$D$}
+          to[V, v=$V_3$] (2.8,0);
+    \draw (2.8,0) node[ground] {};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Referenciamos a tierra el nudo principal inferior}: $V_B = 0\,\si{\volt}$.
+    \item \textbf{Aplicamos LCK en el nudo principal superior $V_A$}:
+    \begin{equation*}
+        I_1 = I_2 + I_4
+    \end{equation*}
+    \item \textbf{Expresamos cada intensidad en función de $V_A$}:
+    \begin{itemize}
+        \item En la rama central: $I_2 = \dfrac{V_A - 0}{R_2} = \dfrac{V_A}{2\,\si{\kilo\ohm}}$.
+        \item En la rama izquierda: por toda la rama serie ($R_3, V_1, R_1$) circula la misma corriente $I_1$. Como $0 - V_E = I_1 R_3 \implies V_E = -I_1 R_3$, y $V_F = V_E + V_1 = V_1 - I_1 R_3$, entonces:
+        \begin{equation*}
+            I_1 = \frac{V_F - V_A}{R_1} = \frac{V_1 - I_1 R_3 - V_A}{R_1} \implies I_1(R_1 + R_3) = V_1 - V_A \implies I_1 = \frac{V_1 - V_A}{R_1 + R_3} = \frac{1 - V_A}{4\,\si{\kilo\ohm}}
+        \end{equation*}
+        \item En la rama derecha: $V_C = V_A + V_2$ y $V_D = 0 + V_3$, por lo que:
+        \begin{equation*}
+            I_4 = \frac{V_C - V_D}{R_4} = \frac{V_A + V_2 - V_3}{R_4} = \frac{V_A + 2 - 3}{4\,\si{\kilo\ohm}} = \frac{V_A - 1}{4\,\si{\kilo\ohm}}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Sustituimos en $I_1 = I_2 + I_4$ y despejamos $V_A$}:
+    \begin{equation*}
+        \frac{1 - V_A}{4} = \frac{V_A}{2} + \frac{V_A - 1}{4} \implies \frac{1 - V_A}{4} + \frac{1 - V_A}{4} = \frac{V_A}{2} \implies \frac{1 - V_A}{2} = \frac{V_A}{2} \implies \boxed{V_A = \frac{1}{2}\,\si{\volt} = 0{,}5\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Conocido $V_A$, obtenemos inmediatamente las tres corrientes}:
+    \begin{equation*}
+        I_2 = \frac{1/2\,\si{\volt}}{2\,\si{\kilo\ohm}} = \frac{1}{4}\,\si{\milli\ampere}, \qquad I_1 = \frac{1 - 1/2}{4\,\si{\kilo\ohm}} = \frac{1}{8}\,\si{\milli\ampere}, \qquad I_4 = \frac{1/2 - 1}{4\,\si{\kilo\ohm}} = -\frac{1}{8}\,\si{\milli\ampere}
+    \end{equation*}
+\end{enumerate}
+\end{ejemplo}
+
+\subsection{Teorema de Thévenin y Teorema de Norton}
+
+\begin{ley}[Teoremas de Thévenin y de Norton]
+\begin{itemize}
+    \item \textbf{Teorema de Thévenin}: Cualquier circuito lineal complejo visto desde dos terminales $A$ y $B$ puede sustituirse por una única \textbf{fuente independiente de tensión $V_{th}$} conectada en \textbf{serie} con una \textbf{resistencia equivalente $R_{th}$}, donde:
+    \begin{enumerate}
+        \item $V_{th} = V_A - V_B$ es la tensión en circuito abierto entre los terminales $A$ y $B$ (desconectando la carga).
+        \item $R_{th}$ es la resistencia equivalente vista entre $A$ y $B$ al \textbf{anular todas las fuentes independientes} del circuito:
+        \begin{itemize}
+            \item Las \textbf{fuentes de tensión} se anulan sustituyéndolas por un \textbf{cortocircuito} (hilo conductor, $V=0$).
+            \item Las \textbf{fuentes de intensidad} se anulan sustituyéndolas por un \textbf{circuito abierto} (interruptor abierto, $I=0$).
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Teorema de Norton}: El mismo circuito lineal entre $A$ y $B$ puede reducirse a una única \textbf{fuente de intensidad $I_N$} en \textbf{paralelo} con una \textbf{resistencia $R_N$}, donde $R_N = R_{th}$ e $I_N = I_{cc}$ es la corriente de cortocircuito que circula de $A$ a $B$ al unir ambos terminales con un cable ideal.
+    \item \textbf{Relación entre Thévenin y Norton}: Se puede pasar siempre de uno a otro mediante:
+    \begin{equation}
+        R_{th} = R_N, \qquad V_{th} = I_N \cdot R_N \qquad \Longleftrightarrow \qquad I_N = \frac{V_{th}}{R_{th}}
+    \end{equation}
+\end{itemize}
+\end{ley}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.92, transform shape]
+    \node[font=\small\bfseries, color=NavyBlue] at (1.8,2.65) {Equivalente de Thévenin};
+    \draw (0,0) to[V, v<=$V_{th}$] (0,2.0)
+          to[R, l=$R_{th}$] (2.6,2.0)
+          to[short, -o] (3.2,2.0) node[right] {$A$};
+    \draw (0,0) to[short, -o] (3.2,0) node[right] {$B$};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.92, transform shape]
+    \node[font=\small\bfseries, color=BrickRed] at (1.8,2.65) {Equivalente de Norton};
+    \draw (0,0) to[isource, l=$I_N$] (0,2.0) -- (2.8,2.0)
+          to[short, -o] (3.4,2.0) node[right] {$A$};
+    \draw (1.8,2.0) to[R, l=$R_N$] (1.8,0);
+    \draw (0,0) to[short, -o] (3.4,0) node[right] {$B$};
+\end{circuitikz}
+\end{minipage}
+\caption{Circuitos equivalentes de Thévenin (izquierda) y de Norton (derecha) entre los terminales $A$ y $B$.}
+\end{figure}
+
+\begin{ejemplo}[Cálculo comparativo por Mallas, Thévenin y Norton]
+Sea el siguiente circuito con $V = 10\,\si{\volt}$, $R_1 = 1\,\si{\kilo\ohm}$, $R_2 = 5\,\si{\kilo\ohm}$, $R_3 = 1\,\si{\kilo\ohm}$ y resistencia de carga $R_4 = 1\,\si{\kilo\ohm}$ conectada entre $A$ y $B$. Calcula la tensión $V_{AB}$ de tres formas distintas: (1) resolviendo el circuito completo por mallas, (2) mediante el equivalente de Thévenin y (3) mediante el equivalente de Norton.
+
+\begin{center}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[V, v<=$10\,\si{\volt}$] (0,2.2)
+          to[R, l={$R_1=1\,\si{\kilo\ohm}$}] (2.5,2.2)
+          to[R, l={$R_2=5\,\si{\kilo\ohm}$}] (2.5,0) -- (0,0);
+    \draw (2.5,2.2) to[R, l={$R_3=1\,\si{\kilo\ohm}$}] (5.0,2.2) to[short, -*] (5.4,2.2) node[above] {$A$};
+    \draw (2.5,0) -- (5.0,0) to[short, -*] (5.4,0) node[below] {$B$};
+    \draw (5.4,2.2) to[R, l={$R_4=1\,\si{\kilo\ohm}$}] (5.4,0);
+    \draw[-{Stealth}, NavyBlue, thick] (0.9,1.1) arc (150:-150:0.4) node[midway, left] {$I_1$};
+    \draw[-{Stealth}, BrickRed, thick] (3.6,1.1) arc (150:-150:0.4) node[midway, left] {$I_2$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Método 1: Resolución directa por mallas}:
+\begin{align*}
+    10 &= I_1(R_1 + R_2) - I_2 R_2 = 6 I_1 - 5 I_2 \\
+    0 &= -I_1 R_2 + I_2(R_2 + R_3 + R_4) = -5 I_1 + 7 I_2
+\end{align*}
+Por Cramer ($\Delta = 42 - 25 = 17$):
+\begin{equation*}
+    I_1 = \frac{70}{17}\,\si{\milli\ampere}, \qquad I_2 = I_{R4} = \frac{50}{17}\,\si{\milli\ampere} \implies \boxed{V_{AB} = I_{R4}\cdot R_4 = \frac{50}{17}\,\si{\volt} \approx 2{,}94\,\si{\volt}}
+\end{equation*}
+
+\textbf{Método 2: Mediante el Equivalente de Thévenin (quitando $R_4$)}:
+\begin{center}
+\begin{minipage}{0.46\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[short] (0,2.0)
+          to[R, l={$R_1=1\,\si{\kilo\ohm}$}] (2.2,2.0)
+          to[R, l={$R_2=5\,\si{\kilo\ohm}$}] (2.2,0) -- (0,0);
+    \draw (2.2,2.0) to[R, l={$R_3=1\,\si{\kilo\ohm}$}, -o] (4.4,2.0) node[right] {$A$};
+    \draw (2.2,0) to[short, -o] (4.4,0) node[right] {$B$};
+    \node[below, font=\footnotesize\bfseries] at (2.2,-0.3) {Cálculo de $R_{th}$ (fuente anulada)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.46\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[V, v<=$10\,\si{\volt}$] (0,2.0)
+          to[R, l=$R_1$] (2.2,2.0) node[above] {$V_A$}
+          to[R, l=$R_2$] (2.2,0) -- (0,0);
+    \draw (2.2,2.0) to[R, l=$R_3$, i>^={$I=0$}, -o] (4.4,2.0) node[right] {$A$};
+    \draw (2.2,0) to[short, -o] (4.4,0) node[right] {$B\ (0\,\si{\volt})$};
+    \draw (2.2,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (2.2,-0.35) {Cálculo de $V_{th}$ ($A$-$B$ en abierto)};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+\begin{itemize}
+    \item \textbf{Resistencia de Thévenin}: Anulando la fuente de $10\,\si{\volt}$ (cortocircuito), $R_1$ y $R_2$ quedan en paralelo y en serie con $R_3$:
+    \begin{equation*}
+        R_{th} = R_3 + (R_1 \parallel R_2) = 1 + \frac{1\cdot 5}{1 + 5} = 1 + \frac{5}{6} = \frac{11}{6}\,\si{\kilo\ohm}
+    \end{equation*}
+    \item \textbf{Tensión de Thévenin}: Con $A$ y $B$ en abierto no circula corriente por $R_3$ ($I_{R3}=0$), luego por divisor de tensión:
+    \begin{equation*}
+        V_{th} = V_A - V_B = \frac{R_2}{R_1 + R_2}\cdot 10\,\si{\volt} = \frac{5}{6}\cdot 10 = \frac{50}{6}\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Conectando $R_4 = 1\,\si{\kilo\ohm}$ al equivalente de Thévenin}:
+    \begin{equation*}
+        I = \frac{V_{th}}{R_{th} + R_4} = \frac{50/6}{11/6 + 1} = \frac{50}{17}\,\si{\milli\ampere} \implies \boxed{V_{AB} = I\cdot R_4 = \frac{50}{17}\,\si{\volt}} \quad \text{(OK)}
+    \end{equation*}
+\end{itemize}
+
+\textbf{Método 3: Mediante el Equivalente de Norton}:
+\begin{itemize}
+    \item Cortocircuitando $A$ y $B$, las resistencias $R_2$ y $R_3$ quedan en paralelo ($R_2 \parallel R_3 = \frac{5\cdot 1}{5+1} = \frac{5}{6}\,\si{\kilo\ohm}$). La tensión en el nudo intermedio $C$ por divisor de tensión es:
+    \begin{equation*}
+        V_C = \frac{R_2 \parallel R_3}{R_1 + (R_2 \parallel R_3)}\cdot 10\,\si{\volt} = \frac{5/6}{1 + 5/6}\cdot 10 = \frac{50}{11}\,\si{\volt} \implies I_N = I_{AB} = \frac{V_C}{R_3} = \frac{50}{11}\,\si{\milli\ampere}
+    \end{equation*}
+    \item Al conectar $R_4 = 1\,\si{\kilo\ohm}$ en paralelo con $R_N = \frac{11}{6}\,\si{\kilo\ohm}$, la resistencia total es $R_p = R_N \parallel R_4 = \frac{11/6 \cdot 1}{11/6 + 1} = \frac{11}{17}\,\si{\kilo\ohm}$, de modo que:
+    \begin{equation*}
+        \boxed{V_{AB} = I_N \cdot R_p = \frac{50}{11}\,\si{\milli\ampere} \cdot \frac{11}{17}\,\si{\kilo\ohm} = \frac{50}{17}\,\si{\volt}} \quad \text{(OK)}
+    \end{equation*}
+\end{itemize}
+\end{ejemplo}
+
+\subsection{Teorema de Máxima Transferencia de Potencia}
+Si se conecta una resistencia de carga variable $R_L$ a un circuito cuyo equivalente de Thévenin es $(V_{th}, R_{th})$, la potencia disipada en la carga es $P_L = I^2 R_L = \left(\frac{V_{th}}{R_{th} + R_L}\right)^2 R_L$. Derivando respecto a $R_L$ e igualando a cero ($\frac{dP_L}{dR_L} = 0$) se demuestra que la carga recibe la \textbf{potencia máxima posible} cuando su valor coincide exactamente con la resistencia de Thévenin:
 \begin{equation}
-    \frac{V_{th} - V_1}{R_1} - I_1 + \frac{V_{th}}{R_2} = 0 \implies \frac{V_{th} - 20}{10} - 2 + \frac{V_{th}}{40} = 0
-\end{equation}
-Multiplicamos toda la ecuación por $40$:
-\begin{equation}
-    4(V_{th} - 20) - 80 + V_{th} = 0 \implies 5 V_{th} - 160 = 0 \implies V_{th} = 32\ \si{\volt}
+    \boxed{R_L = R_{th} \implies P_{L,\max} = \frac{V_{th}^2}{4\,R_{th}}}
 \end{equation}
 
-\textbf{Paso 3: Cálculo de $R_{th}$ con Fuentes Desactivadas:}\\[4pt]
+\subsection{Principio de Superposición}
+
+El \textbf{Principio de Superposición} establece que en cualquier circuito lineal con varias fuentes independientes, la tensión o corriente en cualquier elemento es igual a la suma algebraica de las respuestas parciales obtenidas cuando actúa \textbf{cada una de las fuentes independientes por separado}, anulando todas las demás (fuentes de tensión en cortocircuito y fuentes de corriente en circuito abierto).
+
+\begin{ejemplo}[Demostración paso a paso del Principio de Superposición]
+Sea el circuito de la figura con una fuente de tensión $V$, una fuente de intensidad $I$ y dos elementos pasivos $Z_1$ y $Z_2$. Halla la tensión en el nudo $A$ por superposición y compruébalo por el método de nudos:
+
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
-    % Fuente V1 en cortocircuito
-    \draw (0,0) -- (0,2) to[R, l=$R_1{=}10\si{\ohm}$] (2,2);
-    % Fuente I1 en circuito abierto (omitida)
-    % R2 en paralelo
-    \draw (2,2) to[R, l=$R_2{=}40\si{\ohm}$] (2,0) -- (0,0);
-    % R3 hacia bornes
-    \draw (2,2) to[R, l=$R_3{=}12\si{\ohm}$] (4.5,2) to[short, -o] (5,2) node[right] {$A$};
-    \draw (2,0) -- (4.5,0) to[short, -o] (5,0) node[right] {$B$};
-    \node[right] at (5.2,1) {$\Longrightarrow R_{th} = R_3 + (R_1 \parallel R_2) = 12 + 8 = 20\ \si{\ohm}$};
-\end{tikzpicture}
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \draw (0,0) to[V, v<=$V$] (0,2.0)
+          to[generic, l=$Z_1$] (2.2,2.0) node[above] {$A$}
+          to[generic, l=$Z_2$] (2.2,0) -- (0,0);
+    \draw (2.2,2.0) -- (3.8,2.0);
+    \draw (3.8,0) to[isource, l_=$I$] (3.8,2.0);
+    \draw (2.2,0) -- (3.8,0);
+    \draw (2.2,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.9,-0.35) {Circuito completo};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \draw (0,0) to[V, v<=$V$] (0,2.0)
+          to[generic, l=$Z_1$] (2.2,2.0) node[above] {$A$}
+          to[generic, l=$Z_2$] (2.2,0) -- (0,0);
+    \draw (2.2,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.1,-0.35) {a) Solo fuente $V$ ($I=0$)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \draw (0,0) -- (0,2.0)
+          to[generic, l=$Z_1$] (2.0,2.0) node[above] {$A$}
+          to[generic, l=$Z_2$] (2.0,0) -- (0,0);
+    \draw (2.0,2.0) -- (3.5,2.0);
+    \draw (3.5,0) to[isource, l_=$I$] (3.5,2.0);
+    \draw (2.0,0) -- (3.5,0);
+    \draw (2.0,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.75,-0.35) {b) Solo fuente $I$ ($V=0$)};
+\end{circuitikz}
+\end{minipage}
 \end{center}
+
+\begin{enumerate}
+    \item \textbf{a) Con la fuente de tensión $V$ activa} (anulamos la fuente de corriente dejándola en abierto): Queda un divisor de tensión entre $Z_1$ y $Z_2$:
+    \begin{equation*}
+        V_{A1} = \frac{Z_2}{Z_1 + Z_2}\,V
+    \end{equation*}
+    \item \textbf{b) Con la fuente de intensidad $I$ activa} (anulamos la fuente de tensión con un cortocircuito): Los elementos $Z_1$ y $Z_2$ quedan en paralelo alimentados por la corriente $I$:
+    \begin{equation*}
+        V_{A2} = I\cdot (Z_1 \parallel Z_2) = I\,\frac{Z_1 Z_2}{Z_1 + Z_2}
+    \end{equation*}
+    \item \textbf{Sumando ambas contribuciones}:
+    \begin{equation*}
+        \boxed{V_A = V_{A1} + V_{A2} = \frac{Z_2\,V + I\,Z_1 Z_2}{Z_1 + Z_2}}
+    \end{equation*}
+    \item \textbf{Comprobación directa por nudos con las dos fuentes a la vez}:
+    \begin{equation*}
+        I + \frac{V - V_A}{Z_1} = \frac{V_A}{Z_2} \implies I Z_1 + V - V_A = \frac{Z_1}{Z_2}V_A \implies \left(1 + \frac{Z_1}{Z_2}\right)V_A = I Z_1 + V \implies V_A = \frac{Z_2\,V + I\,Z_1 Z_2}{Z_1 + Z_2} \quad \text{(OK)}
+    \end{equation*}
+\end{enumerate}
+\end{ejemplo}
+
+\section{Régimen Transitorio de Primer Orden: Carga y Descarga de un Condensador}
+
+Cuando en un circuito con condensadores o bobinas se acciona un conmutador o cambia el valor de una fuente, el circuito pasa por un \textbf{régimen transitorio} hasta alcanzar su nuevo estado estacionario.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.88, transform shape]
+    \node[font=\small\bfseries, color=NavyBlue] at (2.2,2.65) {Carga del Condensador};
+    \draw (0,0) to[V, v<=$V$] (0,2.1)
+          to[closing switch, l={$t=0$}] (1.8,2.1)
+          to[R, l=$R$, i>^=$i(t)$] (4.0,2.1)
+          to[C, l=$C$, v=$v_C(t)$] (4.0,0) -- (0,0);
+    \draw (2.0,0) node[ground] {};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.88, transform shape]
+    \node[font=\small\bfseries, color=BrickRed] at (2.0,2.65) {Descarga del Condensador};
+    \draw (0,0) -- (0,2.1)
+          to[R, l=$R$] (3.2,2.1)
+          to[C, l=$C$, v=$v_C(t)$] (3.2,0) -- (0,0);
+    \draw (1.6,0) node[ground] {};
+    \draw[-{Stealth}, BrickRed, thick] (1.1,0.6) arc (-150:150:0.45) node[midway, right] {$i(t)$};
+\end{circuitikz}
+\end{minipage}
+\caption{Circuitos RC de primer orden durante la carga (izquierda) y la descarga (derecha) del condensador.}
+\end{figure}
+
+\subsection{Deducción de la Ecuación de Descarga del Condensador}
+Supongamos que el condensador se ha cargado inicialmente a la tensión de la fuente, de modo que en $t = 0$ tenemos $v_C(0) = V$, y en ese instante desconectamos la fuente y conectamos el conjunto $R$-$C$ a tierra:
+\begin{enumerate}
+    \item Para $t > 0$, la ecuación de malla es:
+    \begin{equation}
+        0 = v_C(t) + i(t)\cdot R
+    \end{equation}
+    \item Como la corriente es la misma que pasa por el condensador, $i(t) = i_C(t) = C\,\frac{dv_C(t)}{dt}$, obtenemos una ecuación diferencial ordinaria de primer orden:
+    \begin{equation}
+        0 = v_C(t) + R C\,\frac{dv_C(t)}{dt} \qquad \text{donde } \boxed{\tau = R\cdot C} \text{ es la \textbf{constante de tiempo} } [\si{\second}]
+    \end{equation}
+    \item Separando variables e integrando entre el instante inicial $t = 0$ ($v_C(0) = V$) y un instante genérico $t$:
+    \begin{equation}
+        \tau\,\frac{dv_C(t)}{dt} = -v_C(t) \implies \int_{v_C(0)}^{v_C(t)} \frac{dv_C(t)}{v_C(t)} = -\frac{1}{\tau}\int_0^t dt
+    \end{equation}
+    \begin{equation}
+        \ln\big[v_C(t)\big] - \ln\big[v_C(0)\big] = -\frac{t}{\tau} \implies \ln\left(\frac{v_C(t)}{V}\right) = -\frac{t}{\tau} \implies \boxed{v_C(t) = V\cdot e^{-t/\tau}}
+    \end{equation}
+\end{enumerate}
+
+Cuanto mayor sea la resistencia $R$ o la capacidad $C$, mayor será la constante de tiempo $\tau = RC$ y más tardará el condensador en descargarse. Se define el \textbf{tiempo de caída} ($t_{\text{fall}}$) como el tiempo que tarda la tensión en caer desde el $90\%$ ($0{,}9\,V$) hasta el $10\%$ ($0{,}1\,V$):
 \begin{equation}
-    R_{th} = R_3 + \frac{R_1 R_2}{R_1 + R_2} = 12 + \frac{10 \times 40}{50} = 12 + 8 = 20\ \si{\ohm}
+    t_{90\%} = -\tau\ln(0{,}9) \approx 0{,}105\,\tau, \quad t_{10\%} = -\tau\ln(0{,}1) \approx 2{,}303\,\tau \implies \boxed{t_{\text{fall}} = t_{10\%} - t_{90\%} \approx 2{,}2\,\tau}
 \end{equation}
 
-\textbf{Paso 4: Equivalente de Thévenin con Carga Óptima:}\\[4pt]
-\begin{center}
-\begin{tikzpicture}[scale=0.95]
-    \draw (0,0) to[V, v=$V_{th}{=}32\si{\volt}$] (0,2)
-          to[R, l=$R_{th}{=}20\si{\ohm}$] (2.5,2)
-          to[short, -o] (3.2,2) node[above] {$A$}
-          to[R, l=$R_L{=}20\si{\ohm}$, i=$I_L$] (3.2,0)
-          to[short, o-] (2.5,0) -- (0,0);
-    \node[below] at (3.2,0) {$B$};
+\subsection{Deducción de la Ecuación de Carga del Condensador}
+Si el condensador está inicialmente descargado en $t = 0$ ($v_C(0) = 0$) y lo conectamos a la fuente de tensión continua $V$ a través de la resistencia $R$:
+\begin{enumerate}
+    \item La ecuación de malla para $t > 0$ es:
+    \begin{equation}
+        V = i(t)\cdot R + v_C(t) = R C\,\frac{dv_C(t)}{dt} + v_C(t) \implies V - v_C(t) = \tau\,\frac{dv_C(t)}{dt}
+    \end{equation}
+    \item Separando variables e integrando desde $t = 0$ ($v_C(0) = 0$) hasta $t$:
+    \begin{equation}
+        \int_0^t -\frac{1}{\tau}\,dt = \int_0^{v_C(t)} \frac{dv_C(t)}{v_C(t) - V} \implies -\frac{t}{\tau} = \ln\left(\frac{v_C(t) - V}{v_C(0) - V}\right) = \ln\left(\frac{v_C(t) - V}{-V}\right)
+    \end{equation}
+    \item Tomando exponenciales y despejando $v_C(t)$:
+    \begin{equation}
+        \frac{v_C(t) - V}{-V} = e^{-t/\tau} \implies v_C(t) - V = -V\,e^{-t/\tau} \implies \boxed{v_C(t) = V\,\left(1 - e^{-t/\tau}\right)}
+    \end{equation}
+    La corriente de carga disminuye exponencialmente: $i(t) = C\frac{dv_C}{dt} = \frac{V}{R}\,e^{-t/\tau}$. Para $t = \tau$, el condensador ha alcanzado el $63{,}2\%$ de su tensión final, y para $t \approx 5\tau$ se considera totalmente cargado ($99{,}3\%$).
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.88]
+    \draw[-{Stealth}, thick] (0,0) -- (5.2,0) node[right] {$t$};
+    \draw[-{Stealth}, thick] (0,0) -- (0,3.2) node[above] {$v_C(t)$};
+    \draw[dashed, gray] (0,2.5) node[left, black] {$V$} -- (5.0,2.5);
+    \draw[dashed, gray] (0,2.25) node[left, black, font=\scriptsize] {$0{,}9V$} -- (0.35,2.25) -- (0.35,0);
+    \draw[dashed, gray] (0,0.25) node[left, black, font=\scriptsize] {$0{,}1V$} -- (3.0,0.25) -- (3.0,0);
+    \draw[ultra thick, BrickRed, domain=0:4.8, samples=80] plot (\x, {2.5*exp(-0.77*\x)});
+    \node[below, font=\scriptsize] at (0.35,0) {$0{,}1\tau$};
+    \node[below, font=\scriptsize] at (3.0,0) {$2{,}3\tau$};
+    \node[above right, BrickRed, font=\small\bfseries] at (1.3,1.3) {$v_C(t) = V e^{-t/\tau}$};
+    \node[below, font=\small\bfseries] at (2.5,-0.55) {Curva de Descarga ($t_{\text{fall}} \approx 2{,}2\tau$)};
 \end{tikzpicture}
-\end{center}
-Por el teorema de máxima transferencia de potencia:
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.88]
+    \draw[-{Stealth}, thick] (0,0) -- (5.2,0) node[right] {$t$};
+    \draw[-{Stealth}, thick] (0,0) -- (0,3.2) node[above] {$v_C(t)$};
+    \draw[dashed, gray] (0,2.5) node[left, black] {$V$} -- (5.0,2.5);
+    \draw[dashed, gray] (0,1.58) node[left, black, font=\scriptsize] {$0{,}632V$} -- (1.1,1.58) -- (1.1,0) node[below, black, font=\scriptsize] {$\tau = RC$};
+    \draw[ultra thick, NavyBlue, domain=0:4.8, samples=80] plot (\x, {2.5*(1 - exp(-0.9*\x))});
+    \node[below right, NavyBlue, font=\small\bfseries] at (1.5,1.6) {$v_C(t) = V(1 - e^{-t/\tau})$};
+    \node[below, font=\small\bfseries] at (2.5,-0.55) {Curva de Carga ($\tau = RC$)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Evolución temporal de la tensión $v_C(t)$ durante la descarga (izquierda) y la carga (derecha) de un condensador.}
+\end{figure}
+
+\begin{ley}[Fórmula Universal de Transitorios de Primer Orden (RC y RL)]
+En cualquier circuito de primer orden con un único elemento almacenador (condensador $C$ con $\tau = R_{th}C$, o bobina $L$ con $\tau = \frac{L}{R_{th}}$), la evolución temporal de cualquier tensión o corriente para $t \ge 0^+$ responde a la expresión universal:
 \begin{equation}
-    R_L = R_{th} = 20\ \si{\ohm} \implies P_{max} = \frac{V_{th}^2}{4 R_{th}} = \frac{32^2}{4 \times 20} = \frac{1024}{80} = 12{,}8\ \si{\watt}
+    \boxed{x(t) = x(\infty) + \big[x(0^+) - x(\infty)\big]\,e^{-t/\tau}, \qquad t \ge 0^+}
 \end{equation}
+donde $x(0^+)$ se obtiene por continuidad ($v_C(0^+) = v_C(0^-)$ o $i_L(0^+) = i_L(0^-)$) y $x(\infty)$ es el valor en régimen estacionario para $t \to \infty$.
+\end{ley}
+
+\section{Ejercicios de Clase y Exámenes Resueltos Paso a Paso}
+
+\begin{ejercicio}[Asociación de resistencias y Teorema de Kennelly (Ejercicio 3)]
+Calcula la resistencia equivalente $R_{AB}$ entre los terminales $A$ y $B$ en las tres asociaciones de resistencias de las figuras siguientes (corregidas en clase):
+
+\textbf{Apartado 1}: Red en puente doble con resistencias de $5\,\si{\kilo\ohm}$ y $15\,\si{\kilo\ohm}$.
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \node[circle, fill=black, inner sep=1.5pt, label=left:$A$] (A) at (0,2.2) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=above:$C$] (C) at (2.5,2.2) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=right:$B$] (B) at (5.0,2.2) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=below:$D$] (D) at (1.25,0) {};
+    \node[circle, fill=black, inner sep=1.5pt, label=below:$E$] (E) at (3.75,0) {};
+    \draw (A) to[R, l={$5\,\si{\kilo\ohm}$}] (C);
+    \draw (C) to[R, l={$5\,\si{\kilo\ohm}$}] (B);
+    \draw (A) to[R, l_={$5\,\si{\kilo\ohm}$}] (D);
+    \draw (C) to[R, l={$15\,\si{\kilo\ohm}$}] (D);
+    \draw (C) to[R, l_={$15\,\si{\kilo\ohm}$}] (E);
+    \draw (B) to[R, l={$5\,\si{\kilo\ohm}$}] (E);
+    \draw (D) to[R, l_={$5\,\si{\kilo\ohm}$}] (E);
+    \node[below, font=\footnotesize\bfseries] at (2.5,-0.55) {1) Red original en puente doble};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \draw (0,1.2) node[left] {$A$} to[R, l={$1\,\si{\kilo\ohm}$}, o-] (1.8,1.2);
+    \draw (1.8,1.2) -- (1.8,2.0) to[R, l={$6\,\si{\kilo\ohm}$}] (4.0,2.0) -- (4.0,1.2);
+    \draw (1.8,1.2) -- (1.8,0.4) to[R, l_={$11\,\si{\kilo\ohm}$}] (4.0,0.4) -- (4.0,1.2);
+    \draw (4.0,1.2) to[R, l={$1\,\si{\kilo\ohm}$}, -o] (5.8,1.2) node[right] {$B$};
+    \node[below, font=\footnotesize\bfseries] at (2.9,-0.35) {2) Red tras aplicar Kennelly};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+\textbf{Resolución del Apartado 1}:
+\begin{itemize}
+    \item Aplicamos el \textbf{Teorema de Kennelly} ($\Delta \to \text{Y}$) a los dos triángulos laterales $ACD$ y $CBE$ (ambos formados por lados de $5\,\si{\kilo\ohm}$, $5\,\si{\kilo\ohm}$ y $15\,\si{\kilo\ohm}$, cuya suma es $5 + 5 + 15 = 25\,\si{\kilo\ohm}$):
+    \begin{equation*}
+        R_a = \frac{5\cdot 5}{25} = 1\,\si{\kilo\ohm}, \qquad R_c = \frac{5\cdot 15}{25} = 3\,\si{\kilo\ohm}, \qquad R_d = \frac{5\cdot 15}{25} = 3\,\si{\kilo\ohm}
+    \end{equation*}
+    \item Al sustituir ambos triángulos por sus estrellas equivalentes:
+    \begin{itemize}
+        \item La rama superior entre los centros de ambas estrellas tiene dos resistencias de $3\,\si{\kilo\ohm}$ en serie: $3 + 3 = 6\,\si{\kilo\ohm}$.
+        \item La rama inferior que pasa por $D$-$E$ tiene tres resistencias en serie ($3\,\si{\kilo\ohm} + 5\,\si{\kilo\ohm} + 3\,\si{\kilo\ohm} = 11\,\si{\kilo\ohm}$).
+    \end{itemize}
+    \item Calculamos el paralelo central $R_p = 6\,\si{\kilo\ohm} \parallel 11\,\si{\kilo\ohm}$ y sumamos las dos resistencias exteriores de $1\,\si{\kilo\ohm}$:
+    \begin{equation*}
+        R_p = \frac{6\cdot 11}{6 + 11} = \frac{66}{17}\,\si{\kilo\ohm} \implies \boxed{R_T = 1\,\si{\kilo\ohm} + \frac{66}{17}\,\si{\kilo\ohm} + 1\,\si{\kilo\ohm} = \frac{100}{17}\,\si{\kilo\ohm} \approx 5{,}88\,\si{\kilo\ohm}}
+    \end{equation*}
+\end{itemize}
+
+\textbf{Apartado 2}: En el mismo puente, si los terminales de entrada son los nudos inferiores $A$ y $B$ (con una resistencia de $6\,\si{\kilo\ohm}$ directamente conectada entre $A$ y $B$, y los nudos superiores $C$ y $E$ al aire):
+\begin{itemize}
+    \item \textbf{Forma 1 (Asociación serie-paralelo directa)}: Los lados exteriores superiores ($5\,\si{\kilo\ohm} + 5\,\si{\kilo\ohm} = 10\,\si{\kilo\ohm}$) quedan en paralelo con las diagonales de $15\,\si{\kilo\ohm}$:
+    \begin{equation*}
+        10\,\si{\kilo\ohm} \parallel 15\,\si{\kilo\ohm} = \frac{10\cdot 15}{10 + 15} = 6\,\si{\kilo\ohm}
+    \end{equation*}
+    Las dos ramas resultantes de $6\,\si{\kilo\ohm}$ quedan en serie ($6 + 6 = 12\,\si{\kilo\ohm}$) y en paralelo con la base de $6\,\si{\kilo\ohm}$ entre $A$ y $B$:
+    \begin{equation*}
+        \boxed{R_{AB} = 12\,\si{\kilo\ohm} \parallel 6\,\si{\kilo\ohm} = \frac{12\cdot 6}{12 + 6} = 4\,\si{\kilo\ohm}}
+    \end{equation*}
+    \item \textbf{Forma 2 (Por Kennelly)}: Transformando los dos triángulos superiores en estrellas ($1\,\si{\kilo\ohm}, 3\,\si{\kilo\ohm}, 3\,\si{\kilo\ohm}$), las puntas de $1\,\si{\kilo\ohm}$ en $C$ y $E$ quedan al aire (no circula corriente por ellas), quedando cuatro resistencias de $3\,\si{\kilo\ohm}$ en serie ($3+3+3+3 = 12\,\si{\kilo\ohm}$) en paralelo con la base de $6\,\si{\kilo\ohm}$: $R_{AB} = 12\,\si{\kilo\ohm} \parallel 6\,\si{\kilo\ohm} = 4\,\si{\kilo\ohm}$.
+\end{itemize}
+
+\textbf{Apartado 4}: Red vertical entre $A$ y $B$ con una resistencia superior de $9\,\si{\kilo\ohm}$ en serie con un puente formado por un triángulo superior ($10\,\si{\kilo\ohm}, 10\,\si{\kilo\ohm}, 5\,\si{\kilo\ohm}$) y dos ramas inferiores de $20\,\si{\kilo\ohm}$ y $9\,\si{\kilo\ohm}$:
+\begin{itemize}
+    \item Transformamos el triángulo superior ($10\,\si{\kilo\ohm}, 10\,\si{\kilo\ohm}, 5\,\si{\kilo\ohm}$, suma $= 25\,\si{\kilo\ohm}$) en estrella:
+    \begin{equation*}
+        R_c = \frac{10\cdot 10}{25} = 4\,\si{\kilo\ohm}, \qquad R_d = \frac{10\cdot 5}{25} = 2\,\si{\kilo\ohm}, \qquad R_e = \frac{10\cdot 5}{25} = 2\,\si{\kilo\ohm}
+    \end{equation*}
+    \item Sumando en serie: arriba queda $9\,\si{\kilo\ohm} + 4\,\si{\kilo\ohm} = 13\,\si{\kilo\ohm}$, y en las dos ramas paralelas inferiores quedan $(2 + 20)\,\si{\kilo\ohm} = 22\,\si{\kilo\ohm}$ en paralelo con $(2 + 9)\,\si{\kilo\ohm} = 11\,\si{\kilo\ohm}$:
+    \begin{equation*}
+        22\,\si{\kilo\ohm} \parallel 11\,\si{\kilo\ohm} = \frac{22\cdot 11}{33} = \frac{22}{3}\,\si{\kilo\ohm} \approx 7{,}33\,\si{\kilo\ohm} \implies \boxed{R_{AB} = 13 + 7{,}33 = 20{,}33\,\si{\kilo\ohm}}
+    \end{equation*}
+\end{itemize}
 \end{ejercicio}
 
-\begin{ejercicio}[Régimen Transitorio de Carga RC --- Examen Convocatoria Ordinaria]
-En un circuito de carga RC, $V_s = 12\ \si{\volt}$, $R = 100\ \si{\kilo\ohm}$ y $C = 50\ \si{\micro\farad}$ con $v_C(0^-) = 0$. En $t = 0$ se cierra el interruptor.
-Hallar $\tau$, las expresiones de $v_C(t)$ e $i(t)$, los valores en $t = 5\ \si{\second}$ y el tiempo para alcanzar el $90\%$ de la carga final.
-\tcbline
-\textbf{Solución Paso a Paso:}\\[4pt]
-1) Constante de tiempo:
-\begin{equation}
-    \tau = R \cdot C = (100 \times 10^3\ \si{\ohm}) \times (50 \times 10^{-6}\ \si{\farad}) = 5{,}0\ \si{\second}
-\end{equation}
-2) Ecuaciones temporales para $t \ge 0$:
-\begin{equation}
-    v_C(t) = 12 \left(1 - e^{-t/5}\right)\ \si{\volt}, \qquad i(t) = \frac{12}{100 \times 10^3} e^{-t/5} = 0{,}12 \cdot e^{-t/5}\ \si{\milli\ampere}
-\end{equation}
-3) En $t = 5\ \si{\second} = \tau$:
-\begin{equation}
-    v_C(5) = 12 (1 - e^{-1}) \approx 7{,}59\ \si{\volt}, \qquad i(5) = 0{,}12 \cdot e^{-1} \approx 44{,}1\ \si{\micro\ampere}
-\end{equation}
-4) Para $v_C(t_1) = 0{,}90 \times 12 = 10{,}8\ \si{\volt}$:
-\begin{equation}
-    1 - e^{-t_1 / 5} = 0{,}90 \implies t_1 = -5 \ln(0{,}10) \approx 11{,}51\ \si{\second}
-\end{equation}
+\begin{ejercicio}[Cálculo de corrientes, potencias y balance energético (Ejercicio 9)]
+Calcula la corriente en cada rama y la potencia disipada por cada resistencia en el circuito de la figura, sabiendo que $V = 12\,\si{\volt}$, $R_1 = 2\,\si{\kilo\ohm}$ y $R_2 = R_3 = R_4 = 6\,\si{\kilo\ohm}$. Comprueba el balance de potencias.
+
+\begin{center}
+\begin{minipage}{0.54\textwidth}
+\centering
+\begin{circuitikz}[scale=0.85, transform shape]
+    \draw (0,0) to[battery1, l=$V$] (0,2.2)
+          to[R, l=$R_1$, i>^=$i_1$] (2.4,2.2) -- (5.6,2.2);
+    \node[above] at (3.8,2.2) {$A$};
+    \node[below] at (3.8,0) {$B$};
+    \draw (2.4,2.2) to[R, l=$R_2$, i>^=$i_2$] (2.4,0);
+    \draw (4.0,2.2) to[R, l=$R_3$, i>^=$i_3$] (4.0,0);
+    \draw (5.6,2.2) to[R, l=$R_4$, i>^=$i_4$] (5.6,0);
+    \draw (0,0) -- (5.6,0);
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+\centering
+\begin{circuitikz}[scale=0.85, transform shape]
+    \draw (0,0) to[battery1, l=$V$] (0,2.2)
+          to[R, l=$R_1$, i>^=$i_1$] (2.6,2.2) node[above] {$A$}
+          to[R, l=$R_{eq}$] (2.6,0) node[below] {$B$} -- (0,0);
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Asociación de las tres resistencias en paralelo} ($R_2, R_3, R_4$):
+    \begin{equation*}
+        \frac{1}{R_{eq}} = \frac{1}{R_2} + \frac{1}{R_3} + \frac{1}{R_4} = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2}\,\si{\kilo\ohm^{-1}} \implies \boxed{R_{eq} = 2\,\si{\kilo\ohm}}
+    \end{equation*}
+    \item \textbf{Cálculo de la corriente principal $i_1$ y de las corrientes de rama}:
+    \begin{equation*}
+        i_1 = \frac{V}{R_1 + R_{eq}} = \frac{12\,\si{\volt}}{2\,\si{\kilo\ohm} + 2\,\si{\kilo\ohm}} = \frac{12\,\si{\volt}}{4\,\si{\kilo\ohm}} = 3\,\si{\milli\ampere}
+    \end{equation*}
+    La tensión entre $A$ y $B$ es $V_{AB} = i_1 \cdot R_{eq} = 3\,\si{\milli\ampere} \cdot 2\,\si{\kilo\ohm} = 6\,\si{\volt}$. Como $R_2 = R_3 = R_4 = 6\,\si{\kilo\ohm}$:
+    \begin{equation*}
+        i_2 = i_3 = i_4 = \frac{V_{AB}}{R_2} = \frac{6\,\si{\volt}}{6\,\si{\kilo\ohm}} = 1\,\si{\milli\ampere} \qquad (\text{se cumple LCK: } 3\,\si{\milli\ampere} = 1 + 1 + 1\,\si{\milli\ampere})
+    \end{equation*}
+    \item \textbf{Potencias disipadas y balance de potencia}:
+    \begin{align*}
+        P_2 = P_3 = P_4 &= i_2 \cdot V_{AB} = 1\,\si{\milli\ampere} \cdot 6\,\si{\volt} = 6\,\si{\milli\watt} \\
+        P_1 &= i_1 \cdot V_{R1} = 3\,\si{\milli\ampere} \cdot 6\,\si{\volt} = 18\,\si{\milli\watt} \\
+        P_{\text{disipada}} &= 3\cdot 6\,\si{\milli\watt} + 18\,\si{\milli\watt} = 36\,\si{\milli\watt} = P_{\text{fuente}} = V\cdot i_1 = 12\,\si{\volt}\cdot 3\,\si{\milli\ampere} = \boxed{36\,\si{\milli\watt}}
+    \end{align*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Análisis completo por mallas y balance de potencias (Ejercicio 10)]
+Calcula la corriente en cada rama y la potencia disipada por cada resistencia del siguiente circuito con $V_1 = 7\,\si{\volt}$, $V_2 = 5\,\si{\volt}$, $R_1 = 3\,\si{\kilo\ohm}$, $R_2 = 1\,\si{\kilo\ohm}$ y $R_3 = 2\,\si{\kilo\ohm}$:
+
+\begin{center}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,2.2) to[V, v=$V_1$] (0,0)
+          to[R, l=$R_3$] (2.6,0)
+          to[R, l=$R_1$] (2.6,1.1)
+          to[V, v<=$V_2$] (2.6,2.2) -- (0,2.2);
+    \draw (2.6,2.2) -- (5.0,2.2)
+          to[R, l=$R_2$] (5.0,0) -- (2.6,0);
+    \draw[-{Stealth}, NavyBlue, thick] (1.3,1.5) arc (30:330:0.45) node[midway, right] {$i_1$};
+    \draw[-{Stealth}, BrickRed, thick] (3.8,1.5) arc (30:330:0.45) node[midway, right] {$i_2$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Establecemos el sentido antihorario para las corrientes de malla $i_1$ e $i_2$} (tal como indica la figura de clase) y planteamos las ecuaciones de malla:
+    \begin{align*}
+        V_1 + V_2 &= i_1 R_3 + (i_1 + i_2) R_1 \implies V_1 + V_2 = (R_1 + R_3)i_1 + R_1 i_2 \implies 12 = 5 i_1 + 3 i_2 \\
+        V_2 &= (i_1 + i_2) R_1 + i_2 R_2 \implies V_2 = R_1 i_1 + (R_1 + R_2)i_2 \implies 5 = 3 i_1 + 4 i_2
+    \end{align*}
+    \item \textbf{Resolución matricial por Cramer}:
+    \begin{equation*}
+        \begin{pmatrix} 12 \\ 5 \end{pmatrix} = \begin{pmatrix} 5 & 3 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} i_1 \\ i_2 \end{pmatrix} \implies
+        i_1 = \frac{\begin{vmatrix} 12 & 3 \\ 5 & 4 \end{vmatrix}}{\begin{vmatrix} 5 & 3 \\ 3 & 4 \end{vmatrix}} = \frac{48 - 15}{20 - 9} = \frac{33}{11} = \boxed{3\,\si{\milli\ampere}}, \qquad
+        i_2 = \frac{\begin{vmatrix} 5 & 12 \\ 3 & 5 \end{vmatrix}}{11} = \frac{25 - 36}{11} = \boxed{-1\,\si{\milli\ampere}}
+    \end{equation*}
+    \item \textbf{Corrientes por cada resistencia}:
+    \begin{equation*}
+        i_{R1} = i_1 + i_2 = 3 - 1 = 2\,\si{\milli\ampere}, \qquad i_{R2} = i_2 = -1\,\si{\milli\ampere}, \qquad i_{R3} = i_1 = 3\,\si{\milli\ampere}
+    \end{equation*}
+    \item \textbf{Cálculo de potencias en resistencias y fuentes}:
+    \begin{align*}
+        P_{R1} &= i_{R1}^2 R_1 = (2\,\si{\milli\ampere})^2 \cdot 3\,\si{\kilo\ohm} = 12\,\si{\milli\watt} \\
+        P_{R2} &= i_{R2}^2 R_2 = (-1\,\si{\milli\ampere})^2 \cdot 1\,\si{\kilo\ohm} = 1\,\si{\milli\watt} \\
+        P_{R3} &= i_{R3}^2 R_3 = (3\,\si{\milli\ampere})^2 \cdot 2\,\si{\kilo\ohm} = 18\,\si{\milli\watt} \implies P_{\text{total},R} = 12 + 1 + 18 = \boxed{31\,\si{\milli\watt}}
+    \end{align*}
+    \begin{equation*}
+        P_{V1} = V_1 \cdot i_1 = 7\,\si{\volt} \cdot 3\,\si{\milli\ampere} = 21\,\si{\milli\watt}, \quad P_{V2} = V_2 \cdot i_{R1} = 5\,\si{\volt} \cdot 2\,\si{\milli\ampere} = 10\,\si{\milli\watt} \implies P_{\text{total},V} = \boxed{31\,\si{\milli\watt}}
+    \end{equation*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Resolución por nudos con fuente de intensidad y fuentes de tensión (Ejercicio 12)]
+Calcula el valor del potencial $V_3$, las corrientes de rama y el balance de potencias en el circuito de la figura, con $R_1 = R_2 = R_3 = 1\,\si{\kilo\ohm}$, $I_1 = 2\,\si{\milli\ampere}$, $V_1 = 1\,\si{\volt}$ y $V_2 = 2\,\si{\volt}$:
+
+\begin{center}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,0) to[V, v<=$V_1$] (0,2.6) node[above left] {$A\ (1\,\si{\volt})$}
+          to[R, l=$R_1$, i>^=$i_1$] (2.0,1.2);
+    \draw (4.0,0) to[V, v=$V_2$] (4.0,2.6) node[above right] {$B\ (2\,\si{\volt})$}
+          to[R, l_=$R_2$, i<_=$i_2$] (2.0,1.2);
+    \draw (4.0,2.6) to[isource, l_=$I_1$] (0,2.6);
+    \node[above] at (2.0,1.35) {$V_3$};
+    \draw (2.0,1.2) to[R, l=$R_3$, i>^=$i_3$] (2.0,0);
+    \draw (0,0) -- (4.0,0);
+    \draw (2.0,0) node[ground] {} node[below right] {$C\ (0\,\si{\volt})$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Referenciamos el nudo inferior $C$ a tierra ($V_C = 0\,\si{\volt}$)}: Automáticamente las fuentes de tensión fijan los potenciales de los nudos superiores: $V_A = 1\,\si{\volt}$ y $V_B = 2\,\si{\volt}$.
+    \item \textbf{Aplicamos la Ley de Kirchhoff de corrientes (LCK) en el nudo central $V_3$}:
+    \begin{equation*}
+        i_1 + i_2 = i_3 \implies \frac{V_A - V_3}{R_1} + \frac{V_B - V_3}{R_2} = \frac{V_3 - 0}{R_3} \implies \frac{1 - V_3}{1} + \frac{2 - V_3}{1} = \frac{V_3}{1} \implies 3 = 3 V_3 \implies \boxed{V_3 = 1\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Cálculo de las intensidades en las resistencias y en las fuentes}:
+    \begin{equation*}
+        i_1 = \frac{1 - 1}{1\,\si{\kilo\ohm}} = 0\,\si{\milli\ampere}, \qquad i_2 = \frac{2 - 1}{1\,\si{\kilo\ohm}} = 1\,\si{\milli\ampere}, \qquad i_3 = i_1 + i_2 = 1\,\si{\milli\ampere}
+    \end{equation*}
+    En el nudo $A$, como por $R_1$ van $0\,\si{\milli\ampere}$ y de la fuente $I_1$ llegan $2\,\si{\milli\ampere}$ hacia la izquierda, toda esa corriente baja entrando por el polo $+$ de $V_1$ ($I_{V1} = 2\,\si{\milli\ampere}$ hacia abajo). En el nudo $B$, salen $2\,\si{\milli\ampere}$ hacia $I_1$ y $1\,\si{\milli\ampere}$ hacia $R_2$, luego la fuente $V_2$ entrega $I_{V2} = 3\,\si{\milli\ampere}$ hacia arriba.
+    \item \textbf{Balance de potencias}:
+    \begin{itemize}
+        \item En las resistencias: $P_{R1} = 0\,\si{\milli\watt}$, $P_{R2} = 1\,\si{\volt}\cdot 1\,\si{\milli\ampere} = 1\,\si{\milli\watt}$, $P_{R3} = 1\,\si{\volt}\cdot 1\,\si{\milli\ampere} = 1\,\si{\milli\watt} \implies P_{\text{total},R} = \boxed{2\,\si{\milli\watt}}$.
+        \item En las fuentes: $P_{V1} = -1\,\si{\volt}\cdot 2\,\si{\milli\ampere} = -2\,\si{\milli\watt}$ (absorbe), $P_{V2} = 2\,\si{\volt}\cdot 3\,\si{\milli\ampere} = 6\,\si{\milli\watt}$ (cede), $P_{I1} = (V_A - V_B)\cdot I_1 = (1 - 2)\,\si{\volt}\cdot 2\,\si{\milli\ampere} = -2\,\si{\milli\watt}$ (absorbe) $\implies P_{\text{total,fuentes}} = -2 + 6 - 2 = \boxed{2\,\si{\milli\watt}}$.
+    \end{itemize}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Análisis de carga y equivalente de Thévenin/Norton (Ejercicio 7)]
+En el circuito de la figura se conocen $R_1 = 6\,\si{\kilo\ohm}$, $R_2 = 12\,\si{\kilo\ohm}$, $R_3 = R_4 = R_5 = R_L = 10\,\si{\kilo\ohm}$, $I_2 = 0{,}5\,\si{\milli\ampere}$, $V_1 = 10\,\si{\volt}$ y $V_2 = 20\,\si{\volt}$:
+\begin{enumerate}
+    \item[a)] Calcula la corriente que atraviesa la resistencia de carga $R_L$, así como la caída de tensión entre sus extremos $A$ y $B$.
+    \item[b)] Calcula el equivalente Thévenin y Norton del circuito entre los puntos $A$ y $B$, siendo $R_L$ la carga del circuito, y comprueba el resultado del apartado anterior.
+\end{enumerate}
+
+\begin{center}
+\begin{circuitikz}[scale=0.88, transform shape]
+    \draw (0,1.4) to[V, v<=$V_1$] (0,3.2)
+          to[R, l=$R_1$] (3.6,3.2) -- (3.6,1.4);
+    \draw (0,1.4) node[left] {$V_B$} to[R, l=$R_2$] (1.8,1.4) node[above] {$B$}
+          to[R, l=$R_L$] (3.6,1.4) node[above right] {$A$};
+    \draw (0,1.4) to[R, l=$R_3$] (0,0);
+    \draw (3.6,0) to[isource, l=$I_2$] (0,0);
+    \draw (3.6,1.4) to[R, l=$R_4$] (3.6,0);
+    \draw (3.6,1.4) to[V, v<=$V_2$] (6.0,1.4)
+          to[R, l=$R_5$] (6.0,0) -- (3.6,0);
+    \draw[-{Stealth}, NavyBlue, thick] (1.4,2.3) arc (150:-150:0.38) node[midway, left] {$I_1$};
+    \draw[-{Stealth}, BrickRed, thick] (4.6,0.7) arc (150:-150:0.38) node[midway, left] {$I_3$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Apartado a)}: Como la fuente de corriente inferior fija directamente la corriente de la malla inferior izquierda en $I_2 = 0{,}5\,\si{\milli\ampere}$ (en sentido horario), para hallar $I_1$ basta plantear la ecuación de la malla superior izquierda:
+    \begin{equation*}
+        V_1 = I_1 R_1 + (I_1 - I_2) R_L + (I_1 - I_2) R_2 = (R_1 + R_2 + R_L) I_1 - (R_2 + R_L) I_2
+    \end{equation*}
+    Sustituyendo los valores ($R_1 + R_2 + R_L = 6 + 12 + 10 = 28\,\si{\kilo\ohm}$ y $R_2 + R_L = 22\,\si{\kilo\ohm}$):
+    \begin{equation*}
+        10 = 28 I_1 - 22 \cdot 0{,}5 \implies 28 I_1 = 21 \implies I_1 = \frac{21}{28} = \frac{3}{4}\,\si{\milli\ampere} = 0{,}75\,\si{\milli\ampere}
+    \end{equation*}
+    La intensidad que atraviesa $R_L$ (de $A$ hacia $B$) y la caída de tensión $V_A - V_B$ son:
+    \begin{equation*}
+        \boxed{I_{RL} = I_1 - I_2 = 0{,}75 - 0{,}50 = 0{,}25\,\si{\milli\ampere}}, \qquad \boxed{V_A - V_B = I_{RL}\cdot R_L = 0{,}25\,\si{\milli\ampere}\cdot 10\,\si{\kilo\ohm} = 2{,}5\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Apartado b) Equivalente de Thévenin entre $A$ y $B$ (desconectando $R_L$)}:
+    \begin{itemize}
+        \item \textbf{Tensión de Thévenin ($V_{th}$)}: Al abrir el tramo $A$-$B$, por la resistencia $R_2$ no circula corriente ($I_{R2} = 0 \implies V_{\text{izq}} = V_B$), y toda la corriente $I_2 = 0{,}5\,\si{\milli\ampere}$ se ve obligada a subir por la malla superior pasando por $R_1$ desde $V_B + 10\,\si{\volt}$ hacia $A$:
+        \begin{equation*}
+            V_A = (V_B + 10\,\si{\volt}) - I_2 \cdot R_1 = V_B + 10 - 0{,}5\,\si{\milli\ampere}\cdot 6\,\si{\kilo\ohm} = V_B + 7\,\si{\volt} \implies \boxed{V_{th} = V_A - V_B = 7\,\si{\volt}}
+        \end{equation*}
+        \item \textbf{Resistencia de Thévenin ($R_{th}$)}: Anulamos las fuentes ($V_1$ y $V_2$ en cortocircuito, $I_2$ en circuito abierto). Al quedar abierta la rama inferior de $I_2$, las resistencias $R_3, R_4, R_5$ no cierran camino entre $A$ y $B$, quedando únicamente $R_1$ y $R_2$ en serie:
+        \begin{equation*}
+            \boxed{R_{th} = R_1 + R_2 = 6\,\si{\kilo\ohm} + 12\,\si{\kilo\ohm} = 18\,\si{\kilo\ohm}} \qquad \left(I_N = \frac{V_{th}}{R_{th}} = \frac{7}{18}\,\si{\milli\ampere}\right)
+        \end{equation*}
+        \item \textbf{Comprobación conectando $R_L = 10\,\si{\kilo\ohm}$ al equivalente de Thévenin}:
+        \begin{equation*}
+            I_{RL} = \frac{V_{th}}{R_{th} + R_L} = \frac{7\,\si{\volt}}{18\,\si{\kilo\ohm} + 10\,\si{\kilo\ohm}} = 0{,}25\,\si{\milli\ampere}, \qquad V_{AB} = 0{,}25\,\si{\milli\ampere}\cdot 10\,\si{\kilo\ohm} = 2{,}5\,\si{\volt} \quad \text{(OK)}
+        \end{equation*}
+    \end{itemize}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Equivalente de Thévenin en función de un parámetro $V_i$ (Ejercicio 8)]
+Calcula el circuito equivalente de Thévenin entre los terminales $A$ y $B$ del siguiente circuito en función de la tensión $V_i$, sabiendo que $I = 1\,\si{\milli\ampere}$, $R_1 = R_2 = R_3 = 1\,\si{\kilo\ohm}$ y $R_4 = R_5 = 2\,\si{\kilo\ohm}$:
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,1.2) node[left] {$C$} to[battery1, l=$V_i$] (0,2.6)
+          to[R, l=$R_1$] (3.2,2.6) -- (3.2,1.2);
+    \draw (0,1.2) to[R, l=$R_2$, -o] (1.8,1.2) node[above] {$B$};
+    \draw (3.2,1.2) to[short, -o] (2.4,1.2) node[above] {$A$};
+    \draw (0,1.2) to[R, l=$R_3$] (0,0);
+    \draw (3.2,0) to[isource, l=$I$] (0,0);
+    \draw (3.2,1.2) to[R, l=$R_4$] (3.2,0);
+    \draw (3.2,1.2) -- (4.6,1.2) to[R, l=$R_5$] (4.6,0) -- (3.2,0);
+    \node[below, font=\footnotesize\bfseries] at (2.3,-0.35) {Circuito original};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[battery1, l={$V_{th}=V_i-1\,\si{\volt}$}] (0,2.0)
+          to[R, l={$R_{th}=2\,\si{\kilo\ohm}$}, -o] (3.2,2.0) node[right] {$A$};
+    \draw (0,0) to[short, -o] (3.2,0) node[right] {$B$};
+    \node[below, font=\footnotesize\bfseries] at (1.6,-0.35) {Equivalente Thévenin resultante};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Cálculo de la tensión de Thévenin ($V_{th} = V_A - V_B$)}:
+    \begin{itemize}
+        \item Como los terminales $A$ y $B$ están en circuito abierto, por la resistencia $R_2$ no circula corriente ($I_{R2} = 0$), de modo que el potencial en $B$ es idéntico al potencial en $C$: $V_B = V_C \implies V_{th} = V_A - V_C$.
+        \item Agrupando $R_4 \parallel R_5 = 2\,\si{\kilo\ohm} \parallel 2\,\si{\kilo\ohm} = 1\,\si{\kilo\ohm}$, la fuente de intensidad inferior $I = 1\,\si{\milli\ampere}$ obliga a que por toda la malla exterior ($R_3, V_i, R_1$ y $R_4\parallel R_5$) circule exactamente la corriente $I = 1\,\si{\milli\ampere}$ en sentido horario.
+        \item Por tanto, partiendo del nudo $C$, subiendo por la fuente $V_i$ y restando la caída en $R_1$:
+        \begin{equation*}
+            V_A - V_C = V_i - I\cdot R_1 = V_i - (1\,\si{\milli\ampere})(1\,\si{\kilo\ohm}) \implies \boxed{V_{th} = V_i - 1\,\si{\volt}}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Cálculo de la resistencia de Thévenin ($R_{th}$)}:
+    \begin{itemize}
+        \item Anulando la fuente de tensión $V_i$ (cortocircuito) y la fuente de intensidad $I$ (circuito abierto), las ramas inferiores quedan abiertas y vistas desde $A$ y $B$ solo quedan en serie las resistencias $R_1$ y $R_2$:
+        \begin{equation*}
+            \boxed{R_{th} = R_1 + R_2 = 1\,\si{\kilo\ohm} + 1\,\si{\kilo\ohm} = 2\,\si{\kilo\ohm}}
+        \end{equation*}
+    \end{itemize}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Equivalente de Thévenin mediante transformación de fuentes (Ejercicio 14)]
+Para el circuito de la figura ($V_1 = 1\,\si{\volt}, V_2 = 3\,\si{\volt}, I_1 = 1\,\si{\milli\ampere}, R_1 = 1\,\si{\kilo\ohm}$):
+\begin{enumerate}
+    \item[a)] Calcula el equivalente de Thévenin entre los terminales $A$ y $B$.
+    \item[b)] Calcula la caída de tensión $V_{CB}$ entre los nudos $C$ y $B$.
+    \item[c)] ¿Qué potencia se disipa en la resistencia $R_1$?
+\end{enumerate}
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[battery1, l={$V_2=3\,\si{\volt}$}] (0,1.2) node[left] {$A$}
+          to[battery1, l={$V_1=1\,\si{\volt}$}] (0,2.5)
+          to[R, l={$1\,\si{\kilo\ohm}$}] (2.4,2.5) node[above] {$C$}
+          to[R, l={$R_1=1\,\si{\kilo\ohm}$}] (2.4,1.2) node[left] {$B$};
+    \draw (2.4,2.5) -- (4.2,2.5);
+    \draw (4.2,1.2) to[isource, l_={$I_1=1\,\si{\milli\ampere}$}] (4.2,2.5);
+    \draw (2.4,1.2) -- (4.2,1.2) to[R, l={$2\,\si{\kilo\ohm}$}] (4.2,0) -- (0,0);
+    \node[below, font=\footnotesize\bfseries] at (2.1,-0.35) {Circuito original};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{circuitikz}[scale=0.82, transform shape]
+    \draw (0,0) to[battery1, l={$V_2=3\,\si{\volt}$}] (0,1.2) node[left] {$A$}
+          to[battery1, l={$V_1=1\,\si{\volt}$}] (0,2.5)
+          to[R, l={$1\,\si{\kilo\ohm}$}] (2.0,2.5) node[above] {$C$}
+          to[R, l={$1\,\si{\kilo\ohm}$}] (3.8,2.5)
+          to[battery1, l={$V_3=1\,\si{\volt}$}] (3.8,1.2) node[right] {$B$}
+          to[R, l={$2\,\si{\kilo\ohm}$}] (3.8,0) -- (0,0);
+    \draw (1.9,0) node[ground] {};
+    \draw[-{Stealth}, NavyBlue, thick] (1.5,0.8) arc (150:-150:0.4) node[midway, left] {$I$};
+    \node[below, font=\footnotesize\bfseries] at (1.9,-0.45) {Tras transformar $(I_1 \parallel R_1)$};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Apartado a)}: Transformamos el paralelo formado por la fuente de corriente $I_1 = 1\,\si{\milli\ampere}$ y la resistencia $R_1 = 1\,\si{\kilo\ohm}$ entre $C$ y $B$ en su fuente de tensión equivalente en serie: $V_3 = I_1 \cdot R_1 = 1\,\si{\milli\ampere}\cdot 1\,\si{\kilo\ohm} = 1\,\si{\volt}$ en serie con $1\,\si{\kilo\ohm}$.
+    \begin{itemize}
+        \item Queda una única malla con resistencias en serie ($1 + 1 + 2 = 4\,\si{\kilo\ohm}$):
+        \begin{equation*}
+            V_1 + V_2 - V_3 = I\,(1 + 1 + 2)\,\si{\kilo\ohm} \implies I = \frac{1 + 3 - 1}{4\,\si{\kilo\ohm}} = \frac{3}{4}\,\si{\milli\ampere} = 0{,}75\,\si{\milli\ampere}
+        \end{equation*}
+        \item Referenciando el cable inferior a tierra ($0\,\si{\volt}$):
+        \begin{equation*}
+            V_A = 3\,\si{\volt}, \quad V_B = I\cdot 2\,\si{\kilo\ohm} = \frac{3}{4}\,\si{\milli\ampere}\cdot 2\,\si{\kilo\ohm} = \frac{3}{2}\,\si{\volt} \implies \boxed{V_{th} = V_A - V_B = 3 - \frac{3}{2} = \frac{3}{2}\,\si{\volt} = 1{,}5\,\si{\volt}}
+        \end{equation*}
+        \item Anulando las fuentes en el circuito original ($V_1, V_2$ en cortocircuito e $I_1$ en abierto), entre $A$ y $B$ quedan la rama superior ($1\,\si{\kilo\ohm} + 1\,\si{\kilo\ohm} = 2\,\si{\kilo\ohm}$) en paralelo con la rama inferior de $2\,\si{\kilo\ohm}$:
+        \begin{equation*}
+            \boxed{R_{th} = 2\,\si{\kilo\ohm} \parallel 2\,\si{\kilo\ohm} = 1\,\si{\kilo\ohm}}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Apartado b) Caída de tensión $V_{CB}$}: En la rama transformada entre $C$ y $B$:
+    \begin{equation*}
+        \boxed{V_{CB} = V_3 + I\cdot 1\,\si{\kilo\ohm} = 1\,\si{\volt} + \frac{3}{4}\,\si{\milli\ampere}\cdot 1\,\si{\kilo\ohm} = \frac{7}{4}\,\si{\volt} = 1{,}75\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Apartado c) Potencia disipada en la resistencia $R_1$ original}: Como $R_1 = 1\,\si{\kilo\ohm}$ está conectada directamente entre $C$ y $B$, soporta la tensión $V_{CB} = \frac{7}{4}\,\si{\volt}$ (por ella bajan $\frac{7}{4}\,\si{\milli\ampere}$):
+    \begin{equation*}
+        \boxed{P_{R1} = \frac{V_{CB}^2}{R_1} = \frac{(7/4\,\si{\volt})^2}{1\,\si{\kilo\ohm}} = \frac{49}{16}\,\si{\milli\watt} \approx 3{,}06\,\si{\milli\watt}} \quad \left(\text{o en la equivalente de la malla: } V_{CB}\cdot I_1 = \frac{7}{4}\,\si{\milli\watt}\right)
+    \end{equation*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Divisor capacitivo en corriente continua (Ejercicio 17)]
+Calcula el potencial $V_2$ en régimen permanente de corriente continua en el circuito de la figura, sabiendo que $V_1 = 10\,\si{\volt}$, $C_1 = 1\,\si{\nano\farad}$ y $C_2 = C_3 = 10\,\si{\nano\farad}$:
+
+\begin{center}
+\begin{minipage}{0.54\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \draw (0,0) to[battery1, l=$V_1$] (0,2.2)
+          to[R, l=$R_1$] (1.5,2.2)
+          to[C, l=$C_1$] (2.8,2.2)
+          to[R, l=$R_2$] (4.2,2.2) node[above] {$V_2$}
+          to[R, l=$R_3$] (5.6,2.2)
+          to[C, l=$C_3$] (7.0,2.2) node[above] {$V_3$}
+          to[R, l=$R_4$] (7.0,0) -- (0,0);
+    \draw (4.2,2.2) to[C, l=$C_2$] (4.2,1.1)
+          to[R, l=$R_5$] (4.2,0);
+    \node[below, font=\footnotesize\bfseries] at (3.5,-0.35) {Circuito RC mixto};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+\centering
+\begin{circuitikz}[scale=0.78, transform shape]
+    \draw (0,0) to[battery1, l=$10\,\si{\volt}$] (0,2.4) -- (2.2,2.4)
+          to[C, l=$C_1$] (2.2,1.2) node[right] {$V_2$}
+          to[C, l={$C_p=20\,\si{\nano\farad}$}] (2.2,0) -- (0,0);
+    \draw (2.2,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.1,-0.45) {Equivalente capacitivo en DC};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item En corriente continua (DC), una vez cargados los condensadores \textbf{no circula corriente por ninguna rama} ($I = 0$). Al ser $I = 0$, no hay caída de tensión en ninguna de las resistencias ($V_R = I\cdot R = 0$), por lo que podemos eliminar todas las resistencias (sustituirlas por cables ideales) para ver cómo se reparten los $10\,\si{\volt}$ entre los condensadores.
+    \item Al hacerlo, los condensadores $C_2$ y $C_3$ quedan conectados en \textbf{paralelo} entre el nudo $V_2$ y tierra ($0\,\si{\volt}$):
+    \begin{equation*}
+        C_p = C_2 + C_3 = 10\,\si{\nano\farad} + 10\,\si{\nano\farad} = 20\,\si{\nano\farad}
+    \end{equation*}
+    \item Este condensador equivalente $C_p = 20\,\si{\nano\farad}$ queda en \textbf{serie} con $C_1 = 1\,\si{\nano\farad}$. Como dos condensadores en serie almacenan exactamente la \textbf{misma carga $q$}:
+    \begin{equation*}
+        10\,\si{\volt} = V_{C1} + V_2 = \frac{q}{C_1} + \frac{q}{C_p} = \frac{C_1 + C_p}{C_1 C_p}\,q \implies q = \frac{C_1 C_p}{C_1 + C_p}\cdot 10\,\si{\volt} = \frac{1\cdot 20}{1 + 20}\cdot 10 = \frac{200}{21}\,\si{\nano\coulomb}
+    \end{equation*}
+    \item Conocida la carga $q$, la tensión en el nudo $V_2$ es:
+    \begin{equation*}
+        \boxed{V_2 = \frac{q}{C_p} = \frac{200/21\,\si{\nano\coulomb}}{20\,\si{\nano\farad}} = \frac{10}{21}\,\si{\volt} \approx 0{,}476\,\si{\volt}}
+    \end{equation*}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Circuitos con fuentes dependientes (Ejercicio 19, apartados a, b y c)]
+Calcula la tensión de salida $V_o$ en cada uno de los tres circuitos con fuentes controladas de la figura (recuerda expresar las resistencias en ohmios cuando la ganancia de una fuente controlada por corriente viene en $\si{\volt/\ampere}$):
+
+\begin{center}
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.72, transform shape]
+    \draw (0,0) to[battery1, l=$12\,\si{\volt}$] (0,2.2)
+          to[R, l={$3\,\si{\kilo\ohm}$}, i>^=$I_s$] (2.0,2.2)
+          to[cV, v<={$2000 I_s$}] (4.0,2.2)
+          to[R, l={$5\,\si{\kilo\ohm}$}, v=$V_o$] (4.0,0) -- (0,0);
+    \node[below, font=\footnotesize\bfseries] at (2.0,-0.35) {Apartado a)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.72, transform shape]
+    \draw (0,0) to[battery1, l=$12\,\si{\volt}$] (0,2.2)
+          to[R, l={$2\,\si{\kilo\ohm}$}, i>^=$I$] (2.0,2.2)
+          to[cV, v={$2 V_o$}] (4.0,2.2)
+          to[R, l={$2\,\si{\kilo\ohm}$}, v=$V_o$] (4.0,0) -- (0,0);
+    \node[below, font=\footnotesize\bfseries] at (2.0,-0.35) {Apartado b)};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.72, transform shape]
+    \draw (0,0) to[isource, l=$5\,\si{\milli\ampere}$] (0,2.2) -- (4.2,2.2);
+    \draw (1.4,2.2) to[R, l={$2\,\si{\kilo\ohm}$}, i>^=$I_x$] (1.4,0);
+    \draw (2.8,2.2) to[cisource, l={$2 I_x$}] (2.8,0);
+    \draw (4.2,2.2) to[R, l={$1\,\si{\kilo\ohm}$}, v=$V_o$] (4.2,0);
+    \draw (0,0) -- (4.2,0);
+    \draw (2.1,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (2.1,-0.45) {Apartado c)};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{itemize}
+    \item \textbf{Apartado a)}: Ponemos las resistencias en ohmios ($3\,\si{\kilo\ohm} + 5\,\si{\kilo\ohm} = 8000\,\si{\ohm}$) y planteamos la ecuación de la única malla en sentido horario:
+    \begin{equation*}
+        12 + 2000\,I_s = I_s\cdot(3000 + 5000) \implies 12 = 6000\,I_s \implies I_s = \frac{12}{6000} = 2\,\si{\milli\ampere}
+    \end{equation*}
+    Por tanto, la tensión de salida en la resistencia de $5\,\si{\kilo\ohm}$ es:
+    \begin{equation*}
+        \boxed{V_o = I_s \cdot 5\,\si{\kilo\ohm} = 2\,\si{\milli\ampere}\cdot 5\,\si{\kilo\ohm} = 10\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Apartado b)}: Planteamos la ecuación de malla en sentido horario ($2\,\si{\kilo\ohm} + 2\,\si{\kilo\ohm} = 4\,\si{\kilo\ohm}$) y la ecuación de control $V_o = I\cdot 2\,\si{\kilo\ohm}$:
+    \begin{equation*}
+        12 - 2 V_o = I\cdot 4\,\si{\kilo\ohm} \xrightarrow{V_o = 2\,\si{\kilo\ohm}\cdot I} 12 - 4 I = 4 I \implies 12 = 8 I \implies I = \frac{3}{2}\,\si{\milli\ampere} = 1{,}5\,\si{\milli\ampere}
+    \end{equation*}
+    \begin{equation*}
+        \boxed{V_o = I\cdot 2\,\si{\kilo\ohm} = \frac{3}{2}\,\si{\milli\ampere}\cdot 2\,\si{\kilo\ohm} = 3\,\si{\volt}}
+    \end{equation*}
+    \item \textbf{Apartado c)}: Todos los elementos están en paralelo entre el nudo superior (con potencial $V_o$) y tierra ($0\,\si{\volt}$). Aplicamos LCK en el nudo superior y sustituimos $I_x = \frac{V_o}{2\,\si{\kilo\ohm}}$:
+    \begin{equation*}
+        5\,\si{\milli\ampere} = I_x + 2 I_x + \frac{V_o}{1\,\si{\kilo\ohm}} = 3 I_x + \frac{V_o}{1\,\si{\kilo\ohm}} = \frac{3 V_o}{2\,\si{\kilo\ohm}} + \frac{V_o}{1\,\si{\kilo\ohm}} = \frac{5 V_o}{2\,\si{\kilo\ohm}} \implies \boxed{V_o = \frac{10}{5} = 2\,\si{\volt}}
+    \end{equation*}
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[Aplicación del Principio de Superposición (Ejercicio 20)]
+Encuentra el valor de la corriente $I_o$ que atraviesa la resistencia de $6\,\si{\kilo\ohm}$ en el circuito de la figura utilizando el Principio de Superposición:
+
+\begin{center}
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.72, transform shape]
+    \draw (0,0) to[V, v<=$12\,\si{\volt}$] (0,1.6) -- (1.8,1.6)
+          to[R, l=$3\,\si{\kilo\ohm}$] (1.8,0) -- (0,0);
+    \draw (0,1.6) to[isource, l=$4\,\si{\milli\ampere}$] (1.8,1.6);
+    \draw (0,1.6) -- (0,2.8) to[R, l=$2\,\si{\kilo\ohm}$] (3.6,2.8) -- (3.6,1.6);
+    \draw (1.8,1.6) to[R, l_=$6\,\si{\kilo\ohm}$, i>^=$I_o$] (3.6,1.6)
+          to[R, l=$4\,\si{\kilo\ohm}$] (3.6,0) -- (1.8,0);
+    \node[below, font=\footnotesize\bfseries] at (1.8,-0.35) {Circuito original};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.72, transform shape]
+    \draw (0,0) to[V, v<=$12\,\si{\volt}$] (0,2.6)
+          to[R, l=$2\,\si{\kilo\ohm}$] (3.4,2.6) -- (3.4,1.5) node[right] {$V_A$};
+    \draw (1.6,1.5) to[R, l=$3\,\si{\kilo\ohm}$] (1.6,0) -- (0,0);
+    \draw (1.6,1.5) to[R, l=$6\,\si{\kilo\ohm}$, i>^=$I_{o1}$] (3.4,1.5)
+          to[R, l=$4\,\si{\kilo\ohm}$] (3.4,0) -- (1.6,0);
+    \draw (1.6,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.7,-0.45) {1) Solo fuente de $12\,\si{\volt}$};
+\end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.32\textwidth}
+\centering
+\begin{circuitikz}[scale=0.72, transform shape]
+    \draw (0,1.5) to[isource, l=$4\,\si{\milli\ampere}$] (1.8,1.5) node[above] {$A$};
+    \draw (0,1.5) -- (0,2.6) to[R, l=$2\,\si{\kilo\ohm}$] (3.6,2.6) -- (3.6,1.5) node[right] {$C$};
+    \draw (0,1.5) -- (0,0) -- (3.6,0);
+    \draw (1.8,1.5) to[R, l=$3\,\si{\kilo\ohm}$] (1.8,0);
+    \draw (1.8,1.5) to[R, l=$6\,\si{\kilo\ohm}$, i>^=$I_{o2}$] (3.6,1.5)
+          to[R, l=$4\,\si{\kilo\ohm}$] (3.6,0);
+    \draw (1.8,0) node[ground] {};
+    \node[below, font=\footnotesize\bfseries] at (1.8,-0.45) {2) Solo fuente de $4\,\si{\milli\ampere}$};
+\end{circuitikz}
+\end{minipage}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Paso 1: Con la fuente de tensión de $12\,\si{\volt}$ activa} (anulamos la fuente de $4\,\si{\milli\ampere}$ dejándola en circuito abierto):
+    \begin{itemize}
+        \item Desde el nudo $V_A$ hacia tierra quedan dos ramas en paralelo: la resistencia de $4\,\si{\kilo\ohm}$ y la serie $(6\,\si{\kilo\ohm} + 3\,\si{\kilo\ohm} = 9\,\si{\kilo\ohm})$:
+        \begin{equation*}
+            R_p = 4\,\si{\kilo\ohm} \parallel 9\,\si{\kilo\ohm} = \frac{4\cdot 9}{4 + 9} = \frac{36}{13}\,\si{\kilo\ohm}
+        \end{equation*}
+        \item Por divisor de tensión con la resistencia superior de $2\,\si{\kilo\ohm}$:
+        \begin{equation*}
+            V_A = \frac{R_p}{2 + R_p}\cdot 12\,\si{\volt} = \frac{36/13}{2 + 36/13}\cdot 12 = \frac{432}{62} \approx 6{,}97\,\si{\volt}
+        \end{equation*}
+        \item Como la corriente $I_{o1}$ está definida hacia la derecha (hacia $V_A$) y por la rama serie de $9\,\si{\kilo\ohm}$ la corriente va de $V_A$ a tierra:
+        \begin{equation*}
+            I_{o1} = \frac{0 - V_A}{6\,\si{\kilo\ohm} + 3\,\si{\kilo\ohm}} = -\frac{6{,}97\,\si{\volt}}{9\,\si{\kilo\ohm}} \approx -0{,}77\,\si{\milli\ampere}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Paso 2: Con la fuente de intensidad de $4\,\si{\milli\ampere}$ activa} (cortocircuitamos la fuente de $12\,\si{\volt}$ a tierra):
+    \begin{itemize}
+        \item Al quedar el terminal izquierdo puesto a tierra ($0\,\si{\volt}$), las resistencias de $4\,\si{\kilo\ohm}$ y $2\,\si{\kilo\ohm}$ quedan en paralelo entre el nudo $C$ y tierra:
+        \begin{equation*}
+            4\,\si{\kilo\ohm} \parallel 2\,\si{\kilo\ohm} = \frac{4\cdot 2}{4 + 2} = \frac{4}{3}\,\si{\kilo\ohm}
+        \end{equation*}
+        \item Esta combinación queda en serie con la resistencia de $6\,\si{\kilo\ohm}$ ($6 + \frac{4}{3} = \frac{22}{3}\,\si{\kilo\ohm}$) y todo ello en paralelo con la resistencia de $3\,\si{\kilo\ohm}$:
+        \begin{equation*}
+            R_{eq,A} = 3\,\si{\kilo\ohm} \parallel \frac{22}{3}\,\si{\kilo\ohm} = \frac{3 \cdot \frac{22}{3}}{3 + \frac{22}{3}} = \frac{22}{31}\,\si{\kilo\ohm}
+        \end{equation*}
+        \item La tensión en el nudo $A$ y la corriente $I_{o2}$ son:
+        \begin{equation*}
+            V_A = 4\,\si{\milli\ampere} \cdot \frac{22}{31}\,\si{\kilo\ohm} = \frac{88}{31}\,\si{\volt} \approx 2{,}84\,\si{\volt} \implies I_{o2} = \frac{V_A}{\frac{22}{3}\,\si{\kilo\ohm}} = \frac{88/31}{22/3} = \frac{12}{31}\,\si{\milli\ampere} \approx 0{,}387\,\si{\milli\ampere}
+        \end{equation*}
+        \emph{(Nota: Si en el cálculo intermedio se tomase $V_A = 8{,}51\,\si{\volt}$ como aparece anotado en el cuaderno manuscrito, saldría $I_{o2} = 1{,}16\,\si{\milli\ampere} \implies I_{o,\text{total}} = -0{,}77 + 1{,}16 = 0{,}39\,\si{\milli\ampere}$; con el valor exacto $V_A = \frac{88}{31}\,\si{\volt}$, resulta $I_{o,\text{total}} = -\frac{24}{31} + \frac{12}{31} = -\frac{12}{31}\,\si{\milli\ampere} \approx -0{,}387\,\si{\milli\ampere}$)}.
+    \end{itemize}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Problema Completo de Examen 2019: Mallas, Nudos y Balance de Potencias]
+En el circuito de examen de la figura, calcula todas las intensidades de malla y de rama, los potenciales de todos los nudos ($V_A, V_B, V_C, V_D, V_E$), las caídas de tensión en las cinco resistencias y el balance completo de potencias entre resistencias y fuentes:
+
+\begin{center}
+\begin{circuitikz}[scale=0.92, transform shape]
+    \draw (0,1.6) node[left] {$A$} -- (0,3.2)
+          to[R, l={$R_1=10\,\si{\ohm}$}] (6.0,3.2) -- (6.0,1.6) node[right] {$C$};
+    \draw (0,1.6) to[R, l={$R_2=3\,\si{\ohm}$}] (3.0,1.6) node[above] {$B$}
+          to[R, l={$R_3=2\,\si{\ohm}$}] (6.0,1.6);
+    \draw (0,0) node[left] {$D$} to[V, v<=$100\,\si{\volt}$] (0,1.6);
+    \draw (3.0,0) to[isource, l=$5\,\si{\ampere}$, v_=$V_x$] (3.0,1.6);
+    \draw (6.0,0) node[right] {$E$} to[V, v=$50\,\si{\volt}$] (6.0,1.6);
+    \draw (0,0) to[R, l_={$R_4=6\,\si{\ohm}$}] (3.0,0)
+          to[R, l_={$R_5=4\,\si{\ohm}$}] (6.0,0);
+    \draw (3.0,0) node[ground] {} node[below right] {$0\,\si{\volt}$};
+    \draw[-{Stealth}, NavyBlue, thick] (2.6,2.4) arc (150:-150:0.38) node[midway, left] {$I_1$};
+    \draw[-{Stealth}, BrickRed, thick] (1.1,0.8) arc (150:-150:0.38) node[midway, left] {$I_2$};
+    \draw[-{Stealth}, ForestGreen, thick] (4.3,0.8) arc (150:-150:0.38) node[midway, left] {$I_3$};
+\end{circuitikz}
+\end{center}
+
+\textbf{Resolución paso a paso}:
+\begin{enumerate}
+    \item \textbf{Planteamiento por el método de mallas (con supermalla inferior)}:
+    Asignamos $I_1, I_2, I_3$ en sentido horario y llamamos $V_x = V_B - 0$ a la tensión en bornes de la fuente de intensidad de $5\,\si{\ampere}$:
+    \begin{align}
+        \text{Malla 1 (superior):} \quad 0 &= (10 + 3 + 2)I_1 - 3 I_2 - 2 I_3 \implies 0 = 15 I_1 - 3 I_2 - 2 I_3 \label{eq:ex19_1} \\
+        \text{Malla 2 (izquierda):} \quad 100 &= -3 I_1 + (3 + 6)I_2 + V_x = -3 I_1 + 9 I_2 + V_x \label{eq:ex19_2} \\
+        \text{Malla 3 (derecha):} \quad -50 &= -2 I_1 + (2 + 4)I_3 - V_x = -2 I_1 + 6 I_3 - V_x \label{eq:ex19_3}
+    \end{align}
+    \item \textbf{Eliminación de $V_x$ (ecuación de la supermalla) y relación de la fuente de corriente}:
+    \begin{itemize}
+        \item Sumando \eqref{eq:ex19_2} y \eqref{eq:ex19_3}:
+        \begin{equation*}
+            50 = -5 I_1 + 9 I_2 + 6 I_3 \xrightarrow{\times 3} 150 = -15 I_1 + 27 I_2 + 18 I_3
+        \end{equation*}
+        \item Sumándole la ecuación \eqref{eq:ex19_1} ($0 = 15 I_1 - 3 I_2 - 2 I_3$) desaparece $I_1$:
+        \begin{equation*}
+            150 = 24 I_2 + 16 I_3
+        \end{equation*}
+        \item Además, en la rama central la fuente de $5\,\si{\ampere}$ impone directamente:
+        \begin{equation*}
+            I_3 - I_2 = 5 \implies I_3 = 5 + I_2
+        \end{equation*}
+        \item Sustituyendo $I_3 = 5 + I_2$:
+        \begin{equation*}
+            150 = 24 I_2 + 16(5 + I_2) = 40 I_2 + 80 \implies 40 I_2 = 70 \implies \boxed{I_2 = 1{,}75\,\si{\ampere}}
+        \end{equation*}
+        \begin{equation*}
+            \boxed{I_3 = 5 + 1{,}75 = 6{,}75\,\si{\ampere}}, \qquad \boxed{I_1 = \frac{3(1{,}75) + 2(6{,}75)}{15} = \frac{18{,}75}{15} = 1{,}25\,\si{\ampere}}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Intensidades y caídas de tensión en cada resistencia}:
+    \begin{align*}
+        I_{R1} &= I_1 = 1{,}25\,\si{\ampere} &\implies V_{R1} &= 1{,}25\cdot 10 = 12{,}5\,\si{\volt} \\
+        I_{R2} &= I_2 - I_1 = 1{,}75 - 1{,}25 = 0{,}50\,\si{\ampere} &\implies V_{R2} &= 0{,}50\cdot 3 = 1{,}5\,\si{\volt} \\
+        I_{R3} &= I_3 - I_1 = 6{,}75 - 1{,}25 = 5{,}50\,\si{\ampere} &\implies V_{R3} &= 5{,}50\cdot 2 = 11{,}0\,\si{\volt} \\
+        I_{R4} &= I_2 = 1{,}75\,\si{\ampere} &\implies V_{R4} &= 1{,}75\cdot 6 = 10{,}5\,\si{\volt} \\
+        I_{R5} &= I_3 = 6{,}75\,\si{\ampere} &\implies V_{R5} &= 6{,}75\cdot 4 = 27{,}0\,\si{\volt}
+    \end{align*}
+    \item \textbf{Tensiones absolutas en todos los nudos respecto a tierra ($0\,\si{\volt}$)}:
+    \begin{equation*}
+        V_D = -10{,}5\,\si{\volt}, \quad V_A = 89{,}5\,\si{\volt}, \quad V_B = 88{,}0\,\si{\volt}, \quad V_E = 27{,}0\,\si{\volt}, \quad V_C = 77{,}0\,\si{\volt}
+    \end{equation*}
+    \item \textbf{Balance completo de potencias}:
+    \begin{itemize}
+        \item \textbf{Potencia disipada en las resistencias}:
+        \begin{align*}
+            P_{R1} &= 12{,}5\cdot 1{,}25 = 15{,}625\,\si{\watt}, \quad P_{R2} = 1{,}5\cdot 0{,}5 = 0{,}75\,\si{\watt}, \quad P_{R3} = 11\cdot 5{,}5 = 60{,}5\,\si{\watt} \\
+            P_{R4} &= 10{,}5\cdot 1{,}75 = 18{,}375\,\si{\watt}, \quad P_{R5} = 27\cdot 6{,}75 = 182{,}25\,\si{\watt} \implies \boxed{P_{R,\text{total}} = 277{,}5\,\si{\watt}}
+        \end{align*}
+        \item \textbf{Potencia suministrada por las fuentes}:
+        \begin{align*}
+            P_{V1} &= 100\,\si{\volt}\cdot I_2 = 100\cdot 1{,}75 = 175\,\si{\watt} \quad (\text{cede}) \\
+            P_{V2} &= -50\,\si{\volt}\cdot I_3 = -50\cdot 6{,}75 = -337{,}5\,\si{\watt} \quad (\text{absorbe, pues } I_3 \text{ entra por el } +) \\
+            P_{I1} &= V_B \cdot 5\,\si{\ampere} = 88\,\si{\volt}\cdot 5\,\si{\ampere} = 440\,\si{\watt} \quad (\text{cede}) \\
+            \implies &\; \boxed{P_{F,\text{total}} = 175 - 337{,}5 + 440 = 277{,}5\,\si{\watt}} \quad (\text{Se cumple } P_{F,\text{total}} = P_{R,\text{total}})
+        \end{align*}
+    \end{itemize}
+\end{enumerate}
 \end{ejercicio}

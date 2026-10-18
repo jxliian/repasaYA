@@ -1,7 +1,7 @@
 {
   "subject": "informatica/fundamentos-fisicos-y-tecnologicos",
   "type": "apuntes",
-  "title": "Apuntes completos de teoría, esquemas circuitales y problemas resueltos (37 páginas)",
+  "title": "Apuntes completos de teoría, esquemas circuitales y problemas resueltos (153 páginas)",
   "description": "Síntesis completa y rigurosa del temario oficial: Electromagnetismo, Circuitos DC y AC, Semiconductores, Diodos, Transistores MOSFET, Electrónica Digital CMOS, Amplificadores Operacionales y Exámenes Oficiales resueltos paso a paso con esquemas nativos Circuitikz.",
   "order": 1,
   "pdf": "fft/apuntes-teoria-fft.pdf"

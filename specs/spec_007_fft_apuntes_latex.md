@@ -12,7 +12,7 @@ Conversión y digitalización integral a código LaTeX profesional de los apunte
 El objetivo es equiparar los materiales de FFT al estándar de máxima calidad editorial y pedagógica establecido en **Sistemas Concurrentes y Distribuidos (SCD)**:
 1. Maquetación limpia, tipografía profesional y cajas didácticas coloreadas (`definicion`, `ley`, `ejemplo`, `aviso`, `metodo`, `ejercicio`).
 2. Código LaTeX modularizado por temas (`temas/tema1_...` a `tema7_...`) con compilación automatizada (`compilar.sh`).
-3. Integración completa del PDF generado (67 páginas) en la plataforma repasaYA a través de `public/fft/` y colecciones de contenido Astro.
+3. Integración completa del PDF generado (153 páginas) en la plataforma repasaYA a través de `public/fft/` y colecciones de contenido Astro.
 4. Activación de la asignatura de `planned` a `available`.
 
 ---
@@ -33,7 +33,7 @@ El objetivo es equiparar los materiales de FFT al estándar de máxima calidad e
   - `tema7_examenes_resueltos.tex`: Solucionario paso a paso de los exámenes parciales y finales oficiales de la UGR (Ampère con 3 hilos paralelos, potencias y nudos en DC, análisis fasorial AC por superposición y transformación de fuentes, síntesis lógica NMOS/CMOS, análisis de diodos ON/OFF y etapas con Op-Amps acoplados).
 
 ### 2.2. Integración en repasaYA
-- **PDF de Producción**: `public/fft/apuntes-teoria-fft.pdf` (67 páginas, 665 KB).
+- **PDF de Producción**: `public/fft/apuntes-teoria-fft.pdf` (153 páginas, 1,5 MB).
 - **Colección de Materiales**: Creación de `src/content/materials/informatica/fundamentos-fisicos-y-tecnologicos/apuntes.json`.
 - **Ficha de Asignatura**: Actualización de `src/content/subjects/informatica/fundamentos-fisicos-y-tecnologicos.md` a `status: available` con material `[apuntes]`.
 
@@ -50,6 +50,6 @@ El objetivo es equiparar los materiales de FFT al estándar de máxima calidad e
 ---
 
 ## 4. Verificación y Pruebas
-- **Compilación LaTeX**: Doble pasada con `pdflatex` finalizada con código 0, generando `main.pdf` y `apuntes_fft.pdf` (67 páginas).
+- **Compilación LaTeX**: Doble pasada con `pdflatex` finalizada con código 0, generando `main.pdf` y `apuntes_fft.pdf` (153 páginas).
 - **Métricas**: `npm run stats` verificado con incremento exacto a 17 PDFs y 40 bloques.
 - **Build Estático**: `npm run build` ejecutado en Astro 6 con 87 páginas generadas en 6.71s y 0 errores de validación Zod.

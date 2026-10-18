@@ -4,184 +4,853 @@
 \cuadrofuentes{
     \textbf{Asignatura:} Fundamentos Físicos y Tecnológicos (1.º Grado en Ingeniería Informática, UGR).\\[2pt]
     \textbf{Profesor:} Pedro Cartujo (Departamento de Electrónica y Tecnología de Computadores).\\[2pt]
-    \textbf{Bibliografía de Referencia:} Franco, S., \textit{Design with Operational Amplifiers and Analog Integrated Circuits}, McGraw-Hill; Sedra, A. S., Smith, K. C., \textit{Circuitos Microelectrónicos}, Oxford University Press.
+    \textbf{Bibliografía de Referencia:} Franco, S., \textit{Design with Operational Amplifiers and Analog Integrated Circuits}, McGraw-Hill; Sedra, A. S., Smith, K. C., \textit{Circuitos Microelectrónicos}, Oxford University Press.\\[2pt]
+    \textbf{Contenido:} El amplificador operacional real e ideal, modelo equivalente interno, curva de transferencia y límites de saturación, realimentación negativa (cortocircuito virtual) y positiva, catálogo completo de configuraciones lineales y no lineales deducidas por Kirchhoff, conversión A/D y D/A, y colección completa de ejercicios resueltos paso a paso.
 }
 
 % ==============================================================================
-% 6.1. EL AMPLIFICADOR OPERACIONAL IDEAL
+% 6.1. EL AMPLIFICADOR OPERACIONAL Y EL CORTOCIRCUITO VIRTUAL
 % ==============================================================================
 \section{El Amplificador Operacional y el Cortocircuito Virtual}
 
-\subsection{Símbolo Circuital y Reglas de Oro}
-\begin{definicion}[Características del Op-Amp Ideal]
+El \textbf{amplificador operacional} (denominado habitualmente \textit{Op-Amp} o AO) es un circuito integrado analógico de acoplamiento directo, constituido internamente por decenas de transistores, resistencias y fuentes de corriente integradas, que ofrece una ganancia de tensión diferencial extraordinariamente elevada. Su nombre histórico proviene de su concepción original en los computadores analógicos para ejecutar operaciones matemáticas sobre señales de tensión (suma, resta, multiplicación por una constante, integración y derivación).
+
+\subsection{Terminales, Símbolo Circuital y Modelo Equivalente Interno}
+
+El amplificador operacional posee cinco terminales fundamentales desde el punto de vista circuital externo:
+\begin{itemize}[leftmargin=*]
+    \item $v^+$ (\textbf{Entrada No Inversora}): Terminal marcado con el signo $+$. Una señal aplicada en este terminal produce a la salida una tensión en fase (del mismo signo).
+    \item $v^-$ (\textbf{Entrada Inversora}): Terminal marcado con el signo $-$. Una señal aplicada en este terminal produce a la salida una tensión desfasada $180^\circ$ (de signo opuesto).
+    \item $v_o$ (\textbf{Terminal de Salida}): Proporciona la tensión amplificada medida respecto a la referencia común (masa o tierra).
+    \item $+V_{CC}$ (o $V_{pos}$) y $-V_{EE}$ (o $V_{neg}$) (\textbf{Terminales de Alimentación DC}): Suministran la energía eléctrica continua necesaria para polarizar los transistores internos del circuito integrado (típicamente $\pm 15\ \si{\volt}$ o $\pm 12\ \si{\volt}$). Estos terminales imponen los límites físicos de excursión de la salida (tensiones de saturación $+V_{sat}$ y $-V_{sat}$):
+    \begin{equation}
+        -V_{sat} \le v_o \le +V_{sat} \qquad (\text{donde } +V_{sat} \approx V_{CC} \text{ y } -V_{sat} \approx -V_{EE})
+    \end{equation}
+\end{itemize}
+
+En su región lineal de operación, el comportamiento interno del amplificador operacional se modela mediante una \textbf{resistencia de entrada diferencial} $R_i$ conectada entre $v^+$ y $v^-$, y una \textbf{fuente de tensión controlada por tensión} de valor $A_v(v^+ - v^-)$ en serie con una \textbf{resistencia de salida} $R_o$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % --- Símbolo Circuital (Izquierda) ---
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (-3.8, 2.5) {Símbolo Circuital Externo};
+    \draw (-3.8,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.6,0) to[short, -o] ++(-0.3,0) node[left] {$v^-$ (Inversora)};
+    \draw (op.+) -- ++(-0.6,0) to[short, -o] ++(-0.3,0) node[left] {$v^+$ (No inversora)};
+    \draw (op.out) to[short, -o] ++(0.7,0) node[right] {$v_o$};
+    \draw (op.up) -- ++(0,0.6) to[short, -o] ++(0,0.2) node[above] {$+V_{CC}\ (+15\,\si{\volt})$};
+    \draw (op.down) -- ++(0,-0.6) to[short, -o] ++(0,-0.2) node[below] {$-V_{EE}\ (-15\,\si{\volt})$};
+
+    % --- Modelo Equivalente Interno (Derecha) ---
+    \node[font=\bfseries\sffamily, color=fftDarkBlue] at (3.6, 2.6) {Modelo Equivalente Interno};
+    % Triángulo envolvente punteado amplio
+    \draw[dashed, thick, fftPrimary] (1.2, 2.3) -- (1.2, -2.3) -- (6.7, 0) -- cycle;
+    % Entradas v- y v+
+    \draw (0.3, 0.9) node[left] {$v^-$} to[short, o-, i=$i^-$] (1.8, 0.9);
+    \draw (0.3, -0.9) node[left] {$v^+$} to[short, o-, i=$i^+$] (1.8, -0.9);
+    \draw (1.8, 0.9) to[R, l=$R_i$] (1.8, -0.9);
+    % Fuente dependiente y resistencia de salida
+    \draw (3.2, -1.2) node[ground] {} to[V, l={\footnotesize $A_v(v^+ - v^-)$}] (3.2, 0)
+          to[R, l=$R_o$] (5.6, 0) to[short, -o] (6.9, 0) node[right] {$v_o$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Curva de Transferencia en Lazo Abierto y Aproximación Ideal}
+
+Si representamos la tensión de salida $v_o$ en función de la tensión diferencial de entrada $v_d = v^+ - v^-$ cuando el operacional trabaja sin red exterior (en lazo abierto), se distinguen tres regiones:
 \begin{enumerate}[leftmargin=*]
-    \item Ganancia diferencial infinita: $A_{vd} \to \infty$.
-    \item Impedancia de entrada infinita: $R_{in} \to \infty \implies \mathbf{I^+ = 0, \quad I^- = 0}$.
-    \item Impedancia de salida nula: $R_{out} = 0$.
-    \item \textbf{Principio del Cortocircuito Virtual (con realimentación negativa):} $\mathbf{V^+ = V^-}$.
+    \item \textbf{Región Lineal Estrecha:} Para diferencias $|v^+ - v^-| < \frac{V_{sat}}{A_v}$, la salida es directamente proporcional a la entrada diferencial:
+    \begin{equation}
+        v_o = A_v (v^+ - v^-)
+    \end{equation}
+    Dado que $A_v$ es del orden de $10^5$ a $10^6\ \si{\volt\per\volt}$, la pendiente en el origen es prácticamente vertical.
+    \item \textbf{Saturación Positiva ($+V_{sat}$ o $V_{pos}$):} Cuando $v^+ - v^- > \frac{+V_{sat}}{A_v}$, la salida queda recortada en su techo de alimentación $+V_{sat}$.
+    \item \textbf{Saturación Negativa ($-V_{sat}$ o $V_{neg}$):} Cuando $v^+ - v^- < \frac{-V_{sat}}{A_v}$, la salida queda recortada en su suelo de alimentación $-V_{sat}$.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % Ejes coordenados
+    \draw[->, >=stealth, thick, gray] (-4.0,0) -- (4.0,0) node[right, text=black] {$v_d = v^+ - v^-$};
+    \draw[->, >=stealth, thick, gray] (0,-2.4) -- (0,2.4) node[above, text=black] {$v_o$};
+    % Líneas asíntotas de saturación
+    \draw[dashed, gray] (-3.6, 1.6) -- (3.6, 1.6);
+    \draw[dashed, gray] (-3.6, -1.6) -- (3.6, -1.6);
+    \node[left, color=fftDarkBlue] at (-3.6, 1.6) {$+V_{sat}\ (V_{pos})$};
+    \node[right, color=fftDarkBlue] at (3.6, -1.6) {$-V_{sat}\ (V_{neg})$};
+    % Curva de transferencia
+    \draw[very thick, fftAccent] (-3.6, -1.6) -- (-0.35, -1.6) -- (0.35, 1.6) -- (3.6, 1.6);
+    % Anotaciones de zonas
+    \node[above, font=\footnotesize\bfseries, color=fftAccent] at (2.2, 1.65) {Saturación positiva};
+    \node[below, font=\footnotesize\bfseries, color=fftAccent] at (-2.2, -1.65) {Saturación negativa};
+    \node[right, font=\footnotesize, color=fftPrimary] at (0.4, 0.6) {Zona lineal: pendiente $A_v \to \infty$};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}[Características del Amplificador Operacional Ideal]
+Para el análisis de circuitos electrónicos utilizamos el \textbf{modelo ideal del amplificador operacional}, definido por las siguientes condiciones límite:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Ganancia de Tensión Diferencial Infinita:} $A_v \to \infty$ (en un operacional comercial real típico, $A_v \sim 10^5 - 10^6$).
+    \item \textbf{Resistencia de Entrada Infinita:} $R_i \to \infty$ (en tecnología bipolar $R_i \sim \si{\mega\ohm}$ y en tecnología CMOS/JFET $R_i \sim 10^{12}\ \si{\ohm}$). Como consecuencia directa, \textbf{las corrientes que entran a los terminales inversor y no inversor son estrictamente nulas}:
+    \begin{equation}
+        i^+ = 0, \qquad i^- = 0
+    \end{equation}
+    \item \textbf{Resistencia de Salida Nula:} $R_o = 0\ \si{\ohm}$, de modo que la tensión de salida $v_o = A_v(v^+ - v^-)$ no cae al conectar cargas exteriores.
+    \item \textbf{Ancho de Banda Infinito ($BW \to \infty$) y Rechazo al Modo Común Infinito ($CMRR \to \infty$):} Amplifica por igual cualquier frecuencia y responde exclusivamente a la diferencia $(v^+ - v^-)$.
 \end{enumerate}
 \end{definicion}
 
-\begin{center}
-\begin{tikzpicture}[scale=1.0]
-    \draw (0,0) node[op amp] (opamp) {};
-    \node[left] at (opamp.-) {$V^-$ (Inversora, $I^- = 0$)};
-    \node[left] at (opamp.+) {$V^+$ (No inversora, $I^+ = 0$)};
-    \node[right] at (opamp.out) {$V_o$};
-    \draw (opamp.up) -- (0,1.2) node[above] {$+V_{CC}$};
-    \draw (opamp.down) -- (0,-1.2) node[below] {$-V_{EE}$};
-    \node[below=16pt] at (0,-1.2) {\small\textsf{Símbolo circuital del Amplificador Operacional (Op-Amp)}};
-\end{tikzpicture}
-\end{center}
+\subsection{Realimentación Negativa vs. Realimentación Positiva y Cortocircuito Virtual}
+
+Se denomina \textbf{realimentación} (\textit{feedback}) a toda red que establece una conexión entre el terminal de salida $v_o$ y alguno de los terminales de entrada del operacional:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Realimentación Negativa (Estabilizadora --- Opera en Zona Lineal):}
+    La salida $v_o$ se reconecta a la \textbf{entrada inversora} $v^-$ (por ejemplo, mediante un divisor resistivo $R_1 - R_2$). Con el paso del tiempo, el lazo corrige cualquier desequilibrio hasta forzar la igualdad de potenciales $v^- = v^+$:
+    \begin{align*}
+        \text{Si } v^- > v^+ &\implies (v^+ - v^-) < 0 \implies v_o \downarrow \implies v^- \downarrow \implies (v^+ - v^-) \uparrow \implies \text{equilibrio } v^+ = v^- \\
+        \text{Si } v^- < v^+ &\implies (v^+ - v^-) > 0 \implies v_o \uparrow \implies v^- \uparrow \implies (v^+ - v^-) \downarrow \implies \text{equilibrio } v^+ = v^-
+    \end{align*}
+    \item \textbf{Realimentación Positiva (Regenerativa --- Lleva a Saturación):}
+    La salida $v_o$ se reconecta a la \textbf{entrada no inversora} $v^+$. En este caso \textbf{no se igualan} $v^-$ y $v^+$; cualquier pequeña diferencia inicial se amplifica regenerativamente hasta saturar la salida en $+V_{CC}$ o $-V_{CC}$:
+    \begin{align*}
+        \text{Si } v^- > v^+ &\implies (v^+ - v^-) < 0 \implies v_o \downarrow \implies v^+ \downarrow \implies (v^+ - v^-) \downarrow \implies v_o \text{ se limita a } -V_{CC} \\
+        \text{Si } v^- < v^+ &\implies (v^+ - v^-) > 0 \implies v_o \uparrow \implies v^+ \uparrow \implies (v^+ - v^-) \uparrow \implies v_o \text{ se limita a } +V_{CC}
+    \end{align*}
+\end{itemize}
+
+\begin{ley}[Principio del Cortocircuito Virtual y Reglas de Oro]
+Cuando un amplificador operacional ideal dispone de \textbf{realimentación negativa} y su salida se mantiene dentro de los límites lineales ($-V_{sat} < v_o < +V_{sat}$), el cociente finito entre la salida y la ganancia infinita obliga a que la tensión diferencial de entrada sea nula:
+\begin{equation}
+    v^+ - v^- = \frac{v_o}{A_v} \xrightarrow{A_v \to \infty} 0 \implies \mathbf{v^+ = v^-}
+\end{equation}
+Este fenómeno recibe el nombre de \textbf{cortocircuito virtual}: ambos terminales están exactamente al mismo potencial eléctrico ($v^+ = v^-$) pero sin que circule corriente entre ellos ($i^+ = i^- = 0$). Si además uno de los terminales está conectado directamente a tierra ($0\ \si{\volt}$), el otro terminal queda a $0\ \si{\volt}$ sin estar físicamente conectado a masa, lo que se denomina \textbf{masa virtual}.
+\end{ley}
 
 % ==============================================================================
-% 6.2. CONFIGURACIONES LINEALES BÁSICAS
+% 6.2. CONFIGURACIONES LINEALES BÁSICAS CON OP-AMP
 % ==============================================================================
 \section{Configuraciones Lineales Básicas con Op-Amp}
 
-\subsection{Amplificador Inversor y No Inversor}
+A continuación se deducen paso a paso, aplicando las leyes de Kirchhoff y las dos reglas de oro del operacional ideal ($v^+ = v^-$ e $i^+ = i^- = 0$), todas las configuraciones lineales fundamentales del temario.
+
+\subsection{1. Amplificador Inversor}
+
+La tensión de entrada $V_i$ se aplica a través de la resistencia $R_1$ al terminal inversor ($v^-$), mientras que la resistencia de realimentación $R_2$ conecta la salida $V_o$ con $v^-$. El terminal no inversor se conecta directamente a masa ($V^+ = 0\ \si{\volt}$).
+
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    % Amplificador Inversor
-    \node[font=\bfseries] at (-3,3.0) {Amplificador Inversor ($V_o = -\frac{R_2}{R_1} V_i$)};
-    \draw (-4.5,1) node[op amp] (op1) {};
-    \draw (-6.5,1.5) node[left] {$V_i$} to[R, l=$R_1$] (op1.-);
-    \draw (op1.+) -- (-5.5,0.5) node[ground] {};
-    \draw (op1.-) -- (-5.5,2.4) to[R, l=$R_2$] (-3.5,2.4) -- (-3.5,1);
-    \draw (op1.out) -- (-2.5,1) node[right] {$V_o$};
-
-    % Amplificador No Inversor
-    \node[font=\bfseries] at (3.5,3.0) {Amplificador No Inversor ($V_o = (1 + \frac{R_2}{R_1}) V_i$)};
-    \draw (2.5,1) node[op amp] (op2) {};
-    \draw (op2.+) -- (1.0,0.5) node[left] {$V_i$};
-    \draw (op2.-) -- (1.5,1.5) -- (1.5,2.4) to[R, l=$R_2$] (3.5,2.4) -- (3.5,1);
-    \draw (1.5,1.5) to[R, l=$R_1$] (1.5,-0.2) node[ground] {};
-    \draw (op2.out) -- (4.5,1) node[right] {$V_o$};
+    \draw (0,0) node[op amp] (op) {};
+    % Entrada inversora y nodo de bifurcación
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    \draw (vn) to[R, l_={$R_1$}, i<={$I_1$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$V_i$};
+    % Lazo de realimentación limpio por arriba
+    \draw (vn) -- ++(0,1.35) to[R, l={$R_2$}, i={$I_2$}] ++(3.1,0) -| (op.out);
+    % Salida
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+    % Entrada no inversora a masa
+    \draw (op.+) -- ++(-0.5,0) node[ground] {};
+    \node[above right=1pt, font=\scriptsize, color=fftAccent] at (vn) {$V^-{=}0\,\si{\volt}$};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Seguidor de Tensión (Buffer) y Sumador Inversor}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Condiciones ideales (masa virtual):} Como hay realimentación negativa, $V^- = V^+ = 0\ \si{\volt}$, e $I^- = I^+ = 0$.
+    \item \textbf{Ley de las Corrientes de Kirchhoff (LCK) en el nodo inversor:} Toda la corriente $I_1$ que llega por $R_1$ debe continuar por $R_2$ hacia la salida:
+    \begin{equation}
+        I_1 = I_2 \implies \frac{V_i - V^-}{R_1} = \frac{V^- - V_o}{R_2}
+    \end{equation}
+    \item Sustituyendo $V^- = 0\ \si{\volt}$:
+    \begin{equation}
+        \frac{V_i}{R_1} = -\frac{V_o}{R_2} \implies \boxed{V_o = -\frac{R_2}{R_1} V_i} \qquad \left(A_v = \frac{V_o}{V_i} = -\frac{R_2}{R_1}\right)
+    \end{equation}
+    \item \textbf{Resistencia de entrada del circuito:} Como el nodo $V^-$ está a masa virtual ($0\ \si{\volt}$), la resistencia equivalente que ve el generador $V_i$ es exactamente $R_{in} = \frac{V_i}{I_1} = R_1$.
+\end{itemize}
+
+\subsection{2. Amplificador No Inversor}
+
+La señal de entrada $V_i$ se aplica directamente a la entrada no inversora ($V^+$). La red de realimentación negativa está formada por el divisor resistivo $R_1$ (entre $V^-$ y masa) y $R_2$ (entre $V^-$ y la salida $V_o$).
+
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    % Seguidor de tensión
-    \node[font=\bfseries] at (-3,3.0) {Seguidor de Tensión ($V_o = V_i$)};
-    \draw (-4.5,1) node[op amp] (op3) {};
-    \draw (op3.+) -- (-6,0.5) node[left] {$V_i$};
-    \draw (op3.-) -- (-5.5,1.5) -- (-5.5,2.2) -- (-3.5,2.2) -- (-3.5,1) -- (op3.out);
-    \draw (op3.out) -- (-2.5,1) node[right] {$V_o$};
-    \node[below=4pt] at (-4,-0.2) {\footnotesize Adaptador de impedancias ($R_{in} \to \infty, R_{out} = 0$)};
-
-    % Sumador Inversor
-    \node[font=\bfseries] at (3.5,3.0) {Sumador Inversor ($V_o = -R_f(\frac{V_1}{R_1} + \frac{V_2}{R_2})$)};
-    \draw (2.5,1) node[op amp] (op4) {};
-    \draw (op4.+) -- (1.5,0.5) node[ground] {};
-    \draw (op4.-) -- (1.5,1.5);
-    \draw (0.2,2.0) node[left] {$V_1$} to[R, l=$R_1$] (1.5,1.5);
-    \draw (0.2,1.0) node[left] {$V_2$} to[R, l=$R_2$] (1.5,1.5);
-    \draw (1.5,1.5) -- (1.5,2.4) to[R, l=$R_f$] (3.5,2.4) -- (3.5,1) -- (op4.out);
-    \draw (op4.out) -- (4.5,1) node[right] {$V_o$};
+    \draw (0,0) node[op amp] (op) {};
+    % Entrada inversora y nodo de bifurcación
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    \draw (vn) to[R, l_={$R_1$}] ++(-2.2,0) node[ground] {};
+    % Lazo de realimentación limpio por arriba
+    \draw (vn) -- ++(0,1.35) to[R, l={$R_2$}] ++(3.1,0) -| (op.out);
+    % Entrada no inversora
+    \draw (op.+) -- ++(-0.8,0) to[short, -o] ++(-0.3,0) node[left] {$V_i$};
+    % Salida
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+    \node[above right=1pt, font=\scriptsize, color=fftAccent] at (vn) {$V^-{=}V_i$};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Integrador y Derivador Analógico}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Condiciones ideales:} Por cortocircuito virtual, $V^- = V^+ = V_i$, con $I^- = I^+ = 0$.
+    \item \textbf{LCK en el nodo inversor:} Aplicando el balance de corrientes entre la rama a masa ($R_1$) y la rama de realimentación ($R_2$):
+    \begin{equation}
+        \frac{0 - V^-}{R_1} = \frac{V^- - V_o}{R_2}
+    \end{equation}
+    \item Sustituyendo $V^- = V_i$ y despejando $V_o$:
+    \begin{equation}
+        -\frac{V_i}{R_1} = \frac{V_i}{R_2} - \frac{V_o}{R_2} \implies \frac{V_o}{R_2} = V_i \left(\frac{1}{R_2} + \frac{1}{R_1}\right) \implies \boxed{V_o = \left(1 + \frac{R_2}{R_1}\right) V_i}
+    \end{equation}
+    \item \textbf{Propiedades clave:} La ganancia $A_v = 1 + \frac{R_2}{R_1} \ge 1$ es siempre positiva (no invierte la fase) y la resistencia de entrada vista por $V_i$ es idealmente infinita ($R_{in} \to \infty$, puesto que $I^+ = 0$).
+\end{itemize}
+
+\subsection{3. Seguidor de Tensión (Buffer de Ganancia Unidad)}
+
+Es el caso límite del amplificador no inversor cuando se hace $R_2 = 0\ \si{\ohm}$ (cortocircuito directo entre la salida y la entrada inversora) y $R_1 \to \infty$ (circuito abierto a masa):
+
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    % Integrador
-    \node[font=\bfseries] at (-3,3.0) {Integrador ($v_o = -\frac{1}{RC}\int v_i dt$)};
-    \draw (-4.5,1) node[op amp] (op5) {};
-    \draw (-6.5,1.5) node[left] {$v_i(t)$} to[R, l=$R$] (op5.-);
-    \draw (op5.+) -- (-5.5,0.5) node[ground] {};
-    \draw (op5.-) -- (-5.5,2.4) to[C, l=$C$] (-3.5,2.4) -- (-3.5,1) -- (op5.out);
-    \draw (op5.out) -- (-2.5,1) node[right] {$v_o(t)$};
-
-    % Derivador
-    \node[font=\bfseries] at (3.5,3.0) {Derivador ($v_o = -RC\frac{dv_i}{dt}$)};
-    \draw (2.5,1) node[op amp] (op6) {};
-    \draw (0.5,1.5) node[left] {$v_i(t)$} to[C, l=$C$] (op6.-);
-    \draw (op6.+) -- (1.5,0.5) node[ground] {};
-    \draw (op6.-) -- (1.5,2.4) to[R, l=$R$] (3.5,2.4) -- (3.5,1) -- (op6.out);
-    \draw (op6.out) -- (4.5,1) node[right] {$v_o(t)$};
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.5,0) coordinate (vn);
+    \draw (vn) -- ++(0,1.2) -- ++(2.9,0) -| (op.out);
+    \draw (op.+) -- ++(-0.9,0) to[short, -o] ++(-0.3,0) node[left] {$V_i$};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o = V_i$};
 \end{tikzpicture}
 \end{center}
 
-\subsection{Comparador y Conversión D/A}
+\begin{equation}
+    \boxed{V_o = V_i \qquad (A_v = 1)}
+\end{equation}
+\begin{aviso}[Utilidad del Seguidor de Tensión como Adaptador de Impedancias]
+Aunque no amplifica en tensión ($A_v = 1$), el seguidor ofrece una impedancia de entrada infinita ($R_{in} \to \infty$, no consume corriente de la fuente previa) y una impedancia de salida nula ($R_{out} = 0$, capaz de entregar corriente a la carga sin caída de tensión). Se utiliza para \textbf{aislar etapas y eliminar el efecto de carga}.
+\end{aviso}
+
+\subsection{4. Sumador Inversor y Sumador No Inversor}
+
+\subsubsection{a) Sumador Inversor}
+Varias señales de entrada $V_1, V_2, \dots, V_n$ se aplican a través de sus respectivas resistencias $R_1, R_2, \dots, R_n$ al nodo común de la entrada inversora $V^-$, mientras que $V^+ = 0\ \si{\volt}$.
+
 \begin{center}
 \begin{tikzpicture}[scale=0.95]
-    % Comparador en lazo abierto
-    \node[font=\bfseries] at (-3,2.8) {Comparador en Lazo Abierto};
-    \draw (-4.5,1) node[op amp] (comp) {};
-    \draw (comp.+) -- (-6,1.5) node[left] {$V_i$};
-    \draw (comp.-) -- (-6,0.5) node[left] {$V_{ref}$};
-    \draw (comp.out) -- (-2.5,1) node[right] {$V_o = \pm V_{sat}$};
-
-    % Escalera R-2R
-    \node[font=\bfseries] at (3.5,2.8) {Conversión D/A con Red R-2R};
-    \draw (2.5,1) node[op amp] (dac) {};
-    \draw (dac.+) -- (1.5,0.5) node[ground] {};
-    \draw (dac.-) -- (1.5,1.5);
-    \draw (1.5,1.5) -- (1.5,2.3) to[R, l=$R_f{=}2R$] (3.5,2.3) -- (3.5,1) -- (dac.out);
-    \draw (dac.out) -- (4.5,1) node[right] {$V_{out}$};
-    \draw (1.5,1.5) to[R, l=$2R$] (0.0,1.5) node[left] {Bits ($b_i$)};
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    % Entradas V1 y V2 hacia el nodo vn
+    \draw (vn) -- ++(-0.4, 0.55) to[R, l_={$R_1$}] ++(-2.1,0) to[short, -o] ++(-0.2,0) node[left] {$V_1$};
+    \draw (vn) -- ++(-0.4,-0.55) to[R, l={$R_2$}] ++(-2.1,0) to[short, -o] ++(-0.2,0) node[left] {$V_2$};
+    % Realimentación RF
+    \draw (vn) -- ++(0,1.45) to[R, l={$R_F$}] ++(3.1,0) -| (op.out);
+    % Entrada + a masa y salida
+    \draw (op.+) -- ++(-0.5,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
 \end{tikzpicture}
 \end{center}
+
+Aplicando LCK en el nodo inversor con la condición ideal de masa virtual ($V^- = V^+ = 0\ \si{\volt}$):
+\begin{equation}
+    \frac{V_1 - V^-}{R_1} + \frac{V_2 - V^-}{R_2} = \frac{V^- - V_o}{R_F} \implies \boxed{V_o = -R_F \left(\frac{V_1}{R_1} + \frac{V_2}{R_2}\right)}
+\end{equation}
+Para $n$ entradas: $V_o = -R_F \sum_{k=1}^n \frac{V_k}{R_k}$. En el caso particular en que todas las resistencias sean iguales ($R_1 = R_2 = R_F$), resulta $V_o = -(V_1 + V_2)$.
+
+\subsubsection{b) Sumador No Inversor}
+Las señales $V_1$ y $V_2$ se aplican mediante $R_1$ y $R_2$ al terminal no inversor ($V^+$), mientras que la red inversora incorpora el divisor $R_S - R_F$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    % Nodo inversor
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    \draw (vn) to[R, l_={$R_S$}] ++(-2.1,0) node[ground] {};
+    \draw (vn) -- ++(0,1.35) to[R, l={$R_F$}] ++(3.1,0) -| (op.out);
+    % Nodo no inversor con suma resistiva
+    \draw (op.+) -- ++(-0.6,0) coordinate (vp);
+    \draw (vp) -- ++(-0.4, 0.45) to[R, l_={$R_1$}] ++(-2.1,0) to[short, -o] ++(-0.2,0) node[left] {$V_1$};
+    \draw (vp) -- ++(-0.4,-0.45) to[R, l={$R_2$}] ++(-2.1,0) to[short, -o] ++(-0.2,0) node[left] {$V_2$};
+    % Salida
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+    \item En el terminal no inversor ($I^+ = 0$):
+    \begin{equation}
+        I_{R1} = I_{R2} \implies \frac{V_1 - V^+}{R_1} = \frac{V^+ - V_2}{R_2} \implies V^+ = \frac{R_2 V_1 + R_1 V_2}{R_1 + R_2} = V^-
+    \end{equation}
+    \item En el terminal inversor ($I^- = 0$):
+    \begin{equation}
+        \frac{0 - V^-}{R_S} = \frac{V^- - V_o}{R_F} \implies V_o = \left(1 + \frac{R_F}{R_S}\right) V^-
+    \end{equation}
+    \item Sustituyendo $V^-$ se obtiene la ecuación general del sumador no inversor:
+    \begin{equation}
+        \boxed{V_o = \left(1 + \frac{R_F}{R_S}\right) \left(\frac{R_2 V_1 + R_1 V_2}{R_1 + R_2}\right)}
+    \end{equation}
+    Si se eligen resistencias simétricas $R_1 = R_2$ y $R_F = R_S$, los factores $\left(1 + 1\right) = 2$ y $\frac{1}{2}$ se cancelan y resulta la suma pura sin inversión: $V_o = V_1 + V_2$.
+\end{itemize}
+
+\subsection{5. Amplificador Diferencial (Restador)}
+
+Permite amplificar la diferencia entre dos señales de entrada $V_1$ y $V_2$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    % Rama inversora (Nodo B)
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    \node[above left, font=\footnotesize, color=fftPrimary] at (vn) {$B\ (V^-)$};
+    \draw (vn) to[R, l_={$R_1$}] ++(-2.2,0) to[short, -o] ++(-0.2,0) node[left] {$V_1$};
+    \draw (vn) -- ++(0,1.35) to[R, l={$R_2$}] ++(3.1,0) -| (op.out);
+    % Rama no inversora (Nodo A)
+    \draw (op.+) -- ++(-0.6,0) coordinate (vp);
+    \node[below left, font=\footnotesize, color=fftPrimary] at (vp) {$A\ (V^+)$};
+    \draw (vp) to[R, l={$R_3$}] ++(-2.2,0) to[short, -o] ++(-0.2,0) node[left] {$V_2$};
+    \draw (vp) to[R, l={$R_4$}] ++(0,-1.8) node[ground] {};
+    % Salida
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Kirchhoff en el punto $A$ ($V^+$):} Como $I^+ = 0$, las resistencias $R_3$ y $R_4$ forman un divisor de tensión:
+    \begin{equation}
+        I_{R3} = I_{R4} \implies \frac{V_2 - V^+}{R_3} = \frac{V^+}{R_4} \implies V^+ = \left(\frac{R_4}{R_3 + R_4}\right) V_2 = V^-
+    \end{equation}
+    \item \textbf{Kirchhoff en el punto $B$ ($V^-$):} Como $I^- = 0$:
+    \begin{equation}
+        I_{R1} = I_{R2} \implies \frac{V_1 - V^-}{R_1} = \frac{V^- - V_o}{R_2} \implies V_o = \left(1 + \frac{R_2}{R_1}\right) V^- - \frac{R_2}{R_1} V_1
+    \end{equation}
+    \item Sustituyendo la expresión de $V^-$:
+    \begin{equation}
+        \boxed{V_o = \left(1 + \frac{R_2}{R_1}\right)\left(\frac{R_4}{R_3 + R_4}\right) V_2 - \frac{R_2}{R_1} V_1}
+    \end{equation}
+    \item \textbf{Caso de puente resistivo equilibrado ($\frac{R_2}{R_1} = \frac{R_4}{R_3}$, por ejemplo $R_1 = R_3$ y $R_2 = R_4$):}
+    \begin{equation}
+        \boxed{V_o = \frac{R_2}{R_1} (V_2 - V_1)}
+    \end{equation}
+\end{itemize}
+
+\subsection{6. Integrador Inversor y Derivador Inversor}
+
+Al sustituir una de las resistencias del amplificador inversor por un condensador $C$, se obtienen operadores dinámicos en el dominio del tiempo:
+
+\subsubsection{a) Integrador Inversor}
+La resistencia $R$ se sitúa en la entrada y el condensador $C$ en el lazo de realimentación negativa:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.5,0) coordinate (vn);
+    \draw (vn) to[R, l_={$R$}, i<={$i_R(t)$}] ++(-2.3,0) to[short, -o] ++(-0.2,0) node[left] {$v_i(t)$};
+    \draw (vn) -- ++(0,1.35) to[C, l={$C$}, i={$i_C(t)$}] ++(3.0,0) -| (op.out);
+    \draw (op.+) -- ++(-0.5,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$v_o(t)$};
+\end{tikzpicture}
+\end{center}
+
+Con $V^- = V^+ = 0\ \si{\volt}$ e $i_R(t) = i_C(t)$:
+\begin{equation}
+    \frac{v_i(t) - 0}{R} = C \frac{d(0 - v_o(t))}{dt} = -C \frac{dv_o(t)}{dt} \implies \boxed{v_o(t) = -\frac{1}{R C} \int_0^t v_i(\tau)\, d\tau + v_o(0)}
+\end{equation}
+En régimen permanente sinusoidal ($\mathbf{Z}_C = \frac{1}{j\omega C}$), su función de transferencia fasorial es $H(j\omega) = -\frac{1}{j\omega R C}$ (comportamiento pasa-bajos con polo en el origen).
+
+\subsubsection{b) Derivador Inversor}
+El condensador $C$ se ubica en la rama de entrada y la resistencia $R$ en el lazo de realimentación:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.5,0) coordinate (vn);
+    \draw (vn) to[C, l_={$C$}, i<={$i_C(t)$}] ++(-2.3,0) to[short, -o] ++(-0.2,0) node[left] {$v_i(t)$};
+    \draw (vn) -- ++(0,1.35) to[R, l={$R$}, i={$i_R(t)$}] ++(3.0,0) -| (op.out);
+    \draw (op.+) -- ++(-0.5,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$v_o(t)$};
+\end{tikzpicture}
+\end{center}
+
+Con $V^- = V^+ = 0\ \si{\volt}$ e $i_C(t) = i_R(t)$:
+\begin{equation}
+    i_C(t) = C \frac{dv_i(t)}{dt} = \frac{0 - v_o(t)}{R} \implies \boxed{v_o(t) = -R C \frac{dv_i(t)}{dt}}
+\end{equation}
+
+\subsection{7. Configuraciones No Lineales: Comparador y Disparador de Schmitt}
+
+\subsubsection{a) Comparador Básico en Lazo Abierto}
+Sin realimentación, el operacional compara instantáneamente las tensiones en sus entradas $V^+$ y $V^-$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.8,0) to[short, -o] ++(-0.2,0) node[left] {$V_{ref}$};
+    \draw (op.+) -- ++(-0.8,0) to[short, -o] ++(-0.2,0) node[left] {$V_{in}$};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o \in \{+V_{pos}, -V_{neg}\}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{equation}
+    V_o =
+    \begin{cases}
+        +V_{pos}\ (+V_{sat}) & \text{si } V_{in} > V_{ref} \iff (V_{in} - V_{ref}) > 0 \\
+        -V_{neg}\ (-V_{sat}) & \text{si } V_{in} < V_{ref} \iff (V_{in} - V_{ref}) < 0
+    \end{cases}
+\end{equation}
+
+\subsubsection{b) Disparador de Schmitt (\textit{Schmitt Trigger}) con Realimentación Positiva}
+Para evitar conmutaciones erráticas producidas por el ruido cuando $V_i$ cruza el umbral de referencia, se introduce \textbf{realimentación positiva} hacia el terminal $V^+$ mediante las resistencias $R_1$ y $R_2$ (pudiendo acotar la salida con dos diodos Zener $D_1, D_2$ en antiserie):
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    % Entrada inversora Vi
+    \draw (op.-) -- ++(-0.8,0) to[short, -o] ++(-0.2,0) node[left] {$V_i$};
+    % Entrada no inversora con realimentación positiva
+    \draw (op.+) -- ++(-0.5,0) coordinate (vp);
+    \draw (vp) -- ++(0,-0.9) coordinate (vdiv);
+    \draw (vdiv) to[R, l={$R_2$}] ++(-2.1,0) to[short, -o] ++(-0.2,0) node[left] {$V_{ref}$};
+    \draw (op.out) to[R, l={$R$}] ++(2.0,0) coordinate (vout);
+    \draw (vdiv) to[R, l_={$R_1$}] ++(2.6,0) -| (op.out);
+    % Rama Zener de recorte en la salida
+    \draw (vout) to[short, -o] ++(1.0,0) node[right] {$V_o$};
+    \draw (vout) to[zDo, l={$D_1$}] ++(0,-1.1) to[zDo, invert, l={$D_2$}] ++(0,-1.1) node[ground] {};
+\end{tikzpicture}
+\end{center}
+
+El circuito presenta \textbf{dos tensiones umbral distintas} ($V_{TH}$ para subida y $V_{TL}$ para bajada), creando un ciclo de \textbf{histéresis} que inmuniza al comparador frente al ruido de alta frecuencia.
 
 % ==============================================================================
-% 6.3. EJERCICIOS RESUELTOS DE EXAMEN
+% 6.3. CONVERSIÓN ANALÓGICA-DIGITAL (A/D) Y DIGITAL-ANALÓGICA (D/A)
 % ==============================================================================
-\section{Ejercicios Resueltos de Exámenes de Amplificadores Operacionales}
+\section{Conversión Analógica-Digital (A/D) y Digital-Analógica (D/A)}
 
-\begin{ejercicio}[Circuito Sumador-Inversor con Chequeo de Saturación --- Examen UGR]
-Un amplificador operacional ideal con realimentación negativa dispone de $R_f = 20\ \si{\kilo\ohm}$ y saturación $\pm 14\ \si{\volt}$.
-Entradas: $V_1 = +2\ \si{\volt}$ por $R_1 = 10\ \si{\kilo\ohm}$ y $V_2 = -3\ \si{\volt}$ por $R_2 = 5\ \si{\kilo\ohm}$.
-Hallar $V_o$ y determinar si satura si se cambia $V_2$ a $-6\ \si{\volt}$.
+Los sistemas digitales y computadores procesan palabras binarias discretas en tiempo y amplitud, mientras que las magnitudes del mundo físico (temperatura, presión, sonido, tensión) son señales analógicas continuas. Los convertidores A/D (ADC) y D/A (DAC) constituyen la interfaz entre ambos dominios.
+
+\subsection{Diagrama de Bloques y Etapas de la Digitalización (Conversión A/D)}
+
+\begin{center}
+\begin{tikzpicture}[
+    scale=0.92,
+    bloque/.style={
+        rectangle, draw=fftPrimary, fill=fftGray, thick,
+        rounded corners=3pt, minimum height=1.2cm, minimum width=2.4cm,
+        align=center, font=\footnotesize\sffamily\bfseries
+    }
+]
+    \node[align=center] (in) at (-1.8,0) {$v_a(t)$\\{\scriptsize (Analógica)}};
+    \node[bloque] (sh) at (1.1,0) {1. Muestreo\\y Retención\\($f_s \ge 2f_{max}$)};
+    \node[bloque] (quant) at (4.7,0) {2. Cuantificación\\($2^n$ niveles,\\$\Delta = V_{FS}/2^n$)};
+    \node[bloque] (cod) at (8.3,0) {3. Codificación\\Binaria\\($n$ bits)};
+    \node[align=center] (out) at (11.2,0) {$b_{n-1}\dots b_1 b_0$\\{\scriptsize (Palabra Digital)}};
+
+    \draw[->, >=stealth, very thick, fftAccent] (in) -- (sh);
+    \draw[->, >=stealth, very thick, fftAccent] (sh) -- (quant);
+    \draw[->, >=stealth, very thick, fftAccent] (quant) -- (cod);
+    \draw[->, >=stealth, very thick, fftAccent] (cod) -- (out);
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Muestreo (\textit{Sampling}) y Teorema de Nyquist-Shannon:}
+    Discretiza el eje temporal tomando muestras cada periodo $T_s = 1/f_s$: $x[k] = x(k T_s)$.
+    \begin{ley}[Teorema del Muestreo de Nyquist-Shannon]
+    Para poder reconstruir sin pérdida de información una señal analógica limitada en banda cuya componente de frecuencia máxima sea $f_{max}$, la frecuencia de muestreo $f_s$ debe cumplir:
+    \begin{equation}
+        \boxed{f_s \ge 2 f_{max}}
+    \end{equation}
+    A la frecuencia crítica $f_N = 2 f_{max}$ se la denomina \textbf{tasa de Nyquist}. Si $f_s < 2 f_{max}$, los espectros periódicos se solapan provocando distorsión irreversible por \textbf{aliasing} (solapamiento espectral).
+    \end{ley}
+    \item \textbf{Cuantificación (\textit{Quantization}):}
+    Discretiza el eje de amplitudes asignando cada muestra analógica a uno de los $N_{niv} = 2^n$ escalones disponibles en un convertidor de $n$ bits con rango de fondo de escala $V_{FS}$ (\textit{Full Scale}):
+    \begin{equation}
+        \boxed{\Delta = \text{LSB} = \frac{V_{FS}}{2^n}} \qquad \left(\text{ o bien } \Delta = \frac{V_{FS}}{2^n - 1}\right)
+    \end{equation}
+    La diferencia entre el valor continuo real y el nivel discreto asignado introduce un \textbf{error de cuantificación} acotado por $|e_q| \le \frac{\Delta}{2}$.
+    \item \textbf{Codificación Binaria:}
+    Asigna a cada uno de los $2^n$ niveles cuantificados su representación única en binario natural o complemento a 2 de $n$ bits ($b_{n-1} b_{n-2} \dots b_1 b_0$).
+\end{enumerate}
+
+\subsection{Convertidores Digital-Analógicos (DAC) con Amplificador Operacional}
+
+\subsubsection{1. DAC de Resistencias Ponderadas}
+Consiste en un sumador inversor cuyas resistencias de entrada siguen una progresión geométrica de potencias de dos ($R, 2R, 4R, 8R, \dots, 2^{n-1}R$), gobernadas por conmutadores electrónicos activados por cada bit $b_k \in \{0, 1\}$ (donde $b_{n-1}$ es el MSB y $b_0$ es el LSB):
+
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    % 4 ramas ponderadas R, 2R, 4R, 8R
+    \draw (vn) -- ++(-0.4, 1.05) to[R, l_={$R$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$b_3 V_{ref}$ (MSB)};
+    \draw (vn) -- ++(-0.4, 0.35) to[R, l_={$2R$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$b_2 V_{ref}$};
+    \draw (vn) -- ++(-0.4,-0.35) to[R, l_={$4R$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$b_1 V_{ref}$};
+    \draw (vn) -- ++(-0.4,-1.05) to[R, l_={$8R$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$b_0 V_{ref}$ (LSB)};
+    % Realimentación Rf
+    \draw (vn) -- ++(0,1.75) to[R, l={$R_f = R/2$}] ++(3.1,0) -| (op.out);
+    % Entrada + a masa y salida
+    \draw (op.+) -- ++(-0.5,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+\end{tikzpicture}
+\end{center}
+
+\begin{equation}
+    V_o = -R_f V_{ref} \left(\frac{b_3}{R} + \frac{b_2}{2R} + \frac{b_1}{4R} + \frac{b_0}{8R}\right) = -\frac{R_f}{R} V_{ref} \sum_{k=0}^{3} \frac{b_k}{2^{3-k}}
+\end{equation}
+\textbf{Limitación práctica:} Para resoluciones altas (p.\,ej. $n = 12$ o $16$ bits), la relación entre la resistencia del LSB ($2^{n-1}R$) y la del MSB ($R$) es enorme, haciendo inviable su fabricación precisa en circuitos integrados.
+
+\subsubsection{2. DAC de Red en Escalera $R\text{--}2R$}
+Resuelve el problema de tolerancias empleando \textbf{únicamente dos valores de resistencia} ($R$ y $2R$). En cada nudo de la escalera la resistencia equivalente vista hacia la izquierda o hacia el nudo inversor es siempre $2R$, dividiendo exactamente por $2$ la contribución de cada bit sucesivo:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.90]
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.6,0) coordinate (n3);
+    \draw (n3) to[R, l_={$R$}] ++(-2.1,0) coordinate (n2)
+               to[R, l_={$R$}] ++(-2.1,0) coordinate (n1)
+               to[R, l_={$R$}] ++(-2.1,0) coordinate (n0);
+    % Resistencia de terminación 2R a masa
+    \draw (n0) to[R, l_={$2R$}] ++(-1.9,0) node[ground] {};
+    % Ramas verticales 2R de los bits
+    \draw (n3) to[R, l={$2R$}] ++(0,-2.0) to[short, -o] ++(0,-0.2) node[below] {$b_3$ (MSB)};
+    \draw (n2) to[R, l={$2R$}] ++(0,-2.0) to[short, -o] ++(0,-0.2) node[below] {$b_2$};
+    \draw (n1) to[R, l={$2R$}] ++(0,-2.0) to[short, -o] ++(0,-0.2) node[below] {$b_1$};
+    \draw (n0) to[R, l={$2R$}] ++(0,-2.0) to[short, -o] ++(0,-0.2) node[below] {$b_0$ (LSB)};
+    % Realimentación
+    \draw (n3) -- ++(0,1.4) to[R, l={$R_f = 2R$}] ++(3.1,0) -| (op.out);
+    \draw (op.+) -- ++(-0.4,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+\end{tikzpicture}
+\end{center}
+
+\begin{equation}
+    \boxed{V_o = -V_{ref} \left(\frac{b_3}{2} + \frac{b_2}{4} + \frac{b_1}{8} + \frac{b_0}{16}\right) = -V_{ref} \sum_{k=0}^{n-1} b_k 2^{k - n}}
+\end{equation}
+
+% ==============================================================================
+% 6.4. COLECCIÓN COMPLETA DE EJERCICIOS RESUELTOS DEL TEMA 6
+% ==============================================================================
+\section{Ejercicios Resueltos Paso a Paso de Amplificadores Operacionales}
+
+\begin{ejercicio}[Ejercicio 1: Amplificador con Fuente Flotante]
+Una fuente de tensión $V_f$ sin conexión directa a tierra se denomina \textbf{fuente flotante}. Este tipo de señal puede amplificarse a través del circuito de la figura, donde las dos resistencias conectadas en serie con la fuente valen $R_1$, la resistencia entre el nodo $A$ ($V^+$) y tierra vale $R_2$, y la resistencia de realimentación entre el nodo $B$ ($V^-$) y la salida $V_o$ también vale $R_2$. Determinar paso a paso la tensión de salida $V_o$ en función de $V_f$ y la ganancia del circuito.
+\tcbline
+\textbf{Esquema Circuital y Malla de Entrada:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    % Nodos B (V-) y A (V+)
+    \draw (op.-) -- ++(-0.6,0) coordinate (vb);
+    \draw (op.+) -- ++(-0.6,0) coordinate (va);
+    \node[above, font=\footnotesize\bfseries, color=fftPrimary] at (vb) {$B\ (V_B)$};
+    \node[below right, font=\footnotesize\bfseries, color=fftPrimary] at (va) {$A\ (V_A)$};
+    % Resistencias R1 hacia la fuente flotante Vf
+    \draw (vb) to[R, l_={$R_1$}, i_={$I$}] ++(-2.2,0) coordinate (topf);
+    \draw (va) to[R, l={$R_1$}, i<={$I$}] ++(-2.2,0) coordinate (botf);
+    \draw (botf) to[V, v={$V_f$}] (topf);
+    % Resistencia R2 de A a tierra
+    \draw (va) to[R, l={$R_2$}, i<={$I$}] ++(0,-1.8) node[ground] {};
+    % Realimentación R2 de B a Vo
+    \draw (vb) -- ++(0,1.35) to[R, l={$R_2$}, i<={$I$}] ++(3.1,0) -| (op.out);
+    % Salida Vo
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Cortocircuito virtual en la malla de la fuente flotante:}
+Como el amplificador operacional tiene realimentación negativa ideal, $I^+ = I^- = 0$ y los potenciales de los nodos $A$ y $B$ son idénticos ($V_A = V_B$).
+Por tanto, entre los nodos $A$ y $B$ la caída de tensión es nula ($V_B - V_A = 0$), cerrando una malla formada por la fuente $V_f$ y las dos resistencias $R_1$ en serie. La corriente $I$ que impulsa la fuente $V_f$ es:
+\begin{equation}
+    V_f = I \cdot R_1 + I \cdot R_1 = 2 R_1 I \implies I = \frac{V_f}{2 R_1}
+\end{equation}
+2) \textbf{Cálculo de la tensión $V_A = V_B$ aplicando la Ley de Ohm en la rama inferior:}
+Como al terminal no inversor no entra corriente ($I^+ = 0$), la corriente $I$ que entra en la fuente flotante por su terminal negativo procede íntegramente desde tierra ($0\ \si{\volt}$) a través de la resistencia $R_2$ inferior:
+\begin{equation}
+    0 - V_A = I \cdot R_2 \implies V_A = -I \cdot R_2 = -\frac{R_2}{2 R_1} V_f = V_B
+\end{equation}
+3) \textbf{Cálculo de la tensión de salida $V_o$ en la rama superior:}
+Como tampoco entra corriente al terminal inversor ($I^- = 0$), la misma corriente $I$ que sale de la fuente por la resistencia $R_1$ superior hacia el nodo $B$ continúa por la resistencia de realimentación $R_2$ hacia la salida $V_o$:
+\begin{equation}
+    V_B - V_o = I \cdot R_2 \implies V_o = V_B - I \cdot R_2 = -\frac{R_2}{2 R_1} V_f - \frac{R_2}{2 R_1} V_f = -\frac{R_2}{R_1} V_f
+\end{equation}
+\begin{equation}
+    \boxed{V_o = -\frac{R_2}{R_1} V_f \qquad \implies \qquad A_v = \frac{V_o}{V_f} = -\frac{R_2}{R_1}}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Ejercicio 2: Dos Amplificadores Operacionales en Cascada (Inversor + Sumador Inversor)]
+En el circuito de dos etapas en cascada de la figura, el primer amplificador operacional recibe una tensión de entrada de $-0{,}6\ \si{\volt}$ a través de una resistencia de $1\ \si{\kilo\ohm}$ y tiene una resistencia de realimentación de $3\ \si{\kilo\ohm}$. Su salida $V_1$ ataca a través de una resistencia de $2\ \si{\kilo\ohm}$ al nodo inversor de un segundo operacional, al cual también se conecta una tensión de $+0{,}5\ \si{\volt}$ mediante una resistencia de $1\ \si{\kilo\ohm}$. La resistencia de realimentación del segundo operacional es de $2\ \si{\kilo\ohm}$. Calcular paso a paso las tensiones $V_1$ y $V_2$.
+\tcbline
+\textbf{Esquema Circuital de las Dos Etapas en Cascada:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.90]
+    % Primer Op-Amp (Inversor)
+    \draw (0,0) node[op amp] (op1) {};
+    \draw (op1.-) -- ++(-0.5,0) coordinate (vn1);
+    \draw (vn1) to[R, l_={$1\,\si{\kilo\ohm}$}] ++(-2.1,0) to[short, -o] ++(-0.2,0) node[left] {$-0{,}6\,\si{\volt}$};
+    \draw (vn1) -- ++(0,1.35) to[R, l={$3\,\si{\kilo\ohm}$}] ++(2.9,0) -| (op1.out);
+    \draw (op1.+) -- ++(-0.4,0) node[ground] {};
+    \draw (op1.out) -- ++(0.5,0) coordinate (v1node);
+    \node[below, font=\footnotesize\bfseries, color=fftPrimary] at (v1node) {$V_1$};
+
+    % Segundo Op-Amp (Sumador Inversor)
+    \draw (5.4,0) node[op amp] (op2) {};
+    \draw (op2.-) -- ++(-0.5,0) coordinate (vn2);
+    % Rama desde V1
+    \draw (v1node) -- ++(0,0.49) to[R, l_={$2\,\si{\kilo\ohm}$}] (vn2);
+    % Rama desde +0.5 V
+    \draw (vn2) -- ++(-0.4, 0.75) to[R, l_={$1\,\si{\kilo\ohm}$}] ++(-1.9,0) to[short, -o] ++(-0.2,0) node[left] {$+0{,}5\,\si{\volt}$};
+    % Realimentación 2 kOhm
+    \draw (vn2) -- ++(0,1.5) to[R, l={$2\,\si{\kilo\ohm}$}] ++(2.9,0) -| (op2.out);
+    \draw (op2.+) -- ++(-0.4,0) node[ground] {};
+    \draw (op2.out) to[short, -o] ++(0.8,0) node[right] {$V_2$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Etapa 1 (Amplificador en configuración inversora):}
+Aplicando la relación del amplificador inversor con $R_{in,1} = 1\ \si{\kilo\ohm}$ y $R_{f,1} = 3\ \si{\kilo\ohm}$:
+\begin{equation}
+    V_1 = -\frac{R_{f,1}}{R_{in,1}} V_i = -\left(\frac{3\ \si{\kilo\ohm}}{1\ \si{\kilo\ohm}}\right) \cdot (-0{,}6\ \si{\volt}) = +1{,}8\ \si{\volt}
+\end{equation}
+2) \textbf{Etapa 2 (Sumador inversor):}
+El segundo operacional suma de forma inversora la tensión $+0{,}5\ \si{\volt}$ (por $1\ \si{\kilo\ohm}$) y la salida de la primera etapa $V_1 = +1{,}8\ \si{\volt}$ (por $2\ \si{\kilo\ohm}$), con resistencia de realimentación $R_F = 2\ \si{\kilo\ohm}$. Aplicando LCK en el nodo inversor del segundo operacional ($V^- = 0\ \si{\volt}$):
+\begin{equation}
+    \frac{0{,}5\ \si{\volt}}{1\ \si{\kilo\ohm}} + \frac{1{,}8\ \si{\volt}}{2\ \si{\kilo\ohm}} = -\frac{V_2}{2\ \si{\kilo\ohm}} \implies \frac{1{,}0 + 1{,}8}{2} = -\frac{V_2}{2}
+\end{equation}
+\begin{equation}
+    \boxed{V_2 = -2\ \si{\kilo\ohm} \left(\frac{0{,}5}{1\ \si{\kilo\ohm}} + \frac{1{,}8}{2\ \si{\kilo\ohm}}\right) = -2 \cdot (0{,}5 + 0{,}9) = -2{,}8\ \si{\volt}}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Ejercicio 3: Dos Operacionales Inversores en Cascada con Realimentación Global $R_f$]
+En el circuito de la figura, una fuente de tensión $v_s$ con resistencia serie $R_s = 1\ \si{\kilo\ohm}$ alimenta el nodo $B$ (de tensión $v_1$). A partir de $v_1$ se conectan en cascada dos etapas inversoras: la primera tiene resistencia de entrada $5\ \si{\kilo\ohm}$ y resistencia de realimentación $9\ \si{\kilo\ohm}$ (salida $v_2$), y la segunda tiene resistencia de entrada $1{,}2\ \si{\kilo\ohm}$ y resistencia de realimentación $6\ \si{\kilo\ohm}$ (salida final $v_o$). Además, existe una resistencia de realimentación global $R_f$ entre la salida final $v_o$ y el nodo $v_1$.
+Hallar las tensiones $v_1, v_2, v_o$ y las corrientes $i_s, i_1, i_f$ en función de $v_s$ para:
+\begin{enumerate}[label=\alph*)]
+    \item $R_f = \infty$ (lazo global abierto).
+    \item $R_f = 40\ \si{\kilo\ohm}$.
+\end{enumerate}
+\tcbline
+\textbf{Esquema Circuital Completo:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.88]
+    % Nodo v1 y resistencia Rs
+    \draw (-5.5, 0.49) to[V, v<={$v_s$}] (-5.5, -1.2) node[ground] {};
+    \draw (-5.5, 0.49) to[R, l={$R_s{=}1\si{\kilo\ohm}$}, i={$i_s$}] (-3.2, 0.49) coordinate (v1);
+    \node[below, font=\footnotesize\bfseries, color=fftPrimary] at (v1) {$B\ (v_1)$};
+
+    % Primer Op-Amp
+    \draw (0,0) node[op amp] (op1) {};
+    \draw (op1.-) -- ++(-0.5,0) coordinate (vn1);
+    \draw (v1) to[R, l_={$5\,\si{\kilo\ohm}$}, i={$i_1$}] (vn1);
+    \draw (vn1) -- ++(0,1.25) to[R, l={$9\,\si{\kilo\ohm}$}] ++(2.9,0) -| (op1.out);
+    \draw (op1.+) -- ++(-0.4,0) node[ground] {};
+    \draw (op1.out) -- ++(0.4,0) coordinate (v2);
+    \node[below, font=\footnotesize\bfseries, color=fftPrimary] at (v2) {$v_2$};
+
+    % Segundo Op-Amp
+    \draw (5.0,-0.49) node[op amp] (op2) {};
+    \draw (op2.-) -- ++(-0.5,0) coordinate (vn2);
+    \draw (v2) to[R, l_={$1{,}2\,\si{\kilo\ohm}$}] (vn2);
+    \draw (vn2) -- ++(0,1.25) to[R, l={$6\,\si{\kilo\ohm}$}] ++(2.9,0) -| (op2.out);
+    \draw (op2.+) -- ++(-0.4,0) node[ground] {};
+    \draw (op2.out) -- ++(0.6,0) coordinate (vo);
+    \draw (vo) to[short, -o] ++(0.6,0) node[right] {$v_o$};
+
+    % Lazo superior Rf desde vo hasta v1
+    \draw (vo) -- ++(0, 2.8) to[R, l_={$R_f$}, i_={$i_f$}] (-3.2, 2.31) -- (v1);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+En primer lugar, como ambos operacionales están en configuración inversora (sus entradas inversoras están a masa virtual $0\ \si{\volt}$), las relaciones entre $v_1$, $v_2$ y $v_o$ son siempre:
+\begin{align}
+    v_2 &= -\frac{9\ \si{\kilo\ohm}}{5\ \si{\kilo\ohm}} v_1 = -1{,}8\, v_1 \\
+    v_o &= -\frac{6\ \si{\kilo\ohm}}{1{,}2\ \si{\kilo\ohm}} v_2 = -5\, v_2 = -5 \left(-\frac{9}{5} v_1\right) = +9\, v_1
+\end{align}
+\textbf{Apartado a) Para $R_f = \infty$:}
+Al estar $R_f$ en circuito abierto, la corriente de realimentación global es nula ($i_f = 0$). Como la entrada inversora del primer operacional está a masa virtual ($0\ \si{\volt}$), las resistencias $R_s = 1\ \si{\kilo\ohm}$ y $5\ \si{\kilo\ohm}$ quedan en serie hacia masa virtual, formando un divisor de tensión:
+\begin{equation}
+    i_1 = i_s = \frac{v_s}{1\ \si{\kilo\ohm} + 5\ \si{\kilo\ohm}} = \frac{v_s}{6\ \si{\kilo\ohm}}, \qquad v_1 = \frac{5\ \si{\kilo\ohm}}{1\ \si{\kilo\ohm} + 5\ \si{\kilo\ohm}} v_s = \frac{5}{6} v_s
+\end{equation}
+Sustituyendo $v_1$ en las ganancias de cada etapa:
+\begin{equation}
+    v_2 = -\frac{9}{5} \left(\frac{5}{6} v_s\right) = -\frac{3}{2} v_s = -1{,}5\, v_s, \qquad v_o = -\frac{6}{1{,}2} v_2 = -5 \left(-\frac{3}{2} v_s\right) = +\frac{15}{2} v_s = +7{,}5\, v_s
+\end{equation}
+\textit{(Nota: en el manuscrito original se arrastró el signo negativo al multiplicar $-\frac{6}{1{,}2} \cdot \left(-\frac{3}{2}\right)$ escribiendo $-7{,}5\,v_s$; algebraicamente el producto de dos etapas inversoras da ganancia positiva $+7{,}5\,v_s$).}\\[6pt]
+\textbf{Apartado b) Para $R_f = 40\ \si{\kilo\ohm}$ ($i_f \ne 0$):}
+Aplicamos LCK en el nodo $B$ ($v_1$), donde $i_s + i_f = i_1$:
+\begin{equation}
+    \frac{v_s - v_1}{1\ \si{\kilo\ohm}} + \frac{v_o - v_1}{40\ \si{\kilo\ohm}} = \frac{v_1 - 0}{5\ \si{\kilo\ohm}}
+\end{equation}
+Multiplicando toda la ecuación por $40\ \si{\kilo\ohm}$:
+\begin{equation}
+    40 (v_s - v_1) + (v_o - v_1) = 8 v_1 \implies 40 v_s - 40 v_1 + v_o - v_1 = 8 v_1
+\end{equation}
+Sustituyendo la relación de las dos etapas en cascada ($v_o = 9 v_1$):
+\begin{equation}
+    40 v_s - 40 v_1 + 9 v_1 - v_1 = 8 v_1 \implies 40 v_s = 40 v_1 \implies \boxed{v_1 = v_s}
+\end{equation}
+Por consiguiente, las demás tensiones e intensidades resultan ser:
+\begin{equation}
+    \boxed{v_2 = -\frac{9}{5} v_s, \qquad v_o = 9 v_s, \qquad i_s = \frac{v_s - v_1}{1\ \si{\kilo\ohm}} = 0, \qquad i_f = i_1 = \frac{v_1}{5\ \si{\kilo\ohm}} = \frac{v_s}{5\ \si{\kilo\ohm}}}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Ejercicio 4: Integrador Inversor con Entrada Sinusoidal]
+En un circuito integrador inversor con Op-Amp ideal se tiene $R = 1\ \si{\kilo\ohm}$, $C = 1\ \si{\micro\farad}$ y una señal de entrada $v_1(t) = \sin(2000t)\ \si{\volt}$. Asumiendo que el condensador parte descargado en el instante inicial, $v_2(0) = 0\ \si{\volt}$, encontrar la expresión temporal de la tensión de salida $v_2(t)$ para $t > 0$.
+\tcbline
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) Por cortocircuito virtual en el integrador inversor ($V^+ = V^- = 0\ \si{\volt}$) e $I^+ = I^- = 0$:
+\begin{equation}
+    i_R(t) = i_C(t) \implies \frac{v_1(t)}{R} = C \frac{d(0 - v_2(t))}{dt} = -C \frac{dv_2(t)}{dt}
+\end{equation}
+2) Integrando entre $0$ y $t$ con $R C = (1 \times 10^3\ \si{\ohm}) \cdot (1 \times 10^{-6}\ \si{\farad}) = 10^{-3}\ \si{\second}$ y $\omega = 2000\ \si{\radian\per\second}$:
+\begin{align}
+    v_2(t) - v_2(0) &= -\frac{1}{R C} \int_0^t \sin(2000\tau)\, d\tau = -\frac{1}{10^{-3}} \left[-\frac{\cos(2000\tau)}{2000}\right]_0^t \\
+    v_2(t) &= \frac{1000}{2000} \left[\cos(2000t) - \cos(0)\right] = \boxed{0{,}5 \left[\cos(2000t) - 1\right]\ \si{\volt}}
+\end{align}
+\end{ejercicio}
+
+\begin{ejercicio}[Ejercicio 5: Comparador con Realimentación Positiva (Ciclo de Histéresis)]
+Analizar el circuito comparador con realimentación positiva de la figura y dibujar su función de transferencia con histéresis. El operacional satura en $+10\ \si{\volt}$ y $-10\ \si{\volt}$, tiene su entrada inversora conectada a masa ($V^- = 0\ \si{\volt}$), la señal $V_i$ se aplica a $V^+$ a través de $R_1 = 24\ \si{\kilo\ohm}$, y la resistencia de realimentación entre $V^+$ y $V_o$ es $R_2 = 48\ \si{\kilo\ohm}$.
+\tcbline
+\textbf{Esquema Circuital y Lazo de Histéresis:}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    % --- Circuito a la izquierda ---
+    \draw (-4.2,0) node[op amp, yscale=-1] (op) {};
+    \draw (op.+) -- ++(-0.5,0) coordinate (vp);
+    \draw (vp) to[R, l_={$R_1{=}24\si{\kilo\ohm}$}] ++(-2.2,0) to[short, -o] ++(-0.2,0) node[left] {$V_i$};
+    \draw (vp) -- ++(0,1.35) to[R, l={$R_2{=}48\si{\kilo\ohm}$}] ++(3.0,0) -| (op.out);
+    \draw (op.-) -- ++(-0.4,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.8,0) node[right] {$V_o$};
+    \node[above, font=\scriptsize] at (-4.2, 0.7) {$+10\si{\volt}$};
+    \node[below, font=\scriptsize] at (-4.2,-0.7) {$-10\si{\volt}$};
+
+    % --- Gráfica de Histéresis a la derecha ---
+    \begin{scope}[xshift=3.4cm]
+        \draw[->, >=stealth, gray] (-2.6,0) -- (2.6,0) node[right, text=black] {$V_i$};
+        \draw[->, >=stealth, gray] (0,-1.8) -- (0,1.8) node[above, text=black] {$V_o$};
+        % Lazo de histéresis
+        \draw[very thick, fftAccent] (-2.3,-1.2) -- (1.0,-1.2) -- (1.0,1.2) -- (2.3,1.2);
+        \draw[very thick, fftPrimary] (2.3,1.2) -- (-1.0,1.2) -- (-1.0,-1.2) -- (-2.3,-1.2);
+        % Flechas de sentido del ciclo
+        \draw[->, >=stealth, thick, fftAccent] (1.0,-0.4) -- (1.0,0.3);
+        \draw[->, >=stealth, thick, fftPrimary] (-1.0,0.4) -- (-1.0,-0.3);
+        % Etiquetas de umbrales y saturación
+        \node[below right, font=\footnotesize] at (1.0,0) {$+5\si{\volt}$};
+        \node[above left, font=\footnotesize] at (-1.0,0) {$-5\si{\volt}$};
+        \node[above left, font=\footnotesize] at (0,1.2) {$+10\si{\volt}$};
+        \node[below right, font=\footnotesize] at (0,-1.2) {$-10\si{\volt}$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Expresión del potencial $V^+$:} Como $I^+ = 0$, la corriente por $R_1$ es igual a la corriente por $R_2$:
+\begin{equation}
+    \frac{V_i - V^+}{24\ \si{\kilo\ohm}} = \frac{V^+ - V_o}{48\ \si{\kilo\ohm}} \implies 2(V_i - V^+) = V^+ - V_o \implies V^+ = \frac{2 V_i + V_o}{3}
+\end{equation}
+2) \textbf{Barrido ascendente (partiendo de $V_i \ll 0$, con $V_o = -10\ \si{\volt}$):}
+El comparador conmutará a $+10\ \si{\volt}$ cuando $V^+$ alcance el potencial de $V^- = 0\ \si{\volt}$:
+\begin{equation}
+    V^+ = \frac{2 V_i - 10}{3} = 0 \implies V_{TH} = +5\ \si{\volt}
+\end{equation}
+Para $V_i > +5\ \si{\volt}$, la salida pasa a $V_o = +10\ \si{\volt}$.\\[4pt]
+3) \textbf{Barrido descendente (regresando desde $V_i \gg 0$, con $V_o = +10\ \si{\volt}$):}
+Ahora $V_o = +10\ \si{\volt}$, por lo que la conmutación de vuelta a $-10\ \si{\volt}$ ocurrirá cuando $V^+ = 0\ \si{\volt}$:
+\begin{equation}
+    V^+ = \frac{2 V_i + 10}{3} = 0 \implies V_{TL} = -5\ \si{\volt}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Ejercicio 6: Conversión de Onda Sinusoidal a Cuadrada y Triangular (Comparador + Integrador)]
+En el circuito de la figura, una señal sinusoidal $v_i(t) = 1\sin(\omega t)\ \si{\volt}$ de frecuencia $f = 100\ \si{\kilo\hertz}$ ataca a un primer operacional conectado como comparador en lazo abierto (con límites de saturación $\pm 12\ \si{\volt}$ y $V^- = 0\ \si{\volt}$), cuya salida $V_A$ alimenta a un integrador inversor con resistencia $R$ y condensador $C = 10\ \si{\nano\farad}$. Sabiendo que en $t = 0$ es $v_o(0) = +1\ \si{\volt}$, calcular el valor de $R$ para que la señal triangular de salida $v_o(t)$ oscile simétricamente entre $+1\ \si{\volt}$ y $-1\ \si{\volt}$.
+\tcbline
+\textbf{Esquema Circuital (Comparador + Integrador):}\\[4pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.92]
+    % Etapa 1: Comparador
+    \draw (0,0) node[op amp] (op1) {};
+    \draw (op1.-) -- ++(-0.4,0) node[ground] {};
+    \draw (op1.+) -- ++(-0.7,0) to[short, -o] ++(-0.2,0) node[left] {$v_i(t)$};
+    \node[above, font=\scriptsize] at (op1.up) {$+12\si{\volt}$};
+    \node[below, font=\scriptsize] at (op1.down) {$-12\si{\volt}$};
+    \draw (op1.out) -- ++(0.5,0) coordinate (va);
+    \node[below, font=\footnotesize\bfseries, color=fftPrimary] at (va) {$V_A$};
+
+    % Etapa 2: Integrador
+    \draw (5.0,-0.49) node[op amp] (op2) {};
+    \draw (op2.-) -- ++(-0.5,0) coordinate (vn2);
+    \draw (va) to[R, l={$R$}] (vn2);
+    \draw (vn2) -- ++(0,1.35) to[C, l={$C{=}10\si{\nano\farad}$}] ++(2.9,0) -| (op2.out);
+    \draw (op2.+) -- ++(-0.4,0) node[ground] {};
+    \draw (op2.out) to[short, -o] ++(0.8,0) node[right] {$v_o(t)$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución Paso a Paso:}\\[4pt]
+1) \textbf{Periodo y salida del comparador ($V_A$):}
+El periodo de la señal de entrada es $T = \frac{1}{f} = \frac{1}{100\ \si{\kilo\hertz}} = 10\ \si{\micro\second}$, luego cada semiperiodo dura $T/2 = 5\ \si{\micro\second}$.
+Durante el primer semiperiodo $t \in (0, T/2)$, es $v_i(t) > 0\ \si{\volt}$, por lo que el comparador satura positivamente entregando una tensión constante $V_A = +12\ \si{\volt}$ (en el segundo semiperiodo entrega $V_A = -12\ \si{\volt}$, formando una onda cuadrada de $\pm 12\ \si{\volt}$).\\[4pt]
+2) \textbf{Integración en el semiperiodo $[0, T/2]$:}
+La ecuación del integrador inversor es:
+\begin{equation}
+    v_o(T/2) = -\frac{1}{R C} \int_0^{T/2} V_A\, dt + v_o(0)
+\end{equation}
+Para que $v_o(t)$ descienda linealmente desde $v_o(0) = +1\ \si{\volt}$ hasta $v_o(T/2) = -1\ \si{\volt}$ en el intervalo $T/2 = 5\ \si{\micro\second}$:
+\begin{equation}
+    -1\ \si{\volt} - 1\ \si{\volt} = -\frac{1}{R C} \cdot 12\ \si{\volt} \cdot \left(\frac{T}{2}\right) \implies -2 = -\frac{12 \cdot 5\ \si{\micro\second}}{R \cdot 10\ \si{\nano\farad}}
+\end{equation}
+\begin{equation}
+    \boxed{R = \frac{12\ \si{\volt} \cdot 5 \times 10^{-6}\ \si{\second}}{2\ \si{\volt} \cdot 10 \times 10^{-9}\ \si{\farad}} = 3 \times 10^3\ \si{\ohm} = 3\ \si{\kilo\ohm}}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Ejercicio 7: Sumador-Inversor con Chequeo de Saturación --- Examen UGR]
+Un amplificador operacional ideal está alimentado simétricamente con $\pm V_{CC} = \pm 15\ \si{\volt}$ ($V_{sat} = \pm 14\ \si{\volt}$). Dispone de una resistencia de realimentación $R_f = 20\ \si{\kilo\ohm}$ conectada a la entrada inversora, mientras la entrada no inversora está conectada a masa ($V^+ = 0\ \si{\volt}$). Al nudo inversor se aplican dos tensiones mediante sendas resistencias: $V_1 = +2\ \si{\volt}$ a través de $R_1 = 10\ \si{\kilo\ohm}$, y $V_2 = -3\ \si{\volt}$ a través de $R_2 = 5\ \si{\kilo\ohm}$.
+\begin{enumerate}[label=\alph*)]
+    \item Calcular la tensión de salida $V_o$.
+    \item Si se modifica la señal 2 pasando a $V_2 = -6\ \si{\volt}$, determinar la nueva tensión de salida indicando si el operacional satura.
+\end{enumerate}
 \tcbline
 \textbf{Esquema Circuital del Sumador Inversor:}\\[4pt]
 \begin{center}
-\begin{tikzpicture}[scale=1.0]
-    \draw (0,1) node[op amp] (op) {};
-    \draw (op.+) -- (-1,0.5) node[ground] {};
-    \draw (op.-) -- (-1,1.5);
-    \draw (-3,2.2) node[left] {$V_1{=}+2\si{\volt}$} to[R, l=$R_1{=}10\si{\kilo\ohm}$] (-1,1.5);
-    \draw (-3,0.8) node[left] {$V_2$} to[R, l=$R_2{=}5\si{\kilo\ohm}$] (-1,1.5);
-    \draw (-1,1.5) -- (-1,2.5) to[R, l=$R_f{=}20\si{\kilo\ohm}$] (1,2.5) -- (1,1) -- (op.out);
-    \draw (op.out) -- (2,1) node[right] {$V_o$};
-    \node[above] at (op.up) {$+15\si{\volt}$};
-    \node[below] at (op.down) {$-15\si{\volt}$};
+\begin{tikzpicture}[scale=0.95]
+    \draw (0,0) node[op amp] (op) {};
+    \draw (op.-) -- ++(-0.6,0) coordinate (vn);
+    \draw (vn) -- ++(-0.4, 0.55) to[R, l_={$R_1{=}10\si{\kilo\ohm}$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$V_1{=}+2\si{\volt}$};
+    \draw (vn) -- ++(-0.4,-0.55) to[R, l={$R_2{=}5\si{\kilo\ohm}$}] ++(-2.4,0) to[short, -o] ++(-0.2,0) node[left] {$V_2$};
+    \draw (vn) -- ++(0,1.45) to[R, l={$R_f{=}20\si{\kilo\ohm}$}] ++(3.1,0) -| (op.out);
+    \draw (op.+) -- ++(-0.5,0) node[ground] {};
+    \draw (op.out) to[short, -o] ++(0.9,0) node[right] {$V_o$};
+    \node[above, font=\scriptsize] at (op.up) {$+15\si{\volt}$};
+    \node[below, font=\scriptsize] at (op.down) {$-15\si{\volt}$};
 \end{tikzpicture}
 \end{center}
 
 \textbf{Solución Paso a Paso:}\\[4pt]
 a) Con $V_1 = +2\ \si{\volt}$ y $V_2 = -3\ \si{\volt}$:
 \begin{equation}
-    V_o = -20 \left( \frac{2}{10} + \frac{-3}{5} \right) = -20 (0{,}20 - 0{,}60) = -20 (-0{,}40) = +8{,}0\ \si{\volt}
+    V_o = -R_f \left( \frac{V_1}{R_1} + \frac{V_2}{R_2} \right) = -20 \left( \frac{2}{10} + \frac{-3}{5} \right) = -20 (0{,}20 - 0{,}60) = -20 (-0{,}40) = +8{,}0\ \si{\volt}
 \end{equation}
 Como $|V_o| = 8{,}0\ \si{\volt} < V_{sat} = 14\ \si{\volt}$, trabaja en régimen lineal sin saturación.\\[4pt]
 b) Con $V_2 = -6\ \si{\volt}$:
 \begin{equation}
-    V_{o,calculado} = -20 \left( \frac{2}{10} + \frac{-6}{5} \right) = -20 (0{,}20 - 1{,}20) = -20 (-1{,}00) = +20{,}0\ \si{\volt}
+    V_{o,\text{calculado}} = -20 \left( \frac{2}{10} + \frac{-6}{5} \right) = -20 (0{,}20 - 1{,}20) = -20 (-1{,}00) = +20{,}0\ \si{\volt}
 \end{equation}
-Como $20\ \si{\volt} > V_{sat} = +14\ \si{\volt}$, la salida satura en su límite físico positivo:
+Como $+20{,}0\ \si{\volt} > +V_{sat} = +14\ \si{\volt}$, el amplificador entra en \textbf{saturación positiva}:
 \begin{equation}
-    V_o = +V_{sat} = +14{,}0\ \si{\volt}
+    \boxed{V_o = +V_{sat} = +14{,}0\ \si{\volt}}
 \end{equation}
 \end{ejercicio}
 
-\begin{ejercicio}[Integrador Inversor ante Entrada Escalonada]
-Un integrador inversor ideal dispone de $R = 50\ \si{\kilo\ohm}$, $C = 2\ \si{\micro\farad}$ y $V_{sat} = \pm 12\ \si{\volt}$.
-En $t = 0$ se aplica una tensión escalón constante $V_i = +2\ \si{\volt}$ con $V_o(0) = 0$.
-Hallar $V_o(t)$, la pendiente de la rampa y el tiempo hasta saturar.
+\begin{ejercicio}[Ejercicio 8: Integrador Inversor ante Entrada Escalonada]
+Un circuito integrador inversor con Op-Amp ideal dispone de $R = 50\ \si{\kilo\ohm}$ y $C = 2\ \si{\micro\farad}$, con tensiones de saturación $\pm 12\ \si{\volt}$. El condensador está inicialmente descargado ($V_o(0) = 0\ \si{\volt}$). En $t = 0$ se aplica una tensión escalón constante $V_i = +2\ \si{\volt}$.
+\begin{enumerate}[label=\alph*)]
+    \item Hallar la expresión temporal de $V_o(t)$ en régimen lineal y la pendiente de la rampa.
+    \item Determinar el tiempo que tarda la salida en alcanzar la saturación negativa.
+\end{enumerate}
 \tcbline
 \textbf{Solución Paso a Paso:}\\[4pt]
-1) Constante de tiempo integradora:
+a) La constante de tiempo integradora es $R C = (50 \times 10^3\ \si{\ohm}) \times (2 \times 10^{-6}\ \si{\farad}) = 0{,}10\ \si{\second} = 100\ \si{\milli\second}$.
+Para una entrada constante $V_i = +2\ \si{\volt}$:
 \begin{equation}
-    RC = (50 \times 10^3\ \si{\ohm}) \times (2 \times 10^{-6}\ \si{\farad}) = 0{,}10\ \si{\second} = 100\ \si{\milli\second}
+    V_o(t) = -\frac{1}{R C} \int_0^t V_i\, d\tau + V_o(0) = -\frac{V_i}{R C} t = -\frac{2}{0{,}10} t = -20 t\ \si{\volt} \qquad \left(\frac{dV_o}{dt} = -20\ \si{\volt\per\second}\right)
 \end{equation}
-2) Salida lineal temporal:
+b) Alcanza la saturación negativa cuando $V_o(t_{sat}) = -V_{sat} = -12\ \si{\volt}$:
 \begin{equation}
-    V_o(t) = -\frac{V_i}{RC} t = -\frac{2}{0{,}10} t = -20 t\ \si{\volt} \quad (\text{pendiente: } -20\ \si{\volt\per\second})
-\end{equation}
-3) Tiempo de saturación en $-V_{sat} = -12\ \si{\volt}$:
-\begin{equation}
-    -20 t_{sat} = -12 \implies t_{sat} = \frac{12}{20} = 0{,}60\ \si{\second} = 600\ \si{\milli\second}
+    -20 t_{sat} = -12 \implies \boxed{t_{sat} = \frac{12}{20} = 0{,}60\ \si{\second} = 600\ \si{\milli\second}}
 \end{equation}
 \end{ejercicio}
