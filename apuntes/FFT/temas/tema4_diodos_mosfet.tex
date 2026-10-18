@@ -1,0 +1,339 @@
+\chapter{Dispositivos Electrónicos: Diodos y Transistores MOSFET}
+\label{cap:tema4}
+
+\cuadrofuentes{
+    \textbf{Asignatura:} Fundamentos Físicos y Tecnológicos (1.º Grado en Ingeniería Informática, UGR).\\[2pt]
+    \textbf{Profesor:} Pedro Cartujo (Departamento de Electrónica y Tecnología de Computadores).\\[2pt]
+    \textbf{Bibliografía de Referencia:} Sedra, A. S., Smith, K. C., \textit{Circuitos Microelectrónicos}, Oxford University Press; Boylestad, R. L., Nashelsky, L., \textit{Electrónica: Teoría de Circuitos y Dispositivos Electrónicos}, Pearson.
+}
+
+% ==============================================================================
+% 4.1. FÍSICA DE SEMICONDUCTORES Y UNIÓN PN
+% ==============================================================================
+\section{Física de Semiconductores y la Unión PN}
+
+Los dispositivos electrónicos modernos basan su funcionamiento en las propiedades de conducción controlada de los materiales semiconductores (principalmente el Silicio, Si).
+
+\subsection{Semiconductores Intrínsecos y Dopaje Extrínseco}
+En el silicio cristalino puro (intrínseco), cada átomo forma cuatro enlaces covalentes tetraédricos compartiendo electrones de valencia. A temperatura ambiente ($T = 300\ \si{\kelvin}$), la energía térmica rompe algunos enlaces, liberando electrones de conducción y dejando huecos (ausencias de electrón con carga efectiva $+e$):
+\begin{equation}
+    n = p = n_i \approx 1{,}5 \times 10^{10}\ \si{\centi\meter^{-3}} \quad (\text{en Si a } 300\ \si{\kelvin})
+\end{equation}
+Para aumentar la conductividad de forma controlada, se introduce una pequeña concentración de impurezas (proceso de \textbf{dopaje}):
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Semiconductor Tipo N (Dopaje con Donadores):} Se añaden impurezas pentavalentes (Fósforo, Arsénico). Cada átomo donador aporta un electrón libre sin crear hueco.
+    \begin{equation}
+        n \approx N_D \gg n_i, \qquad p = \frac{n_i^2}{N_D} \ll n_i
+    \end{equation}
+    Los electrones son los portadores \textbf{mayoritarios} y los huecos son los \textbf{minoritarios}.
+    \item \textbf{Semiconductor Tipo P (Dopaje con Aceptores):} Se añaden impurezas trivalentes (Boro, Galio). Cada átomo aceptor atrapa un electrón, creando un hueco libre en la banda de valencia.
+    \begin{equation}
+        p \approx N_A \gg n_i, \qquad n = \frac{n_i^2}{N_A} \ll n_i
+    \end{equation}
+    Los huecos son los portadores \textbf{mayoritarios} y los electrones son los \textbf{minoritarios}.
+    \item \textbf{Ley de Acción de Masas en Equilibrio Térmico:}
+    \begin{equation}
+        n \cdot p = n_i^2(T)
+    \end{equation}
+\end{itemize}
+
+\subsection{La Unión PN en Equilibrio Térmico}
+Al poner en contacto íntimo una región tipo P y una región tipo N:
+\begin{enumerate}[leftmargin=*]
+    \item Los electrones mayoritarios de la zona N difunden hacia la zona P, y los huecos de la zona P difunden hacia la zona N.
+    \item Cerca de la interfase, los portadores se recombinan, dejando al descubierto una zona desprovista de cargas móviles denominada \textbf{Zona de Carga Espacial (ZCE) o Región de Vaciamiento / Deplexión}.
+    \item En la ZCE quedan iones fijos inmóviles no neutralizados: iones positivos donadores ($N_D^+$) en el lado N y negativos aceptores ($N_A^-$) en el lado P.
+    \item Estos iones generan un \textbf{campo eléctrico interno inducido} dirigido desde la zona N hacia la zona P. Este campo frena la difusión de mayoritarios e impulsa una corriente de arrastre de minoritarios en sentido opuesto.
+    \item En equilibrio térmico sin polarización exterior, ambas corrientes se igualan exactamente ($\sum I = 0$) y se establece una \textbf{barrera de potencial interna} ($V_{bi}$ o $V_0$):
+    \begin{equation}
+        V_{bi} = V_T \ln\left(\frac{N_A N_D}{n_i^2}\right) \approx 0{,}65 - 0{,}75\ \si{\volt} \quad (\text{para Silicio a } 300\ \si{\kelvin})
+    \end{equation}
+    donde $V_T = \frac{k_B T}{q} \approx 25{,}86\ \si{\milli\volt} \approx 26\ \si{\milli\volt}$ es la tensión térmica.
+\end{enumerate}
+
+% ==============================================================================
+% 4.2. EL DIODO DE UNIÓN Y SUS MODELOS
+% ==============================================================================
+\section{El Diodo de Unión PN: Polarización y Modelos}
+
+Un diodo semiconductor es un dispositivo de dos terminales (Ánodo conectado a la zona P, Cátodo conectado a la zona N) que permite el paso de corriente prácticamente en un solo sentido.
+
+\subsection{Comportamiento bajo Polarización Exterior}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Polarización Directa ($V_D = V_{Anodo} - V_{Catodo} > 0$):} El borne positivo externo se conecta al Ánodo y el negativo al Cátodo. La tensión exterior reduce la barrera interna de potencial ($V_{neta} = V_{bi} - V_D$) y estrecha la ZCE, permitiendo una inyección exponencial masiva de portadores mayoritarios a través de la unión.
+    \item \textbf{Polarización Inversa ($V_D < 0$):} El borne positivo se conecta al Cátodo y el negativo al Ánodo. La tensión exterior refuerza la barrera ($V_{neta} = V_{bi} + |V_D|$) y ensancha la ZCE, anulando la corriente de mayoritarios. Únicamente fluye una minúscula corriente de portadores minoritarios denominada \textbf{corriente de saturación inversa} ($I_S \approx 10^{-14}\ \si{\ampere}$).
+\end{itemize}
+
+\begin{ley}[Ecuación Analítica de Shockley del Diodo]
+La relación corriente-tensión ($I-V$) no lineal de un diodo ideal de unión PN es:
+\begin{equation}
+    I_D = I_S \left( e^{\frac{V_D}{n V_T}} - 1 \right)
+\end{equation}
+donde:
+\begin{itemize}[leftmargin=*]
+    \item $I_S$ es la corriente de saturación inversa ($[\si{\ampere}]$).
+    \item $n$ es el factor de emisión o idealidad ($n \approx 1$ para difusión pura; $n \approx 1 - 2$ en silicio).
+    \item $V_T = \frac{k_B T}{q} \approx 26\ \si{\milli\volt}$ a temperatura ambiente.
+\end{itemize}
+\end{ley}
+
+\subsection{Modelos de Análisis Circuital del Diodo}
+Dado el carácter exponencial no lineal de la ecuación de Shockley, para resolver circuitos analíticamente se emplean modelos lineales por tramos:
+
+\begin{metodo}[Los 3 Modelos Lineales del Diodo]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Modelo 1: Diodo Ideal (Interruptor Perfecto):}
+    \begin{itemize}
+        \item \textbf{Estado ON (Conducción):} Si $I_D > 0 \implies V_D = 0$ (sustituir por un \textbf{cortocircuito}).
+        \item \textbf{Estado OFF (Bloqueo):} Si $V_D \le 0 \implies I_D = 0$ (sustituir por un \textbf{circuito abierto}).
+    \end{itemize}
+    \item \textbf{Modelo 2: Caída de Tensión Constante ($V_\gamma$):} (Es el modelo estándar de la UGR para exámenes).
+    \begin{itemize}
+        \item \textbf{Estado ON (Conducción):} Si $I_D > 0 \implies V_D = V_\gamma \approx 0{,}7\ \si{\volt}$ para Silicio ($0{,}3\ \si{\volt}$ para Germanio). Se sustituye por una \textbf{fuente de tensión independiente de $0{,}7\ \si{\volt}$} orientada con el positivo en el ánodo.
+        \item \textbf{Estado OFF (Bloqueo):} Si $V_D \le V_\gamma \implies I_D = 0$ (sustituir por un \textbf{circuito abierto}).
+    \end{itemize}
+    \item \textbf{Modelo 3: Lineal por Tramos con Resistencia Dinámica ($V_\gamma + r_d$):}
+    \begin{itemize}
+        \item \textbf{Estado ON:} Se añade en serie una pequeña resistencia interna $r_d = \Delta V_D / \Delta I_D$ ($r_d \approx 10 - 50\ \si{\ohm}$):
+        \begin{equation}
+            V_D = V_\gamma + r_d I_D \quad (\text{para } I_D > 0)
+        \end{equation}
+        \item \textbf{Estado OFF:} $I_D = 0$ para $V_D \le V_\gamma$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{aviso}[Metodología de Hipótesis y Comprobación en Circuitos con Diodos]
+Para resolver circuitos con uno o varios diodos:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Paso 1 (Suposición):} Asignar a priori un estado lógico (ON o OFF) a cada diodo.
+    \item \textbf{Paso 2 (Sustitución):} Reemplazar cada diodo según su modelo correspondiente (batería de $0{,}7\ \si{\volt}$ para ON; circuito abierto para OFF).
+    \item \textbf{Paso 3 (Resolución):} Resolver el circuito resultante aplicando Kirchhoff / Nudos / Mallas para calcular $I_D$ en los diodos supuestos ON y $V_D$ en los diodos supuestos OFF.
+    \item \textbf{Paso 4 (Verificación Estricta):}
+    \begin{itemize}
+        \item Para los diodos supuestos \textbf{ON}: la corriente calculada debe ser estrictamente positiva ($I_D > 0$).
+        \item Para los diodos supuestos \textbf{OFF}: la caída de tensión calculada debe ser menor que el umbral ($V_D \le V_\gamma$).
+    \end{itemize}
+    Si alguna comprobación falla, la hipótesis es errónea: se descarta y se ensaya una nueva combinación.
+\end{enumerate}
+\end{aviso}
+
+\subsection{Aplicaciones: Circuitos Rectificadores y Filtros}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Rectificador de Media Onda:} Conduce únicamente en el semiciclo positivo de la señal de entrada sinusoidal $v_i(t) = V_m \sin(\omega t)$.
+    \begin{equation}
+        V_{out,max} = V_m - V_\gamma, \qquad V_{dc,medio} = \frac{V_m - V_\gamma}{\pi}
+    \end{equation}
+    \item \textbf{Rectificador de Onda Completa en Puente (Puente de Graetz):} Formado por cuatro diodos. En el semiciclo positivo conducen dos diodos en serie ($D_1$ y $D_2$), y en el negativo los otros dos ($D_3$ y $D_4$). La corriente en la carga siempre fluye en el mismo sentido:
+    \begin{equation}
+        V_{out,max} = V_m - 2V_\gamma, \qquad V_{dc,medio} = \frac{2(V_m - 2V_\gamma)}{\pi}
+    \end{equation}
+    \item \textbf{Filtrado por Condensador en Paralelo con la Carga ($R_L$):} Durante el pico de tensión el condensador se carga a $V_{max}$; cuando la tensión de entrada cae por debajo, los diodos se apagan y el condensador se descarga lentamente a través de $R_L$ con constante $\tau = R_L C \gg T$. La tensión de rizado pico a pico $V_r$ es:
+    \begin{equation}
+        V_r \approx \frac{V_{max}}{f_{rizado} R_L C} = \frac{I_{dc}}{f_{rizado} C}
+    \end{equation}
+    Para onda completa, $f_{rizado} = 2f_{red} = 100\ \si{\hertz}$ en España.
+\end{itemize}
+
+% ==============================================================================
+% 4.3. EL TRANSISTOR MOSFET
+% ==============================================================================
+\section{El Transistor MOSFET (Estructura, Modos y Polarización)}
+
+El transistor de efecto de campo metal-óxido-semiconductor (MOSFET) es el componente esencial de la electrónica digital moderna (microprocesadores, memorias) y de la amplificación analógica integrada.
+
+\subsection{Estructura Física y Terminales}
+Un MOSFET dispone de cuatro terminales físicos:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Drenador (Drain, D):} Por donde salen los portadores del canal.
+    \item \textbf{Fuente (Source, S):} Por donde entran los portadores al canal.
+    \item \textbf{Puerta (Gate, G):} Terminal de control capacitivo. Está eléctricamente aislada del silicio mediante una capa ultradelgada de dióxido de silicio ($SiO_2$, óxido de puerta de espesor $t_{ox}$).
+    \item \textbf{Sustrato (Bulk / Body, B):} Cuerpo semiconductor, generalmente conectado a la fuente ($V_{SB} = 0$).
+\end{itemize}
+
+\begin{aviso}[Aislamiento Eléctrico de la Puerta]
+Debido a la barrera aislante perfecta del óxido de silicio, en corriente continua \textbf{la corriente de puerta es rigurosamente nula}:
+\begin{equation}
+    I_G = 0 \implies I_D = I_S
+\end{equation}
+El MOSFET es un dispositivo controlado estrictamente por tensión (consume potencia estática nula en la puerta).
+\end{aviso}
+
+\subsection{Tipos de MOSFET}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{NMOS (Canal N):} Sustrato tipo P con pozos $N^+$ fuertemente dopados para Fuente y Drenador. Los portadores son electrones (mayor movilidad $\mu_n$). Requiere tensiones positivas $V_{GS} > 0$ y $V_{DS} > 0$.
+    \item \textbf{PMOS (Canal P):} Sustrato tipo N con pozos $P^+$ para Fuente y Drenador. Los portadores son huecos (menor movilidad $\mu_p \approx 0{,}4 \mu_n$).
+    \item \textbf{Enriquecimiento / Acumulación (\textit{Enhancement}):} No existe canal conductor a $V_{GS} = 0$ (normalmente abierto). Hay que aplicar tensión en la puerta para crear el canal por inversión. Tensión umbral positiva en NMOS: $V_{th} > 0$.
+    \item \textbf{Deplexión / Vaciamiento (\textit{Depletion}):} Ya existe canal físico conductor implantado de fábrica para $V_{GS} = 0$ (normalmente cerrado). Tensión umbral negativa en NMOS: $V_{th} < 0$.
+\end{itemize}
+
+\subsection{Modos de Operación y Ecuaciones del Transistor NMOS de Enriquecimiento}
+Definimos los parámetros tecnológicos característicos del transistor:
+\begin{equation}
+    C_{ox} = \frac{\varepsilon_{ox}}{t_{ox}} \quad \left[\si{\farad\per\meter\squared}\right], \qquad k_n' = \mu_n C_{ox} \quad \left[\si{\ampere\per\volt\squared}\right], \qquad k_n = k_n' \frac{W}{L} = \mu_n C_{ox} \frac{W}{L}
+\end{equation}
+donde $W$ es el ancho del canal y $L$ su longitud geométrica.
+La tensión de sobremarcha (\textit{overdrive}) es:
+\begin{equation}
+    V_{ov} = V_{GS} - V_{th}
+\end{equation}
+
+\begin{ley}[Ecuaciones Constitutivas del NMOS de Enriquecimiento]
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{1. Región de Corte (Cutoff):}
+    \begin{equation}
+        \text{Condición: } V_{GS} < V_{th} \implies I_D = 0
+    \end{equation}
+    No se ha formado canal de inversión de electrones; la unión Drenador-Sustrato está bloqueada. El transistor actúa como un circuito abierto entre Drenador y Fuente.
+    
+    \item \textbf{2. Región Óhmica / Lineal / Tríodo:}
+    \begin{equation}
+        \text{Condiciones: } V_{GS} \ge V_{th} \quad \text{y} \quad V_{DS} < V_{GS} - V_{th}
+    \end{equation}
+    Existe un canal continuo de electrones desde la fuente hasta el drenador. La corriente viene dada por:
+    \begin{equation}
+        I_D = k_n \left[ (V_{GS} - V_{th}) V_{DS} - \frac{1}{2} V_{DS}^2 \right]
+    \end{equation}
+    Para caídas de drenador muy pequeñas ($V_{DS} \ll 2(V_{GS} - V_{th})$), el término cuadrático es despreciable y el MOSFET se comporta como una \textbf{resistencia lineal controlada por tensión}:
+    \begin{equation}
+        I_D \approx k_n (V_{GS} - V_{th}) V_{DS} \implies R_{DS} = \frac{V_{DS}}{I_D} = \frac{1}{k_n (V_{GS} - V_{th})}
+    \end{equation}
+    
+    \item \textbf{3. Región de Saturación (Activa para Amplificación):}
+    \begin{equation}
+        \text{Condiciones: } V_{GS} \ge V_{th} \quad \text{y} \quad V_{DS} \ge V_{GS} - V_{th}
+    \end{equation}
+    En el borde del drenador la diferencia de potencial local cae a $V_{GD} = V_{GS} - V_{DS} \le V_{th}$, lo que provoca el \textbf{estrangulamiento del canal} (\textit{pinch-off}). Los electrones son absorbidos por el fuerte campo eléctrico del drenador. La corriente se satura y se vuelve prácticamente independiente de $V_{DS}$:
+    \begin{equation}
+        I_D = \frac{1}{2} k_n (V_{GS} - V_{th})^2 \left( 1 + \lambda V_{DS} \right)
+    \end{equation}
+    donde $\lambda$ es el parámetro de modulación de longitud de canal (habitualmente se asume $\lambda = 0$ salvo indicación contraria).
+\end{enumerate}
+\end{ley}
+
+\subsection{Modos de Operación del Transistor PMOS}
+En los transistores PMOS las polaridades se invierten y se toma la Fuente (S) como terminal de potencial más elevado:
+\begin{itemize}[leftmargin=*]
+    \item Tensión de control: $V_{SG} = V_S - V_G \ge |V_{thp}|$.
+    \item Tensión drenador-fuente: $V_{SD} = V_S - V_D \ge 0$.
+    \item \textbf{Corte:} $V_{SG} < |V_{thp}| \implies I_D = 0$.
+    \item \textbf{Tríodo:} $V_{SG} \ge |V_{thp}|$ y $V_{SD} < V_{SG} - |V_{thp}|$:
+    \begin{equation}
+        I_D = k_p \left[ (V_{SG} - |V_{thp}|) V_{SD} - \frac{1}{2} V_{SD}^2 \right]
+    \end{equation}
+    \item \textbf{Saturación:} $V_{SG} \ge |V_{thp}|$ y $V_{SD} \ge V_{SG} - |V_{thp}|$:
+    \begin{equation}
+        I_D = \frac{1}{2} k_p (V_{SG} - |V_{thp}|)^2
+    \end{equation}
+\end{itemize}
+
+% ==============================================================================
+% 4.4. EJERCICIOS RESUELTOS DE EXAMEN
+% ==============================================================================
+\section{Ejercicios Resueltos de Exámenes de Diodos y MOSFET}
+
+\begin{ejercicio}[Circuito con Diodos y Análisis de Estados --- Examen Parcial 2 FFT]
+Determinar el estado de conducción (ON/OFF), la corriente $I$ y las caídas de tensión en el circuito de la figura, empleando el segundo modelo lineal con $V_\gamma = 0{,}7\ \si{\volt}$.
+Una fuente de $V_1 = 10\ \si{\volt}$ alimenta en el nudo $A$ dos ramas paralelas:
+\begin{itemize}[leftmargin=*]
+    \item Rama 1: Diodo $D_1$ (ánodo hacia $A$, cátodo hacia una resistencia $R_1 = 1\ \si{\kilo\ohm}$ conectada a masa).
+    \item Rama 2: Diodo $D_2$ (ánodo hacia $A$, cátodo conectado a una fuente continua en oposición de $V_2 = 4\ \si{\volt}$ en serie con una resistencia $R_2 = 2\ \si{\kilo\ohm}$ conectada a masa).
+\end{itemize}
+\tcbline
+\textbf{Solución:}\\[4pt]
+El potencial en el nudo $A$ común a ambos ánodos es $V_A = 10\ \si{\volt}$.
+Analizamos las tensiones en los cátodos antes de que conduzcan:
+\begin{itemize}[leftmargin=*]
+    \item En la rama 1, sin corriente, el cátodo de $D_1$ está a $0\ \si{\volt}$. Como $V_A - V_{K1} = 10 - 0 = 10\ \si{\volt} > 0{,}7\ \si{\volt}$, $D_1$ intentará conducir.
+    \item En la rama 2, el cátodo de $D_2$ está fijado a $4\ \si{\volt}$ por la fuente $V_2$. Como $V_A - V_{K2} = 10 - 4 = 6\ \si{\volt} > 0{,}7\ \si{\volt}$, $D_2$ también tiene polarización directa favorable.
+\end{itemize}
+\textbf{Hipótesis:} Ambos diodos conducen ($D_1$ ON y $D_2$ ON).
+Sustituimos $D_1$ y $D_2$ por baterías de $V_\gamma = 0{,}7\ \si{\volt}$ orientadas con el polo positivo en el ánodo.
+1) Corriente por la Rama 1 ($I_{D1}$):
+\begin{equation}
+    V_{K1} = V_A - V_\gamma = 10 - 0{,}7 = 9{,}3\ \si{\volt}
+\end{equation}
+\begin{equation}
+    I_{D1} = \frac{V_{K1} - 0}{R_1} = \frac{9{,}3\ \si{\volt}}{1\ \si{\kilo\ohm}} = 9{,}3\ \si{\milli\ampere}
+\end{equation}
+2) Corriente por la Rama 2 ($I_{D2}$):
+\begin{equation}
+    V_{K2} = V_A - V_\gamma = 10 - 0{,}7 = 9{,}3\ \si{\volt}
+\end{equation}
+La tensión sobre la resistencia $R_2$ es la diferencia entre $V_{K2}$ y la fuente $V_2$:
+\begin{equation}
+    I_{D2} = \frac{V_{K2} - V_2}{R_2} = \frac{9{,}3 - 4}{2\ \si{\kilo\ohm}} = \frac{5{,}3}{2} = 2{,}65\ \si{\milli\ampere}
+\end{equation}
+\textbf{Verificación:}\\[2pt]
+$I_{D1} = 9{,}3\ \si{\milli\ampere} > 0$ \quad $\implies$ Hipótesis confirmada para $D_1$.\\[2pt]
+$I_{D2} = 2{,}65\ \si{\milli\ampere} > 0$ \quad $\implies$ Hipótesis confirmada para $D_2$.\\[4pt]
+La corriente total suministrada por la fuente principal de $10\ \si{\volt}$ es:
+\begin{equation}
+    I_{total} = I_{D1} + I_{D2} = 9{,}3 + 2{,}65 = 11{,}95\ \si{\milli\ampere}
+\end{equation}
+\end{ejercicio}
+
+\begin{ejercicio}[Punto de Trabajo Q de Transistor NMOS --- Examen UGR]
+En el circuito de polarización de la figura, el transistor NMOS de enriquecimiento tiene parámetros: $V_{th} = 1{,}5\ \si{\volt}$, $k_n = 1\ \si{\milli\ampere\per\volt\squared}$ y $\lambda = 0$.
+La tensión de alimentación es $V_{DD} = 15\ \si{\volt}$. Las resistencias son: divisor de puerta con $R_1 = 10\ \si{\mega\ohm}$ (hacia $V_{DD}$) y $R_2 = 5\ \si{\mega\ohm}$ (hacia masa); resistencia de drenador $R_D = 3\ \si{\kilo\ohm}$ y resistencia de fuente $R_S = 1\ \si{\kilo\ohm}$.
+Hallar el punto de reposo $Q(V_{GS}, I_D, V_{DS})$ y verificar en qué región opera.
+\tcbline
+\textbf{Solución:}\\[4pt]
+1) \textbf{Tensión en la Puerta ($V_G$):}
+Como $I_G = 0$, el divisor de tensión de puerta no tiene carga conectada:
+\begin{equation}
+    V_G = V_{DD} \frac{R_2}{R_1 + R_2} = 15 \times \frac{5}{10 + 5} = 15 \times \frac{5}{15} = 5\ \si{\volt}
+\end{equation}
+2) \textbf{Ecuación de la Malla Puerta-Fuente:}
+La tensión en la fuente es $V_S = I_D R_S = I_D \times (1\ \si{\kilo\ohm})$.
+\begin{equation}
+    V_{GS} = V_G - V_S = 5 - 1 \cdot I_D \quad (\text{con } I_D \text{ en } \si{\milli\ampere})
+\end{equation}
+3) \textbf{Hipótesis de Trabajo: Transistor en Saturación:}
+En saturación:
+\begin{equation}
+    I_D = \frac{1}{2} k_n (V_{GS} - V_{th})^2 = \frac{1}{2} (1) (V_{GS} - 1{,}5)^2 = 0{,}5 (V_{GS} - 1{,}5)^2
+\end{equation}
+Sustituyendo $V_{GS} = 5 - I_D$:
+\begin{equation}
+    I_D = 0{,}5 (5 - I_D - 1{,}5)^2 = 0{,}5 (3{,}5 - I_D)^2
+\end{equation}
+\begin{equation}
+    2 I_D = (3{,}5 - I_D)^2 = 12{,}25 - 7 I_D + I_D^2 \implies I_D^2 - 9 I_D + 12{,}25 = 0
+\end{equation}
+Resolvemos la ecuación de segundo grado:
+\begin{equation}
+    I_D = \frac{9 \pm \sqrt{81 - 4(1)(12{,}25)}}{2} = \frac{9 \pm \sqrt{81 - 49}}{2} = \frac{9 \pm \sqrt{32}}{2} \approx \frac{9 \pm 5{,}657}{2}
+\end{equation}
+Obtenemos dos soluciones matemáticas:
+\begin{itemize}[leftmargin=*]
+    \item $I_{D,1} = \frac{9 + 5{,}657}{2} = 7{,}328\ \si{\milli\ampere} \implies V_{GS} = 5 - 7{,}328 = -2{,}328\ \si{\volt} < V_{th}$ (Incompatible, transistor estaría cortado).
+    \item $I_{D,2} = \frac{9 - 5{,}657}{2} = 1{,}6715\ \si{\milli\ampere} \approx 1{,}67\ \si{\milli\ampere}$.
+\end{itemize}
+Con esta corriente físicamente admisible:
+\begin{equation}
+    V_{GS} = 5 - 1{,}67 = 3{,}33\ \si{\volt} > V_{th} = 1{,}5\ \si{\volt} \quad (\text{conducción confirmada})
+\end{equation}
+4) \textbf{Cálculo de $V_{DS}$ y Verificación de Saturación:}
+La tensión en el drenador es:
+\begin{equation}
+    V_D = V_{DD} - I_D R_D = 15 - (1{,}67 \times 3) = 15 - 5{,}01 = 9{,}99\ \si{\volt}
+\end{equation}
+La tensión en la fuente es:
+\begin{equation}
+    V_S = I_D R_S = 1{,}67 \times 1 = 1{,}67\ \si{\volt}
+\end{equation}
+Por tanto, la tensión drenador-fuente es:
+\begin{equation}
+    V_{DS} = V_D - V_S = 9{,}99 - 1{,}67 = 8{,}32\ \si{\volt}
+\end{equation}
+Comprobamos la condición de saturación:
+\begin{equation}
+    V_{DS,sat} = V_{GS} - V_{th} = 3{,}33 - 1{,}50 = 1{,}83\ \si{\volt}
+\end{equation}
+Como $V_{DS} = 8{,}32\ \si{\volt} \ge 1{,}83\ \si{\volt}$, \textbf{la hipótesis de saturación queda rigurosamente verificada}.\\[4pt]
+\textbf{Punto de Operación $Q$:}
+\begin{equation}
+    Q: \quad I_D = 1{,}67\ \si{\milli\ampere}, \quad V_{GS} = 3{,}33\ \si{\volt}, \quad V_{DS} = 8{,}32\ \si{\volt}
+\end{equation}
+\end{ejercicio}

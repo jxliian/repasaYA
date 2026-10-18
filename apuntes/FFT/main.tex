@@ -1,0 +1,67 @@
+\documentclass[11pt,a4paper,twoside,openright]{report}
+
+% Cargar configuración y estilos visuales
+\input{config/estilo}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.2cm}
+    
+    {\Huge\bfseries\color{fftDarkBlue}\textsf{Fundamentos Físicos y Tecnológicos}}\\[0.6cm]
+    {\Large\textsf{Apuntes Completos de Teoría, Circuitos y Problemas Resueltos}}\\[0.4cm]
+    {\large\textsf{1.º Grado en Ingeniería Informática + Doble Grado DGIIM}}\\[0.2cm]
+    {\normalsize\textsf{Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación}}\\[0.2cm]
+    {\normalsize\textsf{Universidad de Granada (UGR)}}\\[1.2cm]
+    
+    \rule{0.85\textwidth}{1.5pt}\\[1.5cm]
+    
+    \begin{tcolorbox}[
+        colback=fftLightAccent,
+        colframe=fftAccent,
+        width=0.9\textwidth,
+        arc=4pt,
+        halign=center
+    ]
+        \large\textbf{\color{fftDarkBlue}Síntesis Integral del Temario Oficial:}\\[8pt]
+        \normalsize
+        \textbf{Profesor:} Pedro Cartujo y Equipo Docente de Electrónica (UGR)\\[4pt]
+        \begin{itemize}[leftmargin=1.5cm, rightmargin=1.5cm, noitemsep]
+            \item \textbf{Bloque I:} Electromagnetismo (Electrostática, Gauss, Corriente y Magnetismo).
+            \item \textbf{Bloque II:} Análisis de Circuitos en DC (Kirchhoff, Thévenin, Norton y Transitorios RC/RL).
+            \item \textbf{Bloque III:} Análisis de Circuitos en AC (Fasores, Impedancias, Potencia y Filtros).
+            \item \textbf{Bloque IV:} Dispositivos Electrónicos (Semiconductores, Diodos y MOSFETs).
+            \item \textbf{Bloque V:} Fundamentos de Electrónica Digital y Familias CMOS.
+            \item \textbf{Bloque VI:} Amplificadores Operacionales y Conversión A/D--D/A.
+            \item \textbf{Solucionario:} Exámenes Parciales y Problemas de Convocatorias Oficiales.
+        \end{itemize}
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\large\textsf{Plataforma \textbf{repasaYA}}}\\[0.2cm]
+    {\small\textsf{Grado en Ingeniería Informática --- Curso Académico 2024--2025 / 2025--2026}}\\[0.6cm]
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% ÍNDICE GENERAL
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% CAPÍTULOS / TEMAS
+% ------------------------------------------------------------------------------
+\include{temas/tema1_electromagnetismo}
+\include{temas/tema2_circuitos_dc}
+\include{temas/tema3_circuitos_ac}
+\include{temas/tema4_diodos_mosfet}
+\include{temas/tema5_electronica_digital}
+\include{temas/tema6_amplificadores_operacionales}
+\include{temas/tema7_examenes_resueltos}
+
+\end{document}

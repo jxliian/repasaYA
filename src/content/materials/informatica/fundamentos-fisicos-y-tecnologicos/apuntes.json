@@ -1,0 +1,8 @@
+{
+  "subject": "informatica/fundamentos-fisicos-y-tecnologicos",
+  "type": "apuntes",
+  "title": "Apuntes completos de teoría, circuitos y problemas resueltos (67 páginas)",
+  "description": "Síntesis completa del temario oficial: Electromagnetismo, Circuitos DC y AC, Semiconductores, Diodos, Transistores MOSFET, Electrónica Digital CMOS, Amplificadores Operacionales y Exámenes Oficiales resueltos paso a paso.",
+  "order": 1,
+  "pdf": "fft/apuntes-teoria-fft.pdf"
+}

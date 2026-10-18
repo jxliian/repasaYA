@@ -5,9 +5,9 @@ year: 1
 semester: 1
 credits: 6
 icon: "⚛️"
-status: planned
-materials: []
+status: available
+description: "Apuntes completos de teoría, circuitos DC y AC, semiconductores, diodos, MOSFET, puertas CMOS y amplificadores operacionales con problemas de examen resueltos."
+materials: [apuntes]
 ---
 
-<!-- Sin material todavía. Para añadirlo: crea un JSON en
-     src/content/materials/informatica/fundamentos-fisicos-y-tecnologicos/ y abre un PR. -->
+Apuntes completos en PDF y proyecto LaTeX modular (67 páginas) que cubren íntegramente los 6 temas del temario oficial impartido por el profesor Pedro Cartujo en la ETSII de la Universidad de Granada (UGR), junto a la resolución detallada paso a paso de problemas de exámenes parciales y convocatorias oficiales.

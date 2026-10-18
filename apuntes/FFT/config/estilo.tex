@@ -1,0 +1,261 @@
+% ==============================================================================
+% CONFIGURACIÓN Y ESTILO VISUAL — FUNDAMENTOS FÍSICOS Y TECNOLÓGICOS (FFT)
+% Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación
+% Universidad de Granada (UGR) — Plataforma repasaYA
+% ==============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{tikz}
+\usepackage[siunitx,european,cuteinductors]{circuitikz}
+
+% Configuración de márgenes
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.8cm,right=2.8cm,headheight=24pt]{geometry}
+
+% Configuración de siunitx en español
+\sisetup{
+  output-decimal-marker = {,},
+  range-phrase = { a },
+  per-mode = symbol
+}
+\DeclareSIUnit\VAR{VAr}
+\DeclareSIUnit\VA{VA}
+
+% Paleta de colores profesionales para Física y Electrónica
+\definecolor{fftDarkBlue}{RGB}{16, 32, 60}
+\definecolor{fftPrimary}{RGB}{24, 76, 120}
+\definecolor{fftAccent}{RGB}{210, 85, 20}
+\definecolor{fftLightAccent}{RGB}{254, 245, 238}
+\definecolor{fftGreen}{RGB}{28, 130, 65}
+\definecolor{fftLightGreen}{RGB}{240, 253, 244}
+\definecolor{fftOrange}{RGB}{210, 110, 10}
+\definecolor{fftLightOrange}{RGB}{255, 251, 235}
+\definecolor{fftRed}{RGB}{185, 28, 28}
+\definecolor{fftLightRed}{RGB}{254, 242, 242}
+\definecolor{fftGray}{RGB}{246, 248, 250}
+\definecolor{fftBorderGray}{RGB}{215, 222, 232}
+\definecolor{fftTeal}{RGB}{15, 115, 110}
+\definecolor{codeBg}{RGB}{248, 249, 252}
+
+% Hipervínculos
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=fftDarkBlue,
+    citecolor=fftTeal,
+    urlcolor=fftAccent,
+    pdfauthor={repasaYA - UGR},
+    pdftitle={Fundamentos Físicos y Tecnológicos - Apuntes Completos},
+    pdfsubject={Electromagnetismo, Circuitos DC/AC, Semiconductores, Diodos, MOSFET y Operacionales},
+    pdfkeywords={FFT, Electromagnetismo, Circuitos, Kirchhoff, Thévenin, Diodos, MOSFET, CMOS, Op-Amp, UGR}
+}
+
+% Configuración de Encabezados y Pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\footnotesize\textsf{\thepage}}
+\fancyhead[LO]{\footnotesize\textsf{\rightmark}}
+\fancyhead[RE]{\footnotesize\textsf{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Configuración de títulos de capítulos y secciones
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{fftDarkBlue}\sffamily}
+  {\Large\textsf{Tema \thechapter}}{1ex}
+  {\titlerule[1.5pt]\vspace{1ex}\huge}
+  [\vspace{1ex}\titlerule]
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{fftPrimary}\sffamily}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{fftDarkBlue}\sffamily}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{fftAccent}\sffamily}
+  {\thesubsubsection}{1em}{}
+
+% Entorno: Caja de Fuentes y Metadatos al inicio de cada tema
+\newcommand{\cuadrofuentes}[1]{%
+  \begin{tcolorbox}[
+    colback=fftLightAccent,
+    colframe=fftAccent,
+    boxrule=1pt,
+    arc=4pt,
+    left=12pt,
+    right=12pt,
+    top=8pt,
+    bottom=8pt,
+    breakable
+  ]
+    \small
+    \noindent\textbf{\color{fftAccent}\large\textsf{Metadatos del Tema y Fuentes:}}\\[4pt]
+    #1
+  \end{tcolorbox}
+  \vspace{10pt}
+}
+
+% Entorno: Definición
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  colback=fftGray,
+  colframe=fftPrimary,
+  boxrule=1pt,
+  leftrule=4pt,
+  arc=3pt,
+  title=\textbf{\textsf{Definición\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=fftPrimary,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Ley / Teorema Fundamental
+\newtcolorbox{ley}[1][]{
+  enhanced,
+  colback=fftLightAccent,
+  colframe=fftAccent,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Ley / Teorema Fundamental\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=fftAccent,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Ejemplo Explicado
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  colback=fftLightGreen,
+  colframe=fftGreen,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Ejemplo Explicado\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=fftGreen,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Aviso / Ojo Examen
+\newtcolorbox{aviso}[1][]{
+  enhanced,
+  colback=fftLightOrange,
+  colframe=fftOrange,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Importante / Ojo Examen\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=fftOrange,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Método Sistemático de Resolución
+\newtcolorbox{metodo}[1][]{
+  enhanced,
+  colback=codeBg,
+  colframe=fftDarkBlue,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Método de Resolución Sistemática\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=fftDarkBlue,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Ejercicio Resuelto
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  colback=fftGray,
+  colframe=fftTeal,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Ejercicio Resuelto\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=fftTeal,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Configuración de listings
+\lstset{
+  backgroundcolor=\color{codeBg},
+  basicstyle=\ttfamily\footnotesize\color{black},
+  keywordstyle=\bfseries\color{fftPrimary},
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{fftGreen},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  stepnumber=1,
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  frame=none,
+  tabsize=2,
+  captionpos=b,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1
+}
