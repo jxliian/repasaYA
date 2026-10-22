@@ -3,15 +3,15 @@
 
 \cuadrofuentes{
     \textbf{Fuentes de referencia cotejadas:}\\
-    $\bullet$ \textbf{Relación Oficial de Problemas. Tema 2 (15/10/2026)} (Manuel I. Capel Tuñón, Dpto. de Lenguajes y Sistemas Informáticos, Universidad de Granada).\\
-    $\bullet$ \textbf{Temario y Relaciones Resueltas de Infomates} (LosDelDGIIM, Secciones 5.2.1 y 5.2.2: Sincronización en Memoria Compartida y Monitores).\\
+    $\bullet$ \textbf{Relaciones Oficiales de Problemas. Tema 2 y Tema 2-2 (15/10/2026 y 22/10/2026)} (Manuel I. Capel Tuñón, Dpto. de Lenguajes y Sistemas Informáticos, Universidad de Granada).\\
+    $\bullet$ \textbf{Temario y Relaciones Resueltas de Infomates} (LosDelDGIIM, Secciones 5.2.1 y 5.2.2: Sincronización en Memoria Compartida, Algoritmos de Exclusión Mutua y Monitores).\\
     $\bullet$ \textbf{Apuntes y Exámenes Resueltos de Ismael Sallami Moreno} (Doble Grado DGIIM / ADE).\\
-    $\bullet$ \textbf{Transparencias Oficiales de Teoría de SCD} (Tema 2: Sincronización en memoria compartida, monitores y patrones).
+    $\bullet$ \textbf{Transparencias Oficiales de Teoría de SCD} (Tema 2: Exclusión mutua en memoria compartida, semáforos, monitores y patrones).
 }
 
 \begin{aviso}[Estructura y Metodología de la Relación 2]
-Esta relación contiene la resolución exhaustiva de los \textbf{17 problemas oficiales} (del 37 al 53) de la hoja oficial del Tema 2 de SCD (15/10/2026).
-Todos los ejercicios se resuelven formalmente justificando los \textbf{invariantes de seguridad}, las \textbf{condiciones de progreso} (ausencia de interbloqueo y ausencia de inanición), los tipos de semánticas de monitor utilizadas (\textbf{Hoare/SU} y \textbf{Mesa/SC}) y el pseudocódigo estructurado listo para implementación.
+Esta relación contiene la resolución exhaustiva de los \textbf{27 problemas oficiales} (del 37 al 63) correspondientes al Tema 2 de SCD (hojas oficiales del 15/10/2026 y nueva entrega oficial del Tema 2-2 del 22/10/2026).
+Todos los ejercicios se resuelven formalmente justificando los \textbf{invariantes de seguridad}, las \textbf{condiciones de progreso} (ausencia de interbloqueo y ausencia de inanición), los algoritmos de exclusión mutua por software y hardware (Hyman, Peterson, Dekker, Dijkstra, turnos circulares, tickets, swap atómico, cerrojos de capacidad $k$) y los mecanismos de alto nivel (monitores Hoare/SU y Mesa/SC).
 \end{aviso}
 
 % ==============================================================================
@@ -915,3 +915,660 @@ void transferir(Servicio &origen, Servicio &destino, int cantidad) {
 \]
 \textbf{2. Tolerancia a Fallos:} En sistemas distribuidos con caída de nodos, la transferencia debe dividirse en dos fases (Protocolo Two-Phase Commit - 2PC) con un identificador unívoco de transacción y un registro persistente (\emph{write-ahead log}) para deshacer cargos parciales si el nodo receptor colapsa.
 \end{solucion}
+
+
+
+% ==============================================================================
+% BLOQUE III: ALGORITMOS CLÁSICOS DE EXCLUSIÓN MUTUA EN MEMORIA COMPARTIDA
+% (Relación Oficial de Problemas — Tema 2-2, 22/10/2026)
+% ==============================================================================
+\section{Bloque III: Algoritmos Software y Hardware de Exclusión Mutua (Tema 2-2)}
+
+\begin{aviso}[Metodología de Resolución del Tema 2-2]
+Esta sección resuelve los \textbf{10 problemas oficiales} (del 54 al 63) correspondientes a la Relación de Problemas Tema 2-2 de Sistemas Concurrentes y Distribuidos (Dpto. de LSI, Universidad de Granada, Curso 2026/2027).
+Salvo que se indique lo contrario en cada ejercicio:
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Las lecturas y escrituras de variables compartidas son atómicas a nivel de hardware.
+    \item Las instrucciones de cada proceso se ejecutan en estricto orden de programa (secuencialmente consistentes).
+    \item El planificador puede intercalar arbitrariamente las operaciones a cualquier velocidad relativa.
+    \item Se asume planificación débilmente justa únicamente cuando se analiza vivacidad o equidad.
+\end{itemize}
+\end{aviso}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 54
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[54: Propiedades de Corrección: Seguridad, Vivacidad y Condiciones de Dijkstra]
+Considerar las cuatro exigencias habituales del problema de la exclusión mutua: exclusión mutua, progreso o ausencia de interbloqueo, ausencia de inanición y espera acotada (equidad). Clasificar cada una como propiedad de seguridad o de vivacidad, precisando las hipótesis necesarias sobre la planificación. Explicar mediante ejemplos por qué garantizar exclusión mutua y ausencia de interbloqueo no implica necesariamente ausencia de inanición. ¿Qué se puede afirmar de un algoritmo que únicamente satisface las cuatro condiciones de Dijkstra estudiadas en clase? Explicitar qué formulación de dichas condiciones se utiliza.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Clasificación Formal de las Propiedades (Seguridad frente a Vivacidad):}\\
+Conforme a la caracterización axiomática de Alpern y Schneider (1985) y Leslie Lamport:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Propiedad de Seguridad (\emph{Safety}):} Estipula que \emph{«nada malo ocurrirá jamás»} durante la ejecución ($\Box P$). Puede refutarse en un prefijo finito de traza: si en algún estado alcanzable se viola la condición, dicha violación es definitiva e irremediable.
+    \item \textbf{Propiedad de Vivacidad (\emph{Liveness}):} Estipula que \emph{«algo bueno terminará ocurriendo eventualmente»} ($\lozenge P$). No puede refutarse en ningún prefijo finito, pues siempre cabe la posibilidad de que el evento deseado ocurra en el futuro; exige considerar trazas de longitud infinita.
+\end{itemize}
+
+Desglose formal de las cuatro exigencias:
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{p{3.8cm}cp{5.2cm}p{4.2cm}}
+\toprule
+\textbf{Propiedad} & \textbf{Clase} & \textbf{Definición Formal} & \textbf{Hipótesis de Planificación} \\ \midrule
+\textbf{Exclusión Mutua} & \textbf{Seguridad} & En todo estado $s$: $N_{SC}(s) \le 1$. Nunca coexisten dos procesos en SC. & Ninguna (invariante de estados global). \\ \addlinespace[4pt]
+\textbf{Progreso (Ausencia de Interbloqueo)} & \textbf{Vivacidad} & Si $N_{SC} = 0$ y $\exists i$ en protocolo de entrada, $\lozenge (\exists j : j \text{ entra a SC})$. & Planificación mínimamente justa (\emph{weak fairness} en CPU). \\ \addlinespace[4pt]
+\textbf{Ausencia de Inanición} & \textbf{Vivacidad} & Si el proceso $P_i$ solicita entrar, $\lozenge (P_i \text{ entra a SC})$. & Planificación justa (\emph{fairness}) individual. \\ \addlinespace[4pt]
+\textbf{Espera Acotada (Equidad)} & \textbf{Seguridad} & $\exists K \in \mathbb{N}$ tal que ningún rival entra $> K$ veces mientras $P_i$ espera. & Planificación débilmente justa y tiempo acotado en SC. \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+
+\vspace{6pt}
+\noindent\textbf{2. Demostración de que Exclusión Mutua + Progreso $\not\Rightarrow$ Ausencia de Inanición:}\\
+La ausencia de interbloqueo es una propiedad de progreso \textbf{colectivo} (el conjunto de procesos avanza globalmente), mientras que la ausencia de inanición es una propiedad de progreso \textbf{individual} (cada proceso concreto avanza).
+
+\textbf{Ejemplo constructivo:} Consideremos 3 procesos $P_0, P_1, P_2$. Un recurso es arbitrado mediante una variable \texttt{turno} $\in \{0, 1\}$. 
+\begin{itemize}[leftmargin=*]
+    \item $P_2$ solicita entrar en el instante $t_0$ y queda esperando en un bucle \texttt{while (recurso\_ocupado) skip;}.
+    \item El planificador intercala alternativamente las solicitudes de $P_0$ y $P_1$: $P_0$ entra a la SC, sale y cede el turno a $P_1$; a continuación $P_1$ entra a la SC, sale y cede el turno a $P_0$, repitiendo indefinidamente la secuencia:
+    \[
+    \sigma = \langle P_0^{SC} \to P_0^{salida} \to P_1^{SC} \to P_1^{salida} \to P_0^{SC} \to P_0^{salida} \dots \rangle
+    \]
+    \item En todo instante se cumple la \textbf{exclusión mutua} ($N_{SC} \le 1$).
+    \item Se satisface el \textbf{progreso global} (no hay interbloqueo, pues en cada intervalo finito algún proceso accede a la SC).
+    \item Sin embargo, el proceso $P_2$ es postergado eternamente y sufre \textbf{inanición estricta}.
+\end{itemize}
+
+\vspace{6pt}
+\noindent\textbf{3. Formulación y Alcance de las Cuatro Condiciones de Dijkstra (1965):}\\
+Se utiliza la formulación canónica publicada por Edsger W. Dijkstra en 1965:
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item \textbf{C1 (Exclusión Mutua):} En ningún instante de tiempo puede haber más de un proceso dentro de su sección crítica.
+    \item \textbf{C2 (Independencia del Hardware):} No se hacen suposiciones sobre el número de procesadores ni sobre la velocidad relativa de ejecución de los procesos.
+    \item \textbf{C3 (Progreso):} Ningún proceso detenido o ejecutando en su sección no crítica (SNC) puede impedir que otros procesos accedan a la sección crítica. Si ningún proceso está en la SC y hay procesos solicitando entrada, la elección no puede posponerse indefinidamente.
+    \item \textbf{C4 (Ausencia de Inanición):} Ningún proceso debe esperar indefinidamente para acceder a su sección crítica si manifiesta su interés.
+\end{enumerate}
+
+\textbf{Qué se puede afirmar de un algoritmo que únicamente satisface las 4 condiciones:}\\
+Un algoritmo que cumpla estrictamente las 4 condiciones de Dijkstra es un algoritmo concurrentemente correcto en seguridad y vivacidad individual. Sin embargo:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{No garantiza FIFO determinista:} No asegura que los procesos sean atendidos en el orden cronológico estricto de sus solicitudes.
+    \item \textbf{No garantiza una cota fija uniforme de espera independiente de $N$:} En algoritmos como el propio de Dijkstra (1965), un proceso puede ser adelantado múltiples veces de forma dependiente de las carreras entre rivales antes de entrar.
+    \item \textbf{No tolera fallos por parada en SC:} Si un proceso colapsa dentro de su SC, el sistema completo se detiene.
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 55
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[55: Dos Indicadores sin Variable de Turno (Cuarto Intento de Dijkstra)]
+Sean dos procesos con las variables compartidas \texttt{b[0]} y \texttt{b[1]}, inicialmente falsas, y el siguiente protocolo, ejecutado por $P(i)$ ($j=1-i$):
+\begin{lstlisting}[language=C++]
+b[i] := true;
+while b[j] do
+    b[i] := false;
+    while b[j] do skip;
+    b[i] := true;
+endwhile;
+<seccion critica>;
+b[i] := false;
+\end{lstlisting}
+Analizar por separado: (a) exclusión mutua; (b) ausencia de interbloqueo; (c) ausencia de inanición. Si alguna propiedad no se satisface, construir un escenario concreto. Comparar el papel de la variable de turno en este algoritmo y en el de Peterson para dos procesos.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Exclusión Mutua (SÍ se garantiza):}\\
+Demostraremos por contradicción que nunca pueden coexistir ambos procesos en la SC:
+\begin{itemize}[leftmargin=*]
+    \item Para que $P_0$ se encuentre en la SC, ha debido salir del bucle \texttt{while b[1]} evaluando $b[1] == \text{false}$. Previamente fijó $b[0] := \text{true}$, y no ejecuta $b[0] := \text{false}$ hasta abandonar la SC. Por tanto, mientras $P_0 \in \text{SC}$, $b[0] = \text{true}$.
+    \item Para que $P_1$ esté simultáneamente en la SC, debió evaluar su guarda \texttt{while b[0]} como \texttt{false}.
+    \item Si $P_0 \in \text{SC}$, $b[0] = \text{true}$. La única forma en que $P_1$ pudo ver $b[0] == \text{false}$ es que $P_0$ se encontrara temporalmente en su fase de cortesía ($b[0] := \text{false}$, línea 3).
+    \item No obstante, si $P_0$ estaba en la línea 3, para que $P_1$ continuase hacia la SC debió tener $b[1] = \text{true}$. Esto hace que $P_0$ quede atrapado en su bucle interno \texttt{while b[1] do skip;} (línea 4) mientras $P_1$ permanezca activo, impidiendo que $P_0$ reasigne $b[0]:=\text{true}$ y alcance la SC.
+    \item Es lógicamente imposible que ambos procesos superen a la vez sus respectivos bucles externos. Por tanto:
+    \[
+    N_{SC} \le 1 \quad \text{(Exclusión mutua demostrada)}
+    \]
+\end{itemize}
+
+\textbf{Apartado (b): Ausencia de Interbloqueo (NO se garantiza: Livelock Dinámico):}\\
+El algoritmo no sufre interbloqueo estático (las instrucciones no se bloquean permanentemente en cerrojos mudos), pero adolece de un \textbf{bloqueo activo o livelock} simétrico en paso síncrono (\emph{lock-step}):
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{cllccc}
+\toprule
+\textbf{Paso} & \textbf{Acción $P_0$} & \textbf{Acción $P_1$} & $b[0]$ & $b[1]$ & \textbf{Estado del Sistema} \\ \midrule
+1 & $b[0] := \text{true}$ & $b[1] := \text{true}$ & true & true & Ambos manifiestan intención. \\
+2 & Evalúa: \texttt{while b[1]} (V) & Evalúa: \texttt{while b[0]} (V) & true & true & Ambos entran al bucle externo. \\
+3 & $b[0] := \text{false}$ (cede) & $b[1] := \text{false}$ (cede) & false & false & Cortesía simultánea. \\
+4 & Evalúa interno: \texttt{b[1]} (F) & Evalúa interno: \texttt{b[0]} (F) & false & false & Ambos salen del bucle interno. \\
+5 & $b[0] := \text{true}$ & $b[1] := \text{true}$ & true & true & Ambos reafirman intención. \\
+6 & \multicolumn{5}{c}{\textit{El sistema regresa exactamente al Paso 2. Ciclo infinito sin entrada a SC.}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+Si el planificador ejecuta ambos procesos a ritmos idénticos, ninguno accede jamás a la SC. Se viola la propiedad de progreso.
+
+\textbf{Apartado (c): Ausencia de Inanición (NO se garantiza):}\\
+Como consecuencia directa del livelock anterior, ambos procesos sufren inanición simultánea. Asimismo, en una ejecución asimétrica donde $P_0$ sea sistemáticamente más lento que $P_1$, $P_0$ puede quedar bloqueado en su bucle interno mientras $P_1$ aprovecha para entrar y salir repetidas veces.
+
+\textbf{Comparación con el papel de la variable de turno en Peterson:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{En este algoritmo:} Las decisiones se sustentan exclusivamente en indicadores simétricos $b[0]$ y $b[1]$. Ante una contienda concurrente, ambos observan un estado idéntico y adoptan la misma conducta de cortesía ("pase usted primero"), generando la oscilación infinita.
+    \item \textbf{En el Algoritmo de Peterson:} Se incorpora la variable compartida \texttt{turno}. Cuando ambos procesos compiten y asignan \texttt{quiere[i] := true}, ambos ejecutan inmediatamente \texttt{turno := 1-i}. La escritura atómica de \texttt{turno} en el hardware resuelve el conflicto de forma asimétrica e instantánea: el último proceso en escribir sobrescribe la variable y asume el rol de víctima. La condición de espera \texttt{quiere[j] and turno == j} resulta cierta para uno solo de los procesos, forzando a que el otro entre de inmediato a la SC.
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 56
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[56: El Algoritmo de Hyman y la Violación de Exclusión Mutua]
+Se comparte \texttt{c[0]=c[1]=1} y \texttt{turno=1}. Cada proceso $P(i)$, con $j=1-i$, ejecuta:
+\begin{lstlisting}[language=C++]
+c[i] := 0;
+while turno != i do
+    while c[j] = 0 do skip;
+    turno := i;
+endwhile;
+<seccion critica>;
+c[i] := 1;
+\end{lstlisting}
+Determinar si el algoritmo garantiza exclusión mutua. Si no la garantiza, proporcionar una intercalación de instrucciones que lleve simultáneamente a ambos procesos a sus secciones críticas. Identificar exactamente la decisión de diseño que permite el fallo.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Determinación de la Propiedad:}\\
+\textbf{EL ALGORITMO DE HYMAN NO GARANTIZA LA EXCLUSIÓN MUTUA.} A pesar de haber sido publicado en 1966 en \emph{Communications of the ACM} como una simplificación del algoritmo de Dekker, contiene una sutil condición de carrera que invalida la seguridad.
+
+\textbf{2. Intercalación de Instrucciones (Contraejemplo Detallado):}\\
+Estado inicial: \texttt{c[0] = 1}, \texttt{c[1] = 1}, \texttt{turno = 1}.
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{cllcccp{4.5cm}}
+\toprule
+\textbf{Paso} & \textbf{Proceso} & \textbf{Instrucción Ejecutada} & $c[0]$ & $c[1]$ & \textbf{turno} & \textbf{Efecto y Comentario} \\ \midrule
+1 & $P_0$ & \texttt{c[0] := 0;} & 0 & 1 & 1 & $P_0$ manifiesta interés. \\
+2 & $P_0$ & Evalúa \texttt{while turno != 0} & 0 & 1 & 1 & Condición \textbf{True} ($1 \ne 0$). Entra. \\
+3 & $P_0$ & Evalúa \texttt{while c[1] == 0} & 0 & 1 & 1 & Condición \textbf{False} ($c[1]=1$). No espera. \\
+4 & --- & \multicolumn{4}{c}{\textit{Planificador suspende a $P_0$ antes de asignar \texttt{turno := 0}}} & Interrupción de contexto crítica. \\
+5 & $P_1$ & \texttt{c[1] := 0;} & 0 & 0 & 1 & $P_1$ manifiesta interés. \\
+6 & $P_1$ & Evalúa \texttt{while turno != 1} & 0 & 0 & 1 & Condición \textbf{False} ($\text{turno}=1$). \\
+7 & $P_1$ & \textbf{Entra a Sección Crítica} & 0 & 0 & 1 & $P_1$ omite el bucle y accede. \\
+8 & $P_0$ & \texttt{turno := 0;} & 0 & 0 & 0 & $P_0$ se reanuda y cambia turno. \\
+9 & $P_0$ & Reevalúa \texttt{while turno != 0} & 0 & 0 & 0 & Condición \textbf{False} ($\text{turno}=0$). \\
+10 & $P_0$ & \textbf{Entra a Sección Crítica} & 0 & 0 & 0 & $P_0$ sale del bucle y accede. \\ \midrule
+\multicolumn{7}{c}{\textbf{ESTADO FINAL: $P_0 \in \text{SC} \ \land \ P_1 \in \text{SC} \implies N_{SC} = 2$. VIOLACIÓN DE EXCLUSIÓN MUTUA.}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+
+\textbf{3. Decisión de Diseño Errónea (Causa Raíz del Fallo):}\\
+El defecto radica en una vulnerabilidad de tipo \textbf{TOCTOU (Time-of-Check to Time-of-Use)} unida a una apropiación no sincronizada del turno:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Desacoplamiento entre comprobación y apropiación:} $P_0$ verifica que $P_1$ no está en el bucle (\texttt{c[1] == 1}), pero antes de ejecutar la asignación \texttt{turno := 0}, $P_1$ puede activarse.
+    \item \textbf{Confianza ciega en el turno previo:} $P_1$ ingresa a la SC sin comprobar el estado de $c[0]$, amparándose exclusivamente en que $\text{turno} == 1$.
+    \item \textbf{Apropiación incondicional del turno:} Cuando $P_0$ despierta, ejecuta $\text{turno} := 0$ sin revalidar si $P_1$ ha iniciado la SC mientras estaba suspendido, saliendo del bucle sin encontrar ningún obstáculo.
+\end{enumerate}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 57
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[57: Algoritmo de Peterson para Dos Procesos: Demostración y Memoria Débil]
+Sean \texttt{quiere[0]=quiere[1]=false} y \texttt{turno} compartido. Cada $P(i)$ ejecuta:
+\begin{lstlisting}[language=C++]
+quiere[i] := true;
+turno := 1-i;
+while quiere[1-i] and turno = 1-i do skip;
+<seccion critica>;
+quiere[i] := false;
+\end{lstlisting}
+(a) Demostrar la exclusión mutua. (b) Argumentar el progreso y la ausencia de inanición, indicando las hipótesis de planificación. (c) Investigar qué sucede si se intercambia el orden de las dos primeras asignaciones. (d) Explicar por qué la corrección en un modelo secuencialmente consistente no autoriza a usar sin más variables ordinarias en un programa real con memoria débil.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Demostración Rigurosa de Exclusión Mutua:}\\
+Demostraremos por contradicción lógica:
+\begin{itemize}[leftmargin=*]
+    \item Supongamos que en el instante $t$, ambos procesos $P_0$ y $P_1$ se encuentran simultáneamente en la SC.
+    \item Para que $P_0$ esté en SC, debió evaluar su guarda de espera como falsa:
+    \[
+    \neg (\texttt{quiere[1]} \land \texttt{turno} = 1) \iff (\neg \texttt{quiere[1]} \lor \texttt{turno} \ne 1)
+    \]
+    \item Para que $P_1$ esté en SC, análogamente debió cumplirse:
+    \[
+    \neg (\texttt{quiere[0]} \land \texttt{turno} = 0) \iff (\neg \texttt{quiere[0]} \lor \texttt{turno} \ne 0)
+    \]
+    \item Puesto que ambos están en SC y no han ejecutado el protocolo de salida, necesariamente $\texttt{quiere[0]} = \text{true}$ y $\texttt{quiere[1]} = \text{true}$.
+    \item En consecuencia, para que ambas expresiones sean verdaderas debe cumplirse forzosamente:
+    \[
+    (\texttt{turno} \ne 1 \implies \texttt{turno} = 0) \quad \land \quad (\texttt{turno} \ne 0 \implies \texttt{turno} = 1)
+    \]
+    \item La variable \texttt{turno} es una celda atómica en memoria que sólo puede almacenar un valor escalar en cada instante. Como la asignación a \texttt{turno} es la última instrucción antes del bucle en ambos procesos, una de las dos asignaciones debió completarse en último lugar en el bus de memoria:
+    \begin{itemize}[leftmargin=*]
+        \item Si $P_0$ escribió en último lugar, $\texttt{turno} = 1$. Entonces $P_0$ no pudo observar $\texttt{turno} = 0$, quedando bloqueado en el bucle.
+        \item Si $P_1$ escribió en último lugar, $\texttt{turno} = 0$. Entonces $P_1$ no pudo observar $\texttt{turno} = 1$, quedando bloqueado en el bucle.
+    \end{itemize}
+    \item Se llega a una contradicción formal insalvable. Por tanto, $N_{SC} \le 1$.
+\end{itemize}
+
+\textbf{Apartado (b): Progreso y Ausencia de Inanición:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Progreso:} Si ningún proceso está en la SC y ambos compiten a la vez, \texttt{turno} adopta el valor 0 o 1. El proceso para el cual $\texttt{turno} \ne 1-i$ (aquel que escribió primero) supera el bucle y accede. Si solo un proceso desea entrar, $\texttt{quiere[1-i]} = \text{false}$, accediendo sin retardo alguno.
+    \item \textbf{Ausencia de Inanición:} Asumiendo \textbf{planificación débilmente justa} (los procesos activos reciben ciclos de CPU y terminan su SC en tiempo finito), cuando el proceso rival $P_j$ abandona la SC ejecuta $\texttt{quiere[j]} := \text{false}$. En ese instante, la guarda de $P_i$ se vuelve inmediatamente falsa y $P_i$ entra. Si $P_j$ intentara reingresar con rapidez, ejecutará $\texttt{turno} := i$, cediéndole la prioridad a $P_i$. La cota de espera es estricta: \textbf{a lo sumo 1 entrada del proceso rival}.
+\end{itemize}
+
+\textbf{Apartado (c): Intercambio de las dos primeras asignaciones:}\\
+Si el protocolo se altera a:
+\begin{lstlisting}[language=C++]
+turno := 1-i;
+quiere[i] := true;
+while quiere[1-i] and turno = 1-i do skip;
+\end{lstlisting}
+\textbf{Se destruye la Exclusión Mutua.} Traza de contraejemplo:
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item $P_0$ ejecuta $\texttt{turno} := 1$.
+    \item Planificador conmuta a $P_1$.
+    \item $P_1$ ejecuta $\texttt{turno} := 0$.
+    \item $P_1$ ejecuta $\texttt{quiere[1]} := \text{true}$.
+    \item $P_1$ evalúa el bucle: $\texttt{quiere[0]}$ sigue en \texttt{false}, luego $P_1$ entra a la SC.
+    \item Planificador conmuta a $P_0$.
+    \item $P_0$ ejecuta $\texttt{quiere[0]} := \text{true}$.
+    \item $P_0$ evalúa el bucle: $\texttt{turno} = 0$. Como $\texttt{turno} == 0 \ne 1$, la guarda es falsa.
+    \item $P_0$ accede a la SC \textbf{simultáneamente con $P_1$}. Violación de exclusión mutua.
+\end{enumerate}
+
+\textbf{Apartado (d): Consistencia Secuencial frente a Memoria Débil (\emph{Weak Memory}):}\\
+La demostración matemática asume el modelo de \textbf{Consistencia Secuencial de Lamport (1979)}, donde toda lectura y escritura se ejecuta en estricto orden de código y es visible de inmediato para todos los hilos.
+\begin{itemize}[leftmargin=*]
+    \item En procesadores modernos (x86, ARM, RISC-V) y compiladores optimizadores (GCC/Clang), las escrituras se colocan en \emph{Store Buffers} locales para evitar latencias de memoria. Esto permite la reordenación \textbf{Store-Load}: la lectura de \texttt{quiere[1-i]} puede adelantarse antes de que la escritura de \texttt{quiere[i]} se haya hecho visible en la caché compartida del otro núcleo.
+    \item Ambos hilos pueden leer simultáneamente $\texttt{quiere[1-i]} == \text{false}$, accediendo a la vez a la SC en hardware real.
+    \item Por ello, en programas reales es obligatorio declarar las variables con tipos atómicos (\texttt{std::atomic<bool>}) bajo ordenación secuencialmente consistente (\texttt{memory\_order\_seq\_cst}) o insertar barreras completas de memoria (\texttt{mfence} en x86, \texttt{dmb} en ARM).
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 58
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[58: Sincronización Hardware para N Procesos con Instrucción Atómica Swap]
+Se dispone de \texttt{swap(x,y)}, que intercambia atómicamente los valores booleanos de $x$ e $y$. Diseñar protocolos de entrada y salida para $N \ge 2$ procesos mediante una variable compartida \texttt{ocupado}, inicialmente falsa, y una variable booleana local por proceso. Demostrar la exclusión mutua y discutir el progreso, la inanición y el coste de espera ocupada. ¿Basta la atomicidad de \texttt{swap} para asegurar equidad? Justificar.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Diseño de los Protocolos de Entrada y Salida:}\\
+Variables compartidas y privadas:
+\begin{lstlisting}[language=C++]
+// Variable compartida global:
+bool ocupado = false;
+
+// Protocolo de Entrada para el proceso Pi:
+bool mi_llave = true; // Variable local privada
+do {
+    swap(ocupado, mi_llave);
+} while (mi_llave == true);
+
+// < Seccion Critica >
+
+// Protocolo de Salida para el proceso Pi:
+ocupado = false;
+\end{lstlisting}
+
+\textbf{2. Demostración de la Exclusión Mutua:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Invariante de conservación del testigo:} En todo instante se cumple:
+    \[
+    \text{Valor}(\texttt{ocupado}) + \sum_{i=1}^N [\,\texttt{mi\_llave}_i == \text{false}\,] = 1
+    \]
+    donde el corchete denota la función indicatriz de valor 1 si es cierta y 0 si es falsa.
+    \item Inicialmente $\texttt{ocupado} = \text{false}$ y todas las variables locales tienen $\texttt{mi\_llave}_i = \text{true}$. La suma es $0 + 0 = 0$. Existe una única llave con valor \texttt{false} disponible en el sistema.
+    \item La primitiva \texttt{swap} es atómica e indivisible a nivel de bus de hardware. El primer proceso que ejecuta \texttt{swap} extrae el valor \texttt{false} a su variable privada \texttt{mi\_llave}, mientras que la variable global \texttt{ocupado} pasa a valer \texttt{true}. Dicho proceso supera el bucle y entra a la SC.
+    \item Mientras el recurso está ocupado ($\texttt{ocupado} = \text{true}$), cualquier otro proceso que ejecute \texttt{swap} intercambia su \texttt{mi\_llave} (\texttt{true}) por \texttt{ocupado} (\texttt{true}), reteniendo el valor \texttt{true} en su variable privada y continuando en espera activa.
+    \item Como en ningún momento puede haber más de una variable local con valor \texttt{false}, a lo sumo un solo proceso puede encontrarse ejecutando la SC:
+    \[
+    N_{SC} \le 1 \quad \text{(Exclusión mutua garantizada)}
+    \]
+\end{itemize}
+
+\textbf{3. Discusión de Progreso, Inanición y Equidad:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Progreso:} Si ningún proceso está en la SC y $\texttt{ocupado} = \text{false}$, el primer proceso que ejecute \texttt{swap} adquiere la llave y accede. No puede producirse interbloqueo colectivo.
+    \item \textbf{¿Basta la atomicidad de swap para asegurar equidad? NO.}
+    La atomicidad de la instrucción sólo garantiza la indivisibilidad de un intercambio individual; \textbf{no impone ninguna disciplina temporal ni cola de espera FIFO} sobre los procesos contendientes.
+    \item Cuando el proceso en SC sale y ejecuta $\texttt{ocupado} = \text{false}$, todos los procesos que esperan en su bucle compiten en una carrera asíncrona. La resolución depende del arbitraje del controlador de memoria y de la topología física (sistemas NUMA). Un proceso desfavorecido puede perder consecutivamente todas las contiendas y sufrir \textbf{inanición indefinida}. Para asegurar equidad se precisa un cerrojo por tickets (\emph{ticket lock}).
+\end{itemize}
+
+\textbf{4. Coste de Espera Ocupada y Optimización:}\\
+La ejecución continua de \texttt{swap} genera continuas transacciones de invalidación en el protocolo de coherencia de caché (\emph{cache line bouncing}), saturando el bus de interconexión. Para mitigarlo se aplica el patrón \textbf{Test and Test-and-Set}: el proceso espera en un bucle pasivo leyendo en caché \texttt{while (ocupado) skip;} y sólo ejecuta \texttt{swap} cuando detecta que la variable ha pasado a valer \texttt{false}.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 59
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[59: Exclusión de Capacidad k mediante Cerrojo Atómico]
+Un recurso admite simultáneamente a lo sumo $k$ procesos, con $1 \le k < N$. Diseñar las subrutinas \texttt{entrar()} y \texttt{salir()} para $N$ procesos utilizando únicamente una variable entera compartida \texttt{dentro}, inicialmente cero, y un cerrojo atómico \texttt{lock()} / \texttt{unlock()}. Se permite espera ocupada fuera del cerrojo. (a) Escribir pseudocódigo. (b) Demostrar el invariante $0 \le \text{dentro} \le k$. (c) Explicar por qué no debe mantenerse el cerrojo mientras se espera a que haya capacidad. (d) Discutir si la solución asegura ausencia de inanición.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Pseudocódigo de las Subrutinas:}\\
+\begin{lstlisting}[language=C++]
+// Variables compartidas globales:
+int dentro = 0;
+Mutex cerrojo; // Primitivas atómicas lock() y unlock()
+
+void entrar() {
+    bool acceso_concedido = false;
+    while (!acceso_concedido) {
+        cerrojo.lock();
+        if (dentro < k) {
+            dentro = dentro + 1;
+            acceso_concedido = true;
+        }
+        cerrojo.unlock();
+        // Si no se concedio, el reintento se efectua fuera del cerrojo
+    }
+}
+
+void salir() {
+    cerrojo.lock();
+    dentro = dentro - 1;
+    cerrojo.unlock();
+}
+\end{lstlisting}
+
+\textbf{Apartado (b): Demostración del Invariante $0 \le \text{dentro} \le k$:}\\
+Demostraremos por inducción estructural sobre los estados del sistema:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Base inductiva:} Inicialmente $\texttt{dentro} = 0$. Como $1 \le k < N$, se cumple trivialmente $0 \le 0 \le k$.
+    \item \textbf{Paso inductivo:} La variable \texttt{dentro} únicamente es modificada dentro de las secciones críticas protegidas por \texttt{cerrojo}:
+    \begin{itemize}[leftmargin=*]
+        \item En \texttt{entrar()}: Se evalúa $\texttt{dentro} < k$. Como \texttt{dentro} es entero, esto equivale a $\texttt{dentro} \le k-1$. Tras la asignación $\texttt{dentro}' = \texttt{dentro} + 1$, se cumple $\texttt{dentro}' \le k$. Además, como por hipótesis inductiva $\texttt{dentro} \ge 0$, tenemos $\texttt{dentro}' \ge 1 \ge 0$. Si la condición no se cumple, la variable no varía.
+        \item En \texttt{salir()}: Por especificación, \texttt{salir()} sólo es invocada por procesos que previamente completaron \texttt{entrar()}. El número total de ejecuciones de \texttt{salir()} no puede superar al de \texttt{entrar()}, lo que garantiza $\texttt{dentro} \ge 1$ antes del decremento. Por ende, tras $\texttt{dentro}' = \texttt{dentro} - 1$, se cumple $\texttt{dentro}' \ge 0$. Puesto que $\texttt{dentro} \le k$, tenemos $\texttt{dentro}' \le k-1 < k$.
+    \end{itemize}
+    \item Queda formalmente demostrado el invariante de seguridad: $\forall t, \ 0 \le \text{dentro}(t) \le k$.
+\end{itemize}
+
+\textbf{Apartado (c): Por qué NO debe retenerse el cerrojo durante la espera:}\\
+Si un proceso adquiriese el cerrojo y ejecutase el bucle de espera sin liberarlo:
+\begin{lstlisting}[language=C++]
+cerrojo.lock();
+while (dentro >= k) { /* espera activa con cerrojo adquirido */ }
+\end{lstlisting}
+se produciría un \textbf{Interbloqueo Fatal (Deadlock)}:
+\begin{itemize}[leftmargin=*]
+    \item Ningún otro proceso podría adquirir \texttt{cerrojo}.
+    \item Los procesos que se encuentran dentro del recurso no podrían ejecutar la subrutina \texttt{salir()}, puesto que \texttt{salir()} necesita adquirir \texttt{cerrojo} para decrementar \texttt{dentro}.
+    \item Al ser imposible decrementar \texttt{dentro}, la condición $\texttt{dentro} \ge k$ permanecería eternamente cierta, congelando a todo el sistema.
+    \item Por tanto, la liberación de \texttt{cerrojo} antes de reiterar la espera activa es estrictamente indispensable para el progreso del sistema.
+\end{itemize}
+
+\textbf{Apartado (d): Discusión sobre la Ausencia de Inanición:}\\
+\textbf{La solución NO asegura la ausencia de inanición.}
+Cuando la capacidad está colmada ($\texttt{dentro} = k$), múltiples procesos iteran concurrentemente en sus respectivos bucles \texttt{while (!acceso\_concedido)}. Cuando un proceso sale y decrementa la variable a $k-1$, el proceso que logra capturar el cerrojo y ocupar la plaza no sigue un orden de llegada FIFO, sino que depende del azar y del planificador. Procesos con menor prioridad de bus pueden ser adelantados arbitrariamente muchas veces, sufriendo inanición.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 60
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[60: Algoritmo de Turnos Circulares y Paso de Testigo en Anillo]
+Para $N \ge 2$ procesos se comparte \texttt{s[0..N-1]}, inicialmente a cero. El proceso $P_i$ espera hasta que se cumpla $s[i] \ne s[i-1]$ si $i > 0$, o $s[0] = s[N-1]$ si $i = 0$. Al salir, ejecuta $s[i]:=s[i-1]$ si $i > 0$, o $s[0]:=1-s[0]$ si $i = 0$. (a) Examinar la exclusión mutua. (b) ¿Qué sucede si un proceso permanece indefinidamente en su sección no crítica? (c) Determinar si se cumple el requisito de progreso cuando solamente un proceso desea entrar. (d) Distinguir entre alternancia forzosa y equidad entre procesos contendientes.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Examen Riguroso de la Exclusión Mutua:}\\
+Definimos la condición de habilitación $E(i)$ que permite a $P_i$ acceder a la SC:
+\[
+E(0) \iff (s[0] = s[N-1]), \qquad E(i) \iff (s[i] \ne s[i-1]) \quad \forall i \in \{1, \dots, N-1\}
+\]
+\textbf{Lema de Proceso Distinguido Único:}\\
+\emph{En cualquier configuración alcanzable del vector $s[0..N-1]$, existe exactamente un único proceso $k \in \{0, \dots, N-1\}$ tal que $E(k)$ es verdadera.}
+
+\textbf{Demostración:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Estado Inicial:} $s = [0, 0, \dots, 0]$.
+    Para $i = 0$: $s[0] = s[N-1] \iff 0 = 0$ (\textbf{Verdadero}, $E(0)$ habilitado).
+    Para todo $i > 0$: $s[i] \ne s[i-1] \iff 0 \ne 0$ (\textbf{Falso}). Único habilitado: $P_0$.
+    \item Cuando $P_0$ sale, ejecuta $s[0] := 1 - s[0] = 1$. Vector: $[1, 0, 0, \dots, 0]$.
+    Ahora $s[0] = s[N-1] \iff 1 = 0$ (Falso).
+    Para $i = 1$: $s[1] \ne s[0] \iff 0 \ne 1$ (\textbf{Verdadero}, $E(1)$ habilitado).
+    Para todo $i > 1$: $s[i] \ne s[i-1] \iff 0 \ne 0$ (Falso). Único habilitado: $P_1$.
+    \item De forma inductiva, cuando $P_k$ ($k > 0$) sale y asigna $s[k] := s[k-1]$, inhabilita su propia condición e iguala su valor al de su predecesor, transfiriendo la habilitación de forma exclusiva al sucesor $P_{k+1}$ (o a $P_0$ si $k = N-1$).
+    \item Como en todo instante exactamente un proceso tiene permiso de entrada, nunca pueden coexistir dos procesos en la SC:
+    \[
+    N_{SC} \le 1 \quad \text{(Exclusión mutua demostrada)}
+    \]
+\end{itemize}
+
+\textbf{Apartado (b): Consecuencias si un proceso permanece en su Sección No Crítica (SNC):}\\
+Si el proceso que ostenta la habilitación en un momento dado ($P_k$) se detiene o permanece indefinidamente en su sección no crítica (SNC) sin solicitar la entrada a la SC, nunca ejecutará el protocolo de salida ni actualizará la variable $s[k]$.
+\begin{itemize}[leftmargin=*]
+    \item En consecuencia, el testigo queda permanentemente retenido en $P_k$.
+    \item Ningún otro proceso del anillo puede entrar jamás a la SC, violando directamente la \textbf{3.ª condición de Dijkstra} (un proceso en su SNC no debe interferir ni bloquear el acceso de los demás).
+\end{itemize}
+
+\textbf{Apartado (c): Cumplimiento del Requisito de Progreso con un Solo Proceso Interesado:}\\
+\textbf{NO se cumple el requisito de progreso.}
+Si únicamente el proceso $P_3$ desea entrar y todos los demás se hallan inactivos en su SNC, $P_3$ se verá incapaz de acceder hasta que $P_0, P_1$ y $P_2$ atraviesen secuencialmente sus respectivas secciones críticas. Al no haber competencia activa sobre el recurso y estar la SC desocupada, el sistema es incapaz de conceder el acceso inmediato al único proceso interesado.
+
+\textbf{Apartado (d): Distinción entre Alternancia Forzosa y Equidad:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Alternancia Forzosa (\emph{Strict Alternation}):} Impone un orden determinista y rígido fijado a priori ($P_0 \to P_1 \to \dots \to P_{N-1} \to P_0$), obligando a que cada proceso participe cíclicamente con independencia de si requiere o no el recurso. Si un proceso no tiene trabajo que realizar, paraliza a todos los demás.
+    \item \textbf{Equidad (\emph{Fairness}):} Garantiza que entre los procesos que \textbf{efectivamente solicitan} la sección crítica, ninguno sufra postergación indefinida ni inanición. Permite que procesos activos adelanten a procesos que se encuentran pasivos en su SNC.
+    \item El algoritmo analizado implementa alternancia forzosa, destruyendo la autonomía de ritmos entre procesos concurrentes.
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 61
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[61: Protocolo de Tickets para Dos Procesos y Ruptura de Simetría]
+Se comparten \texttt{n[0]=n[1]=0}. Cada $P(i)$, con $j=1-i$, ejecuta:
+\begin{lstlisting}[language=C++]
+n[i] := 1;
+n[i] := n[j] + 1;
+while n[j] != 0 and
+    (n[j] < n[i] or (n[j] = n[i] and j < i)) do
+    skip;
+endwhile;
+<seccion critica>;
+n[i] := 0;
+\end{lstlisting}
+(a) Estudiar la exclusión mutua, considerando todas las intercalaciones relevantes de las asignaciones iniciales. (b) Analizar si el protocolo puede producir interbloqueo o inanición. (c) Estudiar qué ocurre al eliminar la asignación \texttt{n[i]:=1}. (d) Explicar la función del desempate por identificador. No suponer que la lectura de \texttt{n[j]} y la escritura posterior constituyen una operación indivisible.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Exclusión Mutua bajo Intercalaciones Relevantes:}\\
+La toma de ticket consta de dos operaciones no atómicas: (1) \texttt{n[i]:=1} (marcador de presencia), y (2) lectura de \texttt{n[j]} seguida de escritura \texttt{n[i]:=n[j]+1}. Analizamos los casos exhaustivos de intercalación:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Caso 1: Ejecución Secuencial (Sin Solapamiento):}\\
+    $P_0$ ejecuta $n[0]:=1$ y luego $n[0]:=n[1]+1 = 0+1 = 1$. A continuación, $P_1$ lee $n[0]=1$ y asigna $n[1]:=1+1=2$. Los tickets son $(n[0]=1, n[1]=2)$.
+    $P_0$ evalúa la guarda: $n[1]=2 < n[0]=1$ (Falso) $\implies P_0$ accede de inmediato.
+    $P_1$ evalúa la guarda: $n[0]=1 < n[1]=2$ (\textbf{Verdadero}) $\implies P_1$ espera en el bucle hasta que $P_0$ libere la SC ($n[0]:=0$). Exclusión mutua garantizada.
+    \item \textbf{Caso 2: Intercalación Concurrente Total (Empate de Tickets):}\\
+    Ambos ejecutan $n[0]:=1$ y $n[1]:=1$. Ambos leen el valor 1 del rival y calculan su ticket a la vez: $n[0] := 1+1 = 2$ y $n[1] := 1+1 = 2$. Empate estricto: $n[0] = n[1] = 2$.
+    \begin{itemize}[leftmargin=*]
+        \item Guarda de $P_0$ ($i=0, j=1$): ¿$n[1] < n[0]$? ($2 < 2$, Falso). ¿$n[1] = n[0] \land 1 < 0$? ($2=2 \land \text{Falso}$, Falso). La condición es \textbf{Falsa} $\implies P_0$ entra a la SC.
+        \item Guarda de $P_1$ ($i=1, j=0$): ¿$n[0] < n[1]$? ($2 < 2$, Falso). ¿$n[0] = n[1] \land 0 < 1$? ($2=2 \land \text{Verdadero}$, \textbf{Verdadero}). La condición es \textbf{Verdadera} $\implies P_1$ espera en el bucle.
+    \end{itemize}
+    El desempate favorece a $P_0$ de forma no ambigua: a lo sumo un proceso entra.
+    \item \textbf{Caso 3: Intercalación Parcial:}\\
+    Si un proceso lee el ticket intermedio 1 y el otro lee el definitivo, se obtienen valores estrictamente diferentes donde el menor ticket tiene prioridad absoluta.
+\end{itemize}
+Como el par ordenado $(n[i], i)$ define un orden total estricto irreflexivo, $N_{SC} \le 1$.
+
+\textbf{Apartado (b): Ausencia de Interbloqueo e Inanición:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Ausencia de Interbloqueo:} El predicado $(n[0], 0) < (n[1], 1)$ es asimétrico y transitivo; nunca puede ser verdadero simultáneamente para ambos procesos. Uno de los dos siempre encontrará su guarda en falso y accederá a la SC.
+    \item \textbf{Ausencia de Inanición:} El proceso que espera en el bucle es liberado en cuanto el proceso en SC sale y ejecuta $n[i]:=0$. Si el proceso saliente desea reingresar, tomará un ticket $n_{\text{nuevo}} = n_{\text{espera}} + 1 > n_{\text{espera}}$, garantizando que el proceso que ya estaba esperando tendrá prioridad absoluta y entrará a la SC.
+\end{itemize}
+
+\textbf{Apartado (c): ¿Qué ocurre al eliminar la asignación \texttt{n[i]:=1}?:}\\
+\textbf{SE DESTRUYE LA EXCLUSIÓN MUTUA.} Contraejemplo:
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item $P_0$ lee $n[1]$ (que vale 0) para calcular su ticket, pero es suspendido antes de escribir en $n[0]$.
+    \item $P_1$ inicia su protocolo completo: lee $n[0]=0$, calcula y asigna $n[1] := 0+1 = 1$.
+    \item $P_1$ evalúa la guarda: como $n[0] == 0$, la guarda es falsa y $P_1$ \textbf{entra a la Sección Crítica}.
+    \item $P_0$ se reanuda y escribe su ticket pendiente: $n[0] := 0+1 = 1$.
+    \item $P_0$ evalúa la guarda con $n[0]=1$ y $n[1]=1$: por desempate de identificador ($0 < 1$), $P_0$ tiene prioridad sobre $P_1$, saliendo del bucle.
+    \item $P_0$ \textbf{entra a la Sección Crítica mientras $P_1$ sigue dentro}. Fallo fatal de exclusión mutua.
+\end{enumerate}
+La asignación $n[i]:=1$ actúa como un indicador transitorio (\emph{doorway}) que impide que el otro proceso crea falsamente que $P_i$ está inactivo.
+
+\textbf{Apartado (d): Función del Desempate por Identificador:}\\
+Dado que la lectura y la posterior suma no son atómicas, los procesos pueden obtener números de ticket idénticos. La relación lexicográfica estricta $(n[i] < n[j]) \lor (n[i] = n[j] \land i < j)$ rompe cualquier simetría determinísticamente, evitando estados de indecisión.
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 62
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[62: Peterson para N Procesos: Filtro por Niveles y Cotas de Espera]
+Considerar la generalización de Peterson con \texttt{nivel[i]} inicialmente cero y \texttt{victima[L]} compartidos. Cada proceso $P_i$ recorre los niveles $L = 1, \dots, N-1$:
+\begin{lstlisting}[language=C++]
+for L := 1 to N-1 do
+    nivel[i] := L;
+    victima[L] := i;
+    while exists j != i such that
+        (nivel[j] >= L and victima[L] = i) do skip;
+endfor;
+<seccion critica>;
+nivel[i] := 0;
+\end{lstlisting}
+(a) Justificar por qué no pueden coexistir dos procesos en sección crítica. (b) Analizar si pueden encontrarse dos procesos en el nivel $N-2$ mientras ninguno está en $N-3$; razonar según la definición precisa de «estar en un nivel». (c) Examinar qué hipótesis adicionales serían necesarias para establecer cotas de espera. Evitar identificar automáticamente ausencia de inanición con espera acotada.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Demostración de Exclusión Mutua (Lema del Filtro):}\\
+El algoritmo organiza la contienda en $N-1$ etapas o filtros sucesivos.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Lema Fundamental del Filtro de Peterson:}\\
+    \emph{En cualquier estado alcanzable, a lo sumo $N - L$ procesos pueden encontrarse en el nivel $L$ o en niveles superiores.}
+    \item \textbf{Demostración por inducción sobre $L$:}
+    \begin{itemize}[leftmargin=*]
+        \item \emph{Base ($L = 1$):} En el nivel 1, la variable \texttt{victima[1]} almacena el identificador de un único proceso (el último en llegar). Este proceso no puede superar el bucle \texttt{while} mientras exista otro proceso con $\texttt{nivel}[j] \ge 1$. Por ende, al menos un proceso queda retenido en el nivel 1, permitiendo avanzar como máximo a $N - 1$ procesos.
+        \item \emph{Paso Inductivo:} Asumamos que a lo sumo $N - L$ procesos pueden alcanzar el nivel $L$. En dicho nivel, la variable compartida \texttt{victima[L]} retiene obligatoriamente al último proceso en registrarse. En consecuencia, de los $N - L$ candidatos, al menos uno no puede franquear el bucle, permitiendo avanzar a lo sumo a $(N - L) - 1 = N - (L + 1)$ procesos al nivel $L+1$.
+    \end{itemize}
+    \item \textbf{Sección Crítica:} Para acceder a la SC, un proceso debe completar el nivel $L = N-1$. Aplicando el lema:
+    \[
+    N_{\text{procesos en SC}} \le N - (N - 1) = 1
+    \]
+    Por tanto, es imposible que dos procesos coexistan en la SC: $N_{SC} \le 1$.
+\end{itemize}
+
+\textbf{Apartado (b): ¿Pueden encontrarse dos procesos en $N-2$ y ninguno en $N-3$?:}\\
+\textbf{Definición de «estar en el nivel $k$»:} Un proceso $P_i$ se encuentra en el nivel $k$ si ha ejecutado $\texttt{nivel}[i] := k$ y aún no ha ejecutado $\texttt{nivel}[i] := k+1$ (es decir, se encuentra ejecutando o esperando en la $k$-ésima iteración del bucle \texttt{for}).
+
+\textbf{Respuesta: NO ES POSIBLE.}\\
+\emph{Justificación Formal (Lema 3 de Peterson / Infomates Ejercicio 5.2.8):}
+\begin{itemize}[leftmargin=*]
+    \item Para que dos procesos $P_a$ y $P_b$ hayan superado el filtro del nivel $N-3$ y se encuentren simultáneamente en el nivel $N-2$, debió ocurrir que uno de ellos asumió la condición de víctima en $N-3$ mientras el otro avanzaba, o bien que un tercer proceso $P_c$ asumió el rol de víctima en dicho nivel.
+    \item La invariante de distribución de procesos en los filtros de Peterson establece una propiedad monótona: para que existan $M \ge 2$ procesos en la etapa $k$, en cada una de las etapas previas $0, 1, \dots, k-1$ debe existir al menos un proceso actuando como víctima de retención.
+    \item Si el nivel $N-3$ estuviera completamente vacío (0 procesos), significaría que no existe ningún proceso que retenga la variable \texttt{victima[N-3]}, lo que contradice el principio de avance del filtro. Por consiguiente, dicha configuración es inalcanzable.
+\end{itemize}
+
+\textbf{Apartado (c): Hipótesis Adicionales para Cotas de Espera frente a Ausencia de Inanición:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Distinción conceptual:} La \emph{ausencia de inanición} es una propiedad cualitativa de vivacidad ($\forall i, \lozenge P_i^{SC}$). La \emph{espera acotada} es una propiedad cuantitativa de seguridad que acota uniformemente el número de adelantamientos por una función matemática determinista $f(N)$.
+    \item \textbf{Hipótesis necesarias para derivar la cota de espera formal:}
+    \begin{enumerate}[leftmargin=*]
+        \item \textbf{Tiempo Finito en SC:} Todo proceso que entra en la SC sale de ella en un tiempo acotado por una constante finita ($\Delta_{SC} \le C_{SC} < \infty$).
+        \item \textbf{Planificación Débilmente Justa en CPU:} Cada hilo activo en el protocolo de entrada progresa de forma continua en sus instrucciones.
+        \item \textbf{Reingreso Cíclico sin Privilegios:} Todo proceso que abandone la SC y vuelva a solicitarla debe reiniciar su tránsito obligatoriamente desde el nivel $L=1$, garantizando que se colocará detrás (como nueva víctima) de los procesos rezagados en niveles inferiores.
+    \end{enumerate}
+    \item Bajo estas condiciones, se demuestra que un proceso compitiendo en el nivel $L$ espera a lo sumo a que cada uno de los demás procesos entre una vez por cada nivel superior, estableciendo una cota matemática de espera de $O(N^2)$ adelantamientos (exactamente $\frac{N(N-1)}{2}$ turnos).
+\end{itemize}
+\end{solucion}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 63
+% ------------------------------------------------------------------------------
+\begin{ejercicio}[63: Algoritmo de Dijkstra para N Procesos: Análisis de Modificación de Guarda]
+Se comparte \texttt{turno} y el vector \texttt{estado[i]} con valores \texttt{pasivo}, \texttt{solicitando} y \texttt{enSC}. En el algoritmo de Dijkstra estudiado en clase, durante el protocolo de entrada, un proceso que espera su turno ejecuta:
+\begin{lstlisting}[language=C++]
+while turno != i do
+    if estado[turno] = pasivo then turno := i;
+endwhile;
+\end{lstlisting}
+Se propone sustituir la guarda por \texttt{estado[turno] != enSC}, sin alterar el resto del algoritmo. (a) Comparar las dos condiciones. (b) Construir, si es posible, una ejecución que invalide alguna propiedad de corrección. (c) Precisar si el defecto afecta a la seguridad, al progreso o a la equidad. Para el análisis, utilizar el protocolo completo de Dijkstra presentado en clase, no únicamente el fragmento anterior.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Protocolo Canónico Completo de Dijkstra (1965) para N Procesos:}\\
+\begin{lstlisting}[language=C++]
+// Variables compartidas:
+enum Estado { pasivo, solicitando, enSC };
+Estado estado[N] = { pasivo, ..., pasivo };
+int turno = 0;
+
+// Protocolo para el proceso Pi:
+void proceso(int i) {
+    while (true) {
+        // Protocolo de entrada:
+        estado[i] = solicitando;
+        L1: while (turno != i) {
+            // Guarda original: if (estado[turno] == pasivo) turno = i;
+            // Guarda propuesta:
+            if (estado[turno] != enSC) {
+                turno = i;
+            }
+        }
+        estado[i] = enSC;
+        for (int j = 0; j < N; ++j) {
+            if (j != i && estado[j] == enSC) {
+                goto L1; // Retroceso si detecta colision en SC
+            }
+        }
+
+        // Seccion Critica:
+        seccion_critica();
+
+        // Protocolo de salida:
+        estado[i] = pasivo;
+
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+
+\textbf{Apartado (a): Comparación Operativa de las Dos Condiciones:}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Condición Original (\texttt{estado[turno] == pasivo}):} Un proceso $P_i$ únicamente se apropia del turno (\texttt{turno := i}) si el titular actual no tiene interés en la sección crítica. Si el titular está en estado \texttt{solicitando}, los demás procesos respetan pacíficamente su turno y aguardan a que él concluya su entrada.
+    \item \textbf{Condición Propuesta (\texttt{estado[turno] != enSC}):} El proceso $P_i$ puede arrebatar el turno no sólo si el titular está pasivo, sino \textbf{también cuando el titular está activamente compitiendo en el protocolo de entrada} (\texttt{estado[turno] == solicitando}), con tal de que no haya alcanzado todavía la SC.
+\end{itemize}
+
+\textbf{Apartado (b): Construcción del Contraejemplo (Interbloqueo Dinámico / Livelock):}\\
+Consideremos $N = 2$ procesos ($P_0$ y $P_1$) con valor inicial $\texttt{turno} = 0$. Ambos solicitan entrar:
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{cllcccp{4.2cm}}
+\toprule
+\textbf{Paso} & \textbf{Proceso} & \textbf{Línea Ejecutada} & $\text{est}[0]$ & $\text{est}[1]$ & \textbf{turno} & \textbf{Efecto en el Sistema} \\ \midrule
+1 & $P_0$ & $\texttt{estado}[0] := \text{solicitando}$ & sol & pas & 0 & $P_0$ inicia solicitud. \\
+2 & $P_1$ & $\texttt{estado}[1] := \text{solicitando}$ & sol & sol & 0 & $P_1$ inicia solicitud. \\
+3 & $P_1$ & Evalúa \texttt{while turno != 1} & sol & sol & 0 & Condición cierta ($0 \ne 1$). \\
+4 & $P_1$ & Evalúa \texttt{estado[0] != enSC} & sol & sol & 0 & Cierta ($\text{sol} \ne \text{enSC}$). \\
+5 & $P_1$ & $\texttt{turno} := 1$ & sol & sol & 1 & $P_1$ arrebata el turno a $P_0$. \\
+6 & $P_0$ & Evalúa \texttt{while turno != 0} & sol & sol & 1 & Condición cierta ($1 \ne 0$). \\
+7 & $P_0$ & Evalúa \texttt{estado[1] != enSC} & sol & sol & 1 & Cierta ($\text{sol} \ne \text{enSC}$). \\
+8 & $P_0$ & $\texttt{turno} := 0$ & sol & sol & 0 & $P_0$ arrebata el turno a $P_1$. \\
+9 & $P_1$ & Reevalúa \texttt{while turno != 1} & sol & sol & 0 & Cierta ($0 \ne 1$). Arrebata: $\texttt{turno}:=1$. \\
+10 & $P_0$ & Reevalúa \texttt{while turno != 0} & sol & sol & 1 & Cierta ($1 \ne 0$). Arrebata: $\texttt{turno}:=0$. \\ \midrule
+\multicolumn{7}{c}{\textbf{CICLO INFINITO: Ningún proceso logra validar $\texttt{turno} == i$ para pasar a $\text{enSC}$. LIVELOCK TOTAL.}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{center}
+Ambos procesos se disputan el turno de forma destructiva y oscilante, impidiendo que ninguno complete la verificación de entrada.
+
+\textbf{Apartado (c): Clasificación del Defecto (Seguridad vs. Progreso vs. Equidad):}\\
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Seguridad (Exclusión Mutua): NO SE VE AFECTADA.}
+    La exclusión mutua estricta en el algoritmo de Dijkstra está custodiada por la segunda barrera (el bucle \texttt{for} que verifica si algún otro proceso tiene $\texttt{estado}[j] == \text{enSC}$, retrocediendo con \texttt{goto L1} si detecta concurrencia). El cambio en la primera guarda no permite que dos procesos superen juntos este segundo filtro.
+    \item \textbf{Progreso (Ausencia de Interbloqueo): QUEDA COMPLETAMENTE DESTRUIDO.}
+    El defecto provoca un \textbf{fallo catastrófico de progreso} (vivacidad global del sistema). La sección crítica se encuentra desocupada y dos procesos compiten activamente por acceder, pero el sabotaje mutuo sobre la variable \texttt{turno} les impide entrar indefinidamente.
+    \item \textbf{Equidad:} Se degrada como consecuencia del fallo de progreso.
+\end{itemize}
+\end{solucion}
+
