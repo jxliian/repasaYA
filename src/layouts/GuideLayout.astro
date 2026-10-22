@@ -1,0 +1,288 @@
+---
+import Shell from './Shell.astro';
+import Breadcrumbs from '../components/nav/Breadcrumbs.astro';
+
+interface Frontmatter {
+  title: string;
+  description?: string;
+  date?: string;
+  author?: string;
+  badge?: string;
+}
+
+interface Props {
+  frontmatter: Frontmatter;
+}
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title ?? 'Guía de Estudio SCD';
+const description = frontmatter?.description ?? 'Plan de estudio y preparación intensiva para el examen parcial de SCD.';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const crumbs = [
+  { label: 'Inicio', href: base },
+  { label: 'Informática', href: `${base}informatica/` },
+  { label: '3º', href: `${base}informatica/3/` },
+  { label: 'Cuatri 1', href: `${base}informatica/3/c1/` },
+  { label: 'SCD', href: `${base}informatica/3/c1/sistemas-concurrentes-y-distribuidos/` },
+  { label: 'Guía de Examen', href: null },
+];
+---
+
+<Shell title={title} description={description}>
+  <div class="guide-wrapper">
+    <div class="guide-crumbs">
+      <Breadcrumbs crumbs={crumbs} />
+    </div>
+
+    {frontmatter?.badge && (
+      <div class="guide-badge-row">
+        <span class="guide-badge">{frontmatter.badge}</span>
+      </div>
+    )}
+
+    <article class="guide-article">
+      <slot />
+    </article>
+
+    <div class="guide-cta-footer">
+      <div class="cta-card">
+        <div class="cta-icon">📝</div>
+        <div class="cta-body">
+          <h3>Banco de Test de SCD</h3>
+          <p>207 preguntas tipo test verificadas con justificaciones exhaustivas de Capel.</p>
+          <a class="btn btn-primary" href={`${base}informatica/3/c1/sistemas-concurrentes-y-distribuidos/test/`}>Practicar Test →</a>
+        </div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">📄</div>
+        <div class="cta-body">
+          <h3>Solucionario de Problemas</h3>
+          <p>63 ejercicios resueltos paso a paso en PDF (Temas 1, 2 y 2-2) con código C++11.</p>
+          <a class="btn btn-ghost" href={`${base}scd/relaciones-problemas-scd.pdf`} target="_blank">Abrir Solucionario PDF →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Shell>
+
+<style is:global>
+  .guide-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  .guide-crumbs {
+    margin-bottom: 20px;
+  }
+
+  .guide-badge-row {
+    margin-bottom: 16px;
+  }
+
+  .guide-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    border-radius: 99px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+  }
+
+  .guide-article {
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  .guide-article h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 16px;
+  }
+
+  .guide-article h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 48px;
+    margin-bottom: 18px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+  }
+
+  .guide-article h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .guide-article p {
+    margin-bottom: 18px;
+    color: var(--text-muted);
+  }
+
+  .guide-article p strong,
+  .guide-article li strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .guide-article ul,
+  .guide-article ol {
+    margin: 16px 0 24px 24px;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .guide-article li {
+    line-height: 1.6;
+  }
+
+  .guide-article blockquote {
+    background: var(--surface);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    color: var(--text);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .guide-article blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .guide-article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 0.9rem;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  .guide-article th {
+    background: var(--surface2);
+    color: var(--text);
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .guide-article td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .guide-article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .guide-article tr:hover td {
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .guide-article code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .guide-article pre {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+
+  .guide-article pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text);
+    font-size: 0.85rem;
+  }
+
+  .guide-article hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  .guide-cta-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+
+  .cta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .cta-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+
+  .cta-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .cta-body h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .cta-body p {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+</style>

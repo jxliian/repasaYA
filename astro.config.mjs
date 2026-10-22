@@ -60,5 +60,10 @@ export default defineConfig({
     '/dsd': '/informatica/4/c2/dsd/',
     '/dsd/vf': '/informatica/4/c2/dsd/vf/',
     '/dsd/apuntes': '/informatica/4/c2/dsd/apuntes-t4-t5/',
+    '/scd': '/informatica/3/c1/sistemas-concurrentes-y-distribuidos/',
+    '/scd/test': '/informatica/3/c1/sistemas-concurrentes-y-distribuidos/test/',
+    '/scd/apuntes': '/informatica/3/c1/sistemas-concurrentes-y-distribuidos/apuntes/',
+    '/scd/relaciones': '/informatica/3/c1/sistemas-concurrentes-y-distribuidos/relaciones/',
+    '/informatica/3/c1/sistemas-concurrentes-y-distribuidos/guia': '/scd/guia/',
   },
 });
