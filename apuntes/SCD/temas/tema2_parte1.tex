@@ -202,17 +202,204 @@ Si $P_0$ asignó $\text{turno} = 1$ en último lugar, entonces $\text{turno} == 
 \end{proof}
 
 % ------------------------------------------------------------------------------
-\subsection{Exclusión Mutua para N Procesos}
-Para extender la exclusión mutua por software a $N$ procesos existen dos algoritmos célebres:
+\subsection{Exclusión Mutua para N Procesos en Memoria Compartida}
+La extensión del problema de la exclusión mutua a $N$ procesos ($N \ge 2$) plantea retos teóricos profundos de vivacidad (ausencia de interbloqueo y ausencia de inanición) y equidad. A continuación se presentan las soluciones formales canónicas estudiadas en la Universidad de Granada basadas en las presentaciones oficiales del Departamento de LSI:
 
+\subsubsection{1. El Algoritmo de Dijkstra para N Procesos (1965)}
+Edsger W. Dijkstra propuso en 1965 la primera solución general al problema de la exclusión mutua para $N$ procesos con memoria compartida y espera activa.
+
+\begin{algoritmo}[Algoritmo de Dijkstra para N Procesos]
+\begin{lstlisting}[language=C++]
+// Estados posibles de cada proceso
+enum Estado { pasivo, solicitando, en_SC };
+
+// Variables compartidas
+Estado c[N] = {pasivo, ..., pasivo};
+int turno = 0; // 0 .. N-1
+
+void Proceso(int i) {
+    while (true) {
+        // PROTOCOLO DE ENTRADA (2 barreras):
+        do {
+            c[i] = solicitando;
+            
+            // Primera Barrera: Competicion por el turno
+            while (turno != i) {
+                if (c[turno] == pasivo) {
+                    turno = i; // Intento de apropiacion del turno
+                }
+            }
+            
+            // Segunda Barrera: Verificacion de seguridad (exclusion mutua)
+            c[i] = en_SC;
+            int j = 0;
+            while (j < N && (j == i || c[j] != en_SC)) {
+                j++;
+            }
+        } while (j < N); // Si alguien mas marco en_SC, ciclar de nuevo
+        
+        seccion_critica();
+        
+        // PROTOCOLO DE SALIDA:
+        c[i] = pasivo;
+        
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+
+\textbf{Análisis de Propiedades del Algoritmo de Dijkstra:}
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Filtro de Peterson:} Generaliza el algoritmo para 2 procesos creando $N-1$ etapas o niveles de competición. En cada nivel, al menos un proceso queda esperando en el filtro, de forma que a la etapa $N-1$ solo llega un único ganador.
-    \item \textbf{Algoritmo de la Panadería de Lamport (\textit{Bakery Algorithm}):} Simula el sistema de turnos de una panadería:
-    \begin{enumerate}
-        \item Cada proceso $i$ que desea entrar toma un número de turno: $\text{turno}[i] = 1 + \max(\text{turno}[0], \dots, \text{turno}[n-1])$.
-        \item Se atiende a los procesos por orden lexicográfico estricto del par $(\text{turno}[i], i)$.
-        \item \textbf{Propiedad excepcional:} Es correcto incluso si las lecturas y escrituras en memoria no son estrictamente atómicas (tolera lecturas solapadas con escrituras en variables compartidas).
-    \end{enumerate}
+    \item \textbf{Seguridad (Exclusión Mutua):} La 2.ª barrera garantiza que ningún proceso entra a la SC si detecta a otro proceso con $c[j] == \text{en\_SC}$.
+    \item \textbf{Ausencia de Interbloqueo:} La 1.ª barrera detiene a los procesos si el que posee el turno no está pasivo. Si un grupo de procesos se ve forzado a ciclar nuevamente, el poseedor del turno no puede estar pasivo.
+    \item \textbf{Problema de Vivacidad (Peligro de Inanición):} El algoritmo de Dijkstra \textbf{no evita la inanición} (\textit{starvation}). La comprobación de $c[\text{turno}] == \text{pasivo}$ y la asignación $\text{turno} = i$ no son indivisibles. Dos procesos rápidos pueden ciclar alternándose continuamente en la SC, impidiendo indefinidamente la entrada de un tercer proceso más lento.
+\end{itemize}
+
+\subsubsection{2. El Algoritmo de Knuth y la Equidad Relativa (1966)}
+Donald Knuth resolvió el problema de la inanición en 1966 introduciendo el concepto de \textit{espera acotada} (\textit{bounded waiting}) o \textit{equidad relativa}: ningún proceso esperará más de un número finito de accesos a la SC por parte de sus competidores.
+
+\begin{algoritmo}[Algoritmo de Knuth para N Procesos]
+\begin{lstlisting}[language=C++]
+Estado c[N] = {pasivo, ..., pasivo};
+int turno = 0;
+
+void Proceso(int i) {
+    while (true) {
+        do {
+            c[i] = solicitando;
+            int j = turno;
+            // Primera barrera con comprobacion circular:
+            while (j != i) {
+                if (c[j] != pasivo) {
+                    j = turno;
+                } else {
+                    j = (j - 1 + N) % N;
+                }
+            }
+            // Segunda barrera:
+            c[i] = en_SC;
+            int k = 0;
+            while (k < N && (k == i || c[k] != en_SC)) {
+                k++;
+            }
+        } while (k < N);
+        
+        turno = i;
+        seccion_critica();
+        
+        // PROTOCOLO DE SALIDA con cesion de turno circular:
+        turno = (i - 1 + N) % N;
+        c[i] = pasivo;
+        
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+
+\begin{teorema}[Cota de Espera de Knuth]
+Bajo la hipótesis de progreso finito, el algoritmo de Knuth garantiza la ausencia total de inanición. El retraso máximo que sufre cualquier proceso solicitante está acotado superiormente por $2^{N-1} - 1$ accesos a la SC de otros procesos.
+\end{teorema}
+
+\subsubsection{3. El Algoritmo del Filtro de Peterson para N Procesos (1981)}
+El algoritmo del filtro generaliza el algoritmo de Peterson para 2 procesos creando $N-1$ etapas o niveles de competición consecutivos (etapas $0, 1, \dots, N-2$). Para acceder a la Sección Crítica (que actúa como etapa ficticia $N-1$), un proceso debe superar exitosamente todos los niveles.
+
+\begin{algoritmo}[Algoritmo del Filtro de Peterson para N Procesos]
+\begin{lstlisting}[language=C++]
+// c[i] indica la etapa actual del proceso i (-1: no compite, 0..N-2: etapas, N-1: SC)
+int c[N] = {-1, ..., -1};
+
+// turno[j] indica el proceso que llego en ultimo lugar a la etapa j
+int turno[N - 1] = {0, ..., 0};
+
+void Proceso(int i) {
+    while (true) {
+        // PROTOCOLO DE ENTRADA A TRAVES DE LAS N-1 ETAPAS:
+        for (int j = 0; j <= N - 2; j++) {
+            c[i] = j;        // Proceso i declara estar en la etapa j
+            turno[j] = i;    // Cortesmente asume ser el ultimo en llegar a la etapa j
+            
+            // Espera mientras exista algun otro proceso en una etapa igual o superior
+            // Y el proceso i siga siendo el ultimo en haber llegado a la etapa j:
+            for (int k = 0; k < N; k++) {
+                if (k == i) continue;
+                while (c[k] >= j && turno[j] == i) {
+                    // Espera activa (spin)
+                }
+            }
+        }
+        
+        c[i] = N - 1; // Metainstruccion: proceso en Seccion Critica
+        seccion_critica();
+        
+        // PROTOCOLO DE SALIDA:
+        c[i] = -1;    // Vuelve al estado inicial de reposo
+        
+        seccion_no_critica();
+    }
+}
+\end{lstlisting}
+\end{algoritmo}
+
+\textbf{Lemas Formales de Verificación del Filtro de Peterson (Capel):}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Lema 1 (Propiedad del Filtro):} A lo sumo $N - L$ procesos pueden encontrarse simultáneamente en la etapa $L$ o en etapas superiores ($0 \le L \le N - 1$).
+    \item \textbf{Lema 2 (Garantía de Exclusión Mutua):} En la etapa final $L = N - 1$ (la Sección Crítica), el número de procesos concurrentes está acotado por:
+    \[
+    N_{SC} \le N - (N - 1) = 1
+    \]
+    lo que demuestra formalmente la exclusión mutua estricta.
+    \item \textbf{Lema 3 (Distribución Monótona y Ausencia de Etapas Intermedias Vacías):} Si en una etapa $L$ existen al menos 2 procesos, todas las etapas anteriores $0, 1, \dots, L - 1$ contienen obligatoriamente al menos un proceso. Por consiguiente, \textbf{no pueden existir etapas intermedias vacías} (por ejemplo, es teóricamente imposible que haya 2 procesos en la etapa $N-2$ y 0 procesos en la etapa $N-3$).
+    \item \textbf{Cota de Espera Uniforme:} La espera máxima de cualquier proceso hasta acceder a la SC está acotada por a lo sumo $\frac{N(N-1)}{2}$ adelantamientos.
+\end{enumerate}
+
+\subsubsection{4. Algoritmo de la Panadería de Lamport (\textit{Bakery Algorithm})}
+Leslie Lamport (1974) formuló este algoritmo inspirado en las salas de espera comerciales donde los clientes extraen un tique numérico:
+\begin{itemize}[leftmargin=*]
+    \item Cada proceso toma un número: $\text{turno}[i] = 1 + \max(\text{turno}[0], \dots, \text{turno}[N-1])$.
+    \item Se atiende en orden lexicográfico del par $(\text{turno}[i], i)$:
+    \[
+    (\text{turno}[i], i) < (\text{turno}[j], j) \iff (\text{turno}[i] < \text{turno}[j]) \lor (\text{turno}[i] == \text{turno}[j] \land i < j)
+    \]
+    \item \textbf{Tolerancia a fallos de hardware:} Es correcto incluso ante lecturas concurrentes solapadas con escrituras en memoria no atómica.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Algoritmos Distribuidos de Exclusión Mutua}
+En sistemas distribuidos, los procesos no comparten memoria física ni un reloj global común. La exclusión mutua debe lograrse exclusivamente mediante el intercambio de mensajes sobre una red de comunicaciones fiable:
+
+\subsubsection{1. Algoritmo de Ricart-Agrawala (1981) — Basado en Permisos}
+Optimiza el algoritmo de Lamport eliminando los mensajes de liberación explícitos:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Petición:} Un proceso $P_i$ que desea entrar a la SC genera una marca de tiempo lógica $ns = mns + 1$ y envía un mensaje $\text{REQUEST}(ns, i)$ a todos los demás $N-1$ nodos.
+    \item \textbf{Decisión:} Un receptor $P_j$ responde con $\text{REPLY}$ inmediatamente salvo que esté en la SC o desee entrar a la SC con una marca de tiempo de mayor prioridad (menor marca lógica o menor ID en empate). En tal caso, pospone la respuesta (\texttt{repretrasadas[i] = true}).
+    \item \textbf{Entrada a la SC:} $P_i$ entra a la SC en cuanto reúne los $N-1$ mensajes $\text{REPLY}$.
+    \item \textbf{Salida:} Al abandonar la SC, $P_i$ envía los mensajes $\text{REPLY}$ aplazados.
+    \item \textbf{Complejidad:} Requiere exactamente $2(N - 1)$ mensajes por acceso a la SC ($(N-1)$ peticiones $+ (N-1)$ respuestas).
+\end{itemize}
+
+\subsubsection{2. Algoritmos Basados en Testigo (\textit{Token-Based})}
+En estos esquemas, existe un único testigo lógico (\textit{token}) en todo el sistema distribuido. Solo el nodo que posee el testigo tiene derecho a ejecutar la Sección Crítica:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Invariante Fundamental de Seguridad:} Si $\text{token\_presente}[i] \in \{0, 1\}$ denota la posesión del testigo en el nodo $i$:
+    \[
+    \sum_{i=0}^{N-1} \text{token\_presente}[i] \le 1
+    \]
+    lo que asegura que jamás coinciden dos nodos en la SC.
+\end{itemize}
+
+\subsubsection{3. Algoritmo de Regeneración de Testigo de Misra (1983)}
+En sistemas propensos a caídas o particiones de red, el testigo puede perderse o destruirse. Jayadev Misra diseñó un protocolo elegante con dos testigos duales circulantes en un anillo lógico: \texttt{ping} y \texttt{pong}.
+\begin{itemize}[leftmargin=*]
+    \item Cada nodo mantiene una variable de estado local $m_i$.
+    \item Los testigos llevan contadores enteros asociados: $(\text{ping}, \text{num\_ping})$ y $(\text{pong}, \text{num\_pong})$.
+    \item \textbf{Relación Invariante en Todo Instante:}
+    \[
+    \text{num\_ping} + \text{num\_pong} = 0
+    \]
+    Inicialmente, ambos tokens residen en un mismo nodo con $\text{num\_ping} = 1$ y $\text{num\_pong} = -1$.
+    \item Al cruzarse los dos testigos en un nodo, se incrementan sus valores absolutos. Si un testigo se pierde, el desfase entre las variables locales $m_i$ y el testigo superviviente permite detectar de forma unívoca la pérdida y regenerar el testigo faltante sin violar la exclusión mutua.
 \end{itemize}
 
 % ==============================================================================
