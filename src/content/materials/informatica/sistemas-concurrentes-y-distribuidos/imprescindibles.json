@@ -1,0 +1,8 @@
+{
+  "subject": "informatica/sistemas-concurrentes-y-distribuidos",
+  "type": "apuntes",
+  "title": "Problemas Imprescindibles Parcial (19 ejercicios resueltos)",
+  "order": 3,
+  "pdf": "scd/ejercicios-imprescindibles-parcial-scd.pdf",
+  "description": "Cuaderno intensivo de 35 páginas con los 19 problemas clave del sprint de 4 días resueltos al detalle: exclusión mutua (Peterson, Hyman, Dijkstra, Swap), monitores (puente, olla, aseo, filósofos, SU vs SC) y lógica de Hoare/Bernstein."
+}

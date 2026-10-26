@@ -75,6 +75,11 @@ La terna típica de Capel es:
 
 De los **63 problemas resueltos** en el solucionario oficial en PDF de repasaYA, estos son los **imprescindibles absolutos**:
 
+> 📥 **Cuaderno PDF de Problemas Imprescindibles (Sprint 4 Días):**  
+> Puedes descargar directamente el PDF dedicado de 35 páginas que contiene exclusivamente estos 19 ejercicios con sus enunciados oficiales, explicaciones pedagógicas paso a paso, tablas de intercalación y código C++11:  
+> 👉 [**Descargar PDF: 19 Problemas Imprescindibles Resueltos para el Parcial de SCD**](/scd/ejercicios-imprescindibles-parcial-scd.pdf)
+
+
 ### Grupo 1: Exclusión Mutua en Memoria Compartida (Tema 2-2)
 * **Ejercicio 57 (Peterson para 2 procesos):**
   * *Qué saberte:* Demostración formal de exclusión mutua por reducción al absurdo en la variable `turno`.
