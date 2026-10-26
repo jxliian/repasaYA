@@ -1,0 +1,8 @@
+{
+  "subject": "informatica/sistemas-concurrentes-y-distribuidos",
+  "type": "examen",
+  "title": "Exámenes Oficiales Resueltos (Convocatorias 2021 y 2025)",
+  "order": 4,
+  "pdf": "scd/examenes-oficiales-resueltos-scd.pdf",
+  "description": "Resolución íntegra y auditoría crítica de los exámenes oficiales de 2021 y 2025 (repetido): semáforos POSIX asimétricos, cerrojo de aforo FIFO, monitores con prioridad dinámica, cuenta bancaria y demostraciones formales de Hoare y Owicki-Gries."
+}

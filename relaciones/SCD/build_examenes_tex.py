@@ -1,0 +1,801 @@
+# -*- coding: utf-8 -*-
+import sys
+
+content = r"""\documentclass[11pt,a4paper,twoside,openright]{report}
+
+\input{config/estilo}
+
+% Formato de capítulos para exámenes
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{scdDarkBlue}\sffamily}
+  {\Large\textsf{\thechapter}}{1ex}
+  {\titlerule[1.5pt]\vspace{1ex}\huge}
+  [\vspace{1ex}\titlerule]
+
+\hypersetup{
+    pdftitle={SCD - Exámenes Reales Resueltos y Corregidos (2021 y 2025)},
+    pdfauthor={repasaYA - UGR},
+    pdfsubject={Sistemas Concurrentes y Distribuidos - Convocatorias Oficiales},
+    pdfkeywords={SCD, Examen 2021, Examen 2025, Semáforos, Monitores, Owicki-Gries, Hoare, Capel, UGR}
+}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.2cm}
+    
+    {\Huge\bfseries\color{scdDarkBlue}\textsf{Sistemas Concurrentes y Distribuidos}}\\[0.6cm]
+    {\LARGE\bfseries\color{scdPrimary}\textsf{Exámenes Oficiales Resueltos y Corregidos}}\\[0.4cm]
+    {\large\textsf{Convocatorias Reales: Parcial 2021 y Parcial 2025 (Repetido)}}\\[0.3cm]
+    {\normalsize\textsf{Grado en Ingeniería Informática + Doble Grado DGIIM / ADE}}\\[0.2cm]
+    {\normalsize\textsf{Universidad de Granada (UGR)}}\\[1.2cm]
+    
+    \rule{0.85\textwidth}{1.5pt}\\[1.4cm]
+    
+    \begin{tcolorbox}[
+        colback=scdLightAccent,
+        colframe=scdAccent,
+        width=0.88\textwidth,
+        arc=4pt,
+        halign=center
+    ]
+        \large\textbf{\color{scdDarkBlue}Auditoría y Resolución Exhaustiva de Problemas:}\\[6pt]
+        \normalsize
+        $\bullet$ \textbf{Examen 2025 (Repetido):} 4 problemas completos (Semáforos POSIX con sincronización asimétrica, Lógica de Hoare y Owicki-Gries, Exclusión mutua de aforo $n$ con cola FIFO, y Monitor de dos tipos con prioridad acumulada).\\[4pt]
+        $\bullet$ \textbf{Examen 2021:} 2 problemas fundamentales (Monitor de Cuenta Bancaria con retiradas en orden estricto FIFO, y Demostración concurrente formal de 3 procesos con Owicki-Gries).\\[6pt]
+        \small\textit{Incluye análisis crítico de los intentos de alumnos, detección y enmienda de errores conceptuales y sintácticos, invariantes formales y código C++11 / POSIX verificado.}
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\large\textsf{Plataforma \textbf{repasaYA}}}\\[0.2cm]
+    {\small\textsf{Material de Preparación para Examen Oficial — Prof. Manuel I. Capel Tuñón}}\\[0.6cm]
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% ÍNDICE Y PRESENTACIÓN
+% ------------------------------------------------------------------------------
+\chapter*{Presentación y Auditoría de los Exámenes}
+\addcontentsline{toc}{chapter}{Presentación y Auditoría de los Exámenes}
+
+\begin{aviso}[¿Por qué es crucial estudiar estos dos exámenes?]
+Las pruebas propuestas por el Prof. Manuel I. Capel Tuñón en la Universidad de Granada siguen patrones muy concretos que se repiten históricamente. De hecho, el examen titulado \textbf{Examen 2025 (Repetido)} reutilizó íntegramente la estructura y ejercicios de convocatorias anteriores (incluyendo problemas clásicos de exámenes de 2018--2021).
+
+En los manuscritos y borradores habituales que circulan entre alumnos se detectan \textbf{errores conceptuales muy graves}:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Semáforos mal sincronizados (Ej. 1 de 2025):} La solución del alumno omitía por completo la espera de $P_2$ sobre $P_3$, provocando que $P_2$ ejecutara su instrucción sin que $P_3$ hubiera intervenido.
+    \item \textbf{Problemas en blanco (Ej. 3 de 2025):} El problema del cerrojo de aforo $n$ con cola FIFO suele dejarse sin responder por falta de conocimiento sobre algoritmos basados en tickets.
+    \item \textbf{Monitores con errores de estado y concurrencia (Ej. 4 de 2025):} La gestión de prioridades dinámicas acumuladas y la reactivación de tipos incompatibles contenía condiciones contradictorias que generaban interbloqueo y violación de exclusión mutua.
+    \item \textbf{Monitores con sintaxis inventada (Ej. 1 de 2021):} El uso de métodos inexistentes como \texttt{cola.queue(pos)} dentro de un bucle \texttt{while} bloqueaba permanentemente el monitor bancario.
+    \item \textbf{Pruebas de Owicki-Gries incompletas (Ej. 2 de 2021 y 2025):} Aserciones sin justificar mediante el axioma de asignación y omisión de las tablas cruzadas de no interferencia.
+\end{enumerate}
+
+Este cuaderno ofrece los enunciados transcritos tal cual, el diagnóstico pedagógico de cada error típico y la \textbf{resolución formal rigurosa} para obtener la máxima calificación en el examen.
+\end{aviso}
+
+\tableofcontents
+\newpage
+
+% ==============================================================================
+% CAPÍTULO 1: EXAMEN 2025 (REPETIDO)
+% ==============================================================================
+\chapter{Examen Parcial 2025 (Convocatoria Repetida)}
+\label{cap:examen2025}
+
+\cuadrofuentes{
+    \textbf{Ficha de la Convocatoria:} Examen Parcial de SCD (Temas 1 y 2), reutilizado en 2025.\\
+    $\bullet$ \textbf{Contenido evaluado:} Sincronización asimétrica con semáforos POSIX, demostración de triples con bucles concurrentes en lógica de Hoare, exclusión mutua de aforo $n$ con cola FIFO en memoria compartida, y monitor de gestión de recursos con dos tipos y prioridad acumulada.
+}
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 1 - 2025
+% ------------------------------------------------------------------------------
+\section{Problema 1: Sincronización de Tres Procesos con Semáforos POSIX}
+
+\begin{ejercicio}[1: Coordinación de P1, P2 y P3 bajo Condiciones Asimétricas]
+Se tienen los procesos $P_1$, $P_2$ y $P_3$ con sus instrucciones originales en bucles infinitos:
+
+\begin{lstlisting}[language=C++]
+Proceso P1;
+begin
+  while true do begin
+    a;
+    b;
+    c;
+  end;
+end;
+
+Proceso P2;
+begin
+  while true do begin
+    d;
+    e;
+    f;
+  end;
+end;
+
+Proceso P3;
+begin
+  while true do begin
+    g;
+    h;
+    i;
+  end;
+end;
+\end{lstlisting}
+
+Se desea modificar el comportamiento de forma que:
+\begin{enumerate}
+    \item $P_2$ solo pueda ejecutar `\texttt{e}' después de que $P_1$ haya ejecutado `\texttt{b}' al menos una vez, y $P_3$ haya ejecutado `\texttt{h}' exactamente una vez (por cada ejecución de `\texttt{e}').
+    \item $P_2$ no debe bloquearse indefinidamente si $P_3$ ejecuta `\texttt{h}' antes que $P_1$.
+    \item Solo pueden usarse semáforos POSIX no nombrados.
+\end{enumerate}
+\textbf{Tareas:}
+\begin{enumerate}[label=(\alph*)]
+    \item Diseñar la solución sin interbloqueo.
+    \item Demostrar que no hay inanición para $P_2$ aunque $P_1$ sea más lento.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Análisis de Requisitos y Diagnóstico del Error del Alumno:}\\
+El borrador original del estudiante proponía:
+\begin{lstlisting}[language=C++]
+// ERROR TIPICO:
+// En P2: sem_wait(b); e; sem_signal(h);
+// En P3: sem_wait(h); h;
+\end{lstlisting}
+Esta propuesta es **completamente incorrecta** por tres razones críticas:
+\begin{itemize}
+    \item $P_2$ **nunca esperaba a $P_3$**: $P_2$ solo hacía \texttt{wait(b)}. Podía ejecutar \texttt{e} sin que $P_3$ hubiera ejecutado jamás \texttt{h}.
+    \item $P_3$ se bloqueaba tras la primera iteración porque nadie le devolvía el permiso si $P_2$ no pasaba por \texttt{sem\_signal(h)}.
+    \item Se confundía la condición de \textit{"al menos una vez"} con consumir un semáforo contador en cada iteración.
+\end{itemize}
+
+\textbf{2. Especificación Formal de Sincronización:}
+\begin{itemize}
+    \item \textbf{Condición sobre $P_1$ ("al menos una vez"):} Basta con que $P_1$ ejecute `\texttt{b}' una sola vez en la vida del sistema para desbloquear permanentemente la precondición de $P_1$. Podemos modelarlo mediante un semáforo \texttt{b\_listo} que, una vez señalizado, permanece accesible o mediante un cerrojo con indicador booleano.
+    \item \textbf{Condición sobre $P_3$ ("exactamente una vez por cada `e'"):} Existe una relación 1 a 1 entre la ejecución de `\texttt{h}' y `\texttt{e}'. $P_3$ debe avisar a $P_2$ de que `\texttt{h}' se ha completado (\texttt{sem\_post(\&h\_hecho)}), y no debe ejecutar una segunda `\texttt{h}' hasta que $P_2$ haya consumido la anterior ejecutando `\texttt{e}' (\texttt{sem\_wait(\&h\_ack)}).
+    \item \textbf{Independencia de velocidad ($P_3$ antes que $P_1$):} Si $P_3$ ejecuta `\texttt{h}' primero, deposita su permiso en \texttt{h\_hecho}. Cuando más tarde $P_1$ ejecute `\texttt{b}', $P_2$ encontrará ambos requisitos satisfechos y avanzará sin bloqueo.
+\end{itemize}
+
+\textbf{3. Código C++ con Semáforos POSIX:}
+\begin{lstlisting}[language=C++]
+#include <semaphore.h>
+
+// Semaforos para coordinar P3 y P2 (handshake 1 a 1)
+sem_t sem_h_hecho; // Inic 0: P3 senala a P2 que 'h' ha concluido
+sem_t sem_h_ack;   // Inic 1: P2 autoriza a P3 a ejecutar su siguiente 'h'
+
+// Sincronizacion para "b ejecutado al menos una vez"
+sem_t sem_b_primera; // Inic 0: P1 avisa de su primer 'b'
+bool b_ya_ejecutado = false;
+sem_t mutex_b;       // Inic 1: protege la comprobacion de b_ya_ejecutado
+
+void inicializar() {
+    sem_init(&sem_h_hecho, 0, 0);
+    sem_init(&sem_h_ack, 0, 1);     // Permite a P3 hacer su primer 'h'
+    sem_init(&sem_b_primera, 0, 0);
+    sem_init(&mutex_b, 0, 1);
+}
+
+void P1() {
+    while (true) {
+        a();
+        b();
+        // Notificar que b se ha ejecutado al menos una vez
+        sem_wait(&mutex_b);
+        if (!b_ya_ejecutado) {
+            b_ya_ejecutado = true;
+            sem_post(&sem_b_primera);
+        }
+        sem_post(&mutex_b);
+        c();
+    }
+}
+
+void P2() {
+    while (true) {
+        d();
+        
+        // 1. Verificar requisito de P1 (al menos una vez):
+        sem_wait(&mutex_b);
+        if (!b_ya_ejecutado) {
+            sem_post(&mutex_b);
+            sem_wait(&sem_b_primera); // Espera al primer 'b'
+            sem_post(&sem_b_primera); // Deja el semaforo abierto para futuras vueltas
+        } else {
+            sem_post(&mutex_b);
+        }
+        
+        // 2. Verificar requisito de P3 (exactamente un 'h'):
+        sem_wait(&sem_h_hecho); // Espera a que P3 haya ejecutado 'h'
+        
+        e(); // Seccion protegida
+        
+        sem_post(&sem_h_ack);   // Autoriza a P3 a producir su siguiente 'h'
+        
+        f();
+    }
+}
+
+void P3() {
+    while (true) {
+        g();
+        sem_wait(&sem_h_ack);   // Espera autorizacion de P2
+        h();
+        sem_post(&sem_h_hecho); // Notifica a P2 que 'h' termino
+        i();
+    }
+}
+\end{lstlisting}
+
+\textbf{4. Demostración de Ausencia de Interbloqueo e Inanición (Apartado b):}
+\begin{itemize}
+    \item \textbf{Ausencia de interbloqueo:} No existe ciclo de espera circular entre procesos. $P_1$ nunca se bloquea esperando a $P_2$ ni a $P_3$ (solo usa una sección crítica corta con \texttt{mutex\_b}). $P_3$ solo espera a \texttt{sem\_h\_ack}, el cual está inicializado a 1, permitiendo que su primera iteración avance sin trabas.
+    \item \textbf{Inanición de $P_2$ ante lentitud de $P_1$:} Supongamos que $P_1$ es arbitrariamente lento. $P_3$ ejecutará `\texttt{g}' y `\texttt{h}', haciendo \texttt{sem\_post(\&sem\_h\_hecho)}. A continuación, $P_3$ se detiene en su siguiente vuelta en \texttt{sem\_wait(\&sem\_h\_ack)}. El proceso $P_2$ se bloqueará en \texttt{sem\_wait(\&sem\_b\_primera)}. En cuanto $P_1$ complete `\texttt{b}' por primera vez en tiempo finito, realiza \texttt{sem\_post(\&sem\_b\_primera)}, liberando a $P_2$. Al despertar, como el permiso de $P_3$ en \texttt{sem\_h\_hecho} ya fue depositado previamente, $P_2$ avanza inmediatamente hacia `\texttt{e}' sin retraso. Por tanto, no existe inanición.
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 2 - 2025
+% ------------------------------------------------------------------------------
+\section{Problema 2: Verificación Formal Axiomática en Lógica de Hoare}
+
+\begin{ejercicio}[2: Demostración Concurrente de Bucle y Asignación Atómica]
+Considérese el siguiente programa concurrente, donde cada instrucción entre $\langle$ y $\rangle$ se ejecuta de forma atómica:
+\begin{lstlisting}[language=C++]
+{ x == 0 /\ y == 0 /\ n > 0 }
+cobegin
+    < x = x + 1 >;
+ ||
+    while (y < n) do begin
+        < y = y + 1 >;
+    end;
+coend
+{ x == 1 /\ y == n }
+\end{lstlisting}
+
+\textbf{Se pide:}
+\begin{enumerate}[label=(\alph*)]
+    \item Determinar si el triple de Hoare concurrente es demostrable usando la Lógica de Programas (incluyendo las reglas del bucle \texttt{while} y la regla de composición concurrente).
+    \item En caso afirmativo, construir una demostración completa indicando: el invariante del bucle \texttt{while}, las triples atómicas utilizadas y las triples resultantes de combinar cada proceso mediante composición secuencial, iterativa y concurrente.
+    \item Discutir formalmente la no interferencia de Owicki-Gries entre ambos procesos.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Apartado (a): Determinación de Demostrabilidad:}\\
+El triple es plenamente demostrable. Como el primer proceso manipula exclusivamente la variable $x$ y el segundo proceso manipula exclusivamente la variable $y$ (siendo $n$ una constante de lectura), los conjuntos de variables modificadas son estrictamente disjuntos:
+\[
+\text{VarMod}(P_1) = \{x\}, \qquad \text{VarMod}(P_2) = \{y\}.
+\]
+Por consiguiente, la condición de no interferencia de Owicki-Gries se satisface de forma automática e invariante.
+
+\textbf{Apartado (b): Demostración Formal Paso a Paso:}
+
+\textbf{Paso 1: Demostración del Proceso $P_1$ ($S_1 \equiv \langle x := x + 1 \rangle$):}\\
+Aplicamos el Axioma de Asignación:
+\[
+\{Q[x/x+1]\} \; x := x + 1 \; \{Q\}
+\]
+Tomando $Q \equiv \{x = 1\}$, obtenemos:
+\[
+\{x + 1 = 1\} \; \langle x := x + 1 \rangle \; \{x = 1\} \iff \{x = 0\} \; \langle x := x + 1 \rangle \; \{x = 1\}.
+\]
+Por tanto, el triple de $P_1$ es válido:
+\[
+\boxed{\{x = 0\} \; P_1 \; \{x = 1\}}
+\]
+
+\textbf{Paso 2: Demostración del Proceso $P_2$ (Bucle \texttt{while}):}\\
+Definimos el invariante del bucle $I$ y la condición de guarda $B$:
+\[
+I \equiv 0 \le y \le n, \qquad B \equiv y < n.
+\]
+Demostramos el cuerpo del bucle para la acción atómica $T \equiv \langle y := y + 1 \rangle$:
+\[
+\{I \land B\} \; \langle y := y + 1 \rangle \; \{I\}
+\]
+Por el axioma de asignación:
+\[
+\{0 \le y + 1 \le n\} \; \langle y := y + 1 \rangle \; \{0 \le y \le n\}.
+\]
+Comprobamos la regla de consecuencia previa:
+\[
+(I \land B) \equiv (0 \le y \le n \land y < n) \implies 0 \le y \le n - 1 \implies 0 \le y + 1 \le n.
+\]
+Como la implicación es tautológicamente cierta, el cuerpo del bucle es correcto. Aplicando la \textbf{Regla del Bucle While}:
+\[
+\frac{\{I \land B\} \; T \; \{I\}}{\{I\} \; \text{while } B \text{ do } T \; \{I \land \neg B\}}
+\]
+Al terminar el bucle, la poscondición resultante es:
+\[
+I \land \neg B \equiv (0 \le y \le n \land \neg(y < n)) \equiv (0 \le y \le n \land y \ge n) \iff \mathbf{y = n}.
+\]
+Dado que la precondición inicial es $y = 0 \land n > 0$, evaluamos:
+\[
+(y = 0 \land n > 0) \implies 0 \le 0 \le n \equiv I.
+\]
+Por la Regla de Consecuencia (reforzamiento de precondición):
+\[
+\boxed{\{y = 0 \land n > 0\} \; P_2 \; \{y = n\}}
+\]
+
+\textbf{Apartado (c): Discusión Exhaustiva de No Interferencia (Owicki-Gries):}\\
+Para componer concurrentemente $\{P_1\} S_1 \{Q_1\}$ y $\{P_2\} S_2 \{Q_2\}$, debemos demostrar que ninguna sentencia atómica de un proceso invalida las aserciones intermedias o finales del otro.
+La condición formal de Owicki-Gries establece que para toda aserción $A \in \text{Aserciones}(P_1)$ y toda acción atómica $T \in P_2$ con precondición $\text{pre}(T)$:
+\[
+\{A \land \text{pre}(T)\} \; T \; \{A\}
+\]
+\begin{itemize}
+    \item \textbf{Aserciones de $P_1$ frente a $P_2$:} Las aserciones de $P_1$ son $\{x = 0\}$ y $\{x = 1\}$. La única acción de $P_2$ es $T \equiv \langle y := y + 1 \rangle$. Dado que $T$ modifica exclusivamente la variable $y$, el valor de verdad de cualquier aserción que dependa únicamente de $x$ permanece inmutable:
+    \[
+    \{x = 0 \land 0 \le y < n\} \; \langle y := y + 1 \rangle \; \{x = 0\}, \quad \text{es trivialmente válido}.
+    \]
+    \item \textbf{Aserciones de $P_2$ frente a $P_1$:} Las aserciones de $P_2$ son $\{I\}$ e $\{I \land \neg B\}$, las cuales dependen únicamente de $y$ y de la constante $n$. La acción de $P_1$ es $S_1 \equiv \langle x := x + 1 \rangle$, que no modifica $y$. Por tanto:
+    \[
+    \{0 \le y \le n \land x = 0\} \; \langle x := x + 1 \rangle \; \{0 \le y \le n\}, \quad \text{es trivialmente válido}.
+    \]
+\end{itemize}
+Demostrada la no interferencia global, aplicamos la \textbf{Regla de Composición Concurrente}:
+\[
+\frac{\{x = 0\} P_1 \{x = 1\} \quad \{y = 0 \land n > 0\} P_2 \{y = n\} \quad \text{NoInterferencia}(P_1, P_2)}{\{x = 0 \land y = 0 \land n > 0\} \; \mathbf{cobegin} \; P_1 \parallel P_2 \; \mathbf{coend} \; \{x = 1 \land y = n\}}
+\]
+Q.E.D.
+\end{solucion}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% EJERCICIO 3 - 2025
+% ------------------------------------------------------------------------------
+\section{Problema 3: Exclusión Mutua con Aforo \texorpdfstring{$n$}{n} y Cola FIFO}
+
+\begin{ejercicio}[3: Cerrojo de Capacidad n con Orden Estricto de Llegada]
+Se diseña una solución de exclusión mutua en memoria compartida donde pueden entrar como máximo $n$ procesos simultáneamente en la sección crítica, con $n \ge 2$.
+En esta versión:
+\begin{enumerate}
+    \item Se debe garantizar una \textbf{cola FIFO} para procesos que esperan cuando el aforo está completo.
+    \item El cerrojo permite hasta $n$ procesos dentro, pero la cola usa un \textbf{único contador protegido}.
+    \item Al salir un proceso, solo se desbloquea a un proceso de la cola, no a todos.
+\end{enumerate}
+\textbf{Tareas:}
+\begin{enumerate}[label=(\alph*)]
+    \item Dar pseudocódigo de entrada y salida utilizando variables en memoria compartida e instrucciones atómicas.
+    \item Demostrar las propiedades de corrección: exclusión mutua de aforo ($N_{sc} \le n$), vivacidad y orden FIFO.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Diseño Algorítmico (Ticket Lock Generalizado con Aforo):}\\
+Para garantizar orden FIFO estricto sin despertar a todos los procesos (evitando el efecto rebaño o \textit{thundering herd}), empleamos el principio del algoritmo de la panadería / cerrojo de ticket:
+\begin{itemize}
+    \item Una variable atómica \texttt{ticket\_distribuidor} reparte turnos correlativos mediante \texttt{fetch\_and\_add}.
+    \item Una variable \texttt{turno\_servicio} indica qué turno tiene derecho a entrar a la sección crítica.
+    \item Una variable \texttt{aforo\_disponible} (inicializada a $n$) contabiliza las plazas libres.
+    \item Para evitar despertar a todos, cada proceso puede esperar en una bandera individual en memoria o comprobar su turno directamente mediante espera activa ordenada: \texttt{mi\_turno < turno\_concedido}.
+\end{itemize}
+
+\textbf{2. Pseudocódigo Formal de Entrada y Salida:}
+\begin{lstlisting}[language=C++]
+// Constante de aforo maximo
+const int N_MAX = n; // con n >= 2
+
+// Variables compartidas en memoria
+atomic<int> ticket_distribuidor = 0; // Entrega turnos correlativos
+atomic<int> turno_salida = 0;        // Contador de procesos que han salido
+atomic<int> dentro = 0;              // Numero actual de procesos en SC (<= n)
+
+// Protocolo de Entrada para el proceso Pi:
+void entrar_SC() {
+    // 1. Obtener numero correlativo de llegada de forma atomica:
+    int mi_ticket = fetch_and_add(&ticket_distribuidor, 1);
+    
+    // 2. Condicion de entrada FIFO con aforo:
+    // Un proceso con 'mi_ticket' solo puede ingresar si han salido suficientes procesos
+    // de forma que su posicion en la cola no supere el aforo n:
+    // Condicion: mi_ticket < turno_salida + N_MAX
+    while (mi_ticket >= turno_salida.load(memory_order_acquire) + N_MAX) {
+        // Espera activa (spin) o suspension controlada.
+        // Solo el primer proceso de la cola superara esta condicion en cuanto
+        // un proceso saliente incremente turno_salida.
+    }
+    
+    // 3. Proceso ingresa formalmente a la SC:
+    fetch_and_add(&dentro, 1);
+}
+
+// Protocolo de Salida para el proceso Pi:
+void salir_SC() {
+    // 1. Decrementar contador de procesos dentro:
+    fetch_and_sub(&dentro, 1);
+    
+    // 2. Desbloquear exactamente al siguiente proceso de la cola FIFO:
+    // Al incrementar 'turno_salida' en 1, exactamente UN unico proceso
+    // (aquel con mi_ticket == turno_salida_anterior + N_MAX) vera su guarda cumplida:
+    fetch_and_add(&turno_salida, 1);
+}
+\end{lstlisting}
+
+\textbf{3. Demostración de Propiedades de Corrección:}
+\begin{itemize}
+    \item \textbf{Seguridad (Aforo Máximo $N_{sc} \le n$):}\\
+    Sea $k$ el valor actual de \texttt{turno\_salida}. Por definición del bucle de espera, cualquier proceso con ticket $T$ que haya ingresado a la sección crítica satisface obligatoriamente:
+    \[
+    T < k + n.
+    \]
+    Asimismo, como los procesos que ya han abandonado la sección crítica corresponden a los tickets $T < k$, los procesos que se encuentran simultáneamente dentro de la sección crítica pertenecen estrictamente al rango de tickets:
+    \[
+    k \le T < k + n.
+    \]
+    La cardinalidad de este intervalo entero es:
+    \[
+    N_{sc} = |\{T \in \mathbb{N} \mid k \le T \le k + n - 1\}| = (k + n - 1) - k + 1 = \mathbf{n}.
+    \]
+    Por consiguiente, en cualquier instante temporal $N_{sc} \le n$, garantizando la exclusión mutua de capacidad.
+    
+    \item \textbf{Orden Estricto de Llegada (FIFO):}\\
+    La asignación de tickets mediante la instrucción atómica indivisible \texttt{fetch\_and\_add} establece un orden total estricto sobre las solicitudes: si el proceso $P_i$ solicita entrar antes que $P_j$, entonces $\text{ticket}_i < \text{ticket}_j$. Como la condición de desbloqueo $\text{ticket} < \text{turno\_salida} + n$ es monótona no decreciente con respecto a \texttt{turno\_salida}, $P_i$ obtendrá permiso de entrada estrictamente antes o simultáneamente dentro del mismo cupo de $n$ plazas que $P_j$, impidiendo cualquier adelantamiento arbitrario.
+    
+    \item \textbf{Desbloqueo Unitario (Sin Efecto Rebaño):}\\
+    Cada ejecución de \texttt{salir\_SC()} incrementa \texttt{turno\_salida} en exactamente 1 unidad. El valor de la cota superior $\text{turno\_salida} + n$ avanza de $M$ a $M+1$. En consecuencia, únicamente el proceso que posea $\text{ticket} = M$ verá evaluada su guarda como verdadera, despertando a un único proceso a la vez.
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% PROBLEMA 4 - 2025
+% ------------------------------------------------------------------------------
+\section{Problema 4: Monitor CentroRecursos con Prioridad Acumulada}
+
+\begin{ejercicio}[4: Monitor para Dos Tipos Incompatibles con Prioridad Dinámica]
+Se desea un monitor \texttt{CentroRecursos} para gestionar el acceso de procesos de dos tipos (\textbf{Tipo 0} y \textbf{Tipo 1}) bajo las siguientes reglas:
+\begin{enumerate}
+    \item Solo procesos del mismo tipo pueden estar dentro simultáneamente (aforo máximo $M > 0$).
+    \item Nunca pueden coincidir procesos de tipos distintos en el centro.
+    \item Si hay procesos esperando de ambos tipos, tiene prioridad el tipo que haya acumulado más esperas totales a lo largo de la ejecución.
+    \item Al terminar, un proceso saliente despierta a un proceso del tipo con mayor prioridad acumulada.
+\end{enumerate}
+El monitor exporta los procedimientos: \texttt{entrar(int tipo)} y \texttt{salir(int tipo)}.
+
+\textbf{Tareas:}
+\begin{enumerate}[label=(\alph*)]
+    \item Diseñar el monitor especificando variables internas, colas de condición y contadores.
+    \item Explicar cómo se aplica la prioridad dinámica sin inconsistencias.
+    \item Justificar formalmente la exclusión mutua, ausencia de interbloqueo y vivacidad.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Auditoría del Código Erróneo del Alumno:}
+\begin{itemize}
+    \item El alumno escribió \texttt{if (colas[tipo].queue() > colas[otrotipo].queue())}, lo cual compara procesos esperando en el instante actual, ignorando el requisito expreso del enunciado de **"más esperas acumuladas históricas"**.
+    \item Al salir, si el centro quedaba vacío, el alumno hacía \texttt{colas[otrotipo].signal()} pero no actualizaba \texttt{tipodentro}, dejando el monitor en un estado incoherente.
+    \item Usaba \texttt{if} en lugar de \texttt{while} para la espera condicional, lo que en semántica Mesa o POSIX provoca fallos de concurrencia al reanudar la ejecución tras ser despertado.
+\end{itemize}
+
+\textbf{2. Implementación Correcta en C++11 (Semántica Mesa/POSIX):}
+\begin{lstlisting}[language=C++]
+#include <mutex>
+#include <condition_variable>
+
+class CentroRecursos {
+private:
+    const int AFORO_MAX = 5;      // Aforo maximo por tipo
+    int dentro = 0;               // Numero actual de procesos dentro
+    int tipo_activo = -1;         // -1: vacio, 0: Tipo 0, 1: Tipo 1
+    
+    // Contadores de procesos esperando en el momento presente
+    int esperando[2] = {0, 0};
+    
+    // Acumulador historico de esperas totales para prioridad dinamica
+    long esperas_totales[2] = {0, 0};
+    
+    std::mutex mtx;
+    std::condition_variable cola[2]; // cola[0] para Tipo 0, cola[1] para Tipo 1
+
+    // Metodo privado para determinar que tipo tiene mayor prioridad de paso
+    int tipo_prioritario() const {
+        if (esperando[0] > 0 && esperando[1] > 0) {
+            // Desempate por acumulacion historica de esperas:
+            return (esperas_totales[0] >= esperas_totales[1]) ? 0 : 1;
+        }
+        if (esperando[0] > 0) return 0;
+        if (esperando[1] > 0) return 1;
+        return -1; // Nadie esperando
+    }
+
+public:
+    void entrar(int tipo) {
+        std::unique_lock<std::mutex> lock(mtx);
+        int otro = 1 - tipo;
+        
+        esperando[tipo]++;
+        esperas_totales[tipo]++; // Registrar espera acumulada para la prioridad
+        
+        // Un proceso debe esperar si:
+        // 1. Hay procesos del tipo contrario dentro (tipo_activo == otro).
+        // 2. O el centro alcanzo el aforo maximo (dentro == AFORO_MAX).
+        // 3. O el centro esta vacio (dentro == 0), pero hay esperando procesos del otro tipo
+        //    Y el otro tipo tiene mayor prioridad historica acumulada:
+        while ((tipo_activo == otro) || 
+               (tipo_activo == tipo && dentro == AFORO_MAX) ||
+               (dentro == 0 && esperando[otro] > 0 && esperas_totales[otro] > esperas_totales[tipo])) {
+            cola[tipo].wait(lock);
+        }
+        
+        esperando[tipo]--;
+        tipo_activo = tipo;
+        dentro++;
+    }
+
+    void salir(int tipo) {
+        std::unique_lock<std::mutex> lock(mtx);
+        dentro--;
+        int otro = 1 - tipo;
+        
+        if (dentro == 0) {
+            tipo_activo = -1; // El centro queda libre
+            
+            // Decidir que grupo tiene derecho a acceder segun la prioridad dinamica:
+            int elegido = tipo_prioritario();
+            if (elegido != -1) {
+                // Notificar a todos los del grupo prioritario para que ocupen las plazas:
+                cola[elegido].notify_all();
+            }
+        } else {
+            // Aun quedan procesos de mi tipo dentro y queda cupo disponible:
+            if (esperando[tipo] > 0 && dentro < AFORO_MAX) {
+                cola[tipo].notify_one();
+            }
+        }
+    }
+};
+\end{lstlisting}
+
+\textbf{3. Justificación de Propiedades de Corrección:}
+\begin{itemize}
+    \item \textbf{Invariante de Exclusión Mutua entre Tipos:}
+    Se define el predicado invariable de seguridad:
+    \[
+    \text{Inv} \equiv (0 \le \text{dentro} \le \text{AFORO\_MAX}) \land (\text{tipo\_activo} \in \{-1, 0, 1\}) \land (\text{dentro} == 0 \iff \text{tipo\_activo} == -1).
+    \]
+    Ningún proceso de tipo $i$ puede salir del bucle \texttt{while} si $\text{tipo\_activo} == 1 - i$. Dado que $\text{tipo\_activo}$ solo se modifica a $i$ cuando $\text{dentro} == 0$, es teóricamente imposible que coexistan procesos de ambos tipos dentro del centro.
+    
+    \item \textbf{Ausencia de Interbloqueo:} Si el centro está lleno, los que están dentro continúan su cómputo hasta ejecutar \texttt{salir()}. El último proceso en salir ($\text{dentro} == 0$) siempre evalúa \texttt{tipo\_prioritario()} y despierta al grupo en espera. Ningún proceso puede quedarse bloqueado si el recurso está desocupado y hay procesos en cola.
+    
+    \item \textbf{Vivacidad y Mitigación de Inanición:} La prioridad basada en \texttt{esperas\_totales} evita que una llegada incesante de procesos de un solo tipo monopolice el centro. Cada vez que un proceso se suspende, incrementa su contador acumulador; tarde o temprano, el grupo rezagado acumulará más esperas totales, superando al grupo dominante y forzando la alternancia.
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+% ==============================================================================
+% CAPÍTULO 2: EXAMEN 2021
+% ==============================================================================
+\chapter{Examen Parcial 2021}
+\label{cap:examen2021}
+
+\cuadrofuentes{
+    \textbf{Ficha de la Convocatoria:} Examen Parcial de SCD 2021 (Temas 1 y 2).\\
+    $\bullet$ \textbf{Contenido evaluado:} Monitor de Cuenta Bancaria con política estricta de retirada FIFO (evitando inanición de solicitudes grandes), y verificación axiomática concurrente formal de 3 procesos sumadores con el Teorema de No Interferencia de Owicki-Gries.
+}
+
+% ------------------------------------------------------------------------------
+% PROBLEMA 1 - 2021
+% ------------------------------------------------------------------------------
+\section{Problema 1: Monitor Cuenta Bancaria con Retiradas FIFO Estrictas}
+
+\begin{ejercicio}[1: Cuenta Bancaria con Saldo No Negativo y Turno de Retirada]
+Se desea implementar un monitor \texttt{CuentaBancaria} que gestione el saldo de una cuenta compartida mediante las operaciones:
+\begin{itemize}
+    \item \texttt{depositar(int c)}: Incrementa el saldo en $c$ unidades ($c > 0$) y despierta procesos bloqueados.
+    \item \texttt{retirar(int c)}: Disminuye el saldo en $c$ unidades ($c > 0$), garantizando en todo momento que el saldo nunca se vuelva negativo ($\text{saldo} \ge 0$).
+\end{itemize}
+\textbf{Requisitos de Concurrencia:}
+\begin{enumerate}
+    \item Las solicitudes de retirada deben ser satisfechas en **estricto orden de llegada (política FIFO)**. Si el primer cliente de la cola desea retirar una cantidad superior al saldo actual, debe esperar a que se realicen nuevos depósitos; ningún cliente que haya llegado más tarde puede adelantarlo, aunque solicite una cantidad menor.
+    \item No debe haber inanición ni interbloqueo.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Crítica al Intento del Alumno (Análisis del Borrador 2021):}\\
+En el archivo original del examen, el alumno escribió:
+\begin{lstlisting}[language=C++]
+// CODIGO ERRONEO DEL ESTUDIANTE:
+Cuenta::retirar(int c) {
+    int pos = posicion;
+    posicion++;
+    if (cola.queue()) { cola.wait(pos); } // cola.queue() no existe en C++
+    while (saldo < c) {
+        cola.queue(pos); // INVENTADO: queue() es una consulta, no suspende hilos
+    }
+    saldo -= c;
+    cola.signal();
+}
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Invención sintáctica:} \texttt{cola.queue(pos)} no es una función de monitores. Para suspenderse en un monitor se debe invocar \texttt{wait()}.
+    \item \textbf{Bucle infinito / Bloqueo activo:} Si \texttt{saldo < c}, el proceso ejecutaba repetidamente \texttt{cola.queue(pos)} sin soltar jamás el cerrojo del monitor, impidiendo que nadie pudiera entrar a ejecutar \texttt{depositar()}. Esto provocaba un **interbloqueo instantáneo**.
+\end{itemize}
+
+\textbf{2. Implementación Canónica en C++11 con Cerrojo de Ticket (FIFO):}
+\begin{lstlisting}[language=C++]
+#include <mutex>
+#include <condition_variable>
+
+class CuentaBancariaFIFO {
+private:
+    int saldo = 0;              // Invariante: saldo >= 0
+    int ticket_distribuidor = 0;// Reparte turnos de retirada
+    int turno_actual = 0;       // Indica a que ticket le corresponde retirar
+    
+    std::mutex mtx;
+    std::condition_variable cola_retiradas;
+
+public:
+    void depositar(int c) {
+        std::unique_lock<std::mutex> lock(mtx);
+        saldo += c;
+        // Al aumentar el saldo, avisamos al proceso que tiene el turno actual
+        // para que compruebe si ya hay fondos suficientes:
+        cola_retiradas.notify_all();
+    }
+
+    void retirar(int c) {
+        std::unique_lock<std::mutex> lock(mtx);
+        
+        // 1. Obtener numero de turno correlativo por orden de llegada (FIFO):
+        int mi_ticket = ticket_distribuidor++;
+        
+        // 2. Esperar mientras:
+        //    - NO sea mi turno (mi_ticket != turno_actual)
+        //    - O sea mi turno pero NO haya suficiente dinero (saldo < c)
+        while (mi_ticket != turno_actual || saldo < c) {
+            cola_retiradas.wait(lock);
+        }
+        
+        // 3. Satisfacer retirada con seguridad:
+        saldo -= c;
+        
+        // 4. Pasar el turno al siguiente cliente en la cola:
+        turno_actual++;
+        
+        // 5. Notificar al siguiente proceso para que pueda ingresar:
+        cola_retiradas.notify_all();
+    }
+};
+\end{lstlisting}
+
+\textbf{3. Verificación de Seguridad y Ausencia de Inanición:}
+\begin{itemize}
+    \item \textbf{Seguridad ($\text{saldo} \ge 0$):} El bucle \texttt{while} garantiza que la asignación \texttt{saldo -= c} solo se ejecuta cuando $\text{saldo} \ge c$. Como inicialmente $\text{saldo} = 0 \ge 0$, por inducción el saldo permanece no negativo en todo estado accesible.
+    \item \textbf{Garantía FIFO y No Inanición:} Los números de ticket son estrictamente crecientes. Un proceso con ticket $k$ solo es adelantado por tickets $0, 1, \dots, k-1$. Ningún proceso con ticket mayor a $k$ puede retirar fondos antes que él, erradicando la inanición de retiradas cuantiosas.
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% PROBLEMA 2 - 2021
+% ------------------------------------------------------------------------------
+\section{Problema 2: Demostración Axiomática Concurrente de Tres Procesos}
+
+\begin{ejercicio}[2: Prueba Formal de Cobegin con No Interferencia Exhaustiva]
+Demostrar mediante la Lógica de Hoare y el Teorema de No Interferencia de Owicki-Gries que el siguiente programa concurrente es correcto:
+\begin{lstlisting}[language=C++]
+{ x == 0 }
+cobegin
+    < x = x + 2 >; // Proceso P1 (S1)
+ ||
+    < x = x + 3 >; // Proceso P2 (S2)
+ ||
+    < x = x + 4 >; // Proceso P3 (S3)
+coend
+{ x == 9 }
+\end{lstlisting}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{1. Deducción Semántica de Estados Accesibles:}\\
+Cada proceso suma una constante entera ($2$, $3$ y $4$). Dado que la suma total es $2 + 3 + 4 = 9$ y las sumas son conmutativas, el valor intermedio de $x$ antes de que cada proceso ejecute su acción refleja el subconjunto de procesos que ya han finalizado:
+
+\begin{itemize}
+    \item \textbf{Para $P_1$ ($S_1 \equiv \langle x := x + 2 \rangle$):}
+    Antes de ejecutar $S_1$, han podido ejecutarse $\{ \emptyset \}$, $\{S_2\}$, $\{S_3\}$ o $\{S_2, S_3\}$. Los valores posibles de $x$ son:
+    \[
+    0, \quad 0 + 3 = 3, \quad 0 + 4 = 4, \quad 0 + 3 + 4 = 7.
+    \]
+    Por consiguiente: $\text{pre}(S_1) \equiv P_1 \equiv \{x \in \{0, 3, 4, 7\}\}$.\\
+    Tras sumar 2, los valores resultantes son $\{0+2, 3+2, 4+2, 7+2\} = \{2, 5, 6, 9\}$.\\
+    Por consiguiente: $\text{post}(S_1) \equiv Q_1 \equiv \{x \in \{2, 5, 6, 9\}\}$.
+
+    \item \textbf{Para $P_2$ ($S_2 \equiv \langle x := x + 3 \rangle$):}
+    Antes de $S_2$, han podido ejecutarse $\{\emptyset\}$, $\{S_1\}$, $\{S_3\}$ o $\{S_1, S_3\}$. Los valores posibles de $x$ son:
+    \[
+    0, \quad 0 + 2 = 2, \quad 0 + 4 = 4, \quad 0 + 2 + 4 = 6.
+    \]
+    Por consiguiente: $\text{pre}(S_2) \equiv P_2 \equiv \{x \in \{0, 2, 4, 6\}\}$.\\
+    Tras sumar 3, los valores resultantes son $\{0+3, 2+3, 4+3, 6+3\} = \{3, 5, 7, 9\}$.\\
+    Por consiguiente: $\text{post}(S_2) \equiv Q_2 \equiv \{x \in \{3, 5, 7, 9\}\}$.
+
+    \item \textbf{Para $P_3$ ($S_3 \equiv \langle x := x + 4 \rangle$):}
+    Antes de $S_3$, han podido ejecutarse $\{\emptyset\}$, $\{S_1\}$, $\{S_2\}$ o $\{S_1, S_2\}$. Los valores posibles de $x$ son:
+    \[
+    0, \quad 0 + 2 = 2, \quad 0 + 3 = 3, \quad 0 + 2 + 3 = 5.
+    \]
+    Por consiguiente: $\text{pre}(S_3) \equiv P_3 \equiv \{x \in \{0, 2, 3, 5\}\}$.\\
+    Tras sumar 4, los valores resultantes son $\{0+4, 2+4, 3+4, 5+4\} = \{4, 6, 7, 9\}$.\\
+    Por consiguiente: $\text{post}(S_3) \equiv Q_3 \equiv \{x \in \{4, 6, 7, 9\}\}$.
+\end{itemize}
+
+\textbf{2. Demostración de las Triples Secuenciales Aisladas:}\\
+Aplicando el axioma de asignación para cada proceso:
+\[
+\{Q_i[x/x+c_i]\} \; \langle x := x + c_i \rangle \; \{Q_i\}
+\]
+\begin{align*}
+\{x + 2 \in \{2, 5, 6, 9\}\} \; S_1 \; \{Q_1\} &\iff \{x \in \{0, 3, 4, 7\}\} \; S_1 \; \{Q_1\} \equiv \{P_1\} S_1 \{Q_1\}.\\
+\{x + 3 \in \{3, 5, 7, 9\}\} \; S_2 \; \{Q_2\} &\iff \{x \in \{0, 2, 4, 6\}\} \; S_2 \; \{Q_2\} \equiv \{P_2\} S_2 \{Q_2\}.\\
+\{x + 4 \in \{4, 6, 7, 9\}\} \; S_3 \; \{Q_3\} &\iff \{x \in \{0, 2, 3, 5\}\} \; S_3 \; \{Q_3\} \equiv \{P_3\} S_3 \{Q_3\}.
+\end{align*}
+
+\textbf{3. Matriz Exhaustiva de No Interferencia de Owicki-Gries:}\\
+Debemos verificar formalmente las \textbf{12 condiciones cruzadas}:
+\[
+\text{NI}(A, S_k) \equiv \{A \land \text{pre}(S_k)\} \; S_k \; \{A\}, \quad \text{con } A \in \{P_i, Q_i\}, \; i \ne k.
+\]
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Aserción $A$} & \textbf{Acción $S_k$} & \textbf{Precondición $A \land \text{pre}(S_k)$} & \textbf{Transformación y Estado Final $\in A$} \\ \midrule
+$P_2 = \{0, 2, 4, 6\}$ & $S_1 (+2)$ & $P_2 \land P_1 = \{0, 4\}$ & $0+2=2 \in P_2, \; 4+2=6 \in P_2$ \checkmark \\
+$P_3 = \{0, 2, 3, 5\}$ & $S_1 (+2)$ & $P_3 \land P_1 = \{0, 3\}$ & $0+2=2 \in P_3, \; 3+2=5 \in P_3$ \checkmark \\
+$Q_2 = \{3, 5, 7, 9\}$ & $S_1 (+2)$ & $Q_2 \land P_1 = \{3, 7\}$ & $3+2=5 \in Q_2, \; 7+2=9 \in Q_2$ \checkmark \\
+$Q_3 = \{4, 6, 7, 9\}$ & $S_1 (+2)$ & $Q_3 \land P_1 = \{4, 7\}$ & $4+2=6 \in Q_3, \; 7+2=9 \in Q_3$ \checkmark \\ \midrule
+$P_1 = \{0, 3, 4, 7\}$ & $S_2 (+3)$ & $P_1 \land P_2 = \{0, 4\}$ & $0+3=3 \in P_1, \; 4+3=7 \in P_1$ \checkmark \\
+$P_3 = \{0, 2, 3, 5\}$ & $S_2 (+3)$ & $P_3 \land P_2 = \{0, 2\}$ & $0+3=3 \in P_3, \; 2+3=5 \in P_3$ \checkmark \\
+$Q_1 = \{2, 5, 6, 9\}$ & $S_2 (+3)$ & $Q_1 \land P_2 = \{2, 6\}$ & $2+3=5 \in Q_1, \; 6+3=9 \in Q_1$ \checkmark \\
+$Q_3 = \{4, 6, 7, 9\}$ & $S_2 (+3)$ & $Q_3 \land P_2 = \{4, 6\}$ & $4+3=7 \in Q_3, \; 6+3=9 \in Q_3$ \checkmark \\ \midrule
+$P_1 = \{0, 3, 4, 7\}$ & $S_3 (+4)$ & $P_1 \land P_3 = \{0, 3\}$ & $0+4=4 \in P_1, \; 3+4=7 \in P_1$ \checkmark \\
+$P_2 = \{0, 2, 4, 6\}$ & $S_3 (+4)$ & $P_2 \land P_3 = \{0, 2\}$ & $0+4=4 \in P_2, \; 2+4=6 \in P_2$ \checkmark \\
+$Q_1 = \{2, 5, 6, 9\}$ & $S_3 (+4)$ & $Q_1 \land P_3 = \{2, 5\}$ & $2+4=6 \in Q_1, \; 5+4=9 \in Q_1$ \checkmark \\
+$Q_2 = \{3, 5, 7, 9\}$ & $S_3 (+4)$ & $Q_2 \land P_3 = \{3, 5\}$ & $3+4=7 \in Q_2, \; 5+4=9 \in Q_2$ \checkmark \\ \bottomrule
+\end{tabular}
+\caption{Verificación completa de las 12 ternas de no interferencia de Owicki-Gries.}
+\end{table}
+
+Como se aprecia en la tabla, en los 12 casos la ejecución de cualquier acción externa sobre cualquier estado accesible preserva rigurosamente el aserto.
+
+\textbf{4. Composición Concurrente Global:}
+Habiéndose demostrado la no interferencia global, aplicamos la regla de composición concurrente:
+\begin{align*}
+\text{Precondición Global} &\equiv P_1 \land P_2 \land P_3 = \{0, 3, 4, 7\} \cap \{0, 2, 4, 6\} \cap \{0, 2, 3, 5\} = \mathbf{\{0\}},\\
+\text{Poscondición Global} &\equiv Q_1 \land Q_2 \land Q_3 = \{2, 5, 6, 9\} \cap \{3, 5, 7, 9\} \cap \{4, 6, 7, 9\} = \mathbf{\{9\}}.
+\end{align*}
+Concluimos formalmente que:
+\[
+\boxed{\{x = 0\} \quad \mathbf{cobegin} \quad \langle x := x + 2 \rangle \parallel \langle x := x + 3 \rangle \parallel \langle x := x + 4 \rangle \quad \mathbf{coend} \quad \{x = 9\}}
+\]
+Q.E.D.
+\end{solucion}
+
+\end{document}
+"""
+
+with open("relaciones/SCD/examenes_resueltos.tex", "w", encoding="utf-8") as f:
+    f.write(content)
+
+print("examenes_resueltos.tex successfully created!")

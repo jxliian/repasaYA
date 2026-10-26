@@ -78,6 +78,10 @@ De los **63 problemas resueltos** en el solucionario oficial en PDF de repasaYA,
 > 📥 **Cuaderno PDF de Problemas Imprescindibles (Sprint 4 Días):**  
 > Puedes descargar directamente el PDF dedicado de 35 páginas que contiene exclusivamente estos 19 ejercicios con sus enunciados oficiales, explicaciones pedagógicas paso a paso, tablas de intercalación y código C++11:  
 > 👉 [**Descargar PDF: 19 Problemas Imprescindibles Resueltos para el Parcial de SCD**](/scd/ejercicios-imprescindibles-parcial-scd.pdf)
+>
+> 📝 **Exámenes Oficiales Reales Resueltos (Convocatorias 2021 y 2025 repetido):**  
+> Hemos resuelto y auditado íntegramente los 6 problemas reales de examen (corrigiendo los fallos graves de los borradores de alumnos):  
+> 👉 [**Descargar PDF: Exámenes Oficiales Resueltos y Corregidos (2021 y 2025)**](/scd/examenes-oficiales-resueltos-scd.pdf)
 
 
 ### Grupo 1: Exclusión Mutua en Memoria Compartida (Tema 2-2)
