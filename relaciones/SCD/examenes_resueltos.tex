@@ -474,30 +474,30 @@ El monitor exporta los procedimientos: \texttt{entrar(int tipo)} y \texttt{salir
 \begin{solucion}
 \textbf{1. Auditoría del Código Erróneo del Alumno:}
 \begin{itemize}
-    \item El alumno escribió \texttt{if (colas[tipo].queue() > colas[otrotipo].queue())}, lo cual compara procesos esperando en el instante actual, ignorando el requisito expreso del enunciado de **"más esperas acumuladas históricas"**.
+    \item El alumno escribió \texttt{if (colas[tipo].queue() > colas[otrotipo].queue())}, lo cual compara procesos esperando en el instante actual, ignorando el requisito expreso del enunciado de **"más esperas acumuladas históricas"**. Además, la sintaxis \texttt{.queue()} no pertenece a la biblioteca \texttt{scd.h} (en la que las consultas válidas son \texttt{.get\_nwt()} o \texttt{.empty()}).
     \item Al salir, si el centro quedaba vacío, el alumno hacía \texttt{colas[otrotipo].signal()} pero no actualizaba \texttt{tipodentro}, dejando el monitor en un estado incoherente.
-    \item Usaba \texttt{if} en lugar de \texttt{while} para la espera condicional, lo que en semántica Mesa o POSIX provoca fallos de concurrencia al reanudar la ejecución tras ser despertado.
+    \item Omitía la cascada de señalización para permitir la entrada en bloque de procesos del mismo tipo hasta agotar el aforo disponible.
 \end{itemize}
 
-\textbf{2. Implementación Correcta en C++11 (Semántica Mesa/POSIX):}
+\textbf{2. Implementación Canónica Oficial con \texttt{HoareMonitor} (UGR / Semántica SU):}
 \begin{lstlisting}[language=C++]
-#include <mutex>
-#include <condition_variable>
+#include "scd.h"
+using namespace std;
+using namespace scd;
 
-class CentroRecursos {
+class CentroRecursos : public HoareMonitor {
 private:
     const int AFORO_MAX = 5;      // Aforo maximo por tipo
-    int dentro = 0;               // Numero actual de procesos dentro
-    int tipo_activo = -1;         // -1: vacio, 0: Tipo 0, 1: Tipo 1
+    int       dentro;             // Numero actual de procesos dentro
+    int       tipo_activo;        // -1: vacio, 0: Tipo 0, 1: Tipo 1
     
     // Contadores de procesos esperando en el momento presente
-    int esperando[2] = {0, 0};
+    int       esperando[2];
     
     // Acumulador historico de esperas totales para prioridad dinamica
-    long esperas_totales[2] = {0, 0};
+    long      esperas_totales[2];
     
-    std::mutex mtx;
-    std::condition_variable cola[2]; // cola[0] para Tipo 0, cola[1] para Tipo 1
+    CondVar   cola[2];            // cola[0] para Tipo 0, cola[1] para Tipo 1
 
     // Metodo privado para determinar que tipo tiene mayor prioridad de paso
     int tipo_prioritario() const {
@@ -511,33 +511,42 @@ private:
     }
 
 public:
+    CentroRecursos() : dentro(0), tipo_activo(-1) {
+        esperando[0] = esperando[1] = 0;
+        esperas_totales[0] = esperas_totales[1] = 0;
+        cola[0] = newCondVar();
+        cola[1] = newCondVar();
+    }
+
     void entrar(int tipo) {
-        std::unique_lock<std::mutex> lock(mtx);
         int otro = 1 - tipo;
         
         esperando[tipo]++;
-        esperas_totales[tipo]++; // Registrar espera acumulada para la prioridad
+        esperas_totales[tipo]++; // Registrar espera acumulada para la prioridad historica
         
         // Un proceso debe esperar si:
         // 1. Hay procesos del tipo contrario dentro (tipo_activo == otro).
         // 2. O el centro alcanzo el aforo maximo (dentro == AFORO_MAX).
         // 3. O el centro esta vacio (dentro == 0), pero hay esperando procesos del otro tipo
         //    Y el otro tipo tiene mayor prioridad historica acumulada:
-        while ((tipo_activo == otro) || 
-               (tipo_activo == tipo && dentro == AFORO_MAX) ||
-               (dentro == 0 && esperando[otro] > 0 && esperas_totales[otro] > esperas_totales[tipo])) {
-            cola[tipo].wait(lock);
+        if ((tipo_activo == otro) || 
+            (tipo_activo == tipo && dentro == AFORO_MAX) ||
+            (dentro == 0 && esperando[otro] > 0 && esperas_totales[otro] > esperas_totales[tipo])) {
+            cola[tipo].wait();
         }
         
         esperando[tipo]--;
         tipo_activo = tipo;
         dentro++;
+
+        // En semantica SU (Hoare), propagacion en cascada para dar paso a companeros de su tipo:
+        if (dentro < AFORO_MAX && esperando[tipo] > 0) {
+            cola[tipo].signal();
+        }
     }
 
     void salir(int tipo) {
-        std::unique_lock<std::mutex> lock(mtx);
         dentro--;
-        int otro = 1 - tipo;
         
         if (dentro == 0) {
             tipo_activo = -1; // El centro queda libre
@@ -545,13 +554,13 @@ public:
             // Decidir que grupo tiene derecho a acceder segun la prioridad dinamica:
             int elegido = tipo_prioritario();
             if (elegido != -1) {
-                // Notificar a todos los del grupo prioritario para que ocupen las plazas:
-                cola[elegido].notify_all();
+                // Notificar al primer proceso del grupo prioritario (semantica SU):
+                cola[elegido].signal();
             }
         } else {
             // Aun quedan procesos de mi tipo dentro y queda cupo disponible:
             if (esperando[tipo] > 0 && dentro < AFORO_MAX) {
-                cola[tipo].notify_one();
+                cola[tipo].signal();
             }
         }
     }
@@ -565,9 +574,12 @@ public:
     \[
     \text{Inv} \equiv (0 \le \text{dentro} \le \text{AFORO\_MAX}) \land (\text{tipo\_activo} \in \{-1, 0, 1\}) \land (\text{dentro} == 0 \iff \text{tipo\_activo} == -1).
     \]
-    Ningún proceso de tipo $i$ puede salir del bucle \texttt{while} si $\text{tipo\_activo} == 1 - i$. Dado que $\text{tipo\_activo}$ solo se modifica a $i$ cuando $\text{dentro} == 0$, es teóricamente imposible que coexistan procesos de ambos tipos dentro del centro.
+    Ningún proceso de tipo $i$ puede avanzar tras \texttt{cola[i].wait()} si $\text{tipo\_activo} == 1 - i$. Dado que $\text{tipo\_activo}$ solo se modifica a $i$ cuando $\text{dentro} == 0$, y bajo semántica SU la hebra señalada despierta atómicamente, es teóricamente imposible que coexistan procesos de ambos tipos dentro del centro.
     
     \item \textbf{Ausencia de Interbloqueo:} Si el centro está lleno, los que están dentro continúan su cómputo hasta ejecutar \texttt{salir()}. El último proceso en salir ($\text{dentro} == 0$) siempre evalúa \texttt{tipo\_prioritario()} y despierta al grupo en espera. Ningún proceso puede quedarse bloqueado si el recurso está desocupado y hay procesos en cola.
+    
+    \item \textbf{Vivacidad y Mitigación de Inanición:} La prioridad basada en \texttt{esperas\_totales} evita que una llegada incesante de procesos de un solo tipo monopolice el centro. Cada vez que un proceso se suspende, incrementa su contador acumulador; tarde o temprano, el grupo rezagado acumulará más esperas totales, superando al grupo dominante y forzando la alternancia.
+\end{itemize}
     
     \item \textbf{Vivacidad y Mitigación de Inanición:} La prioridad basada en \texttt{esperas\_totales} evita que una llegada incesante de procesos de un solo tipo monopolice el centro. Cada vez que un proceso se suspende, incrementa su contador acumulador; tarde o temprano, el grupo rezagado acumulará más esperas totales, superando al grupo dominante y forzando la alternancia.
 \end{itemize}
@@ -621,62 +633,74 @@ Cuenta::retirar(int c) {
 }
 \end{lstlisting}
 \begin{itemize}
-    \item \textbf{Invención sintáctica:} \texttt{cola.queue(pos)} no es una función de monitores. Para suspenderse en un monitor se debe invocar \texttt{wait()}.
-    \item \textbf{Bucle infinito / Bloqueo activo:} Si \texttt{saldo < c}, el proceso ejecutaba repetidamente \texttt{cola.queue(pos)} sin soltar jamás el cerrojo del monitor, impidiendo que nadie pudiera entrar a ejecutar \texttt{depositar()}. Esto provocaba un **interbloqueo instantáneo**.
+    \item \textbf{Invención sintáctica:} \texttt{cola.queue(pos)} no existe en C++ ni en la biblioteca oficial \texttt{scd.h} (en la que las operaciones válidas son \texttt{cola.wait()}, \texttt{cola.signal()}, \texttt{cola.empty()} y \texttt{cola.get\_nwt()}). Además, \texttt{wait()} no recibe parámetros.
+    \item \textbf{Bucle infinito / Bloqueo activo del monitor:} Si \texttt{saldo < c}, el proceso ejecutaba repetidamente \texttt{cola.queue(pos)} sin invocar jamás \texttt{wait()}. Al no soltar la exclusión mutua del monitor, impedía que cualquier otro hilo pudiera entrar a ejecutar \texttt{depositar(c)}. Esto provocaba un **interbloqueo instantáneo y total**.
 \end{itemize}
 
-\textbf{2. Implementación Canónica en C++11 con Cerrojo de Ticket (FIFO):}
-\begin{lstlisting}[language=C++]
-#include <mutex>
-#include <condition_variable>
+\textbf{2. Implementación Canónica Oficial con \texttt{HoareMonitor} (UGR / Semántica SU):}\\
+Para satisfacer la política estricta FIFO sin adelantos entre retiradas de distinto importe bajo la clase \texttt{HoareMonitor}, empleamos el patrón de \textbf{condición privada de turno}:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{cola\_espera}: Cola de condición donde esperan por estricto orden de llegada (garantizado FIFO por \texttt{scd.h}) los procesos que desean retirar cuando ya hay otro cliente gestionando su turno.
+    \item \texttt{cola\_turno}: Cola de condición donde espera exclusivamente el cliente que ostenta el turno actual si los fondos actuales no alcanzan para su petición específica (\texttt{saldo < c\_primero}).
+\end{itemize}
 
-class CuentaBancariaFIFO {
+\begin{lstlisting}[language=C++]
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class CuentaBancariaFIFO : public HoareMonitor {
 private:
-    int saldo = 0;              // Invariante: saldo >= 0
-    int ticket_distribuidor = 0;// Reparte turnos de retirada
-    int turno_actual = 0;       // Indica a que ticket le corresponde retirar
-    
-    std::mutex mtx;
-    std::condition_variable cola_retiradas;
+    int     saldo;            // Invariante: saldo >= 0
+    int     c_primero;        // Cantidad requerida por el proceso en cabeza de turno
+    bool    turno_ocupado;    // true si hay un cliente en proceso de retirada
+    CondVar cola_espera;      // Cola FIFO para clientes conforme van llegando
+    CondVar cola_turno;       // Cola donde espera el cliente en turno si saldo < c_primero
 
 public:
+    CuentaBancariaFIFO() : saldo(0), c_primero(0), turno_ocupado(false) {
+        cola_espera = newCondVar();
+        cola_turno  = newCondVar();
+    }
+
     void depositar(int c) {
-        std::unique_lock<std::mutex> lock(mtx);
         saldo += c;
-        // Al aumentar el saldo, avisamos al proceso que tiene el turno actual
-        // para que compruebe si ya hay fondos suficientes:
-        cola_retiradas.notify_all();
+        // Si hay un cliente en turno esperando fondos y ahora hay saldo suficiente:
+        if (turno_ocupado && saldo >= c_primero) {
+            cola_turno.signal(); // En semantica SU, despierta y entra de inmediato
+        }
     }
 
     void retirar(int c) {
-        std::unique_lock<std::mutex> lock(mtx);
-        
-        // 1. Obtener numero de turno correlativo por orden de llegada (FIFO):
-        int mi_ticket = ticket_distribuidor++;
-        
-        // 2. Esperar mientras:
-        //    - NO sea mi turno (mi_ticket != turno_actual)
-        //    - O sea mi turno pero NO haya suficiente dinero (saldo < c)
-        while (mi_ticket != turno_actual || saldo < c) {
-            cola_retiradas.wait(lock);
+        // 1. Si ya hay otro cliente con el turno de retirada, esperar en cola FIFO:
+        if (turno_ocupado) {
+            cola_espera.wait();
         }
-        
-        // 3. Satisfacer retirada con seguridad:
+
+        // 2. Adquirir el turno de retirada en exclusiva:
+        turno_ocupado = true;
+        c_primero = c;
+
+        // 3. Si no hay saldo suficiente, esperar bloqueado hasta que depositen:
+        if (saldo < c) {
+            cola_turno.wait();
+        }
+
+        // 4. Retirar fondos (saldo >= c plenamente garantizado bajo semantica SU):
         saldo -= c;
-        
-        // 4. Pasar el turno al siguiente cliente en la cola:
-        turno_actual++;
-        
-        // 5. Notificar al siguiente proceso para que pueda ingresar:
-        cola_retiradas.notify_all();
+
+        // 5. Ceder el turno al siguiente cliente en la cola FIFO de espera:
+        turno_ocupado = false;
+        c_primero = 0;
+        cola_espera.signal();
     }
 };
 \end{lstlisting}
 
 \textbf{3. Verificación de Seguridad y Ausencia de Inanición:}
 \begin{itemize}
-    \item \textbf{Seguridad ($\text{saldo} \ge 0$):} El bucle \texttt{while} garantiza que la asignación \texttt{saldo -= c} solo se ejecuta cuando $\text{saldo} \ge c$. Como inicialmente $\text{saldo} = 0 \ge 0$, por inducción el saldo permanece no negativo en todo estado accesible.
-    \item \textbf{Garantía FIFO y No Inanición:} Los números de ticket son estrictamente crecientes. Un proceso con ticket $k$ solo es adelantado por tickets $0, 1, \dots, k-1$. Ningún proceso con ticket mayor a $k$ puede retirar fondos antes que él, erradicando la inanición de retiradas cuantiosas.
+    \item \textbf{Seguridad ($\text{saldo} \ge 0$):} Gracias a la semántica Señalar y Espera Urgente (SU), cuando \texttt{depositar()} ejecuta \texttt{cola\_turno.signal()}, la hebra que esperaba en \texttt{cola\_turno.wait()} reanuda de manera atómica con la garantía formal de que $\text{saldo} \ge c$. Como inicialmente $\text{saldo} = 0$, por inducción se preserva $\text{saldo} \ge 0$ en todo instante.
+    \item \textbf{Garantía FIFO y No Inanición:} La cola \texttt{cola\_espera} de \texttt{HoareMonitor} garantiza matemáticamente orden FIFO. Un cliente posterior nunca puede saltar a \texttt{cola\_turno} ni realizar una retirada mientras el cliente anterior mantenga \texttt{turno\_ocupado == true}, erradicando completamente el adelantamiento y la inanición de retiradas de cuantía elevada.
 \end{itemize}
 \end{solucion}
 

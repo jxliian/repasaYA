@@ -326,10 +326,36 @@ En sistemas de tiempo real y en asignación de recursos escasos con diferentes r
 Cuando se ejecuta \texttt{c.signal()}, el runtime del monitor selecciona y despierta al proceso situado a la cabeza de la cola ordenada, es decir, aquel cuyo valor de prioridad $p$ es estrictamente mínimo.
 
 % ==============================================================================
-\section{Patrones Clásicos de Concurrencia con Monitores}
+\section{Patrones Clásicos de Concurrencia con Monitores Hoare (SU)}
 % ==============================================================================
 
-A continuación se analizan, deducen formalmente y resuelven en C++11 los principales problemas canónicos de la programación concurrente utilizando la arquitectura de monitores con semántica SC (Mesa/Hansen).
+\subsection{El Marco Oficial de la UGR: La Clase \texttt{HoareMonitor} y \texttt{CondVar} (\texttt{scd.h})}
+El estándar C++11 nativo no provee una primitiva directa para monitores con semántica Señalar y Espera Urgente (SU / Hoare); únicamente ofrece soporte para monitores SC (\emph{Signal-and-Continue}) mediante \texttt{std::mutex} y \texttt{std::condition\_variable}. 
+
+Para resolver esta carencia en la docencia de la asignatura en la Universidad de Granada (UGR), el Departamento de Lenguajes y Sistemas Informáticos proporciona la biblioteca oficial \texttt{scd.h} (con espacio de nombres \texttt{scd}). Esta biblioteca define una infraestructura orientada a objetos que garantiza exclusión mutua implícita, orden FIFO estricto y semántica SU pura.
+
+\begin{definicion}[Componentes Clave de la Biblioteca Oficial \texttt{scd.h}]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Clase base \texttt{HoareMonitor}:} Cualquier monitor concurrente en la UGR debe heredar públicamente de ella (\texttt{class MiMonitor : public HoareMonitor}). Gestiona internamente la cola del monitor y la cola de espera urgente (\emph{urgent queue}).
+    \item \textbf{Tipo \texttt{CondVar}:} Modela variables de condición con semántica SU y orden de salida estrictamente FIFO.
+    \item \textbf{Función creadora \texttt{newCondVar()}:} Las variables condición deben crearse \textbf{obligatoriamente en el constructor del monitor} invocando este método protegido. No hacerlo provoca un aborto inmediato del programa.
+    \item \textbf{Operaciones sobre \texttt{CondVar}:}
+    \begin{itemize}
+        \item \texttt{cola.wait()}: Bloquea la hebra invocadora en la cola de la variable y cede el monitor.
+        \item \texttt{cola.signal()}: Si la cola no está vacía, desbloquea a la primera hebra en espera (FIFO) y suspende a la hebra que señala en la cola de urgentes. Si la cola está vacía, no tiene efecto.
+        \item \texttt{cola.empty()}: Devuelve \texttt{true} si no hay ninguna hebra esperando; \texttt{false} si hay al menos una.
+        \item \texttt{cola.get\_nwt()}: Devuelve el número entero de hebras esperando en la cola.
+    \end{itemize}
+    \item \textbf{Instanciación y uso mediante \texttt{MRef<T>} y \texttt{Create<T>}:}
+    Para preservar la exclusión mutua automática (patrón \emph{execute-around}), los monitores no se manipulan como variables directas ni mediante punteros planos, sino a través de referencias seguras de tipo \texttt{MRef<MiMonitor>}, creadas con la función factoría \texttt{Create<MiMonitor>(...)}. Las hebras invocan los métodos utilizando el operador flecha: \texttt{monitor->metodo(...)}.
+\end{itemize}
+\end{definicion}
+
+\begin{aviso}[Sintaxis Canónica: ¿Por qué en Monitores SU basta usar \texttt{if}?]
+Bajo la semántica Señalar y Espera Urgente (SU) implementada por \texttt{HoareMonitor}, la hebra señalada despierta y reanuda \textbf{de inmediato} en el monitor sin que ninguna otra hebra pueda adelantarse. En consecuencia, la condición de sincronización que originó el \texttt{signal} permanece estrictamente verdadera en el momento de reanudación. Por tanto, en monitores SU es canónico, seguro y formalmente óptimo utilizar \texttt{if (!condicion) cola.wait();}, a diferencia de los monitores nativos SC que exigen un bucle \texttt{while}.
+\end{aviso}
+
+A continuación se analizan, deducen formalmente y resuelven bajo la sintaxis y marco oficial de la UGR los principales problemas y patrones canónicos de la programación concurrente.
 
 % ------------------------------------------------------------------------------
 \subsection{Patrón 1: Productor-Consumidor con Búfer Acotado}
@@ -350,65 +376,87 @@ Uno o varios procesos productores generan datos y los almacenan en un búfer cir
     \]
 \end{itemize}
 
-\subsubsection{Implementación en C++11 con Monitor}
-\begin{lstlisting}[language=C++, caption={Monitor Productor-Consumidor con Búfer Acotado}]
+\subsubsection{Implementación Oficial en C++11 con HoareMonitor}
+\begin{lstlisting}[language=C++, caption={Monitor Productor-Consumidor con Búfer Acotado (UGR HoareMonitor)}]
 #include <iostream>
-#include <mutex>
-#include <condition_variable>
-#include <vector>
+#include "scd.h"
+
+using namespace std;
+using namespace scd;
 
 template <typename T, size_t CAPACIDAD>
-class MonitorBufferFIFO {
+class MonitorBufferFIFO : public HoareMonitor {
 private:
     T buffer[CAPACIDAD];
     size_t primera_ocupada;
     size_t primera_libre;
     size_t num_items;
 
-    std::mutex cerrojo_monitor;
-    std::condition_variable puede_escribir;
-    std::condition_variable puede_leer;
+    // Colas condicion gestionadas por el runtime de Hoare
+    CondVar libres;   // Cola donde esperan productores si el buffer esta lleno
+    CondVar ocupadas; // Cola donde esperan consumidores si el buffer esta vacio
 
 public:
-    MonitorBufferFIFO() : primera_ocupada(0), primera_libre(0), num_items(0) {}
+    MonitorBufferFIFO() : primera_ocupada(0), primera_libre(0), num_items(0) {
+        // En el constructor se inicializan obligatoriamente con newCondVar()
+        libres   = newCondVar();
+        ocupadas = newCondVar();
+    }
 
     void escribir(const T& valor) {
-        std::unique_lock<std::mutex> lock(cerrojo_monitor);
-
-        // Semantica SC: Obligatorio 'while' para verificar la condicion
-        while (num_items == CAPACIDAD) {
-            puede_escribir.wait(lock);
+        // En semantica SU basta 'if': no hay robo de condicion ni despertar espurio
+        if (num_items == CAPACIDAD) {
+            libres.wait();
         }
 
-        // Seccion critica: insertar en posicion circular
         buffer[primera_libre] = valor;
         primera_libre = (primera_libre + 1) % CAPACIDAD;
         num_items++;
 
-        // Notificar al consumidor que ahora seguro hay al menos un elemento
-        puede_leer.notify_one();
+        // Despertar de inmediato al consumidor (el productor pasa a cola urgente)
+        ocupadas.signal();
     }
 
     T leer() {
-        std::unique_lock<std::mutex> lock(cerrojo_monitor);
-
-        while (num_items == 0) {
-            puede_leer.wait(lock);
+        if (num_items == 0) {
+            ocupadas.wait();
         }
 
         T valor = buffer[primera_ocupada];
         primera_ocupada = (primera_ocupada + 1) % CAPACIDAD;
         num_items--;
 
-        // Notificar al productor que ahora seguro hay al menos un hueco libre
-        puede_escribir.notify_one();
+        // Notificar al productor que hay hueco libre
+        libres.signal();
         return valor;
     }
 };
 \end{lstlisting}
 
-\subsubsection{Análisis de Funcionamiento}
-La exclusión mutua está garantizada por el cerrojo RAII \texttt{std::unique\_lock}. Cuando el productor se bloquea en \texttt{puede\_escribir.wait(lock)}, libera atómicamente el cerrojo, permitiendo que un consumidor entre y ejecute \texttt{leer()}, el cual decrementa \texttt{num\_items} y avisa al productor con \texttt{puede\_escribir.notify\_one()}.
+\subsubsection{Instanciación y Uso en Hebras Concurrente}
+\begin{lstlisting}[language=C++]
+void funcion_productora(MRef<MonitorBufferFIFO<int, 10>> monitor) {
+    for (int i = 0; i < 20; i++) {
+        monitor->escribir(i);
+    }
+}
+
+void funcion_consumidora(MRef<MonitorBufferFIFO<int, 10>> monitor) {
+    for (int i = 0; i < 20; i++) {
+        int valor = monitor->leer();
+        cout << "Consumido: " << valor << endl;
+    }
+}
+
+int main() {
+    // Instanciacion obligatoria mediante Create<...>() obteniendo un MRef<...>
+    MRef<MonitorBufferFIFO<int, 10>> monitor = Create<MonitorBufferFIFO<int, 10>>();
+    thread hebra_prod(funcion_productora, monitor),
+           hebra_cons(funcion_consumidora, monitor);
+    hebra_prod.join();
+    hebra_cons.join();
+}
+\end{lstlisting}
 
 % ------------------------------------------------------------------------------
 \subsection{Patrón 2: Lectores-Escritores}
@@ -426,118 +474,121 @@ El invariante de seguridad fundamental para cualquier variante es:
 \mathcal{I}_{LE} \equiv (n_{\text{lectores}} \ge 0) \land (n_{\text{escritores}} \in \{0, 1\}) \land (n_{\text{escritores}} = 1 \implies n_{\text{lectores}} = 0)
 \]
 
-\subsubsection{Variante 1: Prioridad a los Lectores}
+\subsubsection{Variante 1: Prioridad a los Lectores (Diseño Oficial de Prácticas)}
 Si un lector está leyendo y llega otro lector, este último entra directamente sin esperar, aunque haya escritores esperando. Los escritores solo entran si no hay ningún lector en la sala.
 
-\begin{aviso}[Inanición de Escritores]
-La prioridad a los lectores puede provocar \textbf{inanición total} (\emph{starvation}) de los escritores si el flujo de lectores es continuo.
-\end{aviso}
+\begin{lstlisting}[language=C++, caption={Monitor Lectores-Escritores con Prioridad a Lectores (UGR HoareMonitor)}]
+#include "scd.h"
+using namespace std;
+using namespace scd;
 
-\begin{lstlisting}[language=C++, caption={Monitor Lectores-Escritores con Prioridad a Lectores}]
-class MonitorLectoresEscritores_PrioridadLectores {
+class Lec_Esc_PrioridadLectores : public HoareMonitor {
 private:
-    int n_lectores = 0;
-    bool escribiendo = false;
-    std::mutex cerrojo;
-    std::condition_variable puede_leer;
-    std::condition_variable puede_escribir;
+    int     n_lec;     // Numero de lectores leyendo actualmente
+    bool    escrib;    // true si hay un escritor escribiendo
+    CondVar lectura;   // Cola donde esperan lectores si hay un escritor
+    CondVar escritura; // Cola donde esperan escritores
 
 public:
-    void iniciar_lectura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        // Esperar mientras haya un escritor activo
-        while (escribiendo) {
-            puede_leer.wait(lock);
+    Lec_Esc_PrioridadLectores() : n_lec(0), escrib(false) {
+        lectura   = newCondVar();
+        escritura = newCondVar();
+    }
+
+    void ini_lectura() {
+        if (escrib) {
+            lectura.wait();
         }
-        n_lectores++;
-        // Con prioridad lectores, despertamos en cadena a otros posibles lectores
-        puede_leer.notify_one();
+        n_lec++;
+        // Desbloqueo en cascada: despierta a posibles lectores esperando en la cola
+        lectura.signal();
     }
 
     void fin_lectura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        n_lectores--;
-        if (n_lectores == 0) {
-            // El ultimo lector en salir despierta a un escritor
-            puede_escribir.notify_one();
+        n_lec--;
+        // El ultimo lector en salir libera a un escritor bloqueado
+        if (n_lec == 0) {
+            escritura.signal();
         }
     }
 
-    void iniciar_escritura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        // Esperar mientras haya lectores o alguien escribiendo
-        while (n_lectores > 0 || escribiendo) {
-            puede_escribir.wait(lock);
+    void ini_escritura() {
+        if (n_lec > 0 || escrib) {
+            escritura.wait();
         }
-        escribiendo = true;
+        escrib = true;
     }
 
     void fin_escritura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        escribiendo = false;
-        // Prioridad lectores: intentar despertar lectores primero
-        // Si no hay lectores esperando, se despertara un escritor
-        puede_leer.notify_one();
-        puede_escribir.notify_one();
+        escrib = false;
+        // Prioridad a lectores: despertar lectores primero si los hay
+        if (!lectura.empty()) {
+            lectura.signal();
+        } else {
+            escritura.signal();
+        }
     }
 };
 \end{lstlisting}
 
 \subsubsection{Variante 2: Prioridad a los Escritores}
-Para proteger a los escritores, si un escritor llega y desea acceder, se bloquea la entrada a los \textbf{nuevos lectores que vayan llegando}. Los lectores ya activos terminan su lectura, tras lo cual el escritor entra de inmediato.
+Para proteger a los escritores frente a flujos continuos de lectores, si un escritor llega y desea acceder, se bloquea la entrada a los nuevos lectores. Los lectores ya activos completan su lectura, tras lo cual el escritor entra inmediatamente.
 
-\begin{lstlisting}[language=C++, caption={Monitor Lectores-Escritores con Prioridad a Escritores}]
-class MonitorLectoresEscritores_PrioridadEscritores {
+\begin{lstlisting}[language=C++, caption={Monitor Lectores-Escritores con Prioridad a Escritores (UGR HoareMonitor)}]
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class Lec_Esc_PrioridadEscritores : public HoareMonitor {
 private:
-    int n_lectores = 0;
-    bool escribiendo = false;
-    int escritores_esperando = 0;
-    std::mutex cerrojo;
-    std::condition_variable puede_leer;
-    std::condition_variable puede_escribir;
+    int     n_lec;              // Numero de lectores en lectura activa
+    bool    escrib;             // true si un escritor esta escribiendo
+    int     escrib_esperando;   // Numero de escritores esperando turno
+    CondVar lectura;
+    CondVar escritura;
 
 public:
-    void iniciar_lectura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        // Bloquear si hay un escritor activo O si hay escritores esperando
-        while (escribiendo || escritores_esperando > 0) {
-            puede_leer.wait(lock);
+    Lec_Esc_PrioridadEscritores() : n_lec(0), escrib(false), escrib_esperando(0) {
+        lectura   = newCondVar();
+        escritura = newCondVar();
+    }
+
+    void ini_lectura() {
+        // Bloquear si hay un escritor activo O si hay escritores esperando en cola
+        if (escrib || escrib_esperando > 0) {
+            lectura.wait();
         }
-        n_lectores++;
+        n_lec++;
+        lectura.signal(); // Desbloqueo en cascada de lectores
     }
 
     void fin_lectura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        n_lectores--;
-        if (n_lectores == 0) {
-            puede_escribir.notify_one();
+        n_lec--;
+        if (n_lec == 0) {
+            escritura.signal(); // Despierta al escritor prioritario
         }
     }
 
-    void iniciar_escritura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        escritores_esperando++;
-        while (n_lectores > 0 || escribiendo) {
-            puede_escribir.wait(lock);
+    void ini_escritura() {
+        escrib_esperando++;
+        if (n_lec > 0 || escrib) {
+            escritura.wait();
         }
-        escritores_esperando--;
-        escribiendo = true;
+        escrib_esperando--;
+        escrib = true;
     }
 
     void fin_escritura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        escribiendo = false;
-        if (escritores_esperando > 0) {
-            puede_escribir.notify_one(); // Siguiente escritor prioritario
+        escrib = false;
+        // Prioridad absoluta a escritores si hay alguno esperando
+        if (escrib_esperando > 0) {
+            escritura.signal();
         } else {
-            puede_leer.notify_all();     // No hay escritores: pasar a todos los lectores
+            lectura.signal();
         }
     }
 };
 \end{lstlisting}
-
-\subsubsection{Variante 3: Solución Equitativa (Sin Inanición)}
-En la variante equitativa se utiliza un esquema de turnos o FIFO donde las peticiones se atienden en orden estricto de llegada, impidiendo que grupos continuos de lectores o escritores monopolicen el recurso.
 
 % ------------------------------------------------------------------------------
 \subsection{Patrón 3: La Cena de los Filósofos}
@@ -550,55 +601,54 @@ Cinco filósofos se sientan alrededor de una mesa redonda alternando entre dos a
 Si los cinco filósofos tienen hambre al mismo tiempo y cada uno toma simultáneamente su tenedor izquierdo, todos quedan reteniendo un recurso y esperando indefinidamente por el tenedor derecho que retiene su vecino. Se produce una espera circular: \textbf{Interbloqueo total (Deadlock)}.
 \end{aviso}
 
-\subsubsection{Estrategias de Solución}
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Estrategia Asimétrica (Sin Camarero):} Romper la simetría circular haciendo que los filósofos pares tomen primero el tenedor izquierdo y luego el derecho, mientras que los filósofos impares tomen primero el derecho y luego el izquierdo.
-    \item \textbf{Estrategia con Camarero (Limitación de Aforo):} Un árbitro o camarero monitoriza la mesa y solo permite que se sienten simultáneamente a la mesa a lo sumo $N-1$ filósofos (en este caso 4). Por el Principio del Palomar, si hay 4 filósofos y 5 tenedores, al menos uno de ellos podrá tomar ambos tenedores y comer, rompiendo la espera circular.
-    \item \textbf{Estrategia de Asignación Atómica en Monitor:} El filósofo solicita ambos tenedores a la vez dentro de un monitor. Si los dos no están disponibles, no toma ninguno y espera en una variable condición propia.
-\end{enumerate}
+\subsubsection{Implementación del Monitor con Asignación Atómica (UGR HoareMonitor)}
+En esta solución canónica, un filósofo solo obtiene sus tenedores si \textbf{ambos están libres simultáneamente}. Si no, se bloquea en su propia variable de condición individual \texttt{puede\_comer[i]}.
 
-\subsubsection{Implementación del Monitor con Asignación Atómica}
-\begin{lstlisting}[language=C++, caption={Monitor de la Cena de los Filósofos}]
-class MonitorFilosofos {
+\begin{lstlisting}[language=C++, caption={Monitor de la Cena de los Filósofos (UGR HoareMonitor)}]
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class MonitorFilosofos : public HoareMonitor {
 private:
     static const int N = 5;
     enum Estado { PENSANDO, HAMBRIENTO, COMIENDO };
-    Estado estado[N];
-    std::condition_variable puede_comer[N];
-    std::mutex cerrojo;
+    Estado  estado[N];
+    CondVar puede_comer[N];
 
     int izq(int i) { return (i + N - 1) % N; }
     int der(int i) { return (i + 1) % N; }
 
     void comprobar(int i) {
-        // Solo puede comer si esta hambriento y ningun vecino esta comiendo
+        // Solo come si tiene hambre y ninguno de sus dos vecinos esta comiendo
         if (estado[i] == HAMBRIENTO && 
             estado[izq(i)] != COMIENDO && 
             estado[der(i)] != COMIENDO) 
         {
             estado[i] = COMIENDO;
-            puede_comer[i].notify_one();
+            puede_comer[i].signal(); // Despierta inmediatamente al filosofo 'i'
         }
     }
 
 public:
     MonitorFilosofos() {
-        for (int i = 0; i < N; i++) estado[i] = PENSANDO;
+        for (int i = 0; i < N; i++) {
+            estado[i] = PENSANDO;
+            puede_comer[i] = newCondVar();
+        }
     }
 
     void coger_tenedores(int i) {
-        std::unique_lock<std::mutex> lock(cerrojo);
         estado[i] = HAMBRIENTO;
         comprobar(i);
-        while (estado[i] != COMIENDO) {
-            puede_comer[i].wait(lock);
+        if (estado[i] != COMIENDO) {
+            puede_comer[i].wait();
         }
     }
 
     void dejar_tenedores(int i) {
-        std::unique_lock<std::mutex> lock(cerrojo);
         estado[i] = PENSANDO;
-        // Al terminar, comprueba si sus dos vecinos ahora pueden comer
+        // Al terminar, comprueba si sus dos vecinos pueden comer ahora
         comprobar(izq(i));
         comprobar(der(i));
     }
@@ -606,7 +656,7 @@ public:
 \end{lstlisting}
 
 % ------------------------------------------------------------------------------
-\subsection{Patrón 4: El Estanco y los Fumadores}
+\subsection{Patrón 4: El Estanco y los Fumadores (Problema Oficial Práctica 2)}
 % ------------------------------------------------------------------------------
 
 \subsubsection{Planteamiento del Problema (Patil-Dijkstra)}
@@ -617,43 +667,51 @@ En un estanco hay un estanquero y tres fumadores. Para liar un cigarrillo se nec
     \item Ingrediente 2: \textbf{Cerillas}
 \end{itemize}
 Cada fumador posee infinitos suministros de uno de los ingredientes: el fumador 0 posee tabaco, el 1 posee papel y el 2 posee cerillas.
-El estanquero coloca en el mostrador \textbf{dos ingredientes distintos} de forma aleatoria. El fumador que posee el ingrediente faltante debe recoger los dos suministros del mostrador, liar su cigarrillo, fumar y avisar al estanquero para que vuelva a colocar ingredientes.
+El estanquero coloca en el mostrador el ingrediente que suministra (representado por el número $i \in \{0, 1, 2\}$ que necesita el fumador $i$). El fumador $i$ debe recoger el ingrediente, fumar y avisar al estanquero para que vuelva a colocar ingredientes.
 
-\subsubsection{Implementación del Monitor Estanco}
-\begin{lstlisting}[language=C++, caption={Monitor para el Problema de los Fumadores del Estanco}]
-class MonitorEstanco {
+\subsubsection{Implementación del Monitor Estanco (UGR HoareMonitor)}
+\begin{lstlisting}[language=C++, caption={Monitor Estanco para Fumadores (UGR HoareMonitor)}]
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class Estanco : public HoareMonitor {
 private:
-    int mostrador; // -1: vacio, 0: falta tabaco (hay papel y cerillas),
-                   // 1: falta papel, 2: falta cerillas
-    std::mutex cerrojo;
-    std::condition_variable puede_poner;
-    std::condition_variable fumador_puede_fumar[3];
+    int     mostrador;     // -1: vacio, o 0, 1, 2 segun el ingrediente disponible
+    CondVar fumadores[3];  // Cola donde espera cada fumador su ingrediente
+    CondVar estanquero;    // Cola donde espera el estanquero a que se retire el ingrediente
 
 public:
-    MonitorEstanco() : mostrador(-1) {}
+    Estanco() : mostrador(-1) {
+        estanquero = newCondVar();
+        for (int i = 0; i < 3; i++) {
+            fumadores[i] = newCondVar();
+        }
+    }
 
     // Invocado por el fumador 'i' (0 <= i < 3)
     void obtenerIngrediente(int i) {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        // El fumador 'i' solo puede actuar si en el mostrador falta su ingrediente
-        while (mostrador != i) {
-            fumador_puede_fumar[i].wait(lock);
+        if (mostrador != i) {
+            fumadores[i].wait();
         }
-        // Retira los ingredientes del mostrador
+        // Retira el ingrediente del mostrador
         mostrador = -1;
-        // Notifica al estanquero de que el mostrador esta libre
-        puede_poner.notify_one();
+        // Despierta al estanquero para que genere un nuevo ingrediente
+        estanquero.signal();
     }
 
-    // Invocado por el estanquero generando el ingrediente faltante 'i'
+    // Invocado por el estanquero generando el ingrediente 'i'
     void ponerIngrediente(int i) {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        while (mostrador != -1) {
-            puede_poner.wait(lock);
-        }
         mostrador = i;
-        // Despierta exclusivamente al fumador que necesita los ingredientes puestos
-        fumador_puede_fumar[i].notify_one();
+        // Despierta de inmediato al fumador que necesita este ingrediente
+        fumadores[i].signal();
+    }
+
+    // Invocado por el estanquero para esperar la retirada antes de continuar
+    void esperarRecogidaIngrediente() {
+        if (mostrador != -1) {
+            estanquero.wait();
+        }
     }
 };
 \end{lstlisting}
@@ -672,12 +730,16 @@ Una barbería consta de una sala con una silla de barbero y una sala de espera c
         \item Si el barbero está pelando a otro y hay sillas libres en la sala de espera, el cliente se sienta a esperar su turno.
         \item Si todas las $N$ sillas están ocupadas, el cliente se marcha inmediatamente sin esperar (\emph{balking}).
     \end{itemize}
-    \item Cuando el barbero termina un corte, despide al cliente, cobra, y si hay clientes en la sala de espera, llama al siguiente; si no hay nadie, vuelve a dormirse.
+    \item Cuando el barbero termina un corte, despide al cliente, y si hay clientes en la sala de espera, llama al siguiente; si no hay nadie, vuelve a dormirse.
 \end{itemize}
 
-\subsubsection{Implementación del Monitor de la Barbería}
-\begin{lstlisting}[language=C++, caption={Monitor del Barbero Durmiente}]
-class MonitorBarberia {
+\subsubsection{Implementación del Monitor de la Barbería (UGR HoareMonitor)}
+\begin{lstlisting}[language=C++, caption={Monitor del Barbero Durmiente (UGR HoareMonitor)}]
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class MonitorBarberia : public HoareMonitor {
 private:
     const int max_sillas_espera;
     int clientes_esperando;
@@ -685,23 +747,23 @@ private:
     bool silla_barbero_ocupada;
     bool corte_terminado;
 
-    std::mutex cerrojo;
-    std::condition_variable cola_espera;
-    std::condition_variable despertar_barbero;
-    std::condition_variable silla_pelar;
-    std::condition_variable cliente_espera_fin_corte;
+    CondVar cola_espera;
+    CondVar despertar_barbero;
+    CondVar cliente_espera_fin_corte;
 
 public:
     MonitorBarberia(int n_sillas) : 
         max_sillas_espera(n_sillas), clientes_esperando(0), 
-        barbero_dormido(true), silla_barbero_ocupada(false), corte_terminado(false) {}
+        barbero_dormido(true), silla_barbero_ocupada(false), corte_terminado(false) 
+    {
+        cola_espera              = newCondVar();
+        despertar_barbero        = newCondVar();
+        cliente_espera_fin_corte = newCondVar();
+    }
 
     bool cortarPelo(int id_cliente) {
-        std::unique_lock<std::mutex> lock(cerrojo);
-
         if (clientes_esperando == max_sillas_espera && silla_barbero_ocupada) {
-            // No hay sitio: se marcha
-            return false;
+            return false; // Sala llena: el cliente se marcha
         }
 
         clientes_esperando++;
@@ -709,43 +771,42 @@ public:
         // Si el barbero duerme, lo despertamos
         if (barbero_dormido) {
             barbero_dormido = false;
-            despertar_barbero.notify_one();
+            despertar_barbero.signal();
         }
 
         // Esperar a que la silla de pelar quede libre
-        while (silla_barbero_ocupada) {
-            cola_espera.wait(lock);
+        if (silla_barbero_ocupada) {
+            cola_espera.wait();
         }
 
         clientes_esperando--;
         silla_barbero_ocupada = true;
         corte_terminado = false;
 
-        // Esperar a que el barbero termine de cortar el pelo
-        while (!corte_terminado) {
-            cliente_espera_fin_corte.wait(lock);
+        // Esperar a que el barbero complete el corte de pelo
+        if (!corte_terminado) {
+            cliente_espera_fin_corte.wait();
         }
 
         silla_barbero_ocupada = false;
-        // Avisar al siguiente cliente en espera
-        cola_espera.notify_one();
+        // Avisar al siguiente cliente en espera si lo hay
+        if (!cola_espera.empty()) {
+            cola_espera.signal();
+        }
         return true;
     }
 
     void siguienteCliente() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-
         // Si no hay nadie esperando ni en la silla, dormir
-        while (clientes_esperando == 0 && !silla_barbero_ocupada) {
+        if (clientes_esperando == 0 && !silla_barbero_ocupada) {
             barbero_dormido = true;
-            despertar_barbero.wait(lock);
+            despertar_barbero.wait();
         }
     }
 
     void finCliente() {
-        std::unique_lock<std::mutex> lock(cerrojo);
         corte_terminado = true;
-        cliente_espera_fin_corte.notify_one();
+        cliente_espera_fin_corte.signal(); // Notificacion directa al cliente sentado
     }
 };
 \end{lstlisting}
@@ -759,43 +820,39 @@ Nótese que en este patrón coexisten dos fases de sincronización distintas:
 \end{aviso}
 
 % ------------------------------------------------------------------------------
-\subsection{Patrón 6: La Barrera Parcial y Sincronización en Fase}
+\subsection{Patrón 6: La Barrera Parcial (Barrera de Parejas / Barrera2)}
 % ------------------------------------------------------------------------------
 
 \subsubsection{Planteamiento del Problema}
 Una \textbf{Barrera Parcial} es un mecanismo de sincronización que bloquea a los procesos conforme van llegando a un punto de control, hasta que un subgrupo de tamaño fijado $K$ (o un número par de procesos, como en la \emph{Barrera de Parejas} o \emph{Barrera2}) ha alcanzado el punto de sincronización. En ese instante, todos los procesos del grupo son liberados conjuntamente para iniciar la siguiente fase del cómputo.
 
-\subsubsection{Comportamiento según la Semántica de Señales}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Bajo Semántica SU (Hoare):} El proceso que completa el aforo de la fase ejecuta una secuencia de llamadas a \texttt{signal()} en cadena (cascada de señales). Gracias a la cola urgente, los procesos van despertando y reanudando de forma atómica en exclusión mutua, garantizando que ninguno de ellos pueda adelantar a los demás ni entrar a la siguiente ronda antes de que todos hayan salido.
-    \item \textbf{Bajo Semántica SC (Mesa/C++11):} El último proceso invoca \texttt{cola.notify\_all()}. Para evitar que un hilo rápido que termine velozmente la siguiente fase regrese a la barrera y se mezcle con los hilos que aún no han salido de la fase anterior, es indispensable introducir un \textbf{contador de generación o época} (\emph{generation counter}).
-\end{itemize}
+Bajo semántica SU (Hoare), gracias a la cola urgente, los procesos despiertan y reanudan de forma atómica en exclusión mutua, garantizando que ninguno de ellos pueda adelantar a los demás ni entrar a la siguiente ronda antes de que todos hayan salido. Por ello, a diferencia de la semántica SC, en semántica SU no se requiere un contador de generaciones.
 
-\begin{algoritmo}[Implementación de la Barrera de Parejas (Barrera2) en C++11]
+\begin{algoritmo}[Implementación de la Barrera de Parejas (Barrera2) en Monitores SU]
 \begin{lstlisting}[language=C++]
-class Barrera2 {
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class Barrera2 : public HoareMonitor {
 private:
-    std::mutex cerrojo;
-    std::condition_variable cola;
-    int esperando = 0;
-    int generacion = 0;
+    int     esperando;
+    CondVar cola;
 
 public:
-    void llegar() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        int gen_actual = generacion;
-        esperando++;
+    Barrera2() : esperando(0) {
+        cola = newCondVar();
+    }
 
-        if (esperando == 2) {
-            // Se completa la pareja: reiniciamos el contador de espera y avanzamos de fase
-            esperando = 0;
-            generacion++;
-            cola.notify_all(); // Despertar a la pareja sincronizada
+    void llegar() {
+        esperando++;
+        if (esperando < 2) {
+            // El primer proceso en llegar se bloquea en la cola de condicion
+            cola.wait();
         } else {
-            // El primer hilo en llegar espera a que cambie la generacion
-            while (gen_actual == generacion) {
-                cola.wait(lock);
-            }
+            // El segundo proceso completa el par: reinicia y despierta a su pareja
+            esperando = 0;
+            cola.signal(); // En SU, la pareja despierta inmediatamente
         }
     }
 };

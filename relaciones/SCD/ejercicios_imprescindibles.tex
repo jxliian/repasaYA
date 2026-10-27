@@ -683,50 +683,61 @@ Resolver el problema de lectores y escritores mediante monitores con prioridad a
 \end{ejercicio}
 
 \begin{solucion}
-\textbf{Variante con Prioridad a Escritores:} Si hay algún escritor esperando o escribiendo, los nuevos lectores deben bloquearse:
+\textbf{Implementación Oficial UGR (\texttt{HoareMonitor} y \texttt{CondVar} de \texttt{scd.h}):}\\
+Bajo semántica SU (Hoare), la exclusión mutua es automática y las variables de condición \texttt{CondVar} garantizan orden FIFO. En la variante con prioridad a escritores, si hay algún escritor escribiendo o esperando turno, los nuevos lectores deben suspenderse:
 \begin{lstlisting}[language=C++]
-class LectoresEscritoresPrioridadEscritores {
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class LectoresEscritoresPrioridadEscritores : public HoareMonitor {
 private:
-    std::mutex cerrojo;
-    std::condition_variable cola_lectores, cola_escritores;
-    int num_lectores = 0;
-    bool escribiendo = false;
-    int escritores_esperando = 0;
+    int     n_lec;              // Numero de lectores leyendo actualmente
+    bool    escrib;             // true si hay un escritor escribiendo
+    int     escrib_esperando;   // Numero de escritores esperando turno
+    CondVar cola_lectores;
+    CondVar cola_escritores;
 
 public:
+    LectoresEscritoresPrioridadEscritores() : n_lec(0), escrib(false), escrib_esperando(0) {
+        cola_lectores   = newCondVar();
+        cola_escritores = newCondVar();
+    }
+
     void iniciar_lectura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        while (escribiendo || escritores_esperando > 0) {
-            cola_lectores.wait(lock);
+        // En semantica SU basta 'if': si hay escritor activo o esperando, esperar
+        if (escrib || escrib_esperando > 0) {
+            cola_lectores.wait();
         }
-        num_lectores++;
+        n_lec++;
+        // Desbloqueo en cascada para dar paso a otros lectores en espera
+        cola_lectores.signal();
     }
 
     void fin_lectura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        num_lectores--;
-        if (num_lectores == 0 && escritores_esperando > 0) {
-            cola_escritores.notify_one();
+        n_lec--;
+        // El ultimo lector en salir despierta al escritor prioritario
+        if (n_lec == 0) {
+            cola_escritores.signal();
         }
     }
 
     void iniciar_escritura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        escritores_esperando++;
-        while (escribiendo || num_lectores > 0) {
-            cola_escritores.wait(lock);
+        escrib_esperando++;
+        if (escrib || n_lec > 0) {
+            cola_escritores.wait();
         }
-        escritores_esperando--;
-        escribiendo = true;
+        escrib_esperando--;
+        escrib = true;
     }
 
     void fin_escritura() {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        escribiendo = false;
-        if (escritores_esperando > 0) {
-            cola_escritores.notify_one();
+        escrib = false;
+        // Prioridad estricta a escritores: si hay alguno esperando, se despierta
+        if (escrib_esperando > 0) {
+            cola_escritores.signal();
         } else {
-            cola_lectores.notify_all();
+            cola_lectores.signal(); // Si no hay escritores, pasan los lectores
         }
     }
 };
@@ -748,46 +759,90 @@ Vehículos del norte y del sur cruzan un puente de un solo carril.
 \begin{solucion}
 \textbf{Apartado (a):} En la política básica (entran del norte si no hay coches del sur cruzando), si llega un flujo ininterrumpido de coches del norte, los coches del sur sufrirán \textbf{inanición indefinida}.
 
-\textbf{Apartado (b): Monitor con Cupo de 10 Coches y Alternancia Justa:}
+\textbf{Apartado (b): Monitor Canónico en C++11 con \texttt{HoareMonitor} (UGR):}
 \begin{lstlisting}[language=C++]
-class MonitorPuenteCupo {
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class MonitorPuenteCupo : public HoareMonitor {
 private:
-    std::mutex cerrojo;
-    std::condition_variable cola_norte, cola_sur;
-    int coches_cruzando = 0;
-    int sentido_actual = 0; // 0: vacio, 1: Norte, 2: Sur
-    int esperando_norte = 0, esperando_sur = 0;
-    int cupo_actual = 0;    // Contador de coches en la ronda actual (max 10)
+    int     coches_cruzando;  // Numero de vehiculos en el puente
+    int     sentido_actual;   // 0: vacio, 1: Norte, 2: Sur
+    int     esperando_norte;  // Vehiculos esperando en el Norte
+    int     esperando_sur;    // Vehiculos esperando en el Sur
+    int     cupo_actual;      // Vehiculos que han entrado en la tanda actual (max 10)
+    CondVar cola_norte;
+    CondVar cola_sur;
 
 public:
+    MonitorPuenteCupo() : coches_cruzando(0), sentido_actual(0), 
+                          esperando_norte(0), esperando_sur(0), cupo_actual(0) {
+        cola_norte = newCondVar();
+        cola_sur   = newCondVar();
+    }
+
     void entrarNorte() {
-        std::unique_lock<std::mutex> lock(cerrojo);
         esperando_norte++;
-        while ((sentido_actual == 2 && coches_cruzando > 0) ||
-               (sentido_actual == 1 && cupo_actual >= 10 && esperando_sur > 0)) {
-            cola_norte.wait(lock);
+        // Esperar si el puente esta ocupado por el Sur, o si siendo Norte se
+        // agoto el cupo de 10 y hay vehiculos esperando en el sentido opuesto:
+        if ((sentido_actual == 2 && coches_cruzando > 0) ||
+            (sentido_actual == 1 && cupo_actual >= 10 && esperando_sur > 0)) {
+            cola_norte.wait();
         }
         esperando_norte--;
         sentido_actual = 1;
         coches_cruzando++;
         cupo_actual++;
+
+        // Cascada SU: permitir la entrada de otros coches del Norte si queda cupo
+        if (cupo_actual < 10 && esperando_norte > 0) {
+            cola_norte.signal();
+        }
     }
 
     void salirNorte() {
-        std::unique_lock<std::mutex> lock(cerrojo);
         coches_cruzando--;
         if (coches_cruzando == 0) {
             if (cupo_actual >= 10 || esperando_norte == 0) {
                 // Cambio de sentido hacia el Sur
                 cupo_actual = 0;
                 sentido_actual = (esperando_sur > 0) ? 2 : 0;
-                cola_sur.notify_all();
+                cola_sur.signal(); // Despierta al primer coche del Sur
             } else {
-                cola_norte.notify_all();
+                cola_norte.signal();
             }
         }
     }
-    // Funciones analogas para entrarSur() y salirSur() invirtiendo los roles
+
+    void entrarSur() {
+        esperando_sur++;
+        if ((sentido_actual == 1 && coches_cruzando > 0) ||
+            (sentido_actual == 2 && cupo_actual >= 10 && esperando_norte > 0)) {
+            cola_sur.wait();
+        }
+        esperando_sur--;
+        sentido_actual = 2;
+        coches_cruzando++;
+        cupo_actual++;
+
+        if (cupo_actual < 10 && esperando_sur > 0) {
+            cola_sur.signal();
+        }
+    }
+
+    void salirSur() {
+        coches_cruzando--;
+        if (coches_cruzando == 0) {
+            if (cupo_actual >= 10 || esperando_sur == 0) {
+                cupo_actual = 0;
+                sentido_actual = (esperando_norte > 0) ? 1 : 0;
+                cola_norte.signal();
+            } else {
+                cola_sur.signal();
+            }
+        }
+    }
 };
 \end{lstlisting}
 \end{solucion}
@@ -801,15 +856,28 @@ Olla de capacidad $M > 0$ raciones y $N > 0$ comensales. El primer salvaje que e
 \end{ejercicio}
 
 \begin{solucion}
+\textbf{Implementación en C++11 con \texttt{HoareMonitor} (UGR):}
 \begin{lstlisting}[language=C++]
-Monitor Olla {
-    int raciones = M;      // Capacidad inicial llena
-    cond cola_salvajes;
-    cond cola_cocinero;
-    bool aviso_enviado = false;
+#include "scd.h"
+using namespace std;
+using namespace scd;
 
-    procedure servir() {
-        // En semantica SU, basta un if porque la senal reactiva de inmediato
+class MonitorOlla : public HoareMonitor {
+private:
+    const int capacidad;
+    int       raciones;
+    bool      aviso_enviado;
+    CondVar   cola_salvajes;
+    CondVar   cola_cocinero;
+
+public:
+    MonitorOlla(int M) : capacidad(M), raciones(M), aviso_enviado(false) {
+        cola_salvajes = newCondVar();
+        cola_cocinero = newCondVar();
+    }
+
+    void servir() {
+        // En semantica SU basta 'if' porque la senal reactiva de inmediato con raciones > 0
         if (raciones == 0) {
             if (!aviso_enviado) {
                 aviso_enviado = true;
@@ -817,24 +885,24 @@ Monitor Olla {
             }
             cola_salvajes.wait();
         }
-        raciones = raciones - 1;
+        raciones--;
         if (raciones > 0) {
-            cola_salvajes.signal(); // Efecto cascada: avisa al siguiente salvaje
+            cola_salvajes.signal(); // Cascada SU: avisa al siguiente salvaje en espera
         }
     }
 
-    procedure esperarPeticion() {
+    void esperarPeticion() {
         if (!aviso_enviado) {
             cola_cocinero.wait();
         }
     }
 
-    procedure reponer() {
-        raciones = M;
+    void reponer() {
+        raciones = capacidad;
         aviso_enviado = false;
         cola_salvajes.signal(); // Despierta al primer salvaje en espera
     }
-}
+};
 \end{lstlisting}
 \textbf{Invariante:} $0 \le raciones \le M$. Si $raciones == 0$, ningún salvaje puede completar \texttt{servir()} antes de que el cocinero reponga.
 \end{solucion}
@@ -856,41 +924,54 @@ Cinco filósofos comparten 5 tenedores.
 \textbf{Apartado (a) y (b): Interbloqueo Circular:}\\
 Si cada filósofo $i$ toma primero su tenedor izquierdo $T_i$, todos los 5 filósofos retienen un tenedor y esperan el derecho $T_{(i+1)\%5}$. Hay un ciclo de espera cerrada $\implies$ \textbf{Interbloqueo}.
 
-\textbf{Apartado (c): Solución con Aforo de 4 Filósofos:}
+\textbf{Apartado (c): Solución con Aforo de 4 Filósofos (\texttt{HoareMonitor} UGR):}
 \begin{lstlisting}[language=C++]
-class MonitorFilosofosAforo {
+#include "scd.h"
+using namespace std;
+using namespace scd;
+
+class MonitorFilosofosAforo : public HoareMonitor {
 private:
-    std::mutex cerrojo;
-    std::condition_variable cola_aforo;
-    std::condition_variable cola_tenedores[5];
-    bool tenedor_libre[5] = {true, true, true, true, true};
-    int comiendo_o_esperando = 0;
+    CondVar cola_aforo;
+    CondVar cola_tenedores[5];
+    bool    tenedor_libre[5] = {true, true, true, true, true};
+    int     sentados_o_esperando = 0;
 
 public:
-    void entrar_a_comer(int i) {
-        std::unique_lock<std::mutex> lock(cerrojo);
-        // Aforo maximo 4: garantiza que al menos un filosofo podra tomar ambos tenedores
-        while (comiendo_o_esperando >= 4) {
-            cola_aforo.wait(lock);
+    MonitorFilosofosAforo() {
+        cola_aforo = newCondVar();
+        for (int i = 0; i < 5; i++) {
+            cola_tenedores[i] = newCondVar();
         }
-        comiendo_o_esperando++;
+    }
 
-        while (!tenedor_libre[i]) cola_tenedores[i].wait(lock);
+    void entrar_a_comer(int i) {
+        // Aforo maximo 4: garantiza que al menos un filosofo podra tomar ambos tenedores
+        if (sentados_o_esperando >= 4) {
+            cola_aforo.wait();
+        }
+        sentados_o_esperando++;
+
+        if (!tenedor_libre[i]) {
+            cola_tenedores[i].wait();
+        }
         tenedor_libre[i] = false;
 
-        while (!tenedor_libre[(i + 1) % 5]) cola_tenedores[(i + 1) % 5].wait(lock);
+        if (!tenedor_libre[(i + 1) % 5]) {
+            cola_tenedores[(i + 1) % 5].wait();
+        }
         tenedor_libre[(i + 1) % 5] = false;
     }
 
     void salir_de_comer(int i) {
-        std::unique_lock<std::mutex> lock(cerrojo);
         tenedor_libre[i] = true;
         tenedor_libre[(i + 1) % 5] = true;
-        cola_tenedores[i].notify_one();
-        cola_tenedores[(i + 1) % 5].notify_one();
+        
+        cola_tenedores[i].signal();
+        cola_tenedores[(i + 1) % 5].signal();
 
-        comiendo_o_esperando--;
-        cola_aforo.notify_one();
+        sentados_o_esperando--;
+        cola_aforo.signal();
     }
 };
 \end{lstlisting}
