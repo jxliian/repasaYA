@@ -82,6 +82,10 @@ De los **63 problemas resueltos** en el solucionario oficial en PDF de repasaYA,
 > 📝 **Exámenes Oficiales Reales Resueltos (Convocatorias 2021 y 2025 repetido):**  
 > Hemos resuelto y auditado íntegramente los 6 problemas reales de examen (corrigiendo los fallos graves de los borradores de alumnos):  
 > 👉 [**Descargar PDF: Exámenes Oficiales Resueltos y Corregidos (2021 y 2025)**](/scd/examenes-oficiales-resueltos-scd.pdf)
+>
+> 🎯 **Plantillas Maestras Universales para el Examen (Monitores y Semáforos):**  
+> Cuaderno de 8 páginas (1 cara por plantilla) con código C++ oficial (`HoareMonitor`) y pseudocódigo canónico, diccionario de adaptación inmediata (puente, aseo, centro, olla, barbería) y checklist de entrega para el Prof. Manuel I. Capel Tuñón:  
+> 👉 [**Descargar PDF: Plantillas Maestras Universales para el Examen de SCD**](/scd/plantillas-maestras-scd.pdf)
 
 
 ### Grupo 1: Exclusión Mutua en Memoria Compartida (Tema 2-2)

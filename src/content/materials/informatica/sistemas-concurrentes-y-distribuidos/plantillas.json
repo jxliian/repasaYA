@@ -1,0 +1,8 @@
+{
+  "subject": "informatica/sistemas-concurrentes-y-distribuidos",
+  "type": "apuntes",
+  "title": "Plantillas Maestras Universales para el Examen (Monitores y Semáforos)",
+  "order": 5,
+  "pdf": "scd/plantillas-maestras-scd.pdf",
+  "description": "Documento de 8 páginas de alta densidad con plantillas maestras completas (1 cara por plantilla) en C++ oficial (HoareMonitor) y pseudocódigo canónico, diccionario de adaptación a problemas típicos y checklist de entrega para el Prof. Manuel I. Capel Tuñón."
+}

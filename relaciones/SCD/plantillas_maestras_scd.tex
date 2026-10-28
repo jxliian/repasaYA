@@ -1,0 +1,706 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+
+\usepackage[a4paper,top=1.2cm,bottom=1.2cm,left=1.5cm,right=1.5cm,headheight=12pt]{geometry}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=scdDarkBlue,
+    urlcolor=scdAccent,
+    pdftitle={Plantillas Maestras Universales para el Examen de SCD - UGR},
+    pdfauthor={repasaYA}
+}
+
+% Paleta de colores repasaYA
+\definecolor{scdDarkBlue}{RGB}{20, 35, 60}
+\definecolor{scdPrimary}{RGB}{35, 75, 135}
+\definecolor{scdAccent}{RGB}{108, 99, 255}
+\definecolor{scdLightAccent}{RGB}{240, 243, 255}
+\definecolor{scdGreen}{RGB}{28, 140, 72}
+\definecolor{scdLightGreen}{RGB}{240, 253, 244}
+\definecolor{scdOrange}{RGB}{217, 119, 6}
+\definecolor{scdLightOrange}{RGB}{255, 251, 235}
+\definecolor{scdGray}{RGB}{248, 249, 252}
+\definecolor{scdBorder}{RGB}{215, 222, 235}
+\definecolor{codeComment}{RGB}{50, 110, 50}
+\definecolor{codeKeyword}{RGB}{15, 45, 150}
+\definecolor{codeString}{RGB}{160, 40, 40}
+
+% Configuración de listings ultracompacta
+\lstset{
+    language=C++,
+    basicstyle=\ttfamily\fontsize{7.1pt}{8.4pt}\selectfont,
+    keywordstyle=\bfseries\color{codeKeyword},
+    commentstyle=\itshape\color{codeComment},
+    stringstyle=\color{codeString},
+    numbers=none,
+    backgroundcolor=\color{scdGray},
+    frame=single,
+    rulecolor=\color{scdBorder},
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+    tabsize=2,
+    aboveskip=2pt,
+    belowskip=2pt,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1
+             {≤}{{$\le$}}1 {≥}{{$\ge$}}1 {≠}{{$\neq$}}1
+             {→}{{$\to$}}1 {λ}{{$\lambda$}}1
+}
+
+\begin{document}
+
+% ==============================================================================
+% PÁGINA 1: PORTADA, ESTRATEGIA Y REGLAS DE ORO DE CAPEL
+% ==============================================================================
+\begin{tcolorbox}[
+    colback=scdDarkBlue,
+    colframe=scdDarkBlue,
+    arc=4pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt
+]
+    \centering
+    {\LARGE\bfseries\color{white} Plantillas Maestras Universales de SCD}\\[2pt]
+    {\normalsize\color{scdLightAccent} Monitores Oficiales UGR (\texttt{HoareMonitor} / SU) y Semáforos POSIX (Paso de Testigo)}\\[2pt]
+    {\footnotesize\color{gray!30} Guía de Código Canónico y Pseudocódigo para el Examen Parcial --- Prof. Manuel I. Capel Tuñón}
+\end{tcolorbox}
+
+\vspace{0.1cm}
+
+\begin{tcolorbox}[colback=scdLightGreen,colframe=scdGreen,title=\textbf{¿Por qué estas plantillas cubren el 100\% de los problemas de examen?},arc=3pt]
+\small
+En la Universidad de Granada, el 100\% de los ejercicios prácticos de concurrencia de la última década corresponden exactamente a una de las siguientes \textbf{4 familias de patrones}:
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+    \item \textbf{Monitores de Dos Bandos / Recursos Incompatibles} (Puente de 1 carril, Aseo mixto con aforo, Centro de Recursos tipo 0/1, Olla de salvajes, Barbería). $\to$ \textbf{Plantilla 1A} (Página 2).
+    \item \textbf{Monitores de Lectores--Escritores y Turno FIFO Estricto} (Lectores/Escritores con prioridad a escritores, o Cuenta Bancaria para evitar adelantamientos entre solicitudes grandes y pequeñas). $\to$ \textbf{Plantillas 1B y 1C} (Páginas 4 y 5).
+    \item \textbf{Semáforos con Paso de Testigo (\textit{Passing the Baton})} (Implementar con semáforos cualquier problema de aforos, bandos o prioridades complejas sin quemar CPU). $\to$ \textbf{Plantilla 2} (Página 6).
+    \item \textbf{Semáforos para Coordinación de Instrucciones entre $P_1, P_2, P_3$ (\textit{Handshake / Rendezvous})} (Garantizar orden: \textit{«$P_2$ ejecuta 'e' tras el 'b' de $P_1$ y el 'h' de $P_3$»}). $\to$ \textbf{Plantilla 3} (Página 7).
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.1cm}
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdPrimary,title=\textbf{Las 4 Reglas de Oro de Capel para el Examen (Monitores y Semáforos)},arc=3pt]
+\small
+\begin{enumerate}[leftmargin=*,itemsep=1.5pt]
+    \item \textbf{Monitores UGR (\texttt{scd.h}):} Siempre derivar de \texttt{public HoareMonitor}. Toda variable condición \texttt{CondVar} \textbf{debe inicializarse obligatoriamente en el constructor} mediante \texttt{cola = newCondVar();}.
+    \item \textbf{Semántica SU (Hoare) vs SC (Mesa):} En la UGR se usa semántica \textbf{Señalar y Espera Urgente (SU)}. El proceso que hace \texttt{signal()} cede la posesión inmediata del monitor al proceso despertado. En consecuencia:
+    \begin{itemize}[leftmargin=*,itemsep=0.5pt]
+        \item \textbf{Basta con un \texttt{if (!cond) cola.wait();}} (no es necesario bucle \texttt{while} porque nadie se puede colar).
+        \item Si el enunciado exige semántica Mesa/SC (Java, POSIX puro), \textbf{es obligatorio usar \texttt{while (!cond) cola.wait();}}.
+    \end{itemize}
+    \item \textbf{Semáforos con Paso de Testigo:} El semáforo \texttt{mutex} se inicializa a $1$ y los semáforos privados a $0$. \textbf{Regla sagrada:} Si al salir se despierta a un proceso bloqueado mediante su semáforo privado (\texttt{sem\_post(\&sem\_privado)}), \textbf{NUNCA se debe hacer \texttt{sem\_post(\&mutex)}}, ya que el testigo de la exclusión mutua se transfiere en mano.
+    \item \textbf{C++ vs Pseudocódigo:} En los exámenes de Capel se acepta tanto la implementación oficial en C++ con \texttt{HoareMonitor} como el pseudocódigo formal de Hoare/Pascal. En esta guía se proporcionan ambas sintaxis para máxima seguridad.
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.1cm}
+
+\begin{tcolorbox}[colback=scdLightOrange,colframe=scdOrange,title=\textbf{Equivalencia Inmediata: Sintaxis C++ UGR $\longleftrightarrow$ Pseudocódigo Hoare Canónico},arc=3pt]
+\footnotesize
+\centering
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{4.2cm}p{4.5cm}p{6.8cm}}
+\toprule
+\textbf{Elemento} & \textbf{C++ Oficial UGR (\texttt{scd.h})} & \textbf{Pseudocódigo Hoare / Capel} \\
+\midrule
+\textbf{Definición monitor} & \texttt{class M : public HoareMonitor} & \texttt{monitor M; ... end;} \\
+\textbf{Variable de condición} & \texttt{CondVar cola;} & \texttt{var cola: condition;} \\
+\textbf{Creación / Inicialización} & \texttt{cola = newCondVar();} (en constr.) & Automática en la declaración del monitor \\
+\textbf{Bloqueo en condición} & \texttt{cola.wait();} & \texttt{wait(cola);} o \texttt{cola.wait;} \\
+\textbf{Despertar a un proceso} & \texttt{cola.signal();} & \texttt{signal(cola);} o \texttt{cola.signal;} \\
+\textbf{Semáforo inicialización} & \texttt{sem\_init(\&s, 0, valor);} & \texttt{var s: semaphore := valor;} \\
+\textbf{Operación de espera sem.} & \texttt{sem\_wait(\&s);} & \texttt{wait(s);} o \texttt{P(s);} \\
+\textbf{Operación de aviso sem.} & \texttt{sem\_post(\&s);} & \texttt{signal(s);} o \texttt{V(s);} \\
+\bottomrule
+\end{tabular}
+\end{tcolorbox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 2: PLANTILLA 1A — MONITOR UNIVERSAL DE DOS BANDOS / RECURSOS
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Plantilla 1A: Monitor Universal de Dos Bandos / Recursos Incompatibles (Una Cara)
+\end{tcolorbox}
+\vspace{-0.15cm}
+{\scriptsize \textbf{Ámbito:} Puente 1 carril, Aseo mixto, Centro Tipo 0/1, Olla, Barbería. \textbf{Regla SU:} Uso de \texttt{if} sin \texttt{while} (el despertado entra de inmediato).}
+
+\begin{lstlisting}
+#include "scd.h"
+using namespace std; using namespace scd;
+
+class MonitorUniversal : public HoareMonitor {
+private:
+    int dentro_A, dentro_B;       // Procesos actualmente dentro de cada tipo
+    int esperando_A, esperando_B; // Procesos esperando fuera (para evaluar prioridades)
+    CondVar cola_A, cola_B;       // Colas de espera donde duermen los procesos
+
+public:
+    MonitorUniversal() : dentro_A(0), dentro_B(0), esperando_A(0), esperando_B(0) {
+        cola_A = newCondVar(); // ¡OBLIGATORIO en el constructor de la UGR!
+        cola_B = newCondVar();
+    }
+
+    void entrar_A() {
+        // Bloqueo: hay incompatibles dentro O aforo lleno O prioridad rival con esperando_B > 0
+        if (dentro_B > 0 /* || dentro_A == AFORO_MAX || esperando_B > 0 */) {
+            esperando_A++; cola_A.wait(); esperando_A--;
+        }
+        dentro_A++; // Entrada autorizada
+        // Desbloqueo en cascada opcional: if (dentro_A < AFORO_MAX && esperando_A > 0) cola_A.signal();
+    }
+
+    void salir_A() {
+        dentro_A--; // Anota salida
+        // Si no queda nadie de A y hay rivales esperando, dar paso prioritario a B:
+        if (dentro_A == 0 && esperando_B > 0) cola_B.signal();
+        else if (dentro_B == 0 && esperando_A > 0) cola_A.signal();
+    }
+
+    void entrar_B() {
+        if (dentro_A > 0 /* || dentro_B == AFORO_MAX || esperando_A > 0 */) {
+            esperando_B++; cola_B.wait(); esperando_B--;
+        }
+        dentro_B++;
+    }
+
+    void salir_B() {
+        dentro_B--;
+        if (dentro_B == 0 && esperando_A > 0) cola_A.signal();
+        else if (dentro_A == 0 && esperando_B > 0) cola_B.signal();
+    }
+};
+\end{lstlisting}
+
+\vspace{-0.15cm}
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdPrimary,title=\textbf{Equivalente Canónico en Pseudocódigo Teórico de Hoare (Capel)},arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]
+\begin{lstlisting}[language=C++]
+monitor MonitorUniversal;
+    var dentro_A, dentro_B, esperando_A, esperando_B: integer;
+        cola_A, cola_B: condition;
+
+    procedure entrar_A;
+    begin
+        if (dentro_B > 0) then begin esperando_A := esperando_A + 1; wait(cola_A); esperando_A := esperando_A - 1; end;
+        dentro_A := dentro_A + 1;
+    end;
+
+    procedure salir_A;
+    begin
+        dentro_A := dentro_A - 1;
+        if (dentro_A = 0 and esperando_B > 0) then signal(cola_B)
+        else if (dentro_B = 0 and esperando_A > 0) then signal(cola_A);
+    end;
+
+    procedure entrar_B; begin if (dentro_A > 0) then begin esperando_B := esperando_B + 1; wait(cola_B); esperando_B := esperando_B - 1; end; dentro_B := dentro_B + 1; end;
+    procedure salir_B;  begin dentro_B := dentro_B - 1; if (dentro_B = 0 and esperando_A > 0) then signal(cola_A) else if (dentro_A = 0 and esperando_B > 0) then signal(cola_B); end;
+begin dentro_A := 0; dentro_B := 0; esperando_A := 0; esperando_B := 0; end;
+\end{lstlisting}
+\end{tcolorbox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 3: DICCIONARIO DE ADAPTACIÓN Y JUSTIFICACIÓN TEÓRICA
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Diccionario de Adaptación Inmediata de la Plantilla 1A
+\end{tcolorbox}
+
+\vspace{0.05cm}
+
+\begin{table}[h!]
+\centering\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{3.2cm}p{4.6cm}p{8cm}}
+\toprule
+\textbf{Problema Típico} & \textbf{Variables y Bandos ($A$ y $B$)} & \textbf{Condición de Bloqueo (\texttt{if}) y Aviso (\texttt{signal})} \\
+\midrule
+\textbf{Puente de 1 carril}\newline \textit{(Norte vs. Sur)} & 
+$A$: Coches Norte (\texttt{norte})\newline
+$B$: Coches Sur (\texttt{sur}) & 
+\textbf{Entrada Norte:} \texttt{if (sur > 0) cola\_norte.wait();}\newline
+\textbf{Salida Norte:} \texttt{if (norte == 0) cola\_sur.signal(); else cola\_norte.signal();} \\
+\midrule
+\textbf{Aseo Mixto}\newline \textit{(Hasta 5H ó 1M)} & 
+$A$: Hombres ($H$, máx 5)\newline
+$B$: Mujeres ($M$, máx 1) & 
+\textbf{Entrada Hombre:} \texttt{if (M > 0 || H == 5 || (prio\_M \&\& esp\_M > 0)) cola\_H.wait();}\newline
+\textbf{Entrada Mujer:} \texttt{if (H > 0 || M == 1 || (prio\_H \&\& esp\_H > 0)) cola\_M.wait();}\newline
+\textbf{Salida Hombre:} \texttt{if (H == 0 \&\& esp\_M > 0) cola\_M.signal(); else cola\_H.signal();} \\
+\midrule
+\textbf{Centro de Recursos}\newline \textit{(Tipo 0 vs. 1, cap. M)} & 
+$A$: Procesos 0 (\texttt{d\_0})\newline
+$B$: Procesos 1 (\texttt{d\_1}) & 
+\textbf{Entrada 0:} \texttt{if (d\_1 > 0 || d\_0 == M || esp\_1 > esp\_0) cola\_0.wait();}\newline
+\textbf{Salida 0:} \texttt{if (d\_0 == 0 \&\& esp\_1 > 0) cola\_1.signal(); else cola\_0.signal();} \\
+\midrule
+\textbf{Olla de Caníbales}\newline \textit{(M raciones)} & 
+Salvajes comen ($A$).\newline
+Cocinero rellena ($B$). & 
+\textbf{Variable:} \texttt{int raciones = M;}\newline
+\textbf{Salvaje come:} \texttt{if (raciones == 0) \{ cola\_cocinero.signal(); cola\_salvajes.wait(); \} raciones--;}\newline
+\textbf{Cocinero rellena:} \texttt{if (raciones > 0) cola\_cocinero.wait(); raciones = M; cola\_salvajes.signal();} \\
+\midrule
+\textbf{Barbería}\newline \textit{(Sillas de espera)} & 
+Cliente entra ($A$).\newline
+Barbero corta ($B$). & 
+\textbf{Variables:} \texttt{bool barbero\_libre = true; int esperando = 0;}\newline
+\textbf{Cliente:} \texttt{if (barbero\_libre) \{ barbero\_libre = false; cola\_barbero.signal(); \} else cola\_sillas.wait();}\newline
+\textbf{Barbero:} \texttt{if (esperando == 0) cola\_barbero.wait(); else cola\_sillas.signal();} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.05cm}
+
+\begin{tcolorbox}[colback=scdLightGreen,colframe=scdGreen,title=\textbf{Justificación Teórica Obligatoria para Obtener el 10 en el Examen de Capel},arc=3pt]
+\small
+Capel siempre añade la coletilla: \textit{«prestando especial atención al razonamiento sobre la corrección y la justificación de las soluciones propuestas»}. En tu examen, redacta siempre estos 3 puntos tras el código:
+\begin{enumerate}[leftmargin=*,itemsep=1.5pt]
+    \item \textbf{Invariante de Exclusión Mutua (Seguridad):}
+    \begin{itemize}[leftmargin=*,itemsep=0.5pt]
+        \item Demostrar que nunca coinciden tipos incompatibles: $I \equiv (\text{dentro\_A} = 0 \lor \text{dentro\_B} = 0) \land (\text{dentro\_A} \ge 0 \land \text{dentro\_B} \ge 0)$.
+        \item Un proceso $A$ solo incrementa \texttt{dentro\_A} si $\text{dentro\_B} = 0$, y mientras $\text{dentro\_A} > 0$ ningún proceso $B$ puede superar su guarda de entrada. Por inducción, $I$ se mantiene invariable en todo estado accesible.
+    \end{itemize}
+    \item \textbf{Ausencia de Interbloqueo (\textit{Deadlock}):}
+    \begin{itemize}[leftmargin=*,itemsep=0.5pt]
+        \item No puede haber bloqueo mutuo permanente porque las condiciones de bloqueo son disjuntas: si hay procesos esperando en ambas colas, el último proceso en salir del recurso activo transfiere explícitamente el control despertando a la cola contraria (\texttt{cola\_B.signal()}).
+    \end{itemize}
+    \item \textbf{Semántica SU vs Mesa (Por qué no hay inanición ni se usa \texttt{while}):}
+    \begin{itemize}[leftmargin=*,itemsep=0.5pt]
+        \item En semántica Señalar y Espera Urgente (Hoare), el proceso señalador pasa el monitor directamente al proceso en la cabeza de la cola, y este pasa a ejecutarse de forma inmediata sin que ningún proceso externo pueda adelantarlo en la cola de entrada. Esto garantiza la validez de la condición de entrada sin reevaluación (\texttt{if}).
+    \end{itemize}
+\end{enumerate}
+\end{tcolorbox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 4: PLANTILLA 1B — LECTORES-ESCRITORES (PRIORIDAD A ESCRITORES)
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Plantilla 1B: Monitor de Lectores--Escritores con Prioridad a Escritores (Una Cara)
+\end{tcolorbox}
+\vspace{-0.15cm}
+{\scriptsize \textbf{Objetivo:} Permitir múltiples lectores concurrentes, exclusión para escritores y evitar inanición de escritores esperando.}
+
+\begin{lstlisting}
+#include "scd.h"
+using namespace std; using namespace scd;
+
+class LectoresEscritores : public HoareMonitor {
+private:
+    int     n_lec;            // Numero de lectores actualmente leyendo
+    bool    escribiendo;      // true si hay un escritor en la seccion critica
+    int     esp_escritores;   // Escritores esperando turno fuera
+    CondVar cola_lectores;    // Cola donde esperan los lectores
+    CondVar cola_escritores;  // Cola donde esperan los escritores
+
+public:
+    LectoresEscritores() : n_lec(0), escribiendo(false), esp_escritores(0) {
+        cola_lectores   = newCondVar(); // Inicializacion obligatoria en constructor
+        cola_escritores = newCondVar();
+    }
+
+    void iniciar_lectura() {
+        // PRIORIDAD A ESCRITORES: esperar si hay escritor dentro O esperando fuera
+        if (escribiendo || esp_escritores > 0) cola_lectores.wait();
+        n_lec++;
+        cola_lectores.signal(); // Cascada: despierta al siguiente lector de la cola
+    }
+
+    void fin_lectura() {
+        n_lec--;
+        // El ultimo lector en salir despierta al escritor que espera
+        if (n_lec == 0) cola_escritores.signal();
+    }
+
+    void iniciar_escritura() {
+        esp_escritores++; // Anotamos escritor esperando
+        if (escribiendo || n_lec > 0) cola_escritores.wait();
+        esp_escritores--;
+        escribiendo = true;
+    }
+
+    void fin_escritura() {
+        escribiendo = false;
+        // Prioridad al siguiente escritor; si no hay, liberamos a los lectores
+        if (esp_escritores > 0) cola_escritores.signal();
+        else cola_lectores.signal();
+    }
+};
+\end{lstlisting}
+
+\vspace{-0.15cm}
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdPrimary,title=\textbf{Equivalente Canónico en Pseudocódigo Teórico de Hoare (Capel)},arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]
+\begin{lstlisting}[language=C++]
+monitor LectoresEscritores;
+    var n_lec, esp_escritores: integer; escribiendo: boolean;
+        cola_lectores, cola_escritores: condition;
+
+    procedure iniciar_lectura;
+    begin
+        if (escribiendo or esp_escritores > 0) then wait(cola_lectores);
+        n_lec := n_lec + 1; signal(cola_lectores); // Cascada de lectores
+    end;
+
+    procedure fin_lectura;
+    begin
+        n_lec := n_lec - 1;
+        if (n_lec = 0) then signal(cola_escritores);
+    end;
+
+    procedure iniciar_escritura;
+    begin
+        esp_escritores := esp_escritores + 1;
+        if (escribiendo or n_lec > 0) then wait(cola_escritores);
+        esp_escritores := esp_escritores - 1; escribiendo := true;
+    end;
+
+    procedure fin_escritura;
+    begin
+        escribiendo := false;
+        if (esp_escritores > 0) then signal(cola_escritores) else signal(cola_lectores);
+    end;
+begin n_lec := 0; esp_escritores := 0; escribiendo := false; end;
+\end{lstlisting}
+\end{tcolorbox}
+
+\vspace{-0.15cm}
+{\scriptsize \textbf{Nota de examen sobre Inanición:} La prioridad a escritores puede causar inanición a los lectores ante un flujo continuo de escritores. Si piden equidad absoluta, se añade un contador de turnos consecutivos.}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 5: PLANTILLA 1C — MONITOR CON TURNO FIFO ESTRICTO (CUENTA BANCARIA)
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Plantilla 1C: Monitor con Turno FIFO Estricto (Ej. Cuenta Bancaria) (Una Cara)
+\end{tcolorbox}
+\vspace{-0.15cm}
+{\scriptsize \textbf{Problema Clave (Examen 2021):} Retiradas de gran importe no pueden ser adelantadas por solicitudes menores. Patrón de \textbf{2 Colas}.}
+
+\begin{lstlisting}
+#include "scd.h"
+using namespace std; using namespace scd;
+
+class CuentaBancariaFIFO : public HoareMonitor {
+private:
+    int     saldo;            // Saldo disponible (Invariante de seguridad: saldo >= 0)
+    int     c_primero;        // Cantidad requerida por el proceso en cabeza de turno
+    bool    turno_ocupado;    // true si ya hay un cliente con el turno concedido
+    CondVar cola_espera;      // Fila general FIFO por estricto orden de llegada
+    CondVar cola_turno;       // Cola donde se duerme el cliente en turno si saldo < c_primero
+
+public:
+    CuentaBancariaFIFO() : saldo(0), c_primero(0), turno_ocupado(false) {
+        cola_espera = newCondVar();
+        cola_turno  = newCondVar();
+    }
+
+    void depositar(int c) {
+        saldo += c;
+        // Si el cliente en turno estaba esperando fondos y ahora alcanza el saldo:
+        if (turno_ocupado && saldo >= c_primero) {
+            cola_turno.signal(); // En semantica SU, despierta y entra de inmediato
+        }
+    }
+
+    void retirar(int c) {
+        // 1. Si ya hay otro cliente con el turno, esperar en la fila general FIFO:
+        if (turno_ocupado) {
+            cola_espera.wait();
+        }
+
+        // 2. Adquirir el turno de retirada en exclusiva:
+        turno_ocupado = true;
+        c_primero = c;
+
+        // 3. Si no hay saldo suficiente, suspenderse en la cola privada de turno:
+        if (saldo < c) {
+            cola_turno.wait();
+        }
+
+        // 4. Retirada efectiva (en semantica SU, saldo >= c plenamente garantizado):
+        saldo -= c;
+
+        // 5. Liberar el turno y despertar al siguiente cliente de la fila de espera:
+        turno_ocupado = false;
+        c_primero = 0;
+        cola_espera.signal();
+    }
+};
+\end{lstlisting}
+
+\vspace{-0.15cm}
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdPrimary,title=\textbf{Equivalente Canónico en Pseudocódigo Teórico de Hoare (Capel)},arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]
+\begin{lstlisting}[language=C++]
+monitor CuentaBancariaFIFO;
+    var saldo, c_primero: integer; turno_ocupado: boolean;
+        cola_espera, cola_turno: condition;
+
+    procedure depositar(c: integer);
+    begin
+        saldo := saldo + c;
+        if (turno_ocupado and saldo >= c_primero) then signal(cola_turno);
+    end;
+
+    procedure retirar(c: integer);
+    begin
+        if (turno_ocupado) then wait(cola_espera);
+        turno_ocupado := true; c_primero := c;
+        if (saldo < c) then wait(cola_turno);
+        saldo := saldo - c;
+        turno_ocupado := false; c_primero := 0;
+        signal(cola_espera);
+    end;
+begin saldo := 0; c_primero := 0; turno_ocupado := false; end;
+\end{lstlisting}
+\end{tcolorbox}
+
+\vspace{-0.15cm}
+{\scriptsize \textbf{Garantía de No Inanición:} La cola \texttt{cola\_espera} de \texttt{HoareMonitor} asegura orden FIFO estricto. Ninguna petición posterior puede saltar a \texttt{cola\_turno} ni retirar saldo mientras el cliente actual mantenga \texttt{turno\_ocupado == true}, erradicando la inanición.}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 6: PLANTILLA 2 — SEMÁFOROS CON PASO DE TESTIGO (PASSING THE BATON)
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Plantilla 2: Semáforos con Paso de Testigo (\textit{Passing the Baton}) (Una Cara)
+\end{tcolorbox}
+\vspace{-0.15cm}
+{\scriptsize \textbf{Fundamento:} Semáforos POSIX para aforos y prioridades. \textbf{Regla de Oro:} En la salida, al hacer \texttt{sem\_post(\&privado)}, \textbf{NO} hacer \texttt{sem\_post(\&mutex)}.}
+
+\begin{lstlisting}
+#include <semaphore.h>
+
+sem_t mutex;                 // Mutex de exclusion mutua sobre las variables (inic. a 1)
+sem_t sem_A, sem_B;          // Semaforos privados de bloqueo (inicializados a 0)
+int dentro_A = 0, esp_A = 0; // Contadores de procesos dentro y esperando
+int dentro_B = 0, esp_B = 0;
+
+void inicializar() {
+    sem_init(&mutex, 0, 1);
+    sem_init(&sem_A, 0, 0);  // Inic 0: quien haga wait aqui se bloquea obligatoriamente
+    sem_init(&sem_B, 0, 0);
+}
+
+void entrar_A() {
+    sem_wait(&mutex); // Pedir el testigo para consultar el estado
+    if (dentro_B > 0 || dentro_A >= 5 /* || esp_B > 0 si B tiene prioridad */) {
+        esp_A++;          // Anotarse en lista de espera
+        sem_post(&mutex); // Liberar mutex para que otros puedan avanzar
+        sem_wait(&sem_A); // BLOQUEO EFECTIVO en el semaforo privado
+    } else {
+        dentro_A++;
+        sem_post(&mutex); // Entrada autorizada de forma directa
+    }
+}
+
+void salir_A() {
+    sem_wait(&mutex); // Adquirir el testigo para actualizar el estado
+    dentro_A--;
+
+    // REGLA SAGRADA DEL PASO DE TESTIGO (evaluar transferencias):
+    // Caso 1: Pasar el testigo a un proceso B si ya no quedan A dentro y hay B esperando:
+    if (dentro_A == 0 && esp_B > 0) {
+        esp_B--; dentro_B++;
+        sem_post(&sem_B); // ¡SE TRANSFIERE EL TESTIGO EN MANO (NO hacer post a mutex)!
+    }
+    // Caso 2: Si no, transferir el testigo a otro A que estuviera en espera:
+    else if (dentro_B == 0 && esp_A > 0 && dentro_A < 5) {
+        esp_A--; dentro_A++;
+        sem_post(&sem_A); // ¡SE TRANSFIERE EL TESTIGO A OTRO A (NO hacer post a mutex)!
+    }
+    // Caso 3: Nadie puede entrar; se devuelve el testigo general al sistema:
+    else {
+        sem_post(&mutex); // Unico caso donde se libera el mutex
+    }
+}
+\end{lstlisting}
+
+\vspace{-0.15cm}
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdPrimary,title=\textbf{Equivalente Canónico en Pseudocódigo Clásico (Dijkstra / Andrews)},arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]
+\begin{lstlisting}[language=C++]
+var mutex: semaphore := 1; sem_A, sem_B: semaphore := 0;
+    dentro_A, esp_A, dentro_B, esp_B: integer := 0;
+
+procedure entrar_A;
+begin
+    wait(mutex);
+    if (dentro_B > 0 or dentro_A >= 5) then begin esp_A := esp_A + 1; signal(mutex); wait(sem_A); end
+    else begin dentro_A := dentro_A + 1; signal(mutex); end;
+end;
+
+procedure salir_A;
+begin
+    wait(mutex); dentro_A := dentro_A - 1;
+    if (dentro_A = 0 and esp_B > 0) then begin esp_B := esp_B - 1; dentro_B := dentro_B + 1; signal(sem_B); end
+    else if (dentro_B = 0 and esp_A > 0 and dentro_A < 5) then begin esp_A := esp_A - 1; dentro_A := dentro_A + 1; signal(sem_A); end
+    else signal(mutex);
+end;
+\end{lstlisting}
+\end{tcolorbox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 7: PLANTILLA 3 — COORDINACIÓN ASIMÉTRICA ENTRE PROCESOS (HANDSHAKE)
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Plantilla 3: Coordinación Asimétrica entre Procesos ($P_1, P_2, P_3$ / \textit{Handshake}) (Una Cara)
+\end{tcolorbox}
+\vspace{-0.15cm}
+{\scriptsize \textbf{Problema Estrella (Examen 2025):} $P_2$ ejecuta 'e' tras el 'b' de $P_1$ al menos una vez, y tras el 'h' de $P_3$ exactamente 1 vez por cada 'e'.}
+
+\begin{lstlisting}
+#include <semaphore.h>
+
+// 1. Coordinacion 1 a 1 estricta (P3 produce 'h' y P2 consume 'e'):
+sem_t sem_h_hecho;   // Inic 0: P3 senala a P2 que 'h' ha concluido
+sem_t sem_h_ack;     // Inic 1: P2 autoriza a P3 a ejecutar su siguiente 'h'
+
+// 2. Condicion "Al menos una vez" (desbloqueo permanente tras la primera ocurrencia):
+sem_t sem_b_primera; // Inic 0: barrera que se desbloquea tras el primer 'b'
+bool b_ya_ocurrio = false;
+sem_t mutex_b;       // Inic 1: protege el acceso concurrente a b_ya_ocurrio
+
+void inicializar() {
+    sem_init(&sem_h_hecho, 0, 0);
+    sem_init(&sem_h_ack, 0, 1);       // Permite a P3 realizar su primer 'h'
+    sem_init(&sem_b_primera, 0, 0);
+    sem_init(&mutex_b, 0, 1);
+}
+
+void P1() {
+    while (true) {
+        a(); b();
+        // Notificar que 'b' se ejecuto al menos una vez en la historia:
+        sem_wait(&mutex_b);
+        if (!b_ya_ocurrio) {
+            b_ya_ocurrio = true;
+            sem_post(&sem_b_primera); // Abre la barrera para P2
+        }
+        sem_post(&mutex_b);
+        c();
+    }
+}
+
+void P2() {
+    while (true) {
+        d();
+        // Paso 1: Comprobar condicion permanente de P1 ("al menos una vez"):
+        sem_wait(&mutex_b);
+        if (!b_ya_ocurrio) {
+            sem_post(&mutex_b);
+            sem_wait(&sem_b_primera); // Espera al primer 'b'
+            sem_post(&sem_b_primera); // ¡TRUCO CANONICO!: se deja abierto para siempre
+        } else {
+            sem_post(&mutex_b);
+        }
+
+        // Paso 2: Handshake 1 a 1 con P3:
+        sem_wait(&sem_h_hecho); // Espera que P3 complete su 'h'
+        e();                    // EJECUCION DE LA SECCION PROTEGIDA
+        sem_post(&sem_h_ack);   // Concede permiso a P3 para su siguiente 'h'
+        f();
+    }
+}
+
+void P3() {
+    while (true) {
+        g();
+        sem_wait(&sem_h_ack);   // Espera autorizacion de P2
+        h();
+        sem_post(&sem_h_hecho); // Senala a P2 que 'h' termino
+        i();
+    }
+}
+\end{lstlisting}
+
+\vspace{-0.15cm}
+
+\begin{tcolorbox}[colback=scdLightAccent,colframe=scdPrimary,title=\textbf{Equivalente Canónico en Pseudocódigo Formal (Estilo Capel)},arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt]
+\begin{lstlisting}[language=C++]
+var sem_h_hecho: semaphore := 0; sem_h_ack: semaphore := 1;
+    sem_b_primera: semaphore := 0; mutex_b: semaphore := 1; b_ya_ocurrio: boolean := false;
+
+process P1; begin loop a(); b(); wait(mutex_b); if not b_ya_ocurrio then begin b_ya_ocurrio := true; signal(sem_b_primera); end; signal(mutex_b); c(); end loop; end;
+process P2; begin loop d(); wait(mutex_b); if not b_ya_ocurrio then begin signal(mutex_b); wait(sem_b_primera); signal(sem_b_primera); end else signal(mutex_b); wait(sem_h_hecho); e(); signal(sem_h_ack); f(); end loop; end;
+process P3; begin loop g(); wait(sem_h_ack); h(); signal(sem_h_hecho); i(); end loop; end;
+\end{lstlisting}
+\end{tcolorbox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 8: TABLA DE DECISIÓN RÁPIDA Y CHECKLIST FINAL DE EXAMEN
+% ==============================================================================
+\begin{tcolorbox}[colback=scdPrimary,colframe=scdPrimary,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \centering\bfseries\color{white}\normalsize Tabla de Decisión Rápida: Identificar el Problema en 10 Segundos
+\end{tcolorbox}
+
+\vspace{0.05cm}
+
+\begin{table}[h!]
+\centering\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{4.6cm}p{3.2cm}p{7.5cm}}
+\toprule
+\textbf{Frase clave en el enunciado} & \textbf{Herramienta a usar} & \textbf{Acción inmediata y plantilla} \\
+\midrule
+\textit{«Diseñar un monitor para un puente / aseo / olla / centro...»} & \textbf{HoareMonitor} (Semántica SU) & \textbf{Plantilla 1A} (Pág. 2).\newline Crear colas con \texttt{newCondVar()}. Usar \texttt{if (!cond) cola.wait()} y avisar en la salida con \texttt{cola.signal()}. \\
+\midrule
+\textit{«Atender en estricto orden de llegada sin que las pequeñas adelanten a las grandes»} & \textbf{HoareMonitor} con cola privada & \textbf{Plantilla 1C} (Pág. 5).\newline Usar dos colas: \texttt{cola\_espera} (fila de llegada) y \texttt{cola\_turno} (fila del que tiene el turno si saldo $< c$). \\
+\midrule
+\textit{«Lectores y escritores con preferencia a escritores / lectores»} & \textbf{HoareMonitor} de dos colas & \textbf{Plantilla 1B} (Pág. 4).\newline Bloquear lectores si \texttt{esp\_escritores > 0}. Desbloqueo en cascada para lectores con \texttt{signal()}. \\
+\midrule
+\textit{«Resolver el aseo / puente con semáforos POSIX...»} & \textbf{Paso de Testigo} (\textit{Baton}) & \textbf{Plantilla 2} (Pág. 6).\newline \texttt{sem\_t mutex = 1}, semáforos privados a 0. En salida, si alguien puede pasar, hacerle \texttt{post(sem\_X)} sin soltar mutex. \\
+\midrule
+\textit{«P2 no puede ejecutar X hasta que P1 ejecute Y...»} & Semáforos \textbf{Handshake} & \textbf{Plantilla 3} (Pág. 7).\newline Semáforo de fin \texttt{hecho = 0} y autorización previa \texttt{ack = 1}. \\
+\midrule
+\textit{«Búfer de N elementos con semáforos...»} & Semáforos contadores clásicos & \texttt{sem\_t libres = N, ocupados = 0, mutex = 1;}\newline Productor: \texttt{wait(libres); wait(mutex); ... post(mutex); post(ocupados);}\newline Consumidor: \texttt{wait(ocupados); wait(mutex); ... post(mutex); post(libres);} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.05cm}
+
+\begin{tcolorbox}[colback=scdLightGreen,colframe=scdGreen,title=\textbf{Checklist de Seguridad antes de Entregar el Examen de Capel},arc=3pt]
+\small
+\begin{itemize}[leftmargin=*,itemsep=1.5pt]
+    \item[$\square$] \textbf{¿Es un monitor?}: ¿He puesto \texttt{\#include "scd.h"} y heredado de \texttt{public HoareMonitor}?
+    \item[$\square$] \textbf{¿He inicializado todas las \texttt{CondVar} en el constructor?}: Recordar \texttt{cola = newCondVar();}. ¡Olvidarlo aborta el programa!
+    \item[$\square$] \textbf{¿Es semántica SU (UGR)?}: BASTA con usar \texttt{if (!cond) cola.wait();}. Si me piden semántica Mesa, entonces cambio a \texttt{while (!cond) cola.wait();}.
+    \item[$\square$] \textbf{¿Son semáforos con Paso de Testigo?}: Comprobar que en la salida \textbf{NO} se hace \texttt{sem\_post(\&mutex)} si transfieres el testigo haciendo \texttt{sem\_post(\&sem\_privado)}.
+    \item[$\square$] \textbf{¿Inanición discutida?}: Si una clase puede acaparar el recurso indefinidamente (ej. flujo continuo de coches norte o lectores), mencionar la adición de un cupo de paso consecutivo para alternar.
+    \item[$\square$] \textbf{¿Justificación escrita?}: Escribir en 3 líneas el Invariante de exclusión mutua, la ausencia de interbloqueo y por qué no hay inanición.
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}
