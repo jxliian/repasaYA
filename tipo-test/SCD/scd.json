@@ -1990,7 +1990,7 @@
   },
   {
     "tema": "Examen Parcial II",
-    "q": "¿Por qué no se puede demostrar la corrección del siguiente fragmento de programa concurrente a menos que se cumpla a = 0?\n{x == 0 ∧ y == 0 ∧ z == 0}; ⟨x = z + a⟩ || ⟨y = x + b⟩; {x == a ∧ (y == b ∨ y == a + b) ∧ z == 0}",
+    "q": "¿Bajo qué condición no se puede demostrar la corrección del siguiente fragmento de programa concurrente a menos que se cumpla?\n{x == 0 ∧ y == 0 ∧ z == 0}; ⟨x = z + a⟩ || ⟨y = x + b⟩; {x == a ∧ (y == b ∨ y == a + b) ∧ z == 0}",
     "opts": [
       "b = 0 ∨ a = 0.",
       "b = 0 ∧ a = 0.",
@@ -2478,6 +2478,19 @@
     ],
     "correct": 2,
     "justification": "La opción 2 es la correcta porque para coordinar una barrera de sincronización entre dos procesos (Barrera2), la estructura mínima necesaria consta de una variable entera compartida (contador) para registrar el número de procesos que han alcanzado la barrera (0 o 1) y un semáforo binario en el que el primer proceso se bloquea (sem_wait) y que el segundo proceso libera (sem_post) al llegar, permitiendo que ambos prosigan.\n- Opción 0 es incorrecta: Utilizar dos semáforos contadores y un mutex adicional introduce redundancia innecesaria y sobrecoste de sincronización para un problema acotado a dos procesos.\n- Opción 1 es incorrecta: Tres semáforos contadores son totalmente excesivos para coordinar a una simple pareja de hilos.\n- Opción 3 es incorrecta: Un único semáforo contador no basta por sí solo para discriminar qué proceso debe suspenderse a la espera del compañero y cuál debe continuar sin bloquearse.\n- Opción 4 es incorrecta: No es posible construir una barrera robusta y libre de carreras sin primitivas de sincronización atómicas ofrecidas por el sistema operativo o el hardware."
+  },
+  {
+    "tema": "InfoAdeHub · Temas 1 y 2",
+    "q": "¿Qué condición de Dijkstra no es esencial para la exclusión mutua?",
+    "opts": [
+      "No hacer suposiciones sobre la velocidad de los procesos.",
+      "Cada proceso debe tener un identificador único.",
+      "Si un proceso está fuera de la sección crítica, no impide a otros entrar.",
+      "Algún proceso en espera debe entrar en la sección crítica.",
+      "La concurrencia es siempre determinista."
+    ],
+    "correct": 4,
+    "justification": "La opción [4] («La concurrencia es siempre determinista») es la correcta porque dicha afirmación es rotundamente falsa y ajena a los principios de la computación concurrente: los programas concurrentes son intrínsecamente no deterministas debido a los múltiples entrelazamientos posibles de instrucciones y a la asincronía de la planificación. Nunca formó parte de los requisitos de Edsger W. Dijkstra (1965), cuyas cuatro condiciones formales para una solución correcta a la exclusión mutua son:\n1) Exclusión mutua estricta (a lo sumo un proceso en la sección crítica a la vez),\n2) No realizar ninguna suposición sobre la velocidad relativa de los procesos ni sobre el número de procesadores (opción [0]),\n3) Progreso en sección no crítica (SNC): ningún proceso que se detenga fuera de la sección crítica debe bloquear ni impedir la entrada a los demás procesos interesados (opción [2]),\n4) Progreso global y ausencia de interbloqueo: si hay procesos solicitando entrar y ninguno está en la sección crítica, la decisión no puede posponerse indefinidamente y algún proceso en espera debe entrar (opción [3]).\n- Opción [0] («No hacer suposiciones sobre la velocidad de los procesos») es incorrecta: es textualmente la segunda condición formal enunciada por Dijkstra para garantizar que la corrección del algoritmo sea independiente del hardware y la velocidad de ejecución.\n- Opción [1] («Cada proceso debe tener un identificador único») es incorrecta: aunque Dijkstra asumió un índice o identificador único para los N procesos en su algoritmo de memoria compartida para romper la simetría y coordinar los turnos, esta es una premisa de diseño de algoritmos software simétricos pero no una condición formal abstracta de seguridad o vivacidad inherente a la exclusión mutua (los mecanismos hardware como Test-and-Set o los semáforos no requieren IDs de proceso).\n- Opción [2] («Si un proceso está fuera de la sección crítica, no impide a otros entrar») es incorrecta: es la tercera condición formal de Dijkstra (progreso local / SNC), esencial para evitar que un proceso pasivo paralice al resto del sistema.\n- Opción [3] («Algún proceso en espera debe entrar en la sección crítica») es incorrecta: es la formulación canónica de la cuarta condición de Dijkstra (progreso global / vivacidad), indispensable para asegurar la ausencia de interbloqueo (deadlock)."
   },
   {
     "tema": "InfoAdeHub · Temas 3 y 4",
