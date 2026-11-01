@@ -24,6 +24,7 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{listings}
+\usepackage[breakall]{truncate}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{tikz}
@@ -63,12 +64,14 @@
     pdfkeywords={MDA, Historias de Usuario, Scrum, XP, INVEST, CCC, BDD, Planning Poker, Velocidad, Spikes, UGR}
 }
 
-% Configuración de Encabezados y Pies de página
+% Configuración de Encabezados y Pies de página (sin colisiones)
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\footnotesize\textsf{\thepage}}
-\fancyhead[LO]{\footnotesize\textsf{\rightmark}}
-\fancyhead[RE]{\footnotesize\textsf{\leftmark}}
+\renewcommand{\chaptermark}[1]{\markboth{Bloque \thechapter: #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\fancyhead[LE]{\footnotesize\bfseries\textsf{\thepage}\hspace{1.2em}\textsf{\color{mdaDarkBlue!80}\truncate{0.78\textwidth}{\leftmark}}}
+\fancyhead[RO]{\footnotesize\textsf{\color{mdaDarkBlue!80}\truncate{0.78\textwidth}{\rightmark}}\hspace{1.2em}\bfseries\textsf{\thepage}}
 \fancyfoot[C]{\footnotesize\textsf{\color{gray}repasaYA $\cdot$ Metodologías de Desarrollo Ágil (UGR) $\cdot$ Seminario 2: Historias de Usuario}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.2pt}
@@ -117,58 +120,52 @@
   enhanced,
   colback=mdaGray,
   colframe=mdaPrimary,
-  boxrule=1pt,
-  leftrule=4pt,
+  boxrule=1.2pt,
   arc=3pt,
-  title=\textbf{\textsf{Definición Canónica\ifstrempty{#1}{}{: #1}}},
+  fonttitle=\bfseries\sffamily,
+  title={Definición Canónica\ifstrempty{#1}{}{: #1}},
   coltitle=white,
   colbacktitle=mdaPrimary,
-  attach boxed title to top left={yshift=-2mm, xshift=4mm},
-  boxed title style={arc=2pt, boxrule=0pt},
-  top=10pt,
-  bottom=8pt,
-  left=10pt,
-  right=10pt,
+  top=7pt,
+  bottom=7pt,
+  left=9pt,
+  right=9pt,
   breakable
 }
 
 % Entorno: Ejemplo Explicado
 \newtcolorbox{ejemplo}[1][]{
   enhanced,
-  colback=mdaLightGreen,
+  colback=mdaLightGreen!50!white,
   colframe=mdaGreen,
-  boxrule=0.8pt,
-  leftrule=3.5pt,
+  boxrule=1.1pt,
   arc=3pt,
-  title=\textbf{\textsf{Ejemplo de Clase / Dominio\ifstrempty{#1}{}{: #1}}},
+  fonttitle=\bfseries\sffamily,
+  title={Ejemplo de Clase / Dominio\ifstrempty{#1}{}{: #1}},
   coltitle=white,
   colbacktitle=mdaGreen,
-  attach boxed title to top left={yshift=-2mm, xshift=4mm},
-  boxed title style={arc=2pt, boxrule=0pt},
-  top=10pt,
-  bottom=8pt,
-  left=10pt,
-  right=10pt,
+  top=7pt,
+  bottom=7pt,
+  left=9pt,
+  right=9pt,
   breakable
 }
 
 % Entorno: Aviso / Ojo Examen
 \newtcolorbox{aviso}[1][]{
   enhanced,
-  colback=mdaLightOrange,
+  colback=mdaLightOrange!50!white,
   colframe=mdaOrange,
-  boxrule=0.8pt,
-  leftrule=3.5pt,
+  boxrule=1.1pt,
   arc=3pt,
-  title=\textbf{\textsf{Importante / Pregunta de Examen\ifstrempty{#1}{}{: #1}}},
+  fonttitle=\bfseries\sffamily,
+  title={Importante / Pregunta de Examen\ifstrempty{#1}{}{: #1}},
   coltitle=white,
   colbacktitle=mdaOrange,
-  attach boxed title to top left={yshift=-2mm, xshift=4mm},
-  boxed title style={arc=2pt, boxrule=0pt},
-  top=10pt,
-  bottom=8pt,
-  left=10pt,
-  right=10pt,
+  top=7pt,
+  bottom=7pt,
+  left=9pt,
+  right=9pt,
   breakable
 }
 
@@ -177,38 +174,34 @@
   enhanced,
   colback=mdaYellowCard,
   colframe=mdaYellowBorder,
-  boxrule=1pt,
-  leftrule=4pt,
+  boxrule=1.2pt,
   arc=3pt,
-  title=\textbf{\textsf{\color{mdaDarkBlue}Tarjeta de Historia de Usuario\ifstrempty{#1}{}{: #1}}},
+  fonttitle=\bfseries\sffamily\color{mdaDarkBlue},
+  title={Tarjeta de Historia de Usuario\ifstrempty{#1}{}{: #1}},
   coltitle=mdaDarkBlue,
-  colbacktitle=mdaYellowBorder!40!white,
-  attach boxed title to top left={yshift=-2mm, xshift=4mm},
-  boxed title style={arc=2pt, boxrule=0.8pt, colframe=mdaYellowBorder},
-  top=10pt,
-  bottom=8pt,
-  left=10pt,
-  right=10pt,
+  colbacktitle=mdaYellowBorder!45!white,
+  top=7pt,
+  bottom=7pt,
+  left=9pt,
+  right=9pt,
   breakable
 }
 
 % Entorno: Regla Formal / Patrón
 \newtcolorbox{teorema}[1][]{
   enhanced,
-  colback=mdaLightAccent,
+  colback=mdaLightAccent!50!white,
   colframe=mdaAccent,
-  boxrule=0.8pt,
-  leftrule=3.5pt,
+  boxrule=1.1pt,
   arc=3pt,
-  title=\textbf{\textsf{Principio / Patrón Metodológico\ifstrempty{#1}{}{: #1}}},
+  fonttitle=\bfseries\sffamily,
+  title={Principio / Patrón Metodológico\ifstrempty{#1}{}{: #1}},
   coltitle=white,
   colbacktitle=mdaAccent,
-  attach boxed title to top left={yshift=-2mm, xshift=4mm},
-  boxed title style={arc=2pt, boxrule=0pt},
-  top=10pt,
-  bottom=8pt,
-  left=10pt,
-  right=10pt,
+  top=7pt,
+  bottom=7pt,
+  left=9pt,
+  right=9pt,
   breakable
 }
 
@@ -217,18 +210,16 @@
   enhanced,
   colback=white,
   colframe=mdaDarkBlue,
-  boxrule=1pt,
-  leftrule=4pt,
+  boxrule=1.2pt,
   arc=3pt,
-  title=\textbf{\textsf{Ejercicio de Examen Resuelto\ifstrempty{#1}{}{: #1}}},
+  fonttitle=\bfseries\sffamily,
+  title={Ejercicio Resuelto de Examen\ifstrempty{#1}{}{: #1}},
   coltitle=white,
   colbacktitle=mdaDarkBlue,
-  attach boxed title to top left={yshift=-2mm, xshift=4mm},
-  boxed title style={arc=2pt, boxrule=0pt},
-  top=10pt,
-  bottom=8pt,
-  left=10pt,
-  right=10pt,
+  top=7pt,
+  bottom=7pt,
+  left=9pt,
+  right=9pt,
   breakable
 }
 

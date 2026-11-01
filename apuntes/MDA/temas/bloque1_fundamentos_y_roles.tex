@@ -79,7 +79,8 @@ En los exámenes parciales de teoría es habitual que se solicite comparar los \
 
 \vspace{4pt}
 \renewcommand{\arraystretch}{1.35}
-\begin{longtable}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{2.7cm} p{6.1cm} p{6.1cm}}
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{2.8cm} p{5.7cm} p{5.7cm}}
 \toprule
 \rowcolor{mdaDarkBlue}
 \textbf{\color{white}\textsf{CONCEPTO}} & \textbf{\color{white}\textsf{CASOS DE USO (RUP)}} & \textbf{\color{white}\textsf{HISTORIAS DE USUARIO (XP / Scrum)}} \\
@@ -182,6 +183,7 @@ Publicista & Gestiona espacios promocionales, banners y posicionamiento patrocin
 Para redactar Historias de Usuario consistentes y orientadas al valor, se emplea la plantilla estándar de tres cláusulas (popularizada por Mike Cohn / Connextra):
 
 \begin{center}
+\resizebox{0.92\linewidth}{!}{%
 \begin{tikzpicture}[
     lego/.style={rectangle, rounded corners=5pt, draw=mdaDarkBlue, thick, minimum width=4.6cm, minimum height=2.6cm, align=center, font=\sffamily},
     stud/.style={rectangle, rounded corners=1pt, draw=mdaDarkBlue, thick, minimum width=0.9cm, minimum height=0.35cm},
@@ -219,7 +221,8 @@ Para redactar Historias de Usuario consistentes y orientadas al valor, se emplea
 
     \draw[arrow] (b1) -- (b2);
     \draw[arrow] (b2) -- (b3);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 
 \begin{itemize}[itemsep=4pt]
@@ -228,7 +231,7 @@ Para redactar Historias de Usuario consistentes y orientadas al valor, se emplea
     \item \textbf{\texttt{[Para:]} (Por qué):} Es el propósito de la historia, la meta o \textbf{valor de negocio/beneficio} que quiere alcanzar el usuario al ejecutar la actividad. Ayuda de forma decisiva a priorizar la historia y a entender su verdadero fin.
 \end{itemize}
 
-\begin{ejemplo}[Catálogo Oficial de Ejemplos: Página Web de Viajes y Librería (Diapositivas 21--25)]
+\begin{ejemplo}[Catálogo Oficial: Web de Viajes y Librería (Diapositivas 21--25)]
 \textbf{A) Ejemplos en formato canónico completo (\texttt{Como / Quiero / Para}):}
 \begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
     \item \textit{``\textbf{Como} cliente, \textbf{quiero} reservar una habitación de hotel \textbf{para} garantizar mi estancia durante mis fechas de viaje y planificar mi viaje con tranquilidad.''}

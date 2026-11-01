@@ -3,7 +3,7 @@
 % Diapositivas 26 a 57 del Seminario 2
 % ==============================================================================
 
-\chapter{Anatomía ``CCC'', Pruebas de Aceptación (BDD), Granularidad y Modelo INVEST}
+\chapter[Anatomía «CCC», Pruebas BDD, Granularidad e INVEST]{Anatomía «CCC», Pruebas de Aceptación,\\ Granularidad y Modelo INVEST}
 
 \cuadrofuentes{
 \textbf{Alcance del Bloque:} Diapositivas 26--57 del Seminario 2.\\
@@ -15,6 +15,7 @@
 En el año 2001, \textbf{Ron Jeffries} (uno de los tres fundadores de \textit{Extreme Programming}) formuló la regla de las \textbf{Tres ``C''} para explicar que una Historia de Usuario es mucho más que el texto escrito en una cartulina:
 
 \begin{center}
+\resizebox{0.92\linewidth}{!}{%
 \begin{tikzpicture}[
     cbox/.style={rectangle, rounded corners=5pt, draw=mdaPrimary, thick, text width=4.2cm, minimum width=4.5cm, minimum height=3.3cm, align=center, font=\sffamily},
     arrow/.style={-{Stealth[length=3.5mm, width=2.5mm]}, ultra thick, color=mdaAccent}
@@ -51,7 +52,8 @@ En el año 2001, \textbf{Ron Jeffries} (uno de los tres fundadores de \textit{Ex
 
     \draw[arrow] (c1) -- (c2);
     \draw[arrow] (c2) -- (c3);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 
 \subsection{Información y Narración en la Tarjeta (Diapositivas 28--30)}
@@ -71,6 +73,7 @@ En el año 2001, \textbf{Ron Jeffries} (uno de los tres fundadores de \textit{Ex
 En la diapositiva 31 se establece la estructura oficial de una tarjeta de Historia de Usuario dividida en \textbf{Anverso} (identificación, descripción, estimación, prioridad y dependencias) y \textbf{Reverso} (pruebas de aceptación):
 
 \begin{center}
+\resizebox{0.92\linewidth}{!}{%
 \begin{tikzpicture}[
     card/.style={rectangle, draw=mdaYellowBorder!90!black, fill=mdaYellowCard, very thick, minimum width=10.2cm, align=left, font=\sffamily\small},
     tag/.style={rectangle, rounded corners=6pt, draw=mdaDarkBlue, fill=white, thick, font=\sffamily\scriptsize\bfseries, inner sep=4pt, text=mdaDarkBlue},
@@ -93,12 +96,12 @@ En la diapositiva 31 se establece la estructura oficial de una tarjeta de Histor
     \node[anchor=east, font=\sffamily\footnotesize] (depval) at (4.8, -1.35) {Dependiente de: \textbf{1, 2}};
 
     % Etiquetas Anverso
-    \node[tag] (tagid) at (-6.5, 1.8) {ID};
-    \node[tag] (tagtit) at (6.5, 1.8) {TÍTULO};
-    \node[tag] (tagdesc) at (6.7, 0.4) {DESCRIPCIÓN};
-    \node[tag] (tagest) at (-6.7, -0.75) {ESTIMACIÓN};
-    \node[tag] (tagpri) at (-6.7, -1.35) {PRIORIDAD};
-    \node[tag] (tagdep) at (6.8, -1.35) {DEPENDENCIAS};
+    \node[tag] (tagid) at (-6.4, 1.8) {ID};
+    \node[tag] (tagtit) at (6.4, 1.8) {TÍTULO};
+    \node[tag] (tagdesc) at (6.5, 0.4) {DESCRIPCIÓN};
+    \node[tag] (tagest) at (-6.5, -0.75) {ESTIMACIÓN};
+    \node[tag] (tagpri) at (-6.5, -1.35) {PRIORIDAD};
+    \node[tag] (tagdep) at (6.6, -1.35) {DEPENDENCIAS};
 
     \draw[line] (tagid.east) -- (-4.85, 1.8);
     \draw[line] (tagtit.west) -- (1.8, 1.8);
@@ -109,16 +112,17 @@ En la diapositiva 31 se establece la estructura oficial de una tarjeta de Histor
 
     % REVERSO
     \node[font=\sffamily\bfseries\color{mdaDarkBlue}] at (0, -2.5) {REVERSO DE LA TARJETA};
-    \node[card, minimum height=3.4cm] (reverso) at (0, -4.5) {};
-    \node[anchor=north west, text width=9.5cm, font=\sffamily\footnotesize] at (-4.8, -3.05) {
-        $\bullet$ Introducir un número de socio incorrecto y comprobar que se indica error.\\[2pt]
-        $\bullet$ Introducir un socio que ya tiene 3 libros en préstamo y comprobar que se indica error.\\[2pt]
-        $\bullet$ Introducir un libro del que no hay ejemplares y comprobar que se indica un error.\\[2pt]
+    \node[card, minimum height=4.4cm] (reverso) at (0, -5.0) {};
+    \node[anchor=north west, text width=9.6cm, font=\sffamily\footnotesize] at (-4.8, -3.1) {
+        $\bullet$ Introducir un número de socio incorrecto y comprobar que se indica error.\\[3pt]
+        $\bullet$ Introducir un socio que ya tiene 3 libros en préstamo y comprobar que se indica error.\\[3pt]
+        $\bullet$ Introducir un libro del que no hay ejemplares y comprobar que se indica un error.\\[3pt]
         $\bullet$ Introducir todos los datos correctos y comprobar que el número de ejemplares disponibles del libro disminuye y el número de préstamos del socio aumenta en uno.
     };
-    \node[tag, align=center] (tagrev) at (6.8, -4.5) {PRUEBAS DE\\ACEPTACIÓN};
-    \draw[line] (tagrev.west) -- (4.4, -4.5);
-\end{tikzpicture}
+    \node[tag, align=center] (tagrev) at (6.6, -5.0) {PRUEBAS DE\\ACEPTACIÓN};
+    \draw[line] (tagrev.west) -- (4.4, -5.0);
+\end{tikzpicture}%
+}
 \end{center}
 
 En herramientas digitales como \textbf{Jira} (diapositiva 34) o plantillas corporativas (diapositivas 32--33), estos mismos campos se representan mediante atributos equivalentes: identificador único, título, narrativa \texttt{Como/Quiero/Para}, condiciones de completitud, prioridad numérica, coste/puntos estimados, iteración asignada y persona encargada.
@@ -180,7 +184,15 @@ Los criterios o pruebas de aceptación son las \textbf{condiciones objetivas que
 \end{itemize}
 
 \textbf{Caso 3 (Formato BDD -- Behavior-Driven Development: \texttt{Dado / Cuando / Entonces}):}
-$$\textbf{Dado } [\text{contexto inicial}] \longrightarrow \textbf{Cuando } [\text{acción / evento}] \longrightarrow \textbf{Entonces } [\text{resultado esperado}]$$
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{r l}
+\textbf{\color{mdaGreen}Dado} & \textit{[contexto inicial / estado previo del sistema]} \\
+$\boldsymbol{\longrightarrow}$ \textbf{\color{mdaGreen}Cuando} & \textit{[acción realizada por el usuario o evento desencadenante]} \\
+$\boldsymbol{\longrightarrow}$ \textbf{\color{mdaGreen}Entonces} & \textit{[resultado esperado / respuesta observable del sistema]}
+\end{tabular}
+\end{center}
 \begin{lstlisting}
 DADO un sistema donde existe un usuario con nombre "idprueba"
 CUANDO alguien intenta registrarse con nombre "idprueba"
@@ -223,6 +235,7 @@ La definición de ``terminado'' (\textit{Done}) es un \textbf{acuerdo formal de 
 En un proyecto ágil coexisten elementos de distinto tamaño y nivel de abstracción. A medida que una necesidad se acerca a la parte alta de la pila para ser implementada en la siguiente iteración, se descompone desde conceptos amplios hacia unidades más pequeñas:
 
 \begin{center}
+\resizebox{0.95\linewidth}{!}{%
 \begin{tikzpicture}[
     level/.style={trapezium, trapezium angle=72, draw=mdaDarkBlue, thick, align=center, font=\sffamily\footnotesize, minimum height=1.05cm},
     desc/.style={rectangle, rounded corners=3pt, draw=mdaBorderGray, fill=mdaGray, thick, text width=8.2cm, minimum height=1.05cm, align=left, font=\sffamily\scriptsize, inner sep=5pt}
@@ -236,7 +249,8 @@ En un proyecto ágil coexisten elementos de distinto tamaño y nivel de abstracc
     \node[desc] at (6.8, 2.4) {\textbf{Súper historias de usuario}, más concretas que los Temas. Conjunto de HU relacionadas entre sí. \textit{Ej: Sistema de búsqueda para hoteles, filtros aplicados a búsquedas, comparador avanzado.}};
     \node[desc] at (6.8, 1.2) {\textbf{Descripción simple de una tarea concisa que aporta valor} en 1 iteración. \textit{Ej: Como cliente quiero buscar un hotel en una localidad determinada; como socio quiero pagar con tarjeta.}};
     \node[desc] at (6.8, 0.0) {\textbf{División de una HU por necesidades técnicas o de desarrollo} ($0.5$ a $3$--$4$ días). \textit{Ej: Crear pantalla de resultados, crear métodos de consulta a BBDD, probar integración del módulo.}};
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 
 \subsection{Requisitos No Funcionales (RNF) en Ágil (Diapositivas 51--54)}
@@ -273,21 +287,22 @@ En un proyecto ágil basado en Historias de Usuario, los RNF pueden tratarse com
 Propuesto por \textbf{Bill Wake}, el acrónimo \textbf{I.N.V.E.S.T.} define las seis cualidades que debe reunir toda Historia de Usuario de calidad antes de entrar en una iteración:
 
 \vspace{4pt}
+\noindent
 \renewcommand{\arraystretch}{1.4}
-\begin{tabularx}{\textwidth}{>{\centering\arraybackslash\Large\bfseries\sffamily\color{white}\columncolor{mdaPrimary}}p{1.0cm} >{\bfseries\sffamily\color{mdaDarkBlue}}p{2.9cm} X}
+\begin{tabularx}{0.99\linewidth}{>{\centering\arraybackslash}p{1.2cm} >{\bfseries\sffamily\color{mdaDarkBlue}}p{2.9cm} X}
 \toprule
 \rowcolor{mdaDarkBlue}
 \textbf{\color{white}\normalsize Letra} & \textbf{\color{white}Atributo} & \textbf{\color{white}\textsf{Definición Oficial y Pregunta de Control (Diapositivas 56--57)}} \\
 \midrule
-I & Independiente\newline{\scriptsize(\textit{Independent})} & Una historia debería ser independiente de otras (lo más posible). \textit{¿Puede sostenerse por sí misma sin depender rígidamente de otras historias?} \\
+\colorbox{mdaDarkBlue}{\makebox[0.65cm]{\color{white}\Large\bfseries I}} & Independiente\newline{\scriptsize(\textit{Independent})} & Una historia debería ser independiente de otras (lo más posible). \textit{¿Puede sostenerse por sí misma sin depender rígidamente de otras historias?} \\
 \rowcolor{mdaGray}
-N & Negociable\newline{\scriptsize(\textit{Negotiable})} & Las HU no son un contrato cerrado ni un requerimiento rígido que el software deba implementar literalmente. \textit{¿Es una propuesta abierta a la discusión colaborativa en lugar de un contrato fijo?} \\
-V & Valiosa\newline{\scriptsize(\textit{Valuable})} & Tiene que tener valor para el cliente (para el usuario o para el comprador). El cliente las escribe, no son un contrato y son negociables. \textit{¿Aporta un beneficio tangible, demostrable e identificable al usuario o al negocio?} \\
+\colorbox{mdaDarkBlue}{\makebox[0.65cm]{\color{white}\Large\bfseries N}} & Negociable\newline{\scriptsize(\textit{Negotiable})} & Las HU no son un contrato cerrado ni un requerimiento rígido que el software deba implementar literalmente. \textit{¿Es una propuesta abierta a la discusión colaborativa en lugar de un contrato fijo?} \\
+\colorbox{mdaDarkBlue}{\makebox[0.65cm]{\color{white}\Large\bfseries V}} & Valiosa\newline{\scriptsize(\textit{Valuable})} & Tiene que tener valor para el cliente (para el usuario o para el comprador). El cliente las escribe, no son un contrato y son negociables. \textit{¿Aporta un beneficio tangible, demostrable e identificable al usuario o al negocio?} \\
 \rowcolor{mdaGray}
-E & Estimable\newline{\scriptsize(\textit{Estimable})} & Debe poder estimarse para permitir que se pueda priorizar y planificar la historia. \textit{¿Tiene el equipo suficiente información y contexto para calcular su complejidad?} \\
-S & Suscinta / Pequeña\newline{\scriptsize(\textit{Small})} & Una buena historia debe ser pequeña en esfuerzo (\textbf{2--3 personas/semana de trabajo}, o entre $\mathbf{1/10}$ y $\mathbf{1/6}$ de la velocidad). \textit{¿Es lo suficientemente compacta para completarse con éxito dentro de un solo Sprint?} \\
+\colorbox{mdaDarkBlue}{\makebox[0.65cm]{\color{white}\Large\bfseries E}} & Estimable\newline{\scriptsize(\textit{Estimable})} & Debe poder estimarse para permitir que se pueda priorizar y planificar la historia. \textit{¿Tiene el equipo suficiente información y contexto para calcular su complejidad?} \\
+\colorbox{mdaDarkBlue}{\makebox[0.65cm]{\color{white}\Large\bfseries S}} & Suscinta / Pequeña\newline{\scriptsize(\textit{Small})} & Una buena historia debe ser pequeña en esfuerzo (\textbf{2--3 personas/semana de trabajo}, o entre $\mathbf{1/10}$ y $\mathbf{1/6}$ de la velocidad). \textit{¿Es lo suficientemente compacta para completarse con éxito dentro de un solo Sprint?} \\
 \rowcolor{mdaGray}
-T & Testeable\newline{\scriptsize(\textit{Testable})} & Una historia necesita poder probarse objetivamente para que ocurra la etapa de ``Confirmación''. \textit{¿Posee criterios de aceptación claros que permitan validar su correcto funcionamiento?} \\
+\colorbox{mdaDarkBlue}{\makebox[0.65cm]{\color{white}\Large\bfseries T}} & Testeable\newline{\scriptsize(\textit{Testable})} & Una historia necesita poder probarse objetivamente para que ocurra la etapa de ``Confirmación''. \textit{¿Posee criterios de aceptación claros que permitan validar su correcto funcionamiento?} \\
 \bottomrule
 \end{tabularx}
 \renewcommand{\arraystretch}{1.0}

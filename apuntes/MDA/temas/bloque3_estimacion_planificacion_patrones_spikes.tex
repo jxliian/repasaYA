@@ -34,54 +34,61 @@ Propuesto por \textbf{Jeff Patton}, el \textbf{Mapa de Historias de Usuario} org
 \end{itemize}
 
 \begin{center}
+\resizebox{0.95\linewidth}{!}{%
 \begin{tikzpicture}[
     act/.style={rectangle, rounded corners=2pt, draw=mdaPrimary, fill=Cyan!25, thick, minimum width=2.2cm, minimum height=0.65cm, font=\sffamily\scriptsize\bfseries, text=mdaDarkBlue},
     hu/.style={rectangle, rounded corners=1pt, draw=mdaRed!70!black, fill=Red!18, minimum width=1.9cm, minimum height=0.48cm, font=\sffamily\tiny, align=center},
-    rel/.style={font=\sffamily\footnotesize\bfseries, text=mdaDarkBlue!80}
+    rel/.style={font=\sffamily\scriptsize\bfseries, text=mdaDarkBlue}
 ]
-    % Eje horizontal: Time
-    \draw[-{Stealth[length=3mm]}, very thick, color=mdaDarkBlue] (0, 3.2) -- (11.2, 3.2) node[midway, fill=white, font=\sffamily\footnotesize\bfseries] {Tiempo / Secuencia de Actividades (time)};
-    
     % Actividades (Backbone)
-    \node[act] at (1.3, 3.75) {Actividad 1};
-    \node[act] at (4.1, 3.75) {Actividad 2};
-    \node[act] at (6.9, 3.75) {Actividad 3};
-    \node[act] at (9.7, 3.75) {Actividad 4};
+    \node[act] at (1.3, 5.15) {Actividad 1};
+    \node[act] at (4.1, 5.15) {Actividad 2};
+    \node[act] at (6.9, 5.15) {Actividad 3};
+    \node[act] at (9.7, 5.15) {Actividad 4};
+
+    % Eje horizontal: Time
+    \draw[-{Stealth[length=3mm]}, very thick, color=mdaDarkBlue] (0, 4.55) -- (11.0, 4.55) node[midway, fill=white, font=\sffamily\footnotesize\bfseries] {Tiempo / Secuencia de Actividades (time)};
 
     % Eje vertical: Optionality
-    \draw[<->, very thick, color=mdaDarkBlue] (-0.4, 0.2) -- (-0.4, 2.9) node[midway, rotate=90, fill=white, font=\sffamily\scriptsize\bfseries] {Opcionalidad (optionality)};
-    \node[anchor=east, font=\sffamily\scriptsize\bfseries, text=mdaDarkBlue] at (-0.6, 2.75) {Necesario (necessary)};
-    \node[anchor=east, font=\sffamily\scriptsize, text=mdaDarkBlue] at (-0.6, 1.75) {Menos opcional};
-    \node[anchor=east, font=\sffamily\scriptsize, text=mdaDarkBlue] at (-0.6, 0.45) {Más opcional};
+    \draw[{Stealth[length=2.5mm]}-{Stealth[length=2.5mm]}, very thick, color=mdaDarkBlue] (-0.4, 0.1) -- (-0.4, 4.25) node[midway, rotate=90, fill=white, font=\sffamily\scriptsize\bfseries] {Opcionalidad (optionality)};
+    \node[anchor=east, font=\sffamily\scriptsize\bfseries, text=mdaDarkBlue] at (-0.6, 3.75) {Necesario};
+    \node[anchor=east, font=\sffamily\scriptsize, text=mdaDarkBlue] at (-0.6, 2.25) {Menos opcional};
+    \node[anchor=east, font=\sffamily\scriptsize, text=mdaDarkBlue] at (-0.6, 0.75) {Más opcional};
 
-    % Fondos de Releases
-    \fill[Yellow!18, rounded corners=2pt] (0.1, 2.15) rectangle (11.0, 2.95);
-    \fill[Orange!18, rounded corners=2pt] (0.1, 1.25) rectangle (11.0, 2.10);
-    \fill[Red!10, rounded corners=2pt] (0.1, 0.10) rectangle (11.0, 1.20);
+    % Fondos de Releases (con holgura vertical completa)
+    \fill[Yellow!20, rounded corners=3pt] (0.1, 2.95) rectangle (11.0, 4.35);
+    \fill[Orange!20, rounded corners=3pt] (0.1, 1.50) rectangle (11.0, 2.85);
+    \fill[Red!12, rounded corners=3pt] (0.1, 0.05) rectangle (11.0, 1.40);
 
-    \draw[dashed, thick, mdaDarkBlue!60] (0.1, 2.12) -- (11.0, 2.12);
-    \draw[dashed, thick, mdaDarkBlue!60] (0.1, 1.22) -- (11.0, 1.22);
+    % Cabeceras de Release
+    \node[rel] at (5.5, 4.08) {Primera Entrega (First Release / Walking Skeleton)};
+    \node[rel] at (5.5, 2.62) {Segunda Entrega (Second Release)};
+    \node[rel] at (5.5, 1.18) {Tercera Entrega (Third Release)};
 
     % Tarjetas Release 1
-    \node[hu] at (1.3, 2.55) {HU 1.1 (MVP)};
-    \node[hu] at (4.1, 2.55) {HU 2.1 (MVP)};
-    \node[hu] at (6.9, 2.55) {HU 3.1 (MVP)};
-    \node[hu] at (9.7, 2.55) {HU 4.1 (MVP)};
-    \node[rel] at (5.5, 2.30) {Primera Entrega (First Release / Walking Skeleton)};
+    \node[hu] at (1.3, 3.40) {HU 1.1 (MVP)};
+    \node[hu] at (4.1, 3.40) {HU 2.1 (MVP)};
+    \node[hu] at (6.9, 3.40) {HU 3.1 (MVP)};
+    \node[hu] at (9.7, 3.40) {HU 4.1 (MVP)};
+
+    % Separadores dashed
+    \draw[dashed, thick, mdaDarkBlue!50] (0.1, 2.90) -- (11.0, 2.90);
 
     % Tarjetas Release 2
-    \node[hu, fill=Red!28] at (1.3, 1.75) {HU 1.2};
-    \node[hu, fill=Red!28] at (4.1, 1.75) {HU 2.2};
-    \node[hu, fill=Red!28] at (6.9, 1.75) {HU 3.2};
-    \node[hu, fill=Red!28] at (9.7, 1.75) {HU 4.2};
-    \node[rel] at (5.5, 1.42) {Segunda Entrega (Second Release)};
+    \node[hu, fill=Red!28] at (1.3, 1.95) {HU 1.2};
+    \node[hu, fill=Red!28] at (4.1, 1.95) {HU 2.2};
+    \node[hu, fill=Red!28] at (6.9, 1.95) {HU 3.2};
+    \node[hu, fill=Red!28] at (9.7, 1.95) {HU 4.2};
+
+    % Separadores dashed
+    \draw[dashed, thick, mdaDarkBlue!50] (0.1, 1.45) -- (11.0, 1.45);
 
     % Tarjetas Release 3
-    \node[hu, fill=Red!40] at (1.3, 0.85) {HU 1.3};
-    \node[hu, fill=Red!40] at (4.1, 0.85) {HU 2.3};
-    \node[hu, fill=Red!40] at (9.7, 0.85) {HU 4.3};
-    \node[rel] at (5.5, 0.35) {Tercera Entrega (Third Release)};
-\end{tikzpicture}
+    \node[hu, fill=Red!40] at (1.3, 0.50) {HU 1.3};
+    \node[hu, fill=Red!40] at (4.1, 0.50) {HU 2.3};
+    \node[hu, fill=Red!40] at (9.7, 0.50) {HU 4.3};
+\end{tikzpicture}%
+}
 \end{center}
 
 \subsection{Proceso Completo de Definición de las HU (Diapositiva 64)}
@@ -118,8 +125,10 @@ Las Historias de Usuario son negociables con el cliente y su prioridad evolucion
 
 \subsection{Categorías de Criticidad y Método MoSCoW (Diapositivas 67--68)}
 
+\vspace{4pt}
+\noindent
 \renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\textwidth}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{3.4cm} >{\bfseries\sffamily\color{mdaAccent}}p{2.6cm} X}
+\begin{tabularx}{0.99\linewidth}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{3.4cm} >{\bfseries\sffamily\color{mdaAccent}}p{2.6cm} X}
 \toprule
 \rowcolor{mdaDarkBlue}
 \textbf{\color{white}Clasificación Clásica} & \textbf{\color{white}Método MoSCoW} & \textbf{\color{white}Significado e Impacto en las Entregas del Proyecto} \\
@@ -141,7 +150,7 @@ Las Historias de Usuario son negociables con el cliente y su prioridad evolucion
 La estimación del tamaño de las HU es realizada siempre \textbf{por el equipo de desarrollo} empleando una de dos métricas principales:
 \begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
     \item \textbf{Puntos de Historia (\textit{Story Points} -- PH):} Miden el \textbf{tamaño relativo} de una historia comparado con otras historias de referencia estimadas por el mismo equipo:
-    $$\mathbf{Puntos\ de\ Historia\ (PH)} = \text{Esfuerzo necesario} + \text{Complejidad} + \text{Riesgo / Incertidumbre}$$
+    $$\mathbf{PH} = \text{Esfuerzo necesario} + \text{Complejidad} + \text{Riesgo / Incertidumbre}$$
     \item \textbf{Días Ideales (\textit{Ideal Days}):} Representan días de trabajo dedicados al $100\%$ sin interrupciones, reuniones, correos ni imprevistos.
 \end{enumerate}
 
@@ -212,7 +221,8 @@ Cuando una Historia de Usuario es demasiado grande (excede entre $1/10$ y $1/6$ 
 
 \vspace{4pt}
 \renewcommand{\arraystretch}{1.38}
-\begin{longtable}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{3.4cm} p{5.2cm} p{5.7cm}}
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{3.1cm} p{5.3cm} p{5.8cm}}
 \toprule
 \rowcolor{mdaDarkBlue}
 \textbf{\color{white}Patrón de División} & \textbf{\color{white}Criterio Metodológico} & \textbf{\color{white}Ejemplo Oficial de Clase (Diapositivas 83--91)} \\
@@ -265,7 +275,7 @@ Un \textbf{SPIKE} es un \textbf{tipo especial de Historia de Usuario} utilizada 
     \end{itemize}
 \end{enumerate}
 
-\begin{aviso}[Las 5 Reglas Oficiales sobre SPIKE (Diapositiva 95 -- ¡Muy Preguntado!)]
+\begin{aviso}[Las 5 Reglas Oficiales sobre SPIKE (Diapositiva 95)]
 \begin{enumerate}[label=\textbf{Regla \arabic*:}, leftmargin=1.9cm, itemsep=3pt]
     \item \textbf{Gestión estándar en la pila:} Se tratan como cualquier otra HU (se incluyen en el \textit{Product Backlog}, se priorizan, se estiman/acotan en tiempo, etc.).
     \item \textbf{Su resultado NO es código de producción, es INFORMACIÓN útil para otras HU:} Debe generar una decisión fundamentada, un prototipo descartable, una demostración de un diseño o una solución parcial de un problema.

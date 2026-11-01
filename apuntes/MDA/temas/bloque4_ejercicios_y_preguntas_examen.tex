@@ -53,7 +53,7 @@ El póster metodológico de \textbf{Richard Lawrence (\textit{Agile For All})} i
 
 \section{Cuaderno de 8 Ejercicios Prácticos de Examen Resueltos}
 
-\begin{ejercicio}[1. Descomposición y Reorganización del Backlog: ``Gestionar Usuarios'' (Diapositiva 97)]
+\begin{ejercicio}[1. Descomposición de Backlog: «Gestionar Usuarios» (Diap. 97)]
 \textbf{Enunciado:} En la Pila de Producto inicial figura una historia de usuario de tamaño $\mathbf{13\text{ PH}}$ titulada \textit{``Gestionar Usuarios''}, seguida de:
 \begin{itemize}[itemsep=1pt]
     \item \textit{Generar factura en HTML, PDF o Excel.}
@@ -78,13 +78,14 @@ Explica cómo se aplica la división de historias y la reordenación del backlog
 \end{enumerate}
 \end{ejercicio}
 
-\begin{ejercicio}[2. Partición y Repriorización Vertical: Librería Online (Diapositiva 98)]
+\begin{ejercicio}[2. Partición Vertical: Librería Online (Diapositiva 98)]
 \textbf{Enunciado:} Analiza las dos tablas de priorización de una tienda de libros online (\textit{Bookstore}) de la diapositiva 98. Explica qué patrón de división se ha aplicado sobre la característica de prioridad 1 y qué ventaja estratégica obtiene el negocio con la nueva ordenación.
 
 \begin{center}
 \footnotesize
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{c p{5.4cm} @{\hspace{0.5cm}} c p{5.2cm}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{c p{4.6cm} @{\hspace{0.4cm}} c p{4.6cm}}
 \toprule
 \multicolumn{2}{c}{\textbf{\color{mdaPrimary}Tabla Inicial (Antes de dividir)}} & \multicolumn{2}{c}{\textbf{\color{mdaGreen}Tabla Final (Dividida y repriorizada)}} \\
 \textbf{Pri.} & \textbf{Feature} & \textbf{Pri.} & \textbf{Feature} \\
@@ -117,7 +118,7 @@ Explica cómo se aplica la división de historias y la reordenación del backlog
 \end{enumerate}
 \end{ejercicio}
 
-\begin{ejercicio}[3. Descomposición de Historias en Tareas Técnicas (Diapositivas 81--82)]
+\begin{ejercicio}[3. Descomposición en Tareas Técnicas (Diaps. 81--82)]
 \textbf{Enunciado:} Dadas las siguientes dos Historias de Usuario del seminario:
 \begin{itemize}[itemsep=1pt]
     \item \textbf{HU A:} \textit{``Como administrador quiero realizar un mantenimiento de los clientes de la empresa para tenerlos actualizados.''}
@@ -164,7 +165,7 @@ Realiza la descomposición en tareas de desarrollo para cada una cumpliendo las 
     \item \textbf{Apartado a) Cálculo de la Velocidad:}
     $$\text{Días laborables por iteración} = 2\text{ semanas} \times 5\text{ días/semana} = 10\text{ días}$$
     $$\text{Capacidad bruta del equipo} = 6\text{ desarrolladores} \times 10\text{ días} = 60\text{ días de trabajo}$$
-    $$\mathbf{Velocidad} = 60\text{ días} \times 0.75 = \mathbf{45\text{ \textbf{PH por iteración}}}$$
+    $$\mathbf{Velocidad} = 60\text{ días} \times 0.75 = \mathbf{45\text{ PH por iteración}}$$
     \item \textbf{Apartado b) Planificación de Iteraciones (límite máximo $= 45\text{ PH}$ por iteración):}
     \begin{itemize}
         \item \textbf{Iteración 1:} $H_1(15) + H_2(12) + H_3(8) + H_5(10) = \mathbf{45\text{ PH}}$ (o bien respetando orden estricto: $H_1(15)+H_2(12)+H_3(8) = \mathbf{35\text{ PH}}$, ya que $35 + H_4(15) = 50 > 45$; si $H_5(10)$ no depende de $H_4$, puede adelantarse para completar exactamente $35+10=45\text{ PH}$).
