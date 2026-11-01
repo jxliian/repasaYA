@@ -1,0 +1,789 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "test",
+  "title": "Test Seminario 2: Historias de Usuario",
+  "description": "65 preguntas tipo test de nivel examen (teoría y problemas prácticos de velocidad, planificación, INVEST, CCC, BDD, patrones de división y Spikes) con justificación detallada.",
+  "order": 1,
+  "items": [
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "Según la definición canónica de Kent Beck y Martin Fowler en 'Planning Extreme Programming', ¿cómo se demuestra el progreso real en un proyecto ágil basado en Historias de Usuario?",
+      "opts": [
+        "Entregando código probado e integrado que implementa una historia comprensible y valiosa para el cliente",
+        "Mediante la aprobación formal de los documentos de especificación funcional por parte de los stakeholders",
+        "Completando los diagramas de secuencia y plantillas de casos de uso antes de finalizar la iteración",
+        "Cumpliendo el porcentaje de líneas de código estimadas por el arquitecto de software al inicio del Sprint"
+      ],
+      "correct": 0,
+      "justification": "Beck y Fowler establecen que la historia es la unidad de funcionalidad en un proyecto XP y que el progreso real se demuestra entregando código probado e integrado (tested, integrated code) que implementa una historia comprensible para el cliente, verificable por los desarrolladores, valiosa y lo bastante pequeña para construir media docena en una iteración."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "¿Cuál es el objetivo primordial de las Historias de Usuario dentro de las metodologías ágiles?",
+      "opts": [
+        "Sustituir la necesidad de realizar reuniones con el cliente mediante contratos cerrados de requisitos",
+        "Documentar exhaustivamente todos los flujos alternativos y técnicos antes de comenzar a programar",
+        "Establecer un registro legal inmutable para auditar desviaciones en el alcance del sistema",
+        "Lograr la interacción y colaboración continua entre el equipo y el usuario, por encima de documentar los requisitos"
+      ],
+      "correct": 3,
+      "justification": "El objetivo principal de las Historias de Usuario es lograr la interacción y el diálogo continuo con el equipo y con el usuario/cliente, situando esta colaboración activa muy por encima de documentar exhaustivamente los requisitos del sistema."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "¿Cuál de las siguientes afirmaciones describe correctamente qué NO es una Historia de Usuario?",
+      "opts": [
+        "No es una descripción escrita en lenguaje de negocio, ya que debe redactarse en términos de arquitectura técnica",
+        "No es un instrumento válido para la planificación de iteraciones ni para el cálculo de la velocidad del equipo",
+        "No es una especificación detallada ni un requisito contractual cerrado, sino la promesa de una conversación y una necesidad negociable del usuario",
+        "No es un artefacto que incluya criterios de verificación, puesto que las pruebas se definen en planes independientes"
+      ],
+      "correct": 2,
+      "justification": "Las Historias de Usuario NO son requisitos tradicionales del sistema ni especificaciones detalladas cerradas; son necesidades del usuario de carácter negociable ('necesitaríamos hacer algo similar a esto...') y actúan como 'promesas de una conversación'."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "Al comparar los Casos de Uso (RUP) con las Historias de Usuario (XP/Scrum) en la dimensión de 'Planificación', ¿qué diferencia fundamental existe?",
+      "opts": [
+        "Los Casos de Uso se utilizan para planificar Sprints diarios, mientras que las HU solo planifican entregas anuales",
+        "Los Casos de Uso no se utilizan para planificar, mientras que las Historias de Usuario se utilizan directamente para planificar iteraciones y entregas",
+        "Los Casos de Uso son la unidad base del Planning Poker, mientras que las HU no permiten estimar esfuerzo",
+        "Ambos artefactos se emplean exactamente igual para calcular la velocidad en puntos de historia"
+      ],
+      "correct": 1,
+      "justification": "En la comparativa clásica entre Casos de Uso e Historias de Usuario, los Casos de Uso no se utilizan para planificar debido a su granularidad dispar y desfase temporal, mientras que las HU son la unidad central de planificación y estimación ágil."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "¿Qué diferencia existe entre Casos de Uso e Historias de Usuario respecto a su 'Duración' e implementación temporal?",
+      "opts": [
+        "Un Caso de Uso debe completarse en un único día, mientras que una HU suele abarcar varios meses",
+        "Un Caso de Uso puede implementarse a lo largo de varias iteraciones, mientras que una HU debe ser implementada y probada en una única iteración",
+        "Tanto los Casos de Uso como las HU tienen prohibido durar más de media jornada de trabajo",
+        "Las HU se implementan en múltiples Sprints consecutivos sin entregar código integrado hasta el final del proyecto"
+      ],
+      "correct": 1,
+      "justification": "Los Casos de Uso suelen abarcar flujos extensos cuya implementación puede repartirse en varias iteraciones; por el contrario, una Historia de Usuario debe ser implementada, probada e integrada íntegramente dentro de una única iteración."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "En cuanto al 'Soporte' y al 'Mantenimiento', ¿cómo contrastan las Historias de Usuario frente a los Casos de Uso tradicionales?",
+      "opts": [
+        "Las HU se escriben en tarjetas para ser usadas directamente, requieren muy poco mantenimiento y pueden desecharse tras su implementación",
+        "Los Casos de Uso se escriben en tarjetas físicas desechables que no requieren mantenimiento alguno",
+        "Las HU se escriben en documentos extensos de cientos de páginas para ser archivados como referencia permanente",
+        "Las HU exigen herramientas UML formales para mantener sincronizados los diagramas de clases con el texto"
+      ],
+      "correct": 0,
+      "justification": "Mientras los Casos de Uso se redactan en documentos extensos de cientos de páginas difíciles de mantener con el objetivo de ser archivados como referencia, las HU se escriben en tarjetas para uso directo, son muy fáciles de mantener y pueden desecharse con seguridad tras implementarse."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "Respecto a la dimensión de 'Pruebas', ¿qué distingue a las Historias de Usuario de los Casos de Uso?",
+      "opts": [
+        "Las pruebas de una HU se definen exclusivamente al finalizar todas las iteraciones del proyecto en un plan maestro de QA",
+        "Los Casos de Uso incluyen pruebas en formato BDD en el reverso de la ficha, mientras que las HU carecen de pruebas funcionales",
+        "En las HU solo se realizan pruebas unitarias de caja blanca, prescindiendo de pruebas de aceptación del cliente",
+        "Las HU contienen sus propias pruebas de aceptación en el reverso de la tarjeta, mientras que en los Casos de Uso las pruebas se redactan en documentación separada"
+      ],
+      "correct": 3,
+      "justification": "En los Casos de Uso la definición de pruebas se redacta en documentación separada, mientras que las Historias de Usuario llevan sus pruebas de aceptación integradas directamente en el reverso de la propia tarjeta."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "En la comparativa entre Casos de Uso e Historias de Usuario, ¿por qué las pruebas y el feedback continuo de los usuarios son tan críticos en las metodologías ágiles al usar HU?",
+      "opts": [
+        "Porque las HU utilizan un lenguaje técnico críptico que solo los programadores entienden",
+        "Porque los Casos de Uso están asociados a Programación Extrema (XP) y las HU a RUP",
+        "Porque las HU proporcionan una visión puntual menos obvia de la integración global del sistema que los Casos de Uso",
+        "Porque las HU impiden que los clientes y usuarios participen en su redacción"
+      ],
+      "correct": 2,
+      "justification": "En la dimensión de 'Contexto', los Casos de Uso proporcionan una visión más general del sistema y su integración, mientras que las HU dan una visión más granular y menos obvia del conjunto, haciendo indispensables las pruebas continuas y el feedback de los usuarios."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "¿Con qué metodologías de desarrollo se asocian históricamente los Casos de Uso y las Historias de Usuario, respectivamente?",
+      "opts": [
+        "Casos de Uso con Scrum y Kanban; Historias de Usuario con RUP y Métrica v3",
+        "Casos de Uso con Extreme Programming (XP); Historias de Usuario con Desarrollo en Cascada puro",
+        "Casos de Uso con RUP (Rational Unified Process); Historias de Usuario con Programación Extrema (XP) y Scrum",
+        "Ambos artefactos nacieron simultáneamente como parte del estándar PMBOK de gestión tradicional"
+      ],
+      "correct": 2,
+      "justification": "Los Casos de Uso están directamente asociados con RUP (Rational Unified Process), donde conducen el diseño y análisis, mientras que las Historias de Usuario nacieron en el seno de Programación Extrema (XP) y se adoptaron ampliamente en Scrum."
+    },
+    {
+      "tema": "1. Fundamentos y Casos de Uso vs. HU",
+      "q": "¿Cómo se caracteriza la 'Estructura' y 'Comprensión' de una Historia de Usuario frente a un Caso de Uso?",
+      "opts": [
+        "La HU consta de plantillas predefinidas de múltiples páginas con precondiciones y postcondiciones técnicas",
+        "La HU se compone de 1 o 2 frases cortas y consistentes en el lenguaje del usuario, fáciles de leer y comprender en pocos minutos",
+        "Tanto la HU como el Caso de Uso suelen ser de difícil comprensión incluso para el personal técnico",
+        "El Caso de Uso consta de 1 o 2 frases cortas fáciles de entender por cualquier cliente sin formación técnica"
+      ],
+      "correct": 1,
+      "justification": "Los Casos de Uso usan plantillas densas de múltiples páginas con conceptos técnicos difíciles de comprender incluso para técnicos; las HU usan 1 o 2 frases cortas en el lenguaje del usuario, pueden escribirse en pocos minutos y son fáciles de leer y comprender."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "Atendiendo a la autoría de las Historias de Usuario, ¿quién las escribe según Programación Extrema (XP), según Scrum y en la práctica real, respectivamente?",
+      "opts": [
+        "En XP el cliente; en Scrum el Product Owner (con ayuda de clientes, stakeholders y equipo); en la realidad cualquier miembro del equipo con conocimiento suficiente del dominio",
+        "En XP el Scrum Master; en Scrum el equipo de QA; en la realidad exclusivamente el arquitecto jefe",
+        "En XP los desarrolladores; en Scrum el patrocinador financiero; en la realidad solo analistas externos",
+        "En XP el Product Owner; en Scrum el cliente en solitario; en la realidad ningún desarrollador puede redactarlas"
+      ],
+      "correct": 0,
+      "justification": "En XP las escribe el Cliente; en Scrum es responsabilidad del Product Owner (apoyado por clientes, stakeholders y equipo); y en la realidad cualquier miembro del equipo de desarrollo con conocimiento suficiente en el dominio del problema puede escribirlas."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "¿Qué perfiles conforman el denominado 'Customer Team' (Equipo de Cliente / Stakeholders) encargado de expresar las necesidades reales del sistema, detallarlas y priorizarlas?",
+      "opts": [
+        "Únicamente los programadores backend, administradores de bases de datos y operadores de sistemas",
+        "El comité de dirección ejecutiva, el departamento jurídico y los auditores externos de calidad ISO",
+        "Exclusivamente el Scrum Master y el jefe de proyecto tradicional sin intervención de probadores ni diseñadores",
+        "Clientes reales (usuarios), Product Manager, Probadores (Testers) y Diseñadores de interacción (UX/UI)"
+      ],
+      "correct": 3,
+      "justification": "El Customer Team aglutina a quienes pueden expresar las necesidades reales del sistema desde todas las perspectivas de valor y uso: clientes reales (usuarios), Product Manager, probadores (testers) y diseñadores de interacción."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "Al organizar e identificar los roles o personas del sistema mediante una sesión de Brainstorming, ¿qué atributos clave se deben analizar para definir cada rol?",
+      "opts": [
+        "Velocidad de mecanografía del usuario y marca del monitor que utiliza en su puesto de trabajo",
+        "Salario anual del empleado, antigüedad en la empresa y tipo de contrato laboral vigente",
+        "Lenguaje de programación preferido, sistemagestor de base de datos y topología de red local",
+        "Frecuencia de uso del software, objetivos que se plantean y forma habitual de acceso al sistema"
+      ],
+      "correct": 3,
+      "justification": "Tras identificar los usuarios en una sesión de Brainstorming, la definición de cada rol de sistema se caracteriza por su frecuencia de uso del software, los objetivos que se plantea al interactuar y su forma o canal habitual de acceso."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "En la plantilla canónica de bloques LEGO ('Como [rol], Quiero [característica/objetivo], Para [valor de negocio/beneficio]'), ¿qué representa exactamente la cláusula 'Para'?",
+      "opts": [
+        "La restricción técnica de implementación que debe respetar el programador al codificar",
+        "El módulo arquitectónico o tabla de la base de datos donde se almacenará la información",
+        "El propósito de la historia y la meta o beneficio real que quiere alcanzar el usuario al ejecutarla",
+        "La actividad funcional o acción concreta que ejecuta el usuario dentro de la pantalla"
+      ],
+      "correct": 2,
+      "justification": "En el formato canónico, 'Como' identifica quién es el rol de usuario, 'Quiero' describe la actividad o eje funcional de la historia, y 'Para' expresa el propósito, valor de negocio o beneficio real que persigue el usuario."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "Analiza la siguiente historia de una web de viajes: 'Como planificador de viajes, quiero ver fotos de un hotel para verificar las instalaciones y asegurarme de que cumple con las expectativas de mis clientes antes de reservar'. ¿Por qué es importante especificar 'Como planificador de viajes' en lugar de 'Como usuario'?",
+      "opts": [
+        "Porque el término 'usuario' está reservado exclusivamente para los administradores de sistemas en Scrum",
+        "Porque identificar el rol concreto aporta contexto sobre las necesidades específicas, objetivos y nivel de exigencia de quien usará la funcionalidad",
+        "Porque todas las historias de un Product Backlog deben tener un rol diferente sin poder repetirse nunca",
+        "Porque el formato Gherkin prohíbe gramaticalmente el uso de sustantivos genéricos en el anverso de la tarjeta"
+      ],
+      "correct": 1,
+      "justification": "Modelar roles específicos (cliente, socio, planificador de viajes, comentarista, afiliado, hotel, etc.) en lugar de un 'usuario' genérico permite empatizar con sus metas reales y entender por qué necesita la característica (en este caso, validar calidad profesionalmente para terceros)."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "¿Cuál de las siguientes Historias de Usuario está correctamente formulada siguiendo el estándar de los tres bloques (Quién, Qué y Por qué) y centrada en el valor de negocio?",
+      "opts": [
+        "Como cliente, quiero filtrar los hoteles en los que admiten perros para descartar rápidamente los alojamientos que no acepten animales y no perder tiempo revisando fichas innecesarias",
+        "Como sistema informático, quiero validar el formato del correo electrónico mediante una expresión regular para evitar errores de inserción",
+        "Como desarrollador backend, quiero crear un índice B-Tree en la tabla de hoteles para que las consultas SQL tarden menos de 20 ms",
+        "Como usuario, quiero un botón azul en la esquina superior derecha para pulsar sobre él cuando entre en la página principal"
+      ],
+      "correct": 0,
+      "justification": "La opción correcta define un rol de negocio claro ('Como cliente'), una acción funcional ('quiero filtrar los hoteles en los que admiten perros') y un beneficio tangible para el usuario ('para descartar rápidamente alojamientos que no acepten animales y no perder tiempo'). Las demás describen tareas técnicas o diseño de interfaz sin valor de negocio claro."
+    },
+    {
+      "tema": "2. Roles, Autoría y Formato LEGO",
+      "q": "¿Qué ocurre desde el punto de vista ágil si al redactar una Historia de Usuario resulta imposible identificar un beneficio o valor en la cláusula 'Para [valor de negocio]'?",
+      "opts": [
+        "Es una señal de alerta de que la historia podría no aportar valor real al cliente o ser una tarea puramente técnica que no debería figurar como HU independiente",
+        "No tiene ninguna relevancia, ya que la cláusula 'Para' es meramente decorativa y nunca se lee durante el Sprint",
+        "Se debe sustituir obligatoriamente por el nombre del lenguaje de programación en el que se implementará",
+        "Significa que la historia pasa automáticamente a tener la máxima prioridad (Must Have) en el Product Backlog"
+      ],
+      "correct": 0,
+      "justification": "Toda Historia de Usuario debe aportar valor al usuario o al negocio. Si no se puede justificar el propósito ('Para qué' sirve), probablemente estemos ante una tarea técnica interna o un requisito sin retorno de valor que debe replantearse o descartarse."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "¿Quién propuso el modelo de las tres 'C' de las Historias de Usuario y cuáles son exactamente esos tres elementos?",
+      "opts": [
+        "Bill Wake: Contexto, Código y Calidad",
+        "Mike Cohn: Capacidad, Complejidad y Criterio",
+        "Jeff Patton: Cliente, Colaboración y Construcción",
+        "Ron Jeffries: Card (Tarjeta), Conversation (Conversación) y Confirmation (Confirmación)"
+      ],
+      "correct": 3,
+      "justification": "Ron Jeffries (co-creador de XP) formuló la regla de las tres 'C' para recordar los componentes esenciales de toda Historia de Usuario: Card (Tarjeta), Conversation (Conversación) y Confirmation (Confirmación)."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "Dentro del modelo CCC de Ron Jeffries, ¿qué papel cumple el elemento 'Tarjeta' (Card)?",
+      "opts": [
+        "Contener la especificación técnica completa y todos los diagramas de arquitectura para evitar preguntas",
+        "Almacenar el código fuente compilado de las pruebas unitarias escritas por los programadores",
+        "Representar las 2 o 3 sentencias usadas para describir la intención de la HU, actuando como un recordatorio físico para conversar",
+        "Registrar el historial diario de horas fichadas por cada desarrollador durante toda la iteración"
+      ],
+      "correct": 2,
+      "justification": "La Tarjeta (Card) representa las 2-3 sentencias usadas para describir la intención de la HU en lenguaje de negocio. No contiene todos los detalles, sino que sirve como identificador y recordatorio para planificar y disparar la conversación."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "¿Qué efecto negativo produce escribir demasiados detalles técnicos o funcionales directamente en la tarjeta de una Historia de Usuario?",
+      "opts": [
+        "Aumenta automáticamente la velocidad del equipo al reducir el factor de dedicación",
+        "Limita y mata la conversación con el cliente, dando la falsa ilusión de que todo está comprendido y cerrado por escrito",
+        "Impide que la tarjeta pueda ser introducida en herramientas digitales como Jira o Trello",
+        "Obliga a que el Scrum Master tenga que estimar la historia en solitario sin usar Planning Poker"
+      ],
+      "correct": 1,
+      "justification": "Una historia es una descripción corta que no incluye detalles porque estos se trabajan durante la etapa de 'Conversación'. Una tarjeta con demasiados detalles limita la conversación con el cliente y sustituye la empatía colaborativa por burocracia documental."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "En la estructura canónica de una tarjeta física de Historia de Usuario, ¿qué campos se registran en el ANVERSO de la tarjeta?",
+      "opts": [
+        "Exclusivamente la lista de pruebas de aceptación en formato Dado-Cuando-Entonces",
+        "ID, Título, Descripción (narrativa Como/Quiero/Para), Estimación (PH), Prioridad y Dependencias",
+        "El esquema entidad-relación de la base de datos y las firmas legales de aceptación del contrato",
+        "El listado detallado de tareas técnicas con el nombre del programador asignado a cada método Java"
+      ],
+      "correct": 1,
+      "justification": "El anverso de la tarjeta concentra la identificación y gestión de la historia: Identificador (ID), Título descriptivo, Descripción canónica, Estimación en Puntos de Historia, Prioridad de negocio y Dependencias con otras HU. El reverso se reserva para las pruebas de aceptación."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "¿Qué información fundamental se ubica en el REVERSO de la tarjeta física de una Historia de Usuario?",
+      "opts": [
+        "Las pruebas o criterios de aceptación que delimitan el alcance y permitirán confirmar que la HU está terminada",
+        "El currículo profesional de los desarrolladores que integran el equipo Scrum",
+        "El gráfico Burndown de todas las iteraciones anteriores del proyecto",
+        "La estimación en Puntos de Historia y el valor de prioridad asignado por el Product Owner"
+      ],
+      "correct": 0,
+      "justification": "En el reverso de la tarjeta se redactan las pruebas de aceptación (Confirmación), que delimitan los flujos alternativos, límites de aceptación y condiciones que comprobará el cliente para dar por válida la historia."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "¿Por qué son tan importantes las conversaciones cara a cara durante el desarrollo de una Historia de Usuario?",
+      "opts": [
+        "Porque permiten prescindir por completo de las pruebas de aceptación y de las pruebas unitarias",
+        "Porque transfieren toda la responsabilidad del fracaso técnico al usuario final en caso de error",
+        "Porque evitan tener que priorizar el Product Backlog al hacerse todas las historias a la vez",
+        "Porque ayudan al equipo a comprender las necesidades del usuario, producir soluciones creativas, fortalecer relaciones y reflejar la voz de los interesados"
+      ],
+      "correct": 3,
+      "justification": "Las conversaciones son esenciales porque ayudan al equipo a comprender las necesidades y deseos reales del usuario, producen soluciones creativas conjuntas, favorecen la solidez de las relaciones equipo-usuarios y reflejan la voz de todos los interesados."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "Dada la historia 'Como cliente, quiero cancelar una reserva de hotel', ¿qué tipo de elementos emergen durante la etapa de Conversación con el Product Owner y usuarios?",
+      "opts": [
+        "El algoritmo de ordenación quicksort que usará el servidor de aplicaciones en memoria",
+        "La elección entre usar contenedores Docker o máquinas virtuales en el servidor de integración continua",
+        "Reglas de negocio y límites de aceptación: coste de cancelación, diferencias entre cliente estándar y premium, plazos límite y notificaciones a enviar",
+        "La asignación nominal de qué horas trabajará cada programador durante el mes siguiente"
+      ],
+      "correct": 2,
+      "justification": "Durante la Conversación se descubren los detalles funcionales y reglas de negocio que delimitan la historia: si tiene coste cancelar, si todos los clientes tienen la misma consideración (ej. Premium vs No-Premium), cuándo se puede cancelar y a quién se informa."
+    },
+    {
+      "tema": "3. Las 3 C (Ron Jeffries), Tarjeta y Conversación",
+      "q": "¿De qué manera se delimita formalmente hasta dónde llega la parte a abordar por una Historia de Usuario tras mantener la Conversación con el cliente?",
+      "opts": [
+        "Fijando un número máximo de líneas de código que el programador tiene permitido escribir",
+        "Cerrando el acceso al repositorio Git una vez transcurridas las primeras 4 horas del Sprint",
+        "Usando las pruebas de aceptación, donde se recogen flujos alternativos en la actividad y límites de aceptación acordados",
+        "Redactando un documento de especificación RUP de 200 páginas firmado ante notario"
+      ],
+      "correct": 2,
+      "justification": "El alcance concreto a abordar por una HU se delimita usando las pruebas de aceptación nacidas de la conversación, especificando flujos alternativos en la actividad, límites de aceptación y verificaciones por parte de los clientes."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "¿Quién es el propietario principal y responsable último de las pruebas de aceptación de una Historia de Usuario, aunque cualquier miembro del equipo pueda ayudar a redactarlas?",
+      "opts": [
+        "El Scrum Master",
+        "El Product Owner (o el Cliente en XP)",
+        "El Administrador de Sistemas (DevOps)",
+        "El desarrollador junior con menos experiencia en el dominio"
+      ],
+      "correct": 1,
+      "justification": "Las pruebas de aceptación se escriben en un lenguaje del ámbito de negocios y, aunque cualquiera en el equipo puede escribirlas o proponerlas, el Product Owner es el principal propietario de las mismas porque validan el valor de negocio."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "¿Por qué se afirma que las pruebas de aceptación de una Historia de Usuario son pruebas de 'Caja Negra' e 'independientes de la implementación'?",
+      "opts": [
+        "Porque verifican que las salidas del sistema cumplen las condiciones de satisfacción esperadas (QUÉ resultado se espera) sin preocuparse de la estructura interna del código (CÓMO se consigue)",
+        "Porque se ejecutan con los monitores apagados en servidores sin interfaz gráfica",
+        "Porque solo pueden ser ejecutadas por herramientas privativas cuyo código fuente es cerrado",
+        "Porque evalúan exclusivamente la complejidad ciclomática y las ramas internas de los métodos privados de cada clase"
+      ],
+      "correct": 0,
+      "justification": "Son pruebas de caja negra e independientes de la implementación porque no describen cómo programarlo internamente, sino qué resultado observable se espera, verificando que las salidas cumplen las condiciones de satisfacción ante determinadas entradas."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "¿En qué momento temporal del proyecto se deben implementar y verificar las pruebas de aceptación asociadas a una Historia de Usuario?",
+      "opts": [
+        "En una fase final de pruebas de aceptación (UAT) seis meses después de haber terminado todos los Sprints de programación",
+        "En la iteración anterior a aquella en la que se codifica la historia de usuario, junto con los Spikes",
+        "Únicamente cuando el software ya lleva un año desplegado en producción y surgen quejas de los usuarios",
+        "En el transcurso de la misma iteración en la que se implementa la propia historia de usuario"
+      ],
+      "correct": 3,
+      "justification": "Las pruebas de aceptación se implementan y ejecutan en el transcurso de la misma iteración (Sprint) en la que se implementa la propia Historia de Usuario, pues sin superarlas la historia no puede considerarse terminada."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "En el formato BDD (Behavior-Driven Development) utilizado para describir pruebas de aceptación, ¿cuáles son las tres cláusulas estándar y qué representa cada una?",
+      "opts": [
+        "Como (rol), Quiero (acción), Para (beneficio)",
+        "Inicio (arranque), Proceso (bucle), Fin (retorno de función)",
+        "Entrada (parámetros SQL), Transformación (join de tablas), Salida (código HTTP 200)",
+        "Dado / Given (contexto o precondición inicial), Cuando / When (evento o acción desencadenante), Entonces / Then (resultado esperado observable)"
+      ],
+      "correct": 3,
+      "justification": "El formato BDD estructura los escenarios de aceptación en tres pasos: Dado (contexto inicial del sistema), Cuando (acción que realiza el usuario o evento que ocurre) y Entonces (comportamiento o salida verificable que muestra el sistema)."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "Considera el escenario BDD visto en clase: 'Dado un sistema donde existe un usuario con nombre \"idprueba\", Cuando alguien intenta registrarse con nombre \"idprueba\", Entonces el sistema muestra un mensaje indicando que el nombre \"idprueba\" ya existe'. ¿Qué cualidad esencial cumple este criterio?",
+      "opts": [
+        "Ambigüedad flexible para que el programador decida si permite o no usuarios duplicados",
+        "Acoplamiento directo al motor de base de datos relacional al especificar la clave primaria de la tabla",
+        "Claridad, precisión y ausencia de espacio a interpretaciones, expresado en lenguaje del dominio sin acoplarse a detalles técnicos",
+        "Sustitución total de las pruebas unitarias del módulo de criptografía de contraseñas"
+      ],
+      "correct": 2,
+      "justification": "Un buen criterio de aceptación en formato BDD destaca por su claridad y precisión (no deja espacio a interpretaciones sobre qué ocurre ante un duplicado) y mantiene independencia de la implementación usando lenguaje comprensible por el negocio."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "¿Qué relación existe entre las pruebas de aceptación definidas con el cliente y las pruebas de unidad (unitarias) que realiza el equipo de desarrollo?",
+      "opts": [
+        "Son mutuamente excluyentes: si una historia tiene pruebas de aceptación en el reverso, está prohibido escribir pruebas unitarias",
+        "Son complementarias: independientemente de las pruebas de aceptación funcionales (caja negra), el equipo de desarrollo realiza pruebas de unidad sobre los módulos que desarrolla",
+        "Son idénticas: las pruebas de aceptación son simplemente el nombre comercial que reciben los tests JUnit de cada método privado",
+        "Las pruebas unitarias las redacta el cliente en lenguaje natural y las pruebas de aceptación las genera el compilador automáticamente"
+      ],
+      "correct": 1,
+      "justification": "Como recalcan los apuntes de clase, no hay que olvidar que el equipo de desarrollo realiza pruebas de unidad (técnicas, caja blanca) sobre los módulos que se desarrollen, independientemente de las pruebas de aceptación (funcionales, caja negra) definidas para la HU."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "En el ejemplo de la historia de 'Préstamo de un libro en una biblioteca' (ID: 5), ¿cuál de los siguientes elementos constituye una prueba de aceptación válida para el reverso de su tarjeta?",
+      "opts": [
+        "Introducir un socio con 3 libros ya prestados y comprobar que el sistema deniega el préstamo por haber alcanzado el límite máximo",
+        "Como socio de la biblioteca, quiero solicitar en préstamo un libro para leerlo en casa",
+        "Crear la tabla PRESTAMOS en PostgreSQL con clave foránea hacia la tabla SOCIOS",
+        "Estimar la historia en 4 Puntos de Historia con prioridad 300"
+      ],
+      "correct": 0,
+      "justification": "Comprobar qué ocurre cuando un socio tiene 3 libros prestados (límite de cupo), cuando el socio no existe, cuando hay 0 ejemplares o cuando los datos son válidos y se decrementan los disponibles en 1 son exactamente las pruebas de aceptación del reverso de la tarjeta."
+    },
+    {
+      "tema": "4. Confirmación, Pruebas de Aceptación y BDD",
+      "q": "Para la historia 'Como cliente, quiero cancelar una reserva previa', el PO acuerda que los clientes Premium cancelan gratis el mismo día y los No-Premium pagan un 10% de recargo. ¿Cómo deben plasmarse estas reglas?",
+      "opts": [
+        "Como pruebas de aceptación verificables asociadas a la historia, comprobando ambos casos (Premium sin coste y No-Premium con cargo del 10%) además del envío de notificaciones",
+        "Deben ocultarse hasta el día de la entrega final para sorprender positivamente a los desarrolladores",
+        "Como un documento legal separado de 50 páginas que invalida el uso de Historias de Usuario",
+        "Modificando el título de la tarjeta para que ocupe tres párrafos detallando todas las fórmulas matemáticas de facturación"
+      ],
+      "correct": 0,
+      "justification": "Las condiciones concretas acordadas en la conversación (diferencia entre Cliente Premium sin coste y No-Premium con 10% de cargo al cancelar el mismo día, mail de confirmación al cliente y aviso al hotel) se transforman directamente en las pruebas de aceptación de la HU."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "¿Quién es el autor del acrónimo I.N.V.E.S.T. utilizado para evaluar la calidad de una Historia de Usuario y qué significan sus seis siglas?",
+      "opts": [
+        "Ron Jeffries: Integrada, Nueva, Verificada, Estructurada, Simple y Técnica",
+        "Mike Cohn: Incremental, Necesaria, Viable, Económica, Secuencial y Temporal",
+        "Kent Beck: Iterativa, Normalizada, Visible, Escalable, Segura y Trazable",
+        "Bill Wake: Independiente, Negociable, Valiosa, Estimable, Suscinta (Small) y Testeable"
+      ],
+      "correct": 3,
+      "justification": "El modelo I.N.V.E.S.T. fue formulado por Bill Wake y define las seis características de una buena Historia de Usuario: Independiente, Negociable, Valiosa, Estimable, Suscinta (Small/Pequeña) y Testeable."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "En el modelo INVEST, ¿por qué es deseable que una Historia de Usuario sea 'Independiente' (I)?",
+      "opts": [
+        "Para que el desarrollador pueda programarla aislado sin hablar jamás con el resto del equipo ni con el cliente",
+        "Para que no comparta la misma base de datos ni el mismo lenguaje de programación con el resto del producto",
+        "Para que pueda priorizarse, planificarse e implementarse en cualquier orden sin depender rígidamente de que otras historias se construyan antes",
+        "Para evitar que el Product Owner pueda cambiar su prioridad dentro del Product Backlog"
+      ],
+      "correct": 2,
+      "justification": "La independencia entre historias permite al Product Owner priorizarlas y moverlas libremente en el Product Backlog según su valor de negocio, evitando bloqueos en la planificación por acoplamientos secuenciales rígidos."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "Un equipo redacta la siguiente historia: 'El sistema implementará obligatoriamente un servicio SOAP en XML con validación XSD estricta para el envío de facturas'. ¿Qué principio del modelo INVEST se está vulnerando principalmente al redactarla como una imposición técnica cerrada?",
+      "opts": [
+        "Suscinta (Small), porque utiliza siglas en mayúsculas",
+        "Negociable (Negotiable) y Valiosa (Valuable), al tratar la HU como un contrato técnico rígido en lugar de una necesidad de negocio abierta a conversación",
+        "Independiente (Independent), porque menciona la palabra facturas",
+        "Estimable (Estimable), porque las tecnologías XML nunca pueden estimarse en puntos"
+      ],
+      "correct": 1,
+      "justification": "Las HU son Negociables (no son un contrato cerrado ni una imposición de arquitectura técnica) y Valiosas para el usuario o comprador. Imponer soluciones técnicas cerradas rompe la negociabilidad y oculta el valor de negocio."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "Según el criterio 'S' (Suscinta / Small) del modelo INVEST y las pautas de descomposición de Richard Lawrence, ¿cuál es el tamaño recomendado para que una Historia de Usuario se considere suficientemente pequeña?",
+      "opts": [
+        "Entre 2 y 3 meses de trabajo a tiempo completo para todo el departamento de ingeniería",
+        "Un esfuerzo de unas 2-3 personas/semana de trabajo, o representar aproximadamente entre 1/10 y 1/6 de la velocidad del equipo en una iteración",
+        "Exactamente 15 minutos de codificación máxima por historia",
+        "Superar al menos el 80% de la capacidad total de puntos del Sprint para que valga la pena probarla"
+      ],
+      "correct": 1,
+      "justification": "En las diapositivas se indica que una historia Suscinta debe ser pequeña en esfuerzo (2-3 personas/semana de trabajo) y en el diagrama de descomposición de Richard Lawrence se precisa el umbral práctico de estar entre 1/10 y 1/6 de la velocidad del equipo (permitiendo completar unas 6 a 10 por iteración)."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "Una Historia de Usuario incluye como único requisito: 'El portal web deberá ser muy intuitivo, elegante y rápido para agradar a los visitantes'. ¿Qué letra del modelo INVEST falla de forma más evidente y por qué?",
+      "opts": [
+        "Falla la 'T' (Testeable), porque adjetivos subjetivos como 'intuitivo, elegante y rápido' no permiten diseñar pruebas de aceptación objetivas que determinen inequívocamente si pasa o falla",
+        "Falla la 'I' (Independiente), porque los portales web siempre dependen de un servidor DNS externo",
+        "Falla la 'V' (Valiosa), porque a ningún cliente le importa que su portal sea rápido o intuitivo",
+        "Cumple perfectamente todas las letras de INVEST al ser una frase corta y fácil de leer"
+      ],
+      "correct": 0,
+      "justification": "Para que una historia sea Testeable (T) necesita poder probarse objetivamente en la etapa de Confirmación. Criterios vagos o subjetivos sin métricas verificables (como 'ser rápido' en vez de 'responder en menos de 2 segundos') impiden confirmar si se ha cumplido."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "¿Qué es exactamente la 'Definición de Terminado' (Definition of Done - DoD) en el desarrollo ágil con Historias de Usuario?",
+      "opts": [
+        "La fecha límite del calendario en la que finaliza el contrato laboral de los programadores del proyecto",
+        "El acta de cierre que firma el Scrum Master cuando se cancela un Sprint por falta de presupuesto",
+        "Un listado de funcionalidades descartadas (Won't Have) que nunca se llegarán a programar",
+        "Un acuerdo de calidad entre los desarrolladores y los clientes que establece los criterios técnicos y de verificación para considerar que una HU está realmente terminada"
+      ],
+      "correct": 3,
+      "justification": "La definición de 'terminado' (Done) es un acuerdo formal de calidad entre los desarrolladores y los clientes. Puede establecerse para todas las HU globalmente o con matices específicos para algunas HU."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "¿Cuál de los siguientes conjuntos de aspectos forma parte habitual de una 'Definition of Done' (DoD) rigurosa según lo estudiado en el seminario?",
+      "opts": [
+        "La redacción de todos los casos de uso futuros del próximo año antes de entregar la versión actual",
+        "Únicamente que el código compile en el ordenador portátil del programador sin errores de sintaxis",
+        "Tipos y grado de pruebas (unidad e integración), código documentado y revisado sin incidencias críticas, entorno de despliegue (prepro, testing, producción), nivel de calidad/métricas y criterios de aceptación aprobados por el PO",
+        "La estimación en Puntos de Historia mediante Planning Poker y la asignación de prioridad MoSCoW"
+      ],
+      "correct": 2,
+      "justification": "La DoD contempla: tipos y grado de prueba (unidad e integración), código documentado, revisado y sin incidencias críticas, entorno específico en que concluye el trabajo (prepro, testing, producción), nivel de documentación, métricas de calidad del software y criterios de aceptación comprobados y aprobados por el Product Owner."
+    },
+    {
+      "tema": "5. Modelo INVEST y Definition of Done (DoD)",
+      "q": "¿Cuál es la diferencia fundamental entre los 'Criterios de Aceptación' y la 'Definition of Done (DoD)'?",
+      "opts": [
+        "No existe ninguna diferencia: ambos términos son sinónimos exactos creados por autores distintos",
+        "La DoD la escribe el cliente en formato Dado-Cuando-Entonces en el reverso de cada tarjeta, mientras que los Criterios de Aceptación solo miden la cobertura de pruebas JUnit",
+        "Los Criterios de Aceptación son condiciones funcionales específicas de cada Historia de Usuario particular, mientras que la DoD es un acuerdo de calidad global/transversal aplicable a todas las historias",
+        "Los Criterios de Aceptación se verifican antes de empezar a programar y la DoD solo se revisa años después de terminar el proyecto"
+      ],
+      "correct": 2,
+      "justification": "Los Criterios de Aceptación son propios y específicos de cada HU (evalúan si cumple las reglas de negocio de esa funcionalidad), mientras que la DoD es el estándar transversal de calidad del producto (pruebas unitarias, revisión de código, entorno desplegado, etc.) que toda HU debe satisfacer."
+    },
+    {
+      "tema": "6. Granularidad (Temas, Épicas, HU, Tareas) y RNF",
+      "q": "Ordena de MAYOR a MENOR nivel de abstracción (de más global a más específico) los elementos de la jerarquía de granularidad en metodologías ágiles:",
+      "opts": [
+        "Épica -> Tema -> Tarea -> Historia de Usuario",
+        "Tema -> Épica -> Historia de Usuario -> Tarea",
+        "Historia de Usuario -> Tema -> Épica -> Tarea",
+        "Tarea -> Historia de Usuario -> Épica -> Tema"
+      ],
+      "correct": 1,
+      "justification": "La jerarquía de granularidad desciende desde los Temas (grandes proyectos o subproductos globales), pasa por las Épicas (súper historias o conjuntos de HU relacionadas), baja a las Historias de Usuario (funcionalidades concisas de valor) y culmina en las Tareas (divisiones técnicas de desarrollo)."
+    },
+    {
+      "tema": "6. Granularidad (Temas, Épicas, HU, Tareas) y RNF",
+      "q": "En el contexto de una plataforma web de viajes, ¿cómo se clasificarían correctamente los siguientes cuatro elementos según su granularidad: (1) 'Planificador de viajes / Sitio web para socios', (2) 'Sistema de búsqueda para hoteles', (3) 'Como cliente quiero buscar un hotel en una localidad determinada', y (4) 'Crear los métodos de consulta a BBDD para que retornen resultados'?",
+      "opts": [
+        "(1) Tema, (2) Épica, (3) Historia de Usuario, (4) Tarea",
+        "(1) Épica, (2) Tema, (3) Tarea, (4) Historia de Usuario",
+        "(1) Historia de Usuario, (2) Tarea, (3) Tema, (4) Épica",
+        "(1) Tarea, (2) Historia de Usuario, (3) Épica, (4) Tema"
+      ],
+      "correct": 0,
+      "justification": "Según el ejemplo de clase (Slide 49): 'Planificador de viajes / sitio Web para socios' es un Tema (subproducto global); 'Sistema de búsqueda para hoteles' es una Épica; 'Como cliente quiero buscar un hotel en una localidad determinada' es una HU; y 'Crear los métodos de consulta a BBDD' es una Tarea técnica."
+    },
+    {
+      "tema": "6. Granularidad (Temas, Épicas, HU, Tareas) y RNF",
+      "q": "Al descomponer una Historia de Usuario en Tareas para el equipo de desarrollo, ¿cuál debe ser la duración estimada de cada tarea individual y qué pautas deben seguirse?",
+      "opts": [
+        "Cada tarea debe durar exactamente 10 minutos y no debe incluir nunca actividades de prueba ni documentación",
+        "Las tareas solo pueden ser definidas por usuarios externos sin participación de los programadores",
+        "Cada tarea debe durar entre 2 y 3 semanas completas, superando la duración del propio Sprint",
+        "La duración de una tarea debe estar entre medio día y 3 o 4 días de trabajo, debe generar un entregable al terminar, no hay que dedicar excesivo tiempo a estudiar sus detalles y deben incluirse tareas de prueba y automatización"
+      ],
+      "correct": 3,
+      "justification": "Las reglas de descomposición en tareas (Slide 80) establecen que se tratan individualmente por el equipo, duran entre medio día y 3 o 4 días de trabajo, generan un producto entregable, no se dedica mucho tiempo a estudiar detalles previos e incluyen tareas de prueba, documentación y automatización."
+    },
+    {
+      "tema": "6. Granularidad (Temas, Épicas, HU, Tareas) y RNF",
+      "q": "¿Qué describen los Requisitos No Funcionales (RNF) y a qué ámbito se pueden aplicar dentro de un proyecto ágil?",
+      "opts": [
+        "Describen únicamente el diseño gráfico de los logotipos corporativos y solo se aplican al manual de usuario",
+        "Son funcionalidades descartadas por el cliente que no aportan calidad ni seguridad al producto",
+        "Describen los flujos principales de negocio de los actores y solo se aplican a las tareas de base de datos",
+        "Describen cualidades o restricciones del sistema que no se relacionan de forma directa con el comportamiento funcional, pudiendo aplicarse al sistema en su conjunto o a determinadas funciones/características"
+      ],
+      "correct": 3,
+      "justification": "Los RNF describen cualidades o restricciones del sistema (rendimiento, disponibilidad, seguridad, etc.) que no se relacionan directamente con el comportamiento funcional, y pueden aplicarse tanto al sistema/producto en su conjunto como a funciones o características específicas."
+    },
+    {
+      "tema": "6. Granularidad (Temas, Épicas, HU, Tareas) y RNF",
+      "q": "¿De qué formas pueden tratarse y gestionarse los Requisitos No Funcionales (RNF) dentro de las metodologías ágiles según lo visto en el seminario?",
+      "opts": [
+        "Únicamente como comentarios dentro del código fuente que el Product Owner nunca llega a conocer",
+        "Exclusivamente mediante diagramas de despliegue UML separados del Product Backlog, ya que las HU prohíben mencionar tiempos o disponibilidad",
+        "Como restricciones asignadas a elementos de las pilas (Temas, Épicas, HU, Tareas), como criterios de aceptación de una HU, como parte de la definición de terminado (DoD), como HU propias o en un documento específico para RNF globales",
+        "Transformándolos siempre en Spikes funcionales sin criterios de aceptación"
+      ],
+      "correct": 2,
+      "justification": "Las diapositivas (Slides 52-54) muestran que los RNF pueden tratarse como: (1) restricciones en Temas, Épicas, HU o Tareas, (2) criterios de aceptación dentro de una HU, (3) parte de la Definition of Done (DoD), (4) documento de especificación específico para RNF globales, o incluso redactarse con formato de HU (ej. disponibilidad del 98% o respuesta en 5 segundos)."
+    },
+    {
+      "tema": "6. Granularidad (Temas, Épicas, HU, Tareas) y RNF",
+      "q": "Para la HU: 'Como analista financiero, quiero ver las transacciones mensuales de mis clientes para aconsejarles sobre su salud financiera', se añade: 'Las transacciones de clientes confidenciales solo se muestran a usuarios con nivel de seguridad 2 y en menos de 10 segundos'. ¿Cómo se están gestionando aquí los RNF de seguridad y rendimiento?",
+      "opts": [
+        "Como elementos de la Definition of Done aplicables a cualquier pantalla de cualquier proyecto de la empresa",
+        "Como Criterios de Aceptación específicos asociados directamente a esa Historia de Usuario funcional",
+        "Como un Tema estratégico de alto nivel sin pruebas de verificación",
+        "Como un Spike técnico de investigación previa sin código entregable"
+      ],
+      "correct": 1,
+      "justification": "En el ejemplo de la Slide 54, tanto el tiempo máximo de respuesta (10 segundos) como la restricción de acceso por confidencialidad (nivel de seguridad 2) se incorporan directamente como Criterios de Aceptación de la HU del analista financiero."
+    },
+    {
+      "tema": "7. Product Backlog, Story Mapping y Priorización",
+      "q": "¿Qué es la Pila de Producto (Product Backlog) y qué representa la 'Prioridad' de cada Historia de Usuario dentro de ella?",
+      "opts": [
+        "Es la lista priorizada de HU que contiene toda la funcionalidad deseable del producto; la prioridad representa el valor que le da el cliente a la HU (medida en que satisface sus necesidades)",
+        "Es un archivo estático e inmutable; la prioridad la decide el programador según qué tecnología le apetezca aprender",
+        "Es el listado de errores de compilación del Sprint actual; la prioridad indica el orden alfabético de los módulos",
+        "Es una herramienta exclusiva de RUP que solo se actualiza una vez al finalizar el proyecto completo"
+      ],
+      "correct": 0,
+      "justification": "El Product Backlog es la lista priorizada de HU que contiene toda la funcionalidad deseable del producto, se revisa y actualiza frecuentemente y sirve para planificar; en él, la prioridad refleja el valor que el cliente otorga a cada HU según satisface sus necesidades."
+    },
+    {
+      "tema": "7. Product Backlog, Story Mapping y Priorización",
+      "q": "En la técnica de 'User Story Mapping' (Mapa de Historias de Usuario), ¿cómo se organizan espacialmente las historias en los ejes horizontal y vertical?",
+      "opts": [
+        "En el eje horizontal se coloca el flujo cronológico de actividades del usuario (Backbone / tiempo) y en el eje vertical se ordenan de arriba abajo según su necesidad/prioridad (de más críticas a más opcionales), separando entregas mediante cortes horizontales",
+        "En el eje horizontal se ordenan por coste económico decreciente y en el eje vertical por orden alfabético del nombre del desarrollador",
+        "En el eje horizontal se sitúan las tareas de base de datos y en el eje vertical las tareas de interfaz gráfica",
+        "Es un gráfico circular donde el centro contiene las historias descartadas (Won't Have) y la periferia las obligatorias (Must Have)"
+      ],
+      "correct": 0,
+      "justification": "El Mapa de Historias de Usuario dispone en el eje horizontal el tiempo o secuencia de pasos del flujo del usuario (espina dorsal o Backbone) y en el eje vertical la necesidad/opcionalidad (arriba lo imprescindible para la primera entrega o Walking Skeleton, y más abajo los incrementos para entregas sucesivas)."
+    },
+    {
+      "tema": "7. Product Backlog, Story Mapping y Priorización",
+      "q": "¿Cuáles son los criterios principales que deben tenerse en cuenta al priorizar las Historias de Usuario de un Product Backlog?",
+      "opts": [
+        "Exclusivamente la antigüedad de la tarjeta desde el día en que fue escrita (método FIFO)",
+        "El número de palabras que contiene el reverso de la tarjeta multiplicado por el identificador numérico de la HU",
+        "Únicamente elegir primero las historias más fáciles de programar y dejar todas las de alto riesgo para el último día del proyecto",
+        "Valor de negocio para el cliente, valor para el usuario (muchos usuarios vs. pocos usuarios importantes), riesgo e incertidumbre, dependencias con otras HU y tamaño/esfuerzo"
+      ],
+      "correct": 3,
+      "justification": "Según la Slide 66, la priorización se basa en: valor para el cliente (Valor de Negocio), valor para el usuario (impacto en muchos usuarios o en pocos usuarios clave), riesgo e incertidumbre, dependencias con otras HU priorizadas y tamaño/esfuerzo."
+    },
+    {
+      "tema": "7. Product Backlog, Story Mapping y Priorización",
+      "q": "Respecto a la relación entre la prioridad y el tamaño de una Historia de Usuario a lo largo del ciclo de vida del proyecto, ¿cuál es la regla fundamental?",
+      "opts": [
+        "Tanto la prioridad como el tamaño cambian todos los días según el estado de ánimo del cliente",
+        "El tamaño cambia constantemente al subir la prioridad, pero la prioridad es fija e inamovible desde el día uno",
+        "La prioridad puede cambiar a lo largo del proyecto, pero el tamaño NO",
+        "Si el Product Owner duplica la prioridad de una historia, sus Puntos de Historia se reducen automáticamente a la mitad"
+      ],
+      "correct": 2,
+      "justification": "Como destaca explícitamente la Slide 66: 'La prioridad puede cambiar, el tamaño no'. Las prioridades evolucionan y se negocian según el mercado, pero el tamaño relativo (esfuerzo y complejidad intrínseca de la historia) permanece constante salvo que cambie su alcance."
+    },
+    {
+      "tema": "7. Product Backlog, Story Mapping y Priorización",
+      "q": "En el método de priorización MoSCoW, ¿qué diferencia exacta existe entre una historia clasificada como 'Should' y una clasificada como 'Could'?",
+      "opts": [
+        "'Should' significa que nunca se implementará, mientras que 'Could' es obligatoria para que el sistema pueda arrancar",
+        "'Should' se debe completar por todos los medios aunque el éxito del proyecto no dependa críticamente de ella, mientras que 'Could' se debería completar solo si su implementación no afecta a la consecución de los objetivos principales",
+        "'Should' se aplica únicamente a bases de datos y 'Could' se aplica únicamente a interfaces móviles",
+        "Ambas categorías indican requisitos descartados para la versión actual que pasan directamente al año siguiente"
+      ],
+      "correct": 1,
+      "justification": "En MoSCoW: Must (obligatorio para finalizar el proyecto), Should (alta prioridad, debe completarse por todos los medios pero el éxito no depende estrictamente de él), Could (deseable, se completa si no afecta a los objetivos principales) y Would/Won't (si sobra tiempo o para futuras versiones)."
+    },
+    {
+      "tema": "7. Product Backlog, Story Mapping y Priorización",
+      "q": "Dentro del esquema de entregas por prioridad (Requeridas/Críticas, Importantes, Opcionales y No se construirán), ¿en qué entregas se abordan las historias 'Importantes' (aquellas sin las cuales el sistema puede vivir durante algún tiempo)?",
+      "opts": [
+        "En las primeras entregas del proyecto (junto con las críticas sin las que la solución no puede vivir)",
+        "En las entregas intermedias del proyecto",
+        "En las entregas finales del proyecto, solo si sobra presupuesto",
+        "Nunca llegan a construirse por carecer de valor para el negocio"
+      ],
+      "correct": 1,
+      "justification": "Según la clasificación de la Slide 67: las Requeridas o críticas van a las primeras entregas; las Importantes (sin las cuales el sistema puede vivir algún tiempo) van a las entregas intermedias; las Opcionales van a las entregas finales si hay tiempo y presupuesto; y el cuarto grupo no se construirá."
+    },
+    {
+      "tema": "8. Estimación, Planning Poker, Velocidad e Iteraciones",
+      "q": "¿Qué miden los 'Puntos de Historia' (PH), quién realiza la estimación y qué diferencia tienen frente a los 'Días Ideales'?",
+      "opts": [
+        "Los PH miden el tamaño relativo de una historia comparada con otras del mismo equipo (combinando esfuerzo, complejidad y riesgo), los estima el equipo de desarrollo, mientras que un Día Ideal representa un día de trabajo continuo sin interrupciones",
+        "Los PH miden el número exacto de horas de reloj que tardará el programador más lento y los impone el Product Owner sin consultar al equipo",
+        "Los Días Ideales incluyen todas las reuniones, correos e interrupciones diarias, mientras que los PH solo miden líneas de código",
+        "Los PH son una métrica universal estandarizada por ISO que permite comparar el rendimiento entre equipos de diferentes empresas"
+      ],
+      "correct": 0,
+      "justification": "Los Puntos de Historia expresan el tamaño relativo de una HU comparada con otras estimadas por el mismo equipo (englobando esfuerzo necesario, complejidad y riesgo); un Día Ideal es un día de trabajo sin interrupciones. En ambos casos la estimación la realiza el equipo de desarrollo."
+    },
+    {
+      "tema": "8. Estimación, Planning Poker, Velocidad e Iteraciones",
+      "q": "¿Qué representa el 'Cono de Incertidumbre' en la estimación de proyectos de software?",
+      "opts": [
+        "Que al principio del proyecto las estimaciones son totalmente exactas y se vuelven más imprecisas conforme se escribe código",
+        "La jerarquía piramidal que va desde las Tareas en la parte ancha hasta los Temas en el vértice estrecho",
+        "Que cuantas más personas participen en el Planning Poker, mayor será el error matemático de la suma de puntos",
+        "Que al inicio del proyecto la incertidumbre y variabilidad de las estimaciones es máxima (pudiendo variar hasta en un factor de 4x), y se va estrechando progresivamente a medida que avanza el proyecto y se reduce el riesgo"
+      ],
+      "correct": 3,
+      "justification": "El Cono de Incertidumbre ilustra cómo en las fases tempranas (definición inicial del concepto) la dispersión del esfuerzo estimado frente al real es muy amplia (entre 0.25x y 4x), convergiendo hacia la exactitud a medida que el equipo avanza iterativamente y conoce mejor el producto."
+    },
+    {
+      "tema": "8. Estimación, Planning Poker, Velocidad e Iteraciones",
+      "q": "En una sesión de 'Planning Poker', ¿cuál es el papel del moderador y por qué todos los estimadores muestran su carta de la secuencia de Fibonacci simultáneamente?",
+      "opts": [
+        "El moderador decide la puntuación final en caso de empate; las cartas se muestran a la vez únicamente para ahorrar tiempo en la reunión",
+        "El moderador es el único que vota con cartas de Fibonacci y los desarrolladores solo pueden usar la carta de la taza de café",
+        "El moderador gestiona la reunión y controla los tiempos pero NO estima; las cartas se colocan boca abajo y se revelan a la vez para evitar el sesgo de anclaje entre participantes",
+        "Cuando no hay consenso en la primera ronda, se calcula la media aritmética exacta con decimales sin permitir debate entre los extremos"
+      ],
+      "correct": 2,
+      "justification": "En Planning Poker existe un moderador que no estima y gestiona la reunión y sus tiempos. Cada estimador elige su carta en secreto y todas se muestran a la vez para evitar que las opiniones de unos condicionen a los demás (efecto anclaje); luego las estimaciones extremas (altas y bajas) justifican su postura y se repite hasta lograr consenso."
+    },
+    {
+      "tema": "8. Estimación, Planning Poker, Velocidad e Iteraciones",
+      "q": "¿Cuáles son las tres formas válidas de obtener o calcular la 'Velocidad' inicial de un equipo de desarrollo según la teoría del seminario?",
+      "opts": [
+        "Preguntar al patrocinador cuántos puntos quiere que se hagan, usar una tirada aleatoria de dados o sumar todos los identificadores de las tarjetas",
+        "Multiplicar el presupuesto en euros por el número de casos de uso, dividir entre los meses del año o copiar la velocidad de otra empresa",
+        "Usar datos históricos ('el tiempo que hizo ayer'), ejecutar una iteración inicial y observar su velocidad, o hacer un pronóstico mediante el cálculo de recursos",
+        "Contar el número de commits en Git del último año, medir la velocidad de conexión a Internet o aplicar el método MoSCoW"
+      ],
+      "correct": 2,
+      "justification": "Según la Slide 76, los tres métodos para calcular la velocidad son: (1) Utilizar datos históricos ('el tiempo que hizo ayer' / Yesterday's Weather), (2) Ejecutar una iteración inicial y utilizar la velocidad observada en ella, y (3) Hacer un pronóstico ('el cálculo de recursos')."
+    },
+    {
+      "tema": "8. Estimación, Planning Poker, Velocidad e Iteraciones",
+      "q": "PROBLEMA PRÁCTICO: Un equipo de desarrollo cuenta con 6 programadores que trabajan las mismas horas en iteraciones de 3 semanas (15 días laborables por iteración). En su entorno se estima que 1 PH = 1 día de trabajo ideal y se considera un factor de dedicación del 70%. aplicando el método de cálculo de recursos, ¿cuál es la velocidad estimada del equipo por iteración?",
+      "opts": [
+        "90 Puntos de Historia",
+        "63 Puntos de Historia",
+        "45 Puntos de Historia",
+        "42 Puntos de Historia"
+      ],
+      "correct": 1,
+      "justification": "Siguiendo la fórmula de la Slide 77: Días de trabajo brutos por iteración = 6 programadores × 15 días de trabajo = 90 días ideales (90 PH teóricos, dado que 1 PH = 1 día ideal). Aplicando el factor de dedicación del 70%: Velocidad = 90 × 0,70 = 63 PH por iteración."
+    },
+    {
+      "tema": "8. Estimación, Planning Poker, Velocidad e Iteraciones",
+      "q": "PROBLEMA PRÁCTICO: Un equipo tiene una velocidad constante de 13 PH por iteración. Debe planificar la Entrega 1 compuesta por las historias: A(3 PH), B(5 PH), C(5 PH), D(3 PH), E(1 PH) y F(8 PH). ¿Cuántas iteraciones necesitará como mínimo para completar la Entrega 1 sin superar nunca la velocidad máxima por iteración y cuál es la carga de cada una?",
+      "opts": [
+        "2 iteraciones: Iteración 1 con A(3)+B(5)+C(5) = 13 PH; Iteración 2 con D(3)+E(1)+F(8) = 12 PH",
+        "1 única iteración de 25 PH forzando horas extraordinarias del equipo",
+        "3 iteraciones: Iteración 1 con A(3)+B(5) = 8 PH; Iteración 2 con C(5)+D(3) = 8 PH; Iteración 3 con E(1)+F(8) = 9 PH",
+        "4 iteraciones porque ninguna historia de 8 PH puede compartir iteración con historias de 3 PH"
+      ],
+      "correct": 0,
+      "justification": "Como se muestra en el ejercicio de planificación de las Slides 78-79, con una velocidad máxima de 13 PH, las seis primeras historias suman 3+5+5+3+1+8 = 25 PH y encajan perfectamente en 2 iteraciones: la Iteración 1 agrupa A(3)+B(5)+C(5) = 13 PH (≤ 13) y la Iteración 2 agrupa D(3)+E(1)+F(8) = 12 PH (≤ 13)."
+    },
+    {
+      "tema": "9. Los 9 Patrones de División y SPIKES",
+      "q": "Un banco tiene la historia grande: 'Como cliente de un banco, quiero retirar dinero de un cajero para poder tener efectivo'. El equipo decide dividirla en: (1) '...quiero que se me impida retirar dinero si no tengo suficiente saldo' y (2) '...quiero estar limitado a retirar un máximo de 1000 € por día'. ¿Qué patrón de división de Richard Lawrence se ha aplicado?",
+      "opts": [
+        "Patrón 1: División por pasos del flujo de trabajo (Workflow Steps)",
+        "Patrón 8: Operaciones múltiples (CRUD)",
+        "Patrón 6: Métodos de entrada de datos (Vista de la IU)",
+        "Patrón 2: División por reglas de negocio (Business Rules Variations)"
+      ],
+      "correct": 3,
+      "justification": "Cuando una HU incluye varias condiciones, restricciones o políticas de negocio (como validar saldo no negativo o imponer un tope diario de 1000 €), se aplica el Patrón 2: División por reglas de negocio, creando historias separadas para cada regla o condición (Slide 84)."
+    },
+    {
+      "tema": "9. Los 9 Patrones de División y SPIKES",
+      "q": "Analiza estas dos divisiones de HU vistas en clase: Caso A: 'Cambiar tarifa eléctrica' se divide en (1) usar tarifa de medida de uso, (2) tarifa prepago, (3) tarifas de descuento (donde la primera lleva casi todo el trabajo de infraestructura). Caso B: 'Navegar por el catálogo de productos' se divide en (1) navegación básica, (2) cargar rápidamente sin demoras, (3) accesibilidad para lectores de pantalla. ¿Qué patrones se han aplicado en A y B respectivamente?",
+      "opts": [
+        "En A: Variaciones en datos; en B: Operaciones múltiples",
+        "En A: Métodos de entrada de datos; en B: Reglas de negocio",
+        "En A: Escenarios de un caso de uso; en B: Pasos del flujo de trabajo",
+        "En A: El mayor esfuerzo de desarrollo (Major Effort); en B: Niveles de calidad del sistema (Deferred System Quality)"
+      ],
+      "correct": 3,
+      "justification": "En el Caso A (Slide 85) se aplica el Patrón 3 ('El mayor esfuerzo de desarrollo'), donde la primera historia asume el grueso del desarrollo base y las siguientes solo añaden variantes. En el Caso B (Slide 89) se aplica el Patrón 7 ('Niveles de calidad del sistema'), entregando primero la funcionalidad base y añadiendo después rapidez de carga o accesibilidad."
+    },
+    {
+      "tema": "9. Los 9 Patrones de División y SPIKES",
+      "q": "En el caso práctico del buscador de una librería online (Slide 98), la historia 'Búsqueda de libros (por título, autor y temática)' figuraba como Prioridad 1 por delante del 'Carrito de compra online' y del 'Pago con tarjeta'. ¿Qué ventaja estratégica de negocio se consigue al dividir el buscador aplicando el patrón de Variaciones en Datos?",
+      "opts": [
+        "Se elimina la necesidad de programar el carrito de compra y la pasarela de pago en todo el proyecto",
+        "Se consigue que todas las modalidades de búsqueda tengan exactamente 0 Puntos de Historia",
+        "Permite dejar como Prioridad 1 solo la 'Búsqueda por título' y adelantar inmediatamente el 'Carrito de compra' (Prioridad 2) y el 'Pago con tarjeta' (Prioridad 4), posponiendo búsquedas secundarias (temática, ISBN) para entregar valor de negocio completo mucho antes",
+        "Obliga a que el cliente tenga que comprar los libros presencialmente sin usar el buscador web"
+      ],
+      "correct": 2,
+      "justification": "Al partir una HU grande en historias más pequeñas (Búsqueda por título, por autor, por temática, por ISBN), descubrimos que no todas las partes tienen la misma urgencia: basta la búsqueda por título para poder adelantar el carrito y el pago con tarjeta, logrando un flujo de compra operativo (Walking Skeleton) mucho antes."
+    },
+    {
+      "tema": "9. Los 9 Patrones de División y SPIKES",
+      "q": "Según el diagrama de flujo de Richard Lawrence ('How to Split a User Story'), una vez que hemos aplicado los patrones para dividir una historia grande en sub-historias, ¿qué comprobaciones debemos realizar en la fase 3 ('Evalúa la división')?",
+      "opts": [
+        "Comprobar únicamente que la suma de puntos de las partes sea exactamente el triple que la historia original",
+        "Verificar si las nuevas historias son de tamaño parejo, si cada una es un corte vertical (no capas técnicas horizontales), si cumplen el modelo INVEST y si hay historias resultantes que puedan borrarse o despriorizarse",
+        "Asignar cada sub-historia a un departamento distinto (una a diseño, otra a base de datos y otra a pruebas)",
+        "Convertir todas las sub-historias en Spikes técnicos para no tener que programarlas en producción"
+      ],
+      "correct": 1,
+      "justification": "En el paso 3 del algoritmo de descomposición ('Evalúa la división', Slide 96) se verifica: (1) ¿Son las HU de un tamaño parejo?, (2) ¿Es cada HU un corte vertical?, (3) ¿Cumplen las nuevas HU los requisitos INVEST?, y (4) ¿Hay HU que puedan ser borradas o bajar su prioridad?"
+    },
+    {
+      "tema": "9. Los 9 Patrones de División y SPIKES",
+      "q": "Para la historia: 'Como cliente, quiero ver el gasto de electricidad en un histograma para comprender mi consumo', el equipo crea dos actividades de investigación: (1) Investigar cuánto tarda en actualizarse la pantalla con el uso actual y sus requisitos de comunicación; (2) Realizar un prototipo del histograma en el portal web y obtener realimentación de varios usuarios sobre la presentación. ¿Cómo se clasifican (1) y (2)?",
+      "opts": [
+        "(1) es un SPIKE Técnico (dominio de la solución/rendimiento) y (2) es un SPIKE Funcional (incertidumbre en la interacción con el usuario)",
+        "(1) es una Épica de negocio y (2) es una prueba unitaria automatizada",
+        "(1) es un SPIKE Funcional y (2) es un SPIKE Técnico de base de datos",
+        "Ambos son Casos de Uso tradicionales de RUP que reemplazan a la Historia de Usuario original"
+      ],
+      "correct": 0,
+      "justification": "Como detalla la Slide 94: (1) evaluar tiempos de actualización y requisitos de comunicación analiza aproximaciones en el dominio de la solución, por lo que es un SPIKE Técnico; (2) construir un prototipo visual para recibir feedback de usuarios sobre cómo interactuar o presentar la información resuelve incertidumbre de interacción, por lo que es un SPIKE Funcional."
+    },
+    {
+      "tema": "9. Los 9 Patrones de División y SPIKES",
+      "q": "¿Cuál de las siguientes afirmaciones recoge fielmente las 5 reglas sobre el tratamiento de los SPIKES en metodologías ágiles (Slide 95)?",
+      "opts": [
+        "Se tratan como otras HU (backlog, priorización, estimación), su resultado NO es código sino información útil (decisión, prototipo, demostración), su solución debe ser demostrable al equipo, se aceptan usando criterios de aceptación definidos y conviene resolverlos en una iteración diferente (previa) a la de la HU que los creó",
+        "No se incluyen en el backlog, no se estiman, su resultado es código en producción, carecen de criterios de aceptación y deben resolverse siempre en el mismo Sprint que la HU original",
+        "Solo los puede ejecutar el Product Owner en solitario y su duración mínima obligatoria es de tres iteraciones completas",
+        "Sustituyen permanentemente a las Historias de Usuario cuando el equipo decide no usar Planning Poker"
+      ],
+      "correct": 0,
+      "justification": "Las 5 reglas de oro de los Spikes (Slide 95) establecen que: 1) se tratan como otras HU (en el backlog, priorizadas y estimadas), 2) su resultado no es código sino información útil para otras HU (decisión, prototipo, demostración), 3) su solución es demostrable al equipo, 4) tienen criterios de aceptación propios, y 5) es interesante resolverlos en una iteración previa/diferente a la de la HU que los originó."
+    }
+  ]
+}

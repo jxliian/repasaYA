@@ -1,0 +1,234 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "flashcards",
+  "title": "Flashcards Seminario 2: Historias de Usuario",
+  "description": "45 tarjetas de estudio interactivas con todos los conceptos, modelos (CCC, INVEST, MoSCoW, BDD), fórmulas de velocidad, los 9 patrones de división y reglas de Spikes.",
+  "order": 2,
+  "items": [
+    {
+      "tema": "Fundamentos de HU",
+      "term": "¿Cuál es la definición canónica de Historia de Usuario según Kent Beck y Martin Fowler?",
+      "def": "Es la unidad mínima de funcionalidad en un proyecto ágil. El progreso se demuestra entregando código probado e integrado que implementa una historia. Debe ser comprensible para el cliente, probable por los desarrolladores, valiosa para el negocio y lo bastante pequeña para construir media docena en una iteración."
+    },
+    {
+      "tema": "Fundamentos de HU",
+      "term": "¿Cuál es el objetivo primordial de las Historias de Usuario en el desarrollo ágil?",
+      "def": "Lograr la interacción, comunicación y colaboración continua con el equipo y el usuario/cliente, muy por encima de documentar exhaustivamente los requisitos del sistema."
+    },
+    {
+      "tema": "Fundamentos de HU",
+      "term": "¿Qué NO es una Historia de Usuario (3 conceptos clave)?",
+      "def": "1) No es un requisito tradicional del sistema ni un contrato cerrado (es algo negociable). 2) No es un requisito de software técnico, sino una necesidad de un usuario. 3) No es una especificación detallada, sino 'la promesa de una conversación'."
+    },
+    {
+      "tema": "Fundamentos de HU",
+      "term": "¿En qué se diferencian los Casos de Uso (RUP) y las Historias de Usuario (XP/Scrum) respecto a la Planificación y la Duración?",
+      "def": "Los Casos de Uso NO se usan para planificar y pueden implementarse a lo largo de varias iteraciones. Las Historias de Usuario SÍ se usan directamente para planificar y deben implementarse, probarse e integrarse en una única iteración."
+    },
+    {
+      "tema": "Fundamentos de HU",
+      "term": "¿En qué se diferencian los Casos de Uso y las Historias de Usuario respecto al Soporte físico, Comunicación y Pruebas?",
+      "def": "Los Casos de Uso son documentos extensos de archivo con comunicación textual/diagramas y pruebas en documentos separados. Las HU son tarjetas para uso directo basadas en comunicación verbal y contienen sus pruebas de aceptación en el reverso de la tarjeta."
+    },
+    {
+      "tema": "Roles y Formato Canónico",
+      "term": "¿Quién escribe las Historias de Usuario en XP, en Scrum y en la práctica real?",
+      "def": "- En XP: El cliente (On-site Customer).\n- En Scrum: El Product Owner (con ayuda de clientes, stakeholders y equipo de desarrollo).\n- En la realidad: Cualquier miembro del equipo de desarrollo con conocimiento suficiente del dominio del problema."
+    },
+    {
+      "tema": "Roles y Formato Canónico",
+      "term": "¿Quiénes integran el 'Customer Team' (Stakeholders) que participa en la definición y priorización de HU?",
+      "def": "1) Clientes reales (usuarios finales), 2) Product Manager / Product Owner, 3) Probadores (Testers/QA) y 4) Diseñadores de interacción (UX/UI)."
+    },
+    {
+      "tema": "Roles y Formato Canónico",
+      "term": "¿Cómo se identifican y definen los roles o personas del sistema?",
+      "def": "Mediante sesiones de 'Brainstorming' para listar perfiles y caracterizarlos según: frecuencia de uso del software, objetivos que se plantean al usarlo, forma habitual de acceso y nivel de experiencia en el dominio."
+    },
+    {
+      "tema": "Roles y Formato Canónico",
+      "term": "¿Cuál es la plantilla o formato canónico de una Historia de Usuario y qué representa cada cláusula?",
+      "def": "'Como [rol], Quiero [característica/objetivo], Para [valor de negocio/beneficio]'.\n- Como (Quién): Rol de usuario que usará la funcionalidad.\n- Quiero (Qué): Actividad o eje central de la historia.\n- Para (Por qué): Propósito o beneficio de negocio que justifica la historia."
+    },
+    {
+      "tema": "Las 3 C y Tarjeta Física",
+      "term": "¿Qué significa el modelo 'CCC' propuesto por Ron Jeffries?",
+      "def": "1) Card (Tarjeta): 2-3 frases que describen la intención de la HU.\n2) Conversation (Conversación): Diálogo continuo con el usuario/cliente donde se detallan los requisitos.\n3) Confirmation (Confirmación): Pruebas de aceptación que verifican que la HU ha sido implementada correctamente."
+    },
+    {
+      "tema": "Las 3 C y Tarjeta Física",
+      "term": "¿Qué ocurre si una tarjeta (Card) de Historia de Usuario incluye demasiados detalles escritos?",
+      "def": "Una tarjeta con demasiados detalles limita y sustituye la conversación con el cliente. La tarjeta solo debe recordar la intención y provocar las preguntas adecuadas para la etapa de Conversación."
+    },
+    {
+      "tema": "Las 3 C y Tarjeta Física",
+      "term": "¿Qué información se registra en el ANVERSO y en el REVERSO de una tarjeta física de HU?",
+      "def": "- Anverso: Identificador (ID), Título, Descripción canónica (Como/Quiero/Para), Estimación (PH), Prioridad y Dependencias.\n- Reverso: Pruebas o Criterios de Aceptación que delimitan el alcance y las condiciones de satisfacción."
+    },
+    {
+      "tema": "Las 3 C y Tarjeta Física",
+      "term": "¿Qué aspectos delimitan las pruebas de aceptación en la narración de una HU?",
+      "def": "Delimitan la parte exacta a abordar por la HU especificando: 1) Flujos alternativos en la actividad, 2) Límites de aceptación y 3) Pruebas de aceptación por parte de los clientes."
+    },
+    {
+      "tema": "Confirmación y BDD",
+      "term": "¿Cuáles son las 4 propiedades fundamentales de los Criterios o Pruebas de Aceptación?",
+      "def": "1) Propiedad del Product Owner (aunque cualquiera pueda redactarlas).\n2) Escritas en lenguaje de negocio con claridad y sin ambigüedad.\n3) Pruebas de caja negra e independientes de la implementación (describen QUÉ resultado se espera, no CÓMO programarlo).\n4) Se implementan en la misma iteración que la HU."
+    },
+    {
+      "tema": "Confirmación y BDD",
+      "term": "¿Cuál es la estructura del formato BDD (Behavior-Driven Development) para redactar pruebas de aceptación?",
+      "def": "- DADO (Given): Contexto inicial o precondición del sistema.\n- CUANDO (When): Evento o acción realizada por el usuario.\n- ENTONCES (Then): Resultado observable o postcondición esperada del sistema."
+    },
+    {
+      "tema": "Confirmación y BDD",
+      "term": "¿Cuál es la diferencia entre Pruebas de Aceptación y Pruebas Unitarias?",
+      "def": "Las Pruebas de Aceptación son de caja negra, en lenguaje de negocio y propiedad del Product Owner para validar que se construye el producto correcto. Las Pruebas Unitarias son técnicas (caja blanca), escritas por desarrolladores sobre los módulos de código para verificar su funcionamiento interno."
+    },
+    {
+      "tema": "INVEST y Definition of Done",
+      "term": "¿Qué significan las siglas del modelo I.N.V.E.S.T. de Bill Wake?",
+      "def": "- I: Independiente (Independent)\n- N: Negociable (Negotiable)\n- V: Valiosa (Valuable)\n- E: Estimable (Estimable)\n- S: Suscinta / Pequeña (Small)\n- T: Testeable / Probable (Testable)"
+    },
+    {
+      "tema": "INVEST y Definition of Done",
+      "term": "Explica las propiedades Independiente (I), Negociable (N) y Valiosa (V) de INVEST.",
+      "def": "- Independiente: Debe poder desarrollarse y entregarse sin depender rígidamente de otras HU.\n- Negociable: No es un contrato cerrado; sus detalles se ajustan en la conversación.\n- Valiosa: Debe aportar valor directo al usuario o al comprador (evitando HU puramente técnicas)."
+    },
+    {
+      "tema": "INVEST y Definition of Done",
+      "term": "Explica las propiedades Estimable (E), Suscinta (S) y Testeable (T) de INVEST.",
+      "def": "- Estimable: El equipo puede calcular su esfuerzo para priorizarla y planificarla.\n- Suscinta (Small): Pequeña en esfuerzo (2-3 personas/semana o entre 1/10 y 1/6 de la velocidad del Sprint).\n- Testeable: Posee criterios objetivos para ejecutar la etapa de Confirmación."
+    },
+    {
+      "tema": "INVEST y Definition of Done",
+      "term": "¿Qué es la 'Definición de Terminado' (Definition of Done - DoD)?",
+      "def": "Es un acuerdo formal de calidad entre los desarrolladores y los clientes/Product Owner que establece los requisitos técnicos y de verificación que toda HU debe cumplir para considerarse completada."
+    },
+    {
+      "tema": "INVEST y Definition of Done",
+      "term": "Cita los 6 aspectos principales a considerar en una Definition of Done (DoD).",
+      "def": "1) Tipos y grado de pruebas (unitarias e integración).\n2) Código documentado, revisado y sin incidencias críticas.\n3) Entorno específico de cierre (preproducción, testing o producción).\n4) Nivel de documentación.\n5) Nivel de calidad del software (métricas).\n6) Criterios de aceptación comprobados y aprobados por el PO."
+    },
+    {
+      "tema": "INVEST y Definition of Done",
+      "term": "¿Cuál es la diferencia crítica entre Criterios de Aceptación y Definition of Done (DoD)?",
+      "def": "Los Criterios de Aceptación son particulares y específicos de CADA Historia de Usuario (reglas funcionales de negocio). La DoD es un acuerdo de calidad transversal aplicable a TODAS las Historias de Usuario del proyecto."
+    },
+    {
+      "tema": "Granularidad y RNF",
+      "term": "¿Cuáles son los 4 niveles de la pirámide de granularidad de requisitos ágiles (de mayor a menor)?",
+      "def": "1) Temas (Themes): Grandes proyectos o subproductos globales.\n2) Épicas (Epics): Súper historias; conjunto de HU relacionadas entre sí.\n3) Historias de Usuario: Tarea concisa que aporta valor en una iteración.\n4) Tareas (Tasks): División técnica de una HU para el desarrollo."
+    },
+    {
+      "tema": "Granularidad y RNF",
+      "term": "¿Qué reglas rigen la descomposición de una Historia de Usuario en Tareas técnicas?",
+      "def": "1) Tratables individualmente por los desarrolladores.\n2) Duración de entre medio día (4h) y 3 o 4 días de trabajo.\n3) Al terminar la tarea debe generarse un entregable.\n4) No dedicar excesivo tiempo a estudiar detalles previos.\n5) Incluir siempre tareas de prueba, documentación y automatización."
+    },
+    {
+      "tema": "Granularidad y RNF",
+      "term": "¿De qué 4 formas se pueden gestionar los Requisitos No Funcionales (RNF) en metodologías ágiles?",
+      "def": "1) Como restricciones asignadas a Temas, Épicas, HU o Tareas.\n2) Como Criterios de Aceptación dentro de una HU.\n3) Como parte transversal de la Definition of Done (DoD).\n4) En un documento de especificación específico para los RNF globales al sistema (o como HU propias de calidad)."
+    },
+    {
+      "tema": "Priorización y Product Backlog",
+      "term": "¿Qué es el Product Backlog y qué representa la Prioridad dentro de él?",
+      "def": "Es la lista priorizada y dinámica de HU que contiene toda la funcionalidad deseable del producto. La prioridad representa el valor que le da el cliente a cada HU según la medida en que satisface sus necesidades."
+    },
+    {
+      "tema": "Priorización y Product Backlog",
+      "term": "¿Cómo se estructura un Mapa de Historias de Usuario (User Story Mapping)?",
+      "def": "- Eje horizontal superior (Backbone): Flujo cronológico de actividades del usuario de izquierda a derecha.\n- Eje vertical: Prioridad, necesidad u opcionalidad (de arriba abajo).\n- Cortes horizontales: Definen las entregas o Releases sucesivas (empezando por el MVP o Walking Skeleton)."
+    },
+    {
+      "tema": "Priorización y Product Backlog",
+      "term": "¿Cuáles son los 5 criterios fundamentales para priorizar Historias de Usuario?",
+      "def": "1) Valor de negocio para el cliente.\n2) Valor/impacto para los usuarios (muchos usuarios estándar o pocos usuarios muy importantes).\n3) Riesgo e incertidumbre.\n4) Dependencias con otras HU priorizadas.\n5) Tamaño y esfuerzo de desarrollo."
+    },
+    {
+      "tema": "Priorización y Product Backlog",
+      "term": "¿Cuál es la regla de oro sobre la evolución de la Prioridad y el Tamaño de una HU a lo largo del proyecto?",
+      "def": "'La prioridad puede cambiar, el tamaño NO'. El cliente puede reordenar la prioridad de una HU según el mercado, pero su esfuerzo relativo en Puntos de Historia permanece constante salvo que cambie su alcance."
+    },
+    {
+      "tema": "Priorización y Product Backlog",
+      "term": "¿Qué significan las categorías del método de priorización MoSCoW?",
+      "def": "- Must: Obligatorio para finalizar el proyecto (crítico).\n- Should: Debe completarse por todos los medios, pero el éxito inmediato no depende de él.\n- Could: Se completa si no afecta a los objetivos principales.\n- Would (Won't): Se completa solo si sobra tiempo o en futuras versiones."
+    },
+    {
+      "tema": "Estimación, Planning Poker y Velocidad",
+      "term": "¿Qué son los Puntos de Historia (PH) y qué variables combinan frente a los Días Ideales?",
+      "def": "- Puntos de Historia: Medida relativa del tamaño de una HU comparada con otras del mismo equipo; combina Esfuerzo necesario + Complejidad + Riesgo/Incertidumbre.\n- Días Ideales: Un día de trabajo continuo sin interrupciones."
+    },
+    {
+      "tema": "Estimación, Planning Poker y Velocidad",
+      "term": "¿Qué expresa el Cono de Incertidumbre en la estimación de proyectos?",
+      "def": "Muestra que al inicio del proyecto la incertidumbre es máxima (las estimaciones pueden variar hasta en un factor de 4x, de 0.25x a 4x) y disminuye progresivamente a medida que avanza el proyecto y se toman decisiones."
+    },
+    {
+      "tema": "Estimación, Planning Poker y Velocidad",
+      "term": "¿Qué es el Planning Poker, qué secuencia de cartas utiliza y cuál es el rol del moderador?",
+      "def": "Es una técnica de estimación por consenso que usa cartas con la secuencia de Fibonacci (0, 1/2, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?, café). El moderador gestiona la reunión y controla los tiempos, pero NO estima."
+    },
+    {
+      "tema": "Estimación, Planning Poker y Velocidad",
+      "term": "¿Cómo funciona la dinámica de votación en el Planning Poker cuando no hay consenso?",
+      "def": "Todos los estimadores eligen su carta en secreto y la revelan a la vez (evitando el efecto anclaje). Si no hay consenso, las personas con las estimaciones más altas y más bajas justifican sus razones, se discute brevemente y se vuelve a votar hasta lograr consenso."
+    },
+    {
+      "tema": "Estimación, Planning Poker y Velocidad",
+      "term": "¿Qué es la Velocidad del equipo y cuáles son los 3 métodos para calcularla?",
+      "def": "Es la cantidad de Puntos de Historia (PH) que un equipo puede completar en una iteración. Se obtiene mediante:\n1) Datos históricos ('el tiempo que hizo ayer').\n2) Ejecutar una iteración inicial de prueba.\n3) Hacer un pronóstico mediante 'cálculo de recursos'."
+    },
+    {
+      "tema": "Estimación, Planning Poker y Velocidad",
+      "term": "¿Cuál es la fórmula del Cálculo de Recursos para pronosticar la Velocidad con Factor de Dedicación?",
+      "def": "1) Días de trabajo brutos = Nº Programadores × Días laborables de la iteración.\n2) Capacidad teórica = Días de trabajo brutos × (PH por día ideal).\n3) Velocidad = Capacidad teórica × Factor de dedicación (%).\n(Ej: 5 prog × 10 días × 80% = 40 PH)."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "¿Cuáles son las 3 etapas del proceso de división de Historias de Usuario grandes (Richard Lawrence)?",
+      "def": "1) Preparar la HU de entrada: Verificar INVEST y comprobar si supera 1/10 a 1/6 de la velocidad.\n2) Aplicar los patrones de división (o crear un Spike como último recurso).\n3) Evaluar la división: Comprobar que las nuevas HU tengan tamaño similar, sean cortes verticales, cumplan INVEST y permitan despriorizar o eliminar partes."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "Explica los patrones de división 1 (Pasos del flujo de trabajo) y 2 (Reglas de negocio).",
+      "def": "1) Pasos del flujo de trabajo: Identificar los pasos secuenciales que realiza el usuario e implementarlos incrementalmente.\n2) Reglas de negocio: Si una HU incluye varias condiciones o límites de negocio (ej. saldo negativo vs. límite diario en cajero), crear historias separadas para cada regla."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "Explica los patrones de división 3 (Mayor esfuerzo de desarrollo) y 4 (Sencillo / Complejo).",
+      "def": "3) Mayor esfuerzo: Dividir varias alternativas de modo que la primera absorba el esfuerzo de infraestructura base y las siguientes sean adiciones pequeñas.\n4) Sencillo / Complejo: Preguntarse '¿qué es lo más simple que podría funcionar?', implementar ese núcleo primero y dejar las variaciones complejas para nuevas HU."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "Explica los patrones de división 5 (Variaciones en datos) y 6 (Métodos de entrada de datos / Vista IU).",
+      "def": "5) Variaciones en datos: Dividir según el tipo, formato o idioma de los datos (ej. mensajes en español y luego en inglés) o criterios de búsqueda (título, autor, ISBN).\n6) Métodos de entrada / IU: Empezar con una interfaz simple (ej. navegador escritorio) y añadir luego interfaces más complejas (ej. app móvil)."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "Explica los patrones de división 7 (Niveles de calidad), 8 (Operaciones múltiples) y 9 (Escenarios de caso de uso).",
+      "def": "7) Niveles de calidad: Implementar la funcionalidad básica primero y optimizar rendimiento/accesibilidad en HU posteriores.\n8) Operaciones múltiples: Dividir verbos genéricos ('Gestionar', 'Administrar') en operaciones CRUD individuales (Alta, Baja, Edición, Búsqueda).\n9) Escenarios de caso de uso: Dividir cada escenario o flujo alternativo en una HU."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "¿Qué es un SPIKE y por qué motivos puede originarse?",
+      "def": "Es un tipo especial de HU acotada en el tiempo usada para reducir un riesgo o incertidumbre técnica o funcional y aumentar la seguridad al estimar una HU. Se origina por desconocimiento del dominio/tecnología, HU demasiado grandes de impacto incierto, riesgos técnicos de diseño o riesgos funcionales de interacción."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "¿Cuál es la diferencia entre un SPIKE Técnico y un SPIKE Funcional?",
+      "def": "- SPIKE Técnico: Analiza aproximaciones en el dominio de la solución (decidir entre comprar o construir una librería, evaluar rendimiento o impacto de carga).\n- SPIKE Funcional: Resuelve incertidumbres en el dominio del problema sobre cómo el usuario debe interactuar con el sistema (ej. prototipo de histograma con usuarios)."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "¿Cuáles son las 5 Reglas de Oro sobre la gestión de los SPIKES?",
+      "def": "1) Se tratan como cualquier otra HU (van al backlog, se priorizan y estiman).\n2) Su resultado NO es código de producción, sino información útil (decisión, prototipo, diseño).\n3) Su solución debe ser demostrable al equipo.\n4) Debe aceptarse mediante criterios de aceptación propios.\n5) Se resuelve en una iteración previa/diferente a la de la HU que lo creó."
+    },
+    {
+      "tema": "Patrones de División y Spikes",
+      "term": "¿Qué ventaja estratégica de priorización se obtiene al dividir una HU grande en lonchas verticales?",
+      "def": "Permite intercalar y adelantar otras funcionalidades críticas de negocio (como el carrito de compra o el pago con tarjeta) justo después de implementar la loncha básica (ej. búsqueda por título), posponiendo las variaciones menos urgentes (ej. búsqueda por ISBN) al final del backlog."
+    }
+  ]
+}

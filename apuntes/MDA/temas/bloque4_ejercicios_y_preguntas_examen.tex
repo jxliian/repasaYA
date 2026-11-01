@@ -1,0 +1,279 @@
+% ==============================================================================
+% BLOQUE 4: ALGORITMO DE DIVISIÓN, EJERCICIOS RESUELTOS Y PREGUNTAS DE EXAMEN
+% Diapositivas 96 a 99 + Preparación Práctica del Parcial
+% ==============================================================================
+
+\chapter{Algoritmo de División, Cuaderno de Ejercicios y Banco de Examen}
+
+\cuadrofuentes{
+\textbf{Alcance del Bloque:} Diapositivas 96--99 del Seminario 2 y preparación integral de la prueba parcial.\\
+\textbf{Contenido Práctico:} Algoritmo en 3 fases de Richard Lawrence (\textit{Prepara $\to$ Aplica Patrones $\to$ Evalúa}), resolución detallada de los ejercicios prácticos de las diapositivas oficiales (descomposición de \textit{Gestionar Usuarios 13 PH}, repriorización vertical del buscador de libros y carrito, cálculo de velocidad y asignación de iteraciones), diseño de tarjetas completas, BDD, auditoría INVEST, formulación de Spikes y banco de \textbf{20 preguntas cortas de examen} con respuesta razonada.
+}
+
+\section{Algoritmo en 3 Fases para Dividir una Historia (Diapositiva 96)}
+
+El póster metodológico de \textbf{Richard Lawrence (\textit{Agile For All})} incluido en la diapositiva 96 sintetiza el procedimiento sistemático en \textbf{tres etapas secuenciales} para dividir cualquier Historia de Usuario excesivamente grande:
+
+\begin{enumerate}[label=\textbf{Fase \arabic*:}, leftmargin=1.9cm, itemsep=5pt]
+    \item \textbf{PREPARA LA HISTORIA (Filtro de Entrada):}
+    \begin{itemize}[itemsep=2pt]
+        \item \textit{Pregunta 1.1: ¿Cumple la historia los requisitos INVEST (excepto, quizás, Pequeña)?}
+        \begin{itemize}
+            \item \textbf{NO $\longrightarrow$} Combínala con otra historia o reformúlala para tener una buena historia de inicio (que aporte valor real y sea independiente) antes de intentar partirla.
+            \item \textbf{SÍ $\longrightarrow$} Pasa a la Pregunta 1.2.
+        \end{itemize}
+        \item \textit{Pregunta 1.2: ¿Es la historia de tamaño de $\mathbf{1/10}$ a $\mathbf{1/6}$ de la velocidad del equipo?}
+        \begin{itemize}
+            \item \textbf{SÍ $\longrightarrow$} \textbf{¡Lista!} No necesita dividirse más.
+            \item \textbf{NO $\longrightarrow$} Continúa a la Fase 2: la historia es demasiado grande y \textbf{debe dividirse}.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{APLICA LOS PATRONES DE DIVISIÓN (Núcleo de Partición):}
+    \begin{itemize}[itemsep=2pt]
+        \item \textbf{Pasos de un Workflow:} ¿Describe un flujo completo? Haz una pequeña loncha de principio a fin, o bien el inicio y el final del flujo y luego las historias intermedias.
+        \item \textbf{Operaciones múltiples:} ¿Incluye múltiples operaciones (p. ej. ``gestionar'' o ``configurar'')? Separa cada operación CRUD en su propia historia.
+        \item \textbf{Variaciones en las reglas de negocio:} ¿Tiene variedad de reglas o términos como ``fechas flexibles''? Implementa primero un subconjunto básico de reglas y mejora con reglas adicionales después.
+        \item \textbf{Variaciones en datos:} ¿Hace lo mismo sobre diferentes tipos de datos? Procesa primero un tipo de dato y añade el resto después.
+        \item \textbf{Variaciones en la interfaz:} ¿Tiene una interfaz compleja o múltiples canales? Empieza con una versión simple de la interfaz o un solo tipo de interfaz.
+        \item \textbf{Esfuerzo importante (\textit{Major Effort}):} Cuando la primera implementación lleva todo el peso de infraestructura, agrúpala y difiere la decisión de qué variante va primero.
+        \item \textbf{Simple / Compleja:} ¿Tiene un núcleo simple que provee la mayoría del valor o aprendizaje? Extrae ese núcleo primero y añade el resto posteriormente.
+        \item \textbf{Retrasa rendimiento (Calidad):} ¿Debe mucha de su complejidad a RNF (rendimiento, escalabilidad)? Hazla funcionar primero y mejórala después para satisfacer los requisitos no funcionales.
+        \item \textbf{Último recurso -- Construye un ``SPIKE'':} ¿Todavía estás confuso sobre cómo dividirla? Si encuentras una pequeña parte que entiendas bien, empieza por ahí; si no, \textbf{define las 2 ó 3 preguntas que más te inquietan, escribe un Spike para responderlas, construye lo mínimo para resolverlas y reinicia el proceso}.
+    \end{itemize}
+
+    \item \textbf{EVALÚA LA DIVISIÓN (Filtro de Calidad de Salida):}
+    \begin{itemize}[itemsep=2pt]
+        \item \textit{¿Son las nuevas historias parecidas en tamaño y cada una representa entre $1/10$ y $1/6$ de la velocidad?} (Si no, prueba otro patrón en la historia original o en las subhistorias grandes).
+        \item \textit{¿Es cada historia un corte vertical que cumple INVEST?} (Si no, prueba otro patrón).
+        \item \textit{¿Hay historias resultantes de bajo valor que ahora puedas \textbf{repriorizar hacia abajo o borrar}?} (Si no, probablemente aún tienes desperdicio oculto).
+        \item \textit{¿Hay una historia obvia por la que empezar que proporcione \textbf{valor temprano, aprendizaje o mitigación del riesgo}?} Si la respuesta es \textbf{SÍ}, la división ha concluido con éxito.
+    \end{itemize}
+\end{enumerate}
+
+\section{Cuaderno de 8 Ejercicios Prácticos de Examen Resueltos}
+
+\begin{ejercicio}[1. Descomposición y Reorganización del Backlog: ``Gestionar Usuarios'' (Diapositiva 97)]
+\textbf{Enunciado:} En la Pila de Producto inicial figura una historia de usuario de tamaño $\mathbf{13\text{ PH}}$ titulada \textit{``Gestionar Usuarios''}, seguida de:
+\begin{itemize}[itemsep=1pt]
+    \item \textit{Generar factura en HTML, PDF o Excel.}
+    \item \textit{Como operador quiero saber qué usuarios están conectados en el sistema.}
+    \item \textit{Como administrador quiero poder tener 100 usuarios simultáneos.}
+    \item \textit{Administración manual del sistema de usuarios.}
+\end{itemize}
+Explica cómo se aplica la división de historias y la reordenación del backlog mostrada en las tres columnas de la diapositiva 97.
+
+\vspace{4pt}
+\textbf{Resolución Paso a Paso:}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textbf{Detección de Épica / Historia demasiado grande:} La historia \textit{``Gestionar Usuarios''} tiene un tamaño de $\mathbf{13\text{ PH}}$ y utiliza un verbo genérico (\textit{``Gestionar''}) que oculta múltiples operaciones independientes.
+    \item \textbf{Aplicación del Patrón 8 (Operaciones Múltiples / CRUD):} Se parte \textit{``Gestionar Usuarios (13 PH)''} en 4 Historias de Usuario independientes y más pequeñas:
+    \begin{itemize}
+        \item \textbf{Registrar un nuevo Usuario} $\longrightarrow$ Estimación: $\mathbf{3\text{ PH}}$.
+        \item \textbf{Editar un Usuario existente} $\longrightarrow$ Estimación: $\mathbf{5\text{ PH}}$.
+        \item \textbf{Buscar un Usuario} $\longrightarrow$ Estimación: $\mathbf{3\text{ PH}}$.
+        \item \textbf{Borrar un Usuario} $\longrightarrow$ Estimación: $\mathbf{5\text{ PH}}$.
+    \end{itemize}
+    \item \textbf{Repriorización de la Pila (Tercera columna de la diapositiva 97):} Una vez dividida la historia en piezas pequeñas, el Product Owner no está obligado a construir las 4 piezas seguidas antes de abordar otras historias valiosas. Así, puede priorizar arriba \textit{Registrar Usuario (3 PH)} y \textit{Editar Usuario (5 PH)}, intercalar a continuación \textit{Generar factura en HTML, PDF o Excel} y \textit{Saber qué usuarios están conectados}, posponer \textit{Buscar un Usuario (3 PH)} más abajo y postergar \textit{Borrar un Usuario (5 PH)} para entregas posteriores.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[2. Partición y Repriorización Vertical: Librería Online (Diapositiva 98)]
+\textbf{Enunciado:} Analiza las dos tablas de priorización de una tienda de libros online (\textit{Bookstore}) de la diapositiva 98. Explica qué patrón de división se ha aplicado sobre la característica de prioridad 1 y qué ventaja estratégica obtiene el negocio con la nueva ordenación.
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c p{5.4cm} @{\hspace{0.5cm}} c p{5.2cm}}
+\toprule
+\multicolumn{2}{c}{\textbf{\color{mdaPrimary}Tabla Inicial (Antes de dividir)}} & \multicolumn{2}{c}{\textbf{\color{mdaGreen}Tabla Final (Dividida y repriorizada)}} \\
+\textbf{Pri.} & \textbf{Feature} & \textbf{Pri.} & \textbf{Feature} \\
+\midrule
+1 & Book search (title, author, subject) & 1 & \textbf{\color{mdaRed}Book Search by Title} \\
+2 & Online shopping cart & 2 & Online shopping cart \\
+3 & Credit card processing integration & 3 & \textbf{\color{mdaRed}Book Search by Author} \\
+4 & Book details & 4 & Credit card processing integration \\
+5 & Order tracking & 5 & \textbf{\color{mdaRed}Book Search by Subject} \\
+6 & Book preview & 6 & Book details \\
+  &              & 7 & Order tracking \\
+  &              & 8 & Book preview \\
+  &              & 9 & \textbf{\color{mdaRed}Book Search by ISBN} \\
+\bottomrule
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+
+\textbf{Resolución Paso a Paso:}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textbf{Problema inicial:} La funcionalidad 1 (\textit{Capacidad de búsqueda de libros por título, autor y materia}) es demasiado amplia. Construir todos los motores de búsqueda al principio retrasa la entrega del carrito de compra (\textit{Online shopping cart}) y del pago con tarjeta (\textit{Credit card processing}).
+    \item \textbf{Patrón aplicado:} Se aplica el \textbf{Patrón 4 (Sencillo / Complejo)} combinado con el \textbf{Patrón 5 (Variaciones en datos / parámetros de búsqueda)}, separando la búsqueda en 4 historias independientes:
+    \begin{itemize}
+        \item \textit{Búsqueda por Título} (Prioridad 1 -- el caso más frecuente y sencillo).
+        \item \textit{Búsqueda por Autor} (Prioridad 3).
+        \item \textit{Búsqueda por Materia/Subject} (Prioridad 5).
+        \item \textit{Búsqueda por ISBN} (Prioridad 9 -- caso muy específico que se pospone al final).
+    \end{itemize}
+    \item \textbf{Ventaja de negocio (\textit{Walking Skeleton}):} Con solo implementar la \textit{Búsqueda por Título} (Prioridad 1) y el \textit{Carrito de compra} (Prioridad 2), el cliente ya dispone de un flujo de compra funcional muy temprano, adelantando el retorno de inversión y posponiendo la búsqueda por ISBN al final de la pila.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[3. Descomposición de Historias en Tareas Técnicas (Diapositivas 81--82)]
+\textbf{Enunciado:} Dadas las siguientes dos Historias de Usuario del seminario:
+\begin{itemize}[itemsep=1pt]
+    \item \textbf{HU A:} \textit{``Como administrador quiero realizar un mantenimiento de los clientes de la empresa para tenerlos actualizados.''}
+    \item \textbf{HU B:} \textit{``Como cliente, quiero buscar un hotel para alojarme.''}
+\end{itemize}
+Realiza la descomposición en tareas de desarrollo para cada una cumpliendo las reglas del seminario.
+
+\vspace{4pt}
+\textbf{Resolución (Desglose Oficial de las Diapositivas 81 y 82):}
+\begin{multicols}{2}
+\textbf{Tareas para HU A (Mantenimiento de clientes):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=1pt]
+    \item Construir la Interfaz de Usuario (IU).
+    \item Construir la lógica de negocio.
+    \item Construir la capa de acceso a datos.
+    \item Implementar la operación \textit{añadir usuario}.
+    \item Implementar la operación \textit{modificar usuario}.
+    \item Implementar la operación \textit{eliminar usuario}.
+    \item Realizar las pruebas de \textit{añadir/modificar/eliminar usuario}.
+\end{enumerate}
+\columnbreak
+\textbf{Tareas para HU B (Buscar un hotel):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=1pt]
+    \item Codificar la pantalla de búsqueda básica.
+    \item Codificar la pantalla de búsqueda avanzada.
+    \item Codificar las pantallas de resultados.
+    \item Escribir las consultas SQL para las búsquedas.
+    \item Documentar la nueva funcionalidad en manuales y ayudas.
+    \item Realizar las pruebas de aceptación.
+\end{enumerate}
+\end{multicols}
+\noindent\textit{Nota metodológica:} Cada tarea tiene una duración de entre \textbf{medio día y 3 ó 4 días de trabajo}, genera un entregable verificable e incluye explícitamente tareas de prueba y documentación.
+\end{ejercicio}
+
+\begin{ejercicio}[4. Cálculo de Velocidad y Planificación Completa de Iteraciones]
+\textbf{Enunciado:} Un equipo ágil está formado por \textbf{6 desarrolladores}. Las iteraciones duran \textbf{2 semanas laborales} (5 días por semana). El equipo estima en Puntos de Historia sabiendo que $1\text{ PH equivale a } 1\text{ día de trabajo ideal}$. Debido a reuniones de Scrum, mantenimiento y gestiones internas, el \textbf{factor de dedicación es del 75\%}.
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item Calcula razonadamente la \textbf{Velocidad del equipo} por iteración.
+    \item Si el Product Backlog tiene las siguientes historias priorizadas de mayor a menor prioridad: $H_1(15\text{ PH})$, $H_2(12\text{ PH})$, $H_3(8\text{ PH})$, $H_4(15\text{ PH})$, $H_5(10\text{ PH})$, $H_6(12\text{ PH})$ y $H_7(5\text{ PH})$, asigna las historias a las iteraciones necesarias sin sobrepasar nunca la velocidad del equipo.
+\end{enumerate}
+
+\textbf{Resolución Paso a Paso:}
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Apartado a) Cálculo de la Velocidad:}
+    $$\text{Días laborables por iteración} = 2\text{ semanas} \times 5\text{ días/semana} = 10\text{ días}$$
+    $$\text{Capacidad bruta del equipo} = 6\text{ desarrolladores} \times 10\text{ días} = 60\text{ días de trabajo}$$
+    $$\mathbf{Velocidad} = 60\text{ días} \times 0.75 = \mathbf{45\text{ \textbf{PH por iteración}}}$$
+    \item \textbf{Apartado b) Planificación de Iteraciones (límite máximo $= 45\text{ PH}$ por iteración):}
+    \begin{itemize}
+        \item \textbf{Iteración 1:} $H_1(15) + H_2(12) + H_3(8) + H_5(10) = \mathbf{45\text{ PH}}$ (o bien respetando orden estricto: $H_1(15)+H_2(12)+H_3(8) = \mathbf{35\text{ PH}}$, ya que $35 + H_4(15) = 50 > 45$; si $H_5(10)$ no depende de $H_4$, puede adelantarse para completar exactamente $35+10=45\text{ PH}$).
+        \item \textbf{Iteración 2 (orden estricto):} $H_4(15) + H_5(10) + H_6(12) + H_7(5) = \mathbf{42\text{ PH}} \le 45\text{ PH}$.
+        \item En tan solo \textbf{2 iteraciones} ($35\text{ PH} + 42\text{ PH} = 77\text{ PH}$ totales) queda completado todo el bloque de historias.
+    \end{itemize}
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[5. Diseño Completo de Tarjeta de HU (Anverso + Reverso en BDD)]
+\textbf{Enunciado:} En el sistema de una clínica médica privada, un paciente registrado necesita poder cancelar una cita médica programada desde la aplicación web. Durante la conversación con el cliente se acuerda que: (1) si cancela con más de 24 horas de antelación no tiene coste; (2) si cancela con menos de 24 horas se le aplica una penalización de $15\text{ \euro}$ salvo que tenga seguro ``Oro''; y (3) el hueco libre debe volver a mostrarse disponible inmediatamente en la agenda del médico. Redacta la tarjeta completa (Anverso y Reverso con pruebas de aceptación tradicionales y en BDD).
+
+\vspace{4pt}
+\textbf{Resolución:}
+\begin{tarjetahu}[ID: HU-08 -- Cancelación de Cita Médica Online]
+\textbf{ANVERSO DE LA TARJETA:}
+\begin{itemize}[itemsep=1pt]
+    \item \textbf{ID:} \texttt{HU-08} \hfill \textbf{TÍTULO:} \texttt{Cancelación de cita médica programada}
+    \item \textbf{DESCRIPCIÓN:} \textbf{Como} paciente registrado de la clínica, \textbf{quiero} cancelar una cita médica previamente reservada desde mi panel web \textbf{para} liberar mi compromiso si no puedo asistir y permitir que otro paciente aproveche ese horario.
+    \item \textbf{ESTIMACIÓN:} $\mathbf{5\text{ PH}}$ \hfill \textbf{PRIORIDAD:} \textbf{Alta (250)} \hfill \textbf{DEPENDENCIAS:} \texttt{HU-03 (Reserva de cita)}
+\end{itemize}
+\tcbline
+\textbf{REVERSO DE LA TARJETA (PRUEBAS DE ACEPTACIÓN):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item Comprobar que si un paciente cancela una cita con \textbf{más de 24 horas} de antelación, la cita queda anulada con coste $0\text{ \euro}$ y recibe correo de confirmación.
+    \item Comprobar que si un paciente con seguro \textbf{Estándar} cancela con \textbf{menos de 24 horas}, se genera un cargo de penalización de $15\text{ \euro}$.
+    \item Comprobar que si un paciente con seguro \textbf{Oro} cancela con \textbf{menos de 24 horas}, la cancelación es gratuita ($0\text{ \euro}$).
+    \item Verificar que el tramo horario cancelado pasa inmediatamente al estado \textit{``Disponible''} en el calendario del facultativo.
+\end{enumerate}
+\textbf{Especificación en formato BDD (Gherkin):}
+\begin{lstlisting}
+DADO un paciente con seguro "Estandar" y una cita programada para dentro de 12 horas
+CUANDO el paciente solicita cancelar dicha cita en el sistema
+ENTONCES el sistema anula la cita, aplica un cargo de 15 euros, libera el hueco en la agenda del medico y envia un email justificante al paciente.
+\end{lstlisting}
+\end{tarjetahu}
+\end{ejercicio}
+
+\begin{ejercicio}[6. Auditoría Crítica de Historias Defectuosas mediante INVEST]
+\textbf{Enunciado:} Evalúa por qué las siguientes tres propuestas NO son buenas Historias de Usuario indicando qué criterio(s) del modelo \textbf{I.N.V.E.S.T.} incumplen y cómo corregirlas:
+\begin{enumerate}[label=\textbf{\alph*)}]
+    \item \textit{``Como desarrollador backend, quiero migrar las tablas de PostgreSQL a MongoDB usando índices compuestos B-Tree para mejorar la base de datos.''}
+    \item \textit{``Como cliente del portal de viajes, quiero un buscador de vuelos y hoteles que sea muy intuitivo, moderno, rápido y fácil de usar.''}
+    \item \textit{``Como gerente del banco, quiero automatizar toda la contabilidad, el análisis de riesgo hipotecario y la pasarela internacional SWIFT para modernizar el banco.''}
+\end{enumerate}
+
+\textbf{Resolución Razonada:}
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Análisis de a):} Incumple \textbf{V (Valiosa)} y \textbf{N (Negociable)}. Está escrita desde la perspectiva técnica de un programador e impone una tecnología concreta (\textit{MongoDB, índices B-Tree}) que no aporta valor directo perceptible al cliente ni deja margen de negociación. \textbf{Corrección:} Transformarla en una tarea técnica interna o asociarla a un beneficio real del usuario (\textit{``Como comprador, quiero que las búsquedas de catálogo respondan en menos de 2 segundos para no abandonar la compra''}).
+    \item \textbf{Análisis de b):} Incumple \textbf{T (Testeable)} y \textbf{E (Estimable)}. Adjetivos subjetivos como \textit{``muy intuitivo, moderno y fácil de usar''} son imposibles de verificar mediante una prueba de aceptación determinista de caja negra. \textbf{Corrección:} Definir criterios medibles (\textit{``completar la reserva en un máximo de 3 clics y mostrar resultados en menos de 3 segundos''}).
+    \item \textbf{Análisis de c):} Incumple \textbf{S (Small / Suscinta)} e \textbf{I (Independiente)}. No es una Historia de Usuario, sino un \textbf{Tema o conjunto de Épicas} que requeriría meses o años de trabajo. \textbf{Corrección:} Desglosarla jerárquicamente en Épicas y partirla en historias pequeñas (de 2--3 personas/semana) aplicando los patrones de Richard Lawrence.
+\end{itemize}
+\end{ejercicio}
+
+\section{Banco de 15 Preguntas Cortas de Examen con Respuesta Modelo}
+
+\begin{enumerate}[label=\textbf{P\arabic*.}, itemsep=6pt]
+    \item \textbf{¿Cuál es el objetivo principal de las Historias de Usuario según el seminario?}\\
+    \textit{Respuesta:} Lograr la \textbf{interacción y comunicación verbal} con el equipo de desarrollo y con el usuario/cliente, situando esta colaboración muy por encima de documentar exhaustivamente los requisitos del sistema.
+
+    \item \textbf{¿Por qué se dice que las Historias de Usuario son ``promesas de una conversación'' y qué ocurre si incluimos demasiados detalles en la tarjeta?}\\
+    \textit{Respuesta:} Porque la tarjeta solo contiene una declaración corta de intención cuyo propósito es provocar preguntas que se resolverán dialogando en la etapa de \textit{Conversación}. Si una tarjeta incluye demasiados detalles, \textbf{limita la conversación con el cliente}, reduce la creatividad del equipo y la convierte en una especificación rígida.
+
+    \item \textbf{¿Qué diferencia fundamental existe entre Casos de Uso e Historias de Usuario respecto a la planificación y la duración?}\\
+    \textit{Respuesta:} Los \textbf{Casos de Uso} (RUP) no se utilizan para planificar y su implementación puede extenderse durante varias iteraciones. Las \textbf{Historias de Usuario} (XP/Scrum) sí se utilizan directamente para planificar y estimar, y deben ser implementadas y probadas íntegramente dentro de \textbf{una única iteración}.
+
+    \item \textbf{Explica qué elementos componen el modelo ``CCC'' de Ron Jeffries.}\\
+    \textit{Respuesta:} \textbf{1) Card (Tarjeta):} las 2--3 frases que describen la intención de la HU en lenguaje de negocio; \textbf{2) Conversation (Conversación):} el diálogo entre equipo y cliente donde emergen los detalles; y \textbf{3) Confirmation (Confirmación):} las pruebas de aceptación que verifican que la HU ha sido correctamente implementada.
+
+    \item \textbf{¿Por qué se afirma que las Pruebas de Aceptación son pruebas de ``Caja Negra'' y quién es su propietario principal?}\\
+    \textit{Respuesta:} Son de \textbf{caja negra} porque solo verifican que las salidas observables del sistema cumplen las condiciones de satisfacción pactadas ante ciertas entradas, sin preocuparse de cómo están programadas internamente. Aunque cualquiera puede escribirlas, su propietario principal es el \textbf{Product Owner}.
+
+    \item \textbf{¿Qué diferencia existe entre los Criterios de Aceptación y la Definición de Terminado (\textit{Definition of Done})?}\\
+    \textit{Respuesta:} Los \textbf{Criterios de Aceptación} son condiciones funcionales o de negocio \textit{específicas de una Historia de Usuario concreta}. La \textbf{Definición de Terminado (DoD)} es un acuerdo formal de calidad \textit{global/transversal para todas las HU} (pruebas unitarias e integración superadas, código revisado y documentado, entorno de despliegue, métricas de calidad y aprobación del PO).
+
+    \item \textbf{¿De qué cuatro formas pueden tratarse los Requisitos No Funcionales (RNF) en un proyecto ágil?}\\
+    \textit{Respuesta:} 1) Como restricciones asignadas a cualquier elemento de las pilas (Temas, Épicas, HU o Tareas); 2) Como criterios de aceptación de una HU; 3) Como parte de la definición de terminada (\textit{Done}); y 4) En un documento de especificación específico para RNF globales al sistema.
+
+    \item \textbf{¿Qué significan las siglas del modelo I.N.V.E.S.T. de Bill Wake?}\\
+    \textit{Respuesta:} \textbf{I}ndependiente (\textit{Independent}), \textbf{N}egociable (\textit{Negotiable}), \textbf{V}aliosa (\textit{Valuable}), \textbf{E}stimable (\textit{Estimable}), \textbf{S}uscinta/Pequeña (\textit{Small}: 2--3 personas/semana o $1/10$ a $1/6$ de la velocidad) y \textbf{T}esteable (\textit{Testable}).
+
+    \item \textbf{¿Qué representa un Mapa de Historias de Usuario (\textit{User Story Mapping}) y cuáles son sus dos ejes?}\\
+    \textit{Respuesta:} Es una representación bidimensional del \textit{Product Backlog}. Su \textbf{eje horizontal} representa el tiempo o secuencia de actividades del usuario (\textit{Backbone}), y su \textbf{eje vertical} representa el grado de necesidad u opcionalidad (arriba las críticas para el \textit{first release}, abajo las opcionales para entregas posteriores).
+
+    \item \textbf{En relación con la priorización y estimación de una HU, ¿puede cambiar su prioridad a lo largo del proyecto? ¿Y su tamaño?}\\
+    \textit{Respuesta:} \textbf{La prioridad SÍ puede cambiar} en cualquier momento según evolucionen las necesidades del negocio y del cliente; en cambio, \textbf{el tamaño NO cambia} por el hecho de que varíe su prioridad.
+
+    \item \textbf{¿Qué diferencia hay entre Puntos de Historia y Días Ideales?}\\
+    \textit{Respuesta:} Los \textbf{Puntos de Historia (PH)} miden el tamaño relativo de una HU comparada con otras del mismo equipo combinando esfuerzo, complejidad y riesgo. Los \textbf{Días Ideales} miden el tiempo de trabajo puro asumiendo dedicación continua sin ninguna interrupción.
+
+    \item \textbf{En \textit{Planning Poker}, ¿por qué todos muestran sus cartas a la vez y qué se hace cuando hay disparidad en las votaciones?}\\
+    \textit{Respuesta:} Se muestran a la vez para evitar el \textbf{sesgo de anclaje} (que la opinión de un miembro influya en los demás). Cuando hay disparidad, las personas con las estimaciones \textbf{más alta y más baja} exponen sus argumentos al equipo, se discuten los riesgos ocultos y se vuelve a votar hasta lograr consenso.
+
+    \item \textbf{¿Cuáles son las tres formas de obtener la Velocidad de un equipo de desarrollo?}\\
+    \textit{Respuesta:} 1) Utilizar datos históricos de iteraciones pasadas (\textit{``el tiempo que hizo ayer''}); 2) Ejecutar una iteración inicial de prueba y observar su velocidad; y 3) Hacer un pronóstico mediante el \textbf{cálculo de recursos} afectado por un factor de dedicación.
+
+    \item \textbf{¿Qué diferencia hay entre descomponer una HU en Tareas y partir una HU grande mediante los patrones de Richard Lawrence?}\\
+    \textit{Respuesta:} Al \textbf{partir una HU grande} (con los 9 patrones) se obtienen \textit{varias Historias de Usuario más pequeñas}, donde cada una sigue siendo un corte vertical que entrega valor al usuario. Al \textbf{descomponer en tareas}, una única HU se divide en actividades técnicas horizontales (IU, BBDD, lógica, pruebas) de $0.5$ a $3$--$4$ días para organizar el trabajo diario de los programadores.
+
+    \item \textbf{Define qué es un SPIKE, sus dos tipos y cuál es su entregable principal.}\\
+    \textit{Respuesta:} Un \textbf{SPIKE} es un tipo especial de HU acotada en tiempo destinada a investigar una dificultad, reducir un riesgo/incertidumbre o ganar confianza para estimar otra HU. Puede ser \textbf{Técnico} (evaluar arquitectura, rendimiento, comprar vs. construir) o \textbf{Funcional} (prototipar interacción con el usuario). Su resultado \textbf{NO es código de producción}, sino \textbf{información útil} (una decisión, prototipo o demostración) aceptada mediante criterios de aceptación.
+\end{enumerate}
+
+\section{Bibliografía Oficial del Seminario (Diapositiva 99)}
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Dean Leffingwell, Pete Behrens (2009):} \textit{``A User Story Primer''}.
+    \item \textbf{Dean Leffingwell (2009):} \textit{``A Lean and Scalable Requirements Information Model for the Agile Enterprise''}.
+    \item \textbf{Mike Cohn (2004):} \textit{``User Stories Applied for Agile Software Development''}, Addison-Wesley.
+    \item \textbf{Mike Cohn (2005):} \textit{``Agile Estimating and Planning''}, Prentice Hall.
+    \item \textbf{Kent Beck, Martin Fowler (2000):} \textit{``Planning Extreme Programming''}, Addison-Wesley.
+    \item \textbf{Richard Lawrence (2009):} \textit{``Patterns for Splitting User Stories''}, Agile For All.
+\end{itemize}

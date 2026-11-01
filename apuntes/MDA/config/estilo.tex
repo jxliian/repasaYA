@@ -1,0 +1,258 @@
+% ==============================================================================
+% CONFIGURACIÓN Y ESTILO VISUAL — METODOLOGÍAS DE DESARROLLO ÁGIL (MDA)
+% Departamento de Lenguajes y Sistemas Informáticos — Universidad de Granada
+% Plataforma repasaYA
+% ==============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[dvipsnames,svgnames,table,xcdraw]{xcolor}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{eurosym}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{tikz}
+\usetikzlibrary{babel,arrows.meta,positioning,calc,shapes.geometric,fit,backgrounds}
+
+% Configuración de márgenes
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.6cm,right=2.6cm,headheight=24pt]{geometry}
+
+% Paleta de colores profesionales para Ingeniería del Software / Ágil
+\definecolor{mdaDarkBlue}{RGB}{18, 32, 58}
+\definecolor{mdaPrimary}{RGB}{30, 74, 138}
+\definecolor{mdaAccent}{RGB}{99, 91, 255}
+\definecolor{mdaLightAccent}{RGB}{242, 243, 255}
+\definecolor{mdaGreen}{RGB}{22, 135, 70}
+\definecolor{mdaLightGreen}{RGB}{240, 253, 244}
+\definecolor{mdaOrange}{RGB}{217, 119, 6}
+\definecolor{mdaLightOrange}{RGB}{255, 251, 235}
+\definecolor{mdaRed}{RGB}{185, 28, 28}
+\definecolor{mdaLightRed}{RGB}{254, 242, 242}
+\definecolor{mdaGray}{RGB}{246, 248, 251}
+\definecolor{mdaBorderGray}{RGB}{215, 222, 232}
+\definecolor{mdaTeal}{RGB}{15, 118, 110}
+\definecolor{mdaYellowCard}{RGB}{255, 252, 220}
+\definecolor{mdaYellowBorder}{RGB}{210, 185, 80}
+\definecolor{codeBg}{RGB}{248, 249, 252}
+
+% Hipervínculos
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=mdaDarkBlue,
+    citecolor=mdaTeal,
+    urlcolor=mdaAccent,
+    pdfauthor={repasaYA - Universidad de Granada (UGR)},
+    pdftitle={Metodologías de Desarrollo Ágil - Seminario 2: Historias de Usuario},
+    pdfsubject={Desarrollo Ágil de Software, Scrum, XP, Historias de Usuario, INVEST, Planning Poker, Spikes},
+    pdfkeywords={MDA, Historias de Usuario, Scrum, XP, INVEST, CCC, BDD, Planning Poker, Velocidad, Spikes, UGR}
+}
+
+% Configuración de Encabezados y Pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\footnotesize\textsf{\thepage}}
+\fancyhead[LO]{\footnotesize\textsf{\rightmark}}
+\fancyhead[RE]{\footnotesize\textsf{\leftmark}}
+\fancyfoot[C]{\footnotesize\textsf{\color{gray}repasaYA $\cdot$ Metodologías de Desarrollo Ágil (UGR) $\cdot$ Seminario 2: Historias de Usuario}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+% Configuración de títulos de capítulos y secciones
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{mdaDarkBlue}\sffamily}
+  {\Large\textsf{Bloque \thechapter}}{1ex}
+  {\titlerule[1.5pt]\vspace{1ex}\huge}
+  [\vspace{1ex}\titlerule]
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{mdaPrimary}\sffamily}
+  {\thesection}{0.8em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{mdaDarkBlue}\sffamily}
+  {\thesubsection}{0.8em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{mdaAccent}\sffamily}
+  {\thesubsubsection}{0.8em}{}
+
+% Entorno: Caja de Fuentes al inicio de cada tema
+\newcommand{\cuadrofuentes}[1]{%
+  \begin{tcolorbox}[
+    colback=mdaLightAccent,
+    colframe=mdaAccent,
+    boxrule=1pt,
+    arc=4pt,
+    left=12pt,
+    right=12pt,
+    top=8pt,
+    bottom=8pt,
+    breakable
+  ]
+    \small
+    \noindent\textbf{\color{mdaAccent}\large\textsf{Síntesis del Bloque y Objetivos de Evaluación:}}\\[4pt]
+    #1
+  \end{tcolorbox}
+  \vspace{8pt}
+}
+
+% Entorno: Definición
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  colback=mdaGray,
+  colframe=mdaPrimary,
+  boxrule=1pt,
+  leftrule=4pt,
+  arc=3pt,
+  title=\textbf{\textsf{Definición Canónica\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=mdaPrimary,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Ejemplo Explicado
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  colback=mdaLightGreen,
+  colframe=mdaGreen,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Ejemplo de Clase / Dominio\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=mdaGreen,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Aviso / Ojo Examen
+\newtcolorbox{aviso}[1][]{
+  enhanced,
+  colback=mdaLightOrange,
+  colframe=mdaOrange,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Importante / Pregunta de Examen\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=mdaOrange,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Tarjeta de Historia de Usuario
+\newtcolorbox{tarjetahu}[1][]{
+  enhanced,
+  colback=mdaYellowCard,
+  colframe=mdaYellowBorder,
+  boxrule=1pt,
+  leftrule=4pt,
+  arc=3pt,
+  title=\textbf{\textsf{\color{mdaDarkBlue}Tarjeta de Historia de Usuario\ifstrempty{#1}{}{: #1}}},
+  coltitle=mdaDarkBlue,
+  colbacktitle=mdaYellowBorder!40!white,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0.8pt, colframe=mdaYellowBorder},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Regla Formal / Patrón
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  colback=mdaLightAccent,
+  colframe=mdaAccent,
+  boxrule=0.8pt,
+  leftrule=3.5pt,
+  arc=3pt,
+  title=\textbf{\textsf{Principio / Patrón Metodológico\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=mdaAccent,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Entorno: Ejercicio Resuelto
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  colback=white,
+  colframe=mdaDarkBlue,
+  boxrule=1pt,
+  leftrule=4pt,
+  arc=3pt,
+  title=\textbf{\textsf{Ejercicio de Examen Resuelto\ifstrempty{#1}{}{: #1}}},
+  coltitle=white,
+  colbacktitle=mdaDarkBlue,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt},
+  top=10pt,
+  bottom=8pt,
+  left=10pt,
+  right=10pt,
+  breakable
+}
+
+% Configuración de listings para Gherkin / BDD
+\lstset{
+  backgroundcolor=\color{codeBg},
+  basicstyle=\ttfamily\small\color{black},
+  keywordstyle=\bfseries\color{mdaPrimary},
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{mdaGreen},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  frame=single,
+  rulecolor=\color{mdaBorderGray},
+  tabsize=2,
+  captionpos=b,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1
+    {«}{{\guillemotleft}}1 {»}{{\guillemotright}}1
+    {€}{{\euro}}1
+}

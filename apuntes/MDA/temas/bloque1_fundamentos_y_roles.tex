@@ -1,0 +1,250 @@
+% ==============================================================================
+% BLOQUE 1: FUNDAMENTOS, CASOS DE USO VS. HU, ROLES Y FORMATO CANÓNICO
+% Diapositivas 1 a 25 del Seminario 2
+% ==============================================================================
+
+\chapter{Fundamentos de las Historias de Usuario, Roles y Formato Canónico}
+
+\cuadrofuentes{
+\textbf{Alcance del Bloque:} Diapositivas 1--25 del Seminario 2 (\textit{Unidad 1: Desarrollo Ágil de Software}).\\
+\textbf{Conceptos Clave:} Definición canónica de Kent Beck y Martin Fowler, eje Comunicación--Colaboración, qué son y qué no son las Historias de Usuario, comparativa exhaustiva de 13 dimensiones entre Casos de Uso (RUP) e Historias de Usuario (XP/Scrum), autoría según metodología, identificación de roles de negocio y sintaxis canónica de tres bloques (\texttt{Como / Quiero / Para}).
+}
+
+\section{¿Qué son las Historias de Usuario (HU)?}
+
+En el contexto de las metodologías ágiles (especialmente \textit{Extreme Programming} --XP-- y \textit{Scrum}), las Historias de Usuario constituyen el artefacto central para gestionar las necesidades de los usuarios y conducir el desarrollo incremental del software.
+
+\begin{definicion}[Historia de Usuario (Kent Beck y Martin Fowler)]
+\textit{``The story is the unit of functionality in an XP project. We demonstrate progress by delivering tested, integrated code that implements a story. A story must be understandable to customers, developer-testable, valuable to the customer, and small enough that programmers can build half a dozen in an iteration.''}\\
+--- \textbf{Kent Beck \& Martin Fowler}, \textit{Planning Extreme Programming}.
+\end{definicion}
+
+De esta definición fundacional se extraen las **cuatro propiedades estructurales** exigibles a toda Historia de Usuario:
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=4pt]
+    \item \textbf{Unidad mínima de funcionalidad y progreso:} En un proyecto ágil el avance real no se mide por documentos redactados, diagramas UML ni porcentaje de arquitectura completada, sino exclusivamente mediante la entrega de \textbf{código probado e integrado} que implementa una historia.
+    \item \textbf{Comprensible para el cliente (\textit{Understandable to customers}):} Debe redactarse en el lenguaje natural del dominio de negocio, libre de tecnicismos internos de programación.
+    \item \textbf{Probable por los desarrolladores (\textit{Developer-testable}):} Debe permitir diseñar pruebas objetivas que determinen sin ambigüedad si la historia funciona según lo acordado.
+    \item \textbf{Valiosa y de tamaño acotado (\textit{Valuable and small enough}):} Debe aportar un beneficio real al cliente o usuario y ser lo suficientemente pequeña como para que los programadores puedan construir e integrar \textbf{alrededor de media docena (entre 4 y 8)} en el transcurso de una única iteración (\textit{Sprint}).
+\end{enumerate}
+
+\subsection{Naturaleza Operativa y Eje Comunicación--Colaboración}
+
+Desde una perspectiva práctica, una Historia de Usuario puede entenderse como:
+\begin{itemize}[itemsep=3pt]
+    \item Una \textbf{corta declaración de intención} que describe algo que el sistema necesita hacer para el usuario.
+    \item Una \textbf{descripción simple de una tarea concreta} que aporta valor directo al usuario o al negocio.
+    \item El resultado directo de las reuniones de toma de contacto con los \textit{stakeholders} (partes interesadas en el producto).
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.4cm,
+    box/.style={rectangle, rounded corners=4pt, draw=mdaPrimary, fill=mdaLightAccent, thick, minimum width=3.4cm, minimum height=1.2cm, align=center, font=\sffamily\small\bfseries, text=mdaDarkBlue},
+    centerbox/.style={ellipse, draw=mdaAccent, fill=mdaAccent, very thick, minimum width=3.8cm, minimum height=1.5cm, align=center, font=\sffamily\bfseries, text=white},
+    arrow/.style={-{Stealth[length=3mm, width=2mm]}, very thick, color=mdaPrimary}
+]
+    \node[box] (com) {COMUNICACIÓN\\[-2pt]{\scriptsize\normalfont\sffamily Lenguaje común de negocio}};
+    \node[centerbox, right=1.5cm of com] (hu) {HISTORIAS DE\\USUARIO (HU)};
+    \node[box, right=1.5cm of hu] (col) {COLABORACIÓN\\[-2pt]{\scriptsize\normalfont\sffamily Trabajo conjunto cliente--equipo}};
+    
+    \draw[arrow, <->] (com) -- (hu);
+    \draw[arrow, <->] (hu) -- (col);
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Simplicidad deliberada:} Las historias tienen que ser simples, cortas, fáciles de entender, de aceptar y de recordar, \textbf{sin que tengan que escribirse todos sus detalles por adelantado}.
+    \item \textbf{Soporte en tarjetas:} Se describen usando tarjetas físicas o visuales (una descripción escrita en lenguaje del negocio que identifica y recuerda el requisito y ayuda directamente a su priorización).
+\end{itemize}
+
+\begin{aviso}[Objetivo Primordial de las Historias de Usuario (Diapositiva 8)]
+El objetivo de las Historias de Usuario es, principalmente, \textbf{lograr la interacción con el equipo y con el usuario, por encima de documentar los requisitos que hay en el sistema}. La tarjeta física o digital no busca reemplazar el diálogo verbal, sino provocarlo y encauzarlo.
+\end{aviso}
+
+\section{¿Qué NO son las Historias de Usuario?}
+
+Uno de los errores más frecuentes en la transición desde metodologías tradicionales en cascada hacia marcos ágiles consiste en confundir las Historias de Usuario con requisitos de software clásicos.
+
+\begin{teorema}[Tres Principios sobre lo que NO es una HU (Diapositiva 9)]
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=4pt]
+    \item \textbf{No es un requisito rígido del sistema:} No representa una imposición unilateral del tipo \textit{``algo que el sistema deba hacer obligatoriamente''}; hay que verlo siempre como \textbf{algo negociable} (\textit{``necesitaríamos hacer algo similar a esto...''}).
+    \item \textbf{No son requisitos del software, son necesidades de un usuario:} El foco no reside en las tripas tecnológicas del sistema, sino en el problema u objetivo que el usuario humano necesita resolver.
+    \item \textbf{No son una especificación detallada, son ``promesas de una conversación'':} Expresión acuñada por Alistair Cockburn. Una HU es un recordatorio (\textit{token}) para mantener una conversación futura con el cliente justo antes o durante su implementación.
+\end{enumerate}
+\end{teorema}
+
+\section{Comparativa Exhaustiva: Casos de Uso vs. Historias de Usuario}
+
+En los exámenes parciales de teoría es habitual que se solicite comparar los \textbf{Casos de Uso} (propios de metodologías guiadas por planes como \textit{RUP -- Rational Unified Process}) frente a las \textbf{Historias de Usuario} (propias de \textit{Extreme Programming} y \textit{Scrum}). A continuación se recoge íntegramente la comparativa oficial de las diapositivas 11 a 14 en sus \textbf{13 dimensiones}:
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.35}
+\begin{longtable}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{2.7cm} p{6.1cm} p{6.1cm}}
+\toprule
+\rowcolor{mdaDarkBlue}
+\textbf{\color{white}\textsf{CONCEPTO}} & \textbf{\color{white}\textsf{CASOS DE USO (RUP)}} & \textbf{\color{white}\textsf{HISTORIAS DE USUARIO (XP / Scrum)}} \\
+\midrule
+\endfirsthead
+
+\toprule
+\rowcolor{mdaDarkBlue}
+\textbf{\color{white}\textsf{CONCEPTO}} & \textbf{\color{white}\textsf{CASOS DE USO (RUP)}} & \textbf{\color{white}\textsf{HISTORIAS DE USUARIO (XP / Scrum)}} \\
+\midrule
+\endhead
+
+\bottomrule
+\endfoot
+
+Objetivo & Modelar detalladamente la interacción formal entre un ``actor'' y el sistema. & Redactar una descripción breve de una funcionalidad tal y como la percibe el usuario. \\
+\rowcolor{mdaGray}
+Estructura & Plantillas densas, múltiples páginas, flujos alternativos formales y conceptos técnicos. & 1 ó 2 frases cortas y consistentes expresadas en el lenguaje natural del usuario. \\
+Planificación & \textbf{No se utilizan para planificar} directamente las iteraciones. & \textbf{Se utilizan directamente para planificar}, estimar y medir la velocidad. \\
+\rowcolor{mdaGray}
+Agilidad & Requieren mucho tiempo previo para el análisis y la redacción de plantillas predefinidas. & Se pueden escribir y ajustar en \textbf{pocos minutos}. \\
+Comprensión & Suelen ser de difícil comprensión, incluso para el propio personal técnico. & \textbf{Fáciles de leer y comprender} tanto por usuarios como por desarrolladores. \\
+\rowcolor{mdaGray}
+Mantenimiento & Documentos pesados con cientos de páginas. Muy difíciles y costosos de mantener. & \textbf{Muy fáciles de mantener}, reordenar o descartar tras su implementación. \\
+Comunicación & Modelo textual exhaustivo asociado con diagramas: \textit{todo tiene que estar escrito}. & Basada en la \textbf{comunicación verbal} y orientada a la colaboración y discusión para clarificar detalles. \\
+\rowcolor{mdaGray}
+Soporte & Escrito en documentos extensos con el objetivo de que sean archivados como documentos de referencia. & Escritas en \textbf{tarjetas} con el objetivo de que sean manipuladas y usadas directamente por el equipo. \\
+Duración & Puede ser implementado a lo largo de \textbf{varias iteraciones}. & Debe ser implementada y probada íntegramente en \textbf{una única iteración}. \\
+\rowcolor{mdaGray}
+Autores & Definidos por analistas de sistemas, consultores, desarrolladores, etc. & Posibilidad real de ser definidas directamente por \textbf{usuarios y clientes}. \\
+Pruebas & La definición de pruebas se redacta en documentación separada e independiente. & Contienen las \textbf{pruebas de aceptación en el reverso} de la propia tarjeta. \\
+\rowcolor{mdaGray}
+Contexto & Proporcionan una visión más general del sistema y de la integración arquitectónica en él. & Proporcionan una visión global menos obvia; por eso las \textbf{pruebas continuas y el feedback de los usuarios} son tan importantes en las metodologías ágiles. \\
+Metodología & Asociado históricamente con \textbf{RUP} (\textit{Rational Unified Process}). & Asociado con \textbf{Programación Extrema (XP)} y \textbf{Scrum}. \\
+\end{longtable}
+\renewcommand{\arraystretch}{1.0}
+
+\section{¿Quién escribe las Historias de Usuario y cómo se definen los Roles?}
+
+\subsection{Autoría según el Marco Metodológico (Diapositivas 15--16)}
+
+La responsabilidad de redactar las Historias de Usuario varía entre la teoría metodológica pura y la práctica diaria de los equipos:
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{En Programación Extrema (XP):} Las escribe directamente \textbf{el cliente} (\textit{On-site Customer}), quien forma parte presencial del equipo.
+    \item \textbf{En Scrum:} Las escribe y gestiona el \textbf{Product Owner (PO)}, contando con la ayuda activa de clientes, \textit{stakeholders} y el equipo de desarrollo.
+    \item \textbf{En la realidad práctica:} Las puede escribir \textbf{cualquier miembro del equipo de desarrollo} que posea conocimiento suficiente en el dominio del problema, aunque el Product Owner sigue siendo el responsable de validarlas y priorizarlas en la pila de producto.
+\end{itemize}
+
+\begin{definicion}[El ``Customer Team'' y los Stakeholders]
+Deben escribir y refinar las HU todos aquellos perfiles capaces de \textbf{expresar las necesidades reales del sistema} y participar en las reuniones para detallarlas y priorizarlas. Este equipo extendido de cliente (\textit{Customer Team} / \textit{Stakeholders}) engloba:
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item \textbf{Clientes reales (usuarios finales):} Quienes utilizarán directamente la aplicación.
+    \item \textbf{Product Manager / Product Owner:} Quien vela por el valor de negocio y el retorno de inversión.
+    \item \textbf{Probadores (QA / Testers):} Quienes aportan visión crítica sobre casos límite y verificación.
+    \item \textbf{Diseñadores de interacción (UX / UI):} Quienes garantizan la usabilidad y experiencia de uso.
+\end{enumerate}
+\end{definicion}
+
+\subsection{Identificación y Organización de los Roles del Sistema (Diapositivas 17--18)}
+
+Antes de redactar historias, es imprescindible \textbf{identificar y organizar a los usuarios del sistema} en \textbf{Roles} o \textit{Personas}, evitando el uso indiscriminado del término genérico ``usuario'':
+\begin{itemize}[itemsep=3pt]
+    \item Se recomienda realizar una sesión de \textbf{\textit{Brainstorming}} (tormenta de ideas) en equipo para identificar todos los perfiles que interactúan con el software.
+    \item Para cada rol identificado se deben caracterizar:
+    \begin{itemize}
+        \item \textbf{Frecuencia de uso del software} (diario, semanal, esporádico, puntual).
+        \item \textbf{Objetivos principales} que se plantea al usar el sistema.
+        \item \textbf{Forma habitual de acceso} (escritorio, móvil, automatizado) y nivel de pericia en el dominio.
+    \end{itemize}
+\end{itemize}
+
+\begin{ejemplo}[Tabla de Roles del Sistema: Agencia de Viajes (Diapositiva 18)]
+En el caso práctico del portal web de una \textbf{Agencia de Viajes}, una sesión de \textit{Brainstorming} permite distinguir al menos \textbf{11 roles diferenciados}, cada uno con necesidades propias:
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{mdaPrimary}}p{4.2cm} X}
+\toprule
+\rowcolor{mdaLightAccent}
+\textbf{Rol Identificado} & \textbf{Objetivos y Comportamiento en el Sistema} \\
+\midrule
+Cliente & Busca alojamientos, compara precios, reserva habitaciones y gestiona cancelaciones. \\
+Socio (Cliente fidelizado) & Accede a ofertas exclusivas, acumula puntos y utiliza métodos de pago guardados. \\
+Planificador de viaje & Organiza viajes para terceros; requiere fotos verificadas y opiniones detalladas de calidad. \\
+Comentarista & Viajero que publica reseñas, valoraciones y fotografías tras concluir su estancia. \\
+Hoteles (Proveedor) & Da de alta habitaciones, actualiza cupos de disponibilidad y recibe avisos de reservas. \\
+Afiliado & Enlaza ofertas desde portales externos a cambio de comisiones por venta referida. \\
+Agencias de Viajes & Gestiona reservas de grupos o paquetes turísticos completos en condiciones mayoristas. \\
+Administrador & Configura parámetros globales del sistema, gestiona usuarios y audita la seguridad. \\
+Distribuidoras & Mayoristas que integran inventarios masivos de vuelos, estancias y paquetes. \\
+Social Media Manager & Conecta campañas, opiniones destacadas y promociones con redes sociales. \\
+Publicista & Gestiona espacios promocionales, banners y posicionamiento patrocinado de ofertas. \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+\end{center}
+\end{ejemplo}
+
+\section{Formato Canónico de una Historia de Usuario (Diapositivas 19--25)}
+
+Para redactar Historias de Usuario consistentes y orientadas al valor, se emplea la plantilla estándar de tres cláusulas (popularizada por Mike Cohn / Connextra):
+
+\begin{center}
+\begin{tikzpicture}[
+    lego/.style={rectangle, rounded corners=5pt, draw=mdaDarkBlue, thick, minimum width=4.6cm, minimum height=2.6cm, align=center, font=\sffamily},
+    stud/.style={rectangle, rounded corners=1pt, draw=mdaDarkBlue, thick, minimum width=0.9cm, minimum height=0.35cm},
+    arrow/.style={-{Stealth[length=3mm]}, very thick, color=mdaDarkBlue}
+]
+    % Bloque 1: Como
+    \node[lego, fill=Cyan!20] (b1) at (0,0) {
+        {\large\bfseries\color{mdaDarkBlue}Como \texttt{[rol]}...}\\[6pt]
+        {\footnotesize\textbf{¿QUIÉN?}}\\[-1pt]
+        {\scriptsize El usuario o grupo de usuarios}\\[-2pt]
+        {\scriptsize que ejecutará la funcionalidad.}
+    };
+    \node[stud, fill=Cyan!30, above=0pt of b1.north west, xshift=1.1cm] {};
+    \node[stud, fill=Cyan!30, above=0pt of b1.north east, xshift=-1.1cm] {};
+
+    % Bloque 2: Quiero
+    \node[lego, fill=Green!20, right=0.5cm of b1] (b2) {
+        {\large\bfseries\color{mdaDarkBlue}Quiero \texttt{[objetivo]}...}\\[6pt]
+        {\footnotesize\textbf{¿QUÉ?}}\\[-1pt]
+        {\scriptsize La actividad central o eje}\\[-2pt]
+        {\scriptsize de la historia que hace el usuario.}
+    };
+    \node[stud, fill=Green!30, above=0pt of b2.north west, xshift=1.1cm] {};
+    \node[stud, fill=Green!30, above=0pt of b2.north east, xshift=-1.1cm] {};
+
+    % Bloque 3: Para
+    \node[lego, fill=Orange!25, right=0.5cm of b2] (b3) {
+        {\large\bfseries\color{mdaDarkBlue}Para \texttt{[beneficio]}.}\\[6pt]
+        {\footnotesize\textbf{¿POR QUÉ?}}\\[-1pt]
+        {\scriptsize El propósito o valor de negocio.}\\[-2pt]
+        {\scriptsize ¡Hay que justificar el beneficio!}
+    };
+    \node[stud, fill=Orange!35, above=0pt of b3.north west, xshift=1.1cm] {};
+    \node[stud, fill=Orange!35, above=0pt of b3.north east, xshift=-1.1cm] {};
+
+    \draw[arrow] (b1) -- (b2);
+    \draw[arrow] (b2) -- (b3);
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{\texttt{[Como:]} (Quién):} Identifica al usuario o grupo de usuarios que participan en la historia; normalmente es un \textbf{``rol de usuario''}, el que usará directamente la funcionalidad descrita.
+    \item \textbf{\texttt{[Quiero:]} (Qué):} Es la actividad o característica central, el eje de la historia: qué necesita hacer el usuario con el sistema.
+    \item \textbf{\texttt{[Para:]} (Por qué):} Es el propósito de la historia, la meta o \textbf{valor de negocio/beneficio} que quiere alcanzar el usuario al ejecutar la actividad. Ayuda de forma decisiva a priorizar la historia y a entender su verdadero fin.
+\end{itemize}
+
+\begin{ejemplo}[Catálogo Oficial de Ejemplos: Página Web de Viajes y Librería (Diapositivas 21--25)]
+\textbf{A) Ejemplos en formato canónico completo (\texttt{Como / Quiero / Para}):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textit{``\textbf{Como} cliente, \textbf{quiero} reservar una habitación de hotel \textbf{para} garantizar mi estancia durante mis fechas de viaje y planificar mi viaje con tranquilidad.''}
+    \item \textit{``\textbf{Como} cliente, \textbf{quiero} cancelar una reserva previa \textbf{para} poder realizar una nueva reserva en fechas o destinos diferentes que se adapten mejor a mi agenda (o evitar cargos si mis planes cambian).''}
+    \item \textit{``\textbf{Como} cliente, \textbf{quiero} buscar hoteles cerca del mar \textbf{para} disfrutar de acceso rápido a la playa.''}
+    \item \textit{``\textbf{Como} cliente, \textbf{quiero} comparar las características y precios de dos hoteles \textbf{para} evaluar cuál de ellos ofrece la mejor relación calidad-precio según mis necesidades.''}
+    \item \textit{``\textbf{Como} cliente, \textbf{quiero} filtrar los hoteles en los que admiten perros \textbf{para} descartar rápidamente los alojamientos que no acepten animales y no perder tiempo revisando fichas innecesarias.''}
+    \item \textit{``\textbf{Como} planificador de viajes, \textbf{quiero} ver fotos de un hotel \textbf{para} verificar las instalaciones, la calidad de las habitaciones y asegurarme de que cumple con las expectativas de mis clientes antes de realizar la reserva.''}
+    \item \textit{``\textbf{Como} planificador de viajes, \textbf{quiero} conocer las opiniones de otros viajeros \textbf{para} anticipar posibles inconvenientes y recomendar a mis clientes únicamente alojamientos con alta satisfacción comprobada.''}
+\end{enumerate}
+
+\textbf{B) Ejemplos en formato narrativo libre directo (Diapositiva 25):}
+\begin{itemize}[itemsep=2pt]
+    \item \textit{``Un usuario puede buscar un libro insertando cualquier combinación de título o autor.''}
+    \item \textit{``Un usuario puede poner los libros en el carrito y sucesivamente comprarlos.''}
+    \item \textit{``Un usuario puede escoger acompañar el envío de un libro con su propia dedicatoria.''}
+    \item \textit{``Un supervisor puede ver un informe de las ventas realizadas en el día.''}
+\end{itemize}
+\end{ejemplo}

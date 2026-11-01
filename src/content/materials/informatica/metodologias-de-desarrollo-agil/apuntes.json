@@ -1,0 +1,8 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "apuntes",
+  "title": "Apuntes Seminario 2: Historias de Usuario (34 páginas)",
+  "description": "Apuntes exhaustivos en LaTeX con toda la teoría del Seminario 2 (99 diapositivas), esquemas visuales TikZ (CCC, INVEST, Tarjeta física, Story Mapping, Planning Poker, 9 Patrones de Richard Lawrence, Spikes), 8 ejercicios prácticos resueltos paso a paso y banco de 15 preguntas cortas de examen.",
+  "order": 0,
+  "pdf": "mda/apuntes-seminario-2-hu.pdf"
+}

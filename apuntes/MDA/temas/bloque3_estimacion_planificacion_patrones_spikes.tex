@@ -1,0 +1,276 @@
+% ==============================================================================
+% BLOQUE 3: PRODUCT BACKLOG, PRIORIZACIÓN, ESTIMACIÓN, VELOCIDAD, PATRONES Y SPIKES
+% Diapositivas 58 a 96 del Seminario 2
+% ==============================================================================
+
+\chapter{Pila de Producto, Priorización, Estimación, Velocidad, Patrones y SPIKES}
+
+\cuadrofuentes{
+\textbf{Alcance del Bloque:} Diapositivas 58--96 del Seminario 2.\\
+\textbf{Conceptos Clave:} \textit{Product Backlog}, Mapa de Historias de Usuario (\textit{User Story Mapping}), flujo de 8 pasos para definir HU, priorización y método \textbf{MoSCoW}, Puntos de Historia vs. Días Ideales, Cono de Incertidumbre, \textit{Planning Poker}, Velocidad del equipo y fórmula de cálculo de recursos con factor de dedicación, planificación de iteraciones, descomposición en tareas, los \textbf{9 Patrones de División de Richard Lawrence} y gestión de \textbf{SPIKES} (técnicos y funcionales).
+}
+
+\section{Pila de Producto (\textit{Product Backlog}) y Mapa de Historias (Diapositivas 58--64)}
+
+\begin{definicion}[Pila de Producto (Product Backlog)]
+\textit{``Lista priorizada de Historias de Usuario que contiene toda la funcionalidad deseable del producto.''}
+\end{definicion}
+
+\textbf{Propiedades esenciales del Product Backlog (Diapositiva 59):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item \textbf{Ordenada por prioridad:} El orden refleja el valor que le da el cliente a cada HU (la medida en que permite satisfacer sus necesidades de negocio).
+    \item \textbf{Cobertura global:} Cubre todas las funcionalidades necesarias conocidas hasta el momento.
+    \item \textbf{Viva y dinámica:} Se revisa y actualiza frecuentemente (\textit{Backlog Refinement / Grooming}).
+    \item \textbf{Herramienta de planificación y gestión:} Constituye la base única para planificar entregas e iteraciones.
+\end{enumerate}
+
+\subsection{Mapa de Historias de Usuario (\textit{User Story Mapping}) (Diapositivas 60--63)}
+
+Propuesto por \textbf{Jeff Patton}, el \textbf{Mapa de Historias de Usuario} organiza el \textit{Product Backlog} en dos dimensiones (frente a una lista plana unidimensional) para conservar la visión global del flujo de trabajo del usuario:
+\begin{itemize}[itemsep=2pt]
+    \item \textbf{Eje Horizontal (\textit{Time / Flujo cronológico}):} De izquierda a derecha se disponen las actividades principales (\textit{Backbone} o espina dorsal) en el orden temporal en que el usuario interactúa con el sistema.
+    \item \textbf{Eje Vertical (\textit{Optionality / Necesidad y prioridad}):} De arriba hacia abajo se ordenan las historias desde las \textbf{estrictamente necesarias} (\textit{necessary}) hasta las \textbf{más opcionales} (\textit{more optional}).
+    \item \textbf{Cortes Horizontales (\textit{Releases / Entregas}):} Trazando líneas horizontales se agrupan las historias en entregas sucesivas (\textit{first release / MVP}, \textit{second release}, \textit{third release}), asegurando que desde la primera entrega el sistema ofrezca un recorrido funcional de extremo a extremo (\textit{Walking Skeleton}).
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[
+    act/.style={rectangle, rounded corners=2pt, draw=mdaPrimary, fill=Cyan!25, thick, minimum width=2.2cm, minimum height=0.65cm, font=\sffamily\scriptsize\bfseries, text=mdaDarkBlue},
+    hu/.style={rectangle, rounded corners=1pt, draw=mdaRed!70!black, fill=Red!18, minimum width=1.9cm, minimum height=0.48cm, font=\sffamily\tiny, align=center},
+    rel/.style={font=\sffamily\footnotesize\bfseries, text=mdaDarkBlue!80}
+]
+    % Eje horizontal: Time
+    \draw[-{Stealth[length=3mm]}, very thick, color=mdaDarkBlue] (0, 3.2) -- (11.2, 3.2) node[midway, fill=white, font=\sffamily\footnotesize\bfseries] {Tiempo / Secuencia de Actividades (time)};
+    
+    % Actividades (Backbone)
+    \node[act] at (1.3, 3.75) {Actividad 1};
+    \node[act] at (4.1, 3.75) {Actividad 2};
+    \node[act] at (6.9, 3.75) {Actividad 3};
+    \node[act] at (9.7, 3.75) {Actividad 4};
+
+    % Eje vertical: Optionality
+    \draw[<->, very thick, color=mdaDarkBlue] (-0.4, 0.2) -- (-0.4, 2.9) node[midway, rotate=90, fill=white, font=\sffamily\scriptsize\bfseries] {Opcionalidad (optionality)};
+    \node[anchor=east, font=\sffamily\scriptsize\bfseries, text=mdaDarkBlue] at (-0.6, 2.75) {Necesario (necessary)};
+    \node[anchor=east, font=\sffamily\scriptsize, text=mdaDarkBlue] at (-0.6, 1.75) {Menos opcional};
+    \node[anchor=east, font=\sffamily\scriptsize, text=mdaDarkBlue] at (-0.6, 0.45) {Más opcional};
+
+    % Fondos de Releases
+    \fill[Yellow!18, rounded corners=2pt] (0.1, 2.15) rectangle (11.0, 2.95);
+    \fill[Orange!18, rounded corners=2pt] (0.1, 1.25) rectangle (11.0, 2.10);
+    \fill[Red!10, rounded corners=2pt] (0.1, 0.10) rectangle (11.0, 1.20);
+
+    \draw[dashed, thick, mdaDarkBlue!60] (0.1, 2.12) -- (11.0, 2.12);
+    \draw[dashed, thick, mdaDarkBlue!60] (0.1, 1.22) -- (11.0, 1.22);
+
+    % Tarjetas Release 1
+    \node[hu] at (1.3, 2.55) {HU 1.1 (MVP)};
+    \node[hu] at (4.1, 2.55) {HU 2.1 (MVP)};
+    \node[hu] at (6.9, 2.55) {HU 3.1 (MVP)};
+    \node[hu] at (9.7, 2.55) {HU 4.1 (MVP)};
+    \node[rel] at (5.5, 2.30) {Primera Entrega (First Release / Walking Skeleton)};
+
+    % Tarjetas Release 2
+    \node[hu, fill=Red!28] at (1.3, 1.75) {HU 1.2};
+    \node[hu, fill=Red!28] at (4.1, 1.75) {HU 2.2};
+    \node[hu, fill=Red!28] at (6.9, 1.75) {HU 3.2};
+    \node[hu, fill=Red!28] at (9.7, 1.75) {HU 4.2};
+    \node[rel] at (5.5, 1.42) {Segunda Entrega (Second Release)};
+
+    % Tarjetas Release 3
+    \node[hu, fill=Red!40] at (1.3, 0.85) {HU 1.3};
+    \node[hu, fill=Red!40] at (4.1, 0.85) {HU 2.3};
+    \node[hu, fill=Red!40] at (9.7, 0.85) {HU 4.3};
+    \node[rel] at (5.5, 0.35) {Tercera Entrega (Third Release)};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Proceso Completo de Definición de las HU (Diapositiva 64)}
+
+El flujo de trabajo ordenado de principio a fin para definir y preparar las Historias de Usuario consta de \textbf{8 pasos secuenciales}:
+\begin{enumerate}[label=\textbf{Paso \arabic*:}, leftmargin=2.2cm, itemsep=2pt]
+    \item \textbf{Toma de requisitos} en reuniones con usuarios/clientes (entrevistas, cuestionarios, observación).
+    \item \textbf{Informar de la visión general} transmitida por el cliente a todo el equipo.
+    \item \textbf{Crear las HU} (talleres o reuniones colaborativas de escritura de HU).
+    \item \textbf{Priorizar las HU} según valor de negocio y urgencia.
+    \item \textbf{Actuar sobre cada HU} mediante un estudio funcional y técnico realizado en equipo (\textbf{Conversación}).
+    \item \textbf{Definir los criterios de aceptación} (\textbf{Confirmación}).
+    \item \textbf{Estimar el tamaño de las HU} (en Puntos de Historia o Días Ideales).
+    \item \textbf{Descomponer las HU en tareas} técnicas individuales para la iteración.
+\end{enumerate}
+
+\section{Priorización de las Historias de Usuario (Diapositivas 65--68)}
+
+Priorizar las Historias de Usuario es un paso crítico porque determina el orden en que deben desarrollarse para \textbf{entregar el máximo valor a los usuarios finales y al negocio lo más rápido posible}.
+
+\subsection{Factores de Priorización (Diapositiva 66)}
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Valor para el cliente (Valor de Negocio):} Retorno económico o estratégico directo.
+    \item \textbf{Valor para el usuario:} Combinando tanto las \textit{HU importantes para un número alto de usuarios} como las \textit{HU críticas para un número pequeño de usuarios muy importantes}.
+    \item \textbf{Riesgo e incertidumbre:} Priorizar temprano historias con alto riesgo para validar la viabilidad técnica o funcional cuanto antes.
+    \item \textbf{Dependencias:} HU estrechamente relacionadas con otras HU priorizadas previamente.
+    \item \textbf{Tamaño y esfuerzo:} Relación coste/beneficio de implementar la historia.
+\end{itemize}
+
+\begin{aviso}[Regla de Oro de Examen sobre Prioridad y Tamaño (Diapositiva 66)]
+\textbf{``La prioridad puede cambiar; el tamaño NO.''}\\
+Las Historias de Usuario son negociables con el cliente y su prioridad evoluciona continuamente a lo largo del proyecto según el mercado, pero su tamaño relativo (complejidad técnica y esfuerzo de implementación) permanece invariante mientras no cambie su alcance funcional.
+\end{aviso}
+
+\subsection{Categorías de Criticidad y Método MoSCoW (Diapositivas 67--68)}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{3.4cm} >{\bfseries\sffamily\color{mdaAccent}}p{2.6cm} X}
+\toprule
+\rowcolor{mdaDarkBlue}
+\textbf{\color{white}Clasificación Clásica} & \textbf{\color{white}Método MoSCoW} & \textbf{\color{white}Significado e Impacto en las Entregas del Proyecto} \\
+\midrule
+1. Requeridas o críticas & \textbf{M -- Must} & Sin las cuales la solución no puede vivir. Se debe completar obligatoriamente este requerimiento para finalizar el proyecto (\textbf{primeras entregas}). \\
+\rowcolor{mdaGray}
+2. Importantes & \textbf{S -- Should} & Sin las cuales el sistema puede vivir durante algún tiempo. Se debe completar por todos los medios, pero el éxito del proyecto no depende vitalmente de él (\textbf{entregas intermedias}). \\
+3. Opcionales & \textbf{C -- Could} & Si hay tiempo y presupuesto se construyen. Se debería completar si su implementación no afecta a la consecución de los objetivos principales (\textbf{entregas finales}). \\
+\rowcolor{mdaGray}
+4. No se construirán & \textbf{W -- Would / Won't} & Por restricciones de presupuesto/tiempo o por carecer de valor actual; se posponen si sobra tiempo o para \textbf{futuras versiones} del sistema. \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+
+\section{Estimación del Tamaño y \textit{Planning Poker} (Diapositivas 69--73)}
+
+\subsection{Puntos de Historia vs. Días Ideales y Cono de Incertidumbre}
+
+La estimación del tamaño de las HU es realizada siempre \textbf{por el equipo de desarrollo} empleando una de dos métricas principales:
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textbf{Puntos de Historia (\textit{Story Points} -- PH):} Miden el \textbf{tamaño relativo} de una historia comparado con otras historias de referencia estimadas por el mismo equipo:
+    $$\mathbf{Puntos\ de\ Historia\ (PH)} = \text{Esfuerzo necesario} + \text{Complejidad} + \text{Riesgo / Incertidumbre}$$
+    \item \textbf{Días Ideales (\textit{Ideal Days}):} Representan días de trabajo dedicados al $100\%$ sin interrupciones, reuniones, correos ni imprevistos.
+\end{enumerate}
+
+A través del \textbf{Cono de Incertidumbre} (diapositiva 70), una estimación inicial de grano grueso (tallas de camiseta: \texttt{XS, S, M, L, XL}) se refina en \textbf{Puntos de Historia} (serie de Fibonacci: \texttt{0, 1, 2, 3, 5, 8, 13, 20, ?}) y, finalmente, al descomponer la historia dentro del Sprint, se traduce en \textbf{Horas} concretas de tarea.
+
+\subsection{\textit{Planning Poker} (El Juego de la Planificación) (Diapositivas 71--73)}
+
+\begin{definicion}[Planning Poker]
+Técnica colaborativa para realizar una estimación basada en el \textbf{consenso entre los estimadores}, utilizando un mazo de cartas con la \textbf{Secuencia de Fibonacci}:
+\begin{itemize}[itemsep=2pt]
+    \item \textbf{Mazo Fibonacci puro:} $(0,\ 1,\ 2,\ 3,\ 5,\ 8,\ 13,\ 21,\ 34,\ 55,\ 89)$
+    \item \textbf{Mazo comercial modificado:} $(0,\ \tfrac{1}{2},\ 1,\ 2,\ 3,\ 5,\ 8,\ 13,\ 20,\ 40,\ 100,\ ?,\ \text{café})$
+\end{itemize}
+\end{definicion}
+
+\textbf{Protocolo paso a paso de una sesión de \textit{Planning Poker} (Diapositiva 72--73):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textbf{Moderador que NO estima:} Existe un moderador (habitualmente el Scrum Master) que gestiona la reunión y controla los tiempos asignados, pero \textbf{no emite estimaciones}.
+    \item \textbf{Conversación e introducción:} El desarrollador con mayor conocimiento de una característica proporciona una breve introducción. El equipo hace preguntas y discute para aclarar supuestos y riesgos.
+    \item \textbf{Votación simultánea sin anclaje:} Cada miembro selecciona una carta del mazo y la coloca \textbf{boca abajo}. A continuación, \textbf{todo el mundo muestra sus cartas a la vez} (evitando que el primer voto condicione a los demás).
+    \item \textbf{Alineación y debate de extremos:} A las personas con estimaciones fuera del promedio (\textbf{la más alta y la más baja}, p. ej., un \texttt{2} y un \texttt{13}) se les concede tiempo para justificar su estimación y continúa la discusión.
+    \item \textbf{Repetición hasta consenso:} Se repite el proceso de votación hasta alcanzar un consenso. \textit{El objetivo real no es solo el número, sino alinear el conocimiento del equipo para descubrir riesgos ocultos.}
+\end{enumerate}
+
+\section{Velocidad del Equipo y Planificación de Iteraciones (Diapositivas 74--79)}
+
+\begin{definicion}[Velocidad del Equipo (Team Velocity)]
+La \textbf{Velocidad} es la \textbf{cantidad de Puntos de Historia (PH) que un equipo puede completar satisfactoriamente en una única iteración}. Se calcula por observación empírica a lo largo de varias iteraciones y permite planificar qué HU se abordarán en cada Sprint.
+\end{definicion}
+
+\subsection{Los 3 Métodos para Calcular la Velocidad (Diapositiva 76)}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item \textbf{Utilizar datos históricos (\textit{``El tiempo que hizo ayer'' / Yesterday's Weather}):} Tomar el promedio de puntos completados en iteraciones pasadas del mismo equipo.
+    \item \textbf{Ejecutar una iteración inicial:} Realizar un primer Sprint de prueba y utilizar la velocidad real obtenida en esa iteración.
+    \item \textbf{Hacer un pronóstico (\textit{``El cálculo de recursos''}):} Calcular matemáticamente la capacidad teórica cuando el equipo es nuevo y aplicar un factor de dedicación.
+\end{enumerate}
+
+\begin{ejercicio}[Cálculo Oficial de la Velocidad mediante Cálculo de Recursos (Diapositiva 77)]
+\textbf{Datos del problema:}
+\begin{itemize}[itemsep=1pt]
+    \item Equipo de desarrollo de $\mathbf{5\text{ \textbf{miembros}}}$ (todos trabajan las mismas horas).
+    \item Iteraciones de $\mathbf{2\text{ \textbf{semanas}}} \Longrightarrow \mathbf{1\text{ \textbf{iteración}} = 10\text{ \textbf{días de trabajo}}}$.
+    \item Equivalencia en el entorno de trabajo: $\mathbf{1\text{ \textbf{PH}} = 1\text{ \textbf{día de trabajo ideal}}}$.
+    \item Factor de dedicación efectiva: $\mathbf{80\%}$.
+\end{itemize}
+
+\textbf{Fórmula y Resolución Paso a Paso:}
+$$\text{Días por iteración} = 5\text{ programadores} \times 10\text{ días} = \mathbf{50\text{ días de trabajo}}$$
+$$\mathbf{Velocidad} = \text{Días totales} \times \text{Factor de dedicación} = 50 \times 80\% = \mathbf{40\text{ PH por iteración}}$$
+\end{ejercicio}
+
+\subsection{Planificación de Iteraciones y Descomposición en Tareas (Diapositivas 78--82)}
+
+En la \textbf{Planificación de Iteraciones}, se asignan las HU priorizadas a las iteraciones garantizando que la suma de Puntos de Historia de cada iteración no supere la Velocidad del equipo (p. ej., con $\text{Velocidad} = 13\text{ PH}$, la Iteración 1 agrupa las historias $A(3)+B(5)+C(5)=13\text{ PH}$; la Iteración 2 agrupa $D(3)+E(1)+F(8)=12\text{ PH}$, etc.).
+
+Posteriormente, cada HU del Sprint se descompone en \textbf{Tareas Técnicas} individuales siguiendo cinco reglas (diapositiva 80):
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item Deben poder ser tratadas de forma individual por miembros del equipo de desarrollo.
+    \item \textbf{Duración acotada:} La duración de una tarea debe estar entre \textbf{medio día (0.5 días) y 3 ó 4 días de trabajo}.
+    \item Una vez terminada la tarea se debe generar un \textbf{producto o componente entregable} verificable.
+    \item No se debe dedicar excesivo tiempo previo a estudiar microdetalles de las tareas.
+    \item Se deben \textbf{incluir explícitamente tareas de prueba, documentación y automatización}.
+\end{enumerate}
+
+\section{Los 9 Patrones para Partir HU Grandes (Richard Lawrence) (Diapositivas 83--91)}
+
+Cuando una Historia de Usuario es demasiado grande (excede entre $1/10$ y $1/6$ de la velocidad del equipo o no cabe con holgura en una iteración), se divide en historias más pequeñas aplicando los \textbf{9 Patrones de Richard Lawrence}:
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.38}
+\begin{longtable}{>{\bfseries\sffamily\color{mdaDarkBlue}}p{3.4cm} p{5.2cm} p{5.7cm}}
+\toprule
+\rowcolor{mdaDarkBlue}
+\textbf{\color{white}Patrón de División} & \textbf{\color{white}Criterio Metodológico} & \textbf{\color{white}Ejemplo Oficial de Clase (Diapositivas 83--91)} \\
+\midrule
+\endfirsthead
+
+\toprule
+\rowcolor{mdaDarkBlue}
+\textbf{\color{white}Patrón de División} & \textbf{\color{white}Criterio Metodológico} & \textbf{\color{white}Ejemplo Oficial de Clase (Diapositivas 83--91)} \\
+\midrule
+\endhead
+
+\bottomrule
+\endfoot
+
+1. División por pasos del flujo de trabajo\newline{\scriptsize(\textit{Workflow Steps})} & Identificar los pasos secuenciales que realiza el usuario para hacer una actividad e implementarlos de forma incremental. & \textbf{HU:} \textit{Publicar nuevos programas de precios.}\newline $\bullet$ Publicar precios en la página principal.\newline $\bullet$ Enviar mensaje a cada cliente en el portal.\newline $\bullet$ Enviar lista con descuentos personalizados. \\
+\rowcolor{mdaGray}
+2. División por reglas de negocio\newline{\scriptsize(\textit{Business Rules})} & Si una HU incluye varias reglas o condiciones de negocio, crear historias separadas para cada regla o condición. & \textbf{HU:} \textit{Retirar dinero de un cajero.}\newline $\bullet$ Impedir retiro si no hay saldo suficiente.\newline $\bullet$ Limitar retiro a un máximo de $1000\text{ \euro}$ por día por seguridad. \\
+3. El mayor esfuerzo de desarrollo\newline{\scriptsize(\textit{Major Effort})} & Partir la HU de modo que la primera parte asuma el mayor esfuerzo de infraestructura y las siguientes solo añadan variantes simples. & \textbf{HU:} \textit{Cambiar tarifa de electricidad con selector.}\newline $\bullet$ Usar tarifa de medida de uso (infraestructura).\newline $\bullet$ Usar tarifa de prepago.\newline $\bullet$ Usar tarifas de descuento. \\
+\rowcolor{mdaGray}
+4. Sencillo / Complejo\newline{\scriptsize(\textit{Simple / Complex})} & Parar y preguntarse: \textit{``¿Qué es lo más simple que podría funcionar?''} Construir ese núcleo y añadir variaciones y complejidad en nuevas HU. & \textbf{HU:} \textit{Tener siempre el precio más bajo.}\newline $\bullet$ Teniendo en cuenta el proveedor actual más barato.\newline $\bullet$ Avisando de ofertas que aparecerán en el futuro próximo. \\
+5. Variaciones en datos\newline{\scriptsize(\textit{Data Variations})} & Las variaciones sobre los tipos de datos, idiomas o formatos aumentan la complejidad; procesar primero un tipo de dato y luego el resto. & \textbf{HU:} \textit{Enviar mensajes a los clientes.}\newline $\bullet$ Enviar mensajes en inglés.\newline $\bullet$ Enviar mensajes en español. \\
+\rowcolor{mdaGray}
+6. Métodos de entrada de datos (Vista IU)\newline{\scriptsize(\textit{Interface Variations})} & Cuando la complejidad reside en la IU más que en la lógica, empezar con una interfaz básica y añadir después interacciones o dispositivos más ricos. & \textbf{HU:} \textit{Escuchar mis listas de reproducción.}\newline $\bullet$ Escuchar en el navegador de escritorio trabajando.\newline $\bullet$ Escuchar en la aplicación móvil mientras corro. \\
+7. Niveles de calidad del sistema\newline{\scriptsize(\textit{Deferred Performance})} & Hacer que la implementación funcione primero y en HU posteriores optimizar eficiencia, rendimiento o accesibilidad. & \textbf{HU:} \textit{Navegar por el catálogo de productos.}\newline $\bullet$ Cargar rápidamente el catálogo sin demoras.\newline $\bullet$ Permitir acceso mediante lectores de pantalla para problemas de visión. \\
+\rowcolor{mdaGray}
+8. Operaciones múltiples\newline{\scriptsize(\textit{CRUD Operations})} & Verbos genéricos como \textit{gestionar, administrar o controlar} se dividen en sus operaciones elementales individuales. & \textbf{HU:} \textit{Gestionar mi cuenta.}\newline $\bullet$ Darme de alta como cliente.\newline $\bullet$ Editar parámetros de la cuenta.\newline $\bullet$ Cancelar la cuenta.\newline $\bullet$ Añadir más dispositivos asociados. \\
+9. Escenarios de un caso de uso\newline{\scriptsize(\textit{Use Case Scenarios})} & Si se parte de un estudio previo de casos de uso, dividir cada caso de uso en escenarios individuales independientes. & Separar el escenario principal de éxito de los escenarios alternativos (alta, edición, baja, vinculación). \\
+\end{longtable}
+\renewcommand{\arraystretch}{1.0}
+
+\section{SPIKE: Investigación Técnica y Funcional (Diapositivas 92--96)}
+
+\begin{definicion}[SPIKE]
+Un \textbf{SPIKE} es un \textbf{tipo especial de Historia de Usuario} utilizada para gestionar una dificultad o incertidumbre. Representa el tiempo acotado (\textit{timebox}) necesario para \textbf{reducir un riesgo o una incertidumbre de un problema técnico o funcional}, o para \textbf{aumentar la seguridad sobre la estimación de una HU}.
+\end{definicion}
+
+\subsection{Tipos de SPIKE y Causas que los Originan (Diapositivas 92--94)}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textbf{SPIKE Técnico:} Analiza varias aproximaciones técnicas en el dominio de la solución del problema:
+    \begin{itemize}
+        \item Decidir si comprar o desarrollar un componente (\textit{Buy vs. Build}).
+        \item Evaluar el rendimiento o viabilidad de una solución propuesta.
+        \item Evaluar el impacto de carga de una nueva HU.
+        \item \textit{Ejemplo (Diapositiva 94):} Investigar cuánto tiempo se tarda en actualizar una pantalla personalizada con el consumo eléctrico actual y qué requisitos de comunicación y gestión tendrá.
+    \end{itemize}
+    \item \textbf{SPIKE Funcional:} Se emplea cuando existe una incertidumbre importante sobre \textbf{cómo debe interactuar el usuario con el sistema} para alcanzar sus objetivos:
+    \begin{itemize}
+        \item \textit{Ejemplo (Diapositiva 94):} Realizar un prototipo de histograma de gasto eléctrico en el portal web y obtener realimentación (\textit{feedback}) de varios usuarios sobre la forma de presentar la información.
+    \end{itemize}
+\end{enumerate}
+
+\begin{aviso}[Las 5 Reglas Oficiales sobre SPIKE (Diapositiva 95 -- ¡Muy Preguntado!)]
+\begin{enumerate}[label=\textbf{Regla \arabic*:}, leftmargin=1.9cm, itemsep=3pt]
+    \item \textbf{Gestión estándar en la pila:} Se tratan como cualquier otra HU (se incluyen en el \textit{Product Backlog}, se priorizan, se estiman/acotan en tiempo, etc.).
+    \item \textbf{Su resultado NO es código de producción, es INFORMACIÓN útil para otras HU:} Debe generar una decisión fundamentada, un prototipo descartable, una demostración de un diseño o una solución parcial de un problema.
+    \item \textbf{Demostrabilidad:} La solución o conclusión de un SPIKE debe ser \textbf{demostrable al equipo de desarrollo}.
+    \item \textbf{Aceptación formal:} Un SPIKE, como cualquier HU, debe ser \textbf{aceptado usando criterios de aceptación} definidos previamente en la propia tarjeta del SPIKE.
+    \item \textbf{Separación temporal de iteraciones:} Suele ser recomendable dejar la resolución del SPIKE para una \textbf{iteración anterior/diferente} a la de la HU que lo motivó (para poder estimar y construir la HU real una vez despejada la incertidumbre).
+\end{enumerate}
+\end{aviso}

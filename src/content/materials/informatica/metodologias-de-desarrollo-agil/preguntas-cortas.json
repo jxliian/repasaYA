@@ -1,0 +1,134 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "reveal",
+  "title": "Preguntas Cortas y Ejercicios de Examen",
+  "description": "25 preguntas cortas de desarrollo y ejercicios prácticos resueltos paso a paso para preparar la prueba parcial de teoría del Seminario 2.",
+  "order": 4,
+  "items": [
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "1. ¿Por qué se afirma que las Historias de Usuario son 'promesas de una conversación' y qué ocurre si una tarjeta incluye demasiados detalles?",
+      "answer": "Porque la tarjeta no pretende ser una especificación cerrada ni contener todas las respuestas; su propósito es provocar las preguntas adecuadas durante la etapa de Conversación con el cliente. Una tarjeta con demasiados detalles limita la conversación, frena la creatividad del equipo y dificulta la negociación."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "2. Según Kent Beck y Martin Fowler, ¿cómo se demuestra el progreso en un proyecto ágil y qué cuatro características debe reunir toda Historia de Usuario?",
+      "answer": "El progreso se demuestra únicamente entregando código probado e integrado que implementa una Historia de Usuario. Toda historia debe ser: 1) Comprensible para los clientes, 2) Probable por los desarrolladores (developer-testable), 3) Valiosa para el cliente/negocio, y 4) Lo suficientemente pequeña para construir alrededor de media docena en una iteración."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "3. Compara los Casos de Uso (RUP) frente a las Historias de Usuario (XP/Scrum) en cuanto a: Planificación, Duración, Comunicación, Soporte y Pruebas.",
+      "answer": "1) Planificación: Los Casos de Uso NO se usan para planificar; las HU SÍ se usan directamente para planificar iteraciones.\n2) Duración: Un Caso de Uso puede abarcar varias iteraciones; una HU debe implementarse y probarse en una única iteración.\n3) Comunicación: Casos de Uso se basan en texto exhaustivo y diagramas ('todo escrito'); las HU se basan en comunicación verbal y colaboración.\n4) Soporte: Casos de Uso son documentos extensos de archivo; las HU son tarjetas para uso directo.\n5) Pruebas: En Casos de Uso van en documentación separada; en HU las pruebas de aceptación van en el reverso de la propia tarjeta."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "4. ¿Quién escribe las Historias de Usuario en XP, en Scrum y en la realidad práctica? ¿Quiénes conforman el 'Customer Team'?",
+      "answer": "- En XP: Las escribe el Cliente.\n- En Scrum: Las escribe y gestiona el Product Owner (con ayuda de clientes, stakeholders y equipo de desarrollo).\n- En la realidad: Cualquier miembro del equipo de desarrollo con conocimiento suficiente del dominio del problema.\nEl 'Customer Team' (Stakeholders) que participa en detallarlas y priorizarlas está formado por: clientes reales (usuarios), Product Manager, probadores (QA) y diseñadores de interacción (UX)."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "5. Explica el modelo 'CCC' de Ron Jeffries y detalla qué elementos se colocan en el anverso y en el reverso de una tarjeta física de HU.",
+      "answer": "Las 3 C de Ron Jeffries son:\n- Card (Tarjeta): 2-3 frases que describen la intención.\n- Conversation (Conversación): Diálogo entre equipo y cliente para aclarar detalles.\n- Confirmation (Confirmación): Pruebas de aceptación que verifican la implementación.\nEn la tarjeta física:\n- Anverso: ID, Título, Narrativa canónica (Como [rol], Quiero [objetivo], Para [beneficio]), Estimación (PH), Prioridad y Dependencias.\n- Reverso: Pruebas o Criterios de Aceptación."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "6. ¿Qué son las Pruebas de Aceptación, quién es su propietario principal y por qué se dice que son de 'Caja Negra' e 'Independientes de la implementación'?",
+      "answer": "Son las condiciones de satisfacción que una HU debe cumplir para considerarse completada. Su propietario principal es el Product Owner (aunque cualquiera puede redactarlas). Son de 'Caja Negra' e 'Independientes de la implementación' porque se escriben en lenguaje de negocio y solo verifican que las salidas observables del sistema cumplen lo esperado (QUÉ hace), sin especificar cómo se programa internamente (CÓMO se hace). Se implementan en la misma iteración que la HU."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "7. ¿Cuál es la diferencia entre la Definición de Terminado (Definition of Done - DoD) y los Criterios de Aceptación? Cita al menos 5 elementos de una DoD.",
+      "answer": "- Diferencia: Los Criterios de Aceptación son condiciones funcionales específicas de CADA historia individual, mientras que la DoD es un acuerdo de calidad global entre desarrolladores y cliente aplicable de forma transversal a todas las HU.\n- Elementos de la DoD: 1) Pruebas unitarias y de integración superadas, 2) Código documentado, revisado y sin incidencias críticas, 3) Despliegue en el entorno acordado (testing/preproducción/producción), 4) Nivel de documentación exigido, 5) Métricas de calidad del software y 6) Criterios de aceptación comprobados y aprobados por el Product Owner."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "8. Describe la pirámide de granularidad de requisitos ágiles y explica las reglas para descomponer una HU en Tareas técnicas.",
+      "answer": "Jerarquía de mayor a menor:\n1) Temas: Grandes proyectos o subproductos globales sin análisis detallado.\n2) Épicas: Súper historias que agrupan un conjunto de HU relacionadas entre sí.\n3) Historias de Usuario: Descripción simple de una funcionalidad concisa que aporta valor en un Sprint.\n4) Tareas: División técnica de una HU para el trabajo individual del desarrollador. Deben durar entre medio día y 3-4 días de trabajo, generar un producto entregable al terminar, no consumir demasiado tiempo en su estudio previo e incluir siempre tareas de prueba, documentación y automatización."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "9. ¿Cómo se gestionan los Requisitos No Funcionales (RNF) en las metodologías ágiles? Cita las 4 vías del seminario y pon un ejemplo.",
+      "answer": "Los RNF describen cualidades o restricciones del sistema (rendimiento, disponibilidad, seguridad) y pueden tratarse como:\n1) Restricciones asignadas a cualquier elemento de las pilas (Temas, Épicas, HU o Tareas).\n2) Criterios de aceptación de una HU (ej. 'El sistema muestra las transacciones mensuales en menos de 10 segundos').\n3) Parte transversal de la Definición de Terminado (DoD).\n4) Documento de especificación específico para los RNF globales al sistema (o redactados como HU de valor para el usuario, ej. disponibilidad web del 98%)."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "10. Explica qué significa cada letra del acrónimo I.N.V.E.S.T. (Bill Wake) para evaluar la calidad de una Historia de Usuario.",
+      "answer": "- I (Independiente): Debe poder desarrollarse y entregarse sin depender de otras HU.\n- N (Negociable): No es un contrato cerrado; sus detalles se negocian entre cliente y equipo.\n- V (Valiosa): Aporta valor claro al usuario o comprador en lenguaje de negocio.\n- E (Estimable): El equipo comprende lo suficiente para estimar su esfuerzo y planificarla.\n- S (Suscinta / Small): Pequeña en esfuerzo (2-3 personas/semana o entre 1/10 y 1/6 de la velocidad de la iteración).\n- T (Testeable): Puede verificarse objetivamente mediante pruebas de aceptación en la etapa de Confirmación."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "11. ¿Qué criterios se emplean para priorizar el Product Backlog, en qué consiste el método MoSCoW y por qué 'la prioridad puede cambiar pero el tamaño no'?",
+      "answer": "- Criterios de priorización: 1) Valor de negocio para el cliente, 2) Valor para el usuario (muchos usuarios o pocos usuarios clave), 3) Riesgo e incertidumbre, 4) Dependencias con otras HU y 5) Tamaño/esfuerzo.\n- MoSCoW: Must (obligatorio), Should (muy importante pero el éxito inmediato no depende de él), Could (deseable si no afecta objetivos principales), Would/Won't (si sobra tiempo o para futuras versiones).\n- Regla: La prioridad cambia según evoluciona el negocio, pero el tamaño (Puntos de Historia) mide el esfuerzo relativo intrínseco de construirla, que no varía por ser más o menos urgente."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "12. ¿Qué son los Puntos de Historia (PH), qué tres factores integran y cómo funciona una sesión de Planning Poker?",
+      "answer": "- Puntos de Historia: Medida relativa del tamaño de una HU comparada con otras del mismo equipo. Integra: Esfuerzo necesario + Complejidad + Riesgo/Incertidumbre.\n- Dinámica de Planning Poker: Un moderador (que NO estima) dirige los tiempos. El desarrollador con más conocimiento introduce la característica y el equipo pregunta dudas. Cada miembro elige en secreto una carta de la serie Fibonacci (0, 1/2, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?, café) y todos las muestran a la vez. Si hay disparidad, los valores extremos (altos y bajos) justifican su postura y se repite la votación hasta lograr consenso."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "13. ¿Qué es la Velocidad de un equipo ágil y cuáles son las 3 formas de calcularla según el seminario?",
+      "answer": "La Velocidad es la cantidad de Puntos de Historia (PH) que un equipo completa satisfactoriamente en una iteración. Se puede calcular de 3 formas:\n1) Utilizar datos históricos de iteraciones previas ('el tiempo que hizo ayer').\n2) Ejecutar una iteración inicial y observar la velocidad real obtenida.\n3) Hacer un pronóstico mediante el 'cálculo de recursos': multiplicar nº de programadores × días de trabajo de la iteración × equivalencia PH/día ideal × Factor de dedicación (%)."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "14. Enumera los 9 patrones de Richard Lawrence para partir Historias de Usuario grandes.",
+      "answer": "1) División por pasos del flujo de trabajo (Workflow Steps).\n2) División por reglas de negocio (Business Rules).\n3) El mayor esfuerzo de desarrollo (Major Effort).\n4) Sencillo / Complejo (Simple / Complex: ¿qué es lo más simple que podría funcionar?).\n5) Variaciones en datos (Data Variations: idiomas, formatos, criterios).\n6) Métodos de entrada de datos / Vista de la IU (Interface Methods).\n7) Niveles de calidad del sistema (rendimiento, accesibilidad pospuesta).\n8) Operaciones múltiples (CRUD: gestionar -> alta, baja, edición, búsqueda).\n9) Escenarios de un caso de uso."
+    },
+    {
+      "tema": "Preguntas Cortas de Teoría",
+      "q": "15. ¿Qué es un SPIKE, en qué se diferencia un SPIKE Técnico de uno Funcional y cuáles son sus 5 reglas de gestión?",
+      "answer": "Un SPIKE es una HU especial acotada en tiempo para investigar y reducir un riesgo o incertidumbre y poder estimar otra HU.\n- SPIKE Técnico: Analiza aproximaciones en el dominio de la solución (comprar vs. desarrollar, rendimiento, impacto de carga).\n- SPIKE Funcional: Analiza incertidumbres en la interacción del usuario con el sistema (ej. prototipos con usuarios).\n- 5 Reglas: 1) Se tratan como otras HU en el backlog (se priorizan y estiman), 2) Su resultado NO es código, sino información útil (decisión, prototipo, diseño), 3) Su solución debe ser demostrable al equipo, 4) Tiene criterios de aceptación propios, y 5) Se resuelve en una iteración previa a la de la HU que lo originó."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 1 (Redacción de Tarjeta Canónica): En un portal de reservas de viajes, un cliente desea poder cancelar una reserva previa para cambiar sus fechas. Diseña la tarjeta física completa (Anverso y Reverso con 4 pruebas de aceptación basadas en el seminario).",
+      "answer": "ANVERSO DE LA TARJETA:\n- ID: HU-08 | Título: Cancelación de reserva previa\n- Descripción: Como cliente, quiero cancelar una reserva previa para poder realizar una nueva reserva en fechas o destinos diferentes que se adapten mejor a mi agenda.\n- Estimación: 3 PH | Prioridad: 200 (Alta) | Dependencias: HU-03 (Reserva de habitación).\n\nREVERSO DE LA TARJETA (Pruebas de Aceptación):\n1. [ ] Comprobar que un Cliente Premium puede cancelar en el mismo día sin coste ni penalización adicional.\n2. [ ] Comprobar que a un cliente No-Premium se le carga un 10% de penalización al cancelar en el mismo día.\n3. [ ] Confirmar que el sistema envía automáticamente un correo electrónico de confirmación de la cancelación al cliente.\n4. [ ] Confirmar que el hotel recibe una notificación automática informando de la cancelación y liberando la plaza."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 2 (Formato BDD Given-When-Then): Redacta en formato BDD (Dado-Cuando-Entonces) dos escenarios de prueba de aceptación: a) Intento de registro con nombre de usuario duplicado ('idprueba'), y b) Préstamo de libro denegado en biblioteca por superar el cupo máximo de 3 libros.",
+      "answer": "Escenario A (Registro duplicado):\n- DADO un sistema donde ya existe un usuario registrado con el nombre 'idprueba'\n- CUANDO alguien intenta registrarse utilizando el nombre 'idprueba'\n- ENTONCES el sistema rechaza el registro y muestra un mensaje indicando que el nombre 'idprueba' ya existe.\n\nEscenario B (Cupo de préstamo agotado):\n- DADO un socio válido de la biblioteca que ya tiene actualmente 3 libros en préstamo activo\n- CUANDO el socio solicita en préstamo un cuarto libro disponible en el catálogo\n- ENTONCES el sistema deniega el préstamo, muestra un aviso de cupo máximo superado y mantiene sin cambios el inventario del libro."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 3 (Auditoría y Refactorización INVEST): Un programador añade al Product Backlog la siguiente historia: 'Diseñar e implementar una caché Redis en el servidor para las consultas SQL del catálogo'. Evalúa qué criterios INVEST incumple y reescríbela correctamente con un criterio de aceptación cuantificable.",
+      "answer": "1. Diagnóstico INVEST:\n- Incumple 'V' (Valiosa): Está escrita en jerga técnica interna y no expresa ningún beneficio comprensible para el cliente o usuario.\n- Incumple 'N' (Negociable): Impone una tecnología cerrada ('caché Redis' y 'consultas SQL') en lugar de expresar la necesidad.\n\n2. Refactorización Canónica:\n- HU: 'Como comprador de la tienda online, quiero que el catálogo de productos cargue rápidamente al aplicar filtros para poder navegar sin esperas ni frustración.'\n- Criterio de Aceptación (Testeable): 'El sistema muestra los productos filtrados en menos de 2 segundos para catálogos de hasta 10.000 artículos en el 98% de las peticiones.'"
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 4 (Cálculo de Velocidad por Recursos - Básico): Un equipo de desarrollo ágil está formado por 6 programadores. Las iteraciones duran 2 semanas (10 días laborables por iteración). Se estima que 1 PH = 1 día de trabajo ideal y el factor de dedicación del equipo es del 75%. Calcula razonadamente la velocidad del equipo.",
+      "answer": "Resolución paso a paso:\n1) Días de trabajo brutos por iteración:\n   6 programadores × 10 días laborables = 60 días de trabajo por iteración.\n2) Conversión a capacidad teórica (1 PH = 1 día ideal):\n   60 días × 1 PH/día = 60 PH teóricos.\n3) Aplicación del Factor de Dedicación (75% = 0,75):\n   Velocidad = 60 PH × 0,75 = 45 PH.\n\nRespuesta final: La velocidad estimada del equipo es de 45 Puntos de Historia por iteración."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 5 (Cálculo de Velocidad con Dedicación Parcial y Festivos): Un equipo cuenta con 4 desarrolladores a tiempo completo y 2 desarrolladores a media jornada (50%). El próximo Sprint dura 3 semanas (15 días laborables), pero incluye 2 días festivos nacionales. Sabiendo que 1 PH = 1 día ideal y el factor de dedicación general es del 80%, ¿cuál será la velocidad para ese Sprint?",
+      "answer": "Resolución paso a paso:\n1) Recursos equivalentes a tiempo completo:\n   4 + (2 × 0,5) = 5 programadores equivalentes.\n2) Días laborables efectivos en la iteración:\n   15 días totales - 2 días festivos = 13 días laborables efectivos.\n3) Días de trabajo brutos:\n   5 programadores × 13 días = 65 días de trabajo.\n4) Aplicación del Factor de Dedicación (80% = 0,80):\n   Velocidad = 65 × 0,80 = 52 PH.\n\nRespuesta final: El equipo podrá comprometer hasta 52 Puntos de Historia en ese Sprint."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 6 (Planificación de Iteraciones): La velocidad de un equipo es de 13 PH por iteración. El Product Backlog priorizado tiene las siguientes 10 historias: A(3), B(5), C(5), D(3), E(1), F(8), G(5), H(5), I(5), J(2). Asigna las historias a las iteraciones necesarias respetando la prioridad y el límite de velocidad.",
+      "answer": "Regla: La suma de puntos de cada iteración debe ser ≤ 13 PH.\n\n- Iteración 1: A(3) + B(5) + C(5) = 13 PH (13 ≤ 13, capacidad al 100%).\n- Iteración 2: D(3) + E(1) + F(8) = 12 PH (12 ≤ 13; G(5) no cabe porque sumaría 17).\n- Iteración 3: G(5) + H(5) + J(2) = 12 PH (12 ≤ 13; se adelanta J(2) para aprovechar los 3 PH libres sin superar 13, ya que I(5) sumaría 15).\n- Iteración 4: I(5) = 5 PH (5 ≤ 13, quedan 8 PH libres para nuevas historias).\n\nTotal: Se completan las 42 PH en 4 iteraciones."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 7 (Descomposición en Tareas Técnicas): Dada la Historia de Usuario 'Como cliente, quiero buscar un hotel para alojarme', desglósala en al menos 6 tareas técnicas concretas para el Sprint Backlog siguiendo las pautas del seminario.",
+      "answer": "Desglose en tareas técnicas (duración entre 0,5 y 3-4 días cada una):\n1. Codificar la pantalla de interfaz de usuario para la búsqueda básica (localidad y fechas).\n2. Codificar la pantalla de búsqueda avanzada con selectores de filtros.\n3. Codificar la pantalla de presentación del listado de resultados y mensaje cuando no existan coincidencias.\n4. Escribir los métodos de acceso a datos y las consultas SQL optimizadas para las búsquedas.\n5. Desarrollar las pruebas unitarias y de integración de los servicios de búsqueda.\n6. Documentar la nueva funcionalidad en los manuales de usuario y ayudas contextuales.\n7. Ejecutar y verificar las pruebas de aceptación definidas en el reverso de la tarjeta."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 8 (Aplicación de Patrones de División): Tienes dos HU demasiado grandes (Épicas): 1) 'Como administrador, quiero gestionar los usuarios del sistema (13 PH)' y 2) 'Como cliente bancario, quiero retirar dinero de un cajero para tener efectivo (20 PH)'. Indica qué patrón de Richard Lawrence aplicarías a cada una y escribe las historias resultantes.",
+      "answer": "Caso 1: 'Gestionar usuarios (13 PH)' -> Patrón #8: Operaciones Múltiples (CRUD).\nSe divide en 4 historias independientes de tamaño pequeño (3-5 PH):\n- HU 1.1: Como administrador, quiero registrar un nuevo usuario (3 PH).\n- HU 1.2: Como administrador, quiero editar los datos de un usuario existente (5 PH).\n- HU 1.3: Como administrador, quiero buscar un usuario en el sistema (3 PH).\n- HU 1.4: Como administrador, quiero borrar o dar de baja un usuario (5 PH).\n\nCaso 2: 'Retirar dinero de cajero (20 PH)' -> Patrón #2: Reglas de Negocio.\nSe divide separando las condiciones de negocio:\n- HU 2.1: ...quiero retirar efectivo en el flujo básico disponiendo de saldo.\n- HU 2.2: ...quiero que se me impida retirar dinero si no tengo suficiente saldo para no quedar en descubierto.\n- HU 2.3: ...quiero estar limitado a retirar un máximo de 1.000 € por día para garantizar la seguridad de mi cuenta."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 9 (División y Repriorización del Backlog): En una librería online las prioridades iniciales son: 1º Buscar libros (por título, autor, temática e ISBN), 2º Carrito de compras y 3º Pago con tarjeta. Explica cómo aplicar el patrón de 'Variaciones en datos' sobre la búsqueda para entregar valor de negocio antes y muestra el nuevo orden del Product Backlog.",
+      "answer": "1. Estrategia: Implementar todas las modalidades de búsqueda al inicio retrasa el carrito y el pago (sin los cuales no se puede vender ningún libro). Aplicamos el Patrón #5 (Variaciones en datos) para dividir 'Buscar libros' en 4 historias según el criterio de búsqueda.\n\n2. Nuevo Product Backlog repriorizado:\n- Prioridad 1: Búsqueda de libros por Título (permite buscar y constituye el Walking Skeleton junto con carrito y pago).\n- Prioridad 2: Carrito de compras online.\n- Prioridad 3: Búsqueda de libros por Autor.\n- Prioridad 4: Pago mediante tarjeta de crédito.\n- Prioridad 5: Búsqueda de libros por Temática.\n- Prioridad 6 (final de la pila): Búsqueda de libros por código ISBN (funcionalidad muy específica que se pospone)."
+    },
+    {
+      "tema": "Ejercicios Prácticos de Examen",
+      "q": "Ejercicio 10 (Diseño de SPIKE Técnico y Funcional): El Product Owner propone la HU: 'Como cliente de una compañía eléctrica, quiero visualizar mi consumo eléctrico en un histograma interactivo para comprender mi gasto actual y previsto'. El equipo desconoce el coste de carga en el servidor y tampoco sabe qué representación gráfica entenderán mejor los clientes. Diseña un SPIKE Técnico y un SPIKE Funcional indicando cómo deben planificarse.",
+      "answer": "1. SPIKE Técnico:\n- Descripción: Investigar cuánto tiempo se tarda en actualizar una pantalla personalizada con el uso eléctrico actual y qué requisitos de comunicación y gestión de carga tendrá en el servidor.\n- Entregable/Criterio de aceptación: Informe técnico con pruebas de carga y decisión arquitectónica demostrable al equipo.\n\n2. SPIKE Funcional:\n- Descripción: Realizar un prototipo rápido de histograma en el portal web y recoger realimentación de varios usuarios reales sobre la forma de presentar la información.\n- Entregable/Criterio de aceptación: Prototipo validado y conclusiones de usabilidad.\n\n3. Regla de Planificación:\nAmbos Spikes se introducen en el Product Backlog, se estiman con un tiempo acotado (timebox) y se ejecutan en una iteración PREVIA (Sprint N) para que la HU del histograma pueda estimarse con seguridad e implementarse en una iteración posterior (Sprint N+1)."
+    }
+  ]
+}

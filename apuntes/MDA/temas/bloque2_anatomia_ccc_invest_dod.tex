@@ -1,0 +1,293 @@
+% ==============================================================================
+% BLOQUE 2: ANATOMÍA CCC, PRUEBAS DE ACEPTACIÓN (BDD), DoD, GRANULARIDAD E INVEST
+% Diapositivas 26 a 57 del Seminario 2
+% ==============================================================================
+
+\chapter{Anatomía ``CCC'', Pruebas de Aceptación (BDD), Granularidad y Modelo INVEST}
+
+\cuadrofuentes{
+\textbf{Alcance del Bloque:} Diapositivas 26--57 del Seminario 2.\\
+\textbf{Conceptos Clave:} Fórmula \textbf{CCC} de Ron Jeffries (\textit{Card, Conversation, Confirmation}), anatomía física de la tarjeta (anverso y reverso), búsqueda de detalles en la Conversación, Pruebas de Aceptación de caja negra, formato BDD (\texttt{Dado / Cuando / Entonces}), Definición de Terminado (\textit{Definition of Done}), jerarquía de granularidad (\textit{Temas, Épicas, HU, Tareas}), gestión de Requisitos No Funcionales (RNF) y modelo \textbf{I.N.V.E.S.T.} de Bill Wake.
+}
+
+\section{Elementos de una Historia de Usuario: El Modelo ``CCC'' (Ron Jeffries)}
+
+En el año 2001, \textbf{Ron Jeffries} (uno de los tres fundadores de \textit{Extreme Programming}) formuló la regla de las \textbf{Tres ``C''} para explicar que una Historia de Usuario es mucho más que el texto escrito en una cartulina:
+
+\begin{center}
+\begin{tikzpicture}[
+    cbox/.style={rectangle, rounded corners=5pt, draw=mdaPrimary, thick, text width=4.2cm, minimum width=4.5cm, minimum height=3.3cm, align=center, font=\sffamily},
+    arrow/.style={-{Stealth[length=3.5mm, width=2.5mm]}, ultra thick, color=mdaAccent}
+]
+    \node[cbox, fill=mdaYellowCard, draw=mdaYellowBorder] (c1) at (0,0) {
+        {\Large\bfseries\color{mdaDarkBlue}1. Tarjeta}\\[2pt]
+        {\normalsize\bfseries\color{mdaOrange}(Card)}\\[6pt]
+        {\scriptsize 2 ó 3 frases que describen}\\[-2pt]
+        {\scriptsize la intención de la HU.}\\[3pt]
+        {\scriptsize\itshape Es una promesa; si tiene}\\[-2pt]
+        {\scriptsize\itshape demasiados detalles, limita}\\[-2pt]
+        {\scriptsize\itshape la conversación con el cliente.}
+    };
+
+    \node[cbox, fill=mdaLightAccent, draw=mdaPrimary, right=0.6cm of c1] (c2) {
+        {\Large\bfseries\color{mdaDarkBlue}2. Conversación}\\[2pt]
+        {\normalsize\bfseries\color{mdaPrimary}(Conversation)}\\[6pt]
+        {\scriptsize El verdadero trabajo ágil.}\\[-2pt]
+        {\scriptsize Detalles obtenidos del}\\[-2pt]
+        {\scriptsize diálogo continuo entre el}\\[-2pt]
+        {\scriptsize equipo de desarrollo y los}\\[-2pt]
+        {\scriptsize usuarios o clientes.}
+    };
+
+    \node[cbox, fill=mdaLightGreen, draw=mdaGreen, right=0.6cm of c2] (c3) {
+        {\Large\bfseries\color{mdaDarkBlue}3. Confirmación}\\[2pt]
+        {\normalsize\bfseries\color{mdaGreen}(Confirmation)}\\[6pt]
+        {\scriptsize Pruebas de aceptación.}\\[-2pt]
+        {\scriptsize Cómo el equipo y el cliente}\\[-2pt]
+        {\scriptsize confirmarán sin ambigüedades}\\[-2pt]
+        {\scriptsize que la HU ha sido}\\[-2pt]
+        {\scriptsize implementada y terminada.}
+    };
+
+    \draw[arrow] (c1) -- (c2);
+    \draw[arrow] (c2) -- (c3);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Información y Narración en la Tarjeta (Diapositivas 28--30)}
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Descripción corta sin detalles exhaustivos:} La tarjeta presenta una descripción concisa junto con pequeñas notas iniciales (p. ej., \textit{``Un cliente puede pagar un viaje usando una tarjeta de crédito. Nota: Se pueden aceptar Visa, MasterCard y American Express; discutir si se aceptan otras más''}).
+    \item \textbf{Peligro del exceso de detalle:} \textbf{Una tarjeta con demasiados detalles limita la conversación con el cliente}, induciendo a los programadores a asumir que todo está decidido y bloqueando soluciones más creativas o simples.
+    \item \textbf{Delimitación del alcance:} La parte exacta a abordar por la HU se delimita en la conversación y se plasma usando las \textbf{pruebas de aceptación}, las cuales recogen:
+    \begin{enumerate}
+        \item Flujos alternativos en la actividad.
+        \item Límites de aceptación (condiciones de contorno y restricciones).
+        \item Pruebas de aceptación verificables por parte de los clientes.
+    \end{enumerate}
+\end{itemize}
+
+\section{Anatomía Canónica de la Tarjeta Física de HU (Diapositivas 31--34)}
+
+En la diapositiva 31 se establece la estructura oficial de una tarjeta de Historia de Usuario dividida en \textbf{Anverso} (identificación, descripción, estimación, prioridad y dependencias) y \textbf{Reverso} (pruebas de aceptación):
+
+\begin{center}
+\begin{tikzpicture}[
+    card/.style={rectangle, draw=mdaYellowBorder!90!black, fill=mdaYellowCard, very thick, minimum width=10.2cm, align=left, font=\sffamily\small},
+    tag/.style={rectangle, rounded corners=6pt, draw=mdaDarkBlue, fill=white, thick, font=\sffamily\scriptsize\bfseries, inner sep=4pt, text=mdaDarkBlue},
+    line/.style={-{Circle[length=1.8mm]}, thick, color=mdaDarkBlue}
+]
+    % ANVERSO
+    \node[font=\sffamily\bfseries\color{mdaDarkBlue}] at (0, 2.5) {ANVERSO DE LA TARJETA};
+    \node[card, minimum height=4.0cm] (anverso) at (0, 0.2) {};
+    \draw[mdaYellowBorder!90!black, thick] (-5.1, 1.45) -- (5.1, 1.45);
+    
+    \node[anchor=west, font=\sffamily\bfseries\color{mdaDarkBlue}] (idval) at (-4.8, 1.8) {5};
+    \node[ font=\sffamily\bfseries\color{mdaDarkBlue}] (titval) at (0, 1.8) {Préstamo de Libro};
+    
+    \node[anchor=north west, text width=9.6cm, font=\sffamily\footnotesize] (descval) at (-4.8, 1.25) {
+        Cómo cliente quiero que los socios puedan pedir prestado un libro, indicando su número de socio y la referencia del libro, siempre y cuando no tengan ya tres libros en préstamo en ese momento.
+    };
+    
+    \node[anchor=west, font=\sffamily\footnotesize] (estval) at (-4.8, -0.75) {Estimación: \textbf{4}};
+    \node[anchor=west, font=\sffamily\footnotesize] (prival) at (-4.8, -1.35) {Prioridad: \textbf{300}};
+    \node[anchor=east, font=\sffamily\footnotesize] (depval) at (4.8, -1.35) {Dependiente de: \textbf{1, 2}};
+
+    % Etiquetas Anverso
+    \node[tag] (tagid) at (-6.5, 1.8) {ID};
+    \node[tag] (tagtit) at (6.5, 1.8) {TÍTULO};
+    \node[tag] (tagdesc) at (6.7, 0.4) {DESCRIPCIÓN};
+    \node[tag] (tagest) at (-6.7, -0.75) {ESTIMACIÓN};
+    \node[tag] (tagpri) at (-6.7, -1.35) {PRIORIDAD};
+    \node[tag] (tagdep) at (6.8, -1.35) {DEPENDENCIAS};
+
+    \draw[line] (tagid.east) -- (-4.85, 1.8);
+    \draw[line] (tagtit.west) -- (1.8, 1.8);
+    \draw[line] (tagdesc.west) -- (4.2, 0.4);
+    \draw[line] (tagest.east) -- (-4.85, -0.75);
+    \draw[line] (tagpri.east) -- (-4.85, -1.35);
+    \draw[line] (tagdep.west) -- (4.75, -1.35);
+
+    % REVERSO
+    \node[font=\sffamily\bfseries\color{mdaDarkBlue}] at (0, -2.5) {REVERSO DE LA TARJETA};
+    \node[card, minimum height=3.4cm] (reverso) at (0, -4.5) {};
+    \node[anchor=north west, text width=9.5cm, font=\sffamily\footnotesize] at (-4.8, -3.05) {
+        $\bullet$ Introducir un número de socio incorrecto y comprobar que se indica error.\\[2pt]
+        $\bullet$ Introducir un socio que ya tiene 3 libros en préstamo y comprobar que se indica error.\\[2pt]
+        $\bullet$ Introducir un libro del que no hay ejemplares y comprobar que se indica un error.\\[2pt]
+        $\bullet$ Introducir todos los datos correctos y comprobar que el número de ejemplares disponibles del libro disminuye y el número de préstamos del socio aumenta en uno.
+    };
+    \node[tag, align=center] (tagrev) at (6.8, -4.5) {PRUEBAS DE\\ACEPTACIÓN};
+    \draw[line] (tagrev.west) -- (4.4, -4.5);
+\end{tikzpicture}
+\end{center}
+
+En herramientas digitales como \textbf{Jira} (diapositiva 34) o plantillas corporativas (diapositivas 32--33), estos mismos campos se representan mediante atributos equivalentes: identificador único, título, narrativa \texttt{Como/Quiero/Para}, condiciones de completitud, prioridad numérica, coste/puntos estimados, iteración asignada y persona encargada.
+
+\section{Buscar Detalles de la HU: La Conversación (Diapositivas 35--36)}
+
+\begin{aviso}[Principio Clave de la Conversación (Diapositiva 35)]
+\textbf{``La tarjeta no contiene estas respuestas; su propósito es PROVOCAR estas preguntas.''}
+\end{aviso}
+
+Por ejemplo, ante la tarjeta mínima \textit{``Como cliente, quiero cancelar una reserva de hotel''}, la etapa de \textbf{Conversación} entre desarrolladores y usuarios debe hacer aflorar preguntas como:
+\begin{itemize}[itemsep=2pt]
+    \item \textit{¿Qué coste de penalización tiene la cancelación?}
+    \item \textit{¿Todos los niveles de clientes tienen el mismo coste o varía si es cliente Premium?}
+    \item \textit{¿Se puede cancelar en cualquier momento o hay límite de horas previo?}
+    \item \textit{¿Se permite una cancelación total y también parcial?}
+    \item \textit{¿A quién (departamento/hotel/cliente) se le notifica automáticamente?}
+\end{itemize}
+
+\textbf{¿Por qué son vitales las conversaciones? (Diapositiva 36):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item Ayudan al equipo a comprender las necesidades y deseos reales del usuario y a producir \textbf{soluciones creativas} a los problemas.
+    \item Favorecen la \textbf{solidez de las relaciones} de confianza entre los miembros del equipo y los usuarios.
+    \item Deben reflejar la \textbf{voz de todos los interesados} (\textit{stakeholders}) en el producto.
+\end{enumerate}
+
+\section{Pruebas de Aceptación: La Confirmación y Formato BDD (Diapositivas 37--43)}
+
+\begin{definicion}[Criterios o Pruebas de Aceptación]
+Los criterios o pruebas de aceptación son las \textbf{condiciones objetivas que una Historia de Usuario debe cumplir para considerarse completada} cuando es desarrollada y desplegada por el equipo. Funcionan como una guía que asegura que lo que se construye es realmente lo que el negocio necesita.
+\end{definicion}
+
+\subsection{Reglas y Propiedades de las Pruebas de Aceptación}
+\begin{itemize}[itemsep=3pt]
+    \item \textbf{Claridad y precisión:} No deben dejar espacio a interpretaciones subjetivas ni ambigüedades.
+    \item \textbf{Independencia de la implementación:} No describen \textit{cómo} programarlo internamente, sino \textbf{\textit{qué} resultado observable se espera}.
+    \item \textbf{Lenguaje de negocio:} Se escriben siempre en el lenguaje del ámbito de negocios.
+    \item \textbf{Propiedad del Product Owner:} Aunque cualquiera en el equipo puede escribir una prueba de aceptación, \textbf{el Product Owner es el principal propietario de la prueba}.
+    \item \textbf{Pruebas de Caja Negra (\textit{Black-box testing}):} Solo verifican que las salidas del sistema cumplen las condiciones de satisfacción indicadas ante determinadas entradas, sin preocuparse de cómo se consiguen internamente los resultados.
+    \item \textbf{Sincronía de iteración:} Se implementan y verifican \textbf{en el transcurso de la misma iteración} en la que se implementa la propia Historia de Usuario.
+    \item \textbf{Complementariedad con Pruebas Unitarias:} El equipo de desarrollo realiza \textbf{pruebas de unidad} (caja blanca) sobre los módulos de código desarrollados, \textit{independientemente} de las pruebas de aceptación definidas para la HU.
+\end{itemize}
+
+\begin{ejemplo}[Criterios de Aceptación Clásicos y Formato BDD (Diapositivas 40--43)]
+\textbf{Caso 1 (Lista de comprobación -- Cancelar reserva previa):}
+\begin{itemize}[itemsep=1pt]
+    \item Comprobar que un \textbf{Cliente Premium} puede cancelar en el mismo día sin coste adicional.
+    \item Comprobar que a un \textbf{Cliente No-Premium} se le carga un $10\%$ al cancelar el mismo día.
+    \item Confirmar que se envía un correo electrónico de confirmación al cliente.
+    \item Confirmar que el hotel recibe notificación automática de la cancelación.
+\end{itemize}
+
+\textbf{Caso 2 (Lista de comprobación -- Pagar viaje con tarjeta de crédito):}
+\begin{itemize}[itemsep=1pt]
+    \item Funciona correctamente con tarjetas \textit{Visa, MasterCard y American Express}.
+    \item Falla (no permitida) con tarjeta \textit{Diner's Club}.
+    \item Rechaza adecuadamente una tarjeta cuya fecha haya expirado.
+    \item Maneja correctamente diferentes montos de cargo y falla ante un número de tarjeta inválido o vacío.
+\end{itemize}
+
+\textbf{Caso 3 (Formato BDD -- Behavior-Driven Development: \texttt{Dado / Cuando / Entonces}):}
+$$\textbf{Dado } [\text{contexto inicial}] \longrightarrow \textbf{Cuando } [\text{acción / evento}] \longrightarrow \textbf{Entonces } [\text{resultado esperado}]$$
+\begin{lstlisting}
+DADO un sistema donde existe un usuario con nombre "idprueba"
+CUANDO alguien intenta registrarse con nombre "idprueba"
+ENTONCES el sistema muestra un mensaje indicando que el nombre "idprueba" ya existe.
+\end{lstlisting}
+\end{ejemplo}
+
+\section{Características de las HU, ``HU Terminada'' (Done) y ¿Por qué usar HU?}
+
+\subsection{Síntesis de Características y Ventajas de las HU (Diapositivas 44 y 48)}
+\begin{itemize}[itemsep=3pt]
+    \item Son \textbf{cortas y fáciles de leer}, entendibles por desarrolladores, interesados y usuarios.
+    \item Representan \textbf{incrementos pequeños de funcionalidad valorada}, desarrollables en un período de días o pocas semanas.
+    \item Son \textbf{relativamente fáciles de estimar} porque el esfuerzo de implementación puede determinarse rápidamente.
+    \item Se gestionan en \textbf{listas organizadas dinámicas} (no en documentos pesados) que pueden reordenarse a medida que emerge nueva información (\textbf{desarrollo oportunista / requisitos emergentes}).
+    \item Necesitan \textbf{poco o ningún mantenimiento} y se pueden desechar con seguridad después de la implementación: las HU y el propio código creado sirven como documentación incremental.
+    \item Permiten mantener una \textbf{relación cercana con el cliente} y aplazar los detalles para cuando sean realmente necesarios.
+\end{itemize}
+
+\subsection{HU Terminada: \textit{Definition of Done} (DoD) (Diapositivas 45--47)}
+
+\begin{definicion}[Definición de ``Terminada'' (Definition of Done -- DoD)]
+La definición de ``terminado'' (\textit{Done}) es un \textbf{acuerdo formal de calidad entre los desarrolladores y los clientes / Product Owner}. Se puede establecer una definición de ``terminada'' global para todas las HU del proyecto o un ``terminado'' específico adicional para determinadas HU.
+\end{definicion}
+
+\textbf{ los 6 aspectos esenciales a considerar en la definición de ``terminada'' (Diapositiva 47):}
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=2pt]
+    \item \textbf{Tipos y grado de prueba:} Superación de pruebas de unidad y pruebas de integración.
+    \item \textbf{Calidad del código:} Código documentado, revisado por pares (\textit{code review}) y sin incidencias críticas.
+    \item \textbf{Entorno de despliegue donde concluye el trabajo:} En preproducción (\textit{prepro}), \textit{testing} o producción.
+    \item \textbf{Nivel de documentación} técnica y de usuario entregada.
+    \item \textbf{Nivel de calidad del producto software:} Cumplimiento de métricas de análisis estático, cobertura, etc.
+    \item \textbf{Criterios de aceptación comprobados y aprobados} formalmente por el Product Owner.
+\end{enumerate}
+
+\section{Granularidad de las HU y Requisitos No Funcionales (Diapositivas 49--54)}
+
+\subsection{Jerarquía de Granularidad: Temas, Épicas, HU y Tareas}
+
+En un proyecto ágil coexisten elementos de distinto tamaño y nivel de abstracción. A medida que una necesidad se acerca a la parte alta de la pila para ser implementada en la siguiente iteración, se descompone desde conceptos amplios hacia unidades más pequeñas:
+
+\begin{center}
+\begin{tikzpicture}[
+    level/.style={trapezium, trapezium angle=72, draw=mdaDarkBlue, thick, align=center, font=\sffamily\footnotesize, minimum height=1.05cm},
+    desc/.style={rectangle, rounded corners=3pt, draw=mdaBorderGray, fill=mdaGray, thick, text width=8.2cm, minimum height=1.05cm, align=left, font=\sffamily\scriptsize, inner sep=5pt}
+]
+    \node[level, fill=mdaDarkBlue, text=white, minimum width=3.2cm, trapezium stretches=true] (l1) at (0, 3.6) {\textbf{1. TEMAS}\\[-1pt](Themes)};
+    \node[level, fill=mdaPrimary, text=white, minimum width=4.4cm, trapezium stretches=true] (l2) at (0, 2.4) {\textbf{2. ÉPICAS}\\[-1pt](Epics)};
+    \node[level, fill=mdaAccent, text=white, minimum width=5.6cm, trapezium stretches=true] (l3) at (0, 1.2) {\textbf{3. HISTORIAS DE USUARIO}\\[-1pt](User Stories)};
+    \node[level, fill=mdaTeal, text=white, minimum width=6.8cm, trapezium stretches=true] (l4) at (0, 0.0) {\textbf{4. TAREAS TÉCNICAS}\\[-1pt](Tasks)};
+
+    \node[desc] at (6.8, 3.6) {\textbf{Grandes proyectos o subproductos}, peticiones globales sin más análisis ni detalles. \textit{Ej: Planificador de viajes, gestor de ofertas de hoteles, sitio Web para socios.}};
+    \node[desc] at (6.8, 2.4) {\textbf{Súper historias de usuario}, más concretas que los Temas. Conjunto de HU relacionadas entre sí. \textit{Ej: Sistema de búsqueda para hoteles, filtros aplicados a búsquedas, comparador avanzado.}};
+    \node[desc] at (6.8, 1.2) {\textbf{Descripción simple de una tarea concisa que aporta valor} en 1 iteración. \textit{Ej: Como cliente quiero buscar un hotel en una localidad determinada; como socio quiero pagar con tarjeta.}};
+    \node[desc] at (6.8, 0.0) {\textbf{División de una HU por necesidades técnicas o de desarrollo} ($0.5$ a $3$--$4$ días). \textit{Ej: Crear pantalla de resultados, crear métodos de consulta a BBDD, probar integración del módulo.}};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Requisitos No Funcionales (RNF) en Ágil (Diapositivas 51--54)}
+
+Los \textbf{Requisitos No Funcionales (RNF)} describen cualidades o restricciones del sistema (rendimiento, disponibilidad, seguridad, usabilidad) que no se relacionan de forma directa con un comportamiento funcional concreto, pudiendo aplicarse \textbf{al sistema en su conjunto} o \textbf{a determinadas funciones específicas}.
+
+\begin{teorema}[Las 4+1 Formas de Tratar los Requisitos No Funcionales (Diapositiva 52)]
+En un proyecto ágil basado en Historias de Usuario, los RNF pueden tratarse como:
+\begin{enumerate}[label=\textbf{\arabic*.}, itemsep=3pt]
+    \item \textbf{Restricciones asignadas a cualquiera de los elementos de las pilas} (Temas, Épicas, Historias de Usuario o Tareas) o redactadas directamente con formato de HU.
+    \item \textbf{Criterios de aceptación} asociados a una Historia de Usuario funcional.
+    \item \textbf{Parte de la definición de terminada (\textit{Definition of Done})} cuando afectan globalmente a todas las historias.
+    \item \textbf{Documento de especificación específico} para los requisitos no funcionales globales al sistema.
+\end{enumerate}
+\end{teorema}
+
+\begin{ejemplo}[Ejemplos Oficiales de Requisitos No Funcionales (Diapositivas 53--54)]
+\textbf{A) RNF expresados directamente con plantilla de Historia de Usuario:}
+\begin{itemize}[itemsep=2pt]
+    \item \textit{``\textbf{Como} comprador, \textbf{quiero} que el sitio web esté disponible el \textbf{98\% de las veces} que intento acceder a él \textbf{para} poder realizar mi compra y no tener que buscar otro lugar para adquirir el producto.''} (Disponibilidad).
+    \item \textit{``\textbf{Como} cliente de banca online, \textbf{quiero} que el saldo de mi cuenta corriente se muestre en \textbf{5 segundos} cuando lo solicite \textbf{para} no frustrarme y poder ver si tengo fondos para pagar mis facturas.''} (Rendimiento / Tiempo de respuesta).
+\end{itemize}
+
+\textbf{B) RNF expresados como Criterios de Aceptación dentro de una HU funcional:}
+\begin{itemize}[itemsep=2pt]
+    \item \textbf{HU Funcional:} \textit{``Como analista financiero, quiero ver las transacciones mensuales de mis clientes para poder aconsejarles sobre su salud financiera.''}
+    \item \textbf{Criterio RNF 1 (Rendimiento):} \textit{El sistema muestra todas las transacciones que cumplen los parámetros de búsqueda en los \textbf{10 segundos} siguientes a la recepción de la solicitud.}
+    \item \textbf{Criterio RNF 2 (Seguridad):} \textit{Las transacciones de los clientes etiquetados como confidenciales sólo se muestran a los usuarios con \textbf{nivel de seguridad 2}.}
+\end{itemize}
+\end{ejemplo}
+
+\section{¿Cuándo es buena una HU? El Modelo I.N.V.E.S.T. (Diapositivas 55--57)}
+
+Propuesto por \textbf{Bill Wake}, el acrónimo \textbf{I.N.V.E.S.T.} define las seis cualidades que debe reunir toda Historia de Usuario de calidad antes de entrar en una iteración:
+
+\vspace{4pt}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash\Large\bfseries\sffamily\color{white}\columncolor{mdaPrimary}}p{1.0cm} >{\bfseries\sffamily\color{mdaDarkBlue}}p{2.9cm} X}
+\toprule
+\rowcolor{mdaDarkBlue}
+\textbf{\color{white}\normalsize Letra} & \textbf{\color{white}Atributo} & \textbf{\color{white}\textsf{Definición Oficial y Pregunta de Control (Diapositivas 56--57)}} \\
+\midrule
+I & Independiente\newline{\scriptsize(\textit{Independent})} & Una historia debería ser independiente de otras (lo más posible). \textit{¿Puede sostenerse por sí misma sin depender rígidamente de otras historias?} \\
+\rowcolor{mdaGray}
+N & Negociable\newline{\scriptsize(\textit{Negotiable})} & Las HU no son un contrato cerrado ni un requerimiento rígido que el software deba implementar literalmente. \textit{¿Es una propuesta abierta a la discusión colaborativa en lugar de un contrato fijo?} \\
+V & Valiosa\newline{\scriptsize(\textit{Valuable})} & Tiene que tener valor para el cliente (para el usuario o para el comprador). El cliente las escribe, no son un contrato y son negociables. \textit{¿Aporta un beneficio tangible, demostrable e identificable al usuario o al negocio?} \\
+\rowcolor{mdaGray}
+E & Estimable\newline{\scriptsize(\textit{Estimable})} & Debe poder estimarse para permitir que se pueda priorizar y planificar la historia. \textit{¿Tiene el equipo suficiente información y contexto para calcular su complejidad?} \\
+S & Suscinta / Pequeña\newline{\scriptsize(\textit{Small})} & Una buena historia debe ser pequeña en esfuerzo (\textbf{2--3 personas/semana de trabajo}, o entre $\mathbf{1/10}$ y $\mathbf{1/6}$ de la velocidad). \textit{¿Es lo suficientemente compacta para completarse con éxito dentro de un solo Sprint?} \\
+\rowcolor{mdaGray}
+T & Testeable\newline{\scriptsize(\textit{Testable})} & Una historia necesita poder probarse objetivamente para que ocurra la etapa de ``Confirmación''. \textit{¿Posee criterios de aceptación claros que permitan validar su correcto funcionamiento?} \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}

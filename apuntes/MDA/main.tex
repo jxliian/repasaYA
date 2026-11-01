@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper,twoside,openany]{report}
+
+% Cargar configuración y estilos visuales
+\input{config/estilo}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.2cm}
+    
+    {\Huge\bfseries\color{mdaDarkBlue}\textsf{Metodologías de Desarrollo Ágil}}\\[0.5cm]
+    {\LARGE\bfseries\color{mdaPrimary}\textsf{Seminario 2: Historias de Usuario (HU)}}\\[0.4cm]
+    {\Large\textsf{Apuntes Exhaustivos de Teoría, Esquemas Visuales y Ejercicios de Examen}}\\[0.4cm]
+    {\large\textsf{Grado en Ingeniería Informática $\cdot$ Especialidad Ingeniería del Software}}\\[0.2cm]
+    {\normalsize\textsf{Departamento de Lenguajes y Sistemas Informáticos $\cdot$ Universidad de Granada (UGR)}}\\[1.2cm]
+    
+    \rule{0.88\textwidth}{1.5pt}\\[1.5cm]
+    
+    \begin{tcolorbox}[
+        colback=mdaLightAccent,
+        colframe=mdaAccent,
+        width=0.90\textwidth,
+        arc=4pt,
+        boxrule=1pt,
+        halign=center
+    ]
+        \large\textbf{\color{mdaDarkBlue}Síntesis Integral de Contenidos Evaluables (99 Diapositivas Oficiales):}\\[8pt]
+        \normalsize
+        \begin{itemize}[leftmargin=1.5cm, rightmargin=1cm, itemsep=3pt]
+            \item[\textbf{1.}] \textbf{Fundamentos y Comparativa:} Definición de Beck y Fowler, ``Promesas de una conversación'' y tabla completa \textit{Casos de Uso (RUP) vs. Historias de Usuario (XP/Scrum)}.
+            \item[\textbf{2.}] \textbf{Roles, Autoría y Formato LEGO:} Quién escribe las HU (XP, Scrum, Customer Team), modelado de roles y sintaxis canónica \texttt{Como [rol], Quiero [objetivo], Para [beneficio]}.
+            \item[\textbf{3.}] \textbf{Anatomía CCC y Pruebas BDD:} Las 3 ``C'' de Ron Jeffries (\textit{Card, Conversation, Confirmation}), tarjeta física (anverso/reverso), pruebas de caja negra y formato Gherkin (\texttt{Dado/Cuando/Entonces}).
+            \item[\textbf{4.}] \textbf{Calidad Ágil y Granularidad:} Modelo \textbf{I.N.V.E.S.T.} (Bill Wake), \textit{Definition of Done} (DoD), pirámide \textit{Temas $\to$ Épicas $\to$ HU $\to$ Tareas} y tratamiento de Requisitos No Funcionales (RNF).
+            \item[\textbf{5.}] \textbf{Planificación, Velocidad y Estimación:} \textit{User Story Mapping} (Jeff Patton), priorización MoSCoW, \textit{Planning Poker}, cálculo numérico de Velocidad con factor de dedicación y asignación de Sprints.
+            \item[\textbf{6.}] \textbf{Descomposición y SPIKES:} Los 9 Patrones de División de Richard Lawrence, algoritmo de 3 etapas, repriorización vertical y las 5 Reglas de Oro de los \textbf{SPIKES} (Técnicos y Funcionales).
+            \item[\textbf{7.}] \textbf{Preparación Directa del Parcial:} Cuaderno de 10 ejercicios prácticos resueltos paso a paso y banco de 20 preguntas cortas de examen con respuesta modelo razonada.
+        \end{itemize}
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\large\textsf{Plataforma \textbf{repasaYA} $\cdot$ Docente: María Luisa (Marisa)}}\\[0.2cm]
+    {\small\textsf{Curso Académico 2025--2026 / 2026--2027}}\\[0.5cm]
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% ÍNDICE GENERAL
+% ------------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% BLOQUES TEMÁTICOS
+% ------------------------------------------------------------------------------
+\input{temas/bloque1_fundamentos_y_roles}
+\input{temas/bloque2_anatomia_ccc_invest_dod}
+\input{temas/bloque3_estimacion_planificacion_patrones_spikes}
+\input{temas/bloque4_ejercicios_y_preguntas_examen}
+
+\end{document}

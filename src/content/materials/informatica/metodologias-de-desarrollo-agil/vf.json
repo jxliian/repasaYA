@@ -1,0 +1,192 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "vf",
+  "title": "Verdadero o Falso: Seminario 2 (Trampas de Examen)",
+  "description": "30 preguntas de Verdadero/Falso centradas en las trampas conceptuales más frecuentes sobre Historias de Usuario, Planning Poker, Velocidad y Spikes.",
+  "order": 3,
+  "items": [
+    {
+      "n": 1,
+      "tema": "Priorización y Tamaño",
+      "q": "A medida que avanza el proyecto y cambian las necesidades del mercado, tanto la prioridad como el tamaño en puntos de historia de una HU cambian proporcionalmente.",
+      "answer": "F",
+      "justification": "Falso: Como indica expresamente el seminario, 'la prioridad puede cambiar, el tamaño NO'. La prioridad depende del valor de negocio en cada momento, pero el esfuerzo relativo de construcción permanece constante salvo que cambie el alcance."
+    },
+    {
+      "n": 2,
+      "tema": "Fundamentos de HU",
+      "q": "Según Kent Beck y Martin Fowler, en un proyecto ágil el progreso se demuestra entregando código probado e integrado que implementa una Historia de Usuario.",
+      "answer": "V",
+      "justification": "Verdadero: La definición canónica de Beck y Fowler en 'Planning Extreme Programming' establece que la historia es la unidad de funcionalidad y el progreso real solo se demuestra con código probado e integrado."
+    },
+    {
+      "n": 3,
+      "tema": "Fundamentos de HU",
+      "q": "Una Historia de Usuario bien redactada debe incluir en su tarjeta todos los detalles técnicos y funcionales desde el principio para evitar reuniones posteriores con el cliente.",
+      "answer": "F",
+      "justification": "Falso: Las HU son 'promesas de una conversación', no especificaciones detalladas. Una tarjeta con demasiados detalles limita la conversación con el cliente; los detalles se descubren dialogando en la etapa de Conversación."
+    },
+    {
+      "tema": "Casos de Uso vs. HU",
+      "q": "A diferencia de los Casos de Uso (que pueden abarcar varias iteraciones y no se usan para planificar), cada Historia de Usuario se utiliza para planificar y debe implementarse y probarse dentro de una única iteración.",
+      "answer": "V",
+      "justification": "Verdadero: Es una de las diferencias clave de la tabla comparativa del seminario. Las HU son instrumentos directos de planificación y su tamaño debe permitir completarlas e integrarlas en un solo Sprint."
+    },
+    {
+      "tema": "Casos de Uso vs. HU",
+      "q": "Las Historias de Usuario proporcionan por sí solas una visión arquitectónica general del sistema mucho más obvia y completa que los Casos de Uso de RUP.",
+      "answer": "F",
+      "justification": "Falso: Los Casos de Uso proporcionan una visión más general del sistema y de su integración, mientras que las HU ofrecen una visión más fragmentada y menos obvia, razón por la cual las pruebas continuas, el feedback del usuario y el User Story Mapping son tan importantes en ágil."
+    },
+    {
+      "tema": "Roles y Autoría",
+      "q": "En Scrum el responsable de gestionar las Historias de Usuario es el Product Owner, mientras que en Programación Extrema (XP) las escribe el Cliente, aunque en la realidad práctica puede redactarlas cualquier miembro del equipo con conocimiento del dominio.",
+      "answer": "V",
+      "justification": "Verdadero: El seminario distingue explícitamente estos tres escenarios (XP: Cliente; Scrum: Product Owner ayudado por stakeholders y equipo; Realidad: cualquier miembro del equipo con dominio del problema)."
+    },
+    {
+      "tema": "Formato Canónico",
+      "q": "En la plantilla canónica 'Como [rol], Quiero [objetivo], Para [beneficio]', la cláusula 'Para' es meramente decorativa y puede omitirse siempre sin afectar a la calidad ni a la priorización de la historia.",
+      "answer": "F",
+      "justification": "Falso: La cláusula 'Para' expresa el propósito y el valor de negocio que el usuario o cliente obtiene al ejecutar la historia, siendo esencial para verificar que la HU es Valiosa (V de INVEST) y poder priorizarla en el Product Backlog."
+    },
+    {
+      "tema": "Modelo CCC y Pruebas de Aceptación",
+      "q": "Aunque cualquier miembro del equipo puede redactar o proponer una prueba de aceptación, el Product Owner es el propietario principal de las pruebas de aceptación de una Historia de Usuario.",
+      "answer": "V",
+      "justification": "Verdadero: Las pruebas de aceptación representan las condiciones de satisfacción del negocio y es el Product Owner quien posee la propiedad y responsabilidad final de validarlas."
+    },
+    {
+      "tema": "Confirmación y BDD",
+      "q": "Los Criterios de Aceptación son pruebas de caja blanca porque deben especificar detalladamente qué tablas SQL, clases y algoritmos internos utilizará el programador para lograr el resultado.",
+      "answer": "F",
+      "justification": "Falso: Las pruebas de aceptación son pruebas de CAJA NEGRA e independientes de la implementación; se escriben en lenguaje de negocio y solo verifican qué salidas observables produce el sistema, sin preocuparse de cómo están programadas internamente."
+    },
+    {
+      "tema": "Confirmación y BDD",
+      "q": "Las pruebas de aceptación de una Historia de Usuario deben implementarse en el transcurso de la misma iteración en la que se desarrolla la propia historia, sin perjuicio de las pruebas unitarias que realiza el equipo sobre los módulos.",
+      "answer": "V",
+      "justification": "Verdadero: Las pruebas de aceptación se implementan en el mismo Sprint que la historia y coexisten con las pruebas unitarias técnicas que los desarrolladores aplican a sus módulos."
+    },
+    {
+      "tema": "Confirmación y BDD",
+      "q": "En el formato BDD (Behavior-Driven Development), la cláusula 'DADO (Given)' describe la acción que ejecuta el usuario, mientras que 'CUANDO (When)' define el estado inicial del sistema.",
+      "answer": "F",
+      "justification": "Falso: Es justamente al revés. 'DADO (Given)' establece el contexto o estado inicial del sistema (ej. existe un usuario 'idprueba'), 'CUANDO (When)' especifica la acción o evento (alguien intenta registrarse con 'idprueba') y 'ENTONCES (Then)' el resultado esperado."
+    },
+    {
+      "tema": "Características de las HU",
+      "q": "Las Historias de Usuario necesitan muy poco o ningún mantenimiento a largo plazo y, una vez implementadas y validadas en el código, las tarjetas pueden desecharse con seguridad.",
+      "answer": "V",
+      "justification": "Verdadero: A diferencia de los pesados documentos de casos de uso, las tarjetas de HU son instrumentos de flujo de trabajo que requieren mínimo mantenimiento y pueden desecharse tras su implementación porque el código probado y los tests actúan como documentación viva."
+    },
+    {
+      "tema": "Definition of Done (DoD)",
+      "q": "La Definición de Terminado (Definition of Done - DoD) y los Criterios de Aceptación son exactamente el mismo concepto y contienen las mismas reglas específicas para una sola historia.",
+      "answer": "F",
+      "justification": "Falso: Los Criterios de Aceptación son condiciones funcionales específicas de CADA historia individual (escritas en su reverso), mientras que la DoD es un acuerdo global de calidad entre desarrolladores y cliente aplicable a todas las HU (pruebas unitarias/integración, revisión de código, entorno de despliegue, métricas y aprobación del PO)."
+    },
+    {
+      "tema": "Granularidad y Tareas",
+      "q": "En la pirámide de granularidad, una Épica es un conjunto de Historias de Usuario relacionadas entre sí, mientras que un Tema representa grandes proyectos o peticiones globales sin detallar.",
+      "answer": "V",
+      "justification": "Verdadero: La jerarquía de mayor a menor granularidad es: Temas (grandes proyectos/subproductos) -> Épicas (súper historias que agrupan HU relacionadas) -> Historias de Usuario -> Tareas técnicas."
+    },
+    {
+      "tema": "Granularidad y Tareas",
+      "q": "Al descomponer una Historia de Usuario en tareas técnicas para el Sprint, cada tarea debe tener una duración ideal de entre 2 y 3 semanas de trabajo individual.",
+      "answer": "F",
+      "justification": "Falso: La duración de una tarea técnica individual debe estar comprendida entre medio día (4 horas) y un máximo de 3 o 4 días de trabajo, generando un entregable al finalizar e incluyendo tareas de prueba y automatización."
+    },
+    {
+      "tema": "Requisitos No Funcionales (RNF)",
+      "q": "En las metodologías ágiles, los Requisitos No Funcionales (RNF) pueden tratarse como criterios de aceptación, como parte de la definición de terminado (DoD), como restricciones en los elementos de la pila o en un documento específico global.",
+      "answer": "V",
+      "justification": "Verdadero: El seminario recoge exactamente estas vías complementarias (además de poder expresarse como HU enfocadas al valor percibido por el usuario, como la disponibilidad del 98% o tiempos de respuesta en segundos)."
+    },
+    {
+      "tema": "Modelo INVEST",
+      "q": "Según el criterio 'S' (Suscinta / Small) del modelo INVEST de Bill Wake, una buena Historia de Usuario debe ser pequeña en esfuerzo, situándose su tamaño orientativo entre 1/10 y 1/6 de la velocidad del equipo para una iteración.",
+      "answer": "V",
+      "justification": "Verdadero: Una historia debe ser lo suficientemente pequeña (Suscinta) para completarse en días o pocas personas/semana, de forma que quepan entre 6 y 10 historias por iteración (entre 1/10 y 1/6 de la velocidad)."
+    },
+    {
+      "tema": "Modelo INVEST",
+      "q": "Una historia redactada como 'Crear índices B-Tree en la tabla SQL de facturas' cumple perfectamente los principios 'Negociable' y 'Valiosa' del modelo INVEST.",
+      "answer": "F",
+      "justification": "Falso: Es una tarea técnica disfrazada de HU. Viola la 'V' (Valiosa) porque no expresa beneficio directo para el usuario ni está escrita en lenguaje de negocio, y viola la 'N' (Negociable) al imponer una implementación técnica concreta."
+    },
+    {
+      "tema": "Priorización y MoSCoW",
+      "q": "Al priorizar el Product Backlog, una Historia de Usuario solo debe recibir prioridad alta si beneficia a un número masivo de usuarios, descartando aquellas que solo afectan a un grupo pequeño de usuarios importantes.",
+      "answer": "F",
+      "justification": "Falso: El seminario destaca explícitamente ambos casos al evaluar el valor para el usuario: tanto una HU importante para un número alto de usuarios como una HU crítica para un número pequeño de usuarios importantes."
+    },
+    {
+      "tema": "Priorización y MoSCoW",
+      "q": "En el método de priorización MoSCoW, los requisitos 'Should' son aquellos que deben completarse por todos los medios posibles, aunque el éxito inmediato del proyecto no dependa estrictamente de ellos.",
+      "answer": "V",
+      "justification": "Verdadero: En MoSCoW, 'Must' es obligatorio para finalizar el proyecto, 'Should' se debe completar por todos los medios aunque el éxito no dependa de él, 'Could' si no afecta a los objetivos principales y 'Would' si sobra tiempo o para futuras versiones."
+    },
+    {
+      "tema": "Estimación y Planning Poker",
+      "q": "Los Puntos de Historia miden el tamaño relativo de una HU comparada con otras historias estimadas por el mismo equipo, combinando el esfuerzo necesario, la complejidad y el riesgo o incertidumbre.",
+      "answer": "V",
+      "justification": "Verdadero: A diferencia de las horas físicas, los Puntos de Historia son una métrica relativa propia de cada equipo que integra esfuerzo, complejidad técnica y riesgo/incertidumbre."
+    },
+    {
+      "tema": "Estimación y Planning Poker",
+      "q": "En una sesión de Planning Poker, el moderador de la reunión es el encargado de emitir el primer voto en voz alta para orientar al resto del equipo y acelerar el consenso.",
+      "answer": "F",
+      "justification": "Falso: En Planning Poker el moderador gestiona la reunión y los tiempos pero NO estima. Además, todos los participantes colocan su carta boca abajo y las descubren simultáneamente para evitar el sesgo de anclaje."
+    },
+    {
+      "tema": "Estimación y Planning Poker",
+      "q": "Cuando en una ronda de Planning Poker existen estimaciones muy dispares, la regla correcta es calcular la media aritmética exacta de todas las cartas mostradas y pasar inmediatamente a la siguiente historia.",
+      "answer": "F",
+      "justification": "Falso: No se promedia. A las personas con estimaciones extremas (las más altas y las más bajas) se les da un tiempo para justificar su estimación, el equipo discute riesgos y supuestos, y se repite la votación hasta alcanzar consenso."
+    },
+    {
+      "tema": "Velocidad y Planificación",
+      "q": "Si un equipo de 5 programadores trabaja en una iteración de 10 días laborables (donde 1 PH = 1 día ideal) con un factor de dedicación del 80%, su velocidad estimada por cálculo de recursos será de 40 Puntos de Historia.",
+      "answer": "V",
+      "justification": "Verdadero: Aplicando la fórmula del seminario: 5 programadores × 10 días = 50 días de trabajo por iteración; aplicando el factor de dedicación del 80%: 50 × 0,80 = 40 PH."
+    },
+    {
+      "tema": "Velocidad y Planificación",
+      "q": "Al planificar las iteraciones de una entrega, es una buena práctica asignar a cada iteración historias cuya suma de Puntos de Historia supere en un 25% la velocidad del equipo para motivar a los programadores.",
+      "answer": "F",
+      "justification": "Falso: En la planificación de iteraciones, la suma de los Puntos de Historia asignados a un Sprint nunca debe superar la velocidad estimada u observada del equipo (Σ PH ≤ Velocidad)."
+    },
+    {
+      "tema": "Patrones de División",
+      "q": "Descomponer la historia 'Como usuario, quiero poder gestionar mi cuenta' en 'darme de alta', 'editar parámetros', 'cancelar cuenta' y 'añadir dispositivos' es una aplicación directa del patrón de división por Operaciones Múltiples.",
+      "answer": "V",
+      "justification": "Verdadero: El patrón #8 (Operaciones múltiples) divide verbos genéricos como gestionar, administrar o controlar en sus operaciones individuales de negocio."
+    },
+    {
+      "tema": "Patrones de División",
+      "q": "Una buena división de una Historia de Usuario grande consiste en partirla horizontalmente por capas arquitectónicas: una HU para diseñar la tabla SQL, otra HU para el backend y otra HU para la interfaz web.",
+      "answer": "F",
+      "justification": "Falso: Dividir por capas técnicas horizontales rompe el modelo INVEST (las piezas no son Independientes ni entregan Valor por sí solas al usuario). Al evaluar la división en el algoritmo de Richard Lawrence, cada nueva HU debe ser una loncha vertical que aporte valor comprobable."
+    },
+    {
+      "tema": "Spikes",
+      "q": "El entregable principal de un SPIKE es código fuente definitivo optimizado y listo para ser desplegado directamente en el entorno de producción al terminar la iteración.",
+      "answer": "F",
+      "justification": "Falso: Como dicta la segunda regla de los Spikes en el seminario, 'su resultado NO es código, es información útil para otras HU'. Debe generar una decisión técnica, un prototipo descartable, una demostración de diseño o conocimiento para poder estimar."
+    },
+    {
+      "tema": "Spikes",
+      "q": "Un SPIKE se gestiona como cualquier otra Historia de Usuario (se introduce en el backlog, se prioriza, se estima y tiene criterios de aceptación), y su solución debe ser demostrable al equipo de desarrollo.",
+      "answer": "V",
+      "justification": "Verdadero: Son cuatro de las cinco reglas de oro de los Spikes: se tratan como otras HU en el backlog, generan información demostrable al equipo y se validan mediante criterios de aceptación propios."
+    },
+    {
+      "tema": "Spikes",
+      "q": "Cuando un equipo crea un prototipo de histograma de consumo eléctrico en el portal web para obtener realimentación de varios usuarios sobre cómo presentar la información, está realizando un SPIKE Funcional.",
+      "answer": "V",
+      "justification": "Verdadero: Es el ejemplo exacto de la diapositiva 94 del seminario: un SPIKE Funcional resuelve incertidumbres sobre cómo el usuario debe interactuar con el sistema, mientras que investigar el tiempo de carga y requisitos de comunicación del servidor es un SPIKE Técnico."
+    }
+  ]
+}
