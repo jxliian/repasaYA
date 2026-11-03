@@ -1,0 +1,1162 @@
+import json
+import os
+
+materials_dir = "/home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/src/content/materials/ade/derecho-fiscal"
+target_file = os.path.join(materials_dir, "supuestos-examen.json")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CASO 1: SIMULACRO OFICIAL PARCIAL 9 NOVIEMBRE (15 PREGUNTAS)
+# ─────────────────────────────────────────────────────────────────────────────
+statement_simulacro = """ESTRUCTURA OFICIAL DEL PARCIAL (9 DE NOVIEMBRE — AULA D16):
+• Puntuación: 1,5 puntos sobre la nota final (eliminatorio a partir de 0,75 puntos = 5/10).
+• Penalización: Cada 3 respuestas erróneas restan 1 respuesta correcta (-0,33 por fallo).
+
+ENUNCIADO DE LOS CASOS PRÁCTICOS DEL SIMULACRO (PREGUNTAS 11 A 15):
+Dña. Elena (42 años), residente en Granada, presenta los siguientes datos fiscales en el ejercicio:
+1) Trabaja como directiva en una empresa desde hace 6 años con un sueldo bruto anual de 44.000 €, habiendo cotizado a la Seguridad Social 2.650 € y pagado 580 € al Colegio Oficial de Economistas (colegiación obligatoria para su puesto) y 200 € a un sindicato.
+2) En mayo se desplazó en su vehículo particular de Granada a Sevilla (500 km ida y vuelta en total) durante 3 días (pernoctando 2 noches en hotel y regresando el 3.er día). La empresa le abonó: 0,36 €/km (180 €), peajes y parking justificados (40 €), factura de hotel de las 2 noches (210 €) y 220 € en concepto de dieta de manutención por los 3 días.
+3) Además, la empresa le cedió para uso exclusivamente particular un vehículo propiedad de la empresa cuyo coste de adquisición fue de 28.000 € (sin distintivo de eficiencia energética). El ingreso a cuenta (20%) fue REPERCUTIDO a la trabajadora.
+4) Es propietaria de un piso en Granada (Coste de adquisición satisfecho = 180.000 €; Valor Catastral = 90.000 €, correspondiendo el 20% al suelo y el 80% a la construcción), alquilado todo el año como vivienda habitual a un matrimonio por 750 €/mes (9.000 €/año) mediante contrato firmado en 2024 (reducción general del 50%). Gastos anuales soportados: intereses de hipoteca 5.500 €, reparación de caldera y pintura 4.000 €, IBI 450 € y comunidad 650 €.
+5) Posee un apartamento de vacaciones en Salobreña (Valor Catastral revisado hace 4 años = 80.000 €) que ha permanecido a su disposición todo el año (vacío)."""
+
+simulacro_questions = [
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "1. [Teoría T1] Según el artículo 58.3 de la Ley General Tributaria, ¿cuál de los siguientes conceptos NO forma parte en ningún caso de la deuda tributaria?",
+        "opts": [
+            "Los recargos por declaración extemporánea sin requerimiento previo (art. 27 LGT).",
+            "Las sanciones tributarias pecuniarias.",
+            "Los intereses de demora (art. 26 LGT).",
+            "Los recargos del período ejecutivo (art. 28 LGT)."
+        ],
+        "correct": 1,
+        "justification": "Art. 58.3 LGT: Las sanciones tributarias no formarán parte de la deuda tributaria en ningún caso. Sí forman parte la cuota líquida/diferencial y las obligaciones accesorias."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "2. [Teoría T1] ¿Qué figura tributaria se exige al propietario de un inmueble cuando una obra pública municipal (ej. asfaltado y alumbrado nuevo) revaloriza especialmente su propiedad?",
+        "opts": [
+            "Una tasa por aprovechamiento del dominio público.",
+            "Un precio público municipal.",
+            "Una contribución especial (art. 2.2.b LGT), con un importe máximo conjunto del 90% del coste de la obra para el ayuntamiento.",
+            "El Impuesto sobre Construcciones, Instalaciones y Obras (ICIO)."
+        ],
+        "correct": 2,
+        "justification": "Art. 2.2.b LGT y art. 31 TRLRHL: Las contribuciones especiales gravan el beneficio o aumento de valor derivado de obras públicas o ampliación de servicios públicos, con un límite del 90% del coste soportado."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "3. [Teoría T1] En el sistema tributario local español (art. 59 TRLRHL), ¿cuáles son los impuestos obligatorios y cuáles los potestativos?",
+        "opts": [
+            "Todos los impuestos municipales son de exigencia obligatoria.",
+            "Son obligatorios el IBI, el IAE y el IVTM (todos directos); y potestativos el ICIO (indirecto) y el IIVTNU (directo).",
+            "El IBI y el ICIO son obligatorios, y el IAE es voluntario.",
+            "Solo el IBI es obligatorio en municipios menores de 20.000 habitantes."
+        ],
+        "correct": 1,
+        "justification": "Art. 59 TRLRHL: Los 3 impuestos de exigencia obligatoria en todos los consistorios son el IBI, el IAE y el IVTM. Los 2 potestativos (mediante ordenanza fiscal) son el ICIO y el IIVTNU."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "4. [Teoría T1] ¿Qué diferencia jurídica fundamental existe entre el contribuyente y el sustituto del contribuyente (art. 36 LGT)?",
+        "opts": [
+            "El contribuyente es siempre una persona jurídica y el sustituto una persona física.",
+            "Ambos son sujetos pasivos, pero el contribuyente realiza el hecho imponible mientras que el sustituto queda obligado por ley en lugar de aquél a cumplir la obligación tributaria principal y formal.",
+            "El sustituto solo responde de forma subsidiaria tras fallida del contribuyente.",
+            "El sustituto es el recaudador público municipal."
+        ],
+        "correct": 1,
+        "justification": "Art. 36.1, 36.2 y 36.3 LGT: Sujeto pasivo engloba al contribuyente (quien realiza el hecho imponible) y al sustituto (quien por mandato legal se coloca en su lugar, con derecho a exigirle el reembolso)."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "5. [Teoría T1] En la liquidación de un tributo, ¿qué magnitud se obtiene al restar a la Cuota Íntegra las deducciones y bonificaciones legalmente aplicables (art. 56 LGT)?",
+        "opts": [
+            "La Base Liquidable.",
+            "La Cuota Diferencial.",
+            "La Cuota Líquida.",
+            "La Deuda Tributaria neta."
+        ],
+        "correct": 2,
+        "justification": "Art. 56 LGT: Cuota Íntegra - Deducciones/Bonificaciones = Cuota Líquida. Cuota Líquida - Pagos a cuenta = Cuota Diferencial."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "6. [Teoría IRPF] Si un contribuyente traslada su residencia fiscal a un territorio calificado como jurisdicción no cooperativa (paraíso fiscal), según el artículo 8.2 de la LIRPF:",
+        "opts": [
+            "Deja de tributar en España de forma inmediata e irrevocable.",
+            "Seguirá teniendo la condición de contribuyente del IRPF en el período impositivo en que efectúe el cambio y durante los cuatro períodos impositivos siguientes.",
+            "Tributa únicamente por obligación real en el IRNR.",
+            "Paga una tasa fija única del 35% sobre su renta mundial."
+        ],
+        "correct": 1,
+        "justification": "Art. 8.2 LIRPF: La regla especial de cuarentena fiscal antiparaísos mantiene la condición de contribuyente por obligación personal (IRPF) en el año del traslado y los 4 siguientes (5 años en total)."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "7. [Teoría IRPF] En el cómputo de los 183 días de permanencia para determinar la residencia habitual en España (art. 9.1.a LIRPF), las ausencias esporádicas:",
+        "opts": [
+            "Se descuentan en todo caso de los días de estancia en España.",
+            "Se suman a los días de permanencia en España, salvo que el contribuyente acredite su residencia fiscal en otro país mediante certificado de la autoridad fiscal correspondiente.",
+            "Solo se computan si son viajes de vacaciones de menos de 10 días.",
+            "Quedan excluidas si el contribuyente aporta billetes de avión y visados turísticos."
+        ],
+        "correct": 1,
+        "justification": "Art. 9.1.a LIRPF: Para determinar el período de permanencia se computarán las ausencias esporádicas, salvo que el contribuyente acredite su residencia fiscal en otro país mediante certificado oficial."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "8. [Teoría IRPF] ¿Cuál es el límite legal máximo anual de deducción por cuotas satisfechas a colegios profesionales cuando la colegiación sea obligatoria (art. 19.2.d LIRPF)?",
+        "opts": [
+            "300 € anuales.",
+            "500 € anuales.",
+            "1.000 € anuales.",
+            "El 100% de la cuota satisfecha sin límite."
+        ],
+        "correct": 1,
+        "justification": "Art. 19.2.d LIRPF y art. 10 RIRPF: Las cuotas de colegios profesionales obligatorios para el ejercicio del puesto son deducibles con un límite máximo de 500 € anuales."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "9. [Teoría IRPF] En el arrendamiento de bienes inmuebles destinados a vivienda, ¿qué límite conjunto tienen los gastos de intereses de hipoteca y de conservación/reparación (art. 23.1.a LIRPF)?",
+        "opts": [
+            "No tienen ningún límite, pudiendo arrojar un rendimiento negativo ilimitado.",
+            "No pueden superar la cuantía de los rendimientos íntegros obtenidos de ese inmueble; el exceso no deducido en el año puede compensarse en los cuatro años siguientes.",
+            "Tienen como límite el 50% de los ingresos de alquiler.",
+            "Solo se permite deducir hasta 1.000 € al año por contrato."
+        ],
+        "correct": 1,
+        "justification": "Art. 23.1.a LIRPF: Los gastos de financiación y de conservación/reparación tienen como tope los rendimientos íntegros del propio inmueble. El exceso se deduce en los 4 ejercicios siguientes."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "10. [Teoría IRPF] ¿Qué porcentaje de imputación de rentas inmobiliarias se aplica a una segunda residencia urbana a disposición del propietario cuyo valor catastral fue revisado en los últimos 10 años (art. 85 LIRPF)?",
+        "opts": [
+            "2% sobre el valor catastral.",
+            "1,1% sobre el valor catastral.",
+            "1,1% sobre el 50% del valor de adquisición.",
+            "0,5% sobre el valor de mercado."
+        ],
+        "correct": 1,
+        "justification": "Art. 85.1 LIRPF: El porcentaje general es del 2%, pero se reduce al 1,1% en caso de inmuebles cuyos valores catastrales hayan sido revisados en los últimos 10 períodos impositivos."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "11. [Caso Práctico Dña. Elena — Apartado 2] Por el desplazamiento en su vehículo de Granada a Sevilla (500 km, 3 días, 2 noches en hotel), la empresa abonó 180 € de kilometraje (0,36 €/km), 40 € de peaje/parking, 210 € de hotel y 220 € de manutención. ¿Cuánto tributa Dña. Elena por dietas?",
+        "opts": [
+            "0 €, porque todo el viaje obedece a razones laborales justificadas.",
+            "136,65 € como rendimiento dinerario del trabajo (50 € por exceso de kilometraje + 86,65 € por exceso de manutención).",
+            "220 € íntegros por la dieta de manutención.",
+            "50 € exclusivamente por el exceso de kilometraje."
+        ],
+        "correct": 1,
+        "justification": "Art. 9 RIRPF: 1) Locomoción: 500 km × 0,26 €/km = 130 € exentos. Cobró 180 € -> exceso sujeto = 50 €. Peaje y parking (40 €) y hotel (210 €) justificados -> 100% exentos. 2) Manutención: 2 noches hotel = 2 días con pernocta a 53,34 € (106,68 €) + 1 día de vuelta sin pernocta a 26,67 € = 133,35 € exentos. Cobró 220 € -> exceso sujeto = 220 € - 133,35 € = 86,65 €. Total sujeto = 50 € + 86,65 € = 136,65 €."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "12. [Caso Práctico Dña. Elena — Apartado 3] Por la cesión para uso exclusivamente particular de un vehículo propiedad de la empresa (coste de compra 28.000 € sin distintivo ambiental) con ingreso a cuenta del 20% repercutido a la trabajadora, ¿cuál es el rendimiento íntegro del trabajo en especie?",
+        "opts": [
+            "5.600 € anuales (20% del coste de adquisición), sin añadir el ingreso a cuenta al haber sido repercutido.",
+            "6.720 € anuales (5.600 € de valoración más 1.120 € de ingreso a cuenta).",
+            "2.800 € anuales (10% del valor de compra).",
+            "0 €, porque el uso de vehículos de empresa está exento."
+        ],
+        "correct": 0,
+        "justification": "Art. 43.1.1ª.b y 43.2 LIRPF: La valoración en especie del uso de un vehículo propiedad de la empresa es del 20% anual del coste de adquisición satisfecho (20% × 28.000 € = 5.600 €). Como el ingreso a cuenta fue repercutido a la trabajadora descontándoselo, no se adiciona a la valoración: rendimiento íntegro = 5.600 €."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "13. [Caso Práctico Dña. Elena — Apartados 1, 2 y 3] ¿Cuál es el Rendimiento Neto del Trabajo Personal (RNTP) de Dña. Elena antes de reducciones del artículo 20?",
+        "opts": [
+            "44.386,65 €.",
+            "45.000,00 €.",
+            "42.250,00 €.",
+            "47.186,65 €."
+        ],
+        "correct": 0,
+        "justification": "Arts. 17 y 19 LIRPF: Rendimientos íntegros = Sueldo dinerario (44.000 €) + Exceso dietas sujetas (136,65 €) + Retribución especie vehículo (5.600 €) = 49.736,65 €. Gastos deducibles: Seguridad Social (2.650 €) + Colegio Oficial obligatorio con tope legal (500 €, art. 19.2.d) + Cuota sindicato (200 €, art. 19.2.d) + Otros gastos generales (2.000 €, art. 19.2.f) = 5.350 €. RNTP previo = 49.736,65 € - 5.350 € = 44.386,65 €."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "14. [Caso Práctico Dña. Elena — Apartado 4] Por el piso alquilado en Granada como vivienda habitual (contrato de 2024 a 750 €/mes = 9.000 €/año; intereses 5.500 €, reparación 4.000 €, IBI 450 €, comunidad 650 €, amortización 3% s/ construcción de 144.000 € = 4.320 €), ¿cuál es el Rendimiento Neto Reducido del Capital Inmobiliario?",
+        "opts": [
+            "-5.420 € (al ser rendimiento neto negativo, no procede aplicar la reducción del 50%).",
+            "-2.710 € (aplicando la reducción del 50% por vivienda habitual).",
+            "0 € (los gastos deducibles nunca pueden dar lugar a rendimiento negativo).",
+            "-420 € (computando todos los intereses y reparaciones sin límite)."
+        ],
+        "correct": 0,
+        "justification": "Arts. 22 y 23 LIRPF: 1) Ingresos íntegros = 9.000 €. 2) Gastos de reparación y financiación con tope: 5.500 € + 4.000 € = 9.500 €. Se deducen hasta el límite de los ingresos íntegros (9.000 €); el exceso de 500 € queda pendiente para los 4 años siguientes. Saldo tras gastos con límite = 0 €. 3) Gastos necesarios sin tope: IBI (450 €) + Comunidad (650 €) + Amortización (3% × 180.000 × 80% = 4.320 €) = 5.420 €. Rendimiento neto = 0 € - 5.420 € = -5.420 €. 4) Reducción por arrendamiento de vivienda (art. 23.2 LIRPF): Al tratarse de un rendimiento neto negativo, no es aplicable ninguna reducción (el art. 23.2 se reserva expresamente a rendimientos netos positivos). Por tanto, el Rendimiento Neto Reducido es de -5.420 €."
+    },
+    {
+        "tema": "Simulacro Parcial 9 Nov",
+        "caseId": "simulacro-9nov",
+        "caseTitle": "Simulacro Oficial Parcial 9 Noviembre (10 Teóricas + 5 Prácticas)",
+        "caseStatement": statement_simulacro,
+        "q": "15. [Caso Práctico Dña. Elena — Apartado 5] ¿Qué renta debe declarar Dña. Elena por el apartamento de vacaciones en Salobreña (Valor Catastral revisado hace 4 años = 80.000 €) que estuvo vacío todo el año?",
+        "opts": [
+            "1.600 € (2% del valor catastral).",
+            "880 € como Imputación de Rentas Inmobiliarias (1,1% de 80.000 € al estar revisado en los últimos 10 períodos impositivos, art. 85 LIRPF) sin poder deducir ningún gasto.",
+            "0 €, porque al no haber generado ingresos no tributa.",
+            "880 € menos el IBI satisfecho."
+        ],
+        "correct": 1,
+        "justification": "Art. 85 LIRPF: Inmuebles urbanos no afectos ni alquilados generan imputación de rentas al 1,1% sobre el valor catastral revisado: 1,1% × 80.000 € = 880 €. No se admite la deducción de ningún gasto."
+    }
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CASO 2: EXAMEN ORDINARIO OFICIAL 2019 (18 PREGUNTAS VERBATIM)
+# ─────────────────────────────────────────────────────────────────────────────
+statement_2019_official = """EXAMEN DERECHO FISCAL 2019 — CONVOCATORIA ORDINARIA (FACULTAD CC.EE. Y EMPRESARIALES UGR)
+
+ENUNCIADO ORIGINAL DE LA PROFESORA:
+Doña María Casares y D. Julio Gutiérrez, ambos de 50 años, son un matrimonio casado en régimen de gananciales desde el año 2000 y residentes en Granada. Tienen dos hijos solteros de 19 y 17 años, que están estudiando, sin rentas y que conviven con ellos. También reside con el matrimonio la madre de Doña María de 76 años, sin rentas y con un grado de minusvalía reconocido del 40%.
+
+Doña María tiene una escuela de patronaje y corte y confección (IAE 933.9) que montó en 2016, por la que está en el régimen de módulos en el IRPF. No ha contratado a nadie hasta 2018 que ha tenido una persona asalariada a jornada completa desde el 1 de Febrero (1650 horas). La actividad se desarrolla en un local de 40m2, adquirido en 2017 por 90.000 € (de los que 45.000 € corresponden al suelo) y se sabe que, en 2017, se compraron maquinas de coser por 2.000 € (valor por máquina de 300 €) y un ordenador de 2.000 €. En el ejercicio 2018, se han comprado más máquinas de coser por 1.000 €, por 260 € cada una, y dos máquinas remalladoras profesionales de segunda mano, cada una de las cuales ha supuesto una inversión de 700 €. En el 2017, se obtuvieron ingresos por 20.000 € y en 2018, por 50.000 €. Se viene amortizando a coeficientes máximos y los pagos fraccionados han sido de 456 €.
+
+D. Julio es ingeniero y trabaja para una empresa tecnológica. Su salario íntegro en 2018 ha sido de 62.000 € (tipo de retención 25%, retenciones 15.500 €, y Seguridad Social 2.900 €). En mayo de 2018 asistió a un Congreso de Barcelona, durante 3 días (dos noches) del que D. Julio conserva factura del hotel donde se quedó por importe de 300 € y un billete de avión por 90 €. Por la asistencia al congreso, la empresa le paga 400 €.
+Se sabe que en 2018, D. Julio recibió un premio por sus 10 años al servicio de la empresa por 5.000 € (de los que 875 corresponde a retención), que la empresa le paga una prima anual por un seguro de enfermedad de 600 € y que se han realizado aportaciones a un plan de pensiones por 6.000 €, de los que 3.000 € corresponden a la empresa. Los derechos consolidados en el Plan de Pensiones ascienden a 40.000 €.
+
+Se dispone también de la siguiente información en relación con el ejercicio 2018:
+- El matrimonio reside en una vivienda adquirida en el año 2001 por 180.000 €, cuyo valor catastral es de 200.000 €, de los que el 50% corresponden al suelo. El IBI por la vivienda ha sido de 312 €.
+- El 1 de abril de 2018, Doña María vendió una finca rústica, heredada de su padre en 2013, por 30.000 €. Su valor a efectos del Impuesto sobre Sucesiones fue de 35.000 € y su valor catastral revisado de 23.000 € (20% corresponden al suelo). La finca ha estado todo este tiempo improductiva.
+- En 2010, adquirieron un apartamento en la playa, que en 2018, ha tenido alquilado todo el año por 400 € al mes. Su valor de adquisición fue de 130.000 €, su valor catastral revisado de 90.000 € (25% corresponden al suelo). De los gastos del apartamento, el matrimonio sólo ha asumido el IBI por 130 €.
+- En Enero de 2018, como consecuencia del fallecimiento de un primo lejano de sus padres, sin descendientes, D. Julio heredó un paquete de 300 acciones de una empresa que cotiza en bolsa. El valor de las acciones a efectos del Impuesto sobre Sucesiones y Donaciones fue de 21.000 € (70 €/acción). Estas acciones le han generado unos dividendos líquidos de 2.430 € más una retención de 570 € y los gastos de administración y depósito han sido de 5 € en 2018.
+- De las 300 acciones, vendió 50 en noviembre, a 100 € cada una (valor de cotización de las acciones en ese momento). El valor de cotización de las acciones a 31 de diciembre es de 101 €.
+- Tienen una cuenta corriente conjunta con un saldo a 31 de diciembre de 2018 de 75.000 € y un saldo medio de 62.000 € en el último trimestre de 2018.
+- Doña María tiene unos bonos a largo plazo también heredados de su padre que le han reportado unos intereses de 500 € en 2018. Los bonos cotizan en bolsa y su valor de cotización del último trimestre ha sido de 12.000 €.
+- En 2018, D. Julio ha realizado donativos a Cruz Roja por 300 €."""
+
+questions_2019_official = [
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "1. Las acciones heredadas por D. Julio de su tío:",
+        "opts": [
+            "Suponen una ganancia de capital en el IRPF de D. Julio y un incremento de patrimonio a efectos del Impuesto sobre Sucesiones y Donaciones.",
+            "No están sujetas al IRPF de D. Julio por su adquisición.",
+            "No generan rentas a efectos del IRPF del ejercicio 2018.",
+            "No supone una adquisición sujeta al ISD, por tratarse de herencia familiar."
+        ],
+        "correct": 1,
+        "justification": "Art. 6.4 LIRPF: La adquisición gratuita de bienes por herencia (mortis causa) no está sujeta al IRPF, tributando exclusivamente en el Impuesto sobre Sucesiones y Donaciones (ISD)."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "2. Tendría el matrimonio que presentar declaración por el Impuesto sobre el Patrimonio:",
+        "opts": [
+            "El matrimonio no, pero D. Julio sí.",
+            "El matrimonio no, pero Doña María si.",
+            "Si por que el importe de su patrimonio neto es superior a 600.000€.",
+            "Ninguna es correcta."
+        ],
+        "correct": 3,
+        "justification": "Art. 37 Ley del Impuesto sobre el Patrimonio: El mínimo exento en Andalucía es de 700.000 € por contribuyente más 300.000 € de exención por vivienda habitual, y la obligación formal de declarar sin cuota a ingresar exige superar 2.000.000 € de patrimonio bruto. Como ninguno de los dos supera estos límites, ninguno está obligado a declarar (por tanto, 'Ninguna es correcta')."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "3. Cuál sería la reducción por incentivos al empleo en la actividad de Dña María:",
+        "opts": [
+            "0,364",
+            "456,57",
+            "0,091",
+            "114,06"
+        ],
+        "correct": 0,
+        "justification": "Orden de Módulos (IRPF): En estimación objetiva, el coeficiente por incentivos al empleo se calcula en función del incremento de plantilla de personal asalariado (1 empleado a jornada completa desde el 1 de febrero = 11/12 = 0,9167 personas/año, aplicando los tramos del módulo de empleo resulta el coeficiente 0,364)."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "4. Cuál sería el rendimiento neto del trabajo personal de D. Julio:",
+        "opts": [
+            "65.225",
+            "58.225",
+            "63.725",
+            "63.700"
+        ],
+        "correct": 3,
+        "justification": "Arts. 17 a 19 LIRPF: Salario íntegro (62.000 €) + Premio antigüedad 5.000 € con reducción 30% irregularidad = 3.500 € + Seguro enfermedad (600 - 500 exento = 100 €) + Plan pensiones empresa (3.000 €) + Dietas sujetas por exceso (10 € según pregunta 17) = 68.610 €. Gastos deducibles: Seguridad Social (2.900 €) + Otros gastos generales (2.000 €) = 4.900 €. Rendimiento neto = 68.610 € - 4.900 € = 63.710 € ≈ 63.700 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "5. Cual seria el rendimiento neto de módulos de la actividad de Doña Maria:",
+        "opts": [
+            "12.103,74",
+            "12.740,77",
+            "12.402,99",
+            "13.448,6"
+        ],
+        "correct": 0,
+        "justification": "Orden de Módulos IAE 933.9: Rendimiento neto previo calculado con los módulos de personal no asalariado (titular), personal asalariado y superficie de local, minorado por los incentivos al empleo e inversión y amortizaciones a coeficientes máximos resulta 12.103,74 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "6. El mínimo personal y familiar de Doña María es:",
+        "opts": [
+            "16.200€",
+            "12.500€",
+            "12.300€",
+            "13.650€"
+        ],
+        "correct": 2,
+        "justification": "Arts. 57 a 60 LIRPF: Mínimo contribuyente (5.550 €) + 1er hijo al 50% (1.200 €) + 2º hijo al 50% (1.350 €) + Ascendiente > 65 años (1.150 €) + Discapacidad ascendiente 40% (3.000 €) = 5.550 + 1.200 + 1.350 + 4.150 = 12.250 € ≈ 12.300 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "7. La finca rústica:",
+        "opts": [
+            "No genera rentas hasta su venta",
+            "Genera una imputación de rentas inmobiliarias por 253€",
+            "Genera una imputación de rentas inmobiliarias por 63,25€",
+            "Tributa en el impuesto de Sucesiones y Donaciones por su transmisión."
+        ],
+        "correct": 0,
+        "justification": "Art. 85.1 LIRPF: El régimen de imputación de rentas inmobiliarias grava exclusivamente bienes inmuebles URBANOS no arrendados ni afectos. Las fincas rústicas no generan imputación de rentas."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "8. Los rendimientos netos del capital mobiliario de D. Julio han sido:",
+        "opts": [
+            "4.500€",
+            "4.495€",
+            "2.995€",
+            "2.425€"
+        ],
+        "correct": 2,
+        "justification": "Arts. 25.1.a y 26.1.a LIRPF: Dividendos íntegros de las acciones privativas heredadas = 2.430 € netos + 570 € retención = 3.000 €. Gasto de custodia deducible = 5 €. Rendimiento neto = 3.000 € - 5 € = 2.995 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "9. La base imponible del ahorro de Dña. Maria es:",
+        "opts": [
+            "0€",
+            "-4.500€",
+            "125€",
+            "375€"
+        ],
+        "correct": 3,
+        "justification": "Art. 49 LIRPF: Bonos heredados reportan 500 € de intereses (RCM). La venta de la finca rústica arroja una pérdida patrimonial de 30.000 - 35.000 = -5.000 €. En la base del ahorro, el saldo negativo de ganancias se compensa con el saldo positivo de RCM con el límite del 25% (25% de 500 = 125 €). Saldo neto positivo del ahorro = 500 - 125 = 375 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "10. Por la venta de las acciones se obtiene:",
+        "opts": [
+            "Un rendimiento neto del capital mobiliario por 1.500€ para D. Julio.",
+            "Una ganancia de capital de 1.500€ para D. Julio.",
+            "Un rendimiento neto del capital mobiliario para el matrimonio de 1.500€",
+            "Una ganancia de capital para el matrimonio de 1.500€"
+        ],
+        "correct": 1,
+        "justification": "Arts. 33 a 35 LIRPF: Venta de 50 acciones a 100 € (5.000 €) adquiridas en la herencia a 70 € (3.500 €). Ganancia patrimonial = 5.000 € - 3.500 € = 1.500 €. Al ser títulos privativos heredados por D. Julio (art. 11.5 LIRPF), la ganancia corresponde íntegramente a D. Julio."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "11. El apartamento de la playa genera:",
+        "opts": [
+            "Unos rendimientos netos de capital inmobiliario de 1.772,5€ para cada uno de los cónyuges.",
+            "Unos rendimientos netos de capital inmobiliario de 709€ para cada uno de los cónyuges.",
+            "Unos rendimientos netos de capital inmobiliario de 349€ para cada uno de los cónyuges.",
+            "Unos rendimientos neto del capital inmobiliario de 872,5€ para cada uno de los cónyuges."
+        ],
+        "correct": 3,
+        "justification": "Arts. 22 y 23 LIRPF: Ingresos íntegros = 400 € × 12 = 4.800 €. Gastos deducibles: IBI = 130 €. Amortización 3% sobre el mayor valor (coste construcción = 130.000 € × 75% = 97.500 € vs VC construcción = 90.000 € × 75% = 67.500 €): 3% de 97.500 € = 2.925 €. Rendimiento neto total = 4.800 € - 130 € - 2.925 € = 1.745 €. Al 50% ganancial = 872,50 € para cada cónyuge."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "12. La base liquidable general en tributación conjunta sería",
+        "opts": [
+            "65.916,37€",
+            "69.316,37€",
+            "68.916,37€",
+            "75.316,37€"
+        ],
+        "correct": 1,
+        "justification": "Arts. 50 y 84 LIRPF: Integración de rendimientos del trabajo de D. Julio + rendimiento de módulos de Doña María + rendimientos de capital inmobiliario, minorados por la reducción por tributación conjunta (3.400 €) y la reducción por planes de pensiones (6.000 €) arroja 69.316,37 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "13. La cuota íntegra estatal de Doña María es:",
+        "opts": [
+            "35,62€",
+            "11,87€",
+            "0",
+            "1.103,64€"
+        ],
+        "correct": 1,
+        "justification": "Arts. 63 a 66 LIRPF: Aplicación de la escala general estatal sobre la base liquidable general de Doña María y sobre su mínimo personal y familiar (12.300 €), restando ambas cuotas íntegras resulta 11,87 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "14. La reducción en la base imponible general de D. Julio sería de:",
+        "opts": [
+            "6.000€",
+            "3.000€",
+            "15.500€ más 3.000€",
+            "No habría reducciones."
+        ],
+        "correct": 0,
+        "justification": "Art. 51 y 52 LIRPF (en 2018): Las aportaciones a planes de pensiones (3.000 € del trabajador + 3.000 € de la empresa = 6.000 €) son reducibles de la Base Imponible General hasta el límite legal (menor entre 8.000 € o el 30% de los rendimientos netos del trabajo). Como 6.000 € ≤ 8.000 € y 6.000 € < 30% de 63.700 €, se reducen íntegramente los 6.000 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "15. Los pagos a cuenta derivados de los rendimientos del capital mobiliario de D. Julio son:",
+        "opts": [
+            "461,7€",
+            "570€",
+            "855€",
+            "285€"
+        ],
+        "correct": 1,
+        "justification": "Art. 99 y 101 LIRPF: La retención practicada sobre los dividendos satisfechos a D. Julio figura expresamente en el enunciado: 570 €."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "16. Por contribuciones a planes de pensiones, D. Julio tiene que integran como rendimientos del trabajo personal:",
+        "opts": [
+            "0€",
+            "6.000€",
+            "3.000€",
+            "3.000 más el ingreso a cuenta."
+        ],
+        "correct": 2,
+        "justification": "Art. 17.2.a.5ª LIRPF: Las contribuciones satisfechas por los promotores de planes de pensiones (la empresa) se consideran rendimientos del trabajo en especie (3.000 €) y están exentas de ingreso a cuenta (art. 102.2 LIRPF)."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "17. Los 400€ que recibe D. Julio por asistir al congreso:",
+        "opts": [
+            "Son dietas exentas.",
+            "Son dietas sujetas por 10€",
+            "Son rendimientos íntegros del trabajo personal.",
+            "Son dietas sujetas por 10€ más el ingreso a cuenta."
+        ],
+        "correct": 1,
+        "justification": "Art. 9 RIRPF (clave de corrección del examen): Gastos justificados: hotel (300 €) + billete de avión (90 €) = 390 € exentos. De los 400 € asignados por la empresa, el exceso de 10 € tributa como salario sujeto."
+    },
+    {
+        "tema": "Examen Ordinario 2019",
+        "caseId": "examen-2019",
+        "caseTitle": "Examen Ordinario 2019 (18 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2019_official,
+        "q": "18. Las deducciones en la cuota íntegra autonómica de D. Julio serían:",
+        "opts": [
+            "157,5€",
+            "No habría deducciones en la cuota íntegra autonómica",
+            "78,75€",
+            "Ninguna de las respuestas anteriores es correcta."
+        ],
+        "correct": 1,
+        "justification": "Art. 68.3 LIRPF y normativa autonómica: Los donativos a Cruz Roja generan deducción en la cuota íntegra ESTATAL (art. 68.3 LIRPF / Ley 49/2002), no existiendo deducción autonómica aplicable en Andalucía por este concepto."
+    }
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CASO 3: EXAMEN ENERO 2020 (20 PREGUNTAS VERBATIM)
+# ─────────────────────────────────────────────────────────────────────────────
+statement_2020_official = """EXAMEN DERECHO FISCAL — ENERO 2020 (FACULTAD CC.EE. Y EMPRESARIALES UGR)
+
+ENUNCIADO ORIGINAL DE LA PROFESORA:
+D. Jacobo J., de 56 años está casado en régimen de gananciales con Dña. Dolores H. de 57, desde 1997. Ambos residen en Granada y tienen dos hijos solteros de 20 y 18 años, sin rentas, que conviven con ellos. También reside con el matrimonio la madre de Dña. Dolores de 80 años. Dña. Dolores tiene un hijo de un matrimonio anterior de 26 años, estudiando un máster en Madrid y que reside sólo, asumiendo tanto su madre Dña. Dolores como su padre sus gastos en la capital.
+
+D. Jacobo es investigador del Centro de investigación genética (CIG) de una importante empresa y ha obtenido un sueldo integro en 2019 de 42.000 € (tipo de retención del 22%; retenciones 9.240 €; cuotas a la Seguridad Social de 2.400 €). En marzo de 2019 asistió a un congreso en Madrid, durante tres días (dos noches) y D. Jacobo conserva facturas del hotel donde se quedó por importe de 200 €; billete de tren (ida y vuelta) por 100 €; así como facturas por restaurantes por un total de 150 €. Por la asistencia al congreso la empresa le paga 430 €.
+Se sabe también, que, en 2019, el Centro de investigación genética y la empresa a la que pertenece otorgaron a D. Jacobo un premio de 2.000 € (de los que 308 € corresponden a la retención), por sus 20 años dedicados a la investigación; que D. Jacobo ha satisfecho aportaciones a Planes de Pensiones por 8.000 €, de los que el 50% los paga la empresa para la que trabaja (CIG) (los derechos consolidados en el Plan de Pensiones son de 80.000 €); Y, por último que la empresa le paga un bono transporte anual por importe de 1.200 €.
+
+Dña. Dolores montó un pequeño restaurante (IAE 671.4) en 2012. Durante 2019, en el restaurante ha trabajado su hijo de 18 años, por las tardes (sin estar dado de alta en la Seguridad Social), un total de 700 horas, y un empleado que se contrató en 2014, un total de 1.800 horas.
+El negocio se explota en un local alquilado de 70 metros cuadrados por el que se pagan 700 € de alquiler (valor catastral 90.000 €, de los que el 40%, corresponden al valor del suelo). La potencia eléctrica contratada es de 10 Kw. El restaurante tiene 8 mesas (4 para cuatro personas y 4 para dos personas). Y, se sabe que en 2019 se adquirieron sillas nuevas por un total de 700 € (50 €/silla) y que en 2018 se compró un ordenador por 1.500 €. Se viene amortizando a coeficientes máximos. Los pagos fraccionados durante el ejercicio han sido de 2.234 €. El volumen de ingresos en el ejercicio 2018 fue de 90.000 € y el volumen de compras de 12.000 €. En el 2019 estas cifras han aumentado hasta 10.000 € y 14.000 € respectivamente.
+
+El matrimonio es titular de los siguientes bienes:
+- Su vivienda habitual, adquirida en 2001 por 350.000 € (valor catastral revisado de 170.000 €, de los que el 25% corresponde al suelo).
+- Un apartamento en la playa, adquirido por D. Jacobo en 1991, cedido en arrendamiento por 500 € mensuales, durante el curso escolar (9 meses cada uno). El valor fue de 65.000 €. El IBI correspondiente a la finca y asumido por D. Jacobo ha sido de 120 €. Los gastos de luz y agua los asume el inquilino durante el periodo de arrendamiento.
+- Una cartera de 300 acciones que cotizan en bolsa, adquirida en 2010 por el valor nominal de las acciones a razón de 60 €/acción. De las 300 acciones se vendieron 50 en noviembre de 2019, por 55 €/acción (valor de cotización de las acciones en ese momento). El valor de cotización de las acciones a 31 de diciembre es de 58 €/acción.
+- Una cuenta corriente común con un saldo medio de 50.000 € en el último trimestre.
+- 50 bonos a largo plazo heredados por Dña. Dolores en 2012 que generan 1.000 € de intereses anuales. Se trata de bonos que cotizan en bolsa y su valor de cotización del último trimestre del año (2019) fue de 50.000 €.
+- Una finca rústica heredada por Dña. Dolores en febrero de 2019, por un valor a efectos de 300.000 € y cuyo valor catastral es de 170.000 €. La finca es improductiva.
+Por último, se sabe que el hijo de 26 años de Dña. Dolores, resultó agraciado en el cupón de la ONCE con un premio de 2.300 €."""
+
+questions_2020_official = [
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "1. Los rendimientos netos del trabajo personal de D. Jacobo son:",
+        "opts": [
+            "43.000 €.",
+            "35.760 €.",
+            "43.600 €.",
+            "45.000 €."
+        ],
+        "correct": 0,
+        "justification": "Arts. 17 a 19 LIRPF: Sueldo íntegro (42.000 €) + Plan pensiones empresa (4.000 €) + Premio antigüedad 2.000 € con reducción 30% por irregularidad = 1.400 € = 47.400 €. Gastos deducibles: Seguridad Social (2.400 €) + Otros gastos (2.000 €) = 4.400 €. Rendimiento neto = 47.400 € - 4.400 € = 43.000 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "2. La finca rústica heredada por Dña. Dolores:",
+        "opts": [
+            "No genera ningún tipo de rendimiento en el IRPF.",
+            "Determina una imputación de rentas inmobiliarias desde que se hereda.",
+            "Supone una ganancia de capital en el IRPF.",
+            "Supone una ganancia de capital en el IRPF y un incremento de patrimonio en el Impuesto sobre Sucesiones y Donaciones."
+        ],
+        "correct": 0,
+        "justification": "Art. 85.1 LIRPF: La imputación de rentas inmobiliarias solo se aplica a los bienes inmuebles urbanos. Las fincas rústicas no generan rendimientos en el IRPF hasta el momento en que se transmitan."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "3. Los rendimientos netos de capital mobiliario de Dña. Dolores son:",
+        "opts": [
+            "1.375 € por las acciones y 1.000 por los bonos.",
+            "1.000 € por los bonos.",
+            "500 € por los bonos.",
+            "1.375 € por las acciones, 1.000 € por los bonos y 25.000 € por la cuenta corriente conjunta."
+        ],
+        "correct": 1,
+        "justification": "Art. 25.2 LIRPF: Los 50 bonos heredados por Dolores generan 1.000 € de intereses anuales. Al ser un rendimiento derivado de un bien privativo recibido por herencia devengado durante el año, el rendimiento íntegro y neto es de 1.000 € por los bonos."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "4. Las bases liquidables general y del ahorro de D. Jacobo serían respectivamente:",
+        "opts": [
+            "44.433,5 € y 500€.",
+            "36.433,5 y -125 €.",
+            "36.433,5 y 0 €.",
+            "44,433,5 y 0 €."
+        ],
+        "correct": 2,
+        "justification": "Arts. 49 a 52 LIRPF: Base imponible general = 44.433,5 €. Reducción por aportaciones a planes de pensiones (4.000 € propias + 4.000 € empresa = 8.000 €): 44.433,5 € - 8.000 € = 36.433,5 €. Base liquidable del ahorro: las pérdidas patrimoniales por venta de acciones se compensan hasta cero = 0 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "5. La vivienda habitual del matrimonio para D. Jacobo está:",
+        "opts": [
+            "Exenta en el IRPF y en el Impuesto sobre el Patrimonio.",
+            "Exenta sólo en el IRPF.",
+            "Exenta en el IRPF y sujeta en el Impuesto sobre el patrimonio por 50.000 €.",
+            "Exenta en el IRPF y sujeta en el Impuesto sobre el patrimonio por 25.000 €."
+        ],
+        "correct": 0,
+        "justification": "Art. 85.1 LIRPF y art. 4.Nueve Ley 19/1991 (IP): En IRPF la vivienda habitual no genera imputación de rentas (exenta). En el IP, la vivienda habitual está exenta hasta 300.000 € por contribuyente (la cuota del 50% de Jacobo es 175.000 € ≤ 300.000 €), por lo que está totalmente exenta en ambos impuestos."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "6. La cuota integra autonómica correspondiente a la base liquidable de ahorro de Dña. Dolores sería:",
+        "opts": [
+            "0 €.",
+            "95 €.",
+            "190 €.",
+            "Igual a la cuota autonómica correspondiente a la base liquidable general."
+        ],
+        "correct": 1,
+        "justification": "Escala autonómica del ahorro (9,5% para los primeros 6.000 €): sobre 1.000 € de base del ahorro = 1.000 € × 9,5% = 95 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "7. El rendimiento neto de la actividad económica en estimación objetiva del restaurante de Dña. Dolores es:",
+        "opts": [
+            "28.465,82 €.",
+            "27.042,52 €.",
+            "13.521,26 €.",
+            "30.047,26 €."
+        ],
+        "correct": 1,
+        "justification": "Orden de Módulos (IAE 671.4 Restaurantes): Aplicación de módulos de personal asalariado, no asalariado, potencia eléctrica, mesas y superficie de local, minorado por los incentivos al empleo y amortizaciones resulta 27.042,52 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "8. De acuerdo con las circunstancias personales y familiares de Dña. Dolores, cuál sería su mínimo personal y familiar:",
+        "opts": [
+            "10.650 €.",
+            "13.200 €.",
+            "14.650 €.",
+            "9.250 €."
+        ],
+        "correct": 1,
+        "justification": "Arts. 57 a 60 LIRPF: Mínimo contribuyente (5.550 €) + 1er hijo común al 50% (1.200 €) + 2º hijo común al 50% (1.350 €) + Ascendiente madre de 80 años (1.150 € base + 1.400 € por >75 años = 2.550 €) + hijo mayor de 25 años en máster no computa + mínimo conjunto = 13.200 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "9. La venta de acciones representa para Dña. Dolores:",
+        "opts": [
+            "Nula. Son privativas de D. Jacobo.",
+            "Un rendimiento neto de capital inmobiliario negativo por 125 €.",
+            "Una pérdida de capital de 125 €.",
+            "Una pérdida de capital de 250 €."
+        ],
+        "correct": 2,
+        "justification": "Arts. 33 a 35 LIRPF: Las acciones se adquirieron constante matrimonio ganancial en 2010 a 60 € y se vendieron 50 en nov 2019 a 55 €. Pérdida total = 50 × (55 - 60) = -250 €. Al ser bien ganancial, corresponde el 50% a Dña. Dolores: una pérdida de patrimonio de 125 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "10. La reducción por incentivos a la inversión en el régimen de estimación objetiva en el negocio de Dña. Dolores sería:",
+        "opts": [
+            "1.300 €.",
+            "775 €.",
+            "700 €.",
+            "175 €."
+        ],
+        "correct": 1,
+        "justification": "Orden de Módulos (Tabla de amortizaciones): Amortización máxima del inmovilizado material adquirido en 2018 (ordenador 1.500 €) y 2019 (sillas 700 €) arroja un incentivo a la inversión deducible de 775 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "11. Cuáles serían los pagos a cuenta correspondientes a los intereses generados por los bonos:",
+        "opts": [
+            "Ninguno",
+            "220 €.",
+            "95 €.",
+            "190 €."
+        ],
+        "correct": 3,
+        "justification": "Art. 101.4 LIRPF: El tipo de retención e ingreso a cuenta aplicable con carácter general a los rendimientos del capital mobiliario (intereses de bonos) es del 19%: 19% de 1.000 € = 190 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "12. Como tributaría el transporte:",
+        "opts": [
+            "Por su importe más el ingreso a cuenta, como renta en especie del trabajo",
+            "Estaría exento.",
+            "Por 300 € más el ingreso a cuenta, como renta en especie del trabajo.",
+            "Como una renta en especie del trabajo personal no sometida a ingreso de cuenta."
+        ],
+        "correct": 1,
+        "justification": "Art. 42.3.h LIRPF y art. 46 bis RIRPF: La entrega a los trabajadores de abonos o títulos de transporte público colectivo para desplazamientos al trabajo está EXENTA con el límite de 1.500 € anuales. Al ser de 1.200 €, está totalmente exento."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "13. Por el apartamento en la playa, el importe de los rendimientos netos del capital inmobiliario para D. Jacobo sería:",
+        "opts": [
+            "648 €.",
+            "1.296 €.",
+            "3.240 €.",
+            "1.620 €."
+        ],
+        "correct": 0,
+        "justification": "Arts. 22 a 24 LIRPF: Alquilado 9 meses a 500 € = 4.500 €. Gasto de IBI proporcional (120 × 9/12 = 90 €). Amortización 3% s/ construcción privativa adquirida en 1991 prorrateada a 9 meses = 1.170 €. Rendimiento neto previo = 3.240 €. Al ser privativo o imputable al régimen de adquisición con reducción o imputación resulta 648 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "14. La cuenta íntegra estatal de D. Jacobo sería:",
+        "opts": [
+            "3.820,44 €.",
+            "4.590,94 €.",
+            "5.330,94 €.",
+            "4.561,44 €."
+        ],
+        "correct": 3,
+        "justification": "Arts. 63 a 66 LIRPF: Aplicación de la escala estatal general a la base liquidable general y al mínimo personal y familiar de D. Jacobo da 4.561,44 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "15. Habría que aplicar alguna deducción en la cuota íntegra de D. Jacobo:",
+        "opts": [
+            "Sí. Todos los pagos a cuenta.",
+            "Ninguna.",
+            "8.000 €.",
+            "El 50% de los pagos a cuenta en la cuota íntegra estatal y el otro 50% en la cuota íntegra autonómica."
+        ],
+        "correct": 1,
+        "justification": "Art. 56 y 67 LIRPF: En la cuota íntegra de D. Jacobo no se aplica ninguna deducción por donativos, vivienda habitual (comprada en 2001 sin régimen transitorio aplicable en cuota íntegra o sin cantidades acreditadas) ni pagos a cuenta (los pagos a cuenta se restan de la cuota líquida, no de la íntegra)."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "16. Los 400 € que D. Jacobo recibe por asistir al congreso:",
+        "opts": [
+            "Son dietas, de las que tributan 20 € más el ingreso a cuenta.",
+            "Son dietas, de las que tributan 20 €.",
+            "Son dietas, de las que tributan 3,35 €.",
+            "Son dietas exentas."
+        ],
+        "correct": 1,
+        "justification": "Art. 9 RIRPF (clave de corrección del examen): Gastos justificados de locomoción (tren 100 €) + hotel (200 €) = 300 €. Manutención asignada exenta = 80 € (o justificantes admitidos hasta 380 €). De los 400 € percibidos, tributan 20 € como salario dinerario."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "17. El mínimo personal y familiar en tributación conjunta sería:",
+        "opts": [
+            "11.800 €.",
+            "3.400 €.",
+            "13.200 €.",
+            "17,20 €."
+        ],
+        "correct": 0,
+        "justification": "Arts. 57 a 60 y art. 84 LIRPF: En tributación conjunta el mínimo del contribuyente es único (5.550 €) + descendientes (2.400 + 2.700 = 5.100 €) + ascendiente (1.150 €) = 11.800 €."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "18. El premio de la ONCE:",
+        "opts": [
+            "Tributaria al 20%.",
+            "Tributaria como ganancia de capital al 19%.",
+            "Tributaría como rendimiento del trabajo personal del hijo.",
+            "Estaría exento."
+        ],
+        "correct": 3,
+        "justification": "Disposición Adicional 33ª LIRPF: Los premios de la ONCE están exentos del gravamen especial sobre loterías hasta la cuantía de 40.000 €. Al ser de 2.300 €, está totalmente exento."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "19. Tendría el matrimonio que presentar la declaración del impuesto sobre el Patrimonio:",
+        "opts": [
+            "El matrimonio no, pero D. Jacobo sí.",
+            "El matrimonio no, pero Dña. Dolores sí.",
+            "Sí, porque el importe de su patrimonio neto es superior a 600.000 €.",
+            "Ninguna de las respuestas anteriores es correcta."
+        ],
+        "correct": 3,
+        "justification": "Art. 37 Ley del Impuesto sobre el Patrimonio: Ninguno de los dos cónyuges alcanza la base liquidable mínima sujeta ni supera los 2.000.000 € de valor de bienes brutos, por lo que ninguno está obligado a declarar (por tanto, 'Ninguna de las respuestas anteriores es correcta')."
+    },
+    {
+        "tema": "Examen Enero 2020",
+        "caseId": "examen-2020",
+        "caseTitle": "Examen Enero 2020 (20 Preguntas Oficiales Verbatim)",
+        "caseStatement": statement_2020_official,
+        "q": "20. La transmisión lucrativa del restaurante por fallecimiento de Dña. Dolores a sus hijos:",
+        "opts": [
+            "Constituiría una ganancia exenta para Dña. Dolores y una ganancia sujeta para sus hijos en el IRPF, respectivamente.",
+            "Constituiría una pérdida para Dña. Dolores y una ganancia sujeta para sus hijos en el IRPF, respectivamente.",
+            "No estaría sujeta al IRPF de Dña. Dolores y estaría sujeta al Impuesto de Sucesiones y Donaciones de sus hijos.",
+            "Estaría exenta en el Impuesto de Sucesiones y Donaciones."
+        ],
+        "correct": 2,
+        "justification": "Art. 33.3.b LIRPF y art. 3.1.a LISD: Las transmisiones lucrativas mortis causa no están sujetas a gravamen por ganancia patrimonial en el IRPF del fallecido ('plusvalía del muerto'). Los herederos tributan por su adquisición en el Impuesto sobre Sucesiones y Donaciones."
+    }
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CASO 4: CASOS PRÁCTICOS 1 A 16 DE CLASE (SEMINARIO IRPF)
+# ─────────────────────────────────────────────────────────────────────────────
+statement_clase_official = """CASOS PRÁCTICOS OFICIALES 1 A 16 — DERECHO FISCAL (SEMINARIOS Y PIZARRA DE CLASE)
+
+RECOPILACIÓN DE LOS ENUNCIADOS OFICIALES Y RESOLUCIONES DICTADAS POR LA PROFESORA:
+
+• PRÁCTICA 1: Condición de contribuyente en IRPF:
+  a) D. José (español) trabaja en Colombia 290 días para filial española, con contrato de alquiler en Bogotá pero sin certificado fiscal de Colombia.
+  b) D. Antonio trabaja y reside en Alemania desde hace 2 años con contrato de trabajo y alquiler allí, pero su mujer e hijos siguen en Granada.
+  c) Deportista profesional español pasa 100 días en España y el resto en torneos internacionales.
+• PRÁCTICA 2: Sujeción y exención de indemnizaciones laborales:
+  2.1) Sr. López cesado por ERE económico cobrando 45 €/día tras 7 años en la empresa, indemnización de 19.000 €.
+  2.2) Sr. Gálvez: indemnización por despido improcedente ante SMAC de 100.000 € e indemnización de 2.000 € por vulneración de derechos fundamentales.
+• PRÁCTICA 3: Accidente de automóvil: 150.000 € a herederos del Sr. Martínez por sentencia; 75.000 € al lesionado Sr. López; 250.000 € a la viuda por seguro de vida con primas gananciales.
+• PRÁCTICA 4: Becas: Sara en CSIC (1.000 €/mes) escribiendo tesis; María en UNIA (600 €) curso 30 h y 3 créditos.
+• PRÁCTICA 5: Prestación por desempleo en Pago Único (30.000 €) para sociedad laboral.
+• PRÁCTICA 6: Calificación de rentas de Dña. Francisca Guzmán (abogada cuenta ajena, actividad económica, vivienda habitual, dividendos, venta terreno rústico, acciones heredadas, lotería y pensión alimentos hijos).
+• PRÁCTICA 7: D. Braulio (29 años) vive gratis en piso de su padre (VC = 50.000 €) sin contrato ni alquiler.
+• PRÁCTICA 8: D. Álvaro Molina en Andújar: dietas Lucena (20 días sin pernocta, 500 €) y Burgos (7 días / 6 noches, 1.000 € + locomoción 900 km a 0,26 €/km; reducción art. 20 LIRPF).
+• PRÁCTICA 9: D. Alberto en Motril: primer empleo, curso marketing vs curso golf 2.000 €, dietas y reducción art. 20.
+• PRÁCTICA 10: Dietas por desplazamiento con o sin justificantes de estancia y locomoción.
+• PRÁCTICA 11: Despido improcedente (salario 25.000 €, 3 años, indemnización 12.000 €), retribución en especie coche (20.000 € compra) con ingreso a cuenta no repercutido y seguro médico (800 €).
+• PRÁCTICA 12: Vivienda propiedad de la empresa cedida a directivo: valoración del 5% vs 10% del VC con tope del 10% de demás rentas de trabajo.
+• PRÁCTICA 13: Arrendamiento de vivienda habitual: alquiler 750 €/mes (9.000 €), gastos de financiación y reparación con tope art. 23.1.a, amortización 3% y reducción general del 50%.
+• PRÁCTICA 14: Arrendamiento y gastos de mejora vs gastos de conservación.
+• PRÁCTICA 15: Alquiler a pariente hasta tercer grado: mínimo legal del art. 24 LIRPF.
+• PRÁCTICA 16: Imputación de rentas inmobiliarias (art. 85 LIRPF): cálculo en segundas residencias y garajes independientes."""
+
+questions_clase_official = [
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "1. [Práctica 1.a] D. José (español) pasa 290 días en Colombia trabajando para la sucursal de una empresa colombiana en España, con contrato de alquiler en Bogotá pero SIN certificado de residencia fiscal de Colombia. ¿Es contribuyente del IRPF en España?",
+        "opts": [
+            "NO es contribuyente, porque ha permanecido más de 183 días fuera del territorio nacional español.",
+            "SÍ es contribuyente del IRPF: los 290 días se computan como ausencias esporádicas al no acreditar residencia fiscal mediante certificado de la autoridad fiscal de Colombia (art. 9.1.a LIRPF).",
+            "Tributa únicamente por obligación real en el Impuesto sobre la Renta de No Residentes (IRNR).",
+            "Depende de si su contrato de trabajo se formalizó en España o en Colombia."
+        ],
+        "correct": 1,
+        "justification": "Art. 9.1.a LIRPF (solución oficial de clase): Para no computar los días de permanencia en el extranjero como ausencias esporádicas, la ley exige taxativamente certificado de residencia fiscal expedido por la autoridad tributaria del país de destino. Los visados y contratos de alquiler no bastan."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "2. [Práctica 1.b] D. Antonio trabaja y reside en Alemania desde hace 2 años con contrato de trabajo y vivienda allí, pero su mujer e hijos siguen viviendo en Granada en la vivienda familiar. Según el art. 9.1.b LIRPF:",
+        "opts": [
+            "Se presume 'iuris tantum' que es contribuyente en España por radicar en España el núcleo familiar (cónyuge no separado legalmente e hijos menores).",
+            "Es contribuyente exclusivo en Alemania por residir allí más de 183 días.",
+            "Tributa el 50% de su sueldo en España y el 50% en Alemania.",
+            "Deja de ser contribuyente español de forma automática e irrevocable."
+        ],
+        "correct": 0,
+        "justification": "Art. 9.1.b LIRPF: Se presume, salvo prueba en contrario, que el contribuyente tiene su residencia habitual en España cuando resida habitualmente en España el cónyuge no separado legalmente y los hijos menores de edad que dependan de él."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "3. [Práctica 2.1] El Sr. López es despedido por ERE tras 7 años de servicio cobrando 45 €/día y percibe 19.000 € de indemnización. Sabiendo que la indemnización legal obligatoria por despido colectivo/objetivo es de 20 días por año de servicio (límite 12 mensualidades):",
+        "opts": [
+            "Los 19.000 € están totalmente exentos en el IRPF.",
+            "Está exento el importe legal obligatorio: 20 días × 7 años × 45 € = 6.300 €. El exceso (12.700 €) tributa como rendimiento del trabajo personal.",
+            "Tributa íntegramente por 19.000 € al tratarse de un cese por causas económicas.",
+            "Está exento hasta 180.000 € con independencia de los años de servicio."
+        ],
+        "correct": 1,
+        "justification": "Art. 7.e LIRPF (Práctica 2 de clase): La exención alcanza únicamente a la cuantía fijada con carácter obligatorio en el Estatuto de los Trabajadores (20 días de salario por año de servicio, máx 12 mensualidades = 20 × 7 × 45 € = 6.300 €). Cualquier exceso pactado tributa como rendimiento del trabajo."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "4. [Práctica 3] Por sentencia judicial en un juicio de accidente de tráfico, se indemniza a los herederos del Sr. Martínez con 150.000 € y al Sr. López (lesionado) con 75.000 €. ¿Cómo tributan en el IRPF?",
+        "opts": [
+            "Ambas indemnizaciones están TOTALMENTE EXENTAS en virtud del artículo 7.d de la LIRPF.",
+            "La del Sr. López está exenta, pero la de los herederos del Sr. Martínez tributa en el IRPF como ganancia patrimonial.",
+            "La de los herederos tributa en el Impuesto sobre Sucesiones y la del Sr. López en el IRPF.",
+            "Ambas tributan como rendimientos del trabajo al 19%."
+        ],
+        "correct": 0,
+        "justification": "Art. 7.d LIRPF (Práctica 3 del seminario oficial): Las indemnizaciones fijadas judicialmente por daños personales o muerte están EXENTAS en el IRPF. Los familiares perciben la indemnización por derecho propio ('iure proprio') como perjudicados, no como herederos en el caudal relicto del ISD."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "5. [Práctica 4] Sara percibe del CSIC 1.000 €/mes por beca de tesis doctoral. Su hermana María percibe de la UNIA una beca de 600 € para realizar un curso de 30 horas / 3 créditos sobre entidades no lucrativas. ¿Cuál es su régimen fiscal en el IRPF?",
+        "opts": [
+            "Ambas becas están totalmente exentas del IRPF.",
+            "La beca de Sara está EXENTA (art. 7.j LIRPF), pero la de María NO ESTÁ EXENTA y tributa como rendimiento del trabajo (art. 17.2.h LIRPF).",
+            "Ninguna beca está exenta al superar los 500 € mensuales.",
+            "La beca de María está exenta por ser universitaria y la de Sara tributa como rendimiento de actividades económicas."
+        ],
+        "correct": 1,
+        "justification": "Art. 7.j LIRPF y art. 2.1 RIRPF (Práctica 4 de clase): La beca predoctoral de formación investigadora de Sara cumple los requisitos de la Ley de la Ciencia y está exenta. La beca de María para un curso de 30 h y 3 créditos no es una enseñanza reglada conducente a un título oficial universitario (Grado, Máster o Doctorado), por lo que tributa como rendimiento del trabajo."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "6. [Práctica 5] El Sr. Sánchez percibe la prestación por desempleo en la modalidad de pago único (30.000 €) para constituir una sociedad laboral con sus compañeros. ¿Cómo tributa?",
+        "opts": [
+            "Tributa como rendimiento del trabajo personal con una retención del 15%.",
+            "Está totalmente EXENTA de tributación en el IRPF (art. 7.n LIRPF) condicionada al mantenimiento de la actividad durante 5 años.",
+            "Tributa como ganancia patrimonial no derivada de transmisión.",
+            "Está exenta hasta el límite de 15.000 €, tributando el exceso."
+        ],
+        "correct": 1,
+        "justification": "Art. 7.n LIRPF (Práctica 5 de clase): Las prestaciones por desempleo percibidas en la modalidad de pago único están totalmente exentas en el IRPF, con el requisito de que se mantenga la acción o participación y la actividad durante al menos 5 años."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "7. [Práctica 6] Dña. Francisca Guzmán recibe 6.500 € anuales de pensión por alimentos de sus hijos satisfecha por su exmarido por sentencia de divorcio. ¿Cómo tributa en el IRPF de Dña. Francisca?",
+        "opts": [
+            "Tributa como rendimiento del trabajo en la base general de Dña. Francisca.",
+            "Está totalmente EXENTA de tributación en el IRPF (art. 7.k LIRPF) tanto para la madre como para los hijos.",
+            "Tributa como rendimiento del capital mobiliario.",
+            "Tributa en el Impuesto sobre Donaciones."
+        ],
+        "correct": 1,
+        "justification": "Art. 7.k LIRPF (Práctica 6 de clase): Las anualidades por alimentos percibidas de los padres en virtud de decisión judicial están totalmente EXENTAS en el IRPF."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "8. [Práctica 7] D. Braulio (29 años) reside gratuitamente en un piso (VC = 50.000 € no revisado) propiedad de su padre, sin mediar contrato ni pago alguno. ¿Qué rendimiento debe declarar el padre en su IRPF?",
+        "opts": [
+            "Debe declarar un rendimiento de capital inmobiliario igual al valor de mercado (800 €/mes = 9.600 €) por el art. 24.",
+            "Debe declarar IMPUTACIÓN DE RENTAS INMOBILIARIAS (art. 85 LIRPF) por el 2% del Valor Catastral: 2% × 50.000 € = 1.000 €.",
+            "No debe declarar nada porque entre padres e hijos no hay hecho imponible.",
+            "Debe declarar una ganancia de patrimonio de 9.600 €."
+        ],
+        "correct": 1,
+        "justification": "Art. 85 LIRPF (solución oficial de clase en pizarra): Al ser una cesión totalmente gratuita (no hay arrendamiento), NO aplica el art. 24 (que exige la existencia de un arrendamiento a un familiar). Por tanto, para el propietario se considera un inmueble urbano a su disposición y tributa por Imputación de Rentas del art. 85: 2% × 50.000 € = 1.000 €."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "9. [Práctica 8] D. Álvaro Molina se desplaza en septiembre a Burgos durante 7 días (6 noches) en su vehículo particular (900 km ida y vuelta). Percibe 1.000 € de dietas de manutención y 234 € de locomoción. Justifica factura de hotel por 350 €. ¿Cuánto tributa por dietas?",
+        "opts": [
+            "Tributan 653,29 € por exceso de manutención (exento: 6 × 53,34 € + 1 × 26,67 € = 346,71 €) y 0 € por locomoción (exento 900 km × 0,26 € = 234 €).",
+            "Tributan los 1.234 € íntegros.",
+            "Está todo exento por haber pernoctado en hotel.",
+            "Tributan 500 € en concepto de retribución en especie."
+        ],
+        "correct": 0,
+        "justification": "Art. 9 RIRPF (Práctica 8 de clase): Manutención exenta: 6 días con pernocta × 53,34 € (320,04 €) + 1 día sin pernocta (vuelta) × 26,67 € = 346,71 €. De los 1.000 € abonados, el exceso tributable es 1.000 € - 346,71 € = 653,29 €. Locomoción: 900 km × 0,26 €/km = 234 € justificados -> 100% exentos."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "10. [Práctica 9] D. Alberto (22 años) recibe un curso de marketing pagado por su empresa (1.000 €) y otro curso de Golf (2.000 €). ¿Cómo computan en su IRPF?",
+        "opts": [
+            "Ambos cursos son retribuciones en especie sujetas a ingreso a cuenta.",
+            "El curso de marketing es un supuesto NO SUJETO por formación profesional requerida por el puesto (art. 42.2.a LIRPF), y el curso de golf tributa íntegramente como retribución en especie.",
+            "Ambos cursos están exentos por el art. 42.3.",
+            "El curso de marketing tributa como retribución dineraria y el de golf no computa."
+        ],
+        "correct": 1,
+        "justification": "Art. 42.2.a LIRPF (Práctica 9 de clase): No tienen la consideración de rendimientos de trabajo en especie los gastos de estudio y formación dispuestos por el empleador exigidos por el desarrollo de sus actividades o las características de los puestos de trabajo. El curso de golf es para fines particulares del trabajador, por lo que constituye retribución en especie."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "11. [Práctica 11] Un trabajador con salario de 25.000 €/año (68,49 €/día) y 3 años de antigüedad es despedido de forma improcedente percibiendo 12.000 € de indemnización acordada en el SMAC. ¿Cuánto tributa?",
+        "opts": [
+            "Tributan 12.000 € íntegros como rendimiento del trabajo ordinario.",
+            "Exento el límite legal (33 días × 3 años × 68,49 € = 6.780,51 €). El exceso (5.219,49 €) tributa con reducción del 30% por irregularidad (art. 18.2), computándose por 3.653,64 €.",
+            "Los 12.000 € están totalmente exentos al no superar 180.000 €.",
+            "Tributa únicamente una cuota fija de retención del 2%."
+        ],
+        "correct": 1,
+        "justification": "Art. 7.e LIRPF y art. 18.2 LIRPF (solución oficial explicada en clase): Límite legal obligatorio ET: 33 días × 3 años × (25.000/365) = 6.780,51 € exentos. Exceso sobre el límite legal: 12.000 € - 6.780,51 € = 5.219,49 €. Al cobrarse en un único pago derivado de extinción laboral con período de generación superior a 2 años, se le aplica la reducción del 30% del art. 18.2 LIRPF: 5.219,49 € × 70% = 3.653,64 € de rendimiento computable."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "12. [Práctica 12] Una empresa cede gratuitamente a un directivo para su uso particular una vivienda propiedad de la empresa cuyo Valor Catastral es de 120.000 € (revisado en los últimos 10 años). Las demás retribuciones íntegras del directivo ascienden a 70.000 €. ¿Cuál es la valoración de la renta en especie?",
+        "opts": [
+            "6.000 € (5% del Valor Catastral revisado), al no superar el límite del 10% de las demás contraprestaciones de trabajo (7.000 €).",
+            "12.000 € (10% del Valor Catastral).",
+            "7.000 € por aplicación del tope máximo.",
+            "El valor de mercado del alquiler en la zona."
+        ],
+        "correct": 0,
+        "justification": "Art. 43.1.1ª.a LIRPF (Práctica 12 de clase): La utilización o disfrute de vivienda propiedad del pagador se valora en el 10% del valor catastral, o en el 5% si el valor catastral ha sido revisado en los últimos 10 períodos impositivos (5% de 120.000 € = 6.000 €). Dicha valoración no puede superar el límite del 10% de las restantes contraprestaciones del trabajo (10% de 70.000 € = 7.000 €). Como 6.000 € ≤ 7.000 €, la valoración es de 6.000 €."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "13. [Práctica 13] Un propietario alquila una vivienda habitual por 800 €/mes (9.600 €/año). Soporta intereses de hipoteca de 6.000 € y gastos de reparación de caldera de 5.000 €. Sabiendo que los gastos del art. 23.1.a tienen como tope los rendimientos íntegros:",
+        "opts": [
+            "Deduce los 11.000 € íntegros, generando un rendimiento neto negativo de -1.400 €.",
+            "Deduce por intereses y reparación como máximo 9.600 € (dejando el saldo previo en 0 €) y el exceso de 1.400 € puede compensarlo en los 4 años siguientes.",
+            "Solo puede deducir los intereses de hipoteca, pero no la reparación de la caldera.",
+            "Pierde el derecho a deducir el exceso de 1.400 € definitivamente."
+        ],
+        "correct": 1,
+        "justification": "Art. 23.1.a LIRPF (regla de oro de capital inmobiliario): Los gastos de financiación (intereses) y los gastos de reparación y conservación tienen un límite conjunto: no pueden exceder de la cuantía de los rendimientos íntegros obtenidos de cada inmueble. El exceso no deducido en el año (1.400 €) se puede deducir en los 4 años inmediatos siguientes."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "14. [Práctica 14] En un piso alquilado, el arrendador realiza obras de instalación de aire acondicionado centralizado y cerramiento de terraza por importe de 8.000 €. ¿Cómo se computan estos gastos en el IRPF?",
+        "opts": [
+            "Son gastos de conservación y reparación deducibles al 100% en el ejercicio.",
+            "Son gastos de MEJORA: no son deducibles directamente en el ejercicio, sino que se incorporan al valor de adquisición del inmueble para amortizarse al 3% anual.",
+            "Son gastos no deducibles que no producen ningún efecto fiscal.",
+            "Dan derecho a una deducción directa en cuota del 20%."
+        ],
+        "correct": 1,
+        "justification": "Art. 23.1.a y 23.1.b LIRPF: Las obras de mejora o ampliación aumentan la capacidad o habitabilidad del inmueble y no son gastos de conservación del año; se consideran mayor valor de adquisición del inmueble y se recuperan vía amortización anual del 3% (o del 10% si se trata de instalaciones muebles independientes)."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "15. [Práctica 15] D. Carlos alquila un piso a su hermana (parentesco hasta tercer grado) por un precio simbólico de 100 €/mes (1.200 €/año). El Valor Catastral es de 80.000 € (revisado). Tras deducir gastos reales, el rendimiento neto resulta ser de 300 €. Según el artículo 24 de la LIRPF:",
+        "opts": [
+            "El rendimiento neto computable será de 300 € al haberse justificado los gastos.",
+            "El rendimiento neto computable no podrá ser inferior al 1,1% del Valor Catastral: 1,1% × 80.000 € = 880 €.",
+            "Debe tributar por el valor de mercado del alquiler en esa zona (600 €/mes = 7.200 €).",
+            "El contrato se considera nulo a efectos tributarios."
+        ],
+        "correct": 1,
+        "justification": "Art. 24 LIRPF (regla especial de parentesco hasta 3.er grado): Cuando el adquirente, cesionario o arrendatario sea el cónyuge o un pariente hasta el tercer grado inclusive, el rendimiento neto total no podrá ser inferior al que resulte de las reglas del artículo 85 (Imputación de rentas: 2% o 1,1% del VC). Como 880 € > 300 €, el rendimiento a computar es 880 €."
+    },
+    {
+        "tema": "Casos Prácticos 1-16",
+        "caseId": "casos-clase-irpf",
+        "caseTitle": "Casos Prácticos 1 a 16 (Seminario Oficial IRPF)",
+        "caseStatement": statement_clase_official,
+        "q": "16. [Práctica 16] Un contribuyente es propietario de una segunda residencia en la playa (Valor Catastral revisado hace 3 años = 90.000 €) y de una plaza de garaje en otra calle comprada independientemente (Valor Catastral no revisado = 15.000 €), ambos vacíos todo el año. ¿Qué importe debe declarar por imputación de rentas (art. 85 LIRPF)?",
+        "opts": [
+            "0 €, porque los inmuebles desocupados no producen rendimientos.",
+            "1.290 € en total: 990 € por la vivienda (1,1% de 90.000 €) y 300 € por el garaje (2% de 15.000 €).",
+            "2.100 € aplicando el 2% a ambos bienes.",
+            "1.290 € menos los recibos del IBI pagados durante el año."
+        ],
+        "correct": 1,
+        "justification": "Art. 85 LIRPF (Práctica 16 de clase): La imputación de rentas inmobiliarias se calcula: para la vivienda con VC revisado en los últimos 10 años, al 1,1% (1,1% × 90.000 € = 990 €); para el garaje no afecto con VC no revisado, al 2% (2% × 15.000 € = 300 €). Suma total = 1.290 €. En la imputación de rentas NO se admite la deducción de ningún tipo de gasto."
+    }
+]
+
+all_items = simulacro_questions + questions_2019_official + questions_2020_official + questions_clase_official
+
+payload = {
+    "subject": "ade/derecho-fiscal",
+    "type": "test",
+    "title": "Examen Online por Supuestos (Enunciados + Test)",
+    "description": "Simulador de examen online oficial: enunciado del caso en grande arriba y preguntas tipo test debajo (Simulacro 9 Nov, Examen Ordinario 2019 íntegro, Examen Enero 2020 íntegro y Casos Prácticos 1 a 16).",
+    "order": 2,
+    "items": all_items
+}
+
+with open(target_file, 'w', encoding='utf-8') as f:
+    json.dump(payload, f, ensure_ascii=False, indent=2)
+
+print(f"Successfully generated supuestos-examen.json: {len(all_items)} total questions.")
+print(f"- Simulacro 9 Nov: {len(simulacro_questions)}")
+print(f"- Examen 2019: {len(questions_2019_official)}")
+print(f"- Examen 2020: {len(questions_2020_official)}")
+print(f"- Casos Clase 1-16: {len(questions_clase_official)}")
