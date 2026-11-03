@@ -11,7 +11,7 @@ badge: "Derecho Fiscal · 5º DADE / ADE · UGR · Examen 9 Nov 2026"
 
 > **Datos Oficiales de la Convocatoria:**  
 > 🗓️ **Fecha y Hora:** Lunes, **9 de noviembre de 2026 a las 8:30 h** (Aula D16)  
-> 🎯 **Puntuación:** **3,5 puntos sobre 10** de la nota final (**eliminatorio** a partir de **1,75 / 3,5**, equivalente a un 5 sobre 10)  
+> 🎯 **Puntuación:** **1,5 puntos sobre 10** de la nota final (evaluación continua, eliminatorio a partir de **0,75 / 1,5**, equivalente a un 5 sobre 10)  
 > 📐 **Estructura del Examen:** **15 preguntas tipo test** (**10 teóricas** del Tema 1 y LIRPF + **5 casos prácticos numéricos** de los Supuestos 1 a 16)  
 > ⚠️ **Penalización:** Cada **3 respuestas erróneas restan 1 correcta** (`-0,33` por fallo; en blanco no resta)  
 > 📖 **Material permitido:** Textos tributarios sin comentar (**Código de Legislación del IRPF del BOE** y LGT) y calculadora.
