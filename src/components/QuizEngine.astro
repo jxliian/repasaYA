@@ -9,13 +9,18 @@ interface Props {
   quizzData?: any[];
   backHref?: string;
   backLabel?: string;
+  initialTab?: string;
 }
-const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel } = Astro.props;
+const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar' } = Astro.props;
 const hasVF    = vfData.length > 0;
 const hasTest  = testData.length > 0;
 const hasQuizz = quizzData.length > 0;
 const hasBoth  = hasVF && hasTest;
 const hasMultiple = [hasVF, hasTest, hasQuizz].filter(Boolean).length > 1;
+const caseItems = testData.filter((q) => Boolean(q?.caseStatement));
+const hasCases = caseItems.length > 0;
+const uniqueCasesCount = new Set(caseItems.map((q) => q.caseId || q.caseTitle || q.tema)).size;
+const startInCases = initialTab === 'supuestos' && hasCases;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <style is:global>
@@ -249,6 +254,235 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
   .toast-notice.show { opacity: 1; }
 
+  /* ── ENUNCIADO DE SUPUESTO / EXAMEN ONLINE ─────────────────── */
+  :root[data-quiz] .q-case-box {
+    background: var(--surface2);
+    border: 1.5px solid var(--accent-line);
+    border-left: 5px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 18px;
+  }
+  :root[data-quiz] .q-case-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  :root[data-quiz] .q-case-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  :root[data-quiz] .q-case-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  :root[data-quiz] .q-case-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  :root[data-quiz] .q-case-body {
+    font-size: 0.94rem;
+    line-height: 1.68;
+    color: var(--text);
+    white-space: pre-line;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+  :root[data-quiz] .q-case-box.collapsed .q-case-body {
+    display: none;
+  }
+
+  /* PANEL SUPUESTOS / EXAMEN ONLINE */
+  :root[data-quiz] .cases-selector-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  :root[data-quiz] .cases-chips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+  }
+  :root[data-quiz] .case-sel-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 2px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  :root[data-quiz] .case-sel-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  :root[data-quiz] .case-sel-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  :root[data-quiz] .case-sel-title {
+    font-size: 0.86rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  :root[data-quiz] .case-sel-meta {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  :root[data-quiz] .case-toolbar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  :root[data-quiz] .case-toolbar-left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+  :root[data-quiz] .case-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  :root[data-quiz] .case-hero-statement {
+    background: var(--surface);
+    border: 2px solid var(--accent-line);
+    border-left: 6px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px 26px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+    transition: all 0.2s;
+  }
+  :root[data-quiz] .case-hero-statement.is-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    max-height: 40vh;
+    overflow-y: auto;
+    background: var(--surface);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+  :root[data-quiz] .case-hero-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  :root[data-quiz] .case-hero-kicker {
+    font-size: 0.72rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--accent-line);
+  }
+  :root[data-quiz] .case-hero-title {
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+  }
+  :root[data-quiz] .case-hero-text {
+    font-size: 1.04rem;
+    line-height: 1.78;
+    color: var(--text);
+    white-space: pre-line;
+  }
+  :root[data-quiz] .case-hero-statement.collapsed .case-hero-text {
+    display: none;
+  }
+
+  :root[data-quiz] .case-q-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  :root[data-quiz] .case-q-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color 0.2s;
+  }
+  :root[data-quiz] .case-q-item.graded-ok {
+    border-color: var(--correct);
+  }
+  :root[data-quiz] .case-q-item.graded-wrong {
+    border-color: var(--wrong);
+  }
+  :root[data-quiz] .case-q-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  :root[data-quiz] .case-q-num {
+    font-size: 0.75rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  :root[data-quiz] .case-q-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+  }
+  :root[data-quiz] .case-q-prompt {
+    font-size: 1.03rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
   #print-container {
     display: none !important;
   }
@@ -292,13 +526,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 </header>
 
 <div class="tabs">
-  <div class="tab active" data-tab="test">Test</div>
+  <div class:list={['tab', { active: !startInCases }]} data-tab="test">Test</div>
+  {hasCases && (
+    <div class:list={['tab', { active: startInCases }]} data-tab="supuestos" id="tab-btn-supuestos">
+      📋 Examen Online por Supuestos ({uniqueCasesCount})
+    </div>
+  )}
   <div class="tab" data-tab="banco">Banco</div>
 </div>
 
-<main style="display:flex;flex-direction:column;flex:1">
+<main style="display:flex;flex-direction:column;flex:1;max-width:960px">
   <!-- TEST PANEL -->
-  <div id="panel-test" class="panel active">
+  <div id="panel-test" class:list={['panel', { active: !startInCases }]}>
 
     <div id="selector-view" class="start">
       <div class="user-stats-bar" id="user-stats-bar" style="display:none">
@@ -325,6 +564,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <div class="mc-title">Tipo test</div>
               <div class="mc-desc">4 opciones, una correcta.</div>
               <span class="mc-chip">{testData.length} preguntas</span>
+            </div>
+          )}
+          {hasCases && (
+            <div class="mode-card" id="card-cases-open" onclick="openSupuestosTab()">
+              <div class="mc-icon">📋</div>
+              <div class="mc-title">Examen con Enunciados</div>
+              <div class="mc-desc">Enunciado grande arriba y preguntas test debajo.</div>
+              <span class="mc-chip">{uniqueCasesCount} supuestos · {caseItems.length} preg.</span>
             </div>
           )}
           {hasBoth && (
@@ -408,6 +655,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <div class="q-type-badge" id="q-type-badge"></div>
           </div>
         </div>
+        <div class="q-case-box" id="q-case-box" style="display:none">
+          <div class="q-case-hdr">
+            <span class="q-case-badge" id="q-case-title">📋 Enunciado del Supuesto</span>
+            <button type="button" class="q-case-toggle" id="q-case-toggle">Plegar / Desplegar enunciado</button>
+          </div>
+          <div class="q-case-body" id="q-case-body"></div>
+        </div>
         <div class="q-text" id="q-text"></div>
         <!-- VF controls -->
         <div id="vf-controls">
@@ -473,6 +727,75 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     </div>
   </div>
 
+  <!-- SUPUESTOS / EXAMEN ONLINE PANEL -->
+  {hasCases && (
+    <div id="panel-supuestos" class:list={['panel', { active: startInCases }]}>
+      <div class="cases-selector-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+          <span class="start-title" style="margin:0">📋 Selecciona el Supuesto Práctico o Examen Oficial</span>
+          <span style="font-size:0.76rem;color:var(--text-muted)">Lee el enunciado en grande arriba y responde las preguntas tipo test debajo</span>
+        </div>
+        <div class="cases-chips-grid" id="cases-selector-list"></div>
+      </div>
+
+      <div class="case-toolbar">
+        <div class="case-toolbar-left">
+          <label class="opt-toggle" title="Si se activa, puedes cambiar tus respuestas y se corrige todo de golpe al pulsar 'Corregir Examen'. Si se desactiva, cada pregunta se corrige al instante.">
+            <input type="checkbox" id="chk-case-exam-mode" />
+            <span><strong>Modo Examen Online</strong> (corregir al entregar)</span>
+          </label>
+          <label class="opt-toggle">
+            <input type="checkbox" id="chk-case-penalty" checked />
+            <span><strong>Penalización UGR</strong> (-0,33 por fallo)</span>
+          </label>
+          <label class="opt-toggle" title="Fija el enunciado en la parte superior para consultarlo mientras bajas por las preguntas">
+            <input type="checkbox" id="chk-case-sticky" />
+            <span><strong>📌 Fijar enunciado arriba</strong> (Split Screen)</span>
+          </label>
+        </div>
+        <div class="case-toolbar-right">
+          <span class="score-live" id="case-live-progress" style="font-size:0.84rem">0 / 0 respondidas</span>
+          <button type="button" class="btn btn-primary" id="btn-case-grade" style="padding:8px 16px;font-size:0.82rem">✅ Corregir Examen</button>
+          <button type="button" class="btn btn-ghost" id="btn-case-reset" style="padding:8px 14px;font-size:0.82rem">🔄 Reiniciar</button>
+        </div>
+      </div>
+
+      <div class="stats-box" id="case-results-banner" style="display:none;border-color:var(--accent)">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+          <div style="font-size:1.05rem;font-weight:800" id="case-results-title">📊 Calificación del Supuesto</div>
+          <span class="ugr-badge" id="case-results-badge" style="margin:0">Nota calculada sobre 10</span>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item"><div class="stat-num p-num" id="cr-note">0.0</div><div class="stat-lbl">Nota / 10</div></div>
+          <div class="stat-item"><div class="stat-num c-num" id="cr-ok">0</div><div class="stat-lbl">Aciertos</div></div>
+          <div class="stat-item"><div class="stat-num w-num" id="cr-wrong">0</div><div class="stat-lbl">Fallos</div></div>
+          <div class="stat-item"><div class="stat-num" id="cr-blank">0</div><div class="stat-lbl">En blanco</div></div>
+        </div>
+      </div>
+
+      <div class="case-hero-statement" id="case-hero-statement">
+        <div class="case-hero-top">
+          <span class="case-hero-kicker" id="case-hero-kicker">📄 ENUNCIADO DEL EXAMEN / SUPUESTO PRÁCTICO</span>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button type="button" class="q-case-toggle" id="btn-case-collapse">Plegar / Desplegar Enunciado</button>
+          </div>
+        </div>
+        <h2 class="case-hero-title" id="case-hero-title"></h2>
+        <div class="case-hero-text" id="case-hero-text"></div>
+      </div>
+
+      <div class="case-q-list" id="case-q-list"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 0 28px">
+        <button type="button" class="btn btn-ghost" id="btn-case-top">↑ Subir al enunciado</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="button" class="btn btn-ghost" id="btn-case-reset-bottom">🔄 Reiniciar Supuesto</button>
+          <button type="button" class="btn btn-primary" id="btn-case-grade-bottom">✅ Entregar y Corregir Examen Online</button>
+        </div>
+      </div>
+    </div>
+  )}
+
   <!-- BANCO PANEL -->
   <div id="panel-banco" class="panel">
     <div class="controls">
@@ -500,7 +823,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   Sígueme en GitHub ⭐
 </a>
 
-<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, code }}>
+<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code }}>
 const LETTERS = ['A','B','C','D','E'];
 const VF_DATA    = vfData.map(q => ({ ...q, qType: 'vf' }));
 const TEST_DATA  = testData.map(q => ({ ...q, qType: 'test' }));
@@ -801,6 +1124,17 @@ function showQ(){
   document.getElementById('q-type-badge').textContent = q.qType === 'vf' ? 'V/F' : q.qType === 'test' ? 'TEST' : 'QUIZ';
   document.getElementById('q-text').textContent = q.q;
   document.getElementById('q-counter').textContent = `${idx+1} / ${questions.length}`;
+
+  const qCaseBox = document.getElementById('q-case-box');
+  if (qCaseBox) {
+    if (q.caseStatement) {
+      qCaseBox.style.display = 'block';
+      document.getElementById('q-case-title').textContent = '📋 ' + (q.caseTitle || q.tema || 'Enunciado del Supuesto');
+      document.getElementById('q-case-body').textContent = q.caseStatement;
+    } else {
+      qCaseBox.style.display = 'none';
+    }
+  }
 
   updateLiveScore();
   updateStarredState();
@@ -1218,10 +1552,314 @@ document.querySelectorAll('.tab').forEach(t => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
     document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
     t.classList.add('active');
-    document.getElementById('panel-' + t.dataset.tab).classList.add('active');
-    if(t.dataset.tab === 'banco') initBank();
+    const targetPanel = document.getElementById('panel-' + t.dataset.tab);
+    if (targetPanel) targetPanel.classList.add('active');
+    if (t.dataset.tab === 'banco') initBank();
+    if (t.dataset.tab === 'supuestos') initCasesPanel();
   });
 });
+
+document.getElementById('q-case-toggle')?.addEventListener('click', () => {
+  document.getElementById('q-case-box')?.classList.toggle('collapsed');
+});
+
+function openSupuestosTab() {
+  const tabBtn = document.getElementById('tab-btn-supuestos');
+  if (tabBtn) tabBtn.click();
+}
+window.openSupuestosTab = openSupuestosTab;
+
+// ── SUPUESTOS / EXAMEN ONLINE CON ENUNCIADO EN GRANDE ────────────────
+const CASE_GROUPS = [];
+const caseGroupMap = new Map();
+TEST_DATA.forEach((q, globalIdx) => {
+  if (!q.caseStatement) return;
+  const key = q.caseId || q.caseTitle || q.tema;
+  if (!caseGroupMap.has(key)) {
+    const grp = {
+      id: key,
+      title: q.caseTitle || q.tema,
+      tema: q.tema,
+      statement: q.caseStatement,
+      questions: [],
+    };
+    caseGroupMap.set(key, grp);
+    CASE_GROUPS.push(grp);
+  }
+  caseGroupMap.get(key).questions.push({ ...q, _globalIdx: globalIdx });
+});
+
+let casesInitialized = false;
+let activeCaseIdx = 0;
+let caseUserAnswers = {}; // { qIdx: chosenOptIdx }
+let caseIsGraded = false;
+
+function initCasesPanel() {
+  if (!CASE_GROUPS.length) return;
+  if (!casesInitialized) {
+    casesInitialized = true;
+    renderCaseSelectorChips();
+
+    document.getElementById('btn-case-collapse')?.addEventListener('click', () => {
+      document.getElementById('case-hero-statement')?.classList.toggle('collapsed');
+    });
+    document.getElementById('chk-case-sticky')?.addEventListener('change', (e) => {
+      document.getElementById('case-hero-statement')?.classList.toggle('is-sticky', e.target.checked);
+    });
+    document.getElementById('chk-case-exam-mode')?.addEventListener('change', () => {
+      renderActiveCaseQuestions();
+    });
+    document.getElementById('chk-case-penalty')?.addEventListener('change', () => {
+      if (caseIsGraded) gradeActiveCaseExam(false);
+    });
+    document.getElementById('btn-case-grade')?.addEventListener('click', () => gradeActiveCaseExam(true));
+    document.getElementById('btn-case-grade-bottom')?.addEventListener('click', () => gradeActiveCaseExam(true));
+    document.getElementById('btn-case-reset')?.addEventListener('click', () => resetActiveCaseExam());
+    document.getElementById('btn-case-reset-bottom')?.addEventListener('click', () => resetActiveCaseExam());
+    document.getElementById('btn-case-top')?.addEventListener('click', () => {
+      document.getElementById('case-hero-statement')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    selectCaseByIndex(0);
+  }
+}
+
+function renderCaseSelectorChips() {
+  const listEl = document.getElementById('cases-selector-list');
+  if (!listEl) return;
+  listEl.innerHTML = '';
+  CASE_GROUPS.forEach((grp, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'case-sel-btn' + (i === activeCaseIdx ? ' active' : '');
+    btn.innerHTML =
+      `<span class="case-sel-title">${grp.title}</span>` +
+      `<span class="case-sel-meta">${grp.questions.length} preguntas tipo test · ${grp.tema}</span>`;
+    btn.addEventListener('click', () => selectCaseByIndex(i));
+    listEl.appendChild(btn);
+  });
+}
+
+function selectCaseByIndex(i) {
+  if (i < 0 || i >= CASE_GROUPS.length) return;
+  activeCaseIdx = i;
+  caseUserAnswers = {};
+  caseIsGraded = false;
+
+  const chips = document.querySelectorAll('#cases-selector-list .case-sel-btn');
+  chips.forEach((c, idx) => c.classList.toggle('active', idx === i));
+
+  const grp = CASE_GROUPS[i];
+  const titleEl = document.getElementById('case-hero-title');
+  const textEl = document.getElementById('case-hero-text');
+  const kickerEl = document.getElementById('case-hero-kicker');
+  const bannerEl = document.getElementById('case-results-banner');
+
+  if (bannerEl) bannerEl.style.display = 'none';
+  if (kickerEl) kickerEl.textContent = `📄 ENUNCIADO DEL SUPUESTO (${i + 1} DE ${CASE_GROUPS.length}) · ${grp.tema}`;
+  if (titleEl) titleEl.textContent = grp.title;
+  if (textEl) textEl.textContent = grp.statement;
+
+  renderActiveCaseQuestions();
+}
+
+function updateCaseLiveProgress() {
+  const grp = CASE_GROUPS[activeCaseIdx];
+  if (!grp) return;
+  const answeredCount = Object.keys(caseUserAnswers).length;
+  const progEl = document.getElementById('case-live-progress');
+  if (progEl) {
+    progEl.textContent = `${answeredCount} / ${grp.questions.length} respondidas`;
+  }
+}
+
+function renderActiveCaseQuestions() {
+  const grp = CASE_GROUPS[activeCaseIdx];
+  const container = document.getElementById('case-q-list');
+  if (!grp || !container) return;
+
+  const isExamMode = document.getElementById('chk-case-exam-mode')?.checked;
+  container.innerHTML = '';
+
+  grp.questions.forEach((q, qIdx) => {
+    const card = document.createElement('div');
+    const chosen = caseUserAnswers[qIdx];
+    const hasAnswered = chosen !== undefined;
+    const isOk = hasAnswered && chosen === q.correct;
+    const showSolution = caseIsGraded || (!isExamMode && hasAnswered);
+
+    let cardCls = 'case-q-item';
+    if (showSolution && hasAnswered) {
+      cardCls += isOk ? ' graded-ok' : ' graded-wrong';
+    }
+    card.className = cardCls;
+
+    // Si la pregunta tiene un enunciado específico distinto del general (ej. en el Simulacro Mixto), mostrarlo
+    const hasSubStatement = q.caseStatement && q.caseStatement !== grp.statement;
+
+    let statusText = 'Sin responder';
+    if (showSolution) {
+      if (!hasAnswered) statusText = '⚪ En blanco (0 pts)';
+      else if (isOk) statusText = '✓ Correcta (+1 pt)';
+      else statusText = '✗ Incorrecta';
+    } else if (hasAnswered) {
+      statusText = `Seleccionada: ${LETTERS[chosen]} (pulsa de nuevo para dejar en blanco)`;
+    }
+
+    const headHtml =
+      `<div class="case-q-head">` +
+      `<span class="case-q-num">Pregunta ${qIdx + 1} de ${grp.questions.length} · ${q.tema}</span>` +
+      `<span class="case-q-status">${statusText}</span>` +
+      `</div>`;
+
+    const subStmtHtml = hasSubStatement
+      ? `<div class="q-case-box" style="margin-bottom:14px"><div class="q-case-hdr"><span class="q-case-badge">📋 Datos específicos de esta pregunta</span></div><div class="q-case-body">${q.caseStatement}</div></div>`
+      : '';
+
+    const promptHtml = `<div class="case-q-prompt">${qIdx + 1}. ${q.q}</div>`;
+
+    const optsDiv = document.createElement('div');
+    optsDiv.className = 'options';
+    optsDiv.style.marginTop = '12px';
+
+    q.opts.forEach((optText, optIdx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      let btnCls = 'opt-btn';
+
+      if (showSolution) {
+        btn.disabled = true;
+        if (hasAnswered && chosen === optIdx) {
+          btnCls += isOk ? ' chosen-correct' : ' chosen-wrong';
+        }
+        if ((!hasAnswered || !isOk) && q.correct === optIdx) {
+          btnCls += ' show-correct';
+        }
+      } else if (hasAnswered && chosen === optIdx) {
+        btnCls += ' chosen-deferred';
+      }
+
+      btn.className = btnCls;
+      btn.innerHTML = `<span class="opt-letter">${LETTERS[optIdx]}</span><span>${optText}</span>`;
+      btn.addEventListener('click', () => handleCaseOptionClick(qIdx, optIdx));
+      optsDiv.appendChild(btn);
+    });
+
+    card.innerHTML = headHtml + subStmtHtml + promptHtml;
+    card.appendChild(optsDiv);
+
+    if (showSolution) {
+      const fb = document.createElement('div');
+      if (hasAnswered) {
+        fb.className = 'feedback show ' + (isOk ? 'correct' : 'wrong');
+        fb.textContent = isOk
+          ? `✓ Correcto — Opción ${LETTERS[q.correct]}: ${q.opts[q.correct]}`
+          : `✗ Incorrecto — Marcaste ${LETTERS[chosen]}, pero la correcta es ${LETTERS[q.correct]}: ${q.opts[q.correct]}`;
+      } else {
+        fb.className = 'feedback show wrong';
+        fb.textContent = `⚪ Dejada en blanco — La respuesta correcta es ${LETTERS[q.correct]}: ${q.opts[q.correct]}`;
+      }
+      card.appendChild(fb);
+
+      if (q.justification) {
+        const jbox = document.createElement('div');
+        jbox.className = 'justification show ' + (hasAnswered && isOk ? 'correct-just' : 'wrong-just');
+        jbox.innerHTML = `<div class="just-label">⚖️ Justificación Legal y Resolución Paso a Paso</div><div>${q.justification}</div>`;
+        card.appendChild(jbox);
+      }
+    }
+
+    container.appendChild(card);
+  });
+
+  updateCaseLiveProgress();
+}
+
+function handleCaseOptionClick(qIdx, optIdx) {
+  const grp = CASE_GROUPS[activeCaseIdx];
+  if (!grp || caseIsGraded) return;
+
+  const isExamMode = document.getElementById('chk-case-exam-mode')?.checked;
+  const q = grp.questions[qIdx];
+
+  if (isExamMode) {
+    // En Modo Examen Online se puede cambiar de opción o desmarcar para dejar en blanco
+    if (caseUserAnswers[qIdx] === optIdx) {
+      delete caseUserAnswers[qIdx];
+    } else {
+      caseUserAnswers[qIdx] = optIdx;
+    }
+    renderActiveCaseQuestions();
+  } else {
+    // En Modo Estudio se corrige al instante al pulsar
+    if (caseUserAnswers[qIdx] !== undefined) return;
+    caseUserAnswers[qIdx] = optIdx;
+    if (optIdx === q.correct) removeWeakQuestion(q.q);
+    else saveWeakQuestion(q.q);
+    renderActiveCaseQuestions();
+  }
+}
+
+function gradeActiveCaseExam(scrollToBanner) {
+  const grp = CASE_GROUPS[activeCaseIdx];
+  if (!grp) return;
+
+  caseIsGraded = true;
+  let okCount = 0;
+  let wrongCount = 0;
+  let blankCount = 0;
+
+  grp.questions.forEach((q, qIdx) => {
+    const chosen = caseUserAnswers[qIdx];
+    if (chosen === undefined) {
+      blankCount++;
+    } else if (chosen === q.correct) {
+      okCount++;
+      removeWeakQuestion(q.q);
+    } else {
+      wrongCount++;
+      saveWeakQuestion(q.q);
+    }
+  });
+
+  const applyPenalty = document.getElementById('chk-case-penalty')?.checked;
+  const rawPoints = applyPenalty ? Math.max(0, okCount - wrongCount * 0.33) : okCount;
+  const finalNote = Math.max(0, Math.round((rawPoints / grp.questions.length) * 100) / 10);
+
+  const banner = document.getElementById('case-results-banner');
+  if (banner) {
+    banner.style.display = 'block';
+    document.getElementById('cr-note').textContent = `${finalNote.toFixed(1)}`;
+    document.getElementById('cr-ok').textContent = String(okCount);
+    document.getElementById('cr-wrong').textContent = String(wrongCount);
+    document.getElementById('cr-blank').textContent = String(blankCount);
+    document.getElementById('case-results-badge').textContent = applyPenalty
+      ? 'Descuento oficial UGR aplicado (-0,33 por fallo)'
+      : 'Nota directa sin penalización';
+  }
+
+  saveUserAttempt(finalNote, okCount);
+  updateWeakChipCount();
+  renderActiveCaseQuestions();
+
+  if (scrollToBanner && banner) {
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    showToast(`Examen corregido: ${finalNote.toFixed(1)} / 10 (${okCount} aciertos)`);
+  }
+}
+
+function resetActiveCaseExam() {
+  caseUserAnswers = {};
+  caseIsGraded = false;
+  const banner = document.getElementById('case-results-banner');
+  if (banner) banner.style.display = 'none';
+  renderActiveCaseQuestions();
+  showToast('Supuesto reiniciado 🔄');
+}
+
+if (startInCases && hasCases) {
+  initCasesPanel();
+}
 
 // Banco
 const ALL_BANK = [...VF_DATA, ...TEST_DATA];

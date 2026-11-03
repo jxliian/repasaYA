@@ -1,0 +1,729 @@
+{
+  "subject": "ade/derecho-fiscal",
+  "type": "test",
+  "title": "Banco Completo de Test: Cuestiones LGT e IRPF Parcial",
+  "description": "60 preguntas tipo test de nivel examen (Tema 1 LGT, Cuestiones 1-16, Hecho Imponible, Exenciones, RNTP, Dietas, RNCI e Imputación) con justificación legal artículo por artículo.",
+  "order": 3,
+  "items": [
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "Según el artículo 2.2 de la Ley General Tributaria (LGT), ¿cuáles son las tres categorías que integran el concepto de tributo?",
+      "opts": [
+        "Impuestos, precios públicos y multas sancionadoras.",
+        "Tasas, contribuciones especiales e impuestos.",
+        "Tasas, impuestos directos e impuestos indirectos.",
+        "Contribuciones especiales, exacciones parafiscales y cuotas a la Seguridad Social."
+      ],
+      "correct": 1,
+      "justification": "Art. 2.2 LGT: Los tributos, cualquiera que sea su denominación, se clasifican en tasas, contribuciones especiales e impuestos."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Qué rasgo esencial diferencia a la Tasa del Impuesto según la LGT?",
+      "opts": [
+        "La tasa es siempre de carácter estatal y el impuesto de carácter local.",
+        "En la tasa existe una actividad administrativa dirigida individualmente al sujeto pasivo (o aprovechamiento del dominio público), mientras que el impuesto se exige sin contraprestación directa.",
+        "La tasa no tiene límite cuantitativo en su recaudación y el impuesto sí.",
+        "En el impuesto se exige el consentimiento expreso del contribuyente para su devengo."
+      ],
+      "correct": 1,
+      "justification": "Art. 2.2.a y 2.2.c LGT: La tasa se fundamenta en la utilización del dominio público o en la prestación de servicios en régimen de derecho público individualizados. El impuesto se exige sin contraprestación, gravando negocios, actos o hechos que ponen de manifiesto la capacidad económica del contribuyente."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuál es el límite cuantitativo máximo fijado por la ley para el importe global de las tasas (principio de equivalencia)?",
+      "opts": [
+        "El 50% del valor de mercado del servicio prestado.",
+        "El coste real o previsible del servicio o actividad de que se trate, o el valor de la utilización privativa.",
+        "El 90% del coste total soportado por la entidad pública.",
+        "No existe ningún límite, fijándose libremente por acuerdo presupuestario."
+      ],
+      "correct": 1,
+      "justification": "Art. 7 de la Ley de Tasas y Precios Públicos (LTPP): El importe de las tasas no podrá exceder, en su conjunto, del coste real o previsible del servicio o actividad de que se trate o, en su defecto, del valor de la prestación recibida."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿En qué se diferencia una Tasa de un Precio Público (art. 24 LTPP)?",
+      "opts": [
+        "El precio público solo lo cobran las Comunidades Autónomas.",
+        "El precio público se exige por servicios o actividades prestados en régimen de concurrencia con el sector privado y cuya solicitud es voluntaria para los administrados.",
+        "La tasa siempre cubre más del 100% del coste del servicio.",
+        "El precio público está reservado a la Ley Orgánica."
+      ],
+      "correct": 1,
+      "justification": "Art. 24 LTPP: Tendrán la consideración de precios públicos las contraprestaciones pecuniarias que se satisfagan por la prestación de servicios o la realización de actividades en régimen de derecho público cuando los servicios sean de solicitud voluntaria y se presten también por el sector privado."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Qué hecho imponible define a las Contribuciones Especiales según el art. 2.2.b de la LGT?",
+      "opts": [
+        "La titularidad de bienes inmuebles urbanos o rústicos.",
+        "La obtención por el obligado tributario de un beneficio o de un aumento de valor de sus bienes como consecuencia de obras públicas o del establecimiento o ampliación de servicios públicos.",
+        "El consumo de bienes sometidos a gravámenes medioambientales específicos.",
+        "La transmisión gratuita de patrimonios entre parientes colaterales."
+      ],
+      "correct": 1,
+      "justification": "Art. 2.2.b LGT: Son contribuciones especiales los tributos cuyo hecho imponible consiste en la obtención por el obligado tributario de un beneficio o de un aumento de valor de sus bienes como consecuencia de la realización de obras públicas o del establecimiento o ampliación de servicios públicos."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuál es el límite máximo que la entidad pública puede repercutir sobre los beneficiarios en una Contribución Especial (TRLRHL)?",
+      "opts": [
+        "El 100% del coste de la obra pública.",
+        "Como máximo el 90% del coste que la entidad soporte por la realización de las obras o por el establecimiento o ampliación de los servicios.",
+        "El 50% del presupuesto de licitación.",
+        "El 30% del valor catastral de los inmuebles afectados."
+      ],
+      "correct": 1,
+      "justification": "Art. 31 del Texto Refundido de la Ley Reguladora de las Haciendas Locales (TRLRHL): La base imponible de las contribuciones especiales está constituida, como máximo, por el 90% del coste que la entidad local soporte por la realización de las obras o por el establecimiento o ampliación de los servicios."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuáles son los tres impuestos municipales de exacción obligatoria en todos los Ayuntamientos de España?",
+      "opts": [
+        "IBI, Plusvalía (IIVTNU) e ICIO.",
+        "IBI, Impuesto sobre Actividades Económicas (IAE) e Impuesto sobre Vehículos de Tracción Mecánica (IVTM).",
+        "IAE, IVA y Tasa de Basuras.",
+        "IVTM, ICIO y Canon de Saneamiento."
+      ],
+      "correct": 1,
+      "justification": "Art. 59.1 TRLRHL (Cuestión 13 de clase): Los Ayuntamientos exigirán obligatoriamente los siguientes impuestos: el Impuesto sobre Bienes Inmuebles (IBI), el Impuesto sobre Actividades Económicas (IAE) y el Impuesto sobre Vehículos de Tracción Mecánica (IVTM). Los otros dos (ICIO e IIVTNU) son potestativos."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuál de los siguientes impuestos municipales es el ÚNICO que tiene naturaleza indirecta?",
+      "opts": [
+        "El Impuesto sobre Bienes Inmuebles (IBI).",
+        "El Impuesto sobre Construcciones, Instalaciones y Obras (ICIO).",
+        "El Impuesto sobre el Incremento de Valor de los Terrenos de Naturaleza Urbana (IIVTNU).",
+        "El Impuesto sobre Vehículos de Tracción Mecánica (IVTM)."
+      ],
+      "correct": 1,
+      "justification": "Art. 59.2 y 100 TRLRHL: El ICIO es el único impuesto municipal de carácter indirecto (grava la realización de construcciones u obras para las que se exija licencia urbanística). Todos los demás impuestos locales (IBI, IAE, IVTM, IIVTNU) son directos."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Qué diferencia existe entre un impuesto directo y un impuesto indirecto?",
+      "opts": [
+        "Los directos gravan la renta o el patrimonio poniendo de manifiesto la capacidad económica inmediata, mientras que los indirectos gravan el consumo o la circulación de bienes mediante repercusión obligatoria.",
+        "Los directos los recauda la Comunidad Autónoma y los indirectos el Estado central.",
+        "Los directos tienen tipo proporcional y los indirectos tipo progresivo.",
+        "Los directos nunca admiten deducciones ni bonificaciones."
+      ],
+      "correct": 0,
+      "justification": "Cuestión 3 de clase: Los impuestos directos gravan una manifestación directa e inmediata de capacidad económica (renta o patrimonio del titular, ej. IRPF, IS, IP). Los impuestos indirectos gravan manifestaciones indirectas o mediatas a través del gasto, consumo o transmisión de bienes (ej. IVA, ITPAJD, Impuestos Especiales)."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuál es la diferencia entre el Hecho Imponible y el Devengo de un tributo?",
+      "opts": [
+        "El hecho imponible es el importe a pagar y el devengo la fecha en que se publica la ley.",
+        "El hecho imponible es el presupuesto fijado por la ley para configurar cada tributo cuya realización origina el nacimiento de la obligación tributaria; el devengo es el momento exacto en el que nace dicha obligación.",
+        "El devengo siempre coincide obligatoriamente con el pago material de la deuda.",
+        "El hecho imponible lo define la Administración y el devengo el contribuyente."
+      ],
+      "correct": 1,
+      "justification": "Arts. 20 y 21 LGT: El hecho imponible es el presupuesto fijado por la ley cuya realización origina el nacimiento de la obligación tributaria principal. El devengo es el momento en el que se entiende realizado el hecho imponible y en el que se produce el nacimiento de la obligación tributaria principal."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Forman parte las sanciones tributarias pecuniarias de la deuda tributaria según el artículo 58.3 de la LGT?",
+      "opts": [
+        "Sí, siempre que se hayan notificado en período voluntario.",
+        "NO. Las sanciones tributarias NO forman parte de la deuda tributaria en ningún caso.",
+        "Sí, junto con los intereses de demora y el recargo de apremio.",
+        "Solo en las deudas tributarias liquidadas mediante acta de inspección."
+      ],
+      "correct": 1,
+      "justification": "Art. 58.3 LGT (Cuestión 14 de clase): Las sanciones tributarias no formarán parte de la deuda tributaria en ningún caso. La deuda se compone de la cuota o cantidad a ingresar y, en su caso, intereses de demora, recargos extemporáneos y recargos del período ejecutivo."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuál es el plazo general de prescripción de las obligaciones tributarias según el artículo 66 de la LGT?",
+      "opts": [
+        "1 año natural.",
+        "4 años.",
+        "5 años.",
+        "10 años en vía administrativa y 20 en vía judicial."
+      ],
+      "correct": 1,
+      "justification": "Art. 66 LGT: Prescribirán a los cuatro años: el derecho de la Administración para determinar la deuda mediante la oportuna liquidación, el derecho para exigir el pago de las deudas liquidadas, el derecho a solicitar devoluciones y el derecho a obtener dichas devoluciones."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Quién tiene la condición de sujeto pasivo en la relación tributaria (art. 36 LGT)?",
+      "opts": [
+        "Cualquier ciudadano mayor de edad empadronado en España.",
+        "El obligado tributario que, según la ley, debe cumplir la obligación tributaria principal y las formales, ya sea como contribuyente o como sustituto del contribuyente.",
+        "Exclusivamente las personas jurídicas sujetas al Impuesto sobre Sociedades.",
+        "El recaudador o funcionario que gestiona el cobro del tributo."
+      ],
+      "correct": 1,
+      "justification": "Art. 36.1 LGT: Es sujeto pasivo el obligado tributario que, según la ley, debe cumplir la obligación tributaria principal, así como las obligaciones formales inherentes a la misma, sea como contribuyente o como sustituto del mismo."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Qué define al 'sustituto del contribuyente' según el artículo 36.3 de la LGT?",
+      "opts": [
+        "El heredero que acepta una herencia a beneficio de inventario.",
+        "El sujeto pasivo que, por imposición de la ley y en lugar del contribuyente, está obligado a cumplir la obligación tributaria principal y las obligaciones formales, pudiendo exigir del contribuyente el reembolso.",
+        "El fiador solidario mercantil de la deuda tributaria.",
+        "El representante legal de los menores de edad."
+      ],
+      "correct": 1,
+      "justification": "Art. 36.3 LGT: Es sustituto el sujeto pasivo que, por imposición de la ley y en lugar del contribuyente, está obligado a cumplir la obligación tributaria principal, así como las obligaciones formales inherentes a la misma. El sustituto podrá exigir del contribuyente el importe de las obligaciones tributarias satisfechas."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿Cuáles son las tres categorías de pagos a cuenta que prevé el ordenamiento tributario español (art. 23 LGT)?",
+      "opts": [
+        "Fianzas, depósitos judiciales y provisiones notariales.",
+        "Retenciones a cuenta, ingresos a cuenta y pagos fraccionados.",
+        "Cuotas fijas, cuotas graduales y tipos especiales.",
+        "Anticipos bancarios, pagarés y letras del tesoro."
+      ],
+      "correct": 1,
+      "justification": "Art. 23 LGT (Cuestión 7 de clase): La obligación tributaria de realizar pagos a cuenta consiste en satisfacer un importe a la Administración a cuenta del tributo principal y comprende las retenciones, los ingresos a cuenta (para rentas en especie) y los pagos fraccionados."
+    },
+    {
+      "tema": "Tema 1: Conceptos Tributarios y LGT",
+      "q": "¿En qué consiste una 'autoliquidación' en el ámbito tributario (art. 120 LGT)?",
+      "opts": [
+        "Es una liquidación que practica de oficio la Inspección de Tributos tras un requerimiento.",
+        "Es una declaración en la que los obligados tributarios, además de comunicar los datos necesarios, realizan por sí mismos las operaciones de calificación y cuantificación necesarias para determinar el importe de la deuda tributaria a ingresar o la cantidad a devolver.",
+        "Es una sentencia judicial firme que condena al pago de tributos.",
+        "Es el certificado emitido por el Catastro Inmobiliario."
+      ],
+      "correct": 1,
+      "justification": "Art. 120.1 LGT: Las autoliquidaciones son declaraciones en las que los obligados tributarios comunican a la Administración los datos necesarios para la liquidación del tributo y realizan por sí mismos las operaciones de calificación y cuantificación necesarias para determinar e ingresar el importe de la deuda tributaria o, en su caso, determinar la cantidad que resulte a devolver."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cuándo se considera que una persona física tiene su residencia habitual en territorio español según el artículo 9.1 de la LIRPF?",
+      "opts": [
+        "Cuando permanezca más de 90 días en territorio español durante el año natural.",
+        "Cuando permanezca más de 183 días durante el año natural en territorio español, o cuando radique en España el núcleo principal o la base de sus actividades o intereses económicos (de forma directa o indirecta).",
+        "Exclusivamente cuando tenga la nacionalidad española y conste en el padrón municipal.",
+        "Cuando sea propietario de más de dos bienes inmuebles en España."
+      ],
+      "correct": 1,
+      "justification": "Art. 9.1 LIRPF: Se considera que el contribuyente tiene su residencia habitual en territorio español cuando concurra cualquiera de las siguientes circunstancias: a) Que permanezca más de 183 días durante el año natural en territorio español; b) Que radique en España el núcleo principal o la base de sus actividades o intereses económicos."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cómo se computan las ausencias esporádicas a efectos del cómputo de los 183 días de permanencia en España (art. 9.1.a LIRPF)?",
+      "opts": [
+        "Se descuentan siempre del cómputo total de días pasados en España.",
+        "Se computan sumándose a los días de permanencia en España, salvo que el contribuyente acredite su residencia fiscal en otro país mediante certificado de la autoridad fiscal correspondiente.",
+        "Solo se computan si la ausencia es por motivos vacacionales de menos de 15 días.",
+        "No se computan en ningún caso si el contribuyente aporta billetes de avión y visados."
+      ],
+      "correct": 1,
+      "justification": "Art. 9.1.a LIRPF (Práctica 1 de clase): Para determinar el período de permanencia en territorio español se computarán las ausencias esporádicas, salvo que el contribuyente acredite su residencia fiscal en otro país mediante certificado emitido por las autoridades fiscales de dicho país."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Qué regla especial de 'cuarentena fiscal' prevé el artículo 8.2 de la LIRPF para las personas físicas que trasladen su residencia a un paraíso fiscal (jurisdicción no cooperativa)?",
+      "opts": [
+        "Pierden la residencia fiscal española al cabo de 6 meses.",
+        "No perderán su condición de contribuyentes por el IRPF en el período impositivo en que se efectúe el cambio de residencia y durante los cuatro períodos impositivos siguientes (total 5 años).",
+        "Tributan únicamente por el Impuesto sobre la Renta de No Residentes con un recargo del 50%.",
+        "Deberán pagar una tasa fija del 30% sobre todo su patrimonio."
+      ],
+      "correct": 1,
+      "justification": "Art. 8.2 LIRPF: Las personas físicas de nacionalidad española que acrediten su nueva residencia fiscal en un país o territorio calificado como jurisdicción no cooperativa no perderán su condición de contribuyentes por este impuesto en el período impositivo en que se efectúe el cambio y durante los cuatro períodos impositivos siguientes."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cuál es el límite máximo absoluto exento de tributación en el IRPF para las indemnizaciones por despido o cese del trabajador (art. 7.e LIRPF)?",
+      "opts": [
+        "60.100 €.",
+        "180.000 €.",
+        "300.000 €.",
+        "No existe límite cuantitativo siempre que lo fije el juez."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.e LIRPF: El importe de la indemnización exenta tendrá como límite máximo la cantidad de 180.000 € (con independencia de cuál sea la indemnización legal obligatoria según el Estatuto de los Trabajadores)."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Están exentas en el IRPF las indemnizaciones por despido pactadas en virtud de convenio colectivo o pacto individual que superen la cuantía fijada con carácter obligatorio por el Estatuto de los Trabajadores?",
+      "opts": [
+        "Sí, están totalmente exentas siempre que no superen los 180.000 €.",
+        "NO. La exención alcanza únicamente hasta la cuantía legalmente obligatoria fijada en el Estatuto de los Trabajadores; el exceso pactado tributa como rendimiento del trabajo personal.",
+        "Están exentas si el trabajador tiene más de 50 años.",
+        "Tributan únicamente al tipo fijo del 15% como ganancia patrimonial."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.e LIRPF (Práctica 2 y 11 de clase): La exención solo cubre la indemnización obligatoria fijada por el Estatuto de los Trabajadores. Todo exceso pactado en convenio, contrato individual o laudo arbitral voluntario está sujeto y no exento en el IRPF."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Qué requisitos exige el artículo 7.d de la LIRPF para que una indemnización por daños personales esté totalmente exenta?",
+      "opts": [
+        "Que no supere los 30.000 € y se cobre en el año de ocurrencia.",
+        "Que su cuantía venga fijada legal o judicialmente (sentencia o auto judicial), o en la cuantía legal del baremo de accidentes de tráfico para indemnizaciones de contratos de seguro.",
+        "Que se perciba exclusivamente por trabajadores en activo.",
+        "Que el causante del daño sea una entidad aseguradora pública."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.d LIRPF: Las indemnizaciones como consecuencia de responsabilidad civil por daños personales están exentas en la cuantía legal o judicialmente reconocida."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Están exentas en el IRPF las prestaciones por maternidad o paternidad percibidas de la Seguridad Social?",
+      "opts": [
+        "No, tributan íntegramente como rendimiento del trabajo dinerario.",
+        "SÍ, están totalmente EXENTAS de tributación en virtud del artículo 7.h de la LIRPF.",
+        "Están exentas solo si la base liquidable del contribuyente es inferior a 22.000 €.",
+        "Están exentas únicamente para familias numerosas."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.h LIRPF: Igualmente estarán exentas las demás prestaciones públicas por nacimiento, parto o adopción múltiple, adopción, hijos a cargo y orfandad, así como las prestaciones por maternidad o paternidad satisfechas por la Seguridad Social."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Hasta qué límite anual están exentos los rendimientos del trabajo percibidos por trabajos efectivamente realizados en el extranjero (art. 7.p LIRPF)?",
+      "opts": [
+        "22.000 € anuales.",
+        "60.100 € anuales.",
+        "180.000 € anuales.",
+        "Están exentos sin ningún límite si el país no es paraíso fiscal."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.p LIRPF: Los rendimientos del trabajo percibidos por trabajos efectivamente realizados en el extranjero están exentos con el límite máximo de 60.100 € anuales, siempre que en el país de destino se aplique un impuesto de naturaleza idéntica o análoga y no sea territorio considerado paraíso fiscal."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "Las indemnizaciones percibidas por incapacidad permanente absoluta o gran invalidez reconocidas por la Seguridad Social:",
+      "opts": [
+        "Tributan como rendimiento del trabajo con una reducción del 50%.",
+        "Están TOTALMENTE EXENTAS de tributación en el IRPF según el artículo 7.f de la LIRPF.",
+        "Tributan al tipo reducido del 19% en la base del ahorro.",
+        "Están exentas únicamente durante los dos primeros años."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.f LIRPF: Las prestaciones reconocidas al contribuyente por la Seguridad Social o por las entidades que la sustituyan como consecuencia de incapacidad permanente absoluta o gran invalidez están totalmente exentas."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cómo tributan las anualidades por alimentos a favor de los hijos percibidas en virtud de decisión judicial de separación o divorcio (art. 7.k LIRPF)?",
+      "opts": [
+        "Tributan como rendimientos del trabajo del progenitor custodio.",
+        "Están totalmente EXENTAS en el IRPF para los hijos perceptores.",
+        "Tributan como ganancias de patrimonio en la base del ahorro.",
+        "Tributan en el Impuesto sobre Donaciones."
+      ],
+      "correct": 1,
+      "justification": "Art. 7.k LIRPF: Las anualidades por alimentos percibidas de los padres en virtud de decisión judicial están exentas en el IRPF."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cuál es la regla general de individualización de las rentas procedentes del trabajo personal cuando los cónyuges están casados en régimen de sociedad de gananciales (art. 11.2 LIRPF)?",
+      "opts": [
+        "Se atribuyen al 50% a cada uno de los cónyuges por el régimen ganancial.",
+        "Se atribuyen EXCLUSIVAMENTE a quien haya generado el derecho a su percepción (criterio de procedencia personal, no rige la regla civil ganancial).",
+        "Se atribuyen al cónyuge con menores ingresos para reducir la progresividad.",
+        "Tributan obligatoriamente en régimen de declaración conjunta."
+      ],
+      "correct": 1,
+      "justification": "Art. 11.2 LIRPF: Los rendimientos del trabajo se atribuirán exclusivamente a quien haya generado el derecho a su percepción. La naturaleza ganancial civil de los bienes ganados en el matrimonio no altera la calificación fiscal individual en el IRPF."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿A quién se atribuyen las rentas derivadas de bienes o derechos que pertenezcan a una sociedad de gananciales según el artículo 11.3 de la LIRPF?",
+      "opts": [
+        "Íntegramente al cónyuge que administre el bien.",
+        "Por mitad (50% a cada cónyuge), salvo que se justifique otra cuota de participación.",
+        "Al cónyuge que tenga mayor base liquidable general.",
+        "Al cónyuge titular catastral exclusivo."
+      ],
+      "correct": 1,
+      "justification": "Art. 11.3 LIRPF: Los rendimientos del capital se atribuirán a los contribuyentes que sean titulares de los elementos patrimoniales de que provengan. Si pertenecen a una sociedad de gananciales, se imputarán por mitad a cada cónyuge."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cuál es el período impositivo y cuándo se produce con carácter general el devengo del IRPF (art. 12 y 13 LIRPF)?",
+      "opts": [
+        "El período impositivo es el semestre y el devengo el 30 de junio y 31 de diciembre.",
+        "El período impositivo es el año natural y el devengo se produce el 31 de diciembre de cada año.",
+        "El período impositivo abarca desde el 1 de julio al 30 de junio del año siguiente.",
+        "El período coincide con la fecha de presentación de la declaración en junio."
+      ],
+      "correct": 1,
+      "justification": "Arts. 12 y 13 LIRPF: El período impositivo será el año natural y el impuesto se devengará el 31 de diciembre de cada año, salvo en caso de fallecimiento del contribuyente antes de esa fecha (en cuyo caso el período concluye y el impuesto se devenga en la fecha del fallecimiento)."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cuándo concluye el período impositivo en caso de fallecimiento del contribuyente durante el año?",
+      "opts": [
+        "El 31 de diciembre como cualquier otro contribuyente.",
+        "En la fecha del fallecimiento, devengándose el impuesto en dicho momento (art. 13.2 LIRPF).",
+        "Al finalizar el mes natural en que ocurrió el óbito.",
+        "No se presenta declaración por ese año al extinguirse la personalidad."
+      ],
+      "correct": 1,
+      "justification": "Art. 13.2 LIRPF: El período impositivo será inferior al año natural cuando el contribuyente fallezca en un día distinto del 31 de diciembre. En este caso el devengo se produce en la fecha del fallecimiento."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Cuál es la regla general de imputación temporal de los rendimientos del trabajo personal (art. 14.1.a LIRPF)?",
+      "opts": [
+        "Se imputan al período impositivo en que efectivamente se cobran por el trabajador en su cuenta bancaria.",
+        "Se imputan al período impositivo en que sean EXIGIBLES por su perceptor.",
+        "Se imputan a partes iguales entre el año de trabajo y el año de cobro.",
+        "Se imputan al período en que la empresa practica la retención en sus libros contables."
+      ],
+      "correct": 1,
+      "justification": "Art. 14.1.a LIRPF: Los rendimientos del trabajo y del capital se imputarán al período impositivo en que sean exigibles por su perceptor (criterio de exigibilidad, con independencia de la fecha de cobro efectivo)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Qué cuantía por kilómetro recorrido está EXENTA de IRPF en concepto de dietas de locomoción cuando el trabajador utiliza su vehículo particular para desplazamientos laborales fuera del centro de trabajo (art. 9.A.2.b RIRPF)?",
+      "opts": [
+        "0,19 € por kilómetro.",
+        "0,26 € por kilómetro (más los gastos justificados de peaje y aparcamiento).",
+        "0,32 € por kilómetro.",
+        "0,45 € por kilómetro si el coche es híbrido o eléctrico."
+      ],
+      "correct": 1,
+      "justification": "Art. 9.A.2.b RIRPF (actualizado tras la Orden HFP/792/2023): Cuando el empleado use su vehículo propio, está exenta la cantidad que resulte de computar 0,26 € por kilómetro recorrido, más los gastos de peaje y aparcamiento que se justifiquen."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es la cuantía diaria exenta por gastos de manutención en desplazamientos dentro de España cuando se ha producido pernocta en municipio distinto del habitual (art. 9.A.3.a RIRPF)?",
+      "opts": [
+        "26,67 € diarios.",
+        "53,34 € diarios.",
+        "91,35 € diarios.",
+        "100 € diarios."
+      ],
+      "correct": 1,
+      "justification": "Art. 9.A.3.a RIRPF: Para desplazamientos dentro del territorio español con pernocta en municipio distinto del lugar de trabajo y del de residencia, el límite de manutención exento es de 53,34 € diarios."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es la cuantía diaria exenta por gastos de manutención en desplazamientos en España SIN pernocta (viajes de ida y vuelta en el mismo día, o el último día de regreso de un viaje con pernocta)?",
+      "opts": [
+        "53,34 € diarios.",
+        "26,67 € diarios.",
+        "15,00 € diarios.",
+        "0 € al no haber pernocta."
+      ],
+      "correct": 1,
+      "justification": "Art. 9.A.3.a RIRPF (regla clave de clase): Sin pernocta en territorio español, el importe exento es de 26,67 € diarios. El día de vuelta de un viaje de varios días siempre computa a 26,67 € porque esa noche ya se duerme en casa."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuáles son las cuantías exentas de manutención en desplazamientos al EXTRANJERO según el artículo 9.A.3.a del RIRPF?",
+      "opts": [
+        "53,34 € con pernocta y 26,67 € sin pernocta.",
+        "91,35 € diarios con pernocta y 48,08 € diarios sin pernocta.",
+        "120,00 € diarios con pernocta y 60,00 € sin pernocta.",
+        "El 100% de lo que abone la empresa justificando el cambio de divisa."
+      ],
+      "correct": 1,
+      "justification": "Art. 9.A.3.a RIRPF: En desplazamientos a territorio extranjero, el importe exento de manutención es de 91,35 € diarios con pernocta y de 48,08 € diarios sin pernocta."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Hasta qué importe diario están exentas las entregas de vales-comida o cheques restaurante a los trabajadores (art. 42.3.a LIRPF y art. 45 RIRPF)?",
+      "opts": [
+        "9 € diarios.",
+        "11 € diarios por día laborable.",
+        "15 € diarios.",
+        "20 € diarios con justificante de factura electrónica."
+      ],
+      "correct": 1,
+      "justification": "Art. 45 RIRPF: La exención de las entregas de productos a precios rebajados en comedores de empresa o mediante fórmulas indirectas (tarjetas o vales) tiene como límite 11 € diarios por día laborable."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Hasta qué límite anual están exentas las primas satisfechas por la empresa para seguros de enfermedad del empleado, su cónyuge y descendientes (art. 42.3.c LIRPF)?",
+      "opts": [
+        "200 € anuales por beneficiario.",
+        "500 € anuales por persona (o 1.500 € si la persona tiene discapacidad reconocida).",
+        "1.200 € anuales por unidad familiar.",
+        "Están 100% exentas sin ningún límite máximo."
+      ],
+      "correct": 1,
+      "justification": "Art. 42.3.c LIRPF: Están exentas las primas de seguro de enfermedad satisfechas por la empresa hasta 500 € anuales por cada persona asegurada (trabajador, cónyuge o descendientes), límite que se eleva a 1.500 € anuales si el asegurado tiene discapacidad."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Hasta qué cuantía anual está exenta la entrega gratuita o a precio rebajado de acciones o participaciones de la propia empresa a sus trabajadores (art. 42.3.f LIRPF)?",
+      "opts": [
+        "1.500 € anuales.",
+        "12.000 € anuales en el conjunto del año (o hasta 50.000 € en empresas emergentes/startups).",
+        "30.000 € anuales.",
+        "Están exentas únicamente si cotizan en el IBEX 35."
+      ],
+      "correct": 1,
+      "justification": "Art. 42.3.f LIRPF: Está exenta la entrega de acciones a trabajadores en activo hasta el límite general de 12.000 € anuales (elevado a 50.000 € anuales en caso de empresas emergentes al amparo de la Ley de Startups)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cómo se valora la retribución en especie por utilización o disfrute de un vehículo propiedad de la empresa que se cede al trabajador para su uso exclusivamente particular (art. 43.1.1ª.b LIRPF)?",
+      "opts": [
+        "En el coste de mantenimiento y combustible abonado por la empresa.",
+        "En el 20% anual del coste de adquisición para el pagador (incluidos tributos que graven la compra).",
+        "En el 10% del valor catastral del vehículo.",
+        "En el valor residual según tablas de Hacienda para transmisiones patrimoniales."
+      ],
+      "correct": 1,
+      "justification": "Art. 43.1.1ª.b LIRPF: En el caso de entrega o uso de vehículos automóviles, si el vehículo es propiedad de la empresa la valoración de la renta en especie es del 20% anual del coste de adquisición para el pagador (incluidos los gastos y tributos que hayan gravado la adquisición)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Qué reducción porcentual en la valoración en especie del vehículo de empresa se prevé para vehículos considerados eficientes energéticamente (art. 47 bis RIRPF)?",
+      "opts": [
+        "Una reducción fija del 10% en todos los casos.",
+        "Una reducción de hasta el 30% para vehículos eléctricos de batería (BEV) o híbridos enchufables con autonomía > 40 km, del 20% para híbridos y del 15% para bajas emisiones.",
+        "Una reducción del 50% en cualquier turismo nuevo.",
+        "No existen reducciones por eficiencia energética en la valoración en especie."
+      ],
+      "correct": 1,
+      "justification": "Art. 47 bis RIRPF: La valoración en especie del uso de vehículos podrá reducirse en un 30% (vehículos eléctricos de batería o híbridos enchufables con autonomía ≥ 40 km), en un 20% (híbridos) o en un 15% (emisiones oficiales ≤ 120 g/km)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es la regla general para calcular el valor total de una retribución en especie cuando la empresa NO repercute el ingreso a cuenta al trabajador (art. 43.2 LIRPF)?",
+      "opts": [
+        "Valoración legal de la renta en especie menos el ingreso a cuenta.",
+        "Valoración legal de la renta en especie MÁS el importe del ingreso a cuenta satisfecho y no repercutido.",
+        "Se computa únicamente la valoración sin sumar nunca el ingreso a cuenta.",
+        "Se multiplica la valoración legal por un coeficiente fijo de 1,25."
+      ],
+      "correct": 1,
+      "justification": "Art. 43.2 LIRPF: A la valoración resultante con arreglo a las reglas anteriores se adicionará el ingreso a cuenta, salvo que su importe hubiera sido repercutido al perceptor de la renta."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuáles son los únicos gastos legalmente deducibles de los rendimientos íntegros del trabajo según la lista taxativa y cerrada del artículo 19.2 de la LIRPF?",
+      "opts": [
+        "Ropa de trabajo, desplazamientos urbanos en autobús y comidas diarias.",
+        "Cotizaciones a la Seguridad Social/mutualidades, detracciones por derechos pasivos, cotizaciones a colegios de huérfanos, cuotas sindicales, cuotas de colegios profesionales obligatorios (máx. 500 €), gastos de defensa jurídica laboral (máx. 300 €) y 2.000 € en concepto de otros gastos generales.",
+        "Los intereses de préstamos personales pedidos por el trabajador.",
+        "Todos los gastos necesarios justificados con ticket o factura que guardan relación con la actividad."
+      ],
+      "correct": 1,
+      "justification": "Art. 19.2 LIRPF (lista cerrada): Únicamente tienen la consideración de gastos deducibles: a) Cotizaciones a la Seguridad Social; b) Detracciones de derechos pasivos; c) Colegios de huérfanos; d) Cuotas satisfechas a sindicatos; e) Cuotas a colegios profesionales cuando la colegiación sea obligatoria (límite 500 €); f) Gastos de defensa jurídica en litigios laborales (límite 300 €); y g) 2.000 € en concepto de otros gastos (ampliable por movilidad geográfica o discapacidad)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es el límite legal máximo de deducción por cuotas satisfechas a Colegios Oficiales cuando la colegiación sea obligatoria para ejercer el puesto de trabajo (art. 19.2.d LIRPF y art. 10 RIRPF)?",
+      "opts": [
+        "300 € anuales.",
+        "500 € anuales.",
+        "1.000 € anuales.",
+        "El 100% de la cuota satisfecha sin ningún límite."
+      ],
+      "correct": 1,
+      "justification": "Art. 10 RIRPF: La exacción de las cuotas satisfechas a colegios profesionales tendrá como límite 500 € anuales, siempre que la colegiación tenga carácter obligatorio para el desempeño del trabajo."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿En cuánto se incrementa la cuantía deducible de 2.000 € en concepto de 'otros gastos' del art. 19.2.f LIRPF para desempleados inscritos en la oficina de empleo que acepten un puesto de trabajo que exija el traslado de su residencia habitual a un nuevo municipio (movilidad geográfica)?",
+      "opts": [
+        "Se incrementa en 1.000 € adicionales.",
+        "Se incrementa en 2.000 € adicionales (alcanzando 4.000 € en el período del traslado y en el siguiente).",
+        "Se incrementa en 3.500 € fijos.",
+        "Se multiplica por dos el total de rendimientos íntegros."
+      ],
+      "correct": 1,
+      "justification": "Art. 19.2.f LIRPF: Tratándose de contribuyentes desempleados inscritos en la oficina de empleo que acepten un puesto de trabajo que exija el traslado de su residencia habitual a un nuevo municipio, la cuantía de 2.000 € se incrementará en 2.000 € anuales adicionales en el período del traslado y en el siguiente."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Qué porcentaje de reducción prevé el artículo 18.2 de la LIRPF para los rendimientos del trabajo que tengan un período de generación superior a dos años o se califiquen reglamentariamente como notoriamente irregulares en el tiempo?",
+      "opts": [
+        "El 20% sobre el rendimiento íntegro.",
+        "El 30% sobre el rendimiento íntegro, con una base máxima reducible de 300.000 € anuales.",
+        "El 50% con límite de 50.000 €.",
+        "El 40% únicamente para planes de pensiones."
+      ],
+      "correct": 1,
+      "justification": "Art. 18.2 LIRPF: El 30% de reducción en el caso de rendimientos íntegros que tengan un período de generación superior a dos años, así como aquellos que se califiquen reglamentariamente como obtenidos de forma notoriamente irregular en el tiempo, cuando se imputen en un único período impositivo. La cuantía máxima sobre la que se aplicará es de 300.000 € anuales."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿A qué contribuyentes resulta aplicable la reducción por obtención de rendimientos del trabajo prevista en el artículo 20 de la LIRPF (tras la reforma del ejercicio)?",
+      "opts": [
+        "A todos los contribuyentes sin importar el nivel de ingresos.",
+        "A los contribuyentes con rendimientos netos del trabajo inferiores a 19.747,50 € (siempre que no tengan rentas distintas a las del trabajo superiores a 6.500 €), alcanzando hasta 7.302 € de reducción para rendimientos netos ≤ 14.047,50 €.",
+        "Únicamente a trabajadores mayores de 65 años.",
+        "Exclusivamente a perceptores de pensiones de viudedad."
+      ],
+      "correct": 1,
+      "justification": "Art. 20 LIRPF: Los contribuyentes con rendimientos netos del trabajo inferiores a 19.747,50 € reducirán el rendimiento neto del trabajo en hasta 7.302 € anuales para rentas bajas (según escala progresiva decreciente)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué rentas integran los Rendimientos Íntegros del Capital Inmobiliario según el artículo 22 de la LIRPF?",
+      "opts": [
+        "Las procedentes de la venta de inmuebles urbanos.",
+        "Las que deriven del arrendamiento o de la constitución o cesión de derechos o facultades de uso o disfrute sobre bienes inmuebles rústicos y urbanos o de derechos reales que recaigan sobre ellos.",
+        "Únicamente las rentas procedentes de locales comerciales.",
+        "Las procedentes de parcelas rústicas cultivadas directamente por su dueño."
+      ],
+      "correct": 1,
+      "justification": "Art. 22.1 LIRPF: Tendrán la consideración de rendimientos íntegros del capital inmobiliario los que se deriven del arrendamiento o de la constitución o cesión de derechos o facultades de uso o disfrute sobre bienes inmuebles rústicos y urbanos o de derechos reales que recaigan sobre ellos."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué limitación cuantitativa establece el artículo 23.1.a de la LIRPF para los gastos de financiación (intereses) y los gastos de conservación y reparación en inmuebles arrendados?",
+      "opts": [
+        "No pueden superar el 20% del valor catastral del inmueble.",
+        "El importe total deducible por estos conceptos no podrá exceder, para cada inmueble, de la cuantía de los rendimientos íntegros obtenidos; el exceso no deducido podrá compensarse en los cuatro años siguientes.",
+        "No tienen ningún límite, pudiendo generar un rendimiento negativo ilimitado.",
+        "Solo se permite deducir un máximo de 1.500 € al año por contrato."
+      ],
+      "correct": 1,
+      "justification": "Art. 23.1.a.1º LIRPF: El importe total a deducir por estos gastos (intereses y conservación/reparación) no podrá exceder, para cada bien o derecho, de la cuantía de los rendimientos íntegros obtenidos. El exceso se podrá deducir en los cuatro años siguientes de acuerdo con lo que se establezca reglamentariamente."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué porcentaje anual de amortización es deducible en el arrendamiento de bienes inmuebles sobre el valor de la construcción (art. 23.1.b LIRPF y art. 14 RIRPF)?",
+      "opts": [
+        "El 1,1% anual.",
+        "El 3% anual aplicado sobre el mayor entre el coste de adquisición satisfecho o el valor catastral, excluyendo en ambos casos el valor del suelo.",
+        "El 5% anual sobre el valor de mercado.",
+        "El 10% anual aplicable tanto al suelo como al vuelo."
+      ],
+      "correct": 1,
+      "justification": "Art. 23.1.b LIRPF y art. 14 RIRPF: Tratándose de inmuebles, se considerará que la amortización cumple el requisito de efectividad cuando no exceda del 3% anual, aplicado sobre el mayor de los siguientes valores: el coste de adquisición satisfecho o el valor catastral, sin incluir el cómputo del suelo."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué porcentaje de amortización anual es deducible para los muebles, enseres y electrodomésticos cedidos conjuntamente con el inmueble arrendado (art. 14.1 RIRPF)?",
+      "opts": [
+        "El 3% anual.",
+        "El 10% anual sobre el coste de adquisición de los enseres muebles.",
+        "El 20% anual.",
+        "Los muebles no son amortizables en ningún caso."
+      ],
+      "correct": 1,
+      "justification": "Art. 14.1 RIRPF: Se considerará que la amortización de bienes muebles cedidos conjuntamente con el inmueble cumple el requisito de efectividad cuando, en cada año, no exceda del 10% anual sobre los costes de adquisición satisfechos."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "Bajo la actual regulación de la Ley 12/2023 por el derecho a la vivienda, ¿cuál es el porcentaje de reducción GENERAL aplicable al rendimiento neto positivo derivado del arrendamiento de bienes inmuebles destinados a vivienda habitual para contratos formalizados a partir de 2024?",
+      "opts": [
+        "El 60% general en todos los contratos.",
+        "El 50% de reducción general (pudiendo incrementarse al 90%, 70% o 60% en zonas tensionadas, jóvenes o rehabilitación).",
+        "El 40% general.",
+        "Se eliminó toda reducción por alquiler."
+      ],
+      "correct": 1,
+      "justification": "Art. 23.2 LIRPF (modificado por la Ley 12/2023 de Vivienda): En los arrendamientos de inmuebles destinados a vivienda habitual, el porcentaje de reducción general pasa a ser del 50%. En contratos anteriores al 26 de mayo de 2023 se mantiene el 60%."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Resulta aplicable la reducción por arrendamiento de vivienda del artículo 23.2 de la LIRPF cuando el contrato de arrendamiento se celebra por temporada (ej. curso escolar o alquiler vacacional de verano)?",
+      "opts": [
+        "Sí, siempre que el inquilino sea estudiante o turista registrado.",
+        "NO. La reducción exige taxativamente que el inmueble se destine a satisfacer la necesidad permanente de vivienda habitual del arrendatario (conforme al art. 2 de la LAU).",
+        "Aplica únicamente la reducción del 30% por irregularidad.",
+        "Aplica solo si el alquiler no supera los 500 € al mes."
+      ],
+      "correct": 1,
+      "justification": "Art. 23.2 LIRPF: La reducción se aplica exclusivamente a los rendimientos netos positivos derivados de arrendamientos de inmuebles destinados a la vivienda con carácter permanente y habitual conforme a la LAU. Quedan excluidos los alquileres turísticos, por temporada o por habitaciones."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué regla especial de cómputo establece el artículo 24 de la LIRPF cuando el arrendatario de un inmueble sea el cónyuge o un pariente del contribuyente hasta el tercer grado inclusive?",
+      "opts": [
+        "El alquiler está exento de tributación.",
+        "El rendimiento neto total computable no podrá ser inferior al 2% (o 1,1% si revisado) del valor catastral del inmueble (el resultado del art. 85).",
+        "Debe tributarse obligatoriamente por el 100% del precio medio de mercado que fije la Junta de Andalucía.",
+        "Se pierde el derecho a deducir el IBI y la comunidad."
+      ],
+      "correct": 1,
+      "justification": "Art. 24 LIRPF: Cuando el adquirente, cesionario, arrendatario o subarrendatario de un elemento patrimonial sea el cónyuge o un pariente, incluidos los afines, hasta el tercer grado inclusive, el rendimiento neto total no podrá ser inferior al que resulte de aplicar las reglas de imputación de rentas del art. 85."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué porcentaje general se aplica para calcular la Imputación de Rentas Inmobiliarias (art. 85 LIRPF) sobre bienes inmuebles urbanos a disposición de su propietario no afectos ni arrendados?",
+      "opts": [
+        "El 0,5% sobre el valor catastral.",
+        "El 2% con carácter general, o el 1,1% para inmuebles cuyos valores catastrales hayan sido revisados, modificados o determinados mediante un procedimiento de valoración colectiva general en los últimos 10 períodos impositivos.",
+        "El 5% sobre el valor de adquisición.",
+        "El 1,1% en todos los casos sin excepción."
+      ],
+      "correct": 1,
+      "justification": "Art. 85.1 LIRPF: Tendrán la consideración de rentas imputadas la cantidad que resulte de aplicar el 2% al valor catastral del inmueble. En caso de inmuebles cuyos valores catastrales hayan sido revisados en los últimos 10 períodos impositivos, el porcentaje será el 1,1%."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "Si un inmueble urbano carece de valor catastral o este no ha sido notificado al contribuyente, ¿cómo se cuantifica la imputación de rentas (art. 85.1 LIRPF)?",
+      "opts": [
+        "No se realiza ninguna imputación hasta que el Catastro asigne valor.",
+        "Se aplica el 1,1% sobre el 50% del mayor valor entre el comprobado por la Administración a efectos de otros tributos o el precio o contraprestación de adquisición.",
+        "Se aplica el 2% sobre el valor total de escritura de compraventa.",
+        "Se aplica una cuota fija de 500 € por vivienda."
+      ],
+      "correct": 1,
+      "justification": "Art. 85.1 segundo párrafo LIRPF: Si a la fecha de devengo del impuesto los inmuebles carecieran de valor catastral o este no hubiera sido notificado al titular, se tomará como base el 50% del mayor entre el comprobado por la Administración o el precio o contraprestación de la adquisición, aplicándose el 1,1%."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Se admite la deducción de algún gasto (IBI, reparaciones, hipoteca, seguro de hogar) en el cálculo de la Imputación de Rentas Inmobiliarias del artículo 85 de la LIRPF?",
+      "opts": [
+        "Sí, se pueden deducir los recibos del IBI pagados durante el año.",
+        "NO. La cuantía resultante de aplicar el porcentaje al valor catastral es íntegra y neta; la ley NO admite deducir ningún gasto.",
+        "Solo se permite deducir los gastos de comunidad de propietarios.",
+        "Se admiten gastos con un tope máximo de 300 € al año."
+      ],
+      "correct": 1,
+      "justification": "Art. 85 LIRPF: La imputación de rentas inmobiliarias es una renta ficticia o legal prefijada sobre la que la ley no contempla la deducción de ningún tipo de gasto real, ni tributos locales ni conservación."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Genera imputación de rentas inmobiliarias la plaza de garaje adquirida conjuntamente con la vivienda habitual en el mismo edificio (hasta un máximo de dos plazas)?",
+      "opts": [
+        "Sí, tributa siempre al 2% de su valor catastral.",
+        "NO. Las plazas de garaje adquiridas conjuntamente con la vivienda habitual (máximo dos) están expresamente asimiladas a la vivienda habitual y no generan imputación de rentas.",
+        "Tributa solo si una de las plazas se alquila a un tercero.",
+        "Genera imputación al tipo reducido del 0,5%."
+      ],
+      "correct": 1,
+      "justification": "Art. 85.1 LIRPF: A efectos de imputación de rentas, se asimilan a la vivienda habitual las plazas de garaje adquiridas conjuntamente con ella hasta un máximo de dos, por lo que no tributan por imputación de rentas."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué límite general de rentas del trabajo con UN solo pagador determina la obligación de presentar declaración del IRPF (art. 96 LIRPF)?",
+      "opts": [
+        "15.876 € brutos anuales.",
+        "22.000 € brutos anuales.",
+        "35.000 € brutos anuales.",
+        "12.000 € brutos anuales."
+      ],
+      "correct": 1,
+      "justification": "Art. 96.2.a LIRPF: El límite con carácter general para contribuyentes que perciban rendimientos íntegros del trabajo con un solo pagador (o cuando del segundo y restantes pagadores la suma no supere 1.500 € anuales) es de 22.000 € anuales."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿En qué circunstancias se reduce el límite de obligación de declarar en rendimientos del trabajo a 15.876 € anuales según el artículo 96.3 de la LIRPF?",
+      "opts": [
+        "Cuando se proceda de más de un pagador y las cantidades percibidas del segundo y restantes superen en conjunto los 1.500 € anuales, o cuando se perciban pensiones compensatorias del cónyuge.",
+        "Únicamente cuando el contribuyente sea autónomo en estimación directa.",
+        "Cuando se tenga más de un hijo menor de tres años.",
+        "En ningún caso, el límite es siempre de 22.000 €."
+      ],
+      "correct": 0,
+      "justification": "Art. 96.3 LIRPF: El límite se reduce a 15.876 € anuales cuando procedan de más de un pagador (salvo que del 2º y restantes no superen 1.500 €), cuando se perciban pensiones compensatorias del cónyuge o anualidades por alimentos no exentas, o cuando el pagador no esté obligado a retener."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Capital Inmobiliario e Imputación",
+      "q": "¿Qué renta en especie se origina cuando una empresa cede a un trabajador una vivienda alquilada por la empresa en vez de ser de su propiedad (art. 43.1.1ª.a LIRPF)?",
+      "opts": [
+        "El 10% del valor catastral de la vivienda arrendada.",
+        "El coste total que el alquiler suponga para la empresa (el alquiler pagado), incluyendo los tributos y gastos asociados, sin que la valoración pueda ser inferior a la que resultaría de aplicar el 5% o 10% del valor catastral.",
+        "El valor de tasación judicial del arrendamiento.",
+        "0 €, porque al no ser propiedad de la empresa no hay patrimonio afecto."
+      ],
+      "correct": 1,
+      "justification": "Art. 43.1.1ª.a párrafo segundo LIRPF: Tratándose de inmuebles que no sean propiedad de la empresa, la valoración en especie será el coste total satisfecho por la empresa por el arrendamiento, no pudiendo ser inferior a la valoración que resultaría de aplicar el 5% o 10% sobre el valor catastral."
+    }
+  ]
+}

@@ -79,6 +79,12 @@ const testItem = z.object({
   opts: z.array(z.string().min(1)).min(2),
   correct: z.number().int().min(0),
   justification: z.string().optional(),
+  /** Identificador opcional del supuesto práctico o examen compartido. */
+  caseId: z.string().optional(),
+  /** Título descriptivo del supuesto práctico o bloque de examen. */
+  caseTitle: z.string().optional(),
+  /** Enunciado extenso del caso práctico o examen que precede a sus preguntas. */
+  caseStatement: z.string().optional(),
 });
 
 /** Verdadero/Falso, con justificación cuando la hay. */

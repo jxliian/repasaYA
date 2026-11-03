@@ -1,0 +1,249 @@
+{
+  "subject": "ade/derecho-fiscal",
+  "type": "flashcards",
+  "title": "Flashcards de Memorización: Artículos, Límites y Reglas Clave",
+  "description": "48 flashcards interactivas con los artículos clave de la LIRPF y LGT, tablas de dietas de locomoción y manutención, límites de exención y reglas de examen.",
+  "order": 5,
+  "items": [
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuáles son las 3 categorías tributarias según el art. 2.2 de la LGT?",
+      "def": "1) TASAS: por uso de dominio público o prestación de servicios obligatorios en monopolio público.\n2) CONTRIBUCIONES ESPECIALES: por obtención de un beneficio o aumento de valor de bienes gracias a obras o servicios públicos.\n3) IMPUESTOS: exigidos sin contraprestación que gravan la capacidad económica."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Qué es el Principio de Equivalencia en las Tasas?",
+      "def": "El importe total recaudado por una tasa no puede exceder del coste real o previsible del servicio o actividad administrativa prestada (art. 7 Ley de Tasas y Precios Públicos)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuál es el límite máximo de base imponible en las Contribuciones Especiales?",
+      "def": "Como máximo el 90% del coste que la entidad soporte por la obra pública o por el establecimiento o ampliación del servicio público (art. 31 TRLRHL)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuáles son los 3 impuestos municipales obligatorios y qué naturaleza tienen?",
+      "def": "1) Impuesto sobre Bienes Inmuebles (IBI)\n2) Impuesto sobre Actividades Económicas (IAE)\n3) Impuesto sobre Vehículos de Tracción Mecánica (IVTM)\nLos tres son IMPUESTOS DIRECTOS (art. 59.1 TRLRHL)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuáles son los 2 impuestos municipales potestativos y su naturaleza?",
+      "def": "1) ICIO (Construcciones, Instalaciones y Obras): único impuesto municipal INDIRECTO.\n2) IIVTNU (Plusvalía Municipal): impuesto municipal DIRECTO (art. 59.2 TRLRHL)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Forman parte las sanciones tributarias de la Deuda Tributaria?",
+      "def": "NO. El art. 58.3 de la LGT establece expresamente que las sanciones tributarias pecuniarias NO forman parte de la deuda tributaria en ningún caso."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Qué compone la Deuda Tributaria según el art. 58.2 de la LGT?",
+      "def": "• La cuota o cantidad a ingresar.\n• El interés de demora (art. 26 LGT).\n• Los recargos por declaración extemporánea sin requerimiento previo (art. 27 LGT).\n• Los recargos del período ejecutivo (art. 28 LGT)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuál es el plazo de prescripción general en la LGT?",
+      "def": "4 AÑOS para el derecho a liquidar la deuda, el derecho a exigir el pago, el derecho a solicitar devoluciones y el derecho a obtener devoluciones (art. 66 LGT)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuál es la diferencia entre Sujeto Pasivo, Contribuyente y Sustituto?",
+      "def": "• SUJETO PASIVO: género que engloba a los obligados frente a Hacienda.\n• CONTRIBUYENTE: quien realiza el hecho imponible que manifiesta la capacidad económica.\n• SUSTITUTO: quien por imposición de la ley desplaza al contribuyente y cumple la obligación en su lugar, con derecho a exigirle el reembolso (art. 36 LGT)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Cuáles son las 3 categorías de pagos a cuenta en la LGT?",
+      "def": "1) Retenciones a cuenta.\n2) Ingresos a cuenta (aplicables a rentas en especie).\n3) Pagos fraccionados (autoliquidaciones periódicas de autónomos y sociedades) (art. 23 LGT)."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "Esquema de cuantificación de la obligación tributaria (art. 56 LGT):",
+      "def": "Base Imponible - Reducciones = BASE LIQUIDABLE\nBase Liquidable × Tipo de gravamen = CUOTA ÍNTEGRA\nCuota Íntegra - Deducciones/Bonificaciones = CUOTA LÍQUIDA\nCuota Líquida - Pagos a cuenta = CUOTA DIFERENCIAL (a ingresar o devolver)"
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Criterios para ser contribuyente por residencia habitual en España (art. 9.1 LIRPF):",
+      "def": "1) Permanencia > 183 días en el año natural en territorio español (contando ausencias esporádicas salvo certificado fiscal extranjero).\n2) Que radique en España el núcleo principal de sus actividades o intereses económicos.\n3) Presunción 'iuris tantum': residencia habitual en España del cónyuge no separado legalmente e hijos menores dependientes."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "¿Qué es la 'cuarentena fiscal' antiparaísos (art. 8.2 LIRPF)?",
+      "def": "Los nacionales españoles que trasladen su residencia a un paraíso fiscal (jurisdicción no cooperativa) siguen tributando como contribuyentes del IRPF español en el año del traslado y durante los 4 períodos impositivos siguientes (total 5 años)."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Exención por indemnización de despido (art. 7.e LIRPF):",
+      "def": "Exenta la cuantía fijada con carácter obligatorio por el Estatuto de los Trabajadores (despido improcedente: 33 días/año, máx. 24 mensualidades; ERE/objetivo: 20 días/año, máx. 12 mensualidades), con un LÍMITE MÁXIMO ABSOLUTO de 180.000 €."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Exención de indemnizaciones por daños personales (art. 7.d LIRPF):",
+      "def": "Exentas en la cuantía fijada legal o judicialmente (sentencia o auto judicial). Si derivan de contratos de seguro de accidentes, exentas hasta el límite del baremo de accidentes de tráfico."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Exención por trabajos realizados en el extranjero (art. 7.p LIRPF):",
+      "def": "Límite máximo de 60.100 € anuales. Requisitos: trabajos para empresa o establecimiento permanente no residente en España, y que en el país de destino exista un impuesto similar y no sea paraíso fiscal."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Exención de prestaciones por desempleo en Pago Único (art. 7.n LIRPF):",
+      "def": "100% EXENTAS en el IRPF, con el requisito de mantener la acción o participación y la actividad como trabajador autónomo o socio durante al menos 5 años."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Anualidades por alimentos a favor de los hijos (art. 7.k LIRPF):",
+      "def": "Están 100% EXENTAS de tributación en el IRPF para los hijos que las perciben, siempre que vengan fijadas por decisión judicial de separación o divorcio."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Individualización de rendimientos del trabajo en gananciales (art. 11.2 LIRPF):",
+      "def": "Se atribuyen EXCLUSIVAMENTE al cónyuge que haya generado el derecho a su percepción (el titular del contrato laboral), sin que aplique la división ganancial al 50%."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Imputación temporal general de rentas de trabajo y capital (art. 14.1.a LIRPF):",
+      "def": "Criterio de EXIGIBILIDAD: se imputan al período impositivo en que sean exigibles por su perceptor, con independencia de la fecha en que se cobren efectivamente."
+    },
+    {
+      "tema": "IRPF: General y Exenciones",
+      "term": "Premios de loterías oficiales (DA 33ª LIRPF):",
+      "def": "Exentos hasta los primeros 40.000 € por décimo o cupón (SELAE, ONCE, Cruz Roja). El exceso tributa mediante retención liberatoria fija del 20%."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Dieta de Locomoción exenta en vehículo propio (art. 9.A.2.b RIRPF):",
+      "def": "0,26 € por kilómetro recorrido + gastos de peaje y aparcamiento debidamente justificados."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Dietas de Manutención exentas en ESPAÑA (art. 9.A.3.a RIRPF):",
+      "def": "• CON pernocta: 53,34 € diarios.\n• SIN pernocta (o día de regreso a casa): 26,67 € diarios."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Dietas de Manutención exentas en el EXTRANJERO (art. 9.A.3.a RIRPF):",
+      "def": "• CON pernocta: 91,35 € diarios.\n• SIN pernocta: 48,08 € diarios."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Vales-comida y cheques guardería exentos (art. 42.3 LIRPF):",
+      "def": "• Vales-comida: exentos hasta 11,00 € diarios por día laborable.\n• Cheques guardería / educación infantil: 100% EXENTOS sin límite cuantitativo."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Seguro de salud pagado por la empresa (art. 42.3.c LIRPF):",
+      "def": "Exento hasta 500 € anuales por persona (trabajador, cónyuge y descendientes). Límite elevado a 1.500 €/año por beneficiario si tiene discapacidad reconocida."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Entrega de acciones de la propia empresa (art. 42.3.f LIRPF):",
+      "def": "Exenta hasta 12.000 € anuales en conjunto para trabajadores en activo (hasta 50.000 €/año en startups de la Ley de Empresas Emergentes)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Valoración en especie de vehículo de empresa particular (art. 43.1.1ª.b LIRPF):",
+      "def": "20% ANUAL del coste de adquisición para la empresa (incluidos gastos e impuestos de compra). Si el vehículo no es de la empresa, 20% del valor de mercado nuevo."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Reducciones por vehículo eficiente en especie (art. 47 bis RIRPF):",
+      "def": "• 30% reducción: Eléctricos puros (BEV) o híbridos enchufables con autonomía ≥ 40 km.\n• 20% reducción: Híbridos no enchufables.\n• 15% reducción: Vehículos con emisiones ≤ 120 g CO2/km."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Valoración en especie de vivienda propiedad de la empresa (art. 43.1.1ª.a LIRPF):",
+      "def": "• 10% del Valor Catastral (general).\n• 5% del Valor Catastral si ha sido revisado en los últimos 10 años.\nTOPE MÁXIMO: no puede superar el 10% de las demás retribuciones íntegras del trabajo."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Regla del Ingreso a Cuenta no repercutido en especie (art. 43.2 LIRPF):",
+      "def": "Rendimiento Íntegro en Especie = Valoración Legal + Ingreso a Cuenta (salvo que el ingreso a cuenta se haya repercutido descontándolo de la nómina)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Lista cerrada de Gastos Deducibles del trabajo (art. 19.2 LIRPF):",
+      "def": "1) Seguridad Social y derechos pasivos.\n2) Cuotas a colegios de huérfanos.\n3) Cuotas sindicales (sin límite).\n4) Cuotas a colegios profesionales obligatorios (máx. 500 €/año).\n5) Gastos defensa jurídica laboral (máx. 300 €/año).\n6) Otros gastos generales: 2.000 € fijos."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Incrementos en los 2.000 € de 'otros gastos' (art. 19.2.f LIRPF):",
+      "def": "• Por MOVILIDAD GEOGRÁFICA (desempleado que traslada residencia por trabajo): +2.000 € adicionales (total 4.000 €).\n• Por DISCAPACIDAD de trabajadores en activo: +3.500 € (general) o +7.750 € (con grado ≥ 65% o ayuda de terceros)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Reducción del 30% por rendimientos irregulares (art. 18.2 LIRPF):",
+      "def": "Aplica a rendimientos del trabajo con período de generación > 2 años o notoriedad irregular. Base máxima reducible: 300.000 € anuales."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo",
+      "term": "Aportaciones de la empresa a Planes de Pensiones:",
+      "def": "Se suman a los rendimientos íntegros como retribución en especie imputada (art. 17.2.a.5ª) EXENTA de ingreso a cuenta (art. 102.2). Luego se reducen de la Base Imponible General (art. 51)."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Límite de deducción de Intereses y Reparaciones (art. 23.1.a LIRPF):",
+      "def": "El conjunto de gastos de financiación y conservación no puede superar los rendimientos íntegros de cada inmueble. El exceso no deducido se compensa en los 4 años siguientes."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Amortización de inmueble arrendado (art. 23.1.b LIRPF):",
+      "def": "3% ANUAL sobre el mayor entre: el coste de adquisición satisfecho o el valor catastral, EXCLUYENDO en ambos casos el porcentaje correspondiente al suelo."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Amortización de muebles en inmueble arrendado (art. 14 RIRPF):",
+      "def": "10% ANUAL sobre el coste de adquisición satisfecho de los bienes muebles, enseres y electrodomésticos cedidos con el piso."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Reducción por arrendamiento de vivienda habitual (art. 23.2 LIRPF):",
+      "def": "• 50% de reducción general para contratos a partir de 2024 (Ley 12/2023 de Vivienda).\n• 60% para contratos formalizados antes del 26 de mayo de 2023.\n• NO APLICA a alquileres turísticos, por temporada o curso escolar."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Rendimiento mínimo en caso de parentesco hasta 3.er grado (art. 24 LIRPF):",
+      "def": "El rendimiento neto total computable no podrá ser inferior al que resulte de aplicar las reglas de imputación de rentas del art. 85 (2% o 1,1% del Valor Catastral)."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Cesión gratuita de inmueble a familiar (sin alquiler ni contrato):",
+      "def": "NO aplica el art. 24 (que exige alquiler). El titular declara IMPUTACIÓN DE RENTAS INMOBILIARIAS del art. 85 (2% o 1,1% del Valor Catastral) como inmueble a su disposición."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Porcentaje de Imputación de Rentas Inmobiliarias (art. 85 LIRPF):",
+      "def": "• 2% sobre el Valor Catastral (general).\n• 1,1% si el Valor Catastral ha sido revisado en los últimos 10 períodos impositivos.\n• 1,1% sobre el 50% del mayor valor comprobado/adquisición si carece de VC."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "¿Se deducen gastos en la Imputación de Rentas Inmobiliarias?",
+      "def": "NO. La imputación es una cuantía fija por ley. NO se admite deducir ningún tipo de gasto real (ni IBI, ni comunidad, ni reparaciones)."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "¿Las fincas rústicas generan Imputación de Rentas Inmobiliarias?",
+      "def": "NO. El artículo 85 de la LIRPF se aplica ÚNICAMENTE a los bienes inmuebles URBANOS. Las fincas rústicas nunca generan imputación de rentas."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Inmuebles excluidos de la Imputación de Rentas del art. 85 LIRPF:",
+      "def": "1) La vivienda habitual del contribuyente.\n2) Plazas de garaje adquiridas con la vivienda habitual (máx. 2).\n3) Inmuebles afectos a actividades económicas.\n4) Inmuebles generadores de rendimientos de capital (alquilados).\n5) Suelo no edificado y fincas rústicas."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Obligación de declarar: límite con 1 solo pagador (art. 96 LIRPF):",
+      "def": "22.000 € brutos anuales de rendimientos íntegros del trabajo."
+    },
+    {
+      "tema": "IRPF: Capital Inmobiliario e Imputación",
+      "term": "Obligación de declarar: límite con más de 1 pagador (art. 96 LIRPF):",
+      "def": "15.876 € brutos anuales cuando las cuantías percibidas del segundo y restantes pagadores superen en conjunto los 1.500 € anuales."
+    },
+    {
+      "tema": "Tema 1: Conceptos LGT",
+      "term": "¿Qué diferencia existe entre un supuesto de No Sujeción y una Exención?",
+      "def": "• NO SUJECIÓN: el hecho realizado NO encaja en el presupuesto fáctico del hecho imponible del tributo (la obligación nunca llega a nacer).\n• EXENCIÓN: el hecho SÍ realiza el hecho imponible (la obligación nace), pero la ley exime de la obligación de tributar o pagar la cuota."
+    }
+  ]
+}

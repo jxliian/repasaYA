@@ -57,6 +57,11 @@ Detalle de archivos creados, modificados o eliminados.
 | [`spec_005`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_005_orquestacion_concurrente_simultanea.md) | 2026-10-09 | Modelo de Orquestación Concurrente y Simultánea Multiagente | Rendimiento / Paralelismo | Implementado |
 | [`spec_006`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_006_scd_auditoria_test_apuntes_y_relaciones.md) | 2026-10-16 | Auditoría de Tests, Apuntes Teóricos y Solucionario de Relaciones de SCD | Contenido / SCD | Implementado |
 | [`spec_007`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_007_fft_apuntes_latex.md) | 2026-10-18 | Digitalización, Estructuración LaTeX y Publicación de Apuntes de FFT | Contenido / FFT / LaTeX | Implementado |
+| [`spec_008`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_008_scd_justificaciones_apuntes_t2_2_y_guia.md) | 2026-10-22 | Justificaciones de SCD, Apuntes T2-2 y Guía de Examen | Contenido / SCD | Implementado |
+| [`spec_009`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_009_scd_extraccion_pdf_y_deduplicacion.md) | 2026-10-28 | Extracción de Tests PDF y Deduplicación en SCD | Contenido / SCD | Implementado |
+| [`spec_010`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_010_scd_plantillas_maestras_monitores_semaforos.md) | 2026-10-28 | Plantillas Maestras Universales de Monitores y Semáforos | Contenido / SCD / LaTeX | Implementado |
+| [`spec_011`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_011_scd_bloque_prado_50_preguntas.md) | 2026-10-28 | Integración del Bloque Exclusivo «Prado» (50 preguntas) en Tests de SCD | Contenido / SCD | Implementado |
+| [`spec_012`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_012_derecho_fiscal_examen_online_supuestos.md) | 2026-11-04 | Incorporación de Derecho Fiscal y Nueva Funcionalidad de Examen Online con Supuestos | Motor de Tests / ADE 5º | Implementado |
 
 
 

@@ -8,6 +8,7 @@ interface Frontmatter {
   date?: string;
   author?: string;
   badge?: string;
+  subject?: string;
 }
 
 interface Props {
@@ -18,15 +19,25 @@ const { frontmatter } = Astro.props;
 const title = frontmatter?.title ?? 'Guía de Estudio SCD';
 const description = frontmatter?.description ?? 'Plan de estudio y preparación intensiva para el examen parcial de SCD.';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const isFiscal = frontmatter?.subject === 'derecho-fiscal';
 
-const crumbs = [
-  { label: 'Inicio', href: base },
-  { label: 'Informática', href: `${base}informatica/` },
-  { label: '3º', href: `${base}informatica/3/` },
-  { label: 'Cuatri 1', href: `${base}informatica/3/c1/` },
-  { label: 'SCD', href: `${base}informatica/3/c1/sistemas-concurrentes-y-distribuidos/` },
-  { label: 'Guía de Examen', href: null },
-];
+const crumbs = isFiscal
+  ? [
+      { label: 'Inicio', href: base },
+      { label: 'ADE', href: `${base}ade/` },
+      { label: '5º', href: `${base}ade/5/` },
+      { label: 'Cuatri 1', href: `${base}ade/5/c1/` },
+      { label: 'Derecho Fiscal', href: `${base}ade/5/c1/derecho-fiscal/` },
+      { label: 'Guía Maestra Parcial', href: null },
+    ]
+  : [
+      { label: 'Inicio', href: base },
+      { label: 'Informática', href: `${base}informatica/` },
+      { label: '3º', href: `${base}informatica/3/` },
+      { label: 'Cuatri 1', href: `${base}informatica/3/c1/` },
+      { label: 'SCD', href: `${base}informatica/3/c1/sistemas-concurrentes-y-distribuidos/` },
+      { label: 'Guía de Examen', href: null },
+    ];
 ---
 
 <Shell title={title} description={description}>
@@ -45,24 +56,45 @@ const crumbs = [
       <slot />
     </article>
 
-    <div class="guide-cta-footer">
-      <div class="cta-card">
-        <div class="cta-icon">📝</div>
-        <div class="cta-body">
-          <h3>Banco de Test de SCD</h3>
-          <p>207 preguntas tipo test verificadas con justificaciones exhaustivas de Capel.</p>
-          <a class="btn btn-primary" href={`${base}informatica/3/c1/sistemas-concurrentes-y-distribuidos/test/`}>Practicar Test →</a>
+    {isFiscal ? (
+      <div class="guide-cta-footer">
+        <div class="cta-card">
+          <div class="cta-icon">📋</div>
+          <div class="cta-body">
+            <h3>Examen Online por Supuestos (Enunciados + Test)</h3>
+            <p>Practica como en el examen real: el enunciado del caso práctico en grande arriba y las preguntas tipo test debajo con corrección y desglose numérico.</p>
+            <a class="btn btn-primary" href={`${base}ade/5/c1/derecho-fiscal/supuestos-examen/`}>Abrir Examen de Supuestos →</a>
+          </div>
+        </div>
+        <div class="cta-card">
+          <div class="cta-icon">⚖️</div>
+          <div class="cta-body">
+            <h3>Banco Completo de Test y V/F</h3>
+            <p>Entrena las Cuestiones 1-16 del Tema 1, modelos de parciales oficiales y preguntas de liquidación IRPF con justificación artículo por artículo.</p>
+            <a class="btn btn-ghost" href={`${base}ade/5/c1/derecho-fiscal/test/`}>Practicar Banco de Test →</a>
+          </div>
         </div>
       </div>
-      <div class="cta-card">
-        <div class="cta-icon">📄</div>
-        <div class="cta-body">
-          <h3>Solucionario de Problemas</h3>
-          <p>63 ejercicios resueltos paso a paso en PDF (Temas 1, 2 y 2-2) con código C++11.</p>
-          <a class="btn btn-ghost" href={`${base}scd/relaciones-problemas-scd.pdf`} target="_blank">Abrir Solucionario PDF →</a>
+    ) : (
+      <div class="guide-cta-footer">
+        <div class="cta-card">
+          <div class="cta-icon">📝</div>
+          <div class="cta-body">
+            <h3>Banco de Test de SCD</h3>
+            <p>207 preguntas tipo test verificadas con justificaciones exhaustivas de Capel.</p>
+            <a class="btn btn-primary" href={`${base}informatica/3/c1/sistemas-concurrentes-y-distribuidos/test/`}>Practicar Test →</a>
+          </div>
+        </div>
+        <div class="cta-card">
+          <div class="cta-icon">📄</div>
+          <div class="cta-body">
+            <h3>Solucionario de Problemas</h3>
+            <p>63 ejercicios resueltos paso a paso en PDF (Temas 1, 2 y 2-2) con código C++11.</p>
+            <a class="btn btn-ghost" href={`${base}scd/relaciones-problemas-scd.pdf`} target="_blank">Abrir Solucionario PDF →</a>
+          </div>
         </div>
       </div>
-    </div>
+    )}
   </div>
 </Shell>
 

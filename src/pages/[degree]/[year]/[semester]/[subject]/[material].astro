@@ -100,13 +100,39 @@ const pdf = 'pdf' in material.data ? `${base}${material.data.pdf}` : null;
 const allMaterials = isEngine ? await getCollection('materials') : [];
 const subjectMaterials = isEngine ? allMaterials.filter((m) => m.data.subject.id === subject.id) : [];
 
-const testMat = subjectMaterials.find((m) => m.data.type === 'test');
+const allTestItems = subjectMaterials
+  .filter((m) => m.data.type === 'test')
+  .flatMap((m) => ('items' in m.data ? m.data.items : []));
 const vfMat = subjectMaterials.find((m) => m.data.type === 'vf');
 const revealMat = subjectMaterials.find((m) => m.data.type === 'reveal');
 
-const testItems = testMat && 'items' in testMat.data ? testMat.data.items : (type === 'test' ? items : []);
-const vfItems = vfMat && 'items' in vfMat.data ? vfMat.data.items : (type === 'vf' ? items : []);
-const revealItems = revealMat && 'items' in revealMat.data ? revealMat.data.items : (type === 'reveal' ? items : []);
+const isCaseExamMaterial =
+  type === 'test' &&
+  items.length > 0 &&
+  items.every((it: any) => Boolean(it.caseStatement));
+
+const testItems = isCaseExamMaterial
+  ? items
+  : allTestItems.length > 0
+    ? allTestItems
+    : type === 'test'
+      ? items
+      : [];
+const vfItems = isCaseExamMaterial
+  ? []
+  : vfMat && 'items' in vfMat.data
+    ? vfMat.data.items
+    : type === 'vf'
+      ? items
+      : [];
+const revealItems = isCaseExamMaterial
+  ? []
+  : revealMat && 'items' in revealMat.data
+    ? revealMat.data.items
+    : type === 'reveal'
+      ? items
+      : [];
+const initialTab = isCaseExamMaterial ? 'supuestos' : 'practicar';
 const hidden = material.data.hidden;
 ---
 
@@ -121,6 +147,7 @@ const hidden = material.data.hidden;
         quizzData={revealItems as any[]}
         backHref={back}
         backLabel={subjectTitle}
+        initialTab={initialTab}
       />
     </QuizShell>
   ) : (
