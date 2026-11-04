@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /* Materiales marcados `hidden` en la colección: generan página con
    noindex, pero tampoco deben aparecer en el sitemap. Se leen del disco
@@ -34,6 +36,10 @@ export default defineConfig({
   site: 'https://repasaya.juliancarrion.dev',
   base: '/',
   output: 'static',
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [[rehypeKatex, { strict: 'ignore' }]],
+  },
   integrations: [sitemap({ filter: (page) => ![...HIDDEN].some((s) => page.endsWith(`/${s}/`)) })],
 
   /* Las rutas planas antiguas están indexadas desde hace meses. En estático

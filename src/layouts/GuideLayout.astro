@@ -1,6 +1,7 @@
 ---
 import Shell from './Shell.astro';
 import Breadcrumbs from '../components/nav/Breadcrumbs.astro';
+import 'katex/dist/katex.min.css';
 
 interface Frontmatter {
   title: string;
@@ -267,6 +268,27 @@ const crumbs = isFiscal
     padding: 0;
     color: var(--text);
     font-size: 0.85rem;
+  }
+
+  .guide-article .katex {
+    font-size: 1.05em;
+    color: var(--text);
+  }
+
+  .guide-article .katex-display {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .guide-article .katex-display > .katex {
+    white-space: nowrap;
+    text-align: center;
   }
 
   .guide-article hr {

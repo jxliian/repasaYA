@@ -22,5 +22,9 @@
     "@fontsource-variable/space-grotesk": "^5.2.10",
     "@fontsource/unbounded": "^5.2.8",
     "astro": "^6.4.2"
+  },
+  "devDependencies": {
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
   }
 }

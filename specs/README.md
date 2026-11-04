@@ -62,6 +62,7 @@ Detalle de archivos creados, modificados o eliminados.
 | [`spec_010`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_010_scd_plantillas_maestras_monitores_semaforos.md) | 2026-10-28 | Plantillas Maestras Universales de Monitores y Semáforos | Contenido / SCD / LaTeX | Implementado |
 | [`spec_011`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_011_scd_bloque_prado_50_preguntas.md) | 2026-10-28 | Integración del Bloque Exclusivo «Prado» (50 preguntas) en Tests de SCD | Contenido / SCD | Implementado |
 | [`spec_012`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_012_derecho_fiscal_examen_online_supuestos.md) | 2026-11-04 | Incorporación de Derecho Fiscal y Nueva Funcionalidad de Examen Online con Supuestos | Motor de Tests / ADE 5º | Implementado |
+| [`spec_013`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_013_derecho_fiscal_renderizado_formulas_katex.md) | 2026-11-04 | Renderizado y Maquetación de Fórmulas Matemáticas con KaTeX en Guías de Estudio | Infraestructura / UI / Fiscal | Implementado |
 
 
 

@@ -30,7 +30,7 @@ Tu libro físico del BOE (*Legislación del IRPF*) es una recopilación de 82 no
 | **4. Capital Inmobiliario** | **LIRPF (§ 1)** | **Arts. 22, 23 y 24** | RICI (`Art. 22`), gastos deducibles y **límite intereses + reparación = RICI**, amortización 3% construcción y 10% muebles (`Art. 23.1`), **reducción alquiler vivienda (50% general, 90%, 70%, 60%)** (`Art. 23.2`), y **mínimo en parentesco hasta 3.er grado** (`Art. 24`). |
 | **5. Rentas en Especie** | **LIRPF (§ 1)** | **Arts. 42 y 43** | Supuestos no sujetos (formación `42.2.a`, seguros accidente laboral `42.2.b`), exentos (comedor 11 €/día `42.3.a`, guardería `42.3.b`, seguro médico 500 € `42.3.c`, acciones 12.000 € `42.3.f`) y **valoración**: vivienda (10% o 5% VC con tope 10%) y vehículo (20% anual o reducción hasta 30% eficientes) (`Art. 43`). |
 | **6. Imputación de Rentas** | **LIRPF (§ 1)** | **Art. 85** | Segunda vivienda vacía o garaje no afecto: **2% del Valor Catastral** (o **1,1%** si VC revisado en los últimos 10 años; o **1,1% sobre el 50% del valor de adquisición** si carece de VC). |
-| **7. Obligación de Declarar** | **LIRPF (§ 1)** | **Art. 96** | Límite **22.000 €** (1 pagador o varios si del 2.º y restantes $\le$ 1.500 €) y **15.876 €** (>1 pagador si del 2.º y restantes > 1.500 €, pensiones compensatorias o pagador no obligado a retener). |
+| **7. Obligación de Declarar** | **LIRPF (§ 1)** | **Art. 96** | Límite **22.000 €** (1 pagador o varios si del 2.º y restantes ≤ 1.500 €) y **15.876 €** (>1 pagador si del 2.º y restantes > 1.500 €, pensiones compensatorias o pagador no obligado a retener). |
 | **8. Dietas y Manutención** | **RIRPF (§ 2)** | **Art. 9** | Kilometraje exento (**0,26 €/km** + peaje y aparcamiento justificados) y tabla de manutención exenta (Con pernocta: **53,34 € España / 91,35 € extranjero**; Sin pernocta: **26,67 € España / 48,08 € extranjero**). |
 
 ---
@@ -106,8 +106,8 @@ Tu libro físico del BOE (*Legislación del IRPF*) es una recopilación de 82 no
 
 1. **Cuestión 1 (Tributos que recaen sobre un bien inmueble):**
    * *Titularidad anual:* **IBI** (municipal obligatorio) e **IP** (estatal cedido, con exención de vivienda habitual hasta 300.000 €).
-   * *Adquisición:* Gratuita $\to$ **ISD**; Onerosa inmueble nuevo del promotor $\to$ **IVA + AJD**; Onerosa inmueble usado (2.ª transmisión) $\to$ **ITP** (TPO).
-   * *Tenencia o alquiler:* Alquiler $\to$ **IRPF** (Rendimientos del Capital Inmobiliario, o Actividades Económicas si tiene local y empleado a jornada completa) o **IS**; Vacío (no vivienda habitual) $\to$ **IRPF Imputación de Rentas Inmobiliarias** (Art. 85 LIRPF: 2% o 1,1% VC).
+   * *Adquisición:* Gratuita → **ISD**; Onerosa inmueble nuevo del promotor → **IVA + AJD**; Onerosa inmueble usado (2.ª transmisión) → **ITP** (TPO).
+   * *Tenencia o alquiler:* Alquiler → **IRPF** (Rendimientos del Capital Inmobiliario, o Actividades Económicas si tiene local y empleado a jornada completa) o **IS**; Vacío (no vivienda habitual) → **IRPF Imputación de Rentas Inmobiliarias** (Art. 85 LIRPF: 2% o 1,1% VC).
    * *Obras:* **ICIO** (impuesto municipal potestativo indirecto) + **Tasa urbanística** por licencia.
    * *Venta:* Ganancia patrimonial en **IRPF / IS** + **IIVTNU** (Plusvalía Municipal sobre el incremento de valor del suelo urbano).
 2. **Cuestión 2 (Hecho Imponible):** Art. 20.1 LGT. Es el presupuesto fijado por la ley para configurar cada tributo y cuya realización origina el nacimiento de la obligación tributaria principal.
@@ -153,8 +153,8 @@ Tu libro físico del BOE (*Legislación del IRPF*) es una recopilación de 82 no
 * **Frontera IRPF vs. ISD (Art. 6.4 LIRPF — Regla de Oro):** No estarán sujetas al IRPF las rentas que se encuentren sujetas al **Impuesto sobre Sucesiones y Donaciones (ISD)**.
   * *Herencia o donación recibida:* **No sujeta a IRPF** (tributa en ISD).
   * *Seguro de vida o invalidez:*
-    - Si **Tomador = Beneficiario** (quien contrató el seguro es quien cobra) $\to$ **Sujeto a IRPF** (Rendimiento del Capital Mobiliario, salvo seguros colectivos que instrumenten compromisos por pensiones, que son Rendimientos del Trabajo).
-    - Si **Tomador $\neq$ Beneficiario** (ej. fallece el padre tomador y cobra el hijo beneficiario, o un padre contrata seguro y pone de beneficiario al hijo) $\to$ **No sujeto a IRPF (sujeto a ISD)**.
+    - Si **Tomador = Beneficiario** (quien contrató el seguro es quien cobra) → **Sujeto a IRPF** (Rendimiento del Capital Mobiliario, salvo seguros colectivos que instrumenten compromisos por pensiones, que son Rendimientos del Trabajo).
+    - Si **Tomador ≠ Beneficiario** (ej. fallece el padre tomador y cobra el hijo beneficiario, o un padre contrata seguro y pone de beneficiario al hijo) → **No sujeto a IRPF (sujeto a ISD)**.
 
 ### 3.2. Contribuyentes y Residencia Habitual (Arts. 8, 9 y 10 LIRPF)
 Tributa por **renta mundial** en el IRPF toda persona física que tenga su **residencia habitual en territorio español** por cumplir **cualquiera** de estos criterios (*Art. 9.1 LIRPF*):
@@ -241,8 +241,10 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
 ### 4.3. Retribuciones en Especie: No Sujeción, Exención y Reglas de Valoración (Arts. 42 y 43 LIRPF)
 
 > **Fórmula general del Rendimiento Íntegro en Especie (Art. 43.2 LIRPF):**  
-> $$\text{Rendimiento Íntegro en Especie} = \text{Valor Fiscal de la Especie} + \text{Ingreso a Cuenta (solo si NO ha sido repercutido al trabajador)}$$  
-> * Si la empresa **repercute** (descuenta de la nómina) el ingreso a cuenta al trabajador $\implies$ solo se suma el **Valor Fiscal** (y aun así el trabajador se deduce el ingreso a cuenta en su cuota diferencial).  
+> 
+> $$\text{Rendimiento Íntegro en Especie} = \text{Valor Fiscal de la Especie} + \text{Ingreso a Cuenta (no repercutido)}$$  
+> 
+> * Si la empresa **repercute** (descuenta de la nómina) el ingreso a cuenta al trabajador ⟹ solo se suma el **Valor Fiscal** (y aun así el trabajador se deduce el ingreso a cuenta en su cuota diferencial).  
 > * **Excepción:** En las **contribuciones empresariales a Planes de Pensiones** no existe obligación de practicar ingreso a cuenta.
 
 | Retribución en Especie | Regla de Calificación / Valoración Fiscal (Arts. 42 y 43 LIRPF) |
@@ -254,7 +256,7 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
 | **5. Servicio de guardería / primer ciclo educación infantil** (`Art. 42.3.b`) | **100% Exento** sin límite cuantitativo (para hijos de 0 a 3 años). |
 | **6. Entrega gratuita o rebajada de acciones de la empresa** (`Art. 42.3.f`) | **Exenta hasta 12.000 € anuales** (hasta 50.000 € en empresas emergentes / *startups*) si se mantiene la acción al menos 3 años. |
 | **7. Utilización de VIVIENDA:**<br>• **Si es PROPIEDAD de la empresa** (`Art. 43.1.1.º.a`)<br>• **Si la empresa la ALQUILA** para el trabajador | • **Vivienda propiedad de la empresa:** **10% del Valor Catastral** (o **5% del VC** si el valor catastral está revisado en los últimos 10 años), con el **LÍMITE MÁXIMO del 10% de las restantes contraprestaciones del trabajo** que perciba el empleado.<br>• **Vivienda alquilada por la empresa:** Se valora por el **coste para la empresa (alquiler pagado)**, pero **nunca puede ser inferior** a la valoración que resultaría si fuera propiedad de la empresa (el 5% o 10% del VC con el tope del 10% de las restantes retribuciones). |
-| **8. Vehículo de empresa:**<br>• **ENTREGA en propiedad** (`Art. 43.1.1.º.b`)<br>• **CESIÓN DE USO** para fines particulares | • **Entrega en propiedad:** Coste de adquisición total para la empresa (incluidos todos los tributos: IVA, matriculación).<br>• **Cesión de uso:** **20% anual** del coste de adquisición para la empresa (si es propiedad de la empresa) o del **valor de mercado que correspondería al vehículo si fuese nuevo** (si la empresa lo tiene en *renting* o *leasing*). Si el uso es **mixto** (laboral y particular), se aplica solo el **% de disponibilidad para fines particulares**.<br>• **Reducción por eficiencia energética:** El resultado anterior se reduce en un **15%** (Euro 6 emisiones $\le$ 120 g/km y $<25.000$ €), **20%** (híbridos o GLP $<35.000$ €) o **30%** (eléctricos puros BEV o híbridos enchufables con autonomía $\ge$ 15 km y $<40.000$ €). |
+| **8. Vehículo de empresa:**<br>• **ENTREGA en propiedad** (`Art. 43.1.1.º.b`)<br>• **CESIÓN DE USO** para fines particulares | • **Entrega en propiedad:** Coste de adquisición total para la empresa (incluidos todos los tributos: IVA, matriculación).<br>• **Cesión de uso:** **20% anual** del coste de adquisición para la empresa (si es propiedad de la empresa) o del **valor de mercado que correspondería al vehículo si fuese nuevo** (si la empresa lo tiene en *renting* o *leasing*). Si el uso es **mixto** (laboral y particular), se aplica solo el **% de disponibilidad para fines particulares**.<br>• **Reducción por eficiencia energética:** El resultado anterior se reduce en un **15%** (Euro 6 emisiones ≤ 120 g/km y < 25.000 €), **20%** (híbridos o GLP < 35.000 €) o **30%** (eléctricos puros BEV o híbridos enchufables con autonomía ≥ 15 km y < 40.000 €). |
 | **9. Préstamos con tipo de interés inferior al legal del dinero** (`Art. 43.1.1.º.c`) | Diferencia entre el interés pagado por el trabajador y el **interés legal del dinero vigente** en el período (ej. 3,25%). |
 
 ---
@@ -334,8 +336,8 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
 A continuación tienes el resumen ejecutivo y los resultados numéricos exactos verificados con las resoluciones de clase de los **16 supuestos prácticos** que entran en el parcial del 9 de noviembre:
 
 ### Bloque I: Contribuyentes y Residencia Habitual (Prácticas 1 a 3)
-* **Práctica 1 (D. Javier — Trabajador desplazado a Argelia):** Sale hacia Argelia el 10 de octubre de 2026 hasta julio de 2027. En 2026 permanece en España de enero al 10 de octubre (**> 183 días**) $\implies$ **Contribuyente del IRPF en 2026** (*Art. 9.1.a LIRPF*). En 2027 regresa en julio y permanece de julio a diciembre (< 183 días), pero como su ausencia no supera el año fiscal completo o mantiene aquí su núcleo económico/familiar salvo certificado fiscal argelino, sigue tributando en España.
-* **Práctica 2 (Sr. Mohamed — Marroquí contratado en Almería desde marzo con viaje en agosto a Marruecos):** Permanece en España de marzo a diciembre (10 meses $\approx$ 300 días > 183 días). Además, su mes de vacaciones en agosto en Marruecos es una **ausencia esporádica** que se computa como permanencia en España (*Art. 9.1.a LIRPF*) $\implies$ **Contribuyente del IRPF en España**.
+* **Práctica 1 (D. Javier — Trabajador desplazado a Argelia):** Sale hacia Argelia el 10 de octubre de 2026 hasta julio de 2027. En 2026 permanece en España de enero al 10 de octubre (**> 183 días**) ⟹ **Contribuyente del IRPF en 2026** (*Art. 9.1.a LIRPF*). En 2027 regresa en julio y permanece de julio a diciembre (< 183 días), pero como su ausencia no supera el año fiscal completo o mantiene aquí su núcleo económico/familiar salvo certificado fiscal argelino, sigue tributando en España.
+* **Práctica 2 (Sr. Mohamed — Marroquí contratado en Almería desde marzo con viaje en agosto a Marruecos):** Permanece en España de marzo a diciembre (10 meses ≈ 300 días > 183 días). Además, su mes de vacaciones en agosto en Marruecos es una **ausencia esporádica** que se computa como permanencia en España (*Art. 9.1.a LIRPF*) ⟹ **Contribuyente del IRPF en España**.
 * **Práctica 3 (5 casos de residencia fiscal):**
   1. *Matrimonio e hijos menores en Almuñécar, marido vive todo el año en Portugal sin acreditar certificado fiscal portugués:* **Residente en España** por la presunción familiar del *Art. 9.1.b LIRPF* (residen en España su cónyuge no separado e hijos menores).
   2. *Directivo trasladado a filial de Brasil hace 2 años:* **No residente en España** (< 183 días y núcleo económico en Brasil).
@@ -348,15 +350,20 @@ A continuación tienes el resumen ejecutivo y los resultados numéricos exactos 
   1. *Pensión de jubilación:* **Sujeta y NO exenta** (Rendimiento del Trabajo, *Art. 17.2.a LIRPF*).
   2. *Incapacidad Permanente Total (55% base reguladora) de un fontanero:* **Sujeta y NO exenta** (el *Art. 7.f* solo exime la Absoluta y la Gran Invalidez).
   3. *Indemnización de seguro privado de accidentes contratado por el propio lesionado por pérdida de un dedo en accidente doméstico:* **Exenta** hasta la cuantía fijada legal o judicialmente o Anexo del Texto Refundido de Responsabilidad Civil y Seguro (*Art. 7.d LIRPF*).
-  4. *Capital de seguro de vida por fallecimiento del padre (Tomador = Padre $\neq$ Beneficiaria = Hija):* **No sujeto a IRPF** (*Art. 6.4 LIRPF*), porque tributa en el **Impuesto sobre Sucesiones y Donaciones (ISD)**.
+  4. *Capital de seguro de vida por fallecimiento del padre (Tomador = Padre ≠ Beneficiaria = Hija):* **No sujeto a IRPF** (*Art. 6.4 LIRPF*), porque tributa en el **Impuesto sobre Sucesiones y Donaciones (ISD)**.
 * **Práctica 5 (Indemnizaciones por Despido — Art. 7.e LIRPF):**
   1. *Trabajador con 9 años de antigüedad y salario anual de 36.500 € (100 €/día) despedido en ERE (despido colectivo) que recibe 40 días/año (36.000 €):* En ERE la indemnización legal obligatoria es de **20 días por año** (máx. 12 mensualidades):
-     $$\text{Exento (Art. 7.e)} = 20 \text{ días} \times 9 \text{ años} \times 100\text{ €/día} = \mathbf{18.000\text{ €}}$$
-     $$\text{Exceso sujeto al IRPF} = 36.000 - 18.000 = \mathbf{18.000\text{ €}}$$
-     Como su antigüedad en la empresa es **> 2 años** (9 años), sobre el exceso sujeto de 18.000 € se aplica la **reducción del 30% por irregularidad del Art. 18.2 LIRPF**: $18.000 \times 30\% = \mathbf{5.400\text{ €}}$ de reducción $\implies$ **RITP computable = $18.000 - 5.400 = \mathbf{12.600\text{ €}}$**.
+
+     $$\text{Exento (Art. 7.e)} = 20\text{ días} \times 9\text{ años} \times 100\text{ €/día} = \mathbf{18.000\text{ €}}$$
+
+     $$\text{Exceso sujeto al IRPF} = 36.000\text{ €} - 18.000\text{ €} = \mathbf{18.000\text{ €}}$$
+
+     Como su antigüedad en la empresa es **> 2 años** (9 años), sobre el exceso sujeto de 18.000 € se aplica la **reducción del 30% por irregularidad del Art. 18.2 LIRPF**: $18.000\text{ €} \times 30\% = \mathbf{5.400\text{ €}}$ de reducción ⟹ **RITP computable = $18.000\text{ €} - 5.400\text{ €} = \mathbf{12.600\text{ €}}$**.
   2. *Directivo con 20 años de antigüedad y salario de 150.000 €/año despedido improcedentemente recibiendo 250.000 €:* Aunque los 33 días/año (con máx. 24 mensualidades) superarían los 180.000 €, el *Art. 7.e LIRPF* fija un **tope máximo absoluto de exención de 180.000 €**.
-     $$\text{Exento} = \mathbf{180.000\text{ €}} \quad \mid \quad \text{Exceso sujeto} = 250.000 - 180.000 = \mathbf{70.000\text{ €}}$$
-     Sobre los 70.000 € de exceso se aplica la reducción del **30% por irregularidad** (*Art. 18.2 LIRPF*, al tener > 2 años de antigüedad): $70.000 \times 30\% = 21.000\text{ €}$ $\implies$ **RITP computable = $70.000 - 21.000 = \mathbf{49.000\text{ €}}$**.
+
+     $$\text{Exento} = \mathbf{180.000\text{ €}} \quad \mid \quad \text{Exceso sujeto} = 250.000\text{ €} - 180.000\text{ €} = \mathbf{70.000\text{ €}}$$
+
+     Sobre los 70.000 € de exceso se aplica la reducción del **30% por irregularidad** (*Art. 18.2 LIRPF*, al tener > 2 años de antigüedad): $70.000\text{ €} \times 30\% = 21.000\text{ €}$ ⟹ **RITP computable = $70.000\text{ €} - 21.000\text{ €} = \mathbf{49.000\text{ €}}$**.
   3. *Indemnización de 2.400 € por finalización de contrato temporal de obra o servicio:* **0 € exentos (tributa el 100%: 2.400 €)**. El *Art. 7.e LIRPF* excluye expresamente las indemnizaciones por expiración del tiempo convenido o realización de la obra o servicio.
 * **Práctica 6 (Desempleo en pago único vs. mensual — Art. 7.n LIRPF):**
   * Si percibe el desempleo mes a mes (**14.400 €**): **100% sujeto y no exento** como Rendimiento del Trabajo (*Art. 17.1.b LIRPF*).
@@ -380,101 +387,124 @@ A continuación tienes el resumen ejecutivo y los resultados numéricos exactos 
 * **Práctica 8 (Gastos de locomoción y dietas de viaje — Art. 9 RIRPF):**
   Directivo que se desplaza de Granada a Madrid (430 km ida y 430 km vuelta = **860 km totales**) durante **3 días (pernoctando 2 noches y regresando el 3.er día)**:
   * **Caso A (En su vehículo propio):** La empresa le abona **0,35 €/km** (301 €), peajes justificados (**45 €**), hotel justificado de 2 noches (**240 €**) y **250 €** para gastos de manutención de los 3 días:
-    - *Locomoción:* Exento $= 860\text{ km} \times 0,26\text{ €/km} + 45\text{ € peajes} = 223,60 + 45 = \mathbf{268,60\text{ €}}$.  
-      **Tributa el exceso de kilometraje:** $860 \times (0,35 - 0,26) = \mathbf{77,40\text{ €}}$.
+    - *Locomoción:* Exento = $860\text{ km} \times 0,26\text{ €/km} + 45\text{ € (peajes)} = 223,60\text{ €} + 45\text{ €} = \mathbf{268,60\text{ €}}$.  
+      **Tributa el exceso de kilometraje:** $860\text{ km} \times (0,35 - 0,26)\text{ €/km} = \mathbf{77,40\text{ €}}$.
     - *Estancia (hotel):* **240 € exentos al 100%** (justificados con factura).
     - *Manutención (2 días CON pernocta + 1 día SIN pernocta en España):*  
-      $$\text{Límite exento} = (2 \times 53,34\text{ €}) + (1 \times 26,67\text{ €}) = 106,68 + 26,67 = \mathbf{133,35\text{ €}}$$
-      **Tributa el exceso de manutención:** $250 - 133,35 = \mathbf{116,65\text{ €}}$.
-    - **Total sujeto a IRPF en Caso A:** $77,40 + 116,65 = \mathbf{194,05\text{ €}}$.
+
+      $$\text{Límite exento} = (2 \times 53,34\text{ €}) + (1 \times 26,67\text{ €}) = 106,68\text{ €} + 26,67\text{ €} = \mathbf{133,35\text{ €}}$$
+
+      **Tributa el exceso de manutención:** $250\text{ €} - 133,35\text{ €} = \mathbf{116,65\text{ €}}$.
+    - **Total sujeto a IRPF en Caso A:** $77,40\text{ €} + 116,65\text{ €} = \mathbf{194,05\text{ €}}$.
   * **Caso B (Viaje a París — extranjero, 2 noches con pernocta y 1 día de vuelta sin pernocta, avión 320 € y hotel 400 € justificados, más 350 € de dieta de manutención):**
     - *Locomoción (avión) y Estancia (hotel):* **100% exentos** (justificados).
     - *Manutención en el extranjero:*  
-      $$\text{Límite exento} = (2 \times 91,35\text{ €}) + (1 \times 48,08\text{ €}) = 182,70 + 48,08 = \mathbf{230,78\text{ €}}$$
-      **Tributa el exceso:** $350 - 230,78 = \mathbf{119,22\text{ €}}$.
+
+      $$\text{Límite exento} = (2 \times 91,35\text{ €}) + (1 \times 48,08\text{ €}) = 182,70\text{ €} + 48,08\text{ €} = \mathbf{230,78\text{ €}}$$
+
+      **Tributa el exceso:** $350\text{ €} - 230,78\text{ €} = \mathbf{119,22\text{ €}}$.
 
 * **Práctica 9 (Valoración de Retribuciones en Especie — Arts. 42 y 43 LIRPF):**
   Trabajadora con sueldo dinerario de **40.000 €** y tipo de retención/ingreso a cuenta del **20%** (**no repercutido** por la empresa):
   1. *Vivienda propiedad de la empresa con Valor Catastral NO revisado de 90.000 €:*
-     - Valoración inicial $= 10\% \times 90.000 = 9.000\text{ €}$.
+     - Valoración inicial: $10\% \times 90.000\text{ €} = \mathbf{9.000\text{ €}}$.
      - *(Se comprueba el tope del 10% de las restantes contraprestaciones del trabajo al final).*
   2. *Vehículo propiedad de la empresa (coste adquisición 30.000 €, no eficiente) cedido para uso mixto: **30% laboral y 70% particular**:*
+
      $$\text{Valor Fiscal Vehículo} = 30.000\text{ €} \times 20\% \times 70\%\text{ (uso particular)} = \mathbf{4.200\text{ €}}$$
-     $$\text{Ingreso a cuenta (20\%)} = 4.200 \times 20\% = 840\text{ €} \implies \text{RITP Vehículo} = 4.200 + 840 = \mathbf{5.040\text{ €}}$$
+
+     $$\text{Ingreso a cuenta (20\%)} = 4.200\text{ €} \times 20\% = 840\text{ €} \implies \text{RITP Vehículo} = 4.200\text{ €} + 840\text{ €} = \mathbf{5.040\text{ €}}$$
+
   3. *Seguro médico privado pagado por la empresa para la trabajadora, su marido y su hijo (450 € por persona = 1.350 € totales):*
-     - **0 € (100% Exento)** por el *Art. 42.3.c LIRPF*, ya que no supera los **500 € anuales por cada asegurado** (450 € $\le$ 500 €).
+     - **0 € (100% Exento)** por el *Art. 42.3.c LIRPF*, ya que no supera los **500 € anuales por cada asegurado** (450 € ≤ 500 €).
   4. *Curso de perfeccionamiento del software contable de la empresa (900 €):*
      - **0 € (No sujeto)** por el *Art. 42.2.a LIRPF*.
   5. *Aportación empresarial al Plan de Pensiones de la trabajadora (3.000 €):*
      - **3.000 €** de RITP en especie (**sin ingreso a cuenta**, *Art. 102.2 RIRPF*).
   6. *Aplicación del límite máximo del 10% sobre la vivienda:*
-     - Restantes contraprestaciones del trabajo $= 40.000\text{ (sueldo)} + 5.040\text{ (vehículo c/ IC)} + 3.000\text{ (plan pensiones)} = \mathbf{48.040\text{ €}}$.
-     - Límite máximo del Valor Fiscal de la vivienda $= 10\% \times 48.040 = \mathbf{4.804\text{ €}}$ (como 9.000 € supera 4.804 €, **opera el tope de 4.804 €**).
-     - Ingreso a cuenta de la vivienda $= 4.804 \times 20\% = 960,80\text{ €}$ $\implies$ **RITP Vivienda = $4.804 + 960,80 = \mathbf{5.764,80\text{ €}}$**.
+     - Restantes contraprestaciones del trabajo: $40.000\text{ € (sueldo)} + 5.040\text{ € (vehículo c/ IC)} + 3.000\text{ € (plan pensiones)} = \mathbf{48.040\text{ €}}$.
+     - Límite máximo del Valor Fiscal de la vivienda: $10\% \times 48.040\text{ €} = \mathbf{4.804\text{ €}}$ (como 9.000 € supera 4.804 €, **opera el tope de 4.804 €**).
+     - Ingreso a cuenta de la vivienda: $4.804\text{ €} \times 20\% = 960,80\text{ €}$ ⟹ **RITP Vivienda = $4.804\text{ €} + 960,80\text{ €} = \mathbf{5.764,80\text{ €}}$**.
 
 * **Práctica 10 (Liquidación completa con Bonus Irregular y Gastos Deducibles):**
   Trabajador con sueldo bruto de **38.000 €**, bonus quinquenal (generado en 5 años > 2 años) de **10.000 €**, Seguridad Social **2.400 €**, cuota sindical **180 €**, colegio profesional obligatorio **600 €**, y gastos de abogado por pleito contra un vecino **400 €**:
-  * **RITP:** $38.000 + 10.000 - (30\% \times 10.000\text{ reducción Art. 18.2}) = 48.000 - 3.000 = \mathbf{45.000\text{ €}}$.
+  * **RITP:** $38.000\text{ €} + 10.000\text{ €} - (30\% \times 10.000\text{ € reducción Art. 18.2}) = 48.000\text{ €} - 3.000\text{ €} = \mathbf{45.000\text{ €}}$.
   * **Gastos deducibles (Art. 19.2 LIRPF):**
     - Seguridad Social: **2.400 €**
     - Sindicato: **180 €** (100% deducible)
     - Colegio profesional obligatorio: **500 €** (tope máximo legal de 500 € del *Art. 10 RIRPF*, aunque pagó 600 €)
     - Abogado contra vecino: **0 €** (solo son deducibles hasta 300 € los litigios laborales **con el empleador**, no pleitos particulares)
     - Otros gastos fijos (*Art. 19.2.f*): **2.000 €**
-    - Total gastos $= 2.400 + 180 + 500 + 2.000 = \mathbf{5.080\text{ €}}$.
-  * **RNTP:** $45.000 - 5.080 = \mathbf{39.920\text{ €}}$ (Reducción Art. 20 = 0 € por superar 19.747,50 €).
+    - Total gastos: $2.400\text{ €} + 180\text{ €} + 500\text{ €} + 2.000\text{ €} = \mathbf{5.080\text{ €}}$.
+  * **RNTP:** $45.000\text{ €} - 5.080\text{ €} = \mathbf{39.920\text{ €}}$ (Reducción Art. 20 = 0 € por superar 19.747,50 €).
 
 * **Práctica 11 (Movilidad Geográfica y Reducción del Art. 20 LIRPF):**
   Desempleado inscrito en la oficina de empleo de Jaén que acepta un contrato en Málaga mudándose allí, con sueldo íntegro de **16.500 €** y cotización a la Seguridad Social de **1.050 €** (sin otras rentas):
   * **RITP:** **16.500 €**
-  * **Rendimiento Neto Previo:** $16.500 - 1.050\text{ (SS)} = \mathbf{15.450\text{ €}}$.
+  * **Rendimiento Neto Previo:** $16.500\text{ €} - 1.050\text{ € (SS)} = \mathbf{15.450\text{ €}}$.
   * **Otros gastos (Art. 19.2.f):** $2.000\text{ € (general)} + 2.000\text{ € (movilidad geográfica)} = \mathbf{4.000\text{ €}}$.
-  * **Rendimiento Neto del Trabajo (RNT):** $15.450 - 4.000 = \mathbf{11.450\text{ €}}$.
-  * **Reducción del Art. 20 LIRPF:** Al ser el RNT PREVIO a la aplicación de movilidad geográfica o tras él $\le 14.852\text{ €}$ (*nota: el Art. 20 se calcula sobre el RNT previo a los incrementos de movilidad/discapacidad o según el tramo*), si tomamos $11.450 \le 14.852\text{ €}$, le corresponde la reducción máxima de **7.302 €** $\implies$ **RNTP = $11.450 - 7.302 = \mathbf{4.148\text{ €}}$**. *(Si se evalúa el tramo del Art. 20 antes de restar los 2.000 € de movilidad, sobre 13.450 € sigue siendo $\le 14.852$ €, por lo que la reducción del Art. 20 es igualmente **7.302 €**).*
+  * **Rendimiento Neto del Trabajo (RNT):** $15.450\text{ €} - 4.000\text{ €} = \mathbf{11.450\text{ €}}$.
+  * **Reducción del Art. 20 LIRPF:** Al ser el RNT PREVIO a la aplicación de movilidad geográfica o tras él ≤ 14.852 € (*nota: el Art. 20 se calcula sobre el RNT previo a los incrementos de movilidad/discapacidad o según el tramo*), si tomamos $11.450\text{ €} \le 14.852\text{ €}$, le corresponde la reducción máxima de **7.302 €** ⟹ **RNTP = $11.450\text{ €} - 7.302\text{ €} = \mathbf{4.148\text{ €}}$**. *(Si se evalúa el tramo del Art. 20 antes de restar los 2.000 € de movilidad, sobre 13.450 € sigue siendo ≤ 14.852 €, por lo que la reducción del Art. 20 es igualmente **7.302 €**).*
 
 * **Práctica 12 (Trabajador en activo con Discapacidad del 65%):**
   Trabajador con discapacidad del **65%**, sueldo íntegro **28.000 €**, Seguridad Social **1.800 €**:
-  * **Gastos deducibles:** $1.800\text{ (SS)} + 2.000\text{ (fijo Art. 19.2.f)} + 7.750\text{ (incremento trabajador activo con discapacidad }\ge 65\%) = \mathbf{11.550\text{ €}}$.
-  * **RNTP:** $28.000 - 11.550 = \mathbf{16.450\text{ €}}$.
+  * **Gastos deducibles:** $1.800\text{ € (SS)} + 2.000\text{ € (fijo Art. 19.2.f)} + 7.750\text{ € (incremento activo discapacidad } \ge 65\%) = \mathbf{11.550\text{ €}}$.
+  * **RNTP:** $28.000\text{ €} - 11.550\text{ €} = \mathbf{16.450\text{ €}}$.
 
 ---
 
 ### Bloque IV: Capital Inmobiliario e Imputación de Rentas (Prácticas 13 a 16)
 
 * **Práctica 13 (Vivienda alquilada todo el año + Límite de Intereses y Reparación):**
-  Piso adquirido por **150.000 €** (gastos e impuestos de compra **15.000 €** $\implies$ Coste adquisición satisfecho = **165.000 €**). Valor Catastral total = **80.000 €** (Valor del suelo = 20% = 16.000 €; **Valor de la construcción = 80% = 64.000 €**). Alquilado como vivienda todo el año por **600 €/mes** (**7.200 €/año**). Gastos del año: Intereses hipoteca **5.000 €**, Pintura y reparación de tuberías **2.800 €**, IBI **400 €**, Comunidad **600 €**, Seguro de hogar **200 €**:
-  1. **RICI:** $600 \times 12 = \mathbf{7.200\text{ €}}$.
-  2. **Grupo 1 (Intereses + Reparación):** $5.000 + 2.800 = 7.800\text{ €}$. Como supera el RICI de 7.200 €, **opera el límite del Art. 23.1.a.1.º LIRPF**: solo se deducen **7.200 €** este año (quedando **600 € pendientes** para compensar en los **4 años siguientes**).
+  Piso adquirido por **150.000 €** (gastos e impuestos de compra **15.000 €** ⟹ Coste adquisición satisfecho = **165.000 €**). Valor Catastral total = **80.000 €** (Valor del suelo = 20% = 16.000 €; **Valor de la construcción = 80% = 64.000 €**). Alquilado como vivienda todo el año por **600 €/mes** (**7.200 €/año**). Gastos del año: Intereses hipoteca **5.000 €**, Pintura y reparación de tuberías **2.800 €**, IBI **400 €**, Comunidad **600 €**, Seguro de hogar **200 €**:
+  1. **RICI:** $600\text{ €} \times 12\text{ meses} = \mathbf{7.200\text{ €}}$.
+  2. **Grupo 1 (Intereses + Reparación):** $5.000\text{ €} + 2.800\text{ €} = 7.800\text{ €}$. Como supera el RICI de 7.200 €, **opera el límite del Art. 23.1.a.1.º LIRPF**: solo se deducen **7.200 €** este año (quedando **600 € pendientes** para compensar en los **4 años siguientes**).
   3. **Grupo 2 (Resto de gastos y Amortización — estos SÍ pueden dejar el rendimiento negativo):**
-     - IBI + Comunidad + Seguro $= 400 + 600 + 200 = \mathbf{1.200\text{ €}}$.
+     - IBI + Comunidad + Seguro: $400\text{ €} + 600\text{ €} + 200\text{ €} = \mathbf{1.200\text{ €}}$.
      - **Amortización del inmueble (3%):** Base = 80% (construcción) del mayor entre Coste Adquisición (165.000 €) y VC (80.000 €):
-       $$\text{Base Amortizable} = 80\% \times 165.000 = 132.000\text{ €} \implies \text{Amortización} = 3\% \times 132.000 = \mathbf{3.960\text{ €}}$$
+
+       $$\text{Base Amortizable} = 80\% \times 165.000\text{ €} = 132.000\text{ €} \implies \text{Amortización} = 3\% \times 132.000\text{ €} = \mathbf{3.960\text{ €}}$$
+
   4. **Rendimiento Neto del Capital Inmobiliario (RNCI):**
-     $$\text{RNCI} = 7.200 - 7.200\text{ (Grupo 1)} - 1.200\text{ (IBI/Com/Seg)} - 3.960\text{ (Amortización)} = \mathbf{-5.160\text{ €}}$$
+
+     $$\text{RNCI} = 7.200\text{ €} - 7.200\text{ € (Grupo 1)} - 1.200\text{ € (IBI/Com/Seg)} - 3.960\text{ € (Amortización)} = \mathbf{-5.160\text{ €}}$$
+
   5. **Reducción por alquiler de vivienda (Art. 23.2 LIRPF):** **0 €**, porque el *Art. 23.2 LIRPF* exige que el rendimiento neto sea **positivo**.
 
 * **Práctica 14 (Alquiler de Vivienda con Rendimiento Positivo vs. Alquiler de Local Comercial):**
-  Mismo piso anterior con alquiler de **1.000 €/mes** (**12.000 €/año**), intereses + reparación de **3.000 €**, IBI/Comunidad/Seguro de **1.200 €**, amortización del inmueble de **3.960 €** y amortización del mobiliario cedido (coste muebles 6.000 € $\times 10\% = \mathbf{600\text{ €}}$):
-  * **Rendimiento Neto Previo:** $12.000 - 3.000 - 1.200 - 3.960 - 600 = \mathbf{3.240\text{ €}}$.
+  Mismo piso anterior con alquiler de **1.000 €/mes** (**12.000 €/año**), intereses + reparación de **3.000 €**, IBI/Comunidad/Seguro de **1.200 €**, amortización del inmueble de **3.960 €** y amortización del mobiliario cedido (coste muebles 6.000 € × 10% = **600 €**):
+  * **Rendimiento Neto Previo:** $12.000\text{ €} - 3.000\text{ €} - 1.200\text{ €} - 3.960\text{ €} - 600\text{ €} = \mathbf{3.240\text{ €}}$.
   * **Si es VIVIENDA habitual del inquilino** (contrato nuevo régimen general 50%):
-    $$\text{Reducción Art. 23.2 (50\%)} = 50\% \times 3.240 = 1.620\text{ €} \implies \mathbf{RNCI = 1.620\text{ €}}$$
-    *(Si el contrato fuera anterior al 26/05/2023 con DT 38.ª al 60%: Reducción = 1.944 € $\implies$ RNCI = **1.296 €**).*
-  * **Si fuera un LOCAL COMERCIAL o alquiler turístico de verano:** **No tiene reducción del Art. 23.2** $\implies$ **RNCI = 3.240 €**.
+
+    $$\text{Reducción Art. 23.2 (50\%)} = 50\% \times 3.240\text{ €} = 1.620\text{ €} \implies \mathbf{RNCI = 1.620\text{ €}}$$
+
+    *(Si el contrato fuera anterior al 26/05/2023 con DT 38.ª al 60%: Reducción = 1.944 € ⟹ RNCI = **1.296 €**).*
+  * **Si fuera un LOCAL COMERCIAL o alquiler turístico de verano:** **No tiene reducción del Art. 23.2** ⟹ **RNCI = 3.240 €**.
 
 * **Práctica 15 (Inmueble Alquilado a un Hermano — Regla de Parentesco del Art. 24 LIRPF):**
   Propietaria que alquila un piso a su **hermano** (pariente de **2.º grado** de consanguinidad, dentro del límite de hasta el 3.er grado) por **250 €/mes** (**3.000 €/año**), con gastos deducibles totales de **2.600 €** y Valor Catastral revisado hace 4 años de **100.000 €**:
-  1. Cálculo ordinario: RNT previo $= 3.000 - 2.600 = 400\text{ €}$; con reducción del 50% por vivienda $= \mathbf{200\text{ €}}$.
+  1. Cálculo ordinario: RNT previo = $3.000\text{ €} - 2.600\text{ €} = 400\text{ €}$; con reducción del 50% por vivienda = **200 €**.
   2. **Mínimo legal por parentesco hasta 3.er grado (Art. 24 LIRPF):** Como el VC está revisado en los últimos 10 años, se aplica el **1,1%** sobre el VC:
+
      $$\text{Mínimo Art. 24} = 1,1\% \times 100.000\text{ €} = \mathbf{1.100\text{ €}}$$
-  3. Como $200\text{ €} < 1.100\text{ €}$, **prevalece obligatoriamente el mínimo del Art. 24 LIRPF**: **RNCI computable = 1.100 €**.
+
+  3. Como **200 € < 1.100 €**, **prevalece obligatoriamente el mínimo del Art. 24 LIRPF**: **RNCI computable = 1.100 €**.
 
 * **Práctica 16 (Imputación de Rentas Inmobiliarias y Uso Mixto Vacío/Alquilado — Art. 85 LIRPF):**
   Contribuyente titular de:
   1. *Vivienda habitual en Granada (VC = 120.000 €) con 1 plaza de garaje comprada conjuntamente:* **0 €** (Excluida de imputación por ser vivienda habitual, *Art. 85.1 LIRPF*).
   2. *Apartamento en la playa en Almuñécar (VC revisado hace 5 años = 90.000 €) usado por la familia en verano y vacío el resto del año:*
+
      $$\text{Imputación de Renta (Art. 85)} = 1,1\% \times 90.000\text{ €} = \mathbf{990\text{ €}}$$
+
   3. *Segunda residencia que carece de Valor Catastral notificado, adquirida por **140.000 €** (vacía todo el año):*
-     $$\text{Base de cálculo} = 50\% \times 140.000 = 70.000\text{ €} \implies \text{Imputación (1,1\%)} = 1,1\% \times 70.000 = \mathbf{770\text{ €}}$$
+
+     $$\text{Base de cálculo} = 50\% \times 140.000\text{ €} = 70.000\text{ €} \implies \text{Imputación (1,1\%)} = 1,1\% \times 70.000\text{ €} = \mathbf{770\text{ €}}$$
+
   4. *Si el apartamento de la playa (VC revisado = 90.000 €) se alquila durante **3 meses (1/4 del año)** y está vacío a disposición del dueño **9 meses (3/4 del año)**:*
      - Por los **3 meses alquilado**: tributa como **Rendimiento del Capital Inmobiliario**, deduciendo únicamente el **25% (3/12)** de los gastos anuales (IBI, comunidad, seguro, amortización) y **sin reducción por alquiler de vivienda** por ser alquiler vacacional de temporada.
-     - Por los **9 meses vacío**: tributa como **Imputación de Rentas Inmobiliarias**: $90.000 \times 1,1\% \times \frac{9}{12} = \mathbf{742,50\text{ €}}$ (sin deducir ningún gasto).
+     - Por los **9 meses vacío**: tributa como **Imputación de Rentas Inmobiliarias**:
+
+       $$\text{Imputación de Rentas} = 90.000\text{ €} \times 1,1\% \times \frac{9}{12} = \mathbf{742,50\text{ €}}$$
+
+       (sin deducir ningún gasto).
