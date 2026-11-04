@@ -63,6 +63,7 @@ Detalle de archivos creados, modificados o eliminados.
 | [`spec_011`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_011_scd_bloque_prado_50_preguntas.md) | 2026-10-28 | Integración del Bloque Exclusivo «Prado» (50 preguntas) en Tests de SCD | Contenido / SCD | Implementado |
 | [`spec_012`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_012_derecho_fiscal_examen_online_supuestos.md) | 2026-11-04 | Incorporación de Derecho Fiscal y Nueva Funcionalidad de Examen Online con Supuestos | Motor de Tests / ADE 5º | Implementado |
 | [`spec_013`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_013_derecho_fiscal_renderizado_formulas_katex.md) | 2026-11-04 | Renderizado y Maquetación de Fórmulas Matemáticas con KaTeX en Guías de Estudio | Infraestructura / UI / Fiscal | Implementado |
+| [`spec_014`](file:///home/jxlig0d/Escritorio/PROYECTOS/repasaya/repasaYA/specs/spec_014_optimizacion_movil_motor_tests.md) | 2026-11-04 | Optimización Responsiva Móvil y Limpieza Visual en el Motor de Tests | UI/UX / Motor Tests / Móvil | Implementado |
 
 
 

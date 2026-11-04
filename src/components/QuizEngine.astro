@@ -26,6 +26,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <style is:global>
   :root[data-quiz],:root[data-quiz] body{height:100%;overflow:hidden}
   :root[data-quiz] header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  :root[data-quiz] .header-left{display:flex;align-items:center;gap:12px}
+  :root[data-quiz] .header-right{display:flex;align-items:center;gap:12px}
+  :root[data-quiz] .header-divider{color:var(--border)}
   :root[data-quiz] .logo{font-size:1.15rem;font-weight:800}:root[data-quiz] .logo span{color:var(--accent)}
   :root[data-quiz] .back{font-size:.8rem;color:var(--text-muted);transition:color .2s}:root[data-quiz] .back:hover{color:var(--accent)}
   :root[data-quiz] .tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border)}
@@ -487,6 +490,97 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     display: none !important;
   }
 
+  /* ── OPTIMIZACIÓN RESPONSIVA MÓVIL ────────────────────────── */
+  @media (max-width: 768px) {
+    /* 1. Ocultar RepasaBot (Dudas) y botón flotante de GitHub */
+    :root[data-quiz] #repasa-bot-root,
+    :root[data-quiz] .github-fab {
+      display: none !important;
+    }
+
+    /* 2. Cabecera en el Menú: solo la flecha para salir a la asignatura y el botón de tema */
+    :root[data-quiz] header {
+      padding: 10px 14px;
+      gap: 8px;
+    }
+    :root[data-quiz] .back-label,
+    :root[data-quiz] .header-divider,
+    :root[data-quiz] header .logo,
+    :root[data-quiz] #hdr-stats {
+      display: none !important;
+    }
+    :root[data-quiz] .back {
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      min-height: 36px;
+      padding: 4px 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+    }
+    :root[data-quiz] .back:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* 3. Pestañas: ocultar Banco en móvil; si solo hay test, ocultar toda la barra */
+    :root[data-quiz] .tab[data-tab="banco"] {
+      display: none !important;
+    }
+    :root[data-quiz] .tabs:not(.has-cases) {
+      display: none !important;
+    }
+    :root[data-quiz] .tab {
+      padding: 10px 14px;
+      font-size: 0.82rem;
+    }
+
+    /* 4. En realización de tipo test (data-quiz-active): */
+    /* Ocultar cabecera superior y pestañas para que ARRIBA SOLO quede la flecha para salir al menú */
+    :root[data-quiz-active="true"] header,
+    :root[data-quiz-active="true"] .tabs {
+      display: none !important;
+    }
+
+    /* 5. Ajustes de espacio y legibilidad en el test */
+    :root[data-quiz] main {
+      padding: 12px 10px;
+    }
+    :root[data-quiz] .q-header {
+      padding: 4px 2px 8px;
+    }
+    :root[data-quiz] .btn-back-top {
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    :root[data-quiz] .q-card {
+      padding: 16px 14px;
+      margin-top: 10px;
+    }
+    :root[data-quiz] .kbd-hints {
+      display: none !important;
+    }
+    :root[data-quiz] .q-case-body {
+      max-height: 180px;
+      font-size: 0.88rem;
+    }
+  }
+
   @media print {
     body > * { visibility: hidden !important; }
     #print-container, #print-container * { visibility: visible !important; display: block !important; }
@@ -508,13 +602,16 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 </style>
 
-<header>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a class="back" href={backHref ?? base}>← {backLabel ?? 'repasaYA'}</a>
-    <span style="color:var(--border)">|</span>
+<header class="quiz-header">
+  <div class="header-left">
+    <a class="back" href={backHref ?? base} aria-label="Volver a la asignatura">
+      <span class="back-arrow">←</span>
+      <span class="back-label">{backLabel ?? 'repasaYA'}</span>
+    </a>
+    <span class="header-divider">|</span>
     <div class="logo"><span>{code}</span> · {title}</div>
   </div>
-  <div style="display:flex;align-items:center;gap:12px">
+  <div class="header-right">
     <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema" style="width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--text);cursor:pointer">
       <svg class="ic-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
       <svg class="ic-moon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -525,7 +622,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   </div>
 </header>
 
-<div class="tabs">
+<div class:list={['tabs', { 'has-cases': hasCases }]}>
   <div class:list={['tab', { active: !startInCases }]} data-tab="test">Test</div>
   {hasCases && (
     <div class:list={['tab', { active: startInCases }]} data-tab="supuestos" id="tab-btn-supuestos">
@@ -824,6 +921,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 </a>
 
 <script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code }}>
+document.documentElement.dataset.quizActive = 'false';
 const LETTERS = ['A','B','C','D','E'];
 const VF_DATA    = vfData.map(q => ({ ...q, qType: 'vf' }));
 const TEST_DATA  = testData.map(q => ({ ...q, qType: 'test' }));
@@ -1064,6 +1162,7 @@ function startQuiz(){
   idx = 0; correct = 0; wrong = 0; answers = [];
 
   hide('selector-view'); hide('results-view'); show('quiz-view');
+  document.documentElement.dataset.quizActive = 'true';
   showQ();
 }
 
@@ -1479,12 +1578,14 @@ function repeatWrong(){
   questions = wrongQs;
   idx = 0; correct = 0; wrong = 0; answers = [];
   hide('results-view'); show('quiz-view');
+  document.documentElement.dataset.quizActive = 'true';
   showQ();
 }
 
 function backToSelector(){
   clearInterval(timerInterval);
   hide('quiz-view'); hide('results-view'); show('selector-view');
+  document.documentElement.dataset.quizActive = 'false';
   updateWeakChipCount();
   updateStarredChipCount();
   renderUserStats();
@@ -1554,6 +1655,7 @@ document.querySelectorAll('.tab').forEach(t => {
     t.classList.add('active');
     const targetPanel = document.getElementById('panel-' + t.dataset.tab);
     if (targetPanel) targetPanel.classList.add('active');
+    document.documentElement.dataset.quizActive = 'false';
     if (t.dataset.tab === 'banco') initBank();
     if (t.dataset.tab === 'supuestos') initCasesPanel();
   });

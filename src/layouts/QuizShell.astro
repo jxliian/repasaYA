@@ -81,6 +81,13 @@ const canonical = `${siteUrl}${Astro.url.pathname.replace(/^\/|\/$/g, '')}${Astr
         }
       })();
     </script>
+    <style is:global>
+      @media (max-width: 768px) {
+        :root[data-quiz] #repasa-bot-root {
+          display: none !important;
+        }
+      }
+    </style>
   </head>
 
   <body>
