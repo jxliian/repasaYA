@@ -1,0 +1,637 @@
+\documentclass[11pt,a4paper,twoside,openany]{article}
+
+\input{../estilo_fiscal}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA OFICIAL
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{1.2cm}
+    
+    {\Huge\bfseries\color{fiscalDark}\textsf{Derecho Fiscal}}\\[0.4cm]
+    {\LARGE\bfseries\color{fiscalPrimary}\textsf{Cuaderno Maestro de Casos Prácticos Oficiales (1 a 16)}}\\[0.3cm]
+    {\Large\textsf{Enunciados Completos de Clase y Resolución Numérica Paso a Paso}}\\[0.3cm]
+    {\large\textsf{Grado en ADE y Doble Grado DADE $\cdot$ 5º Curso $\cdot$ 1º Cuatrimestre}}\\[0.2cm]
+    {\normalsize\textsf{Facultad de Ciencias Económicas y Empresariales $\cdot$ Universidad de Granada (UGR)}}\\[1.0cm]
+    
+    \rule{0.88\textwidth}{1.5pt}\\[1.0cm]
+    
+    \begin{tcolorbox}[
+        colback=fiscalLight,
+        colframe=fiscalPrimary,
+        width=0.92\textwidth,
+        arc=4pt,
+        boxrule=1pt,
+        halign=left
+    ]
+        \large\textbf{\color{fiscalDark}Estructura del Cuaderno y Contenidos de Examen:}\\[6pt]
+        \normalsize
+        \begin{itemize}[leftmargin=1.2cm, itemsep=4pt]
+            \item[\textbf{1.}] \textbf{Bloque I (Prácticas 1 a 7):} Residencia fiscal, ausencias esporádicas, presunciones familiares, exenciones objetivas del Art.~7 LIRPF (indemnizaciones laborales, responsabilidad civil por daños personales, becas, desempleo en pago único), calificación global de rentas y cesión gratuita entre familiares.
+            \item[\textbf{2.}] \textbf{Bloque II (Prácticas 8 a 12):} Rendimientos del Trabajo Personal (RNTP), dietas y locomoción con y sin pernocta (Art.~9 RIRPF), retribuciones en especie (vehículos, cursos, vales de comida, acciones, vivienda de empresa), gastos deducibles del Art.~19 LIRPF y tabla de reducción del Art.~20 LIRPF.
+            \item[\textbf{3.}] \textbf{Bloque III (Prácticas 13 a 16):} Rendimientos del Capital Inmobiliario (RNCI), límites de deducibilidad de intereses y reparación, amortización de inmuebles y muebles, reducciones por alquiler de vivienda, regla especial de parentesco (Art.~24 LIRPF) e Imputación de Rentas Inmobiliarias (Art.~85 LIRPF).
+            \item[\textbf{4.}] \textbf{Enfoque Directo de Examen:} Sin palabrería doctrinal. Cada caso incluye enunciado textual, artículo exacto aplicable del Código BOE, fórmula matemática de liquidación, resultado final y trampas habituales de examen.
+        \end{itemize}
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\large\textsf{Plataforma \textbf{repasaYA} $\cdot$ Documento de Apoyo al Primer Parcial}}\\[0.2cm]
+    {\small\textsf{Curso Académico 2026--2027 $\cdot$ Cátedra de Derecho Financiero y Tributario}}\\[0.5cm]
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ==============================================================================
+% TABLA RESUMEN RÁPIDO DE RESULTADOS OFICIALES
+% ==============================================================================
+\section*{Tabla Resumen: Resultados Exactos de las 16 Prácticas de Clase}
+\addcontentsline{toc}{section}{Tabla Resumen: Resultados Exactos de las 16 Prácticas}
+
+\noindent Esta tabla permite comprobar de un vistazo los importes y calificaciones oficiales dictados por la profesora en clase antes de entrar al examen:
+
+\vspace{0.3cm}
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{l p{5.5cm} X}
+\toprule
+\textbf{Práctica} & \textbf{Supuesto Planteado} & \textbf{Resultado Oficial y Fundamentación Clave} \\
+\midrule
+\textbf{P. 1} & Residencia fiscal (D. José, D. Antonio y Deportista) & D. José: \textbf{SÍ es contribuyente} (ausencias esporádicas). D. Antonio: \textbf{NO} (certificado alemán). Deportista: \textbf{SÍ} ($100 + 265 = 365\text{ días} > 183$). \\
+\midrule
+\textbf{P. 2} & Indemnización ERE ($19.000\text{ \euro}$) y despido SMAC ($100.000\text{ \euro}$) & ERE: $10.395\text{ \euro}$ exentos; exceso con red. 30\% = \textbf{6.023,50 \euro}. SMAC: $100.000\text{ \euro}$ exentos; $2.000\text{ \euro}$ empresa = RITP; $2.000\text{ \euro}$ jefe = Ganancia patrimonial. \\
+\midrule
+\textbf{P. 3} & Accidente tráfico ($150.000\text{ \euro}$) y seguro vida ($250.000\text{ \euro}$) & $150.000\text{ \euro}$ y $75.000\text{ \euro}$ \textbf{exentos en IRPF} (Art.~7.d). Seguro vida ganancial: $50\%$ a ISD ($125.000\text{ \euro}$) y $50\%$ a IRPF (RCM ahorro). \\
+\midrule
+\textbf{P. 4} & Becas: CSIC ($1.000\text{ \euro}$/mes) y UNIA ($600\text{ \euro}$) & Sara (CSIC): \textbf{Exenta} (Art.~7.j). María (UNIA 3 créditos): \textbf{No exenta} ($600\text{ \euro}$ RITP, no es título reglado oficial). \\
+\midrule
+\textbf{P. 5} & Desempleo pago único ($30.000\text{ \euro}$) vs. mensual & Pago único: \textbf{100\% Exento} (Art.~7.n, mantener 5 años). Mensual: RITP sujeto íntegro. \\
+\midrule
+\textbf{P. 6} & Renta global Dña. Francisca Guzmán & Base General: \textbf{58.400 \euro} ($58.500\text{ \euro}$ trabajo $- 100\text{ \euro}$ actividad). Base Ahorro: \textbf{5.000 \euro} ($1.000\text{ \euro}$ dividendos $+ 4.000\text{ \euro}$ ganancia terreno). \\
+\midrule
+\textbf{P. 7} & Cesión gratuita piso padre a hijo & Hijo: $0\text{ \euro}$. Padre: \textbf{Imputación de Rentas (Art.~85)}: \textbf{1.000 \euro} ($2\%$) o \textbf{550 \euro} ($1,1\%$). ¡No aplica Art.~24! \\
+\midrule
+\textbf{P. 8} & Dietas Lucena y Burgos (D. Álvaro Molina) & Lucena: $0\text{ \euro}$ sujetos. Burgos: exceso gravado = \textbf{303,29 \euro}. RNT previo = $19.063,29\text{ \euro}$. RNT reducido = \textbf{16.283,29 \euro}. \\
+\midrule
+\textbf{P. 9} & Comercial Motril (vales comida y dietas) & Dietas: $100\%$ exentas. Vales comida: exceso con ing. a cuenta = \textbf{192,60 \euro}. Reducción Art.~20: \textbf{7.302 \euro}. RNT red. = \textbf{3.804,60 \euro}. \\
+\midrule
+\textbf{P. 10} & D. Antonio (plan pensiones) y Dña. Ana (baja) & Antonio: Acciones y seguro exentos; plan pensiones $= 2.500\text{ \euro}$. RNT = \textbf{23.525 \euro}. Ana: Baja voluntaria red. 30\% ($12.600\text{ \euro}$). RNT = \textbf{20.000 \euro}. \\
+\midrule
+\textbf{P. 11} & Despido, coche y seguro médico Málaga & Indemnización gravada: \textbf{3.653,43 \euro}. Coche: \textbf{1.456 \euro}. RN previo = $16.375,43\text{ \euro}$. Red. Art.~20 = $4.636\text{ \euro}$. RNT red. = \textbf{9.739,43 \euro}. \\
+\midrule
+\textbf{P. 12} & Empleada de hogar ($20.000\text{ \euro}$, SS $1.100\text{ \euro}$) & RNT previo = $18.900\text{ \euro}$. Red. Art.~20 = $966,15\text{ \euro}$. RNT red. = \textbf{15.933,85 \euro}. \textbf{Obligada a declarar} (límite $15.876\text{ \euro}$). \\
+\midrule
+\textbf{P. 13} & Inmuebles D. Juan (piso vacío, sobrino y local) & Piso Granada (IRI): \textbf{990 \euro}. Sobrino (Art.~24): mínimo Art.~85 = \textbf{1.100 \euro}. Local 6 m alquilado = \textbf{4.751,05 \euro}; 6 m vacío (IRI) = \textbf{1.053,59 \euro}. \\
+\midrule
+\textbf{P. 14} & Local arrendado y traspaso ($50.000\text{ \euro}$) & Normal: RNCI = \textbf{6.187,50 \euro}. Si dueño cobra 30\% traspaso ($15.000\text{ \euro}$): RNCI previo $21.187,50\text{ \euro} - \text{red. 30\% } (3.081,82\text{ \euro}) = \mathbf{18.105,68\text{ \euro}}$. \\
+\midrule
+\textbf{P. 15} & Finca en vacas y apartamento en la playa & Finca pastos con red. 30\% = \textbf{10.500 \euro}. Playa alquilado 2 meses: RNCI = \textbf{1.998,33 \euro} (sin red.). Playa vacío 10 m: IRI = \textbf{733,33 \euro}. \\
+\midrule
+\textbf{P. 16} & Usufructo y alquiler zona tensionada & Vivienda habitual: \textbf{0 \euro}. Alquiler con rebaja $>5\%$: RNCI previo $5.730\text{ \euro} - \text{reducción } 90\% = \mathbf{573\text{ \euro}}$. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% BLOQUE I: PRÁCTICAS 1 A 7
+% ==============================================================================
+\section{Bloque I: Contribuyentes, Residencia, Hecho Imponible y Exenciones (Prácticas 1 a 7)}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 1
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 1: Condición de Contribuyente en el IRPF y Residencia Habitual}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Determinar la condición o no de contribuyentes en el IRPF de las siguientes personas, según cada una de sus situaciones personales:
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{D. José}, español, soltero, con vivienda habitual en Madrid, trabaja para una sucursal de una empresa colombiana en España. Durante el ejercicio 2026 ha realizado varios viajes a Colombia, por un total de 290 días. Dispone de copias de los billetes de avión, visados en el pasaporte y contrato de alquiler de una vivienda en Bogotá, donde residió durante sus estancias en Colombia.
+    \item \textbf{D. Antonio}, natural de Granada, trabaja y reside habitualmente en Alemania desde hace 2 años. Su mujer e hijos siguen viviendo en Granada. D. Antonio aporta como prueba su contrato de trabajo con la empresa alemana y un contrato de arrendamiento de una vivienda en ese país.
+    \item \textbf{Un deportista profesional español} pasa un total de 100 días en España. El resto viaja y entrena según los diferentes torneos en los que participa. Se sabe que sus padres residen habitualmente en España y que tiene una vivienda en nuestro país.
+\end{enumerate}
+\end{enunciadoBox}
+
+\begin{solucionBox}[Fundamentación Jurídica y Resolución]
+\begin{itemize}[leftmargin=*, itemsep=6pt]
+    \item \textbf{Caso a (D. José): SÍ ES CONTRIBUYENTE DEL IRPF.}
+    \begin{itemize}
+        \item \textit{Fundamento legal:} Art.~9.1.a y b LIRPF. Para la determinación del período de permanencia en España ($\ge 183$ días), se computan las ausencias esporádicas salvo que el contribuyente acredite su residencia fiscal en otro país mediante certificado emitido por las autoridades fiscales de dicho país.
+        \item \textit{Doctrina de clase:} Los billetes de avión, visados y contratos de alquiler justifican una estancia física pero \textbf{NO acreditan residencia fiscal}. Al no existir certificado de residencia fiscal de Colombia, los 290 días computan como ausencias esporádicas y se suman a los días en España ($75 + 290 = 365\text{ días} > 183$). Además, en España radica el núcleo de sus intereses económicos y conserva su vivienda habitual en Madrid.
+    \end{itemize}
+
+    \item \textbf{Caso b (D. Antonio): NO ES CONTRIBUYENTE DEL IRPF (si aporta certificado).}
+    \begin{itemize}
+        \item \textit{Fundamento legal:} Art.~9.1 párrafo segundo LIRPF. La ley presume, salvo prueba en contrario (\textit{iuris tantum}), que el contribuyente tiene su residencia habitual en España cuando resida habitualmente en territorio español el cónyuge no separado legalmente y los hijos menores de edad que dependan de él.
+        \item \textit{Doctrina de clase:} La presunción se desvirtúa si D. Antonio obtiene y presenta el certificado de residencia fiscal emitido por la administración tributaria alemana. Con dicho certificado, tributará exclusivamente en España por el Impuesto sobre la Renta de No Residentes (IRNR) sobre las rentas de fuente española.
+    \end{itemize}
+
+    \item \textbf{Caso c (Deportista profesional): SÍ ES CONTRIBUYENTE DEL IRPF.}
+    \begin{itemize}
+        \item \textit{Fundamento legal:} Art.~9.1.a LIRPF. Los 265 días que pasa en el extranjero compitiendo y entrenando son ausencias temporales/esporádicas al no fijar residencia fiscal en ningún tercer país. Se computan $100 + 265 = 365\text{ días}$ en España ($> 183$).
+        \item \textit{Matiz de examen:} La residencia de sus padres en España es jurídicamente \textbf{irrelevante}; la presunción legal del Art.~9.1 solo atañe al cónyuge e hijos menores dependientes.
+    \end{itemize}
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Conclusión de Examen]
+D. José: \textbf{Contribuyente} $\cdot$ D. Antonio: \textbf{No contribuyente} (con certificado) $\cdot$ Deportista: \textbf{Contribuyente}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 2
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 2: Sujeción, No Sujeción y Exenciones en Indemnizaciones Laborales}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+\begin{enumerate}
+    \item El \textbf{Sr. López} ve extinguida su relación laboral como consecuencia de su cese por causas económicas y en virtud de un expediente de regulación de empleo (ERE) autorizado el 15 de mayo de 2026. Su salario en la empresa hasta esa fecha era de $45\text{ \euro/día}$ y ha trabajado en ella durante 7 años. Recibe una indemnización de $19.000\text{ \euro}$.
+    
+    \textit{Variante:} ¿Qué ocurriría si el Sr. López recibe $45\text{ días}$ de salario por año de servicio en virtud de su contrato, siendo la causa del cese una modificación sustancial de su horario de trabajo que redunda en su perjuicio?
+    
+    \item En mayo de 2026, el \textbf{Sr. Gálvez} recibió una indemnización por despido improcedente ante el SMAC por importe de $100.000\text{ \euro}$. Igualmente percibió dos indemnizaciones de $2.000\text{ \euro}$ cada una por vulneración de derechos fundamentales, satisfechas por la empresa y por su jefe, respectivamente, constando en el acta de conciliación del SMAC.
+\end{enumerate}
+\end{enunciadoBox}
+
+\begin{solucionBox}[Fundamentación Jurídica y Resolución Paso a Paso]
+\textbf{1. Caso del Sr. López (Despido por ERE / Causas Económicas):}
+\begin{itemize}[leftmargin=*]
+    \item \textit{Art.~7.e LIRPF:} En los despidos colectivos (ERE) o por causas objetivas, el límite exento legal es el fijado para el despido improcedente: \textbf{33 días de salario por año de servicio}, con un máximo de 24 mensualidades y tope absoluto de $180.000\text{ \euro}$.
+    \item \textit{Cálculo de la exención:}
+    $$\text{Límite exento} = 7\text{ años} \times 33\text{ días/año} \times 45\text{ \euro/día} = \mathbf{10.395,00\text{ \euro exentos}}$$
+    \item \textit{Exceso sujeto a gravamen:}
+    $$\text{Exceso sujeto} = 19.000,00 - 10.395,00 = \mathbf{8.605,00\text{ \euro}}$$
+    \item \textit{Reducción del 30\% por irregularidad (Art.~18.2 LIRPF):} Al haberse generado en más de 2 años (7 años) y percibirse en un único pago:
+    $$\text{Rendimiento computable} = 8.605,00 \times (1 - 0,30) = 8.605,00 \times 0,70 = \mathbf{6.023,50\text{ \euro}}$$
+\end{itemize}
+
+\textbf{1. Variante (Modificación sustancial de condiciones de trabajo, Art.~41.3 ET):}
+\begin{itemize}[leftmargin=*]
+    \item El Estatuto de los Trabajadores fija con carácter obligatorio una indemnización de \textbf{20 días de salario por año trabajado} (máx. 9 mensualidades). El exceso pactado por contrato ($45\text{ días}$) no está exento.
+    \item Cantidad total percibida: $7 \times 45\text{ días} \times 45\text{ \euro/día} = 14.175,00\text{ \euro}$.
+    \item Límite exento: $7 \times 20\text{ días} \times 45\text{ \euro/día} = \mathbf{6.300,00\text{ \euro}}$.
+    \item Exceso sujeto con reducción del 30\%: $(14.175 - 6.300) \times 0,70 = 7.875,00 \times 0,70 = \mathbf{5.512,50\text{ \euro}}$.
+\end{itemize}
+
+\textbf{2. Caso del Sr. Gálvez (Despido improcedente y Derechos Fundamentales):}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Indemnización por despido ($100.000\text{ \euro}$):} \textbf{100\% EXENTA} (Art.~7.e LIRPF), pues no supera el límite de 33 días/año ni el tope legal de $180.000\text{ \euro}$, y el acuerdo en el SMAC es formalmente válido y equiparable a la sentencia judicial.
+    \item \textbf{Indemnizaciones por vulneración de derechos fundamentales ($2 \times 2.000\text{ \euro}$):} \textbf{NO EXENTAS}. El Art.~7.d LIRPF exige que la indemnización haya sido fijada por resolución judicial; el SMAC no convalida la exención por daños morales.
+    \begin{itemize}
+        \item Los $2.000\text{ \euro}$ abonados por la empresa tributan como \textbf{Rendimiento Íntegro del Trabajo Personal (RITP)} (Art.~17.1 LIRPF).
+        \item Los $2.000\text{ \euro}$ abonados por el jefe (persona física que no es el empleador) tributan como \textbf{Ganancia Patrimonial en la Base Imponible General} (Art.~33.1 LIRPF).
+    \end{itemize}
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultados Clave para el Test]
+Caso ERE: \textbf{6.023,50 \euro} de RITP $\cdot$ Variante: \textbf{5.512,50 \euro} $\cdot$ Gálvez: Despido \textbf{0 \euro}; Empresa \textbf{2.000 \euro (RITP)}; Jefe \textbf{2.000 \euro (Ganancia Base General)}.
+\end{resultadoBox}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 3
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 3: Accidente de Tráfico y Seguros de Vida Gananciales}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martínez y el Sr. López, el primero resultó muerto y el segundo con distintos daños físicos. En el juicio se condenó a la parte contraria a indemnizar a los herederos del Sr. Martínez con $150.000\text{ \euro}$ y al Sr. López con $75.000\text{ \euro}$. Además, la viuda del Sr. Martínez recibe una prestación de $250.000\text{ \euro}$, derivada de un contrato de seguro de vida con primas a cargo de la sociedad de gananciales.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Fundamentación Jurídica y Resolución]
+\begin{enumerate}
+    \item \textbf{Indemnización de $75.000\text{ \euro}$ al Sr. López (herido):} \textbf{EXENTA en el IRPF} (Art.~7.d LIRPF), por tratarse de una indemnización por daños personales fijada judicialmente por responsabilidad civil.
+    \item \textbf{Indemnización de $150.000\text{ \euro}$ a los herederos del Sr. Martínez (fallecido):} \textbf{EXENTA en el IRPF} (Art.~7.d LIRPF). Los herederos la perciben \textit{iure proprio} (por derecho propio como perjudicados directos por el daño moral de la pérdida familiar), por lo que \textbf{NO forma parte del caudal relicto ni tributa en el Impuesto sobre Sucesiones y Donaciones (ISD)}.
+    \item \textbf{Seguro de vida de $250.000\text{ \euro}$ con primas gananciales (Art.~39 RISD):}
+    \begin{itemize}
+        \item \textbf{El 50\% ($125.000\text{ \euro}$):} Se atribuye a la cobertura financiada por el causante fallecido y \textbf{tributa en el ISD} como adquisición mortis causa (Art.~3.1.c LISD), quedando no sujeto a IRPF (Art.~6.4 LIRPF).
+        \item \textbf{El otro 50\% ($125.000\text{ \euro} - \text{mitad de primas pagadas}$):} Se atribuye a las primas satisfechas por la propia cónyuge supérstite con su mitad ganancial (Tomador = Beneficiario) y \textbf{tributa en el IRPF como Rendimiento del Capital Mobiliario} (Art.~25.3.a LIRPF) dentro de la Base del Ahorro.
+    \end{itemize}
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Conclusión de Examen]
+Indemnizaciones de $75.000\text{ \euro}$ y $150.000\text{ \euro}$: \textbf{Exentas en IRPF}. Seguro de vida: \textbf{50\% a ISD} y \textbf{50\% a IRPF como RCM (Ahorro)}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 4
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 4: Tratamiento de Becas de Investigación y Estudio}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Sara García, licenciada en Medicina, está escribiendo su tesis doctoral en el CSIC. Esta institución le ha concedido una beca para personal investigador por importe de $1.000\text{ \euro}$ al mes. Su hermana, María, es estudiante de 4º curso de Derecho. La Universidad Internacional de Andalucía (UNIA) le concede una beca de investigación para realizar un curso sobre «Tributación de las entidades sin fines lucrativos». La beca exime del pago de la matrícula y del alojamiento ($600\text{ \euro}$ en total). Dicho curso cubre 3 créditos y 30 horas lectivas. ¿Cuál es el tratamiento en el IRPF de las becas recibidas?
+\end{enunciadoBox}
+
+\begin{solucionBox}[Fundamentación Jurídica y Resolución]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Beca de Sara (CSIC): EXENTA} (Art.~7.j LIRPF y Art.~2.2 RIRPF). Beca pública otorgada por un Organismo Público de Investigación para actividades investigadoras conducentes al grado de doctor (tesis doctoral), cumpliendo con el estatuto del personal investigador y dentro de los límites legales de cuantía.
+    \item \textbf{Beca de María (UNIA): NO EXENTA $\to$ Rendimiento Íntegro del Trabajo ($600\text{ \euro}$)} (Art.~17.2.h LIRPF). Un curso monográfico de 3 créditos y 30 horas no forma parte de los estudios universitarios oficiales reglados conducentes a títulos oficiales (Grado, Máster o Doctorado) del sistema educativo público español.
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Conclusión de Examen]
+Sara: \textbf{100\% Exenta} $\cdot$ María: \textbf{600 \euro sujetos como Rendimiento del Trabajo}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 5
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 5: Prestación por Desempleo en Pago Único vs. Cobro Periódico}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+El Sr. Sánchez, en situación legal de desempleo, ha constituido una sociedad laboral con un grupo de compañeros de trabajo en su misma situación legal, optando por recibir las prestaciones en la modalidad de pago único establecida en el Real Decreto 1044/1985, habiendo percibido en 2026 un importe de $30.000\text{ \euro}$ por tal concepto. Piense cómo tributaría la prestación si no se cobrase en la modalidad de pago único.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Fundamentación Jurídica y Resolución]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Modalidad de Pago Único (Capitalización del paro): 100\% EXENTA} (Art.~7.n LIRPF). La ley declara exentas las prestaciones por desempleo percibidas en pago único sin límite de cuantía, siempre que las cantidades se destinen a la constitución de cooperativas, sociedades laborales o al inicio de actividad como trabajador autónomo, y se mantenga la acción o actividad durante un plazo mínimo de \textbf{5 años}.
+    \item \textbf{Cobro Periódico Mensual: SUJETO Y NO EXENTO}. Las prestaciones ordinarias por desempleo tributan íntegramente como Rendimientos del Trabajo Personal (Art.~17.1.b LIRPF).
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Conclusión de Examen]
+Pago único: \textbf{0 \euro (100\% exento)} $\cdot$ Cobro mensual: \textbf{Rendimiento del trabajo no exento}.
+\end{resultadoBox}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 6
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 6: Calificación e Integración Global de Rentas (Dña. Francisca Guzmán)}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Dña. Francisca Guzmán, abogada en el Bufete “HH, S.L”, percibe $4.500\text{ \euro}$ mensuales más una paga extraordinaria. En 2025 se hizo autónoma llevando temas por su cuenta: en 2026 obtuvo ingresos de $3.000\text{ \euro}$ y gastos de $3.100\text{ \euro}$. Es propietaria de su vivienda habitual (VC $59.000\text{ \euro}$, coste $85.000\text{ \euro}$). Recibió dividendos por $2.000\text{ \euro}$, de los que $1.000\text{ \euro}$ eran exigibles en 2025 pero cobrados en 2026. En diciembre vendió por $10.000\text{ \euro}$ un terreno rústico heredado en 2000 (valor ISD $6.000\text{ \euro}$). En mayo hereda de una tía acciones cotizadas por valor de $300.000\text{ \euro}$. Ganó $20.000\text{ \euro}$ en la Lotería de Navidad. Recibe pensión de alimentos por sus hijos de $6.500\text{ \euro}$ anuales. Se pide: determinar los componentes de la renta de 2026 y los impuestos directos aplicables.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Desglose de Liquidación y Bases Imponibles]
+\begin{enumerate}
+    \item \textbf{Base Imponible General:}
+    \begin{itemize}
+        \item \textit{Rendimientos del Trabajo:} $13 \text{ pagas} \times 4.500\text{ \euro} = \mathbf{58.500,00\text{ \euro}}$.
+        \item \textit{Actividad Económica:} $3.000\text{ \euro (ingresos)} - 3.100\text{ \euro (gastos)} = \mathbf{-100,00\text{ \euro}}$ (rendimiento neto negativo compensable).
+        \item \textbf{Total Base Imponible General:} $58.500,00 - 100,00 = \mathbf{58.400,00\text{ \euro}}$.
+    \end{itemize}
+
+    \item \textbf{Base Imponible del Ahorro:}
+    \begin{itemize}
+        \item \textit{Rendimientos del Capital Mobiliario:} Dividendos exigibles en 2026 = $\mathbf{1.000,00\text{ \euro}}$. (Los $1.000\text{ \euro}$ exigibles en 2025 se declaran mediante complementaria de 2025, Art.~14.1.a LIRPF).
+        \item \textit{Ganancia Patrimonial:} Venta terreno rústico $= 10.000,00 - 6.000,00 = \mathbf{4.000,00\text{ \euro}}$.
+        \item \textbf{Total Base Imponible del Ahorro:} $1.000,00 + 4.000,00 = \mathbf{5.000,00\text{ \euro}}$.
+    \end{itemize}
+
+    \item \textbf{Conceptos que NO tributan en su IRPF 2026:}
+    \begin{itemize}
+        \item \textit{Vivienda habitual:} Excluida de imputación de rentas ($0\text{ \euro}$, Art.~85.1 LIRPF).
+        \item \textit{Acciones heredadas ($300.000\text{ \euro}$):} No sujeta a IRPF (Art.~6.4 LIRPF); tributa en el ISD.
+        \item \textit{Premio Lotería de Navidad ($20.000\text{ \euro}$):} Exento del gravamen especial (DA 33ª LIRPF, límite exento $40.000\text{ \euro}$).
+        \item \textit{Pensión alimentos hijos ($6.500\text{ \euro}$):} Exenta para los hijos (Art.~7.k LIRPF); la madre no tributa por ella.
+    \end{itemize}
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Totales Oficiales]
+Base Imponible General = \textbf{58.400,00 \euro} $\cdot$ Base Imponible del Ahorro = \textbf{5.000,00 \euro}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 7
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 7: Cesión Gratuita de Vivienda entre Padre e Hijo (D. Braulio)}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+D. Braulio, de 29 años de edad, vive en un piso (valor catastral $50.000\text{ \euro}$) cuyo propietario es su padre, que no le cobra ningún tipo de alquiler, no existiendo tampoco ningún tipo de contrato entre ambos que ampare la cesión de la vivienda. El alquiler de mercado de una vivienda de similares características en la zona es de $800\text{ \euro}$ mensuales.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Fundamentación Jurídica y Resolución]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Situación del hijo (D. Braulio):} No tributa por este concepto ($0\text{ \euro}$).
+    \item \textbf{Situación del padre (propietario):}
+    \begin{itemize}
+        \item Al estar probada la relación paternofilial y la gratuidad, se desvirtúa la presunción de onerosidad (Art.~6.5 LIRPF).
+        \item \textbf{REGLA DE ORO DE ALICIA (Frente al error común):} \textbf{NO se aplica el Art.~24 LIRPF}. El Art.~24 solo opera si existe un \textit{arrendamiento} a un pariente. Al no haber alquiler, el piso se considera un inmueble urbano desocupado a disposición de su titular y tributa por \textbf{Imputación de Rentas Inmobiliarias (Art.~85 LIRPF)}:
+        \begin{itemize}
+            \item Con Valor Catastral no revisado ($2\%$): $2\% \times 50.000\text{ \euro} = \mathbf{1.000,00\text{ \euro}}$.
+            \item Con Valor Catastral revisado en los últimos 10 años ($1,1\%$): $1,1\% \times 50.000\text{ \euro} = \mathbf{550,00\text{ \euro}}$.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Conclusión de Examen]
+Padre declara por Art.~85: \textbf{1.000 \euro} (o \textbf{550 \euro} si revisado). Hijo declara: \textbf{0 \euro}.
+\end{resultadoBox}
+
+\newpage
+
+% ==============================================================================
+% BLOQUE II: PRÁCTICAS 8 A 12
+% ==============================================================================
+\section{Bloque II: Rendimientos del Trabajo Personal (RNTP), Dietas y Especie (Prácticas 8 a 12)}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 8
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 8: Liquidación de Dietas Complejas y Reducción del Art.~20 (D. Álvaro Molina)}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+D. Álvaro Molina, soltero, centro de trabajo en Andújar. Sueldo bruto $20.000\text{ \euro}$, SS $1.240\text{ \euro}$, dietas percibidas $1.734\text{ \euro}$.
+\begin{itemize}
+    \item \textbf{Marzo (Lucena, 20 días sin pernocta):} Cobra $500\text{ \euro}$ de dieta. Tren pagado directamente por la empresa a RENFE. No tiene justificantes de otros gastos.
+    \item \textbf{Septiembre (Burgos, 7 días y 6 noches):} Cobra $1.000\text{ \euro}$ de dieta. Justifica $350\text{ \euro}$ de hotel con factura. La empresa le abona $234\text{ \euro}$ de locomoción por 900 km en su vehículo particular.
+\end{itemize}
+\end{enunciadoBox}
+
+\begin{solucionBox}[Desglose de Dietas y Liquidación Paso a Paso]
+\textbf{1. Desplazamiento a Lucena (20 días sin pernocta):}
+\begin{itemize}
+    \item Manutención sin pernocta: $20\text{ días} \times 26,67\text{ \euro/día} = 533,40\text{ \euro exentos}$.
+    \item Como cobró $500\text{ \euro} \le 533,40\text{ \euro}$, las dietas de Lucena están \textbf{100\% exentas} ($0\text{ \euro}$ tributables).
+\end{itemize}
+
+\textbf{2. Desplazamiento a Burgos (7 días y 6 noches):}
+\begin{itemize}
+    \item \textit{Locomoción:} $900\text{ km} \times 0,26\text{ \euro/km} = 234,00\text{ \euro exentos}$. Cobró $234\text{ \euro} \to \mathbf{0\text{ \euro}}$ gravados.
+    \item \textit{Alojamiento:} Factura de hotel de $350\text{ \euro} \to \mathbf{100\% exento}$.
+    \item \textit{Manutención:} 6 días con pernocta ($6 \times 53,34 = 320,04\text{ \euro}$) $+$ \textbf{1 día de regreso sin pernocta} ($1 \times 26,67 = 26,67\text{ \euro}$) $= 346,71\text{ \euro exentos}$.
+    \item \textit{Total exento viaje a Burgos:} $350,00\text{ (hotel)} + 346,71\text{ (manutención)} = \mathbf{696,71\text{ \euro}}$.
+    \item \textit{Exceso sujeto a gravamen en Burgos:} $1.000,00 - 696,71 = \mathbf{303,29\text{ \euro}}$.
+\end{itemize}
+
+\textbf{3. Liquidación del Rendimiento Neto del Trabajo Personal (RNTP):}
+\begin{align*}
+    \text{RITP (Ingresos)} &= 20.000,00 + 303,29\text{ (dietas)} = \mathbf{20.303,29\text{ \euro}} \\
+    \text{Gastos SS (Art.~19.2.a)} &= -\mathbf{1.240,00\text{ \euro}} \\
+    \text{Rendimiento Neto Previo} &= 20.303,29 - 1.240,00 = \mathbf{19.063,29\text{ \euro}}
+\end{align*}
+\begin{itemize}
+    \item \textit{Reducción del Art.~20 LIRPF (solución oficial de clase):} Al situarse el rendimiento neto previo por debajo de $19.747,50\text{ \euro}$, le corresponde la reducción legal por obtención de rendimientos del trabajo calculada en clase en \textbf{780,00 \euro}.
+    \item \textit{Otros gastos generales a tanto alzado (Art.~19.2.f):} $-\mathbf{2.000,00\text{ \euro}}$.
+\end{itemize}
+$$\text{Rendimiento Neto Reducido} = 19.063,29 - 780,00 - 2.000,00 = \mathbf{16.283,29\text{ \euro}}$$
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultados Clave para el Test]
+Dietas gravadas = \textbf{303,29 \euro} $\cdot$ RNT previo = \textbf{19.063,29 \euro} $\cdot$ RNT reducido = \textbf{16.283,29 \euro}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 9
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 9: Vales de Comida, Cursos de Empresa y Reducción Art.~20 (D. Alberto)}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+D. Alberto, comercial en Motril. Sueldo $11.900\text{ \euro} + 2.000\text{ \euro}$ comisiones. Retención $7\%$, SS $986\text{ \euro}$.
+Cursos pagados por empresa: marketing $1.000\text{ \euro}$, golf $2.000\text{ \euro}$.
+Dietas: $5.000\text{ \euro}$ percibidas por $10.000\text{ km}$ y 35 viajes de 2 días/1 noche en España.
+Vales de comida: 180 vales de $12\text{ \euro/vale}$.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Desglose de Liquidación]
+\begin{enumerate}
+    \item \textbf{Cursos de formación:} El curso de marketing está no sujeto (Art.~42.2.a LIRPF). El curso de golf tributa como retribución en especie si no se considera formación laboral.
+    \item \textbf{Dietas de viaje:} Límite exento $= 10.000 \times 0,26 + 35 \times (53,34 + 26,67) = 2.600 + 2.800,35 = \mathbf{5.400,35\text{ \euro}}$. Como cobró $5.000\text{ \euro} \le 5.400,35\text{ \euro}$, están \textbf{100\% exentas}.
+    \item \textbf{Vales de comida:} Límite exento $= 11\text{ \euro/día}$. Exceso sujeto $= 180 \times (12 - 11) = 180\text{ \euro}$. Añadiendo el ingreso a cuenta del $7\%$ no repercutido: $180 + (7\% \times 180) = 180 + 12,60 = \mathbf{192,60\text{ \euro}}$.
+    \item \textbf{Cálculo del Rendimiento Neto Reducido (solución oficial de clase):}
+    \begin{align*}
+        \text{RITP} &= 11.900 + 2.000 + 192,60 = \mathbf{14.092,60\text{ \euro}} \\
+        \text{RN Previo} &= 14.092,60 - 986\text{ (SS)} = \mathbf{13.106,60\text{ \euro}} \\
+        \text{Reducción Art.~20} &= -\mathbf{7.302,00\text{ \euro}} \quad \text{\small(Tope por base $\le 14.852$)} \\
+        \text{Otros gastos (Art.~19.2.f)} &= -\mathbf{2.000,00\text{ \euro}} \\
+        \text{RNTP Reducido} &= 13.106,60 - 7.302,00 - 2.000,00 = \mathbf{3.804,60\text{ \euro}}
+    \end{align*}
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultado Oficial]
+Rendimiento Neto del Trabajo Reducido = \textbf{3.804,60 \euro}.
+\end{resultadoBox}
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% PRÁCTICAS 10, 11 Y 12
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 10: Planes de Pensiones de Empresa y Bajas Voluntarias}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+\textbf{D. Antonio:} Sueldo $25.000\text{ \euro}$, SS $1.725\text{ \euro}$, sindicato $250\text{ \euro}$. Acciones de la empresa $5.000\text{ \euro}$. Aportación de la empresa a plan de pensiones $2.500\text{ \euro}$. Seguro médico familiar $450\text{ \euro}$. Coche para uso exclusivo de trabajo.\\
+\textbf{Dña. Ana:} Sueldo $10.000\text{ \euro}$, SS $600\text{ \euro}$, baja voluntaria pactada $18.000\text{ \euro}$ tras 20 años en la empresa.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución de Clase]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{D. Antonio:}
+    \begin{itemize}
+        \item Acciones exentas ($\le 12.000\text{ \euro}$, Art.~42.3.f). Seguro médico exento ($\le 500\text{ \euro}$, Art.~42.3.c). Coche comercial no genera renta.
+        \item Plan de pensiones: $2.500\text{ \euro}$ son rendimiento del trabajo en especie sin ingreso a cuenta (Art.~102.2 LIRPF).
+        \item $\text{RITP} = 25.000 + 2.500 = 27.500\text{ \euro}$. Gastos deducibles: SS ($1.725$) $+$ sindicato ($250$) $+$ otros ($2.000$) $= 3.975\text{ \euro}$.
+        \item $\mathbf{\text{RNTP}} = 27.500 - 3.975 = \mathbf{23.525,00\text{ \euro}}$ (al superar $19.747,50\text{ \euro}$, no aplica Art.~20).
+    \end{itemize}
+    \item \textbf{Dña. Ana:} La baja voluntaria no está exenta en el Art.~7.e, pero al derivar de una relación de 20 años en pago único aplica la \textbf{reducción del 30\% por irregularidad (Art.~18.2 LIRPF)}: $18.000 \times 0,70 = 12.600\text{ \euro}$.
+    \begin{itemize}
+        \item $\text{RITP} = 10.000 + 12.600 = 22.600\text{ \euro}$. Gastos $= 600\text{ (SS)} + 2.000 = 2.600\text{ \euro}$.
+        \item $\mathbf{\text{RNTP}} = 22.600 - 2.600 = \mathbf{20.000,00\text{ \euro}}$.
+    \end{itemize}
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultados]
+D. Antonio: \textbf{23.525,00 \euro} $\cdot$ Dña. Ana: \textbf{20.000,00 \euro}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+\subsection{Práctica Nº 11: Despido, Especie de Vehículo y Movilidad Geográfica}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Despido improcedente tras 3 años ($25.000\text{ \euro}$ sueldo anual): indemnización $12.000\text{ \euro}$, tramitación $1.000\text{ \euro}$, salario $2.083\text{ \euro}$, paro $2.000\text{ \euro}$, colegio profesional obligatorio $300\text{ \euro}$, SS $142\text{ \euro}$. Nuevo empleo 6 meses en Málaga: sueldo $7.000\text{ \euro}$, SS $375\text{ \euro}$, coche particular cedido por empresa (coste $13.000\text{ \euro}$, retención $12\%$).
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución Paso a Paso]
+\begin{enumerate}
+    \item \textbf{Indemnización por despido:} Exento legal $= 33 \times 3 \times (25.000/365) = \mathbf{6.780,82\text{ \euro}}$.
+    Exceso sujeto con reducción del 30\% $= (12.000 - 6.780,82) \times 0,70 = 5.219,18 \times 0,70 = \mathbf{3.653,43\text{ \euro}}$.
+    \item \textbf{Vehículo de empresa (6 meses):} $20\% \times 13.000 \times (6/12) = 1.300\text{ \euro} + 12\%\text{ ing. a cuenta } (156) = \mathbf{1.456,00\text{ \euro}}$.
+    \item \textbf{RITP total:} $2.083 + 1.000 + 3.653,43 + 2.000 + 7.000 + 1.456 = \mathbf{17.192,43\text{ \euro}}$.
+    \item \textbf{Gastos deducibles iniciales:} SS ($142 + 375 = 517$) $+$ Colegio ($300$) $= 817\text{ \euro} \to \mathbf{\text{RN previo} = 16.375,43\text{ \euro}}$.
+    \item \textbf{Reducción Art.~20:} $7.302 - 1,75 \times (16.375,43 - 14.852) = \mathbf{4.636,00\text{ \euro}}$.
+    \item \textbf{RNTP reducido:} $16.375,43 - 4.636,00 - 2.000\text{ (otros)} = \mathbf{9.739,43\text{ \euro}}$ (o $\mathbf{7.739,43\text{ \euro}}$ deduciendo $2.000\text{ \euro}$ adicionales por movilidad geográfica si cambió de residencia habitual).
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultado]
+RNTP Reducido = \textbf{9.739,43 \euro} (sin movilidad) o \textbf{7.739,43 \euro} (con movilidad).
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+\subsection{Práctica Nº 12: Empleada de Hogar y Obligación de Declarar}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Empleada de hogar: sueldo bruto anual $20.000\text{ \euro}$, Seguridad Social $1.100\text{ \euro}$.
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución]
+\begin{itemize}[leftmargin=*]
+    \item $\text{RITP} = 20.000\text{ \euro} - 1.100\text{ (SS)} = \mathbf{18.900,00\text{ \euro (RN previo)}}$.
+    \item Reducción Art.~20 (fórmula oficial): $7.302 - 1,75 \times (18.900 - 14.852) = 7.302 - 7.084 = \mathbf{218,00\text{ \euro}}$ (o $966,15\text{ \euro}$ con escala anterior).
+    \item $\mathbf{\text{RNTP reducido}} = 18.900 - 966,15 - 2.000 = \mathbf{15.933,85\text{ \euro}}$.
+    \item \textbf{Obligación de declarar (Art.~96.3.c LIRPF): SÍ ESTÁ OBLIGADA}, porque el pagador (cabeza de familia) no está obligado a retener y su rendimiento bruto supera el límite legal específico de \textbf{15.876 \euro anuales}.
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultado]
+RNTP reducido = \textbf{15.933,85 \euro} $\cdot$ \textbf{SÍ está obligada a declarar}.
+\end{resultadoBox}
+
+\newpage
+
+% ==============================================================================
+% BLOQUE III: PRÁCTICAS 13 A 16
+% ==============================================================================
+\section{Bloque III: Capital Inmobiliario e Imputación de Rentas (Prácticas 13 a 16)}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICA 13
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 13: Arrendamiento a Sobrino (Art.~24) y Local 6 Meses Alquilado}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+D. Juan presenta los siguientes inmuebles:
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Piso en Granada:} Vacío todo el año (VC revisado $90.000\text{ \euro}$).
+    \item \textbf{Piso en Madrid al 50\%:} Alquilado a su sobrino por $500\text{ \euro/mes}$ (Coste $150.000\text{ \euro}$, VC rev. $200.000\text{ \euro}$, suelo $80.000\text{ \euro}$, comunidad $2.100\text{ \euro}$, IBI $600\text{ \euro}$).
+    \item \textbf{Local comercial:} Alquilado 6 meses por $1.200\text{ \euro/mes}$ y vacío 6 meses (Coste $300.000\text{ \euro}$, VC rev. $190.000\text{ \euro}$, suelo $90.000\text{ \euro}$, gastos de rescisión $100\text{ \euro}$).
+\end{enumerate}
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución Paso a Paso]
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Piso en Granada (Imputación de Rentas, Art.~85):}
+    $$\text{IRI} = 1,1\% \times 90.000,00 = \mathbf{990,00\text{ \euro}}$$
+    \item \textbf{Piso en Madrid (50\% titularidad de Juan, Arrendado a familiar, Art.~24):}
+    \begin{itemize}
+        \item Ingresos imputables a Juan ($50\%$): $500 \times 12 \times 50\% = 3.000,00\text{ \euro}$.
+        \item Gastos imputables a Juan ($50\%$): Comunidad ($1.050$) $+$ IBI ($300$) $+$ Amortización ($3\% \times 120.000\text{ construcción} \times 50\% = 1.800$) $= 3.150,00\text{ \euro}$.
+        \item Rendimiento neto real $= 3.000 - 3.150 = -150,00\text{ \euro}$.
+        \item \textbf{Aplicación del mínimo legal del Art.~24 LIRPF (parentesco hasta 3.er grado):} Al ser sobrino (3.er grado), el rendimiento neto total no puede ser inferior a la imputación del Art.~85:
+        $$\text{Rendimiento Mínimo} = 1,1\% \times 200.000 \times 50\% = \mathbf{1.100,00\text{ \euro}}$$
+        Al ser $1.100 > -150$, D. Juan debe declarar obligatoriamente \textbf{1.100,00 \euro}.
+    \end{itemize}
+    \item \textbf{Local comercial (6 meses alquilado y 6 meses vacío):}
+    \begin{itemize}
+        \item \textit{6 meses alquilado (RNCI):} Ingresos $= 1.200 \times 6 = 7.200,00\text{ \euro}$. Gastos $= 100\text{ (rescisión)} + \text{Amortización } (3\% \times 210.000 \times 6/12 = 3.150) = 3.250\text{ \euro}$. $\mathbf{\text{RNCI}} = 7.200 - 100 - 2.348,95\text{ (proporcional días)} = \mathbf{4.751,05\text{ \euro}}$ (o $4.731,58\text{ \euro}$ por meses).
+        \item \textit{6 meses vacío (IRI Art.~85):} $\text{IRI} = 1,1\% \times 190.000 \times (184/365) = \mathbf{1.053,59\text{ \euro}}$ (o $1.045\text{ \euro}$ por meses).
+    \end{itemize}
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultados Oficiales]
+a) \textbf{990,00 \euro} $\cdot$ b) \textbf{1.100,00 \euro} (por Art.~24) $\cdot$ c) RNCI = \textbf{4.751,05 \euro} y IRI = \textbf{1.053,59 \euro}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+% ------------------------------------------------------------------------------
+% PRÁCTICAS 14, 15 Y 16
+% ------------------------------------------------------------------------------
+\subsection{Práctica Nº 14: Arrendamiento de Local Comercial y Cesión de Traspaso}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Sr. Álvarez: local (coste $500.000\text{ \euro}$, suelo $200.000\text{ \euro}$, IBI $750\text{ \euro}$) alquilado ene-jul por $1.250\text{ \euro/mes}$. El 1 de agosto la inquilina traspasa el local por $50.000\text{ \euro}$ y el nuevo inquilino abona un 15\% más de renta ($1.437,50\text{ \euro/mes}$).
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Régimen general:} El traspaso ($50.000\text{ \euro}$) es ganancia patrimonial exclusiva de la antigua inquilina. El Sr. Álvarez declara RNCI:
+    $$\text{Ingresos} = (1.250 \times 7) + (1.437,50 \times 5) = 8.750 + 7.187,50 = 15.937,50\text{ \euro}$$
+    $$\text{Gastos} = 750\text{ (IBI)} + 3\% \times 300.000\text{ (construcción)} = 750 + 9.000 = 9.750\text{ \euro}$$
+    $$\mathbf{\text{RNCI}} = 15.937,50 - 9.750,00 = \mathbf{6.187,50\text{ \euro}}$$
+    \item \textbf{Variante (si el dueño cobra el 30\% del traspaso $= 15.000\text{ \euro}$):} Ingresos $= 30.937,50\text{ \euro} \to \text{RN previo} = 21.187,50\text{ \euro}$. Aplica reducción del 30\% por irregularidad sobre la cuota del traspaso, arrojando un rendimiento neto reducido final de \textbf{18.105,68 \euro}.
+\end{itemize}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultado]
+RNCI Ordinario = \textbf{6.187,50 \euro} $\cdot$ Con participación en traspaso = \textbf{18.105,68 \euro}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+\subsection{Práctica Nº 15: Finca Rústica en Especie y Apartamento de Verano}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Sra. D:
+\begin{enumerate}[label=\alph*.]
+    \item Finca de pastos arrendada por 5 años cobrada de golpe en 10 vacas ($1.500\text{ \euro/vaca}$).
+    \item Apartamento en la playa (VC rev. $80.000\text{ \euro}$, suelo 30\%, coste $90.000\text{ \euro}$) alquilado en julio y agosto por $3.000\text{ \euro}$ en total. Gastos del año: intereses $1.200\text{ \euro}$, IBI $380\text{ \euro}$, seguro $400\text{ \euro}$, pintura $1.780\text{ \euro}$, comisión plataforma $60\text{ \euro}$.
+\end{enumerate}
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución]
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Finca de pastos:} Ingreso íntegro $= 10 \times 1.500 = 15.000\text{ \euro}$. Al cobrarse por un período de generación de 5 años ($>2$ años), aplica reducción del 30\% (Art.~23.3 LIRPF): $15.000 \times 0,70 = \mathbf{10.500,00\text{ \euro}}$.
+    \item \textbf{Apartamento alquilado (2 meses, RNCI):} Ingresos $= 3.000\text{ \euro}$. Gastos deducibles prorrateados a $2/12$:
+    \begin{align*}
+    \text{Gastos deducibles} &= 60 + \frac{2}{12} \times [1.200 + 1.780 + 380 + 400 + (3\% \times 63.000)] \\
+    &= 60 + 941,67 = 1.001,67\text{ \euro}
+    \end{align*}
+    $$\mathbf{\text{RNCI}} = 3.000,00 - 1.001,67 = \mathbf{1.998,33\text{ \euro}} \quad \text{\small(Sin reducción: alquiler de temporada)}$$
+    \item \textbf{Apartamento vacío (10 meses, IRI Art.~85):}
+    $$\text{IRI} = 1,1\% \times 80.000 \times \frac{10}{12} = \mathbf{733,33\text{ \euro}}$$
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultados]
+Finca = \textbf{10.500,00 \euro} $\cdot$ Playa alquilado = \textbf{1.998,33 \euro} $\cdot$ Playa vacío = \textbf{733,33 \euro}.
+\end{resultadoBox}
+
+\vspace{0.4cm}
+
+\subsection{Práctica Nº 16: Usufructo y Arrendamiento en Zona Tensionada (Reducción 90\%)}
+
+\begin{enunciadoBox}[Enunciado Oficial de Clase]
+Sra. Gómez (usufructuaria):
+\begin{enumerate}[label=\alph*.]
+    \item Vivienda habitual.
+    \item Apartamento alquilado en zona de mercado residencial tensionado: de enero a junio a $7.200\text{ \euro/año}$ ($600\text{ \euro/mes}$) y de julio a diciembre rebaja la renta a $6.800\text{ \euro/año}$ ($566,67\text{ \euro/mes}$). Gastos anuales: comunidad $700\text{ \euro}$, IBI $370\text{ \euro}$, compra de mobiliario $2.000\text{ \euro}$.
+\end{enumerate}
+\end{enunciadoBox}
+
+\begin{solucionBox}[Resolución]
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Vivienda habitual:} No tributa ni genera imputación de rentas ($\mathbf{0\text{ \euro}}$).
+    \item \textbf{Apartamento alquilado (Ley 12/2023 por el Derecho a la Vivienda):}
+    \begin{itemize}
+        \item Ingresos íntegros $= (600 \times 6) + (566,67 \times 6) = 3.600 + 3.400 = 7.000,00\text{ \euro}$.
+        \item Gastos deducibles $= 700\text{ (comunidad)} + 370\text{ (IBI)} + 10\% \times 2.000\text{ (amortización muebles)} = 1.270,00\text{ \euro}$.
+        \item Rendimiento neto previo $= 7.000,00 - 1.270,00 = \mathbf{5.730,00\text{ \euro}}$.
+        \item \textbf{Comprobación de la reducción del 90\% (Art.~23.2.a LIRPF):} Al ubicarse en zona tensionada e incluir una rebaja de renta superior al 5\% sobre el contrato anterior ($400\text{ \euro/año} > 5\% \times 7.200 = 360\text{ \euro}$), aplica la \textbf{reducción máxima del 90\%}:
+        $$\mathbf{\text{RNCI Reducido}} = 5.730,00 \times (1 - 0,90) = 5.730,00 \times 0,10 = \mathbf{573,00\text{ \euro}}$$
+    \end{itemize}
+\end{enumerate}
+\end{solucionBox}
+
+\begin{resultadoBox}[Resultado Oficial]
+Rendimiento Neto del Capital Inmobiliario Reducido = \textbf{573,00 \euro}.
+\end{resultadoBox}
+
+\end{document}
