@@ -1,0 +1,512 @@
+{
+  "subject": "ade/derecho-fiscal",
+  "type": "test",
+  "title": "Test Oficial de Examen: Temas 2 y 3 (IRPF)",
+  "description": "42 preguntas tipo test extraídas tal cual del documento oficial de examen (Wuolah / UGR) sobre IRPF: ámbito, residencia, exenciones, rendimientos de trabajo, dietas, retribuciones en especie y reducciones.",
+  "order": 4,
+  "items": [
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "La pensión por desequilibrio económico que un cónyuge abona al otro en caso de divorcio es:",
+      "opts": [
+        "Es renta exenta para el que la cobra, pero da derecho al que la paga al reducir su base imponible.",
+        "Es renta exenta para el que la cobra y da derecho al que la paga a reducir su base imponible.",
+        "Ninguna de las anteriores es correcta.",
+        "Es renta no exenta para el que la cobra y da derecho a reducir la base imponible del que la paga."
+      ],
+      "correct": 3,
+      "justification": "Una pensión compensatoria tanto para el que la paga como para el que la cobra la renta no está exenta: el que la paga reduce su base imponible y el que la cobra tributa como rendimiento del trabajo. Las pensiones compensatorias por resolución judicial en favor del cónyuge, a diferencia de las de alimentos a los hijos, son rendimiento del trabajo para el perceptor, reducen la base imponible del pagador y NO ESTÁN EXENTAS. Para el que la paga, resta esa pensión de su base imponible (la reduce). El que la cobra tributa como rendimiento del trabajo. Si es anualidad por alimentos a favor de los hijos, el que la paga no se reduce la base imponible (se aplica la escala de gravamen separada)."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "El IRPF es:",
+      "opts": [
+        "Un impuesto personal, frente a un impuesto sobre el patrimonio que es real.",
+        "Es un impuesto subjetivo como el IVA.",
+        "Es un impuesto parcialmente cedido a las CCAA como lo es el IVA.",
+        "Ninguna de las restantes es correcta."
+      ],
+      "correct": 2,
+      "justification": "El IRPF es un impuesto personal al igual que el Impuesto sobre el Patrimonio y el Impuesto sobre Sociedades, y está cedido parcialmente a las Comunidades Autónomas (al 50%) como lo está el IVA."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "Las diferencias entre el IRPF que se aplica en Madrid y el que se aplica en Andalucía son relativas, entre otros aspectos:",
+      "opts": [
+        "La tarifa autonómica.",
+        "La tarifa estatal.",
+        "Todas las deducciones sobre la cuota."
+      ],
+      "correct": 0,
+      "justification": "La tarifa autonómica, ya que esta es la escala de gravamen que fijan y aprueban autónomamente las CCAA dentro de sus competencias normativas sobre el IRPF."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "El IRPF es:",
+      "opts": [
+        "Un impuesto personal, frente a un impuesto sobre el patrimonio que es real.",
+        "Es un impuesto subjetivo como el IVA.",
+        "Es un impuesto parcialmente cedido a las CCAA como lo es el ISD.",
+        "Ninguna de las restantes es correcta."
+      ],
+      "correct": 3,
+      "justification": "La c no es correcta porque el Impuesto sobre Sucesiones y Donaciones (ISD) está totalmente cedido a las CCAA (mientras que el IRPF solo está parcialmente cedido al 50%). La opción a es incorrecta porque el Impuesto sobre el Patrimonio también es personal (no real), y la b es incorrecta porque el IVA es un impuesto objetivo (no subjetivo)."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "Don Juan Pérez está casado con Joaquina. Tienen un hijo común (menor de edad). Además Don Juan tiene un hijo también menor, de un matrimonio anterior y Doña Joaquina tiene otros dos de una relación no matrimonial previa (uno mayor y otro menor de edad). En el domicilio conyugal conviven Don Juan, Doña Joaquina, el hijo del matrimonio anterior de Don Juan y el hijo mayor de Doña Joaquina. ¿Quién integra la unidad familiar?",
+      "opts": [
+        "Don Juan, Doña Joaquina, el hijo común, el hijo de Don Juan y el hijo menor de Doña Joaquina.",
+        "El matrimonio y el hijo común.",
+        "El matrimonio y todos los hijos de ambos.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 3,
+      "justification": "Sí forman parte de la unidad familiar: los cónyuges no separados legalmente (Don Juan y Doña Joaquina), los hijos comunes menores de edad que convivan y los hijos menores de cualquiera de los cónyuges sometidos a patria potestad que convivan con ellos (el hijo común menor y el hijo menor de Don Juan). La opción a incluye erróneamente al hijo menor de Doña Joaquina, el cual no convive en el domicilio conyugal (por tanto, no se integra en esta unidad familiar). La b se queda corta al excluir al hijo menor de Don Juan que sí convive con ellos. La c es incorrecta porque incluye a todos los hijos (incluyendo al mayor de edad de Joaquina y al menor que no convive). Al no figurar la composición exacta, ninguna de las anteriores es correcta."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "De las siguientes pensiones ¿cuáles están exentas de tributar en el IRPF?:",
+      "opts": [
+        "Las pensiones de viudedad.",
+        "Las pensiones de jubilación.",
+        "Las pensiones de orfandad.",
+        "Las pensiones de invalidez."
+      ],
+      "correct": 2,
+      "justification": "Las pensiones de orfandad están expresamente exentas de tributar en el IRPF (artículo 7.h LIRPF), mientras que las pensiones de viudedad, jubilación e invalidez no cualificadas (como la invalidez permanente parcial) son rendimientos del trabajo no exentos."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "Doña Lola es funcionaria en el Ministerio de España y presta servicios en un colegio del estado español en Marruecos:",
+      "opts": [
+        "Es contribuyente del IRPF aunque no es residente fiscal en España.",
+        "Deberá tributar en el impuesto de los no residentes en España.",
+        "Es contribuyente en el IRPF al ser residente en España.",
+        "Deberá tributar exclusivamente en Marruecos."
+      ],
+      "correct": 0,
+      "justification": "Conforme al artículo 10 de la Ley del IRPF, los miembros de misiones diplomáticas, oficinas consulares y los funcionarios en activo que ejerzan en el extranjero en centros o colegios de titularidad estatal conservan la condición de contribuyentes por el IRPF, considerándose residentes a efectos fiscales aunque su estancia física efectiva radique en el extranjero."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Las dietas por gastos de locomoción:",
+      "opts": [
+        "Son en su integridad rendimientos del trabajo.",
+        "Son rendimientos del trabajo, pero está exento el gasto, si el transporte se realiza en un medio público o, en otro caso, 0’19 euros por Km recorrido.",
+        "Son rendimientos de trabajo, pero está exento todo el gasto que se justifique.",
+        "Son rendimientos del trabajo, pero están exentos 0’19 euros por Km recorrido."
+      ],
+      "correct": 1,
+      "justification": "Las dietas por desplazamiento se consideran legalmente rendimientos del trabajo, pero la normativa del IRPF (art. 9 RIRPF) establece que están exentas las cantidades justificadas si el transporte se realiza en transporte público o, en caso de utilizar vehículo particular, la cantidad resultante de aplicar la asignación por kilómetro reglamentaria (0,19 €/km según la escala del test, actualizada a 0,26 €/km) más los gastos de peaje y aparcamiento debidamente justificados."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál será la reducción que sobre el rendimiento neto habrá de practicar un trabajador, cuando el importe del mismo es de 13.000€?",
+      "opts": [
+        "5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre 13.115 y 13.000 euros.",
+        "5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre el rendimiento del trabajo y 13.115 euros.",
+        "Dependerá del número de hijos que formen parte de la unidad familiar.",
+        "5.565 euros."
+      ],
+      "correct": 3,
+      "justification": "Al encontrarse el rendimiento neto del trabajador (13.000 €) por debajo del umbral mínimo de 13.115 € establecido en la escala legal del art. 20 LIRPF, le corresponde aplicarse de forma íntegra la reducción máxima fija a tanto alzado de 5.565 euros sin minoración ni fórmula proporcional alguna."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es el rendimiento íntegro del trabajo que corresponde a la entrega gratuita de un vehículo no eficiente energéticamente a un trabajador cuyo coste de adquisición para la empresa ascendió a 20.000 euros, si el tipo de retención aplicable es del 10%?",
+      "opts": [
+        "16.000 euros.",
+        "18.000 euros.",
+        "2.000 euros.",
+        "22.000 euros."
+      ],
+      "correct": 3,
+      "justification": "El rendimiento íntegro del trabajo en especie se compone de la valoración de la retribución (el coste de adquisición del vehículo para la empresa: 20.000 €) más el importe del ingreso a cuenta obligatorio practicado por el empleador al tipo del 10% (2.000 €), dando un rendimiento íntegro total de 20.000 + 2.000 = 22.000 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es el rendimiento íntegro que corresponde por el disfrute gratuito de una vivienda, cuyo valor catastral no revisado en los últimos diez años es de 80.000 euros, si el tipo de retención es del 10%?",
+      "opts": [
+        "8.000 euros.",
+        "4.000 euros.",
+        "8.800 euros.",
+        "4.400 euros."
+      ],
+      "correct": 2,
+      "justification": "La retribución en especie por uso de vivienda con valor catastral no revisado en los últimos diez años se valora en el 10% del valor catastral (10% de 80.000 € = 8.000 €). A dicha cuantía se le suma el correspondiente ingreso a cuenta del 10% no repercutido (800 €), resultando un rendimiento íntegro total de 8.000 + 800 = 8.800 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "El trabajador que percibe una retribución en especie, consistente en unas vacaciones gratuitas al Caribe, deberá declarar como rendimiento íntegro:",
+      "opts": [
+        "El valor de mercado del viaje.",
+        "El precio pagado por la empresa más el correspondiente ingreso a cuenta.",
+        "El precio de adquisición pagado por la empresa.",
+        "El precio pagado por la empresa incrementado en un 20%."
+      ],
+      "correct": 1,
+      "justification": "El rendimiento íntegro de las retribuciones en especie se compone de la valoración de la retribución (que en prestaciones de hospedaje, viajes o turismo se valora por su coste para el empleador) más el ingreso a cuenta que obligatoriamente debe efectuar la empresa (art. 43.1.1ª.e y 43.2 LIRPF)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Un trabajador de F.C.C. es beneficiario, junto con su mujer e hijo, de un seguro de enfermedad cuyas primas de 300 euros por beneficiario satisface la empresa. ¿Cómo tributa en el IRPF?",
+      "opts": [
+        "No tributa, porque se trata de un rendimiento exento.",
+        "Tributa como ganancia patrimonial.",
+        "Tributa como retribución en especie de trabajo.",
+        "Tributa como retribución dineraria del trabajo."
+      ],
+      "correct": 0,
+      "justification": "Conforme al artículo 42.2.c de la LIRPF, están exentas las primas o cuotas satisfechas por la empresa a entidades aseguradoras para la cobertura de enfermedad del trabajador, su cónyuge y descendientes con el límite de 500 euros anuales por cada uno de ellos (1.500 € en caso de personas con discapacidad). Como en este caso la prima es de 300 euros por persona (por debajo del límite legal de 500 €), la retribución está totalmente exenta y no tributa."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Un trabajador del Corte Inglés, S.A., recibe gratuitamente un paquete de acciones de la empresa por valor de 12.000 euros, ¿cómo tributará en el IRPF?",
+      "opts": [
+        "Tributará como rendimiento del capital mobiliario.",
+        "No tributa, puesto que se trata de una operación exenta.",
+        "Tributará como rendimiento del trabajo en especie.",
+        "Tributará sólo 3.000 euros como rendimiento del trabajo en especie."
+      ],
+      "correct": 1,
+      "justification": "Según el artículo 42.2.f de la LIRPF, la entrega a los trabajadores de acciones o participaciones de la propia empresa o de empresas del grupo se encuentra exenta de tributación hasta el límite de 12.000 euros anuales para el conjunto de las entregadas a cada trabajador, siempre que la oferta se realice en las mismas condiciones a todos los trabajadores."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cabe practicar reducción por rentas irregulares sobre el rendimiento íntegro correspondiente al cobro por jubilación de un plan de pensiones?",
+      "opts": [
+        "Por supuesto, el 30%.",
+        "No, en ningún caso.",
+        "Sólo si se cobra en forma de capital y han pasado dos años desde la primera aportación.",
+        "Sólo si cobra en forma de renta."
+      ],
+      "correct": 1,
+      "justification": "El artículo 18.2 de la LIRPF excluye expresamente de la reducción por rendimientos con período de generación superior a dos años u obtenidos de forma notoriamente irregular en el tiempo a las prestaciones procedentes de planes de pensiones y sistemas de previsión social (art. 17.2.a LIRPF). Las prestaciones de planes de pensiones no disfrutan en ningún caso de la reducción general del 30% por irregularidad."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "D. Mario es un ejecutivo de una multinacional que tiene su sede social en Madrid. La empresa, dentro de la política retributiva general de la misma, le entregó, en el año 2021, 10 acciones de la sociedad con un valor de 1.000 € cada una. La participación que supone es del 2%. Y en el año 2022 le entrega 15 acciones del mismo valor cada una que las anteriores (3% capital). El tipo de retención es del 28% y no se le repercute el ingreso a cuenta. ¿Cuál es el importe de la renta en especie que ha de integrar D. Mario en el año 2022?:",
+      "opts": [
+        "19.350 €",
+        "0 €",
+        "3.840 €",
+        "3.000 €"
+      ],
+      "correct": 2,
+      "justification": "En 2022 percibe 15 acciones por importe de 15.000 €. Tras aplicar el límite anual de exención de 12.000 euros (art. 42.2.f LIRPF), solo tributa el exceso de 3.000 euros. Como la empresa no repercute el ingreso a cuenta, este debe adicionarse a la valoración: 3.000 € + (28% × 3.000 €) = 3.000 € + 840 € = 3.840 € de rendimiento íntegro en especie a integrar."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Si un empleado del Banco Santander obtiene un préstamo sin interés, estará:",
+      "opts": [
+        "Percibiendo la cesión gratuita de un préstamo, sujeto al ISD.",
+        "Percibiendo un rendimiento del capital mobiliario por la cesión a terceros de capitales propios.",
+        "Percibiendo un rendimiento dinerario del trabajo personal.",
+        "Percibiendo un rendimiento en especie del trabajo personal."
+      ],
+      "correct": 3,
+      "justification": "La concesión de préstamos a tipos de interés inferiores al legal del dinero (o al 0%) concedidos por el empleador a sus empleados constituye rendimientos del trabajo en especie (artículo 43.1.1ª.c LIRPF). Se valora por la diferencia entre el interés efectivamente pagado (0%) y el tipo de interés legal del dinero vigente."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál será la reducción que sobre el rendimiento neto habrá de practicar un trabajador, cuando el importe de este es de 13.000€? (Variante)",
+      "opts": [
+        "5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre 13.115 y 13.000 euros.",
+        "5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre el rendimiento del trabajo y 13.115 euros.",
+        "Dependerá del número de hijos que formen parte de la unidad familiar.",
+        "5.565 euros."
+      ],
+      "correct": 3,
+      "justification": "Para un rendimiento neto del trabajo de 13.000 € (inferior al umbral legal de 13.115 € fijado en el art. 20 LIRPF), corresponde aplicar de forma directa e íntegra la reducción fija máxima a tanto alzado de 5.565 euros, sin realizar ningún ajuste proporcional ni minoración."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es el rendimiento íntegro del trabajo que corresponde a la entrega gratuita de un vehículo no eficiente energéticamente a un trabajador cuyo coste de adquisición para la empresa ascendió a 20.000 euros, si el tipo de retención aplicable es del 10%? (Variante)",
+      "opts": [
+        "16.000 euros.",
+        "18.000 euros.",
+        "2.000 euros.",
+        "22.000 euros."
+      ],
+      "correct": 3,
+      "justification": "La entrega en propiedad de un vehículo se valora por su coste de adquisición para la empresa (20.000 €). Al no repercutirse el ingreso a cuenta, se le suma el 10% de dicha valoración (2.000 €), determinando un rendimiento íntegro total del trabajo de 20.000 + 2.000 = 22.000 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "¿Cuál es el rendimiento íntegro que corresponde por el disfrute gratuito de una vivienda, cuyo valor catastral no revisado en los últimos diez años es de 80.000 euros, si el tipo de retención es del 10%? (Variante)",
+      "opts": [
+        "8.000 euros.",
+        "4.000 euros.",
+        "8.800 euros.",
+        "4.400 euros."
+      ],
+      "correct": 2,
+      "justification": "Al tratarse de una vivienda con valor catastral no revisado en los últimos 10 años, la retribución en especie se valora en el 10% de su valor catastral (8.000 €). Añadiendo el ingreso a cuenta correspondiente del 10% (800 €), el rendimiento íntegro total computable asciende a 8.000 + 800 = 8.800 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. Paula, de 23 años, trabaja para el Corte Inglés como dependienta. Percibe un sueldo bruto anual de 13.000 €. Además, el Corte Inglés le aporta a un Plan de Pensiones la cantidad de 1.100 € anuales. El tipo de retención es del 15%. Las cuotas a la Seguridad Social ascienden a 1.020 € anuales. ¿Cuál es el importe del rendimiento neto reducido del trabajo?:",
+      "opts": [
+        "13.080 €",
+        "5.515 €",
+        "14.100 €",
+        "11.080 €"
+      ],
+      "correct": 1,
+      "justification": "Rendimiento íntegro = 13.000 € (sueldo) + 1.100 € (aportación a plan de pensiones) = 14.100 €. Gastos deducibles = 1.020 € (Seguridad Social) + 2.000 € (otros gastos a tanto alzado) = 3.020 €. Rendimiento neto previo = 14.100 € − 3.020 € = 11.080 €. Al situarse por debajo de 13.115 €, se le aplica la reducción íntegra del artículo 20 LIRPF de 5.565 €, obteniendo un rendimiento neto reducido de 11.080 € − 5.565 € = 5.515 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Mario es un ejecutivo de una multinacional que tiene su sede social en Madrid. La empresa, dentro de la política retributiva general de la misma, le entregó, en el año 2021, 10 acciones de la sociedad con un valor de 1.000 € cada una. La participación que supone es del 2%. Y en el año 2022 le entrega 15 acciones del mismo valor cada una que las anteriores (3% capital). El tipo de retención es del 28% y no se le repercute el ingreso a cuenta. ¿Cuál es el importe de la renta en especie que ha de integrar D. Mario en el año 2022? (Variante):",
+      "opts": [
+        "19.350 €",
+        "0 €",
+        "3.840 €",
+        "3.000 €"
+      ],
+      "correct": 2,
+      "justification": "De los 15.000 euros en acciones entregadas en 2022, la ley exime los primeros 12.000 euros, dejando un exceso sujeto de 3.000 euros; como la empresa no repercute el ingreso a cuenta, a dicha cantidad se le debe sumar el 28% correspondiente en concepto de ingreso a cuenta no repercutido (840 euros), elevando la renta en especie total a integrar a 3.840 euros."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Por motivos de trabajo, D. José se ha desplazado a Madrid durante 7 días, percibiendo unas dietas de 1.400 €. Ha justificado de alojamiento 600 € y para el desplazamiento ha utilizado su propio vehículo (1.000 km. en total). También se ha tenido que desplazar a Londres durante 9 días. La dieta que ha percibido de la empresa para este viaje ha sido de 3.600 €. El billete de avión le ha costado 400 €, que justifica mediante factura, y el hotel ha importado 1.280 €, que también justifica mediante la correspondiente factura. ¿A cuánto asciende el importe de la dieta que se ha de gravar en el IRPF por estos viajes?",
+      "opts": [
+        "1.404,41 €",
+        "263,29 €",
+        "1.141,12 €",
+        "1.334,47 €"
+      ],
+      "correct": 3,
+      "justification": "Del total percibido en dietas (1.400 € + 3.600 € = 5.000 €) se restan los límites legales exentos: En Madrid: alojamiento justificado (600 €) + kilometraje a 0,19 €/km (190 €) + manutención con pernocta a 53,34 €/día (7 × 53,34 = 373,38 €) = 1.163,38 € exentos. En Londres: billete de avión (400 €) + hotel justificado (1.280 €) + manutención en el extranjero con pernocta a 91,35 €/día (9 × 91,35 = 822,15 €) = 2.502,15 € exentos. Total exento = 3.665,53 €. Dietas gravadas = 5.000 € − 3.665,53 € = 1.334,47 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. Leonor, que trabaja en la empresa Mercader S.L., a tiempo completo y con jornada continua, percibe de la empresa 240 vales comedor de un importe unitario de 15 €. Estos vales comedor cumplen con la normativa exigida por el IRPF. ¿Cuánto ha de integrar Dª. Leonor como rendimiento íntegro correspondiente a esta retribución en especie si el tipo de retención es del 12% y no se le repercute el ingreso a cuenta?:",
+      "opts": [
+        "1.075,20 €",
+        "960 €",
+        "4.032 €",
+        "3.600 €"
+      ],
+      "correct": 0,
+      "justification": "Dado que los vales de comedor están exentos hasta el límite reglamentario de 11 euros diarios (artículo 45 RIRPF), el exceso de 4 € por vale (15 € − 11 € = 4 €; 240 × 4 € = 960 €) computa como retribución en especie sujeta. Al no repercutirse el ingreso a cuenta del 12%, se le adiciona el 12% de 960 € (115,20 €), arrojando un rendimiento íntegro total computable de 960 € + 115,20 € = 1.075,20 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. María, funcionaria de la Diputación de Granada, obtiene en el año 2022 un sueldo bruto de 36.000 €. El tipo de retención es del 20%. El importe de la Seguridad Social es de 2.200 €. Está afiliada a UGT abonando una cuota sindical de 600 € anuales. Para sufragar los desplazamientos desde su residencia a su puesto de trabajo, la Diputación le abona un plus de transporte de 500 € mensuales. Por motivos laborales se ha desplazado a Motril y Guadix a lo largo del año 2022, una vez al mes a cada uno de ellos. En todos esos desplazamientos ha utilizado vehículo de empresa y se realizan sin pernocta. En compensación de estos gastos la Diputación le abona 586,74 €. ¿Cuál es el importe del rendimiento neto del trabajo personal que se integra en la base imponible?:",
+      "opts": [
+        "37.786,74 €",
+        "42.586,74 €",
+        "36.000,00 €",
+        "40.386,74 €"
+      ],
+      "correct": 0,
+      "justification": "Rendimientos Íntegros: Sueldo bruto anual: 36.000 €; Plus de transporte habitual (residencia al trabajo): 500 €/mes × 12 meses = 6.000 € (no es dieta exenta, sino salario dinerario íntegro); Asignación por viajes a Motril y Guadix: 586,74 € (al utilizarse vehículo de empresa y no justificar otros gastos exentos, computa íntegro). Rendimiento Íntegro Total = 36.000 + 6.000 + 586,74 = 42.586,74 €. Gastos Deducibles (Art. 19 LIRPF): Cotizaciones a la Seguridad Social: 2.200 €; Cuotas sindicales (UGT): 600 €; Gastos generales a tanto alzado: 2.000 €. Total Gastos Deducibles = 2.200 + 600 + 2.000 = 4.800 €. Rendimiento Neto del Trabajo: Rendimiento Neto = 42.586,74 € − 4.800 € = 37.786,74 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "La diferencia entre un rendimiento de trabajo y uno de actividad está en que:",
+      "opts": [
+        "El rendimiento del trabajo es el que deriva del ejercicio de una profesión y el de actividad del desarrollo de una empresa.",
+        "El rendimiento del trabajo deriva de una actividad por cuenta ajena y el de actividad económica de una actividad por cuenta propia.",
+        "El rendimiento del trabajo está sujeto a la progresividad de la tarifa y el de actividad a los módulos.",
+        "El rendimiento del trabajo deriva de una actividad por cuenta propia y el de actividad de una actividad por cuenta ajena."
+      ],
+      "correct": 1,
+      "justification": "Los rendimientos del trabajo derivan del trabajo personal prestado por cuenta ajena y en régimen de dependencia (art. 17 LIRPF), mientras que los rendimientos de actividades económicas proceden del trabajo y del capital conjuntamente o de uno de ellos, implicando la ordenación por cuenta propia de medios de producción y de recursos humanos (art. 27 LIRPF)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Lo que cobra el viudo cuando fallece el partícipe en un plan de pensiones:",
+      "opts": [
+        "Es, en todo caso, ganancia patrimonial.",
+        "Es, en todo caso, rendimiento del trabajo.",
+        "Es, en todo caso, rendimiento del capital mobiliario.",
+        "Tributa en el Impuesto de Sucesiones y Donaciones."
+      ],
+      "correct": 1,
+      "justification": "Las prestaciones percibidas de los planes de pensiones califican legalmente en todos los casos como rendimientos del trabajo para el beneficiario que las percibe (art. 17.2.a.3ª LIRPF), con independencia de que quien las perciba sea el propio partícipe o sus causahabientes (como el cónyuge viudo) tras el fallecimiento de este, no tributando jamás en el ISD."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Las prestaciones por desempleo:",
+      "opts": [
+        "No constituyen renta gravada por el IRPF.",
+        "Son rentas del trabajo, pero están exentas.",
+        "Son siempre rendimientos exentos.",
+        "Son rentas del trabajo, pero están exentas cuando se cobran de acuerdo con la modalidad de pago único."
+      ],
+      "correct": 3,
+      "justification": "Las prestaciones por desempleo tienen la consideración general de rendimientos íntegros del trabajo sujetos y no exentos, salvo en el supuesto especial en el que la prestación se perciba en la modalidad de pago único (para incorporarse como socio a cooperativas o constituirse como trabajador autónomo, art. 7.n LIRPF), en cuyo caso la ley las exime de tributación."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Las contribuciones de los promotores a los planes de pensiones imputadas a los trabajadores:",
+      "opts": [
+        "Son gasto deducible.",
+        "Son rendimientos dinerarios del trabajo, no sometidos a retención.",
+        "Son rendimientos dinerarios del trabajo, sometidos a retención.",
+        "Son rendimientos del trabajo en especie, no sometidos a ingreso a cuenta."
+      ],
+      "correct": 3,
+      "justification": "Conforme al artículo 17.1.e y artículo 102.2 de la LIRPF (y artículo 75 del Reglamento del IRPF), las contribuciones imputadas por los promotores a los planes de pensiones de empleo constituyen rendimientos del trabajo en especie para el trabajador partícipe, estableciendo expresamente la ley que no existirá obligación de practicar ingresos a cuenta sobre dichas contribuciones."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "En las dietas para gastos de manutención:",
+      "opts": [
+        "Todo lo que se cobre está exento, aunque no se justifique.",
+        "Es irrelevante el gasto que se justifique.",
+        "No hay ninguna cantidad exenta.",
+        "Está exento todo el gasto que se justifique."
+      ],
+      "correct": 1,
+      "justification": "Para los gastos de manutención, el artículo 9 del RIRPF establece unos límites cuantitativos fijos diarios (módulos diarios con y sin pernocta en España o en el extranjero) que operan automáticamente, siendo irrelevante el importe de las facturas o tickets de comidas que se justifiquen: lo que excede del módulo legal tributa y lo que no lo supera queda exento sin necesidad de acreditar el coste real de la comida."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "En las dietas para gastos de alojamiento:",
+      "opts": [
+        "Todo lo que se cobre está exento.",
+        "No está exenta ninguna cantidad.",
+        "Está exenta una cantidad fija, con independencia del gasto que se justifique.",
+        "Está exento todo el gasto que se justifique."
+      ],
+      "correct": 3,
+      "justification": "A diferencia de la manutención, el régimen fiscal de las dietas por alojamiento (art. 9 RIRPF) exime de gravamen la totalidad de los importes percibidos siempre y cuando el gasto de hotel o estancia quede debidamente respaldado y justificado mediante la correspondiente factura emitida por el establecimiento."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. Filomena venía trabajando para la empresa Electrodomésticos Segura S.L. como dependienta. Fue despedida el 1 de enero de 2022, y llevaba una antigüedad de cinco años en la empresa. La indemnización a que tiene derecho por la normativa laboral vigente es a 20.000 €. Además tiene derecho a percibir por prestación por desempleo un importe total de 20.000 € a lo largo de 20 meses. Solicita percibir la prestación en un único pago para poder ejercer como autónoma. ¿Qué importes debe integrar como rendimientos íntegros del trabajo en el ejercicio de 2022?:",
+      "opts": [
+        "40.000 €",
+        "0 €",
+        "4.500 €",
+        "20.000 €"
+      ],
+      "correct": 1,
+      "justification": "Las indemnizaciones por despido improcedente o cese dentro de los límites fijados con carácter obligatorio por el Estatuto de los Trabajadores están exentas de tributación en el IRPF (artículo 7.e LIRPF), por lo que los 20.000 € no tributan. Por su parte, la prestación por desempleo percibida en la modalidad de pago único (capitalización del paro) para establecerse como trabajadora autónoma está exenta de tributación según el artículo 7.n LIRPF. Por lo tanto, el importe total a integrar en el ejercicio es 0 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. María, de 39 años, trabaja para la empresa Servicios de Comunicación S.L. La empresa le cede el uso de un vehículo cuyo coste de adquisición es de 14.700 €. El tipo de retención es del 22% y se realiza el ingreso a cuenta sin repercusión. ¿Cuál es el importe de esta retribución en especie?:",
+      "opts": [
+        "2.940 €",
+        "3.586,80 €",
+        "3.557,40 €",
+        "3.498,60 €"
+      ],
+      "correct": 2,
+      "justification": "El uso del vehículo propiedad de la empresa se valora anualmente en el 20% del coste de adquisición (art. 43.1.1ª.b LIRPF): 20% × 14.700 € = 2.940 €. Al no repercutirse el ingreso a cuenta, se debe adicionar el 22% de 2.940 € (646,80 €): 2.940 € + 646,80 € = 3.557,40 € de retribución íntegra en especie. Los posibles períodos de generación o reducciones por irregularidad no eximen de practicar el ingreso a cuenta ni alteran la valoración inicial."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. María, casada en régimen de gananciales, de 38 años de edad, cumplió el 1 de octubre de 2019 veinte años de antigüedad en la empresa en la que trabaja. Por tal motivo debía percibir un premio por antigüedad de 5.000 €, según su contrato laboral. Sin embargo, el empresario entiende que no le correspondía ese premio hasta el año siguiente (2020) por haber estado de baja por maternidad durante un período de cuatro meses el año 2019. Dña. María interpuso la correspondiente demanda que se resuelve el 1 de diciembre de 2021 en la que se le confirma ese derecho y la obligación de pagar al empresario. La sentencia adquiere firmeza el 1 de enero de 2022, pero hasta el 1 de febrero de 2022 no percibe ese importe. ¿En qué período impositivo ha de declarar ese premio de antigüedad?:",
+      "opts": [
+        "2022",
+        "2021",
+        "2020",
+        "2019"
+      ],
+      "correct": 0,
+      "justification": "Conforme a la regla especial de imputación temporal recogida en el artículo 14.2.a de la LIRPF, cuando no se hubiera satisfecho la totalidad o parte de una renta por encontrarse pendiente de resolución judicial el derecho a su percepción o su cuantía, los importes no satisfechos se imputarán al período impositivo en que aquella adquiera firmeza. Dado que la sentencia adquirió firmeza el 1 de enero de 2022, debe imputarse obligatoriamente al ejercicio fiscal 2022."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Julio, soltero, de 32 años, trabaja como director de marketing para el hotel Granada Center. El sueldo bruto anual asciende a 48.000 €. Con motivo de su trabajo ha de desplazarse por todo el territorio nacional varias veces al año. En el año 2022 ha percibido en concepto de dietas un total de 10.000 €. En concepto de alojamiento ha justificado con factura un total de 3.800 €. Y por desplazamientos, en billetes de avión ha justificado 1.000 € y puede aplicar un kilometraje de 1.000 km. Los días que ha pernoctado en territorio español han ascendido a 20 y en territorio extranjero a 10. Y sin pernocta, 3 días en territorio español y 2 días en territorio extranjero. También ha percibido en el año 2022, 5.000 € por un premio de antigüedad por permanencia durante cinco años en la empresa. Las cuotas a la Seguridad Social importan 2.160 €. ¿Cuál es el importe del rendimiento neto reducido del trabajo que ha de ser llevado a la base?:",
+      "opts": [
+        "51.041,53 €",
+        "48.188 €",
+        "50.193,53 €",
+        "49.041,53 €"
+      ],
+      "correct": 2,
+      "justification": "1) Gastos de viaje y dietas exentos: Alojamiento justificado: 3.800 €. Billetes avión: 1.000 €. Kilometraje (1.000 km × 0,19 €): 190 €. Manutención: Con pernocta España (20 × 53,34 € = 1.066,80 €); Con pernocta Extranjero (10 × 91,35 € = 913,50 €); Sin pernocta España (3 × 26,67 € = 80,01 €); Sin pernocta Extranjero (2 × 48,08 € = 96,16 €). Total exento = 7.146,47 €. Dietas gravadas = 10.000 € − 7.146,47 € = 2.853,53 €. 2) Rendimientos Íntegros Computables: Sueldo bruto (48.000 €) + Dietas tributables (2.853,53 €) + Premio antigüedad tras reducción del 30% por irregularidad en 5 años (5.000 € × 70% = 3.500 €) = 54.353,53 €. 3) Gastos Deducibles (art. 19 LIRPF): Seguridad Social (2.160 €) + Otros gastos a tanto alzado (2.000 €) = 4.160 €. Rendimiento Neto Reducido = 54.353,53 € − 4.160 € = 50.193,53 €."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. Estefanía, soltera, de 35 años de edad y con discapacidad del 50%, trabaja en el Ayuntamiento de Granada. Ha percibido un sueldo bruto de 16.000 € y las cuotas a la Seguridad Social han ascendido a 2.160 €. ¿Cuál es el importe del rendimiento neto reducido del trabajo personal que se integra en la base imponible del IRPF?:",
+      "opts": [
+        "2.775 €",
+        "11.840 €",
+        "3.862,5 €",
+        "8.340 €"
+      ],
+      "correct": 0,
+      "justification": "Partiendo de un sueldo bruto de 16.000 euros, se restan los gastos deducibles del artículo 19 LIRPF: 2.160 euros de Seguridad Social, 2.000 euros de gastos generales y 3.500 euros adicionales por trabajadores activos con discapacidad igual o superior al 33% e inferior al 65%, totalizando 7.660 euros de gastos y obteniendo un rendimiento neto de 8.340 euros. Al situarse este rendimiento neto por debajo de 13.115 euros, le corresponde la reducción fija máxima del artículo 20 LIRPF de 5.565 euros, arrojando un rendimiento neto reducido final de 8.340 € − 5.565 € = 2.775 euros."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "D. Manuel, de 68 años, viudo y con una minusvalía del 70%, trabaja para la empresa Marketing Soluciones S.L. como responsable del departamento de creación de diseños. Percibe un sueldo bruto de 20.000 €. El importe de la Seguridad Social asciende a 1.200 €. ¿Cuál es el importe del rendimiento neto del trabajo?:",
+      "opts": [
+        "9.050 €",
+        "13.300 €",
+        "16.800 €",
+        "18.800 €"
+      ],
+      "correct": 0,
+      "justification": "El enunciado solicita expresamente el rendimiento neto (antes de la reducción del art. 20 LIRPF). Partiendo del sueldo bruto de 20.000 €, se restan los gastos deducibles del art. 19 LIRPF: cotizaciones a la Seguridad Social (1.200 €), gastos generales a tanto alzado (2.000 €) y el incremento de gastos deducibles para trabajadores activos con discapacidad igual o superior al 65% (7.750 €). Gastos deducibles totales = 1.200 + 2.000 + 7.750 = 10.950 €. Rendimiento Neto del Trabajo = 20.000 € − 10.950 € = 9.050 euros."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Juan, casado y con un hijo de cinco años, percibe un sueldo bruto de 30.000 € anuales. La cotización a la Seguridad Social asciende a 1.800 €. El tipo de retención es del 20%. La empresa abona a ASISA para la cobertura de enfermedad de este trabajador y de su familia una prima anual de 1.000 € por cada uno de los miembros (3 miembros). Y también, para facilitarle el transporte desde su residencia hasta el puesto de trabajo, le satisface a una empresa de transporte público por este trabajador un total de 2.000 € anuales. ¿Cuál es el importe del rendimiento neto reducido del trabajo que ha de llevarse a la base imponible del IRPF?:",
+      "opts": [
+        "27.948 €",
+        "28.600 €",
+        "31.548 €",
+        "30.548 €"
+      ],
+      "correct": 3,
+      "justification": "1) Seguro médico: están exentos 500 € anuales por miembro (art. 42.2.c LIRPF). De 1.000 € por persona, tributan 500 € de exceso por cada uno de los 3 miembros = 1.500 €. Con ingreso a cuenta al 20% no repercutido: 1.500 € + (20% × 1.500 €) = 1.800 €. 2) Abono de transporte público: el límite exento legal es de 1.500 € anuales (art. 42.2.h LIRPF). De los 2.000 € satisfechos, el exceso sujeto es 500 €. Con ingreso a cuenta al 20% no repercutido: 500 € + (20% × 500 €) = 600 €. 3) Rendimiento íntegro total: 30.000 € + 1.800 € + 600 € = 32.400 €. 4) Gastos deducibles (art. 19 LIRPF): Seguridad Social (1.800 €) + otros gastos (2.000 €) = 3.800 €. Rendimiento Neto Reducido = 32.400 € − 3.800 € = 30.548 € (al superar el umbral de 16.832 €, no procede reducción por rendimientos del trabajo del art. 20)."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "Dña. Encarnación, soltera, trabaja en una agencia de viajes. Al haber superado los objetivos a cumplir se le gratifica con un viaje a Nueva York cuyo coste para la agencia de viajes es de 3.000 € y su valor de mercado es de 3.500 €. El tipo de retención es del 19 % y no se le repercute el ingreso a cuenta. ¿Cuál es el importe del rendimiento íntegro del trabajo correspondiente a esta retribución en especie?:",
+      "opts": [
+        "3.000 €",
+        "3.500 €",
+        "4.165 €",
+        "3.570 €"
+      ],
+      "correct": 2,
+      "justification": "Cuando el empleador tiene por actividad la prestación de los mismos servicios que entrega como retribución en especie, la valoración no puede ser inferior al precio ofertado al público (valor de mercado, 3.500 €), descartando el coste interno de 3.000 €. Al no repercutirse el ingreso a cuenta del 19%, este debe sumarse a la valoración: 3.500 € + (19% × 3.500 € = 665 €) = 4.165 euros de rendimiento íntegro en especie."
+    },
+    {
+      "tema": "IRPF: Rendimientos del Trabajo (RNTP)",
+      "q": "D. Fernando ha recibido durante el año 2022 de su empresa 20.000 € brutos en concepto de rendimientos dinerarios del trabajo, pero también disfruta gratuitamente de una vivienda propiedad de la empresa para la que trabaja. El valor catastral revisado de la misma es de 50.000 €. ¿Cuál es la valoración de esta vivienda, que ha de integrar D. Fernando como retribución en especie del trabajo, a la que habría que sumar el ingreso a cuenta?:",
+      "opts": [
+        "4.000 €",
+        "5.000 €",
+        "2.500 €",
+        "2.000 €"
+      ],
+      "correct": 1,
+      "justification": "La valoración de la retribución en especie por el uso gratuito de una vivienda propiedad de la empresa se calcula conforme a la escala del examen aplicando el 10% sobre su valor catastral (10% de 50.000 euros), lo que arroja un importe base de 5.000 euros sobre el cual posteriormente se adicionaría el ingreso a cuenta si procede."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "¿Qué aspectos del IRPF pueden variar de unas CCAA a otras en virtud de sus competencias normativas?",
+      "opts": [
+        "La tarifa autonómica, las deducciones y bonificaciones sobre la cuota autonómica y el mínimo personal (mejorándolo) y familiar establecido por el Estado.",
+        "El tipo único de gravamen aplicable a las rentas del ahorro a nivel estatal.",
+        "La definición legal del hecho imponible y el listado de rentas exentas del artículo 7.",
+        "Ninguno, ya que las Comunidades Autónomas no tienen competencias normativas sobre el IRPF."
+      ],
+      "correct": 0,
+      "justification": "El IRPF es un impuesto parcialmente cedido (al 50%), teniendo las CCAA competencias normativas para regular el IRPF y puede hacer que el impuesto difiera de unos territorios a otros. Por ejemplo, puede variar la tarifa autonómica, las deducciones y bonificaciones sobre la cuota autonómica y el mínimo personal (mejorándolo) y familiar establecido por el Estado."
+    },
+    {
+      "tema": "IRPF: Ámbito, Residencia y Exenciones",
+      "q": "En caso de fallecimiento el día 3 de abril de uno de los cónyuges, ¿cuántas posibilidades y modalidades de tributación existen en el IRPF para la unidad familiar?",
+      "opts": [
+        "El cónyuge que fallece tendrá que tributar necesariamente individualmente devengándose el 3 de abril, mientras que los demás familiares siguen siendo una unidad familiar pudiendo tributar de manera individual o conjunta a 31 de diciembre.",
+        "Todos los miembros familiares deben tributar obligatoriamente de forma conjunta devengándose el 31 de diciembre.",
+        "Solo existe la posibilidad de tributar individualmente para todos los miembros, extinguiéndose la opción de declaración conjunta.",
+        "El cónyuge supérstite queda exento de presentar declaración en dicho ejercicio."
+      ],
+      "correct": 0,
+      "justification": "El cónyuge que fallece tendrá que tributar necesariamente individualmente devengándose el 3 de abril. Los demás familiares siguen siendo una unidad familiar (1 cónyuge y los hijos) por lo que podrá hacerse la tributación de manera individual o conjunta a 31 de diciembre."
+    }
+  ]
+}
