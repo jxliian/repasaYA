@@ -24,9 +24,10 @@ A petición del usuario para la preparación intensiva del examen parcial del 9 
   - `trampaBox`: Alertas de examen y reglas de oro de la profesora.
 - Encabezados y pies con `fancyhdr` y `truncate` para evitar colisiones y desbordamientos.
 
-### 2.2 Documento 1: `casos-practicos-resueltos.pdf` (18 páginas)
+### 2.2 Documento 1: `casos-practicos-resueltos.pdf` (23 páginas)
 - Ubicación fuente: `apuntes/derecho-fiscal/casos_practicos/main.tex`
 - Ubicación pública: `public/derecho-fiscal/casos-practicos-resueltos.pdf`
+- Enunciados oficiales: Extraídos 100% verbatim palabra por palabra del archivo oficial de ejercicios `Supuestos_Clase_IRPF_DERECHO_FISCAL_2026-27.pdf` sin omisiones ni resúmenes.
 - Contenido:
   - Prácticas 1 a 7: Concepto de renta, hecho imponible, exenciones (Art. 7 LIRPF), indemnizaciones por despido (límite 180.000 € y 33/45 días/año), IPP/IPA, becas, anualidades por alimentos vs pensiones compensatorias, dividendos y seguros de vida.
   - Prácticas 8 a 12: Rendimientos del Trabajo Personal (RITP, dietas y asignaciones para gastos de viaje del Art. 9 RIRPF, vales de comida y guardería, vehículos y viviendas en especie con ingresos a cuenta repercutidos vs no repercutidos, reducción por irregularidad del Art. 18.2 LIRPF, reducción del Art. 20 LIRPF por bajos ingresos y gastos deducibles del Art. 19 LIRPF).
