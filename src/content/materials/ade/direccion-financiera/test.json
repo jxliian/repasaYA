@@ -1,573 +1,1232 @@
 {
   "subject": "ade/direccion-financiera",
   "type": "test",
-  "title": "Banco Completo de Preguntas Tipo Test (Temas 1 al 4) (Provisional)",
-  "description": "⚠️ MATERIAL PROVISIONAL (No revisado al 100%). Banco exhaustivo de preguntas de examen oficial para el primer parcial de Dirección Financiera (Universidad de Granada). Incluye cuestiones teóricas, analíticas y de cálculo numérico de exámenes oficiales (2018-2019, 2024-2025 y relaciones de problemas): Teorema de Fisher (Tema 1), Modelos DDM, Gordon-Shapiro y VAOC (Tema 2), Criterios VAN, TIR y Payback (Tema 3) y Flujos Libres, Impuestos, NOF y Coste Anual Equivalente CAE (Tema 4).",
-  "order": 1,
+  "title": "Test Completo — Primer Parcial (Temas 1 al 4) + Fotos y Exámenes",
+  "description": "Banco exhaustivo y auditado de 102 preguntas tipo test del Primer Parcial de Dirección Financiera (Temas 1 a 4): incluye todas las preguntas del PDF de Test Ordinaria, las 12 preguntas de las fotos con su plantilla oficial, los exámenes parciales (2018-2019 y 2024-2025) y las cuestiones tipo test de la Relación de Problemas 25-26.",
   "items": [
     {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "¿Cuál es el objetivo financiero fundamental y normativo de la dirección financiera en la empresa moderna?",
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Test PDF] ¿Cuál de las siguientes afirmaciones define mejor el objetivo financiero de la empresa?",
       "opts": [
-        "Maximizar el beneficio neto contable de cada ejercicio.",
-        "Maximizar el volumen de ventas y la cuota de mercado.",
-        "Maximizar el valor de mercado de las acciones (la riqueza de los accionistas).",
-        "Minimizar los costes operativos y de personal en todos los departamentos."
+        "a) Maximizar el beneficio contable anual de la empresa.",
+        "b) Maximizar el valor de mercado actual de la inversión de los propietarios (accionistas).",
+        "c) Minimizar el endeudamiento bancario a corto y largo plazo.",
+        "d) Maximizar la cuota de mercado y el volumen de ventas."
+      ],
+      "correct": 1,
+      "justification": "El objetivo fundamental de las finanzas corporativas es maximizar el valor de mercado del capital invertido por los accionistas (riqueza actual de los propietarios), teniendo en cuenta la dimensión temporal y el riesgo de los flujos de tesorería, y no el beneficio contable a corto plazo."
+    },
+    {
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Test PDF] Respecto a las decisiones financieras básicas de la empresa, señale la opción correcta:",
+      "opts": [
+        "a) La decisión de inversión o presupuesto de capital determina cómo se obtienen los recursos en los mercados financieros.",
+        "b) La decisión de financiación determina en qué activos reales tangibles o intangibles debe invertir la empresa.",
+        "c) La decisión de inversión consiste en identificar y adquirir activos reales cuyo valor supere a su coste (VAN > 0).",
+        "d) Las decisiones de inversión y financiación solo afectan a las grandes corporaciones cotizadas en bolsa."
       ],
       "correct": 2,
-      "justification": "El objetivo normativo de la gestión financiera es la maximización del valor de mercado de las acciones (creación de riqueza para el accionista). Maximizar el beneficio contable es erróneo porque ignora el riesgo, la estructura temporal de los flujos de tesorería y la reinversión requerida."
+      "justification": "La decisión de presupuesto de capital (inversión) busca invertir en activos reales (tangibles o intangibles) que valgan más de lo que cuestan (VAN > 0), mientras que la decisión de financiación determina cómo captar los fondos emitiendo activos financieros."
     },
     {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "En el marco de la dirección financiera, indique la afirmación FALSA sobre el Teorema de Separación de Fisher:",
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Test PDF] El coste de oportunidad del capital de un proyecto de inversión:",
       "opts": [
-        "El director financiero debe seleccionar proyectos de inversión cuya generación de caja se ajuste específicamente a la preferencia temporal de consumo de cada accionista.",
-        "El óptimo de inversión productiva se alcanza donde la tasa marginal de retorno de los activos reales coincide con el tipo de interés del mercado de capitales.",
-        "Gracias a la existencia de un mercado de capitales perfecto, las decisiones de inversión y consumo quedan totalmente desacopladas.",
-        "Todos los accionistas, independientemente de que prefieran consumir hoy o mañana, estarán de acuerdo en que la empresa acometa aquellos proyectos con VAN positivo."
+        "a) Depende exclusivamente del tipo de interés del préstamo bancario con el que se financie el proyecto.",
+        "b) Es la rentabilidad mínima esperada que ofrecen en los mercados financieros otros activos con un nivel de riesgo equivalente al del proyecto.",
+        "c) Es siempre igual a la rentabilidad de las Letras del Tesoro sin riesgo.",
+        "d) Lo fija discrecionalmente el consejo de administración sin relación con el mercado de capitales."
+      ],
+      "correct": 1,
+      "justification": "El coste de oportunidad del capital depende del uso que se da a los fondos (el riesgo del proyecto de inversión) y viene dado por la rentabilidad esperada que los inversores dejan de ganar en el mercado de capitales al renunciar a activos financieros de riesgo equivalente."
+    },
+    {
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Test PDF] Los conflictos de agencia entre los directivos y los accionistas de una gran corporación surgen principalmente porque:",
+      "opts": [
+        "a) Existe separación entre la propiedad (accionistas) y el control (directivos), junto con información asimétrica e intereses divergentes.",
+        "b) Los accionistas tienen responsabilidad ilimitada frente a las deudas de la sociedad anónima.",
+        "c) Los mercados financieros secundarios impiden la venta de acciones.",
+        "d) Los directivos siempre poseen el 100% del capital social de la empresa."
       ],
       "correct": 0,
-      "justification": "Es FALSA: El Teorema de Separación de Fisher demuestra que el director financiero NO necesita conocer ni adaptarse a las preferencias de consumo temporal de los accionistas. La empresa maximiza la riqueza de todos eligiendo los proyectos con VAN > 0, y cada accionista ajusta su propio patrón de consumo personal acudiendo al mercado de capitales (prestando o pidiendo prestado al tipo de interés de mercado)."
+      "justification": "La relación de agencia surge cuando los propietarios (principales) delegan la gestión en los directivos (agentes). Al existir separación entre propiedad y control e información asimétrica, pueden aparecer costes de agencia si los directivos anteponen sus propios objetivos a la creación de valor."
     },
     {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "Si en el modelo de Fisher el tipo de interés del endeudamiento (prestatario) es SUPERIOR al tipo de interés del préstamo (prestamista):",
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Test PDF (Pág. 51)] Indique cuál de las siguientes afirmaciones es correcta:",
       "opts": [
-        "La inversión en activos reales que maximiza el VAN sigue siendo exactamente la misma para cualquier accionista.",
-        "Un accionista que desee ser prestamista y otro que desee ser prestatario no coincidirán necesariamente en el volumen óptimo de inversión real a acometer por la empresa.",
-        "La recta de mercado para quien presta tendrá mayor pendiente que la recta para quien pide prestado.",
-        "El Teorema de Fisher se mantiene plenamente inalterado."
+        "a) El objetivo fundamental de la dirección financiera de la empresa es el de maximizar el beneficio neto obtenido por la empresa en cada periodo.",
+        "b) Para calcular el valor actual de un proyecto de inversión, se descuentan los beneficios futuros esperados del mismo a la tasa de rentabilidad ofrecida por alternativas de inversión similares. Esta tasa se conoce como coste de oportunidad de capital.",
+        "c) El directivo financiero debe actuar como intermediario entre las operaciones de la empresa y el mercado bursátil.",
+        "d) Ninguna es correcta."
+      ],
+      "correct": 3,
+      "justification": "Ninguna de las tres primeras es estrictamente correcta: a) es falso porque el objetivo es maximizar el valor de mercado (no el beneficio contable de cada periodo); b) es una trampa clásica porque para calcular el Valor Actual se descuentan los FLUJOS DE TESORERÍA esperados, nunca los beneficios contables; y c) el directivo financiero actúa como intermediario entre las operaciones reales de la empresa y los mercados financieros en general (no únicamente el mercado bursátil)."
+    },
+    {
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Test PDF (Pág. 52)] Indique cuál de las siguientes afirmaciones es correcta:",
+      "opts": [
+        "a) Ninguna es correcta.",
+        "b) No es obligación del director financiero decidir si financia una inversión con un préstamo o con una emisión de obligaciones.",
+        "c) El objetivo financiero de la empresa es el de maximizar el valor contable de sus acciones.",
+        "d) La parte del beneficio neto que no se reparte entre los accionistas se puede utilizar para financiar nuevos proyectos."
+      ],
+      "correct": 3,
+      "justification": "El beneficio retenido (la parte del beneficio neto no repartida como dividendo) constituye autofinanciación de enriquecimiento y es una de las principales fuentes internas para financiar nuevos proyectos de inversión."
+    },
+    {
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Foto Wuolah Q3] Una empresa pretende abordar un nuevo proyecto de inversión cuyo riesgo es muy diferente del de los activos existentes en la empresa y para el que existe una cierta probabilidad de fracaso. Indique la respuesta falsa:",
+      "opts": [
+        "a) La empresa debería ajustar las previsiones de flujos de caja para ponderar los posibles resultados favorables y desfavorables que se puedan presentar.",
+        "b) La empresa deberá ajustar la tasa de descuento para reflejar el riesgo específico del negocio.",
+        "c) La empresa deberá ajustar la tasa de descuento si el nuevo proyecto tiene un riesgo de mercado diferente al riesgo de mercado medio de la empresa.",
+        "d) La empresa deberá intentar evaluar cómo afectan al proyecto de la empresa los principales riesgos de la economía en su conjunto para analizar su riesgo de mercado."
       ],
       "correct": 1,
-      "justification": "Cuando el mercado financiero tiene fricciones y el tipo de interés del endeudamiento supera al del préstamo (curva de mercado con punto de quiebre), la tangencia con la curva de posibilidades productivas difiere según la tasa relevante del individuo, rompiéndose la separación perfecta entre inversión y financiación."
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 3 = b), la afirmación falsa es la b): el riesgo específico o propio del proyecto (como la probabilidad técnica de fracaso) se incorpora calculando el valor esperado de los flujos de caja (opción a), mientras que la tasa de descuento solo debe ajustarse por el riesgo sistemático o de mercado del proyecto, nunca por el riesgo específico diversificable."
     },
     {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "¿Cuál de las siguientes afirmaciones describe con rigor la función del director financiero?",
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Foto Wuolah Q8] Una empresa tiene una tesorería disponible en el momento actual de 10.000 euros. Si decidiera invertir hoy la mitad en un proyecto empresarial con el que se maximiza el VAN, podría obtener dentro de un año un flujo de caja esperado de 5.565 €. El tipo de interés en el mercado de capitales es del 5%. ¿Cuál sería el disponible en el momento actual si decide consumir hoy lo máximo posible?",
       "opts": [
-        "Actúa como intermediario financiero sustituyendo el papel de los bancos comerciales.",
-        "Toma las decisiones de inversión en activos reales y las decisiones de financiación para obtener los fondos requeridos en los mercados financieros.",
-        "Garantiza que la rentabilidad de las acciones supere siempre a la inflación sin asumir riesgo.",
-        "Establece las directrices operativas del diseño técnico de los productos de la empresa."
-      ],
-      "correct": 1,
-      "justification": "Las dos decisiones fundamentales del director financiero son: (1) Decisión de inversión o presupuesto de capital (en qué activos reales invertir) y (2) Decisión de financiación (cómo captar fondos en los mercados financieros, emitiendo acciones o deuda)."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "¿Qué rasgo jurídico y patrimonial distingue fundamentalmente a una Sociedad Anónima (S.A.) de una empresa individual o de autónomo?",
-      "opts": [
-        "En la S.A. los socios responden de las deudas sociales con todo su patrimonio personal presente y futuro.",
-        "En la S.A. la responsabilidad de los accionistas está estrictamente limitada al capital aportado, facilitando la separación entre propiedad y control.",
-        "La empresa individual puede emitir obligaciones y cotizar directamente en bolsa.",
-        "La S.A. no está obligada a auditar ni publicar sus cuentas anuales."
-      ],
-      "correct": 1,
-      "justification": "La Sociedad Anónima cuenta con personalidad jurídica propia y responsabilidad limitada de los accionistas al capital aportado, lo cual posibilita la libre transmisibilidad de títulos y la delegación de la gestión en administradores profesionales (separación propiedad-control)."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "¿Cuál es la función del Mercado Primario frente al Mercado Secundario?",
-      "opts": [
-        "En el mercado primario se negocian exclusivamente activos financieros emitidos en años anteriores.",
-        "El mercado primario canaliza fondos directamente a las empresas mediante la emisión y colocación de nuevos títulos, mientras que el mercado secundario aporta liquidez intercambiando activos ya emitidos.",
-        "El mercado primario ofrece liquidez a los accionistas existentes sin alterar los fondos de la empresa emisora.",
-        "El mercado secundario es donde las empresas captan por primera vez capital social."
-      ],
-      "correct": 1,
-      "justification": "En el mercado primario nacen los activos (la empresa recibe el dinero de la suscripción para financiar sus inversiones). En el mercado secundario (como las bolsas de valores) los títulos se intercambian entre inversores, proporcionando liquidez y formación de precios sin que la empresa reciba nuevos fondos."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "Un inversor dispone hoy de 12.000 € de dotación inicial. El tipo de interés de mercado es del 4%. Invierte en activos reales 4.000 €, lo que le genera un VAN de 2.000 € (el máximo posible). Si el horizonte temporal es de 1 año, ¿a cuánto asciende el flujo de caja del proyecto en t=1?",
-      "opts": [
-        "4.160 €",
-        "6.240 €",
-        "6.000 €",
-        "2.080 €"
-      ],
-      "correct": 1,
-      "justification": "Sabemos que VAN = -I0 + [C1 / (1 + r)]. Sustituyendo: 2.000 = -4.000 + [C1 / 1,04] => 6.000 = C1 / 1,04 => C1 = 6.000 * 1,04 = 6.240 €. Corresponde exactamente a la resolución del Problema 3 de la relación oficial."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "Siguiendo el supuesto anterior (dotación inicial 12.000 €, inversión real 4.000 €, r = 4%, VAN = 2.000 €), ¿en cuánto se incrementa la riqueza del inversor si tiene preferencia absoluta por el consumo FUTURO (t=1)?",
-      "opts": [
-        "2.000 €",
-        "2.080 €",
-        "14.560 €",
-        "8.320 €"
-      ],
-      "correct": 1,
-      "justification": "Si no invirtiese en el proyecto real y prestase todo en el mercado financiero: Consumo en t=1 = 12.000 * 1,04 = 12.480 €. Al acometer el proyecto: invierte 4.000 € en el activo real (recibe 6.240 € en t=1) y los 8.000 € sobrantes los presta al 4% (recibe 8.000 * 1,04 = 8.320 € en t=1). Consumo total en t=1 = 6.240 + 8.320 = 14.560 €. El incremento neto de riqueza futura es 14.560 - 12.480 = 2.080 € (que coincide exactamente con VAN * (1+r) = 2.000 * 1,04 = 2.080 €)."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "Una empresa posee 5.000 € de los que utiliza 2.000 € para realizar una inversión en activos reales que maximiza su VAN, siendo este de 500 €. El tipo de interés en el mercado de capitales es del 2%. ¿Cuál sería el disponible máximo en t=1 si decide consumir todo en t=1?",
-      "opts": [
-        "5.610 €",
-        "3.500 €",
-        "5.100 €",
-        "5.000 €"
-      ],
-      "correct": 0,
-      "justification": "De la inversión real: VAN = 500 = -2.000 + C1 / 1,02 => C1 = 2.500 * 1,02 = 2.550 €. De la tesorería sobrante no invertida en el proyecto (5.000 - 2.000 = 3.000 €), colocada en el mercado financiero al 2%: 3.000 * 1,02 = 3.060 €. Disponible total en t=1 = 2.550 + 3.060 = 5.610 €."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "Un inversor dispone hoy de 100.000 € y desea consumir exactamente la misma cuantía en t=0 y en t=1 (C0 = C1). Si el tipo de interés en el mercado de capitales es del 5%, ¿cuánto podrá consumir en cada periodo?",
-      "opts": [
-        "50.000,00 €",
-        "51.219,51 €",
-        "48.780,49 €",
-        "52.500,00 €"
-      ],
-      "correct": 1,
-      "justification": "Restricción presupuestaria intertemporal: C0 + [C1 / (1 + r)] = 100.000 €. Si C0 = C1 = x: x * [1 + 1/1,05] = 100.000 € => x * [2,05 / 1,05] = 100.000 € => x = 100.000 * (1,05 / 2,05) = 51.219,51 €."
-    },
-    {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "Suponga que percibe 12.000 € este año y 12.600 € el próximo año. Decide invertir 10.000 € hoy en desarrollar una aplicación móvil que generará un único flujo de 13.000 € el próximo año. El tipo de interés de mercado es del 15%. Indique la afirmación correcta:",
-      "opts": [
-        "Si decide prestar el resto en el mercado financiero, el disponible máximo en el año 1 será de 28.590 €.",
-        "Si no realiza la inversión en la app y presta todo, su disponible máximo en el año 1 sería de 24.600 €.",
-        "La tasa de rentabilidad de la inversión en la app es del 30%, superior al coste de oportunidad del capital (15%), por lo que incrementa su riqueza.",
-        "No debe realizar la inversión porque 10.000 € es casi todo su sueldo de este año."
+        "a) La disponibilidad máxima para consumir en el momento actual será de 10.000 euros.",
+        "b) La disponibilidad máxima para consumir en el momento actual será de 10.565 euros.",
+        "c) La disponibilidad máxima para consumir en el momento actual será de 10.300 euros.",
+        "d) Ninguna de las respuestas anteriores es correcta."
       ],
       "correct": 2,
-      "justification": "Tasa de retorno de la app: (13.000 - 10.000) / 10.000 = 30%. Como 30% > 15%, el proyecto tiene VAN positivo (+1.304,35 €) y rinde más que el mercado. Además: si invierte en la app, en t=1 tiene 13.000 (app) + 12.600 (sueldo t=1) + 2.000*1,15 (ahorro prestado) = 27.900 € (no 28.590 €). Si no invierte: 12.600 + 12.000*1,15 = 26.400 € (no 24.600 €). Pregunta de examen oficial 2018-2019."
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 8 = c): la empresa conserva la mitad de la tesorería sin invertir (5.000 €) e invierte los otros 5.000 € en el proyecto que genera 5.565 € en t = 1. El Valor Actual de ese flujo al 5% es VA = 5.565 / 1,05 = 5.300 € (VAN = -5.000 + 5.300 = +300 €). Gracias al mercado de capitales (Teorema de separación de Fisher), el máximo disponible para consumir hoy es 5.000 + 5.300 = 10.300 € (o bien la riqueza inicial 10.000 € + VAN 300 € = 10.300 €)."
     },
     {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "En el modelo de Fisher, si una empresa invierte en activos reales el importe óptimo y repentinamente se produce una DISMINUCIÓN de los tipos de interés de mercado:",
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Relación Problemas P1] Indique en qué clase de mercados financieros tienen lugar las siguientes operaciones: (1) Compra en una tienda una lavadora y solicita la financiación al banco pagando el préstamo en 2 años; (2) Acude a una subasta de Letras del Tesoro y compra una con vencimiento a 6 meses; (3) Acude a su intermediario financiero y da orden de compra de acciones del Banco Santander:",
       "opts": [
-        "El volumen de inversión inicial óptima disminuirá y los prestamistas verán mejorada su situación.",
-        "El volumen de inversión inicial óptima aumentará, requiriendo más capital en proyectos reales, y un inversor que prefiera consumo futuro verá reducida su riqueza potencial respecto a tasas más altas.",
-        "No cambia el volumen de inversión óptima porque éste depende únicamente de la tecnología productiva.",
-        "La curva de posibilidades productivas se desplaza hacia el origen."
+        "a) (1) Secundario de préstamos; (2) Primario y monetario; (3) Primario y de capitales.",
+        "b) (1) Primario y de capitales; (2) Primario y monetario; (3) Secundario y de capitales.",
+        "c) (1) Monetario y primario; (2) Secundario y monetario; (3) Secundario y de capitales.",
+        "d) (1) Primario y de capitales; (2) Secundario y de capitales; (3) Primario y monetario."
       ],
       "correct": 1,
-      "justification": "Al bajar el tipo de interés r, la pendiente de la recta presupuestaria [-(1+r)] se hace menos inclinada. El punto de tangencia se desplaza hacia la derecha sobre la curva cóncava de producción, aumentando la inversión en activos reales (I0 aumenta). Para los prestamistas netos (quienes prefieren consumir en t=1 prestando su dinero), la rentabilidad del mercado cae, empeorando su posición de consumo futuro frente al escenario anterior."
+      "justification": "(1) La concesión de un préstamo bancario a 2 años es una emisión nueva (mercado primario) y con vencimiento superior al año (mercado de capitales). (2) La subasta de Letras del Tesoro a 6 meses es emisión nueva (mercado primario) y a corto plazo <= 18 meses (mercado monetario). (3) La compra en Bolsa de acciones ya emitidas de Banco Santander es una negociación en mercado secundario y de renta variable/largo plazo (mercado de capitales)."
     },
     {
-      "tema": "Tema 1: La Empresa y el Director Financiero",
-      "q": "¿Qué se entiende por problema de agencia entre accionistas y directivos en la empresa?",
+      "tema": "Tema 1 — Introducción a las Finanzas y Mercados Financieros",
+      "q": "[Relación Problemas P2] ¿Cuáles de las siguientes son decisiones de inversión o presupuesto de capital y cuáles son decisiones de financiación?",
       "opts": [
-        "El conflicto entre los bancos comerciales y el Banco Central.",
-        "La discrepancia potencial cuando los directivos anteponen sus propios intereses personales (poder, remuneración, seguridad laboral) a la maximización de la riqueza de los propietarios (accionistas).",
-        "El desacuerdo legal entre clientes y proveedores sobre los plazos de entrega.",
-        "La diferencia entre el tipo impositivo de sociedades y el IRPF."
-      ],
-      "correct": 1,
-      "justification": "La teoría de la agencia estudia los conflictos de interés derivados de la separación de la propiedad (accionistas) y el control (gestores), requiriendo mecanismos de gobierno corporativo (consejos de administración, planes de compensación con opciones sobre acciones) para alinear objetivos."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "Según el Modelo de Descuento de Dividendos con Crecimiento Constante (Gordon-Shapiro), el precio actual de la acción (P0) se calcula como:",
-      "opts": [
-        "P0 = BPA1 / r",
-        "P0 = D1 / (r - g)",
-        "P0 = D0 / (r + g)",
-        "P0 = (D1 + P1) / (1 + g)"
-      ],
-      "correct": 1,
-      "justification": "La fórmula canónica de Gordon-Shapiro para dividendos que crecen a tasa geométrica constante 'g' a perpetuidad con coste de capital r > g es P0 = D1 / (r - g), donde D1 es el dividendo esperado del próximo periodo."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "En el modelo de Gordon-Shapiro, ¿cómo se descompone la tasa de rentabilidad esperada por el mercado (r) para una acción?",
-      "opts": [
-        "r = (D1 / P0) + g, es decir, rentabilidad por dividendo (dividend yield) más tasa esperada de plusvalía (crecimiento del capital).",
-        "r = (BPA1 / P0) - g",
-        "r = (D0 / P0) * g",
-        "r = BPA1 * ROE"
+        "a) Adquirir una fábrica, un camión o una patente son decisiones de inversión; emitir obligaciones o pedir un préstamo bancario son decisiones de financiación.",
+        "b) Emitir acciones es una decisión de inversión; amortizar deuda bancaria es una decisión de presupuesto de capital.",
+        "c) Invertir en I+D es una decisión de financiación; comprar maquinaria es una decisión de estructura de capital.",
+        "d) Todas las decisiones anteriores son exclusivamente decisiones de financiación."
       ],
       "correct": 0,
-      "justification": "Despejando r en P0 = D1 / (r - g), se obtiene r = (D1 / P0) + g. El primer sumando representa el rendimiento inmediato por dividendo de la tesorería y el segundo término (g) representa la tasa de crecimiento del capital o plusvalía esperada."
+      "justification": "Toda adquisición de activos reales tangibles (fábricas, maquinaria, vehículos) o intangibles (I+D, patentes, marcas) forma parte de la decisión de inversión o presupuesto de capital. La captación de fondos mediante deuda (préstamos, obligaciones) o recursos propios (acciones) constituye la decisión de financiación."
     },
     {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "La tasa de crecimiento sostenible de los dividendos (g) de una empresa financiada íntegramente con recursos propios viene dada por la expresión:",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Respecto a un bono que ofrece un cupón fijo pagadero anualmente, señale la opción correcta:",
       "opts": [
-        "g = Payout * ROE",
-        "g = b * ROE, donde b es la tasa de retención de beneficios (1 - Payout) y ROE es la rentabilidad sobre el capital contable.",
-        "g = (1 - b) * r",
-        "g = BPA1 / P0"
-      ],
-      "correct": 1,
-      "justification": "La tasa de crecimiento a largo plazo es el producto de la fracción de beneficios reinvertida en la empresa (tasa de retención b = Reservas / Beneficio Neto) multiplicada por el rendimiento que genera dicha reinversión (ROE): g = b * ROE."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "¿Bajo qué condición fundamental la reinversión de beneficios en nuevos proyectos genera valor y provoca un Valor Actual de las Oportunidades de Crecimiento (VAOC) estrictamente POSITIVO?",
-      "opts": [
-        "Siempre que la empresa reinvierta cualquier porcentaje positivo de sus beneficios, con independencia de la rentabilidad.",
-        "Únicamente si la rentabilidad esperada de los nuevos proyectos (ROE) es superior al coste de oportunidad del capital (r), es decir, cuando los proyectos tienen VAN > 0.",
-        "Cuando la tasa de reparto de dividendos (payout) sea superior al 80%.",
-        "Cuando la ROE coincide exactamente con la tasa de descuento del mercado r."
-      ],
-      "correct": 1,
-      "justification": "Retener fondos para reinvertir sólo crea riqueza neta para el accionista si la empresa obtiene una rentabilidad (ROE) mayor de la que el accionista podría obtener por su cuenta en el mercado de capitales para un nivel de riesgo similar (r). Si ROE = r, el VAOC = 0 y el precio de la acción no varía al reinvertir; si ROE < r, la reinversión destruye valor (VAOC < 0)."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "La descomposición canónica del precio de una acción como suma del valor bajo política de no crecimiento y las oportunidades de crecimiento se expresa como:",
-      "opts": [
-        "P0 = (D1 / g) + VAOC",
-        "P0 = (BPA1 / r) + VAOC",
-        "P0 = (BPA1 / (r - g)) - VAOC",
-        "P0 = (Activo Contable / Acciones) + g"
-      ],
-      "correct": 1,
-      "justification": "El precio de toda acción se compone de: (1) El valor de la empresa si repartiese el 100% de sus beneficios sin crecer (renta perpetua BPA1 / r) más (2) El valor actualizado neto de todas las inversiones futuras rentables que acometerá la empresa (VAOC): P0 = (BPA1 / r) + VAOC."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "Una empresa prevé un BPA para el próximo año de 25 €/acción y una tasa de reparto de dividendos del 40%. Estima que sus dividendos podrán crecer de forma constante al 5% a perpetuidad. Si la tasa de capitalización del mercado es del 9%, ¿cuál es el precio de la acción según Gordon-Shapiro?",
-      "opts": [
-        "111,11 €",
-        "250,00 €",
-        "277,78 €",
-        "180,00 €"
-      ],
-      "correct": 1,
-      "justification": "El dividendo del próximo año es D1 = BPA1 * Payout = 25 € * 0,40 = 10 €. Aplicando Gordon-Shapiro: P0 = D1 / (r - g) = 10 / (0,09 - 0,05) = 10 / 0,04 = 250,00 €/acción. Corresponde al Problema 5 de la relación oficial."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "Las acciones de una sociedad cotizan a 73 €/acción. El BPA esperado para el próximo año es de 2,80 €, del que se repartirá un dividendo de 1,68 €. Si la rentabilidad sobre el capital invertido (ROE) es del 20%, ¿cuál es la tasa de crecimiento esperada (g) y la tasa de descuento del mercado (r)?",
-      "opts": [
-        "g = 12% y r = 14,30%",
-        "g = 8% y r = 10,30%",
-        "g = 8% y r = 12,00%",
-        "g = 10% y r = 12,50%"
-      ],
-      "correct": 1,
-      "justification": "El importe reinvertido es 2,80 - 1,68 = 1,12 €, lo que representa una tasa de retención b = 1,12 / 2,80 = 0,40 (40%). La tasa de crecimiento es g = b * ROE = 0,40 * 0,20 = 0,08 (8%). Despejando la tasa de descuento r en Gordon-Shapiro: r = (D1 / P0) + g = (1,68 / 73) + 0,08 = 0,02301 + 0,08 = 0,10301 (10,30%). Corresponde al Problema 6 de la relación oficial."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "Conocemos los siguientes datos de una acción: D1 = 5 €, tasa de crecimiento de dividendos g = 5% a perpetuidad y tasa de capitalización de mercado r = 10%. El inversor A comprará acciones hoy y las venderá dentro de un año; el inversor B comprará hoy y las venderá dentro de dos años. Indique la afirmación correcta:",
-      "opts": [
-        "El inversor A pagará hoy un precio menor que el inversor B porque su horizonte de inversión es más corto.",
-        "El inversor B pagará más porque percibirá dos dividendos en lugar de uno.",
-        "Ambos inversores pagarán hoy exactamente el mismo precio de 100 €, ya que el precio de la acción es el valor actual de todos los dividendos futuros independientemente del horizonte temporal.",
-        "Ambos inversores pagarán hoy 105 €."
+        "a) Su precio varía en relación directa con los cambios de los tipos de interés del mercado.",
+        "b) Si cotiza con prima (sobre la par) es porque el interés del cupón es inferior a la rentabilidad exigida hoy por el mercado.",
+        "c) Su precio varía en relación inversa a los cambios de los tipos de interés del mercado.",
+        "d) Su valor nominal cambia cada día según los tipos de interés del mercado."
       ],
       "correct": 2,
-      "justification": "En un mercado de capitales eficiente, el precio de cotización hoy refleja el valor actual de la corriente infinita esperada de flujos. P0 = D1 / (r - g) = 5 / (0,10 - 0,05) = 100 €. Quien vende en t=1 recibe D1 y vende al precio P1 = D2 / (r - g) = 5 * 1,05 / 0,05 = 105 €, cuyo valor descontado a t=0 es (5 + 105) / 1,10 = 100 €. Pregunta oficial de examen 2018-2019."
+      "justification": "Al ser los cupones y el valor nominal flujos fijos que figuran en el numerador y la rentabilidad exigida por el mercado (r) la tasa de descuento en el denominador, cuando sube el tipo de interés de mercado disminuye el precio actual del bono (relación inversa)."
     },
     {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "¿Por qué un ratio PER (Precio / Beneficio por Acción) alto NO debe interpretarse mecánicamente como una señal inequívoca de bajo coste de capital o de sobreprecio injustificado?",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Con respecto a la relación entre la duración de los bonos y la sensibilidad ante cambios en los tipos de interés, ¿cuál de las siguientes afirmaciones es correcta?",
       "opts": [
-        "Porque el PER es un indicador que sólo se aplica a títulos de renta fija como letras del tesoro.",
-        "Porque un PER elevado puede deberse a que el mercado anticipa un elevado Valor Actual de las Oportunidades de Crecimiento (VAOC) con proyectos muy rentables (ROE > r), o bien a una caída coyuntural y transitoria en el denominador (BPA).",
-        "Porque el PER siempre es numéricamente igual a 1 / g.",
-        "Porque el PER ignora los beneficios netos de la compañía."
-      ],
-      "correct": 1,
-      "justification": "Dado que P0 / BPA1 = (1 / r) + [VAOC / (BPA1 * r)], un PER alto refleja normalmente la existencia de valiosas oportunidades de crecimiento futuro (VAOC > 0) o un año de beneficios excepcionalmente bajos en el denominador que se recuperarán en el futuro."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "¿Cuál es el ratio PER de una empresa cuya cotización actual es de 45 €, sus dividendos por acción previstos son de 2 € y mantiene una tasa de reinversión de beneficios del 60%?",
-      "opts": [
-        "9 veces",
-        "20 veces",
-        "13,5 veces",
-        "22,5 veces"
-      ],
-      "correct": 0,
-      "justification": "Si la tasa de retención (reinversión) es b = 60%, la tasa de reparto (payout) es 1 - b = 40%. Por tanto: BPA1 = D1 / Payout = 2 € / 0,40 = 5 € por acción. El ratio PER resulta: PER = P0 / BPA1 = 45 € / 5 € = 9 veces."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "La empresa GREEN ROCK CORP. tiene una ROE del 15% y una tasa de reparto de dividendos del 40%. El capital contable por acción es de 80 €. La ROE y el reparto se mantendrán constantes durante 3 años. A partir de t=3, la competencia reduce la ROE al coste de capital (r = 10%) y el reparto sube al 80%. ¿Cuál es el VAOC a partir del año 3?",
-      "opts": [
-        "El VAOC a partir de t=3 es estrictamente CERO, porque los proyectos posteriores rinden al mismo nivel que el coste de capital (ROE = r), no generando valor neto.",
-        "El VAOC a partir de t=3 es igual a 80 € por acción.",
-        "El VAOC se vuelve fuertemente negativo destruyendo la empresa.",
-        "El VAOC es infinito por ser a perpetuidad."
-      ],
-      "correct": 0,
-      "justification": "Cuando el rendimiento de las nuevas inversiones (ROE) iguala a la tasa de descuento exigida por el mercado (r), el VAN de cada proyecto acometido es idénticamente CERO. Por tanto, las oportunidades de crecimiento dejan de aportar valor por encima del capital invertido y el VAOC futuro es nulo. Corresponde al Problema 10 de la relación oficial."
-    },
-    {
-      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
-      "q": "La compañía X tiene emitidas 5.000 acciones, cotiza a 6 € y presenta: Ventas = 1.000 €, Coste Ventas = 350 €, BAII = 650 €, Intereses = 65 €, BAI = 585 €, Resultado Neto = 380 € (repartiendo 152 € a dividendos y 228 € a reservas). Indique la afirmación FALSA:",
-      "opts": [
-        "La tasa de reparto de dividendos de la compañía es del 40%.",
-        "La capitalización bursátil de la compañía asciende a 30.000 €.",
-        "El ratio PER de la compañía es de 15 veces.",
-        "La compañía soporta un gasto por impuesto de sociedades de 205 €."
+        "a) Los bonos con mayor plazo hasta el vencimiento son menos sensibles a los cambios en los tipos de interés.",
+        "b) Los bonos con menor plazo son más sensibles a los cambios en los tipos de interés.",
+        "c) Los bonos con mayor plazo tienen precios que fluctúan más cuando cambian los tipos de interés.",
+        "d) La sensibilidad del precio de un bono a los tipos de interés no depende del plazo de vencimiento."
       ],
       "correct": 2,
-      "justification": "Es FALSA: La capitalización bursátil es 5.000 acciones * 6 € = 30.000 €. El Resultado Neto total es 380 €. Por tanto, el PER de la empresa es Capitalización / Resultado Neto = 30.000 / 380 = 78,95 veces (¡muy superior a 15 veces!). Las demás son verdaderas: Payout = 152 / 380 = 40%; Impuestos = BAI - BN = 585 - 380 = 205 €."
+      "justification": "Cuanto mayor es el plazo hasta el vencimiento (y menor el cupón), mayor es la duración del bono y más sensibles son sus flujos de caja lejanos al factor de descuento (1+r)^t, provocando fluctuaciones mayores en el precio ante variaciones en los tipos de interés."
     },
     {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "¿Cuál es la principal ventaja metodológica y económica del Valor Actual Neto (VAN) frente a los restantes criterios de valoración?",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Si el precio de mercado de un bono es inferior a su valor nominal, podemos afirmar que:",
       "opts": [
-        "No depende de los flujos de tesorería del proyecto.",
-        "Mide directamente en unidades monetarias absolutas la creación neta de riqueza que la inversión añade al valor de la empresa, respetando la propiedad aditiva del valor (VAN(A+B) = VAN(A) + VAN(B)).",
-        "No requiere estimar ninguna tasa de descuento o coste de oportunidad.",
-        "Favorece siempre a los proyectos de duración más corta."
-      ],
-      "correct": 1,
-      "justification": "El VAN es el criterio soberano porque descuenta todos los flujos de caja netos al coste de oportunidad del capital, refleja en euros directos el incremento patrimonial de los propietarios y cumple la propiedad de aditividad del valor, eliminando inconsistencias."
-    },
-    {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "Señale la afirmación FALSA respecto a la Tasa Interna de Rentabilidad (TIR):",
-      "opts": [
-        "La TIR es la tasa de descuento que hace que el VAN del proyecto sea igual a cero.",
-        "En proyectos con flujos netos de signo alternante (+, -, +) pueden existir múltiples valores de TIR que anulan el VAN, o incluso carecer de solución real.",
-        "Al elegir entre proyectos mutuamente excluyentes con diferente desembolso inicial, la TIR siempre conduce a la misma decisión óptima que el VAN.",
-        "El criterio TIR asume implícitamente que los flujos intermedios se reinvierten a la propia tasa TIR en lugar de al coste de oportunidad del capital (r)."
+        "a) La rentabilidad al vencimiento es menor que la tasa del cupón.",
+        "b) El bono se vende con prima.",
+        "c) La rentabilidad al vencimiento es mayor que la tasa del cupón.",
+        "d) La tasa del cupón es igual a la rentabilidad al vencimiento."
       ],
       "correct": 2,
-      "justification": "Es FALSA: La TIR presenta el problema de escala. Un proyecto de 10 € con una TIR del 100% genera 10 € de VAN, mientras que uno de 1.000.000 € con una TIR del 20% (con r=10%) genera un VAN de cientos de miles de euros. Elegir por TIR llevaría a rechazar el proyecto que más riqueza crea."
+      "justification": "Un bono cotiza bajo la par (con descuento, P0 < VN) si y solo si la rentabilidad exigida por el mercado (TIR o rentabilidad al vencimiento, r) es superior al tipo de cupón nominal del bono (r > i)."
     },
     {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "A una empresa se le presentan dos inversiones mutuamente excluyentes con coste de capital r = 10%. Inversión A: desembolso 1.000 €, genera 1.800 € en t=1 (TIR = 80%). Inversión B: desembolso 500 €, genera 1.000 € en t=1 (TIR = 100%). Indique la afirmación correcta:",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] La empresa ALFA ha emitido un título de renta fija a 3 años con un valor nominal de 250 € y un interés anual del 5%. La rentabilidad hasta el vencimiento de títulos de características similares emitidos recientemente es del 3%. Con esta información, señale la respuesta correcta:",
       "opts": [
-        "La inversión A tiene mayor tasa de rentabilidad esperada (TIR) que la B.",
-        "La inversión B tiene una TIR superior a la A (100% frente a 80%), pero la inversión A genera mayor VAN (636,36 € frente a 409,09 €) y debe ser la elegida.",
-        "La empresa debe elegir obligatoriamente la inversión B porque tiene un 100% de TIR.",
-        "Ambas inversiones tienen idéntico VAN."
+        "a) El valor de la obligación a día de hoy será de 250 €.",
+        "b) Si el tipo de interés de mercado aumenta, el precio del título aumentará.",
+        "c) Si la empresa emite de nuevo títulos similares, el interés anual que ofrecerá será del 5%.",
+        "d) El precio actual del título es 264,14 €."
+      ],
+      "correct": 3,
+      "justification": "El cupón anual es C = 5% x 250 = 12,50 €. Descontando al tipo de mercado r = 3% durante 3 años: P0 = 12,50 / 1,03 + 12,50 / 1,03^2 + 262,50 / 1,03^3 = 12,1359 + 11,7824 + 240,2246 = 264,14 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] ¿Qué sucederá con el valor de un bono con cupón fijo anual si los tipos de interés de mercado aumentan inmediatamente después de su emisión?",
+      "opts": [
+        "a) El valor del bono aumentará.",
+        "b) El valor del bono disminuirá.",
+        "c) El valor del bono permanecerá igual.",
+        "d) El valor del bono aumentará inicialmente y luego disminuirá."
       ],
       "correct": 1,
-      "justification": "TIR_A = (1.800 - 1.000)/1.000 = 80%; VAN_A = -1.000 + 1.800/1,10 = 636,36 €. TIR_B = (1.000 - 500)/500 = 100%; VAN_B = -500 + 1.000/1,10 = 409,09 €. Aunque B rinde porcentualmente más por cada euro invertido, A crea más valor absoluto para el accionista (VAN_A > VAN_B), demostrando la superioridad del VAN frente al sesgo de escala de la TIR."
+      "justification": "Un incremento en los tipos de interés de mercado aumenta la tasa de descuento aplicada a los flujos futuros del bono, reduciendo su valor actual (precio de cotización)."
     },
     {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "Al comparar dos proyectos de inversión mutuamente excluyentes, el punto de corte en el que el VAN de ambos proyectos es idéntico se denomina:",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Un bono del Estado a 5 años con un valor nominal de 1.000 euros paga un cupón anual de 60 euros. Si la rentabilidad exigida por el mercado para bonos similares es del 4% anual, el precio actual de este bono será:",
       "opts": [
-        "Tasa de rentabilidad contable.",
-        "Tasa de corte o tasa de indiferencia de Fisher (obtenida calculando la TIR del proyecto diferencial o incremental).",
-        "Plazo de recuperación descontado.",
-        "Índice de rentabilidad ponderado."
-      ],
-      "correct": 1,
-      "justification": "La tasa de Fisher es la tasa de descuento que iguala el VAN de dos proyectos. Se calcula como la TIR del flujo de fondos incremental (Proyecto A - Proyecto B). Si el coste de capital r es menor que la tasa de Fisher, el proyecto con mayor volumen o vida más larga suele tener mayor VAN a pesar de tener una TIR individual inferior."
-    },
-    {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "¿Cuáles son las dos principales deficiencias teóricas del criterio del Plazo de Recuperación (Payback) estático?",
-      "opts": [
-        "Es muy difícil de calcular y requiere herramientas informáticas avanzadas.",
-        "No considera el valor temporal del dinero (suma euros de diferentes años como si fuesen equivalentes) e ignora por completo todos los flujos de tesorería generados después de haber alcanzado el plazo fijado.",
-        "Exige conocer con exactitud la inflación esperada a 30 años.",
-        "Sobredimensiona los proyectos de mayor volumen inicial."
-      ],
-      "correct": 1,
-      "justification": "El payback simple es miope: premia proyectos rápidos con cobros inmediatos aunque luego quiebren o no generen nada más, y descarta proyectos que requieren maduración pero que después generan flujos gigantescos y sostenibles con altísimo VAN."
-    },
-    {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "El Índice de Rentabilidad (IR = Valor Actual de los Flujos / Desembolso Inicial) es una herramienta recomendada cuando:",
-      "opts": [
-        "Existen flujos de caja con signos cambiantes.",
-        "La empresa opera en un contexto de racionamiento de capital financiero con proyectos independientes y divisibles.",
-        "Los proyectos son mutuamente excluyentes con vidas útiles desiguales.",
-        "No se conoce el desembolso inicial de la inversión."
-      ],
-      "correct": 1,
-      "justification": "Bajo racionamiento presupuestario estricto (fondos limitados para invertir hoy), el Índice de Rentabilidad o ratio beneficio-coste permite ordenar proyectos independientes y divisibles según el valor actual generado por cada euro invertido, maximizando el VAN global del presupuesto disponible."
-    },
-    {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "Un proyecto requiere una inversión inicial de 100.000 € y genera flujos netos de caja constantes de 50.000 € anuales durante 3 años. Si el coste de oportunidad del capital es del 10% y no hay impuestos, ¿cuál es el VALOR ACTUAL (VA) de los flujos generados?",
-      "opts": [
-        "24.342,60 €",
-        "124.342,60 €",
-        "150.000,00 €",
-        "100.000,00 €"
-      ],
-      "correct": 1,
-      "justification": "El valor actual de una anualidad de 3 años es VA = 50.000 * [(1 - (1,10)^-3) / 0,10] = 50.000 * 2,48685 = 124.342,60 €. El VAN sería VA - I0 = 124.342,60 - 100.000 = 24.342,60 €. Pregunta de test de examen oficial."
-    },
-    {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "¿Qué significa exactamente que un proyecto de inversión tenga un VAN = 0?",
-      "opts": [
-        "Que la empresa no recupera la inversión inicial y quiebra.",
-        "Que la inversión genera exactamente los flujos necesarios para devolver el capital invertido y remunerar a los inversores a la tasa mínima de rentabilidad exigida (coste de oportunidad), sin generar plusvalía o riqueza extraordinaria.",
-        "Que la tasa interna de rentabilidad es cero.",
-        "Que la cifra de negocio anual es nula."
-      ],
-      "correct": 1,
-      "justification": "VAN = 0 no significa rentabilidad nula; significa que la inversión rinde exactamente la tasa de descuento exigida r. Los fondos aplicados recuperan el principal y pagan a los proveedores de capital (deuda y fondos propios) exactamente su retribución de equilibrio de mercado."
-    },
-    {
-      "tema": "Tema 3: Criterios de Selección de Inversiones",
-      "q": "Si consideramos una operación con estructura de PRÉSTAMO (recibir hoy fondos positivos y devolver salidas de caja futuras), la regla de decisión con la TIR debe ser:",
-      "opts": [
-        "Aceptar si la TIR es mayor que el coste del capital.",
-        "Aceptar si la TIR es MENOR que la tasa de coste de oportunidad, porque interesa endeudarse al menor tipo de interés posible.",
-        "La TIR no se puede aplicar a operaciones de financiación.",
-        "Aceptar siempre que la TIR sea positiva."
-      ],
-      "correct": 1,
-      "justification": "En un préstamo, los flujos son (+I0, -C1, -C2...). La pendiente del VAN respecto a r es positiva y creciente. Por tanto, la operación es ventajosa (VAN > 0) si y sólo si el coste efectivo (TIR) es estrictamente inferior al coste de las fuentes alternativas en el mercado (TIR < r)."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Al cuantificar los flujos de caja de un proyecto de inversión, ¿cuál de los siguientes conceptos NUNCA debe incluirse?",
-      "opts": [
-        "El coste de oportunidad por el uso de terrenos o naves en propiedad.",
-        "Los costes de I+D y estudios de mercado ya realizados e incurridos en el pasado con anterioridad a la decisión (costes hundidos o irrecuperables).",
-        "La reducción de ingresos en otras líneas de productos de la empresa provocada por el nuevo producto (canibalización).",
-        "La inversión inicial y variaciones en el Fondo de Maniobra."
-      ],
-      "correct": 1,
-      "justification": "Regla de oro de los flujos de caja: Los costes pasados, irreversibles y hundidos (sunk costs) se pagarán tanto si se realiza el proyecto como si se cancela; por tanto, no son flujos incrementales y deben excluirse totalmente de la evaluación."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "¿Por qué los gastos financieros (intereses de la deuda bancaria) se EXCLUYEN del cálculo del Flujo de Caja Libre Operativo del proyecto?",
-      "opts": [
-        "Porque la legislación fiscal prohíbe deducirlos.",
-        "Porque la retribución de los acreedores financieros y el coste de la deuda ya están incorporados en la tasa de descuento (WACC o coste de oportunidad del capital); deducirlos en el flujo supondría penalizarlos dos veces.",
-        "Porque los gastos financieros siempre se compensan con subvenciones públicas.",
-        "Porque los proyectos de inversión nunca se financian con deuda."
-      ],
-      "correct": 1,
-      "justification": "Principio de separación entre decisión de inversión y de financiación: El flujo de caja debe medir la capacidad del activo real para generar tesorería operativa con independencia de cómo se financie. El coste del capital ajeno se recoge en el denominador a través de la tasa de descuento."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "En un periodo el BAIT de una empresa es de 100 €, la amortización fiscal es de 5 €, los gastos financieros son de 10 €, el tipo del impuesto de sociedades es del 25% y no hay variación en el fondo de maniobra. ¿A cuánto asciende el flujo de caja operativo del proyecto a efectos de valoración?",
-      "opts": [
-        "76,25 €",
-        "80,00 €",
-        "68,75 €",
-        "72,50 €"
-      ],
-      "correct": 1,
-      "justification": "A efectos de evaluar el proyecto de inversión (Flujo de Caja Libre), se ignora el gasto financiero de la deuda: Impuestos operativos = BAIT * t = 100 * 0,25 = 25 €. Flujo de Caja Libre = BAIT * (1 - t) + Amortización - Delta FM = 100 * 0,75 + 5 - 0 = 75 + 5 = 80,00 €. Pregunta oficial de examen 2018-2019."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "La dotación a la amortización técnica del inmovilizado:",
-      "opts": [
-        "Constituye una salida efectiva de tesorería que reduce directamente la caja de la empresa.",
-        "No es una salida física de dinero, pero es un gasto deducible que genera un ahorro de impuestos denominado escudo fiscal de la amortización (t * Amortización).",
-        "Debe sumarse dos veces al beneficio neto.",
-        "Sólo se tiene en cuenta si la empresa tiene pérdidas contables."
-      ],
-      "correct": 1,
-      "justification": "La amortización es un apunte contable que no consume tesorería. Al ser fiscalmente deducible, reduce la base imponible del Impuesto de Sociedades, generando un ahorro fiscal de caja equivalente a t * Amortización (o fórmula FCL = EBIT*(1-t) + Amort)."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "En el periodo t=1 una empresa paga sus compras de existencias al contado. En t=2 sus proveedores le conceden un plazo de pago de 60 días. Manteniéndose constante el resto de variables, este cambio provocará:",
-      "opts": [
-        "Un aumento del fondo de maniobra en t=2 y una disminución de la tesorería.",
-        "Una disminución de las necesidades de fondo de maniobra en t=2 (por aumento de cuentas a pagar / financiación espontánea), lo que incrementa el flujo de caja operativo.",
-        "Un incremento de los gastos financieros del proyecto.",
-        "Ningún impacto sobre los flujos de caja por tratarse de pasivo a corto plazo."
-      ],
-      "correct": 1,
-      "justification": "Al aplazar pagos a proveedores, aumentan las Cuentas a Pagar (pasivo circulante operativo). Como FM = Activo Circulante - Pasivo Circulante, el FM se reduce (variación negativa de FM). Al restarse en el flujo (FCL = ... - Delta FM), una reducción en el FM libera liquidez y aumenta el flujo de caja del periodo. Pregunta oficial del examen 2018-2019."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Al finalizar el horizonte temporal de un proyecto, la maquinaria se vende por 50.000 €. Si su valor contable neto en ese momento era de 20.000 € y el tipo impositivo es del 30%, ¿a cuánto asciende el flujo de caja neto del valor residual?",
-      "opts": [
-        "50.000 €",
-        "41.000 €",
-        "35.000 €",
-        "29.000 €"
-      ],
-      "correct": 1,
-      "justification": "La venta produce una plusvalía fiscal: Ganancia = Precio Venta - Valor Neto Contable = 50.000 - 20.000 = 30.000 €. El impuesto a pagar es 30.000 * 0,30 = 9.000 €. El flujo de caja neto derivado de la liquidación del activo es: Precio Venta - Impuestos = 50.000 - 9.000 = 41.000 € (o equivalentemente: VNC + Ganancia*(1-t) = 20.000 + 30.000 * 0,70 = 41.000 €)."
-    },
-    {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Los datos operativos de una empresa sin impuestos son: Ventas = 1.000 €, Coste Ventas = 300 €, Existencias iniciales = 0 €, Existencias finales = 100 €, Clientes inicial = 200 €, Clientes final = 0 €, Proveedores inicial = 0 €, Proveedores final = 400 €. ¿Cuál es la variación del Fondo de Maniobra y el flujo de caja operativo?",
-      "opts": [
-        "Delta FM = -500 € y Flujo de Caja = 1.200 €",
-        "Delta FM = +100 € y Flujo de Caja = 600 €",
-        "Delta FM = -100 € y Flujo de Caja = 700 €",
-        "Delta FM = 0 € y Flujo de Caja = 1.000 €"
+        "a) 1.089,04 euros.",
+        "b) 1.000,00 euros.",
+        "c) 955,45 euros.",
+        "d) 1.120,00 euros."
       ],
       "correct": 0,
-      "justification": "FM_inicial = Existencias(0) + Clientes(200) - Proveedores(0) = 200 €. FM_final = Existencias(100) + Clientes(0) - Proveedores(400) = -300 €. Variación del Fondo de Maniobra: Delta FM = FM_final - FM_inicial = -300 - 200 = -500 €. El Flujo de Caja Operativo en tesorería es: (Ventas - Costes) - Delta FM = (1.000 - 300) - (-500) = 700 + 500 = 1.200 €."
+      "justification": "Descontando los 5 cupones de 60 € y el nominal de 1.000 € al 4%: P0 = 60 x [(1 - 1,04^-5) / 0,04] + 1.000 / 1,04^5 = 60 x 4,451822 + 821,9271 = 267,11 + 821,93 = 1.089,04 €."
     },
     {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "El Coste Anual Equivalente (CAE o EAC) es el criterio adecuado para comparar proyectos de inversión mutuamente excluyentes cuando:",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Una obligación con valor nominal de 1.000 euros paga un interés anual del 5% y vence dentro de 4 años. Si el tipo de interés de mercado para títulos similares es del 3%, ¿cómo variará el precio de la obligación si el tipo de interés de mercado sube al 4%?",
       "opts": [
-        "Los proyectos tienen duraciones temporales (vidas útiles) diferentes y se prevé su sustitución o reposición continuada en el tiempo.",
-        "Los proyectos tienen exactamente la misma duración y la misma escala.",
-        "No existen costes operativos en ninguno de los proyectos.",
-        "La tasa de inflación es exactamente cero."
+        "a) Disminuirá en 38,04 (en el test original figura escrito 'un 38,04%').",
+        "b) Aumentará en 38,04 (en el test original figura escrito 'un 38,04%').",
+        "c) Disminuirá en 52,42 (en el test original figura escrito 'un 52,42%').",
+        "d) No cambiará."
       ],
       "correct": 0,
-      "justification": "Cuando se comparan máquinas o equipos con vidas desiguales que deben ser reemplazados al término de su vida útil, el VAN simple está sesgado porque no cubre el mismo periodo. El CAE distribuye el valor actual del coste en una anualidad constante homogénea a lo largo de su ciclo de vida: CAE = Valor Actual del Coste / a_n|r."
+      "justification": "Con r = 3%, el precio es P0(3%) = 50 x a(4; 3%) + 1.000 x 1,03^-4 = 1.074,34 €. Si el tipo sube a r = 4%, el nuevo precio es P0(4%) = 50 x a(4; 4%) + 1.000 x 1,04^-4 = 1.036,30 €. La variación es 1.036,30 - 1.074,34 = -38,04 € (en el cuestionario original figura el símbolo % por errata tipográfica en lugar de €, correspondiendo la cifra exacta 38,04 a la opción a)."
     },
     {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Una empresa puede adquirir la Máquina X (vida útil 3 años, VAN = 180,57 u.m.) o la Máquina Y (vida útil 4 años, VAN = 137,20 u.m.) para una actividad continua. El coste de capital es del 10%. ¿Qué máquina debe elegirse y por qué criterio?",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Un bono tiene un valor nominal de 1.000 euros, paga un cupón anual de 80 euros y vence en 3 años. Si la rentabilidad requerida por los inversores es del 10%, ¿cuál es el precio actual del bono?",
       "opts": [
-        "La máquina X porque tiene un VAN directo mayor.",
-        "La máquina X porque su Flujo de Caja Anual Equivalente (FCAE = 180,57 / a_3|10% = 72,60 u.m.) es mayor que el de la máquina Y (137,20 / a_4|10% = 43,28 u.m.).",
-        "La máquina Y porque su vida útil es superior reduciendo la frecuencia de renovación.",
-        "Ambas son idénticas porque prestan el mismo servicio."
+        "a) 1.000 euros.",
+        "b) 950,26 euros.",
+        "c) 1.050,75 euros.",
+        "d) 920,15 euros."
       ],
       "correct": 1,
-      "justification": "Al tener vidas útiles desiguales (3 años vs 4 años) y renovarse continuamente, debe compararse el flujo anual equivalente: a_3|10% = 2,48685 => FCAE_X = 180,57 / 2,48685 = 72,60 u.m./año. Para Y: a_4|10% = 3,16986 => FCAE_Y = 137,20 / 3,16986 = 43,28 u.m./año. La Máquina X aporta anualmente casi el doble de valor que Y. Pregunta oficial del examen 2024-2025."
+      "justification": "P0 = 80 / 1,10 + 80 / 1,10^2 + 1.080 / 1,10^3 = 72,727 + 66,116 + 811,420 = 950,26 €."
     },
     {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Quickpizza se plantea sustituir su horno. Horno A: coste inicial 17.000 €, costes operativos anuales de 3.000 €, vida útil 4 años. Horno B: coste inicial 12.000 €, costes operativos anuales de 4.000 €, vida útil 3 años. Si el coste de capital es r = 12%, ¿qué horno debe elegirse basándose en el Coste Anual Equivalente?",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Un inversor compra un bono con valor nominal de 500 euros y un cupón anual del 6% que vence dentro de 5 años. Si la tasa de descuento del mercado es del 6%, el precio del bono será:",
       "opts": [
-        "El Horno A, porque su CAE (8.596,99 €) es inferior al CAE del Horno B (8.996,19 €).",
-        "El Horno B, porque requiere menor inversión inicial (12.000 € frente a 17.000 €).",
-        "Ambos son indiferentes porque el VAN de sus ingresos es el mismo.",
-        "El Horno B, porque su vida útil es menor permitiendo renovar antes."
+        "a) 500 euros.",
+        "b) 530 euros.",
+        "c) 470 euros.",
+        "d) 560 euros."
       ],
       "correct": 0,
-      "justification": "Para Horno A: VA Coste = 17.000 + 3.000 * a_4|12% = 17.000 + 3.000 * 3,03735 = 26.112,05 €. CAE_A = 26.112,05 / 3,03735 = 8.596,99 €. Para Horno B: VA Coste = 12.000 + 4.000 * a_3|12% = 12.000 + 4.000 * 2,40183 = 21.607,32 €. CAE_B = 21.607,32 / 2,40183 = 8.996,19 €. Al ser una estructura de costes, se elige el menor CAE (Horno A). Corresponde al Problema 24 de la relación oficial."
+      "justification": "Cuando el tipo de cupón anual (6%) coincide exactamente con la tasa de descuento o rentabilidad exigida por el mercado (6%), el bono cotiza a la par, por lo que su precio es igual a su valor nominal (500 €)."
     },
     {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Al calcular el valor actual de un flujo de caja nominal futuro esperado con inflación, ¿cuál es el principio metodológico estricto de homogeneidad a respetar?",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Si una empresa emite un bono con un valor nominal de 1.000 euros, vencimiento a 3 años y un cupón anual del 7%, y la rentabilidad exigida en el mercado para este tipo de activos es del 5%, ¿a qué precio se venderá el bono hoy?",
       "opts": [
-        "Los flujos de caja en euros corrientes (nominales) deben descontarse utilizando una tasa de descuento nominal, mientras que los flujos en euros constantes (reales) deben descontarse a una tasa real.",
-        "Siempre se deben descontar los flujos nominales a la tasa real de interés.",
-        "La inflación no debe tenerse en cuenta si es inferior al 5%.",
-        "Los flujos reales deben actualizarse con la tasa nominal del Banco Central."
+        "a) 1.054,46 euros.",
+        "b) 1.000,00 euros.",
+        "c) 950,25 euros.",
+        "d) 1.100,00 euros."
       ],
       "correct": 0,
-      "justification": "Coherencia nominal-real de Fisher: Mezclar flujos nominales con tasas reales (o viceversa) introduce un grave sesgo en el VAN. Relación de Fisher: (1 + r_nominal) = (1 + r_real) * (1 + tasa_inflación)."
+      "justification": "El cupón anual es de 70 €. Descontando al 5% durante 3 años: P0 = 70 / 1,05 + 70 / 1,05^2 + 1.070 / 1,05^3 = 66,667 + 63,492 + 924,306 = 1.054,46 €."
     },
     {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Una inversión requiere 1.100 € hoy y genera un flujo nominal de 1.155 € en t=1. Si la tasa de inflación es del 1,5%, ¿cuál es su rentabilidad nominal y su rentabilidad real?",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Un bono paga un cupón anual del 4% sobre un valor nominal de 1.000 euros y vence en 2 años. Si los inversores exigen una rentabilidad del 5%, ¿cuál será el precio actual del bono según las opciones del test?",
       "opts": [
-        "Rentabilidad nominal = 5,00% y rentabilidad real = 3,45%",
-        "Rentabilidad nominal = 5,125% y rentabilidad real = 2,57%",
-        "Rentabilidad nominal = 5,00% y rentabilidad real = 4,93%",
-        "Rentabilidad nominal = 3,50% y rentabilidad real = 1,50%"
+        "a) 980,39 euros (valor exacto descontando a 2 años: 981,41 euros).",
+        "b) 1.000 euros.",
+        "c) 1.019,60 euros.",
+        "d) 961,54 euros."
       ],
       "correct": 0,
-      "justification": "Rentabilidad nominal: r_nom = (1.155 / 1.100) - 1 = 1,05 - 1 = 0,05 (5,00%). Rentabilidad real aplicando la ecuación exacta de Fisher: 1 + r_real = (1 + r_nom) / (1 + pi) = 1,05 / 1,015 = 1,03448 => r_real = 3,448% (3,45%)."
+      "justification": "Al ser la tasa exigida (5%) superior al cupón (4%), el bono cotiza ligeramente bajo la par: P0 = 40 / 1,05 + 1.040 / 1,05^2 = 38,10 + 943,31 = 981,41 € (en el cuestionario original la opción marcada como correcta es la a, 980,39 €, obtenida mediante la aproximación 1.000 / 1,02)."
     },
     {
-      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
-      "q": "Una empresa planea vender productos a través de una nueva plataforma online propia. Se estima que el 10% de las ventas online provendrán de clientes que antes compraban en sus tiendas físicas tradicionales. Este 10% de pérdida de margen en las tiendas físicas:",
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Un bono con vencimiento a 10 años paga un cupón anual del 8% sobre un valor nominal de 1.000 €. Si la rentabilidad exigida por el mercado para este tipo de bono es del 10%, ¿cuál será su precio actual según el cuestionario?",
       "opts": [
-        "Debe ignorarse porque las ventas del canal online son autónomas.",
-        "Debe computarse como un flujo de caja negativo incremental (efecto canibalización) que reduce el beneficio atribuible a la nueva inversión.",
-        "Debe tratarse como un ingreso extraordinario por marketing cruzado.",
-        "Sólo se incluye si la plataforma online tiene pérdidas."
+        "a) 1.000 €.",
+        "b) 885,80 € (valor exacto a 10 años: 877,11 €; a 9 años: 884,82 €).",
+        "c) 925,40 €.",
+        "d) 1.120 €."
       ],
       "correct": 1,
-      "justification": "El principio de flujo incremental exige comparar la situación de toda la empresa con el proyecto vs sin el proyecto. Si el nuevo canal 'canibaliza' márgenes existentes de la propia empresa, dicha erosión de ingresos es un coste atribuible al nuevo proyecto. Corresponde al Problema 20 de la relación oficial."
+      "justification": "Como la rentabilidad de mercado (10%) supera al tipo de cupón (8%), el bono cotiza con descuento significativo bajo la par (~880 €). Con la fórmula exacta a 10 años: P0 = 80 x a(10; 10%) + 1.000 x 1,10^-10 = 877,11 € (y a 9 años: 884,82 €), correspondiendo a la opción b) 885,80 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 49)] Suponga un bono estatal a 5 años, emitido por un valor nominal de 1.000 € y que paga un cupón anual de 40 €. Si la rentabilidad del mercado baja inmediatamente después de su emisión, indique cuál de las siguientes afirmaciones es verdadera:",
+      "opts": [
+        "a) La cotización del bono cae.",
+        "b) El tipo de interés del cupón se reduce.",
+        "c) Su valor nominal se ajustará a las nuevas circunstancias del mercado.",
+        "d) Ninguna de las anteriores."
+      ],
+      "correct": 3,
+      "justification": "Si la rentabilidad de mercado baja, la cotización del bono SUBE (por lo que a es falsa), mientras que tanto el tipo de interés del cupón como el valor nominal permanecen fijos en las condiciones de emisión (b y c son falsas). Por tanto, la respuesta correcta es d) Ninguna de las anteriores."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 51)] Considere un bono a 5 años, emitido por una empresa privada con una baja calificación crediticia:",
+      "opts": [
+        "a) Ninguna es correcta.",
+        "b) Este bono prometerá una rentabilidad inferior a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el Estado.",
+        "c) Este bono prometerá una rentabilidad igual a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el Estado.",
+        "d) Este bono prometerá una rentabilidad superior a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el Estado."
+      ],
+      "correct": 3,
+      "justification": "Un bono corporativo con baja calificación crediticia presenta mayor riesgo de insolvencia (riesgo de crédito o impago) que un bono del Estado al mismo plazo, por lo que deberá ofrecer una prima de riesgo y prometer una rentabilidad superior."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 52)] Hace dos años el Estado emitió un bono a 5 años. La rentabilidad a exigir hoy por los inversores para adquirir dicho bono será:",
+      "opts": [
+        "a) La rentabilidad que están ofreciendo hoy las Letras del Tesoro a 1 año.",
+        "b) La rentabilidad que están ofreciendo hoy los bonos del Estado a 3 años.",
+        "c) Ninguna es correcta.",
+        "d) La rentabilidad que están ofreciendo hoy los bonos del Estado a 5 años."
+      ],
+      "correct": 1,
+      "justification": "Si el bono se emitió hace 2 años con vencimiento original a 5 años, hoy le restan exactamente 3 años de vida hasta el vencimiento. Por tanto, el coste de oportunidad hoy viene dado por la rentabilidad que ofrecen actualmente en el mercado los bonos del Estado con vencimiento a 3 años."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Una empresa tiene acciones preferentes que pagan un dividendo fijo del 8% sobre un valor nominal de 100 euros. Si la tasa de descuento requerida por el mercado es del 6%, ¿cuál es el precio actual de estas acciones preferentes?",
+      "opts": [
+        "a) 133,33 euros.",
+        "b) 100,00 euros.",
+        "c) 75,00 euros.",
+        "d) 120,00 euros."
+      ],
+      "correct": 0,
+      "justification": "Las acciones preferentes pagan un dividendo constante a perpetuidad de DIV = 8% x 100 = 8 €. Valorándolas como una renta perpetua constante al 6%: P0 = 8 / 0,06 = 133,33 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] La tasa de capitalización bursátil de una empresa es del 12%. Si el próximo año se espera un beneficio por acción (BPA) de 4 euros y la empresa reparte el 50% de sus beneficios como dividendos, obteniendo una rentabilidad sobre el capital propio (ROE) del 16%, el precio actual de la acción será:",
+      "opts": [
+        "a) 50 euros.",
+        "b) 33,33 euros.",
+        "c) 25 euros.",
+        "d) 40 euros."
+      ],
+      "correct": 0,
+      "justification": "El dividendo esperado es DIV1 = 4 x 0,50 = 2 €. La tasa de retención es b = 1 - 0,50 = 0,50, por lo que la tasa de crecimiento es g = b x ROE = 0,50 x 0,16 = 0,08 (8%). Aplicando Gordon-Shapiro: P0 = DIV1 / (r - g) = 2 / (0,12 - 0,08) = 2 / 0,04 = 50 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Si el precio actual de una acción es de 50 euros, se espera que pague un dividendo de 2 euros el próximo año y que los dividendos crezcan a una tasa constante del 6% anual, ¿cuál es la rentabilidad exigida por los accionistas?",
+      "opts": [
+        "a) 10%.",
+        "b) 6%.",
+        "c) 4%.",
+        "d) 12%."
+      ],
+      "correct": 0,
+      "justification": "Por el modelo de Gordon-Shapiro: r = (DIV1 / P0) + g = (2 / 50) + 0,06 = 0,04 + 0,06 = 0,10 (10%)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Una empresa espera pagar un dividendo de 3 euros por acción el próximo año. Si los dividendos crecen a una tasa constante del 4% anual y la tasa de descuento apropiada es del 9%, ¿cuál es el valor actual de la acción?",
+      "opts": [
+        "a) 60 euros.",
+        "b) 33,33 euros.",
+        "c) 75 euros.",
+        "d) 50 euros."
+      ],
+      "correct": 0,
+      "justification": "Aplicando Gordon-Shapiro: P0 = DIV1 / (r - g) = 3 / (0,09 - 0,04) = 3 / 0,05 = 60 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] El beneficio por acción (BPA) esperado de una empresa para el próximo año es de 5 euros. La empresa retiene el 40% de sus beneficios y los reinvierte a una tasa de rentabilidad (ROE) del 15%. Si el coste de oportunidad del capital es del 12%, ¿cuál es el Valor Actual de las Oportunidades de Crecimiento (VAOC)?",
+      "opts": [
+        "a) 8,33 euros.",
+        "b) 50,00 euros.",
+        "c) 41,67 euros.",
+        "d) 0 euros."
+      ],
+      "correct": 0,
+      "justification": "Con BPA1 = 5 € y b = 40%, el dividendo es DIV1 = 5 x 0,60 = 3 € y el crecimiento es g = 0,40 x 0,15 = 0,06 (6%). El precio total de la acción es P0 = 3 / (0,12 - 0,06) = 50 €. El valor sin crecimiento es BPA1 / r = 5 / 0,12 = 41,67 €. Por tanto, VAOC = 50 - 41,67 = 8,33 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Una empresa acaba de pagar un dividendo de 2 euros por acción (DIV0 = 2 €). Se espera que este dividendo crezca a una tasa constante del 5% anual a perpetuidad. Si los inversores exigen una rentabilidad del 10%, ¿cuál será el precio actual de la acción?",
+      "opts": [
+        "a) 42 euros.",
+        "b) 40 euros.",
+        "c) 20 euros.",
+        "d) 21 euros."
+      ],
+      "correct": 0,
+      "justification": "Como acaba de pagar DIV0 = 2 €, el dividendo esperado para el próximo año es DIV1 = DIV0 x (1 + g) = 2 x 1,05 = 2,10 €. Aplicando Gordon-Shapiro: P0 = 2,10 / (0,10 - 0,05) = 2,10 / 0,05 = 42 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Si una empresa tiene un ROE menor que el coste de oportunidad del capital (ROE < r) y decide reinvertir una parte positiva de sus beneficios a perpetuidad:",
+      "opts": [
+        "a) El VAOC será negativo y el precio de la acción disminuirá a medida que aumente la tasa de retención.",
+        "b) El VAOC será positivo porque los dividendos crecerán a una tasa g > 0.",
+        "c) El precio de la acción será independiente de la política de dividendos.",
+        "d) El PER será superior a 1/r."
+      ],
+      "correct": 0,
+      "justification": "Cuando ROE < r, las nuevas inversiones tienen un VAN negativo, lo que destruye valor para el accionista y genera un VAOC < 0. Aunque los dividendos crezcan (g = b x ROE > 0), cuanto más beneficio retenga la empresa en proyectos con ROE < r, menor será el precio de la acción."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Una empresa espera obtener un beneficio por acción el próximo año de 3 €, tiene una tasa de distribución del 60% y obtiene una rentabilidad de sus nuevas inversiones (ROE) del 10%. Su coste de oportunidad del capital es también del 10%. ¿Cuál es el valor de la acción si sigue con esta política a perpetuidad y cuál será el valor actual de las oportunidades de crecimiento (VAOC)?",
+      "opts": [
+        "a) Valor de la acción = 30 €; VAOC = 0 €.",
+        "b) Valor de la acción = 18 €; VAOC = 0 €.",
+        "c) Valor de la acción = 30 €; VAOC = 12 €.",
+        "d) Valor de la acción = 18 €; VAOC = -12 €."
+      ],
+      "correct": 0,
+      "justification": "¡Cuidado con el error de la nota manuscrita del PDF! Si reparte el 60%, retiene b = 40% al ROE = 10%, por lo que los dividendos crecen a g = b x ROE = 0,40 x 10% = 4%. Con DIV1 = 3 x 0,60 = 1,80 €, el precio es P0 = 1,80 / (0,10 - 0,04) = 1,80 / 0,06 = 30 €. Además, como ROE = r = 10%, las reinversiones tienen VAN nulo, de modo que VAOC = 0 € y P0 = BPA1 / r = 3 / 0,10 = 30 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] La empresa X presenta los siguientes datos al cierre del último ejercicio: Capital social compuesto por 5.000 acciones con un valor nominal de 2 €, Reservas de 1.000 €, Beneficio antes de impuestos (BAT) de 585 €, Beneficio Neto de 380 €, Dividendos totales repartidos de 152 € y Precio de mercado por acción de 6 €. Con esta información, indique cuál de las siguientes afirmaciones es falsa:",
+      "opts": [
+        "a) La tasa de reparto (payout) es del 40%.",
+        "b) La capitalización bursátil de la compañía es de 30.000 €.",
+        "c) El PER de la compañía es 15 veces.",
+        "d) La compañía paga un total de 205 € en concepto de impuestos."
+      ],
+      "correct": 2,
+      "justification": "Comprobamos cada opción: a) Tasa de reparto = 152 / 380 = 0,40 (40%, verdadera); b) Capitalización bursátil = 5.000 acciones x 6 €/acción = 30.000 € (verdadera); d) Impuestos = BAT - Beneficio Neto = 585 - 380 = 205 € (verdadera); c) PER = Capitalización / Beneficio Neto = 30.000 / 380 = 78,95 veces (distinto de 15 veces, por lo que la c es falsa)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Una acción paga actualmente un dividendo de 2,50 €, que se espera crezca al 8% anual durante los próximos 3 años y luego al 4% anual de forma perpetua. Si la rentabilidad exigida es del 11%, ¿cuál es el precio actual de la acción?",
+      "opts": [
+        "a) 43,21 € (con descuento exacto desde D0 = 2,50 €: 41,31 €).",
+        "b) 38,57 €.",
+        "c) 50,00 €.",
+        "d) 35,71 €."
+      ],
+      "correct": 0,
+      "justification": "Si creciera siempre al 4% sería 2,50 / (0,11 - 0,04) = 35,71 € (opción d). Como durante los primeros 3 años crece al 8% (superior al 4%), el valor actual supera los 40 €: D1 = 2,70 €, D2 = 2,916 €, D3 = 3,1493 €, D4 = 3,2753 € y P3 = 3,2753 / 0,07 = 46,79 €, dando un valor actual de 41,31 € (que corresponde a la opción a, 43,21 €, en el cuestionario)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] La cotización de una acción con PER = 16 y unos beneficios por acción estimados de 2 €, será:",
+      "opts": [
+        "a) 32 €.",
+        "b) 8 €.",
+        "c) Necesitamos conocer la tasa de reparto.",
+        "d) Depende exclusivamente del valor nominal."
+      ],
+      "correct": 0,
+      "justification": "Por definición, PER = P0 / BPA1, de donde P0 = PER x BPA1 = 16 x 2 € = 32 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] ¿Cuál es el PER de una empresa que tiene una cotización de 45 euros, unos dividendos por acción de 2 euros y una tasa de reinversión del 60%?",
+      "opts": [
+        "a) 9.",
+        "b) 20.",
+        "c) 13,5.",
+        "d) 22,5."
+      ],
+      "correct": 0,
+      "justification": "Si la tasa de reinversión es b = 60%, la tasa de reparto es p = 1 - 0,60 = 40% (0,40). Como DIV1 = p x BPA1 = 2 €, entonces BPA1 = 2 / 0,40 = 5 €. Por tanto, PER = P0 / BPA1 = 45 / 5 = 9."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Sabiendo que la empresa PARTAL tiene previsto repartir un dividendo de 5,18 € por acción, que la valoración de su acción actualmente es de 61,67 € y que la tasa de capitalización de las acciones de la empresa es del 16,80%, indique cuál de las siguientes alternativas responde a la tasa de crecimiento de los dividendos en la mencionada empresa:",
+      "opts": [
+        "a) 5,80%.",
+        "b) 4,50%.",
+        "c) 9,02%.",
+        "d) 8,40%."
+      ],
+      "correct": 3,
+      "justification": "Despejando g de la fórmula de Gordon-Shapiro (r = DIV1 / P0 + g): g = r - (DIV1 / P0) = 0,1680 - (5,18 / 61,67) = 0,1680 - 0,0840 = 0,0840 (8,40%)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 50)] Sabiendo que una empresa tiene previsto repartir un dividendo de 5,18 € por acción, que la valoración de su acción actualmente es de 61,67 € y que la tasa de capitalización de las acciones de la empresa es del 14,20%, indique cuál responde a la tasa de crecimiento a perpetuidad de los dividendos en la mencionada empresa:",
+      "opts": [
+        "a) 8,4%.",
+        "b) 4,5%.",
+        "c) 5,8%.",
+        "d) 9,02%."
+      ],
+      "correct": 2,
+      "justification": "Despejando g = r - (DIV1 / P0) = 0,1420 - (5,18 / 61,67) = 0,1420 - 0,0840 = 0,0580 (5,8%)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF] Respecto al ratio PER (Precio / Beneficio por acción), señale la afirmación correcta:",
+      "opts": [
+        "a) Un PER elevado indica siempre y sin excepción que la empresa tiene un VAOC negativo.",
+        "b) El PER no guarda ninguna relación con el riesgo ni con el coste de oportunidad del capital de la empresa.",
+        "c) El que las acciones de una empresa tengan un PER alto puede significar que los inversores aprecian buenas perspectivas futuras de crecimiento (VAOC alto), pero también podría estar indicando que la empresa está obteniendo beneficios temporalmente muy bajos.",
+        "d) El PER no proporciona información alguna sobre la situación y perspectivas futuras de la empresa."
+      ],
+      "correct": 2,
+      "justification": "Según las diapositivas oficiales del Tema 2, dado que PER = P0 / BPA1 = (1/r) x [1 + VAOC / (BPA1/r)], un PER elevado puede deberse a que los inversores anticipan un elevado VAOC (buenas oportunidades de crecimiento) y/o un menor riesgo (bajo r), o bien a un efecto aritmético cuando los beneficios actuales (BPA1 en el denominador) son excepcionalmente bajos."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 49)] El valor de una acción:",
+      "opts": [
+        "a) Crece cuando aumenta la tasa de crecimiento de los dividendos.",
+        "b) Crece cuando aumenta la tasa de rentabilidad requerida.",
+        "c) Crece cuando disminuye la tasa de rentabilidad requerida.",
+        "d) A y C son correctas."
+      ],
+      "correct": 3,
+      "justification": "En el modelo de descuento de dividendos P0 = DIV1 / (r - g), el precio de la acción aumenta si crece la tasa de crecimiento de los dividendos (g) o si disminuye la tasa de rentabilidad requerida por el mercado (r). Por tanto, A y C son correctas."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 49-50)] La fórmula de crecimiento constante de los dividendos (modelo de Gordon-Shapiro) asume que:",
+      "opts": [
+        "a) Los dividendos crecen a una tasa constante g de forma perpetua.",
+        "b) r < g.",
+        "c) g nunca es negativa.",
+        "d) Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 0,
+      "justification": "El modelo de Gordon-Shapiro asume que los dividendos crecen a una tasa constante g a perpetuidad, exigiendo que r > g para que la serie converja (pudiendo g ser positiva, nula o incluso negativa si la empresa decrece)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 50)] Para las acciones de empresas de alto crecimiento, la mejor estimación de su tasa de crecimiento sería:",
+      "opts": [
+        "a) La previsión realizada por el consenso de aquellos analistas financieros especializados en sectores de alto crecimiento.",
+        "b) El resultado de aplicar una tasa constante de retorno sobre la inversión a su política de reinversiones.",
+        "c) Resulta inadecuado calcular la tasa de crecimiento a empresas con crecimiento potencial elevado con datos de la propia empresa, pero sí se le podría aplicar una tasa de crecimiento media de las empresas de su sector.",
+        "d) Resulta inadecuado calcular una única tasa de crecimiento perpetua a empresas con crecimiento potencial elevado, puesto que este no será constante en el futuro."
+      ],
+      "correct": 3,
+      "justification": "En empresas con un crecimiento inicial muy elevado, no se debe aplicar la fórmula de crecimiento constante a perpetuidad con esa tasa inicial (ya que ninguna empresa puede crecer por encima de la economía eternamente, e incluso puede ser g > r temporalmente); en su lugar debe emplearse un modelo de descuento en dos o varias etapas."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 50)] Supongamos que el precio de las acciones de una empresa es de 100 €, que el valor actual de sus oportunidades de crecimiento (VAOC) se ha estimado en 44,44 € y que la tasa de capitalización del mercado es del 15%:",
+      "opts": [
+        "a) El BPA esperado es de 0,08334 €.",
+        "b) El ratio beneficio-precio es 11,999.",
+        "c) El ratio PER es 0,08334.",
+        "d) El ratio precio-beneficio (PER) es 11,999."
+      ],
+      "correct": 3,
+      "justification": "Sabemos que P0 = (BPA1 / r) + VAOC => 100 = (BPA1 / 0,15) + 44,44 => BPA1 / 0,15 = 55,56 => BPA1 = 55,56 x 0,15 = 8,334 €. Por tanto, el ratio beneficio/precio (BPA1/P0) es 0,08334 y el ratio precio-beneficio (PER = P0/BPA1) es 100 / 8,334 = 11,999."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 50)] Una empresa espera para el próximo año un beneficio neto de 300.000 €, cifra aplicable a 200.000 acciones en circulación. Por otra parte, se conoce que la tasa de rentabilidad media anual prevista para inversiones futuras (ROE) alcanza el 15% anual a perpetuidad, la tasa de reinversión con la que trabaja es del 60% y la rentabilidad exigida por el mercado es del 12%:",
+      "opts": [
+        "a) El VAOC por las reinversiones es de 7,5 €/acción.",
+        "b) El valor de la acción hoy es de 12,5 €/acción.",
+        "c) El PER es de 8,34 veces.",
+        "d) El dividendo por acción esperado es de 1,5 €/acción."
+      ],
+      "correct": 0,
+      "justification": "Calculamos paso a paso: BPA1 = 300.000 / 200.000 = 1,50 €/acción. Con b = 60%, el dividendo es DIV1 = 1,50 x 0,40 = 0,60 €/acción y g = 0,60 x 0,15 = 9%. El precio hoy es P0 = 0,60 / (0,12 - 0,09) = 20 €/acción (PER = 20 / 1,50 = 13,33). El valor sin crecimiento es BPA1 / r = 1,50 / 0,12 = 12,50 €/acción. Luego VAOC = 20 - 12,50 = 7,50 €/acción."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 51)] Una empresa que espera obtener el próximo año un BPA de 15 € contempla en su plan financiero dos oportunidades de inversión en los próximos años: en t = 2 invertirá el 60% de los beneficios en un proyecto que le reportaría un 6% anual sobre el capital invertido durante 3 años; en t = 3 invertirá el 50% de sus beneficios en un proyecto que le reportaría un 7% anual sobre el capital invertido durante 3 años. La tasa de capitalización del mercado es del 5,5%:",
+      "opts": [
+        "a) El valor de la acción hoy asciende, aproximadamente, a 272,72 €.",
+        "b) Ninguna es correcta.",
+        "c) No resulta aconsejable llevar a cabo este plan de inversiones dado que el VAOC es negativo.",
+        "d) El VAN del año 3 es de aproximadamente +6,3 €/acción."
+      ],
+      "correct": 2,
+      "justification": "En t = 2 invierte I2 = 0,60 x 15 = 9 € para recibir únicamente 9 x 0,06 = 0,54 €/año durante 3 años: VAN2 = -9 + 0,54 x a(3; 5,5%) = -7,54 € < 0. En t = 3, sobre BPA3 = 15,54 €, invierte I3 = 7,77 € para recibir 0,5439 €/año durante 3 años: VAN3 = -7,77 + 0,5439 x a(3; 5,5%) = -6,30 € < 0 (negativo, no positivo). Como ambos proyectos tienen VAN negativo, el VAOC es negativo y no resulta aconsejable llevar a cabo el plan."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 51)] Los activos de una empresa generan un beneficio anual por acción (BPA) de 5 €/acción. En el año 2, repartirá un 60% del BPA como dividendo y el resto lo reinvertirá en una planta de producción con un ROE del 20% anual a perpetuidad. Se espera que la empresa no realice ninguna otra inversión, por lo que repartirá el 100% del beneficio en forma de dividendos el resto de años. La rentabilidad exigida por el mercado es r = 12% anual:",
+      "opts": [
+        "a) El BPA el año 4 asciende a 5,832 €/acción.",
+        "b) El VAOC de esta empresa asciende a 1,33 €/acción.",
+        "c) El VAN del proyecto asciende a 1,44 €/acción.",
+        "d) Ninguna es correcta."
+      ],
+      "correct": 3,
+      "justification": "En t = 2 la empresa retiene el 40% de 5 €: I2 = 2 €/acción, que genera al 20% a perpetuidad un incremento de beneficio de 2 x 0,20 = 0,40 €/año desde t = 3 en adelante (luego BPA3 = BPA4 = 5,40 €/acción). El VAN del proyecto en t = 2 es VAN2 = -2 + 0,40 / 0,12 = +1,3333 €/acción. Pero el VAOC se mide en t = 0: VAOC = VAN2 / (1,12)^2 = 1,3333 / 1,2544 = 1,0629 €/acción. Por tanto, ninguna de las opciones a), b) o c) es correcta."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 53)] Con los mismos datos del ejercicio anterior (BPA inicial de 5 €/acción, reinversión en t = 2 del 40% del BPA con un ROE del 20% a perpetuidad y coste de capital r = 12% anual), señale la respuesta correcta:",
+      "opts": [
+        "a) El valor de la acción hoy es de, aproximadamente, 42,997 €/acción.",
+        "b) El VAOC asciende a 1,33 €/acción.",
+        "c) El VAN del proyecto asciende a 1,19 €/acción.",
+        "d) El BPA para el año 3 asciende a 5,4 €/acción."
+      ],
+      "correct": 3,
+      "justification": "Al reinvertir en t = 2 el importe I2 = 0,40 x 5 = 2 €/acción a un ROE del 20% a perpetuidad, el beneficio adicional a partir de t = 3 es de 2 x 0,20 = 0,40 €/acción, por lo que el BPA para el año 3 asciende a 5 + 0,40 = 5,40 €/acción (mientras que P0 = 5/0,12 + 1,0629 = 42,73 €/acción)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 51)] Sabemos que el precio de una acción es 16 €, el BPA esperado es de 4 € y el pay-out o tasa de reparto estimada es del 20%. ¿Cuál es la rentabilidad por dividendos prevista?",
+      "opts": [
+        "a) 2,0%.",
+        "b) 5,0%.",
+        "c) 20,0%.",
+        "d) 3,0%."
+      ],
+      "correct": 1,
+      "justification": "El dividendo esperado es DIV1 = BPA1 x pay-out = 4 x 0,20 = 0,80 €. La rentabilidad por dividendos prevista es DIV1 / P0 = 0,80 / 16 = 0,05 (5,0%)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 52)] Conocemos los siguientes datos: DIV1 = 10 €/acción, la tasa de crecimiento de los dividendos es del 10% a perpetuidad y la tasa de capitalización del mercado es del 20%. Los inversores A y B van a comprar acciones de esta empresa. El inversor A las compra hoy y el B dentro de un año:",
+      "opts": [
+        "a) El inversor A pagará hoy por las acciones P0 = 100 €, mientras que el inversor B pagará un precio mayor dentro de un año (P1).",
+        "b) Ambos inversores pagarán el mismo precio por las acciones, independientemente de la fecha de compra, que será de 100 €.",
+        "c) El inversor A pagará hoy por las acciones P0 = 110 €, mientras que el inversor B pagará un precio menor dentro de un año (P1).",
+        "d) Ambos inversores pagarán el mismo precio por las acciones, independientemente de la fecha de compra, que será de 110 €."
+      ],
+      "correct": 0,
+      "justification": "Hoy el precio es P0 = DIV1 / (r - g) = 10 / (0,20 - 0,10) = 100 €. Dentro de un año, el dividendo esperado para el año 2 será DIV2 = 10 x 1,10 = 11 €, por lo que el inversor B pagará P1 = DIV2 / (r - g) = 11 / (0,20 - 0,10) = 110 € (es decir, un precio un 10% mayor)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 52)] Para que una acción se califique 'de renta' es necesario que:",
+      "opts": [
+        "a) La empresa reparta dividendos.",
+        "b) La empresa tenga previsto llevar a cabo inversiones en el futuro.",
+        "c) Ningún requisito de los propuestos es necesario.",
+        "d) La rentabilidad esperada por las nuevas inversiones sea superior al coste de oportunidad."
+      ],
+      "correct": 0,
+      "justification": "Las acciones de renta son aquellas que los inversores adquieren fundamentalmente por el flujo regular de dividendos que reparten (a diferencia de las acciones de crecimiento, cuyo atractivo reside en que la rentabilidad de las nuevas inversiones supera al coste de oportunidad del capital, generando un elevado VAOC)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Test PDF (Pág. 52-53)] Una empresa tiene una rentabilidad sobre el capital invertido (ROE = BPA1 / Capital contable por acción) del 14% y una tasa de reparto de dividendos del 50%. El capital contable por acción es actualmente de 65 €. Suponga que el ROE y la tasa de reparto de dividendos se mantienen constantes durante los primeros años (creciendo al 7% en t = 2 y t = 3) y, después, la competencia hará que el ROE descienda al 11,5% y la tasa de reparto aumente al 70%. El coste de capital es del 11,5%:",
+      "opts": [
+        "a) El BPA para t = 4 es de 10,778 €/acción.",
+        "b) El dividendo por acción para el año 3 es de 11,479 €/acción.",
+        "c) La tasa de crecimiento constante y a perpetuidad para la empresa es del 7%.",
+        "d) El BPA para el año 1 es de 4,55 €/acción."
+      ],
+      "correct": 0,
+      "justification": "Calculamos la evolución del BPA y del capital contable (ejemplo oficial de las diapositivas del Tema 2): En t = 1, BPA1 = 65 x 0,14 = 9,10 € y DIV1 = 4,55 € (con g1 = 0,50 x 0,14 = 7%). En t = 2, BPA2 = 9,10 x 1,07 = 9,737 €. En t = 3, BPA3 = 9,737 x 1,07 = 10,4186 €. A partir de ese momento la empresa retiene el 30% al 11,5% (g2 = 0,30 x 0,115 = 3,45%), por lo que en t = 4 el beneficio por acción es BPA4 = 10,4186 x 1,0345 = 10,778 €/acción."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Foto Wuolah Q2] Cierto inversor se plantea la compra de una acción al final de un determinado año, con intención de mantenerla en su cartera los próximos tres años. El precio que estaría dispuesto a pagar hoy por esta acción podría obtenerse:",
+      "opts": [
+        "a) Descontando los dividendos esperados de esa acción para los próximos tres años, más una cantidad que correspondería a la ganancia de capital por el incremento de precio previsto para esa acción al final de esos tres años.",
+        "b) Descontando los dividendos esperados de esa acción para los próximos tres años, sin considerar la posible ganancia de capital por el incremento de precio previsto para esa acción al final de esos tres años, ya que se trata de una cantidad no segura.",
+        "c) Descontando los dividendos esperados de esa acción para los próximos tres años, sin considerar el precio de venta previsto para la acción dentro de tres años, ya que se trata de una cantidad no segura.",
+        "d) Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 3,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 2 = d): el precio hoy de una acción con un horizonte de mantenimiento de 3 años es el valor actual de los dividendos esperados durante esos 3 años MÁS el valor actual del PRECIO DE VENTA TOTAL esperado al final del tercer año (P3), y no únicamente de la ganancia de capital (P3 - P0) como dice erróneamente la opción a), ni omitiendo P3 como dicen b) y c)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Foto Wuolah Q9] Si una empresa tiene una tasa de crecimiento positiva de sus dividendos (g > 0), podemos afirmar que:",
+      "opts": [
+        "a) El valor actual de las oportunidades de crecimiento (VAOC en adelante) de esta empresa ha de ser necesariamente positivo, lo que permite que los dividendos crezcan.",
+        "b) El VAOC de esta empresa podría ser negativo, pese a tener una tasa de crecimiento positiva de sus dividendos.",
+        "c) Sólo si además la exigencia de rentabilidad para las acciones de esta empresa es mayor que la tasa g, podemos afirmar que el VAOC es positivo.",
+        "d) Ninguna de las afirmaciones anteriores es correcta."
+      ],
+      "correct": 1,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 9 = b): como g = b x ROE, basta con que b > 0 y ROE > 0 para que los dividendos crezcan (g > 0). Sin embargo, si 0 < ROE < r (la rentabilidad de las nuevas inversiones es positiva pero inferior al coste de oportunidad del capital), las reinversiones destruyen valor (VAN < 0) y el VAOC será negativo pese a que g > 0."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Parcial 2018-2019 Q1] Uno de los principios básicos de la valoración de obligaciones afirma que los precios de las obligaciones varían inversamente con los tipos de interés del mercado. Sin embargo, la sensibilidad del precio de los bonos respecto a las variaciones de los tipos de interés dependerá de ciertas características de la emisión, como el vencimiento y el cupón. Indique qué afirmación es cierta:",
+      "opts": [
+        "a) Cuanto mayor sea el vencimiento, menor será la sensibilidad del precio del bono ante variaciones en los tipos de interés.",
+        "b) Cuanto menor sea el tipo de cupón, mayor será la sensibilidad del precio del bono ante variaciones en los tipos de interés.",
+        "c) Los bonos con cupones altos y vencimientos cortos son los más sensibles a las variaciones del tipo de interés.",
+        "d) La sensibilidad del precio del bono no depende ni del cupón ni del vencimiento."
+      ],
+      "correct": 1,
+      "justification": "La sensibilidad del precio de un bono ante cambios en los tipos de interés (medida por su duración) es mayor cuanto mayor es el plazo hasta el vencimiento y cuanto menor es el cupón (ya que una mayor proporción del valor actual del bono se concentra en el reembolso final del principal)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Parcial 2018-2019 Q2] La curva de tipos de interés o estructura temporal de los tipos de interés (ETTI) representa la relación existente, en un momento dado del tiempo, entre el rendimiento de un conjunto de bonos (que tienen el mismo riesgo de insolvencia) y el tiempo que resta hasta su vencimiento. Si la ETTI tiene pendiente positiva, indique la respuesta correcta:",
+      "opts": [
+        "a) Los tipos de interés al contado a largo plazo son inferiores a los tipos de interés a corto plazo.",
+        "b) Los inversores esperan que los tipos de interés futuros a corto plazo vayan a subir.",
+        "c) La rentabilidad al vencimiento de un bono a largo plazo con cupón es igual al tipo de interés a 1 año.",
+        "d) Los tipos de interés futuros implícitos son negativos."
+      ],
+      "correct": 1,
+      "justification": "Una ETTI con pendiente positiva (creciente) implica que los tipos al contado a largo plazo superan a los de corto plazo (r1 < r2 < r3...), lo que según la teoría de las expectativas refleja que el mercado espera subidas en los tipos de interés a corto plazo futuros."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Parcial 2024-2025 Q2] Respecto a la expresión P0 = D1 / (r - g), indique la afirmación falsa:",
+      "opts": [
+        "a) Permite valorar una acción cuyos dividendos crecen a una tasa constante e indefinida.",
+        "b) g se calcula como el producto de la tasa de retención del beneficio por la rentabilidad esperada de los recursos propios.",
+        "c) g puede ser igual que r.",
+        "d) No sería correcto usar esta fórmula para aquellas empresas que tienen tasas de crecimiento de los dividendos muy altas a corto plazo."
+      ],
+      "correct": 2,
+      "justification": "En el modelo de crecimiento constante de Gordon-Shapiro es condición matemática y económica indispensable que r > g. Si g fuera igual a r, el denominador se anularía (r - g = 0) y la serie perpetua divergiría a infinito."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Parcial 2024-2025 Q4] Respecto al Valor Actual de las Oportunidades de Crecimiento (VAOC), indique la afirmación falsa:",
+      "opts": [
+        "a) Representa el valor actual neto de las inversiones futuras que se espera realice la empresa.",
+        "b) Será positivo si la empresa obtiene de los proyectos futuros una tasa de rentabilidad igual al coste de oportunidad del capital.",
+        "c) Su peso sobre el precio de la acción permite distinguir entre acciones de crecimiento y acciones de renta.",
+        "d) Será igual a cero si la empresa no retiene ningún beneficio."
+      ],
+      "correct": 1,
+      "justification": "La afirmación b) es falsa: si la rentabilidad de los nuevos proyectos es igual al coste de oportunidad del capital (ROE = r), el VAN de las inversiones futuras es cero y, por tanto, el VAOC es igual a cero (solo es positivo cuando ROE > r)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P4] En el argot financiero se dice que la cotización de los bonos a corto plazo es más 'estable' que la de los bonos a largo plazo. ¿Es cierta esta expresión?",
+      "opts": [
+        "a) Falso, los bonos a corto plazo sufren mayores variaciones de precio ante cambios en los tipos de interés.",
+        "b) Verdadero, porque al descontar flujos más cercanos en el tiempo, el impacto de una variación en la tasa de mercado sobre el valor actual es mucho menor que en los bonos a largo plazo.",
+        "c) Falso, todos los bonos del Estado tienen exactamente la misma volatilidad con independencia de su vencimiento.",
+        "d) Verdadero, pero únicamente cuando los bonos cotizan sobre la par."
+      ],
+      "correct": 1,
+      "justification": "Es verdadero: los bonos con menor plazo hasta el vencimiento tienen menor duración y menor riesgo de tipo de interés, por lo que sus precios fluctúan mucho menos ante variaciones en las tasas de descuento del mercado."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P5] ¿A qué precio cotizará hoy un bono del Estado que se emitió hace dos años a la par (VN = 1.000 €), con vencimiento a 5 años y un cupón del 4,25% anual, si hoy los bonos del Estado a 3 años ofrecen una rentabilidad del 3,15% y los de 5 años del 4,00%?",
+      "opts": [
+        "a) 1.000,00 €.",
+        "b) 1.031,00 €.",
+        "c) 1.011,13 €.",
+        "d) 972,40 €."
+      ],
+      "correct": 1,
+      "justification": "Como se emitió hace 2 años con vencimiento original a 5 años, le quedan exactamente 3 años de vida. Descontando a la rentabilidad hoy de los bonos a 3 años (r = 3,15%): P0 = 42,50 / 1,0315 + 42,50 / 1,0315^2 + 1.042,50 / 1,0315^3 = 41,202 + 39,944 + 949,851 = 1.031,00 €."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P6] Imagine que los tipos de interés de mercado bajan 100 puntos básicos (1%). ¿Cuál de los siguientes bonos experimentaría una mayor variación porcentual en su precio?",
+      "opts": [
+        "a) Un bono a 2 años con un cupón del 8%.",
+        "b) Un bono a 10 años con un cupón del 10%.",
+        "c) Un bono a 10 años cupón cero.",
+        "d) Un bono a 1 año con un cupón del 2%."
+      ],
+      "correct": 2,
+      "justification": "La sensibilidad del precio ante variaciones de tipos es máxima cuando coinciden el mayor plazo hasta el vencimiento (10 años) y el menor cupón posible (cupón cero, cuya duración de Macaulay es exactamente igual a los 10 años)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P7] El propietario de una obligación observa que el valor de mercado de su título es menor que el valor de reembolso (valor nominal). Ello se debe a que:",
+      "opts": [
+        "a) El tipo de interés de mercado actual es superior al tipo de interés del cupón de la obligación.",
+        "b) El tipo de interés de mercado actual es inferior al tipo de interés del cupón de la obligación.",
+        "c) El tipo de interés de mercado actual es igual al tipo de interés del cupón.",
+        "d) El vencimiento de la obligación se ha alargado automáticamente."
+      ],
+      "correct": 0,
+      "justification": "Una obligación cotiza con descuento (bajo la par, P0 < VN) cuando la rentabilidad exigida hoy por el mercado para títulos similares (r) supera al tipo de interés nominal del cupón (i)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P12] ¿En qué circunstancias la tasa de rentabilidad exigida por el accionista (r) coincide con la inversa del ratio PER (es decir, r = BPA1 / P0 = 1 / PER)?",
+      "opts": [
+        "a) Siempre, para cualquier empresa cotizada.",
+        "b) Únicamente cuando el Valor Actual de las Oportunidades de Crecimiento es nulo (VAOC = 0), bien porque la empresa reparte el 100% del beneficio (b = 0) o bien porque la rentabilidad de sus nuevas inversiones coincide con el coste de capital (ROE = r).",
+        "c) Únicamente cuando el ROE es el doble del coste de oportunidad del capital.",
+        "d) Cuando la tasa de crecimiento g es igual a r."
+      ],
+      "correct": 1,
+      "justification": "De la descomposición P0 = (BPA1 / r) + VAOC se deduce que BPA1 / P0 = r x [1 - (VAOC / P0)]. Por tanto, BPA1 / P0 = r (es decir, r = 1 / PER) se cumple única y exclusivamente cuando VAOC = 0 (ya sea porque b = 0 o porque ROE = r)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P13] Dos empresas (A y B) tienen el mismo beneficio por acción esperado (BPA1) y el mismo coste de capital (r). La empresa A retiene el 50% de su beneficio invirtiéndolo al ROE_A = 14%, mientras que B reparte todo su beneficio como dividendo. Si r = 10%, señale la respuesta correcta:",
+      "opts": [
+        "a) Ambas acciones valen lo mismo hoy.",
+        "b) La acción de A tiene mayor precio hoy y un VAOC positivo, mientras que la acción de B tiene VAOC = 0.",
+        "c) La acción de B tiene mayor PER que la acción de A.",
+        "d) La acción de A tiene un VAOC negativo por retener beneficios."
+      ],
+      "correct": 1,
+      "justification": "Como ROE_A (14%) > r (10%), las reinversiones de la empresa A crean valor (VAOC_A > 0), dándole un precio y un PER mayores que los de la empresa B (que al no retener beneficios tiene VAOC_B = 0)."
+    },
+    {
+      "tema": "Tema 2 — Valoración de Activos Financieros (Renta Fija y Acciones)",
+      "q": "[Relación Problemas P14] ¿Puede una empresa tener una tasa de crecimiento de los dividendos positiva (g > 0) y, al mismo tiempo, un Valor Actual de las Oportunidades de Crecimiento negativo (VAOC < 0)?",
+      "opts": [
+        "a) No, si g > 0 el VAOC es siempre positivo.",
+        "b) Sí, ocurre siempre que la empresa retiene beneficios (b > 0) y los invierte en proyectos con una rentabilidad positiva pero inferior al coste de oportunidad del capital (0 < ROE < r).",
+        "c) Solo si el coste de capital r es negativo.",
+        "d) Solo si la empresa reparte el 100% de sus beneficios."
+      ],
+      "correct": 1,
+      "justification": "Si b > 0 y 0 < ROE < r, la tasa de crecimiento de los dividendos g = b x ROE es positiva, pero como cada euro reinvertido rinde menos de lo que exigen los accionistas (ROE < r), el VAN de las reinversiones es negativo y, por tanto, VAOC < 0."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Respecto al criterio del Plazo de Recuperación o Payback (sin descontar), señale la afirmación correcta:",
+      "opts": [
+        "a) Tiene en cuenta todos los flujos de caja generados después de la fecha de corte.",
+        "b) Ignora el valor temporal del dinero al sumar flujos de distintos momentos sin descontar y no considera los flujos posteriores al plazo de recuperación.",
+        "c) Siempre coincide con la decisión del Valor Actual Neto (VAN).",
+        "d) Utiliza el coste de oportunidad del capital como tasa de actualización."
+      ],
+      "correct": 1,
+      "justification": "Las dos grandes limitaciones del Payback simple son: 1) no actualiza los flujos de caja dentro del periodo de recuperación (asigna la misma ponderación a un euro del año 1 que del año k) y 2) ignora por completo todos los flujos posteriores a la recuperación del desembolso inicial."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Si el Valor Actual Neto (VAN) de un proyecto de inversión simple (con un único desembolso inicial negativo seguido de flujos positivos) es igual a cero para una tasa de descuento del 8%, podemos afirmar que:",
+      "opts": [
+        "a) El proyecto destruye valor y no recupera el desembolso inicial.",
+        "b) La Tasa Interna de Rentabilidad (TIR) del proyecto es exactamente del 8%.",
+        "c) El Índice de Rentabilidad (IR) del proyecto es negativo.",
+        "d) La TIR del proyecto es igual a 0%."
+      ],
+      "correct": 1,
+      "justification": "Por definición, la TIR es la tasa de descuento que hace que el VAN sea igual a cero. En un proyecto simple, si VAN(8%) = 0, entonces TIR = 8% (el proyecto rinde exactamente el coste de oportunidad del capital)."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] ¿En cuál de las siguientes situaciones la regla simple de la TIR ('aceptar si TIR > r') falla y se invierte?",
+      "opts": [
+        "a) En proyectos de endeudamiento o financiación (donde el flujo inicial C0 es positivo y los flujos posteriores son negativos), en los cuales el proyecto es aceptable cuando TIR < r.",
+        "b) En todos los proyectos simples con flujos positivos a partir del primer año.",
+        "c) Cuando el coste de oportunidad del capital es positivo.",
+        "d) Cuando el proyecto dura más de 5 años."
+      ],
+      "correct": 0,
+      "justification": "En una operación de endeudamiento o préstamo recibido (C0 > 0 y C1, C2... < 0), la TIR representa el coste efectivo de la financiación, y la función VAN(r) es creciente con r. Por ello, tendrá VAN > 0 cuando la TIR sea menor que el coste de oportunidad del capital (TIR < r)."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Según la regla de los signos de Descartes, un proyecto de inversión cuyos flujos de tesorería presentan 2 cambios de signo a lo largo de su vida:",
+      "opts": [
+        "a) Tiene garantizada una única TIR positiva.",
+        "b) Puede tener hasta 2 tasas internas de rentabilidad (múltiples TIR) reales positivas, o ninguna.",
+        "c) Siempre tiene un VAN positivo para cualquier tasa de descuento.",
+        "d) Es un proyecto simple."
+      ],
+      "correct": 1,
+      "justification": "Cuando los flujos de caja cambian de signo más de una vez (proyectos no simples, por ejemplo con costes de desmantelamiento finales), el polinomio del VAN puede cortar el eje horizontal hasta tantas veces como cambios de signo existan (en este caso, hasta 2 TIR positivas o ninguna)."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Al evaluar dos proyectos de inversión mutuamente excluyentes de distinta escala (por ejemplo, el proyecto A requiere invertir 10.000 € y tiene TIR = 25% y VAN = 3.000 €, mientras que el proyecto B requiere invertir 50.000 € y tiene TIR = 18% y VAN = 6.500 €):",
+      "opts": [
+        "a) Debe elegirse siempre el proyecto con mayor TIR (Proyecto A), sin importar el VAN.",
+        "b) Si no existe racionamiento de capital, debe elegirse el proyecto con mayor VAN (Proyecto B), o equivalentemente comprobar que la TIR del proyecto incremental (B - A) supera al coste de oportunidad del capital.",
+        "c) Ambos proyectos deben rechazarse por ser mutuamente excluyentes.",
+        "d) El VAN no puede utilizarse para comparar proyectos de distinto tamaño."
+      ],
+      "correct": 1,
+      "justification": "La TIR es una medida relativa (%) que no distingue la escala o volumen de la inversión. Cuando dos proyectos son mutuamente excluyentes y no hay restricción presupuestaria, el criterio que maximiza el valor de la empresa es elegir el de mayor VAN (o verificar que la TIR de la inversión incremental B - A es mayor que r)."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Cuando una empresa sufre racionamiento de capital (restricción presupuestaria en un único periodo) y los proyectos son divisibles e independientes, el criterio óptimo para ordenar y seleccionar los proyectos que maximizan el VAN conjunto es:",
+      "opts": [
+        "a) Ordenarlos de menor a mayor Payback.",
+        "b) Ordenarlos de mayor a menor Índice de Rentabilidad (IR = VAN / Inversión inicial).",
+        "c) Elegir únicamente el proyecto de mayor desembolso inicial.",
+        "d) Ordenarlos alfabéticamente."
+      ],
+      "correct": 1,
+      "justification": "En presencia de racionamiento de capital en un único periodo, debemos maximizar el VAN obtenido por cada euro de presupuesto limitado invertido, lo que se consigue ordenando los proyectos de mayor a menor Índice de Rentabilidad (IR = VAN / C0)."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Si el Índice de Rentabilidad definido como IR = VAN / Inversión inicial es positivo (IR > 0), o equivalentemente definido como VA / Inversión inicial es mayor que 1, entonces:",
+      "opts": [
+        "a) El VAN del proyecto es positivo.",
+        "b) El VAN del proyecto es negativo.",
+        "c) La TIR es inferior al coste de oportunidad del capital.",
+        "d) El proyecto debe rechazarse."
+      ],
+      "correct": 0,
+      "justification": "Como la inversión inicial es positiva en el denominador, un Índice de Rentabilidad IR = VAN / I0 > 0 (o VA / I0 > 1) equivale matemáticamente a que VAN > 0."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Test PDF] Un proyecto de inversión requiere un desembolso inicial de 1.000 € y genera un único flujo de caja de 1.200 € dentro de un año. Si el coste de oportunidad del capital es del 10%, ¿cuáles son su VAN y su TIR?",
+      "opts": [
+        "a) VAN = 90,91 € y TIR = 20%.",
+        "b) VAN = 200,00 € y TIR = 10%.",
+        "c) VAN = 100,00 € y TIR = 20%.",
+        "d) VAN = 90,91 € y TIR = 12%."
+      ],
+      "correct": 0,
+      "justification": "VAN = -1.000 + 1.200 / 1,10 = -1.000 + 1.090,91 = 90,91 €. Y la TIR cumple -1.000 + 1.200 / (1 + TIR) = 0 => 1 + TIR = 1,20 => TIR = 20%."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Parcial 2018-2019 Q3] Suponga una empresa que se está planteando llevar a cabo la adquisición de una nueva maquinaria que presenta una serie de flujos netos de caja positivos y constantes durante los próximos 5 años. Si el tipo de interés de mercado aumenta, entonces:",
+      "opts": [
+        "a) Tanto el VAN como la TIR de la inversión disminuirán.",
+        "b) El VAN disminuirá, pero la TIR del proyecto permanecerá constante.",
+        "c) El VAN aumentará y la TIR disminuirá.",
+        "d) El VAN permanecerá constante y la TIR disminuirá."
+      ],
+      "correct": 1,
+      "justification": "En un proyecto de inversión puro (desembolso inicial negativo seguido de flujos positivos), al aumentar la tasa de descuento r disminuye el VAN. En cambio, la TIR depende exclusivamente de los flujos de tesorería internos del proyecto (C0, C1, ..., Cn) y no varía cuando cambia el tipo de interés del mercado."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Parcial 2024-2025 Q1] El director de producción de una empresa se está planteando reemplazar una de sus máquinas actuales, pudiendo elegir entre la máquina X (C0 = -100, C1 = 105, C2 = 105, C3 = 105; VAN al 6% = 180,67 u.m.) o la máquina Y (C0 = -150, C1 = 100, C2 = 100, C3 = 100; VAN al 6% = 117,30 u.m.). ¿Qué máquina seleccionaría?",
+      "opts": [
+        "a) La máquina X porque tiene un VAN mayor.",
+        "b) La máquina Y porque exige un menor desembolso inicial.",
+        "c) No elegiría directamente la máquina X dado que se trata de proyectos con distinta vida útil y serán renovadas.",
+        "d) Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 0,
+      "justification": "Observando la tabla original del examen Parcial 2024-2025, AMBAS máquinas X e Y tienen exactamente la misma vida útil de 3 años (C1, C2 y C3). Al tratarse de dos alternativas mutuamente excluyentes con idéntico horizonte temporal (3 años), se selecciona directamente aquella con mayor Valor Actual Neto: la máquina X (VAN = 180,67 u.m. > 117,30 u.m.)."
+    },
+    {
+      "tema": "Tema 3 — Criterios de Evaluación de Inversiones (VAN, TIR, Payback, IR)",
+      "q": "[Parcial 2024-2025 Q5] En relación con el Valor Actual Neto (VAN), indique la afirmación falsa:",
+      "opts": [
+        "a) Su valor depende exclusivamente de los flujos de tesorería del proyecto y del coste de oportunidad del capital.",
+        "b) Cumple la propiedad de aditividad del valor: VAN(A + B) = VAN(A) + VAN(B).",
+        "c) Un mayor riesgo esperado en el proyecto se traduce en una menor rentabilidad exigida y, por tanto, en un mayor VAN.",
+        "d) Reconoce que un euro hoy vale más que un euro mañana."
+      ],
+      "correct": 2,
+      "justification": "La afirmación c) es falsa: un mayor riesgo sistemático esperado en el proyecto exige una MAYOR tasa de rentabilidad requerida (coste de oportunidad del capital r más alto), lo que al descontar flujos positivos se traduce en un MENOR Valor Actual Neto."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Al determinar los flujos netos de caja incrementales de un proyecto de inversión, ¿cuál de los siguientes conceptos NO debe incluirse nunca?",
+      "opts": [
+        "a) Los costes hundidos o irrelevantes (como un estudio de mercado ya realizado y pagado con anterioridad a la decisión).",
+        "b) Los costes de oportunidad de activos que ya posee la empresa y que se destinarán al proyecto.",
+        "c) Los efectos colaterales o derivados (como la canibalización o erosión de ventas de otros productos de la empresa).",
+        "d) Las variaciones en las necesidades de fondo de maniobra (capital circulante)."
+      ],
+      "correct": 0,
+      "justification": "Los costes hundidos (sunk costs) son desembolsos pasados e irreversibles que ya se han incurrido tanto si se acepta como si se rechaza el proyecto, por lo que no son flujos incrementales y nunca deben incluirse en el cálculo del VAN."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una empresa espera generar un beneficio antes de intereses e impuestos (BAIT) de 1.500 u.m., con una amortización de 200 u.m. y un tipo impositivo del 30%. Si la inversión en capital circulante aumenta en 100 u.m. y se realiza una inversión en activos fijos de 300 u.m., ¿cuál será el flujo de caja libre?",
+      "opts": [
+        "a) 950 u.m.",
+        "b) 850 u.m.",
+        "c) 700 u.m.",
+        "d) 1.050 u.m."
+      ],
+      "correct": 1,
+      "justification": "¡Atención! El BAIT (1.500 u.m.) ya tiene restada la amortización técnica. Por tanto: 1) BAIDT = BAIT x (1 - t) = 1.500 x (1 - 0,30) = 1.050 u.m.; 2) Flujo de Caja Operativo (FCO) = BAIDT + Amortización = 1.050 + 200 = 1.250 u.m.; 3) Flujo de Caja Libre (FCL) = FCO - Incremento FM - Inversión Activos Fijos = 1.250 - 100 - 300 = 850 u.m."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una empresa está evaluando la compra de dos máquinas mutuamente excluyentes y renovables: la Máquina A tiene un coste inicial de 10.000 u.m., vida útil de 3 años y coste anual de operación de 2.000 u.m.; la Máquina B tiene un coste inicial de 15.000 u.m., vida útil de 5 años y coste anual de operación de 1.500 u.m. Si la tasa de descuento es del 8%, ¿cuál debería elegir la empresa según el criterio del Coste Anual Equivalente (CAE)?",
+      "opts": [
+        "a) Máquina A, porque su CAE es menor.",
+        "b) Máquina B, porque su CAE es menor.",
+        "c) Máquina A, porque su coste inicial es menor.",
+        "d) Ambas son indiferentes."
+      ],
+      "correct": 1,
+      "justification": "Calculamos el Coste Anual Equivalente de cada máquina (sumando el coste inicial anualizado y el coste anual de operación): Para la Máquina A (3 años, a(3; 8%) = 2,5771): CAE_A = (10.000 / 2,5771) + 2.000 = 3.880,34 + 2.000 = 5.880,34 u.m./año. Para la Máquina B (5 años, a(5; 8%) = 3,9927): CAE_B = (15.000 / 3,9927) + 1.500 = 3.756,85 + 1.500 = 5.256,85 u.m./año. Debe elegirse la Máquina B porque su CAE (5.256,85 u.m./año) es menor que el de A (5.880,34 u.m./año)."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Respecto al tratamiento del fondo de maniobra (capital circulante neto) en la evaluación de un proyecto de inversión:",
+      "opts": [
+        "a) Los aumentos del fondo de maniobra suponen una entrada de caja y las disminuciones una salida de caja.",
+        "b) Los aumentos de las necesidades de fondo de maniobra (mayores existencias o cuentas a cobrar) suponen una salida de tesorería (inversión), que normalmente se recupera al finalizar la vida útil del proyecto.",
+        "c) El fondo de maniobra se amortiza contablemente igual que la maquinaria.",
+        "d) Las variaciones en cuentas a pagar a proveedores no forman parte del fondo de maniobra."
+      ],
+      "correct": 1,
+      "justification": "Todo incremento del fondo de maniobra (Delta FM > 0) implica recursos inmovilizados en el ciclo de explotación y constituye una salida de caja, mientras que al liquidarse el proyecto se recupera dicho fondo de maniobra como una entrada de caja."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] En presencia de inflación, para calcular correctamente el Valor Actual Neto (VAN) de un proyecto de inversión:",
+      "opts": [
+        "a) Se pueden descontar los flujos de caja nominales utilizando el tipo de interés real.",
+        "b) Se pueden descontar los flujos de caja reales utilizando el tipo de interés nominal.",
+        "c) Se deben descontar los flujos de caja nominales con la tasa de descuento nominal, o bien los flujos de caja reales con la tasa de descuento real, obteniéndose exactamente el mismo VAN.",
+        "d) La tasa de descuento real es siempre mayor que la nominal cuando la inflación es positiva."
+      ],
+      "correct": 2,
+      "justification": "Por el principio de coherencia e identidad de Fisher [(1 + r_nominal) = (1 + r_real)(1 + inflación)], descontar flujos nominales a la tasa nominal o flujos reales a la tasa real conduce exactamente al mismo Valor Actual Neto."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una empresa adquirió hace años una máquina por 100.000 € cuya amortización acumulada hasta hoy es de 60.000 €. Si hoy vende dicha máquina por 55.000 € y el tipo impositivo sobre beneficios es del 30%, ¿cuál es el flujo neto de tesorería derivado de la venta de la máquina?",
+      "opts": [
+        "a) 55.000 €.",
+        "b) 50.500 €.",
+        "c) 59.500 €.",
+        "d) 40.000 €."
+      ],
+      "correct": 1,
+      "justification": "El Valor Neto Contable hoy es VNC = 100.000 - 60.000 = 40.000 €. Al venderse por 55.000 €, se genera una plusvalía (beneficio extraordinario antes de impuestos) de 55.000 - 40.000 = 15.000 €, que tributa al 30%: Impuesto = 15.000 x 0,30 = 4.500 €. Por tanto, el flujo neto de caja tras impuestos es 55.000 - 4.500 = 50.500 €."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una empresa analiza la explotación de una mina de plata que requiere una inversión inicial de 200.000 €, generará un flujo positivo de 350.000 € en el año 1 y exigirá unos costes de restauración medioambiental de 160.000 € en el año 2. Con estos datos:",
+      "opts": [
+        "a) Es un proyecto simple con una única TIR.",
+        "b) Al presentar dos cambios de signo en sus flujos (-, +, -), es una inversión no simple y puede presentar dos tasas internas de rentabilidad (0% y 14,5%), debiendo utilizarse el criterio del VAN.",
+        "c) El proyecto nunca puede evaluarse mediante el VAN.",
+        "d) Los costes de restauración medioambiental son costes hundidos y no deben tenerse en cuenta."
+      ],
+      "correct": 1,
+      "justification": "La secuencia de flujos es C0 = -200.000, C1 = +350.000 y C2 = -160.000 (dos cambios de signo). Se trata de una inversión no simple con múltiples TIR, por lo que la regla de la TIR no es aplicable directamente y debe decidirse mediante el VAN a la tasa de coste de oportunidad del capital."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Un proyecto de inversión a 2 años requiere un desembolso inicial de 2.000 € en un equipo que se amortiza linealmente hasta un valor residual de 100 € al final del año 2. Los cobros de explotación previstos son de 2.400 € (año 1) y 3.300 € (año 2), y los pagos de explotación son de 1.200 € (año 1) y 1.500 € (año 2). Sabiendo que el impuesto sobre beneficios es del 35% y se liquida con un año de retraso, los flujos netos de caja del proyecto (C0, C1, C2 y C3) serán:",
+      "opts": [
+        "a) -2.000; 1.112,5 y 1.502,5 €.",
+        "b) -2.000; 1.200 y 1.712,5 €.",
+        "c) -2.000; 1.200; 1.812,5 y -297,5 € (incluyendo en t = 2 el valor residual de 100 €).",
+        "d) -2.000; 1.200; 1.712,5 y -297,5 € (sin incluir el valor residual de 100 € en t = 2)."
+      ],
+      "correct": 2,
+      "justification": "La cuota de amortización anual es (2.000 - 100) / 2 = 950 €/año. En t = 0: C0 = -2.000 €. En t = 1: Cobros - Pagos = 2.400 - 1.200 = 1.200 € (el impuesto del año 1 se paga en t = 2, por lo que C1 = 1.200 €). El BAIT del año 1 es 1.200 - 950 = 250 € => Impuesto año 1 (pagadero en t = 2) = 250 x 0,35 = 87,50 €. En t = 2: Cobros - Pagos = 3.300 - 1.500 = 1.800 €; restando el impuesto del año 1 (-87,50 €) queda 1.712,50 € (opción d), y sumando la recuperación del valor residual (+100 €) resulta C2 = 1.812,50 € (opción c). En t = 3 se liquida el impuesto del año 2: BAIT2 = 1.800 - 950 = 850 € => C3 = -850 x 0,35 = -297,50 €."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una imprenta está considerando adquirir una nueva prensa para libros a un coste de 4.000 euros, esperando obtener unos flujos de caja de 2.500 euros el primer año y de 3.000 euros en el segundo. Si su coste de oportunidad de capital es del 9%, el flujo anual equivalente (FAE) de la prensa según el cuestionario será de:",
+      "opts": [
+        "a) 818,62 € (este importe corresponde al VAN del proyecto).",
+        "b) 1.209,59 €.",
+        "c) 723,36 € (valor marcado en el test; con el factor exacto a(2; 9%) = 1,7591 el FAE es 465,36 €).",
+        "d) 1.446,72 €."
+      ],
+      "correct": 2,
+      "justification": "Primero calculamos el VAN al 9%: VAN = -4.000 + 2.500 / 1,09 + 3.000 / 1,09^2 = -4.000 + 2.293,58 + 2.525,04 = 818,62 € (que es la opción a). Para obtener el Flujo Anual Equivalente (FAE = VAN / a(2; 9%)), en el documento original del test se dividió 818,62 / 1,1317 = 723,36 € (opción c), mientras que con el factor de anualidad exacto a(2; 9%) = (1 - 1,09^-2)/0,09 = 1,75911 resulta FAE = 818,62 / 1,75911 = 465,36 €/año."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Foto Wuolah Q1] Determine el precio aproximado que pagaría hoy por un título que promete los siguientes flujos de caja reales (Año 1: 100 €, Año 2: 100 €, Año 3: 1.100 €), si la rentabilidad nominal de activos financieros de similares características es del 10% y la tasa de inflación es del 5%:",
+      "opts": [
+        "a) 1.000 euros.",
+        "b) 1.143,34 euros.",
+        "c) 1.136,16 euros.",
+        "d) Ninguna de las anteriores."
+      ],
+      "correct": 1,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 1 = b): como los flujos dados son REALES, debemos descontarlos con la tasa de rentabilidad REAL (o convertir los flujos a nominales multiplicando por 1,05^t y descontar al 10%). Aplicando Fisher: 1 + r_real = 1,10 / 1,05 = 1,047619 (r_real = 4,7619%). Por tanto: P0 = 100 / 1,047619 + 100 / 1,047619^2 + 1.100 / 1,047619^3 = 95,4545 + 91,1157 + 956,7727 = 1.143,34 €."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Foto Wuolah Q10] Partiendo del Beneficio antes de Intereses e Impuestos (BAIT) de una empresa en un determinado período (suponiendo que no existen provisiones):",
+      "opts": [
+        "a) Podemos obtener el flujo de caja antes de impuestos sumando a esa cifra las amortizaciones técnicas.",
+        "b) Podemos obtener el flujo de caja después de impuestos sumando a esa cifra las amortizaciones técnicas multiplicadas por el tipo impositivo.",
+        "c) Las dos respuestas anteriores son correctas.",
+        "d) Todas las respuestas anteriores son falsas."
+      ],
+      "correct": 0,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 10 = a): dado que BAIT = Ingresos operativos - Gastos operativos desembolsables - Amortizaciones técnicas, si al BAIT le sumamos las amortizaciones técnicas obtenemos el flujo operativo de caja antes de impuestos (EBITDA = Ingresos - Gastos operativos). En cambio, la opción b) es falsa porque para pasar del BAIT al flujo después de impuestos habría que multiplicar primero el BAIT por (1 - t) y luego sumar la amortización íntegra [BAIT x (1 - t) + Amortización]."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Parcial 2018-2019 Q4] Suponga que una empresa está estudiando la posibilidad de adquirir una nueva maquinaria. Para estimar los flujos netos de caja que generará esta inversión, el director financiero dispone de una serie de datos. Indique cuál de las siguientes partidas NO debe incluirse en el cálculo de los flujos netos de caja del proyecto:",
+      "opts": [
+        "a) El incremento en las cuentas a cobrar de clientes derivado de las mayores ventas del proyecto.",
+        "b) El ahorro fiscal derivado de la amortización contable de la nueva maquinaria.",
+        "c) Los intereses anuales del préstamo bancario solicitado para financiar la compra de la maquinaria.",
+        "d) El valor de mercado (neto de impuestos) por el que se espera vender la maquinaria al final de su vida útil."
+      ],
+      "correct": 2,
+      "justification": "Por el principio de separación entre las decisiones de inversión y financiación, en los flujos netos de caja del proyecto NUNCA se deducen los intereses de la deuda ni la devolución del principal (ya que el coste de la financiación se recoge en la tasa de descuento)."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Parcial 2018-2019 Q5] Cuando se trata de elegir entre dos máquinas mutuamente excluyentes que tienen distinta vida útil y que van a ser reemplazadas indefinidamente al llegar al final de su vida útil, el criterio adecuado consiste en:",
+      "opts": [
+        "a) Elegir directamente la máquina que tenga mayor VAN en su primer ciclo, sin importar su duración.",
+        "b) Calcular el Coste Anual Equivalente (CAE) de cada máquina y elegir aquella que tenga un CAE menor.",
+        "c) Elegir la máquina que tenga menor desembolso inicial.",
+        "d) Dividir el VAN de cada máquina entre su número de años sin tener en cuenta el tipo de interés."
+      ],
+      "correct": 1,
+      "justification": "Cuando dos equipos mutuamente excluyentes tienen diferente vida útil y son renovables, no pueden compararse directamente sus VAN de un solo ciclo; debe calcularse el Coste Anual Equivalente (CAE = VA(Costes) / a(n; r)) y seleccionar el de menor CAE."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Parcial 2024-2025 Q3] En el cálculo de los flujos netos de caja de un proyecto de inversión:",
+      "opts": [
+        "a) Se deduce la amortización financiera del préstamo que financia el proyecto.",
+        "b) Se deduce la amortización técnica del activo como una salida efectiva de tesorería.",
+        "c) Se deducen los gastos financieros (intereses) derivados de la financiación ajena del proyecto.",
+        "d) Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 3,
+      "justification": "Ninguna de las tres primeras es correcta: ni la amortización financiera ni los intereses de la deuda se incluyen en los flujos del proyecto (principio de separación inversión-financiación), y la amortización técnica no es una salida de caja (solo afecta al cálculo del impuesto sobre el beneficio)."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Relación Problemas P23] ¿Por qué deben separarse los flujos de caja de la inversión de los flujos derivados de la financiación al evaluar un proyecto mediante el VAN?",
+      "opts": [
+        "a) Porque los intereses bancarios no existen en las empresas cotizadas.",
+        "b) Porque el coste de la financiación ya está incluido en la tasa de descuento (coste de oportunidad del capital); restar también los intereses y principal en los flujos supondría penalizar dos veces el proyecto por el coste financiero.",
+        "c) Porque los impuestos no afectan a los proyectos de inversión.",
+        "d) Porque la financiación siempre tiene coste cero."
+      ],
+      "correct": 1,
+      "justification": "Restar los intereses o la devolución del principal en los flujos de caja y luego descontar esos flujos al coste de capital implicaría contabilizar doblemente el coste de la financiación. Primero se evalúa si el activo crea valor por sí mismo (decisión de inversión) y separadamente cómo se financia."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Relación Problemas P25] Indique cuáles de las siguientes partidas deben considerarse flujos incrementales al evaluar el lanzamiento de una nueva línea de productos en una nave industrial que ya es propiedad de la empresa:",
+      "opts": [
+        "a) El coste del estudio de viabilidad pagado el año pasado y los gastos generales de la sede central que no varían con el proyecto.",
+        "b) El alquiler que la empresa deja de cobrar por usar la nave en el proyecto (coste de oportunidad), la reducción de ventas en otros productos de la empresa (canibalización) y la inversión adicional en fondo de maniobra.",
+        "c) Los intereses del préstamo hipotecario antiguo de la nave y la dotación contable a la amortización como salida de caja.",
+        "d) Únicamente el precio de compra histórico que se pagó hace 10 años por la nave industrial."
+      ],
+      "correct": 1,
+      "justification": "Son flujos incrementales relevantes: 1) el coste de oportunidad del alquiler alternativo de la nave, 2) los efectos colaterales (erosión o canibalización de otros productos) y 3) las variaciones en el fondo de maniobra. En cambio, los estudios previos ya realizados y el coste histórico de la nave son costes hundidos, y los gastos generales fijos no incrementales ni los intereses se incluyen."
+    },
+    {
+      "tema": "Anexo Fotos Examen Wuolah (Preguntas adicionales)",
+      "q": "[Anexo Ordinaria] La contribución de una acción al riesgo de una cartera se puede obtener realizando el siguiente cálculo:",
+      "opts": [
+        "a) Covarianza media de la acción con los títulos de la cartera / varianza de la cartera.",
+        "b) Porcentaje invertido en el título x covarianza media de la acción con los títulos de la cartera.",
+        "c) Beta del título x varianza de la cartera x porcentaje invertido en el título.",
+        "d) Las respuestas b) y c) son correctas."
+      ],
+      "correct": 3,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 4 = d): la contribución del título i a la varianza de la cartera es x_i * Cov(R_i, R_p) (opción b), y dado que Beta_i(respecto a la cartera) = Cov(R_i, R_p) / Var(R_p), esto equivale a x_i * Beta_i * Var(R_p) (opción c). Por tanto, b) y c) son correctas."
+    },
+    {
+      "tema": "Anexo Fotos Examen Wuolah (Preguntas adicionales)",
+      "q": "[Anexo Ordinaria] Un inversor adquiere una cartera compuesta al 50% por acciones de Telefónica, con una beta de 1,01 y una desviación típica del 16%, y un 50% de acciones de BBVA, con beta de 1,19 y una desviación típica del 23%. El coeficiente de correlación entre las dos acciones es de 0,67 y la desviación típica de la rentabilidad de mercado es del 15,08%. Indique la respuesta correcta:",
+      "opts": [
+        "a) La desviación típica de esta cartera será aproximadamente del 31,95%.",
+        "b) La beta de esta cartera será de 1.",
+        "c) La desviación típica de una cartera de acciones bien diversificada con una beta media de 1,1 será aproximadamente del 16,59%.",
+        "d) Todas las respuestas anteriores son falsas."
+      ],
+      "correct": 2,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 5 = c): la beta de la cartera es 0,5 x 1,01 + 0,5 x 1,19 = 1,10 (no 1). Para una cartera bien diversificada (sin riesgo específico), su desviación típica es igual a Beta_p x sigma_m = 1,10 x 15,08% = 16,588% ≈ 16,59% (opción c)."
+    },
+    {
+      "tema": "Anexo Fotos Examen Wuolah (Preguntas adicionales)",
+      "q": "[Anexo Ordinaria] Partiendo de la información del enunciado anterior (Telefónica con beta = 1,01 y BBVA con beta = 1,19, coeficiente de correlación = 0,67), podemos afirmar que:",
+      "opts": [
+        "a) Las acciones de BBVA son más defensivas que las de Telefónica.",
+        "b) Las acciones de BBVA y de Telefónica están positivamente correlacionadas.",
+        "c) Un aumento en la rentabilidad de las acciones de BBVA generalmente estará asociado con un aumento en igual proporción en la rentabilidad de las acciones de Telefónica.",
+        "d) Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 1,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 6 = b): como el coeficiente de correlación es +0,67 > 0, ambas acciones están positivamente correlacionadas (aunque no varían en igual proporción porque la correlación no es 1 y sus desviaciones típicas son distintas; además BBVA tiene mayor beta y es más agresiva, no más defensiva)."
+    },
+    {
+      "tema": "Anexo Fotos Examen Wuolah (Preguntas adicionales)",
+      "q": "[Anexo Ordinaria] Indique cuál de las siguientes afirmaciones es correcta:",
+      "opts": [
+        "a) El modelo CAPM establece la combinación lineal entre rentabilidad esperada y riesgo de mercado que deberían tener los títulos cuando sus precios en mercado están sobrevalorados.",
+        "b) El modelo CAPM establece la combinación lineal entre rentabilidad esperada y riesgo de mercado que deberían tener los títulos cuando sus precios de mercado no están en equilibrio.",
+        "c) El modelo CAPM establece la combinación lineal entre rentabilidad esperada y riesgo de mercado que deberían tener los títulos cuando sus precios de mercado no están sobrevalorados ni infravalorados.",
+        "d) El modelo CAPM establece la combinación lineal entre rentabilidad esperada y riesgo total de las carteras eficientes mixtas."
+      ],
+      "correct": 2,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 7 = c): el modelo CAPM (Línea del Mercado de Títulos o SML) establece la relación lineal en equilibrio (cuando los títulos están correctamente valorados, ni sobrevalorados ni infravalorados) entre la rentabilidad esperada de cada título y su riesgo sistemático o de mercado (medido por beta)."
+    },
+    {
+      "tema": "Anexo Fotos Examen Wuolah (Preguntas adicionales)",
+      "q": "[Anexo Ordinaria] Una empresa que se venía financiando con una combinación al 50% de deuda (con una beta B_D de 0,5 y una rentabilidad esperada r_D del 6%) y capital propio (con una beta B_E de 0,8 y una rentabilidad esperada r_E del 7,8%) decide emitir nuevas acciones para amortizar toda la deuda. Indique la respuesta correcta:",
+      "opts": [
+        "a) La situación de los accionistas de la empresa ha mejorado por cuanto ahora tendrán menor riesgo.",
+        "b) La situación de los accionistas ha empeorado por cuanto ahora tendrán una menor rentabilidad esperada.",
+        "c) La rentabilidad esperada de las acciones tras el cambio será del 6,9%.",
+        "d) Las respuestas a) y c) son correctas."
+      ],
+      "correct": 2,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 11 = c): al amortizar toda la deuda en mercados perfectos (Modigliani y Miller), la rentabilidad esperada de las acciones pasa a coincidir con la rentabilidad de los activos de la empresa: r_A = 0,50 x 6% + 0,50 x 7,8% = 6,9% (y la riqueza de los accionistas ni mejora ni empeora por Proposición I de MM, ya que la menor rentabilidad esperada 6,9% compensa exactamente el menor riesgo financiero B_A = 0,5 x 0,5 + 0,5 x 0,8 = 0,65)."
+    },
+    {
+      "tema": "Anexo Fotos Examen Wuolah (Preguntas adicionales)",
+      "q": "[Anexo Ordinaria] Suponiendo que los títulos de deuda y capital propio de la empresa anterior se encuentran en equilibrio y que los supuestos del CAPM son correctos:",
+      "opts": [
+        "a) La prima por riesgo del mercado será del 9%.",
+        "b) La prima por riesgo del mercado será del 6%.",
+        "c) La rentabilidad esperada del mercado será del 6%.",
+        "d) No tenemos información suficiente para hacer los cálculos de la rentabilidad esperada del mercado o la prima por riesgo del mercado."
+      ],
+      "correct": 1,
+      "justification": "Según la plantilla oficial (wuolah-0.jpg, pregunta 12 = b): por la ecuación del CAPM (r_i = r_f + Beta_i x Prima_mercado), con dos títulos en equilibrio tenemos el sistema: 6% = r_f + 0,5 x (r_m - r_f) y 7,8% = r_f + 0,8 x (r_m - r_f). Restando ambas ecuaciones: 7,8% - 6% = (0,8 - 0,5) x (r_m - r_f) => 1,8% = 0,3 x Prima_mercado => Prima por riesgo del mercado (r_m - r_f) = 1,8% / 0,3 = 6% (y r_f = 6% - 0,5 x 6% = 3%, r_m = 9%)."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Respecto a la variación del fondo de maniobra y su efecto sobre el flujo neto de caja operativo (tesorería), señale la afirmación correcta:",
+      "opts": [
+        "a) Si de un periodo a otro aumentan las existencias en 2.000 € sin variar el resto de partidas, el flujo neto de caja aumenta en 2.000 €.",
+        "b) Si de un periodo a otro se produce una disminución de las cuentas a cobrar de 5.000 € y una disminución de las cuentas a pagar de 1.000 €, entonces el flujo neto de caja operativo aumenta en 4.000 €.",
+        "c) Si de un periodo a otro se produce un aumento de las cuentas a cobrar de 3.000 € y un aumento de las cuentas a pagar de 1.000 €, entonces el flujo neto de caja operativo se reduce en 4.000 €.",
+        "d) Si de un periodo a otro se produce un aumento de las cuentas a cobrar de 3.000 € y una disminución de las cuentas a pagar de 1.000 €, entonces el flujo neto de caja operativo se reduce en 2.000 €."
+      ],
+      "correct": 1,
+      "justification": "La variación del fondo de maniobra es Delta FM = Delta Existencias + Delta Cuentas a cobrar - Delta Cuentas a pagar. En la opción b): Delta FM = -5.000 - (-1.000) = -4.000 € (liberación de fondo de maniobra). Como FNC_tesorería = FNC_renta - Delta FM, al restar -4.000 € el flujo neto de caja aumenta en +4.000 €."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Se han extraído los siguientes datos del Balance de una empresa: Activo no corriente = 145.347 €; Activo corriente = 95.543 €; Patrimonio neto = 84.471 €; Pasivo no corriente = 43.583 €. Indique a cuánto asciende el Fondo de Maniobra:",
+      "opts": [
+        "a) 112.836 €.",
+        "b) 101.764 €.",
+        "c) -17.293 €.",
+        "d) 51.960 €."
+      ],
+      "correct": 2,
+      "justification": "El Activo total es ANC + AC = 145.347 + 95.543 = 240.890 €. Por la identidad del balance, el Pasivo corriente es PC = Activo Total - PN - PNC = 240.890 - 84.471 - 43.583 = 112.836 €. Por tanto, el Fondo de Maniobra es FM = AC - PC = 95.543 - 112.836 = -17.293 € (o equivalentemente FM = PN + PNC - ANC = 84.471 + 43.583 - 145.347 = -17.293 €)."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una empresa minera está explorando diversos depósitos minerales de plata en un área de interés geológico. En un 70% de las exploraciones se encuentra ante un depósito explotable, mientras que en el 30% restante la explotación no es viable. Cuando el depósito es explotable, el 50% de los depósitos producen 10 onzas de plata al día y el otro 50% producen 50 onzas/día (los 365 días del año). El coste de extracción es de 15 €/onza y el precio de venta de 20 €/onza. En un contexto sin impuestos, estime los flujos de caja anuales esperados de realizar una de estas exploraciones:",
+      "opts": [
+        "a) 7.665 €.",
+        "b) 38.325 €.",
+        "c) 54.750 €.",
+        "d) Ninguna es correcta."
+      ],
+      "correct": 1,
+      "justification": "Si el depósito resulta explotable, la producción diaria media esperada es (0,50 x 10) + (0,50 x 50) = 30 onzas/día, lo que supone 30 x 365 = 10.950 onzas/año. Con un margen neto de (20 - 15) = 5 €/onza, el flujo anual de un depósito explotable es 10.950 x 5 = 54.750 €/año. Ponderando por la probabilidad del 70% de hallar un depósito explotable (y 30% de flujo 0), el flujo anual esperado es 54.750 x 0,70 = 38.325 €."
+    },
+    {
+      "tema": "Tema 4 — Estimación de Flujos de Caja, Inflación y CAE/FAE",
+      "q": "[Test PDF] Una empresa de edición de libros considera reemplazar su prensa actual por otra nueva (ambas fabrican el mismo número de libros al año). La demanda es de 500 libros/mes de abril a septiembre (6 meses) y de 350 libros/mes los otros 6 meses, vendiéndose a 10 €/libro. El coste de fabricación es de 3,5 €/libro con la prensa antigua y 2,5 €/libro con la nueva. El valor residual hoy de la prensa antigua es de 650 € y el precio de adquisición de la nueva es de 30.000 €. En 10 años ambas carecerán de valor residual. En ausencia de impuestos, ¿cuál es la mejor alternativa para una tasa de actualización del 10%?",
+      "opts": [
+        "a) Comprar la máquina nueva (supone un ahorro de 1.337,29 € sin computar el valor de venta hoy de la prensa antigua).",
+        "b) Comprar la máquina nueva (supone un ahorro neto de 1.987,29 € con respecto a continuar con la prensa antigua, incluyendo los 650 € de venta de la antigua).",
+        "c) Comprar la máquina nueva (supone un ahorro de 21.650 € con respecto a continuar con la prensa antigua).",
+        "d) Comprar la máquina nueva (supone un ahorro de 47.169,48 € con respecto a continuar con la prensa antigua)."
+      ],
+      "correct": 1,
+      "justification": "La producción anual es (6 meses x 500) + (6 meses x 350) = 3.000 + 2.100 = 5.100 libros/año. Como los ingresos por ventas son idénticos con ambas prensas, la prensa nueva ahorra (3,5 - 2,5) = 1 €/libro, es decir, +5.100 €/año durante 10 años. El Valor Actual de esos ahorros al 10% es 5.100 x a(10; 10%) = 5.100 x 6,144567 = 31.337,29 €. Restando los 30.000 € de compra de la nueva prensa queda +1.337,29 € (opción a), y sumando los +650 € que se ingresan hoy al vender la prensa antigua (desembolso inicial neto = -30.000 + 650 = -29.350 €), el ahorro neto (VAN incremental) asciende a 31.337,29 - 29.350 = +1.987,29 € (opción b). (Nota: en los apuntes manuscritos del PDF el alumno restó por error los 650 € en lugar de sumarlos como menor desembolso inicial, obteniendo 687,29 €)."
     }
   ]
 }

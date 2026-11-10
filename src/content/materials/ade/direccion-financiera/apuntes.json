@@ -1,8 +1,8 @@
 {
   "subject": "ade/direccion-financiera",
   "type": "apuntes",
-  "title": "Manual Maestro de Teoría: Temas 1 al 4 (Provisional)",
-  "description": "⚠️ MATERIAL PROVISIONAL (No revisado al 100%). Apuntes completos y estructurados para el primer parcial de Dirección Financiera I: Teorema de Separación de Fisher, Modelos DDM / Gordon-Shapiro y descomposición del precio con VAOC, Criterios de Selección VAN frente a anomalías de la TIR y Determinación de Flujos de Caja Libres con Fondo de Maniobra y Coste Anual Equivalente (CAE).",
+  "title": "Manual Completo de Teoría y Casos de Diapositivas: Temas 1 al 4 (24 págs.)",
+  "description": "Manual exhaustivo de 24 páginas revisado diapositiva por diapositiva con las presentaciones oficiales de la UGR (Temas 1 al 4): incluye toda la teoría, la notación oficial del Departamento (C0)di, Qi)di renta, Qi)di tesorería, VRn)di), las trampas de examen y todos los casos prácticos resueltos de las diapositivas (Edificio de oficinas, Teorema de Separación de Fisher, Compraventa de 40 bonos, Tecnocrecimiento S.A., Reinversiones perpetuas vs. finitas de 3 años, los 4 defectos de la TIR, el Caso completo del Guano - SIFA, CAE con inflación y con cambio tecnológico del 20% y demanda estacional de copiadoras).",
   "order": 3,
   "pdf": "ade/direccion-financiera/apuntes-primer-parcial.pdf"
 }
