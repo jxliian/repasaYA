@@ -1,0 +1,153 @@
+{
+  "subject": "ade/direccion-financiera",
+  "type": "vf",
+  "title": "Batería Verdadero / Falso: Conceptos Clave y Trampas de Examen (Temas 1 al 4) (Provisional)",
+  "description": "⚠️ MATERIAL PROVISIONAL (No revisado al 100%). 24 preguntas conceptuales de Verdadero o Falso con justificaciones rigurosas para identificar trampas frecuentes en exámenes de Dirección Financiera: Teorema de Fisher, Modelos de Dividendos y VAOC, Criterios VAN vs. TIR y Flujos de Caja Libres con Coste Anual Equivalente.",
+  "order": 2,
+  "items": [
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "El objetivo financiero normativo de la empresa consiste en maximizar el beneficio neto contable del ejercicio.",
+      "answer": "F",
+      "justification": "Falso. El objetivo es maximizar el valor de mercado de las acciones (la riqueza de los accionistas). Maximizar el beneficio contable ignora el riesgo, la estructura temporal de los flujos de tesorería y la reinversión requerida."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Según el Teorema de Separación de Fisher, la regla óptima de inversión productiva para la empresa es independiente de las preferencias de consumo temporal de sus accionistas.",
+      "answer": "V",
+      "justification": "Verdadero. En un mercado de capitales perfecto, la empresa debe acometer todos los proyectos con VAN > 0 para maximizar la riqueza común, y cada accionista ajusta su perfil de consumo personal prestando o endeudándose en el mercado financiero."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Si el tipo de interés del endeudamiento es superior al tipo de interés del préstamo, el Teorema de Separación de Fisher sigue manteniéndose de forma inalterada.",
+      "answer": "F",
+      "justification": "Falso. Al existir una imperfección (quiebre en la recta de mercado), la elección del volumen óptimo de inversión real puede variar según si el accionista es prestamista o prestatario."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Una disminución en los tipos de interés de mercado incrementa el volumen de inversión inicial en activos reales que maximiza el VAN.",
+      "answer": "V",
+      "justification": "Verdadero. Al descender r, la pendiente de la recta presupuestaria se aplana, desplazando el punto de tangencia sobre la curva de producción cóncava hacia un mayor nivel de inversión real (I0)."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "En una Sociedad Anónima, los accionistas tienen responsabilidad patrimonial ilimitada por las deudas y obligaciones de la compañía.",
+      "answer": "F",
+      "justification": "Falso. La responsabilidad de los accionistas en una S.A. está estrictamente limitada al capital aportado."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "El modelo de Gordon-Shapiro puede aplicarse válidamente incluso cuando la tasa de crecimiento de los dividendos (g) es superior al coste de oportunidad del capital (r).",
+      "answer": "F",
+      "justification": "Falso. Si g >= r, la serie geométrica no converge y daría un precio negativo o matemáticamente indeterminado. El modelo exige rigurosamente r > g."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "Toda retención de beneficios (b > 0) para reinvertir en la empresa genera automáticamente un Valor Actual de las Oportunidades de Crecimiento (VAOC) positivo.",
+      "answer": "F",
+      "justification": "Falso. La reinversión sólo genera VAOC > 0 si la rentabilidad obtenida por la empresa (ROE) supera al coste de oportunidad del capital (ROE > r). Si ROE = r, el VAOC es cero; y si ROE < r, la reinversión destruye valor."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "El precio de una acción hoy equivale al valor actual de todos los dividendos futuros proyectados a perpetuidad, con independencia de que el inversor mantenga la acción durante uno, dos o cincuenta años.",
+      "answer": "V",
+      "justification": "Verdadero. En un mercado eficiente, el precio de reventa futuro de la acción reflejará a su vez el valor actualizado de los dividendos que restan por cobrar a partir de ese momento."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "Un ratio PER elevado siempre es síntoma de que la empresa mantiene una baja tasa de capitalización de mercado.",
+      "answer": "F",
+      "justification": "Falso. Un PER alto puede deberse a que el mercado anticipa un elevado VAOC (oportunidades de inversión muy rentables) o bien a una caída coyuntural y transitoria en los beneficios corrientes (denominador)."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "La tasa de rentabilidad esperada de una acción según Gordon-Shapiro se compone de la rentabilidad por dividendo (D1 / P0) y de la tasa de plusvalía del capital (g).",
+      "answer": "V",
+      "justification": "Verdadero. r = (D1 / P0) + g."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "El criterio del Valor Actual Neto (VAN) cumple con la propiedad de aditividad del valor (VAN(A + B) = VAN(A) + VAN(B)).",
+      "answer": "V",
+      "justification": "Verdadero. Al basarse en la suma de valores actuales descontados a la tasa de mercado, el valor del conjunto es exactamente la suma de los valores de las partes."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "En proyectos de inversión mutuamente excluyentes con diferente desembolso inicial, el criterio de la TIR siempre coincide con la recomendación del VAN.",
+      "answer": "F",
+      "justification": "Falso. La TIR adolece del sesgo de escala: un proyecto pequeño puede tener una TIR muy alta pero generar menos euros de riqueza absoluta que un proyecto grande con menor TIR pero mayor VAN."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "En proyectos cuyos flujos netos de caja cambian de signo más de una vez (+, -, +, -), pueden existir múltiples valores de TIR o no existir ninguna solución real.",
+      "answer": "V",
+      "justification": "Verdadero. Por la regla de los signos de Descartes, un polinomio de grado n puede tener tantas raíces reales positivas como cambios de signo presenten sus coeficientes."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "El criterio del Plazo de Recuperación (Payback) simple tiene en cuenta los flujos de tesorería generados después de que se ha recuperado el desembolso inicial.",
+      "answer": "F",
+      "justification": "Falso. Una de las mayores limitaciones del Payback es que ignora totalmente todos los flujos posteriores al horizonte de corte."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "Un proyecto con VAN igual a cero no permite devolver la inversión inicial.",
+      "answer": "F",
+      "justification": "Falso. VAN = 0 significa que el proyecto devuelve exactamente la totalidad del capital invertido y además remunera a los proveedores de fondos a su coste de oportunidad r, sin generar ganancias extraordinarias."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "Bajo racionamiento de capital financiero con proyectos divisibles, el criterio de priorización óptimo es ordenar los proyectos de mayor a menor Índice de Rentabilidad (IR).",
+      "answer": "V",
+      "justification": "Verdadero. El IR (VA / I0) mide la eficiencia en el uso del capital limitado (riqueza generada por euro invertido), maximizando el VAN del paquete presupuestario."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Los costes hundidos o irrecuperables en los que la empresa incurrió en el pasado deben incluirse en el desembolso inicial del proyecto para valorar su viabilidad.",
+      "answer": "F",
+      "justification": "Falso. Los costes pasados e irreversibles se pagarán con independencia de la decisión; no son flujos incrementales futuros y deben ignorarse por completo."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Si un nuevo proyecto reduce las ventas de una línea existente de la empresa (canibalización), dicha pérdida de margen debe restarse como un flujo de caja negativo atribuible al nuevo proyecto.",
+      "answer": "V",
+      "justification": "Verdadero. La regla de los flujos de caja exige evaluar el impacto incremental neto sobre el valor global de la empresa (situación con proyecto vs. situación sin proyecto)."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Los gastos financieros derivados de la deuda bancaria deben deducirse en la cuenta de resultados operativa para obtener el Flujo de Caja Libre del proyecto.",
+      "answer": "F",
+      "justification": "Falso. Los gastos financieros se excluyen del cálculo del flujo libre porque la remuneración de la deuda ya está contabilizada en la tasa de descuento (WACC o r). Incluirlos restaría dos veces el coste financiero."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "La amortización del inmovilizado no supone una salida de tesorería, pero genera un flujo positivo de caja indirecto a través del escudo fiscal (t * Amortización).",
+      "answer": "V",
+      "justification": "Verdadero. Al ser gasto fiscalmente deducible, reduce la base del impuesto y minora el pago de impuestos de la empresa."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Un aplazamiento concedido por los proveedores a la empresa en el pago de compras reduce el Fondo de Maniobra e incrementa el flujo de caja del periodo.",
+      "answer": "V",
+      "justification": "Verdadero. Al aumentar las Cuentas a Pagar (pasivo circulante operativo), el FM (Activo - Pasivo Circulante) disminuye (Delta FM < 0), lo que libera liquidez e incrementa el FCL."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Al comparar dos máquinas con vidas útiles desiguales que deben ser sustituidas periódicamente en el tiempo, el criterio adecuado de decisión es el Coste Anual Equivalente (CAE) y no el VAN directo.",
+      "answer": "V",
+      "justification": "Verdadero. El VAN simple penaliza o favorece indebidamente a la máquina con horizonte temporal diferente. El CAE homogeniza el coste a una anualidad constante homogénea equivalente."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Los flujos de caja proyectados en euros nominales deben descontarse a una tasa de descuento en términos reales.",
+      "answer": "F",
+      "justification": "Falso. Principio de consistencia de Fisher: los flujos nominales se descuentan con tasas nominales, y los flujos reales con tasas reales."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "El Fondo de Maniobra o capital circulante invertido a lo largo del proyecto se recupera al término de su vida útil por su valor contable, constituyendo una entrada positiva de caja.",
+      "answer": "V",
+      "justification": "Verdadero. Al liquidar el proyecto, se cobran los saldos pendientes de clientes y se venden las existencias remanentes, liberando la inversión acumulada en circulante."
+    }
+  ]
+}

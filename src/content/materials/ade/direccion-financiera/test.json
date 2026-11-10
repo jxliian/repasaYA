@@ -1,0 +1,573 @@
+{
+  "subject": "ade/direccion-financiera",
+  "type": "test",
+  "title": "Banco Completo de Preguntas Tipo Test (Temas 1 al 4) (Provisional)",
+  "description": "⚠️ MATERIAL PROVISIONAL (No revisado al 100%). Banco exhaustivo de preguntas de examen oficial para el primer parcial de Dirección Financiera (Universidad de Granada). Incluye cuestiones teóricas, analíticas y de cálculo numérico de exámenes oficiales (2018-2019, 2024-2025 y relaciones de problemas): Teorema de Fisher (Tema 1), Modelos DDM, Gordon-Shapiro y VAOC (Tema 2), Criterios VAN, TIR y Payback (Tema 3) y Flujos Libres, Impuestos, NOF y Coste Anual Equivalente CAE (Tema 4).",
+  "order": 1,
+  "items": [
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "¿Cuál es el objetivo financiero fundamental y normativo de la dirección financiera en la empresa moderna?",
+      "opts": [
+        "Maximizar el beneficio neto contable de cada ejercicio.",
+        "Maximizar el volumen de ventas y la cuota de mercado.",
+        "Maximizar el valor de mercado de las acciones (la riqueza de los accionistas).",
+        "Minimizar los costes operativos y de personal en todos los departamentos."
+      ],
+      "correct": 2,
+      "justification": "El objetivo normativo de la gestión financiera es la maximización del valor de mercado de las acciones (creación de riqueza para el accionista). Maximizar el beneficio contable es erróneo porque ignora el riesgo, la estructura temporal de los flujos de tesorería y la reinversión requerida."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "En el marco de la dirección financiera, indique la afirmación FALSA sobre el Teorema de Separación de Fisher:",
+      "opts": [
+        "El director financiero debe seleccionar proyectos de inversión cuya generación de caja se ajuste específicamente a la preferencia temporal de consumo de cada accionista.",
+        "El óptimo de inversión productiva se alcanza donde la tasa marginal de retorno de los activos reales coincide con el tipo de interés del mercado de capitales.",
+        "Gracias a la existencia de un mercado de capitales perfecto, las decisiones de inversión y consumo quedan totalmente desacopladas.",
+        "Todos los accionistas, independientemente de que prefieran consumir hoy o mañana, estarán de acuerdo en que la empresa acometa aquellos proyectos con VAN positivo."
+      ],
+      "correct": 0,
+      "justification": "Es FALSA: El Teorema de Separación de Fisher demuestra que el director financiero NO necesita conocer ni adaptarse a las preferencias de consumo temporal de los accionistas. La empresa maximiza la riqueza de todos eligiendo los proyectos con VAN > 0, y cada accionista ajusta su propio patrón de consumo personal acudiendo al mercado de capitales (prestando o pidiendo prestado al tipo de interés de mercado)."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Si en el modelo de Fisher el tipo de interés del endeudamiento (prestatario) es SUPERIOR al tipo de interés del préstamo (prestamista):",
+      "opts": [
+        "La inversión en activos reales que maximiza el VAN sigue siendo exactamente la misma para cualquier accionista.",
+        "Un accionista que desee ser prestamista y otro que desee ser prestatario no coincidirán necesariamente en el volumen óptimo de inversión real a acometer por la empresa.",
+        "La recta de mercado para quien presta tendrá mayor pendiente que la recta para quien pide prestado.",
+        "El Teorema de Fisher se mantiene plenamente inalterado."
+      ],
+      "correct": 1,
+      "justification": "Cuando el mercado financiero tiene fricciones y el tipo de interés del endeudamiento supera al del préstamo (curva de mercado con punto de quiebre), la tangencia con la curva de posibilidades productivas difiere según la tasa relevante del individuo, rompiéndose la separación perfecta entre inversión y financiación."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "¿Cuál de las siguientes afirmaciones describe con rigor la función del director financiero?",
+      "opts": [
+        "Actúa como intermediario financiero sustituyendo el papel de los bancos comerciales.",
+        "Toma las decisiones de inversión en activos reales y las decisiones de financiación para obtener los fondos requeridos en los mercados financieros.",
+        "Garantiza que la rentabilidad de las acciones supere siempre a la inflación sin asumir riesgo.",
+        "Establece las directrices operativas del diseño técnico de los productos de la empresa."
+      ],
+      "correct": 1,
+      "justification": "Las dos decisiones fundamentales del director financiero son: (1) Decisión de inversión o presupuesto de capital (en qué activos reales invertir) y (2) Decisión de financiación (cómo captar fondos en los mercados financieros, emitiendo acciones o deuda)."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "¿Qué rasgo jurídico y patrimonial distingue fundamentalmente a una Sociedad Anónima (S.A.) de una empresa individual o de autónomo?",
+      "opts": [
+        "En la S.A. los socios responden de las deudas sociales con todo su patrimonio personal presente y futuro.",
+        "En la S.A. la responsabilidad de los accionistas está estrictamente limitada al capital aportado, facilitando la separación entre propiedad y control.",
+        "La empresa individual puede emitir obligaciones y cotizar directamente en bolsa.",
+        "La S.A. no está obligada a auditar ni publicar sus cuentas anuales."
+      ],
+      "correct": 1,
+      "justification": "La Sociedad Anónima cuenta con personalidad jurídica propia y responsabilidad limitada de los accionistas al capital aportado, lo cual posibilita la libre transmisibilidad de títulos y la delegación de la gestión en administradores profesionales (separación propiedad-control)."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "¿Cuál es la función del Mercado Primario frente al Mercado Secundario?",
+      "opts": [
+        "En el mercado primario se negocian exclusivamente activos financieros emitidos en años anteriores.",
+        "El mercado primario canaliza fondos directamente a las empresas mediante la emisión y colocación de nuevos títulos, mientras que el mercado secundario aporta liquidez intercambiando activos ya emitidos.",
+        "El mercado primario ofrece liquidez a los accionistas existentes sin alterar los fondos de la empresa emisora.",
+        "El mercado secundario es donde las empresas captan por primera vez capital social."
+      ],
+      "correct": 1,
+      "justification": "En el mercado primario nacen los activos (la empresa recibe el dinero de la suscripción para financiar sus inversiones). En el mercado secundario (como las bolsas de valores) los títulos se intercambian entre inversores, proporcionando liquidez y formación de precios sin que la empresa reciba nuevos fondos."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Un inversor dispone hoy de 12.000 € de dotación inicial. El tipo de interés de mercado es del 4%. Invierte en activos reales 4.000 €, lo que le genera un VAN de 2.000 € (el máximo posible). Si el horizonte temporal es de 1 año, ¿a cuánto asciende el flujo de caja del proyecto en t=1?",
+      "opts": [
+        "4.160 €",
+        "6.240 €",
+        "6.000 €",
+        "2.080 €"
+      ],
+      "correct": 1,
+      "justification": "Sabemos que VAN = -I0 + [C1 / (1 + r)]. Sustituyendo: 2.000 = -4.000 + [C1 / 1,04] => 6.000 = C1 / 1,04 => C1 = 6.000 * 1,04 = 6.240 €. Corresponde exactamente a la resolución del Problema 3 de la relación oficial."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Siguiendo el supuesto anterior (dotación inicial 12.000 €, inversión real 4.000 €, r = 4%, VAN = 2.000 €), ¿en cuánto se incrementa la riqueza del inversor si tiene preferencia absoluta por el consumo FUTURO (t=1)?",
+      "opts": [
+        "2.000 €",
+        "2.080 €",
+        "14.560 €",
+        "8.320 €"
+      ],
+      "correct": 1,
+      "justification": "Si no invirtiese en el proyecto real y prestase todo en el mercado financiero: Consumo en t=1 = 12.000 * 1,04 = 12.480 €. Al acometer el proyecto: invierte 4.000 € en el activo real (recibe 6.240 € en t=1) y los 8.000 € sobrantes los presta al 4% (recibe 8.000 * 1,04 = 8.320 € en t=1). Consumo total en t=1 = 6.240 + 8.320 = 14.560 €. El incremento neto de riqueza futura es 14.560 - 12.480 = 2.080 € (que coincide exactamente con VAN * (1+r) = 2.000 * 1,04 = 2.080 €)."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Una empresa posee 5.000 € de los que utiliza 2.000 € para realizar una inversión en activos reales que maximiza su VAN, siendo este de 500 €. El tipo de interés en el mercado de capitales es del 2%. ¿Cuál sería el disponible máximo en t=1 si decide consumir todo en t=1?",
+      "opts": [
+        "5.610 €",
+        "3.500 €",
+        "5.100 €",
+        "5.000 €"
+      ],
+      "correct": 0,
+      "justification": "De la inversión real: VAN = 500 = -2.000 + C1 / 1,02 => C1 = 2.500 * 1,02 = 2.550 €. De la tesorería sobrante no invertida en el proyecto (5.000 - 2.000 = 3.000 €), colocada en el mercado financiero al 2%: 3.000 * 1,02 = 3.060 €. Disponible total en t=1 = 2.550 + 3.060 = 5.610 €."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Un inversor dispone hoy de 100.000 € y desea consumir exactamente la misma cuantía en t=0 y en t=1 (C0 = C1). Si el tipo de interés en el mercado de capitales es del 5%, ¿cuánto podrá consumir en cada periodo?",
+      "opts": [
+        "50.000,00 €",
+        "51.219,51 €",
+        "48.780,49 €",
+        "52.500,00 €"
+      ],
+      "correct": 1,
+      "justification": "Restricción presupuestaria intertemporal: C0 + [C1 / (1 + r)] = 100.000 €. Si C0 = C1 = x: x * [1 + 1/1,05] = 100.000 € => x * [2,05 / 1,05] = 100.000 € => x = 100.000 * (1,05 / 2,05) = 51.219,51 €."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "Suponga que percibe 12.000 € este año y 12.600 € el próximo año. Decide invertir 10.000 € hoy en desarrollar una aplicación móvil que generará un único flujo de 13.000 € el próximo año. El tipo de interés de mercado es del 15%. Indique la afirmación correcta:",
+      "opts": [
+        "Si decide prestar el resto en el mercado financiero, el disponible máximo en el año 1 será de 28.590 €.",
+        "Si no realiza la inversión en la app y presta todo, su disponible máximo en el año 1 sería de 24.600 €.",
+        "La tasa de rentabilidad de la inversión en la app es del 30%, superior al coste de oportunidad del capital (15%), por lo que incrementa su riqueza.",
+        "No debe realizar la inversión porque 10.000 € es casi todo su sueldo de este año."
+      ],
+      "correct": 2,
+      "justification": "Tasa de retorno de la app: (13.000 - 10.000) / 10.000 = 30%. Como 30% > 15%, el proyecto tiene VAN positivo (+1.304,35 €) y rinde más que el mercado. Además: si invierte en la app, en t=1 tiene 13.000 (app) + 12.600 (sueldo t=1) + 2.000*1,15 (ahorro prestado) = 27.900 € (no 28.590 €). Si no invierte: 12.600 + 12.000*1,15 = 26.400 € (no 24.600 €). Pregunta de examen oficial 2018-2019."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "En el modelo de Fisher, si una empresa invierte en activos reales el importe óptimo y repentinamente se produce una DISMINUCIÓN de los tipos de interés de mercado:",
+      "opts": [
+        "El volumen de inversión inicial óptima disminuirá y los prestamistas verán mejorada su situación.",
+        "El volumen de inversión inicial óptima aumentará, requiriendo más capital en proyectos reales, y un inversor que prefiera consumo futuro verá reducida su riqueza potencial respecto a tasas más altas.",
+        "No cambia el volumen de inversión óptima porque éste depende únicamente de la tecnología productiva.",
+        "La curva de posibilidades productivas se desplaza hacia el origen."
+      ],
+      "correct": 1,
+      "justification": "Al bajar el tipo de interés r, la pendiente de la recta presupuestaria [-(1+r)] se hace menos inclinada. El punto de tangencia se desplaza hacia la derecha sobre la curva cóncava de producción, aumentando la inversión en activos reales (I0 aumenta). Para los prestamistas netos (quienes prefieren consumir en t=1 prestando su dinero), la rentabilidad del mercado cae, empeorando su posición de consumo futuro frente al escenario anterior."
+    },
+    {
+      "tema": "Tema 1: La Empresa y el Director Financiero",
+      "q": "¿Qué se entiende por problema de agencia entre accionistas y directivos en la empresa?",
+      "opts": [
+        "El conflicto entre los bancos comerciales y el Banco Central.",
+        "La discrepancia potencial cuando los directivos anteponen sus propios intereses personales (poder, remuneración, seguridad laboral) a la maximización de la riqueza de los propietarios (accionistas).",
+        "El desacuerdo legal entre clientes y proveedores sobre los plazos de entrega.",
+        "La diferencia entre el tipo impositivo de sociedades y el IRPF."
+      ],
+      "correct": 1,
+      "justification": "La teoría de la agencia estudia los conflictos de interés derivados de la separación de la propiedad (accionistas) y el control (gestores), requiriendo mecanismos de gobierno corporativo (consejos de administración, planes de compensación con opciones sobre acciones) para alinear objetivos."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "Según el Modelo de Descuento de Dividendos con Crecimiento Constante (Gordon-Shapiro), el precio actual de la acción (P0) se calcula como:",
+      "opts": [
+        "P0 = BPA1 / r",
+        "P0 = D1 / (r - g)",
+        "P0 = D0 / (r + g)",
+        "P0 = (D1 + P1) / (1 + g)"
+      ],
+      "correct": 1,
+      "justification": "La fórmula canónica de Gordon-Shapiro para dividendos que crecen a tasa geométrica constante 'g' a perpetuidad con coste de capital r > g es P0 = D1 / (r - g), donde D1 es el dividendo esperado del próximo periodo."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "En el modelo de Gordon-Shapiro, ¿cómo se descompone la tasa de rentabilidad esperada por el mercado (r) para una acción?",
+      "opts": [
+        "r = (D1 / P0) + g, es decir, rentabilidad por dividendo (dividend yield) más tasa esperada de plusvalía (crecimiento del capital).",
+        "r = (BPA1 / P0) - g",
+        "r = (D0 / P0) * g",
+        "r = BPA1 * ROE"
+      ],
+      "correct": 0,
+      "justification": "Despejando r en P0 = D1 / (r - g), se obtiene r = (D1 / P0) + g. El primer sumando representa el rendimiento inmediato por dividendo de la tesorería y el segundo término (g) representa la tasa de crecimiento del capital o plusvalía esperada."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "La tasa de crecimiento sostenible de los dividendos (g) de una empresa financiada íntegramente con recursos propios viene dada por la expresión:",
+      "opts": [
+        "g = Payout * ROE",
+        "g = b * ROE, donde b es la tasa de retención de beneficios (1 - Payout) y ROE es la rentabilidad sobre el capital contable.",
+        "g = (1 - b) * r",
+        "g = BPA1 / P0"
+      ],
+      "correct": 1,
+      "justification": "La tasa de crecimiento a largo plazo es el producto de la fracción de beneficios reinvertida en la empresa (tasa de retención b = Reservas / Beneficio Neto) multiplicada por el rendimiento que genera dicha reinversión (ROE): g = b * ROE."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "¿Bajo qué condición fundamental la reinversión de beneficios en nuevos proyectos genera valor y provoca un Valor Actual de las Oportunidades de Crecimiento (VAOC) estrictamente POSITIVO?",
+      "opts": [
+        "Siempre que la empresa reinvierta cualquier porcentaje positivo de sus beneficios, con independencia de la rentabilidad.",
+        "Únicamente si la rentabilidad esperada de los nuevos proyectos (ROE) es superior al coste de oportunidad del capital (r), es decir, cuando los proyectos tienen VAN > 0.",
+        "Cuando la tasa de reparto de dividendos (payout) sea superior al 80%.",
+        "Cuando la ROE coincide exactamente con la tasa de descuento del mercado r."
+      ],
+      "correct": 1,
+      "justification": "Retener fondos para reinvertir sólo crea riqueza neta para el accionista si la empresa obtiene una rentabilidad (ROE) mayor de la que el accionista podría obtener por su cuenta en el mercado de capitales para un nivel de riesgo similar (r). Si ROE = r, el VAOC = 0 y el precio de la acción no varía al reinvertir; si ROE < r, la reinversión destruye valor (VAOC < 0)."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "La descomposición canónica del precio de una acción como suma del valor bajo política de no crecimiento y las oportunidades de crecimiento se expresa como:",
+      "opts": [
+        "P0 = (D1 / g) + VAOC",
+        "P0 = (BPA1 / r) + VAOC",
+        "P0 = (BPA1 / (r - g)) - VAOC",
+        "P0 = (Activo Contable / Acciones) + g"
+      ],
+      "correct": 1,
+      "justification": "El precio de toda acción se compone de: (1) El valor de la empresa si repartiese el 100% de sus beneficios sin crecer (renta perpetua BPA1 / r) más (2) El valor actualizado neto de todas las inversiones futuras rentables que acometerá la empresa (VAOC): P0 = (BPA1 / r) + VAOC."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "Una empresa prevé un BPA para el próximo año de 25 €/acción y una tasa de reparto de dividendos del 40%. Estima que sus dividendos podrán crecer de forma constante al 5% a perpetuidad. Si la tasa de capitalización del mercado es del 9%, ¿cuál es el precio de la acción según Gordon-Shapiro?",
+      "opts": [
+        "111,11 €",
+        "250,00 €",
+        "277,78 €",
+        "180,00 €"
+      ],
+      "correct": 1,
+      "justification": "El dividendo del próximo año es D1 = BPA1 * Payout = 25 € * 0,40 = 10 €. Aplicando Gordon-Shapiro: P0 = D1 / (r - g) = 10 / (0,09 - 0,05) = 10 / 0,04 = 250,00 €/acción. Corresponde al Problema 5 de la relación oficial."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "Las acciones de una sociedad cotizan a 73 €/acción. El BPA esperado para el próximo año es de 2,80 €, del que se repartirá un dividendo de 1,68 €. Si la rentabilidad sobre el capital invertido (ROE) es del 20%, ¿cuál es la tasa de crecimiento esperada (g) y la tasa de descuento del mercado (r)?",
+      "opts": [
+        "g = 12% y r = 14,30%",
+        "g = 8% y r = 10,30%",
+        "g = 8% y r = 12,00%",
+        "g = 10% y r = 12,50%"
+      ],
+      "correct": 1,
+      "justification": "El importe reinvertido es 2,80 - 1,68 = 1,12 €, lo que representa una tasa de retención b = 1,12 / 2,80 = 0,40 (40%). La tasa de crecimiento es g = b * ROE = 0,40 * 0,20 = 0,08 (8%). Despejando la tasa de descuento r en Gordon-Shapiro: r = (D1 / P0) + g = (1,68 / 73) + 0,08 = 0,02301 + 0,08 = 0,10301 (10,30%). Corresponde al Problema 6 de la relación oficial."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "Conocemos los siguientes datos de una acción: D1 = 5 €, tasa de crecimiento de dividendos g = 5% a perpetuidad y tasa de capitalización de mercado r = 10%. El inversor A comprará acciones hoy y las venderá dentro de un año; el inversor B comprará hoy y las venderá dentro de dos años. Indique la afirmación correcta:",
+      "opts": [
+        "El inversor A pagará hoy un precio menor que el inversor B porque su horizonte de inversión es más corto.",
+        "El inversor B pagará más porque percibirá dos dividendos en lugar de uno.",
+        "Ambos inversores pagarán hoy exactamente el mismo precio de 100 €, ya que el precio de la acción es el valor actual de todos los dividendos futuros independientemente del horizonte temporal.",
+        "Ambos inversores pagarán hoy 105 €."
+      ],
+      "correct": 2,
+      "justification": "En un mercado de capitales eficiente, el precio de cotización hoy refleja el valor actual de la corriente infinita esperada de flujos. P0 = D1 / (r - g) = 5 / (0,10 - 0,05) = 100 €. Quien vende en t=1 recibe D1 y vende al precio P1 = D2 / (r - g) = 5 * 1,05 / 0,05 = 105 €, cuyo valor descontado a t=0 es (5 + 105) / 1,10 = 100 €. Pregunta oficial de examen 2018-2019."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "¿Por qué un ratio PER (Precio / Beneficio por Acción) alto NO debe interpretarse mecánicamente como una señal inequívoca de bajo coste de capital o de sobreprecio injustificado?",
+      "opts": [
+        "Porque el PER es un indicador que sólo se aplica a títulos de renta fija como letras del tesoro.",
+        "Porque un PER elevado puede deberse a que el mercado anticipa un elevado Valor Actual de las Oportunidades de Crecimiento (VAOC) con proyectos muy rentables (ROE > r), o bien a una caída coyuntural y transitoria en el denominador (BPA).",
+        "Porque el PER siempre es numéricamente igual a 1 / g.",
+        "Porque el PER ignora los beneficios netos de la compañía."
+      ],
+      "correct": 1,
+      "justification": "Dado que P0 / BPA1 = (1 / r) + [VAOC / (BPA1 * r)], un PER alto refleja normalmente la existencia de valiosas oportunidades de crecimiento futuro (VAOC > 0) o un año de beneficios excepcionalmente bajos en el denominador que se recuperarán en el futuro."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "¿Cuál es el ratio PER de una empresa cuya cotización actual es de 45 €, sus dividendos por acción previstos son de 2 € y mantiene una tasa de reinversión de beneficios del 60%?",
+      "opts": [
+        "9 veces",
+        "20 veces",
+        "13,5 veces",
+        "22,5 veces"
+      ],
+      "correct": 0,
+      "justification": "Si la tasa de retención (reinversión) es b = 60%, la tasa de reparto (payout) es 1 - b = 40%. Por tanto: BPA1 = D1 / Payout = 2 € / 0,40 = 5 € por acción. El ratio PER resulta: PER = P0 / BPA1 = 45 € / 5 € = 9 veces."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "La empresa GREEN ROCK CORP. tiene una ROE del 15% y una tasa de reparto de dividendos del 40%. El capital contable por acción es de 80 €. La ROE y el reparto se mantendrán constantes durante 3 años. A partir de t=3, la competencia reduce la ROE al coste de capital (r = 10%) y el reparto sube al 80%. ¿Cuál es el VAOC a partir del año 3?",
+      "opts": [
+        "El VAOC a partir de t=3 es estrictamente CERO, porque los proyectos posteriores rinden al mismo nivel que el coste de capital (ROE = r), no generando valor neto.",
+        "El VAOC a partir de t=3 es igual a 80 € por acción.",
+        "El VAOC se vuelve fuertemente negativo destruyendo la empresa.",
+        "El VAOC es infinito por ser a perpetuidad."
+      ],
+      "correct": 0,
+      "justification": "Cuando el rendimiento de las nuevas inversiones (ROE) iguala a la tasa de descuento exigida por el mercado (r), el VAN de cada proyecto acometido es idénticamente CERO. Por tanto, las oportunidades de crecimiento dejan de aportar valor por encima del capital invertido y el VAOC futuro es nulo. Corresponde al Problema 10 de la relación oficial."
+    },
+    {
+      "tema": "Tema 2: Valor Actual y Valoración de Acciones",
+      "q": "La compañía X tiene emitidas 5.000 acciones, cotiza a 6 € y presenta: Ventas = 1.000 €, Coste Ventas = 350 €, BAII = 650 €, Intereses = 65 €, BAI = 585 €, Resultado Neto = 380 € (repartiendo 152 € a dividendos y 228 € a reservas). Indique la afirmación FALSA:",
+      "opts": [
+        "La tasa de reparto de dividendos de la compañía es del 40%.",
+        "La capitalización bursátil de la compañía asciende a 30.000 €.",
+        "El ratio PER de la compañía es de 15 veces.",
+        "La compañía soporta un gasto por impuesto de sociedades de 205 €."
+      ],
+      "correct": 2,
+      "justification": "Es FALSA: La capitalización bursátil es 5.000 acciones * 6 € = 30.000 €. El Resultado Neto total es 380 €. Por tanto, el PER de la empresa es Capitalización / Resultado Neto = 30.000 / 380 = 78,95 veces (¡muy superior a 15 veces!). Las demás son verdaderas: Payout = 152 / 380 = 40%; Impuestos = BAI - BN = 585 - 380 = 205 €."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "¿Cuál es la principal ventaja metodológica y económica del Valor Actual Neto (VAN) frente a los restantes criterios de valoración?",
+      "opts": [
+        "No depende de los flujos de tesorería del proyecto.",
+        "Mide directamente en unidades monetarias absolutas la creación neta de riqueza que la inversión añade al valor de la empresa, respetando la propiedad aditiva del valor (VAN(A+B) = VAN(A) + VAN(B)).",
+        "No requiere estimar ninguna tasa de descuento o coste de oportunidad.",
+        "Favorece siempre a los proyectos de duración más corta."
+      ],
+      "correct": 1,
+      "justification": "El VAN es el criterio soberano porque descuenta todos los flujos de caja netos al coste de oportunidad del capital, refleja en euros directos el incremento patrimonial de los propietarios y cumple la propiedad de aditividad del valor, eliminando inconsistencias."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "Señale la afirmación FALSA respecto a la Tasa Interna de Rentabilidad (TIR):",
+      "opts": [
+        "La TIR es la tasa de descuento que hace que el VAN del proyecto sea igual a cero.",
+        "En proyectos con flujos netos de signo alternante (+, -, +) pueden existir múltiples valores de TIR que anulan el VAN, o incluso carecer de solución real.",
+        "Al elegir entre proyectos mutuamente excluyentes con diferente desembolso inicial, la TIR siempre conduce a la misma decisión óptima que el VAN.",
+        "El criterio TIR asume implícitamente que los flujos intermedios se reinvierten a la propia tasa TIR en lugar de al coste de oportunidad del capital (r)."
+      ],
+      "correct": 2,
+      "justification": "Es FALSA: La TIR presenta el problema de escala. Un proyecto de 10 € con una TIR del 100% genera 10 € de VAN, mientras que uno de 1.000.000 € con una TIR del 20% (con r=10%) genera un VAN de cientos de miles de euros. Elegir por TIR llevaría a rechazar el proyecto que más riqueza crea."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "A una empresa se le presentan dos inversiones mutuamente excluyentes con coste de capital r = 10%. Inversión A: desembolso 1.000 €, genera 1.800 € en t=1 (TIR = 80%). Inversión B: desembolso 500 €, genera 1.000 € en t=1 (TIR = 100%). Indique la afirmación correcta:",
+      "opts": [
+        "La inversión A tiene mayor tasa de rentabilidad esperada (TIR) que la B.",
+        "La inversión B tiene una TIR superior a la A (100% frente a 80%), pero la inversión A genera mayor VAN (636,36 € frente a 409,09 €) y debe ser la elegida.",
+        "La empresa debe elegir obligatoriamente la inversión B porque tiene un 100% de TIR.",
+        "Ambas inversiones tienen idéntico VAN."
+      ],
+      "correct": 1,
+      "justification": "TIR_A = (1.800 - 1.000)/1.000 = 80%; VAN_A = -1.000 + 1.800/1,10 = 636,36 €. TIR_B = (1.000 - 500)/500 = 100%; VAN_B = -500 + 1.000/1,10 = 409,09 €. Aunque B rinde porcentualmente más por cada euro invertido, A crea más valor absoluto para el accionista (VAN_A > VAN_B), demostrando la superioridad del VAN frente al sesgo de escala de la TIR."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "Al comparar dos proyectos de inversión mutuamente excluyentes, el punto de corte en el que el VAN de ambos proyectos es idéntico se denomina:",
+      "opts": [
+        "Tasa de rentabilidad contable.",
+        "Tasa de corte o tasa de indiferencia de Fisher (obtenida calculando la TIR del proyecto diferencial o incremental).",
+        "Plazo de recuperación descontado.",
+        "Índice de rentabilidad ponderado."
+      ],
+      "correct": 1,
+      "justification": "La tasa de Fisher es la tasa de descuento que iguala el VAN de dos proyectos. Se calcula como la TIR del flujo de fondos incremental (Proyecto A - Proyecto B). Si el coste de capital r es menor que la tasa de Fisher, el proyecto con mayor volumen o vida más larga suele tener mayor VAN a pesar de tener una TIR individual inferior."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "¿Cuáles son las dos principales deficiencias teóricas del criterio del Plazo de Recuperación (Payback) estático?",
+      "opts": [
+        "Es muy difícil de calcular y requiere herramientas informáticas avanzadas.",
+        "No considera el valor temporal del dinero (suma euros de diferentes años como si fuesen equivalentes) e ignora por completo todos los flujos de tesorería generados después de haber alcanzado el plazo fijado.",
+        "Exige conocer con exactitud la inflación esperada a 30 años.",
+        "Sobredimensiona los proyectos de mayor volumen inicial."
+      ],
+      "correct": 1,
+      "justification": "El payback simple es miope: premia proyectos rápidos con cobros inmediatos aunque luego quiebren o no generen nada más, y descarta proyectos que requieren maduración pero que después generan flujos gigantescos y sostenibles con altísimo VAN."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "El Índice de Rentabilidad (IR = Valor Actual de los Flujos / Desembolso Inicial) es una herramienta recomendada cuando:",
+      "opts": [
+        "Existen flujos de caja con signos cambiantes.",
+        "La empresa opera en un contexto de racionamiento de capital financiero con proyectos independientes y divisibles.",
+        "Los proyectos son mutuamente excluyentes con vidas útiles desiguales.",
+        "No se conoce el desembolso inicial de la inversión."
+      ],
+      "correct": 1,
+      "justification": "Bajo racionamiento presupuestario estricto (fondos limitados para invertir hoy), el Índice de Rentabilidad o ratio beneficio-coste permite ordenar proyectos independientes y divisibles según el valor actual generado por cada euro invertido, maximizando el VAN global del presupuesto disponible."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "Un proyecto requiere una inversión inicial de 100.000 € y genera flujos netos de caja constantes de 50.000 € anuales durante 3 años. Si el coste de oportunidad del capital es del 10% y no hay impuestos, ¿cuál es el VALOR ACTUAL (VA) de los flujos generados?",
+      "opts": [
+        "24.342,60 €",
+        "124.342,60 €",
+        "150.000,00 €",
+        "100.000,00 €"
+      ],
+      "correct": 1,
+      "justification": "El valor actual de una anualidad de 3 años es VA = 50.000 * [(1 - (1,10)^-3) / 0,10] = 50.000 * 2,48685 = 124.342,60 €. El VAN sería VA - I0 = 124.342,60 - 100.000 = 24.342,60 €. Pregunta de test de examen oficial."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "¿Qué significa exactamente que un proyecto de inversión tenga un VAN = 0?",
+      "opts": [
+        "Que la empresa no recupera la inversión inicial y quiebra.",
+        "Que la inversión genera exactamente los flujos necesarios para devolver el capital invertido y remunerar a los inversores a la tasa mínima de rentabilidad exigida (coste de oportunidad), sin generar plusvalía o riqueza extraordinaria.",
+        "Que la tasa interna de rentabilidad es cero.",
+        "Que la cifra de negocio anual es nula."
+      ],
+      "correct": 1,
+      "justification": "VAN = 0 no significa rentabilidad nula; significa que la inversión rinde exactamente la tasa de descuento exigida r. Los fondos aplicados recuperan el principal y pagan a los proveedores de capital (deuda y fondos propios) exactamente su retribución de equilibrio de mercado."
+    },
+    {
+      "tema": "Tema 3: Criterios de Selección de Inversiones",
+      "q": "Si consideramos una operación con estructura de PRÉSTAMO (recibir hoy fondos positivos y devolver salidas de caja futuras), la regla de decisión con la TIR debe ser:",
+      "opts": [
+        "Aceptar si la TIR es mayor que el coste del capital.",
+        "Aceptar si la TIR es MENOR que la tasa de coste de oportunidad, porque interesa endeudarse al menor tipo de interés posible.",
+        "La TIR no se puede aplicar a operaciones de financiación.",
+        "Aceptar siempre que la TIR sea positiva."
+      ],
+      "correct": 1,
+      "justification": "En un préstamo, los flujos son (+I0, -C1, -C2...). La pendiente del VAN respecto a r es positiva y creciente. Por tanto, la operación es ventajosa (VAN > 0) si y sólo si el coste efectivo (TIR) es estrictamente inferior al coste de las fuentes alternativas en el mercado (TIR < r)."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Al cuantificar los flujos de caja de un proyecto de inversión, ¿cuál de los siguientes conceptos NUNCA debe incluirse?",
+      "opts": [
+        "El coste de oportunidad por el uso de terrenos o naves en propiedad.",
+        "Los costes de I+D y estudios de mercado ya realizados e incurridos en el pasado con anterioridad a la decisión (costes hundidos o irrecuperables).",
+        "La reducción de ingresos en otras líneas de productos de la empresa provocada por el nuevo producto (canibalización).",
+        "La inversión inicial y variaciones en el Fondo de Maniobra."
+      ],
+      "correct": 1,
+      "justification": "Regla de oro de los flujos de caja: Los costes pasados, irreversibles y hundidos (sunk costs) se pagarán tanto si se realiza el proyecto como si se cancela; por tanto, no son flujos incrementales y deben excluirse totalmente de la evaluación."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "¿Por qué los gastos financieros (intereses de la deuda bancaria) se EXCLUYEN del cálculo del Flujo de Caja Libre Operativo del proyecto?",
+      "opts": [
+        "Porque la legislación fiscal prohíbe deducirlos.",
+        "Porque la retribución de los acreedores financieros y el coste de la deuda ya están incorporados en la tasa de descuento (WACC o coste de oportunidad del capital); deducirlos en el flujo supondría penalizarlos dos veces.",
+        "Porque los gastos financieros siempre se compensan con subvenciones públicas.",
+        "Porque los proyectos de inversión nunca se financian con deuda."
+      ],
+      "correct": 1,
+      "justification": "Principio de separación entre decisión de inversión y de financiación: El flujo de caja debe medir la capacidad del activo real para generar tesorería operativa con independencia de cómo se financie. El coste del capital ajeno se recoge en el denominador a través de la tasa de descuento."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "En un periodo el BAIT de una empresa es de 100 €, la amortización fiscal es de 5 €, los gastos financieros son de 10 €, el tipo del impuesto de sociedades es del 25% y no hay variación en el fondo de maniobra. ¿A cuánto asciende el flujo de caja operativo del proyecto a efectos de valoración?",
+      "opts": [
+        "76,25 €",
+        "80,00 €",
+        "68,75 €",
+        "72,50 €"
+      ],
+      "correct": 1,
+      "justification": "A efectos de evaluar el proyecto de inversión (Flujo de Caja Libre), se ignora el gasto financiero de la deuda: Impuestos operativos = BAIT * t = 100 * 0,25 = 25 €. Flujo de Caja Libre = BAIT * (1 - t) + Amortización - Delta FM = 100 * 0,75 + 5 - 0 = 75 + 5 = 80,00 €. Pregunta oficial de examen 2018-2019."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "La dotación a la amortización técnica del inmovilizado:",
+      "opts": [
+        "Constituye una salida efectiva de tesorería que reduce directamente la caja de la empresa.",
+        "No es una salida física de dinero, pero es un gasto deducible que genera un ahorro de impuestos denominado escudo fiscal de la amortización (t * Amortización).",
+        "Debe sumarse dos veces al beneficio neto.",
+        "Sólo se tiene en cuenta si la empresa tiene pérdidas contables."
+      ],
+      "correct": 1,
+      "justification": "La amortización es un apunte contable que no consume tesorería. Al ser fiscalmente deducible, reduce la base imponible del Impuesto de Sociedades, generando un ahorro fiscal de caja equivalente a t * Amortización (o fórmula FCL = EBIT*(1-t) + Amort)."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "En el periodo t=1 una empresa paga sus compras de existencias al contado. En t=2 sus proveedores le conceden un plazo de pago de 60 días. Manteniéndose constante el resto de variables, este cambio provocará:",
+      "opts": [
+        "Un aumento del fondo de maniobra en t=2 y una disminución de la tesorería.",
+        "Una disminución de las necesidades de fondo de maniobra en t=2 (por aumento de cuentas a pagar / financiación espontánea), lo que incrementa el flujo de caja operativo.",
+        "Un incremento de los gastos financieros del proyecto.",
+        "Ningún impacto sobre los flujos de caja por tratarse de pasivo a corto plazo."
+      ],
+      "correct": 1,
+      "justification": "Al aplazar pagos a proveedores, aumentan las Cuentas a Pagar (pasivo circulante operativo). Como FM = Activo Circulante - Pasivo Circulante, el FM se reduce (variación negativa de FM). Al restarse en el flujo (FCL = ... - Delta FM), una reducción en el FM libera liquidez y aumenta el flujo de caja del periodo. Pregunta oficial del examen 2018-2019."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Al finalizar el horizonte temporal de un proyecto, la maquinaria se vende por 50.000 €. Si su valor contable neto en ese momento era de 20.000 € y el tipo impositivo es del 30%, ¿a cuánto asciende el flujo de caja neto del valor residual?",
+      "opts": [
+        "50.000 €",
+        "41.000 €",
+        "35.000 €",
+        "29.000 €"
+      ],
+      "correct": 1,
+      "justification": "La venta produce una plusvalía fiscal: Ganancia = Precio Venta - Valor Neto Contable = 50.000 - 20.000 = 30.000 €. El impuesto a pagar es 30.000 * 0,30 = 9.000 €. El flujo de caja neto derivado de la liquidación del activo es: Precio Venta - Impuestos = 50.000 - 9.000 = 41.000 € (o equivalentemente: VNC + Ganancia*(1-t) = 20.000 + 30.000 * 0,70 = 41.000 €)."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Los datos operativos de una empresa sin impuestos son: Ventas = 1.000 €, Coste Ventas = 300 €, Existencias iniciales = 0 €, Existencias finales = 100 €, Clientes inicial = 200 €, Clientes final = 0 €, Proveedores inicial = 0 €, Proveedores final = 400 €. ¿Cuál es la variación del Fondo de Maniobra y el flujo de caja operativo?",
+      "opts": [
+        "Delta FM = -500 € y Flujo de Caja = 1.200 €",
+        "Delta FM = +100 € y Flujo de Caja = 600 €",
+        "Delta FM = -100 € y Flujo de Caja = 700 €",
+        "Delta FM = 0 € y Flujo de Caja = 1.000 €"
+      ],
+      "correct": 0,
+      "justification": "FM_inicial = Existencias(0) + Clientes(200) - Proveedores(0) = 200 €. FM_final = Existencias(100) + Clientes(0) - Proveedores(400) = -300 €. Variación del Fondo de Maniobra: Delta FM = FM_final - FM_inicial = -300 - 200 = -500 €. El Flujo de Caja Operativo en tesorería es: (Ventas - Costes) - Delta FM = (1.000 - 300) - (-500) = 700 + 500 = 1.200 €."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "El Coste Anual Equivalente (CAE o EAC) es el criterio adecuado para comparar proyectos de inversión mutuamente excluyentes cuando:",
+      "opts": [
+        "Los proyectos tienen duraciones temporales (vidas útiles) diferentes y se prevé su sustitución o reposición continuada en el tiempo.",
+        "Los proyectos tienen exactamente la misma duración y la misma escala.",
+        "No existen costes operativos en ninguno de los proyectos.",
+        "La tasa de inflación es exactamente cero."
+      ],
+      "correct": 0,
+      "justification": "Cuando se comparan máquinas o equipos con vidas desiguales que deben ser reemplazados al término de su vida útil, el VAN simple está sesgado porque no cubre el mismo periodo. El CAE distribuye el valor actual del coste en una anualidad constante homogénea a lo largo de su ciclo de vida: CAE = Valor Actual del Coste / a_n|r."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Una empresa puede adquirir la Máquina X (vida útil 3 años, VAN = 180,57 u.m.) o la Máquina Y (vida útil 4 años, VAN = 137,20 u.m.) para una actividad continua. El coste de capital es del 10%. ¿Qué máquina debe elegirse y por qué criterio?",
+      "opts": [
+        "La máquina X porque tiene un VAN directo mayor.",
+        "La máquina X porque su Flujo de Caja Anual Equivalente (FCAE = 180,57 / a_3|10% = 72,60 u.m.) es mayor que el de la máquina Y (137,20 / a_4|10% = 43,28 u.m.).",
+        "La máquina Y porque su vida útil es superior reduciendo la frecuencia de renovación.",
+        "Ambas son idénticas porque prestan el mismo servicio."
+      ],
+      "correct": 1,
+      "justification": "Al tener vidas útiles desiguales (3 años vs 4 años) y renovarse continuamente, debe compararse el flujo anual equivalente: a_3|10% = 2,48685 => FCAE_X = 180,57 / 2,48685 = 72,60 u.m./año. Para Y: a_4|10% = 3,16986 => FCAE_Y = 137,20 / 3,16986 = 43,28 u.m./año. La Máquina X aporta anualmente casi el doble de valor que Y. Pregunta oficial del examen 2024-2025."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Quickpizza se plantea sustituir su horno. Horno A: coste inicial 17.000 €, costes operativos anuales de 3.000 €, vida útil 4 años. Horno B: coste inicial 12.000 €, costes operativos anuales de 4.000 €, vida útil 3 años. Si el coste de capital es r = 12%, ¿qué horno debe elegirse basándose en el Coste Anual Equivalente?",
+      "opts": [
+        "El Horno A, porque su CAE (8.596,99 €) es inferior al CAE del Horno B (8.996,19 €).",
+        "El Horno B, porque requiere menor inversión inicial (12.000 € frente a 17.000 €).",
+        "Ambos son indiferentes porque el VAN de sus ingresos es el mismo.",
+        "El Horno B, porque su vida útil es menor permitiendo renovar antes."
+      ],
+      "correct": 0,
+      "justification": "Para Horno A: VA Coste = 17.000 + 3.000 * a_4|12% = 17.000 + 3.000 * 3,03735 = 26.112,05 €. CAE_A = 26.112,05 / 3,03735 = 8.596,99 €. Para Horno B: VA Coste = 12.000 + 4.000 * a_3|12% = 12.000 + 4.000 * 2,40183 = 21.607,32 €. CAE_B = 21.607,32 / 2,40183 = 8.996,19 €. Al ser una estructura de costes, se elige el menor CAE (Horno A). Corresponde al Problema 24 de la relación oficial."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Al calcular el valor actual de un flujo de caja nominal futuro esperado con inflación, ¿cuál es el principio metodológico estricto de homogeneidad a respetar?",
+      "opts": [
+        "Los flujos de caja en euros corrientes (nominales) deben descontarse utilizando una tasa de descuento nominal, mientras que los flujos en euros constantes (reales) deben descontarse a una tasa real.",
+        "Siempre se deben descontar los flujos nominales a la tasa real de interés.",
+        "La inflación no debe tenerse en cuenta si es inferior al 5%.",
+        "Los flujos reales deben actualizarse con la tasa nominal del Banco Central."
+      ],
+      "correct": 0,
+      "justification": "Coherencia nominal-real de Fisher: Mezclar flujos nominales con tasas reales (o viceversa) introduce un grave sesgo en el VAN. Relación de Fisher: (1 + r_nominal) = (1 + r_real) * (1 + tasa_inflación)."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Una inversión requiere 1.100 € hoy y genera un flujo nominal de 1.155 € en t=1. Si la tasa de inflación es del 1,5%, ¿cuál es su rentabilidad nominal y su rentabilidad real?",
+      "opts": [
+        "Rentabilidad nominal = 5,00% y rentabilidad real = 3,45%",
+        "Rentabilidad nominal = 5,125% y rentabilidad real = 2,57%",
+        "Rentabilidad nominal = 5,00% y rentabilidad real = 4,93%",
+        "Rentabilidad nominal = 3,50% y rentabilidad real = 1,50%"
+      ],
+      "correct": 0,
+      "justification": "Rentabilidad nominal: r_nom = (1.155 / 1.100) - 1 = 1,05 - 1 = 0,05 (5,00%). Rentabilidad real aplicando la ecuación exacta de Fisher: 1 + r_real = (1 + r_nom) / (1 + pi) = 1,05 / 1,015 = 1,03448 => r_real = 3,448% (3,45%)."
+    },
+    {
+      "tema": "Tema 4: Flujos de Caja Relevantes y CAE",
+      "q": "Una empresa planea vender productos a través de una nueva plataforma online propia. Se estima que el 10% de las ventas online provendrán de clientes que antes compraban en sus tiendas físicas tradicionales. Este 10% de pérdida de margen en las tiendas físicas:",
+      "opts": [
+        "Debe ignorarse porque las ventas del canal online son autónomas.",
+        "Debe computarse como un flujo de caja negativo incremental (efecto canibalización) que reduce el beneficio atribuible a la nueva inversión.",
+        "Debe tratarse como un ingreso extraordinario por marketing cruzado.",
+        "Sólo se incluye si la plataforma online tiene pérdidas."
+      ],
+      "correct": 1,
+      "justification": "El principio de flujo incremental exige comparar la situación de toda la empresa con el proyecto vs sin el proyecto. Si el nuevo canal 'canibaliza' márgenes existentes de la propia empresa, dicha erosión de ingresos es un coste atribuible al nuevo proyecto. Corresponde al Problema 20 de la relación oficial."
+    }
+  ]
+}
