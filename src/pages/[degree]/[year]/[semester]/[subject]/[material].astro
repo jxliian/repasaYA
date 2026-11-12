@@ -100,9 +100,6 @@ const pdf = 'pdf' in material.data ? `${base}${material.data.pdf}` : null;
 const allMaterials = isEngine ? await getCollection('materials') : [];
 const subjectMaterials = isEngine ? allMaterials.filter((m) => m.data.subject.id === subject.id) : [];
 
-const allTestItems = subjectMaterials
-  .filter((m) => m.data.type === 'test')
-  .flatMap((m) => ('items' in m.data ? m.data.items : []));
 const vfMat = subjectMaterials.find((m) => m.data.type === 'vf');
 const revealMat = subjectMaterials.find((m) => m.data.type === 'reveal');
 
@@ -111,13 +108,11 @@ const isCaseExamMaterial =
   items.length > 0 &&
   items.every((it: any) => Boolean(it.caseStatement));
 
-const testItems = isCaseExamMaterial
+// Cada material de test maneja su propio conjunto de preguntas para no mezclar bancos
+const testItems = type === 'test'
   ? items
-  : allTestItems.length > 0
-    ? allTestItems
-    : type === 'test'
-      ? items
-      : [];
+  : subjectMaterials.find((m) => m.data.type === 'test' && !('items' in m.data && m.data.items.every((it: any) => Boolean(it.caseStatement))))?.data?.items ?? [];
+
 const vfItems = isCaseExamMaterial
   ? []
   : vfMat && 'items' in vfMat.data
@@ -133,6 +128,7 @@ const revealItems = isCaseExamMaterial
       ? items
       : [];
 const initialTab = isCaseExamMaterial ? 'supuestos' : 'practicar';
+const initialMode = type === 'vf' ? 'vf' : type === 'reveal' ? 'quizz' : 'test';
 const hidden = material.data.hidden;
 ---
 
@@ -148,6 +144,7 @@ const hidden = material.data.hidden;
         backHref={back}
         backLabel={subjectTitle}
         initialTab={initialTab}
+        initialMode={initialMode}
       />
     </QuizShell>
   ) : (

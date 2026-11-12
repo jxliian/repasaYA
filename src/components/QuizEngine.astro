@@ -10,8 +10,9 @@ interface Props {
   backHref?: string;
   backLabel?: string;
   initialTab?: string;
+  initialMode?: string;
 }
-const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar' } = Astro.props;
+const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar', initialMode } = Astro.props;
 const hasVF    = vfData.length > 0;
 const hasTest  = testData.length > 0;
 const hasQuizz = quizzData.length > 0;
@@ -21,6 +22,7 @@ const caseItems = testData.filter((q) => Boolean(q?.caseStatement));
 const hasCases = caseItems.length > 0;
 const uniqueCasesCount = new Set(caseItems.map((q) => q.caseId || q.caseTitle || q.tema)).size;
 const startInCases = initialTab === 'supuestos' && hasCases;
+const defaultMode = initialMode || (hasTest ? 'test' : hasVF ? 'vf' : 'quizz');
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <style is:global>
@@ -38,7 +40,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .panel{display:none;flex-direction:column;gap:20px}:root[data-quiz] .panel.active{display:flex}
 
   /* START */
-  .start{display:flex;flex-direction:column;gap:22px;padding:8px 0}
+  .start{display:flex;flex-direction:column;gap:22px;padding:8px 0 100px}
   :root[data-quiz] .start-title{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
   :root[data-quiz] .mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
   :root[data-quiz] .mode-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:18px 16px;cursor:pointer;transition:all .2s;position:relative;user-select:none}
@@ -63,7 +65,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .tema-chip.chip-on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent2)}
   :root[data-quiz] .chip-all.chip-on{background:var(--accent);color:var(--on-accent)}
   :root[data-quiz] .chip-count{font-size:.65rem;opacity:.7;margin-left:4px}
-  :root[data-quiz] .btn-start{width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:var(--on-accent);border:none;font-weight:800;cursor:pointer;transition:all .2s}
+  :root[data-quiz] .btn-start{position:relative;z-index:10;width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:var(--on-accent);border:none;font-weight:800;cursor:pointer;transition:all .2s;user-select:none;-webkit-tap-highlight-color:transparent}
   :root[data-quiz] .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(138,107,216,.35);transform:translateY(-1px)}
 
   /* PROGRESS & HEADER */
@@ -648,7 +650,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <p class="start-title">Modo de preguntas</p>
         <div class="mode-grid">
           {hasVF && (
-            <div class="mode-card selected" id="card-vf" onclick="selectMode('vf')">
+            <div class:list={['mode-card', { selected: defaultMode === 'vf' }]} id="card-vf" onclick="selectMode('vf')">
               <div class="mc-icon">✓✗</div>
               <div class="mc-title">Verdadero / Falso</div>
               <div class="mc-desc">Afirmaciones con justificación.</div>
@@ -656,7 +658,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             </div>
           )}
           {hasTest && (
-            <div class="mode-card" id="card-test" onclick="selectMode('test')">
+            <div class:list={['mode-card', { selected: defaultMode === 'test' }]} id="card-test" onclick="selectMode('test')">
               <div class="mc-icon">🧠</div>
               <div class="mc-title">Tipo test</div>
               <div class="mc-desc">4 opciones, una correcta.</div>
@@ -672,33 +674,33 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             </div>
           )}
           {hasBoth && (
-            <div class="mode-card" id="card-mix" onclick="selectMode('mix')">
+            <div class:list={['mode-card', { selected: defaultMode === 'mix' }]} id="card-mix" onclick="selectMode('mix')">
               <div class="mc-icon">🔀</div>
               <div class="mc-title">Mezcla Combinada</div>
               <div class="mc-desc">Combina Test y Verdadero/Falso.</div>
               <span class="mc-chip">{vfData.length + testData.length} preguntas</span>
             </div>
           )}
-          <div class="mode-card" id="card-streak" onclick="selectMode('streak')">
+          <div class:list={['mode-card', { selected: defaultMode === 'streak' }]} id="card-streak" onclick="selectMode('streak')">
             <div class="mc-icon">🔥</div>
             <div class="mc-title">Modo Racha</div>
             <div class="mc-desc">Supervivencia: falla 1 y finaliza.</div>
             <span class="mc-chip">Racha máx</span>
           </div>
-          <div class="mode-card" id="card-weak" onclick="selectMode('weak')">
+          <div class:list={['mode-card', { selected: defaultMode === 'weak' }]} id="card-weak" onclick="selectMode('weak')">
             <div class="mc-icon">🎯</div>
             <div class="mc-title">Puntos Débiles</div>
             <div class="mc-desc">Preguntas falladas guardadas.</div>
             <span class="mc-chip" id="chip-weak-count">0 acumuladas</span>
           </div>
-          <div class="mode-card" id="card-starred" onclick="selectMode('starred')">
+          <div class:list={['mode-card', { selected: defaultMode === 'starred' }]} id="card-starred" onclick="selectMode('starred')">
             <div class="mc-icon">⭐</div>
             <div class="mc-title">Mis Favoritas</div>
             <div class="mc-desc">Preguntas guardadas con estrella.</div>
             <span class="mc-chip" id="chip-starred-count">0 guardadas</span>
           </div>
           {hasQuizz && (
-            <div class="mode-card" id="card-quizz" onclick="selectMode('quizz')">
+            <div class:list={['mode-card', { selected: defaultMode === 'quizz' }]} id="card-quizz" onclick="selectMode('quizz')">
               <div class="mc-icon">💡</div>
               <div class="mc-title">Quiz de repaso</div>
               <div class="mc-desc">Pregunta abierta, revela la respuesta.</div>
@@ -730,8 +732,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <span class="sel-label">Bloques <span id="sel-count" style="font-weight:400;text-transform:none;letter-spacing:0"></span></span>
         <div class="tema-chips" id="tema-chips"></div>
       </div>
-      <button class="btn-start" id="btn-start">Empezar →</button>
-      <button class="btn-print" id="btn-print">🖨️ Versión para Imprimir / PDF</button>
+      <button type="button" class="btn-start" id="btn-start" onclick="startQuiz()">Empezar →</button>
+      <button type="button" class="btn-print" id="btn-print" onclick="printExamSheet()">🖨️ Versión para Imprimir / PDF</button>
     </div>
 
     <div id="quiz-view" style="display:none">
@@ -815,11 +817,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div id="cat-list" class="cat-list"></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary" id="btn-repeat">Repetir todo</button>
-        <button class="btn btn-danger" id="btn-repeat-wrong" style="display:none">↺ Solo fallos</button>
-        <button class="btn btn-ghost" id="btn-share-wa" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.3);color:#25D366;font-weight:700">📲 Compartir WhatsApp</button>
-        <button class="btn btn-ghost" id="btn-copy-result">📋 Copiar nota</button>
-        <button class="btn btn-ghost" id="btn-back2">← Volver</button>
+        <button type="button" class="btn btn-primary" id="btn-repeat" onclick="startQuiz()">Repetir todo</button>
+        <button type="button" class="btn btn-danger" id="btn-repeat-wrong" onclick="repeatWrong()" style="display:none">↺ Solo fallos</button>
+        <button type="button" class="btn btn-ghost" id="btn-share-wa" onclick="shareResultWhatsApp()" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.3);color:#25D366;font-weight:700">📲 Compartir WhatsApp</button>
+        <button type="button" class="btn btn-ghost" id="btn-copy-result" onclick="copyResultText()">📋 Copiar nota</button>
+        <button type="button" class="btn btn-ghost" id="btn-back2" onclick="backToSelector()">← Volver</button>
       </div>
     </div>
   </div>
@@ -920,7 +922,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   Sígueme en GitHub ⭐
 </a>
 
-<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code }}>
+<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code, defaultMode }}>
 document.documentElement.dataset.quizActive = 'false';
 const LETTERS = ['A','B','C','D','E'];
 const VF_DATA    = vfData.map(q => ({ ...q, qType: 'vf' }));
@@ -931,7 +933,7 @@ const VF_TEMAS    = [...new Set(VF_DATA.map(q=>q.tema))];
 const TEST_TEMAS  = [...new Set(TEST_DATA.map(q=>q.tema))];
 const QUIZZ_TEMAS = [...new Set(QUIZZ_DATA.map(q=>q.tema))];
 
-let selectedMode = hasVF ? 'vf' : hasTest ? 'test' : 'quizz';
+let selectedMode = defaultMode || (hasTest ? 'test' : hasVF ? 'vf' : 'quizz');
 let questions=[], idx=0, correct=0, wrong=0, answered=false;
 let answers=[];   // answers[i] = {chosen, wasCorrect}
 let selectedTemas = new Set();
@@ -1158,13 +1160,21 @@ function startQuiz(){
   }
 
   const pool = selectedTemas.size===0 ? src : src.filter(q => selectedTemas.has(q.tema));
+  if (!pool || pool.length === 0) {
+    alert('No hay preguntas en los bloques seleccionados.');
+    return;
+  }
   questions = shuffle(pool);
   idx = 0; correct = 0; wrong = 0; answers = [];
 
   hide('selector-view'); hide('results-view'); show('quiz-view');
   document.documentElement.dataset.quizActive = 'true';
+  const mainEl = document.querySelector('main');
+  if (mainEl) mainEl.scrollTop = 0;
+  window.scrollTo(0, 0);
   showQ();
 }
+window.startQuiz = startQuiz;
 
 function startTimer() {
   clearInterval(timerInterval);
@@ -1579,8 +1589,12 @@ function repeatWrong(){
   idx = 0; correct = 0; wrong = 0; answers = [];
   hide('results-view'); show('quiz-view');
   document.documentElement.dataset.quizActive = 'true';
+  const mainEl = document.querySelector('main');
+  if (mainEl) mainEl.scrollTop = 0;
+  window.scrollTo(0, 0);
   showQ();
 }
+window.repeatWrong = repeatWrong;
 
 function backToSelector(){
   clearInterval(timerInterval);
@@ -1589,7 +1603,11 @@ function backToSelector(){
   updateWeakChipCount();
   updateStarredChipCount();
   renderUserStats();
+  const mainEl = document.querySelector('main');
+  if (mainEl) mainEl.scrollTop = 0;
+  window.scrollTo(0, 0);
 }
+window.backToSelector = backToSelector;
 
 function hide(id){ document.getElementById(id).style.display = 'none'; }
 function show(id){ document.getElementById(id).style.display = ''; }
