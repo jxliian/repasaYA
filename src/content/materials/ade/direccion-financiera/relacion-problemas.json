@@ -1,8 +1,8 @@
 {
   "subject": "ade/direccion-financiera",
   "type": "apuntes",
-  "title": "Relación de Problemas Resuelta Íntegramente (Temas 1 al 4: Problemas 1 al 25)",
+  "title": "Relación de Problemas Resuelta · Problemas 1 al 25 · Temas 1 al 4 (30 págs.)",
   "order": 4,
   "pdf": "ade/direccion-financiera/relacion-problemas-resueltos.pdf",
-  "description": "Cuaderno completo (37 páginas, revisado al 100%) con los enunciados literales oficiales del Curso 2025/2026 y la resolución paso a paso de los 25 problemas de los Temas 1 al 4 conforme a las soluciones de cátedra: Teorema de Separación de Fisher con gráficas (P1-P3), Valoración de Acciones por Descuento de Dividendos y VAOC multietapa (P4-P11), Criterios VAN vs. TIR (P12), Flujos Netos de Caja, Punto Muerto Financiero, Estados Financieros Proyectados, Análisis Incremental, Canibalización, Continuación vs. Cese (P13-P22) y Coste Anual Equivalente CAE y Demanda Estacional (P23-P25)."
+  "description": "Los 25 problemas oficiales del curso 2025/26 con enunciado literal y resolución paso a paso en la notación del Departamento. Incluye plantilla de soluciones, gráficos de Fisher (P1-P3), valoración de acciones por dividendos y VAOC (P4-P11), VAN frente a TIR (P12), flujos de caja con líneas temporales, VAN incremental y punto muerto (P13-P22), y CAE y demanda estacional con gráficos comparativos (P23-P25). Todas las cifras están recalculadas y se señalan los redondeos y criterios dudosos (P5, P16, P21, P22 y P25)."
 }

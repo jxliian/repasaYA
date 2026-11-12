@@ -1,0 +1,1697 @@
+% =====================================================================
+%  DIRECCIÓN FINANCIERA (UGR) · Relación de problemas resuelta · P1–P25
+%  Fuente LaTeX del PDF publicado en
+%  public/ade/direccion-financiera/relacion-problemas-resueltos.pdf
+%  Compilar:  ./compilar.sh   (pdflatex x2)
+% =====================================================================
+\documentclass[10pt,a4paper,twoside]{article}
+
+\usepackage[a4paper,top=25mm,bottom=22mm,inner=21mm,outer=19mm,
+            headheight=19pt,headsep=6.3mm,footskip=10mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\AtBeginDocument{\spanishplainpercent}
+\usepackage{sourceserifpro}
+\usepackage[scale=0.96]{sourcesanspro}
+\usepackage{amsmath,amssymb}
+\usepackage{icomma}
+\usepackage[final]{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs,tabularx,colortbl,array,multirow}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[breakall]{truncate}
+\usepackage{fontawesome5}
+\usepackage{needspace}
+\usepackage{xspace}
+\raggedbottom
+\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+
+% ---------------------------------------------------------------------
+%  Identidad corporativa (idéntica a los apuntes)
+% ---------------------------------------------------------------------
+\definecolor{navy}{HTML}{0B2545}
+\definecolor{steel}{HTML}{13315C}
+\definecolor{slate}{HTML}{5B6B7F}
+\definecolor{mist}{HTML}{EEF2F6}
+\definecolor{rule}{HTML}{C9D3DE}
+\definecolor{gold}{HTML}{B88A1B}
+\definecolor{goldbg}{HTML}{FBF5E6}
+\definecolor{alert}{HTML}{A4243B}
+\definecolor{alertbg}{HTML}{FBEEF0}
+\definecolor{okgreen}{HTML}{2E7D5B}
+\definecolor{okbg}{HTML}{EDF6F1}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+\linespread{1.06}
+\setlist{itemsep=2pt,topsep=3pt,leftmargin=1.3em}
+\setlist[itemize]{label={\color{steel}\scriptsize$\blacksquare$}}
+\setlist[enumerate]{label={\sffamily\bfseries\color{steel}\arabic*.}}
+
+% Notación oficial del Departamento
+\newcommand{\di}{)_{di}}
+\newcommand{\ai}{)_{ai}}
+\newcommand{\an}[2]{a_{\overline{#1}|#2}}
+\newcommand{\eur}{\,\text{€}\xspace}
+\newcommand{\paso}[1]{\par\smallskip{\sffamily\bfseries\color{steel}#1}\par\nopagebreak}
+
+% ---------------------------------------------------------------------
+%  Títulos
+% ---------------------------------------------------------------------
+\titleformat{\section}[block]
+  {\sffamily\bfseries\Large\color{navy}}
+  {}{0pt}{}[\vspace{2pt}{\color{gold}\titlerule[1.2pt]}]
+\titlespacing*{\section}{0pt}{16pt}{8pt}
+
+\newcommand{\bloque}[3]{%
+  \par\needspace{0.42\textheight}\vspace{6pt}
+  \phantomsection
+  \addcontentsline{toc}{part}{#1 · #2}%
+  \markboth{#1 · #2}{}%
+  \begin{tcolorbox}[enhanced,colback=navy,colframe=navy,arc=0pt,
+      left=12pt,right=12pt,top=14pt,bottom=14pt,boxrule=0pt,
+      borderline north={2.5pt}{0pt}{gold}]
+    {\sffamily\color{gold}\bfseries\small #1}\par\vspace{3pt}
+    {\sffamily\color{white}\bfseries\LARGE #2}\par\vspace{6pt}
+    {\sffamily\color{white!80!navy}\small #3}
+  \end{tcolorbox}\vspace{2pt}%
+}
+
+% Cabecera de problema: P# + título + etiquetas
+\newcommand{\problema}[3]{%
+  \needspace{16\baselineskip}%
+  \phantomsection
+  \addcontentsline{toc}{section}{P#1 · #2}%
+  \section*{\textcolor{gold}{P#1}\enspace#2}%
+  \vspace{-6pt}{\sffamily\footnotesize\color{slate}#3}\par\vspace{2pt}%
+}
+
+% ---------------------------------------------------------------------
+%  Cajas
+% ---------------------------------------------------------------------
+\tcbset{base/.style={enhanced,breakable,arc=1.5pt,boxrule=0pt,
+  left=8pt,right=8pt,top=5pt,bottom=5pt,before skip=7pt,after skip=7pt,
+  fonttitle=\sffamily\bfseries\small,coltitle=white}}
+
+\newtcolorbox{enunciado}[1]{base,colback=mist,colframe=steel,
+  borderline west={3pt}{0pt}{steel},
+  title={\faFile*\ \ Enunciado oficial · Problema #1},colbacktitle=steel}
+\newtcolorbox{solucion}[1][Resultado]{base,colback=okbg,colframe=okgreen,
+  borderline west={3pt}{0pt}{okgreen},
+  title={\faCheckCircle\ \ #1},colbacktitle=okgreen}
+\newtcolorbox{clave}[1][Idea clave]{base,colback=goldbg,colframe=gold,
+  borderline west={3pt}{0pt}{gold},title={\faLightbulb\ \ #1},
+  colbacktitle=gold}
+\newtcolorbox{trampa}[1][Ojo]{base,colback=alertbg,colframe=alert,
+  borderline west={3pt}{0pt}{alert},title={\faExclamationTriangle\ \ #1},
+  colbacktitle=alert}
+
+% Opciones de test
+\newenvironment{opciones}{\begin{enumerate}[label={\sffamily\bfseries\color{steel}\alph*)},
+  leftmargin=1.6em,itemsep=1pt,topsep=2pt]}{\end{enumerate}}
+
+% Tablas
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{Q}{>{\raggedleft\arraybackslash}p{1.95cm}}
+\newcolumntype{N}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcommand{\thead}[1]{\leavevmode\sffamily\bfseries\color{white}#1}
+\newcommand{\headrow}{\rowcolor{steel}}
+\newcommand{\totrow}{\rowcolor{goldbg}}
+\renewcommand{\arraystretch}{1.18}
+
+% Línea temporal de flujos: \flujos[ancho por periodo]{n}{t/s/texto,...}
+%   s = p (cobro, flecha hacia arriba) · s = n (pago, flecha hacia abajo)
+\newcommand{\flujos}[3][1.9]{%
+\begin{tikzpicture}[x=#1cm,font=\sffamily\scriptsize]
+  \draw[slate,line width=0.7pt,-{Stealth[length=2mm]}] (-0.35,0) -- (#2+0.55,0);
+  \foreach \t in {0,...,#2}{\draw[slate] (\t,0.07) -- (\t,-0.07);
+    \node[slate,fill=white,inner sep=1pt] at (\t,-0.28) {$t=\t$};}
+  \foreach \t/\s/\v in {#3}{%
+    \if\s p
+      \draw[okgreen,line width=1pt,-{Stealth[length=2mm]}] (\t,0.12) -- (\t,0.85)
+        node[above,align=center,text=okgreen!70!black]{\v};
+    \else
+      \draw[alert,line width=1pt,-{Stealth[length=2mm]}] (\t,-0.45) -- (\t,-1.15)
+        node[below,align=center,text=alert]{\v};
+    \fi}
+\end{tikzpicture}}
+
+% ---------------------------------------------------------------------
+%  Cabeceras y pies
+% ---------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rule}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[LE]{\sffamily\footnotesize\bfseries\color{navy}\thepage\hspace{1.2em}%
+  \mdseries\color{slate}\truncate{0.78\textwidth}{Dirección Financiera · Relación de problemas resuelta P1–P25}}
+\fancyhead[RO]{\sffamily\footnotesize\color{slate}\truncate{0.78\textwidth}{\leftmark}%
+  \hspace{1.2em}\bfseries\color{navy}\thepage}
+\fancyfoot[C]{\sffamily\scriptsize\color{slate!80}repasaYA · Grado en ADE · Universidad de Granada}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}}
+
+\hypersetup{pdftitle={Dirección Financiera · Relación de problemas resuelta (P1–P25)},
+  pdfauthor={repasaYA},pdfsubject={Primer parcial · UGR}}
+
+\makeatletter
+\renewcommand{\l@part}[2]{\vspace{5pt}\noindent
+  {\sffamily\bfseries\color{navy}#1\hfill\color{steel}#2}\par}
+\renewcommand{\l@section}{\@dottedtocline{1}{1.2em}{2.4em}}
+\setcounter{tocdepth}{1}
+\makeatother
+
+% =====================================================================
+\begin{document}
+% =====================================================================
+
+% ---------------------------------------------------------------------
+%  PORTADA
+% ---------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[navy] (current page.north west) rectangle ([yshift=-128mm]current page.north east);
+  \fill[gold] ([yshift=-128mm]current page.north west) rectangle ([yshift=-130mm]current page.north east);
+  \node[anchor=north west,text width=150mm,align=left] at ([xshift=24mm,yshift=-30mm]current page.north west)
+   {\sffamily\color{gold}\bfseries\large DIRECCIÓN FINANCIERA\\[2pt]
+    \color{white!75!navy}\mdseries\normalsize Grado en ADE · Facultad de CC.~Económicas y Empresariales · UGR};
+  \node[anchor=north west,text width=160mm,align=left] at ([xshift=24mm,yshift=-62mm]current page.north west)
+   {\sffamily\color{white}\bfseries\fontsize{34}{38}\selectfont Relación de problemas\\[4pt]
+    \fontsize{17}{21}\selectfont\mdseries Resuelta · Problemas 1 a 25 · Temas 1 a 4};
+  \node[anchor=north west,text width=150mm,align=left] at ([xshift=24mm,yshift=-104mm]current page.north west)
+   {\sffamily\color{white!80!navy}\small Enunciados oficiales del curso 2025/26, resolución paso a paso con la\\
+    notación del Departamento, gráficos y notas sobre los puntos conflictivos.};
+\end{tikzpicture}
+
+\vspace*{118mm}
+
+\begin{minipage}[t]{0.47\textwidth}
+{\sffamily\bfseries\color{navy}Contenido}\par\vspace{3pt}
+{\color{gold}\rule{\linewidth}{1pt}}\par\vspace{2pt}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\sffamily\bfseries\color{steel}}l L@{}}
+P1--P3   & Fisher: inversión real y mercado de capitales\\
+P4--P11  & Acciones: Gordon, multietapa y VAOC\\
+P12      & Criterios VAN y TIR\\
+P13--P22 & Flujos de caja, VAN e incrementales\\
+P23--P25 & CAE y demanda estacional
+\end{tabularx}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+{\sffamily\bfseries\color{navy}Cómo usar este documento}\par\vspace{3pt}
+{\color{gold}\rule{\linewidth}{1pt}}\par\vspace{2pt}
+\small
+\begin{itemize}[leftmargin=1.1em]
+  \item \textcolor{steel}{\textbf{Azul}}: enunciado oficial. Intenta resolverlo antes de seguir leyendo.
+  \item \textcolor{okgreen}{\textbf{Verde}}: resultado final, para comprobar.
+  \item \textcolor{gold}{\textbf{Ámbar}}: la idea que hay que llevarse.
+  \item \textcolor{alert}{\textbf{Rojo}}: redondeos, erratas y criterios dudosos.
+  \item La página 2 trae la plantilla de soluciones.
+\end{itemize}
+\end{minipage}
+
+\vfill
+{\sffamily\scriptsize\color{slate}
+Enunciados de la Relación de Problemas de Dirección Financiera 2025/26 (Departamento de Economía Financiera y
+Contabilidad, UGR). Resoluciones según las soluciones oficiales de cátedra (P1--P3, P18--P22) y las presentaciones
+de los Temas 1--4. Todas las cifras han sido recalculadas.\par}
+\end{titlepage}
+
+% ---------------------------------------------------------------------
+%  PLANTILLA DE SOLUCIONES + ÍNDICE
+% ---------------------------------------------------------------------
+\markboth{Plantilla de soluciones}{}
+\section*{Plantilla de soluciones}
+\addcontentsline{toc}{part}{Plantilla de soluciones}
+
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}>{\leavevmode\sffamily\bfseries\color{navy}}p{0.9cm} L >{\leavevmode\sffamily\bfseries\color{navy}}p{0.9cm} L@{}}
+\headrow \thead{P} & \thead{Solución} & \thead{P} & \thead{Solución}\\
+P1  & a) & P14 & b) es la falsa\\
+\rowcolor{mist}
+P2  & b) & P15 & d)\\
+P3  & $C_1=6.240$; $\Delta$riqueza $t{=}1$: 2.080; $t{=}0$: 2.000 & P16 & 38.243 bombillas (exacto: 38.244,36)\\
+\rowcolor{mist}
+P4  & d) & P17 & VAN $=2.317,57$\\
+P5  & b) 285,04 & P18 & VAN $=-104,32$\\
+\rowcolor{mist}
+P6  & b) & P19 & VAN $=112.587,82$\\
+P7  & d) & P20 & $\Delta$VAN $=10.388,30$\\
+\rowcolor{mist}
+P8  & VAOC $=3,19$; $P_0=169,86$; ROE mín.\ 12\,\% & P21 & $\Delta$VAN $=6.346.457,61$ $\Rightarrow$ ampliar\\
+P9  & $P_4=749,92$; $P_0=693,25$ & P22 & $\Delta$VAN $=0$; no procede la misma $r$\\
+\rowcolor{mist}
+P10 & $P_0=115,83$ (VAOC $=2,08$) & P23 & d)\\
+P11 & VAOC $=3,64$; $P_0=48,64$; $BPA_1/P_0=9,25\,\%$ & P24 & Horno A (CAE 8.596,99 < 8.996,19)\\
+\rowcolor{mist}
+P12 & b) & P25 & d) (ahorro 500.000, no 450.000)\\
+P13 & c) 732.841,04 & & \\
+\end{tabularx}
+\endgroup
+
+\begin{clave}[Método común a todos los proyectos (P13--P22)]
+\begin{enumerate}
+  \item Dibuja la línea temporal y separa tres bloques: $C_0\di$ · $Q_i\di$ · $VR_n\di$.
+  \item $C_0\di=$ activo fijo $+$ gastos iniciales$\cdot(1-t_c)$ $+$ FM inicial $[-\,VR_0\di$ del equipo viejo$]$.
+  \item $Q_i\di$ renta $=Q_i\ai(1-t_c)+CAF_i\cdot t_c$; \ $Q_i\di$ tesorería $=$ renta $-\Delta FM_i$.
+  \item $VR_n\di=VR_n\ai\mp\Delta/\nabla P\cdot t_c$ (plusvalía resta, minusvalía suma) $+$ FM recuperado.
+  \item Los intereses y la devolución de préstamos \textbf{no} entran en los flujos: la financiación ya está en $r$.
+\end{enumerate}
+\end{clave}
+
+\clearpage
+\markboth{Índice}{}
+{\sffamily\bfseries\large\color{navy}Índice}\par
+{\color{gold}\rule{\linewidth}{1.2pt}}\par\vspace{2pt}
+\begingroup\small
+\makeatletter\@starttoc{toc}\makeatother
+\endgroup
+
+% =====================================================================
+\clearpage
+\bloque{Tema 1}{Separación de Fisher}{Problemas 1 a 3 · inversión en activos reales, mercado de capitales y preferencias de consumo}
+% =====================================================================
+
+\problema{1}{Disminución del tipo de interés}{Test · Tema 1 · gráfico de Fisher}
+
+\begin{enunciado}{1}
+Una empresa está invirtiendo actualmente en activos reales el importe necesario para maximizar su VAN. Una
+disminución de la tasa de interés:
+\begin{opciones}
+  \item Provocaría un incremento de la inversión inicial necesaria para maximizar el VAN. Un inversor que prefiera
+        consumo futuro a consumo actual vería empeorada su situación como consecuencia de la disminución de la tasa de interés.
+  \item Provocaría un incremento de la inversión inicial necesaria para maximizar el VAN. Un inversor que prefiera
+        consumo actual a consumo futuro vería empeorada su situación como consecuencia de la disminución de la tasa de interés.
+  \item Provocaría un incremento de la inversión inicial necesaria para maximizar el VAN. Un inversor que prefiera
+        consumo futuro a consumo actual vería mejorada su situación como consecuencia de la disminución de la tasa de interés.
+  \item Provocaría una reducción de la inversión inicial necesaria para maximizar el VAN. Un inversor que prefiera
+        consumo futuro a consumo actual vería mejorada su situación como consecuencia de la disminución de la tasa de interés.
+\end{opciones}
+\end{enunciado}
+
+\paso{1. Qué pasa con la inversión}
+La empresa invierte hasta el punto en que la curva de inversión en activos reales es tangente a la línea del mercado
+de capitales, de pendiente $-(1+r)$. Si $r$ baja, la línea se \textbf{aplana} y la tangencia se desplaza a la
+izquierda (de $J$ a $J'$): proyectos que antes rendían menos que $r$ ahora superan el nuevo coste de oportunidad.
+\textbf{Aumentan la inversión} ($J'D>JD$) \textbf{y el VAN} ($DK'>DK$).
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,x=1.1cm,y=0.68cm]
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (9.8,0) node[below left=2pt]{u.m.\ ($t=0$)};
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (0,8.9) node[above right=-1pt]{u.m.\ ($t=1$)};
+  % curva de inversión y = 2(6-x)^0,5
+  \draw[steel,line width=1.1pt,domain=0.6:6,samples=120,smooth] plot (\x,{2*sqrt(6-\x)});
+  % línea con r (pendiente -1,2) tangente en J=5,306
+  \draw[gold,line width=1.1pt] (0,8.033) -- (6.694,0);
+  % línea con r' (pendiente -0,75) tangente en J'=4,222
+  \draw[alert,line width=1.1pt] (0,5.833) -- (7.778,0);
+  \fill[navy] (5.306,1.667) circle (1.6pt) node[above right=0pt]{G};
+  \fill[navy] (4.222,2.667) circle (1.6pt) node[above right=0pt]{G$'$};
+  \draw[dashed,slate] (5.306,1.667) -- (5.306,0);
+  \draw[dashed,slate] (4.222,2.667) -- (4.222,0);
+  \foreach \x/\l in {4.222/J$'$,5.306/J,6/D,6.694/K,7.778/K$'$}{\node[below] at (\x,0) {\l};}
+  \node[left] at (0,8.033) {M};
+  \node[left] at (0,5.833) {M$'$};
+  \node[gold!70!black,anchor=west] at (2.1,6.0) {recta con $r$: pendiente $-(1+r)$};
+  \node[alert,anchor=west] at (4.6,3.9) {recta con $r'<r$ (más plana)};
+  \node[steel,anchor=west] at (0.7,2.75) {inversión en activos reales};
+  \draw[{Stealth}-{Stealth},navy] (4.222,-0.95) -- node[below]{inversión} (6,-0.95);
+  \draw[{Stealth}-{Stealth},okgreen] (6,-0.95) -- node[below]{VAN} (7.778,-0.95);
+\end{tikzpicture}
+\end{center}
+
+\paso{2. Quién gana y quién pierde}
+\begin{itemize}
+  \item \textbf{Prefiere consumo actual} (se endeuda): se mueve hacia el eje horizontal y puede gastar hoy hasta
+        $K'>K$. \textbf{Mejora}.
+  \item \textbf{Prefiere consumo futuro} (presta): el máximo que puede tener en $t=1$ baja de $M$ a $M'$ porque
+        el mercado le remunera menos. \textbf{Empeora}.
+\end{itemize}
+
+\begin{solucion}
+\textbf{a)}: aumenta la inversión que maximiza el VAN y quien prefiere consumo futuro empeora.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{2}{Tipos distintos para prestar y para endeudarse}{Test · Tema 1 · ruptura de la separación}
+
+\begin{enunciado}{2}
+Indique cuál de las siguientes afirmaciones es correcta:
+\begin{opciones}
+  \item Si el tipo de interés del endeudamiento es mayor que el tipo de interés del préstamo, la inversión inicial en
+        activos reales que maximizaría el VAN sería la misma tanto desde el punto de vista de un accionista que quisiera
+        ser prestamista como desde el punto de vista de un accionista que quisiera ser prestatario.
+  \item Si el tipo de interés del endeudamiento es mayor que el tipo de interés del préstamo, un accionista que
+        quisiera ser prestamista y otro que quisiera ser prestatario no estarían de acuerdo en cuanto al importe de la
+        inversión inicial en activos reales necesaria para maximizar el VAN.
+  \item Si el tipo de interés del endeudamiento es mayor que el tipo de interés del préstamo, la línea del tipo de
+        interés para quien presta será más inclinada que para quien se endeuda.
+  \item Las respuestas a) y c) son correctas.
+\end{opciones}
+\end{enunciado}
+
+La separación de Fisher exige un mercado perfecto con un único tipo. Si $r_e>r_p$ hay \textbf{dos rectas}:
+\begin{itemize}
+  \item Quien se \textbf{endeuda} usa la recta más inclinada, $-(1+r_e)$: tangencia en $B$, inversión $C_0=BD$ (menor).
+        Por eso c) es falsa.
+  \item Quien \textbf{presta} usa la recta más plana, $-(1+r_p)$: tangencia en $A$, inversión $C_0'=AD$ (mayor).
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,x=1.1cm,y=0.68cm]
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (9.8,0) node[below left=2pt]{u.m.\ ($t=0$)};
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (0,8.9) node[above right=-1pt]{u.m.\ ($t=1$)};
+  \draw[steel,line width=1.1pt,domain=0.6:6,samples=120,smooth] plot (\x,{2*sqrt(6-\x)});
+  \draw[gold,line width=1.1pt] (0,8.033) -- (6.694,0);
+  \draw[okgreen,line width=1.1pt] (0,5.833) -- (7.778,0);
+  \fill[navy] (5.306,1.667) circle (1.6pt);
+  \fill[navy] (4.222,2.667) circle (1.6pt);
+  \draw[dashed,slate] (5.306,1.667) -- (5.306,0);
+  \draw[dashed,slate] (4.222,2.667) -- (4.222,0);
+  \foreach \x/\l in {4.222/A,5.306/B,6/D}{\node[below] at (\x,0) {\l};}
+  \node[steel,anchor=west] at (0.7,2.75) {inversión en activos reales};
+  \node[gold!70!black,anchor=west] at (2.1,6.0) {quien se endeuda: $-(1+r_e)$};
+  \node[okgreen!70!black,anchor=west] at (4.6,3.9) {quien presta: $-(1+r_p)$};
+  \draw[{Stealth}-{Stealth},gold!70!black] (5.306,-0.95) -- (6,-0.95) node[right]{$C_0$ (prestatario)};
+  \draw[{Stealth}-{Stealth},okgreen] (4.222,-2.0) -- (6,-2.0) node[right]{$C_0'$ (prestamista)};
+\end{tikzpicture}
+\end{center}
+
+\begin{solucion}
+\textbf{b)}: con $r_e>r_p$ prestamistas y prestatarios no se ponen de acuerdo en la inversión que maximiza el VAN.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{3}{Ejercicio numérico de Fisher}{Problema · Tema 1 · gráfico + riqueza en $t=0$ y $t=1$}
+
+\begin{enunciado}{3}
+Un inversor dispone hoy de un presupuesto de 12.000\eur. El tipo de interés del mercado de capitales a un año es
+del 4\,\%. Invierte hoy en activos reales 4.000\eur, lo que le permite obtener un VAN de 2.000\eur, cifra que constituye
+el máximo VAN posible. Con esta información, y con un horizonte temporal de un año, se pide:
+\begin{opciones}
+  \item Representación gráfica de la situación descrita.
+  \item Cuantía del flujo de caja que el inversor recibiría al cabo de un año, derivado de su inversión en activos
+        reales. \textbf{SOL: 6.240\eur}
+  \item Cuantía en la que se incrementaría la riqueza del inversor a consecuencia de la inversión en activos reales,
+        si tuviera total preferencia por el consumo futuro frente al consumo actual. \textbf{SOL: 2.080\eur}
+  \item Cuantía en la que se incrementaría la riqueza del inversor a consecuencia de la inversión en activos reales,
+        si tuviera total preferencia por el consumo actual frente al consumo futuro. \textbf{SOL: 2.000\eur}
+\end{opciones}
+\end{enunciado}
+
+\paso{Datos}
+$D=12.000$; $r=4\,\%$; $C_0=4.000$ $\Rightarrow$ le quedan $12.000-4.000=8.000$; VAN $=2.000$ $\Rightarrow$
+$VA=C_0+VAN=6.000$.
+
+\paso{b) Flujo dentro de un año}
+\[
+VAN=-C_0+\frac{C_1}{1+r}\ \Rightarrow\ 2.000=-4.000+\frac{C_1}{1,04}\ \Rightarrow\ C_1=6.000\cdot1,04=\mathbf{6.240\eur}
+\]
+
+\paso{c) Preferencia total por consumo futuro (todo a $t=1$)}
+\begin{itemize}
+  \item Con inversión real: cobra 6.240 y presta los 8.000 sobrantes: $6.240+8.000\cdot1,04=\mathbf{14.560}$ ($M$).
+  \item Solo con el mercado: presta los 12.000: $12.000\cdot1,04=\mathbf{12.480}$ ($L$).
+  \item $\Delta$riqueza$_{t=1}=14.560-12.480=\mathbf{2.080\eur}=VAN\cdot(1+r)$.
+\end{itemize}
+
+\paso{d) Preferencia total por consumo actual (todo a $t=0$)}
+\begin{itemize}
+  \item Con inversión real: conserva 8.000 y se endeuda hoy contra los 6.240 futuros ($6.240/1,04=6.000$):
+        $8.000+6.000=\mathbf{14.000}$ ($K$).
+  \item Sin invertir: 12.000. \ $\Delta$riqueza$_{t=0}=14.000-12.000=\mathbf{2.000\eur}=VAN$.
+\end{itemize}
+
+\paso{a) Representación gráfica}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,x=0.62cm,y=0.42cm]
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (19.4,0) node[below left=2pt]{u.m.\ ($t=0$, miles)};
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (0,16.3) node[above right=-1pt]{u.m.\ ($t=1$, miles)};
+  % recta del mercado tras invertir: de (0;14,56) a (14;0)
+  \draw[gold,line width=1.1pt] (0,14.56) -- (14,0);
+  % recta del mercado sin invertir: de (0;12,48) a (12;0)
+  \draw[slate,dashed,line width=0.8pt] (0,12.48) -- (12,0);
+  % curva de inversión y = 2,4763 (12-x)^(2/3), tangente en G(8; 6,24)
+  \draw[steel,line width=1.1pt,domain=1.2:12,samples=140,smooth] plot (\x,{2.4763*(12-\x)^(2/3)});
+  \fill[navy] (8,6.24) circle (2pt) node[above right=1pt]{G};
+  \draw[dashed,slate] (8,6.24) -- (8,0);
+  \draw[dashed,slate] (8,6.24) -- (0,6.24);
+  \node[left] at (0,14.56) {14.560 (M)};
+  \node[left] at (0,12.48) {12.480 (L)};
+  \node[left] at (0,6.24) {6.240};
+  \node[below] at (8,0) {8.000};
+  \node[below] at (12,0) {12.000};
+  \node[below] at (14.3,0) {14.000};
+  \node[above right=-1pt] at (12,0) {D};
+  \node[above right=-1pt] at (14,0) {K};
+  \draw[decorate,decoration={brace,mirror,amplitude=4pt},navy] (8,-1.4) -- node[below=4pt]{$C_0=4.000$} (12,-1.4);
+  \draw[decorate,decoration={brace,mirror,amplitude=4pt},okgreen] (12,-1.4) -- node[below=4pt]{VAN $=2.000$} (14,-1.4);
+  \draw[decorate,decoration={brace,mirror,amplitude=4pt},slate] (8,-3.6) -- node[below=4pt]{$VA=6.000$} (14,-3.6);
+  \draw[decorate,decoration={brace,amplitude=4pt},okgreen] (-3.3,12.48) -- node[left=4pt,align=right]{$\Delta$riq.\ $t{=}1$\\$=2.080$} (-3.3,14.56);
+  \draw[steel,-{Stealth[length=1.8mm]}] (3.2,4.3) -- (3.55,9.9);
+  \node[steel,below] at (3.2,4.3) {inversión en activos reales};
+  \node[gold!70!black,anchor=west] at (10.2,5.2) {mercado, $-(1{,}04)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{clave}
+El VAN es el aumento de riqueza medido en $t=0$; medido en $t=1$ es $VAN\cdot(1+r)$. Los dos inversores mejoran,
+sea cual sea su preferencia de consumo: eso es la separación de Fisher.
+\end{clave}
+
+% =====================================================================
+\bloque{Tema 2}{Valoración de acciones y VAOC}{Problemas 4 a 11 · Gordon, $g=b\cdot ROE$, crecimiento por etapas y oportunidades de crecimiento}
+% =====================================================================
+
+\begin{clave}[Herramientas del bloque]
+$P_0=\dfrac{DIV_1}{r-g}$ \quad $g=b\cdot ROE$ \quad $DIV=(1-b)\,BPA$ \quad
+$P_0=\dfrac{BPA_1}{r}+\text{VAOC}$ \quad $VAN_t=-I_t+\dfrac{ROE\cdot I_t}{r}$.\\
+Cuando se agotan las oportunidades de crecer, $DIV=BPA$ constante y $P_T=BPA_{T+1}/r$.
+\end{clave}
+
+\problema{4}{Crecimiento con ROE igual a \texorpdfstring{$r$}{r}}{Test · Gordon y VAOC}
+
+\begin{enunciado}{4}
+Una empresa que el próximo año espera obtener un BPA de 20 euros/acción prevé que sus dividendos pueden crecer
+indefinidamente al 4\,\% anual. Si el dividendo del próximo año es de 10 euros/acción y la tasa de capitalización del
+mercado es del 8\,\%, podemos afirmar que:
+\begin{opciones}
+  \item Esta empresa tiene oportunidades de crecimiento que el mercado valora en 250 euros/acción, debido a que
+        reinvierte parte de sus beneficios y obtiene de esas reinversiones una tasa de rentabilidad conveniente.
+  \item Todo lo que el mercado valora en esta empresa son sus oportunidades de crecimiento (250 euros/acción).
+  \item La empresa tiene oportunidades de crecimiento, ya que reinvierte parte de sus beneficios, pero no es posible
+        cuantificarlas, al no conocerse la rentabilidad que está obteniendo en sus reinversiones.
+  \item El VAOC de esta empresa es nulo pues, pese a reinvertir parte de sus beneficios, la rentabilidad que obtiene en
+        sus reinversiones es exactamente igual a la tasa de capitalización del mercado.
+\end{opciones}
+\end{enunciado}
+
+\[
+P_0=\frac{10}{0,08-0,04}=250 \qquad d=\frac{10}{20}=0,5\Rightarrow b=0,5 \qquad
+ROE=\frac{g}{b}=\frac{0,04}{0,5}=8\,\%=r
+\]
+\[
+\text{VAOC}=P_0-\frac{BPA_1}{r}=250-\frac{20}{0,08}=250-250=\mathbf{0}
+\]
+
+\begin{solucion}
+\textbf{d)}: crece, pero sus reinversiones rinden justo $r$; crecer sin superar el coste del capital no crea valor.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{5}{Crecimiento hasta el año 6}{Test · descuento de dividendos en dos etapas}
+
+\begin{enunciado}{5}
+Una empresa que el año próximo prevé obtener un BPA de 25 euros/acción tiene una tasa de reparto de dividendos
+prevista del 40\,\%. La empresa estima que sus dividendos podrán crecer hasta el año 6 a razón de un 6\,\% anual. Del
+año 6 en adelante, se prevé que sus oportunidades de crecer se habrán agotado, por lo que se repartirán
+indefinidamente todos sus beneficios como dividendos. Si la tasa de capitalización del mercado es del 9\,\%, el precio
+de una acción de esta empresa (utilizando 2 decimales para los cálculos) es de:
+\begin{opciones}
+  \item 265,09 euros/acción.
+  \item 285,04 euros/acción.
+  \item 415,19 euros/acción.
+  \item 333,33 euros/acción.
+\end{opciones}
+\end{enunciado}
+
+El BPA crece al 6\,\% hasta el año 6 ($BPA_6=25\cdot1,06^5=33,46$). Desde el año 6 se reparte todo:
+$DIV_6=DIV_7=\dots=33,46$.
+
+\begin{center}\small
+\begin{tabularx}{0.86\textwidth}{@{}L RRRRRR@{}}
+\headrow \thead{€/acción} & \thead{Año 1} & \thead{Año 2} & \thead{Año 3} & \thead{Año 4} & \thead{Año 5} & \thead{Año 6 y sig.}\\
+$BPA_t$ & 25,00 & 26,50 & 28,09 & 29,78 & 31,56 & 33,46\\
+\rowcolor{mist} Reparto & 40\,\% & 40\,\% & 40\,\% & 40\,\% & 40\,\% & 100\,\%\\
+$DIV_t$ & 10,00 & 10,60 & 11,24 & 11,91 & 12,62 & 33,46\\
+\end{tabularx}
+\end{center}
+
+\[
+P_5=\frac{DIV_6}{r}=\frac{33,46}{0,09}=371,78
+\qquad
+P_0=\frac{10}{1,09}+\frac{10,60}{1,09^2}+\frac{11,24}{1,09^3}+\frac{11,91}{1,09^4}+\frac{12,62+371,78}{1,09^5}=\mathbf{285,04}
+\]
+
+\begin{solucion}
+\textbf{b) 285,04 €/acción}.
+\end{solucion}
+\begin{trampa}[Redondeo]
+Con todos los decimales sale 285,01. El enunciado pide trabajar con 2 decimales, y así se obtiene exactamente 285,04.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{6}{Obtener \texorpdfstring{$g$ y $r$}{g y r} a partir del precio}{Test · Gordon despejando $r$}
+
+\begin{enunciado}{6}
+Las acciones de la sociedad X cotizan actualmente a 73 euros/acción. El BPA esperado para el próximo año es de 2,80
+euros/acción, del que se espera repartir un dividendo de 1,68 euros/acción. Si la rentabilidad que esta empresa puede
+esperar obtener en sus reinversiones es del 20\,\%, es posible afirmar que:
+\begin{opciones}
+  \item La tasa esperada de crecimiento del dividendo será del 12\,\%, y la tasa de capitalización del mercado
+        ascenderá aproximadamente al 14,3\,\%.
+  \item La tasa esperada de crecimiento del dividendo será del 8\,\%, y la tasa de capitalización del mercado
+        ascenderá aproximadamente al 10,3\,\%.
+  \item La tasa esperada de crecimiento del dividendo será del 10,3\,\%, y la tasa de capitalización del mercado
+        ascenderá aproximadamente al 8\,\%.
+  \item Las respuestas a), b) y c) son falsas.
+\end{opciones}
+\end{enunciado}
+
+\[
+d=\frac{1,68}{2,80}=0,60\Rightarrow b=0,40 \qquad g=0,40\cdot0,20=\mathbf{8\,\%} \qquad
+r=\frac{1,68}{73}+0,08=0,0230+0,08=\mathbf{10,3\,\%}
+\]
+
+\begin{solucion}
+\textbf{b)}: $g=8\,\%$ y $r\approx10,3\,\%$.
+\end{solucion}
+\begin{trampa}[Distractor típico]
+La opción a) usa $g=0,60\cdot0,20=12\,\%$: aplica la tasa de \emph{reparto} en lugar de la de \emph{retención}.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{7}{De qué depende el crecimiento}{Test · teoría de Gordon}
+
+\begin{enunciado}{7}
+Indique cuál de las siguientes afirmaciones es correcta:
+\begin{opciones}
+  \item La fórmula del flujo de tesorería descontado con crecimiento constante es apropiada para calcular el precio de
+        las acciones de una empresa que viene experimentando en los últimos años una tasa muy elevada de crecimiento de
+        los dividendos.
+  \item El crecimiento que una empresa pueda experimentar en el futuro depende exclusivamente de la proporción de sus
+        beneficios anuales que la misma destine a reinversión.
+  \item El crecimiento que una empresa pueda experimentar en el futuro depende exclusivamente de la rentabilidad que
+        pueda obtener de las oportunidades de inversión futuras que la misma encuentre.
+  \item Las respuestas a), b) y c) son falsas.
+\end{opciones}
+\end{enunciado}
+
+\begin{itemize}
+  \item \textbf{a) es falsa}: un crecimiento muy alto suele ser transitorio y puede incluso superar a $r$. Aplicar
+        $DIV_1/(r-g)$ con ese $g$ sobrevalora la acción (o no tiene sentido si $g\ge r$): hay que usar etapas.
+  \item \textbf{b) y c) son falsas}: $g=b\cdot ROE$ depende de \textbf{las dos} cosas a la vez, no de una sola.
+\end{itemize}
+
+\begin{solucion}
+\textbf{d)}: las tres afirmaciones son falsas.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{8}{MILLION, S.A.: una oportunidad puntual en \texorpdfstring{$t=2$}{t=2}}{Problema · VAOC de una única reinversión}
+
+\begin{enunciado}{8}
+La empresa MILLION, S.A. espera obtener el próximo año un BPA de 20\eur/acción. Su director financiero estima que dentro
+de dos años ($t=2$) surgirá una oportunidad de inversión interesante que piensa que podría reportar una rentabilidad
+anual a perpetuidad sobre el capital invertido del 15\,\%. La tasa de capitalización del mercado es del 12\,\%.
+Con esta información, indique:
+\begin{opciones}
+  \item Si se decidiera reinvertir el 80\,\% de los beneficios esperados por la empresa en el año 2, ¿cuál sería el
+        valor actual de las oportunidades de crecimiento en cada acción de la empresa? \textbf{SOL: VAOC = 3,19\eur}
+  \item ¿Cuál sería el precio actual de la acción? \textbf{SOL: $P_0$ = 169,86\eur}
+  \item ¿Cuál es la rentabilidad anual mínima que usted consideraría aceptable para la reinversión que la empresa se
+        plantea realizar en $t=2$? Justifique su respuesta.
+\end{opciones}
+\end{enunciado}
+
+\paso{a) VAOC}
+Sin reinversión en $t=1$, $BPA_2=BPA_1=20$. En $t=2$ se reinvierte $I_2=0,80\cdot20=16$, que rinde $16\cdot0,15=2,40$
+al año a perpetuidad desde $t=3$.
+\[
+VAN_2=-16+\frac{2,40}{0,12}=-16+20=4 \qquad
+\text{VAOC}=\frac{4}{1,12^2}=\mathbf{3,19\eur}
+\]
+
+\paso{b) Precio}
+\[
+P_0=\frac{BPA_1}{r}+\text{VAOC}=\frac{20}{0,12}+3,19=166,67+3,19=\mathbf{169,86\eur}
+\]
+Comprobación por dividendos: $DIV_1=20$, $DIV_2=4$ y desde $t=3$, $DIV=22,40$:
+\(
+P_0=\frac{20}{1,12}+\frac{4+22,40/0,12}{1,12^2}=17,86+152,00=169,86.
+\)
+
+\paso{c) Rentabilidad mínima}
+El coste de oportunidad, \textbf{12\,\%}. Con $ROE=12\,\%$: $VAN_2=-16+16\cdot0,12/0,12=0$ (indiferente). Por encima,
+la reinversión crea valor; por debajo, conviene repartir el dividendo.
+
+\begin{solucion}
+VAOC $=3,19$\eur; \ $P_0=169,86$\eur; \ rentabilidad mínima exigible $=r=12\,\%$.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{9}{Empresa Z: crecimiento en los años 1, 2 y 3}{Problema · multietapa por DDM y por VAOC}
+
+\begin{enunciado}{9}
+Disponemos de la siguiente información de la empresa Z:
+\begin{itemize}
+  \item $BPA_1=80$ euros/acción.
+  \item Tasa de reparto de dividendos: 80\,\%.
+  \item Se espera que los beneficios crezcan hasta el año 4, gracias a la obtención de una rentabilidad del 20\,\% en sus
+        reinversiones de los años 1, 2 y 3.
+  \item Desde ese año en adelante, se consideran agotadas las oportunidades de crecimiento, de forma que se repartirán
+        todos los beneficios como dividendos.
+  \item La tasa de capitalización del mercado es del 12\,\%.
+\end{itemize}
+SE PIDE:
+\begin{opciones}
+  \item El precio de la acción de la empresa Z en el año 4. \textbf{SOL: $P_4$ = 749,92\eur}
+  \item El precio actual de la acción de la empresa Z. \textbf{SOL: $P_0$ = 693,25\eur}
+\end{opciones}
+\end{enunciado}
+
+\paso{Crecimiento y cuadro}
+$b=1-0,80=0,20$; $g=0,20\cdot0,20=4\,\%$ hasta el año 4. Desde el año 4 se reparte el 100\,\%.
+
+\begin{center}\small
+\begin{tabularx}{0.8\textwidth}{@{}L RRRR@{}}
+\headrow \thead{€/acción} & \thead{Año 1} & \thead{Año 2} & \thead{Año 3} & \thead{Año 4 y sig.}\\
+$BPA_t$ & 80,00 & 83,20 & 86,53 & 89,99\\
+\rowcolor{mist} Reparto & 80\,\% & 80\,\% & 80\,\% & 100\,\%\\
+$DIV_t$ & 64,00 & 66,56 & 69,22 & 89,99\\
+\rowcolor{mist} Reinversión $I_t$ & 16,00 & 16,64 & 17,31 & 0\\
+\end{tabularx}
+\end{center}
+
+\paso{a) Precio en el año 4}
+\[
+P_4=\frac{DIV_5}{r}=\frac{89,99}{0,12}=\mathbf{749,92\eur}
+\]
+
+\paso{b) Precio hoy por descuento de dividendos}
+\[
+P_0=\frac{64}{1,12}+\frac{66,56}{1,12^2}+\frac{69,22}{1,12^3}+\frac{89,99+749,92}{1,12^4}
+=57,14+53,06+49,27+533,78=\mathbf{693,25\eur}
+\]
+
+\paso{Comprobación por VAOC}
+$VAN_1=-16+\frac{3,20}{0,12}=10,67$; \ $VAN_2=-16,64+\frac{3,328}{0,12}=11,09$; \
+$VAN_3=-17,31+\frac{3,461}{0,12}=11,54$
+\[
+\text{VAOC}=\frac{10,67}{1,12}+\frac{11,09}{1,12^2}+\frac{11,54}{1,12^3}=26,58
+\qquad P_0=\frac{80}{0,12}+26,58=666,67+26,58=693,25
+\]
+
+\begin{solucion}
+$P_4=749,92$\eur; \ $P_0=693,25$\eur.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{10}{Green Rock Corp.: la competencia reduce la ROE}{Problema · dos etapas por DDM y por VAOC}
+
+\begin{enunciado}{10}
+La empresa Green Rock Corp., tiene una rentabilidad sobre el capital invertido del 10\,\% a perpetuidad y una tasa de
+crecimiento constante de sus reinversiones del 5\,\%. El valor contable por acción es actualmente de 91\eur. Suponga que
+la ROE y la tasa de reparto de dividendos se mantiene constante durante los próximos 2 años. Después de esa fecha, la
+competencia hará que la ROE descienda al 8\,\% a perpetuidad y la tasa de crecimiento constante baje al 2,4\,\%. La tasa
+de capitalización del mercado se estima en el 8\,\%. Con esta información, determine:
+\begin{enumerate}
+  \item El precio actual de la acción de la empresa Green Rock Corp., empleando el método del descuento de dividendos.
+  \item El precio actual de la acción de la empresa, detallando el cálculo previo del Valor Actual de la Oportunidades
+        de Crecimiento (VAOC), explicando qué parte del precio se debe a las oportunidades de crecimiento.
+\end{enumerate}
+\end{enunciado}
+
+\paso{Parámetros de cada etapa}
+\begin{itemize}
+  \item Años 1--2: $ROE=10\,\%$, $g=5\,\%$ $\Rightarrow b=0,05/0,10=50\,\%$, reparto 50\,\%.
+  \item Año 3 en adelante: $ROE=8\,\%=r$, $g=2,4\,\%$ $\Rightarrow b=0,024/0,08=30\,\%$, reparto 70\,\%.
+\end{itemize}
+
+\begin{center}\small
+\begin{tabularx}{0.82\textwidth}{@{}c RcRR@{}}
+\headrow \thead{Año} & \thead{$BPA_t$} & \thead{Reparto} & \thead{$DIV_t$} & \thead{Reinversión $I_t$}\\
+1 & $91\cdot0,10=9,1000$ & 50\,\% & 4,5500 & 4,5500 (al 10\,\%)\\
+\rowcolor{mist} 2 & $9,10\cdot1,05=9,5550$ & 50\,\% & 4,7775 & 4,7775 (al 10\,\%)\\
+3 & $9,555\cdot1,05=10,0328$ & 70\,\% & 7,0229 & 3,0098 (al 8\,\%)\\
+\rowcolor{mist} 4 & $10,0328\cdot1,024=10,2735$ & 70\,\% & 7,1915 & 3,0821 (al 8\,\%)\\
+\end{tabularx}
+\end{center}
+
+\paso{1. Descuento de dividendos}
+Desde el año 3 el dividendo crece al 2,4\,\% indefinidamente, así que
+$P_2=\dfrac{DIV_3}{r-g}=\dfrac{7,0229}{0,08-0,024}=125,41$:
+\[
+P_0=\frac{4,55}{1,08}+\frac{4,7775+125,41}{1,08^2}=4,21+111,62=\mathbf{115,83\eur}
+\]
+
+\paso{2. Por VAOC}
+\[
+VAN_1=-4,55+\frac{4,55\cdot0,10}{0,08}=1,1375 \qquad VAN_2=-4,7775+\frac{4,7775\cdot0,10}{0,08}=1,1944
+\]
+Desde el año 3 la ROE es igual a $r$, así que esas reinversiones tienen $VAN=0$.
+\[
+\text{VAOC}=\frac{1,1375}{1,08}+\frac{1,1944}{1,08^2}=1,05+1,02=2,08
+\qquad
+P_0=\frac{9,10}{0,08}+2,08=113,75+2,08=\mathbf{115,83\eur}
+\]
+
+\begin{solucion}
+$P_0=115,83$\eur por los dos métodos. Las oportunidades de crecimiento explican solo \textbf{2,08\eur (1,8\,\%)};
+el 98,2\,\% (113,75\eur) es el valor de los activos actuales sin crecimiento.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{11}{North Atlantic, S.A.: el proyecto de la avena}{Problema · VAOC de un proyecto y ratio $BPA_1/P_0$}
+
+\begin{enunciado}{11}
+La empresa North Atlantic S.A. se dedica al cultivo y venta de trigo, lo que le viene reportando unos beneficios netos
+anuales de 4.500.000 euros, importe que se prevé estable para los próximos años. Actualmente se está planteando
+introducirse en el cultivo y distribución de avena, lo que supondrá una inversión de 1.000.000 de euros en el año 1,
+previéndose la venta de 10.000 Tm/año de avena desde el año 2 en adelante. Los costes de producción y distribución
+ascienden a 100\eur/Tm, importe que se mantendrá constante a futuro y el precio previsto para la avena en los próximos años
+se estima en: año 1: 140\eur/Tm; año 2 y siguientes: 150\eur/Tm.
+
+North Atlantic S.A. se financia sólo con fondos propios: tiene 1.000.000 de acciones en circulación y el coste de
+capitalización de las acciones es del 10\,\%. Todos los beneficios de la empresa se reparten como dividendos excepto en
+el año 1, en que se reinvertirá la cantidad necesaria para llevar a cabo el nuevo proyecto de la avena. Suponga
+asimismo que la empresa mantendrá su actividad a perpetuidad y que estamos en un contexto sin impuestos.
+\begin{opciones}
+  \item Determine el valor actual de las oportunidades de crecimiento de esta empresa.
+  \item Calcule el precio actual de las acciones de esta empresa.
+  \item Calcule el ratio $BPA_1/P_0$ y explique por qué no coincide con el coste de capital del 10\,\%.
+\end{opciones}
+\end{enunciado}
+
+\paso{Datos por acción (1.000.000 de acciones)}
+$BPA_1=4,50$; inversión en $t=1$: 1,00 por acción; flujo de la avena desde $t=2$:
+$10.000\cdot(150-100)=500.000$\eur al año, es decir, 0,50 por acción. El precio del año 1 (140) no se usa porque ese
+año todavía no se vende avena.
+
+\begin{center}
+\flujos[2.0]{4}{1/n/{$-1{,}00$ (inversión)},2/p/{$+0{,}50$},3/p/{$+0{,}50$},4/p/{$+0{,}50$ \dots}}
+\end{center}
+
+\paso{a) VAOC}
+\[
+VAN_1=-1+\frac{0,50}{0,10}=4,00 \qquad \text{VAOC}=\frac{4,00}{1,10}=\mathbf{3,64}\text{\,€/acción}
+\quad(3.636.363,64\eur\text{ en total})
+\]
+
+\paso{b) Precio}
+\[
+P_0=\frac{4,50}{0,10}+3,64=45,00+3,64=\mathbf{48,64\eur}
+\]
+Comprobación por dividendos: $DIV_1=4,50-1,00=3,50$; desde $t=2$, $DIV=5,00$:
+$P_0=\frac{3,50+5,00/0,10}{1,10}=\frac{53,50}{1,10}=48,64$.
+
+\paso{c) Ratio beneficio/precio}
+\[
+\frac{BPA_1}{P_0}=\frac{4,50}{48,64}=\mathbf{9,25\,\%}<10\,\% \qquad
+\text{porque}\quad \frac{BPA_1}{P_0}=r\left(1-\frac{\text{VAOC}}{P_0}\right)
+\]
+
+\begin{solucion}
+VAOC $=3,64$\eur; \ $P_0=48,64$\eur; \ $BPA_1/P_0=9,25\,\%$. Solo coincide con $r$ si VAOC $=0$; aquí la avena
+rinde un 50\,\% $>10\,\%$ y el precio incorpora ese crecimiento.
+\end{solucion}
+
+% =====================================================================
+\bloque{Tema 3}{Criterios de valoración}{Problema 12 · VAN frente a TIR}
+% =====================================================================
+
+\problema{12}{VAN frente a TIR}{Test · proyectos mutuamente excluyentes}
+
+\begin{enunciado}{12}
+Indique cuál de las siguientes afirmaciones sobre algunos de los criterios de selección de inversiones es correcta:
+\begin{opciones}
+  \item El criterio TIR resulta adecuado para elegir entre dos proyectos de inversión que tienen distinto desembolso inicial.
+  \item El criterio VAN es adecuado para elegir entre dos proyectos que tienen el mismo horizonte temporal.
+  \item El criterio TIR es adecuado para elegir entre dos proyectos de inversión en cualquier caso.
+  \item En cualquier circunstancia los criterios VAN y TIR llevarán a la misma decisión.
+\end{opciones}
+\end{enunciado}
+
+\begin{itemize}
+  \item \textbf{a), c) y d) son falsas}: la TIR es una medida relativa. Ignora la escala del desembolso y el reparto
+        temporal de los flujos, no distingue entre prestar y endeudarse y puede dar varias tasas o ninguna. VAN y TIR
+        pueden ordenar los proyectos al revés cuando $r$ está por debajo de la intersección de Fisher (salvo que se
+        calcule la TIR del proyecto incremental).
+  \item \textbf{b) es correcta}: el VAN mide en euros de hoy la riqueza creada y sirve para elegir entre proyectos
+        excluyentes con el mismo horizonte. Con horizontes distintos y equipos que se reponen, se usa el CAE (P23).
+\end{itemize}
+
+\begin{solucion}
+\textbf{b)}.
+\end{solucion}
+
+% =====================================================================
+\bloque{Tema 4}{Flujos de caja y decisiones de inversión}{Problemas 13 a 25 · $C_0\di$, $Q_i\di$, $\Delta FM$, $VR_n\di$, análisis incremental, CAE y demanda estacional}
+% =====================================================================
+
+\problema{13}{Conservas de pescado: la nave tiene coste de oportunidad}{Test · VAN incremental con FM no recuperado}
+
+\begin{enunciado}{13}
+Una fábrica de conservas de pescado pretende acometer un proyecto de ampliación de su planta envasadora en una nave de
+su propiedad, que actualmente se encuentra sin utilización específica. La inversión necesaria en equipos es de
+900.000\eur, que se amortizarán linealmente en 10 años. Este proyecto provocará un incremento inicial del fondo de
+maniobra de 12.000\eur. Los ingresos anuales se estiman, para los 10 años de vida útil de los equipos, en 1.200.000\eur. Los
+costes operativos anuales serán previsiblemente de 535.000\eur. Se estima que en cada año el fondo de maniobra ascenderá
+al 2\,\% de las ventas anuales previstas. El valor residual de los equipos se puede considerar despreciable al final de
+su vida útil. El fondo de maniobra no se recupera al final de la vida del proyecto. De no acometerse el proyecto, la
+nave se alquilaría por 360.000\eur al año durante 10 años.
+
+Sabiendo que el tipo del impuesto de sociedades es del 35\,\%, que toda la cuota de amortización contable es deducible a
+efectos fiscales, y que la tasa de actualización apropiada para reflejar el riesgo del proyecto es del 6,5\,\%, indique
+cuál de las siguientes afirmaciones es correcta:
+\begin{opciones}
+  \item Se aconseja no acometer el proyecto de ampliación, pues el VAN incremental (de acometer el proyecto frente a no
+        acometerlo) arroja una cifra de $-732.841,04$\eur.
+  \item Se aconseja acometer el proyecto, pues el VAN incremental (de acometer el proyecto frente a no acometerlo)
+        arroja una cifra de 728.366,14\eur.
+  \item Se aconseja acometer el proyecto, pues el VAN incremental (de acometer el proyecto frente a no acometerlo)
+        asciende a 732.841,04\eur.
+  \item Las respuestas a), b) y c) son falsas.
+\end{opciones}
+\end{enunciado}
+
+\paso{1. Desembolso inicial}
+$\Delta C_0\di=-900.000-12.000=-912.000$ (la nave es propia: no se paga, pero se renuncia a su alquiler).
+
+\paso{2. Fondo de maniobra}
+$FM_0=12.000$; \ $FM_{1\ldots10}=2\,\%\cdot1.200.000=24.000$ $\Rightarrow$ $\Delta FM_1=+12.000$ y
+$\Delta FM_{2\ldots10}=0$.
+
+\paso{3. Flujos de las operaciones}
+El alquiler perdido es un \textbf{coste de oportunidad}: se resta como un coste más. $CAF=900.000/10=90.000$.
+\[
+\Delta Q_i\ai=1.200.000-535.000-360.000=305.000
+\qquad
+\Delta Q_i\di\text{ renta}=305.000\cdot0,65+90.000\cdot0,35=\mathbf{229.750}
+\]
+Tesorería: año 1: $229.750-12.000=217.750$; años 2--10: $229.750$.
+
+\paso{4. Valor residual}
+Los 24.000 de FM no se recuperan: se pierde su valor contable y esa pérdida es deducible,
+$VR_{10}\di=0+24.000\cdot0,35=8.400$.
+
+\begin{center}
+\flujos[1.25]{10}{0/n/{$-912.000$},1/p/{217.750},2/p/{229.750},5/p/{$\cdots$},9/p/{229.750},10/p/{229.750\\$+$8.400}}
+\end{center}
+
+\paso{5. VAN incremental ($r=6,5\,\%$, \ $\an{10}{0{,}065}=7,188830$)}
+\begin{align*}
+\Delta VAN&=-912.000-\frac{12.000}{1,065}+229.750\cdot7,188830+\frac{8.400}{1,065^{10}}\\
+&=-912.000-11.267,61+1.651.633,75+4.474,90=\mathbf{732.841,04}
+\end{align*}
+
+\begin{solucion}
+\textbf{c)} $\Delta VAN=732.841,04$\eur $>0$: conviene ampliar.
+\end{solucion}
+\begin{trampa}[Por qué existe la opción b)]
+Si se olvida el ahorro fiscal por la pérdida del FM no recuperado ($8.400$ en $t=10$), sale 728.366,14 (opción b).
+La diferencia es justo $8.400/1,065^{10}=4.474,90$.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{14}{Reglas del desembolso inicial}{Test · costes hundidos, renovación y FM}
+
+\begin{enunciado}{14}
+Indique cuál de las siguientes afirmaciones sobre la valoración de inversiones con el criterio del VAN es
+\textbf{falsa}:
+\begin{opciones}
+  \item Al calcular el desembolso inicial de un proyecto de inversión no habrá que incorporar el importe de los
+        desembolsos pasados e irreversibles, aunque éstos se efectuaran para posibilitar la realización del proyecto.
+  \item En una inversión de renovación, el importe percibido por la venta del equipo que se sustituye aumentará la
+        cuantía del desembolso inicial incremental.
+  \item En una inversión de renovación, el importe percibido por la venta del equipo que se sustituye reducirá la
+        cuantía del desembolso inicial incremental.
+  \item Al calcular el desembolso inicial habrá que considerar las variaciones en el fondo de maniobra de la empresa
+        causadas por el proyecto.
+\end{opciones}
+\end{enunciado}
+
+La venta del equipo viejo es un \textbf{cobro} en $t=0$: \textbf{reduce} el desembolso incremental,
+$\Delta C_0\di=C_0\text{ nuevo}-VR_0\di\text{ viejo}$. Por eso c) es verdadera y b) falsa. a) (costes hundidos fuera)
+y d) (el FM inicial sí cuenta) son verdaderas.
+
+\begin{solucion}
+La afirmación falsa es la \textbf{b)}.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{15}{Renovación de una planta}{Test · qué entra en un análisis incremental}
+
+\begin{enunciado}{15}
+Determinada empresa actualmente utiliza una planta de producción que le genera unos flujos de caja de 1 millón de\eur
+anuales durante 5 años. Si la planta se vendiese en el momento actual obtendría por ella 6 millones de\eur y si lo
+hiciera dentro de 5 años recibiría 2 millones de\eur. La empresa está planteando renovar la planta por otro equipo que le
+costaría hoy 8 millones de\eur y que le producirían 2,5 millones de\eur durante los 5 años, con valor residual nulo. Si se
+plantea estudiar la viabilidad financiera de la renovación, mediante el criterio del VAN incremental, se puede afirmar
+que:
+\begin{opciones}
+  \item El coste de la renovación no debe considerar la venta de la planta actual.
+  \item El coste de la renovación sí debe considerar la venta de la planta actual, pero el flujo de caja de la
+        renovación no debe considerar los flujos de caja proporcionados por la planta antigua.
+  \item En este tipo de proyectos, el coste de la renovación no debe considerar la venta de la planta actual, pero el
+        flujo de caja de la renovación si debe considerar los flujos de caja proporcionados por la planta antigua.
+  \item Ninguna de las opciones anteriores (a, b y c) son correctas.
+\end{opciones}
+\end{enunciado}
+
+En el análisis incremental (renovar $-$ seguir) \textbf{todo} lo de la planta vieja entra con signo contrario:
+\begin{center}\small
+\begin{tabularx}{0.78\textwidth}{@{}L QQQ@{}}
+\headrow \thead{Millones de €} & \thead{$t=0$} & \thead{$t=1\ldots5$} & \thead{$t=5$ (VR)}\\
+Renovar (planta nueva) & $-8$ & $+2,5$ & 0\\
+\rowcolor{mist} Seguir con la vieja (se pierde) & $+6$ & $-1,0$ & $-2$\\
+\totrow \textbf{Incremental} & $\mathbf{-2}$ & $\mathbf{+1,5}$ & $\mathbf{-2}$\\
+\end{tabularx}
+\end{center}
+
+\begin{solucion}
+\textbf{d)}: hay que considerar la venta de la planta actual \textbf{y} los flujos que dejaría de generar (y su valor
+residual), así que a), b) y c) son falsas.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{16}{Bombillas: punto muerto financiero}{Problema · cantidad mínima con VAN $=0$}
+
+\begin{enunciado}{16}
+Una empresa pretende adquirir un nuevo equipo para fabricar bombillas de bajo consumo, cuyo coste inicial asciende a
+800.000\eur, y que se amortizará linealmente en 10 años. Se estima que el precio de venta será de 12\eur/bombilla; los costes
+variables se prevé que ascenderán a 6,50\eur/bombilla, y los costes fijos se estiman en 150.000\eur/año (esta cifra incluye
+la amortización técnica prevista del equipo). La duración del proyecto será de 10 años, al final de los cuales el valor
+residual del equipo se puede despreciar. El tipo vigente para el impuesto de sociedades es del 35\,\%, y la tasa de
+actualización que refleja adecuadamente el riesgo de la inversión es del 8\,\%. Indique la cantidad mínima de bombillas
+que la empresa debería vender para que resultara aconsejable acometer el proyecto. \textbf{SOL: 38.243 bombillas}
+\end{enunciado}
+
+\paso{1. Separar la amortización de los costes fijos}
+$CAF=800.000/10=80.000$ $\Rightarrow$ costes fijos que se pagan $=150.000-80.000=70.000$. Margen unitario
+$=12-6,50=5,50$.
+
+\paso{2. Flujo anual en función de las unidades $X$}
+\[
+Q\di=(5,50X-70.000)\cdot0,65+80.000\cdot0,35=3,575X-17.500
+\]
+
+\paso{3. VAN $=0$ ($\an{10}{0{,}08}=6,710081$)}
+\[
+-800.000+(3,575X-17.500)\cdot6,710081=0\ \Rightarrow\ Q\di=119.223,59\ \Rightarrow\ X=\frac{136.723,59}{3,575}=38.244,36
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=0.78\textwidth,height=5.2cm,
+  xlabel={\sffamily\scriptsize bombillas vendidas al año},ylabel={\sffamily\scriptsize VAN (miles de €)},
+  xmin=20000,xmax=56000,ymin=-480,ymax=480,
+  axis lines=left,tick label style={font=\sffamily\scriptsize},
+  scaled x ticks=false,xtick={20000,30000,38244,46000,56000},
+  xticklabels={20.000,30.000,\textbf{38.244},46.000,56.000},
+  ytick={-400,-200,0,200,400},
+  grid=major,grid style={rule!60},
+  every axis plot/.append style={line width=1.2pt}]
+  \addplot[steel,domain=20000:56000,samples=2] {(-800000+(3.575*x-17500)*6.710081)/1000};
+  \addplot[alert,dashed,line width=0.8pt] coordinates {(20000,0) (56000,0)};
+  \addplot[only marks,mark=*,mark size=2.4pt,navy] coordinates {(38244.36,0)};
+  \node[font=\sffamily\scriptsize,okgreen!70!black,anchor=west] at (axis cs:44000,250) {VAN $>0$: conviene};
+  \node[font=\sffamily\scriptsize,alert,anchor=west] at (axis cs:21000,-300) {VAN $<0$: no conviene};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{solucion}
+Hacen falta unas \textbf{38.243} bombillas al año (solución oficial).
+\end{solucion}
+\begin{trampa}[Redondeo de la solución oficial]
+Con el factor exacto sale $X=38.244,36$, así que el entero que da VAN $\ge0$ es \textbf{38.245}. La cifra oficial
+(38.243) sale de redondear el factor de actualización. En el examen escribe tu cálculo completo: la diferencia es
+solo de redondeo.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{17}{Cuadro de siete periodos}{Problema · beneficios, $C_0\di$, $Q_i\di$ tesorería y $VR\di$}
+
+\begin{enunciado}{17}
+Determinada empresa a inicio del año 2023 presenta la información financiera que se recoge en el cuadro adjunto,
+relativa a un proyecto de inversión que quiere emprender:
+
+\begingroup\scriptsize\setlength{\tabcolsep}{2.6pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{2.75cm} *{8}{R}@{}}
+\headrow \thead{Concepto (€)} & \thead{0} & \thead{1} & \thead{2} & \thead{3} & \thead{4} & \thead{5} & \thead{6} & \thead{7}\\
+Inversión de capital & 15.000 & & & & & & & \\
+Valor residual de venta & & & & & & & & 2.000\\
+Cuota de amortización & & 2.250 & 2.250 & 2.250 & 2.250 & 2.250 & 2.250 & \\
+Fondo amort.\ acumulada & & 2.250 & 4.500 & 6.750 & 9.000 & 11.250 & 13.500 & \\
+Valor contable fin año & & 12.750 & 10.500 & 8.250 & 6.000 & 3.750 & 1.500 & \\
+Fondo de maniobra & -- & 1.000 & 500 & 300 & 1.500 & 1.500 & 1.000 & 500\\
+Valor contable activo total & & 13.750 & 11.000 & 8.550 & 7.500 & 5.250 & 2.500 & \\
+Ingresos por ventas & -- & 1.500 & 5.000 & 30.000 & 50.000 & 35.000 & 30.000 & \\
+Coste de las ventas & -- & 837 & 7.729 & 19.552 & 29.345 & 21.492 & 11.830 & \\
+Otros costes & 4.000 & 2.200 & 1.200 & 1.300 & 1.500 & 1.600 & 1.700 & \\
+\end{tabularx}
+\endgroup
+
+\smallskip
+La amortización de la inversión inicial es lineal en 6 años, reconociéndose un valor residual contable de 1.500\eur el
+sexto año. La tasa impositiva es del 35\,\% anual. El coste de oportunidad del capital que la empresa exige a sus
+proyectos del 15\,\%. Suponga que la empresa cuenta con otros proyectos que generan beneficios y que pagan impuestos en
+los próximos 10 años y que el fondo de maniobra se recupera por su valor contable. Con estos datos se pide calcular:
+\begin{opciones}
+  \item Los beneficios antes y después de impuestos.
+  \item La inversión inicial después de impuestos, los flujos netos de caja después de impuestos y el valor residual
+        después de impuestos.
+  \item El VAN del proyecto. \textbf{SOL: VAN = 2.317,57\eur}
+\end{opciones}
+\end{enunciado}
+
+\paso{a) Beneficios antes y después de impuestos}
+$CAF=(15.000-1.500)/6=2.250$. En el periodo 7 la venta por 2.000 de un activo con valor contable 1.500 da una
+plusvalía de 500. Las pérdidas generan ahorro fiscal porque la empresa tributa por otros proyectos.
+
+\begingroup\scriptsize\setlength{\tabcolsep}{2.6pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{2.75cm} *{8}{R}@{}}
+\headrow \thead{€} & \thead{0} & \thead{1} & \thead{2} & \thead{3} & \thead{4} & \thead{5} & \thead{6} & \thead{7}\\
+Ingresos & 0 & 1.500 & 5.000 & 30.000 & 50.000 & 35.000 & 30.000 & 0\\
+\rowcolor{mist}$-$ Coste ventas & 0 & $-837$ & $-7.729$ & $-19.552$ & $-29.345$ & $-21.492$ & $-11.830$ & 0\\
+$-$ Otros costes & $-4.000$ & $-2.200$ & $-1.200$ & $-1.300$ & $-1.500$ & $-1.600$ & $-1.700$ & 0\\
+\rowcolor{mist}$-$ Amortización & 0 & $-2.250$ & $-2.250$ & $-2.250$ & $-2.250$ & $-2.250$ & $-2.250$ & 0\\
+$+$ Plusvalía & & & & & & & & 500\\
+\totrow \textbf{BAI} & $-4.000$ & $-3.787$ & $-6.179$ & 6.898 & 16.905 & 9.658 & 14.220 & 500\\
+Impuesto 35\,\% & $-1.400$ & $-1.325,45$ & $-2.162,65$ & 2.414,30 & 5.916,75 & 3.380,30 & 4.977 & 175\\
+\totrow \textbf{BDI} & $-2.600$ & $-2.461,55$ & $-4.016,35$ & 4.483,70 & 10.988,25 & 6.277,70 & 9.243 & 325\\
+\end{tabularx}
+\endgroup
+
+\paso{b) Inversión inicial, flujos y valor residual}
+\[
+C_0\di=-[15.000+4.000\cdot(1-0,35)]=-(15.000+2.600)=\mathbf{-17.600}
+\]
+
+\begingroup\scriptsize\setlength{\tabcolsep}{2.6pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{2.75cm} *{7}{R}@{}}
+\headrow \thead{€} & \thead{1} & \thead{2} & \thead{3} & \thead{4} & \thead{5} & \thead{6} & \thead{7}\\
+$Q_i\ai$ & $-1.537$ & $-3.929$ & 9.148 & 19.155 & 11.908 & 16.470 & 0\\
+\rowcolor{mist}$Q_i\ai\cdot0,65$ & $-999,05$ & $-2.553,85$ & 5.946,20 & 12.450,75 & 7.740,20 & 10.705,50 & 0\\
+$+\,CAF\cdot0,35$ & 787,50 & 787,50 & 787,50 & 787,50 & 787,50 & 787,50 & 0\\
+\totrow $Q_i\di$ renta & $-211,55$ & $-1.766,35$ & 6.733,70 & 13.238,25 & 8.527,70 & 11.493 & 0\\
+$FM_i$ & 1.000 & 500 & 300 & 1.500 & 1.500 & 1.000 & 500\\
+\rowcolor{mist}$-\Delta FM_i$ & $-1.000$ & $+500$ & $+200$ & $-1.200$ & 0 & $+500$ & $+500$\\
+\totrow $Q_i\di$ tesorería & $-1.211,55$ & $-1.266,35$ & 6.933,70 & 12.038,25 & 8.527,70 & 11.993 & 500\\
+\end{tabularx}
+\endgroup
+
+\smallskip
+Valor residual en el periodo 7: activo fijo $VR_7\di=2.000-500\cdot0,35=1.825$; el FM que queda (500) se recupera por
+su valor contable. Flujo total del periodo 7: $500+1.825+500=\mathbf{2.825}$.
+
+\begin{trampa}[El FM del periodo 7]
+En el periodo 7 el FM baja de 1.000 a 500 ($+500$ en tesorería) y los 500 restantes se recuperan como valor residual:
+en total vuelven los 1.000 que había al cierre del periodo 6. No los cuentes dos veces ni te dejes la mitad.
+\end{trampa}
+
+\paso{c) VAN ($r=15\,\%$)}
+\[
+VAN=-17.600-\frac{1.211,55}{1,15}-\frac{1.266,35}{1,15^2}+\frac{6.933,70}{1,15^3}+\frac{12.038,25}{1,15^4}
++\frac{8.527,70}{1,15^5}+\frac{11.993}{1,15^6}+\frac{2.825}{1,15^7}=\mathbf{2.317,57}
+\]
+
+\begin{solucion}
+$C_0\di=-17.600$; \ VAN $=2.317,57$\eur $>0$: el proyecto crea valor.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{18}{Estados financieros proyectados}{Problema · inversiones sucesivas leídas del balance}
+
+\begin{enunciado}{18}
+Determinada empresa, que se constituye a inicios de 2018, presenta los siguientes estados financieros proyectados, que
+se corresponden con el proyecto de inversión a desarrollar:
+
+\begin{center}\small
+\begin{tabularx}{0.76\linewidth}{@{}L QQQ@{}}
+\headrow \thead{Balance resumido} & \thead{Inicio 2018} & \thead{Final 2018} & \thead{Final 2019}\\
+Activo circulante operativo & 100 & 200 & 300\\
+Activo fijo bruto & 200 & 469 & 1.170\\
+($-$) Fondo acumulado de depreciación & 0 & $-20$ & $-67$\\
+\rowcolor{mist} Total activo & 300 & 649 & 1.403\\
+Pasivo circulante operativo & 100 & 100 & 100\\
+Deuda a largo plazo & 100 & 50 & 0\\
+Fondos propios & 100 & 499 & 1.303\\
+\rowcolor{mist} Total pasivo y neto & 300 & 649 & 1.403\\
+\end{tabularx}
+\end{center}
+
+Además: a) las ventas para el año 2018 y 2019 se estiman en 1000 y 2000 euros respectivamente; b) los costes operativos
+para el año 2018 y 2019 se estiman en un 40\,\% de las ventas; c) la amortización técnica de todas las inversiones que
+realiza y realice en el futuro la empresa serán lineales en 10 años, sistema admitido a efectos fiscales; d) el coste
+financiero de la deuda a largo plazo es de una tasa anual del 8\,\%; e) el impuesto de sociedades es del 30\,\%; f) el
+coste de capital que aplica la empresa a todos sus proyectos de inversión es del 10\,\%; g) no estime el valor residual
+del proyecto de inversión.
+
+Con esta información, se pide calcular (siguiendo el orden indicado, y dejando en blanco aquel/aquellos puntos a los
+que no sepa dar una respuesta): 1. Los ingresos y costes operativos anuales. 2. Las inversiones a realizar cada año.
+3. La cuota de amortización técnica anual. 4. El beneficio antes de intereses e impuestos (BAIT) anual. 5. Los intereses
+a pagar cada periodo. 6. El beneficio bruto anual. 7. El impuesto anual y el beneficio neto anual. 8. Las variaciones
+del fondo de maniobra anuales. 9. El flujo de caja operativo después de impuestos a inicios de 2018, a finales de 2018
+y a finales de 2019. 10. El VAN del proyecto. \textbf{SOL: VAN = $-$104,32\eur}
+\end{enunciado}
+
+\paso{1--3. Ingresos, costes, inversiones y amortización}
+\begin{itemize}
+  \item 2018: ventas 1.000, costes 400. \ 2019: ventas 2.000, costes 800.
+  \item Inversiones (variación del activo fijo bruto): 200 en $t=0$; $469-200=269$ en $t=1$; $1.170-469=701$ en $t=2$.
+  \item Amortización: la de 200 aporta 20/año desde 2018; la de 269 aporta 26,90 desde 2019; la de 701 empieza en 2020.
+        Total: \textbf{20} en 2018 y \textbf{46,90} en 2019 (acumulada 66,90 $\approx$ 67, como en el balance).
+\end{itemize}
+
+\paso{4--7. Cuenta de resultados}
+Intereses al 8\,\% sobre la deuda al inicio de cada año: $100\cdot0,08=8$ en 2018 y $50\cdot0,08=4$ en 2019.
+
+\begin{center}\small
+\begin{tabularx}{0.66\linewidth}{@{}L QQ@{}}
+\headrow \thead{€} & \thead{2018} & \thead{2019}\\
+Ventas & 1.000,00 & 2.000,00\\
+\rowcolor{mist}$-$ Costes operativos (40\,\%) & $-400,00$ & $-800,00$\\
+$-$ Amortización & $-20,00$ & $-46,90$\\
+\totrow \textbf{4. BAIT} & 580,00 & 1.153,10\\
+$-$ 5. Intereses & $-8,00$ & $-4,00$\\
+\totrow \textbf{6. BAT} & 572,00 & 1.149,10\\
+$-$ Impuesto (30\,\%) & $-171,60$ & $-344,73$\\
+\totrow \textbf{7. Beneficio neto} & 400,40 & 804,37\\
+\end{tabularx}
+\end{center}
+
+\paso{8. Fondo de maniobra (AC operativo $-$ PC operativo)}
+$FM$: 0 (inicio 2018), 100 (final 2018), 200 (final 2019) $\Rightarrow$ $\Delta FM_1=+100$, $\Delta FM_2=+100$.
+
+\paso{9. Flujos de caja (sin intereses) y 10. VAN}
+\begin{center}\small
+\begin{tabularx}{0.82\linewidth}{@{}L QQQ@{}}
+\headrow \thead{€} & \thead{Inicio 2018} & \thead{Final 2018} & \thead{Final 2019}\\
+$Q_i\ai=$ ventas $-$ costes & -- & 600,00 & 1.200,00\\
+\rowcolor{mist}$Q_i\ai\cdot0,70$ & -- & 420,00 & 840,00\\
+$+\,CAF\cdot0,30$ & -- & 6,00 & 14,07\\
+\totrow $Q_i\di$ renta & -- & 426,00 & 854,07\\
+$-\Delta FM_i$ & 0 & $-100,00$ & $-100,00$\\
+\totrow \textbf{9. $Q_i\di$ tesorería} & 0 & 326,00 & 754,07\\
+$-$ Inversión en activo fijo & $-200,00$ & $-269,00$ & $-701,00$\\
+\totrow \textbf{Flujo neto total} & $-200,00$ & 57,00 & 53,07\\
+\end{tabularx}
+\end{center}
+\[
+VAN=-200+\frac{57,00}{1,10}+\frac{53,07}{1,10^2}=-200+51,82+43,86=\mathbf{-104,32}
+\]
+
+\begin{solucion}
+VAN $=-104,32$\eur: con los datos de estos dos años, el proyecto no se acometería.
+\end{solucion}
+\begin{trampa}[Los intereses no van al flujo]
+Los intereses se calculan porque los pide la cuenta de resultados (puntos 5--7), pero \textbf{no} se restan en el flujo
+de caja del proyecto. Ahí solo entran las operaciones, el FM y las inversiones.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{19}{Ampliación de capacidad con préstamo}{Problema · separar inversión y financiación}
+
+\begin{enunciado}{19}
+Una empresa se está planteando realizar una inversión para incrementar su capacidad de producción. Para ello, deberá
+adquirir dos máquinas que costarían 50.000\eur cada una, ambas amortizables linealmente en cinco años (sistema admitido a
+efectos fiscales) y sin valor residual alguno. La realización del proyecto requeriría alquilar una nave contigua a las
+instalaciones de la empresa durante los cinco años de duración del mismo, lo que supondría un desembolso anual de
+12.000\eur.
+
+Se espera obtener unos ingresos anuales por ventas de 150.000\eur, y se estiman unos costes operativos de 60.000\eur/año,
+cifra que no incluye la amortización técnica de los equipos. El incremento inicial del FM imputable al proyecto es de
+12.000\eur. Posteriormente, al final de cada uno de sus cinco años de duración, se estima que el FM ascenderá al 5\,\% del
+volumen anual de ingresos previstos. El FM se recuperará al final de la vida del proyecto por su valor contable.
+
+Para la financiación, se tiene previsto contratar un préstamo bancario a 5 años, por un importe de 50.000\eur, con
+amortización financiera al vencimiento, y a un 6\,\% de interés anual. El coste de oportunidad del capital es del
+10,5\,\%, y la tasa del Impuesto de Sociedades es del 35\,\%. Con esta información, se pide:
+\begin{opciones}
+  \item Calcular, para cada uno de los cinco años de duración del proyecto, el BAIT, el BAT y el BN imputables al mismo.
+  \item Calcular el desembolso inicial, los flujos netos de caja de explotación, el valor residual y el VAN del
+        proyecto. \textbf{SOL: VAN = 112.587,82\eur}
+\end{opciones}
+\end{enunciado}
+
+\paso{a) Resultados (iguales los cinco años)}
+$CAF=100.000/5=20.000$; intereses $=50.000\cdot0,06=3.000$.
+\begin{center}\small
+\begin{tabularx}{0.6\linewidth}{@{}L Q@{}}
+\headrow \thead{€/año (años 1 a 5)} & \thead{Importe}\\
+Ventas & 150.000\\
+\rowcolor{mist}$-$ Costes operativos & $-60.000$\\
+$-$ Alquiler de la nave & $-12.000$\\
+\rowcolor{mist}$-$ Amortización & $-20.000$\\
+\totrow \textbf{BAIT} & 58.000\\
+$-$ Intereses & $-3.000$\\
+\totrow \textbf{BAT} & 55.000\\
+$-$ Impuesto 35\,\% & $-19.250$\\
+\totrow \textbf{BN} & 35.750\\
+\end{tabularx}
+\end{center}
+
+\paso{b) Desembolso inicial}
+$C_0\di=-100.000-12.000=\mathbf{-112.000}$. El préstamo no aparece: la financiación ya está recogida en $r$.
+
+\paso{Flujos de explotación}
+$Q_i\ai=150.000-60.000-12.000=78.000$; \ renta $=78.000\cdot0,65+20.000\cdot0,35=\mathbf{57.700}$.\\
+FM: de 12.000 en $t=0$ pasa a $5\,\%\cdot150.000=7.500$ $\Rightarrow$ $\Delta FM_1=-4.500$ (se libera
+y suma). Tesorería: año 1: $57.700+4.500=62.200$; años 2--5: 57.700.
+
+\paso{Valor residual}
+Máquinas: 0. FM recuperado por su valor contable: 7.500. Año 5: $57.700+7.500=65.200$.
+
+\begin{center}
+\flujos[2.3]{5}{0/n/{$-112.000$},1/p/{62.200},2/p/{57.700},3/p/{57.700},4/p/{57.700},5/p/{57.700\\$+$7.500}}
+\end{center}
+
+\[
+VAN=-112.000+\frac{62.200}{1,105}+\frac{57.700}{1,105^2}+\frac{57.700}{1,105^3}+\frac{57.700}{1,105^4}
++\frac{65.200}{1,105^5}=\mathbf{112.587,82}
+\]
+
+\begin{solucion}
+$C_0\di=-112.000$; \ $Q\di$: 62.200 y 57.700; \ $VR_5\di=7.500$; \ VAN $=112.587,82$\eur.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{20}{Tienda online con canibalización}{Problema · VAN incremental}
+
+\begin{enunciado}{20}
+Una empresa de calzado deportivo se está planteando la posibilidad de introducirse en el comercio electrónico para
+ampliar sus canales de distribución, por lo que está analizando el lanzamiento de un proyecto piloto para vender on line
+parte de sus productos durante 3 años. El coste de inversión en la plataforma asciende a 10.000 euros (que se
+amortizaría contable y fiscalmente en 2 años), no existiendo valor residual alguno al finalizar los 3 años del
+proyecto. Además, se realizaría un curso inicial de formación al personal, con un coste de 2.000 euros, y se ampliarían
+las existencias iniciales en 2.500 euros. Estas existencias serían recuperadas al final de la vida del proyecto por el
+70\,\% de su valor. El gasto de mantenimiento de la plataforma supondría 1.000 euros anuales.
+
+La cifra actual de negocios de la empresa a través de sus tiendas físicas es de 100.000 euros al año, importe que se
+prevé estable para los próximos 3 años. Por su parte, las ventas online se estiman en 20.000 euros para el primer año,
+con crecimientos del 5\,\% en los dos años siguientes. No obstante, si se incorpora la tienda virtual, se prevé que parte
+de las ventas que actualmente se realizan a través del canal físico se deriven al canal electrónico, de modo que las
+ventas del primero caerían en un 10\,\% para cada uno de los tres años. El resto de gastos de explotación no se verían
+alterados.
+
+Si el tipo del Impuesto de Sociedades es del 25\,\% (la empresa obtiene beneficios con su negocio actual, por el que tiene
+previsto tributar en los próximos tres años), la financiación del proyecto es íntegramente con fondos propios y la tasa
+de actualización adecuada para el proyecto es del 5\,\%, se pide:
+\begin{enumerate}
+  \item Cuenta de pérdidas y ganancias incremental para los ejercicios 0, 1, 2 y 3.
+  \item Cálculo del VAN incremental, indicando la decisión que debería adoptar la empresa.
+        \textbf{SOL: $\Delta$VAN = 10.388,30\eur}
+\end{enumerate}
+\end{enunciado}
+
+\paso{Ventas incrementales}
+Online: 20.000; 21.000; 22.050. Canibalización: $-10\,\%\cdot100.000=-10.000$ cada año.
+Incremental: \textbf{10.000; 11.000; 12.050}.
+
+\paso{1. Pérdidas y ganancias incremental}
+\begin{center}\small
+\begin{tabularx}{0.86\linewidth}{@{}L QQQQ@{}}
+\headrow \thead{€} & \thead{Año 0} & \thead{Año 1} & \thead{Año 2} & \thead{Año 3}\\
+Ventas incrementales & 0 & 10.000 & 11.000 & 12.050\\
+\rowcolor{mist}$-$ Curso de formación & $-2.000$ & 0 & 0 & 0\\
+$-$ Mantenimiento & 0 & $-1.000$ & $-1.000$ & $-1.000$\\
+\rowcolor{mist}$-$ Amortización plataforma & 0 & $-5.000$ & $-5.000$ & 0\\
+$-$ Pérdida en existencias (30\,\%) & 0 & 0 & 0 & $-750$\\
+\totrow \textbf{$\Delta$BAIT} & $-2.000$ & 4.000 & 5.000 & 10.300\\
+$-$ Impuesto 25\,\% & $+500$ & $-1.000$ & $-1.250$ & $-2.575$\\
+\totrow \textbf{$\Delta$BN} & $-1.500$ & 3.000 & 3.750 & 7.725\\
+\end{tabularx}
+\end{center}
+
+\paso{2. Flujos incrementales}
+\begin{itemize}
+  \item $t=0$: $-[10.000+2.000\cdot(1-0,25)+2.500]=\mathbf{-14.000}$ (el curso es un gasto deducible).
+  \item $t=1$: $(10.000-1.000)\cdot0,75+5.000\cdot0,25=\mathbf{8.000}$.
+  \item $t=2$: $(11.000-1.000)\cdot0,75+5.000\cdot0,25=\mathbf{8.750}$.
+  \item $t=3$: $(12.050-1.000)\cdot0,75=8.287,50$, más el valor residual de las existencias:
+        $1.750+750\cdot0,25=1.937,50$ $\Rightarrow$ \textbf{10.225}.
+\end{itemize}
+
+\begin{center}
+\flujos[2.6]{3}{0/n/{$-14.000$},1/p/{8.000},2/p/{8.750},3/p/{8.287,50\\$+$1.937,50}}
+\end{center}
+\[
+\Delta VAN=-14.000+\frac{8.000}{1,05}+\frac{8.750}{1,05^2}+\frac{10.225}{1,05^3}=\mathbf{10.388,30}
+\]
+
+\begin{solucion}
+$\Delta VAN=10.388,30$\eur $>0$: conviene lanzar la tienda online, aun descontando las ventas que quita a las tiendas.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{21}{Sonora, S.A.: ampliación}{Problema · solo cuentan los flujos incrementales}
+
+\begin{enunciado}{21}
+La empresa Sonora, S.A. presenta en el momento actual el siguiente balance de situación:
+
+\begin{center}\small
+\begin{tabularx}{0.86\linewidth}{@{}L Q L Q@{}}
+\headrow \thead{Activo ($t=0$)} & \thead{€} & \thead{Pasivo ($t=0$)} & \thead{€}\\
+Activos financieros & 20.000.000 & Capital & 40.000.000\\
+Activos explotación & 80.000.000 & Crédito a l/p & 30.000.000\\
+ & & Reservas & 30.000.000\\
+\rowcolor{mist}\textbf{Activo} & 100.000.000 & \textbf{Pasivo} & 100.000.000\\
+\end{tabularx}
+\end{center}
+
+\begin{itemize}
+  \item Los activos financieros del balance se refieren a una inversión que, por el momento, no piensa liquidarse, y que
+        produce un 22\,\% de rentabilidad bruta anual postpagable.
+  \item Los activos de explotación producen unos flujos de caja de explotación anuales de 20 millones de\eur, y se vienen
+        amortizando, contable y fiscalmente, en 10 millones de\eur/año. Transcurridos tres años pueden venderse por 50
+        millones de euros.
+\end{itemize}
+Dado el éxito empresarial alcanzado, la entidad se plantea la posibilidad de llevar a cabo una ampliación de su
+actividad productiva en los siguientes términos:
+\begin{itemize}
+  \item Compra de equipos por 20 millones de\eur, a pagar al contado, amortizables linealmente en dos años. Esta cuota
+        contable está permitida a efectos fiscales.
+  \item Gastos de transporte de los equipos por una cuantía de 2 millones de\eur.
+  \item La nueva inversión va a generar un volumen de ventas de 12 millones de\eur/año y unos gastos de explotación de 2
+        millones\eur/año (sin amortización técnica).
+  \item La duración prevista para esta inversión es de tres años, a final de los cuales se podrán vender los equipos
+        nuevos por 6 millones de\eur.
+  \item Incremento inicial del fondo de maniobra de 200.000\eur (en adelante no se producirá ningún incremento o reducción
+        adicional en el fondo de maniobra). Este capital circulante se liquidaría al final de los tres años por su valor
+        neto contable.
+  \item La tasa impositiva es del 35\,\%.
+  \item El coste de oportunidad del capital para el nuevo proyecto es del 4,73\,\%.
+\end{itemize}
+Con la información disponible, determine la conveniencia, o no, de llevar a cabo la ampliación.
+\end{enunciado}
+
+\begin{clave}[Primero, descartar lo irrelevante]
+Los activos financieros y los de explotación actuales siguen igual se amplíe o no: sus flujos son comunes a las dos
+alternativas y se cancelan. \textbf{Solo se valora la ampliación.}
+\end{clave}
+
+\paso{Inversión inicial incremental (criterio de la cátedra)}
+$\Delta A_0=-(20.000.000+2.000.000+200.000)=\mathbf{-22.200.000}$
+
+\paso{Flujos de explotación}
+$CAF=20.000.000/2=10.000.000$ en los años 1 y 2; en el año 3 ya está amortizado.
+\[
+\Delta Q_{1,2}=10.000.000\cdot0,65+10.000.000\cdot0,35=\mathbf{10.350.000}\qquad
+\Delta Q_{3}=10.000.000\cdot0,65=\mathbf{6.500.000}
+\]
+
+\paso{Valor residual en el año 3}
+Equipos con valor contable 0 vendidos por 6.000.000: plusvalía íntegra. FM recuperado por su valor contable.
+\[
+\Delta VR_3=\underbrace{6.000.000-6.000.000\cdot0,35}_{3.900.000}+\underbrace{200.000}_{FM}=\mathbf{4.100.000}
+\]
+
+\begin{center}
+\flujos[2.6]{3}{0/n/{$-22.200.000$},1/p/{10.350.000},2/p/{10.350.000},3/p/{6.500.000\\$+$4.100.000}}
+\end{center}
+\[
+\Delta VAN=-22.200.000+\frac{10.350.000}{1,0473}+\frac{10.350.000}{1,0473^2}+\frac{10.600.000}{1,0473^3}
+=\mathbf{6.346.457,61}
+\]
+
+\begin{solucion}
+$\Delta VAN=6.346.457,61$\eur $>0$: conviene llevar a cabo la ampliación.
+\end{solucion}
+\begin{trampa}[Gastos de transporte]
+La solución oficial suma los 2 M€ de transporte al desembolso inicial y no los amortiza ni los deduce. Si se trataran
+como gasto deducible en $t=0$, el desembolso sería $-21.500.000$ y el $\Delta$VAN subiría a 7.046.457,61. En el examen,
+sigue el criterio de la cátedra.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{22}{Sr.\ Tired: continuar o cesar}{Problema · dos alternativas excluyentes y riesgo distinto}
+
+\begin{enunciado}{22}
+El Sr.~Tired no confía demasiado en las expectativas del gobierno respecto de la incipiente recuperación del país, por
+lo que se está planteando si continuar con su negocio de venta de libros durante dos ejercicios más, al final de los
+cuales en cualquier caso se retirará, o bien cesar la actividad en el momento presente ante su previsión de
+continuación en la tendencia de bajada en las ventas y resultados que viene acusando. Su balance en euros a 31/12/2013
+(fecha que tomaremos como momento 0) es el siguiente:
+
+\begin{center}\small
+\begin{tabularx}{0.92\linewidth}{@{}L Q L Q@{}}
+\headrow \thead{Activo} & \thead{€} & \thead{Pasivo} & \thead{€}\\
+Inmovilizado material (local) & 500.000 & Capital social & 3.000\\
+Mobiliario y equipamiento & 100.000 & Reservas & 1.197.000\\
+Existencias & 400.000 & Resultados negativos ej.\ anteriores & (200.000)\\
+\rowcolor{mist}\textbf{Total} & 1.000.000 & \textbf{Total} & 1.000.000\\
+\end{tabularx}
+\end{center}
+
+En caso de continuar con la actividad, los datos que estima serán los siguientes:
+\begin{itemize}
+  \item La cifra de negocios prevista es de 600.000 euros en 2014 y un 20\,\% menos en 2015.
+  \item Los costes de explotación supondrán un 75\,\% de las ventas en cada uno de los años, al que habrá que añadir el
+        coste de despido de los trabajadores al final del 2015, que se estima ascenderá a 200.000 euros.
+  \item La empresa desarrolla su actividad en un local propiedad de la sociedad que ya se encuentra totalmente
+        amortizado a efectos contables y fiscales.
+  \item El mobiliario y equipamiento se amortizarán de forma lineal en dos años, siendo esta amortización admitida como
+        gasto deducible por la administración tributaria. Transcurridos los dos años, no se prevé obtener ningún valor
+        por estos activos.
+  \item Se prevé una reducción del fondo de maniobra de 150.000 euros en el primer año y la liquidación del mismo por
+        su valor contable al final del 2015.
+\end{itemize}
+En caso de cesar en la actividad en el momento actual, el local (sin mobiliario ni equipamiento) sería alquilado,
+durante un periodo de dos años, a un tercero muy solvente que ya ha manifestado su interés y con el que se ha negociado
+el pago de una renta anual, avalado personalmente por el arrendatario, del 5\,\% del valor neto contable del inmueble.
+El personal sería despedido de forma inmediata, lo que supondría un coste de indemnizaciones 175.271,55 euros. El resto
+de activos serían liquidados de acuerdo a la siguiente estimación:
+\begin{itemize}
+  \item Las existencias se podrían vender hoy por un precio aproximado del 110\,\% de su valor contable.
+  \item El mobiliario y equipamiento se venderían por 75.000 euros.
+\end{itemize}
+Si la tasa impositiva es del 30\,\%, se pide:
+\begin{enumerate}
+  \item Indique las alternativas que se está planteando el Sr.~Tired.
+  \item Calcule los flujos netos de caja después de impuestos de las dos alternativas.
+  \item Si la tasa de actualización fuese del 10\,\% en cualquiera de las dos alternativas, calcule el valor
+        actualizado neto (VAN) incremental. \textbf{SOL: $\Delta$VAN = 0\eur}
+  \item Comente los resultados obtenidos y explique razonadamente si le parece adecuado usar la misma tasa de descuento
+        para valorar las dos alternativas.
+\end{enumerate}
+\end{enunciado}
+
+\paso{1. Alternativas}
+\textbf{I}: continuar dos años más (2014 y 2015) y retirarse. \ \textbf{II}: cesar hoy, liquidar mobiliario y existencias,
+despedir al personal y alquilar el local dos años.
+
+\paso{2a. Alternativa I: continuar}
+$CAF=100.000/2=50.000$ $\Rightarrow$ ahorro fiscal 15.000/año. FM (existencias): $400.000\to250.000\to0$.
+\begin{center}\small
+\begin{tabularx}{0.84\linewidth}{@{}L QQQ@{}}
+\headrow \thead{Alternativa I (€)} & \thead{2013} & \thead{2014} & \thead{2015}\\
+Ventas & & 600.000 & 480.000\\
+\rowcolor{mist}$-$ Costes de explotación (75\,\%) & & $-450.000$ & $-360.000$\\
+$-$ Despidos & & & $-200.000$\\
+\rowcolor{mist}$Q_i\ai$ & & 150.000 & $-80.000$\\
+$Q_i\ai\cdot0,70$ & & 105.000 & $-56.000$\\
+\rowcolor{mist}$+\,CAF\cdot0,30$ & & 15.000 & 15.000\\
+\totrow $Q_i\di$ renta & & 120.000 & $-41.000$\\
+$FM_t$ & 400.000 & 250.000 & 0\\
+\rowcolor{mist}$-\Delta FM_t$ & & $+150.000$ & $+250.000$\\
+\totrow \textbf{Flujo total I} & 0 & 270.000 & 209.000\\
+\end{tabularx}
+\end{center}
+
+\paso{2b. Alternativa II: cesar y alquilar}
+\begin{itemize}
+  \item Despidos hoy: $-175.271,55\cdot0,70=-122.690,09$.
+  \item Existencias al 110\,\%: $440.000-40.000\cdot0,30=428.000$ (plusvalía de 40.000).
+  \item Mobiliario por 75.000 (valor contable 100.000): $75.000+25.000\cdot0,30=82.500$ (minusvalía de 25.000).
+  \item Total en $t=0$: $-122.690,09+428.000+82.500=\mathbf{387.809,91}$.
+  \item Alquiler en 2014 y 2015: $5\,\%\cdot500.000=25.000$ $\Rightarrow$ $25.000\cdot0,70=\mathbf{17.500}$/año.
+\end{itemize}
+
+\begin{center}
+\begin{minipage}{0.48\linewidth}\centering
+{\sffamily\scriptsize\bfseries\color{navy}Alternativa I: continuar}\par\smallskip
+\flujos[1.7]{2}{1/p/{270.000},2/p/{209.000}}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering
+{\sffamily\scriptsize\bfseries\color{navy}Alternativa II: cesar y alquilar}\par\smallskip
+\flujos[1.7]{2}{0/p/{387.809,91},1/p/{17.500},2/p/{17.500}}
+\end{minipage}
+\end{center}
+
+\paso{3. VAN ($r=10\,\%$)}
+\[
+VAN_I=\frac{270.000}{1,10}+\frac{209.000}{1,10^2}=418.181,82
+\qquad
+VAN_{II}=387.809,91+\frac{17.500}{1,10}+\frac{17.500}{1,10^2}=418.181,82
+\]
+\[
+\Delta VAN_{II/I}=\mathbf{0}
+\]
+
+\paso{4. Comentario}
+Con la misma tasa, las dos alternativas valen lo mismo. Pero \textbf{no es adecuado} usar la misma $r$: vender libros
+con ventas en caída es mucho más arriesgado que cobrar un alquiler de un inquilino muy solvente que además lo avala
+personalmente. La alternativa II merece una tasa menor ($r_{II}<r_I$), con lo que $VAN_{II}>VAN_I$ y
+\textbf{convendría cesar y alquilar}.
+
+\begin{solucion}
+$\Delta VAN=0$ con $r=10\,\%$; corrigiendo por riesgo, es preferible cesar y alquilar el local.
+\end{solucion}
+\begin{trampa}[La renta del local]
+El enunciado dice que el local está totalmente amortizado, pero el balance lo recoge por 500.000. La solución oficial
+toma esos 500.000 como valor neto contable: renta de 25.000 al año.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{23}{Para qué sirve el CAE}{Test · teoría del coste anual equivalente}
+
+\begin{enunciado}{23}
+Indique cuál de las siguientes afirmaciones sobre el cálculo del coste anual equivalente es cierta:
+\begin{opciones}
+  \item No resulta conveniente calcular el coste anual equivalente en anualidades reales, porque puede proporcionar
+        resultados incorrectos cuando las tasas de inflación son elevadas.
+  \item Este cálculo sólo es apropiado cuando estamos comparando proyectos de inversión mutuamente excluyentes, pero de
+        idéntica duración o estructura temporal.
+  \item El criterio del VAN es más adecuado que el del coste anual equivalente en cualquier circunstancia. Si existe
+        discrepancia entre ambos cálculos. Siempre emplearemos el primer método de valoración.
+  \item Ninguna de las anteriores es correcta.
+\end{opciones}
+\end{enunciado}
+
+\begin{itemize}
+  \item \textbf{a) es falsa}: con inflación, lo correcto es precisamente calcular el CAE en términos \textbf{reales}
+        ($r_{real}=\frac{1+r_{nom}}{1+\pi}-1$); en nominal la cuota no sería constante.
+  \item \textbf{b) es falsa}: el CAE existe para comparar equipos de \textbf{distinta} duración. Si duran lo mismo,
+        basta con el VA de los costes.
+  \item \textbf{c) es falsa}: con equipos de distinta vida que se reponen, comparar el VAN de un solo ciclo lleva a
+        error; hay que usar el CAE.
+\end{itemize}
+
+\begin{solucion}
+\textbf{d)}: ninguna es correcta.
+\end{solucion}
+
+% ---------------------------------------------------------------------
+\problema{24}{Quickpizza, S.L.: horno A u horno B}{Problema · CAE con vidas distintas}
+
+\begin{enunciado}{24}
+Quickpizza, S.L. se está planteando la sustitución de su horno actual por otro nuevo. El gerente ha recibido las dos
+ofertas siguientes:
+\begin{itemize}
+  \item Horno A, con un coste inicial de 17.000\eur, costes operativos anuales de 3.000\eur, y vida útil de 4 años.
+  \item Horno B, con un coste inicial del 12.000\eur, costes operativos anuales de 4.000\eur, y vida útil de 3 años.
+\end{itemize}
+Si el coste de oportunidad del capital es del 12\,\%, ¿qué horno debería elegir la empresa? Justifique numéricamente
+su respuesta. \textbf{SOL: CAE$_A$ = 8.596,99\eur; CAE$_B$ = 8.996,19\eur}
+\end{enunciado}
+
+Vidas distintas y equipos que se reponen: se compara el \textbf{coste anual equivalente}.
+
+\begin{center}\small
+\begin{tabularx}{0.9\linewidth}{@{}l L L@{}}
+\headrow & \thead{Horno A ($n=4$)} & \thead{Horno B ($n=3$)}\\
+Factor $\an{n}{0{,}12}$ & 3,037349 & 2,401831\\
+\rowcolor{mist} VA de costes & $17.000+3.000\cdot3,037349=26.112,05$ & $12.000+4.000\cdot2,401831=21.607,33$\\
+CAE $=$ VA$/\an{n}{r}$ & $26.112,05/3,037349=\mathbf{8.596,99}$ & $21.607,33/2,401831=\mathbf{8.996,19}$\\
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,x=0.82cm,y=0.6cm]
+  \foreach \x/\l in {0/0,2/2.000,4/4.000,6/6.000,8/8.000,10/10.000}{
+    \draw[rule] (\x,-0.25) -- (\x,1.75); \node[slate,below] at (\x,-0.25) {\l};}
+  \fill[okgreen] (0,0.95) rectangle (8.597,1.55);
+  \fill[slate] (0,0.15) rectangle (8.996,0.75);
+  \node[anchor=east,navy] at (-0.15,1.25) {Horno A};
+  \node[anchor=east,navy] at (-0.15,0.45) {Horno B};
+  \node[anchor=west,fill=white,inner sep=1.5pt,font=\sffamily\scriptsize\bfseries,okgreen!70!black] at (8.65,1.25) {8.596,99};
+  \node[anchor=west,fill=white,inner sep=1.5pt,font=\sffamily\scriptsize\bfseries,slate] at (9.05,0.45) {8.996,19};
+  \draw[slate] (0,-0.25) -- (0,1.75);
+  \node[slate] at (5,-1.15) {coste anual equivalente (€/año)};
+\end{tikzpicture}
+\end{center}
+
+\begin{solucion}
+Elegir el \textbf{horno A}: su CAE es menor (8.596,99 < 8.996,19; ahorra 399,20\eur al año).
+\end{solucion}
+\begin{trampa}[No compares el VA de un solo ciclo]
+B tiene menos VA de costes (21.607 < 26.112) solo porque dura un año menos. Comparar esos VA llevaría a elegir B, que es
+el error que quiere provocar el problema.
+\end{trampa}
+
+% ---------------------------------------------------------------------
+\problema{25}{Copiadoras con demanda estacional}{Test · cuántas máquinas sustituir}
+
+\begin{enunciado}{25}
+Una empresa de reprografía, con demanda estacional, que actualmente tiene dos copiadoras en funcionamiento, se está
+planteando la posibilidad de sustituir una o dos de estas máquinas por otras nuevas. Las características de las
+copiadoras se detallan en la tabla siguiente:
+
+\begin{center}\small
+\begin{tabularx}{0.82\linewidth}{@{}L QQ@{}}
+\headrow \thead{Concepto} & \thead{Copiadoras actuales} & \thead{Copiadoras nuevas}\\
+Capacidad anual por máquina & 100.000 copias & 100.000 copias\\
+\rowcolor{mist} Coste adquisición/máquina nueva & -- & 1.000.000\eur\\
+Coste operativo por copia & 3\eur & 1,5\eur\\
+\rowcolor{mist} Valor residual por máquina & -- & --\\
+\end{tabularx}
+\end{center}
+
+Si todas las copiadoras tienen una vida indefinida, la demanda es de 150.000 copias para el período octubre-junio, y de
+12.500 copias en verano (julio-septiembre), y el coste de capital es del 10\,\%, indique qué opción recomendaría a esta
+empresa:
+\begin{opciones}
+  \item No sustituir ninguna copiadora.
+  \item Sustituir ambas copiadoras.
+  \item Sustituir una de las dos, lo que permitiría obtener un ahorro de costes de 450.000\eur si se utiliza la copiadora
+        nueva a pleno rendimiento, y la antigua se destina a absorber el exceso en la época de mayor demanda.
+  \item Ninguna de las opciones anteriores es correcta.
+\end{opciones}
+\end{enunciado}
+
+Método de las diapositivas del Tema 4 (52--55): demanda anual $150.000+12.500=162.500$ copias; vida indefinida, así que
+los costes anuales se actualizan como perpetuidad ($\div0,10$).
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}L >{\raggedleft\arraybackslash}p{5.4cm} Q@{}}
+\headrow \thead{Alternativa} & \thead{VA de costes} & \thead{Ahorro vs.\ I}\\
+I. No sustituir (162.500 copias a 3\eur) & $\frac{487.500}{0,10}=4.875.000$ & --\\
+\rowcolor{mist} II. Sustituir las dos (162.500 copias a 1,5\eur) & $2.000.000+\frac{243.750}{0,10}=4.437.500$ & 437.500\\
+III. Sustituir una: nueva a pleno (100.000) $+$ vieja el resto (62.500) & $1.000.000+\frac{150.000}{0,10}+\frac{187.500}{0,10}=4.375.000$ & \textbf{500.000}\\
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,x=1.5cm,y=0.6cm]
+  \foreach \x/\l in {0/0,1/1,2/2,3/3,4/4,5/5}{
+    \draw[rule] (\x,-0.25) -- (\x,2.55); \node[slate,below] at (\x,-0.25) {\l};}
+  \fill[slate] (0,1.75) rectangle (4.875,2.35);
+  \fill[steel] (0,0.95) rectangle (4.4375,1.55);
+  \fill[okgreen] (0,0.15) rectangle (4.375,0.75);
+  \node[anchor=east,navy] at (-0.1,2.05) {I. No sustituir};
+  \node[anchor=east,navy] at (-0.1,1.25) {II. Sustituir las dos};
+  \node[anchor=east,navy] at (-0.1,0.45) {III. Sustituir una};
+  \node[anchor=west,fill=white,inner sep=1.5pt,font=\sffamily\scriptsize\bfseries,slate] at (4.9,2.05) {4.875.000};
+  \node[anchor=west,fill=white,inner sep=1.5pt,font=\sffamily\scriptsize\bfseries,steel] at (4.46,1.25) {4.437.500};
+  \node[anchor=west,fill=white,inner sep=1.5pt,font=\sffamily\scriptsize\bfseries,okgreen!70!black] at (4.4,0.45) {4.375.000 (mínimo)};
+  \draw[slate] (0,-0.25) -- (0,2.55);
+  \node[slate] at (2.5,-1.15) {VA de los costes (millones de €)};
+\end{tikzpicture}
+\end{center}
+
+Lo mejor es sustituir \textbf{una} (III), pero el ahorro es de \textbf{500.000\eur}, no de 450.000. Por eso c) no es
+correcta tal y como está escrita.
+
+\begin{solucion}
+\textbf{d)}: conviene sustituir una sola copiadora, con un ahorro de 500.000\eur (62.500 frente a sustituir las dos).
+\end{solucion}
+\begin{trampa}[No hay solución oficial publicada de P25]
+Esta respuesta aplica el método de las diapositivas, que reparte la capacidad \textbf{por año}. Si se exigiera
+capacidad \textbf{por estación} (75.000 copias por máquina de octubre a junio y 25.000 en verano), la nueva solo podría
+hacer $75.000+12.500=87.500$ copias, el ahorro de sustituir una bajaría a 312.500 y saldría mejor sustituir las dos
+(437.500). Ninguna lectura da 450.000, así que c) es falsa en ambos casos. Si en clase se corrigió de otra forma,
+manda el criterio del profesor.
+\end{trampa}
+
+\end{document}
