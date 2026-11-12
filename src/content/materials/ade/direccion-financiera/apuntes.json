@@ -1,8 +1,8 @@
 {
   "subject": "ade/direccion-financiera",
   "type": "apuntes",
-  "title": "Manual Completo de Teoría y Casos de Diapositivas: Temas 1 al 4 (24 págs.)",
-  "description": "Manual exhaustivo de 24 páginas revisado diapositiva por diapositiva con las presentaciones oficiales de la UGR (Temas 1 al 4): incluye toda la teoría, la notación oficial del Departamento (C0)di, Qi)di renta, Qi)di tesorería, VRn)di), las trampas de examen y todos los casos prácticos resueltos de las diapositivas (Edificio de oficinas, Teorema de Separación de Fisher, Compraventa de 40 bonos, Tecnocrecimiento S.A., Reinversiones perpetuas vs. finitas de 3 años, los 4 defectos de la TIR, el Caso completo del Guano - SIFA, CAE con inflación y con cambio tecnológico del 20% y demanda estacional de copiadoras).",
+  "title": "Apuntes de Examen: Teoría, Fórmulas y Trampas · Temas 1 al 4 (17 págs.)",
+  "description": "Apuntes rediseñados con estilo corporativo y enfocados al primer parcial (17 páginas): mapa del examen, lo esencial de cada tema, fórmulas clave en notación del Departamento (C0)di, Qi)di, VRn)di, CAF), procedimiento paso a paso para el problema de acciones multietapa (DDM y VAOC), checklist del problema de proyecto de inversión, CAE con inflación y cambio tecnológico, demanda estacional, ejemplos de diapositivas y del parcial 2018/19 recalculados, formulario de una página y 20 afirmaciones V/F de test.",
   "order": 3,
   "pdf": "ade/direccion-financiera/apuntes-primer-parcial.pdf"
 }

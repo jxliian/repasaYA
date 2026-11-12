@@ -1,0 +1,951 @@
+% =====================================================================
+%  DIRECCIÓN FINANCIERA (UGR) · Apuntes de examen · Primer parcial T1–T4
+%  Fuente LaTeX del PDF publicado en
+%  public/ade/direccion-financiera/apuntes-primer-parcial.pdf
+%  Compilar:  ./compilar.sh   (pdflatex x2)
+% =====================================================================
+\documentclass[10pt,a4paper,twoside]{article}
+
+\usepackage[a4paper,top=25mm,bottom=22mm,inner=21mm,outer=19mm,
+            headheight=14pt,headsep=8mm,footskip=10mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\AtBeginDocument{\spanishplainpercent}
+\usepackage{sourceserifpro}
+\usepackage[scale=0.96]{sourcesanspro}
+\usepackage{amsmath,amssymb}
+\usepackage{icomma}
+\usepackage[final]{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs,tabularx,colortbl,array,multirow}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[breakall]{truncate}
+\usepackage{fontawesome5}
+\usepackage{needspace}
+\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+
+% ---------------------------------------------------------------------
+%  Identidad corporativa
+% ---------------------------------------------------------------------
+\definecolor{navy}{HTML}{0B2545}
+\definecolor{steel}{HTML}{13315C}
+\definecolor{slate}{HTML}{5B6B7F}
+\definecolor{mist}{HTML}{EEF2F6}
+\definecolor{rule}{HTML}{C9D3DE}
+\definecolor{gold}{HTML}{B88A1B}
+\definecolor{goldbg}{HTML}{FBF5E6}
+\definecolor{alert}{HTML}{A4243B}
+\definecolor{alertbg}{HTML}{FBEEF0}
+\definecolor{okgreen}{HTML}{2E7D5B}
+
+\newcommand{\sffam}{\sffamily}
+\renewcommand{\familydefault}{\rmdefault}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+\linespread{1.06}
+\setlist{itemsep=2pt,topsep=3pt,leftmargin=1.3em}
+\setlist[itemize]{label={\color{steel}\scriptsize$\blacksquare$}}
+\setlist[enumerate]{label={\sffamily\bfseries\color{steel}\arabic*.}}
+
+% Notación oficial del Departamento
+\newcommand{\di}{)_{di}}
+\newcommand{\ai}{)_{ai}}
+\newcommand{\an}[2]{a_{\overline{#1}|#2}}
+\newcommand{\eur}{\,\text{€}}
+
+% ---------------------------------------------------------------------
+%  Títulos
+% ---------------------------------------------------------------------
+\titleformat{\section}[block]
+  {\sffamily\bfseries\Large\color{navy}}
+  {\thesection}{0.8em}{}[\vspace{2pt}{\color{gold}\titlerule[1.2pt]}]
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titleformat{\subsection}[hang]
+  {\sffamily\bfseries\large\color{steel}}
+  {\thesubsection}{0.7em}{}
+\titlespacing*{\subsection}{0pt}{11pt}{4pt}
+\titleformat{\subsubsection}[runin]
+  {\sffamily\bfseries\normalsize\color{navy}}{}{0pt}{}[.]
+\titlespacing*{\subsubsection}{0pt}{7pt}{0.5em}
+
+% Portada de cada tema
+\newcommand{\tema}[3]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{part}{Tema #1 · #2}%
+  \markboth{Tema #1 · #2}{}%
+  \begin{tcolorbox}[enhanced,colback=navy,colframe=navy,arc=0pt,
+      left=12pt,right=12pt,top=14pt,bottom=14pt,boxrule=0pt,
+      borderline north={2.5pt}{0pt}{gold}]
+    {\sffamily\color{gold}\bfseries\small TEMA #1}\par\vspace{3pt}
+    {\sffamily\color{white}\bfseries\LARGE #2}\par\vspace{6pt}
+    {\sffamily\color{white!80!navy}\small #3}
+  \end{tcolorbox}\vspace{4pt}%
+  \setcounter{section}{0}%
+  \renewcommand{\thesection}{#1.\arabic{section}}%
+}
+
+% ---------------------------------------------------------------------
+%  Cajas
+% ---------------------------------------------------------------------
+\tcbset{base/.style={enhanced,breakable,arc=1.5pt,boxrule=0pt,
+  left=8pt,right=8pt,top=5pt,bottom=5pt,before skip=7pt,after skip=7pt,
+  fonttitle=\sffamily\bfseries\small,coltitle=white}}
+
+% Fórmula clave
+\newtcolorbox{formula}[1][]{base,colback=mist,colframe=steel,
+  borderline west={3pt}{0pt}{steel},
+  title={\faSquareRoot*\ \ #1},colbacktitle=steel}
+% Lo esencial (resumen de tema)
+\newtcolorbox{esencial}{base,colback=white,colframe=rule,boxrule=0.6pt,
+  borderline west={3pt}{0pt}{gold},
+  title={\faBullseye\ \ Lo que tienes que dominar},colbacktitle=navy}
+% En el examen
+\newtcolorbox{examen}[1][En el examen]{base,colback=goldbg,colframe=gold,
+  borderline west={3pt}{0pt}{gold},title={\faClipboardCheck\ \ #1},
+  colbacktitle=gold}
+% Trampa
+\newtcolorbox{trampa}[1][Trampa de examen]{base,colback=alertbg,colframe=alert,
+  borderline west={3pt}{0pt}{alert},title={\faExclamationTriangle\ \ #1},
+  colbacktitle=alert}
+% Ejemplo resuelto
+\newtcolorbox{ejemplo}[1]{base,colback=white,colframe=rule,boxrule=0.6pt,
+  title={\faCalculator\ \ #1},colbacktitle=slate}
+
+% Tablas
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcommand{\thead}[1]{\leavevmode\sffamily\bfseries\color{white}#1}
+\newcommand{\headrow}{\rowcolor{steel}}
+\renewcommand{\arraystretch}{1.18}
+
+% ---------------------------------------------------------------------
+%  Cabeceras y pies
+% ---------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rule}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[LE]{\sffamily\footnotesize\bfseries\color{navy}\thepage\hspace{1.2em}%
+  \mdseries\color{slate}\truncate{0.78\textwidth}{Dirección Financiera · Apuntes de examen T1–T4}}
+\fancyhead[RO]{\sffamily\footnotesize\color{slate}\truncate{0.78\textwidth}{\leftmark}%
+  \hspace{1.2em}\bfseries\color{navy}\thepage}
+\fancyfoot[C]{\sffamily\scriptsize\color{slate!80}repasaYA · Grado en ADE · Universidad de Granada}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}}
+
+\hypersetup{pdftitle={Dirección Financiera · Apuntes de examen (Temas 1–4)},
+  pdfauthor={repasaYA},pdfsubject={Primer parcial · UGR}}
+
+% Índice
+\makeatletter
+\renewcommand{\l@part}[2]{\vspace{5pt}\noindent
+  {\sffamily\bfseries\color{navy}#1\hfill\color{steel}#2}\par}
+\renewcommand{\l@section}{\@dottedtocline{1}{1.2em}{2.4em}}
+\setcounter{tocdepth}{1}
+\makeatother
+\renewcommand{\contentsname}{Índice}
+
+% =====================================================================
+\begin{document}
+% =====================================================================
+
+% ---------------------------------------------------------------------
+%  PORTADA
+% ---------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[navy] (current page.north west) rectangle ([yshift=-128mm]current page.north east);
+  \fill[gold] ([yshift=-128mm]current page.north west) rectangle ([yshift=-130mm]current page.north east);
+  \node[anchor=north west,text width=150mm,align=left] at ([xshift=24mm,yshift=-30mm]current page.north west)
+   {\sffamily\color{gold}\bfseries\large DIRECCIÓN FINANCIERA\\[2pt]
+    \color{white!75!navy}\mdseries\normalsize Grado en ADE · Facultad de CC.~Económicas y Empresariales · UGR};
+  \node[anchor=north west,text width=160mm,align=left] at ([xshift=24mm,yshift=-62mm]current page.north west)
+   {\sffamily\color{white}\bfseries\fontsize{34}{38}\selectfont Apuntes de examen\\[4pt]
+    \fontsize{17}{21}\selectfont\mdseries Primer parcial · Temas 1 a 4};
+  \node[anchor=north west,text width=150mm,align=left] at ([xshift=24mm,yshift=-104mm]current page.north west)
+   {\sffamily\color{white!80!navy}\small Teoría, fórmulas, procedimientos y trampas de test, ordenados\\
+    tal y como se preguntan en la prueba parcial.};
+\end{tikzpicture}
+
+\vspace*{118mm}
+
+\begin{minipage}[t]{0.47\textwidth}
+{\sffamily\bfseries\color{navy}Contenido}\par\vspace{3pt}
+{\color{gold}\rule{\linewidth}{1pt}}\par\vspace{2pt}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\sffamily\bfseries\color{steel}}l L@{}}
+T1 & La empresa y el director financiero\\
+T2 & Valor actual, bonos y acciones (DDM, Gordon, VAOC)\\
+T3 & Criterios VAN, plazo de recuperación y TIR\\
+T4 & Flujos de caja: $C_0$, $Q_i$, $\Delta$FM, VR, CAE\\
+F  & Formulario y trampas de test
+\end{tabularx}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+{\sffamily\bfseries\color{navy}Cómo usar este documento}\par\vspace{3pt}
+{\color{gold}\rule{\linewidth}{1pt}}\par\vspace{2pt}
+\small
+\begin{itemize}[leftmargin=1.1em]
+  \item Cada tema abre con \textbf{lo que tienes que dominar}.
+  \item \textcolor{steel}{\textbf{Azul}}: fórmulas que debes saber escribir de memoria.
+  \item \textcolor{gold}{\textbf{Ámbar}}: cómo se pregunta en el examen.
+  \item \textcolor{alert}{\textbf{Rojo}}: trampas que han caído en el test.
+  \item Al final: formulario de una página y checklist de problemas.
+\end{itemize}
+\end{minipage}
+
+\vfill
+{\sffamily\scriptsize\color{slate}
+Elaborado a partir de las presentaciones oficiales del Departamento de Economía Financiera y Contabilidad
+(Temas 1–4), la Relación de Problemas 2025/26 y exámenes parciales anteriores. Notación del
+Departamento: $C_0\di$, $Q_i\di$, $VR_n\di$, CAF, $t_c$. Todas las cifras de los ejemplos han sido
+recalculadas.\par}
+\end{titlepage}
+
+% ---------------------------------------------------------------------
+%  MAPA DEL EXAMEN + ÍNDICE
+% ---------------------------------------------------------------------
+\markboth{Mapa del examen}{}
+\section*{Mapa del examen}
+\addcontentsline{toc}{part}{Mapa del examen}
+
+La prueba parcial combina \textbf{preguntas tipo test} (conceptos y cálculos de un paso) y
+\textbf{problemas} de desarrollo. Esto es lo que se repite convocatoria tras convocatoria:
+
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{@{}>{\leavevmode\sffamily\bfseries\color{navy}}p{2.6cm} L >{\sffamily\small}p{3.6cm}@{}}
+\headrow \thead{Bloque} & \thead{Qué se pregunta} & \thead{Dónde está aquí}\\
+Test T1–T2 & Fisher (quién mejora/empeora si baja $r$; $r_e>r_p$), objetivo financiero, VA de bonos, misma valoración de la acción sea cual sea el horizonte, $g=b\cdot ROE$, VAOC $=0$ si $ROE=r$ & 2.2, 2.3, 2.4\\
+\rowcolor{mist}
+Test T3–T4 & Defectos de la TIR, VAN con distinta duración, costes hundidos y de oportunidad, efecto del plazo de proveedores en el FM, flujo de caja sin intereses & 3.4, 4.1, 4.3\\
+Problema A & Valoración de acciones \textbf{multietapa}: tabla BPA/DIV, $P_0$ por descuento de dividendos \textbf{y} por VAOC, comentario & 2.4 (procedimiento)\\
+\rowcolor{mist}
+Problema B & VAN de un proyecto con impuestos: $C_0\di$, $Q_i\di$, $\Delta$FM, $VR_n\di$; VAN incremental (renovación, canibalización, continuar/cesar) & 4.2–4.5\\
+Problema C & CAE: equipos de distinta vida, con inflación (trabajar en real) o cambio tecnológico; demanda estacional & 4.6\\
+\end{tabularx}
+
+\begin{examen}[Estrategia en 30 segundos]
+\begin{itemize}
+  \item En los problemas de acciones calcula \textbf{siempre por los dos métodos} (DDM y VAOC): te piden ambos y
+        sirven de comprobación cruzada.
+  \item En los proyectos, dibuja primero la \textbf{línea temporal} y separa tres bloques: $C_0\di$ · $Q_i\di$ · $VR_n\di$.
+  \item Nunca restes intereses ni la devolución del préstamo en los flujos (la financiación va en $r$).
+  \item Si las vidas útiles son distintas y los equipos se reponen $\Rightarrow$ CAE, no VAN.
+\end{itemize}
+\end{examen}
+
+\vspace{4pt}
+{\sffamily\bfseries\large\color{navy}Índice}\par
+{\color{gold}\rule{\linewidth}{1.2pt}}\par\vspace{2pt}
+\begingroup\small
+\makeatletter\@starttoc{toc}\makeatother
+\endgroup
+
+% =====================================================================
+\tema{1}{La empresa y el director financiero}{Objetivo financiero · decisiones de inversión y financiación · conflictos de agencia}
+% =====================================================================
+
+\begin{esencial}
+Tema exclusivamente teórico (solo test). Debes poder justificar en una línea por qué el objetivo
+\textbf{no} es maximizar beneficios, qué hace el director financiero en el circuito de tesorería y qué
+mecanismos reducen los conflictos de agencia.
+\end{esencial}
+
+\section{Las dos decisiones financieras}
+\begin{itemize}
+  \item \textbf{Decisión de inversión}: identificar proyectos (activos reales) cuyo \textbf{valor supere a su coste} (VAN $>0$).
+  \item \textbf{Decisión de financiación}: encontrar la financiación más adecuada (fondos propios o ajenos) para pagarlos.
+\end{itemize}
+
+\section{El papel del director financiero}
+El director financiero es el \textbf{intermediario} entre las operaciones de la empresa (activos reales) y los
+mercados de capitales (inversores en activos financieros):
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\small,
+  box/.style={draw=steel,fill=mist,line width=0.8pt,minimum width=3.3cm,minimum height=1.25cm,align=center,rounded corners=1.5pt},
+  arr/.style={-{Stealth[length=2.4mm]},line width=0.9pt,color=steel},
+  lab/.style={font=\sffamily\scriptsize,color=navy,fill=white,inner sep=1.5pt}]
+  \node[box] (op) at (0,0) {Operaciones\\(activos reales)};
+  \node[box,fill=navy,text=white,draw=navy] (df) at (5.2,0) {\bfseries Director\\\bfseries financiero};
+  \node[box] (mk) at (10.4,0) {Mercados de capitales\\(activos financieros)};
+  \draw[arr] ([yshift=3mm]mk.west) -- node[lab,above=1pt]{(1) dinero captado} ([yshift=3mm]df.east);
+  \draw[arr] ([yshift=3mm]df.west) -- node[lab,above=1pt]{(2) tesorería invertida} ([yshift=3mm]op.east);
+  \draw[arr] ([yshift=-3mm]op.east) -- node[lab,below=1pt]{(3) tesorería generada} ([yshift=-3mm]df.west);
+  \draw[arr] ([yshift=-3mm]df.east) -- node[lab,below=1pt]{(4b) restituida a inversores} ([yshift=-3mm]mk.west);
+  \draw[arr] (df.south) -- ++(0,-0.55) -| node[lab,pos=0.25,below=1pt]{(4a) reinvertida} ([xshift=6mm]op.south);
+\end{tikzpicture}
+\end{center}
+
+Por debajo del director financiero: el \textbf{tesorero} (bancos, tesorería, obtención de financiación, créditos,
+dividendos, seguros, pensiones) y el \textbf{jefe de control de gestión} (contabilidad, estados financieros,
+auditoría interna, nóminas, registros, presupuestos, impuestos).
+
+\section{El objetivo de la función financiera}
+\begin{formula}[Objetivo financiero natural]
+\centering\sffamily\bfseries Maximizar el valor de mercado de las acciones ($P_0$)
+\end{formula}
+
+\textbf{¿Por qué es erróneo «maximizar beneficios»?} (diapositiva 6)
+\begin{enumerate}
+  \item ¿Los beneficios \textbf{de qué año}? Se pueden inflar hoy a costa del futuro.
+  \item ¿Es bueno recortar dividendos y reinvertir? Solo si la reinversión rinde más que el coste de oportunidad;
+        el beneficio crecería igualmente reinvirtiendo en algo peor que $r$.
+  \item \textbf{Distintos contables} calculan el beneficio de distinta forma.
+\end{enumerate}
+
+\section{Agencia: directivos frente a accionistas}
+\begin{itemize}
+  \item \textbf{Tecnoestructura} (directivos): min.~$k_0$ / max.~$P_0$; \textbf{inversores}: max.~$k_0$ (su rentabilidad).
+  \item \textbf{Dos posturas} sobre el objetivo: \emph{idealista} (los directivos no están obligados a actuar en el
+        interés egoísta de los accionistas) y \emph{realista} (en la práctica cuidan más de sí mismos que de los accionistas).
+  \item \textbf{Origen de los conflictos}: diferencias de información (precios y rentabilidades, emisiones, dividendos,
+        financiación) y diferencias de objetivos (directivos vs.~accionistas; alta dirección vs.~directivos operativos;
+        accionistas vs.~bancos y prestamistas).
+  \item \textbf{Mecanismos que los mitigan}: planes de compensación (\emph{stock options}), Consejo de Administración,
+        absorciones (los «gandules» acaban desbancados), control de los especialistas (analistas, bancos, auditores).
+\end{itemize}
+
+\begin{trampa}
+«El director financiero debe elegir inversiones cuya generación de caja se ajuste a las preferencias de consumo de sus
+accionistas» es \textbf{FALSO} (examen 2018/19). Gracias al mercado de capitales cada accionista ajusta su consumo
+por su cuenta; al director solo le corresponde \textbf{maximizar el VAN} (separación de Fisher, tema 2).
+\end{trampa}
+
+% =====================================================================
+\tema{2}{Valor actual, coste de oportunidad y valoración de activos}{VAN y separación de Fisher · obligaciones · acciones: descuento de dividendos, Gordon y VAOC}
+% =====================================================================
+
+\begin{esencial}
+\begin{itemize}
+  \item Calcular VA y VAN a un año y razonar con el \textbf{gráfico de Fisher} (quién gana y quién pierde si cambia $r$).
+  \item Valorar un bono y distinguir \textbf{rentabilidad actual}, \textbf{al vencimiento} y \textbf{tasa de rentabilidad} del periodo.
+  \item Valorar acciones: descuento de dividendos, Gordon, $g=b\cdot ROE$, $P_0=BPA_1/r+\text{VAOC}$ y el ratio $BPA_1/P_0$.
+  \item Resolver un problema \textbf{multietapa} por los dos métodos (es el problema A del examen).
+\end{itemize}
+\end{esencial}
+
+\section{Valor actual y VAN: los dos principios}
+\begin{ejemplo}{Edificio de oficinas (diapositivas 3–10)}
+Coste hoy 370.000\eur; venta segura en $t=1$ por 420.000\eur.
+\begin{itemize}
+  \item Sin riesgo (Letras al 5\,\%): $VA=\dfrac{420.000}{1,05}=400.000$\eur\ $\Rightarrow$ $VAN=-370.000+400.000=\mathbf{30.000}$\eur.
+  \item Con riesgo similar a acciones (12\,\%): $VA=375.000$\eur\ $\Rightarrow$ $VAN=\mathbf{5.000}$\eur.
+  \item Regla equivalente: rentabilidad $=\frac{420.000}{370.000}-1=13,5\,\%>12\,\%$ $\Rightarrow$ aceptar.
+\end{itemize}
+\end{ejemplo}
+
+\begin{formula}[Valor actual y VAN a un periodo]
+\[
+VA=\frac{C_1}{1+r}\qquad\qquad VAN=-C_0+\frac{C_1}{1+r}
+\]
+\textbf{1.\textsuperscript{er} principio}: 1\,u.m.~hoy vale más que 1\,u.m.~futura. \quad
+\textbf{2.\textsuperscript{o} principio}: 1\,u.m.~segura vale más que 1\,u.m.~arriesgada.\\
+$r$ = \textbf{coste de oportunidad del capital}: rentabilidad de una inversión de \textbf{riesgo similar} en el mercado.
+\end{formula}
+
+\begin{trampa}[Pregunta de la diapositiva 10]
+Si el edificio se financia con un préstamo al 8\,\%, se sigue exigiendo el \textbf{12\,\%}: el coste de oportunidad
+depende del \textbf{riesgo del proyecto}, no de cómo se financie.
+\end{trampa}
+
+\section{Fundamentos del VAN: separación de Fisher}
+
+El mercado de capitales permite a cada inversor desplazar consumo entre $t=0$ y $t=1$ a lo largo de la
+\textbf{línea del mercado de capitales} (pendiente $-(1+r)$). La curva de inversión en activos reales tiene
+\textbf{rendimientos marginales decrecientes} (pendiente $-(1+r')$).
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,scale=0.95]
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (8.4,0) node[below left=1pt]{u.m.\ ($t=0$)};
+  \draw[-{Stealth[length=2.2mm]},slate] (0,0) -- (0,6.0) node[above right=-1pt]{u.m.\ ($t=1$)};
+  % curva de oportunidades de inversión desde D=(5,0)
+  % curva de inversión y = 2,042·sqrt(5-x): tangente a la recta en x = 3,23
+  \draw[steel,line width=1.1pt,domain=0.25:5,samples=90,smooth] plot (\x,{2.042*sqrt(5-\x)});
+  \draw[gold,line width=1.1pt] (0,5.195) -- (6.77,0);
+  \fill[navy] (3.23,2.716) circle (1.6pt) node[above right=1pt,navy]{G (tangencia)};
+  \draw[dashed,slate] (3.23,2.716) -- (3.23,0);
+  \fill[navy] (5,0) circle (1.4pt);
+  \node[below] at (5,0) {D};
+  \node[below] at (3.23,0) {J};
+  \node[below] at (6.77,0) {K};
+  \node[left] at (0,5.195) {M};
+  \draw[{Stealth}-{Stealth},navy] (3.23,-0.55) -- node[below]{$C_0$ (inversión)} (5,-0.55);
+  \draw[{Stealth}-{Stealth},alert] (5,-0.55) -- node[below]{VAN} (6.77,-0.55);
+  \node[gold!70!black,align=left] at (6.7,2.0) {línea del mercado\\de capitales $-(1+r)$};
+  \node[steel,align=left] at (1.4,3.35) {inversión en\\activos reales};
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+  \item La inversión óptima es $JD$: se invierte hasta que la \textbf{rentabilidad marginal = $r$} (tangencia).
+        Invertir más o menos que $JD$ da un VAN menor ($DP<DK$).
+  \item Tras invertir, \textbf{todos} mejoran: quien prefiere consumo actual se endeuda contra $G$ y llega a $K>D$;
+        quien prefiere consumo futuro presta $J$ y llega a $M>H$. Incremento de riqueza en $t=0$: $DK=\text{VAN}$;
+        en $t=1$: $\text{VAN}(1+r)$.
+  \item \textbf{Separación}: la decisión de inversión (maximizar VAN) es independiente de las preferencias de consumo.
+        Hipótesis: \textbf{mercado perfecto} con un único tipo para prestar y endeudarse.
+\end{itemize}
+
+\begin{examen}[Cómo se pregunta (relación P1–P3)]
+\begin{itemize}
+  \item \textbf{Si baja $r$}: la recta se aplana $\Rightarrow$ \textbf{aumenta} la inversión que maximiza el VAN y el VAN.
+        Quien prefiere \textbf{consumo actual mejora} (puede gastar más hoy); quien prefiere \textbf{consumo futuro empeora}
+        (podrá gastar menos en el futuro). Respuesta tipo: \emph{a)} en P1.
+  \item \textbf{Si $r_{\text{endeudamiento}}>r_{\text{préstamo}}$}: la recta de quien se endeuda es \textbf{más inclinada}
+        $\Rightarrow$ prestamistas y prestatarios \textbf{no se ponen de acuerdo} sobre la inversión óptima
+        (prestatario invierte menos, $C_0$; prestamista más, $C_0'$). Respuesta \emph{b)} en P2.
+  \item \textbf{Numérico (P3)}: presupuesto 12.000, $r=4\,\%$, $C_0=4.000$, VAN $=2.000$ $\Rightarrow$
+        $C_1=6.000\cdot1,04=\mathbf{6.240}$; riqueza extra en $t=1$: $14.560-12.480=\mathbf{2.080}=VAN(1+r)$;
+        en $t=0$: $14.000-12.000=\mathbf{2.000}=VAN$.
+\end{itemize}
+\end{examen}
+
+\section{Valoración de obligaciones}
+
+\begin{formula}[Precio de un bono]
+\[
+P_0=\sum_{t=1}^{n}\frac{C}{(1+r)^t}+\frac{VN}{(1+r)^n}=C\cdot\an{n}{r}+\frac{VN}{(1+r)^n},
+\qquad \an{n}{r}=\frac{1-(1+r)^{-n}}{r}
+\]
+$C$ = cupón $=$ tipo del cupón $\times VN$; \ $r$ = rentabilidad de títulos de características similares.
+\end{formula}
+
+\begin{tabularx}{\textwidth}{@{}l L@{}}
+\headrow \thead{Situación} & \thead{Precio}\\
+$r=$ tipo cupón & a la par ($P_0=VN$)\\
+\rowcolor{mist} $r<$ tipo cupón & sobre la par ($P_0>VN$)\\
+$r>$ tipo cupón & bajo la par ($P_0<VN$)\\
+\end{tabularx}
+
+\vspace{3pt}
+\begin{tabularx}{\textwidth}{@{}>{\leavevmode\sffamily\bfseries\color{navy}}p{3.3cm} L@{}}
+\headrow \thead{Medida} & \thead{Definición}\\
+Rentabilidad actual & Cupón anual / precio. Solo ingresos corrientes; \textbf{ignora} ganancias o pérdidas de capital.\\
+\rowcolor{mist} Rentabilidad al vencimiento & TIR que iguala el VA de los pagos al precio. Incluye ganancia/pérdida de capital.\\
+Tasa de rentabilidad & $\dfrac{C_1+(P_1-P_0)}{P_0}$ en un periodo concreto.\\
+\end{tabularx}
+
+\begin{itemize}
+  \item Actual y al vencimiento \textbf{solo coinciden si el bono cotiza a la par}. Ej.: cupón 10\,\% a 3 años comprado
+        a 1.136,16: rentabilidad actual 8,8\,\%, al vencimiento 5\,\%.
+  \item Si durante el periodo la rentabilidad al vencimiento \textbf{no cambia} $\Rightarrow$ tasa = TIR; si
+        \textbf{sube} $\Rightarrow$ tasa $<$ TIR; si \textbf{baja} $\Rightarrow$ tasa $>$ TIR.
+  \item \textbf{Riesgo de tipo de interés}: el bono de vida más larga (o el cupón cero frente al americano del mismo plazo)
+        es \textbf{más sensible} a los tipos.
+  \item \textbf{Curva de rentabilidad}: creciente (c/p $<$ l/p), decreciente o plana. \textbf{Prima de fallido}:
+        diferencial frente a un bono igual sin riesgo de impago. Grado de inversión: Aaa/AAA a Baa/BBB; especulativo: Ba/BB e inferiores.
+\end{itemize}
+
+\begin{ejemplo}{Compraventa de 40 bonos (diapositivas 34–37)}
+Nominal 1.000, cupón 1,10\,\% (11\eur), emitidos el 20/12/2013 a 5 años; compra el 20/12/2014 (quedan 4 años) al 0,6\,\%:
+\[
+P_{\text{compra}}=11\,\an{4}{0,006}+\frac{1.000}{1,006^4}=1.019,70\eur\quad(\times 40=40.788\eur)
+\]
+Venta un año después al 0,65\,\% (quedan 3 años): $P_{\text{venta}}=11\,\an{3}{0,0065}+\frac{1.000}{1,0065^3}=1.013,33\eur$.\\
+Rentabilidad: $1.019,70=\dfrac{11+1.013,33}{1+r}\Rightarrow r=\mathbf{0,45\,\%}$ (menor que el 0,6\,\% porque subieron los tipos).
+\end{ejemplo}
+
+\section{Valoración de acciones}
+
+\textbf{Tres valores}: contable (no refleja el verdadero valor), de liquidación (no refleja una empresa en
+funcionamiento) y de \textbf{mercado} (depende de los activos actuales y de las inversiones futuras).
+
+\subsection{Modelo de descuento de dividendos}
+\begin{formula}[Descuento de dividendos]
+\[
+r=\frac{DIV_1}{P_0}+\frac{P_1-P_0}{P_0}\qquad\Longrightarrow\qquad
+P_0=\frac{DIV_1+P_1}{1+r}=\sum_{t=1}^{H}\frac{DIV_t}{(1+r)^t}+\frac{P_H}{(1+r)^H}\ \xrightarrow{H\to\infty}\ \sum_{t=1}^{\infty}\frac{DIV_t}{(1+r)^t}
+\]
+\end{formula}
+
+\begin{trampa}[Horizonte del inversor (examen 2018/19)]
+Dos inversores que venderán en 1 y en 2 años pagan hoy \textbf{el mismo precio}: el valor no depende del horizonte.
+Con $DIV_1=5$, $g=5\,\%$, $r=10\,\%$: ambos pagan $5/(0,10-0,05)=\mathbf{100}$\eur.
+\end{trampa}
+
+\subsection{Simplificaciones y tasa de crecimiento}
+\begin{formula}[Sin crecimiento · Gordon · crecimiento sostenible]
+\[
+\underbrace{P_0=\frac{DIV_1}{r}\ ,\ r=\frac{DIV_1}{P_0}}_{g=0}
+\qquad\qquad
+\underbrace{P_0=\frac{DIV_1}{r-g}\ ,\ r=\frac{DIV_1}{P_0}+g}_{\text{Gordon } (r>g)}
+\qquad\qquad
+g=b\cdot ROE
+\]
+$b$ = tasa de retención (reinversión) $=1-$ tasa de reparto; \ $ROE=BPA/$capital contable por acción; \ $DIV_t=(1-b)\,BPA_t$.
+\end{formula}
+
+\begin{itemize}
+  \item \textbf{Duke Power}: $P_0=36$, $DIV_1=1,87$, $g=4,1\,\%$ $\Rightarrow r=5,2\,\%+4,1\,\%=9,3\,\%$. Con $ROE=12,5\,\%$ y $b=30\,\%$:
+        $g=3,75\,\%$ y $r=8,95\,\%$.
+  \item \textbf{Tecnocrecimiento}: $DIV_1=0,50$, $P_0=50$, $b=80\,\%$, $ROE=25\,\%\Rightarrow g=20\,\%$. Aplicar Gordon daría
+        $r=21\,\%$: \textbf{error}, nadie crece al 20\,\% para siempre. Con dos etapas (desde el año 3: $ROE=16\,\%$, $b=50\,\%$,
+        $g=8\,\%$) y dividendos $0,50;\ 0,60;\ 1,15;\ 1,24\ldots$ se obtiene $r\approx\mathbf{9,9\,\%}$.
+\end{itemize}
+
+\subsection{Acciones de crecimiento y VAOC}
+Una acción es «de crecimiento» si \textbf{(1)} la empresa reinvierte parte del beneficio \textbf{y (2)} esas reinversiones
+tienen \textbf{VAN $>0$} ($ROE>r$). Reinvertir con $ROE=r$ hace crecer el dividendo pero \textbf{no} el precio.
+
+\begin{formula}[Valor actual de las oportunidades de crecimiento]
+\[
+P_0=\underbrace{\frac{BPA_1}{r}}_{\text{sin crecimiento}}+\text{VAOC},\qquad
+\text{VAOC}=\sum_{t}\frac{VAN_t}{(1+r)^t},\qquad
+VAN_t=-I_t+\frac{ROE\cdot I_t}{r}\ \ (\text{reinversión perpetua})
+\]
+\[
+\frac{BPA_1}{P_0}=r\left(1-\frac{\text{VAOC}}{P_0}\right)\quad\Rightarrow\quad
+\begin{cases}
+\text{VAOC}=0: & BPA_1/P_0=r\ \text{(acciones de renta)}\\
+\text{VAOC}>0: & BPA_1/P_0<r\ \text{(infravalora } r)\\
+\text{VAOC}<0: & BPA_1/P_0>r\ \text{(sobrevalora } r)
+\end{cases}
+\]
+\end{formula}
+
+\begin{center}\small
+\begin{tabularx}{0.92\textwidth}{@{}>{\centering\arraybackslash}X *{5}{>{\centering\arraybackslash}X}@{}}
+\headrow \thead{ROE proyecto} & \thead{Flujo $C$} & \thead{VAN$_1$} & \thead{Impacto en $P_0$} & \thead{$P_0$} & \thead{$BPA_1/P_0$}\\
+5\,\%  & 0,50 & $-5,00$ & $-4,55$ & 95,45  & 10,48\,\%\\
+\rowcolor{mist}10\,\% & 1,00 & 0,00 & 0,00 & 100,00 & 10,00\,\%\\
+15\,\% & 1,50 & 5,00 & 4,55 & 104,55 & 9,57\,\%\\
+\rowcolor{mist}20\,\% & 2,00 & 10,00 & 9,09 & 109,09 & 9,17\,\%\\
+25\,\% & 2,50 & 15,00 & 13,64 & 113,64 & 8,80\,\%\\
+\end{tabularx}\\[2pt]
+{\scriptsize\color{slate}Diapositiva 56: inversión adicional de 10\$ en $t=1$, $BPA_1=10$, $r=10\,\%$.}
+\end{center}
+
+\subsection{Procedimiento para el problema multietapa}
+\begin{examen}[Receta (problema A del examen)]
+\begin{enumerate}
+  \item \textbf{Parámetros por etapa}: $b=g/ROE$ o $b=1-$reparto; $BPA_1=ROE\times$capital contable (si dan valor contable).
+  \item \textbf{Tabla año a año}: para cada $t$, $I_t=b_t\,BPA_t$; $DIV_t=BPA_t-I_t$; \ $BPA_{t+1}=BPA_t+ROE\cdot I_t$
+        (equivale a $BPA_t(1+g)$ mientras la reinversión sea perpetua).
+  \item \textbf{Valor terminal}: cuando el crecimiento pasa a ser constante, $P_{T}=DIV_{T+1}/(r-g)$; si se agotan las
+        oportunidades, $P_T=BPA_{T+1}/r$.
+  \item \textbf{DDM}: $P_0=\sum DIV_t/(1+r)^t+P_T/(1+r)^T$.
+  \item \textbf{VAOC}: $VAN_t=-I_t+ROE\,I_t/r$ en cada año con reinversión; si $ROE=r$, $VAN_t=0$. Luego
+        $P_0=BPA_1/r+\text{VAOC}$. \textbf{Debe coincidir con el DDM.}
+  \item \textbf{Comentario}: qué parte del precio es crecimiento y por qué (si $ROE=r$, crecer no crea valor).
+\end{enumerate}
+\end{examen}
+
+\begin{ejemplo}{Empresa C · primer parcial 2018/19 (3,5 puntos)}
+$ROE=14\,\%$, reparto 50\,\%, capital contable 65\eur; desde el año 3: $ROE=11,5\,\%$ y reparto 70\,\%; $r=11,5\,\%$.
+\begin{center}\small
+\begin{tabular}{@{}c r r r r@{}}
+\headrow \thead{$t$} & \thead{$BPA_t$} & \thead{Reparto} & \thead{$DIV_t$} & \thead{$I_t$}\\
+1 & 9,1000 & 50\,\% & 4,5500 & 4,5500\\
+\rowcolor{mist}2 & 9,7370 & 50\,\% & 4,8685 & 4,8685\\
+3 & 10,4186 & 70\,\% & 7,2930 & 3,1256\\
+\rowcolor{mist}4 & 10,7780 & 70\,\% & 7,5446 & 3,2334\\
+\end{tabular}
+\end{center}
+DDM: $P_0=\dfrac{4,55}{1,115}+\dfrac{4,8685}{1,115^2}+\dfrac{7,293+\frac{7,5446}{0,115-0,0345}}{1,115^3}=\mathbf{80,87}$\eur.\\
+VAOC: $VAN_1=-4,55+\frac{0,637}{0,115}=0,989$; \ $VAN_2=-4,8685+\frac{0,6816}{0,115}=1,058$; \ $VAN_{t\geq3}=0$ ($ROE=r$).
+$\text{VAOC}=\frac{0,989}{1,115}+\frac{1,058}{1,115^2}=1,74$ \ $\Rightarrow$ \ $P_0=\frac{9,1}{0,115}+1,74=\mathbf{80,87}$\eur.
+\end{ejemplo}
+
+\begin{ejemplo}{Reinversión perpetua vs.~finita (diapositivas 59–69)}
+$BPA_1=40$, $r=10\,\%$. En $t=2$ reinvierte el 50\,\% al 25\,\%; en $t=5$ el 60\,\% al 20\,\% perpetuo.
+\begin{itemize}
+  \item \textbf{Ej.~1 (ambas perpetuas)}: $VAN_2=-20+5/0,1=30$; $VAN_5=-27+5,4/0,1=27$.
+        $\text{VAOC}=\frac{30}{1,1^2}+\frac{27}{1,1^5}=41,56$ $\Rightarrow$ $P_0=400+41,56=\mathbf{441,56}$.
+        Dividendos: 40; 20; 45; 45; 18; 50,40 perpetuo.
+  \item \textbf{Ej.~2 (la primera dura 3 años)}: $VAN_2=-20+5\,\an{3}{0,1}=\mathbf{-7,57}$ \textbf{aunque $ROE>r$}.
+        Desde $t=6$ el BPA es $40+5,4=45,40$ (no 50,40). $\text{VAOC}=10,51$ $\Rightarrow$ $P_0=\mathbf{410,51}$.
+\end{itemize}
+{\footnotesize\color{slate}Ojo: la diapositiva 69 escribe $-7,27$, pero el valor correcto es $-7,57$ (con él sale el VAOC de 10,51).}
+\end{ejemplo}
+
+\begin{trampa}[Las que más caen en el test]
+\begin{itemize}
+  \item $BPA_1=20$, $DIV_1=10$, $g=4\,\%$, $r=8\,\%$: $P_0=250=BPA_1/r$ $\Rightarrow$ \textbf{VAOC $=0$} porque $ROE=g/b=8\,\%=r$ (P4: \emph{d}).
+  \item $g$ depende de \textbf{ambos}, $b$ y $ROE$; ninguno «exclusivamente». Gordon no sirve para empresas con crecimiento
+        muy alto transitorio (P7: \emph{d}).
+  \item $P_0=73$, $BPA_1=2,80$, $DIV_1=1,68$, $ROE=20\,\%$: $b=40\,\%$, $g=8\,\%$, $r=1,68/73+8\,\%\approx10,3\,\%$ (P6: \emph{b}).
+  \item Con oportunidades que se agotan, desde ese año $DIV=BPA$ y el precio es $BPA/r$ (P5: 285,04; P9: $P_4=749,92$, $P_0=693,25$).
+  \item La rentabilidad mínima exigible a una reinversión es $r$: con $ROE=r$ el VAN es 0 (P8c).
+\end{itemize}
+\end{trampa}
+
+% =====================================================================
+\tema{3}{Criterios de valoración de inversiones}{VAN · plazo de recuperación · TIR y sus defectos · proyectos mutuamente excluyentes}
+% =====================================================================
+
+\begin{esencial}
+Saber \textbf{cuándo falla la TIR} (cuatro casos, con su ejemplo) y qué criterio usar en cada tipo de decisión
+entre proyectos excluyentes. Es materia de test casi segura.
+\end{esencial}
+
+\section{VAN}
+$VAN=VA$ del proyecto $-$ inversión necesaria. Es la contribución neta al valor de la empresa.
+\textbf{Regla: aceptar proyectos con VAN $>0$}. Si VAN y TIR discrepan, \textbf{manda el VAN}.
+
+\section{Plazo de recuperación}
+Tiempo hasta que los flujos recuperan la inversión inicial. Único atractivo: \textbf{sencillez}. Defectos:
+\begin{itemize}
+  \item Puede dar decisiones absurdas: valora igual dos proyectos con el mismo plazo aunque uno tenga VAN negativo
+        (ignora los flujos posteriores al plazo).
+  \item Da el \textbf{mismo peso} a todos los flujos anteriores al plazo, aunque los más lejanos valgan menos.
+\end{itemize}
+
+\section{TIR}
+Tasa de descuento que hace $VAN=0$. Regla: aceptar si $TIR>r$. En un proyecto convencional ($-$, $+$, $+$\ldots)
+$TIR>r \Leftrightarrow VAN>0$. Ej.: $-350$ y $+400$ $\Rightarrow$ $TIR=14,29\,\%$.
+
+\section{Defectos de la TIR}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=0.86\textwidth,height=5.3cm,
+  xmin=0,xmax=0.2,ymin=-80,ymax=160,
+  xlabel={\sffamily\scriptsize tasa de descuento},ylabel={\sffamily\scriptsize VAN},
+  xtick={0,0.05,0.07,0.1,0.1226,0.15,0.2},
+  xticklabels={0\,\%,5\,\%,7\,\%,10\,\%,12,26\,\%,15\,\%,20\,\%},
+  ticklabel style={font=\sffamily\tiny},axis lines=left,
+  grid=major,grid style={rule!60},
+  legend style={font=\sffamily\scriptsize,draw=none,fill=white,at={(0.98,0.97)},anchor=north east}]
+  \addplot[steel,line width=1.2pt,domain=0:0.2,samples=60]{-350+400/(1+x)};
+  \addlegendentry{A: $-350$, $+400$}
+  \addplot[gold,line width=1.2pt,domain=0:0.2,samples=60]{-350+16/(1+x)+16/(1+x)^2+466/(1+x)^3};
+  \addlegendentry{B: $-350$, $16$, $16$, $466$}
+  \addplot[slate,dashed] coordinates {(0.07,-80) (0.07,160)};
+  \addplot[alert,only marks,mark=*,mark size=1.6pt] coordinates {(0.1226,8.54)};
+  \node[font=\sffamily\tiny,alert,anchor=south west] at (axis cs:0.1226,12) {intersección de Fisher};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{tabularx}{\textwidth}{@{}>{\leavevmode\sffamily\bfseries\color{navy}}p{3.4cm} L@{}}
+\headrow \thead{Defecto} & \thead{Ejemplo de las diapositivas y conclusión}\\
+1. ¿Prestar o endeudarse? & A: $+100,\ -150$ y B: $-100,\ +150$; ambos TIR 50\,\%, pero $VAN_A=-36,36$ y $VAN_B=+36,36$ ($r=10\,\%$).
+  En un proyecto de financiación el VAN \textbf{crece} con $r$: la regla se invierte (interesa $TIR<r$).\\
+\rowcolor{mist} 2. Varios cambios de signo & $-22,\ 15,\ 15,\ 15,\ 15,\ -40$: dos TIR ($\approx5,6\,\%$ y $\approx27,8\,\%$). La TIR no funciona; usar VAN ($VAN_{10\%}>0$).\\
+3. Mismo desembolso, distinta duración & A ($-350,\ 400$): TIR 14,29\,\%, VAN$_{7\%}$ 23,83. B ($-350,\ 16,\ 16,\ 466$): TIR 12,96\,\%, VAN$_{7\%}$ 59,32.
+  La TIR elige A; el VAN, B. Los perfiles se cruzan en 12,26\,\% (gráfico).\\
+\rowcolor{mist} 4. Desembolsos distintos & La TIR ignora la escala. Solución: TIR del proyecto \textbf{incremental} (grande $-$ pequeño) frente a $r$, o directamente el VAN.\\
+\end{tabularx}
+
+\section{Proyectos mutuamente excluyentes}
+\begin{itemize}
+  \item \textbf{Momento óptimo de inversión}: elegir la fecha que dé el \textbf{mayor VAN hoy}, $\max_t\ VAN_t/(1+r)^t$.
+  \item \textbf{Equipos de distinta duración}: el VAN \textbf{no es válido}; elegir la \textbf{menor anualidad equivalente} (CAE, tema 4).
+  \item \textbf{Momento de reemplazo de un equipo en funcionamiento}: comparar con la anualidad equivalente del equipo que lo sustituiría.
+\end{itemize}
+
+\begin{trampa}
+\begin{itemize}
+  \item «El VAN es adecuado para elegir entre dos proyectos con el \textbf{mismo horizonte temporal}» es la correcta (P12: \emph{b}).
+        Falsas: «la TIR sirve con distinto desembolso», «la TIR sirve en cualquier caso», «VAN y TIR siempre coinciden».
+  \item «Si la rentabilidad de una inversión es menor que el coste de oportunidad, su VAN es negativo»: \textbf{verdadero}.
+\end{itemize}
+\end{trampa}
+
+% =====================================================================
+\tema{4}{Variables que intervienen en la decisión de inversión}{Flujos de tesorería incrementales · inversión inicial · flujos de las operaciones · valor residual · CAE y demanda estacional}
+% =====================================================================
+
+\begin{esencial}
+Es el tema que más puntúa. Debes construir sin dudar la tabla de flujos de un proyecto
+($C_0\di$, $Q_i\di$ renta $\to$ tesorería, $VR_n\di$ del activo fijo y del FM), plantear un \textbf{VAN incremental}
+y resolver un \textbf{CAE} (con inflación o cambio tecnológico) y un caso de \textbf{demanda estacional}.
+\end{esencial}
+
+\begin{formula}[Ecuación general del VAN después de impuestos]
+\[
+VAN=-C_0\di+\sum_{i=1}^{n}\frac{Q_i\di}{(1+r)^i}+\frac{VR_n\di}{(1+r)^n}
+\]
+\end{formula}
+
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\scriptsize,x=1.35cm]
+  \draw[slate,line width=0.8pt] (0,0) -- (8.3,0);
+  \foreach \i/\l in {0/0,1/1,2/2,3/3,5.5/{n-1},7/n}{\draw[slate] (\i,0.1)--(\i,-0.1) node[below]{$\l$};}
+  \node[slate] at (4.25,-0.25) {$\cdots$};
+  \draw[alert,line width=1.6pt,-{Stealth}] (0,0) -- (0,-1.1) node[below]{$C_0\di$};
+  \foreach \i in {1,2,3,5.5,7}{\draw[steel,line width=1.4pt,-{Stealth}] (\i,0) -- (\i,0.95);}
+  \node[steel,above] at (2,0.95) {$Q_i\di$ (tesorería)};
+  \draw[okgreen,line width=1.4pt,-{Stealth}] (7.25,0) -- (7.25,1.5) node[above]{$VR_n\di$};
+\end{tikzpicture}
+\end{center}
+
+\section{Criterios generales para estimar los flujos}
+\begin{enumerate}
+  \item \textbf{Solo flujos de tesorería} (cobros $-$ pagos), \textbf{después de impuestos}. El beneficio contable no sirve
+        (criterio de devengo; deduce amortización y no la inversión).
+  \item \textbf{Solo flujos incrementales}: $\Delta C_0\di^{II/I}$, $\Delta Q_i\di^{II/I}$, $\Delta VR\di^{II/I}$.
+  \begin{itemize}
+    \item No confundir rendimientos \textbf{medios} (históricos de una división) con \textbf{incrementales}.
+    \item Incluir \textbf{todos los efectos} del proyecto (ramal de ferrocarril con VAN aislado $<0$ pero conjunto $>0$;
+          y, al revés, la \textbf{canibalización} de ventas propias).
+    \item Incluir las \textbf{variaciones del FM}.
+    \item \textbf{Olvidar los costes irrecuperables} (pasados e irreversibles), aunque se hicieran para el proyecto.
+    \item \textbf{Incluir los costes de oportunidad} (terreno que podría venderse; nave que podría alquilarse).
+    \item Cuidado con los \textbf{gastos generales}: solo los extra que cause el proyecto.
+  \end{itemize}
+  \item \textbf{Inflación coherente}: flujos nominales a tasa nominal; reales a tasa real.
+        $(1+r_{nom})=(1+r_{real})(1+\pi)$. Ej.: flujos reales $-100.000$; 35.000; 50.000; 30.000, $r_{nom}=10\,\%$, $\pi=3\,\%$
+        $\Rightarrow r_{real}=6,7961\,\%$ y por ambas vías $VAN=\mathbf{1.241,03}$.
+  \item \textbf{Separar inversión y financiación}: el proyecto se valora como si se financiara con fondos propios.
+        \textbf{No se restan intereses} ni devolución del préstamo.
+  \item La \textbf{amortización no es un pago}, pero es deducible: genera un \textbf{ahorro fiscal} $CAF\cdot t_c$.
+\end{enumerate}
+
+\begin{trampa}[Flujo de caja con gastos financieros (examen 2018/19)]
+$BAIT=100$, amortización 5, gastos financieros 10, $t_c=25\,\%$, sin $\Delta$FM:
+\ $Q\di=BAIT(1-t_c)+CAF=75+5=\mathbf{80}$\eur. Los intereses \textbf{no} se restan (opción \emph{b}).
+\end{trampa}
+
+\section{Inversión inicial}
+\textbf{Antes de impuestos} $C_0\ai$: coste principal + costes secundarios necesarios para que el activo alcance su nivel
+de servicio (puesta en marcha, transporte, ampliación de almacén) + inversión en capital circulante.
+Los \textbf{gastos de formación no se activan}: son gasto del ejercicio.
+
+\begin{formula}[Inversión inicial después de impuestos]
+\[
+C_0\di=C_0\ai-\text{impuestos}=\text{Activo fijo}+G_0\,(1-t_c)+FM_0\ \ [-\ VR_0\di\ \text{del equipo viejo que se vende}]
+\]
+$G_0$: gastos deducibles en $t=0$ (puesta en marcha, formación) $\Rightarrow$ ahorro fiscal inmediato.
+Supuestos: el impuesto se devenga y paga en el mismo instante; se ignoran deducciones por inversión.
+\end{formula}
+
+\section{Flujos de caja de las operaciones}
+\begin{formula}[De renta a tesorería]
+\[
+Q_i\ai=\text{Ingresos}_i-\text{Gastos de explotación}_i\quad(\text{sin amortización ni intereses})
+\]
+\[
+Q_i\di^{\,\text{renta}}=Q_i\ai\,(1-t_c)+CAF_i\cdot t_c
+\qquad\qquad
+Q_i\di^{\,\text{tesorería}}=Q_i\ai\,(1-t_c)+CAF_i\cdot t_c-\Delta FM_i
+\]
+General: $Q_i\di=Q_i\ai(1-t_c)-I^{*}t_c+G^{*}t_c$ ($I^*$: ingresos computables sin cobro; $G^*$: gastos deducibles sin pago).\\
+$CAF=\dfrac{V_0-VR_{\text{contable}}}{n}$\qquad $\Delta FM_i=FM_i-FM_{i-1}=\Delta AC-\Delta PC$
+\end{formula}
+
+\begin{itemize}
+  \item $\Delta FM>0$ (más existencias o clientes): \textbf{resta}. \ $\Delta FM<0$ (se libera FM): \textbf{suma}.
+  \item Por qué funciona: cobros $=$ ingresos $-\Delta CC$; pagos $=$ compras $-\Delta CP$ y consumo $=$ compras $+E_t-E_{t+1}$.
+        Restando $\Delta FM$ pasamos de devengo a caja.
+\end{itemize}
+
+\begin{trampa}[Plazo de proveedores (examen 2018/19)]
+Si en el año 2 los proveedores conceden 60 días (antes se pagaba al contado), aumenta el pasivo circulante $\Rightarrow$
+\textbf{disminuye el FM} $\Rightarrow$ \textbf{aumenta el flujo de caja} del año 2 (opción \emph{c}).
+\end{trampa}
+
+\section{Valor residual}
+\begin{formula}[Valor residual después de impuestos]
+\[
+VR_n\di=VR_n\di^{AF}+VR_n\di^{FM}
+\]
+\[
+VR_n\di^{AF}=VR_n\ai^{AF}\mp\left(VR_n\ai^{AF}-VNC\right)t_c,\qquad VNC=V_0-\text{amort.~acumulada}
+\]
+\[
+VR_n\di^{FM}=VR_n\ai^{FM}\pm\left(\text{FM no recuperado}\right)t_c
+\]
+\textbf{Plusvalía} ($\Delta P$, precio $>$ VNC): paga impuesto (resta). \textbf{Minusvalía} ($\nabla P$, precio $<$ VNC):
+ahorro fiscal (suma). FM recuperado por su valor contable $\Rightarrow$ sin efecto fiscal.
+\end{formula}
+
+\needspace{12\baselineskip}
+\section{Caso completo: proyecto del guano (SIFA)}
+\begin{ejemplo}{Diapositivas 34–39 · miles de \texteuro, $r=20\,\%$, $t_c=35\,\%$}
+\textbf{Datos}: planta 10.000 en $t=0$, amortización lineal 6 años hasta VNC 500 ($CAF=1.583$); puesta en marcha 4.000
+deducible en $t=0$; venta de la planta en $t=7$ por 1.949; FM recuperado por su valor contable.
+
+\textbf{1.} $C_0\di=-[10.000+4.000(1-0,35)]=\mathbf{-12.600}$.
+
+\textbf{2.} Flujos de las operaciones:
+\begin{center}\scriptsize\setlength{\tabcolsep}{3.4pt}
+\begin{tabular}{@{}l *{7}{r}@{}}
+\headrow \thead{Concepto} & \thead{1} & \thead{2} & \thead{3} & \thead{4} & \thead{5} & \thead{6} & \thead{7}\\
+Ventas & 523 & 12.887 & 32.610 & 48.901 & 35.834 & 19.717 & --\\
+\rowcolor{mist}$-$ Coste ventas y otros & 3.037 & 8.939 & 20.883 & 30.809 & 23.103 & 13.602 & --\\
+$Q_i\ai$ & $-2.514$ & 3.948 & 11.727 & 18.092 & 12.731 & 6.115 & --\\
+\rowcolor{mist}$Q_i\ai(1-t_c)+CAF\,t_c$ & $-1.080,05$ & 3.120,25 & 8.176,60 & 12.313,85 & 8.829,20 & 4.528,80 & --\\
+$\Delta FM$ & 550 & 739 & 1.972 & 1.629 & $-1.307$ & $-1.581$ & --\\
+\rowcolor{mist}\bfseries $Q_i\di$ tesorería & \bfseries $-1.630,05$ & \bfseries 2.381,25 & \bfseries 6.204,60 & \bfseries 10.684,85 & \bfseries 10.136,20 & \bfseries 6.109,80 & --\\
+\end{tabular}
+\end{center}
+
+\textbf{3.} $VR_7\di^{AF}=1.949-(1.949-500)\cdot0,35=1.442$; \ $VR_7\di^{FM}=2.002$ $\Rightarrow$ $VR_7\di=\mathbf{3.444}$.
+
+\textbf{4.} $VAN=-12.600-\frac{1.630,05}{1,2}+\frac{2.381,25}{1,2^2}+\cdots+\frac{6.109,80}{1,2^6}+\frac{3.444}{1,2^7}=\mathbf{+3.519,53}$ $\Rightarrow$ conviene.
+\end{ejemplo}
+
+\begin{examen}[Checklist del problema de proyecto]
+\begin{enumerate}
+  \item Define las \textbf{alternativas} (I: sin proyecto / seguir; II: con proyecto / cambiar) y trabaja en \textbf{incrementos II$-$I}.
+  \item $C_0\di$: activo + gastos iniciales $\times(1-t_c)$ + $FM_0$ $-$ venta neta del equipo viejo.
+  \item CAF y su ahorro fiscal \textbf{solo en los años en que se amortiza}.
+  \item Coste de oportunidad (alquiler perdido, venta perdida) y canibalización \textbf{dentro} de $Q_i\ai$.
+  \item Fila de FM: saldos y \textbf{variaciones}; el FM final se recupera en $VR_n$.
+  \item $VR_n\di$ por separado para activo fijo (con VNC) y FM (con la parte no recuperada).
+  \item Pregunta de BAIT/BAT/BN: ahí \textbf{sí} van amortización e intereses; en los flujos, \textbf{no} los intereses.
+\end{enumerate}
+\end{examen}
+
+\begin{trampa}[Problemas de la relación que conviene recordar]
+\begin{itemize}
+  \item \textbf{Renovación}: la venta del equipo viejo \textbf{reduce} el desembolso incremental; se pierden los flujos y el
+        VR futuro del viejo. Por eso en P15 ninguna de \emph{a, b, c} es correcta (\emph{d}); en P14 la falsa es la \emph{b}.
+  \item \textbf{Nave propia sin uso que se alquilaría}: el alquiler perdido resta en $Q_i\ai$ (P13: $\Delta VAN=732.841,04$,
+        incluyendo el ahorro fiscal por el FM no recuperado).
+  \item \textbf{Punto muerto financiero} (VAN $=0$): separar de los costes fijos la parte que es amortización (P16).
+  \item \textbf{Canibalización}: las ventas incrementales son ventas online menos la caída de las físicas (P20: 10.388,30).
+  \item \textbf{Activos ya existentes} que se mantienen en ambas alternativas \textbf{no cuentan} (P21, Sonora).
+  \item \textbf{Continuar vs.~cesar} con igual VAN: la alternativa de menor riesgo (alquiler avalado) merecería una tasa menor (P22).
+\end{itemize}
+\end{trampa}
+
+\section{Equipos de distinta duración: coste anual equivalente}
+\begin{formula}[CAE]
+\[
+VA(\text{costes})=CAE\cdot\an{n}{r}\qquad\Longrightarrow\qquad CAE=\frac{VA(\text{costes})}{\an{n}{r}}
+\]
+Se elige el \textbf{menor CAE}. Hipótesis implícita: cada equipo se reemplaza indefinidamente por otro idéntico.
+\end{formula}
+
+\begin{ejemplo}{Máquinas A y B (términos reales, $r=6\,\%$)}
+A: 15; 5; 5; 5 $\Rightarrow VA=28,37$, $CAE_A=28,37/\an{3}{0,06}=\mathbf{10,61}$. \quad
+B: 10; 6; 6 $\Rightarrow VA=21,00$, $CAE_B=21/\an{2}{0,06}=\mathbf{11,45}$. Se elige \textbf{A}
+(aunque B tenga menor VA de costes: dura un año menos).
+\end{ejemplo}
+
+\subsubsection{CAE e inflación}
+Calcula el CAE \textbf{en términos reales}. Los CAE nominales no son constantes ($10,61\cdot1,05^t$: 11,14; 11,70; 12,28 con
+$\pi=5\,\%$); despejar un CAE nominal constante con la tasa nominal es un \textbf{error}. Si te dan datos nominales:
+$r_{real}=\frac{1+r_{nom}}{1+\pi}-1$ y trabaja en real.
+
+\begin{ejemplo}{Bombillas LED · primer parcial 2018/19 (1,5 puntos)}
+LED: 3,60\eur, 9 años, 2\eur/año. Convencional: 0,60\eur, 1 año, 7\eur/año. $r_{nom}=6,08\,\%$, $\pi=2\,\%$ $\Rightarrow$ $r_{real}=4\,\%$.\\
+$VA_{LED}=3,60+2\,\an{9}{0,04}=18,74\Rightarrow CAE_{LED}=\mathbf{2,48}$; \quad
+$VA_{conv}=0,60+\frac{7}{1,04}=7,33\Rightarrow CAE_{conv}=\mathbf{7,62}$. Interesa la \textbf{LED}.
+\end{ejemplo}
+
+\subsubsection{CAE y cambio tecnológico}
+Si los costes de las máquinas futuras bajan un 20\,\% anual, el CAE deja de ser constante: se busca el primer término
+$CAE_1$ de una renta decreciente de razón 0,8 cuyo VA iguale el VA de costes.
+\[
+28,37=\frac{CAE_1}{1,06}+\frac{0,8\,CAE_1}{1,06^2}+\frac{0,8^2\,CAE_1}{1,06^3}\Rightarrow CAE_1^A=12,94
+\qquad
+21=\frac{CAE_1}{1,06}+\frac{0,8\,CAE_1}{1,06^2}\Rightarrow CAE_1^B=12,69
+\]
+Ahora gana \textbf{B}. \textbf{No generalizar}: con A de 6 años (VA 39,59) y B de 2 años (VA 25,00), sin cambio tecnológico
+$CAE_A=8,05<CAE_B=13,63$ y con él $CAE_1^A=12,63<CAE_1^B=15,10$: sigue ganando \textbf{A}.
+
+\begin{ejemplo}{Quickpizza (relación P24, $r=12\,\%$)}
+Horno A: $17.000+3.000\,\an{4}{0,12}=26.112,05\Rightarrow CAE_A=\mathbf{8.596,99}$. \
+Horno B: $12.000+4.000\,\an{3}{0,12}=21.607,33\Rightarrow CAE_B=\mathbf{8.996,19}$. Se elige \textbf{A}.
+\end{ejemplo}
+
+\section{Fluctuaciones en la carga de trabajo (demanda estacional)}
+Con demanda estacional no basta con comparar «todo viejo» contra «todo nuevo»: hay que valorar la combinación en la que
+la máquina \textbf{nueva} (coste por unidad menor) trabaja \textbf{a pleno rendimiento} y la \textbf{vieja} cubre la punta.
+
+\begin{ejemplo}{Copiadoras (diapositivas 52–55, $r=10\,\%$, vida indefinida)}
+Capacidad 1.000 uc/año por máquina; vieja 2\,u.m./copia, nueva 1\,u.m./copia y 6.000\,u.m.; demanda 1.000 (oct–jun) + 500 (verano) = 1.500.
+\begin{center}\small
+\begin{tabular}{@{}l r r@{}}
+\headrow \thead{Alternativa} & \thead{VA (costes)} & \thead{Ahorro vs.~I}\\
+I. No sustituir (2 viejas $\times$ 750 uc) & $2\times\frac{750\cdot2}{0,1}=30.000$ & --\\
+\rowcolor{mist}II. Sustituir las dos (2 nuevas $\times$ 750 uc) & $2\times\left(6.000+\frac{750\cdot1}{0,1}\right)=27.000$ & 3.000\\
+III. Sustituir una (nueva 1.000 uc + vieja 500 uc) & $6.000+\frac{1.000}{0,1}+\frac{500\cdot2}{0,1}=26.000$ & \textbf{4.000}\\
+\end{tabular}
+\end{center}
+La óptima es \textbf{III}: una nueva a pleno rendimiento y la vieja para la demanda punta.
+\end{ejemplo}
+
+\begin{trampa}[Relación P23 y P25]
+\begin{itemize}
+  \item P23: el CAE \textbf{sí} conviene en términos reales; sirve precisamente para \textbf{distinta} duración; y no siempre
+        es mejor el VAN. Respuesta: \emph{d) ninguna es correcta}.
+  \item P25 aplicando el método de las diapositivas (162.500 copias/año): I $=4.875.000$; II $=4.437.500$; III $=4.375.000$.
+        Conviene sustituir una, pero el ahorro es \textbf{500.000} (no 450.000) $\Rightarrow$ \emph{d}. Ojo: si se exige
+        capacidad por estación (75.000 copias en oct–jun por máquina) la nueva solo haría 87.500 copias; el enunciado no
+        lo pide y la cátedra trabaja con capacidad anual, como en la diapositiva.
+\end{itemize}
+\end{trampa}
+
+% =====================================================================
+\clearpage
+\markboth{Formulario y trampas}{}
+\phantomsection
+\addcontentsline{toc}{part}{Formulario de examen y trampas de test}
+\begin{tcolorbox}[enhanced,colback=navy,colframe=navy,arc=0pt,left=12pt,right=12pt,top=12pt,bottom=12pt,
+   boxrule=0pt,borderline north={2.5pt}{0pt}{gold}]
+{\sffamily\color{gold}\bfseries\small REPASO FINAL}\par\vspace{3pt}
+{\sffamily\color{white}\bfseries\LARGE Formulario de examen}
+\end{tcolorbox}
+% =====================================================================
+
+\begin{tcolorbox}[base,colback=white,colframe=rule,boxrule=0.6pt,title={Tema 2 · Valoración},colbacktitle=steel]
+\small
+\begin{tabularx}{\linewidth}{@{}>{\leavevmode\sffamily\bfseries\color{navy}}p{3.3cm} L@{}}
+VAN a un año & $VAN=-C_0+\dfrac{C_1}{1+r}$; riqueza extra en $t=1$: $VAN(1+r)$\\
+Renta y factor & $\an{n}{r}=\dfrac{1-(1+r)^{-n}}{r}$; \ perpetuidad: $C/r$; \ perpetuidad creciente: $C_1/(r-g)$\\
+Bono & $P_0=C\,\an{n}{r}+VN/(1+r)^n$; \ rentabilidad actual $=C/P_0$\\
+Tasa de rentabilidad & $[C_1+(P_1-P_0)]/P_0$ \ · \ acciones: $r=DIV_1/P_0+(P_1-P_0)/P_0$\\
+Gordon & $P_0=DIV_1/(r-g)$; \ $r=DIV_1/P_0+g$; \ $g=b\cdot ROE$; \ $DIV=(1-b)BPA$\\
+VAOC & $P_0=BPA_1/r+\text{VAOC}$; \ $VAN_t=-I_t+ROE\cdot I_t/r$; \ $BPA_1/P_0=r(1-\text{VAOC}/P_0)$\\
+Agotamiento & desde el año $T+1$: $DIV=BPA$ constante $\Rightarrow P_T=BPA_{T+1}/r$\\
+\end{tabularx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[base,colback=white,colframe=rule,boxrule=0.6pt,title={Tema 4 · Proyectos},colbacktitle=steel]
+\small
+\begin{tabularx}{\linewidth}{@{}>{\leavevmode\sffamily\bfseries\color{navy}}p{3.3cm} L@{}}
+VAN & $-C_0\di+\sum Q_i\di/(1+r)^i+VR_n\di/(1+r)^n$\\
+Inversión inicial & $C_0\di=\text{AF}+G_0(1-t_c)+FM_0\ [-\,VR_0\di\text{ viejo}]$\\
+Flujo de tesorería & $Q_i\di=(I_i-G_i)(1-t_c)+CAF_i\,t_c-\Delta FM_i$; \ también $BAIT(1-t_c)+CAF-\Delta FM$\\
+Amortización & $CAF=(V_0-VR_{\text{contable}})/n$\\
+Valor residual AF & $VR\di=VR\ai-(VR\ai-VNC)\,t_c$ \ (si minusvalía, el término suma)\\
+Valor residual FM & recuperado a valor contable: sin impuesto; parte perdida $\times t_c$ = ahorro\\
+Inflación & $(1+r_{nom})=(1+r_{real})(1+\pi)$\\
+CAE & $CAE=VA(\text{costes})/\an{n}{r}$ \ (real); cambio tecnológico: renta de razón $(1-\text{reducción})$\\
+\end{tabularx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[base,colback=alertbg,colframe=alert,borderline west={3pt}{0pt}{alert},
+   title={\faExclamationTriangle\ \ Veinte afirmaciones de test (V/F)},colbacktitle=alert]
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}L >{\leavevmode\sffamily\bfseries\centering\arraybackslash}p{0.7cm}@{}}
+El objetivo financiero es maximizar el beneficio. & \color{alert}F\\
+El director financiero debe ajustar la caja a las preferencias de consumo de los accionistas. & \color{alert}F\\
+Si baja $r$, aumenta la inversión óptima y el que prefiere consumo futuro empeora. & \color{okgreen}V\\
+Con $r_e>r_p$ prestamistas y prestatarios no coinciden en la inversión óptima. & \color{okgreen}V\\
+Con $r_e>r_p$ la recta de quien presta es más inclinada. & \color{alert}F\\
+Se exige al proyecto el tipo del préstamo que lo financia. & \color{alert}F\\
+Rentabilidad actual y al vencimiento coinciden siempre. & \color{alert}F\\
+Un bono más largo es más sensible a los tipos de interés. & \color{okgreen}V\\
+El precio de una acción depende del horizonte del inversor. & \color{alert}F\\
+Reinvertir siempre crea valor si hace crecer los dividendos. & \color{alert}F\\
+Si $ROE=r$, VAOC $=0$ y $BPA_1/P_0=r$. & \color{okgreen}V\\
+Con VAOC $>0$, $BPA_1/P_0$ infravalora $r$. & \color{okgreen}V\\
+Una reinversión con $ROE>r$ siempre tiene VAN $>0$. & \color{alert}F\\
+La TIR sirve para elegir entre proyectos de distinto desembolso. & \color{alert}F\\
+VAN y TIR llevan siempre a la misma decisión. & \color{alert}F\\
+Los costes hundidos forman parte del desembolso inicial. & \color{alert}F\\
+La venta del equipo sustituido aumenta el desembolso incremental. & \color{alert}F\\
+Los intereses del préstamo se restan en los flujos del proyecto. & \color{alert}F\\
+Más plazo de proveedores reduce el FM y aumenta el flujo de caja. & \color{okgreen}V\\
+El CAE solo sirve para proyectos de idéntica duración. & \color{alert}F\\
+\end{tabularx}
+\end{tcolorbox}
+
+\end{document}
