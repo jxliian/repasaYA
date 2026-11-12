@@ -1,15 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
 import GlobalSearch from '../search/GlobalSearch.astro';
-import ThemeToggle from './ThemeToggle.astro';
 import { degreePath } from '../../lib/routes';
 
+/**
+ * Cabecera corporativa: marca, navegación principal, buscador compacto y
+ * el enlace para pedir una asignatura. Blanca, con borde inferior fino y
+ * el subrayado dorado en la sección activa.
+ */
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const degrees = (await getCollection('degrees')).sort((a, b) =>
   a.data.short.localeCompare(b.data.short, 'es')
 );
 
 const path = Astro.url.pathname;
+const isHome = path === base;
 const isActive = (href: string) => path.startsWith(href);
 
 const REPO_URL = 'https://github.com/jxliian/repasaYA';
@@ -20,42 +25,30 @@ const ISSUE_URL = `${REPO_URL}/issues/new?title=Solicitud%3A+%5BAsignatura%5D&bo
 
 <header class="site-header">
   <div class="hdr-inner">
-    <a class="brand" href={base} aria-label="repasaYA — inicio">
-      repasaYA<span class="dot" aria-hidden="true"></span>
-    </a>
+    <a class="brand" href={base} aria-label="repasaYA, inicio">repasaYA<span class="pt">.</span></a>
 
-    <nav class="degrees" aria-label="Grados">
+    <nav class="nav" aria-label="Principal">
+      <a class:list={['nav-link', { active: isHome }]} href={`${base}#asignaturas`}>Asignaturas</a>
       {
         degrees.map((d) => (
-          <a
-            class:list={['deg-link', { active: isActive(degreePath(d.id)) }]}
-            href={degreePath(d.id)}
-          >
-            <span aria-hidden="true">{d.data.icon}</span>
+          <a class:list={['nav-link', { active: isActive(degreePath(d.id)) }]} href={degreePath(d.id)}>
             {d.data.short}
           </a>
         ))
       }
+      <a class="nav-link" href={`${base}#novedades`}>Novedades</a>
+      <a class="nav-link" href={`${base}#sobre-mi`}>Sobre mí</a>
     </nav>
 
-    <div class="search-slot">
-      <GlobalSearch variant="compact" id="hdr-search" placeholder="Buscar asignatura…" />
-    </div>
+    {
+      !isHome && (
+        <div class="search-slot">
+          <GlobalSearch variant="compact" id="hdr-search" placeholder="Buscar asignatura…" />
+        </div>
+      )
+    }
 
-    <div class="actions">
-      <a class="icon-btn" href={REPO_URL} target="_blank" rel="noopener" aria-label="Ver el código en GitHub">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-        </svg>
-      </a>
-      <ThemeToggle />
-      <a class="ask" href={ISSUE_URL} target="_blank" rel="noopener">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
-          <path d="M12 5v14M5 12h14"></path>
-        </svg>
-        <span>Pedir asignatura</span>
-      </a>
-    </div>
+    <a class="ask" href={ISSUE_URL} target="_blank" rel="noopener">Pedir asignatura</a>
   </div>
 </header>
 
@@ -69,163 +62,124 @@ const ISSUE_URL = `${REPO_URL}/issues/new?title=Solicitud%3A+%5BAsignatura%5D&bo
     left: 12px;
     top: 12px;
     padding: 10px 16px;
-    border-radius: var(--radius-sm);
-    background: var(--accent);
-    color: var(--on-accent);
+    border-radius: var(--radius);
+    background: var(--brand);
+    color: #fff;
   }
 
   .site-header {
     position: sticky;
     top: 0;
     z-index: 200;
-    background: color-mix(in srgb, var(--bg) 72%, transparent);
-    border-bottom: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--blur)) saturate(150%);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
   }
   .hdr-inner {
-    max-width: var(--w-wide);
+    max-width: var(--w-content);
     margin-inline: auto;
     height: var(--header-h);
-    padding-inline: clamp(14px, 3vw, 28px);
+    padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 28px;
+  }
+  @media (min-width: 720px) {
+    .hdr-inner {
+      padding-inline: 28px;
+    }
   }
 
   .brand {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    flex-shrink: 0;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.16rem;
-    letter-spacing: -0.055em;
-  }
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 10px var(--accent);
-    margin-bottom: 5px;
-    animation: dotPulse 2.4s var(--ease-out) infinite;
-  }
-  @keyframes dotPulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.35;
-    }
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: -0.01em;
+    color: var(--brand);
+    flex: none;
   }
 
-  .degrees {
+  .nav {
     display: flex;
-    gap: 4px;
-    flex-shrink: 0;
+    gap: 22px;
+    height: 100%;
   }
-  .deg-link {
-    display: inline-flex;
+  .nav-link {
+    display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 7px 13px;
-    border-radius: var(--radius-pill);
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     font-weight: 600;
-    color: var(--text-muted);
-    border: 1px solid transparent;
-    transition: color var(--dur) var(--ease-out),
-      background var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out);
+    color: var(--ink-2);
+    border-bottom: 2px solid transparent;
+    padding-top: 2px;
+    white-space: nowrap;
   }
-  .deg-link:hover {
-    color: var(--text);
-    background: var(--glass);
-    border-color: var(--glass-border);
+  .nav-link:hover {
+    color: var(--ink);
   }
-  .deg-link.active {
-    color: var(--accent);
-    background: var(--accent-soft);
-    border-color: var(--accent-line);
+  .nav-link.active {
+    color: var(--ink);
+    border-bottom-color: var(--dot);
   }
 
   .search-slot {
     flex: 1;
     min-width: 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-
-  .icon-btn {
-    display: grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-pill);
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    color: var(--text-muted);
-    transition: color var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out),
-      box-shadow var(--dur) var(--ease-out);
-  }
-  .icon-btn:hover {
-    color: var(--accent);
-    border-color: var(--glass-border-hi);
-    box-shadow: var(--glow-sm);
+    max-width: 320px;
+    margin-left: auto;
   }
 
   .ask {
+    margin-left: auto;
+    flex: none;
+    height: 34px;
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    padding: 9px 16px;
-    border-radius: var(--radius-pill);
-    font-size: 0.82rem;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: 0.86rem;
     font-weight: 600;
-    white-space: nowrap;
-    color: var(--on-accent);
-    background: linear-gradient(135deg, var(--accent-bright), var(--accent-deep));
-    box-shadow: var(--glow-sm);
-    transition: transform var(--dur) var(--ease-snap),
-      box-shadow var(--dur) var(--ease-out);
+    color: var(--brand);
+  }
+  .search-slot + .ask {
+    margin-left: 0;
   }
   .ask:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--glow-md);
+    border-color: var(--brand);
   }
 
-  /* ── Adaptación ─────────────────────────────────────────────
-     Se van cayendo por orden de prescindibilidad: primero el texto
-     del botón, luego los grados, luego el buscador (queda ⌘K). */
-  @media (max-width: 1080px) {
-    .ask span {
-      display: none;
-    }
-    .ask {
-      padding: 9px 12px;
-    }
-  }
-  @media (max-width: 900px) {
-    .degrees {
+  @media (max-width: 1000px) {
+    .nav-link:nth-last-child(-n + 2) {
       display: none;
     }
   }
-  @media (max-width: 560px) {
+  /* Móvil: la navegación baja a una segunda fila desplazable */
+  @media (max-width: 760px) {
+    .hdr-inner {
+      flex-wrap: wrap;
+      height: auto;
+      row-gap: 0;
+      column-gap: 14px;
+      padding-top: 10px;
+    }
+    .nav {
+      order: 3;
+      width: 100%;
+      height: 42px;
+      gap: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-link,
+    .nav-link:nth-last-child(-n + 2) {
+      display: flex;
+    }
     .search-slot {
-      display: none;
+      max-width: none;
     }
-    .icon-btn {
+  }
+  @media (max-width: 520px) {
+    .ask {
       display: none;
     }
   }

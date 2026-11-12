@@ -7,13 +7,14 @@ import PageHead from '../components/catalog/PageHead.astro';
  * Política de privacidad.
  *
  * Escrita a partir de lo que el sitio hace de verdad, comprobado en el
- * código: dos claves de almacenamiento (`theme` y `ry_boot`), cero cookies
+ * código: claves de almacenamiento propias (`ry-recent`, `ry_boot` y las
+ * del motor de tests), cero cookies
  * y un único tercero (hits.sh, solo en la portada). Si se añade o se quita
  * una dependencia externa, hay que actualizar esta página el mismo día.
  */
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const EMAIL = 'e.carrionjuliann@go.ugr.es';
-const updated = '3 de agosto de 2026';
+const updated = '13 de noviembre de 2026';
 // Cambia si se añade o quita algún tercero.
 
 const NEVER = [
@@ -26,9 +27,9 @@ const NEVER = [
 
 const STORAGE = [
   {
-    key: 'theme',
+    key: 'ry-recent',
     where: 'localStorage',
-    what: 'Si prefieres el tema claro u oscuro.',
+    what: 'Las últimas cuatro asignaturas que has abierto, para enseñarlas en «Seguir donde lo dejaste» de la portada.',
     life: 'Hasta que borres los datos del navegador.',
   },
   {
@@ -93,7 +94,7 @@ const STORAGE = [
     <section class="block">
       <h2>Lo que se guarda en tu navegador</h2>
       <p class="lede">
-        Dos cosas, y las dos se quedan en tu dispositivo. No viajan a ninguna parte
+        Tres cosas, y todas se quedan en tu dispositivo. No viajan a ninguna parte
         porque no hay a dónde enviarlas.
       </p>
 

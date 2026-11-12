@@ -7,11 +7,12 @@
  * sin backend es la única forma honesta de tener formulario sin meter
  * un servicio de terceros que rastree a quien lo use.
  *
- * ⚠️ El texto de la bio es un punto de partida: cámbialo a tu gusto.
+ * El QR se genera como SVG (`assets/qr-repasaYA.svg`) y se pinta siempre
+ * sobre blanco para que se pueda escanear.
  */
 import { Image } from 'astro:assets';
 import avatar from '../../assets/julian-avatar.jpg';
-import qrImg from '../../assets/qr-repasaYA.png';
+import qrSvg from '../../assets/qr-repasaYA.svg?raw';
 
 const EMAIL = 'e.carrionjuliann@go.ugr.es';
 const GITHUB = 'https://github.com/jxliian';
@@ -25,96 +26,69 @@ const SUBJECTS = [
 ];
 ---
 
-<section class="about container" id="sobre-mi" aria-labelledby="about-title">
-  <div class="grid">
-    <!-- ── Bio ──────────────────────────────────────────────── -->
-    <div class="bio glass">
-      <div class="bio-head">
-        <Image
-          class="avatar"
-          src={avatar}
-          alt="Julián Carrión"
-          width={168}
-          height={168}
-          loading="lazy"
-        />
+<section class="about" id="sobre-mi" aria-labelledby="about-title">
+  <div class="container grid">
+    <div class="bio">
+      <div class="me">
+        <Image src={avatar} alt="Julián Carrión" width={152} height={152} loading="lazy" class="avatar" />
         <div>
-          <p class="mono-label">Sobre mí</p>
-          <h2 id="about-title">Julián Carrión</h2>
-          <p class="role">Doble Grado en ADE + Ingeniería Informática · Universidad de Granada</p>
+          <h2 id="about-title" class="sec-title">Julián Carrión</h2>
+          <p class="role">Doble Grado en ADE e Ingeniería Informática, Universidad de Granada</p>
         </div>
       </div>
-
-      <div class="bio-text">
-        <p>
-          Monté repasaYA porque estaba harto de llegar a la semana de exámenes con
-          200 diapositivas y ninguna forma decente de saber si me las sabía. Así que
-          en vez de subrayar, me puse a convertir el temario en preguntas.
-        </p>
-        <p>
-          Todo lo que hay aquí lo uso yo para estudiar lo mismo que tú. Por eso es
-          gratis, no pide registro y no tiene un solo anuncio: no hay nada que
-          monetizar, solo apuntes que ya existían.
-        </p>
+      <p>
+        Monté repasaYA porque estaba harto de llegar a la semana de exámenes con
+        200 diapositivas y ninguna forma decente de saber si me las sabía. Así que
+        en vez de subrayar, me puse a convertir el temario en preguntas.
+      </p>
+      <p>
+        Todo lo que hay aquí lo uso yo para estudiar lo mismo que tú. Por eso es
+        gratis, no pide registro y no tiene un solo anuncio: no hay nada que
+        monetizar, solo apuntes que ya existían.
+      </p>
+      <div class="links">
+        <a class="btn btn-ghost" href={GITHUB} target="_blank" rel="noopener">GitHub @jxliian</a>
+        <a class="btn btn-ghost" href={REPO} target="_blank" rel="noopener">Código del proyecto</a>
       </div>
-
-      <div class="bio-qr">
-        <Image
-          src={qrImg}
-          alt="Código QR repasaYA"
-          class="qr-img"
-          width={180}
-          height={180}
-          loading="lazy"
-        />
-      </div>
-
-
-
-      <div class="bio-links">
-        <a class="btn btn-ghost" href={GITHUB} target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-          </svg>
-          @jxliian
-        </a>
-        <a class="btn btn-ghost" href={REPO} target="_blank" rel="noopener">★ Código del proyecto</a>
+      <div class="qr">
+        <div class="code" set:html={qrSvg} />
+        <div>
+          <strong>Llévatelo al móvil</strong>
+          <span>Escanéalo para abrir repasaYA y repasar desde cualquier sitio.</span>
+          <span class="url">repasaya.juliancarrion.dev</span>
+        </div>
       </div>
     </div>
 
-    <!-- ── Contacto ─────────────────────────────────────────── -->
-    <div class="contact glass">
-      <p class="mono-label">Contacto</p>
-      <h2>Escríbeme</h2>
-      <p class="intro">
+    <div class="contact" id="contacto">
+      <h2 class="sec-title">Escríbeme<span class="pt">.</span></h2>
+      <p class="sec-sub">
         ¿Una pregunta mal puesta, una asignatura que falta, apuntes que quieres
         compartir? Cuéntamelo.
       </p>
 
       <form class="form" data-contact data-email={EMAIL} novalidate>
-        <!-- Campo trampa Anti-Spam (Honeypot) para bots -->
         <div class="hp-slot" aria-hidden="true">
           <input type="text" name="b_hp" tabindex="-1" autocomplete="off" />
         </div>
-
-        <div class="field">
-          <label for="c-name">Cómo te llamas</label>
-          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre (o un alias, me da igual)" maxlength="80" required />
+        <div class="two">
+          <div class="field">
+            <label for="c-name">Cómo te llamas</label>
+            <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre o un alias" maxlength="80" required />
+          </div>
+          <div class="field">
+            <label for="c-subject">De qué va</label>
+            <select id="c-subject" name="subject">
+              {SUBJECTS.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </div>
         </div>
-
-        <div class="field">
-          <label for="c-subject">De qué va</label>
-          <select id="c-subject" name="subject">
-            {SUBJECTS.map((s) => <option value={s}>{s}</option>)}
-          </select>
-        </div>
-
         <div class="field">
           <div class="label-row">
             <label for="c-message">Cuéntame</label>
             <span class="char-count" data-char-count>0 / 1500</span>
           </div>
-          <textarea id="c-message" name="message" rows="6" placeholder="Sin formalismos, al grano." maxlength="1500" required></textarea>
+          <textarea id="c-message" name="message" placeholder="Sin formalismos, al grano." maxlength="1500" required></textarea>
         </div>
 
         <p class="disclaimer">
@@ -130,257 +104,191 @@ const SUBJECTS = [
         <output class="status" data-status aria-live="polite"></output>
       </form>
 
-      <p class="fallback">
-        O directamente a <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-      </p>
+      <p class="fallback">O directamente a <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
     </div>
   </div>
 </section>
 
 <style>
-  /* Los rótulos globales se quedan cortos aquí: esta sección tiene sitio
-     de sobra y el texto pedía leerse desde más lejos. */
-  .about :global(.mono-label) {
-    font-size: 0.76rem;
-  }
-
   .about {
-    padding-block: 20px 30px;
-    text-align: left;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    margin-top: 56px;
   }
   .grid {
     display: grid;
-    /* Mismo ancho y misma altura para los dos cuadros: `stretch` iguala
-       la altura y `1fr 1fr` el ancho. */
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    gap: 20px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+    padding-block: 52px;
   }
   @media (max-width: 880px) {
     .grid {
       grid-template-columns: 1fr;
+      gap: 44px;
     }
   }
 
-  .bio,
-  .contact {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 34px;
-    border-radius: var(--radius-lg);
-  }
-
-  /* ── Bio ───────────────────────────────────────────────────── */
-  .bio-head {
+  .me {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 24px;
+    gap: 18px;
+    margin-bottom: 18px;
   }
-  .avatar {
-    width: 112px;
-    height: 112px;
-    flex-shrink: 0;
-    border-radius: 50%;
+  .me :global(.avatar) {
+    width: 76px;
+    height: 76px;
     object-fit: cover;
-    border: 1px solid var(--glass-border-hi);
-    box-shadow: var(--glow-sm);
-  }
-  .bio-head h2 {
-    margin-top: 5px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.85rem;
-    letter-spacing: -0.035em;
+    border: 1px solid var(--line);
+    flex: none;
   }
   .role {
-    margin-top: 6px;
+    margin-top: 2px;
+    color: var(--ink-2);
     font-size: 0.92rem;
-    color: var(--text-dim);
   }
-
-  .bio-text p {
-    font-size: 1.04rem;
-    line-height: 1.7;
-    color: var(--text-muted);
-    text-wrap: pretty;
+  .bio > p {
+    margin-bottom: 12px;
+    max-width: 62ch;
   }
-  .bio-text p + p {
-    margin-top: 14px;
-  }
-
-  .bio-qr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 24px;
-    margin-bottom: 8px;
-    padding: 0;
-    background: transparent;
-    border: none;
-    text-align: center;
-  }
-  .qr-img {
-    width: 180px;
-    height: 180px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--glass-border-hi);
-    box-shadow: var(--glow-sm);
-  }
-  .qr-btn {
-    font-size: 0.9rem;
-    padding: 12px 22px;
-  }
-
-
-
-  .bio-links {
+  .links {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: auto;
-    padding-top: 28px;
-  }
-  .bio-links .btn {
-    padding: 12px 20px;
-    font-size: 0.95rem;
+    margin-top: 18px;
   }
 
-  /* ── Contacto ──────────────────────────────────────────────── */
-  .contact h2 {
-    margin-top: 5px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.85rem;
-    letter-spacing: -0.035em;
+  .qr {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
   }
-  .intro {
-    margin-top: 10px;
-    font-size: 1.02rem;
-    line-height: 1.65;
-    color: var(--text-muted);
+  .code {
+    width: 116px;
+    height: 116px;
+    padding: 9px;
+    background: #fff;
+    border: 1px solid var(--line);
+    flex: none;
+  }
+  .code :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .qr strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .qr span {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+  .qr .url {
+    margin-top: 4px;
+    color: var(--brand);
+    font-weight: 600;
   }
 
   .form {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 520px) {
+    .two {
+      grid-template-columns: 1fr;
+    }
+  }
+  .hp-slot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
   .field {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
+    min-width: 0;
   }
   .label-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
-  .char-count {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-dim);
-  }
-  .hp-slot {
-    display: none !important;
-    position: absolute;
-    left: -9999px;
+    align-items: baseline;
   }
   label {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+  .char-count {
+    font-size: 0.78rem;
+    color: var(--ink-3);
   }
   input,
   select,
   textarea {
     width: 100%;
-    padding: 14px 16px;
-    border-radius: var(--radius-sm);
-    background: var(--glass-hi);
-    border: 1px solid var(--glass-border);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 0.98rem;
-    transition: border-color var(--dur) var(--ease-out),
-      box-shadow var(--dur) var(--ease-out);
+    font: 400 0.95rem var(--font-body);
+    color: var(--ink);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 12px;
   }
+  /* Altura fija: antes se podía estirar sin límite y descuadraba la web */
   textarea {
-    resize: vertical;
-    min-height: 132px;
-    max-height: 260px; /* Evita que la caja de texto se estire infinitamente */
-    line-height: 1.55;
-  }
-  input::placeholder,
-  textarea::placeholder {
-    color: var(--text-dim);
+    height: 150px;
+    resize: none;
+    overflow-y: auto;
   }
   input:focus,
   select:focus,
   textarea:focus {
     outline: none;
-    border-color: var(--glass-border-hi);
-    box-shadow: var(--glow-sm);
+    border-color: var(--brand);
+    box-shadow: 0 0 0 1px var(--brand);
   }
   input[aria-invalid='true'],
   textarea[aria-invalid='true'] {
     border-color: var(--wrong);
-    box-shadow: 0 0 0 3px var(--wrong-glow);
   }
-  select {
-    cursor: pointer;
-  }
-  /* El desplegable nativo hereda el fondo del sistema: hay que forzarlo */
-  select option {
-    background: var(--bg-elevated);
-    color: var(--text);
-  }
-
   .disclaimer {
-    font-size: 0.84rem;
-    line-height: 1.55;
-    color: var(--text-dim);
+    font-size: 0.82rem;
+    color: var(--ink-3);
   }
-
   .actions {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
-  .actions .btn {
-    padding: 13px 22px;
-    font-size: 0.95rem;
-  }
-
   .status {
-    min-height: 1.2em;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     color: var(--correct);
+    min-height: 1.2em;
   }
   .status[data-error] {
     color: var(--wrong);
   }
-
   .fallback {
-    margin-top: auto;
-    padding-top: 20px;
-    border-top: 1px solid var(--glass-border);
-    font-size: 0.9rem;
-    color: var(--text-dim);
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: var(--ink-2);
   }
   .fallback a {
-    color: var(--accent);
-    word-break: break-all;
-  }
-  .fallback a:hover {
-    text-decoration: underline;
+    color: var(--brand);
+    font-weight: 600;
   }
 </style>
 
@@ -407,7 +315,7 @@ const SUBJECTS = [
       if (charCount && message) {
         const len = message.value.length;
         charCount.textContent = `${len} / 1500`;
-        charCount.style.color = len >= 1450 ? 'var(--wrong)' : 'var(--text-dim)';
+        charCount.style.color = len >= 1450 ? 'var(--wrong)' : 'var(--ink-3)';
       }
     }
 

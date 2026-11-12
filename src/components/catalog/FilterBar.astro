@@ -24,6 +24,7 @@ const MATERIAL_LABEL: Record<string, string> = {
   glosario: 'Glosario',
   apuntes: 'Apuntes',
   examen: 'Exámenes',
+  guia: 'Guía',
 };
 ---
 
@@ -78,88 +79,76 @@ const MATERIAL_LABEL: Record<string, string> = {
 
 <style>
   .filters {
-    position: sticky;
-    top: calc(var(--header-h) + 10px);
-    z-index: 50;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 22px;
-    padding: 12px 16px;
-    border-radius: var(--radius);
+    display: grid;
+    gap: 10px;
+    padding: 14px 18px;
     margin-bottom: 26px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
   }
   .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
-    min-width: 0;
+    gap: 8px 14px;
+  }
+  .row > .mono-label {
+    min-width: 64px;
   }
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 0;
   }
-
   .chip {
-    padding: 6px 13px;
-    border-radius: var(--radius-pill);
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    transition: color var(--dur-fast) var(--ease-out),
-      background var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+    padding: 5px 12px;
+    font: 600 0.84rem var(--font-body);
+    color: var(--ink-2);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    margin-left: -1px;
+  }
+  .chip:first-child {
+    margin-left: 0;
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+  .chip:last-child {
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .chip:only-child {
+    border-radius: var(--radius);
   }
   .chip:hover {
-    color: var(--text);
-    border-color: var(--glass-border-hi);
+    color: var(--ink);
+    background: var(--canvas);
   }
   .chip.active {
-    color: var(--accent);
-    background: var(--accent-soft);
-    border-color: var(--accent-line);
-    box-shadow: var(--glow-sm);
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    background: var(--brand);
+    border-color: var(--brand);
   }
-
   .count-row {
-    margin-left: auto;
+    justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
   }
   .count {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    white-space: nowrap;
+    font-size: 0.84rem;
+    color: var(--ink-3);
   }
   .reset {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--accent);
     background: none;
-    border: none;
+    border: 0;
+    font: 600 0.84rem var(--font-body);
+    color: var(--brand);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
   .reset[hidden] {
     display: none;
-  }
-
-  @media (max-width: 720px) {
-    .filters {
-      position: static;
-      gap: 12px;
-    }
-    .row {
-      width: 100%;
-      align-items: flex-start;
-    }
-    .count-row {
-      margin-left: 0;
-      justify-content: space-between;
-    }
   }
 </style>
 

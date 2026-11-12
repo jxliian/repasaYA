@@ -1,18 +1,17 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/jetbrains-mono';
-import '@fontsource/unbounded/700.css';
-import '@fontsource/unbounded/800.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import SiteHeader from '../components/nav/SiteHeader.astro';
-import ParticleField from '../components/fx/ParticleField.astro';
 import About from '../components/sections/About.astro';
 import RepasaBot from '../components/fx/RepasaBot.astro';
+import { fetchHitsOnce } from '../lib/hits';
+import { degreePath } from '../lib/routes';
 
 /**
- * Shell — layout del catálogo (oscuro por defecto).
+ * Shell — layout del catálogo: cabecera, contenido, «Sobre mí» con el
+ * contacto, pie corporativo y el asistente Zero. Un único tema, claro.
  *
  * `QuizShell` es su equivalente para las páginas de material, que van sin
  * cabecera ni pie porque el motor ocupa la pantalla entera.
@@ -20,7 +19,7 @@ import RepasaBot from '../components/fx/RepasaBot.astro';
 interface Props {
   title: string;
   description?: string;
-  /** Fondo de nebulosa suave. Off en páginas largas de listado. */
+  /** Sin uso desde el rediseño: se acepta para no romper páginas antiguas. */
   ambient?: boolean;
   /** Fuera del índice de Google (páginas de prueba, duplicados). */
   noindex?: boolean;
@@ -38,6 +37,7 @@ const siteUrl = 'https://repasaya.juliancarrion.dev/';
 const canonical = `${siteUrl}${Astro.url.pathname.replace(/^\/|\/$/g, '')}${Astro.url.pathname === '/' ? '' : '/'}`;
 const pageTitle = title === 'repasaYA' ? 'repasaYA — Tests, Flashcards y Apuntes UGR | Aprueba sin pagar ni un duro' : `${title} — repasaYA UGR`;
 const year = new Date().getFullYear();
+const visits = await fetchHitsOnce();
 
 const favicon512 = `${siteUrl}favicon-512.png`;
 ---
@@ -133,111 +133,145 @@ const favicon512 = `${siteUrl}favicon-512.png`;
       ]
     })} />
     <ClientRouter />
-    <script is:inline>
-      // Oscuro por defecto; el claro es opt-in y se recuerda.
-      (function () {
-        try {
-          document.documentElement.dataset.theme =
-            localStorage.getItem('theme') || 'dark';
-        } catch (e) {
-          document.documentElement.dataset.theme = 'dark';
-        }
-      })();
-    </script>
   </head>
 
   <body>
-    <ParticleField />
-    {ambient && <div class="ambient" aria-hidden="true" />}
-
     <SiteHeader />
 
     <main id="contenido">
       <slot />
     </main>
 
+    <About />
+
     <footer class="site-footer">
-      <About />
-      <div class="container footer-meta">
-        <p>
-          Hecho con ganas por <strong>Julián Carrión</strong> ·
-          <a href="https://github.com/jxliian" target="_blank" rel="noopener">@jxliian</a>
-          · <a href="https://github.com/jxliian/repasaYA" target="_blank" rel="noopener">
-            código en GitHub
-          </a>
-        </p>
-        <p class="meta">
-          © {year} · Universidad de Granada · Doble Grado ADE + Ingeniería Informática
-        </p>
-        <p class="meta">
-          <a href={`${base}#sobre-mi`}>Sobre mí</a> ·
-          <a href="mailto:e.carrionjuliann@go.ugr.es">Contacto</a> ·
-          <a href={`${base}privacidad/`}>Privacidad</a> ·
-          <a href={`${base}mapa/`}>Mapa web</a>
-        </p>
+      <div class="container cols">
+        <div class="brandcol">
+          <a class="f-brand" href={base}>repasaYA<span class="pt">.</span></a>
+          <p>Tests, apuntes y exámenes resueltos para repasar ADE e Informática en la UGR. Gratis, sin registro y sin anuncios.</p>
+          {visits && (
+            <p class="visits"><strong>{visits}</strong> visitas</p>
+          )}
+        </div>
+        <div>
+          <h2>Grados</h2>
+          <ul>
+            <li><a href={degreePath('ade')}>ADE</a></li>
+            <li><a href={degreePath('informatica')}>Ingeniería Informática</a></li>
+            <li><a href={`${base}mapa/`}>Mapa web</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Proyecto</h2>
+          <ul>
+            <li><a href={`${base}#novedades`}>Novedades</a></li>
+            <li><a href={`${base}#opiniones`}>Opiniones</a></li>
+            <li><a href="https://github.com/jxliian/repasaYA" target="_blank" rel="noopener">Código en GitHub</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contacto</h2>
+          <ul>
+            <li><a href={`${base}#sobre-mi`}>Sobre mí</a></li>
+            <li><a href={`${base}#contacto`}>Escríbeme</a></li>
+            <li><a href={`${base}privacidad/`}>Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <div class="container legal-row">
+          <span>Hecho con ganas por <a href="https://github.com/jxliian" target="_blank" rel="noopener">Julián Carrión</a></span>
+          <span>© {year} Universidad de Granada, Doble Grado ADE + Ingeniería Informática</span>
+        </div>
       </div>
     </footer>
 
     <RepasaBot />
 
     <style is:global>
-      /* Nebulosa de fondo, fija: se ve a través del cristal al hacer scroll */
-      .ambient {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        background:
-          radial-gradient(
-            ellipse 70% 50% at 15% 0%,
-            rgba(124, 92, 255, 0.16),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 60% 50% at 90% 15%,
-            rgba(79, 220, 210, 0.09),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 80% 60% at 50% 100%,
-            rgba(255, 111, 216, 0.06),
-            transparent 65%
-          );
-      }
-      :root[data-theme='light'] .ambient {
-        opacity: 0.5;
-      }
-
       main {
         min-height: 50vh;
-        padding-bottom: 40px;
       }
 
       .site-footer {
-        border-top: 1px solid var(--glass-border);
-        padding: 40px 0 46px;
-        text-align: center;
-        font-size: 0.84rem;
-        color: var(--text-muted);
+        background: var(--foot);
+        color: var(--foot-text);
+        font-size: 0.9rem;
       }
-      .site-footer .footer-meta {
-        margin-top: 36px;
-        padding-top: 28px;
-        border-top: 1px solid var(--glass-border);
+      .site-footer .cols {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+        gap: 32px;
+        padding-block: 46px 34px;
       }
-      .site-footer p + p {
-        margin-top: 6px;
+      @media (max-width: 820px) {
+        .site-footer .cols {
+          grid-template-columns: 1fr 1fr;
+        }
+        .site-footer .brandcol {
+          grid-column: 1 / -1;
+        }
       }
-      .site-footer .meta {
-        font-family: var(--font-mono);
-        font-size: 0.68rem;
-        color: var(--text-dim);
+      .site-footer .f-brand {
+        font-family: var(--font-brand);
+        font-weight: 700;
+        font-size: 1.65rem;
+        color: #fff;
       }
-      .site-footer a {
-        color: var(--accent);
+      .site-footer .brandcol p {
+        margin-top: 10px;
+        max-width: 38ch;
+        color: var(--foot-dim);
       }
-      .site-footer a:hover {
+      .site-footer .visits {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 18px !important;
+        padding: 7px 12px;
+        border: 1px solid var(--foot-line);
+        border-radius: var(--radius);
+      }
+      .site-footer .visits strong {
+        color: #fff;
+        font-size: 1.05rem;
+      }
+      .site-footer h2 {
+        margin-bottom: 12px;
+        color: #fff;
+        font-family: var(--font-body);
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+      .site-footer ul {
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+      .site-footer ul a {
+        color: var(--foot-text);
+      }
+      .site-footer ul a:hover {
+        color: #fff;
         text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .site-footer .legal {
+        border-top: 1px solid var(--foot-line);
+      }
+      .site-footer .legal-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        padding-block: 16px;
+        font-size: 0.8rem;
+        color: var(--foot-dim);
+      }
+      .site-footer .legal a {
+        color: var(--foot-text);
+        text-decoration: underline;
+        text-underline-offset: 3px;
       }
     </style>
   </body>

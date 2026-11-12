@@ -1,165 +1,154 @@
+@import '@fontsource/source-sans-3/400.css';
+@import '@fontsource/source-sans-3/600.css';
+@import '@fontsource/source-sans-3/700.css';
+@import '@fontsource/source-serif-4/600.css';
+@import '@fontsource/source-serif-4/700.css';
+@import '@fontsource/ibm-plex-sans-condensed/700.css';
+
 /* ═══════════════════════════════════════════════════════════════
    repasaYA — TOKENS
    Fuente única de verdad del sistema visual. Nada de valores
    sueltos en los componentes: si un color no está aquí, no existe.
 
-   Tema por defecto: DEEP SPACE (oscuro). El claro es el alternativo.
+   Identidad corporativa (rediseño 2026): un solo tema, claro,
+   en granate y oro. Titulares en Source Serif 4 (la misma familia
+   que los PDF de apuntes), texto en Source Sans 3 y la marca en
+   IBM Plex Sans Condensed. El punto dorado de «repasaYA.» es la
+   firma que se repite en los titulares.
+
+   El tema es único a propósito: aunque un navegador antiguo traiga
+   `data-theme="dark"` guardado, los valores son los mismos.
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── DEEP SPACE (default) ────────────────────────────────────── */
 :root,
-:root[data-theme='dark'] {
-  /* Escala de fondo: de negro azulado a violeta profundo */
-  --space-950: #04030a;
-  --space-900: #07050f;
-  --space-850: #0b0818;
-  --space-800: #110d22;
-  --space-700: #191231;
-  --space-600: #241a44;
-
-  --bg: var(--space-900);
-  --bg-deep: var(--space-950);
-  --bg-elevated: var(--space-850);
-
-  /* Glass: translúcido + blur. Tres niveles según profundidad */
-  --glass: rgba(26, 19, 51, 0.38);
-  --glass-strong: rgba(26, 19, 51, 0.68);
-  --glass-hi: rgba(255, 255, 255, 0.055);
-  --glass-border: rgba(167, 139, 234, 0.16);
-  --glass-border-hi: rgba(167, 139, 234, 0.42);
-  --blur: 18px;
-  --blur-lg: 32px;
-
-  /* Marca */
-  --accent: #a78bea;
-  --accent-bright: #c7b2ff;
-  --accent-deep: #6d4fd6;
-  --accent-soft: rgba(167, 139, 234, 0.14);
-  --accent-line: rgba(167, 139, 234, 0.3);
-  --on-accent: #0b0718;
-
-  /* Neones secundarios — usar con cuentagotas, solo acentos */
-  --neon-cyan: #4fdcd2;
-  --neon-pink: #ff6fd8;
-
-  /* Estado */
-  --correct: #2fd47f;
-  --correct-glow: rgba(47, 212, 127, 0.45);
-  --wrong: #ff5c62;
-  --wrong-glow: rgba(255, 92, 98, 0.45);
-  --reveal: #e8b33c;
-
-  /* Texto */
-  --text: #eeecfb;
-  --text-muted: #9b95bd;
-  --text-dim: #6a6590;
-
-  /* Glows — el "neon accent on hover" del brief */
-  --glow-sm: 0 0 18px -6px rgba(124, 92, 255, 0.6);
-  --glow-md: 0 0 34px -8px rgba(124, 92, 255, 0.75);
-  --glow-ring: 0 0 0 1px var(--glass-border-hi), 0 0 28px -6px rgba(124, 92, 255, 0.55);
-
-  /* Sombras de profundidad (oscuras, no grises) */
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 12px 34px rgba(0, 0, 0, 0.55);
-  --shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.6);
-
-  --particle: 167, 139, 234;
-  --star: 255, 255, 255;
-}
-
-/* ── LIGHT (alternativo) ─────────────────────────────────────── */
+:root[data-theme='dark'],
 :root[data-theme='light'] {
-  --space-950: #ffffff;
-  --space-900: #faf9fe;
-  --space-850: #ffffff;
-  --space-800: #f5f1fd;
-  --space-700: #ece6fb;
-  --space-600: #ddd3f7;
+  /* ── Paleta base ───────────────────────────────────────────── */
+  --paper: #ffffff;
+  --canvas: #f5f4f3;
+  --canvas-deep: #edeae8;
+  --ink: #1d1a1c;
+  --ink-2: #57504f;
+  --ink-3: #8a8280;
+  --line: #e4dfdc;
+  --line-strong: #cfc7c3;
 
-  --bg: #faf9fe;
-  --bg-deep: #f2eefb;
-  --bg-elevated: #ffffff;
+  --brand: #7a1f2b; /* granate */
+  --brand-hover: #8f2735;
+  --brand-deep: #5e1520;
+  --brand-soft: #f6eced;
+  --band: #6e1b27; /* banda de cabecera de portada */
+  --on-band: #ffffff;
+  --on-band-2: #e2c3c6;
+  --dot: #d9a13a; /* oro: el punto de la marca */
+  --foot: #3f1018;
+  --foot-line: #5f2630;
+  --foot-text: #e6cfd2;
+  --foot-dim: #c09ca1;
 
-  --glass: rgba(255, 255, 255, 0.72);
-  --glass-strong: rgba(255, 255, 255, 0.92);
-  --glass-hi: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(20, 20, 40, 0.09);
-  --glass-border-hi: rgba(138, 107, 216, 0.45);
+  --deg-ade: #7a1f2b;
+  --deg-inf: #2e6a87;
 
-  --accent: #8a6bd8;
-  --accent-bright: #7a5bcf;
-  --accent-deep: #5f43b8;
-  --accent-soft: #ece6fb;
-  --accent-line: #d7ccf5;
+  /* ── Alias del sistema anterior ──────────────────────────────
+     El motor de tests, las guías y las páginas legales usan estos
+     nombres. Se mantienen apuntando a la paleta nueva para que todo
+     cambie de golpe sin reescribir 2.000 líneas que ya funcionan. */
+  --space-950: var(--paper);
+  --space-900: var(--canvas);
+  --space-850: var(--paper);
+  --space-800: var(--canvas);
+  --space-700: var(--canvas-deep);
+  --space-600: var(--line);
+
+  --bg: var(--canvas);
+  --bg-deep: var(--canvas-deep);
+  --bg-elevated: var(--paper);
+
+  --glass: var(--paper);
+  --glass-strong: var(--paper);
+  --glass-hi: transparent;
+  --glass-border: var(--line);
+  --glass-border-hi: var(--line-strong);
+  --blur: 0px;
+  --blur-lg: 0px;
+
+  --accent: var(--brand);
+  --accent-bright: var(--brand-hover);
+  --accent-deep: var(--brand-deep);
+  --accent-soft: var(--brand-soft);
+  --accent-line: #e6c9cc;
   --on-accent: #ffffff;
 
-  --neon-cyan: #12a89c;
-  --neon-pink: #d43fa8;
+  --neon-cyan: var(--deg-inf);
+  --neon-pink: var(--dot);
 
-  --correct: #1f9d57;
-  --correct-glow: rgba(31, 157, 87, 0.3);
-  --wrong: #e5484d;
-  --wrong-glow: rgba(229, 72, 77, 0.3);
-  --reveal: #c98a00;
+  /* Estado */
+  --correct: #1f7a4d;
+  --correct-glow: rgba(31, 122, 77, 0.22);
+  --wrong: #b3261e;
+  --wrong-glow: rgba(179, 38, 30, 0.2);
+  --reveal: #a4740f;
 
-  --text: #1b1b2e;
-  --text-muted: #6b6f86;
-  --text-dim: #9b9fb2;
+  /* Texto */
+  --text: var(--ink);
+  --text-muted: var(--ink-2);
+  --text-dim: var(--ink-3);
 
-  --glow-sm: 0 4px 14px -6px rgba(138, 107, 216, 0.5);
-  --glow-md: 0 10px 30px -10px rgba(138, 107, 216, 0.55);
-  --glow-ring: 0 0 0 1px var(--glass-border-hi), 0 6px 22px -8px rgba(138, 107, 216, 0.4);
+  /* Sin neones: los antiguos "glows" pasan a ser sombras discretas */
+  --glow-sm: 0 1px 2px rgba(29, 26, 28, 0.06);
+  --glow-md: 0 2px 8px rgba(29, 26, 28, 0.08);
+  --glow-ring: 0 0 0 2px var(--accent-line);
 
-  --shadow-sm: 0 2px 8px rgba(20, 20, 40, 0.06);
-  --shadow-md: 0 12px 28px rgba(20, 20, 40, 0.09);
-  --shadow-lg: 0 26px 60px rgba(20, 20, 40, 0.12);
+  --shadow-sm: 0 1px 2px rgba(29, 26, 28, 0.05);
+  --shadow-md: 0 1px 3px rgba(29, 26, 28, 0.06);
+  --shadow-lg: 0 10px 30px rgba(29, 26, 28, 0.12);
 
-  --particle: 60, 52, 110;
-  --star: 60, 52, 110;
+  --particle: 122, 31, 43;
+  --star: 122, 31, 43;
+
+  color-scheme: light;
 }
 
-/* ── Invariantes del tema ────────────────────────────────────── */
+/* ── Invariantes ─────────────────────────────────────────────── */
 :root {
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius: 18px;
-  --radius-lg: 26px;
-  --radius-xl: 34px;
-  --radius-pill: 999px;
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-pill: 4px;
 
-  --font-display: 'Unbounded', system-ui, -apple-system, sans-serif;
-  --font-body: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-brand: 'IBM Plex Sans Condensed', 'Arial Narrow', system-ui, sans-serif;
+
+  /* Nombres antiguos, ahora apuntando a la tipografía nueva */
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans);
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
 
-  /* Easings: el "snap" satisfactorio del brief */
   --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.33, 1, 0.68, 1);
 
-  --dur-fast: 0.14s;
-  --dur: 0.24s;
-  --dur-slow: 0.5s;
+  --dur-fast: 0.12s;
+  --dur: 0.18s;
+  --dur-slow: 0.4s;
 
-  /* Anchos de contenedor */
   --w-prose: 62ch;
-  --w-content: 1180px;
-  --w-wide: 1420px;
+  --w-content: 1120px;
+  --w-wide: 1280px;
 
-  --header-h: 64px;
+  --header-h: 60px;
 }
 
-/* ── Alias de compatibilidad ─────────────────────────────────────
-   `QuizEngine` y las páginas de material antiguas usan los nombres
-   del sistema viejo. En vez de reescribir 600 líneas de CSS de un
-   motor que ya funciona, se mapean aquí. Cuando el motor se
-   rediseñe, este bloque desaparece.                              */
+/* ── Alias de compatibilidad del motor de tests ─────────────── */
 :root {
-  --surface: var(--bg-elevated);
-  --surface2: var(--space-800);
-  --border: var(--glass-border);
-  --accent-hover: var(--accent-bright);
-  --accent-strong: var(--accent-bright);
-  --accent2: var(--accent);
-  --header-bg: var(--glass-strong);
+  --surface: var(--paper);
+  --surface2: var(--canvas);
+  --border: var(--line);
+  --accent-hover: var(--brand-hover);
+  --accent-strong: var(--brand-hover);
+  --accent2: var(--brand);
+  --header-bg: var(--paper);
 }

@@ -21,6 +21,18 @@ const BADGE: Record<string, { badge: string; tone: string }> = {
   perf: { badge: 'Velocidad', tone: 'cyan' },
 };
 
+/** `ade/direccion-financiera` → `Dirección Financiera` si la conocemos */
+const SCOPES: Record<string, string> = {
+  'direccion-financiera': 'Dirección Financiera',
+  'derecho-fiscal': 'Derecho Fiscal',
+  ade: 'ADE',
+  informatica: 'Informática',
+};
+function prettyScope(scope: string): string {
+  const last = scope.split('/').pop()!.toLowerCase();
+  return SCOPES[last] ?? scope.split('/').pop()!.toUpperCase();
+}
+
 function humanize(raw: string): Omit<Commit, 'date'> {
   const m = raw.match(/^(feat|fix|chore|docs|style|refactor|perf)\(([^)]+)\):\s*(.+)/i);
   if (!m) return { badge: 'Cambio', tone: 'gray', scope: '', text: raw.slice(0, 62) };
@@ -30,15 +42,15 @@ function humanize(raw: string): Omit<Commit, 'date'> {
   const text = txt.replace(/^(añadir|agregar|add|crear|actualizar|update|corregir)\s+/i, '');
   return {
     ...meta,
-    scope: scope.toUpperCase(),
-    text: (text[0].toUpperCase() + text.slice(1)).slice(0, 62),
+    scope: prettyScope(scope),
+    text: text[0].toUpperCase() + text.slice(1),
   };
 }
 
 let commits: Commit[] = [];
 try {
   const raw = execSync(
-    'git log --pretty=format:"%ad%x09%s" --date=format:"%d %b" -n 7',
+    'git log --pretty=format:"%ad%x09%s" --date=format:"%d/%m/%Y" -n 6',
     { encoding: 'utf8', cwd: process.cwd() }
   ).trim();
   commits = raw
@@ -54,24 +66,18 @@ try {
 
 const lastUpdate = commits[0]?.date ?? null;
 ---
-
 {
   commits.length > 0 && (
-    <section class="changelog container" aria-label="Novedades recientes">
-      <div class="head">
-        <span class="dot" aria-hidden="true" />
-        <h2>Novedades</h2>
-        {lastUpdate && <span class="since">último cambio · {lastUpdate}</span>}
-      </div>
-
-      <ol class="track">
-        {commits.map((c, i) => (
-          <li class:list={['item', { latest: i === 0 }]}>
-            <span class:list={['node', `t-${c.tone}`]} aria-hidden="true" />
-            <span class:list={['badge', `t-${c.tone}`]}>{c.badge}</span>
-            {c.scope && <span class="scope">{c.scope}</span>}
-            <span class="text">{c.text}</span>
-            <time class="date">{c.date}</time>
+    <section class="panel changelog" aria-labelledby="news-title">
+      <h2 id="news-title" class="p-title">Novedades</h2>
+      <ol class="news">
+        {commits.map((c) => (
+          <li>
+            <time>{c.date}</time>
+            <span>
+              {c.scope && <b>{c.scope}: </b>}
+              {c.text}
+            </span>
           </li>
         ))}
       </ol>
@@ -80,142 +86,45 @@ const lastUpdate = commits[0]?.date ?? null;
 }
 
 <style>
-  .changelog {
-    padding-block: 40px 20px;
-  }
-
-  .head {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    margin-bottom: 20px;
-  }
-  .head h2 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.025em;
-  }
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--correct);
-    box-shadow: 0 0 10px var(--correct-glow);
-    animation: pulse 2.4s var(--ease-out) infinite;
-  }
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.3;
-    }
-  }
-  .since {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-dim);
-  }
-
-  .track {
-    list-style: none;
-    border-left: 1px solid var(--glass-border);
-    margin-left: 4px;
-  }
-
-  .item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px 0 10px 22px;
-    font-size: 0.86rem;
-  }
-  /* El punto se monta sobre la línea, no al lado */
-  .node {
-    position: absolute;
-    left: -4.5px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--text-dim);
-    box-shadow: 0 0 0 3px var(--bg);
-  }
-  .item.latest .node {
-    background: var(--accent);
-    box-shadow: 0 0 0 3px var(--bg), 0 0 12px var(--accent);
-  }
-
-  .badge {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 3px 8px;
-    border-radius: var(--radius-xs);
-    border: 1px solid currentColor;
-    flex-shrink: 0;
-  }
-  .scope {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--text-dim);
-    flex-shrink: 0;
-  }
-  .text {
-    color: var(--text-muted);
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
     min-width: 0;
   }
-  .date {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    color: var(--text-dim);
-    flex-shrink: 0;
+  .p-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
   }
-
-  /* Tonos por tipo de cambio */
-  .t-green {
-    color: var(--correct);
+  .news {
+    list-style: none;
   }
-  .t-orange {
-    color: var(--reveal);
+  .news li {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 12px;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
   }
-  .t-blue {
-    color: #6ea8ff;
+  .news li:first-child {
+    border-top: 0;
   }
-  .t-cyan {
-    color: var(--neon-cyan);
+  .news time {
+    color: var(--ink-3);
+    font-size: 0.84rem;
+    font-variant-numeric: tabular-nums;
   }
-  .t-purple {
-    color: var(--accent);
+  .news b {
+    font-weight: 600;
   }
-  .t-gray {
-    color: var(--text-dim);
-  }
-  .node.t-green {
-    background: var(--correct);
-  }
-  .node.t-orange {
-    background: var(--reveal);
-  }
-  .node.t-blue {
-    background: #6ea8ff;
-  }
-  .node.t-cyan {
-    background: var(--neon-cyan);
-  }
-  .node.t-purple {
-    background: var(--accent);
-  }
-
-  @media (max-width: 560px) {
-    .date {
-      margin-left: 0;
+  @media (max-width: 480px) {
+    .news li {
+      grid-template-columns: 1fr;
+      gap: 0;
     }
   }
 </style>

@@ -47,3 +47,13 @@ export async function fetchHits(): Promise<string | null> {
     return null;
   }
 }
+
+/**
+ * Igual que `fetchHits`, pero una sola petición por build: el pie de todas
+ * las páginas enseña la cifra y no tiene sentido pedirla 100 veces.
+ */
+let cached: Promise<string | null> | null = null;
+export function fetchHitsOnce(): Promise<string | null> {
+  cached ??= fetchHits();
+  return cached;
+}

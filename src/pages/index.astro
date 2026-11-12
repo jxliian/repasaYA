@@ -1,152 +1,727 @@
 ---
 /**
- * Landing de repasaYA.
+ * Portada de repasaYA.
  *
- * Orden: secuencia de carga con el logo 3D → hero con buscador y las dos
- * puertas de grado → lo que ya tiene material → novedades sacadas de git
- * → sobre mí y contacto.
+ * Orden: pantalla de carga → banda granate con el buscador (asignatura,
+ * grado y curso) → «Seguir donde lo dejaste» → plan de estudios con las
+ * asignaturas que tienen material (curso × cuatrimestre, los dos grados
+ * juntos) → novedades → opiniones. «Sobre mí», contacto y pie los pone
+ * el layout.
+ *
+ * El filtrado es en cliente sobre lo ya pintado: no hay que pedir nada
+ * al escribir.
  */
 import { getCollection } from 'astro:content';
 import Shell from '../layouts/Shell.astro';
 import BootSequence from '../components/boot/BootSequence.astro';
-import Hero from '../components/hero/Hero.astro';
-import SubjectCard from '../components/catalog/SubjectCard.astro';
 import Changelog from '../components/sections/Changelog.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import VisitCounter from '../components/nav/VisitCounter.astro';
-import { fetchHits } from '../lib/hits';
-import { degreePath } from '../lib/routes';
+import { degreePath, subjectSlug, subjectUrl } from '../lib/routes';
 
 const allSubjects = await getCollection('subjects');
 const allDegrees = await getCollection('degrees');
-const allMaterials = await getCollection('materials');
-const degreeById = new Map(allDegrees.map((d) => [d.id, d.data]));
-
-const degrees = allDegrees
-  .map((d) => {
-    const mine = allSubjects.filter((s) => s.data.degree.id === d.id);
-    return {
-      slug: d.id,
-      name: d.data.name,
-      short: d.data.short,
-      icon: d.data.icon,
-      ready: mine.filter((s) => s.data.status === 'available').length,
-      total: mine.length,
-      blurb: d.data.blurb,
-    };
-  })
-  .sort((a, b) => b.ready - a.ready);
-
-const ready = allSubjects
-  .filter((s) => s.data.status === 'available')
-  .sort((a, b) => a.data.year - b.data.year || a.data.title.localeCompare(b.data.title, 'es'));
-
-/* Cifras contadas de verdad sobre la colección: si añades un archivo de
-   preguntas, el hero se actualiza en el siguiente build. */
-function countBy(types: string[]): number {
-  return allMaterials
-    .filter((m) => types.includes(m.data.type))
-    .reduce((n, m) => n + ('items' in m.data ? m.data.items.length : 0), 0);
-}
+const allMaterials = (await getCollection('materials')).filter((m) => !m.data.hidden);
 
 /* Separador de miles a mano: `toLocaleString` depende del ICU del Node
    que ejecute el build y en CI puede devolver "1935" en vez de "1.935". */
 const es = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+const norm = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '');
 
-/* Visitas: se lee de hits.sh en build. Si no responde, la cifra
-   simplemente no sale — un contador caído no rompe la portada. */
-const visits = await fetchHits();
+const QUESTION_TYPES = ['test', 'vf', 'reveal', 'examen'];
+const CARD_TYPES = ['flashcards', 'glosario'];
+const itemsOf = (m: (typeof allMaterials)[number]) => ('items' in m.data ? m.data.items.length : 0);
 
-const stats = [
-  { value: es(countBy(['test', 'vf', 'reveal'])), label: 'preguntas' },
-  { value: es(countBy(['flashcards', 'glosario'])), label: 'fichas' },
-  { value: String(allSubjects.length), label: 'asignaturas' },
-  ...(visits ? [{ value: visits, label: 'visitas' }] : []),
-  { value: '0', label: 'anuncios' },
-];
+const totalQuestions = allMaterials.filter((m) => QUESTION_TYPES.includes(m.data.type)).reduce((n, m) => n + itemsOf(m), 0);
+const totalCards = allMaterials.filter((m) => CARD_TYPES.includes(m.data.type)).reduce((n, m) => n + itemsOf(m), 0);
+/* Redondeo hacia abajo a la centena: «más de 3.100» sigue siendo cierto
+   mientras se añade material y no hay que tocar la portada. */
+const roundDown = (n: number) => (n >= 1000 ? Math.floor(n / 100) * 100 : n);
+
+const KIND: Record<string, string> = {
+  test: 'Test',
+  vf: 'Verdadero/Falso',
+  reveal: 'Preguntas abiertas',
+  flashcards: 'Flashcards',
+  glosario: 'Glosario',
+  apuntes: 'Apuntes',
+  examen: 'Exámenes',
+  guia: 'Guía',
+};
+
+/** Cifras de una asignatura: «126 preguntas, 3 PDF». Si no hay nada que
+    contar, los tipos de material que declara. */
+function figures(subjectId: string, declared: string[]): string {
+  const mine = allMaterials.filter((m) => m.data.subject.id === subjectId);
+  const q = mine.filter((m) => QUESTION_TYPES.includes(m.data.type)).reduce((n, m) => n + itemsOf(m), 0);
+  const c = mine.filter((m) => CARD_TYPES.includes(m.data.type)).reduce((n, m) => n + itemsOf(m), 0);
+  const pdf = mine.filter((m) => 'pdf' in m.data).length;
+  const guides = mine.filter((m) => m.data.type === 'guia').length;
+  const out = [
+    q && `${es(q)} preguntas`,
+    c && `${es(c)} fichas`,
+    pdf && `${pdf} PDF`,
+    guides && `${guides} ${guides > 1 ? 'guías' : 'guía'}`,
+  ].filter(Boolean);
+  return out.length ? out.join(', ') : declared.map((k) => KIND[k] ?? k).join(', ');
+}
+
+const degreeShort = new Map(allDegrees.map((d) => [d.id, d.data.short]));
+
+const ready = allSubjects
+  .filter((s) => s.data.status === 'available')
+  .map((s) => {
+    const url = subjectUrl(s)!;
+    const deg = s.data.degree.id;
+    return {
+      id: s.id,
+      slug: subjectSlug(s),
+      title: s.data.title,
+      url,
+      external: Boolean(s.data.external),
+      deg,
+      degShort: degreeShort.get(deg) ?? deg,
+      year: s.data.year,
+      sem: s.data.semester,
+      figs: figures(s.id, s.data.materials),
+      search: norm([s.data.title, subjectSlug(s), s.data.description ?? '', ...s.data.materials.map((k) => KIND[k] ?? k)].join(' ')),
+    };
+  })
+  .sort((a, b) => a.title.localeCompare(b.title, 'es'));
+
+const count = (deg?: string) => ready.filter((s) => !deg || s.deg === deg).length;
+const years = [5, 4, 3, 2, 1];
+const cell = (y: number, sem: number) => ready.filter((s) => s.year === y && s.sem === sem);
+
+const degrees = [...allDegrees].sort((a, b) => a.data.short.localeCompare(b.data.short, 'es'));
+const planTotals = degrees.map((d) => ({
+  id: d.id,
+  name: d.data.name,
+  ready: count(d.id),
+  total: allSubjects.filter((s) => s.data.degree.id === d.id).length,
+}));
 ---
 
 <Shell title="repasaYA">
   <BootSequence />
-  <Hero degrees={degrees} stats={stats} />
 
-  <section id="asignaturas" class="ready container" aria-label="Asignaturas con material">
-    <div class="sec-head">
-      <div>
-        <p class="mono-label">Listo para machacar</p>
-        <h2>Lo que ya puedes repasar hoy</h2>
-      </div>
-      <div class="sec-links">
-        {
-          degrees.map((d) => (
-            <a class="btn btn-ghost" href={degreePath(d.slug)}>
-              {d.icon} Ver {d.short}
-            </a>
-          ))
-        }
+  <section class="band">
+    <div class="container band-inner">
+      <h1>Encuentra tu asignatura<span class="pt">.</span></h1>
+      <p class="lede">
+        Más de <strong>{es(roundDown(totalQuestions))} preguntas</strong> y <strong>{es(roundDown(totalCards))} fichas</strong>
+        de ADE e Informática en la UGR, hechas por un estudiante para estudiantes. Sin registro y con
+        <strong>0 anuncios</strong>.
+      </p>
+
+      <form class="finder" role="search" data-finder onsubmit="return false">
+        <div class="f">
+          <label for="f-q">Asignatura o material</label>
+          <input id="f-q" type="search" autocomplete="off" placeholder="Dirección Financiera, Econometría, flashcards…" />
+        </div>
+        <div class="f">
+          <label for="f-deg">Grado</label>
+          <select id="f-deg">
+            <option value="all">Todos los grados</option>
+            {degrees.map((d) => <option value={d.id}>{d.data.short}</option>)}
+          </select>
+        </div>
+        <div class="f">
+          <label for="f-y">Curso</label>
+          <select id="f-y">
+            <option value="all">Todos</option>
+            {[1, 2, 3, 4, 5].map((y) => <option value={y}>{y}º curso</option>)}
+          </select>
+        </div>
+      </form>
+      <div class="finder-meta">
+        <span data-count-band>{ready.length} asignaturas con material</span>
+        <button type="button" data-clear hidden>Quitar filtros</button>
       </div>
     </div>
+  </section>
 
-    <div class="grid">
+  <div class="resume" data-resume hidden>
+    <div class="container resume-row">
+      <strong>Seguir donde lo dejaste</strong>
+      <span data-resume-links></span>
+    </div>
+  </div>
+
+  <section class="container plan-sec" id="asignaturas" aria-labelledby="plan-title">
+    <div class="sec-head">
+      <h2 id="plan-title" class="sec-title">Lo que ya puedes repasar hoy<span class="pt">.</span></h2>
+      <span class="count" data-count>{ready.length} de {ready.length} asignaturas con material</span>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Grado">
+      <button class="tab" role="tab" data-tab="all" aria-selected="true">Ambos grados<small>{count()}</small></button>
       {
-        ready.map((s) => (
-          <SubjectCard
-            subject={s}
-            degreeName={degreeById.get(s.data.degree.id)?.name ?? ''}
-            degreeShort={degreeById.get(s.data.degree.id)?.short ?? ''}
-            showPlace
-          />
+        degrees.map((d) => (
+          <button class="tab" role="tab" data-tab={d.id} aria-selected="false">
+            {d.data.short}
+            <small>{count(d.id)}</small>
+          </button>
         ))
       }
     </div>
 
-    <p class="rest">
-      Y otras <strong>{allSubjects.length - ready.length}</strong> asignaturas del plan
-      esperando material. Si has cursado alguna, ya sabes.
-    </p>
+    <div class="plan">
+      <div class="pgrid" data-plan>
+        <div class="ph"></div>
+        <div class="ph">1er cuatrimestre</div>
+        <div class="ph">2º cuatrimestre</div>
+        {
+          years.map((y) => (
+            <div class="prow" data-year={y}>
+              <div class="cn">{y}º</div>
+              {[1, 2].map((sem) => (
+                <div class="cell">
+                  <span class="mh">{sem === 1 ? '1er cuatrimestre' : '2º cuatrimestre'}</span>
+                  {cell(y, sem).map((s) => (
+                    <a
+                      class="item"
+                      href={s.url}
+                      data-item
+                      data-deg={s.deg}
+                      data-search={s.search}
+                      data-title={s.title}
+                      {...(s.external ? { target: '_blank', rel: 'noopener' } : {})}
+                    >
+                      <b>{s.title}</b>
+                      <span>
+                        <span class:list={['deg', `deg-${s.deg}`]}>
+                          <i />
+                          {s.degShort}
+                        </span>
+                        {s.figs}
+                      </span>
+                    </a>
+                  ))}
+                  <div class="none" data-none>Sin material todavía</div>
+                </div>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+      <div class="empty" data-empty hidden>
+        Ninguna asignatura coincide con la búsqueda. Prueba con otra palabra o quita los filtros.
+      </div>
+    </div>
   </section>
 
-  <VisitCounter />
-  <Changelog />
+  <section class="container below" id="novedades">
+    <Changelog />
+    <section class="panel" aria-labelledby="plans-title">
+      <h2 id="plans-title" class="p-title">Planes de estudio completos</h2>
+      <div class="degs">
+        {
+          planTotals.map((p) => (
+            <a href={degreePath(p.id)}>
+              <span class:list={['deg', `deg-${p.id}`]}>
+                <i />
+                {p.name}
+              </span>
+              <small>
+                {p.ready} de {p.total} con material
+              </small>
+            </a>
+          ))
+        }
+      </div>
+      <p class="note">Las asignaturas sin material siguen en el plan de cada grado; puedes pedirlas desde allí.</p>
+    </section>
+  </section>
+
   <Testimonials />
+  <VisitCounter />
 </Shell>
 
+<script>
+  type Recent = { t: string; u: string };
+
+  function initHome() {
+    const plan = document.querySelector<HTMLElement>('[data-plan]');
+    if (!plan || plan.dataset.ready === '1') return;
+    plan.dataset.ready = '1';
+
+    const q = document.getElementById('f-q') as HTMLInputElement;
+    const fDeg = document.getElementById('f-deg') as HTMLSelectElement;
+    const fY = document.getElementById('f-y') as HTMLSelectElement;
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    const clear = document.querySelector<HTMLButtonElement>('[data-clear]')!;
+    const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+    const countEls = [document.querySelector('[data-count]'), document.querySelector('[data-count-band]')];
+    const items = [...plan.querySelectorAll<HTMLElement>('[data-item]')];
+    const rows = [...plan.querySelectorAll<HTMLElement>('.prow')];
+    const total = items.length;
+
+    const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const state = { q: '', deg: 'all', y: 'all' };
+
+    function apply() {
+      const words = norm(state.q).split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const it of items) {
+        const ok =
+          (state.deg === 'all' || it.dataset.deg === state.deg) &&
+          words.every((w) => it.dataset.search!.includes(w));
+        it.hidden = !ok;
+        if (ok && (state.y === 'all' || it.closest<HTMLElement>('.prow')!.dataset.year === state.y)) shown++;
+      }
+      for (const row of rows) {
+        let rowHas = false;
+        for (const c of row.querySelectorAll<HTMLElement>('.cell')) {
+          const has = [...c.querySelectorAll<HTMLElement>('[data-item]')].some((i) => !i.hidden);
+          c.querySelector<HTMLElement>('[data-none]')!.hidden = has;
+          c.classList.toggle('is-empty', !has);
+          rowHas ||= has;
+        }
+        row.hidden = (state.y !== 'all' && row.dataset.year !== state.y) || (words.length > 0 && !rowHas);
+      }
+      empty.hidden = shown > 0;
+      plan.hidden = shown === 0;
+      const txt = `${shown} de ${total} asignaturas con material`;
+      countEls.forEach((el) => el && (el.textContent = txt));
+      clear.hidden = !(state.q || state.deg !== 'all' || state.y !== 'all');
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === state.deg)));
+      fDeg.value = state.deg;
+      fY.value = state.y;
+    }
+
+    q.addEventListener('input', () => {
+      state.q = q.value;
+      apply();
+    });
+    fDeg.addEventListener('change', () => {
+      state.deg = fDeg.value;
+      apply();
+    });
+    fY.addEventListener('change', () => {
+      state.y = fY.value;
+      apply();
+    });
+    tabs.forEach((t) =>
+      t.addEventListener('click', () => {
+        state.deg = t.dataset.tab!;
+        apply();
+      })
+    );
+    clear.addEventListener('click', () => {
+      state.q = '';
+      state.deg = 'all';
+      state.y = 'all';
+      q.value = '';
+      apply();
+    });
+
+    /* Seguir donde lo dejaste: lo guarda la página de cada asignatura */
+    try {
+      const recent: Recent[] = JSON.parse(localStorage.getItem('ry-recent') || '[]');
+      if (Array.isArray(recent) && recent.length) {
+        const box = document.querySelector<HTMLElement>('[data-resume]')!;
+        const links = box.querySelector<HTMLElement>('[data-resume-links]')!;
+        for (const r of recent.slice(0, 4)) {
+          if (!r || typeof r.t !== 'string' || typeof r.u !== 'string' || !r.u.startsWith('/')) continue;
+          const a = document.createElement('a');
+          a.href = r.u;
+          a.textContent = r.t;
+          links.appendChild(a);
+        }
+        box.hidden = !links.children.length;
+      }
+    } catch {
+      /* sin almacenamiento: la franja no aparece */
+    }
+
+    apply();
+  }
+
+  initHome();
+  document.addEventListener('astro:page-load', initHome);
+</script>
+
 <style>
-  .ready {
-    padding-block: 40px 20px;
+  /* ── Banda con el buscador ─────────────────────────────────── */
+  .band {
+    position: relative;
+    overflow: hidden;
+    background: var(--band);
+    color: var(--on-band);
+  }
+  /* Alicatado nazarí: estrellas de ocho puntas en oro que se difuminan */
+  .band::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(58%, 680px);
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23d9a13a' stroke-width='1.1'%3E%3Crect x='16' y='16' width='32' height='32'/%3E%3Crect x='16' y='16' width='32' height='32' transform='rotate(45 32 32)'/%3E%3Cpath d='M0 0L9.4 9.4M64 0L54.6 9.4M0 64L9.4 54.6M64 64L54.6 54.6M32 0V9.4M32 64V54.6M0 32H9.4M64 32H54.6'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 64px 64px;
+    opacity: 0.32;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 70%);
+    mask-image: linear-gradient(90deg, transparent, #000 70%);
+  }
+  .band-inner {
+    position: relative;
+    z-index: 1;
+    padding-block: 48px 40px;
+  }
+  .band h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5.6vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  .lede {
+    margin: 12px 0 26px;
+    max-width: 62ch;
+    color: var(--on-band-2);
+  }
+  .lede strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .finder {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 210px 160px;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+  }
+  .f {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 16px 8px;
+    border-left: 1px solid var(--line);
+    min-width: 0;
+  }
+  .f:first-child {
+    border-left: 0;
+  }
+  .f:focus-within {
+    box-shadow: inset 0 -3px 0 var(--dot);
+  }
+  .f label {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--ink-3);
+  }
+  .f input,
+  .f select {
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: 600 1rem var(--font-body);
+    padding: 2px 0 4px;
+    width: 100%;
+    min-width: 0;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .f input {
+    font-weight: 400;
+  }
+  .f input::placeholder {
+    color: var(--ink-3);
+  }
+  .f select {
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 9px) 55%, calc(100% - 4px) 55%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 18px;
+  }
+  @media (max-width: 680px) {
+    .finder {
+      grid-template-columns: 1fr 1fr;
+    }
+    .f:first-child {
+      grid-column: 1 / -1;
+    }
+    .f:nth-child(2) {
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+    .f:nth-child(3) {
+      border-top: 1px solid var(--line);
+    }
+  }
+  .finder-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-size: 0.84rem;
+    color: var(--on-band-2);
+  }
+  .finder-meta button {
+    background: none;
+    border: 0;
+    color: #fff;
+    font: 600 0.84rem var(--font-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── Seguir donde lo dejaste ───────────────────────────────── */
+  .resume {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .resume-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding-block: 12px;
+    font-size: 0.9rem;
+  }
+  .resume strong {
+    font-size: 0.84rem;
+    color: var(--ink-2);
+  }
+  .resume :global([data-resume-links]) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+  }
+  .resume :global([data-resume-links] a) {
+    color: var(--brand);
+    font-weight: 600;
+    padding-inline: 16px;
+    border-left: 1px solid var(--line);
+  }
+  .resume :global([data-resume-links] a:first-child) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .resume :global([data-resume-links] a:hover) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── Plan de estudios ──────────────────────────────────────── */
+  .plan-sec {
+    padding-top: 36px;
   }
   .sec-head {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
     justify-content: space-between;
-    gap: 18px;
-    margin-bottom: 24px;
+    align-items: baseline;
+    gap: 6px 12px;
+    margin-bottom: 14px;
   }
-  .sec-head h2 {
-    margin-top: 6px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.5rem, 3.6vw, 2.2rem);
-    letter-spacing: -0.035em;
+  .count {
+    font-size: 0.84rem;
+    color: var(--ink-3);
   }
-  .sec-links {
+  .tabs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 4px;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
   }
-  .grid {
+  .tab {
+    background: none;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    padding: 10px 16px;
+    font: 600 0.95rem var(--font-body);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .tab:hover {
+    color: var(--ink);
+  }
+  .tab[aria-selected='true'] {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+  }
+  .tab small {
+    margin-left: 6px;
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+
+  .plan {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+  .pgrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
-    gap: 14px;
+    grid-template-columns: 84px minmax(0, 1fr) minmax(0, 1fr);
   }
-  .rest {
-    margin-top: 26px;
+  .prow {
+    display: contents;
+  }
+  .prow[hidden] {
+    display: none !important;
+  }
+  .ph {
+    padding: 10px 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-3);
+    background: var(--canvas);
+  }
+  .cn,
+  .cell {
+    border-top: 1px solid var(--line);
+    min-width: 0;
+  }
+  .cn {
+    padding: 16px 0 16px 20px;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.9rem;
+    line-height: 1;
+    color: var(--brand);
+  }
+  .cell {
+    border-left: 1px solid var(--line);
+    padding: 6px 0;
+  }
+  .mh {
+    display: none;
+  }
+  .item {
+    display: block;
+    padding: 9px 20px;
+  }
+  .item:hover {
+    background: var(--brand-soft);
+  }
+  .item b {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+  .item:hover b {
+    color: var(--brand);
+  }
+  .item > span {
+    display: block;
+    margin-top: 1px;
+    font-size: 0.86rem;
+    color: var(--ink-3);
+  }
+  .deg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 8px;
+    color: var(--ink-2);
+  }
+  .deg i {
+    width: 9px;
+    height: 9px;
+    background: var(--deg-ade);
+  }
+  .deg-informatica i {
+    background: var(--deg-inf);
+  }
+  .none {
+    padding: 12px 20px;
+    font-size: 0.86rem;
+    color: var(--ink-3);
+  }
+  .empty {
+    padding: 36px 20px;
     text-align: center;
-    font-size: 0.88rem;
-    color: var(--text-muted);
+    color: var(--ink-2);
   }
-  .rest strong {
-    color: var(--accent);
+  @media (max-width: 700px) {
+    .pgrid {
+      grid-template-columns: 1fr;
+    }
+    .ph {
+      display: none;
+    }
+    .cn {
+      padding: 14px 20px 4px;
+      font-size: 1.5rem;
+    }
+    .cell {
+      border-left: 0;
+      border-top: 0;
+      padding: 0 0 6px;
+    }
+    .cell.is-empty {
+      display: none;
+    }
+    .mh {
+      display: block;
+      padding: 6px 20px 0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink-3);
+    }
+  }
+
+  /* ── Novedades y planes ────────────────────────────────────── */
+  .below {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .below {
+      grid-template-columns: 1fr;
+    }
+  }
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .p-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .degs a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+  }
+  .degs a:first-child {
+    border-top: 0;
+  }
+  .degs a:hover .deg {
+    color: var(--brand);
+  }
+  .degs small {
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .note {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: var(--ink-3);
   }
 </style>

@@ -15,37 +15,22 @@
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<div
-  class="boot"
-  id="boot"
-  role="status"
-  aria-live="polite"
-  hidden
->
-  <div class="boot-stage">
-    <div class="boot-brand">
-      repasaYA<span class="dot" aria-hidden="true"></span>
-    </div>
-  </div>
-
+<div class="boot" id="boot" role="status" aria-live="polite" hidden>
+  <div class="boot-brand">repasaYA<span class="dot" aria-hidden="true">.</span></div>
   <div class="boot-meter">
-    <div class="boot-track">
-      <div class="boot-fill" id="boot-fill"></div>
-    </div>
+    <div class="boot-track"><div class="boot-fill" id="boot-fill"></div></div>
     <div class="boot-readout">
-      <span class="boot-status" id="boot-status">encendiendo motores</span>
-      <span class="boot-pct" id="boot-pct">0%</span>
+      <span id="boot-status">encendiendo motores</span>
+      <span id="boot-pct">0%</span>
     </div>
   </div>
-
-  <p class="boot-skip" aria-hidden="true">pulsa cualquier tecla para saltar</p>
+  <p class="boot-skip" aria-hidden="true">Pulsa cualquier tecla para saltar</p>
 </div>
 
 <style is:global>
   :root[data-boot='on'] body {
     overflow: hidden;
   }
-
   .boot {
     position: fixed;
     inset: 0;
@@ -54,156 +39,61 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 34px;
-    background: radial-gradient(
-        ellipse 80% 60% at 50% 40%,
-        var(--space-800) 0%,
-        var(--space-950) 70%
-      ),
-      var(--space-950);
-    transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out),
-      filter 0.55s var(--ease-out);
+    gap: 28px;
+    background: var(--paper);
+    transition: opacity 0.45s var(--ease-out);
   }
   .boot[hidden] {
     display: none;
   }
   .boot.is-leaving {
     opacity: 0;
-    transform: scale(1.06);
-    filter: blur(14px);
     pointer-events: none;
-  }
-
-  /* Halo de nebulosa detrás del logo */
-  .boot::before {
-    content: '';
-    position: absolute;
-    width: min(560px, 80vw);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    translate: -50% -60%;
-    background: radial-gradient(
-      circle,
-      rgba(124, 92, 255, 0.22) 0%,
-      rgba(124, 92, 255, 0.06) 45%,
-      transparent 70%
-    );
-    filter: blur(40px);
-    animation: bootPulse 3.2s var(--ease-out) infinite;
-    pointer-events: none;
-  }
-  @keyframes bootPulse {
-    0%,
-    100% {
-      opacity: 0.6;
-      scale: 0.96;
-    }
-    50% {
-      opacity: 1;
-      scale: 1.04;
-    }
-  }
-
-  .boot-stage {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .boot-brand {
-    display: inline-flex;
-    align-items: flex-end;
-    gap: 4px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(36px, 8vw, 56px);
-    letter-spacing: -0.055em;
-    color: var(--text);
-    text-shadow: 0 8px 40px rgba(124, 92, 255, 0.55);
-    user-select: none;
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: clamp(2.8rem, 9vw, 4.8rem);
+    letter-spacing: -0.01em;
+    color: var(--brand);
+    line-height: 1;
   }
   .boot-brand .dot {
-    width: 0.22em;
-    height: 0.22em;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 16px var(--accent);
-    margin-bottom: 0.18em;
-    animation: dotPulse 2.4s var(--ease-out) infinite;
+    color: var(--dot);
+    display: inline-block;
+    animation: bootBlink 1s steps(2, start) infinite;
   }
-  @keyframes dotPulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.35;
+  @keyframes bootBlink {
+    to {
+      visibility: hidden;
     }
   }
-
   .boot-meter {
-    width: min(320px, 72vw);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    width: min(280px, 70vw);
   }
   .boot-track {
     height: 3px;
-    border-radius: var(--radius-pill);
-    background: rgba(167, 139, 234, 0.14);
+    background: var(--line);
     overflow: hidden;
   }
   .boot-fill {
     height: 100%;
-    width: 0%;
-    border-radius: inherit;
-    background: linear-gradient(
-      90deg,
-      var(--accent-deep),
-      var(--accent),
-      var(--neon-cyan)
-    );
-    box-shadow: 0 0 14px rgba(124, 92, 255, 0.85);
+    width: 0;
+    background: var(--brand);
   }
   .boot-readout {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-  }
-  .boot-status {
-    color: var(--text-dim);
-  }
-  .boot-pct {
-    color: var(--accent);
-    font-weight: 700;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--ink-3);
     font-variant-numeric: tabular-nums;
   }
-
   .boot-skip {
     position: absolute;
-    bottom: 32px;
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-    opacity: 0;
-    animation: bootSkipIn 0.4s var(--ease-out) 1.4s forwards;
-  }
-  @keyframes bootSkipIn {
-    to {
-      opacity: 0.55;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .boot {
-      display: none !important;
-    }
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    font-size: 0.78rem;
+    color: var(--ink-3);
   }
 </style>
 
