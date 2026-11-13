@@ -46,9 +46,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .mode-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:18px 16px;cursor:pointer;transition:all .2s;position:relative;user-select:none}
   :root[data-quiz] .mode-card:hover,:root[data-quiz] .mode-card.selected{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-2px)}
   :root[data-quiz] .mode-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;font-size:.8rem;font-weight:800;color:var(--accent)}
-  :root[data-quiz] .mc-icon{font-size:1.5rem;margin-bottom:8px}:root[data-quiz] .mc-title{font-size:.95rem;font-weight:800;margin-bottom:4px}
+  :root[data-quiz] .mc-icon{display:flex;height:28px;margin-bottom:10px;color:var(--brand)}:root[data-quiz] .mc-title{font-size:.95rem;font-weight:800;margin-bottom:4px}
   :root[data-quiz] .mc-desc{font-size:.76rem;color:var(--text-muted);line-height:1.35}
-  :root[data-quiz] .mc-chip{display:inline-block;margin-top:8px;font-size:.68rem;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:2px 8px;color:var(--text-muted)}
+  :root[data-quiz] .mc-chip{display:inline-block;margin-top:8px;font-size:.68rem;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:2px 8px;color:var(--text-muted)}
   :root[data-quiz] .mode-card.selected .mc-chip{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent2)}
   
   /* EXAM OPTIONS TOGGLES */
@@ -60,20 +60,20 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   :root[data-quiz] .sel-label{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px}
   :root[data-quiz] .tema-chips{display:flex;flex-wrap:wrap;gap:8px}
-  :root[data-quiz] .tema-chip{padding:6px 14px;border:1.5px solid var(--border);border-radius:99px;background:var(--surface2);color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s;user-select:none;line-height:1.5}
+  :root[data-quiz] .tema-chip{padding:6px 14px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--surface2);color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s;user-select:none;line-height:1.5}
   :root[data-quiz] .tema-chip:hover{border-color:var(--accent);color:var(--accent2)}
   :root[data-quiz] .tema-chip.chip-on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent2)}
   :root[data-quiz] .chip-all.chip-on{background:var(--accent);color:var(--on-accent)}
   :root[data-quiz] .chip-count{font-size:.65rem;opacity:.7;margin-left:4px}
   :root[data-quiz] .btn-start{position:relative;z-index:10;width:100%;padding:16px;font-size:1rem;border-radius:var(--radius);background:var(--accent);color:var(--on-accent);border:none;font-weight:800;cursor:pointer;transition:all .2s;user-select:none;-webkit-tap-highlight-color:transparent}
-  :root[data-quiz] .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(138,107,216,.35);transform:translateY(-1px)}
+  :root[data-quiz] .btn-start:hover{background:var(--accent-hover);box-shadow:0 4px 20px rgba(122,31,43,.35);transform:translateY(-1px)}
 
   /* PROGRESS & HEADER */
   .q-header{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)}
-  :root[data-quiz] .progress-bar{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:6px}
-  :root[data-quiz] .progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+  :root[data-quiz] .progress-bar{height:4px;background:var(--surface2);border-radius:var(--radius);overflow:hidden;margin-top:6px}
+  :root[data-quiz] .progress-fill{height:100%;background:var(--accent);border-radius:var(--radius);transition:width .3s}
   :root[data-quiz] .score-live{color:var(--accent);font-weight:700}
-  :root[data-quiz] .timer-badge{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:var(--wrong);padding:2px 8px;border-radius:99px;font-weight:700;font-family:var(--font-mono);font-size:.75rem}
+  :root[data-quiz] .timer-badge{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:var(--wrong);padding:2px 8px;border-radius:var(--radius);font-weight:700;font-family:var(--font-mono);font-size:.75rem}
 
   /* QUESTION CARD */
   .q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px 22px;margin-top:14px}
@@ -142,7 +142,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .stat-item{text-align:center}:root[data-quiz] .stat-num{font-size:2.2rem;font-weight:800;letter-spacing:-1px;font-family:var(--font-mono)}
   :root[data-quiz] .stat-lbl{font-size:.75rem;color:var(--text-muted);margin-top:2px}
   :root[data-quiz] .c-num{color:var(--correct)}:root[data-quiz] .w-num{color:var(--wrong)}:root[data-quiz] .p-num{color:var(--accent2)}
-  :root[data-quiz] .ugr-badge{display:inline-block;margin-top:10px;font-size:.75rem;font-weight:700;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.25);color:var(--accent);padding:4px 12px;border-radius:99px}
+  :root[data-quiz] .ugr-badge{display:inline-block;margin-top:10px;font-size:.75rem;font-weight:700;background:rgba(122,31,43,.12);border:1px solid rgba(122,31,43,.25);color:var(--accent);padding:4px 12px;border-radius:var(--radius)}
 
   /* Desglose por categoría */
   .cat-list{display:flex;flex-direction:column;gap:14px}
@@ -151,8 +151,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .cat-name{font-size:.86rem;font-weight:700;color:var(--text)}
   :root[data-quiz] .cat-meta{font-size:.8rem;font-weight:700;font-family:var(--font-mono);white-space:nowrap}
   :root[data-quiz] .cat-meta .frac{color:var(--text-muted);font-weight:600;margin-left:6px}
-  :root[data-quiz] .cat-bar{height:8px;border-radius:99px;background:var(--surface2);border:1px solid var(--border);overflow:hidden}
-  :root[data-quiz] .cat-fill{height:100%;border-radius:99px;transition:width .5s ease}
+  :root[data-quiz] .cat-bar{height:8px;border-radius:var(--radius);background:var(--surface2);border:1px solid var(--border);overflow:hidden}
+  :root[data-quiz] .cat-fill{height:100%;border-radius:var(--radius);transition:width .5s ease}
   :root[data-quiz] .cat-fill.hi{background:var(--correct)}
   :root[data-quiz] .cat-fill.mid{background:var(--reveal)}
   :root[data-quiz] .cat-fill.lo{background:var(--wrong)}
@@ -170,8 +170,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .b-t{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);font-size:.6rem}
   :root[data-quiz] .bank-meta{font-size:.68rem;font-weight:700;font-family:var(--font-mono);color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
   :root[data-quiz] .bank-q{font-size:.88rem;color:var(--text);margin-bottom:3px}:root[data-quiz] .bank-ans{font-size:.8rem;color:var(--text-muted);font-style:italic}
-  :root[data-quiz] .github-fab{position:fixed;bottom:28px;right:28px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:12px 20px 12px 16px;color:var(--text);font-size:.85rem;font-weight:600;box-shadow:0 10px 26px rgba(70,60,120,.15);transition:all .25s;z-index:100}
-  :root[data-quiz] .github-fab:hover{border-color:var(--accent);background:var(--surface2);color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),0 0 24px rgba(138,107,216,.30);transform:translateY(-2px)}
+  :root[data-quiz] .github-fab{position:fixed;bottom:28px;right:28px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 20px 12px 16px;color:var(--text);font-size:.85rem;font-weight:600;box-shadow:0 10px 26px rgba(70,60,120,.15);transition:all .25s;z-index:100}
+  :root[data-quiz] .github-fab:hover{border-color:var(--accent);background:var(--surface2);color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),0 0 24px rgba(122,31,43,.30);transform:translateY(-2px)}
   :root[data-quiz] .github-fab svg{flex-shrink:0;transition:transform .25s}:root[data-quiz] .github-fab:hover svg{transform:rotate(-8deg) scale(1.1)}
   :root[data-quiz] body{display:flex;flex-direction:column}
   :root[data-quiz] .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
@@ -248,7 +248,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     background: var(--accent);
     color: var(--on-accent);
     padding: 10px 20px;
-    border-radius: 99px;
+    border-radius: var(--radius);
     font-size: 0.85rem;
     font-weight: 700;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
@@ -421,7 +421,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     color: var(--accent);
     background: var(--accent-soft);
     padding: 4px 10px;
-    border-radius: 99px;
+    border-radius: var(--radius);
     border: 1px solid var(--accent-line);
   }
   :root[data-quiz] .case-hero-title {
@@ -614,7 +614,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <div class="logo"><span>{code}</span> · {title}</div>
   </div>
   <div class="header-right">
-    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema" style="width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--text);cursor:pointer">
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar tema" title="Cambiar tema" style="width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius);background:var(--surface2);border:1px solid var(--border);color:var(--text);cursor:pointer">
       <svg class="ic-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
       <svg class="ic-moon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
@@ -628,7 +628,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <div class:list={['tab', { active: !startInCases }]} data-tab="test">Test</div>
   {hasCases && (
     <div class:list={['tab', { active: startInCases }]} data-tab="supuestos" id="tab-btn-supuestos">
-      📋 Examen Online por Supuestos ({uniqueCasesCount})
+      Examen Online por Supuestos ({uniqueCasesCount})
     </div>
   )}
   <div class="tab" data-tab="banco">Banco</div>
@@ -641,9 +641,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <div id="selector-view" class="start">
       <div class="user-stats-bar" id="user-stats-bar" style="display:none">
         <div class="usb-item"><span class="usb-val" id="usb-avg">-</span><span class="usb-lbl">Nota Media UGR</span></div>
-        <div class="usb-item"><span class="usb-val" id="usb-streak">0</span><span class="usb-lbl">Racha Máx 🔥</span></div>
+        <div class="usb-item"><span class="usb-val" id="usb-streak">0</span><span class="usb-lbl">Racha máx.</span></div>
         <div class="usb-item"><span class="usb-val" id="usb-total">0</span><span class="usb-lbl">Simulacros</span></div>
-        <button class="btn-reset-stats" id="btn-reset-stats" title="Reiniciar estadísticas de esta asignatura">🗑️</button>
+        <button class="btn-reset-stats" id="btn-reset-stats" title="Reiniciar estadísticas de esta asignatura" aria-label="Reiniciar estadísticas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
       </div>
 
       <div>
@@ -651,7 +651,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="mode-grid">
           {hasVF && (
             <div class:list={['mode-card', { selected: defaultMode === 'vf' }]} id="card-vf" onclick="selectMode('vf')">
-              <div class="mc-icon">✓✗</div>
+              <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l3 3 5-6"/><path d="M14 8l7 8M21 8l-7 8"/></svg></div>
               <div class="mc-title">Verdadero / Falso</div>
               <div class="mc-desc">Afirmaciones con justificación.</div>
               <span class="mc-chip">{vfData.length} preguntas</span>
@@ -659,7 +659,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           )}
           {hasTest && (
             <div class:list={['mode-card', { selected: defaultMode === 'test' }]} id="card-test" onclick="selectMode('test')">
-              <div class="mc-icon">🧠</div>
+              <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/></svg></div>
               <div class="mc-title">Tipo test</div>
               <div class="mc-desc">4 opciones, una correcta.</div>
               <span class="mc-chip">{testData.length} preguntas</span>
@@ -667,7 +667,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           )}
           {hasCases && (
             <div class="mode-card" id="card-cases-open" onclick="openSupuestosTab()">
-              <div class="mc-icon">📋</div>
+              <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg></div>
               <div class="mc-title">Examen con Enunciados</div>
               <div class="mc-desc">Enunciado grande arriba y preguntas test debajo.</div>
               <span class="mc-chip">{uniqueCasesCount} supuestos · {caseItems.length} preg.</span>
@@ -675,33 +675,33 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           )}
           {hasBoth && (
             <div class:list={['mode-card', { selected: defaultMode === 'mix' }]} id="card-mix" onclick="selectMode('mix')">
-              <div class="mc-icon">🔀</div>
+              <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4"/><path d="M19 5l2 2-2 2M19 15l2 2-2 2"/></svg></div>
               <div class="mc-title">Mezcla Combinada</div>
               <div class="mc-desc">Combina Test y Verdadero/Falso.</div>
               <span class="mc-chip">{vfData.length + testData.length} preguntas</span>
             </div>
           )}
           <div class:list={['mode-card', { selected: defaultMode === 'streak' }]} id="card-streak" onclick="selectMode('streak')">
-            <div class="mc-icon">🔥</div>
+            <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c4 0 7-2.7 7-6.6 0-3.6-2.6-5.6-4-8.4-.8 2-2 3-3.3 3.4C12.7 6.6 11.5 4.3 9.5 3c.3 3.4-4.5 6.3-4.5 11.4C5 18.3 8 21 12 21z"/></svg></div>
             <div class="mc-title">Modo Racha</div>
             <div class="mc-desc">Supervivencia: falla 1 y finaliza.</div>
             <span class="mc-chip">Racha máx</span>
           </div>
           <div class:list={['mode-card', { selected: defaultMode === 'weak' }]} id="card-weak" onclick="selectMode('weak')">
-            <div class="mc-icon">🎯</div>
+            <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
             <div class="mc-title">Puntos Débiles</div>
             <div class="mc-desc">Preguntas falladas guardadas.</div>
             <span class="mc-chip" id="chip-weak-count">0 acumuladas</span>
           </div>
           <div class:list={['mode-card', { selected: defaultMode === 'starred' }]} id="card-starred" onclick="selectMode('starred')">
-            <div class="mc-icon">⭐</div>
+            <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></div>
             <div class="mc-title">Mis Favoritas</div>
             <div class="mc-desc">Preguntas guardadas con estrella.</div>
             <span class="mc-chip" id="chip-starred-count">0 guardadas</span>
           </div>
           {hasQuizz && (
             <div class:list={['mode-card', { selected: defaultMode === 'quizz' }]} id="card-quizz" onclick="selectMode('quizz')">
-              <div class="mc-icon">💡</div>
+              <div class="mc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0012 3z"/></svg></div>
               <div class="mc-title">Quiz de repaso</div>
               <div class="mc-desc">Pregunta abierta, revela la respuesta.</div>
               <span class="mc-chip">{quizzData.length} preguntas</span>
@@ -733,14 +733,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="tema-chips" id="tema-chips"></div>
       </div>
       <button type="button" class="btn-start" id="btn-start" onclick="startQuiz()">Empezar →</button>
-      <button type="button" class="btn-print" id="btn-print" onclick="printExamSheet()">🖨️ Versión para Imprimir / PDF</button>
+      <button type="button" class="btn-print" id="btn-print" onclick="printExamSheet()">Versión para Imprimir / PDF</button>
     </div>
 
     <div id="quiz-view" style="display:none">
       <div class="q-header">
         <button class="btn-back-top" id="btn-back">← Menú</button>
         <div style="display:flex;align-items:center;gap:10px">
-          <span id="q-timer" class="timer-badge" style="display:none">⏱️ 30s</span>
+          <span id="q-timer" class="timer-badge" style="display:none">30s</span>
           <span id="q-counter"></span>
         </div>
         <span class="score-live" id="q-score"></span>
@@ -750,13 +750,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="q-meta-line">
           <div class="q-tema-tag" id="q-tema"></div>
           <div style="display:flex;align-items:center;gap:8px">
-            <button class="btn-star-q" id="btn-star-q" title="Guardar pregunta favorita">⭐ <span id="star-txt">Favorita</span></button>
+            <button class="btn-star-q" id="btn-star-q" title="Guardar pregunta favorita"><span id="star-txt">Favorita</span></button>
             <div class="q-type-badge" id="q-type-badge"></div>
           </div>
         </div>
         <div class="q-case-box" id="q-case-box" style="display:none">
           <div class="q-case-hdr">
-            <span class="q-case-badge" id="q-case-title">📋 Enunciado del Supuesto</span>
+            <span class="q-case-badge" id="q-case-title">Enunciado del Supuesto</span>
             <button type="button" class="q-case-toggle" id="q-case-toggle">Plegar / Desplegar enunciado</button>
           </div>
           <div class="q-case-body" id="q-case-body"></div>
@@ -819,8 +819,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button type="button" class="btn btn-primary" id="btn-repeat" onclick="startQuiz()">Repetir todo</button>
         <button type="button" class="btn btn-danger" id="btn-repeat-wrong" onclick="repeatWrong()" style="display:none">↺ Solo fallos</button>
-        <button type="button" class="btn btn-ghost" id="btn-share-wa" onclick="shareResultWhatsApp()" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.3);color:#25D366;font-weight:700">📲 Compartir WhatsApp</button>
-        <button type="button" class="btn btn-ghost" id="btn-copy-result" onclick="copyResultText()">📋 Copiar nota</button>
+        <button type="button" class="btn btn-ghost" id="btn-share-wa" onclick="shareResultWhatsApp()" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.3);color:#25D366;font-weight:700">Compartir WhatsApp</button>
+        <button type="button" class="btn btn-ghost" id="btn-copy-result" onclick="copyResultText()">Copiar nota</button>
         <button type="button" class="btn btn-ghost" id="btn-back2" onclick="backToSelector()">← Volver</button>
       </div>
     </div>
@@ -831,7 +831,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <div id="panel-supuestos" class:list={['panel', { active: startInCases }]}>
       <div class="cases-selector-card">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-          <span class="start-title" style="margin:0">📋 Selecciona el Supuesto Práctico o Examen Oficial</span>
+          <span class="start-title" style="margin:0">Selecciona el Supuesto Práctico o Examen Oficial</span>
           <span style="font-size:0.76rem;color:var(--text-muted)">Lee el enunciado en grande arriba y responde las preguntas tipo test debajo</span>
         </div>
         <div class="cases-chips-grid" id="cases-selector-list"></div>
@@ -849,19 +849,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           </label>
           <label class="opt-toggle" title="Fija el enunciado en la parte superior para consultarlo mientras bajas por las preguntas">
             <input type="checkbox" id="chk-case-sticky" />
-            <span><strong>📌 Fijar enunciado arriba</strong> (Split Screen)</span>
+            <span><strong>Fijar enunciado arriba</strong> (Split Screen)</span>
           </label>
         </div>
         <div class="case-toolbar-right">
           <span class="score-live" id="case-live-progress" style="font-size:0.84rem">0 / 0 respondidas</span>
-          <button type="button" class="btn btn-primary" id="btn-case-grade" style="padding:8px 16px;font-size:0.82rem">✅ Corregir Examen</button>
-          <button type="button" class="btn btn-ghost" id="btn-case-reset" style="padding:8px 14px;font-size:0.82rem">🔄 Reiniciar</button>
+          <button type="button" class="btn btn-primary" id="btn-case-grade" style="padding:8px 16px;font-size:0.82rem">Corregir Examen</button>
+          <button type="button" class="btn btn-ghost" id="btn-case-reset" style="padding:8px 14px;font-size:0.82rem">Reiniciar</button>
         </div>
       </div>
 
       <div class="stats-box" id="case-results-banner" style="display:none;border-color:var(--accent)">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">
-          <div style="font-size:1.05rem;font-weight:800" id="case-results-title">📊 Calificación del Supuesto</div>
+          <div style="font-size:1.05rem;font-weight:800" id="case-results-title">Calificación del Supuesto</div>
           <span class="ugr-badge" id="case-results-badge" style="margin:0">Nota calculada sobre 10</span>
         </div>
         <div class="stats-row">
@@ -874,7 +874,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
       <div class="case-hero-statement" id="case-hero-statement">
         <div class="case-hero-top">
-          <span class="case-hero-kicker" id="case-hero-kicker">📄 ENUNCIADO DEL EXAMEN / SUPUESTO PRÁCTICO</span>
+          <span class="case-hero-kicker" id="case-hero-kicker">ENUNCIADO DEL EXAMEN / SUPUESTO PRÁCTICO</span>
           <div style="display:flex;gap:8px;align-items:center">
             <button type="button" class="q-case-toggle" id="btn-case-collapse">Plegar / Desplegar Enunciado</button>
           </div>
@@ -888,8 +888,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 0 28px">
         <button type="button" class="btn btn-ghost" id="btn-case-top">↑ Subir al enunciado</button>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button type="button" class="btn btn-ghost" id="btn-case-reset-bottom">🔄 Reiniciar Supuesto</button>
-          <button type="button" class="btn btn-primary" id="btn-case-grade-bottom">✅ Entregar y Corregir Examen Online</button>
+          <button type="button" class="btn btn-ghost" id="btn-case-reset-bottom">Reiniciar Supuesto</button>
+          <button type="button" class="btn btn-primary" id="btn-case-grade-bottom">Entregar y Corregir Examen Online</button>
         </div>
       </div>
     </div>
@@ -919,7 +919,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 <a class="github-fab" href="https://github.com/jxliian" target="_blank" rel="noopener">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-  Sígueme en GitHub ⭐
+  Sígueme en GitHub 
 </a>
 
 <script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code, defaultMode }}>
@@ -992,10 +992,10 @@ function toggleStarCurrentQ(e) {
   let list = getStarredQuestions();
   if (list.includes(qText)) {
     list = list.filter(t => t !== qText);
-    showToast('Estrella quitada ⭐');
+    showToast('Estrella quitada ');
   } else {
     list.push(qText);
-    showToast('¡Guardada en Favoritas! ⭐');
+    showToast('¡Guardada en Favoritas! ');
   }
   localStorage.setItem(STAR_KEY, JSON.stringify(list));
   updateStarredState();
@@ -1057,7 +1057,7 @@ function resetUserStats(e) {
   if (confirm('¿Quieres reiniciar las estadísticas de esta asignatura?')) {
     localStorage.removeItem(STATS_KEY);
     renderUserStats();
-    showToast('Estadísticas reiniciadas 🗑️');
+    showToast('Estadísticas reiniciadas ');
   }
 }
 
@@ -1155,7 +1155,7 @@ function startQuiz(){
     return;
   }
   if (selectedMode === 'starred' && src.length === 0) {
-    alert('Aún no has guardado ninguna pregunta favorita con la estrella ⭐.');
+    alert('Aún no has guardado ninguna pregunta favorita con la estrella .');
     return;
   }
 
@@ -1188,12 +1188,12 @@ function startTimer() {
   timeLeft = 30;
   if (timerBadge) {
     timerBadge.style.display = 'inline-block';
-    timerBadge.textContent = `⏱️ ${timeLeft}s`;
+    timerBadge.textContent = `${timeLeft}s`;
   }
 
   timerInterval = setInterval(() => {
     timeLeft--;
-    if (timerBadge) timerBadge.textContent = `⏱️ ${timeLeft}s`;
+    if (timerBadge) timerBadge.textContent = `${timeLeft}s`;
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       handleTimeout();
@@ -1214,7 +1214,7 @@ function updateLiveScore() {
   const scoreEl = document.getElementById('q-score');
   if (!scoreEl) return;
   if (selectedMode === 'streak') {
-    scoreEl.textContent = `🔥 Racha: ${correct}`;
+    scoreEl.textContent = `Racha: ${correct}`;
   } else if (isDeferred) {
     const totalAnswered = answers.filter(Boolean).length;
     scoreEl.textContent = `Respondidas: ${totalAnswered} / ${questions.length}`;
@@ -1238,7 +1238,7 @@ function showQ(){
   if (qCaseBox) {
     if (q.caseStatement) {
       qCaseBox.style.display = 'block';
-      document.getElementById('q-case-title').textContent = '📋 ' + (q.caseTitle || q.tema || 'Enunciado del Supuesto');
+      document.getElementById('q-case-title').textContent = '' + (q.caseTitle || q.tema || 'Enunciado del Supuesto');
       document.getElementById('q-case-body').textContent = q.caseStatement;
     } else {
       qCaseBox.style.display = 'none';
@@ -1460,7 +1460,7 @@ function showResults(){
     if (ugrContainer) ugrContainer.style.display = 'none';
     calculatedNote = 10;
   } else if (selectedMode === 'streak') {
-    document.getElementById('r-pct').textContent = `🔥 ${correct}`;
+    document.getElementById('r-pct').textContent = `${correct}`;
     document.getElementById('r-pct-lbl').textContent = 'Racha Aciertos';
     document.getElementById('r-ok').textContent = correct;
     document.getElementById('r-fail').textContent = wrong;
@@ -1537,15 +1537,15 @@ window.printExamSheet = printExamSheet;
 
 function shareResultWhatsApp() {
   const subjTitle = document.title.split('·')[0].trim();
-  const text = `🎓 ¡He sacado un ${currentResultNote}/10 en el Simulacro UGR de ${subjTitle} en repasaYA! (🔥 Racha: ${correct} aciertos). ¡Demuestra lo que sabes en: ${window.location.href}`;
+  const text = `¡He sacado un ${currentResultNote}/10 en el Simulacro UGR de ${subjTitle} en repasaYA! (Racha: ${correct} aciertos). ¡Demuestra lo que sabes en: ${window.location.href}`;
   window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 function copyResultText() {
   const subjTitle = document.title.split('·')[0].trim();
-  const text = `🎓 ¡He sacado un ${currentResultNote}/10 en el Simulacro UGR de ${subjTitle} en repasaYA! (🔥 Racha: ${correct} aciertos). ¡Demuestra lo que sabes en: ${window.location.href}`;
+  const text = `¡He sacado un ${currentResultNote}/10 en el Simulacro UGR de ${subjTitle} en repasaYA! (Racha: ${correct} aciertos). ¡Demuestra lo que sabes en: ${window.location.href}`;
   navigator.clipboard.writeText(text).then(() => {
-    showToast('¡Resultado copiado al portapapeles! 📋');
+    showToast('¡Resultado copiado al portapapeles! ');
   }).catch(() => {
     showToast('Error al copiar');
   });
@@ -1776,7 +1776,7 @@ function selectCaseByIndex(i) {
   const bannerEl = document.getElementById('case-results-banner');
 
   if (bannerEl) bannerEl.style.display = 'none';
-  if (kickerEl) kickerEl.textContent = `📄 ENUNCIADO DEL SUPUESTO (${i + 1} DE ${CASE_GROUPS.length}) · ${grp.tema}`;
+  if (kickerEl) kickerEl.textContent = `ENUNCIADO DEL SUPUESTO (${i + 1} DE ${CASE_GROUPS.length}) · ${grp.tema}`;
   if (titleEl) titleEl.textContent = grp.title;
   if (textEl) textEl.textContent = grp.statement;
 
@@ -1819,7 +1819,7 @@ function renderActiveCaseQuestions() {
 
     let statusText = 'Sin responder';
     if (showSolution) {
-      if (!hasAnswered) statusText = '⚪ En blanco (0 pts)';
+      if (!hasAnswered) statusText = 'En blanco (0 pts)';
       else if (isOk) statusText = '✓ Correcta (+1 pt)';
       else statusText = '✗ Incorrecta';
     } else if (hasAnswered) {
@@ -1833,7 +1833,7 @@ function renderActiveCaseQuestions() {
       `</div>`;
 
     const subStmtHtml = hasSubStatement
-      ? `<div class="q-case-box" style="margin-bottom:14px"><div class="q-case-hdr"><span class="q-case-badge">📋 Datos específicos de esta pregunta</span></div><div class="q-case-body">${q.caseStatement}</div></div>`
+      ? `<div class="q-case-box" style="margin-bottom:14px"><div class="q-case-hdr"><span class="q-case-badge">Datos específicos de esta pregunta</span></div><div class="q-case-body">${q.caseStatement}</div></div>`
       : '';
 
     const promptHtml = `<div class="case-q-prompt">${qIdx + 1}. ${q.q}</div>`;
@@ -1877,14 +1877,14 @@ function renderActiveCaseQuestions() {
           : `✗ Incorrecto — Marcaste ${LETTERS[chosen]}, pero la correcta es ${LETTERS[q.correct]}: ${q.opts[q.correct]}`;
       } else {
         fb.className = 'feedback show wrong';
-        fb.textContent = `⚪ Dejada en blanco — La respuesta correcta es ${LETTERS[q.correct]}: ${q.opts[q.correct]}`;
+        fb.textContent = `Dejada en blanco — La respuesta correcta es ${LETTERS[q.correct]}: ${q.opts[q.correct]}`;
       }
       card.appendChild(fb);
 
       if (q.justification) {
         const jbox = document.createElement('div');
         jbox.className = 'justification show ' + (hasAnswered && isOk ? 'correct-just' : 'wrong-just');
-        jbox.innerHTML = `<div class="just-label">⚖️ Justificación Legal y Resolución Paso a Paso</div><div>${q.justification}</div>`;
+        jbox.innerHTML = `<div class="just-label">Justificación Legal y Resolución Paso a Paso</div><div>${q.justification}</div>`;
         card.appendChild(jbox);
       }
     }
@@ -1974,7 +1974,7 @@ function resetActiveCaseExam() {
   const banner = document.getElementById('case-results-banner');
   if (banner) banner.style.display = 'none';
   renderActiveCaseQuestions();
-  showToast('Supuesto reiniciado 🔄');
+  showToast('Supuesto reiniciado ');
 }
 
 if (startInCases && hasCases) {

@@ -37,6 +37,14 @@ body {
   display: none !important;
 }
 
+/* Los controles de formulario heredan la tipografía de la web */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 /* La web tiene un único tema: el botón de tema del motor de tests sobra */
 [data-theme-toggle] {
   display: none !important;

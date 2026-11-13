@@ -10,11 +10,11 @@ badge: "Derecho Fiscal · 5º DADE / ADE · UGR · Examen 9 Nov 2026"
 ### Convocatoria de Evaluación Continua — Lunes 9 de Noviembre de 2026
 
 > **Datos Oficiales de la Convocatoria:**  
-> 🗓️ **Fecha y Hora:** Lunes, **9 de noviembre de 2026 a las 8:30 h** (Aula D16)  
-> 🎯 **Puntuación:** **1,5 puntos sobre 10** de la nota final (evaluación continua, eliminatorio a partir de **0,75 / 1,5**, equivalente a un 5 sobre 10)  
-> 📐 **Estructura del Examen:** **15 preguntas tipo test** (**10 teóricas** del Tema 1 y LIRPF + **5 casos prácticos numéricos** de los Supuestos 1 a 16)  
-> ⚠️ **Penalización:** Cada **3 respuestas erróneas restan 1 correcta** (`-0,33` por fallo; en blanco no resta)  
-> 📖 **Material permitido:** Textos tributarios sin comentar (**Código de Legislación del IRPF del BOE** y LGT) y calculadora.
+> **Fecha y Hora:** Lunes, **9 de noviembre de 2026 a las 8:30 h** (Aula D16)  
+> **Puntuación:** **1,5 puntos sobre 10** de la nota final (evaluación continua, eliminatorio a partir de **0,75 / 1,5**, equivalente a un 5 sobre 10)  
+> **Estructura del Examen:** **15 preguntas tipo test** (**10 teóricas** del Tema 1 y LIRPF + **5 casos prácticos numéricos** de los Supuestos 1 a 16)  
+> **Penalización:** Cada **3 respuestas erróneas restan 1 correcta** (`-0,33` por fallo; en blanco no resta)  
+> **Material permitido:** Textos tributarios sin comentar (**Código de Legislación del IRPF del BOE** y LGT) y calculadora.
 
 ---
 
@@ -45,7 +45,7 @@ Tu libro físico del BOE (*Legislación del IRPF*) es una recopilación de 82 no
 | **2. Contribución Especial** *(Art. 2.2.b LGT)* | Obtención por el obligado de un **beneficio o aumento de valor de sus bienes** como consecuencia de la **realización de obras públicas** o del **establecimiento o ampliación de servicios públicos**. | **SÍ** (obra pública o establecimiento/ampliación de servicio que beneficia especialmente a un grupo). | **Máximo el 90%** del coste que la Entidad Local soporte por la obra/servicio. **Ingresos afectados** a sufragar dicha obra. | Asfaltado, alcantarillado o alumbrado por primera vez de una calle, apertura de parque que revaloriza inmuebles colindantes. |
 | **3. Impuesto** *(Art. 2.2.c LGT)* | Tributos **exigidos sin contraprestación** cuyo hecho imponible pone de manifiesto la **capacidad económica** del contribuyente (renta, patrimonio o gasto). | **NO** hay actividad administrativa individualizada vinculada al pago. | Según capacidad económica y progresividad. Financia todos los gastos públicos sin afectación específica. | IRPF, IS, IVA, ISD, IP, IBI, IAE, IVTM, ICIO, IIVTNU. |
 
-> ⚠️ **Distinción vital: Tasa vs. Precio Público (Art. 24 LTPP):**  
+> **Distinción vital: Tasa vs. Precio Público (Art. 24 LTPP):**  
 > Es **Precio Público** (y no tasa) cuando concurren **a la vez dos notas**:  
 > 1) El servicio es de **solicitud y recepción libre/voluntaria** (no viene impuesto ni es imprescindible para la vida privada o social), **Y**  
 > 2) Se presta en **concurrencia con el sector privado** (existen empresas privadas que ofrecen ese mismo servicio).  
@@ -91,7 +91,7 @@ Tu libro físico del BOE (*Legislación del IRPF*) es una recopilación de 82 no
        CUOTA DIFERENCIAL (Art. 56.6 LGT: puede ser positiva a ingresar o negativa a devolver)
 ```
 
-> 🚨 **LA TRAMPA Nº 1 DE EXAMEN (Art. 58 LGT): ¿Qué forma parte de la Deuda Tributaria?**  
+> **LA TRAMPA Nº 1 DE EXAMEN (Art. 58 LGT): ¿Qué forma parte de la Deuda Tributaria?**  
 > * **SÍ integran la Deuda Tributaria (Art. 58.1 y 58.2 LGT):**  
 >   1) La **cuota** o cantidad a ingresar que resulte de la obligación principal o de los pagos a cuenta, **Y**  
 >   2) Las **obligaciones tributarias accesorias**:  
@@ -278,7 +278,7 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
       • Intereses de préstamos hipotecarios y gastos de financiación para adquirir/mejorar el inmueble
       • Gastos de reparación y conservación (pintura, arreglo de caldera, sustitución de elementos;
         OJO: las obras de AMPLIACIÓN o MEJORA NO son gasto del ejercicio, sino mayor valor amortizable)
-      ⚠️ Si (Intereses + Reparación) > RICI del inmueble: solo se deduce hasta dejar el saldo a 0 €,
+      Si (Intereses + Reparación) > RICI del inmueble: solo se deduce hasta dejar el saldo a 0 €,
          y el exceso pendiente se podrá deducir en los 4 AÑOS SIGUIENTES sobre ese mismo inmueble.
   ═══════════════════════════════════════════════════════════════════════════════════════════════
   (─) GRUPO 2 DE GASTOS DEDUCIBLES (SIN límite: PUEDEN hacer que el Rendimiento Neto sea NEGATIVO):
@@ -295,7 +295,7 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
         incluyendo gastos e impuestos de la compra o del ISD en herencias).
       • AMORTIZACIÓN DE MUEBLES Y ENSERES cedidos con el inmueble:
         10% anual sobre su coste de adquisición.
-      ⚠️ Prorrateo temporal: Si el inmueble solo estuvo alquilado una parte del año (ej. 6 meses o 180 días),
+      Prorrateo temporal: Si el inmueble solo estuvo alquilado una parte del año (ej. 6 meses o 180 días),
          todos los gastos anuales (IBI, seguro, comunidad, intereses, amortización) se prorratean por los
          días/meses de alquiler, y por los días que estuvo vacío a disposición del dueño tributa como
          IMPUTACIÓN DE RENTAS INMOBILIARIAS (Art. 85 LIRPF) sin gastos deducibles.
@@ -304,7 +304,7 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
   (─) Reducción del 30% por rendimientos irregulares (> 2 años o notoriamente irregulares como traspaso;
       Base máxima = 300.000 € → Art. 23.3 LIRPF)
   (─) REDUCCIÓN POR ARRENDAMIENTO DE VIVIENDA HABITUAL (Art. 23.2 LIRPF):
-      ⚠️ REQUISITOS: 1) Solo si el Rendimiento Neto es POSITIVO; 2) Solo para arrendamiento de VIVIENDA
+      REQUISITOS: 1) Solo si el Rendimiento Neto es POSITIVO; 2) Solo para arrendamiento de VIVIENDA
          permanente (NO aplica a locales comerciales, garajes sueltos, oficinas ni pisos turísticos o de
          temporada salvo que constituya la vivienda habitual del inquilino); 3) Declarado por el contribuyente.
       • Contratos firmados desde el 26/05/2023 (Ley 12/2023 de Vivienda):
@@ -315,7 +315,7 @@ Para que las dietas estén exentas, el desplazamiento debe realizarse a un **mun
       • Contratos firmados antes del 26/05/2023 (DT 38.ª LIRPF): mantienen la reducción del 60%.
   ═══════════════════════════════════════════════════════════════════════════════════════════════
   (=) RENDIMIENTO NETO REDUCIDO DEL CAPITAL INMOBILIARIO (RNCI)
-      ⚠️ REGLA ANTI-FRAUDE DE PARENTESCO (Art. 24 LIRPF):
+      REGLA ANTI-FRAUDE DE PARENTESCO (Art. 24 LIRPF):
       Cuando el inquilino sea el cónyuge o un pariente (por consanguinidad o afinidad) hasta el 3.er GRADO
       inclusive (padres, hijos, abuelos, nietos, hermanos, tíos, sobrinos, suegros, cuñados), el RNCI
       total NUNCA podrá ser inferior al que resultaría de aplicar el Art. 85 LIRPF (2% o 1,1% del VC).

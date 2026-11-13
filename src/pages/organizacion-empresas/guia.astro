@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 // ── Las 6 configuraciones de Mintzberg (confirmadas con los exámenes) ──
 const configs = [
   {
-    n: 'Estructura simple', alias: 'Empresarial', icon: '🌱', c: '#10b981',
+    n: 'Estructura simple', alias: 'Empresarial', icon: '', c: '#10b981',
     coord: 'Supervisión directa',
     parte: 'Ápice estratégico',
     desc: 'Centralización vertical y horizontal',
@@ -14,7 +14,7 @@ const configs = [
     param: 'Poca formalización · división del trabajo poco estricta',
   },
   {
-    n: 'Burocracia maquinal', icon: '⚙️', c: '#3b82f6',
+    n: 'Burocracia maquinal', icon: '', c: '#3b82f6',
     coord: 'Normalización de procesos',
     parte: 'Tecnoestructura',
     desc: 'Centr. vertical + descentr. horizontal limitada (→ tecnoestructura)',
@@ -22,7 +22,7 @@ const configs = [
     param: 'Formalización alta · sistema técnico regulador y poco sofisticado',
   },
   {
-    n: 'Burocracia profesional', icon: '🎓', c: '#8b5cf6',
+    n: 'Burocracia profesional', icon: '', c: '#8b5cf6',
     coord: 'Normalización de habilidades',
     parte: 'Núcleo de operaciones',
     desc: 'Descentralización vertical y horizontal',
@@ -30,7 +30,7 @@ const configs = [
     param: 'Preparación/formación externa · jerarquías paralelas · poca formalización',
   },
   {
-    n: 'Forma divisional', icon: '🏢', c: '#f59e0b',
+    n: 'Forma divisional', icon: '', c: '#f59e0b',
     coord: 'Normalización de resultados',
     parte: 'Línea media',
     desc: 'Descentr. vertical limitada y paralela (sede → divisiones)',
@@ -38,7 +38,7 @@ const configs = [
     param: 'Agrupación por mercado · sistema de control del rendimiento',
   },
   {
-    n: 'Adhocracia', icon: '🚀', c: '#ec4899',
+    n: 'Adhocracia', icon: '', c: '#ec4899',
     coord: 'Adaptación mutua',
     parte: 'Staff de apoyo (operativa: + núcleo de operaciones)',
     desc: 'Descentralización selectiva (vertical y horizontal)',
@@ -46,7 +46,7 @@ const configs = [
     param: 'Dispositivos de enlace · estructura matricial · poca formalización',
   },
   {
-    n: 'Misionera', alias: 'Ideológica', icon: '🕊️', c: '#14b8a6',
+    n: 'Misionera', alias: 'Ideológica', icon: '', c: '#14b8a6',
     coord: 'Normalización de normas (valores)',
     parte: 'Ideología',
     desc: 'Descentralización total (poder igualitario)',
@@ -114,7 +114,7 @@ const cfgDetalle = [
     'La sede central controla el <b>rendimiento</b> → descentralización vertical <b>limitada y paralela</b>.',
     'Etapas de transición: funcional → subproductos → productos relacionados → conglomerado.',
     'Las divisiones tienden a la <b>burocracia maquinal</b> (facilita el control por resultados).',
-    '⚠️ NO es una ventaja mover personal entre divisiones: son independientes. Sí: reparte riesgos y asigna capital.',
+    'NO es una ventaja mover personal entre divisiones: son independientes. Sí: reparte riesgos y asigna capital.',
   ]},
   { n: 'Adhocracia', c: '#ec4899', pts: [
     'Coordina por <b>adaptación mutua</b>; muchos dispositivos de enlace y estructura matricial. Poca formalización.',
@@ -201,11 +201,11 @@ const caen = [
 
   /* Hero */
   .gx-hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:40px}
-  .gx-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:99px;padding:5px 14px;font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:.3px}
+  .gx-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:var(--radius);padding:5px 14px;font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:.3px}
   .gx-title{font-family:var(--font-display);font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;letter-spacing:-1px;line-height:1.1}
   .gx-title span{color:var(--accent)}
   .gx-sub{font-size:.92rem;color:var(--text-muted);max-width:560px;line-height:1.65}
-  .gx-note{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:14px;padding:14px 16px;max-width:620px;margin-top:6px}
+  .gx-note{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px;max-width:620px;margin-top:6px}
   .gx-note b{color:var(--text)}
   .gx-note .ico{font-size:1.2rem;line-height:1.4}
   .gx-note p{font-size:.83rem;color:var(--text-muted);line-height:1.6}
@@ -219,11 +219,11 @@ const caen = [
 
   /* Config cards */
   .gx-cfgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-  .gx-cfg{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 18px 6px;overflow:hidden;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .gx-cfg{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 18px 6px;overflow:hidden;transition:transform .18s,box-shadow .18s,border-color .18s}
   .gx-cfg::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
   .gx-cfg:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 45%,var(--border));box-shadow:0 14px 30px color-mix(in srgb,var(--c) 20%,transparent)}
   .gx-cfg-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-  .gx-cfg-ico{width:44px;height:44px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:color-mix(in srgb,var(--c) 15%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+  .gx-cfg-ico{width:44px;height:44px;flex-shrink:0;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:color-mix(in srgb,var(--c) 15%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
   .gx-cfg-head h3{font-size:1rem;font-weight:800;letter-spacing:-.3px;line-height:1.15}
   .gx-cfg-alias{font-size:.7rem;color:var(--text-muted);font-weight:600}
   .gx-dl>div{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid var(--border)}
@@ -234,7 +234,7 @@ const caen = [
   /* Generic content cards */
   .gx-cards{display:grid;gap:12px}
   .gx-cards.two{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
-  .gx-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 17px;display:flex;gap:13px;align-items:flex-start;transition:border-color .18s,transform .18s}
+  .gx-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 17px;display:flex;gap:13px;align-items:flex-start;transition:border-color .18s,transform .18s}
   .gx-item:hover{border-color:var(--accent-line);transform:translateY(-2px)}
   .gx-item .tag{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;font-family:var(--font-mono);margin-top:1px}
   .gx-item .tag.warn{background:color-mix(in srgb,var(--reveal) 16%,transparent);border-color:color-mix(in srgb,var(--reveal) 40%,transparent);color:var(--reveal)}
@@ -244,16 +244,16 @@ const caen = [
 
   /* Check list ("casi seguro") */
   .gx-check{list-style:none;display:grid;gap:10px}
-  .gx-check li{display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 15px;font-size:.84rem;line-height:1.55;color:var(--text-muted)}
+  .gx-check li{display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;font-size:.84rem;line-height:1.55;color:var(--text-muted)}
   .gx-check li b{color:var(--text);font-weight:700}
   .gx-check .ck{flex-shrink:0;color:var(--correct);font-weight:800;margin-top:1px}
 
   /* Express concept blocks */
   .gx-express{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-  .gx-xb{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:15px 16px}
+  .gx-xb{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:15px 16px}
   .gx-xb h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:var(--accent);font-weight:800;margin-bottom:10px}
   .gx-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-  .gx-pill{font-size:.74rem;font-weight:600;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:4px 11px;color:var(--text)}
+  .gx-pill{font-size:.74rem;font-weight:600;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:4px 11px;color:var(--text)}
   .gx-arrow{color:var(--text-muted);font-size:.7rem}
   .gx-xb ul{list-style:none;display:grid;gap:7px}
   .gx-xb li{font-size:.8rem;color:var(--text);line-height:1.45;padding-left:15px;position:relative}
@@ -262,22 +262,22 @@ const caen = [
 
   /* Strategy steps */
   .gx-steps{display:grid;gap:12px;counter-reset:step}
-  .gx-step{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 17px}
+  .gx-step{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 17px}
   .gx-step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--font-mono);font-size:.85rem}
   .gx-step p{font-size:.85rem;line-height:1.55;color:var(--text-muted)}
   .gx-step p b{color:var(--text)}
 
   /* CTA */
   .gx-cta{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .gx-ctac{display:flex;align-items:center;gap:14px;background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:18px 20px;transition:all .2s}
-  .gx-ctac:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-3px);box-shadow:0 12px 30px rgba(138,107,216,.14)}
-  .gx-ctac .em{font-size:1.7rem;width:48px;height:48px;flex-shrink:0;border-radius:12px;background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center}
+  .gx-ctac{display:flex;align-items:center;gap:14px;background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:all .2s}
+  .gx-ctac:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-3px);box-shadow:0 12px 30px rgba(122,31,43,.14)}
+  .gx-ctac .em{font-size:1.7rem;width:48px;height:48px;flex-shrink:0;border-radius:var(--radius);background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center}
   .gx-ctac h4{font-size:.95rem;font-weight:800}
   .gx-ctac p{font-size:.76rem;color:var(--text-muted);margin-top:2px}
 
   /* Deep config cards (respuestas por configuración) */
   .gx-deep{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-  .gx-dcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px 8px;overflow:hidden}
+  .gx-dcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px 8px;overflow:hidden}
   .gx-dcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--c)}
   .gx-dcard h3{font-size:.98rem;font-weight:800;letter-spacing:-.3px;margin-bottom:10px;color:color-mix(in srgb,var(--c) 65%,var(--text))}
   .gx-dcard ul{list-style:none;display:grid;gap:8px}
@@ -313,11 +313,11 @@ const caen = [
 
     <!-- HERO -->
     <div class="gx-hero">
-      <span class="gx-badge">📌 Todo lo que necesitas para el tipo test</span>
+      <span class="gx-badge">Todo lo que necesitas para el tipo test</span>
       <h1 class="gx-title">Guía de examen — <span>Mintzberg</span></h1>
       <p class="gx-sub">Las 6 configuraciones estructurales, los patrones de pregunta, las trampas de siempre y los conceptos que caen todos los años. Si dominas esta página, tienes el examen casi hecho.</p>
       <div class="gx-note">
-        <span class="ico">💡</span>
+        <span class="ico"></span>
         <p><b>El examen es el mismo banco cada año.</b> Comparando la convocatoria ordinaria con la de 21-22, las preguntas se repiten casi 1:1 (flujos regulados, especialización, tramos de control, organigrama, socialización…). Memorizar este repertorio es rentabilísimo.</p>
       </div>
     </div>
@@ -330,7 +330,7 @@ const caen = [
         {configs.map(cfg => (
           <article class="gx-cfg" style={`--c:${cfg.c}`}>
             <div class="gx-cfg-head">
-              <span class="gx-cfg-ico">{cfg.icon}</span>
+              
               <div>
                 <h3>{cfg.n}</h3>
                 {cfg.alias && <span class="gx-cfg-alias">También: {cfg.alias}</span>}
@@ -554,11 +554,11 @@ const caen = [
     <!-- CTA -->
     <div class="gx-cta">
       <a class="gx-ctac" href={`${base}ade/4/c2/organizacion-empresas/test/`}>
-        <span class="em">🧠</span>
+        <span class="em"></span>
         <div><h4>Tipo Test →</h4><p>397 preguntas · 20 bloques</p></div>
       </a>
       <a class="gx-ctac" href={`${base}ade/4/c2/organizacion-empresas/flashcards/`}>
-        <span class="em">🃏</span>
+        <span class="em"></span>
         <div><h4>Flashcards →</h4><p>128 tarjetas · conceptos clave</p></div>
       </a>
     </div>

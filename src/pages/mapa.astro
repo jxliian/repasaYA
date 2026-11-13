@@ -118,7 +118,7 @@ const es = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
       tree.map(({ degree, years, total, ready }) => (
         <section class="block">
           <h2>
-            <span aria-hidden="true">{degree.data.icon}</span>
+            
             <a href={degreePath(degree.id)}>{degree.data.name}</a>
             <span class="note">
               {ready} de {total} con material

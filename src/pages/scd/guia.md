@@ -9,10 +9,10 @@ badge: "SCD · Grado en Ingeniería Informática / DGIIM · UGR"
 ### Convocatoria Oficial de Evaluación Continua — Jueves 29 de Octubre de 2026
 
 > **Información Oficial de la Convocatoria (Prof. Manuel I. Capel Tuñón):**  
-> 🗓️ **Fecha:** Jueves, 29 de octubre de 2026  
-> ⏰ **Horario:** 17:30 a 19:30 horas (duración máxima del examen: **100 minutos**)  
-> 📍 **Modalidad:** Presencial e individual  
-> 🎯 **Peso en la Calificación Final:** **3,5 puntos sobre 10** de la teoría (Tema 1: 1,2 puntos | Tema 2: 2,3 puntos)
+> **Fecha:** Jueves, 29 de octubre de 2026  
+> **Horario:** 17:30 a 19:30 horas (duración máxima del examen: **100 minutos**)  
+> **Modalidad:** Presencial e individual  
+> **Peso en la Calificación Final:** **3,5 puntos sobre 10** de la teoría (Tema 1: 1,2 puntos | Tema 2: 2,3 puntos)
 
 ---
 
@@ -27,7 +27,7 @@ El examen consta de dos bloques independientes que se realizan en un tiempo tota
              ▼                                                                   ▼
 PARTE 1: CUESTIONARIO TEST (5 opciones)                            PARTE 2: RESOLUCIÓN DE PROBLEMAS
 • 1 única respuesta correcta                                      • Se proponen 3 problemas
-• ⚠️ PENALIZACIÓN: Cada 2 fallos anulan 1 acierto                  • El estudiante ELIGE y RESUELVE 2
+• PENALIZACIÓN: Cada 2 fallos anulan 1 acierto                  • El estudiante ELIGE y RESUELVE 2
   (Fallo = -0,5 aciertos | Blanco = 0)                            • Código C++11, semáforos, monitores y trazas
 ```
 
@@ -35,7 +35,7 @@ PARTE 1: CUESTIONARIO TEST (5 opciones)                            PARTE 2: RESO
 * **Tema 1 (1,2 puntos — 34% del examen):** Introducción a la concurrencia, entrelazados, condiciones de Bernstein, grafos de precedencias, lógica de Hoare y teorema de no interferencia de Owicki-Gries.
 * **Tema 2 (2,3 puntos — 66% del examen):** Exclusión mutua, algoritmos de memoria compartida (Dekker, Peterson, Lamport, Hyman, Dijkstra), mecanismos hardware (Swap, Test-and-Set), semáforos y monitores (semántica Hoare/SU vs. Mesa/SC).
 
-> 💡 **Conclusión Estratégica:** El Tema 2 vale prácticamente el **doble** que el Tema 1. Quien domine los algoritmos de exclusión mutua y los monitores tiene asegurado el aprobado con holgura.
+> **Conclusión Estratégica:** El Tema 2 vale prácticamente el **doble** que el Tema 1. Quien domine los algoritmos de exclusión mutua y los monitores tiene asegurado el aprobado con holgura.
 
 ---
 
@@ -43,7 +43,7 @@ PARTE 1: CUESTIONARIO TEST (5 opciones)                            PARTE 2: RESO
 
 > **Tu situación actual:** *"No he podido estudiar antes y tengo poco tiempo... ¿qué hago con la teoría y el tipo test? ¿Me empoyo las transparencias o hago tests de memoria?"*
 
-### ⚠️ El Error Típico: Leer Diapositivas Pasivamente
+### El Error Típico: Leer Diapositivas Pasivamente
 Leerse las más de 80 diapositivas teóricas de Capel como una novela a pocos días del examen es una trampa: consume un tiempo vital que necesitas para programar y no fija los conceptos trampa. En este examen, **la teoría se aprende y se consolida haciendo los tests comentados de repasaYA y deduciendo los invariantes de los problemas**.
 
 ### La Verdad sobre el Banco de Preguntas de Capel
@@ -70,22 +70,22 @@ La terna típica de Capel es:
 2. **Problema B:** Monitor de Sincronización Condicional en C++11 (Tema 2-1).
 3. **Problema C:** Lógica de Hoare / Owicki-Gries / Paralelización Bernstein (Tema 1).
 
-> 🎯 **Recomendación Estratégica de Elección:**  
+> **Recomendación Estratégica de Elección:**  
 > La combinación más rápida, limpia y con menor riesgo de error algebraico es **elegir el Problema B (Monitor) y el Problema A (Exclusión Mutua)**. Deja Hoare/Owicki-Gries como reserva solo si uno de los otros dos viniera con un enunciado excepcionalmente complejo.
 
 De los **63 problemas resueltos** en el solucionario oficial en PDF de repasaYA, estos son los **imprescindibles absolutos**:
 
-> 📥 **Cuaderno PDF de Problemas Imprescindibles (Sprint 4 Días):**  
+> **Cuaderno PDF de Problemas Imprescindibles (Sprint 4 Días):**  
 > Puedes descargar directamente el PDF dedicado de 35 páginas que contiene exclusivamente estos 19 ejercicios con sus enunciados oficiales, explicaciones pedagógicas paso a paso, tablas de intercalación y código C++11:  
-> 👉 [**Descargar PDF: 19 Problemas Imprescindibles Resueltos para el Parcial de SCD**](/scd/ejercicios-imprescindibles-parcial-scd.pdf)
+> [**Descargar PDF: 19 Problemas Imprescindibles Resueltos para el Parcial de SCD**](/scd/ejercicios-imprescindibles-parcial-scd.pdf)
 >
-> 📝 **Exámenes Oficiales Reales Resueltos (Convocatorias 2021 y 2025 repetido):**  
+> **Exámenes Oficiales Reales Resueltos (Convocatorias 2021 y 2025 repetido):**  
 > Hemos resuelto y auditado íntegramente los 6 problemas reales de examen (corrigiendo los fallos graves de los borradores de alumnos):  
-> 👉 [**Descargar PDF: Exámenes Oficiales Resueltos y Corregidos (2021 y 2025)**](/scd/examenes-oficiales-resueltos-scd.pdf)
+> [**Descargar PDF: Exámenes Oficiales Resueltos y Corregidos (2021 y 2025)**](/scd/examenes-oficiales-resueltos-scd.pdf)
 >
-> 🎯 **Plantillas Maestras Universales para el Examen (Monitores y Semáforos):**  
+> **Plantillas Maestras Universales para el Examen (Monitores y Semáforos):**  
 > Cuaderno de 8 páginas (1 cara por plantilla) con código C++ oficial (`HoareMonitor`) y pseudocódigo canónico, diccionario de adaptación inmediata (puente, aseo, centro, olla, barbería) y checklist de entrega para el Prof. Manuel I. Capel Tuñón:  
-> 👉 [**Descargar PDF: Plantillas Maestras Universales para el Examen de SCD**](/scd/plantillas-maestras-scd.pdf)
+> [**Descargar PDF: Plantillas Maestras Universales para el Examen de SCD**](/scd/plantillas-maestras-scd.pdf)
 
 
 ### Grupo 1: Exclusión Mutua en Memoria Compartida (Tema 2-2)

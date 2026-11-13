@@ -60,7 +60,6 @@ const crumbs = isFiscal
     {isFiscal ? (
       <div class="guide-cta-footer">
         <div class="cta-card">
-          <div class="cta-icon">📋</div>
           <div class="cta-body">
             <h3>Examen Online por Supuestos (Enunciados + Test)</h3>
             <p>Practica como en el examen real: el enunciado del caso práctico en grande arriba y las preguntas tipo test debajo con corrección y desglose numérico.</p>
@@ -68,7 +67,6 @@ const crumbs = isFiscal
           </div>
         </div>
         <div class="cta-card">
-          <div class="cta-icon">⚖️</div>
           <div class="cta-body">
             <h3>Banco Completo de Test y V/F</h3>
             <p>Entrena las Cuestiones 1-16 del Tema 1, modelos de parciales oficiales y preguntas de liquidación IRPF con justificación artículo por artículo.</p>
@@ -79,7 +77,6 @@ const crumbs = isFiscal
     ) : (
       <div class="guide-cta-footer">
         <div class="cta-card">
-          <div class="cta-icon">📝</div>
           <div class="cta-body">
             <h3>Banco de Test de SCD</h3>
             <p>207 preguntas tipo test verificadas con justificaciones exhaustivas de Capel.</p>
@@ -87,7 +84,6 @@ const crumbs = isFiscal
           </div>
         </div>
         <div class="cta-card">
-          <div class="cta-icon">📄</div>
           <div class="cta-body">
             <h3>Solucionario de Problemas</h3>
             <p>63 ejercicios resueltos paso a paso en PDF (Temas 1, 2 y 2-2) con código C++11.</p>
@@ -120,7 +116,7 @@ const crumbs = isFiscal
     gap: 6px;
     background: var(--accent-soft);
     border: 1px solid var(--accent-line);
-    border-radius: 99px;
+    border-radius: var(--radius);
     padding: 6px 14px;
     font-size: 0.78rem;
     font-weight: 700;
@@ -213,7 +209,7 @@ const crumbs = isFiscal
     margin: 28px 0;
     font-size: 0.9rem;
     background: var(--surface);
-    border-radius: 12px;
+    border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid var(--border);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
@@ -256,7 +252,7 @@ const crumbs = isFiscal
   .guide-article pre {
     background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius);
     padding: 18px;
     overflow-x: auto;
     margin: 24px 0;
@@ -278,7 +274,7 @@ const crumbs = isFiscal
   .guide-article .katex-display {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius);
     padding: 16px 20px;
     margin: 20px 0;
     overflow-x: auto;
@@ -309,7 +305,7 @@ const crumbs = isFiscal
   .cta-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: var(--radius);
     padding: 22px;
     display: flex;
     gap: 16px;

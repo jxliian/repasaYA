@@ -6,6 +6,7 @@ import '../styles/base.css';
 import SiteHeader from '../components/nav/SiteHeader.astro';
 import About from '../components/sections/About.astro';
 import RepasaBot from '../components/fx/RepasaBot.astro';
+import CookieNotice from '../components/nav/CookieNotice.astro';
 import { fetchHitsOnce } from '../lib/hits';
 import { degreePath } from '../lib/routes';
 
@@ -59,6 +60,7 @@ const favicon512 = `${siteUrl}favicon-512.png`;
     <link rel="canonical" href={canonical} />
 
     <!-- Favicon e Iconos oficiales para Google Search y Navegadores -->
+    <meta name="theme-color" content="#7a1f2b" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="icon" type="image/png" sizes="512x512" href={`${base}favicon-512.png`} />
     <link rel="icon" type="image/png" sizes="192x192" href={`${base}favicon-192.png`} />
@@ -180,13 +182,14 @@ const favicon512 = `${siteUrl}favicon-512.png`;
       </div>
       <div class="legal">
         <div class="container legal-row">
-          <span>Hecho con ganas por <a href="https://github.com/jxliian" target="_blank" rel="noopener">Julián Carrión</a></span>
+          <span>Developed by <a href="https://juliancarrion.dev" target="_blank" rel="noopener">Julián Carrión</a>, <a href="https://juliancarrion.dev" target="_blank" rel="noopener">juliancarrion.dev</a></span>
           <span>© {year} Universidad de Granada, Doble Grado ADE + Ingeniería Informática</span>
         </div>
       </div>
     </footer>
 
     <RepasaBot />
+    <CookieNotice />
 
     <style is:global>
       main {

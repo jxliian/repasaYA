@@ -1,0 +1,126 @@
+---
+/**
+ * Aviso de cookies y almacenamiento, abajo de la pantalla en la primera
+ * visita.
+ *
+ * repasaYA no usa cookies, así que el aviso informa en lugar de pedir
+ * permiso: explica qué se guarda en el navegador y enlaza a Privacidad.
+ * Al pulsar «Entendido» se recuerda en `localStorage` (`ry-aviso`) y no
+ * vuelve a salir.
+ */
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<div class="cookie" data-cookie role="region" aria-label="Aviso sobre cookies" hidden>
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>Sin cookies, sin rastreo.</strong>
+      <p>
+        repasaYA no usa cookies. Solo guarda en tu navegador tu progreso en los tests y las últimas
+        asignaturas que abres, y nada sale de tu dispositivo. La portada cuenta visitas con hits.sh.
+        <a href={`${base}privacidad/`}>Ver la política de privacidad</a>
+      </p>
+    </div>
+    <button class="btn btn-primary" type="button" data-cookie-ok>Entendido</button>
+  </div>
+</div>
+
+<style>
+  .cookie {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 400;
+    background: var(--paper);
+    border-top: 3px solid var(--brand);
+    box-shadow: 0 -8px 30px rgba(40, 10, 16, 0.14);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    animation: cookieIn 0.35s var(--ease-out);
+  }
+  @keyframes cookieIn {
+    from {
+      transform: translateY(100%);
+    }
+  }
+  .cookie-inner {
+    max-width: var(--w-content);
+    margin-inline: auto;
+    padding: 16px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px));
+    display: flex;
+    align-items: center;
+    gap: 14px 28px;
+  }
+  @media (min-width: 720px) {
+    .cookie-inner {
+      padding-inline: 28px;
+    }
+  }
+  .cookie-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9rem;
+  }
+  .cookie-text strong {
+    font-family: var(--font-serif);
+    font-size: 1.02rem;
+  }
+  .cookie-text p {
+    margin-top: 2px;
+    color: var(--ink-2);
+  }
+  .cookie-text a {
+    color: var(--brand);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 640px) {
+    .cookie-inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  /* Mientras está el aviso, Zero sube para no quedar tapado */
+  :global(:root[data-cookie-open] .zero-fab) {
+    bottom: calc(var(--cookie-h, 0px) + 20px);
+  }
+  :global(:root[data-cookie-open] .zero-panel) {
+    bottom: calc(var(--cookie-h, 0px) + 78px);
+  }
+</style>
+
+<script>
+  function initCookie() {
+    const box = document.querySelector<HTMLElement>('[data-cookie]');
+    if (!box || box.dataset.ready) return;
+    box.dataset.ready = '1';
+    let seen = false;
+    try {
+      seen = localStorage.getItem('ry-aviso') === '1';
+    } catch {
+      /* sin almacenamiento: se enseña y se cierra igual */
+    }
+    if (seen) return;
+    const root = document.documentElement;
+    box.hidden = false;
+    const sync = () => root.style.setProperty('--cookie-h', `${box.offsetHeight}px`);
+    sync();
+    root.dataset.cookieOpen = '';
+    const ro = new ResizeObserver(sync);
+    ro.observe(box);
+    box.querySelector('[data-cookie-ok]')!.addEventListener('click', () => {
+      try {
+        localStorage.setItem('ry-aviso', '1');
+      } catch {
+        /* nada */
+      }
+      ro.disconnect();
+      box.hidden = true;
+      delete root.dataset.cookieOpen;
+      root.style.removeProperty('--cookie-h');
+    });
+  }
+  initCookie();
+  document.addEventListener('astro:page-load', initCookie);
+</script>

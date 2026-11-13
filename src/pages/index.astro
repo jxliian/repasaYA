@@ -17,6 +17,7 @@ import BootSequence from '../components/boot/BootSequence.astro';
 import Changelog from '../components/sections/Changelog.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import VisitCounter from '../components/nav/VisitCounter.astro';
+import PixelMe from '../components/hero/PixelMe.astro';
 import { degreePath, subjectSlug, subjectUrl } from '../lib/routes';
 
 const allSubjects = await getCollection('subjects');
@@ -111,6 +112,7 @@ const planTotals = degrees.map((d) => ({
 
   <section class="band">
     <div class="container band-inner">
+      <div class="band-main">
       <h1>Encuentra tu asignatura<span class="pt">.</span></h1>
       <p class="lede">
         Más de <strong>{es(roundDown(totalQuestions))} preguntas</strong> y <strong>{es(roundDown(totalCards))} fichas</strong>
@@ -123,24 +125,34 @@ const planTotals = degrees.map((d) => ({
           <label for="f-q">Asignatura o material</label>
           <input id="f-q" type="search" autocomplete="off" placeholder="Dirección Financiera, Econometría, flashcards…" />
         </div>
-        <div class="f">
-          <label for="f-deg">Grado</label>
-          <select id="f-deg">
-            <option value="all">Todos los grados</option>
-            {degrees.map((d) => <option value={d.id}>{d.data.short}</option>)}
-          </select>
+        <div class="f dd" data-dd="deg">
+          <span class="f-label" id="f-deg-label">Grado</span>
+          <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="f-deg-label f-deg-value">
+            <span id="f-deg-value" data-dd-value>Todos los grados</span>
+          </button>
+          <ul class="dd-list" role="listbox" aria-labelledby="f-deg-label" tabindex="-1" hidden>
+            <li role="option" data-value="all" aria-selected="true">Todos los grados</li>
+            {degrees.map((d) => <li role="option" data-value={d.id} aria-selected="false">{d.data.name}</li>)}
+          </ul>
         </div>
-        <div class="f">
-          <label for="f-y">Curso</label>
-          <select id="f-y">
-            <option value="all">Todos</option>
-            {[1, 2, 3, 4, 5].map((y) => <option value={y}>{y}º curso</option>)}
-          </select>
+        <div class="f dd" data-dd="y">
+          <span class="f-label" id="f-y-label">Curso</span>
+          <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="f-y-label f-y-value">
+            <span id="f-y-value" data-dd-value>Todos</span>
+          </button>
+          <ul class="dd-list" role="listbox" aria-labelledby="f-y-label" tabindex="-1" hidden>
+            <li role="option" data-value="all" aria-selected="true">Todos los cursos</li>
+            {[1, 2, 3, 4, 5].map((y) => <li role="option" data-value={String(y)} aria-selected="false">{y}º curso</li>)}
+          </ul>
         </div>
       </form>
       <div class="finder-meta">
         <span data-count-band>{ready.length} asignaturas con material</span>
         <button type="button" data-clear hidden>Quitar filtros</button>
+      </div>
+      </div>
+      <div class="band-art">
+        <PixelMe />
       </div>
     </div>
   </section>
@@ -251,8 +263,59 @@ const planTotals = degrees.map((d) => ({
     plan.dataset.ready = '1';
 
     const q = document.getElementById('f-q') as HTMLInputElement;
-    const fDeg = document.getElementById('f-deg') as HTMLSelectElement;
-    const fY = document.getElementById('f-y') as HTMLSelectElement;
+    /* Desplegables propios (los <select> nativos rompían el estilo) */
+    const dds = new Map<string, { set: (v: string) => void }>();
+    for (const dd of document.querySelectorAll<HTMLElement>('[data-dd]')) {
+      const name = dd.dataset.dd as 'deg' | 'y';
+      const btn = dd.querySelector<HTMLButtonElement>('.dd-btn')!;
+      const list = dd.querySelector<HTMLUListElement>('.dd-list')!;
+      const label = dd.querySelector<HTMLElement>('[data-dd-value]')!;
+      const opts = [...list.querySelectorAll<HTMLLIElement>('[role="option"]')];
+      let active = 0;
+      const mark = (i: number) => {
+        active = (i + opts.length) % opts.length;
+        opts.forEach((o, j) => o.classList.toggle('is-active', j === active));
+      };
+      const open = (on: boolean) => {
+        list.hidden = !on;
+        btn.setAttribute('aria-expanded', String(on));
+        dd.classList.toggle('is-open', on);
+        if (on) {
+          mark(Math.max(0, opts.findIndex((o) => o.getAttribute('aria-selected') === 'true')));
+          list.focus();
+        }
+      };
+      const set = (v: string) => {
+        opts.forEach((o) => o.setAttribute('aria-selected', String(o.dataset.value === v)));
+        const sel = opts.find((o) => o.dataset.value === v) ?? opts[0];
+        label.textContent = v === 'all' ? (name === 'deg' ? 'Todos los grados' : 'Todos') : sel.textContent!;
+      };
+      const choose = (i: number) => {
+        const v = opts[i].dataset.value!;
+        state[name] = v;
+        open(false);
+        btn.focus();
+        apply();
+      };
+      btn.addEventListener('click', () => open(list.hidden));
+      opts.forEach((o, i) => {
+        o.addEventListener('click', () => choose(i));
+        o.addEventListener('mousemove', () => mark(i));
+      });
+      list.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); mark(active + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); mark(active - 1); }
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
+        else if (e.key === 'Escape' || e.key === 'Tab') { open(false); if (e.key === 'Escape') btn.focus(); }
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(true); }
+      });
+      document.addEventListener('click', (e) => {
+        if (!dd.contains(e.target as Node)) open(false);
+      });
+      dds.set(name, { set });
+    }
     const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
     const clear = document.querySelector<HTMLButtonElement>('[data-clear]')!;
     const empty = document.querySelector<HTMLElement>('[data-empty]')!;
@@ -262,7 +325,7 @@ const planTotals = degrees.map((d) => ({
     const total = items.length;
 
     const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-    const state = { q: '', deg: 'all', y: 'all' };
+    const state: { q: string; deg: string; y: string } = { q: '', deg: 'all', y: 'all' };
 
     function apply() {
       const words = norm(state.q).split(/\s+/).filter(Boolean);
@@ -290,20 +353,12 @@ const planTotals = degrees.map((d) => ({
       countEls.forEach((el) => el && (el.textContent = txt));
       clear.hidden = !(state.q || state.deg !== 'all' || state.y !== 'all');
       tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === state.deg)));
-      fDeg.value = state.deg;
-      fY.value = state.y;
+      dds.get('deg')?.set(state.deg);
+      dds.get('y')?.set(state.y);
     }
 
     q.addEventListener('input', () => {
       state.q = q.value;
-      apply();
-    });
-    fDeg.addEventListener('change', () => {
-      state.deg = fDeg.value;
-      apply();
-    });
-    fY.addEventListener('change', () => {
-      state.y = fY.value;
       apply();
     });
     tabs.forEach((t) =>
@@ -370,7 +425,27 @@ const planTotals = degrees.map((d) => ({
   .band-inner {
     position: relative;
     z-index: 1;
-    padding-block: 48px 40px;
+    padding-block: 44px 38px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    align-items: center;
+  }
+  .band-main {
+    min-width: 0;
+  }
+  .band-art {
+    align-self: end;
+    margin-bottom: -38px;
+    margin-top: -20px;
+  }
+  @media (max-width: 960px) {
+    .band-inner {
+      grid-template-columns: 1fr;
+    }
+    .band-art {
+      display: none;
+    }
   }
   .band h1 {
     font-family: var(--font-serif);
@@ -392,10 +467,9 @@ const planTotals = degrees.map((d) => ({
 
   .finder {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 210px 160px;
+    grid-template-columns: minmax(0, 1fr) 190px 150px;
     background: #fff;
     border-radius: var(--radius);
-    overflow: hidden;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
   }
   .f {
@@ -411,7 +485,8 @@ const planTotals = degrees.map((d) => ({
   .f:focus-within {
     box-shadow: inset 0 -3px 0 var(--dot);
   }
-  .f label {
+  .f label,
+  .f-label {
     font-size: 0.76rem;
     font-weight: 600;
     color: var(--ink-3);
@@ -435,13 +510,89 @@ const planTotals = degrees.map((d) => ({
   .f input::placeholder {
     color: var(--ink-3);
   }
-  .f select {
-    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
-      linear-gradient(135deg, currentColor 50%, transparent 50%);
-    background-position: calc(100% - 9px) 55%, calc(100% - 4px) 55%;
-    background-size: 5px 5px;
-    background-repeat: no-repeat;
-    padding-right: 18px;
+  .f:first-child {
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+  /* Desplegable propio */
+  .dd {
+    position: relative;
+  }
+  .dd-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 2px 0 4px;
+    border: 0;
+    background: none;
+    font: 600 1rem var(--font-body);
+    color: var(--ink);
+    text-align: left;
+  }
+  .dd-btn::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    margin-top: -4px;
+    border-right: 2px solid var(--brand);
+    border-bottom: 2px solid var(--brand);
+    transform: rotate(45deg);
+    transition: transform var(--dur) var(--ease-out);
+  }
+  .dd.is-open .dd-btn::after {
+    transform: rotate(-135deg);
+    margin-top: 4px;
+  }
+  .dd-btn:focus-visible {
+    outline: none;
+  }
+  .dd:focus-within {
+    box-shadow: inset 0 -3px 0 var(--dot);
+  }
+  .dd-list {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    left: -1px;
+    right: -1px;
+    min-width: 200px;
+    list-style: none;
+    padding: 6px 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--brand);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-lg);
+    outline: none;
+  }
+  .dd:last-child .dd-list {
+    left: auto;
+  }
+  .dd-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 16px;
+    font-size: 0.95rem;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .dd-list li.is-active {
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+  .dd-list li[aria-selected='true'] {
+    font-weight: 600;
+  }
+  .dd-list li[aria-selected='true']::after {
+    content: '';
+    width: 5px;
+    height: 10px;
+    border-right: 2px solid var(--brand);
+    border-bottom: 2px solid var(--brand);
+    transform: rotate(45deg);
   }
   @media (max-width: 680px) {
     .finder {
@@ -449,6 +600,9 @@ const planTotals = degrees.map((d) => ({
     }
     .f:first-child {
       grid-column: 1 / -1;
+    }
+    .f:first-child {
+      border-radius: var(--radius) var(--radius) 0 0;
     }
     .f:nth-child(2) {
       border-left: 0;
@@ -531,9 +685,9 @@ const planTotals = degrees.map((d) => ({
   }
   .tabs {
     display: flex;
+    flex-wrap: wrap;
     gap: 4px;
     border-bottom: 1px solid var(--line);
-    overflow-x: auto;
   }
   .tab {
     background: none;
