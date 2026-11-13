@@ -22,3 +22,12 @@
 ## Verificación
 - `npm run build`: 112 páginas, sin errores. Consola del navegador sin errores en portada y test.
 - Capturas revisadas de la portada (escena 3D con WebGL) y del motor de tests.
+
+## Iteración 2 (13/11/2026)
+- Desplegables del buscador: la banda ya no recorta la lista (`overflow` fuera, `z-index` propio). Comprobado
+  abriendo el desplegable con Chrome por CDP.
+- PixelMe a doble resolución (vóxel = mitad, píxel de pantalla = 2): cabeza redondeada con ojos (iris, pupila,
+  brillo, pestañas), cejas, nariz con volumen, sonrisa, mejillas y orejas; pelo de ~300 rizos esféricos en cinco
+  tonos; camiseta con pliegues, mangas y estampado; dedos que teclean en cuatro fotogramas; silla, portátil con
+  teclas y panel táctil, cuaderno con boli, flexo con luz cálida, luz fría de pantalla, taza con asa hueca, libros
+  con páginas, planta con hojas y vetas en la mesa. Solo se dibujan los vóxeles con alguna cara visible.

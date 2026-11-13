@@ -34,13 +34,14 @@
 
 <script>
   import {
-    AmbientLight,
     BoxGeometry,
     Color,
     DirectionalLight,
     Group,
+    HemisphereLight,
     InstancedMesh,
     Matrix4,
+    MeshBasicMaterial,
     MeshLambertMaterial,
     OrthographicCamera,
     PointLight,
@@ -61,151 +62,296 @@
 
   const C = {
     skin: '#f2c4a0',
-    skin2: '#e3ad88',
-    blush: '#eba08a',
-    lip: '#b4604c',
-    eye: '#231a16',
-    white: '#ffffff',
+    skin2: '#e6b08c',
+    skin3: '#d39673',
+    blush: '#ee9f8a',
+    lip: '#b85c4a',
+    lip2: '#9c4636',
+    sclera: '#fbf8f4',
+    iris: '#4a2e1c',
+    pupil: '#140e0b',
+    lash: '#1d1410',
     brow: '#2a1d17',
-    hair: '#241914',
-    hair2: '#3b2a20',
-    hair3: '#4f392b',
-    tee: '#f5f3f0',
-    tee2: '#e4dfda',
+    hair: ['#1d130f', '#261a14', '#30221a', '#3d2c21', '#4d382a'],
+    tee: '#f6f4f1',
+    tee2: '#e7e2dd',
+    tee3: '#d6cfc9',
     print: '#1f6f6a',
-    desk: '#9a6542',
-    desk2: '#7c4e32',
+    chair: '#3a2f33',
+    chair2: '#4a3d42',
+    desk: '#a06a45',
+    desk2: '#8a5a39',
+    desk3: '#b47a52',
     leg: '#5a3a26',
-    lid: '#cdd1d6',
-    lid2: '#aab1b9',
-    key: '#3a3d42',
+    lid: '#d0d4d9',
+    lid2: '#b4bac2',
+    lid3: '#e2e5e8',
+    key: '#2f3236',
+    keyGap: '#1d1f22',
+    pad: '#c4c9cf',
     dot: '#d9a13a',
+    dot2: '#f0c46a',
     mug: '#f6f4f1',
+    mug2: '#e3ddd6',
     mugr: '#7a1f2b',
-    coffee: '#4a2c1f',
+    coffee: '#3e2418',
     bk1: '#e9dcc6',
+    bk1s: '#c9b89c',
     bk2: '#2e6a87',
+    bk2s: '#245670',
     bk3: '#d9a13a',
+    bk3s: '#b5832a',
     page: '#fbf7ef',
+    page2: '#e8e0d2',
     pot: '#b4673f',
+    pot2: '#9a5432',
+    soil: '#3b2a20',
     leaf: '#5f9a6a',
-    leaf2: '#3f7a50',
-    steam: '#ffffff',
+    leaf2: '#477f55',
+    leaf3: '#7cb886',
+    note: '#f4efe4',
+    noteLine: '#c9d3e6',
+    pen: '#d9a13a',
+    lamp: '#2b2326',
+    lamp2: '#3c3236',
+    bulb: '#fff1c4',
   };
 
   function box(v: Vox, x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, c: string) {
     for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) for (let z = z0; z <= z1; z++) v.set(key(x, y, z), c);
   }
+  function cyl(v: Vox, cx: number, cz: number, r: number, y0: number, y1: number, c: (y: number, x: number, z: number) => string | null) {
+    for (let x = Math.floor(cx - r); x <= Math.ceil(cx + r); x++)
+      for (let z = Math.floor(cz - r); z <= Math.ceil(cz + r); z++)
+        if ((x - cx) ** 2 + (z - cz) ** 2 <= r * r)
+          for (let y = y0; y <= y1; y++) {
+            const col = c(y, x, z);
+            if (col) v.set(key(x, y, z), col);
+          }
+  }
+  function sphere(v: Vox, cx: number, cy: number, cz: number, r: number, c: (x: number, y: number, z: number) => string | null) {
+    for (let x = Math.floor(cx - r); x <= Math.ceil(cx + r); x++)
+      for (let y = Math.floor(cy - r); y <= Math.ceil(cy + r); y++)
+        for (let z = Math.floor(cz - r); z <= Math.ceil(cz + r); z++)
+          if ((x - cx) ** 2 + (y - cy) ** 2 + (z - cz) ** 2 <= r * r) {
+            const col = c(x, y, z);
+            if (col) v.set(key(x, y, z), col);
+          }
+  }
 
-  /* ── Modelo ──────────────────────────────────────────────────── */
+  /* ── Escena fija: mesa, cuerpo, portátil y objetos ──────────── */
   function buildStatic(): Vox {
     const v: Vox = new Map();
-    // Mesa
-    box(v, -22, 8, -8, 21, 9, 10, C.desk);
-    box(v, -22, 8, 10, 21, 8, 10, C.desk2);
-    for (const [x, z] of [[-21, -7], [20, -7], [-21, 9], [20, 9]]) box(v, x, 0, z, x, 7, z, C.leg);
-    // Torso con camiseta
-    box(v, -6, 10, -6, 5, 19, -1, C.tee);
-    box(v, -6, 10, -1, 5, 10, -1, C.tee2);
-    for (const [x, y] of [[2, 17], [3, 17], [4, 17], [2, 16], [4, 16]]) v.set(key(x, y, 0), C.print);
-    // Cuello
-    box(v, -2, 20, -4, 1, 21, -2, C.skin2);
-    // Hombros y brazos (mangas + antebrazo apoyado)
-    box(v, -8, 15, -5, -7, 19, -2, C.tee);
-    box(v, 6, 15, -5, 7, 19, -2, C.tee);
-    box(v, -8, 11, -4, -7, 14, -1, C.skin);
-    box(v, 6, 11, -4, 7, 14, -1, C.skin);
-    box(v, -7, 10, 0, -6, 11, 3, C.skin);
-    box(v, 5, 10, 0, 6, 11, 3, C.skin);
-    // Portátil: base con teclado y tapa vista por detrás
-    box(v, -7, 10, 0, 6, 10, 8, C.lid2);
-    box(v, -6, 10, 1, 5, 10, 6, C.key);
-    box(v, -7, 11, 8, 6, 18, 8, C.lid);
-    box(v, -7, 11, 9, 6, 11, 9, C.lid2);
-    // El punto de repasaYA en la tapa
-    box(v, -1, 13, 9, 0, 16, 9, C.dot);
-    box(v, -2, 14, 9, 1, 15, 9, C.dot);
-    // Taza
-    box(v, 12, 10, 1, 15, 14, 4, C.mug);
-    box(v, 12, 12, 1, 15, 12, 4, C.mugr);
-    box(v, 13, 14, 2, 14, 14, 3, C.coffee);
-    box(v, 16, 11, 2, 16, 13, 3, C.mug);
-    // Libros y planta
-    box(v, -19, 10, -1, -10, 11, 6, C.bk1);
-    box(v, -19, 10, 6, -10, 11, 6, C.page);
-    box(v, -18, 12, 0, -11, 13, 5, C.bk2);
-    box(v, -18, 12, 5, -11, 13, 5, C.page);
-    box(v, -17, 14, 1, -12, 14, 4, C.bk3);
-    box(v, -16, 15, 1, -13, 18, 4, C.pot);
     const r = rng(11);
-    for (let i = 0; i < 26; i++) {
-      const x = -16 + Math.floor(r() * 4);
-      const z = 1 + Math.floor(r() * 4);
-      const y = 19 + Math.floor(r() * 5);
-      v.set(key(x + Math.round((r() - 0.5) * 3), y, z + Math.round((r() - 0.5) * 3)), r() > 0.5 ? C.leaf : C.leaf2);
+    // Silla (respaldo detrás del cuerpo)
+    box(v, -14, 18, -20, 13, 48, -18, C.chair);
+    box(v, -14, 48, -20, 13, 48, -18, C.chair2);
+    box(v, -14, 18, -20, -14, 48, -18, C.chair2);
+    // Mesa con vetas
+    box(v, -46, 16, -16, 45, 19, 22, C.desk);
+    for (let x = -46; x <= 45; x++) for (let z = -16; z <= 22; z++) if (r() < 0.16) v.set(key(x, 19, z), r() < 0.5 ? C.desk2 : C.desk3);
+    for (let z = -16; z <= 22; z += 7) box(v, -46, 19, z, 45, 19, z, C.desk2);
+    box(v, -46, 16, 22, 45, 16, 22, C.desk2);
+    for (const [x, z] of [[-44, -14], [42, -14], [-44, 19], [42, 19]]) box(v, x, 0, z, x + 2, 15, z + 2, C.leg);
+    // Torso con camiseta, pliegues y estampado
+    box(v, -12, 20, -13, 11, 39, -2, C.tee);
+    box(v, -12, 20, -13, -12, 39, -2, C.tee2);
+    box(v, 11, 20, -13, 11, 39, -2, C.tee3);
+    for (const [x, y] of [[-6, 30], [-5, 29], [-4, 28], [6, 29], [5, 28], [-2, 24], [-1, 23], [3, 25]]) v.set(key(x, y, -2), C.tee2);
+    for (const [x, y] of [[3, 36], [4, 36], [6, 36], [7, 36], [8, 36], [3, 35], [5, 35], [7, 35], [3, 34], [4, 34], [6, 34], [8, 34]]) v.set(key(x, y, -1), C.print);
+    // Cuello de la camiseta y cuello
+    for (let x = -5; x <= 4; x++) v.set(key(x, 39, -2), C.tee3);
+    box(v, -4, 40, -9, 3, 43, -4, C.skin2);
+    box(v, -3, 39, -3, 2, 39, -3, C.skin3);
+    // Hombros, mangas con dobladillo y brazos
+    for (const s of [-1, 1]) {
+      const x0 = s < 0 ? -17 : 12;
+      box(v, x0, 30, -11, x0 + 4, 39, -3, C.tee);
+      box(v, x0, 30, -11, x0 + 4, 30, -3, C.tee3);
+      box(v, x0 + 1, 22, -10, x0 + 3, 29, -5, C.skin);
+      box(v, x0 + 1, 20, -6, x0 + 3, 23, 6, C.skin);
+      box(v, x0 + 1, 20, -6, x0 + 1, 23, 6, C.skin2);
+    }
+    // Portátil: base, teclado con teclas, panel táctil y tapa
+    box(v, -15, 20, 0, 14, 21, 18, C.lid2);
+    box(v, -15, 21, 0, 14, 21, 18, C.lid);
+    for (let x = -13; x <= 12; x++)
+      for (let z = 9; z <= 16; z++) v.set(key(x, 21, z), (x + 13) % 2 === 0 && z % 2 === 1 ? C.key : C.keyGap);
+    box(v, -4, 21, 2, 3, 21, 6, C.pad);
+    box(v, -15, 22, 18, 14, 42, 19, C.lid);
+    box(v, -15, 42, 18, 14, 42, 19, C.lid3);
+    box(v, -15, 22, 18, -15, 42, 19, C.lid2);
+    box(v, 14, 22, 18, 14, 42, 19, C.lid2);
+    sphere(v, -0.5, 32.5, 20, 3.2, (x, y, z) => (z === 20 ? ((x === -2 && y === 34) || (x === -1 && y === 35) ? C.dot2 : C.dot) : null));
+    // Cuaderno con boli
+    box(v, -34, 20, 6, -20, 20, 19, C.note);
+    for (let z = 8; z <= 18; z += 2) box(v, -33, 20, z, -21, 20, z, C.noteLine);
+    box(v, -34, 20, 6, -34, 21, 19, C.mugr);
+    for (let i = 0; i < 12; i++) v.set(key(-30 + i, 21, 9 + Math.floor(i * 0.7)), i < 2 ? C.lamp : C.pen);
+    // Taza con franja, café y asa hueca
+    cyl(v, 30, 6, 5, 20, 31, (y, x, z) => {
+      const rr = Math.hypot(x - 30, z - 6);
+      if (y === 31 && rr < 4) return null;
+      if (y === 30 && rr < 4) return C.coffee;
+      if (y >= 24 && y <= 26) return C.mugr;
+      return x < 28 ? C.mug2 : C.mug;
+    });
+    for (let y = 22; y <= 29; y++) for (let x = 35; x <= 38; x++) if (!(y >= 24 && y <= 27 && x <= 37 && x >= 36)) for (let z = 5; z <= 7; z++) v.set(key(x, y, z), C.mug);
+    // Libros apilados con páginas
+    const books: [number, number, number, number, number, number, string, string][] = [
+      [-44, 20, -12, -24, 23, 2, C.bk1, C.bk1s],
+      [-42, 24, -11, -26, 26, 1, C.bk2, C.bk2s],
+      [-41, 27, -10, -28, 29, 0, C.bk3, C.bk3s],
+    ];
+    for (const [x0, y0, z0, x1, y1, z1, c, s] of books) {
+      box(v, x0, y0, z0, x1, y1, z1, c);
+      box(v, x0, y0, z0, x0 + 1, y1, z1, s);
+      box(v, x0 + 2, y0 + 1, z1, x1 - 1, y1 - 1, z1, C.page);
+      for (let x = x0 + 3; x < x1; x += 2) v.set(key(x, y0 + 1, z1), C.page2);
+    }
+    // Planta en maceta sobre los libros
+    cyl(v, -35, -5, 4.5, 30, 38, (y, x) => (y === 38 ? C.soil : y === 37 || x < -37 ? C.pot2 : C.pot));
+    for (let i = 0; i < 9; i++) {
+      const a = (i / 9) * Math.PI * 2 + r() * 0.4;
+      const len = 7 + Math.floor(r() * 5);
+      for (let t = 0; t < len; t++) {
+        const x = Math.round(-35 + Math.cos(a) * t * 0.55);
+        const z = Math.round(-5 + Math.sin(a) * t * 0.55);
+        const y = Math.round(39 + t * 0.9 - (t * t) / (len * 2.2));
+        v.set(key(x, y, z), t > len - 3 ? C.leaf3 : t % 3 === 0 ? C.leaf2 : C.leaf);
+        if (t > 2 && t < len - 1) v.set(key(x + (Math.cos(a) > 0 ? 0 : 0), y, z + 1), C.leaf2);
+      }
+    }
+    // Flexo: base, poste, brazo y pantalla apuntando a la mesa
+    cyl(v, 38, -10, 4, 20, 21, () => C.lamp);
+    box(v, 38, 22, -10, 38, 46, -10, C.lamp2);
+    box(v, 29, 46, -10, 38, 46, -10, C.lamp2);
+    box(v, 29, 46, -9, 29, 46, -7, C.lamp2);
+    for (let y = 41; y <= 45; y++) {
+      const w = 45 - y + 1;
+      box(v, 29 - w, y, -6 - w, 29 + w, y, -6 + w, C.lamp);
     }
     return v;
   }
 
-  /* Cabeza relativa al cuello (0,0,0 = base del cuello) */
+  /* Cabeza relativa a la base del cuello */
   function buildHead(): Vox {
     const v: Vox = new Map();
-    box(v, -5, 0, -6, 4, 9, 2, C.skin);
-    box(v, -5, 0, -6, -5, 9, 2, C.skin2);
+    // Cráneo redondeado
+    for (let x = -10; x <= 9; x++)
+      for (let y = 0; y <= 19; y++)
+        for (let z = -12; z <= 5; z++) {
+          const ex = Math.max(0, Math.abs(x + 0.5) - 7.5);
+          const ey = y < 4 ? 4 - y : Math.max(0, y - 16);
+          const ez = Math.max(0, z - 2) + Math.max(0, -9 - z);
+          if (ex * ex + ey * ey * 0.8 + ez * ez > 7) continue;
+          let c = C.skin;
+          if (Math.abs(x + 0.5) > 8.5 || y < 2) c = C.skin2;
+          v.set(key(x, y, z), c);
+        }
+    const F = 5; // plano de la cara
     // Orejas
-    box(v, -6, 3, -3, -6, 5, -2, C.skin2);
-    box(v, 5, 3, -3, 5, 5, -2, C.skin2);
-    // Ojos con brillo
-    for (const x0 of [-4, 1]) {
-      box(v, x0, 4, 3, x0 + 1, 5, 3, C.eye);
-      v.set(key(x0, 5, 3), C.white);
+    for (const x of [-11, 10]) {
+      box(v, x, 6, -5, x, 11, -1, C.skin2);
+      box(v, x, 7, -4, x, 10, -2, C.skin3);
     }
-    // Cejas
-    box(v, -4, 7, 3, -2, 7, 3, C.brow);
-    box(v, 1, 7, 3, 3, 7, 3, C.brow);
-    // Nariz, sonrisa y mejillas
-    v.set(key(-1, 3, 3), C.skin2);
-    v.set(key(0, 3, 3), C.skin);
-    box(v, -1, 1, 3, 0, 1, 3, C.lip);
-    v.set(key(-2, 2, 3), C.lip);
-    v.set(key(1, 2, 3), C.lip);
-    v.set(key(-4, 3, 3), C.blush);
-    v.set(key(3, 3, 3), C.blush);
-    // Pelo rizado: casquete + rizos sueltos
-    const r = rng(5);
-    const hairC = () => (r() > 0.7 ? C.hair3 : r() > 0.45 ? C.hair2 : C.hair);
-    for (let x = -6; x <= 5; x++)
-      for (let z = -7; z <= 3; z++) {
-        const top = 10 + Math.floor(r() * 3);
-        for (let y = 9; y <= top; y++) v.set(key(x, y, z), hairC());
+    // Ojos: esclerótica, iris, pupila, brillo y pestañas
+    for (const e of [-7, 3]) {
+      box(v, e, 8, F, e + 3, 10, F, C.sclera);
+      box(v, e + 1, 8, F, e + 2, 10, F, C.iris);
+      v.set(key(e + 1, 9, F), C.pupil);
+      v.set(key(e + 2, 9, F), C.pupil);
+      v.set(key(e + 1, 10, F), C.sclera);
+      box(v, e - (e < 0 ? 1 : 0), 11, F, e + 3 + (e < 0 ? 0 : 1), 11, F, C.lash);
+      box(v, e, 7, F, e + 3, 7, F, C.skin2);
+    }
+    // Cejas gruesas, un poco arqueadas
+    for (const [x0, x1, s] of [[-8, -3, 1], [2, 7, -1]] as const)
+      for (let x = x0; x <= x1; x++) {
+        const y = 13 + (x === (s > 0 ? x1 : x0) ? 0 : 1) - (x === (s > 0 ? x0 : x1) ? 1 : 0);
+        box(v, x, y, F, x, y + 1, F + 1, C.brow);
       }
-    for (let x = -6; x <= 5; x++) for (let y = 2; y <= 10; y++) v.set(key(x, y, -7), hairC());
-    for (const x of [-6, 5]) for (let y = 6; y <= 10; y++) for (let z = -6; z <= 1; z++) v.set(key(x, y, z), hairC());
-    // Flequillo rizado sobre la frente
-    for (let x = -5; x <= 4; x++) {
-      v.set(key(x, 9, 3), hairC());
-      if (r() > 0.45) v.set(key(x, 8, 3), hairC());
-      if (r() > 0.6) v.set(key(x, 10, 4), hairC());
+    // Nariz con volumen
+    box(v, -1, 5, F + 1, 0, 8, F + 1, C.skin);
+    box(v, -1, 5, F + 2, 0, 6, F + 2, C.skin2);
+    v.set(key(-2, 5, F + 1), C.skin3);
+    v.set(key(1, 5, F + 1), C.skin3);
+    box(v, -1, 7, F + 1, -1, 8, F + 1, C.skin2);
+    // Sonrisa
+    box(v, -3, 2, F, 2, 2, F, C.lip);
+    v.set(key(-4, 3, F), C.lip2);
+    v.set(key(3, 3, F), C.lip2);
+    box(v, -2, 1, F, 1, 1, F, C.skin3);
+    // Mejillas
+    box(v, -9, 4, F - 1, -7, 5, F, C.blush);
+    box(v, 6, 4, F - 1, 8, 5, F, C.blush);
+
+    // Pelo rizado: muchas esferas pequeñas con tonos variados
+    const r = rng(5);
+    const shade = (y: number) => {
+      const n = r();
+      const t = Math.min(4, Math.max(0, Math.floor((y - 10) / 4 + n * 2.2)));
+      return C.hair[t];
+    };
+    const cover = (x: number, y: number, z: number) => {
+      if (z >= 1 && y <= 15) return null; // la cara queda libre
+      if (y <= 9 && Math.abs(x + 0.5) < 9.5 && z > -9) return null; // mejillas y orejas
+      return shade(y);
+    };
+    for (let i = 0; i < 230; i++) {
+      const th = r() * Math.PI * 2;
+      const ph = r() * Math.PI * 0.62;
+      const rx = 11.5, ry = 10.5, rz = 11.5;
+      const cx = Math.cos(th) * Math.sin(ph) * rx - 0.5;
+      const cz = Math.sin(th) * Math.sin(ph) * rz - 3.5;
+      const cy = 12 + Math.cos(ph) * ry;
+      if (cz > 3 && cy < 14) continue;
+      sphere(v, cx, cy, cz, 2.2 + r() * 1.6, cover);
     }
-    // Rizos que sobresalen del contorno
+    // Nuca y lados hasta media cabeza
     for (let i = 0; i < 70; i++) {
-      const x = -7 + Math.floor(r() * 14);
-      const z = -8 + Math.floor(r() * 12);
-      const y = 8 + Math.floor(r() * 6);
-      const k = key(x, y, z);
-      if (!v.has(k) && (y >= 11 || x <= -6 || x >= 5 || z <= -7)) v.set(k, hairC());
+      const x = -11 + r() * 21;
+      const y = 6 + r() * 10;
+      const z = -13 + r() * 4;
+      sphere(v, x, y, z, 2 + r() * 1.2, cover);
+    }
+    // Flequillo: rizos que caen sobre la frente
+    for (let x = -9; x <= 8; x += 2.2) {
+      const y = 16.5 + r() * 1.5;
+      sphere(v, x + r() * 0.8, y, 3.5 + r(), 1.9 + r() * 0.7, (xx, yy, zz) => (yy < 15 ? null : shade(yy)));
     }
     return v;
   }
 
   function buildHands(phase: number): Vox {
     const v: Vox = new Map();
-    box(v, -6, 11, 3, -4, 11, 5, C.skin);
-    box(v, 3, 11, 3, 5, 11, 5, C.skin);
-    // dedo levantado alterno
-    v.set(key(phase ? -5 : -4, 12, 5), C.skin);
-    v.set(key(phase ? 4 : 3, 12, 5), C.skin);
+    for (const s of [-1, 1]) {
+      const x0 = s < 0 ? -16 : 9;
+      box(v, x0, 22, 7, x0 + 6, 23, 11, C.skin);
+      box(v, x0, 22, 7, x0, 23, 11, C.skin2);
+      // cuatro dedos; uno se levanta en cada fotograma
+      for (let f = 0; f < 4; f++) {
+        const up = (f + phase + (s > 0 ? 2 : 0)) % 4 === 0;
+        box(v, x0 + 1 + f * 1.5 | 0, up ? 23 : 22, 12, (x0 + 1 + f * 1.5) | 0, up ? 23 : 22, up ? 12 : 14, C.skin);
+      }
+      v.set(key(s < 0 ? x0 + 6 : x0, 22, 6), C.skin2); // pulgar
+    }
     return v;
+  }
+
+  /* Solo se dibujan los vóxeles con alguna cara al aire */
+  function cull(v: Vox): Vox {
+    const out: Vox = new Map();
+    for (const [k, c] of v) {
+      const [x, y, z] = k.split(',').map(Number);
+      if (
+        !v.has(key(x + 1, y, z)) || !v.has(key(x - 1, y, z)) ||
+        !v.has(key(x, y + 1, z)) || !v.has(key(x, y - 1, z)) ||
+        !v.has(key(x, y, z + 1)) || !v.has(key(x, y, z - 1))
+      )
+        out.set(k, c);
+    }
+    return out;
   }
 
   /* Agrupa vóxeles por color en InstancedMesh (pocas llamadas de dibujo) */
@@ -218,7 +364,7 @@
   function toGroup(v: Vox): Group {
     const g = new Group();
     const byColor = new Map<string, number[][]>();
-    for (const [k, c] of v) {
+    for (const [k, c] of cull(v)) {
       if (!byColor.has(c)) byColor.set(c, []);
       byColor.get(c)!.push(k.split(',').map(Number));
     }
@@ -246,37 +392,46 @@
     renderer.setClearColor(0x000000, 0);
 
     const scene = new Scene();
-    scene.add(new AmbientLight(0xfff1e0, 1.25));
-    const sun = new DirectionalLight(0xffffff, 1.6);
-    sun.position.set(18, 40, 30);
+    scene.add(new HemisphereLight(0xfff4e6, 0x6b2a30, 1.3));
+    const sun = new DirectionalLight(0xffffff, 1.2);
+    sun.position.set(30, 70, 60);
     scene.add(sun);
-    const lamp = new PointLight(0xffc77a, 120, 60);
-    lamp.position.set(18, 26, 14);
+    // Luz cálida del flexo y luz fría de la pantalla en la cara
+    const lamp = new PointLight(0xffc77a, 320, 70, 1.6);
+    lamp.position.set(29, 37, -6);
     scene.add(lamp);
+    const screen = new PointLight(0x9cc4ff, 70, 34, 1.8);
+    screen.position.set(0, 46, 8);
+    scene.add(screen);
+    const bulb = new InstancedMesh(new BoxGeometry(4, 1.2, 4), new MeshBasicMaterial({ color: 0xfff1c4 }), 1);
+    bulb.setMatrixAt(0, new Matrix4().makeTranslation(29, 40.4, -6));
+    scene.add(bulb);
 
     scene.add(toGroup(buildStatic()));
     const head = toGroup(buildHead());
-    head.position.set(0, 22, -2);
+    head.position.set(-0.5, 44, -6.5);
     scene.add(head);
-    const handsA = toGroup(buildHands(0));
-    const handsB = toGroup(buildHands(1));
-    handsB.visible = false;
-    scene.add(handsA, handsB);
+    const handFrames = [0, 1, 2, 3].map((p) => {
+      const g = toGroup(buildHands(p));
+      g.visible = p === 0;
+      scene.add(g);
+      return g;
+    });
 
-    // Vapor: cubitos que suben y se desvanecen
-    const steamMat = new MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
-    const steam = Array.from({ length: 7 }, (_, i) => {
-      const s = new InstancedMesh(new BoxGeometry(0.7, 0.7, 0.7), steamMat, 1);
+    // Vapor: cubitos que suben, se mecen y se desvanecen
+    const steamMat = new MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 });
+    const steam = Array.from({ length: 16 }, (_, i) => {
+      const s = new InstancedMesh(new BoxGeometry(1.2, 1.2, 1.2), steamMat, 1);
       s.setMatrixAt(0, new Matrix4());
-      s.userData.offset = i / 7;
+      s.userData.offset = i / 16;
       scene.add(s);
       return s;
     });
 
-    const cam = new OrthographicCamera(-1, 1, 1, -1, 0.1, 400);
-    const target = { x: -1, y: 18, z: 0 };
-    const SCALE = 18.5; // mitad del ancho visible, en vóxeles
-    const PIX = 3; // tamaño de cada píxel de pantalla
+    const cam = new OrthographicCamera(-1, 1, 1, -1, 0.1, 800);
+    const target = { x: -3, y: 34, z: 0 };
+    const SCALE = 36; // mitad del ancho visible, en vóxeles
+    const PIX = 2; // tamaño de cada píxel de pantalla
 
     function resize() {
       const w = canvas!.clientWidth || 380;
@@ -300,24 +455,22 @@
     function frame(t: number) {
       const s = t / 1000;
       const yaw = 0.34 + (reduce ? 0 : Math.sin(s * 0.35) * 0.14);
-      cam.position.set(target.x + Math.sin(yaw) * 80, target.y + 30, target.z + Math.cos(yaw) * 80);
+      cam.position.set(target.x + Math.sin(yaw) * 160, target.y + 62, target.z + Math.cos(yaw) * 160);
       cam.lookAt(target.x, target.y, target.z);
 
       if (!reduce) {
-        head.position.y = 22 + (Math.floor(s * 2) % 2 ? 0.35 : 0);
-        head.rotation.z = Math.sin(s * Math.PI) * 0.03;
-        const typing = Math.floor(s * 6) % 2 === 0;
-        handsA.visible = typing;
-        handsB.visible = !typing;
+        head.position.y = 44 + (Math.floor(s * 2) % 2 ? 0.6 : 0);
+        head.rotation.z = Math.sin(s * Math.PI) * 0.025;
+        const f = Math.floor(s * 8) % 4;
+        handFrames.forEach((g, i) => (g.visible = i === f));
       }
       steam.forEach((st) => {
-        const p = (s * 0.45 + st.userData.offset) % 1;
-        const wob = Math.sin((p + st.userData.offset) * 9) * 0.6;
-        st.setMatrixAt(0, m.makeTranslation(13.5 + wob, 15 + p * 9, 2.5 + wob * 0.5));
+        const p = (s * 0.35 + st.userData.offset) % 1;
+        const wob = Math.sin((p * 2 + st.userData.offset) * 7) * 1.6;
+        st.setMatrixAt(0, m.makeTranslation(30 + wob, 33 + p * 22, 6 + wob * 0.4));
         st.instanceMatrix.needsUpdate = true;
-        st.visible = !reduce || p < 0.6;
+        st.visible = p < 0.85 && (!reduce || p < 0.5);
       });
-      steamMat.opacity = 0.75;
       renderer.render(scene, cam);
     }
 

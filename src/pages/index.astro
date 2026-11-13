@@ -405,7 +405,7 @@ const planTotals = degrees.map((d) => ({
   /* ── Banda con el buscador ─────────────────────────────────── */
   .band {
     position: relative;
-    overflow: hidden;
+    z-index: 5; /* la lista de los desplegables queda por encima del plan */
     background: var(--band);
     color: var(--on-band);
   }
