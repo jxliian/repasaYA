@@ -1,0 +1,1077 @@
+{
+  "subject": "informatica/sistemas-concurrentes-y-distribuidos",
+  "type": "test",
+  "title": "Simulacro parcial T2.2: algoritmos de exclusión mutua",
+  "description": "82 preguntas nuevas del tema 2.2 (refinamiento sucesivo, Dekker, Dijkstra, Knuth, Peterson, Hyman, tickets, hardware, Ricart-Agrawala, Suzuki-Kasami y Misra) con justificación. Simulacro de 35 preguntas con la puntuación del examen: +0,15 por acierto y −0,075 por fallo.",
+  "order": 0,
+  "penalty": 0.5,
+  "examSize": 35,
+  "items": [
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "La exclusión mutua es una propiedad de…",
+      "opts": [
+        "Rendimiento: reduce el tiempo de espera de los procesos.",
+        "Equidad: todos los procesos entran el mismo número de veces.",
+        "Vivacidad: algún proceso acabará entrando en la sección crítica.",
+        "Alcanzabilidad: la sección crítica siempre se alcanza.",
+        "Seguridad: nunca puede haber dos procesos a la vez en la sección crítica."
+      ],
+      "correct": 4,
+      "justification": "Las propiedades de seguridad dicen que «nada malo ocurre» en ningún estado alcanzable. Que dos procesos coincidan en la SC es justo ese «algo malo», así que la EM es de seguridad y se demuestra con un invariante, sin hipótesis de planificación."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "La ausencia de inanición es…",
+      "opts": [
+        "Lo mismo que la espera acotada.",
+        "Una propiedad de seguridad que se demuestra con un invariante.",
+        "Una propiedad de vivacidad: todo proceso que solicita la SC acaba entrando, y normalmente exige suponer planificación justa.",
+        "Una propiedad que solo tiene sentido en sistemas distribuidos.",
+        "Una consecuencia directa de garantizar exclusión mutua y ausencia de interbloqueo."
+      ],
+      "correct": 2,
+      "justification": "Es de vivacidad («algo bueno acaba ocurriendo») y es individual: habla de cada proceso, no del sistema. Para demostrarla hay que suponer que el planificador no deja parado para siempre a un proceso listo (planificación débilmente justa)."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "Un algoritmo garantiza exclusión mutua y ausencia de interbloqueo. ¿Qué se puede afirmar de la inanición?",
+      "opts": [
+        "Queda garantizada su ausencia solo si hay dos procesos.",
+        "Queda garantizado un orden FIFO de entrada.",
+        "Nada: el sistema progresa, pero un proceso concreto puede ser adelantado indefinidamente por los demás.",
+        "Queda garantizada su ausencia, porque si no hay interbloqueo todos entran.",
+        "Queda garantizada la espera acotada y, con ella, la ausencia de inanición."
+      ],
+      "correct": 2,
+      "justification": "Ausencia de interbloqueo es global (alguien entra); ausencia de inanición es individual (todos entran). El algoritmo de Dijkstra para N procesos es el ejemplo de clase: EM y alcanzabilidad, pero un proceso puede quedarse siempre en la primera barrera."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "La propiedad de espera acotada (equidad) exige que…",
+      "opts": [
+        "Exista una cota al número de veces que otros procesos entran en la SC antes que uno que ya la ha solicitado.",
+        "Cada proceso espere como máximo un tiempo fijo medido en segundos.",
+        "Ningún proceso tenga que esperar nunca para entrar.",
+        "Los procesos entren estrictamente en orden de llegada.",
+        "El tiempo que un proceso pasa dentro de la SC esté acotado."
+      ],
+      "correct": 0,
+      "justification": "La equidad se mide en «adelantamientos» o turnos, no en tiempo. FIFO es un caso particular (cota 0); Peterson para N procesos, por ejemplo, tiene cota n(n−1)/2 turnos."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "¿Cuál de estas es una de las cuatro condiciones de Dijkstra?",
+      "opts": [
+        "El número de procesos debe ser 2.",
+        "No hacer suposiciones sobre la velocidad de ejecución de los procesos, salvo que no es cero.",
+        "Los procesos deben entrar en la SC en orden de llegada.",
+        "El multiprocesador debe disponer de una instrucción TestAndSet.",
+        "Todos los procesos deben ejecutarse a la misma velocidad."
+      ],
+      "correct": 1,
+      "justification": "Las cuatro condiciones: (1) ninguna suposición sobre las instrucciones ni el número de procesos; (2) ninguna sobre la velocidad, salvo que no es cero (progreso finito); (3) un proceso fuera de la SC no puede impedir que otros entren; (4) la SC siempre es alcanzada por alguno de los que esperan."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "Según la tercera condición de Dijkstra…",
+      "opts": [
+        "Un proceso que ejecuta código fuera de la sección crítica no puede impedir que los demás entren en ella.",
+        "Los procesos no pueden usar instrucciones especiales del hardware.",
+        "Un proceso dentro de la SC debe salir en un tiempo acotado.",
+        "Un proceso no puede volver a entrar hasta que entren todos los demás.",
+        "La SC debe ser alcanzada por todos los procesos que esperan."
+      ],
+      "correct": 0,
+      "justification": "Es la condición que viola la primera etapa del refinamiento (alternancia estricta con turno): si P1 no quiere volver a entrar, P2 se queda esperando un turno que nunca le llega."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "La cuarta condición de Dijkstra («la SC siempre será alcanzada por alguno de los procesos que esperan») corresponde a…",
+      "opts": [
+        "La ausencia de inanición de cada proceso.",
+        "El orden FIFO de entrada.",
+        "La espera acotada.",
+        "La alcanzabilidad o ausencia de interbloqueo.",
+        "La exclusión mutua."
+      ],
+      "correct": 3,
+      "justification": "Dice que el conjunto de procesos progresa (alguno entra), no que entre cada uno de ellos. Por eso no implica ausencia de inanición."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "En las condiciones de Dijkstra, «progreso finito» significa que…",
+      "opts": [
+        "Todo proceso entra en la SC en un número finito de pasos.",
+        "La sección crítica tarda un tiempo finito y conocido.",
+        "El número de procesos es finito.",
+        "El protocolo de entrada tiene un número finito de instrucciones.",
+        "La velocidad de ejecución de cada proceso no es cero: ningún proceso se detiene para siempre."
+      ],
+      "correct": 4,
+      "justification": "Es la única suposición permitida sobre la velocidad (condición 2): los procesos pueden ir a cualquier ritmo, pero ninguno a velocidad cero."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "¿Qué se puede afirmar de un algoritmo que solo satisface las cuatro condiciones de Dijkstra?",
+      "opts": [
+        "Que solo garantiza la ausencia de inanición.",
+        "Que garantiza el orden FIFO de entrada.",
+        "Que no garantiza la exclusión mutua.",
+        "Que es una solución totalmente correcta, sin inanición.",
+        "Que es una solución parcialmente correcta: garantiza EM y alcanzabilidad, pero puede haber inanición."
+      ],
+      "correct": 4,
+      "justification": "Las diapositivas las presentan como condiciones «para obtener una solución parcialmente correcta». Lo que añaden Knuth, Peterson o Lamport es precisamente la equidad (ausencia de inanición con retraso acotado)."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "Según las diapositivas, ¿cuándo es aceptable resolver la EM con bucles de espera activa?",
+      "opts": [
+        "Nunca: la espera activa no garantiza la exclusión mutua.",
+        "Solo si se dispone de semáforos.",
+        "Cuando el sistema o la aplicación no tiene muchos procesos.",
+        "Solo en sistemas distribuidos.",
+        "Siempre, porque no consume CPU."
+      ],
+      "correct": 2,
+      "justification": "Los procesos iteran en un bucle vacío hasta que entrar es seguro. Funciona, pero gasta CPU mientras espera, así que solo compensa con pocos procesos (típicamente en un multiprocesador)."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "¿Qué propuso Dijkstra en 1965 según la introducción histórica?",
+      "opts": [
+        "La primera solución sin inanición con retraso limitado.",
+        "Una solución con orden FIFO para los procesos que esperan.",
+        "Una solución segura y libre de interbloqueo, pero que puede producir inanición.",
+        "Un algoritmo de paso de testigo para multicomputadores.",
+        "La solución más simple para dos y n procesos."
+      ],
+      "correct": 2,
+      "justification": "1962 Dekker plantea el problema; 1965 Dijkstra (seguro, sin interbloqueo, con inanición); 1966 Knuth (sin inanición, no FIFO); 1974 Lamport (FIFO); 1981 Peterson (equitativo y simple); 1983 algoritmos distribuidos."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "¿Qué aportó Knuth en 1966?",
+      "opts": [
+        "Una solución sin inanición que garantiza retraso limitado de los procesos, aunque no FIFO.",
+        "El primer algoritmo distribuido basado en permisos.",
+        "La solución más simple para multiprocesadores.",
+        "La primera solución segura y libre de interbloqueo, con inanición.",
+        "Una solución FIFO que permite a los procesos detenerse en el protocolo."
+      ],
+      "correct": 0,
+      "justification": "Knuth corrige el defecto de Dijkstra (la inanición) con un turno circular. El retraso queda acotado, pero el orden de entrada no es el de llegada."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "¿Qué caracteriza a la solución de Lamport (1974) según las diapositivas?",
+      "opts": [
+        "Necesita una instrucción atómica de intercambio.",
+        "Es la primera solución libre de interbloqueo.",
+        "Solo funciona para dos procesos.",
+        "Garantiza retraso cuadrático y es la más simple.",
+        "Permite que los procesos se detengan en el protocolo de adquisición, solapa lecturas con escrituras y da retraso FIFO a los que ya esperan."
+      ],
+      "correct": 4,
+      "justification": "Es el algoritmo de la panadería: cada proceso coge un número mayor que los que ve y se atiende por número (y por identificador si empatan), de ahí el orden FIFO."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "Según la introducción histórica, la solución de Peterson (1981)…",
+      "opts": [
+        "Puede producir inanición, igual que la de Dijkstra.",
+        "Es equitativa para 2 y n procesos, garantiza retraso cuadrático y es la más simple para multiprocesadores.",
+        "Es la primera solución distribuida para multicomputadores.",
+        "Garantiza orden FIFO estricto.",
+        "Solo funciona para dos procesos."
+      ],
+      "correct": 1,
+      "justification": "Para n procesos el retraso máximo es r(n) = n(n−1)/2 turnos: cuadrático en n."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "La hipótesis de planificación débilmente justa se necesita para demostrar…",
+      "opts": [
+        "Que el protocolo de salida es correcto.",
+        "Que las variables compartidas tienen valores iniciales correctos.",
+        "Propiedades de vivacidad como la ausencia de inanición.",
+        "La exclusión mutua.",
+        "Que las lecturas y escrituras son atómicas."
+      ],
+      "correct": 2,
+      "justification": "La seguridad se cumple con cualquier intercalación, así que no necesita hipótesis sobre el planificador. Las de vivacidad sí: si el planificador nunca ejecuta a un proceso, nada lo hará entrar."
+    },
+    {
+      "tema": "T2.2 · Propiedades y condiciones de Dijkstra",
+      "q": "¿En qué se diferencia un interbloqueo activo (livelock) de un interbloqueo?",
+      "opts": [
+        "No hay diferencia: son dos nombres para lo mismo.",
+        "El livelock solo puede ocurrir con semáforos.",
+        "En el livelock los procesos siguen ejecutando instrucciones, pero ninguno consigue avanzar hacia la SC.",
+        "En el livelock los procesos quedan bloqueados en una cola del sistema operativo.",
+        "El livelock viola la exclusión mutua."
+      ],
+      "correct": 2,
+      "justification": "Es lo que pasa en la cuarta etapa del refinamiento: si los dos procesos van al mismo ritmo, ceden y reintentan a la vez una y otra vez. Ninguno está parado, pero ninguno entra."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En la primera etapa del refinamiento sucesivo (una variable turno que alterna entre P1 y P2)…",
+      "opts": [
+        "No se garantiza la exclusión mutua.",
+        "Se garantiza la EM, pero no se cumple la tercera condición de Dijkstra.",
+        "Se cumplen todas las condiciones de Dijkstra.",
+        "Se produce interbloqueo si ambos quieren entrar a la vez.",
+        "Se produce un livelock cuando los dos van al mismo ritmo."
+      ],
+      "correct": 1,
+      "justification": "Es el esquema de «corrutinas»: los procesos entran alternándose. Si uno se queda fuera de la SC (o termina), el otro no puede volver a entrar porque el turno no le llega: un proceso fuera de la SC impide al otro entrar."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En la segunda etapa, cada proceso espera mientras la clave del otro valga 0 y después pone la suya a 0. ¿Qué falla?",
+      "opts": [
+        "La ausencia de interbloqueo: los dos se quedan esperando para siempre.",
+        "La ausencia de inanición, pero la EM se cumple.",
+        "Nada: es la solución correcta.",
+        "La seguridad: la salida de la espera y el cambio de clave no son atómicos, así que los dos pueden entrar a la vez.",
+        "La tercera condición de Dijkstra."
+      ],
+      "correct": 3,
+      "justification": "Traza: P1 ve c2=1 y sale del bucle; antes de poner c1:=0, P2 ve c1=1 y sale también. Los dos asignan su clave a 0 y entran en la SC."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En la tercera etapa, cada proceso asigna su clave a 0 antes de comprobar la del otro. ¿Qué problema tiene?",
+      "opts": [
+        "No garantiza la exclusión mutua.",
+        "Viola la tercera condición de Dijkstra por la alternancia estricta.",
+        "No tiene ningún problema.",
+        "Es segura, pero si los dos asignan su clave a la vez se quedan esperando indefinidamente (interbloqueo).",
+        "Produce inanición solo si hay más de dos procesos."
+      ],
+      "correct": 3,
+      "justification": "Adelantar la asignación da seguridad, pero «el proceso que modifica la clave no sabe si el otro hace lo mismo concurrentemente»: c1=0 y c2=0, y cada uno espera a que la clave del otro vuelva a 1."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En la cuarta etapa, un proceso que ve la clave del otro a 0 vuelve a poner la suya a 1, espera y lo reintenta. Esto…",
+      "opts": [
+        "Provoca un interbloqueo permanente en cuanto los dos intentan entrar.",
+        "Garantiza la ausencia de inanición.",
+        "Pierde la exclusión mutua.",
+        "Mantiene la EM y evita el bloqueo permanente, pero si avanzan al mismo ritmo pueden ceder indefinidamente (livelock / inanición).",
+        "Es ya el algoritmo de Dekker."
+      ],
+      "correct": 3,
+      "justification": "Es la «cortesía»: cada uno cede al otro. Con velocidades distintas alguno entra, pero el planificador puede intercalarlos de forma que los dos cedan y reintenten a la vez sin fin."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "¿Qué añade el algoritmo de Dekker (quinta etapa) respecto a la cuarta?",
+      "opts": [
+        "Una variable turno que decide quién debe ceder cuando los dos quieren entrar a la vez.",
+        "Un vector de números de ticket.",
+        "Una segunda barrera que comprueba que nadie más está en la SC.",
+        "Una cola FIFO de procesos en espera.",
+        "Una instrucción atómica de intercambio."
+      ],
+      "correct": 0,
+      "justification": "Solo cede (pone su clave a 1 y espera) el proceso que no tiene el turno. El que lo tiene mantiene su clave a 0 y espera a que el otro ceda, así que se rompe la simetría del livelock."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En Dekker, un proceso Pi que encuentra la clave del otro a 0 y no tiene el turno…",
+      "opts": [
+        "Entra directamente en la sección crítica.",
+        "Espera con su clave a 0 hasta que el otro salga.",
+        "Termina su ejecución.",
+        "Se apropia del turno y entra.",
+        "Pone su clave a 1, espera activamente mientras el turno sea del otro y luego vuelve a poner su clave a 0."
+      ],
+      "correct": 4,
+      "justification": "Así deja pasar al que tiene el turno. Cuando este sale y le cede el turno, Pi vuelve a manifestar su intención (clave a 0) y entra."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "¿Qué hace un proceso al salir de la sección crítica en el algoritmo de Dekker?",
+      "opts": [
+        "Solo pone su clave a 1, sin tocar el turno.",
+        "Pone su clave a 0 y cede el turno.",
+        "Cede el turno al otro proceso y pone su clave a 1.",
+        "Se queda con el turno y pone su clave a 1.",
+        "Espera a que el otro proceso entre."
+      ],
+      "correct": 2,
+      "justification": "turno := j; c[i] := 1. Ceder el turno a la salida es lo que impide que un mismo proceso adelante indefinidamente al otro."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "¿Cómo se demuestra la exclusión mutua en el algoritmo de Dekker?",
+      "opts": [
+        "Con la atomicidad de la instrucción swap.",
+        "Pi solo entra si ve c[j] = 1, y comprueba c[j] después de asignar c[i] = 0; así, al entrar se cumple c[j] = 1 ∧ c[i] = 0.",
+        "Mediante el orden total de los números de secuencia.",
+        "Contando los procesos que hay en cada etapa.",
+        "Con el valor de turno: solo entra el proceso que tiene el turno."
+      ],
+      "correct": 1,
+      "justification": "Si los dos estuvieran dentro, cada uno habría visto la clave del otro a 1 después de poner la suya a 0, lo que es imposible porque ninguno la vuelve a 1 hasta salir. El turno sirve para la alcanzabilidad, no para la EM."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "El algoritmo de Dekker garantiza, para dos procesos…",
+      "opts": [
+        "Ausencia de inanición, pero no exclusión mutua.",
+        "Exclusión mutua, ausencia de interbloqueo y ausencia de inanición.",
+        "Exclusión mutua y orden FIFO para N procesos.",
+        "Solo exclusión mutua.",
+        "Exclusión mutua, pero puede haber livelock."
+      ],
+      "correct": 1,
+      "justification": "Es la primera solución completamente correcta para dos procesos. No se generaliza directamente a N: para eso están Dijkstra, Knuth, Peterson y Lamport."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En Dekker, si P1 y P2 intentan entrar a la vez y turno = 1…",
+      "opts": [
+        "Entran los dos.",
+        "Entra P2 porque fue el último en asignar su clave.",
+        "P1 espera a que P2 ceda su clave y entra; P2 pone su clave a 1 y se queda en espera activa.",
+        "No entra ninguno hasta que cambie el turno.",
+        "P1 cede el turno a P2."
+      ],
+      "correct": 2,
+      "justification": "Es el argumento de alcanzabilidad de las diapositivas: si encuentra la clave del otro a 1 entra; si no, decide el turno. Quien lo tiene espera; quien no lo tiene cede."
+    },
+    {
+      "tema": "T2.2 · Refinamiento sucesivo y Dekker",
+      "q": "En el refinamiento sucesivo de las diapositivas, una clave ci = 0 indica que…",
+      "opts": [
+        "El proceso i ha cedido el turno.",
+        "El proceso i tiene el turno.",
+        "El proceso i está fuera de la sección crítica.",
+        "El proceso i ha terminado.",
+        "El proceso i quiere entrar o está en la sección crítica."
+      ],
+      "correct": 4,
+      "justification": "Las claves se inicializan a 1 (fuera). Para indicar que intenta entrar, el proceso cambia su clave a 0, y al salir la devuelve a 1."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "En el algoritmo de Dijkstra para N procesos, cada proceso tiene un estado c[i] que puede valer…",
+      "opts": [
+        "un número de ticket.",
+        "pasivo, solicitando o en_SC.",
+        "la etapa en la que se encuentra.",
+        "libre u ocupado.",
+        "verdadero o falso."
+      ],
+      "correct": 1,
+      "justification": "Además hay una variable compartida turno. El número de ticket es de Lamport y la etapa, de Peterson para N procesos."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "En el algoritmo de Dijkstra, la primera barrera (bucle mientras turno ≠ i)…",
+      "opts": [
+        "Detiene a los procesos mientras el que posee el turno no esté pasivo; si lo está, el proceso se apropia del turno.",
+        "Garantiza que no hay inanición.",
+        "Comprueba que ningún otro proceso está en_SC.",
+        "Asigna a cada proceso un número de orden.",
+        "Asegura la exclusión mutua."
+      ],
+      "correct": 0,
+      "justification": "while turno ≠ i do if c[turno] = pasivo then turno := i. La comprobación y el cambio de turno no son atómicos, así que pueden pasar varios procesos: de la seguridad se encarga la segunda barrera."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "En el algoritmo de Dijkstra, la segunda barrera…",
+      "opts": [
+        "Asigna el turno al proceso pasivo.",
+        "Impide la inanición.",
+        "Reparte el turno de forma circular.",
+        "Ordena los procesos por identificador.",
+        "Asegura la seguridad: el proceso pone su estado a en_SC y solo entra si ningún otro está en_SC; si no, vuelve a empezar."
+      ],
+      "correct": 4,
+      "justification": "Es el mismo argumento que en Dekker: se marca en_SC antes de mirar a los demás, así que de dos procesos que se solapen al menos uno ve al otro y retrocede."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "El algoritmo de Dijkstra para N procesos garantiza…",
+      "opts": [
+        "Exclusión mutua, alcanzabilidad y ausencia de inanición.",
+        "Orden FIFO de entrada.",
+        "Solo la ausencia de inanición.",
+        "Exclusión mutua y alcanzabilidad, pero no la ausencia de inanición.",
+        "Ausencia de inanición, pero no exclusión mutua."
+      ],
+      "correct": 3,
+      "justification": "Las diapositivas lo dicen explícitamente: «satisface seguridad pero no evita el peligro de inanición». Corregirlo es lo que hace Knuth."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "¿Por qué el algoritmo de Dijkstra garantiza la alcanzabilidad de la SC?",
+      "opts": [
+        "Porque cada proceso tiene un número de ticket distinto.",
+        "Porque turno conserva el valor del último proceso que lo asignó: entre los que llegan a en_SC entra el que tiene el turno y los demás vuelven a la primera barrera.",
+        "Porque solo un proceso puede superar la primera barrera.",
+        "Porque el proceso que sale cede el turno al siguiente.",
+        "Porque los procesos entran en orden de llegada."
+      ],
+      "correct": 1,
+      "justification": "Como nadie puede quitarle el turno a un proceso que no está pasivo, el poseedor del turno termina pasando las dos barreras en tiempo finito."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "En el algoritmo de Dijkstra, ¿pueden dos procesos superar la primera barrera a la vez?",
+      "opts": [
+        "Sí, porque la comprobación del estado del que tiene el turno y el cambio de turno no se hacen atómicamente.",
+        "No, porque turno es una variable atómica.",
+        "Solo si hay exactamente dos procesos.",
+        "Solo si el planificador es justo.",
+        "No, nunca: la primera barrera garantiza la exclusión mutua."
+      ],
+      "correct": 0,
+      "justification": "La traza de la diapositiva lo muestra: P1 y P2 llegan a en_SC con turno = 3 (pasivo). Por eso hace falta la segunda barrera, que los hace volver a intentarlo."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "Se cambia la guarda de la primera barrera de Dijkstra de «c[turno] = pasivo» a «c[turno] ≠ en_SC». Razonando sobre el protocolo completo, ¿qué ocurre?",
+      "opts": [
+        "El algoritmo pasa a garantizar orden FIFO.",
+        "La EM se mantiene gracias a la segunda barrera, pero se pierde la alcanzabilidad: los procesos pueden arrebatarse el turno indefinidamente.",
+        "No cambia nada: las dos guardas son equivalentes.",
+        "Se pierde la exclusión mutua.",
+        "Mejora la equidad y desaparece la inanición."
+      ],
+      "correct": 1,
+      "justification": "Con la nueva guarda se puede quitar el turno a un proceso que está solicitando. Dos procesos pueden quitárselo uno a otro sin fin, así que se pierde el progreso. La segunda barrera sigue impidiendo que dos procesos estén en_SC a la vez. Ojo: en un banco de otros años la clave marcaba «pierde corrección (seguridad)»; si solo aparece esa opción como «pérdida de corrección», es la que se acerca."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "¿Qué técnica introduce el algoritmo de Knuth para evitar la inanición?",
+      "opts": [
+        "Un turno circular: el proceso que sale cede el turno a su predecesor en el anillo, y el que espera recorre los procesos desde el turno hacia atrás.",
+        "Un número de ticket por proceso.",
+        "Una instrucción atómica TestAndSet.",
+        "Un paso de mensajes con marcas de tiempo.",
+        "Prioridades fijas por identificador."
+      ],
+      "correct": 0,
+      "justification": "En la primera barrera, j empieza en turno y se decrementa módulo n mientras encuentra procesos pasivos; si encuentra uno activo, vuelve a j := turno. Al salir: turno := (i−1) mod n."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "El algoritmo de Knuth para N procesos cumple…",
+      "opts": [
+        "Solo exclusión mutua y alcanzabilidad, como Dijkstra.",
+        "Ausencia de inanición, pero no exclusión mutua.",
+        "Exclusión mutua, alcanzabilidad y ausencia de inanición (retraso limitado), aunque no orden FIFO.",
+        "Orden FIFO estricto.",
+        "Exclusión mutua solo si hay planificación fuertemente justa."
+      ],
+      "correct": 2,
+      "justification": "Mantiene la segunda barrera de Dijkstra (seguridad) y el turno circular garantiza que nadie es adelantado indefinidamente. La clave del examen de otros años lo resumía como «EM, alcanzabilidad, vivacidad y equidad»."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "La imposibilidad de inanición en el algoritmo de Knuth se demuestra suponiendo…",
+      "opts": [
+        "Que solo hay dos procesos.",
+        "Que existe un número finito de procesos.",
+        "Que la instrucción swap es atómica.",
+        "Que la planificación es FIFO.",
+        "Que los procesos tienen prioridades distintas."
+      ],
+      "correct": 1,
+      "justification": "Con infinitos procesos, uno podría ser adelantado siempre por otros que van recibiendo el turno en el anillo (el escenario de inanición de la diapositiva). Con n finito, el turno circular acaba llegándole."
+    },
+    {
+      "tema": "T2.2 · Dijkstra y Knuth (N procesos)",
+      "q": "En el algoritmo de Knuth, ¿qué hace un proceso al entrar en la sección crítica y al salir de ella?",
+      "opts": [
+        "Al entrar asigna turno := i, y al salir turno := (i−1) mod n antes de volver a pasivo.",
+        "No modifica el turno en ningún momento.",
+        "Al salir asigna turno := i para volver a entrar el primero.",
+        "Al salir asigna turno al proceso con menor identificador.",
+        "Al entrar asigna turno := (i+1) mod n y al salir no toca el turno."
+      ],
+      "correct": 0,
+      "justification": "Pasar el turno al predecesor hace que el turno recorra el anillo y que, con n finito, todo proceso que espera acabe teniéndolo."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En el algoritmo de Peterson para dos procesos tal como aparece en las diapositivas (solicitado[i] := true; turno := i; esperar mientras solicitado[j] y turno = i), si los dos compiten…",
+      "opts": [
+        "Esperan los dos hasta que uno ceda.",
+        "Entra siempre el proceso 0.",
+        "Entra el último proceso que escribió turno.",
+        "Espera el último proceso que escribió turno; el otro entra.",
+        "Entran los dos."
+      ],
+      "correct": 3,
+      "justification": "turno solo puede tener un valor: el del último que lo escribió. Ese ve turno = i y espera; el otro ve turno ≠ j y entra. En la versión de la relación (turno := 1−i, el proceso cede el turno) la conclusión es la misma: espera el último que escribe."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En Peterson para dos procesos, si solo un proceso quiere entrar…",
+      "opts": [
+        "Entra después de un número fijo de iteraciones.",
+        "Se produce interbloqueo.",
+        "Tiene que esperar a que el otro entre antes.",
+        "Entra inmediatamente, porque el otro tiene su indicador a falso.",
+        "Solo entra si tiene el turno."
+      ],
+      "correct": 3,
+      "justification": "La espera exige solicitado[j] = true. Por eso Peterson no tiene alternancia forzosa, a diferencia de la primera etapa del refinamiento."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "¿Qué ocurre en Peterson para dos procesos si se intercambia el orden de las dos primeras asignaciones (primero turno, luego el indicador)?",
+      "opts": [
+        "Se pierde la exclusión mutua.",
+        "Se pierde solo la ausencia de inanición.",
+        "Mejora la equidad.",
+        "Se produce interbloqueo.",
+        "No cambia nada."
+      ],
+      "correct": 0,
+      "justification": "Traza: P0 asigna turno; P1 asigna turno, pone su indicador y entra porque el de P0 sigue a falso; P0 pone su indicador y ve que el turno no le obliga a esperar: entra también."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "El algoritmo de Peterson para dos procesos garantiza…",
+      "opts": [
+        "Exclusión mutua solo si el planificador es FIFO.",
+        "Exclusión mutua y progreso, pero no ausencia de inanición.",
+        "Exclusión mutua, progreso, ausencia de inanición y espera acotada (a lo sumo una entrada del rival).",
+        "Solo exclusión mutua.",
+        "Ausencia de inanición, pero no exclusión mutua."
+      ],
+      "correct": 2,
+      "justification": "Si el rival sale y quiere volver a entrar, al escribir turno se convierte en el último y cede: no puede adelantar dos veces seguidas."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "¿Por qué Peterson, correcto en un modelo secuencialmente consistente, puede fallar en un programa real con variables ordinarias?",
+      "opts": [
+        "Porque necesita una instrucción swap.",
+        "No puede fallar: la demostración vale para cualquier máquina.",
+        "Porque las variables booleanas no se pueden compartir.",
+        "Porque solo funciona con un procesador.",
+        "Porque el hardware y el compilador pueden reordenar escrituras y lecturas (memoria débil), y los dos procesos pueden leer el indicador del otro a falso."
+      ],
+      "correct": 4,
+      "justification": "La demostración supone que cada proceso ve las operaciones en el orden escrito. Con buffers de escritura, la lectura de solicitado[j] puede adelantarse a la escritura de solicitado[i]. En C++ hay que usar std::atomic con orden secuencialmente consistente o barreras de memoria."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En Peterson para N procesos, ¿cuántas etapas tiene que recorrer un proceso antes de la sección crítica?",
+      "opts": [
+        "log2(n) etapas, como un torneo.",
+        "Una sola etapa con n turnos.",
+        "n etapas, una por proceso.",
+        "2 etapas, como en Peterson para dos procesos.",
+        "n−1 etapas (de la 0 a la n−2); la n−1 es una etapa ficticia que indica que está en la SC."
+      ],
+      "correct": 4,
+      "justification": "c[i] va de −1 (fuera) a n−2; al terminar el bucle se ejecuta la metainstrucción c[i] := n−1 para indicar que ha llegado a la SC."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En Peterson para N procesos, turno[j] guarda…",
+      "opts": [
+        "La etapa en la que está el proceso j.",
+        "El último proceso que ha llegado a la etapa j, que es el que se queda esperando.",
+        "El proceso que está en la sección crítica.",
+        "El primer proceso que ha llegado a la etapa j.",
+        "El número de procesos que hay en la etapa j."
+      ],
+      "correct": 1,
+      "justification": "Igual que en el caso de dos procesos, el último en llegar a una etapa es la «víctima» y espera mientras haya otro proceso en esa etapa o en una más avanzada."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En Peterson para N procesos, Pi espera en la etapa j mientras se cumple…",
+      "opts": [
+        "(∃ k ≠ i : c[k] = n−1)",
+        "(∀ k ≠ i : c[k] < j) ∧ turno[j] = i",
+        "turno[j] ≠ i",
+        "(∃ k ≠ i : c[k] ≥ j) ∧ turno[j] = i",
+        "(∃ k ≠ i : c[k] ≥ j) ∨ turno[j] = i"
+      ],
+      "correct": 3,
+      "justification": "Deja de esperar si (a) va por delante de todos (nadie más está en su etapa o en una superior) o (b) ha llegado otro proceso después a su etapa, que pasa a ser el nuevo turno[j]."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "Según el lema 4 de Peterson para N procesos, el número máximo de procesos que puede haber en la etapa j es…",
+      "opts": [
+        "2",
+        "j + 1",
+        "n / 2",
+        "n − j",
+        "n − 1"
+      ],
+      "correct": 3,
+      "justification": "Se demuestra con el lema 3. Consecuencia: en la etapa n−2 hay como máximo 2 procesos, y por el lema 2 solo uno de ellos puede pasar a la SC."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "¿Cómo se demuestra la exclusión mutua en Peterson para N procesos?",
+      "opts": [
+        "Porque solo existe un testigo en el sistema.",
+        "Porque turno[0] solo puede tener un valor.",
+        "Por el orden total de los números de secuencia.",
+        "A la etapa n−2 llegan como máximo dos procesos y, por el lema 2, solo uno de ellos puede avanzar a la SC.",
+        "Porque la segunda barrera comprueba que ningún otro está en_SC."
+      ],
+      "correct": 3,
+      "justification": "Un proceso que pasa de una etapa a la siguiente o precede a todos o no estaba solo en su etapa (lema 2). En la última etapa con dos procesos, el que llegó último es turno[n−2] y no puede avanzar mientras el otro esté en la SC."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "Según las diapositivas, el número máximo de turnos que un proceso puede tener que esperar en Peterson para N procesos es…",
+      "opts": [
+        "2(n − 1)",
+        "r(n) = n − 1 + r(n−1) = n(n−1)/2",
+        "n − 1",
+        "2ⁿ⁻¹ − 1",
+        "log2 n"
+      ],
+      "correct": 1,
+      "justification": "Es el «retraso cuadrático» de la introducción histórica. Ojo: en un banco de otros años aparece «N−1» como respuesta; según estas diapositivas la cota es n(n−1)/2."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En Peterson para N procesos, ¿pueden encontrarse dos procesos en la etapa n−2 y ninguno en la n−3?",
+      "opts": [
+        "No: por el lema 3, si hay al menos dos procesos en una etapa, hay al menos uno en cada etapa anterior.",
+        "Sí, solo con planificación fuertemente justa.",
+        "Sí, si el turno de la etapa n−3 ha rotado.",
+        "Depende del valor inicial de turno.",
+        "Sí, siempre que n sea par."
+      ],
+      "correct": 0,
+      "justification": "El lema 3 se demuestra por inducción sobre la etapa: para que un segundo proceso alcance la etapa j, otro tuvo que «empujarlo» desde la j−1, y así hacia atrás."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "En Peterson para N procesos, se dice que Pi precede a Pj cuando…",
+      "opts": [
+        "i < j: tiene menor identificador.",
+        "Pi llegó antes a su etapa actual.",
+        "turno[c[i]] = j.",
+        "Pi ha entrado más veces en la SC.",
+        "c[i] > c[j]: Pi está en una etapa más avanzada."
+      ],
+      "correct": 4,
+      "justification": "Con esa definición, el lema 1 dice que un proceso que precede a todos los demás puede avanzar al menos una etapa."
+    },
+    {
+      "tema": "T2.2 · Peterson (2 y N procesos)",
+      "q": "La alcanzabilidad de la SC en Peterson para N procesos se demuestra…",
+      "opts": [
+        "Contando los mensajes de respuesta.",
+        "Por el orden total de las peticiones.",
+        "Por inducción sobre el número de entradas en la SC.",
+        "Porque el turno es circular.",
+        "Por reducción al absurdo: si todos quedaran bloqueados, el más avanzado precedería a los demás (contradice el lema 1) o compartiría etapa (contradice el lema 2)."
+      ],
+      "correct": 4,
+      "justification": "Se supone que ningún proceso avanza (hipótesis de incorrección) y se llega a contradicción con los lemas 1 y 2."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "El algoritmo de Hyman (1966) para dos procesos es…",
+      "opts": [
+        "Correcto.",
+        "Correcto, pero con inanición.",
+        "Correcto solo con planificación fuertemente justa.",
+        "Incorrecto: no garantiza la exclusión mutua.",
+        "Correcto si las claves son booleanas."
+      ],
+      "correct": 3,
+      "justification": "Se publicó como simplificación de Dekker y resultó erróneo: hay una intercalación que mete a los dos procesos en la SC."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "¿Qué intercalación lleva a los dos procesos a la SC en el algoritmo de Hyman (c[0]=c[1]=1, turno=1)?",
+      "opts": [
+        "P0 pone c[0]:=0, ve turno ≠ 0 y c[1]=1, y es interrumpido antes de turno:=0; P1 entra con turno=1; P0 asigna turno:=0 y entra también.",
+        "Los dos leen turno = 1 y entran.",
+        "No existe tal intercalación.",
+        "P1 sale de la SC sin restaurar su clave.",
+        "P0 y P1 ponen su clave a 0 a la vez y se quedan esperando."
+      ],
+      "correct": 0,
+      "justification": "El fallo está en que P0 se apropia del turno sin volver a comprobar si P1 ha entrado, y en que P1, como tiene el turno, entra sin mirar la clave de P0."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "En el protocolo de tickets para dos procesos (n[i]:=1; n[i]:=n[j]+1; …), ¿para qué sirve la asignación n[i]:=1?",
+      "opts": [
+        "Para dar prioridad al proceso 1.",
+        "Para evitar el desbordamiento de los tickets.",
+        "Para que el proceso entre sin esperar.",
+        "Para avisar de que el proceso está calculando su ticket; sin ella se puede perder la exclusión mutua.",
+        "Es redundante: puede eliminarse sin efecto."
+      ],
+      "correct": 3,
+      "justification": "Si se elimina, un proceso puede leer n[j]=0 mientras el otro está a medio calcular su ticket, entrar, y que el otro termine con un ticket menor o igual y entre también. Cumple el papel de «choosing» en la panadería de Lamport."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "En el protocolo de tickets para dos procesos, el desempate por identificador cuando n[j] = n[i]…",
+      "opts": [
+        "Provoca inanición del proceso con mayor identificador.",
+        "Da prioridad permanente al proceso con mayor identificador.",
+        "Es innecesario porque los tickets nunca coinciden.",
+        "Sirve para reiniciar los tickets.",
+        "Rompe la simetría y evita que los dos esperen a la vez cuando calculan el mismo ticket."
+      ],
+      "correct": 4,
+      "justification": "Los dos pueden leer n[j]=1 y quedarse con el mismo ticket. Con el orden lexicográfico (ticket, id) solo uno espera. El examen de otros años: la ausencia de inanición se apoya en «numeración creciente y orden lexicográfico (ticket, id)»."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "En el algoritmo de turnos circulares con el vector s[0..N−1] (problema 60), ¿qué ocurre si un proceso se queda indefinidamente en su sección no crítica?",
+      "opts": [
+        "Se pierde la exclusión mutua.",
+        "Los demás no pueden avanzar cuando les toca después de él: hay alternancia forzosa y se viola el progreso.",
+        "No afecta a nadie: los demás entran libremente.",
+        "Entran dos procesos a la vez.",
+        "Se regenera automáticamente el testigo."
+      ],
+      "correct": 1,
+      "justification": "El vector implementa un testigo implícito que rota en orden 0, 1, …, N−1. La EM se cumple, pero si el que debe pasar el testigo no quiere entrar, el testigo se queda parado (viola la tercera condición de Dijkstra)."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "¿Cuál es la diferencia entre alternancia forzosa y equidad?",
+      "opts": [
+        "La alternancia forzosa obliga a seguir un orden aunque el proceso no quiera entrar; la equidad solo acota los adelantamientos entre procesos que compiten.",
+        "La equidad obliga a un orden fijo de entrada.",
+        "Son lo mismo.",
+        "La alternancia forzosa garantiza el progreso.",
+        "La equidad solo existe en algoritmos distribuidos."
+      ],
+      "correct": 0,
+      "justification": "Un algoritmo equitativo deja entrar sin esperar a un proceso que compite solo. La alternancia forzosa no, y por eso viola la tercera condición de Dijkstra."
+    },
+    {
+      "tema": "T2.2 · Hyman, tickets, anillo y Lamport",
+      "q": "En el algoritmo de la panadería de Lamport…",
+      "opts": [
+        "Los procesos avanzan por etapas hasta la sección crítica.",
+        "Un testigo circula en anillo entre los procesos.",
+        "El proceso con menor identificador entra siempre primero.",
+        "Se usa una instrucción TestAndSet sobre una variable compartida.",
+        "Cada proceso toma un número mayor que todos los que ve y se atiende por orden de número, desempatando por identificador."
+      ],
+      "correct": 4,
+      "justification": "Es lo que da el orden FIFO para los procesos que ya esperan. Sus números pueden crecer sin límite, y tolera que los procesos se detengan en el protocolo."
+    },
+    {
+      "tema": "T2.2 · Soporte hardware y cerrojos",
+      "q": "Un protocolo con swap atómico para N procesos (ocupado compartido, llave local) es:",
+      "opts": [
+        "ocupado := true; swap(ocupado, llave); SC; llave := false.",
+        "llave := false; repetir swap(ocupado, llave) hasta llave = true; SC.",
+        "llave := true; repetir swap(ocupado, llave) hasta llave = false; SC; ocupado := false.",
+        "repetir llave := ocupado hasta llave = false; ocupado := true; SC; ocupado := false.",
+        "swap(ocupado, llave); SC; swap(ocupado, llave)."
+      ],
+      "correct": 2,
+      "justification": "El que recibe false al intercambiar es el único que ha encontrado el cerrojo libre, y deja true en ocupado. La opción que lee y luego escribe en dos pasos separados es la segunda etapa del refinamiento: no es segura."
+    },
+    {
+      "tema": "T2.2 · Soporte hardware y cerrojos",
+      "q": "¿Basta la atomicidad de swap (o TestAndSet) para garantizar la equidad?",
+      "opts": [
+        "Sí, porque el hardware atiende las peticiones en orden FIFO.",
+        "Sí, si hay solo dos procesos.",
+        "No: garantiza la exclusión mutua, pero un proceso puede perder la carrera indefinidamente frente a otros.",
+        "Sí, porque la instrucción es atómica.",
+        "No, porque tampoco garantiza la exclusión mutua."
+      ],
+      "correct": 2,
+      "justification": "Nada decide quién gana el siguiente swap cuando se libera el cerrojo. Para acotar la espera hay que añadir un orden (por ejemplo, tickets o pasar el cerrojo al siguiente que espera)."
+    },
+    {
+      "tema": "T2.2 · Soporte hardware y cerrojos",
+      "q": "La instrucción TestAndSet(x)…",
+      "opts": [
+        "Intercambia el valor de dos variables locales.",
+        "Compara x con un valor y lo cambia solo si coinciden.",
+        "Devuelve el valor anterior de x y lo pone a true, todo en una sola operación atómica.",
+        "Bloquea al proceso hasta que x sea true.",
+        "Pone x a false y devuelve true."
+      ],
+      "correct": 2,
+      "justification": "Con ella: while TestAndSet(cerrojo) do nothing; SC; cerrojo := false. La opción de comparar y cambiar describe CompareAndSwap."
+    },
+    {
+      "tema": "T2.2 · Soporte hardware y cerrojos",
+      "q": "Deshabilitar las interrupciones para proteger la sección crítica…",
+      "opts": [
+        "Sirve en un monoprocesador, pero no garantiza la exclusión mutua en un multiprocesador.",
+        "No sirve ni siquiera en un monoprocesador.",
+        "Garantiza la equidad entre procesos.",
+        "Es la solución recomendada en multiprocesadores.",
+        "Solo funciona en sistemas distribuidos."
+      ],
+      "correct": 0,
+      "justification": "En un monoprocesador evita que el planificador cambie de proceso dentro de la SC. Con varios procesadores, otro núcleo puede ejecutar a la vez la SC sin que le afecten tus interrupciones."
+    },
+    {
+      "tema": "T2.2 · Soporte hardware y cerrojos",
+      "q": "Para limitar a k los procesos dentro de un recurso con un contador dentro y un cerrojo lock/unlock (problema 59), ¿por qué no se debe mantener el cerrojo mientras se espera a que haya sitio?",
+      "opts": [
+        "No hay ningún problema en mantenerlo.",
+        "Porque se perdería el invariante 0 ≤ dentro ≤ k.",
+        "Porque el cerrojo no es atómico.",
+        "Porque los procesos que quieren salir también necesitan el cerrojo para decrementar dentro: nadie liberaría plazas (interbloqueo).",
+        "Porque el cerrojo solo admite dos procesos."
+      ],
+      "correct": 3,
+      "justification": "Patrón correcto: repetir { lock; si dentro < k entonces { dentro++; ok := true }; unlock } hasta ok. Comprobar y modificar dentro bajo el mismo cerrojo es lo que mantiene 0 ≤ dentro ≤ k."
+    },
+    {
+      "tema": "T2.2 · Soporte hardware y cerrojos",
+      "q": "El principal inconveniente de los cerrojos con espera activa (spinlocks) es…",
+      "opts": [
+        "Que necesitan paso de mensajes.",
+        "Que no pueden usarse en multiprocesadores.",
+        "Que no garantizan la exclusión mutua.",
+        "Que consumen CPU mientras esperan, iterando sin hacer trabajo útil.",
+        "Que provocan siempre interbloqueo."
+      ],
+      "correct": 3,
+      "justification": "Por eso solo compensan con esperas cortas y pocos procesos. Los semáforos y monitores bloquean al proceso en lugar de hacerle girar."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En un sistema distribuido (multicomputador), los algoritmos de exclusión mutua…",
+      "opts": [
+        "Necesitan un reloj físico global.",
+        "No pueden usar variables en memoria compartida y se sincronizan mediante paso de mensajes.",
+        "Usan las mismas variables compartidas que Peterson.",
+        "Necesitan una instrucción TestAndSet en red.",
+        "Solo funcionan con dos nodos."
+      ],
+      "correct": 1,
+      "justification": "No hay memoria común, así que no hay sincronización global por variables: todo se hace con operaciones atómicas de envío y recepción de mensajes."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "¿Cuál de estas condiciones de la red NO se exige a los algoritmos distribuidos de exclusión mutua estudiados?",
+      "opts": [
+        "Que el retraso de entrega sea variable pero acotado.",
+        "Que la red esté completamente conectada.",
+        "Que cada nodo pueda enviar mensajes a cualquier otro.",
+        "Que los mensajes se transmitan sin errores.",
+        "Que los mensajes se entreguen en el mismo orden en que se enviaron."
+      ],
+      "correct": 4,
+      "justification": "Las diapositivas piden red completamente conectada, transmisión sin errores y retraso variable acotado, y admiten expresamente posibles desordenamientos (desecuenciamientos) en la entrega."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "¿Cuántos mensajes necesita el algoritmo de Ricart-Agrawala para que un proceso entre en la sección crítica?",
+      "opts": [
+        "n−1",
+        "n",
+        "2(n−1): n−1 peticiones y n−1 respuestas.",
+        "2n",
+        "Ninguno si ya tiene el testigo."
+      ],
+      "correct": 2,
+      "justification": "Envía una petición a cada uno de los otros n−1 procesos y necesita una respuesta favorable de todos ellos."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Ricart-Agrawala, ¿cuándo puede un proceso entrar en la sección crítica?",
+      "opts": [
+        "En cuanto envía su petición.",
+        "Cuando ha recibido una respuesta favorable de todos los demás procesos.",
+        "Cuando su número de secuencia es el mayor.",
+        "Cuando ha recibido la mayoría de las respuestas.",
+        "Cuando recibe el testigo."
+      ],
+      "correct": 1,
+      "justification": "La hebra Rep cuenta las respuestas (num_repesperadas) y, al llegar a 0, hace signal(sinc) para que el proceso principal entre."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Ricart-Agrawala, un proceso que recibe una petición (k, j) retrasa su respuesta si…",
+      "opts": [
+        "Él también está solicitando la SC y su petición es prioritaria: su número es menor que k, o es igual y su identificador es menor que j.",
+        "Está fuera de la sección crítica.",
+        "j tiene menor identificador.",
+        "El número k es menor que el suyo.",
+        "Ya ha respondido a otro proceso."
+      ],
+      "correct": 0,
+      "justification": "prioridad := solicitaSC and (k > ns or (k = ns and i < j)). Si la tiene, marca repretrasadas[j] y contesta al salir de la SC; si no, contesta enseguida."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Ricart-Agrawala, la instrucción mns := max(ns, k) al recibir una petición sirve para…",
+      "opts": [
+        "Elegir qué proceso tiene el testigo.",
+        "Detectar mensajes perdidos.",
+        "Que las peticiones posteriores tengan números de secuencia mayores, como un reloj lógico de Lamport.",
+        "Reiniciar los números de secuencia.",
+        "Contar las respuestas recibidas."
+      ],
+      "correct": 2,
+      "justification": "La siguiente petición del proceso usará ns := mns + 1. Así se respeta el orden en que se hicieron las peticiones y, con el identificador como desempate, se obtiene un orden total."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "¿En qué se apoya la alcanzabilidad de la SC en Ricart-Agrawala?",
+      "opts": [
+        "En un proceso coordinador central.",
+        "En que la red entrega los mensajes en orden.",
+        "En la ordenación total de las peticiones (número de secuencia e identificador): ninguna respuesta favorable se retrasa indefinidamente.",
+        "En el turno circular entre procesos.",
+        "En que solo hay un testigo en el sistema."
+      ],
+      "correct": 2,
+      "justification": "Siempre hay una petición más prioritaria que todas las demás, y su dueño recibe todas las respuestas."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Ricart-Agrawala, ¿qué hace un proceso al salir de la sección crítica?",
+      "opts": [
+        "Envía el testigo al siguiente proceso del anillo.",
+        "Difunde una nueva petición a todos los procesos.",
+        "Pone solicitaSC a falso y envía la respuesta a todos los procesos cuya respuesta había retrasado.",
+        "Espera a recibir n−1 confirmaciones.",
+        "Incrementa su número de secuencia y vuelve a entrar."
+      ],
+      "correct": 2,
+      "justification": "Recorre repretrasadas[j] y contesta a cada proceso pendiente, que puede así completar sus n−1 respuestas."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "¿Cuántos mensajes necesita el algoritmo de Suzuki-Kasami para una entrada en la SC si el proceso no tiene el testigo?",
+      "opts": [
+        "2(n−1)",
+        "n: n−1 peticiones difundidas y 1 mensaje con el testigo.",
+        "1",
+        "2n",
+        "n−1"
+      ],
+      "correct": 1,
+      "justification": "Si el proceso ya tiene el testigo, entra sin enviar ningún mensaje."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "La exclusión mutua en Suzuki-Kasami equivale a demostrar que…",
+      "opts": [
+        "Ningún proceso envía dos peticiones seguidas.",
+        "La red entrega los mensajes en orden.",
+        "Los números de secuencia son distintos.",
+        "Cada proceso recibe n−1 respuestas.",
+        "Globalmente hay exactamente un proceso con token_presente = true (o el testigo está en tránsito)."
+      ],
+      "correct": 4,
+      "justification": "Se cumple al principio y se conserva cada vez que se transmite el testigo, porque quien lo envía pone token_presente := false."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Suzuki-Kasami, un proceso que tiene el testigo y no está en la SC se lo envía al proceso j cuando…",
+      "opts": [
+        "j tiene el menor identificador.",
+        "peticion[j] > token[j]: j tiene una petición posterior a la última vez que se le atendió.",
+        "token[j] > peticion[j].",
+        "j ha enviado una respuesta favorable.",
+        "peticion[j] = 0."
+      ],
+      "correct": 1,
+      "justification": "peticion[] guarda el último número de petición recibido de cada proceso y token[] el de la última petición atendida de cada uno, que viaja con el testigo."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "¿Cómo garantiza la equidad Suzuki-Kasami?",
+      "opts": [
+        "Mediante un coordinador central.",
+        "El testigo se entrega en orden circular j+1, j+2, …, n, 1, …, j−1 al primero que lo tenga pedido.",
+        "Atendiendo siempre al proceso de menor identificador.",
+        "No garantiza equidad.",
+        "Atendiendo al proceso con el número de secuencia más alto."
+      ],
+      "correct": 1,
+      "justification": "Recorrer los procesos en orden circular desde el que lo tiene evita que uno sea saltado indefinidamente."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Suzuki-Kasami, ¿qué pasa si se sustituye el vector de contadores de peticiones por booleanos?",
+      "opts": [
+        "Solo se pierde la equidad.",
+        "Se rompe la EM y/o la vivacidad, porque no se distinguen las peticiones nuevas de las ya atendidas.",
+        "Solo funciona para n = 2.",
+        "El algoritmo sigue siendo correcto.",
+        "Solo se pierde eficiencia."
+      ],
+      "correct": 1,
+      "justification": "Con contadores, peticion[j] > token[j] identifica sin ambigüedad una petición pendiente. Con booleanos, una petición vieja o duplicada se confunde con una nueva."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "El algoritmo de Misra resuelve…",
+      "opts": [
+        "La regeneración del testigo cuando se pierde, usando dos testigos (ping y pong) que circulan por el anillo.",
+        "La ordenación FIFO de los mensajes.",
+        "El desempate en Ricart-Agrawala.",
+        "La exclusión mutua con variables compartidas.",
+        "La asignación de números de ticket."
+      ],
+      "correct": 0,
+      "justification": "Responde a la pregunta abierta de Suzuki-Kasami («¿qué pasa si se pierden mensajes?»): cada testigo vigila al otro y lo regenera si detecta que se ha perdido."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En el algoritmo de Misra, el invariante que se mantiene durante toda la ejecución es…",
+      "opts": [
+        "num_ping + num_pong = n",
+        "num_ping + num_pong = 0",
+        "num_ping · num_pong = 1",
+        "num_ping = num_pong",
+        "num_ping − num_pong = 0"
+      ],
+      "correct": 1,
+      "justification": "Inicialmente num_ping = 1 y num_pong = −1. Cuando se encuentran se incrementa el contador de ping y pong pasa a valer su opuesto, así que el invariante se conserva."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En Misra, un proceso Pi detecta que se ha perdido el pong cuando…",
+      "opts": [
+        "Recibe ping con un valor igual al que guardó en mi la última vez que pasó un testigo por él.",
+        "Recibe dos veces seguidas el pong.",
+        "Pasa un tiempo sin recibir ningún mensaje.",
+        "num_ping se hace negativo.",
+        "Recibe un mensaje de error de la red."
+      ],
+      "correct": 0,
+      "justification": "mi guarda el número del último testigo que pasó por Pi. Si el ping vuelve con el mismo número, el pong no ha pasado por Pi desde entonces y se ha perdido: Pi lo regenera."
+    },
+    {
+      "tema": "T2.2 · Algoritmos distribuidos",
+      "q": "En el estado inicial del algoritmo de Misra…",
+      "opts": [
+        "num_ping = num_pong = 1.",
+        "Solo existe el testigo ping.",
+        "Los testigos se crean al detectar la primera pérdida.",
+        "Ambos testigos están en un mismo nodo, con num_ping = 1 y num_pong = −1.",
+        "Cada testigo está en un nodo distinto con valor 0."
+      ],
+      "correct": 3,
+      "justification": "A partir de ahí recorren el anillo. Cada vez que se encuentran, sus contadores (el número de colisiones) aumentan."
+    }
+  ]
+}

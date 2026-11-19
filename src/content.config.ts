@@ -127,7 +127,18 @@ const materialBase = {
 const materials = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/materials' }),
   schema: z.discriminatedUnion('type', [
-    z.object({ ...materialBase, type: z.literal('test'), items: z.array(testItem).min(1) }),
+    z.object({
+      ...materialBase,
+      type: z.literal('test'),
+      items: z.array(testItem).min(1),
+      /**
+       * Fracción de acierto que resta cada fallo con el descuento activado.
+       * Por defecto 0.33 (test de 4 opciones). SCD T2.2: 0.5 (+0,15 / −0,075).
+       */
+      penalty: z.number().min(0).max(1).optional(),
+      /** Número de preguntas del simulacro de examen (muestra al azar). */
+      examSize: z.number().int().positive().optional(),
+    }),
     z.object({ ...materialBase, type: z.literal('vf'), items: z.array(vfItem).min(1) }),
     z.object({ ...materialBase, type: z.literal('reveal'), items: z.array(revealItem).min(1) }),
     z.object({

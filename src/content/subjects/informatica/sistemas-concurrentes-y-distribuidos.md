@@ -6,7 +6,7 @@ semester: 1
 credits: 6
 icon: "🖧"
 status: available
-description: "207 preguntas tipo test verificadas sobre concurrencia, monitores, paso de mensajes y tiempo real."
+description: "340 preguntas tipo test sobre concurrencia, exclusión mutua, monitores, paso de mensajes y tiempo real, con simulacro y kit para el parcial del tema 2.2 (26 de noviembre)."
 materials: [test, apuntes, guia]
 ---
 

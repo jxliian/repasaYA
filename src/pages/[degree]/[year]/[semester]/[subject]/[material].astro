@@ -127,6 +127,9 @@ const revealItems = isCaseExamMaterial
     : type === 'reveal'
       ? items
       : [];
+// Puntuación propia del examen (p. ej. SCD T2.2: cada fallo resta medio acierto)
+const penalty = type === 'test' && 'penalty' in material.data ? material.data.penalty : undefined;
+const examSize = type === 'test' && 'examSize' in material.data ? material.data.examSize : undefined;
 const initialTab = isCaseExamMaterial ? 'supuestos' : 'practicar';
 const initialMode = type === 'vf' ? 'vf' : type === 'reveal' ? 'quizz' : 'test';
 const hidden = material.data.hidden;
@@ -145,6 +148,8 @@ const hidden = material.data.hidden;
         backLabel={subjectTitle}
         initialTab={initialTab}
         initialMode={initialMode}
+        penalty={penalty}
+        examSize={examSize}
       />
     </QuizShell>
   ) : (

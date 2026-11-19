@@ -11,8 +11,15 @@ interface Props {
   backLabel?: string;
   initialTab?: string;
   initialMode?: string;
+  /** Fracción de acierto que resta cada fallo con el descuento activado (0.33 por defecto). */
+  penalty?: number;
+  /** Si se indica, ofrece un simulacro con ese número de preguntas al azar. */
+  examSize?: number;
 }
-const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar', initialMode } = Astro.props;
+const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar', initialMode, penalty = 0.33, examSize } = Astro.props;
+// Etiqueta del descuento: «-0.33 por fallo», «-0.5 por fallo»…
+const penaltyLabel = `-${String(penalty)} por fallo`;
+const hasExamSize = typeof examSize === 'number' && examSize > 0 && examSize < testData.length;
 const hasVF    = vfData.length > 0;
 const hasTest  = testData.length > 0;
 const hasQuizz = quizzData.length > 0;
@@ -132,6 +139,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   :root[data-quiz] .kbd-hints kbd{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 5px;font-size:.65rem;color:var(--text)}
   :root[data-quiz] .btn{padding:11px 22px;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}
   :root[data-quiz] .btn-primary{background:var(--accent);color:var(--on-accent)}:root[data-quiz] .btn-primary:hover{background:var(--accent-hover)}
+  :root[data-quiz] .btn-blank{margin-top:10px;font-size:.82rem;padding:8px 14px}
   :root[data-quiz] .btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border)}:root[data-quiz] .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
   :root[data-quiz] .btn-danger{background:rgba(239,68,68,.15);color:var(--wrong);border:1px solid rgba(239,68,68,.3)}:root[data-quiz] .btn-danger:hover{background:rgba(239,68,68,.25);border-color:var(--wrong)}
   :root[data-quiz] .btn-back-top{background:none;border:none;color:var(--text-muted);font-size:.8rem;font-weight:600;cursor:pointer;padding:2px 6px;border-radius:6px;transition:color .2s;white-space:nowrap}:root[data-quiz] .btn-back-top:hover{color:var(--accent)}
@@ -715,8 +723,14 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <div class="options-grid">
           <label class="opt-toggle">
             <input type="checkbox" id="chk-penalty" />
-            <span><strong>Descuento por fallo UGR</strong> (-0.33 por fallo)</span>
+            <span><strong>Descuento por fallo UGR</strong> ({penaltyLabel})</span>
           </label>
+          {hasExamSize && (
+            <label class="opt-toggle">
+              <input type="checkbox" id="chk-exam-size" />
+              <span><strong>Simulacro de examen</strong> ({examSize} preguntas al azar, con opción de dejar en blanco)</span>
+            </label>
+          )}
           <label class="opt-toggle">
             <input type="checkbox" id="chk-deferred" />
             <span><strong>Ocultar soluciones</strong> (ver nota al final)</span>
@@ -776,6 +790,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <!-- Test controls -->
         <div id="test-controls" style="display:none">
           <div class="options" id="options-container"></div>
+          <button type="button" class="btn btn-ghost btn-blank" id="btn-blank" style="display:none">Dejar en blanco (0 puntos)</button>
           <div class="feedback" id="feedback"></div>
           <div class="justification" id="test-just"><div id="test-just-text"></div></div>
         </div>
@@ -809,7 +824,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           <div class="stat-item"><div class="stat-num" id="r-total"></div><div class="stat-lbl">Total</div></div>
         </div>
         <div id="ugr-note-container" style="text-align:center;display:none">
-          <span class="ugr-badge" id="ugr-badge">Descuento UGR aplicado (-0.33 por fallo)</span>
+          <span class="ugr-badge" id="ugr-badge">Descuento UGR aplicado ({penaltyLabel})</span>
         </div>
       </div>
       <div class="stats-box" id="cat-breakdown" style="display:none">
@@ -845,7 +860,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           </label>
           <label class="opt-toggle">
             <input type="checkbox" id="chk-case-penalty" checked />
-            <span><strong>Penalización UGR</strong> (-0,33 por fallo)</span>
+            <span><strong>Penalización UGR</strong> ({penaltyLabel})</span>
           </label>
           <label class="opt-toggle" title="Fija el enunciado en la parte superior para consultarlo mientras bajas por las preguntas">
             <input type="checkbox" id="chk-case-sticky" />
@@ -922,7 +937,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   Sígueme en GitHub 
 </a>
 
-<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code, defaultMode }}>
+<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code, defaultMode, penalty, examSize }}>
 document.documentElement.dataset.quizActive = 'false';
 const LETTERS = ['A','B','C','D','E'];
 const VF_DATA    = vfData.map(q => ({ ...q, qType: 'vf' }));
@@ -1165,6 +1180,12 @@ function startQuiz(){
     return;
   }
   questions = shuffle(pool);
+  // Simulacro: muestra al azar del tamaño del examen, con el descuento activado
+  if (isExamSim()) {
+    questions = questions.slice(0, examSize);
+    const pen = document.getElementById('chk-penalty');
+    if (pen) pen.checked = true;
+  }
   idx = 0; correct = 0; wrong = 0; answers = [];
 
   hide('selector-view'); hide('results-view'); show('quiz-view');
@@ -1175,6 +1196,33 @@ function startQuiz(){
   showQ();
 }
 window.startQuiz = startQuiz;
+
+function isExamSim() {
+  return Boolean(examSize) && selectedMode === 'test' && Boolean(document.getElementById('chk-exam-size')?.checked);
+}
+
+// Dejar en blanco: no suma ni resta. Solo en el simulacro de examen.
+function answerBlank(){
+  if (answered) return;
+  answered = true;
+  clearInterval(timerInterval);
+  const q = questions[idx];
+  answers[idx] = { chosen: -1, wasCorrect: false, blank: true };
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b => b.disabled = true);
+  hide_el('btn-blank');
+  const isDeferred = document.getElementById('chk-deferred')?.checked;
+  if (!isDeferred) {
+    btns[q.correct].className += ' show-correct';
+    const fb = document.getElementById('feedback');
+    fb.className = 'feedback show wrong';
+    fb.textContent = `En blanco — Era: ${q.opts[q.correct]}`;
+    showTestJust(q, false);
+  }
+  updateLiveScore();
+  show_el('btn-next');
+}
+window.answerBlank = answerBlank;
 
 function startTimer() {
   clearInterval(timerInterval);
@@ -1297,8 +1345,22 @@ function showQ(){
     });
     document.getElementById('feedback').className = 'feedback';
     document.getElementById('test-just').className = 'justification';
+    const blankBtn = document.getElementById('btn-blank');
+    if (blankBtn) blankBtn.style.display = (isExamSim() && answers[idx] === undefined) ? '' : 'none';
 
-    if (answers[idx] !== undefined) {
+    if (answers[idx] !== undefined && answers[idx].blank) {
+      answered = true;
+      const btns = document.querySelectorAll('.opt-btn');
+      btns.forEach(b => b.disabled = true);
+      if (!isDeferred) {
+        btns[q.correct].className += ' show-correct';
+        const fb = document.getElementById('feedback');
+        fb.className = 'feedback show wrong';
+        fb.textContent = `En blanco — Era: ${q.opts[q.correct]}`;
+        showTestJust(q, false);
+      }
+      show_el('btn-next');
+    } else if (answers[idx] !== undefined) {
       answered = true;
       const { chosen, wasCorrect } = answers[idx];
       const btns = document.querySelectorAll('.opt-btn');
@@ -1396,6 +1458,7 @@ function answerTest(chosen){
   answers[idx] = { chosen, wasCorrect: ok };
   const btns = document.querySelectorAll('.opt-btn');
   btns.forEach(b => b.disabled = true);
+  hide_el('btn-blank');
 
   if (isDeferred) {
     btns[chosen].className += ' chosen-deferred';
@@ -1474,8 +1537,8 @@ function showResults(){
     document.getElementById('btn-repeat-wrong').style.display = wrong > 0 ? '' : 'none';
 
     if (isPenaltyOn) {
-      // Penalización UGR: -0.33 por fallo
-      const penaltyFactor = 0.33;
+      // Penalización UGR: cada fallo resta `penalty` aciertos (0.33 por defecto)
+      const penaltyFactor = penalty;
       const rawScore = Math.max(0, correct - (wrong * penaltyFactor));
       calculatedNote = Math.max(0, Math.round((rawScore / questions.length) * 100) / 10);
       document.getElementById('r-pct').textContent = `${calculatedNote} / 10`;
@@ -1619,6 +1682,7 @@ document.getElementById('btn-start').addEventListener('click', startQuiz);
 document.getElementById('btn-v').addEventListener('click', () => answerVF('V'));
 document.getElementById('btn-f').addEventListener('click', () => answerVF('F'));
 document.getElementById('btn-reveal').addEventListener('click', answerReveal);
+document.getElementById('btn-blank')?.addEventListener('click', answerBlank);
 document.getElementById('btn-next').addEventListener('click', nextQ);
 document.getElementById('btn-prev').addEventListener('click', prevQ);
 document.getElementById('btn-back').addEventListener('click', backToSelector);
@@ -1943,7 +2007,7 @@ function gradeActiveCaseExam(scrollToBanner) {
   });
 
   const applyPenalty = document.getElementById('chk-case-penalty')?.checked;
-  const rawPoints = applyPenalty ? Math.max(0, okCount - wrongCount * 0.33) : okCount;
+  const rawPoints = applyPenalty ? Math.max(0, okCount - wrongCount * penalty) : okCount;
   const finalNote = Math.max(0, Math.round((rawPoints / grp.questions.length) * 100) / 10);
 
   const banner = document.getElementById('case-results-banner');
