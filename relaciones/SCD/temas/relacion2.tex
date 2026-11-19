@@ -1027,6 +1027,14 @@ Desglose formal de las cuatro exigencias:
 }
 \end{center}
 
+\begin{aviso}[terminología de Capel]
+En las diapositivas del Tema 1 (diapositiva 1.25), la \textbf{ausencia de interbloqueo} aparece como ejemplo de
+propiedad de \textbf{seguridad}: «nunca ocurrirá que los procesos se encuentren esperando algo que nunca
+sucederá». Así se puntuó también en el Parcial I. Formulada como \emph{progreso} («algún proceso acabará
+entrando en la SC»), en cambio, es de vivacidad. En el test, si la pregunta habla de \emph{ausencia de
+interbloqueo} con esas palabras, la respuesta esperada es \textbf{seguridad}.
+\end{aviso}
+
 \vspace{6pt}
 \noindent\textbf{2. Demostración de que Exclusión Mutua + Progreso $\not\Rightarrow$ Ausencia de Inanición:}\\
 La ausencia de interbloqueo es una propiedad de progreso \textbf{colectivo} (el conjunto de procesos avanza globalmente), mientras que la ausencia de inanición es una propiedad de progreso \textbf{individual} (cada proceso concreto avanza).

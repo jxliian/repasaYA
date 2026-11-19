@@ -36,3 +36,19 @@ obligatorios (4,75 puntos). Fuentes: diapositivas «Tema 2. Sincronización en m
 - Chrome sin cabeza por CDP: simulacro de 35 preguntas, botón en blanco visible y funcional, nota con descuento
   0,5 correcta (8 aciertos, 26 fallos, 1 en blanco → 0), sin errores de consola; guía y hub de la asignatura enlazan
   el material nuevo; el PDF se sirve.
+
+## Iteración 2 (19/11/2026): contraste con Infomates, diapositivas del tema 1 y banco antiguo
+- Fuentes revisadas: `Temario_infomates.pdf` §2.1 (págs. 33–59) y `T1.pdf` diapositiva 1.25. `Apuntes_isma.pdf` solo
+  cubre los temas 3 y 4: no aporta nada al 2.2.
+- Correcciones de contenido:
+  - **Ausencia de interbloqueo = seguridad** en la terminología de Capel (diapositiva 1.25 y clave del Parcial I).
+    Corregido en el kit y añadido aviso a la solución del problema 54 (`relacion2.tex`, PDF de relaciones recompilado).
+  - **Dekker**: EM y alcanzabilidad; vivacidad y equidad no demostrables (dependen del arbitraje del hardware de
+    memoria). Corregidos el kit, la tabla resumen y la pregunta del simulacro.
+  - Añadidos: 5ª condición de Knuth (retraso calculable), copia local del turno en Knuth, f(n) = 2^(n−1) − 1 con su
+    recurrencia, condición de Dijkstra que incumple cada etapa del refinamiento.
+- Simulacro: 7 preguntas nuevas sobre lo anterior y 41 del banco antiguo revisadas (bloque «Exámenes y bancos de otros
+  años (revisadas)»). Total 130.
+- Banco general (`test.json`): corregidas 6 preguntas (índices 46, 53, 55, 66, 136, 169): opciones duplicadamente
+  correctas, «progreso finito», Dekker, guarda de Dijkstra y espera de Peterson N.
+- `npm run build` 115 páginas; simulacro probado en Chrome sin errores.

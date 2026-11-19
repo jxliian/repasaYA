@@ -19,7 +19,7 @@ Q = []
 
 
 def q(tema, texto, correcta, incorrectas, just):
-    assert len(incorrectas) == 4, texto
+    assert len(incorrectas) in (3, 4), texto  # los del Parcial I tenían 4 opciones
     Q.append((tema, texto, correcta, incorrectas, just))
 
 
@@ -207,7 +207,7 @@ q(B, "¿Qué hace un proceso al salir de la sección crítica en el algoritmo de
    "Pone su clave a 0 y cede el turno.",
    "Solo pone su clave a 1, sin tocar el turno.",
    "Espera a que el otro proceso entre."],
-  "turno := j; c[i] := 1. Ceder el turno a la salida es lo que impide que un mismo proceso adelante indefinidamente al otro.")
+  "turno := j; c[i] := 1. Ceder el turno a la salida es lo que permite que el otro entre cuando los dos compiten. Aun así, la equidad de Dekker no se puede demostrar: depende de cómo arbitre el hardware los accesos simultáneos a memoria.")
 
 q(B, "¿Cómo se demuestra la exclusión mutua en el algoritmo de Dekker?",
   "Pi solo entra si ve c[j] = 1, y comprueba c[j] después de asignar c[i] = 0; así, al entrar se cumple c[j] = 1 ∧ c[i] = 0.",
@@ -217,13 +217,13 @@ q(B, "¿Cómo se demuestra la exclusión mutua en el algoritmo de Dekker?",
    "Mediante el orden total de los números de secuencia."],
   "Si los dos estuvieran dentro, cada uno habría visto la clave del otro a 1 después de poner la suya a 0, lo que es imposible porque ninguno la vuelve a 1 hasta salir. El turno sirve para la alcanzabilidad, no para la EM.")
 
-q(B, "El algoritmo de Dekker garantiza, para dos procesos…",
-  "Exclusión mutua, ausencia de interbloqueo y ausencia de inanición.",
-  ["Solo exclusión mutua.",
-   "Exclusión mutua, pero puede haber livelock.",
+q(B, "¿Qué propiedades se pueden demostrar del algoritmo de Dekker?",
+  "Exclusión mutua y alcanzabilidad; su vivacidad y su equidad no se pueden demostrar, porque dependen del hardware de acceso a memoria (puede haber inanición).",
+  ["Exclusión mutua, alcanzabilidad y ausencia de inanición con cualquier hardware.",
+   "Solo la ausencia de inanición.",
    "Ausencia de inanición, pero no exclusión mutua.",
    "Exclusión mutua y orden FIFO para N procesos."],
-  "Es la primera solución completamente correcta para dos procesos. No se generaliza directamente a N: para eso están Dijkstra, Knuth, Peterson y Lamport.")
+  "Es la primera solución aceptable para dos procesos, pero no garantiza la equidad. Si el controlador de memoria da prioridad a las lecturas cuando P1 lee c2 a la vez que P2 la escribe, un P1 rápido puede volver a entrar una y otra vez antes que un P2 lento (apuntes de Infomates, 2.1.3). Por eso la historia de las diapositivas atribuye a Knuth (1966) la primera solución sin inanición.")
 
 q(B, "En Dekker, si P1 y P2 intentan entrar a la vez y turno = 1…",
   "P1 espera a que P2 ceda su clave y entra; P2 pone su clave a 1 y se queda en espera activa.",
@@ -672,6 +672,306 @@ q(G, "En el estado inicial del algoritmo de Misra…",
   "A partir de ahí recorren el anillo. Cada vez que se encuentran, sus contadores (el número de colisiones) aumentan.")
 
 
+# ---------------------------------------------------------------- añadidas tras contrastar con Infomates
+q(A, "Según las diapositivas del tema 1 de Capel, la ausencia de interbloqueo («nunca ocurrirá que los procesos se encuentren esperando algo que nunca sucederá») es una propiedad de…",
+  "Seguridad.",
+  ["Vivacidad.", "Equidad.", "Rendimiento.", "Alcanzabilidad."],
+  "La diapositiva 1.25 la pone como ejemplo de seguridad junto a la exclusión mutua, y así se puntuó en el Parcial I. Formulada como progreso («algún proceso acabará entrando») sería de vivacidad; si la pregunta usa estas palabras, responde seguridad.")
+
+q(A, "¿Qué quinta condición añadió Knuth a las cuatro de Dijkstra?",
+  "Poder demostrar que el retraso máximo de cualquier proceso en el acceso a la SC es calculable.",
+  ["Que los procesos entren en orden FIFO.",
+   "Que el algoritmo funcione con paso de mensajes.",
+   "Que no se use espera activa.",
+   "Que solo haya dos procesos."],
+  "Con ella se exige equidad: ningún proceso sufre inanición porque su espera está acotada. Dekker y Dijkstra no la cumplen; Knuth y Peterson sí.")
+
+q(B, "La segunda etapa del refinamiento se considera inaceptable porque…",
+  "Su corrección depende de la velocidad relativa de los procesos: si van a la par, los dos entran a la vez.",
+  ["Obliga a los procesos a alternarse.",
+   "Provoca un interbloqueo permanente.",
+   "Necesita una variable turno.",
+   "Solo funciona con más de dos procesos."],
+  "Las diapositivas lo resumen en que falla la seguridad; los apuntes añaden que incumple la segunda condición de Dijkstra (no suponer nada sobre la velocidad), porque solo es segura si un proceso va más rápido que el otro.")
+
+q(B, "¿Qué condición de Dijkstra incumple la tercera etapa del refinamiento?",
+  "La cuarta: si los dos ponen su clave a 0 a la vez, ninguno alcanza la SC (interbloqueo).",
+  ["La primera: usa instrucciones especiales.",
+   "La tercera: un proceso fuera de la SC impide al otro entrar.",
+   "Ninguna: cumple las cuatro.",
+   "Solo la exclusión mutua."],
+  "Es segura, pero no garantiza la alcanzabilidad. Además depende de la velocidad (segunda condición). La tercera condición es la que incumple la primera etapa.")
+
+q(C, "En el algoritmo de Knuth, ¿por qué el proceso trabaja con una copia local j del turno?",
+  "Para evitar las condiciones de carrera sobre la variable compartida turno, que en Dekker y Dijkstra impedían demostrar la vivacidad.",
+  ["Para ahorrar memoria compartida.",
+   "Porque el turno solo puede leerse una vez.",
+   "Para ordenar los procesos por identificador.",
+   "Para poder usar paso de mensajes."],
+  "Además, Knuth solo modifica turno cuando el proceso ya está dentro de la sección crítica (turno := i al entrar y turno := (i−1) mod n al salir).")
+
+q(C, "Con el algoritmo de Knuth, el número máximo de adelantamientos que puede sufrir un proceso con n procesos es…",
+  "2ⁿ⁻¹ − 1",
+  ["n − 1", "n(n − 1)/2", "n", "ilimitado"],
+  "Sale de la recurrencia f(n) = 2f(n−1) + 1 con f(1) = 0 (apuntes de Infomates). Es exponencial; Peterson lo mejora a n(n−1)/2, cuadrático, y por eso se le considera la solución canónica.")
+
+q(D, "¿Por qué se considera Peterson la solución canónica frente a Knuth?",
+  "Porque, siendo más sencillo, acota la espera en O(n²) turnos frente al O(2ⁿ) de Knuth.",
+  ["Porque es el único que garantiza exclusión mutua.",
+   "Porque no usa espera activa.",
+   "Porque solo funciona para dos procesos.",
+   "Porque garantiza orden FIFO."],
+  "Los dos cumplen la quinta condición (retraso calculable); Peterson con r(n) = n(n−1)/2 y Knuth con 2ⁿ⁻¹ − 1 adelantamientos.")
+
+# ---------------------------------------------------------------- bancos y exámenes de otros años (revisadas)
+H = "T2.2 · Exámenes y bancos de otros años (revisadas)"
+
+q(H, "¿Qué garantiza el algoritmo de Dijkstra para N procesos?",
+  "Exclusión mutua sin control de inanición.",
+  ["Acceso simultáneo a la sección crítica.", "Eliminación de la necesidad de turnos.",
+   "Exclusión mutua con tiempo de espera limitado.", "Uso de variables globales compartidas."],
+  "Garantiza EM (segunda barrera) y alcanzabilidad, pero no acota la espera: un proceso puede quedarse siempre en la primera barrera.")
+
+q(H, "¿Qué propiedad NO garantiza el algoritmo de Dijkstra?",
+  "Ausencia de inanición.",
+  ["Ausencia de interbloqueo.", "Alcanzabilidad de la sección crítica.", "Exclusión mutua.",
+   "Seguridad en el acceso a recursos compartidos."],
+  "Revisada: en el original había otra opción también correcta («uso equitativo de los recursos»), sustituida por «ausencia de interbloqueo», que Dijkstra sí garantiza.")
+
+q(H, "¿Qué asegura el algoritmo de Peterson al pasar entre etapas?",
+  "Un proceso no avanza solo si no está más adelantado que los demás y es el último en asignar el turno.",
+  ["La etapa más alta siempre está vacía.", "Los procesos se bloquean indefinidamente.",
+   "El acceso a la sección crítica se distribuye aleatoriamente.", "Los procesos siempre progresan a la misma velocidad."],
+  "Es la condición de espera (∃k ≠ i : c[k] ≥ j) ∧ turno[j] = i leída al revés.")
+
+q(H, "¿Qué asegura el uso de etapas en el algoritmo de Peterson para N procesos?",
+  "Exclusión mutua y equidad.",
+  ["Interrupción de procesos de bajo nivel.", "Eliminación de etapas redundantes.",
+   "Mayor velocidad de procesamiento.", "Eliminación del uso de testigos."],
+  "En cada etapa queda retenido al menos un proceso; a la n−2 llegan como máximo dos y solo uno pasa. La espera está acotada por n(n−1)/2 turnos.")
+
+q(H, "¿Qué propiedad asegura el algoritmo de Peterson?",
+  "Garantiza exclusión mutua y evita la inanición.",
+  ["Solo funciona con dos procesos.", "Necesita una red de comunicaciones.",
+   "Depende de semáforos externos.", "Permite acceso prioritario a un proceso."],
+  "Para 2 y para N procesos: EM, alcanzabilidad y equidad (espera acotada).")
+
+q(H, "¿Qué significa «progreso finito» en las condiciones de Dijkstra?",
+  "Que la velocidad de ejecución de los procesos no es cero.",
+  ["Que la ejecución de un proceso nunca se interrumpe.", "Que todos los procesos se ejecutan en paralelo.",
+   "Que los procesos tienen un tiempo finito para entrar en la SC.", "Que el acceso a la memoria es constante."],
+  "Revisada: la clave original era «los procesos tienen un tiempo finito para entrar a la SC», que es ausencia de inanición, no progreso finito. Las diapositivas dicen «ni sobre la velocidad de ejecución de los procesos, excepto que no es cero (progreso finito)».")
+
+q(H, "¿Qué mejora introduce el algoritmo de Peterson para N procesos?",
+  "Garantiza exclusión mutua para cualquier cantidad de procesos.",
+  ["Sustituye los semáforos por variables locales.", "Requiere menos pasos que el algoritmo de Dekker.",
+   "Permite acceso simultáneo a la sección crítica.", "Elimina la inanición en sistemas distribuidos."],
+  "Generaliza el de 2 procesos repitiendo la decisión en n−1 etapas.")
+
+q(H, "¿Cómo soluciona el algoritmo de Knuth la inanición?",
+  "Garantizando que el tiempo de espera de cada proceso esté acotado.",
+  ["Eliminando los procesos en espera.", "Permitiendo que todos los procesos avancen a la vez.",
+   "Bloqueando a los procesos de menor prioridad.", "Usando una instrucción TestAndSet."],
+  "Revisada: el original tenía también «usando turnos circulares», que describe cómo lo consigue y podía darse por buena; se ha sustituido.")
+
+q(H, "¿Qué hace un proceso después de usar la sección crítica en el algoritmo de Peterson para 2 procesos?",
+  "Pone a falso su indicador de «solicitado».",
+  ["Solicita de nuevo el turno.", "Envía mensajes a los otros procesos.",
+   "Bloquea a los otros procesos.", "Incrementa un contador global."],
+  "solicitado[i] := false. Con eso el otro proceso, si espera, ve la guarda falsa y entra.")
+
+q(H, "¿Qué ocurre si dos procesos intentan entrar a la vez con el algoritmo de Peterson?",
+  "Se respeta la exclusión mutua: entra uno y espera el último que escribió el turno.",
+  ["Se produce un interbloqueo.", "Fallan los dos.", "Entran los dos en la sección crítica.",
+   "Uno de ellos puede quedar bloqueado indefinidamente."],
+  "turno solo guarda un valor; el último en escribirlo espera y el otro entra. Al salir, el que entró ya no puede adelantarle otra vez.")
+
+q(H, "¿Qué técnica introduce el algoritmo de Knuth?",
+  "Retraso limitado en el acceso a la sección crítica.",
+  ["Prioridad fija entre procesos.", "Uso de semáforos para la exclusión mutua.",
+   "Una solución parcial para sistemas distribuidos.", "Inanición controlada de procesos."],
+  "Es la quinta condición: poder calcular la espera máxima (2ⁿ⁻¹ − 1 adelantamientos).")
+
+q(H, "¿Cómo resuelve el método de refinamiento sucesivo el problema de la exclusión mutua?",
+  "Con bucles de espera activa para decidir el acceso, corrigiendo etapa a etapa los fallos.",
+  ["Eliminando el uso de turnos.", "Permitiendo que dos procesos entren a la vez.",
+   "Usando semáforos binarios.", "Dividiendo el problema en varias secciones críticas."],
+  "Cinco etapas sobre variables compartidas y espera activa hasta llegar a Dekker.")
+
+q(H, "¿Qué es una «etapa» en el algoritmo de Peterson para N procesos?",
+  "Una fase de sincronización previa a la sección crítica en la que se retiene al último en llegar.",
+  ["Un mecanismo de exclusión global.", "Un nivel de prioridad fijo de cada proceso.",
+   "Un bucle infinito en la ejecución.", "Una señal de error del sistema."],
+  "Hay n−1 etapas (0 a n−2); la n−1 es ficticia y significa estar en la SC.")
+
+q(H, "¿Qué condición debe cumplirse para que un proceso entre en la SC con Peterson para 2 procesos?",
+  "Que el turno no le obligue a esperar o que la clave del otro proceso sea falsa.",
+  ["Que su contador supere al de los demás.", "Que su clave de solicitud sea verdadera.",
+   "Que su prioridad sea la más alta.", "Que su solicitud sea la primera de la cola."],
+  "Es la negación de la guarda de espera: ¬(solicitado[j] ∧ turno = i).")
+
+q(H, "¿Qué problema puede surgir al verificar las claves en el refinamiento sucesivo?",
+  "Que la salida de la espera activa y el cambio de clave no se hacen de forma atómica.",
+  ["Que los turnos se asignan de forma inconsistente.", "Que se producen interrupciones aleatorias.",
+   "Que hay bloqueo mutuo al intercambiar turnos.", "Que los procesos entran sin permiso del sistema operativo."],
+  "Es el fallo de la segunda etapa según las diapositivas: los dos procesos salen de la espera antes de que ninguno cambie su clave.")
+
+q(H, "¿Qué ocurre si todos los procesos solicitan acceso a la vez en el algoritmo de Dijkstra?",
+  "Uno de ellos accede según el turno asignado.",
+  ["Se ordenan en una cola de prioridad.", "Se produce un interbloqueo.",
+   "El sistema queda bloqueado indefinidamente.", "Todos acceden simultáneamente."],
+  "Los que superan la primera barrera y chocan en la segunda vuelven a empezar; el poseedor del turno, que no está pasivo, ya no puede perderlo y entra.")
+
+q(H, "¿Qué garantiza el algoritmo de Dekker?",
+  "Exclusión mutua, pero puede causar inanición.",
+  ["Equidad completa entre procesos.", "Inanición de todos los procesos.",
+   "Una solución distribuida.", "Ejecución simultánea en la sección crítica."],
+  "Revisada: esta es la clave correcta según los apuntes. La vivacidad y la equidad de Dekker dependen del hardware de memoria: si prioriza las lecturas, un proceso rápido puede adelantar indefinidamente a uno lento.")
+
+q(H, "¿Qué garantiza la propiedad de equidad en la exclusión mutua?",
+  "Que los procesos acceden sin que ninguno sea postergado indefinidamente: hay una cota a los adelantamientos.",
+  ["Que todos los procesos se bloquean a la vez.", "Que todos los procesos avanzan al mismo tiempo.",
+   "Que solo un proceso se ejecuta indefinidamente.", "Que no hace falta sincronización."],
+  "Es la quinta condición de Knuth: un retraso máximo calculable.")
+
+q(H, "¿Cuál es el principal problema de los bucles de espera activa?",
+  "Pueden generar un uso innecesario del procesador.",
+  ["Reducen el tiempo de espera de los procesos.", "Facilitan la exclusión mutua.",
+   "Eliminan la necesidad de sincronización.", "Aumentan la equidad del sistema."],
+  "El proceso gira en un bucle vacío consumiendo CPU; solo compensa con pocos procesos.")
+
+q(H, "(Parcial I) Un programa concurrente que cumple la propiedad de seguridad en todas sus ejecuciones se considera correcto si además…",
+  "Se puede demostrar que sus procesos no sufren inanición en ninguna ejecución posible.",
+  ["Sus procesos nunca pueden llegar a un interbloqueo.",
+   "Sus procesos siempre ejecutan sus instrucciones de forma equitativa.",
+   "Hay que demostrar la no inanición y, además, la vivacidad."],
+  "Clave del examen oficial. La ausencia de interbloqueo ya forma parte de la seguridad en la terminología de Capel.")
+
+q(H, "(Parcial I) La hipótesis de progreso finito asegura que…",
+  "Todo proceso que comienza la ejecución de una instrucción la completará alguna vez.",
+  ["La velocidad de los procesos está limitada por el procesador.",
+   "Siempre existe algún proceso ejecutándose.",
+   "Los procesos no sufren inanición en ningún momento."],
+  "Equivale a decir que la velocidad de cada proceso no es cero.")
+
+q(H, "(Parcial I) Sobre el problema de la sección crítica para N procesos, se puede afirmar que…",
+  "Con Peterson nunca puede haber etapas vacías anteriores a una etapa a la que se acaba de unir un segundo proceso.",
+  ["Si un algoritmo cumple las 4 condiciones de Dijkstra, es una solución totalmente correcta.",
+   "En el algoritmo de Dijkstra ningún grupo de procesos puede ser adelantado indefinidamente.",
+   "Con Knuth, la espera máxima es igual al número de procesos anteriores en el turno cíclico."],
+  "Es el lema 3 de Peterson. Las otras son falsas: las 4 condiciones solo dan corrección parcial, Dijkstra tiene inanición y la espera de Knuth es 2ⁿ⁻¹ − 1.")
+
+q(H, "(Parcial I) La exclusión mutua es una propiedad de…",
+  "Seguridad: debe cumplirse siempre.",
+  ["Vivacidad: debe cumplirse alguna vez.", "Seguridad: debe cumplirse intermitentemente.",
+   "Vivacidad: debe cumplirse alguna vez en el futuro y desde entonces para siempre."],
+  "Nunca, en ningún estado, puede haber dos procesos en la SC.")
+
+q(H, "(Parcial I) La ausencia de interbloqueo es una propiedad de…",
+  "Seguridad: debe cumplirse siempre.",
+  ["Vivacidad: debe cumplirse alguna vez.", "Seguridad: debe cumplirse intermitentemente.",
+   "Vivacidad: debe cumplirse alguna vez en el futuro."],
+  "Clave del examen oficial y de la diapositiva 1.25: «nunca ocurrirá que los procesos se encuentren esperando algo que nunca sucederá».")
+
+q(H, "(Parcial I) La no inanición de los procesos es una propiedad de…",
+  "Vivacidad: debe cumplirse alguna vez.",
+  ["Seguridad: debe cumplirse siempre.", "Seguridad: debe cumplirse intermitentemente.",
+   "Vivacidad: debe cumplirse alguna vez en el futuro y para siempre."],
+  "Algo bueno (entrar en la SC) acabará ocurriendo para cada proceso.")
+
+q(H, "En el algoritmo de tickets para dos procesos (relación 2-2), la ausencia de inanición se apoya en…",
+  "La numeración creciente y el orden lexicográfico (ticket, id).",
+  ["Una prioridad fija a P1.", "El azar del planificador.",
+   "Recalcular la prioridad en cada iteración del protocolo.", "El incremento secuencial de las variables."],
+  "Quien sale y vuelve a pedir obtiene un ticket mayor que el del que espera, así que no puede adelantarle de nuevo.")
+
+q(H, "Se cambia la guarda de la primera barrera de Dijkstra por «if c[turno] ≠ en_SC then turno := i». El algoritmo…",
+  "Mantiene la EM, pero pierde el progreso.",
+  ["Mejora la equidad.", "Pierde la corrección (seguridad).", "Mantiene todas las propiedades.",
+   "Solo empeora el rendimiento."],
+  "Revisada: la clave antigua era «pierde corrección (seguridad)». Razonado sobre el protocolo completo, la segunda barrera sigue impidiendo que dos procesos estén en la SC; lo que se pierde es la alcanzabilidad, porque los procesos pueden quitarse el turno indefinidamente. Si en el examen no aparece la opción de progreso, la de «pierde corrección» es la más cercana.")
+
+q(H, "En el esquema s[i] (relación 2-2), la estructura implementa…",
+  "Un anillo con un testigo implícito que rota y reparte el acceso por turnos.",
+  ["Una prioridad fija del proceso 0.", "Un acceso aleatorio.",
+   "Dos testigos simultáneos.", "Un acceso libre sin esperas."],
+  "La rotación da equidad entre los que compiten, pero es alternancia forzosa: si un proceso no quiere entrar, el testigo se para.")
+
+q(H, "En el esquema s[i] en anillo, ¿se garantiza la ausencia de interbloqueo?",
+  "No: si el proceso al que le toca no quiere entrar, los demás se quedan esperando.",
+  ["Sí, siempre.", "Solo si se añade una variable turno.", "Depende del planificador.", "Solo con espera exponencial."],
+  "Es el apartado (b) del problema 60: alternancia forzosa, se viola el progreso.")
+
+q(H, "El algoritmo de Knuth para N procesos cumple…",
+  "EM, alcanzabilidad, vivacidad y equidad.",
+  ["No garantiza la EM.", "Requiere planificación fuertemente justa.",
+   "Solo EM y alcanzabilidad.", "Solo la vivacidad, que no cumplía Dijkstra."],
+  "Mantiene la segunda barrera de Dijkstra y añade el turno circular con copia local: espera acotada a 2ⁿ⁻¹ − 1 adelantamientos.")
+
+q(H, "La solución de Hyman (1966) a la EM para 2 procesos es…",
+  "Incorrecta.",
+  ["Correcta.", "Correcta solo con planificación fuertemente justa.",
+   "Correcta si las claves son booleanas.", "Correcta si turno vale −1."],
+  "Existe una intercalación que mete a los dos en la SC (ejercicio resuelto 1 del kit).")
+
+q(H, "En el algoritmo de tickets n1/n2 con desempate a favor de P1 se garantiza…",
+  "EM, ausencia de interbloqueo y equidad.",
+  ["Solo EM y vivacidad.", "Solo ausencia de interbloqueo.",
+   "Ausencia de inanición, pero no EM.", "Ninguna propiedad."],
+  "Con la asignación previa n[i] := 1 y el desempate por identificador, el protocolo es correcto.")
+
+q(H, "En Knuth, ¿pueden superar dos procesos la primera barrera a la vez?",
+  "Sí, si ambos leen sucesivamente c[j] = pasivo y avanzan su copia local hasta su índice.",
+  ["No, nunca.", "Solo si el turno no cambia nunca.", "Solo si el turno es aleatorio.",
+   "Solo con un turno inicial concreto."],
+  "Por eso Knuth conserva la segunda barrera de Dijkstra, que garantiza la EM.")
+
+q(H, "En el algoritmo de tickets para dos procesos, las asignaciones n1 := 1 y n2 := 1 son…",
+  "Necesarias las dos.",
+  ["Innecesarias si turno = 1.", "Solo necesaria n2 := 1.", "Solo necesaria n1 := 1.", "Redundantes."],
+  "Sin ellas un proceso puede leer n[j] = 0 mientras el otro calcula su ticket y entrar los dos.")
+
+q(H, "Si un algoritmo satisface las 4 condiciones de Dijkstra, garantiza…",
+  "Seguridad y vivacidad (en el sentido de alcanzabilidad), aunque no la ausencia de inanición.",
+  ["Solo vivacidad.", "Ninguna propiedad.", "Solo seguridad.", "Solo equidad."],
+  "Es una solución parcialmente correcta: EM y alcanzabilidad. La equidad es la quinta condición de Knuth.")
+
+q(H, "En Dijkstra para N procesos, la clave del progreso está en…",
+  "La comprobación de c[turno] = pasivo y la posible reasignación del turno.",
+  ["El protocolo de salida c[i] := pasivo.", "La asignación inicial de j.",
+   "La asignación c[i] := en_SC.", "El bucle de la segunda barrera."],
+  "Esa línea impide quitar el turno a quien no está pasivo; por eso cambiarla rompe el progreso.")
+
+q(H, "En Peterson para N procesos, ¿pueden llegar 2 procesos a la etapa N−2 y ninguno a la N−3?",
+  "No, por la estructura del filtro (lema 3).",
+  ["Sí.", "Sí, si el turno rota.", "Sí, si N es par.", "Solo con planificación fuertemente justa."],
+  "Si hay dos procesos en una etapa, hay al menos uno en cada etapa anterior.")
+
+q(H, "En Peterson para N procesos, el máximo de turnos que espera un proceso para entrar es…",
+  "N(N−1)/2",
+  ["1", "N", "2(N−1)", "N−1"],
+  "Revisada: la clave antigua era N−1, que es el número de etapas, no la espera. Las diapositivas y los apuntes dan r(n) = n − 1 + r(n−1) = n(n−1)/2.")
+
+q(H, "En Suzuki-Kasami, si se sustituye el vector de contadores de peticiones por booleanos…",
+  "Se rompe la EM y/o la vivacidad.",
+  ["Solo se pierde eficiencia.", "El algoritmo sigue siendo correcto.", "Solo se pierde equidad.", "Solo funciona para n = 2."],
+  "Los contadores distinguen peticiones nuevas de atendidas; con booleanos se confunden.")
+
+q(H, "¿Qué es el «progreso global» en la ejecución concurrente?",
+  "Que, si hay al menos un proceso listo, alguno llegue a ejecutarse, evitando el interbloqueo.",
+  ["Que ningún proceso pueda bloquear a otro.", "Algo específico de los sistemas de tiempo real.",
+   "Que todos los procesos se ejecuten a la vez.", "Que todos los procesos terminen inmediatamente."],
+  "Frente al progreso local: un proceso que empieza una sección de código la termina.")
+
+q(H, "¿Cuál es la definición de «propiedad de vivacidad»?",
+  "Una condición que establece que algo bueno debe suceder en algún momento futuro.",
+  ["Una condición que debe cumplirse en cada instante de la ejecución.",
+   "Una propiedad que fija cuántos procesos se ejecutan a la vez.",
+   "Una condición que solo se aplica a programas secuenciales.",
+   "Una propiedad que permite pausar los procesos indefinidamente."],
+  "La que debe cumplirse en cada instante es la de seguridad.")
+
+
 def build():
     rng = random.Random(2226)
     items = []
@@ -694,7 +994,7 @@ if __name__ == "__main__":
         "subject": "informatica/sistemas-concurrentes-y-distribuidos",
         "type": "test",
         "title": "Simulacro parcial T2.2: algoritmos de exclusión mutua",
-        "description": f"{len(items)} preguntas nuevas del tema 2.2 (refinamiento sucesivo, Dekker, Dijkstra, Knuth, Peterson, Hyman, tickets, hardware, Ricart-Agrawala, Suzuki-Kasami y Misra) con justificación. Simulacro de 35 preguntas con la puntuación del examen: +0,15 por acierto y −0,075 por fallo.",
+        "description": f"{len(items)} preguntas del tema 2.2 ({sum(i['tema'] != H for i in items)} nuevas y {sum(i['tema'] == H for i in items)} de exámenes y bancos de otros años, revisadas) (refinamiento sucesivo, Dekker, Dijkstra, Knuth, Peterson, Hyman, tickets, hardware, Ricart-Agrawala, Suzuki-Kasami y Misra) con justificación. Simulacro de 35 preguntas con la puntuación del examen: +0,15 por acierto y −0,075 por fallo.",
         "order": 0,
         "penalty": 0.5,
         "examSize": 35,

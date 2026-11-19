@@ -606,14 +606,14 @@
       "tema": "T2: Exclusión Mutua",
       "q": "¿Qué propiedad NO es garantizada por el algoritmo de Dijkstra?",
       "opts": [
-        "Uso equitativo de los recursos",
+        "Ausencia de interbloqueo",
         "Alcanzabilidad de la sección crítica",
         "Exclusión mutua",
         "Ausencia de inanición",
         "Seguridad en el acceso a recursos compartidos"
       ],
       "correct": 3,
-      "justification": "La opción [3] es la correcta porque la propiedad formal que NO garantiza el algoritmo de Dijkstra para N procesos es la ausencia de inanición (*starvation-freedom* o espera limitada). Tal como documentan las transparencias oficiales de la UGR, Dijkstra propuso en 1965 una solución segura y libre de interbloqueo, pero que puede producir inanición si un proceso que compite por la SC es pospuesto indefinidamente por otros.\n- Opción [0] es incorrecta: Aunque no proporciona equidad estricta (FIFO), la carencia teórica fundamental demostrada y resaltada en el temario de concurrencia es la falta de ausencia de inanición.\n- Opción [1] es incorrecta: La alcanzabilidad de la sección crítica sí está garantizada por la propiedad de progreso (siempre que haya procesos intentando entrar, alguno lo conseguirá en tiempo finito).\n- Opción [2] es incorrecta: La exclusión mutua es la propiedad básica de seguridad que el algoritmo satisface matemáticamente.\n- Opción [4] es incorrecta: La seguridad en el acceso a recursos compartidos (invariante de exclusión mutua) está garantizada en su totalidad."
+      "justification": "Dijkstra garantiza exclusión mutua (segunda barrera), alcanzabilidad y ausencia de interbloqueo, pero no la ausencia de inanición: un proceso puede quedarse siempre en la primera barrera mientras otros toman el turno. (Revisada: la opción «uso equitativo de los recursos» también era correcta y se ha sustituido.)"
     },
     {
       "tema": "T2: Exclusión Mutua",
@@ -700,11 +700,11 @@
         "La ejecución de un proceso no se interrumpe",
         "Todos los procesos se ejecutan en paralelo",
         "Los procesos avanzan indefinidamente sin detenerse",
-        "Los procesos tienen un tiempo finito para entrar a la sección crítica",
+        "La velocidad de ejecución de los procesos no es cero",
         "El acceso a la memoria es constante"
       ],
       "correct": 3,
-      "justification": "La opción [3] es la correcta porque, según define la teoría de Dijkstra y las transparencias oficiales de la UGR, la hipótesis de progreso finito estipula que la velocidad de ejecución de los procesos no es cero: no se asume nada sobre sus velocidades relativas, salvo que cualquier proceso en ejecución avanza continuamente y tardará un tiempo finito en realizar sus operaciones y entrar a la sección crítica.\n- Opción [0] es incorrecta: Los sistemas multitarea de tiempo compartido pueden interrumpir temporalmente a un proceso (cambio de contexto) sin que ello viole la hipótesis de velocidad no nula a largo plazo.\n- Opción [1] es incorrecta: Las garantías de Dijkstra aplican tanto a la ejecución en multiprocesadores paralelos como a la concurrencia intercalada en un único procesador.\n- Opción [2] es incorrecta: Un proceso puede permanecer de manera arbitraria o indefinida en su sección no crítica (SNC) sin que ello afecte al progreso de los demás.\n- Opción [4] es incorrecta: El progreso finito es una condición abstracta de vivacidad lógica sobre la velocidad de cómputo de los procesos, no una propiedad física del bus de memoria."
+      "justification": "Las diapositivas lo definen en la segunda condición de Dijkstra: no suponer nada sobre la velocidad de los procesos «excepto que no es cero (progreso finito)». Equivale a que todo proceso que empieza una instrucción la termina alguna vez. (Revisada: la clave antigua decía «tiempo finito para entrar en la SC», que es ausencia de inanición.)"
     },
     {
       "tema": "T2: Exclusión Mutua",
@@ -727,10 +727,10 @@
         "Permitiendo que todos los procesos avancen simultáneamente",
         "Garantizando que el tiempo de espera sea limitado para cada proceso",
         "Bloqueando procesos con menor prioridad",
-        "Usando turnos circulares para la asignación de recursos"
+        "Usando una instrucción TestAndSet"
       ],
       "correct": 2,
-      "justification": "La opción [2] es la correcta porque Donald Knuth (1966) resolvió la limitación de inanición del algoritmo de Dijkstra de 1965 demostrando formalmente que su algoritmo garantiza un tiempo de espera limitado (retraso acotado): ningún proceso puede ser adelantado arbitrariamente un número ilimitado de veces por los demás, garantizando que el acceso a la sección crítica ocurre tras un tiempo finito.\n- Opción [0] es incorrecta: Los procesos que compiten por el recurso son atendidos por el protocolo; en ningún momento se eliminan ni se abortan.\n- Opción [1] es incorrecta: Permitir que los procesos avancen a la vez hacia la sección crítica violaría el invariante de exclusión mutua.\n- Opción [3] es incorrecta: Bloquear a los procesos con menor prioridad provocaría inanición sobre ellos, justo lo contrario del objetivo de Knuth.\n- Opción [4] es incorrecta: Aunque Knuth organiza el control de turnos, su contribución teórica decisiva frente al algoritmo de Dijkstra fue acotar matemáticamente el retraso máximo para garantizar vivacidad individual."
+      "justification": "Knuth acota la espera de cada proceso (retraso limitado, 2^(n−1) − 1 adelantamientos como máximo), que es su quinta condición. Lo consigue con un turno circular y una copia local del turno. (Revisada: «usando turnos circulares» describía el cómo y podía darse por buena; se ha sustituido.)"
     },
     {
       "tema": "T2: Exclusión Mutua",
@@ -873,7 +873,7 @@
         "Exclusión mutua, pero puede causar inanición"
       ],
       "correct": 4,
-      "justification": "[Aclaración didáctica repasaYA: En las plataformas de autoevaluación se daba como clave esta opción de compromiso. No obstante, en la teoría clásica de concurrencia y en el temario oficial de SCD (Dijkstra y Capel), el algoritmo de Dekker para 2 procesos garantiza exclusión mutua, ausencia de interbloqueo y ausencia de inanición (starvation-freedom), si bien no garantiza equidad estricta en orden FIFO.]\n\nLa opción [4] es la marcada como válida en el banco de preguntas histórico de la asignatura porque destaca la garantía de exclusión mutua frente a las demás alternativas, reflejando el matiz de que no implementa un orden de atención FIFO estricto.\n- Opción [0] es incorrecta: Dekker no garantiza equidad completa de tipo FIFO estricto; si un proceso sale de la SC y vuelve a solicitarla rápidamente, bajo ciertas velocidades relativas podría volver a entrar antes de que el otro complete su protocolo.\n- Opción [1] es incorrecta: El algoritmo no provoca inanición en todos los procesos; está demostrado formalmente que el sistema en conjunto progresa de manera continua.\n- Opción [2] es incorrecta: Dekker es un algoritmo de memoria compartida para 2 procesos sobre variables ordinarias, no una solución para entornos distribuidos con paso de mensajes.\n- Opción [3] es incorrecta: La ejecución simultánea en la sección crítica violaría la exclusión mutua, que es precisamente la propiedad que Dekker demostró formalmente satisfacer."
+      "justification": "Dekker garantiza exclusión mutua y alcanzabilidad, pero su vivacidad y su equidad no se pueden demostrar: dependen del hardware. Si el controlador de memoria da prioridad a las lecturas, un proceso rápido puede volver a entrar una y otra vez antes que uno lento (apuntes de Infomates, 2.1.3). Por eso las diapositivas atribuyen a Knuth (1966) la primera solución sin inanición."
     },
     {
       "tema": "T2: Exclusión Mutua",
@@ -1769,8 +1769,8 @@
         "Mantiene todo.",
         "Sólo afecta rendimiento."
       ],
-      "correct": 1,
-      "justification": "La opción [1] (\"Pierde corrección (seguridad)\") es la correcta porque en el Algoritmo de Dijkstra para N procesos (1965), la instrucción de la línea (6) del protocolo comprueba `if flag[turno] = pasivo then turno := i`. Si se reemplaza por `if flag[turno] != enSC`, se permite a cualquier proceso arrebatar la variable `turno` incluso cuando el proceso dueño está activamente solicitando o en fases intermedias del protocolo; esto destruye el invariante del turno único de arbitraje, produciendo anomalías donde se vulnera la corrección formal del protocolo y su seguridad.\n- Opción [0] (\"Mejora equidad\") es incorrecta: la equidad se degrada por completo al entrar en colisión destructiva múltiples procesos que se sobreescriben la variable turno.\n- Opción [2] (\"Mantiene EM pero pierde progreso\") es incorrecta: el cambio altera las guardas lógicas fundamentales del protocolo diseñadas para garantizar la corrección global del algoritmo, perdiendo su demostración de seguridad formal.\n- Opción [3] (\"Mantiene todo\") es incorrecta: la comprobación exacta `flag[turno] = pasivo` es una precondición matemática indispensable para la validez del algoritmo de Dijkstra.\n- Opción [4] (\"Sólo afecta rendimiento\") es incorrecta: no se trata de una variación en tiempos de espera o latencia, sino de un fallo semántico en la lógica del control concurrente."
+      "correct": 2,
+      "justification": "Con la guarda c[turno] ≠ en_SC se puede quitar el turno a un proceso que está solicitando, y los procesos pueden quitárselo indefinidamente: se pierde el progreso. La EM la sigue garantizando la segunda barrera, que no cambia. (Revisada: la clave antigua era «pierde corrección (seguridad)». Si en el examen no aparece la opción de progreso, la de «pierde corrección» es la más cercana.)"
     },
     {
       "tema": "Examen Parcial II",
@@ -2192,13 +2192,13 @@
       "q": "En Peterson N, el máximo de turnos que espera un proceso para entrar es...",
       "opts": [
         "1",
-        "N",
+        "N(N-1)/2",
         "2(N-1)",
         "Log N",
         "N-1"
       ],
-      "correct": 4,
-      "justification": "La opción [4] (\"N-1\") es la correcta porque en el Algoritmo del Filtro de Peterson para N procesos (1981), el protocolo de entrada consta exactamente de $N-1$ etapas o niveles de filtrado numerados de $0$ a $N-2$. En cada etapa, al menos un proceso queda rezagado en el bucle de espera mientras los restantes progresan hacia el siguiente nivel. En el análisis formal de cotas de espera del algoritmo, un proceso que compite por entrar a la sección crítica debe superar sucesivamente estos $N-1$ turnos o barreras de etapa antes de obtener el acceso exclusivo a la SC.\n- Opción [0] (\"1\") es incorrecta: 1 turno corresponde al algoritmo de Peterson básico para 2 procesos, no a la versión general para N procesos.\n- Opción [1] (\"N\") es incorrecta: el número total de etapas de filtrado es $N-1$, ya que con $N-1$ niveles se garantiza que a la sección crítica sólo accede 1 único proceso.\n- Opción [2] (\"2(N-1)\") es incorrecta: no se corresponde con la cota de niveles de filtrado en el protocolo de Peterson.\n- Opción [3] (\"Log N\") es incorrecta: una cota logarítmica $\\log_2 N$ pertenece a un árbol de torneo de Peterson, no al filtro lineal clásico de $N-1$ etapas."
+      "correct": 1,
+      "justification": "Las diapositivas (2.25) y los apuntes dan r(n) = n − 1 + r(n−1) = n(n−1)/2 turnos: retraso cuadrático. (Revisada: la clave antigua era N−1, que es el número de etapas, no la espera máxima.)"
     },
     {
       "tema": "InfoAdeHub · Temas 1 y 2",

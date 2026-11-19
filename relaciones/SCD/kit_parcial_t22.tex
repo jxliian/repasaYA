@@ -49,7 +49,8 @@
   \textbf{Qué entra.} Lo que dicen las diapositivas del 22/10/2026: el problema de la exclusión mutua y las
   condiciones de Dijkstra, el método de refinamiento sucesivo hasta Dekker, los algoritmos de Dijkstra, Knuth y
   Peterson para $N$ procesos, y los algoritmos distribuidos de Ricart-Agrawala, Suzuki-Kasami y Misra. Más la
-  Relación 2-2 (problemas 54–63): Hyman, tickets, anillo, \texttt{swap} y cerrojo de capacidad $k$.\\[6pt]
+  Relación 2-2 (problemas 54–63): Hyman, tickets, anillo, \texttt{swap} y cerrojo de capacidad $k$.
+  Contrastado con los apuntes de Infomates (2.1) y la diapositiva 1.25 del tema 1.\\[6pt]
   \textbf{Cómo usar este kit.} Sección 1 para la táctica; secciones 2–7 para la teoría tal como la pregunta el
   test; sección 8 con las plantillas de los ejercicios breves y 9 ejercicios resueltos; y la tabla resumen final
   para el último repaso. Las soluciones completas de la relación están en \emph{Relaciones de problemas
@@ -114,6 +115,7 @@ son de uno de estos tipos (plantillas en la sección~\ref{sec:plantillas}):
 \end{enumerate}
 
 % ==============================================================================
+\clearpage
 \section{El problema y las condiciones de Dijkstra}
 
 \subsection{Historia (cae en el test)}
@@ -137,12 +139,17 @@ son de uno de estos tipos (plantillas en la sección~\ref{sec:plantillas}):
 \toprule
 \textbf{Propiedad} & \textbf{Tipo} & \textbf{Hipótesis de planificación} \\ \midrule
 Exclusión mutua & seguridad & ninguna (vale para cualquier intercalación) \\
-Ausencia de interbloqueo (progreso, alcanzabilidad) & vivacidad (global) & progreso finito \\
+Ausencia de interbloqueo & \textbf{seguridad} (diap. 1.25) & «nunca ocurrirá que los procesos esperen algo que nunca sucederá» \\
+Alcanzabilidad / progreso & vivacidad (global) & progreso finito: algún proceso acabará entrando \\
 Ausencia de inanición & vivacidad (individual) & planificación (débilmente) justa \\
-Espera acotada (equidad) & vivacidad + cota & cota de adelantamientos, no de tiempo \\
+Espera acotada (equidad) & 5ª condición (Knuth) & cota de adelantamientos, no de tiempo \\
 \bottomrule
 \end{tabular}
 \end{center}
+\textbf{Ojo con la terminología de Capel}: en las diapositivas del tema 1 la \emph{ausencia de interbloqueo} es un
+ejemplo de propiedad de \textbf{seguridad}, y así se puntuó en el Parcial I. Si te la preguntan con esas palabras,
+responde seguridad; el \emph{progreso} («algún proceso acabará entrando») sí es de vivacidad.
+
 \textbf{EM + ausencia de interbloqueo no implica ausencia de inanición}: el sistema progresa (alguien entra),
 pero un proceso concreto puede ser adelantado siempre. Ejemplo de clase: el algoritmo de Dijkstra para $N$.
 
@@ -157,7 +164,11 @@ la SC (4ª etapa del refinamiento).
   \item La SC siempre será alcanzada por alguno de los procesos que esperan entrar (\textbf{alcanzabilidad}).
 \end{enumerate}
 Un algoritmo que solo cumple estas cuatro condiciones es \textbf{parcialmente correcto}: tiene EM y
-alcanzabilidad, pero \textbf{puede tener inanición}. Lo que añaden Knuth, Peterson y Lamport es la equidad.
+alcanzabilidad, pero \textbf{puede tener inanición}.
+
+\textbf{5ª condición (Knuth)}: se tiene que poder demostrar que el retraso máximo de cualquier proceso en el acceso
+a la SC es \textbf{calculable}. Es la equidad. La cumplen Knuth ($2^{n-1}-1$ adelantamientos) y Peterson
+($n(n-1)/2$ turnos); \textbf{no} la cumplen Dekker ni Dijkstra.
 
 \textbf{Espera activa}: los procesos iteran en un bucle vacío hasta que entrar es seguro. Funciona, pero
 consume CPU; solo es aceptable si hay pocos procesos.
@@ -171,10 +182,10 @@ En las diapositivas la clave $c_i = 0$ significa «quiero entrar o estoy dentro�
 \toprule
 \textbf{Etapa} & \textbf{Idea} & \textbf{Qué falla} \\ \midrule
 1ª & Variable \texttt{turno} que alterna (corrutinas). & EM sí, pero \textbf{viola la 3ª condición}: si uno no quiere entrar, el otro no puede (alternancia forzosa). \\
-2ª & Espero mientras $c_j=0$; \textbf{después} pongo $c_i:=0$. & \textbf{Falla la EM}: la salida de la espera y el cambio de clave no son atómicos. \\
-3ª & Pongo $c_i:=0$ \textbf{antes} de mirar $c_j$. & Segura, pero \textbf{interbloqueo}: los dos ponen su clave a 0 y esperan para siempre. \\
-4ª & Si $c_j=0$, cedo: $c_i:=1$, espero, $c_i:=0$ y reintento. & EM sí; sin bloqueo permanente, pero \textbf{livelock/inanición} si van al mismo ritmo. \\
-5ª & \textbf{Dekker}: claves + \texttt{turno}. Solo cede el que no tiene el turno. & \textbf{Correcto} para 2 procesos: EM, sin interbloqueo, sin inanición. \\
+2ª & Espero mientras $c_j=0$; \textbf{después} pongo $c_i:=0$. & \textbf{Falla la EM}: la salida de la espera y el cambio de clave no son atómicos. Solo es segura según la velocidad: \textbf{viola la 2ª condición}. \\
+3ª & Pongo $c_i:=0$ \textbf{antes} de mirar $c_j$. & Segura, pero \textbf{interbloqueo} si los dos ponen su clave a 0 a la vez: \textbf{viola la 4ª} (y la 2ª). \\
+4ª & Si $c_j=0$, cedo: $c_i:=1$, espero, $c_i:=0$ y reintento. & EM sí; el bloqueo es más improbable, pero si van al mismo ritmo pueden ceder sin fin (livelock): \textbf{viola la 2ª y la 4ª}. \\
+5ª & \textbf{Dekker}: claves + \texttt{turno}. Solo cede el que no tiene el turno. & \textbf{Primera solución aceptable}: EM y alcanzabilidad. Su vivacidad y equidad \textbf{no se pueden demostrar} (dependen del hardware). \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -199,8 +210,10 @@ c1 := 1;
         del otro a 1 después de que el otro la pusiera a 0. Imposible. (El turno no interviene en la EM.)
   \item \textbf{Alcanzabilidad}: si los dos quieren entrar y $\texttt{turno} = i$, $P_i$ espera a que $P_j$ ceda su
         clave y entra; $P_j$ pone su clave a 1 y queda en espera activa.
-  \item \textbf{Sin inanición}: al salir se cede el turno, así que el que salió no puede adelantar
-        indefinidamente al que espera (con planificación justa).
+  \item \textbf{Vivacidad y equidad: no se pueden demostrar.} Dependen del hardware de acceso a memoria. Si P1 lee
+        $c_2$ a la vez que P2 la escribe y el controlador da prioridad a las lecturas, un P1 rápido vuelve a entrar
+        antes que un P2 lento, y puede repetirse indefinidamente: \textbf{inanición} de P2 (apuntes de Infomates).
+        Por eso la historia de las diapositivas atribuye a Knuth la primera solución sin inanición.
 \end{itemize}
 
 % ==============================================================================
@@ -268,8 +281,11 @@ until false
   \item \textbf{Cumple EM, alcanzabilidad y ausencia de inanición} (retraso limitado), \textbf{no FIFO}.
   \item La imposibilidad de inanición exige un \textbf{número finito de procesos}: con infinitos, uno podría ser
         adelantado siempre.
-  \item Dato clásico (no está en las diapositivas): la espera máxima de Knuth es exponencial, $2^{n-1}-1$
-        turnos. Por eso Peterson ($n(n-1)/2$, cuadrático) supone una mejora.
+  \item Usa una \textbf{copia local} \texttt{j} del turno para evitar las condiciones de carrera sobre la variable
+        compartida, y solo modifica \texttt{turno} cuando ya está en la SC.
+  \item \textbf{Espera máxima}: $f(n) = 2f(n-1) + 1$, $f(1) = 0$, así que $f(n) = 2^{n-1}-1$ adelantamientos
+        (exponencial; apuntes de Infomates). Con 3 procesos la víctima puede ser adelantada 3 veces: P0 P1 P0.
+        Peterson lo mejora a $n(n-1)/2$ (cuadrático) y por eso es la solución \textbf{canónica}.
 \end{itemize}
 
 % ==============================================================================
@@ -581,7 +597,7 @@ posible, un proceso puede llegar siempre tarde a la plaza libre.
 2ª etapa & 2 & \no & -- & -- & comprobar y luego asignar \\
 3ª etapa & 2 & \si & \no & \no & interbloqueo \\
 4ª etapa (cortesía) & 2 & \si & \no{} (livelock) & \no & ceden a la vez \\
-Dekker & 2 & \si & \si & \si & claves + turno \\
+Dekker & 2 & \si & \si & \no{} (dep. HW) & claves + turno; equidad no demostrable \\
 Hyman & 2 & \no & -- & -- & toma el turno sin recomprobar \\
 Peterson & 2 & \si & \si & \si & espera el último en escribir turno; cota 1 \\
 Dijkstra & $N$ & \si & \si & \no & dos barreras \\

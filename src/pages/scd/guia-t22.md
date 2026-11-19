@@ -37,8 +37,8 @@ No hace falta una nota mínima en ninguna parte.
 
 ## El material
 
-- **[Kit del parcial T2.2](/scd/kit-parcial-t22-scd.pdf)** (PDF, 13 páginas). Toda la teoría que pregunta el test, plantillas para los ejercicios breves, 9 ejercicios resueltos y una tabla resumen.
-- **Simulacro parcial T2.2.** 82 preguntas nuevas con justificación. Activa **Simulacro de examen** para hacer 35 al azar con la puntuación real y la opción de dejar en blanco. Lo tienes en la página de la asignatura.
+- **[Kit del parcial T2.2](/scd/kit-parcial-t22-scd.pdf)** (PDF). Toda la teoría que pregunta el test, plantillas para los ejercicios breves, 9 ejercicios resueltos y una tabla resumen.
+- **Simulacro parcial T2.2.** 130 preguntas con justificación: 89 nuevas y 41 de exámenes y bancos de otros años, revisadas. Activa **Simulacro de examen** para hacer 35 al azar con la puntuación real y la opción de dejar en blanco. Lo tienes en la página de la asignatura.
 - **Relaciones de problemas resueltas.** Los problemas 54 a 63 están resueltos al detalle en el bloque III.
 
 ## Plan de 7 días
@@ -53,7 +53,12 @@ No hace falta una nota mínima en ninguna parte.
 | **Martes 24** | Repasa las preguntas que fallaste (modo «Puntos débiles»). Problemas 54 y 62 de la relación. Segundo simulacro. |
 | **Miércoles 25** | Tabla resumen del kit y las tres plantillas. Último simulacro. Nada nuevo: descansa. |
 
-## Dos avisos sobre el banco de otros años
+## Avisos: claves corregidas y puntos con trampa
 
 - **Peterson para N procesos.** En un banco de otros años la respuesta a «máximo de turnos que espera un proceso» es N−1. Según las diapositivas de este curso es **n(n−1)/2**.
 - **Dijkstra con la guarda cambiada a `c[turno] ≠ en_SC`** (problema 63). La clave de otros años decía «pierde corrección (seguridad)». Razonado sobre el código, la exclusión mutua se mantiene gracias a la segunda barrera y lo que se pierde es el progreso. Si aparece una opción que hable de progreso o vivacidad, elige esa.
+- **Ausencia de interbloqueo.** En las diapositivas del tema 1 de Capel es una propiedad de **seguridad** («nunca ocurrirá que los procesos esperen algo que nunca sucederá»), y así se puntuó en el Parcial I. El *progreso* («algún proceso acabará entrando») sí es de vivacidad.
+- **Dekker.** Es la primera solución aceptable (EM y alcanzabilidad), pero su vivacidad y su equidad **no se pueden demostrar**: dependen de cómo arbitre el hardware los accesos simultáneos a memoria. La primera solución sin inanición es la de Knuth.
+- **Quinta condición (Knuth).** Poder calcular el retraso máximo de cualquier proceso. Knuth: 2ⁿ⁻¹ − 1 adelantamientos; Peterson: n(n−1)/2 turnos.
+
+Estas correcciones salen de contrastar el material con los apuntes de Infomates. Las claves erróneas también se han corregido en el test general de la asignatura.
