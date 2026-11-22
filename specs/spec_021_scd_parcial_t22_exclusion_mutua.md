@@ -52,3 +52,23 @@ obligatorios (4,75 puntos). Fuentes: diapositivas «Tema 2. Sincronización en m
 - Banco general (`test.json`): corregidas 6 preguntas (índices 46, 53, 55, 66, 136, 169): opciones duplicadamente
   correctas, «progreso finito», Dekker, guarda de Dijkstra y espera de Peterson N.
 - `npm run build` 115 páginas; simulacro probado en Chrome sin errores.
+
+## Iteración 3 (22/11/2026): relación 2-2 con enunciados oficiales y soluciones verificadas
+- Kit (`relaciones/SCD/kit_parcial_t22.tex`, 24 págs.): la antigua sección de 9 ejercicios con enunciados propios se
+  sustituye por la **relación 2-2 completa** (problemas 54–63 con el enunciado oficial copiado tal cual) más 4
+  ejercicios extra de las diapositivas (A–D). Las mismas soluciones reemplazan las del bloque III de
+  `relaciones/SCD/temas/relacion2.tex` (PDF de relaciones recompilado, 73 págs.).
+- Verificación: verificador exhaustivo de intercalaciones (scratchpad `mc.py`/`ov.py`, no versionado). Resultados:
+  55 EM ok + livelock; 56 EM violada; 57 EM ok, intercambiada violada, espera acotada 1 aunque el otro sea lento;
+  58 EM ok; 60 EM ok; 61 EM ok, sin la puerta `n[i]:=1` violada, espera acotada 1; 62 EM ok, (b) 0 estados con 2 en
+  N−2 y 0 en N−3 (N=4), adelantamientos ilimitados con un proceso lento (N=3,4); 63 guarda `!= enSC`: EM ok y
+  livelock (N=2,3), original sin livelock.
+- Errores corregidos en las soluciones antiguas: 54 usaba la formulación de libro de las condiciones de Dijkstra
+  (con ausencia de inanición) y concluía «correcto en vivacidad individual»; 58 tenía un invariante que no sumaba 1;
+  62c afirmaba la cota n(n−1)/2 sin hipótesis de velocidad.
+- Apuntes de teoría (`apuntes/SCD/temas/tema2_parte1.tex`, 81 págs.): condiciones de Dijkstra con la formulación de
+  las diapositivas (2.3), Dekker sin «completamente correcto», lemas del filtro con la numeración L1–L4 de las
+  diapositivas y la cota en turnos con su hipótesis.
+- Guía `/scd/guia-t22/`: plan de cuatro tardes de 3 h (22–25/11) y aviso sobre las condiciones de Dijkstra.
+- Descripción de la asignatura: 388 preguntas (258 del test general + 130 del simulacro).
+- `npm run build`: 115 páginas.

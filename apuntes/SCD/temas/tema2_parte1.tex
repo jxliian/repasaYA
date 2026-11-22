@@ -41,16 +41,18 @@ void Proceso(int i) {
 \end{lstlisting}
 
 \subsection{Las Cuatro Condiciones de Dijkstra}
-Edsger W. Dijkstra formuló en 1965 los cuatro requisitos formales indispensables que cualquier protocolo de entrada y salida debe satisfacer obligatoriamente para considerarse una solución válida y correcta al problema de la exclusión mutua:
+En las diapositivas de Capel (2.3) aparecen como las condiciones para obtener una solución \textbf{parcialmente correcta} al problema de la exclusión mutua. La exclusión mutua es el objetivo del protocolo, no una de las cuatro condiciones:
 
-\begin{definicion}[Condiciones de Dijkstra]
+\begin{definicion}[Condiciones de Dijkstra (formulación de las diapositivas)]
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Exclusión Mutua Estricta (Seguridad):} Nunca puede haber más de un proceso simultáneamente dentro de la sección crítica ($N_{SC} \le 1$).
-    \item \textbf{No Suposiciones sobre el Hardware ni Velocidades:} No se puede asumir ninguna hipótesis sobre el número de procesadores, ni sobre la velocidad relativa de ejecución de los procesos.
-    \item \textbf{Progreso / Ausencia de Interbloqueo (Seguridad/Vivacidad):} Un proceso que se encuentre ejecutando en su sección no crítica (SNC) o que haya terminado no puede impedir que otros procesos interesados accedan a la sección crítica. Si ningún proceso está en la SC y hay procesos intentando entrar, la decisión de cuál entra debe tomarse en un tiempo finito.
-    \item \textbf{Espera Limitada / Ausencia de Inanición (Vivacidad):} Ningún proceso que desee entrar a la sección crítica debe ser postergado indefinidamente. El tiempo de espera para entrar debe ser finito.
+    \item No hacer ninguna suposición acerca de las instrucciones o número de procesos soportados por el multiprocesador.
+    \item Ni tampoco acerca de la velocidad de ejecución de los procesos, excepto que no es cero (\textbf{progreso finito}).
+    \item Cuando un proceso se encuentra ejecutando código fuera de la sección crítica no puede impedir a los otros procesos entrar en ésta.
+    \item La sección crítica siempre será alcanzada por alguno de los procesos que esperan entrar (\textbf{alcanzabilidad}, sin interbloqueo).
 \end{enumerate}
 \end{definicion}
+
+\textbf{Ojo de examen:} un algoritmo con exclusión mutua que solo cumple estas cuatro condiciones es \emph{parcialmente correcto}: no tiene interbloqueo, pero \textbf{puede tener inanición} (como el algoritmo de Dijkstra de 1965). Knuth añadió una \textbf{5ª condición}: el retraso máximo de cualquier proceso tiene que ser calculable (equidad). En muchos libros se usa otra formulación (exclusión mutua, progreso y espera limitada), en la que la espera limitada ya incluye la ausencia de inanición. En el examen hay que decir cuál se usa: la de las diapositivas es la de arriba.
 
 % ==============================================================================
 % 2.2. ALGORITMOS SOFTWARE CON ESPERA ACTIVA
@@ -128,7 +130,7 @@ quiere_entrar[i] = false;
 
 % ------------------------------------------------------------------------------
 \subsection{El Algoritmo de Dekker (1965)}
-Fue el primer algoritmo completamente correcto conocido en la historia de la computación para resolver el problema de la exclusión mutua para 2 procesos. Combina las banderas de intención del Intento 3 con una variable de desempate (\texttt{turno}) para romper la simetría cuando ambos desean entrar a la vez.
+Es la primera solución aceptable (5ª etapa del refinamiento sucesivo) para 2 procesos: garantiza exclusión mutua y alcanzabilidad de la SC. Su vivacidad y su equidad \textbf{no se pueden demostrar}, porque dependen de cómo arbitre el hardware los accesos simultáneos a memoria; según las diapositivas, la primera solución sin inanición es la de Knuth (1966). Combina las banderas de intención del Intento 3 con una variable de desempate (\texttt{turno}) para romper la simetría cuando ambos desean entrar a la vez.
 
 \begin{algoritmo}[Algoritmo de Dekker para 2 Procesos]
 \begin{lstlisting}[language=C++]
@@ -342,16 +344,13 @@ void Proceso(int i) {
 \end{lstlisting}
 \end{algoritmo}
 
-\textbf{Lemas Formales de Verificación del Filtro de Peterson (Capel):}
+\textbf{Lemas de verificación del filtro de Peterson (numeración de las diapositivas 2.20--2.22).} $P_i$ \emph{precede} a $P_j$ si $c[i] > c[j]$.
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{Lema 1 (Propiedad del Filtro):} A lo sumo $N - L$ procesos pueden encontrarse simultáneamente en la etapa $L$ o en etapas superiores ($0 \le L \le N - 1$).
-    \item \textbf{Lema 2 (Garantía de Exclusión Mutua):} En la etapa final $L = N - 1$ (la Sección Crítica), el número de procesos concurrentes está acotado por:
-    \[
-    N_{SC} \le N - (N - 1) = 1
-    \]
-    lo que demuestra formalmente la exclusión mutua estricta.
-    \item \textbf{Lema 3 (Distribución Monótona y Ausencia de Etapas Intermedias Vacías):} Si en una etapa $L$ existen al menos 2 procesos, todas las etapas anteriores $0, 1, \dots, L - 1$ contienen obligatoriamente al menos un proceso. Por consiguiente, \textbf{no pueden existir etapas intermedias vacías} (por ejemplo, es teóricamente imposible que haya 2 procesos en la etapa $N-2$ y 0 procesos en la etapa $N-3$).
-    \item \textbf{Cota de Espera Uniforme:} La espera máxima de cualquier proceso hasta acceder a la SC está acotada por a lo sumo $\frac{N(N-1)}{2}$ adelantamientos.
+    \item \textbf{L1:} un proceso que precede a todos los demás puede avanzar al menos una etapa.
+    \item \textbf{L2:} un proceso que pasa de la etapa $j$ a la $j+1$ o precede a todos los demás o no estaba solo en la etapa $j$.
+    \item \textbf{L3:} si hay al menos dos procesos en la etapa $j$, hay al menos uno en cada etapa anterior (inducción sobre $j$). Por eso es imposible tener 2 procesos en la etapa $N-2$ y ninguno en la $N-3$.
+    \item \textbf{L4:} en la etapa $j$ hay como máximo $N - j$ procesos ($0 \le j \le N-2$); a la etapa $N-2$ llegan como máximo 2 y, por L2, solo uno pasa a la SC: \textbf{exclusión mutua}.
+    \item \textbf{Equidad:} espera máxima $r(n) = n - 1 + r(n-1) = \frac{n(n-1)}{2}$ \textbf{turnos}. Es una cota medida en turnos, suponiendo que todos los procesos avanzan a ritmo comparable: si un proceso es arbitrariamente lento, los demás pueden adelantarle sin límite. Ausencia de inanición (que sí tiene) no es lo mismo que espera acotada (problema 62c).
 \end{enumerate}
 
 \subsubsection{4. Algoritmo de la Panadería de Lamport (\textit{Bakery Algorithm})}
