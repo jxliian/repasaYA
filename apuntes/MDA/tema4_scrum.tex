@@ -1,0 +1,829 @@
+% ==============================================================================
+%  MDA · Tema 4: SCRUM — apuntes y ejercicios para el parcial del 27/11/2026
+%  Fuente: diapositivas «Unidad 1 - Desarrollo Ágil de Software. Tema 4 – SCRUM»
+%  (104 diapositivas) y «Tema 4 – Elevator Pitch» (11 diapositivas), LSI, UGR.
+%  Compilar: pdflatex tema4_scrum.tex (dos pasadas)
+% ==============================================================================
+\documentclass[11pt,a4paper,oneside,openany]{report}
+\input{config/estilo}
+
+\renewcommand{\thesection}{\arabic{section}}
+\setcounter{secnumdepth}{2}
+\newcommand{\diap}[1]{\textcolor{mdaPrimary}{\small[diap.~#1]}}
+\newcommand{\extra}{\textcolor{mdaOrange}{\small[no está en las diapositivas]}}
+
+\hypersetup{pdftitle={MDA - Tema 4: Scrum. Apuntes y ejercicios para el parcial}}
+\fancyfoot[C]{\footnotesize\textsf{\color{gray}repasaYA $\cdot$ Metodologías de Desarrollo Ágil (UGR) $\cdot$ Tema 4: Scrum}}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+  \centering
+  \vspace*{1.2cm}
+  {\Huge\bfseries\color{mdaDarkBlue}\textsf{Metodologías de Desarrollo Ágil}}\\[0.5cm]
+  {\LARGE\bfseries\color{mdaPrimary}\textsf{Tema 4: Scrum}}\\[0.3cm]
+  {\Large\textsf{Apuntes, esquemas y ejercicios para el segundo parcial}}\\[1.2cm]
+  \begin{tcolorbox}[colback=mdaLightAccent,colframe=mdaAccent,width=0.88\textwidth,arc=4pt,halign=center]
+    \large\textbf{Viernes 27 de noviembre de 2026}\\[4pt]
+    \normalsize Prueba \textbf{en grupo} (los grupos de prácticas) $\cdot$ \textbf{sin apuntes} $\cdot$ \textbf{1 hora como máximo}\\[4pt]
+    Preguntas cortas y ejercicios sobre el contenido del tema
+  \end{tcolorbox}
+  \vspace{0.8cm}
+  \begin{minipage}{0.88\textwidth}\small
+  \textbf{De dónde sale.} De las 104 diapositivas del Tema 4 y de las 11 del \emph{Elevator Pitch} (Sprint 0 y
+  visión del producto). Cada idea lleva la diapositiva de la que sale, por ejemplo \diap{53}. Lo poco que se añade de
+  fuera (la duración del Daily, la plantilla de Moore para el \emph{elevator pitch}) se marca con
+  \extra.\\[6pt]
+  \textbf{Cómo usarlo.} Secciones 1 a 6: la teoría en el orden de las diapositivas. Sección 7: cómo repartiros el
+  trabajo en el examen de grupo. Sección 8: ejercicios resueltos de los tipos que pueden caer. Sección 9: preguntas
+  cortas con su respuesta modelo. Al final, una tabla resumen para el último repaso.
+  \end{minipage}
+  \vfill
+  {\large\textsf{repasaYA $\cdot$ Universidad de Granada}}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% ==============================================================================
+\section{Qué es Scrum}
+
+\subsection{Una nueva forma de desarrollar \diap{2}}
+Takeuchi y Nonaka (\emph{The New New Product Development Game}, Harvard Business Review, 1986) comparan dos formas
+de desarrollar productos:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Carrera de relevos}: cada fase pasa el testigo a la siguiente (como en cascada). Choca con la
+        velocidad y la flexibilidad que exige la competencia.
+  \item \textbf{Rugby}: el equipo avanza \emph{como una unidad}, pasándose el balón adelante y atrás. De ahí viene el
+        nombre: un \emph{scrum} es la melé del rugby.
+\end{itemize}
+Por eso, en lugar de hacer todo de una cosa a la vez, \textbf{los equipos Scrum hacen un poco de todo, todo el
+tiempo}: en cada Sprint se analiza, diseña, codifica y prueba \diap{48}.
+
+\subsection{Historia \diap{3--5}}
+\begin{center}\small
+\begin{tabular}{lp{11.6cm}}
+\toprule
+\textbf{Año} & \textbf{Hito} \\ \midrule
+1986 & Takeuchi y Nonaka usan por primera vez el término, para un proceso de desarrollo acelerado y competitivo. \\
+1993 & Primer equipo que trabaja con Scrum: \textbf{Jeff Sutherland} en \textbf{Easel Corp.} \\
+1996 & \textbf{Ken Schwaber} formaliza Scrum en el artículo \emph{Scrum Development Process} (conferencia \textbf{OOPSLA}). \\
+2001 & Schwaber y \textbf{Mike Beedle} publican el primer libro: \emph{Agile Software Development with Scrum}. \\
+2002 & Schwaber y \textbf{Mike Cohn} fundan la \textbf{Scrum Alliance}, para compartir y aumentar el conocimiento de Scrum. \\
+-- & Schwaber y Sutherland mantienen \emph{La Guía de Scrum} (scrum.org). \\
+\bottomrule
+\end{tabular}
+\end{center}
+Se usa en empresas de todo tipo (Google, Microsoft, Amazon, Telefónica, BBC…) y en todo tipo de software:
+videojuegos, sistemas críticos, contratos de precio cerrado, aplicaciones certificadas ISO 9001, sistemas
+embebidos, sistemas 7x24 con 99,999~\% de disponibilidad… \diap{6--7}. Scrum \textbf{no} es solo para proyectos
+pequeños o web.
+
+\subsection{Definición \diap{8}}
+\begin{definicion}[Scrum]
+Scrum es un \textbf{marco de trabajo iterativo e incremental} para el desarrollo de proyectos, productos y
+aplicaciones. \textbf{No se basa en el seguimiento de un plan}, sino en la \textbf{adaptación continua} a las
+circunstancias de la evolución del proyecto.
+\end{definicion}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Iterativo}: el trabajo se repite en ciclos (Sprints).
+  \item \textbf{Incremental}: cada ciclo añade un trozo de producto terminado.
+  \item Es un \textbf{marco} (\emph{framework}), no una metodología cerrada: dice qué roles, eventos y artefactos hay,
+        no cómo programar.
+\end{itemize}
+
+\subsection{Pilares empíricos \diap{9}}
+Scrum es \textbf{empírico}: se decide con lo que se observa, no con lo que se predijo.
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\small]
+  \foreach \x/\t/\d in {0/Transparencia/{Todos ven el\\estado real},4.6/Inspección/{Se revisa a menudo\\el producto y el proceso},9.2/Adaptación/{Se corrige en cuanto\\algo se desvía}}{
+    \node[draw=mdaPrimary,fill=mdaLightAccent,rounded corners,minimum width=3.9cm,minimum height=1.6cm,align=center]
+      at (\x,0) {\textbf{\t}\\[2pt]\footnotesize\d};}
+  \draw[-{Latex},thick,mdaPrimary] (1.95,0) -- (2.65,0);
+  \draw[-{Latex},thick,mdaPrimary] (6.55,0) -- (7.25,0);
+\end{tikzpicture}
+\end{center}
+Ejemplos: el Burndown Chart y el panel de tareas dan \emph{transparencia}; el Daily y la Review son
+\emph{inspección}; replanificar el Sprint o cambiar la forma de trabajar tras la Retrospectiva es
+\emph{adaptación}.
+
+\subsection{Valores \diap{10}}
+Las diapositivas listan catorce: \textbf{mejora continua, calidad, time-boxing, responsabilidad,
+multidisciplinar, flexibilidad, ritmo, compromiso, simplicidad, respeto, coraje, foco, predictibilidad y personas}.
+\begin{aviso}[los cinco valores de la Guía de Scrum]
+La Guía de Scrum oficial reduce los valores a cinco: \textbf{compromiso, coraje, foco, apertura y respeto}
+\extra. Si preguntan «valores de Scrum», da los de la diapositiva y, si quieres, menciona estos cinco.
+\end{aviso}
+
+\subsection{La esencia de Scrum \diap{11--12} y factores clave \diap{103}}
+\begin{multicols}{2}\small
+\textbf{Esencia}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item El equipo recibe \textbf{objetivos claros}.
+  \item Se \textbf{organiza} en función del trabajo.
+  \item Entrega con \textbf{regularidad} las funciones \textbf{más valiosas}.
+  \item Recibe \textbf{retroalimentación} de gente de fuera del equipo.
+  \item \textbf{Reflexiona} sobre su forma de trabajar para mejorar.
+  \item Toda la organización tiene \textbf{visibilidad} del progreso.
+  \item Equipo y gerencia se comunican de forma \textbf{honesta y transparente}.
+\end{itemize}
+\columnbreak
+\textbf{Factores clave}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Delegación} de atribuciones al equipo: auto-organización y toma de decisiones.
+  \item \textbf{Respeto} entre las personas: confianza en sus conocimientos y capacidades.
+  \item \textbf{Responsabilidad} y autodisciplina.
+  \item Trabajo centrado en el \textbf{compromiso} de desarrollo.
+  \item \textbf{Información, transparencia y visibilidad}.
+\end{itemize}
+\end{multicols}
+
+% ==============================================================================
+\section{Elementos de Scrum \diap{13}}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\small,
+  cab/.style={draw=mdaPrimary,fill=mdaPrimary,text=white,rounded corners,minimum width=4.2cm,minimum height=0.7cm,font=\sffamily\bfseries},
+  it/.style={draw=mdaBorderGray,fill=mdaLightAccent,minimum width=4.2cm,minimum height=0.85cm,align=center,font=\sffamily\footnotesize}]
+  \node[cab] at (0,0) {Artefactos (3)};
+  \node[it] at (0,-0.9) {Product Backlog\\(Pila de producto)};
+  \node[it] at (0,-1.8) {Sprint Backlog\\(Pila de Sprint)};
+  \node[it] at (0,-2.7) {Burndown Chart\\(Gráfica de trabajo pendiente)};
+  \node[cab] at (4.7,0) {Reuniones (4)};
+  \node[it] at (4.7,-0.9) {Sprint Planning\\(Planificación del Sprint)};
+  \node[it] at (4.7,-1.8) {Daily Meeting\\(Reunión diaria)};
+  \node[it] at (4.7,-2.7) {Sprint Review\\(Revisión del Sprint)};
+  \node[it] at (4.7,-3.6) {Sprint Retrospective\\(Retrospectiva)};
+  \node[cab] at (9.4,0) {Roles (3)};
+  \node[it] at (9.4,-0.9) {Product Owner\\(Propietario)};
+  \node[it] at (9.4,-1.8) {Scrum Master\\(Director de proyecto)};
+  \node[it] at (9.4,-2.7) {Team\\(Equipo de desarrollo)};
+  \node[text=mdaRed,font=\sffamily\bfseries] at (4.7,-4.5) {+ Reglas de trabajo};
+\end{tikzpicture}
+\end{center}
+\textbf{Regla mnemotécnica: 3 -- 4 -- 3} (tres artefactos, cuatro reuniones, tres roles), más las reglas de
+trabajo.
+
+% ==============================================================================
+\section{Roles}
+
+\subsection{Rol $\neq$ puesto \diap{15}}
+Los roles representan una \textbf{responsabilidad en el proceso}, \textbf{no la posición} dentro de la organización.
+Un jefe de departamento puede ser un miembro más del equipo, y un programador puede hacer de Scrum Master.
+
+\subsection{Gallinas y cerdos: 3 + 3 roles \diap{16}}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\small]
+  \node[draw=mdaOrange,fill=mdaLightOrange,rounded corners,minimum width=6cm,minimum height=1.1cm,align=center] (g) at (0,0)
+    {\textbf{Roles gallina} (stakeholders)\\\footnotesize User $\cdot$ Customer $\cdot$ Management};
+  \node[draw=mdaPrimary,fill=mdaLightAccent,rounded corners,minimum width=6cm,minimum height=1.1cm,align=center] (c) at (0,-1.8)
+    {\textbf{Roles cerdo} (equipo Scrum)\\\footnotesize Product Owner $\cdot$ Scrum Master $\cdot$ Team};
+  \draw[dashed,mdaOrange] (-3.6,-0.9) -- (3.6,-0.9);
+  \node[align=left,font=\sffamily\footnotesize,text width=6.2cm] at (7.2,-0.9) {
+    En unos huevos con beicon, la gallina \emph{participa} (pone los huevos) y el cerdo se \emph{compromete} (pone
+    el beicon). Los cerdos se juegan el resultado; las gallinas están interesadas, pero no comprometidas.};
+\end{tikzpicture}
+\end{center}
+\textbf{Stakeholders} \diap{17}: todas las personas y organizaciones con algún interés en el trabajo. Son
+\textbf{fuente de requisitos} (definen el producto) y \textbf{validan el trabajo} (examinan los resultados intermedios y
+finales y dan su \emph{feedback}).
+
+\subsection{Product Owner (propietario) \diap{18--21}}
+\begin{definicion}[Product Owner]
+\textbf{Representante del cliente e intermediario entre éste y el equipo.} Habla el lenguaje del negocio y conoce
+los métodos y conceptos del equipo. Es \textbf{una sola persona}, no un comité.
+\end{definicion}
+\textbf{Implementación} \diap{19}: \emph{directa} (el propio cliente hace de PO) o \emph{proxy} (alguien de la
+organización, como un \emph{product manager}, representa a varios clientes ante el equipo).
+
+\begin{multicols}{2}\small
+\textbf{Necesidades del PO} \diap{20}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item Conocer a fondo el negocio del cliente, sus necesidades y el objetivo del sistema.
+  \item Tener \textbf{atribuciones} para tomar decisiones.
+  \item Conocer Scrum.
+  \item Recibir y analizar retroinformación continua del negocio y del proyecto.
+\end{itemize}
+\columnbreak
+\textbf{Responsabilidades del PO} \diap{21}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item Obtener una \textbf{visión compartida}.
+  \item Recoger los requisitos.
+  \item Crear, administrar y \textbf{priorizar el Product Backlog}.
+  \item \textbf{Aceptar o rechazar} el software al final de cada iteración.
+  \item Resolver las dudas del equipo.
+  \item Administrar el \textbf{plan de entregas}.
+  \item \textbf{Maximizar el ROI}.
+\end{itemize}
+\end{multicols}
+
+\subsection{Scrum Master \diap{22--28}}
+\begin{definicion}[Scrum Master]
+Garantiza el funcionamiento de los procesos y metodologías que se emplean, gestiona el proceso y mejora la
+productividad del equipo. \textbf{Es un facilitador, coach y mentor}, no un jefe: \textbf{no asigna tareas} ni
+manda sobre el equipo.
+\end{definicion}
+\begin{aviso}[trampa de nombre]
+Las diapositivas traducen Scrum Master como «director de proyecto», pero \textbf{no es un jefe de proyecto
+tradicional}. No reparte el trabajo (el equipo se auto-organiza) ni decide qué se construye (eso es del PO).
+\end{aviso}
+\begin{multicols}{2}\small
+\textbf{Responsabilidades} \diap{23}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item Promover los valores y prácticas de Scrum.
+  \item \textbf{Eliminar impedimentos}.
+  \item Asegurar que el equipo es funcional y productivo.
+  \item Permitir la cooperación entre todos los roles.
+  \item \textbf{Escudo} del equipo ante interferencias externas.
+  \item Fomentar el uso y el respeto del proceso.
+\end{itemize}
+\textbf{Atributos} \diap{24}: responsable, humilde, colaborador, comprometido, influyente y entendido.
+\columnbreak
+\textbf{Servicio al PO} \diap{25}: técnicas para gestionar la Lista de Producto; entender la planificación en un
+entorno empírico; enseñarle a ordenar la lista para maximizar el valor.\\[4pt]
+\textbf{Servicio al equipo} \diap{26}: guiarlo a ser auto-organizado y multifuncional; ayudarle a crear productos de
+alto valor; eliminar impedimentos; facilitar los eventos; enseñarle Scrum donde la organización aún no lo entiende.\\[4pt]
+\textbf{Servicio a la organización} \diap{27}: liderar la adopción de Scrum; planificar sus implantaciones; ayudar a
+entender el desarrollo empírico; motivar cambios que suban la productividad; coordinarse con otros Scrum Masters.
+\end{multicols}
+
+\subsection{Equipo de desarrollo (Team) \diap{29--33}}
+\begin{definicion}[Equipo de desarrollo]
+Los profesionales que entregan, al final de cada Sprint, un \textbf{incremento de producto «terminado»} que
+potencialmente se puede poner en producción.
+\end{definicion}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Auto-organizado}: tiene la responsabilidad final del éxito y \textbf{no está jerarquizado}.
+  \item \textbf{Multidisciplinar}: entre todos tienen las habilidades necesarias.
+  \item \textbf{Multifuncional}: programar, diseñar, analizar, probar…
+  \item Elevado grado de \textbf{compromiso}.
+  \item Scrum \textbf{no reconoce sub-equipos} (nada de «equipo de pruebas» dentro del equipo).
+  \item Trabajo a \textbf{tiempo completo} y de forma \textbf{fija}.
+  \item \textbf{Tamaño}: lo bastante pequeño para seguir siendo ágil y lo bastante grande para completar trabajo
+        significativo: \textbf{típicamente de 5 a 9 personas} \diap{31}.
+  \item Cualidades: trabajo en equipo, comunicación, generosidad y capacidad de aprendizaje \diap{29}.
+\end{itemize}
+\textbf{Responsabilidades} \diap{32} (del equipo \emph{como un todo}): \textbf{estimar} el tamaño de los ítems del
+backlog, comprometerse a entregar incrementos de \textbf{calidad de producción} y hacer el seguimiento de \textbf{su
+propio plan}. Todos conocen la visión, colaboran con el PO en la pila, comparten el objetivo del Sprint, participan en
+las decisiones y se respetan \diap{33}.
+
+\subsection{¿Quién hace qué?}
+\begin{center}\small
+\begin{tabular}{p{6.3cm}ccc}
+\toprule
+\textbf{Tarea} & \textbf{PO} & \textbf{SM} & \textbf{Equipo} \\ \midrule
+Definir la visión del producto & \textbf{X} & & \\
+Crear, mantener y \textbf{priorizar} el Product Backlog & \textbf{X} & & colabora \\
+\textbf{Estimar} historias (puntos de historia) & & & \textbf{X} \\
+Descomponer historias en tareas (Sprint Backlog) & & & \textbf{X} \\
+Elegir \emph{cómo} hacer el trabajo / repartirse las tareas & & & \textbf{X} \\
+Aceptar o rechazar el incremento & \textbf{X} & & \\
+Eliminar impedimentos; mantener la lista de impedimentos & & \textbf{X} & \\
+Facilitar las reuniones y proteger al equipo & & \textbf{X} & \\
+Maximizar el ROI y gestionar el plan de entregas & \textbf{X} & & \\
+Actualizar el Burndown y el estado de las tareas & & & \textbf{X} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Artefactos}
+Los backlogs son los repositorios donde PO, SM y equipo escriben los requisitos (con \textbf{historias de usuario})
+y las tareas de desarrollo \diap{35}.
+
+\subsection{Product Backlog (pila de producto) \diap{36--39}}
+\begin{definicion}[Product Backlog]
+«Lista \textbf{ordenada y priorizada} de todo lo que podría ser necesario en el producto». Es \textbf{flexible},
+\textbf{adaptable} y \textbf{dinámica}, está escrita en \textbf{lenguaje de negocio} y su responsable es el
+\textbf{Product Owner}.
+\end{definicion}
+\begin{itemize}[leftmargin=*]
+  \item Describe los requisitos que se conocen \textbf{en un momento dado}: nunca está completa.
+  \item Los requisitos se discuten, aclaran y estiman entre todo el equipo Scrum, de forma colectiva.
+  \item Contiene requisitos \textbf{funcionales y no funcionales}.
+  \item Es la \textbf{materialización de la visión} y el nexo de comunicación entre clientes y equipo \diap{102}.
+\end{itemize}
+\begin{teorema}[Lista DEEP \diap{38}]
+\begin{description}[leftmargin=1.2cm,style=nextline]
+  \item[\textbf{D}etallado] Las HU están definidas de forma que el equipo pueda entenderlas y estimarlas (más detalle
+        arriba, en las prioritarias; menos abajo).
+  \item[\textbf{E}mergente] En cualquier momento pueden aparecer nuevas historias.
+  \item[\textbf{E}stimado] Los elementos están estimados.
+  \item[\textbf{P}riorizado] Para saber qué hay que detallar y dónde colocar los ítems nuevos.
+\end{description}
+\end{teorema}
+\textbf{Técnicas de priorización} \diap{39} (Mike Cohn, 2008):
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Priority poker}: como el Planning Poker, pero votando prioridad.
+  \item \textbf{MoSCoW}: \emph{Must} (imprescindible), \emph{Should} (importante), \emph{Could} (deseable),
+        \emph{Won't} (no en esta entrega).
+  \item \textbf{Modelo de Kano}: según la satisfacción del usuario (básicas, de rendimiento, de entusiasmo).
+  \item \textbf{Criba de temas}: puntuar contra criterios (satisfacción, efectividad, ganar clientes, imagen,
+        seguridad, productividad).
+  \item \textbf{Peso relativo}: combina beneficio, penalización (por no tenerlo), coste y tamaño.
+\end{itemize}
+
+\subsection{Sprint Backlog (pila de Sprint) \diap{40}}
+\begin{definicion}[Sprint Backlog]
+Selección de requisitos del Product Backlog \textbf{negociados para el Sprint}: «el trabajo necesario del equipo para
+alcanzar el objetivo del Sprint». Está \textbf{descompuesto en tareas} (lenguaje técnico) y es \textbf{propiedad del
+equipo de desarrollo}.
+\end{definicion}
+\textbf{Dimensiones} \diap{58}: \textbf{prioridad} (primero las historias más prioritarias), \textbf{detalle} (cada
+historia se divide en sus tareas) y \textbf{estado}: pendiente, en curso, terminada o \textbf{impedida}.
+
+\subsection{Burndown Chart \diap{41--44}}
+Representa el \textbf{trabajo pendiente} del equipo frente al tiempo. Hay dos tipos: del \textbf{Sprint} (días en el
+eje X, horas o puntos pendientes en el Y) y del \textbf{proyecto} completo (Sprints en el eje X).
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\footnotesize,x=0.95cm,y=0.05cm]
+  \draw[->] (0,0) -- (10.6,0) node[right] {días};
+  \draw[->] (0,0) -- (0,85) node[above] {pendiente};
+  \foreach \x in {0,2,...,10} \node[below] at (\x,0) {\x};
+  \draw[thick,gray,dashed] (0,80) -- (10,0) node[pos=0.08,above right,text=gray] {ideal};
+  \draw[thick,mdaRed] (0,80) -- (1,79) -- (2,76) -- (3,74) -- (4,70) -- (5,64) node[above,text=mdaRed] {real (A)};
+  \draw[thick,mdaGreen] (0,80) -- (1,68) -- (2,58) -- (3,47) -- (4,36) node[below left,text=mdaGreen] {real (B)};
+\end{tikzpicture}
+\end{center}
+\begin{aviso}[cómo se interpreta \diap{44}]
+\begin{itemize}[leftmargin=*]
+  \item Línea real \textbf{por encima} de la ideal (A): el ritmo es \textbf{bajo}; conviene \textbf{reducir el alcance}
+        del Sprint (renegociarlo con el PO).
+  \item Línea real \textbf{por debajo} (B): el ritmo es \textbf{mayor} de lo previsto; quizá se acabe antes y se
+        puedan \textbf{incorporar nuevas historias}.
+\end{itemize}
+Da información inmediata del Sprint y ayuda a preparar \textbf{acciones correctoras}. Si la línea se queda plana
+varios días, hay un impedimento.
+\end{aviso}
+
+\subsection{Lista de impedimentos (Impediments Backlog) \diap{66--67}}
+Sale del Daily: \textbf{repositorio de todo lo que impide alcanzar los objetivos del proyecto}, identificado y
+priorizado. \textbf{Responsable: el Scrum Master.} Un impedimento puede ser la falta de una información o herramienta,
+no poder reunirse con una persona clave, no tener un material, o \textbf{todo lo que amenace la calidad} del producto.
+Cada impedimento se describe, se identifica su solución si es posible y se le \textbf{asigna un responsable}.
+
+% ==============================================================================
+\section{El Sprint y las cuatro reuniones}
+
+\subsection{El ciclo de Scrum \diap{46}}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\footnotesize,node distance=0.5cm,
+  b/.style={draw=mdaPrimary,fill=mdaLightAccent,rounded corners,align=center,minimum height=0.9cm,text width=2.3cm}]
+  \node[b] (s0) {Sprint 0\\visión + backlog inicial};
+  \node[b,right=0.6cm of s0] (pb) {Product\\Backlog};
+  \node[b,right=0.6cm of pb] (pl) {Sprint\\Planning};
+  \node[b,right=0.6cm of pl] (sb) {Sprint\\Backlog};
+  \node[b,below=1.3cm of sb] (dd) {Sprint\\(1--4 semanas)\\+ Daily};
+  \node[b,left=0.6cm of dd] (rv) {Sprint\\Review};
+  \node[b,left=0.6cm of rv] (rt) {Sprint\\Retrospective};
+  \node[b,fill=mdaLightGreen,draw=mdaGreen,left=0.6cm of rt] (inc) {Incremento\\terminado};
+  \draw[-{Latex},thick] (s0)--(pb); \draw[-{Latex},thick] (pb)--(pl); \draw[-{Latex},thick] (pl)--(sb);
+  \draw[-{Latex},thick] (sb)--(dd); \draw[-{Latex},thick] (dd)--(rv); \draw[-{Latex},thick] (rv)--(rt);
+  \draw[-{Latex},thick,mdaGreen] (rv.south) |- ++(0,-0.5) -| (inc.south);
+  \draw[-{Latex},thick,dashed,mdaPrimary] (rt.north) -- ++(0,0.55) -| (pl.south) node[pos=0.25,above] {siguiente Sprint};
+\end{tikzpicture}
+\end{center}
+
+\subsection{El Sprint \diap{47--49}}
+\begin{definicion}[Sprint]
+Bloque de tiempo (\textbf{time-box}) de \textbf{1 a 4 semanas} durante el cual se crea un \textbf{incremento de producto
+«terminado», utilizable y potencialmente desplegable}.
+\end{definicion}
+\begin{itemize}[leftmargin=*]
+  \item La \textbf{longitud es fija} (mejor ritmo).
+  \item Tiene una definición de qué se va a construir, un diseño y un plan \textbf{flexible}.
+  \item \textbf{No se hacen cambios que afecten al objetivo del Sprint.}
+  \item \textbf{Los objetivos de calidad no disminuyen.}
+  \item El \textbf{alcance} sí se puede clarificar y renegociar entre el PO y el equipo a medida que se aprende.
+\end{itemize}
+
+\subsection{Duración de las reuniones (Sprint de 4 semanas) \diap{50}}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily\footnotesize]
+  \draw[rounded corners=12pt,thick,mdaPrimary] (0,0) rectangle (13,1.6);
+  \node[draw,fill=mdaLightAccent,minimum width=2cm,minimum height=0.9cm,align=center] at (1.4,0.8) {Sprint\\Planning};
+  \node[text=mdaRed] at (1.4,-0.3) {\textbf{8 horas}};
+  \foreach \x in {3.3,4.3,5.3} \draw[mdaRed] (\x,0.8) circle (0.35) node {\scriptsize 1 día};
+  \node at (6.6,0.8) {$\cdots$};
+  \draw[mdaRed] (7.8,0.8) circle (0.35) node {\scriptsize 1 día};
+  \node at (5.5,1.85) {Daily Scrum (cada día) \extra: 15 min};
+  \node[draw,fill=mdaLightAccent,minimum width=1.9cm,minimum height=0.9cm,align=center] at (9.6,0.8) {Sprint\\Review};
+  \node[text=mdaRed] at (9.6,-0.3) {\textbf{4 horas}};
+  \node[draw,fill=mdaLightAccent,minimum width=2.1cm,minimum height=0.9cm,align=center] at (11.8,0.8) {Retrospective};
+  \node[text=mdaRed] at (11.8,-0.3) {\textbf{3 horas}};
+  \node[text=mdaRed] at (6.5,-0.9) {\textbf{Sprint de 4 semanas}};
+\end{tikzpicture}
+\end{center}
+Para Sprints más cortos se reducen proporcionalmente. La duración del Daily (\textbf{15 minutos}) no aparece en la
+diapositiva; es la de la Guía de Scrum.
+
+\subsection{Sprint Planning \diap{51--59}}
+\textbf{Reunión previa al comienzo de cada Sprint} para identificar el \textbf{objetivo del Sprint} y las tareas
+concretas. Entrada: el Product Backlog revisado y priorizado. Salida: el \textbf{objetivo general del Sprint} y el
+\textbf{Sprint Backlog}. Asegura que todo el equipo está alineado y comprometido con un plan claro y alcanzable.
+
+\textbf{Objetivos} \diap{55}: definir el \textbf{objetivo del Sprint} (descripción corta y clara de lo que se quiere
+lograr; guía el trabajo), \textbf{seleccionar los ítems} (por prioridad del PO y capacidad del equipo) y
+\textbf{desarrollar un plan de trabajo} (descomponer en tareas y estimarlas).
+
+\textbf{Dos fases} \diap{53}:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Planificación (qué)}: se revisan los ítems del Product Backlog valorando su complejidad y se
+        seleccionan, \textbf{siguiendo la prioridad}, los que caben en el Sprint.
+  \item \textbf{Planificación detallada (cómo)}: el \textbf{equipo} traduce las historias seleccionadas al lenguaje de
+        desarrollo y las divide en \textbf{tareas} (arquitectura, código, pruebas, marketing…).
+\end{enumerate}
+\begin{teorema}[selección de historias, paso a paso \diap{56}]
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item El PO lee la primera HU del Product Backlog (la de \textbf{mayor prioridad}).
+  \item La explica, detalla los \textbf{criterios de aceptación} y responde dudas.
+  \item El equipo la \textbf{estima} (puntos de historia).
+  \item Cada historia comprendida, valorada y seleccionada pasa al Sprint Backlog \textbf{manteniendo el orden de
+        prioridad}.
+  \item Cuando la suma de puntos alcanza (o supera ligeramente) la \textbf{velocidad media del equipo}, termina la
+        primera fase.
+\end{enumerate}
+\end{teorema}
+\textbf{Participantes} \diap{59}: el \textbf{PO} explica prioridades y negocia qué entra; el \textbf{equipo}
+descompone en tareas y estima; el \textbf{SM} facilita y vela por el foco y la eficiencia.
+
+\subsection{Backlog grooming (refinamiento) \diap{60--62}}
+Revisar, actualizar y priorizar el Product Backlog para que esté \textbf{listo para los próximos Sprints}: depurar,
+añadir historias, eliminar las que sobran, \textbf{dividir épicas y temas} y comprobar la priorización.
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \textbf{No está formalmente incluida} entre las reuniones típicas de Scrum.
+  \item Se hace \textbf{inmediatamente antes de cada planificación}.
+  \item La \textbf{dirige el PO}; el equipo aporta detalle técnico, estimación y viabilidad; el SM facilita.
+\end{itemize}
+
+\subsection{Daily Meeting (Scrum diario) \diap{63--70}}
+Reunión \textbf{diaria} con todo el equipo de desarrollo y el SM; \textbf{el PO puede asistir}. Cada miembro, de forma
+voluntaria, responde:
+\begin{center}
+\begin{tcolorbox}[colback=mdaLightGreen,colframe=mdaGreen,width=0.8\textwidth,halign=center]
+\textbf{1.} ¿Qué he hecho? \quad \textbf{2.} ¿Qué voy a hacer a continuación? \quad \textbf{3.} ¿Qué impedimentos tengo?
+\end{tcolorbox}
+\end{center}
+\begin{itemize}[leftmargin=*]
+  \item Breve y centrada en el objetivo. \textbf{No} se entra en detalle de lo hecho, \textbf{no} se discuten soluciones y
+        \textbf{no} se divaga sobre el origen de un impedimento: solo cómo resolverlo y quién.
+  \item Da a todos un conocimiento actualizado del estado; la información se refleja en un \textbf{panel} accesible.
+  \item \textbf{Genera}: la lista de impedimentos (responsable el SM) y el Burndown actualizado.
+  \item \textbf{Participantes} \diap{68}: el equipo (protagonista); el SM la facilita, \textbf{aunque participe no
+        debería dirigirla}; el PO puede asistir, sin participar activamente, para aclaraciones rápidas.
+  \item \textbf{Importancia} \diap{69--70}: transparencia y comunicación; adaptabilidad (ajustes diarios del plan);
+        compromiso y responsabilidad (cada uno informa ante sus compañeros).
+\end{itemize}
+\begin{aviso}[el Daily no es]
+Una reunión de estado para el jefe, una sesión para resolver problemas técnicos, ni una reunión donde el SM pregunta
+y cada uno le contesta. Si surge un problema, se anota y se trata \emph{después} con quien haga falta.
+\end{aviso}
+
+\subsection{Sprint Review (revisión) \diap{71--79}}
+\textbf{Objetivo}: recoger \emph{feedback} sobre el estado del producto. Es el punto de comunicación entre los
+responsables del producto y el equipo. Tiene lugar \textbf{el último día del Sprint}. Se revisa \textbf{qué} se ha
+hecho: puesta en común, novedades de la iteración y valor añadido.
+
+\textbf{Finalidad} \diap{73}: recoger comentarios sobre el objetivo del Sprint, recoger la \textbf{aceptación} de lo
+comprometido y analizar si hay que mejorar lo hecho o añadir ítems nuevos al Product Backlog.
+
+\textbf{Preparación} \diap{74}: tener el material de la demo, un guion coherente y comprobar que todo funciona.
+
+\textbf{Guion en 8 pasos} \diap{75--76}:
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item Normas de la reunión si hay asistentes nuevos.
+  \item Repaso de los objetivos del Sprint.
+  \item El PO recapitula qué se ha terminado y qué no.
+  \item El equipo revisa sus estadísticas y métricas, logros, problemas y cómo los resolvió.
+  \item \textbf{Demostración} por el equipo de los ítems \textbf{terminados}, respondiendo dudas.
+  \item El PO repasa el Product Backlog y el plan de entregas.
+  \item Comentarios de stakeholders y PO sobre las novedades.
+  \item Se recogen todos los comentarios para las siguientes reuniones de estimación y planificación.
+\end{enumerate}
+\textbf{Genera} \diap{77}: el \textbf{Product Backlog adaptado} a las nuevas necesidades y un \textbf{plan de entregas
+actualizado} con la nueva velocidad y las nuevas prioridades.
+
+\textbf{Participantes} \diap{78--79}: equipo (presenta y responde), SM (facilita), PO (voz del cliente: qué se ha
+cumplido y prioridades futuras) y \textbf{stakeholders} (clientes, inversores, otros departamentos: su feedback guía el
+producto). \textbf{Es la única reunión con stakeholders.}
+
+\subsection{Sprint Retrospective \diap{80--91}}
+\textbf{Después de la Review}, el equipo analiza \textbf{«el cómo»} trabaja para mejorar continuamente y ver qué le
+impide ser más productivo.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Objetivo}: qué estamos haciendo bien, qué tenemos que mejorar (o dejar de hacer), y qué vamos a hacer en
+        la siguiente iteración.
+  \item \textbf{Características}: aprender de la experiencia, aumentar calidad y productividad, eliminar lo que no es
+        útil y potenciar lo que sí, revisar riesgos y mejorar la comunicación.
+  \item \textbf{Se revisa} \diap{84}: cada persona, las relaciones entre miembros, los procesos y las herramientas.
+  \item \textbf{Participantes} \diap{85}: el equipo (todos participan), el SM (facilita, ambiente positivo y
+        constructivo, foco en acciones de mejora) y el PO \textbf{no siempre es requerido}.
+\end{itemize}
+\textbf{Review frente a Retrospective}: la Review mira el \textbf{producto} (qué) con los stakeholders; la Retrospective
+mira el \textbf{proceso} (cómo) con el equipo.
+
+\subsubsection*{Técnicas de retrospectiva}
+\begin{center}\small
+\begin{tabular}{p{2.6cm}p{11.4cm}}
+\toprule
+\textbf{Técnica} & \textbf{Cómo funciona} \\ \midrule
+\textbf{El Barco} \diap{86--87} & Se dibuja un barco que va hacia una isla. Post-its: \textbf{viento} (lo que nos impulsa), \textbf{ancla} (impedimentos que nos frenan), \textbf{iceberg} (riesgos), \textbf{sol} (lo que nos facilita la travesía) e \textbf{isla/tesoro} (el objetivo). \\
+\textbf{Estrella de mar} \diap{88--89} & Cinco brazos: \textbf{Start doing} (probar algo nuevo), \textbf{Do more} (útil: hacerlo más y mejorarlo), \textbf{Continue to do} (útil y ya refinado: mantener), \textbf{Do less} (aporta poco), \textbf{Stop doing} (no aporta valor: eliminar). \\
+\textbf{Las 4 L} \diap{90--91} & Cuatro cuadrantes: \textbf{Liked} (qué gustó), \textbf{Lacked} (qué faltó), \textbf{Learned} (qué aprendimos), \textbf{Longed for} (qué anhelamos). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Tabla resumen de las reuniones}
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{2.1cm}p{2.3cm}p{1.6cm}p{3.1cm}p{2.7cm}p{2.6cm}}
+\toprule
+\textbf{Reunión} & \textbf{Cuándo} & \textbf{Duración (4 sem.)} & \textbf{Quién} & \textbf{Para qué} & \textbf{Genera} \\ \midrule
+Sprint Planning & antes de cada Sprint & 8 h & PO, equipo, SM (facilita) & qué y cómo se hará & objetivo del Sprint y Sprint Backlog \\
+Daily & cada día & 15 min \extra & equipo y SM; PO puede asistir & sincronizarse; detectar impedimentos & impedimentos, Burndown \\
+Sprint Review & último día del Sprint & 4 h & equipo, SM, PO, \textbf{stakeholders} & inspeccionar el \textbf{producto} (qué) & PB adaptado, plan de entregas \\
+Retrospective & después de la Review & 3 h & equipo y SM; PO opcional & mejorar el \textbf{proceso} (cómo) & acciones de mejora \\
+(Grooming) & justo antes de cada Planning & -- & PO (dirige), equipo, SM & dejar el PB listo & PB refinado \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Sprint 0 y visión del producto (Elevator Pitch)}
+
+\subsection{Sprint 0 \diap{93--95}}
+Etapa en la que se define \textbf{la misión del trabajo, las herramientas y el equipo}. Es muy importante y de
+\textbf{duración variable pero no indefinida}.
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Viabilidad}: al final del Sprint 0 debe quedar claro si el proyecto es \textbf{viable} y tiene los medios
+        y el apoyo necesarios.
+  \item \textbf{Contrato}: el PO consigue apoyos y recursos, \textbf{selecciona al equipo y al Scrum Master}, acuerda
+        \textbf{alcance y fechas} con el cliente y fija las condiciones para llegar a buen fin.
+\end{itemize}
+\begin{center}\small
+\begin{tabular}{lp{11cm}}
+\toprule
+\textbf{Pregunta} & \textbf{Actividades del Sprint 0} \\ \midrule
+¿Qué hacer? & Desarrollar la \textbf{visión del producto} (alcance) y el \textbf{Product Backlog inicial}. \\
+¿Cómo hacerlo? & \textbf{Organizar el equipo} y la forma de trabajar (mecánica, herramientas de comunicación, \textbf{duración de los Sprints}, estándares, reglas); \textbf{análisis inicial} de la solución (arquitectura software inicial); \textbf{prueba de concepto}. \\
+¿Cuándo hacerlo? & Desarrollar un \textbf{plan de entregas}. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Visión del producto \diap{96--101}}
+\begin{definicion}[Visión]
+Responde a \textbf{dónde se quiere estar} o \textbf{qué se quiere tener}. La define el \textbf{Product Owner}, y debe ser
+\textbf{conocida, comprendida y compartida por todo el equipo}. Es el \textbf{origen y el final} del proceso: lo primero
+que se hace y el punto al que se quiere llegar.
+\end{definicion}
+\textbf{Características} \diap{98}: información de \textbf{alto nivel} y propósito general; \textbf{sencilla, clara,
+concisa y sin ambigüedades}; contiene la \textbf{esencia} de lo que se crea y sus claves; \textbf{fácilmente
+comunicable}; instrumento vital para \textbf{conseguir presupuesto}; material de apoyo para el \textbf{lanzamiento,
+venta y promoción}.
+
+\textbf{Elementos básicos} \diap{99--100}:
+\begin{multicols}{2}\small
+\textbf{Concepto} (cómo se benefician los \emph{usuarios}):
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item ¿Qué problema se intenta resolver?
+  \item ¿Cómo es la solución general?
+  \item ¿Quiénes son los usuarios o clientes?
+  \item ¿En qué situación están?
+  \item ¿Qué necesidad suya se cubre?
+  \item ¿Quiénes son los competidores y cómo nos comparamos?
+\end{itemize}
+\columnbreak
+\textbf{Modelo de negocio} (cómo se benefician los \emph{creadores}):
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item ¿Cómo se consigue el presupuesto?
+  \item ¿Cuál es el presupuesto y el tiempo para crear y lanzar el producto?
+  \item ¿Cómo se genera beneficio?
+  \item ¿Cómo encuentran y consiguen el producto los usuarios?
+  \item ¿Cuáles son los costes del producto?
+\end{itemize}
+\end{multicols}
+
+\subsection{Test del ascensor \diap{101}}
+\begin{teorema}[Geoffrey Moore]
+«La visión debería explicarse durante el tiempo que se tarda en subir o bajar varios pisos en un ascensor»: unos
+\textbf{30 segundos a 2 minutos}. Si no cabe, no es lo bastante clara.
+\end{teorema}
+\textbf{Plantilla de Moore} (\emph{Crossing the Chasm}) \extra, la forma habitual de escribir el \emph{elevator pitch}:
+\begin{tcolorbox}[colback=mdaYellowCard,colframe=mdaYellowBorder]
+\textbf{Para} [cliente objetivo] \textbf{que} [necesidad u oportunidad], \textbf{el} [nombre del producto] \textbf{es
+un} [categoría de producto] \textbf{que} [beneficio clave]. \textbf{A diferencia de} [competencia principal],
+\textbf{nuestro producto} [diferencia principal].
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Trampas típicas}
+\begin{center}\small
+\begin{tabular}{p{6.6cm}p{7.4cm}}
+\toprule
+\textbf{Falso} & \textbf{Lo correcto} \\ \midrule
+El Scrum Master asigna tareas al equipo. & El equipo se auto-organiza; el SM facilita y elimina impedimentos. \\
+El equipo prioriza el Product Backlog. & Lo prioriza el \textbf{PO}; el equipo \textbf{estima}. \\
+El PO es dueño del Sprint Backlog. & El Sprint Backlog es del \textbf{equipo}; el Product Backlog, del PO. \\
+El Product Backlog está cerrado tras el Sprint 0. & Es \textbf{emergente} y dinámico: cambia siempre. \\
+Durante el Sprint se puede cambiar su objetivo. & No; solo se \textbf{clarifica o renegocia el alcance}. \\
+Si vamos mal, bajamos la calidad. & Los objetivos de calidad \textbf{no disminuyen}; se reduce el alcance. \\
+En el Daily se resuelven los problemas técnicos. & Solo se identifican impedimentos; se resuelven después. \\
+El SM dirige el Daily. & Lo facilita, pero no debería dirigirlo. \\
+La Retrospectiva revisa el producto. & Revisa el \textbf{proceso} (cómo); la Review, el producto (qué). \\
+Los stakeholders van a la Retrospectiva. & Van a la \textbf{Review}; la Retro es del equipo y el SM. \\
+El grooming es una de las cuatro reuniones. & No está formalmente incluida; se hace justo antes de cada Planning. \\
+Los Sprints varían de duración según el trabajo. & Duración \textbf{fija}, de 1 a 4 semanas. \\
+Un rol es un puesto en la empresa. & Es una responsabilidad en el proceso. \\
+El equipo tiene un subequipo de pruebas. & Scrum no reconoce sub-equipos; es multifuncional. \\
+El Sprint 0 puede durar lo que haga falta. & Duración variable pero \textbf{no indefinida}. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{El examen en grupo: cómo organizaros}
+Es una hora, sin apuntes y en grupo. La ventaja es que cada uno puede llevar dominado un bloque; el riesgo es perder
+tiempo discutiendo.
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Repartid el temario antes del viernes}, con solapes: cada bloque, al menos dos personas.
+        \begin{itemize}[itemsep=1pt]
+          \item Historia, definición, pilares y valores, roles.
+          \item Artefactos (Product Backlog DEEP, priorización, Sprint Backlog, Burndown, impedimentos).
+          \item Reuniones (Planning con sus fases y pasos, grooming, Daily, Review con su guion, Retrospectiva y técnicas).
+          \item Sprint 0, visión y elevator pitch.
+        \end{itemize}
+  \item \textbf{En el examen}: 5 minutos para leer todo y repartir preguntas por bloques; los ejercicios largos
+        (visión, backlog, planificación) los hacen dos personas juntas; dejad 10 minutos para que otro revise cada
+        respuesta.
+  \item \textbf{Un único redactor por pregunta}, con letra clara. Los demás dictan y comprueban.
+  \item Las \textbf{preguntas cortas} se contestan con la definición y un ejemplo; los \textbf{ejercicios}, con el
+        resultado y el porqué (en qué fase, qué rol, qué artefacto).
+\end{enumerate}
+
+% ==============================================================================
+\section{Ejercicios resueltos}
+
+\begin{ejercicio}[1. Visión y elevator pitch]
+Una start-up quiere crear \emph{ComparteCoche UGR}, una app para que estudiantes de la UGR que viven en pueblos del
+área metropolitana compartan coche hasta los campus. Redacta la visión del producto con sus dos elementos básicos y
+un \emph{elevator pitch}.
+\end{ejercicio}
+\textbf{Concepto.} Problema: muchos estudiantes de pueblos tienen malas conexiones de autobús y van solos en coche,
+con gasto alto y problemas de aparcamiento. Solución: app que empareja conductores y pasajeros por horario de clases y
+campus. Usuarios: estudiantes con y sin coche. Necesidad: llegar a tiempo, barato. Competencia: BlaBlaCar (pensado
+para viajes largos, no diarios) y grupos de WhatsApp (sin verificación ni reparto de gastos).\\
+\textbf{Modelo de negocio.} Presupuesto: subvención de la UGR y del área de movilidad; 6 meses y 40.000~\euro{} para el
+MVP. Beneficio: comisión de 0,20~\euro{} por trayecto y patrocinio de gasolineras. Distribución: tiendas de apps,
+difusión en la web de la UGR y en las matrículas. Costes: desarrollo, servidores, verificación de identidad.\\
+\textbf{Elevator pitch.} \emph{Para los estudiantes de la UGR que viven fuera de Granada y pierden tiempo y dinero cada
+día en el trayecto, ComparteCoche UGR es una app de coche compartido que empareja automáticamente conductores y
+pasajeros según su horario de clases. A diferencia de BlaBlaCar o de los grupos de WhatsApp, solo admite usuarios
+verificados con correo de la UGR y reparte los gastos automáticamente.}
+
+\begin{ejercicio}[2. Sprint 0]
+Para el proyecto anterior, enumera qué haríais en el Sprint 0 organizado en «qué, cómo y cuándo», y qué tiene que estar
+claro al acabar.
+\end{ejercicio}
+\textbf{Qué}: visión (ejercicio 1) y Product Backlog inicial con las primeras épicas e historias. \textbf{Cómo}:
+equipo de 6 (PO de la start-up, SM, 5 desarrolladores multifuncionales); Sprints de 2 semanas; Jira y Slack; estándares
+de código y Definition of Done; arquitectura inicial (app Flutter + API REST + base de datos); prueba de concepto del
+emparejamiento por horario. \textbf{Cuándo}: plan de entregas (MVP en el Sprint 4, versión pública en el Sprint 8).
+\textbf{Al final}: que el proyecto es \textbf{viable} y hay \textbf{contrato} (recursos, equipo, alcance y fechas
+acordados con el cliente).
+
+\begin{ejercicio}[3. Product Backlog DEEP y MoSCoW]
+Escribe 6 historias para el Product Backlog, estímalas y priorízalas con MoSCoW. Justifica que es DEEP.
+\end{ejercicio}
+\begin{center}\small
+\begin{tabular}{cp{9.6cm}cc}
+\toprule
+\textbf{Orden} & \textbf{Historia de usuario} & \textbf{PH} & \textbf{MoSCoW} \\ \midrule
+1 & Como estudiante, quiero registrarme con mi correo de la UGR para que solo haya usuarios verificados. & 3 & Must \\
+2 & Como conductor, quiero publicar un trayecto con hora y plazas para llevar pasajeros. & 5 & Must \\
+3 & Como pasajero, quiero buscar trayectos por campus y hora para llegar a clase. & 5 & Must \\
+4 & Como pasajero, quiero reservar plaza para asegurarme el viaje. & 3 & Should \\
+5 & Como usuario, quiero valorar a los demás para viajar con gente de confianza. & 2 & Could \\
+6 & Como conductor, quiero cobrar con tarjeta dentro de la app para no manejar efectivo. & 8 & Won't (esta entrega) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{DEEP}: \emph{detallado} (las de arriba tienen criterios de aceptación; la 6 puede quedarse como épica),
+\emph{emergente} (en la Review pueden aparecer más), \emph{estimado} (puntos de historia por el equipo) y
+\emph{priorizado} (orden por valor, lo decide el PO).
+
+\begin{ejercicio}[4. Sprint Planning con velocidad]
+La velocidad media del equipo es de 12 puntos. El Product Backlog priorizado es: A (5), B (3), C (8), D (2), E (3).
+¿Qué historias entran en el Sprint según el procedimiento de las diapositivas? ¿Y si el PO dice que D es imprescindible
+para el objetivo del Sprint?
+\end{ejercicio}
+Se recorren en \textbf{orden de prioridad} hasta alcanzar (o superar ligeramente) la velocidad: A (5) $\to$ 5; B (3) $\to$
+8; C (8) $\to$ 16, que supera bastante los 12. Lo normal es parar en A y B (8 puntos) y negociar con el PO: si no se
+puede partir C, se puede añadir D (2) $\to$ 10, y E no cabe entera (13 superaría ligeramente: aceptable si el equipo se
+compromete). El orden de prioridad se mantiene en el Sprint Backlog. Si D es imprescindible para el objetivo, el PO
+debe \textbf{subirla de prioridad} en el Product Backlog antes de seleccionar; no la elige el equipo por su cuenta.
+
+\begin{ejercicio}[5. De historia a tareas (Sprint Backlog)]
+Descompón la historia «Como pasajero, quiero buscar trayectos por campus y hora» en tareas y di qué estados pueden
+tener.
+\end{ejercicio}
+Tareas (lenguaje técnico): diseñar la pantalla de búsqueda (3 h); servicio de búsqueda en la API, \texttt{GET /trayectos} filtrando por campus y hora (5 h);
+índice en la base de datos por campus y hora (2 h); filtro de plazas libres (2 h); pruebas de aceptación de los
+criterios (3 h); pruebas en dispositivo (2 h). Estados: \textbf{pendiente, en curso, terminada e impedida}. Las hace el
+\textbf{equipo} en la segunda fase del Sprint Planning; el Sprint Backlog es suyo.
+
+\begin{ejercicio}[6. Interpretar un Burndown]
+Sprint de 10 días con 80 horas. El día 5 quedan 64 horas. ¿Qué indica y qué haríais? ¿Y si quedaran 30?
+\end{ejercicio}
+La línea ideal el día 5 estaría en 40 horas. Con 64 la real va \textbf{por encima}: el ritmo es bajo. Hay que buscar
+la causa en el Daily (¿impedimentos?) y, si no se recupera, \textbf{reducir el alcance} renegociándolo con el PO, sin
+bajar la calidad ni cambiar el objetivo del Sprint. Con 30 va \textbf{por debajo}: el ritmo es mayor y quizá se puedan
+\textbf{incorporar nuevas historias} (las siguientes en prioridad, de acuerdo con el PO).
+
+\begin{ejercicio}[7. ¿Qué está mal? (roles y reuniones)]
+Señala el error en cada situación: (a) El Scrum Master reparte las tareas del Sprint en el Daily. (b) A mitad de Sprint,
+el director comercial pide al equipo una funcionalidad nueva urgente y el equipo la mete. (c) La Retrospectiva la
+dirige el cliente para ver la demo. (d) Como vamos retrasados, nos saltamos las pruebas.
+\end{ejercicio}
+(a) El equipo se auto-organiza; el SM facilita el Daily sin dirigirlo ni asignar trabajo. (b) Las peticiones van al
+\textbf{PO}, que las añade y prioriza en el Product Backlog; el SM \textbf{protege} al equipo de interferencias y no se
+cambia el objetivo del Sprint. (c) La demo con el cliente es la \textbf{Review}; la Retrospectiva es del equipo para
+mejorar su proceso. (d) Los objetivos de calidad \textbf{no disminuyen}: se reduce el alcance.
+
+\begin{ejercicio}[8. Preparar una retrospectiva]
+El equipo ha tenido un Sprint con muchos problemas de despliegue y comunicación con el PO, pero ha aprendido a usar
+pruebas automáticas. Plantea una retrospectiva con la estrella de mar.
+\end{ejercicio}
+\textbf{Start doing}: despliegue automático con integración continua. \textbf{Do more}: pruebas automáticas (útiles,
+seguir ampliándolas). \textbf{Continue to do}: el panel de tareas actualizado tras el Daily. \textbf{Do less}:
+reuniones largas por chat que no aportan. \textbf{Stop doing}: desplegar a mano el último día. Salida: 2 o 3 acciones
+concretas para el siguiente Sprint, con responsable (por ejemplo, «sesión semanal de 30 minutos con el PO»).
+
+% ==============================================================================
+\section{Preguntas cortas con respuesta modelo}
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item \textbf{¿Qué es Scrum?} Un marco de trabajo iterativo e incremental que no sigue un plan fijo, sino que se adapta
+        continuamente a la evolución del proyecto.
+  \item \textbf{¿Por qué «rugby»?} Takeuchi y Nonaka oponen el relevo (fases secuenciales) al rugby (el equipo avanza
+        unido pasándose el balón): los equipos Scrum hacen un poco de todo, todo el tiempo.
+  \item \textbf{Pilares empíricos}: transparencia, inspección y adaptación.
+  \item \textbf{Elementos de Scrum}: 3 artefactos (Product Backlog, Sprint Backlog, Burndown), 4 reuniones
+        (Planning, Daily, Review, Retrospective), 3 roles (PO, SM, equipo) y las reglas de trabajo.
+  \item \textbf{Roles gallina y cerdo}: cerdos, el equipo Scrum (PO, SM, equipo), comprometidos; gallinas, los
+        stakeholders (usuario, cliente, dirección), interesados pero no comprometidos.
+  \item \textbf{Responsabilidades del PO}: visión compartida, requisitos, Product Backlog priorizado, aceptar o rechazar
+        el incremento, resolver dudas, plan de entregas y ROI.
+  \item \textbf{¿Por qué el SM no es un jefe?} Es facilitador, coach y mentor: elimina impedimentos y protege al equipo,
+        pero no asigna tareas ni decide el producto.
+  \item \textbf{Características del equipo}: auto-organizado, multidisciplinar, multifuncional, comprometido, sin
+        sub-equipos, a tiempo completo, de 5 a 9 personas.
+  \item \textbf{Lista DEEP}: detallada, emergente, estimada y priorizada.
+  \item \textbf{Product Backlog frente a Sprint Backlog}: el primero es todo lo que podría necesitar el producto, en
+        lenguaje de negocio, del PO; el segundo, lo seleccionado para el Sprint, descompuesto en tareas, del equipo.
+  \item \textbf{Fases del Sprint Planning}: planificación (qué historias entran, por prioridad y velocidad) y
+        planificación detallada (cómo: división en tareas por el equipo).
+  \item \textbf{Las tres preguntas del Daily}: qué he hecho, qué voy a hacer y qué impedimentos tengo.
+  \item \textbf{¿Qué genera la Review?} Product Backlog adaptado y plan de entregas actualizado con la nueva velocidad.
+  \item \textbf{Review frente a Retrospective}: producto (qué, con stakeholders) frente a proceso (cómo, el equipo).
+  \item \textbf{¿Qué es el Sprint 0?} Etapa de duración variable pero no indefinida para definir la visión, el backlog
+        inicial, el equipo y la forma de trabajar; al final se sabe si el proyecto es viable.
+  \item \textbf{Elementos de la visión}: concepto (beneficio para los usuarios) y modelo de negocio (beneficio para los
+        creadores).
+  \item \textbf{Test del ascensor}: la visión tiene que poder explicarse en el tiempo de un viaje en ascensor (Moore).
+  \item \textbf{¿Qué es el backlog grooming?} Refinar el Product Backlog justo antes de cada Planning; no es una reunión
+        formal de Scrum; la dirige el PO.
+\end{enumerate}
+
+% ==============================================================================
+\clearpage
+\section*{Tabla resumen para el último repaso}
+\addcontentsline{toc}{section}{Tabla resumen}
+\begin{center}\small
+\begin{tabular}{p{3.3cm}p{10.8cm}}
+\toprule
+Scrum & marco iterativo e incremental; adaptación continua, no seguir un plan \\
+Historia & Takeuchi-Nonaka 1986 (rugby) · Sutherland, Easel 1993 · Schwaber, OOPSLA 1996 · libro Schwaber-Beedle 2001 · Scrum Alliance 2002 (Schwaber, Cohn) \\
+Pilares & transparencia, inspección, adaptación \\
+Elementos & 3 artefactos + 4 reuniones + 3 roles + reglas \\
+PO & cliente/negocio; prioriza el PB; acepta o rechaza; ROI; plan de entregas \\
+SM & facilitador, coach, mentor; impedimentos; escudo; proceso \\
+Equipo & auto-organizado, multifuncional, sin sub-equipos, 5--9; estima; Sprint Backlog \\
+Product Backlog & ordenado y priorizado, lenguaje de negocio, del PO; DEEP \\
+Priorización & priority poker, MoSCoW, Kano, criba de temas, peso relativo \\
+Sprint Backlog & historias del Sprint en tareas; del equipo; pendiente/en curso/terminada/impedida \\
+Burndown & trabajo pendiente; por encima de la ideal: reducir alcance; por debajo: añadir historias \\
+Sprint & time-box fijo de 1--4 semanas; incremento terminado y desplegable; no cambia el objetivo ni baja la calidad \\
+Planning (8 h) & qué (selección por prioridad hasta la velocidad) + cómo (tareas) \\
+Daily (15 min) & hecho / haré / impedimentos; SM facilita sin dirigir; PO puede asistir \\
+Review (4 h) & último día; demo; stakeholders; PB adaptado + plan de entregas \\
+Retro (3 h) & después de la Review; cómo trabajamos; Barco, Estrella de mar, 4 L \\
+Grooming & no formal; justo antes del Planning; lo dirige el PO \\
+Sprint 0 & visión + PB inicial; equipo y forma de trabajar; arquitectura; prueba de concepto; plan de entregas; viabilidad y contrato \\
+Visión & del PO; concepto + modelo de negocio; test del ascensor (Moore) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

@@ -1,0 +1,219 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "vf",
+  "order": -7,
+  "title": "Verdadero o falso: Tema 4 Scrum (trampas de examen)",
+  "description": "30 afirmaciones con las confusiones típicas: quién prioriza y quién estima, qué reunión es cuál, qué no se cambia en un Sprint.",
+  "items": [
+    {
+      "n": 1,
+      "tema": "Roles",
+      "q": "El Scrum Master asigna las tareas del Sprint a cada miembro del equipo.",
+      "answer": "F",
+      "justification": "El equipo es auto-organizado (diap. 30) y descompone y reparte el trabajo. El SM es facilitador, coach y mentor (diap. 22)."
+    },
+    {
+      "n": 2,
+      "tema": "Roles",
+      "q": "Los roles de Scrum representan una responsabilidad en el proceso, no un puesto en la organización.",
+      "answer": "V",
+      "justification": "Diap. 15, textualmente."
+    },
+    {
+      "n": 3,
+      "tema": "Roles",
+      "q": "Los stakeholders son «roles cerdo» porque están comprometidos con el resultado.",
+      "answer": "F",
+      "justification": "Son roles gallina: interesados, no comprometidos. Los cerdos son PO, SM y equipo (diap. 16)."
+    },
+    {
+      "n": 4,
+      "tema": "Roles",
+      "q": "El Product Owner es quien acepta o rechaza el software al final de cada iteración.",
+      "answer": "V",
+      "justification": "Diap. 21."
+    },
+    {
+      "n": 5,
+      "tema": "Roles",
+      "q": "Scrum recomienda dividir el equipo en sub-equipos de desarrollo y de pruebas.",
+      "answer": "F",
+      "justification": "Scrum no reconoce sub-equipos; el equipo es multifuncional (diap. 30)."
+    },
+    {
+      "n": 6,
+      "tema": "Roles",
+      "q": "El tamaño típico del equipo de desarrollo es de 5 a 9 personas.",
+      "answer": "V",
+      "justification": "Diap. 31."
+    },
+    {
+      "n": 7,
+      "tema": "Roles",
+      "q": "Eliminar impedimentos es responsabilidad del Product Owner.",
+      "answer": "F",
+      "justification": "Es del Scrum Master (diap. 23 y 26)."
+    },
+    {
+      "n": 8,
+      "tema": "Roles",
+      "q": "En una implementación proxy, un product manager puede actuar como Product Owner en representación de varios clientes.",
+      "answer": "V",
+      "justification": "Diap. 19."
+    },
+    {
+      "n": 9,
+      "tema": "Artefactos",
+      "q": "El Product Backlog se cierra al acabar el Sprint 0 y ya no cambia.",
+      "answer": "F",
+      "justification": "Es emergente y dinámico: pueden aparecer historias nuevas en cualquier momento (diap. 36-38)."
+    },
+    {
+      "n": 10,
+      "tema": "Artefactos",
+      "q": "El Product Backlog solo contiene requisitos funcionales.",
+      "answer": "F",
+      "justification": "Contiene requisitos funcionales y no funcionales (diap. 37)."
+    },
+    {
+      "n": 11,
+      "tema": "Artefactos",
+      "q": "El Sprint Backlog es propiedad del equipo de desarrollo.",
+      "answer": "V",
+      "justification": "Diap. 40."
+    },
+    {
+      "n": 12,
+      "tema": "Artefactos",
+      "q": "Si en el Burndown la línea real va por debajo de la ideal, el equipo va más rápido de lo previsto y puede plantearse añadir historias.",
+      "answer": "V",
+      "justification": "Diap. 44."
+    },
+    {
+      "n": 13,
+      "tema": "Artefactos",
+      "q": "El responsable de la lista de impedimentos es el Scrum Master.",
+      "answer": "V",
+      "justification": "Diap. 66."
+    },
+    {
+      "n": 14,
+      "tema": "Artefactos",
+      "q": "MoSCoW, Kano y priority poker son técnicas de estimación del tamaño de las historias.",
+      "answer": "F",
+      "justification": "Son técnicas de priorización (diap. 39)."
+    },
+    {
+      "n": 15,
+      "tema": "Sprint",
+      "q": "La duración de cada Sprint se ajusta a la cantidad de trabajo pendiente.",
+      "answer": "F",
+      "justification": "La longitud es fija, de 1 a 4 semanas (diap. 47 y 49)."
+    },
+    {
+      "n": 16,
+      "tema": "Sprint",
+      "q": "Si el Sprint va retrasado, se pueden relajar los objetivos de calidad para cumplir la fecha.",
+      "answer": "F",
+      "justification": "«Los objetivos de calidad no disminuyen» (diap. 49); en su lugar se renegocia el alcance."
+    },
+    {
+      "n": 17,
+      "tema": "Sprint",
+      "q": "Durante el Sprint, el PO y el equipo pueden clarificar y renegociar el alcance a medida que aprenden.",
+      "answer": "V",
+      "justification": "Diap. 49. Lo que no se cambia es el objetivo del Sprint."
+    },
+    {
+      "n": 18,
+      "tema": "Sprint",
+      "q": "En un Sprint de 4 semanas, el Sprint Planning dura como máximo 8 horas.",
+      "answer": "V",
+      "justification": "Diap. 50."
+    },
+    {
+      "n": 19,
+      "tema": "Sprint",
+      "q": "En la primera fase del Sprint Planning el equipo divide las historias en tareas técnicas.",
+      "answer": "F",
+      "justification": "Eso es la segunda fase (planificación detallada). En la primera se seleccionan historias por prioridad hasta la velocidad media (diap. 53-57)."
+    },
+    {
+      "n": 20,
+      "tema": "Sprint",
+      "q": "El backlog grooming es una de las cuatro reuniones formales de Scrum.",
+      "answer": "F",
+      "justification": "No está formalmente incluido; se hace justo antes de cada planificación (diap. 61)."
+    },
+    {
+      "n": 21,
+      "tema": "Reuniones",
+      "q": "En el Daily se discuten las soluciones técnicas a los problemas que surgen.",
+      "answer": "F",
+      "justification": "No se discuten soluciones ni el origen del impedimento: solo cómo resolverlo y quién (diap. 65)."
+    },
+    {
+      "n": 22,
+      "tema": "Reuniones",
+      "q": "El Product Owner puede asistir al Daily, pero no es un participante activo.",
+      "answer": "V",
+      "justification": "Diap. 68."
+    },
+    {
+      "n": 23,
+      "tema": "Reuniones",
+      "q": "El Scrum Master dirige el Daily preguntando a cada miembro.",
+      "answer": "F",
+      "justification": "Lo facilita para que cumpla tiempo y propósito, pero no debería dirigirlo (diap. 68)."
+    },
+    {
+      "n": 24,
+      "tema": "Reuniones",
+      "q": "La Sprint Review se celebra el último día del Sprint.",
+      "answer": "V",
+      "justification": "Diap. 71."
+    },
+    {
+      "n": 25,
+      "tema": "Reuniones",
+      "q": "Los stakeholders participan en la Sprint Retrospective para dar su feedback del producto.",
+      "answer": "F",
+      "justification": "El feedback del producto lo dan en la Review (diap. 79). La Retrospectiva es del equipo y el SM; el PO es opcional (diap. 85)."
+    },
+    {
+      "n": 26,
+      "tema": "Reuniones",
+      "q": "La Retrospectiva analiza «el cómo» trabaja el equipo para mejorar continuamente.",
+      "answer": "V",
+      "justification": "Diap. 80."
+    },
+    {
+      "n": 27,
+      "tema": "Reuniones",
+      "q": "En la retrospectiva del Barco, el iceberg representa los riesgos.",
+      "answer": "V",
+      "justification": "Diap. 87."
+    },
+    {
+      "n": 28,
+      "tema": "Sprint 0 y visión",
+      "q": "El Sprint 0 puede durar indefinidamente hasta que el producto esté perfectamente definido.",
+      "answer": "F",
+      "justification": "Su duración es variable pero no indefinida (diap. 93)."
+    },
+    {
+      "n": 29,
+      "tema": "Sprint 0 y visión",
+      "q": "La visión del producto debe ser información de alto nivel, sencilla y sin ambigüedades.",
+      "answer": "V",
+      "justification": "Diap. 98."
+    },
+    {
+      "n": 30,
+      "tema": "Sprint 0 y visión",
+      "q": "Según el test del ascensor, la visión debe poder explicarse en lo que dura un viaje de varios pisos en ascensor.",
+      "answer": "V",
+      "justification": "Diap. 101 (G. Moore)."
+    }
+  ]
+}

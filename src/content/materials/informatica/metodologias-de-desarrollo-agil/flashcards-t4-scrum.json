@@ -1,0 +1,219 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "flashcards",
+  "order": -8,
+  "title": "Flashcards Tema 4: Scrum",
+  "description": "42 tarjetas con todo el Tema 4: elementos 3-4-3, roles, DEEP, duraciones de las reuniones, técnicas de retrospectiva, Sprint 0 y visión.",
+  "items": [
+    {
+      "tema": "Origen",
+      "term": "Takeuchi y Nonaka (1986)",
+      "def": "«The New New Product Development Game» (HBR): proponen el enfoque «rugby» (el equipo avanza unido) frente a la «carrera de relevos». Primeros en usar el término."
+    },
+    {
+      "tema": "Origen",
+      "term": "Hitos de Scrum",
+      "def": "1993 Sutherland en Easel Corp. (primer equipo) · 1996 Schwaber en OOPSLA (formalización) · 2001 libro de Schwaber y Beedle · 2002 Scrum Alliance (Schwaber y Cohn)."
+    },
+    {
+      "tema": "Origen",
+      "term": "¿Qué es Scrum?",
+      "def": "Un marco de trabajo iterativo e incremental que no sigue un plan, sino que se adapta continuamente a la evolución del proyecto."
+    },
+    {
+      "tema": "Origen",
+      "term": "Pilares empíricos",
+      "def": "Transparencia, inspección y adaptación."
+    },
+    {
+      "tema": "Origen",
+      "term": "Valores de Scrum (diap. 10)",
+      "def": "Mejora continua, calidad, time-boxing, responsabilidad, multidisciplinar, flexibilidad, ritmo, compromiso, simplicidad, respeto, coraje, foco, predictibilidad y personas."
+    },
+    {
+      "tema": "Origen",
+      "term": "Factores clave",
+      "def": "Delegación al equipo (auto-organización), respeto entre personas, responsabilidad y autodisciplina, compromiso, y transparencia y visibilidad."
+    },
+    {
+      "tema": "Origen",
+      "term": "Elementos de Scrum (3-4-3)",
+      "def": "3 artefactos (Product Backlog, Sprint Backlog, Burndown), 4 reuniones (Planning, Daily, Review, Retrospective), 3 roles (PO, SM, equipo) + reglas de trabajo."
+    },
+    {
+      "tema": "Roles",
+      "term": "Rol en Scrum",
+      "def": "Una responsabilidad en el proceso, no la posición en la organización."
+    },
+    {
+      "tema": "Roles",
+      "term": "Roles cerdo y gallina",
+      "def": "Cerdos: PO, SM y equipo (comprometidos). Gallinas: stakeholders (user, customer, management), interesados pero no comprometidos."
+    },
+    {
+      "tema": "Roles",
+      "term": "Stakeholders",
+      "def": "Personas u organizaciones con interés en el trabajo. Son fuente de requisitos y validan el trabajo dando feedback."
+    },
+    {
+      "tema": "Roles",
+      "term": "Product Owner",
+      "def": "Representante del cliente e intermediario con el equipo. Visión, requisitos, Product Backlog priorizado, aceptar o rechazar el incremento, resolver dudas, plan de entregas y ROI."
+    },
+    {
+      "tema": "Roles",
+      "term": "PO directo y proxy",
+      "def": "Directo: el propio cliente es el PO. Proxy: un intermediario (p. ej. product manager) representa a varios clientes."
+    },
+    {
+      "tema": "Roles",
+      "term": "Necesidades del PO",
+      "def": "Conocer a fondo el negocio, tener atribuciones para decidir, conocer Scrum y recibir retroinformación continua."
+    },
+    {
+      "tema": "Roles",
+      "term": "Scrum Master",
+      "def": "Facilitador, coach y mentor. Garantiza el proceso, elimina impedimentos, protege al equipo (escudo) y mejora su productividad. No asigna tareas."
+    },
+    {
+      "tema": "Roles",
+      "term": "Atributos del SM",
+      "def": "Responsable, humilde, colaborador, comprometido, influyente y entendido."
+    },
+    {
+      "tema": "Roles",
+      "term": "Servicios del SM",
+      "def": "Al PO (gestionar y ordenar el backlog), al equipo (auto-organización, impedimentos, facilitar eventos) y a la organización (adopción de Scrum)."
+    },
+    {
+      "tema": "Roles",
+      "term": "Equipo de desarrollo",
+      "def": "Entrega cada Sprint un incremento «terminado» y desplegable. Auto-organizado, multidisciplinar, multifuncional, sin sub-equipos, a tiempo completo, de 5 a 9 personas."
+    },
+    {
+      "tema": "Roles",
+      "term": "Responsabilidades del equipo",
+      "def": "Estimar los ítems del backlog, comprometerse a entregar con calidad de producción y seguir su propio plan de avance."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Product Backlog",
+      "def": "Lista ordenada y priorizada de todo lo que podría necesitar el producto. Lenguaje de negocio, flexible y dinámica; responsable: el PO. Requisitos funcionales y no funcionales."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Lista DEEP",
+      "def": "Detallada (entendible y estimable), Emergente (aparecen historias nuevas), Estimada y Priorizada."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Técnicas de priorización",
+      "def": "Priority poker, MoSCoW (Must, Should, Could, Won't), modelo de Kano, criba de temas y peso relativo."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Sprint Backlog",
+      "def": "Historias del Product Backlog negociadas para el Sprint, descompuestas en tareas técnicas. Propiedad del equipo."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Dimensiones del Sprint Backlog",
+      "def": "Prioridad, detalle (historia dividida en tareas) y estado: pendiente, en curso, terminada o impedida."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Burndown Chart",
+      "def": "Gráfica del trabajo pendiente, del Sprint o del proyecto. Real por encima de la ideal: ritmo bajo, reducir alcance. Por debajo: ritmo alto, se pueden añadir historias."
+    },
+    {
+      "tema": "Artefactos",
+      "term": "Lista de impedimentos",
+      "def": "Sale del Daily: todo lo que impide alcanzar los objetivos. Responsable: el SM. Cada impedimento se describe, se busca solución y se le asigna responsable."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Sprint",
+      "def": "Time-box fijo de 1 a 4 semanas que produce un incremento terminado y desplegable. No se cambia su objetivo ni bajan los objetivos de calidad; el alcance se puede renegociar."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Duraciones (Sprint de 4 semanas)",
+      "def": "Planning 8 h, Review 4 h, Retrospectiva 3 h. Daily: 15 min (Guía de Scrum; no viene en la diapositiva)."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Fases del Sprint Planning",
+      "def": "1) Planificación: qué historias entran, por prioridad y hasta la velocidad media. 2) Planificación detallada: el equipo las divide en tareas."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Selección de historias (5 pasos)",
+      "def": "El PO lee la más prioritaria; la explica con sus criterios de aceptación; el equipo la estima; pasa al Sprint Backlog en orden; se para al alcanzar la velocidad media."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Backlog grooming",
+      "def": "Refinar el Product Backlog (depurar, añadir, eliminar, dividir épicas, repriorizar). No es formal en Scrum; justo antes de cada Planning; lo dirige el PO."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Daily Meeting",
+      "def": "Diaria; equipo y SM (el PO puede asistir). Qué hice, qué haré, qué impedimentos tengo. Breve, sin discutir soluciones; el SM facilita sin dirigir."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Sprint Review",
+      "def": "Último día del Sprint; equipo, SM, PO y stakeholders. Demo de lo terminado y feedback. Genera el Product Backlog adaptado y el plan de entregas actualizado."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Guion de la Review (8 pasos)",
+      "def": "Normas · objetivos del Sprint · el PO dice qué se terminó · métricas del equipo · demostración · el PO repasa backlog y plan de entregas · comentarios de los stakeholders · recogida de comentarios."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Sprint Retrospective",
+      "def": "Después de la Review; equipo y SM (PO opcional). Mejorar «el cómo»: qué hacemos bien, qué mejorar y qué haremos en la siguiente iteración. Revisa personas, relaciones, procesos y herramientas."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Retrospectiva del Barco",
+      "def": "Viento: nos impulsa. Ancla: impedimentos. Iceberg: riesgos. Sol: lo que nos facilita. Isla o tesoro: objetivo."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Estrella de mar",
+      "def": "Start doing, Do more, Continue to do, Do less, Stop doing."
+    },
+    {
+      "tema": "Sprint y reuniones",
+      "term": "Las 4 L",
+      "def": "Liked, Lacked, Learned y Longed for."
+    },
+    {
+      "tema": "Sprint 0 y visión",
+      "term": "Sprint 0",
+      "def": "Define la misión, las herramientas y el equipo. Duración variable pero no indefinida. Al final: viabilidad y contrato."
+    },
+    {
+      "tema": "Sprint 0 y visión",
+      "term": "Actividades del Sprint 0",
+      "def": "Qué: visión y Product Backlog inicial. Cómo: organizar el equipo (incluida la duración de los Sprints), arquitectura inicial y prueba de concepto. Cuándo: plan de entregas."
+    },
+    {
+      "tema": "Sprint 0 y visión",
+      "term": "Visión del producto",
+      "def": "Dónde se quiere estar. La define el PO; conocida, comprendida y compartida por todos. Origen y final del proceso."
+    },
+    {
+      "tema": "Sprint 0 y visión",
+      "term": "Elementos de la visión",
+      "def": "Concepto (cómo se benefician los usuarios: problema, solución, usuarios, necesidad, competencia) y modelo de negocio (cómo se benefician los creadores: presupuesto, tiempo, beneficio, distribución, costes)."
+    },
+    {
+      "tema": "Sprint 0 y visión",
+      "term": "Test del ascensor",
+      "def": "G. Moore: la visión debe poder explicarse en lo que dura un viaje de varios pisos en ascensor. Plantilla: Para [cliente] que [necesidad], [producto] es un [categoría] que [beneficio]. A diferencia de [competencia], [diferencia]."
+    }
+  ]
+}

@@ -1,0 +1,753 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "test",
+  "order": -9,
+  "title": "Test Tema 4: Scrum",
+  "description": "62 preguntas tipo test del Tema 4 (origen, pilares, roles, artefactos, Sprint, reuniones, retrospectivas, Sprint 0 y visión) con justificación y la diapositiva de la que sale cada una.",
+  "items": [
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "¿Qué imagen usan Takeuchi y Nonaka (1986) para describir la nueva forma de desarrollar productos que dio nombre a Scrum?",
+      "opts": [
+        "Un equipo de rugby que avanza como una unidad pasándose el balón adelante y atrás.",
+        "Una orquesta dirigida por un director que marca el ritmo a cada músico.",
+        "Una carrera de relevos en la que cada fase pasa el testigo a la siguiente.",
+        "Una cadena de montaje en la que cada puesto se especializa en una tarea."
+      ],
+      "correct": 0,
+      "justification": "Diap. 2: frente al enfoque de «carrera de relevos», proponen un enfoque «rugby» en el que el equipo va a la distancia como una unidad. Un scrum es la melé del rugby. La carrera de relevos es justo lo que critican."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "¿Quién formalizó Scrum en el artículo «Scrum Development Process» presentado en OOPSLA en 1996?",
+      "opts": [
+        "Ken Schwaber.",
+        "Mike Cohn.",
+        "Hirotaka Takeuchi.",
+        "Jeff Sutherland."
+      ],
+      "correct": 0,
+      "justification": "Diap. 4: Ken Schwaber lo formalizó en OOPSLA (1996). Sutherland fue el primero en aplicarlo (Easel Corp., 1993), Cohn cofundó la Scrum Alliance (2002) y Takeuchi acuñó el término en 1986 con Nonaka."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "¿Dónde y cuándo trabajó por primera vez un equipo con Scrum?",
+      "opts": [
+        "En la Scrum Alliance, con Schwaber y Cohn, en 2002.",
+        "En IBM, con Schwaber y Beedle, en 2001.",
+        "En Easel Corp., con Jeff Sutherland, en 1993.",
+        "En Toyota, con Takeuchi y Nonaka, en 1986."
+      ],
+      "correct": 2,
+      "justification": "Diap. 3: «El primer equipo que trabajó con SCRUM fue el compuesto por J. Sutherland en Easel Corp. 1993». 1986 es el artículo de Takeuchi y Nonaka; 2001, el libro de Schwaber y Beedle; 2002, la fundación de la Scrum Alliance."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "Según las diapositivas, Scrum es…",
+      "opts": [
+        "Un marco de trabajo iterativo e incremental que se basa en la adaptación continua, no en seguir un plan.",
+        "Un conjunto de prácticas de programación como la programación por parejas y el TDD.",
+        "Una metodología secuencial basada en un plan detallado que se sigue de principio a fin.",
+        "Una herramienta de gestión de proyectos para diagramas de Gantt."
+      ],
+      "correct": 0,
+      "justification": "Diap. 8: «Scrum es un marco de trabajo iterativo e incremental… no se basa en el seguimiento de un plan, sino en la adaptación continua a las circunstancias de la evolución del proyecto»."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "¿Cuáles son los tres pilares empíricos de Scrum?",
+      "opts": [
+        "Visión, backlog y entrega.",
+        "Transparencia, inspección y adaptación.",
+        "Planificación, ejecución y control.",
+        "Compromiso, coraje y foco."
+      ],
+      "correct": 1,
+      "justification": "Diap. 9. Compromiso, coraje y foco son valores, no pilares; planificación-ejecución-control es el ciclo de gestión tradicional."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "Un equipo revisa cada día en el Daily cómo va respecto al objetivo y, si se desvía, reorganiza el trabajo. ¿Qué pilares empíricos está aplicando?",
+      "opts": [
+        "Compromiso y respeto.",
+        "Inspección y adaptación.",
+        "Solo transparencia.",
+        "Ninguno: el Daily no tiene relación con el empirismo."
+      ],
+      "correct": 1,
+      "justification": "Revisar el avance es inspección; reorganizar el trabajo cuando hay desviación es adaptación (diap. 9). La transparencia es la condición previa: que todos vean el estado real."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "¿Cuál de estos NO aparece entre los valores de Scrum de la diapositiva 10?",
+      "opts": [
+        "Respeto.",
+        "Time-boxing.",
+        "Jerarquía.",
+        "Coraje."
+      ],
+      "correct": 2,
+      "justification": "Diap. 10: mejora continua, calidad, time-boxing, responsabilidad, multidisciplinar, flexibilidad, ritmo, compromiso, simplicidad, respeto, coraje, foco, predictibilidad y personas. La jerarquía va contra la auto-organización."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "¿Cuál de estas afirmaciones forma parte de «la esencia de Scrum»?",
+      "opts": [
+        "El equipo entrega todo el producto al final, en una única entrega.",
+        "El progreso del equipo solo lo conoce el Scrum Master.",
+        "El equipo recibe las tareas ya asignadas por la gerencia y las ejecuta.",
+        "El equipo entrega con regularidad las funciones más valiosas y reflexiona sobre su forma de trabajar para mejorar."
+      ],
+      "correct": 3,
+      "justification": "Diap. 11-12: objetivos claros, auto-organización, entregas regulares de lo más valioso, retroalimentación externa, reflexión para mejorar, visibilidad para toda la organización y comunicación honesta con la gerencia."
+    },
+    {
+      "tema": "1. Origen, definición, pilares y valores",
+      "q": "Según las diapositivas, ¿en qué tipo de software se ha usado Scrum?",
+      "opts": [
+        "Solo en aplicaciones web pequeñas.",
+        "Nunca en sistemas críticos ni en proyectos de precio cerrado.",
+        "En casi cualquiera: videojuegos, sistemas críticos de soporte vital, software certificado ISO 9001, sistemas 7x24…",
+        "Solo en proyectos internos sin contrato con cliente."
+      ],
+      "correct": 2,
+      "justification": "Diap. 7: la lista incluye desarrollo de videojuegos, sistemas críticos, proyectos fixed-price, aplicaciones certificadas ISO 9001, sistemas embebidos y sistemas 7x24 con 99,999 % de disponibilidad."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "Según las diapositivas, los roles en Scrum representan…",
+      "opts": [
+        "El nivel de experiencia de cada miembro.",
+        "Una responsabilidad en el proceso, no la posición dentro de la organización.",
+        "El puesto que cada persona tiene en el organigrama.",
+        "Un cargo fijo que no puede cambiar entre proyectos."
+      ],
+      "correct": 1,
+      "justification": "Diap. 15, textualmente."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Qué roles son los «roles cerdo» en Scrum?",
+      "opts": [
+        "Product Owner, Scrum Master y equipo de desarrollo.",
+        "Usuario, cliente y dirección.",
+        "Product Owner, cliente y dirección.",
+        "Solo el equipo de desarrollo."
+      ],
+      "correct": 0,
+      "justification": "Diap. 16 (3 + 3 Scrum Roles): los cerdos son el equipo Scrum, comprometidos con el resultado; las gallinas son los stakeholders (user, customer, management), interesados pero no comprometidos."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Cuáles son las dos responsabilidades de los stakeholders según las diapositivas?",
+      "opts": [
+        "Priorizar el Product Backlog y aceptar el incremento.",
+        "Ser fuente de requisitos y validar el trabajo dando su feedback.",
+        "Eliminar impedimentos y facilitar las reuniones.",
+        "Estimar las historias y descomponerlas en tareas."
+      ],
+      "correct": 1,
+      "justification": "Diap. 17. Estimar y descomponer es del equipo; eliminar impedimentos, del SM; priorizar y aceptar, del PO."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Quién es el responsable de crear, administrar y priorizar el Product Backlog?",
+      "opts": [
+        "El Scrum Master.",
+        "El equipo de desarrollo.",
+        "Los stakeholders, por votación.",
+        "El Product Owner."
+      ],
+      "correct": 3,
+      "justification": "Diap. 21 y 36. El equipo colabora y estima, pero prioriza el PO."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Cuál de estas NO es una responsabilidad del Product Owner?",
+      "opts": [
+        "Maximizar el retorno de la inversión (ROI).",
+        "Administrar el plan de entregas.",
+        "Eliminar los impedimentos que encuentra el equipo.",
+        "Aceptar o rechazar el software al final de cada iteración."
+      ],
+      "correct": 2,
+      "justification": "Eliminar impedimentos es del Scrum Master (diap. 23). Las otras tres están en la diap. 21."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "En una implementación «proxy» del Product Owner…",
+      "opts": [
+        "El Scrum Master asume también el papel de Product Owner.",
+        "Alguien de la organización (por ejemplo, un product manager) representa a uno o varios clientes ante el equipo.",
+        "No hay Product Owner y el equipo habla directamente con todos los clientes.",
+        "El propio cliente hace de Product Owner."
+      ],
+      "correct": 1,
+      "justification": "Diap. 19: en la implementación directa el PO es el propio cliente; en la proxy, un intermediario (product manager) representa a varios clientes."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Cuál es la mejor descripción del Scrum Master según las diapositivas?",
+      "opts": [
+        "El miembro más técnico, que toma las decisiones de arquitectura.",
+        "El jefe del equipo, que asigna tareas y controla horarios.",
+        "Un facilitador, coach y mentor que garantiza el proceso y mejora la productividad del equipo.",
+        "El representante del cliente ante el equipo."
+      ],
+      "correct": 2,
+      "justification": "Diap. 22: «¡El Scrum Master es un facilitador, coach y mentor!». Aunque la diapositiva lo traduzca como «director de proyecto», no es un jefe tradicional; el representante del cliente es el PO."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "Un directivo interrumpe al equipo a mitad de Sprint con peticiones urgentes. ¿Qué rol debe actuar como «escudo»?",
+      "opts": [
+        "El Product Owner.",
+        "El stakeholder que más aporta.",
+        "El Scrum Master.",
+        "El miembro más veterano del equipo."
+      ],
+      "correct": 2,
+      "justification": "Diap. 23: entre las responsabilidades del SM está ser «escudo del equipo ante interferencias externas». La petición debería llegar al PO para que la priorice en el Product Backlog."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Cuál de estos NO es un atributo del Scrum Master en las diapositivas?",
+      "opts": [
+        "Autoritario.",
+        "Humilde.",
+        "Influyente.",
+        "Colaborador."
+      ],
+      "correct": 0,
+      "justification": "Diap. 24: responsable, humilde, colaborador, comprometido, influyente y entendido."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Cuál es el tamaño típico del equipo de desarrollo según las diapositivas?",
+      "opts": [
+        "De 5 a 9 personas.",
+        "No hay límite: cuantas más, mejor.",
+        "De 10 a 15 personas.",
+        "De 1 a 3 personas."
+      ],
+      "correct": 0,
+      "justification": "Diap. 31: lo bastante pequeño para seguir siendo ágil y lo bastante grande para completar un trabajo significativo; típicamente de 5 a 9."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Qué afirmación sobre el equipo de desarrollo es correcta?",
+      "opts": [
+        "Se divide en sub-equipos de análisis, desarrollo y pruebas.",
+        "Es auto-organizado y multifuncional, y Scrum no reconoce sub-equipos dentro de él.",
+        "Tiene un jefe técnico que reparte las tareas.",
+        "Sus miembros trabajan a tiempo parcial en varios proyectos."
+      ],
+      "correct": 1,
+      "justification": "Diap. 30: auto-organizado (no jerarquizado), multidisciplinar, multifuncional, comprometido, sin sub-equipos, a tiempo completo y de forma fija."
+    },
+    {
+      "tema": "2. Roles: Product Owner, Scrum Master, equipo y stakeholders",
+      "q": "¿Quién estima el tamaño de los ítems del Product Backlog?",
+      "opts": [
+        "El equipo de desarrollo.",
+        "El Scrum Master.",
+        "El Product Owner.",
+        "El cliente."
+      ],
+      "correct": 0,
+      "justification": "Diap. 32: la estimación del tamaño de los ítems es responsabilidad del equipo de desarrollo, como un todo."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿Cuáles son los tres artefactos de Scrum según las diapositivas?",
+      "opts": [
+        "Historias de usuario, casos de uso y diagrama de clases.",
+        "Product Backlog, Sprint Backlog y Burndown Chart.",
+        "Sprint Backlog, Daily Meeting y Sprint Review.",
+        "Product Backlog, plan de proyecto y diagrama de Gantt."
+      ],
+      "correct": 1,
+      "justification": "Diap. 13 y 34. El Daily y la Review son reuniones, no artefactos."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿Cómo se define el Product Backlog?",
+      "opts": [
+        "La gráfica del trabajo pendiente del Sprint.",
+        "La lista de tareas técnicas que el equipo hará en el Sprint actual.",
+        "Un documento de requisitos cerrado que se firma con el cliente.",
+        "Una lista ordenada y priorizada de todo lo que podría ser necesario en el producto."
+      ],
+      "correct": 3,
+      "justification": "Diap. 36. La lista de tareas del Sprint es el Sprint Backlog; la gráfica, el Burndown."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿Qué significa que el Product Backlog sea una lista DEEP?",
+      "opts": [
+        "Detallada, Emergente, Estimada y Priorizada.",
+        "Documentada, Entregable, Escalable y Probada.",
+        "Definida, Estable, Exhaustiva y Pública.",
+        "Detallada, Estática, Estimada y Pequeña."
+      ],
+      "correct": 0,
+      "justification": "Diap. 38. Emergente porque en cualquier momento pueden aparecer historias nuevas; por eso nunca es estática."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "Que el Product Backlog sea «emergente» significa que…",
+      "opts": [
+        "Se cierra al terminar el Sprint 0.",
+        "Solo contiene los requisitos urgentes.",
+        "Lo escriben únicamente los stakeholders.",
+        "En cualquier momento pueden aparecer nuevas historias de usuario."
+      ],
+      "correct": 3,
+      "justification": "Diap. 38. El backlog describe los requisitos conocidos en un momento dado y evoluciona (diap. 37)."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿Qué tipo de requisitos contiene el Product Backlog?",
+      "opts": [
+        "Solo los requisitos no funcionales.",
+        "Solo las tareas de programación.",
+        "Funcionales y no funcionales, descritos en lenguaje de negocio.",
+        "Solo funcionales, en lenguaje técnico."
+      ],
+      "correct": 2,
+      "justification": "Diap. 36-37: lista de requisitos en lenguaje de negocio, que contiene requisitos funcionales y no funcionales."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿Cuál de estas NO aparece entre las técnicas de priorización de la diapositiva 39?",
+      "opts": [
+        "MoSCoW.",
+        "Modelo de Kano.",
+        "Planning por diagrama de Gantt.",
+        "Peso relativo."
+      ],
+      "correct": 2,
+      "justification": "Diap. 39: priority poker, MoSCoW, modelo de Kano, criba de temas y peso relativo."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿De quién es propiedad el Sprint Backlog?",
+      "opts": [
+        "Del equipo de desarrollo.",
+        "Del Scrum Master.",
+        "Del Product Owner.",
+        "De los stakeholders."
+      ],
+      "correct": 0,
+      "justification": "Diap. 40: «Es propiedad del Equipo de desarrollo». El Product Backlog es responsabilidad del PO."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿En qué estados puede estar una historia o tarea del Sprint Backlog?",
+      "opts": [
+        "Pendiente, en curso, terminada o impedida.",
+        "Nueva, aprobada o rechazada.",
+        "Must, Should, Could o Won't.",
+        "Detallada, emergente, estimada o priorizada."
+      ],
+      "correct": 0,
+      "justification": "Diap. 58: dimensiones del Sprint Backlog: prioridad, detalle y estado (pendiente de iniciar, en curso, terminada, impedida). MoSCoW es una técnica de priorización y DEEP describe el Product Backlog."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "A mitad de Sprint, la línea real del Burndown va claramente por encima de la ideal. ¿Qué indica y qué conviene hacer?",
+      "opts": [
+        "El ritmo es alto; se pueden añadir historias.",
+        "El ritmo es bajo; puede convenir reducir el alcance del Sprint.",
+        "Todo va según lo previsto.",
+        "Hay que bajar los objetivos de calidad para recuperar."
+      ],
+      "correct": 1,
+      "justification": "Diap. 44. Bajar la calidad no es una opción: «los objetivos de calidad no disminuyen» (diap. 49)."
+    },
+    {
+      "tema": "3. Artefactos: Product Backlog, Sprint Backlog y Burndown",
+      "q": "¿Quién es el responsable de la lista de impedimentos (Impediments Backlog)?",
+      "opts": [
+        "El miembro del equipo que encontró el impedimento.",
+        "El cliente.",
+        "El Product Owner.",
+        "El Scrum Master."
+      ],
+      "correct": 3,
+      "justification": "Diap. 66: la lista de impedimentos sale del Daily y su responsable es el Scrum Master; cada impedimento tiene además un responsable de resolverlo (diap. 67)."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "¿Cuánto dura un Sprint según las diapositivas?",
+      "opts": [
+        "Siempre exactamente 2 meses.",
+        "Lo que tarde el equipo en terminar todas las historias.",
+        "De 1 a 4 días.",
+        "Un bloque de tiempo fijo de 1 a 4 semanas."
+      ],
+      "correct": 3,
+      "justification": "Diap. 47 y 49: time-box de 1 a 4 semanas y de longitud fija, para tener mejor ritmo."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "¿Qué se obtiene al final de cada Sprint?",
+      "opts": [
+        "Un documento de diseño para el siguiente Sprint.",
+        "Solo el informe del Burndown.",
+        "Un prototipo desechable.",
+        "Un incremento de producto «terminado», utilizable y potencialmente desplegable."
+      ],
+      "correct": 3,
+      "justification": "Diap. 47."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "¿Qué NO se puede hacer durante un Sprint?",
+      "opts": [
+        "Clarificar el alcance entre el PO y el equipo.",
+        "Actualizar el Burndown cada día.",
+        "Renegociar el alcance a medida que se aprende.",
+        "Hacer cambios que afecten al objetivo del Sprint."
+      ],
+      "correct": 3,
+      "justification": "Diap. 49: no se realizan cambios que puedan afectar al objetivo del Sprint y los objetivos de calidad no disminuyen; el alcance sí puede clarificarse y renegociarse."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "En un Sprint de 4 semanas, ¿cuánto duran como máximo el Sprint Planning, la Sprint Review y la Retrospectiva?",
+      "opts": [
+        "4 horas, 8 horas y 3 horas.",
+        "8 horas, 4 horas y 3 horas.",
+        "8 horas, 8 horas y 8 horas.",
+        "1 hora, 1 hora y 1 hora."
+      ],
+      "correct": 1,
+      "justification": "Diap. 50 (gráfico «Sprint de 4 semanas»)."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "¿Cuáles son las dos fases del Sprint Planning?",
+      "opts": [
+        "Demostración y retrospectiva.",
+        "Estimación y priorización del Product Backlog.",
+        "Planificación (qué historias entran) y planificación detallada (cómo: dividirlas en tareas).",
+        "Análisis y diseño."
+      ],
+      "correct": 2,
+      "justification": "Diap. 53: en la primera se seleccionan, siguiendo la prioridad, los ítems que pueden hacerse; en la segunda el equipo los traduce al lenguaje de desarrollo y los subdivide en tareas."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "En la primera fase del Sprint Planning, ¿cuándo se deja de seleccionar historias?",
+      "opts": [
+        "Cuando el PO decide que ya hay suficientes, sin tener en cuenta la velocidad.",
+        "Cuando el Scrum Master asigna una historia a cada miembro.",
+        "Cuando la suma de puntos de historia alcanza (o supera ligeramente) la velocidad media del equipo.",
+        "Cuando se acaban las historias del Product Backlog."
+      ],
+      "correct": 2,
+      "justification": "Diap. 56, paso 5."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "En la selección de historias del Sprint Planning, ¿en qué orden pasan al Sprint Backlog?",
+      "opts": [
+        "Por orden alfabético.",
+        "De menor a mayor tamaño.",
+        "Manteniendo el orden de prioridad del Product Backlog.",
+        "En el orden que prefiera el equipo."
+      ],
+      "correct": 2,
+      "justification": "Diap. 56: el PO lee la historia de mayor prioridad, la explica con sus criterios de aceptación, el equipo la estima y pasa al Sprint Backlog manteniendo el orden de prioridad."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "¿Qué papel tiene el Scrum Master en el Sprint Planning?",
+      "opts": [
+        "No asiste.",
+        "Decide qué historias entran en el Sprint.",
+        "Facilita la reunión para que se mantenga el foco y sea eficiente.",
+        "Estima las historias en lugar del equipo."
+      ],
+      "correct": 2,
+      "justification": "Diap. 59: el PO explica prioridades y negocia; el equipo descompone y estima; el SM facilita."
+    },
+    {
+      "tema": "4. El Sprint y el Sprint Planning",
+      "q": "El objetivo del Sprint es…",
+      "opts": [
+        "La lista completa de tareas técnicas.",
+        "El número de horas que trabajará el equipo.",
+        "Una descripción corta y clara de lo que el equipo se propone lograr, que guía su trabajo.",
+        "La velocidad media del equipo."
+      ],
+      "correct": 2,
+      "justification": "Diap. 55."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Qué tres cosas comenta cada miembro en el Daily?",
+      "opts": [
+        "Cuántas horas ha trabajado, cuánto cobra y cuándo tiene vacaciones.",
+        "Qué ha hecho, qué va a hacer a continuación y qué impedimentos ha encontrado.",
+        "Qué historias quiere el cliente, cuánto cuestan y cuándo se entregan.",
+        "Qué ha ido bien, qué ha ido mal y qué cambiaría del proceso."
+      ],
+      "correct": 1,
+      "justification": "Diap. 64. La última opción es más bien de una retrospectiva."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Quién participa en el Daily?",
+      "opts": [
+        "Solo el Scrum Master.",
+        "El equipo de desarrollo y el Scrum Master; el Product Owner puede asistir.",
+        "Todo el equipo Scrum y los stakeholders, obligatoriamente.",
+        "Solo el Product Owner y los stakeholders."
+      ],
+      "correct": 1,
+      "justification": "Diap. 63 y 68. El PO puede asistir, pero no es un participante activo."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "Durante el Daily, dos programadores empiezan a discutir cómo solucionar un fallo de la base de datos. ¿Qué debería pasar?",
+      "opts": [
+        "Pedir al PO que decida la solución.",
+        "Resolverlo en ese momento con todo el equipo presente.",
+        "Anotar el impedimento y tratar la solución después de la reunión, con quien haga falta.",
+        "Cancelar el Daily ese día."
+      ],
+      "correct": 2,
+      "justification": "Diap. 65: no hay que discutir las soluciones ni divagar sobre el origen del impedimento, solo cómo resolverlo y quién."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "Respecto al Daily, el Scrum Master…",
+      "opts": [
+        "Lo dirige preguntando a cada uno y asignándole tareas.",
+        "Es el único que habla.",
+        "No puede asistir.",
+        "Lo facilita para que se cumpla el tiempo y el propósito, pero no debería dirigirlo."
+      ],
+      "correct": 3,
+      "justification": "Diap. 68."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Qué artefactos se generan o actualizan en el Daily?",
+      "opts": [
+        "Las técnicas de retrospectiva.",
+        "La visión del producto.",
+        "La lista de impedimentos y el Burndown Chart.",
+        "El Product Backlog y el plan de entregas."
+      ],
+      "correct": 2,
+      "justification": "Diap. 66. El Product Backlog adaptado y el plan de entregas los genera la Sprint Review."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Cuándo tiene lugar la Sprint Review?",
+      "opts": [
+        "El primer día del Sprint.",
+        "Justo antes de cada Sprint Planning, sustituyendo al grooming.",
+        "El último día del Sprint.",
+        "Cada día, al empezar la jornada."
+      ],
+      "correct": 2,
+      "justification": "Diap. 71."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Cuál es el objetivo de la Sprint Review?",
+      "opts": [
+        "Decidir la duración del siguiente Sprint.",
+        "Recoger feedback sobre el estado del producto y la aceptación de lo comprometido en el Sprint.",
+        "Repartir las tareas del siguiente Sprint.",
+        "Mejorar la forma de trabajar del equipo."
+      ],
+      "correct": 1,
+      "justification": "Diap. 71 y 73. Mejorar la forma de trabajar es la Retrospectiva."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Qué se obtiene de la Sprint Review?",
+      "opts": [
+        "La lista de impedimentos.",
+        "Una lista de acciones de mejora del proceso.",
+        "El Sprint Backlog del siguiente Sprint.",
+        "El Product Backlog adaptado a las nuevas necesidades y un plan de entregas actualizado con la nueva velocidad."
+      ],
+      "correct": 3,
+      "justification": "Diap. 77."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿En qué reunión participan los stakeholders?",
+      "opts": [
+        "En la Sprint Review.",
+        "En la Retrospectiva.",
+        "En el Daily.",
+        "En la segunda fase del Sprint Planning."
+      ],
+      "correct": 0,
+      "justification": "Diap. 79: los stakeholders (clientes, inversores, otros departamentos) dan su feedback en la Review."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Qué analiza la Sprint Retrospective?",
+      "opts": [
+        "Las prioridades del Product Backlog.",
+        "«El cómo»: la forma de trabajar del equipo, para mejorarla.",
+        "El presupuesto del proyecto.",
+        "«El qué»: el producto construido."
+      ],
+      "correct": 1,
+      "justification": "Diap. 80-82. La Review mira el producto; la Retrospectiva, el proceso."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "En la retrospectiva del Barco, ¿qué representa el ancla?",
+      "opts": [
+        "El objetivo.",
+        "Lo que nos impulsa.",
+        "Los impedimentos que nos frenan.",
+        "Los riesgos."
+      ],
+      "correct": 2,
+      "justification": "Diap. 86-87: viento (nos impulsa), ancla (impedimentos), iceberg (riesgos), sol (lo que nos facilita) e isla o tesoro (el objetivo)."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "En la retrospectiva de la Estrella de mar, ¿dónde van las prácticas que no aportan valor y se pueden desechar?",
+      "opts": [
+        "En «Do less».",
+        "En «Start doing».",
+        "En «Continue to do».",
+        "En «Stop doing»."
+      ],
+      "correct": 3,
+      "justification": "Diap. 89: Do less es para lo que aporta poco en comparación con otras acciones; Stop doing, para lo que no aporta valor."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "Las 4 L de la retrospectiva son…",
+      "opts": [
+        "Liked, Loved, Lost y Left.",
+        "Listen, Learn, Lean y Launch.",
+        "Liked, Lacked, Learned y Longed for.",
+        "Look, Learn, Let go y Lead."
+      ],
+      "correct": 2,
+      "justification": "Diap. 90-91."
+    },
+    {
+      "tema": "5. Daily, Review, Retrospectiva y grooming",
+      "q": "¿Qué afirmación sobre el backlog grooming es correcta?",
+      "opts": [
+        "No está formalmente incluido entre las reuniones de Scrum y se hace inmediatamente antes de cada planificación.",
+        "Lo dirige el Scrum Master y el PO no participa.",
+        "Sirve para revisar la forma de trabajar del equipo.",
+        "Es la quinta reunión obligatoria de Scrum y se hace al final del Sprint."
+      ],
+      "correct": 0,
+      "justification": "Diap. 60-62: lo dirige el PO, el equipo aporta detalle técnico y estimación, y el SM facilita."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Qué es el Sprint 0?",
+      "opts": [
+        "La etapa en la que se define la misión del trabajo, las herramientas y el equipo; de duración variable pero no indefinida.",
+        "El Sprint final de cierre del proyecto.",
+        "Una reunión de una hora para presentar el equipo.",
+        "El primer Sprint de desarrollo, en el que ya se entrega código."
+      ],
+      "correct": 0,
+      "justification": "Diap. 93."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Qué dos cosas deben quedar claras al acabar el Sprint 0?",
+      "opts": [
+        "El Burndown del proyecto y la lista de impedimentos.",
+        "La viabilidad del proyecto y el contrato (recursos, equipo, alcance y fechas acordados).",
+        "El diseño completo del sistema y el código de la primera versión.",
+        "La retrospectiva y la review."
+      ],
+      "correct": 1,
+      "justification": "Diap. 94."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Qué actividad corresponde al «¿cuándo hacerlo?» del Sprint 0?",
+      "opts": [
+        "Desarrollar un plan de entregas.",
+        "Desarrollar la visión del producto.",
+        "Hacer una prueba de concepto.",
+        "Definir la duración de los Sprints."
+      ],
+      "correct": 0,
+      "justification": "Diap. 95: qué (visión y Product Backlog inicial), cómo (organización del equipo, duración de los Sprints, arquitectura inicial, prueba de concepto) y cuándo (plan de entregas)."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Quién define la visión del producto?",
+      "opts": [
+        "Los stakeholders, sin el equipo.",
+        "El Product Owner, y debe ser conocida, comprendida y compartida por todo el equipo.",
+        "Cada miembro del equipo por separado.",
+        "El Scrum Master."
+      ],
+      "correct": 1,
+      "justification": "Diap. 96."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Por qué se dice que la visión es «el origen y el final» del proceso?",
+      "opts": [
+        "Porque la escribe el primer y el último miembro que entra en el equipo.",
+        "Porque es lo primero que se hace para empezar a trabajar y también el punto al que se quiere llegar.",
+        "Porque se redacta al final como resumen del proyecto.",
+        "Porque se escribe al principio y no se vuelve a mirar."
+      ],
+      "correct": 1,
+      "justification": "Diap. 97."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Cuál de estas NO es una característica de la visión del producto?",
+      "opts": [
+        "Sencilla, clara, concisa y sin ambigüedades.",
+        "Fácilmente comunicable a todo el mundo.",
+        "Instrumento vital para conseguir presupuesto.",
+        "Detallada al nivel de tareas técnicas."
+      ],
+      "correct": 3,
+      "justification": "Diap. 98: es información de alto nivel y propósito general; el detalle técnico está en el Sprint Backlog."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "«¿Cómo se va a generar beneficio?» y «¿cuáles son los costes del producto?» son preguntas de…",
+      "opts": [
+        "El Daily.",
+        "La retrospectiva.",
+        "El modelo de negocio de la visión.",
+        "El concepto de la visión."
+      ],
+      "correct": 2,
+      "justification": "Diap. 99-100: el concepto define cómo se benefician los usuarios (problema, solución, usuarios, necesidad, competencia); el modelo de negocio, cómo se benefician los creadores (presupuesto, tiempo, beneficio, distribución, costes)."
+    },
+    {
+      "tema": "6. Sprint 0, visión del producto y elevator pitch",
+      "q": "¿Qué dice el test del ascensor de Geoffrey Moore?",
+      "opts": [
+        "Que el equipo no debe tener más miembros de los que caben en un ascensor.",
+        "Que el Product Backlog debe caber en una hoja.",
+        "Que el Daily debe durar lo que un viaje en ascensor.",
+        "Que la visión debería poder explicarse en el tiempo que se tarda en subir o bajar varios pisos en ascensor."
+      ],
+      "correct": 3,
+      "justification": "Diap. 101."
+    }
+  ]
+}

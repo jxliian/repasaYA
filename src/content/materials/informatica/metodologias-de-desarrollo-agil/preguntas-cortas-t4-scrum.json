@@ -1,0 +1,134 @@
+{
+  "subject": "informatica/metodologias-de-desarrollo-agil",
+  "type": "reveal",
+  "order": -6,
+  "title": "Preguntas cortas y ejercicios: Tema 4 Scrum",
+  "description": "15 preguntas cortas y 10 ejercicios resueltos del tipo de la prueba (visión y elevator pitch, Sprint 0, Sprint Planning con velocidad, Burndown, roles, Review y retrospectiva).",
+  "items": [
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "¿Qué es Scrum y de dónde viene su nombre?",
+      "answer": "Un marco de trabajo iterativo e incremental que no sigue un plan fijo, sino que se adapta continuamente a la evolución del proyecto (diap. 8). El nombre viene del rugby: Takeuchi y Nonaka (1986) comparan el desarrollo en fases («carrera de relevos») con un equipo que avanza unido pasándose el balón (la melé o scrum)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Enumera los elementos de Scrum.",
+      "answer": "3 artefactos: Product Backlog, Sprint Backlog y Burndown Chart. 4 reuniones: Sprint Planning, Daily Meeting, Sprint Review y Sprint Retrospective. 3 roles: Product Owner, Scrum Master y equipo de desarrollo. Más las reglas de trabajo (diap. 13)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Explica los pilares empíricos con un ejemplo de cada uno.",
+      "answer": "Transparencia: el Burndown y el panel muestran a todos el estado real. Inspección: en el Daily y en la Review se revisan el avance y el producto. Adaptación: si el Burndown va por encima de la ideal, se renegocia el alcance; tras la Retrospectiva se cambia la forma de trabajar."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Diferencia entre roles cerdo y gallina.",
+      "answer": "Cerdos: el equipo Scrum (PO, SM y equipo), comprometidos con el resultado. Gallinas: los stakeholders (usuarios, clientes, dirección), interesados pero no comprometidos; son fuente de requisitos y validan el trabajo (diap. 16-17)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Responsabilidades del Product Owner.",
+      "answer": "Obtener una visión compartida, recoger requisitos, crear, administrar y priorizar el Product Backlog, aceptar o rechazar el software al final de cada iteración, resolver dudas del equipo, administrar el plan de entregas y maximizar el ROI (diap. 21)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "¿Por qué se dice que el Scrum Master no es un jefe de proyecto?",
+      "answer": "Porque es un facilitador, coach y mentor (diap. 22): garantiza el proceso, elimina impedimentos y protege al equipo de interferencias, pero no asigna tareas (el equipo se auto-organiza) ni decide qué se construye (eso es del PO)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Características del equipo de desarrollo.",
+      "answer": "Auto-organizado y no jerarquizado, multidisciplinar, multifuncional, con elevado compromiso, sin sub-equipos, a tiempo completo y fijo, típicamente de 5 a 9 personas. Estima los ítems y se compromete a entregar incrementos con calidad de producción (diap. 30-32)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Define el Product Backlog y explica DEEP.",
+      "answer": "Lista ordenada y priorizada de todo lo que podría necesitar el producto, en lenguaje de negocio, responsabilidad del PO, con requisitos funcionales y no funcionales. DEEP: Detallada (entendible y estimable), Emergente (aparecen historias nuevas), Estimada y Priorizada (diap. 36-38)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Diferencias entre Product Backlog y Sprint Backlog.",
+      "answer": "Product Backlog: todo lo que podría necesitar el producto; lenguaje de negocio; del PO; dura todo el proyecto. Sprint Backlog: las historias seleccionadas para un Sprint, descompuestas en tareas técnicas; del equipo; se rehace cada Sprint; cada tarea está pendiente, en curso, terminada o impedida."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Describe las dos fases del Sprint Planning.",
+      "answer": "1) Planificación: el PO presenta las historias por prioridad con sus criterios de aceptación, el equipo las estima y se seleccionan hasta alcanzar la velocidad media; se define el objetivo del Sprint. 2) Planificación detallada: el equipo traduce las historias al lenguaje de desarrollo y las divide en tareas (diap. 53-57)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "¿Cómo es el Daily Meeting?",
+      "answer": "Reunión diaria y breve del equipo con el SM (el PO puede asistir). Cada uno dice qué ha hecho, qué va a hacer y qué impedimentos tiene. No se discuten soluciones. Genera la lista de impedimentos (del SM) y actualiza el Burndown. El SM la facilita sin dirigirla (diap. 63-70)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Diferencia entre Sprint Review y Sprint Retrospective.",
+      "answer": "Review: último día del Sprint, con stakeholders; inspecciona el producto («qué»), con una demo; genera el Product Backlog adaptado y el plan de entregas actualizado. Retrospective: después de la Review, el equipo y el SM; inspecciona el proceso («cómo»); genera acciones de mejora."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Explica dos técnicas de retrospectiva.",
+      "answer": "Barco: viento (impulsa), ancla (impedimentos), iceberg (riesgos), sol (facilita) e isla (objetivo). Estrella de mar: start doing, do more, continue to do, do less y stop doing. (También las 4 L: liked, lacked, learned y longed for.)"
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "¿Qué es el Sprint 0 y qué actividades incluye?",
+      "answer": "Etapa de duración variable pero no indefinida para definir la misión, las herramientas y el equipo. Qué: visión y Product Backlog inicial. Cómo: organización del equipo y forma de trabajar (duración de los Sprints, herramientas, reglas), arquitectura inicial y prueba de concepto. Cuándo: plan de entregas. Al final: viabilidad y contrato (diap. 93-95)."
+    },
+    {
+      "tema": "Preguntas cortas de teoría",
+      "q": "Características y elementos de la visión del producto.",
+      "answer": "La define el PO y la comparte todo el equipo. Características: alto nivel, sencilla, clara, concisa y sin ambigüedades, con la esencia del producto, fácil de comunicar, sirve para conseguir presupuesto y para el lanzamiento. Elementos: concepto (beneficio para los usuarios) y modelo de negocio (beneficio para los creadores). Test del ascensor de Moore."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 1 (Visión): redacta la visión y el elevator pitch de una app para reservar las pistas deportivas de la UGR.",
+      "answer": "Concepto. Problema: las reservas se hacen en persona o por teléfono y las pistas quedan vacías. Solución: app con disponibilidad en tiempo real y reserva con el correo de la UGR. Usuarios: estudiantes y personal. Necesidad: reservar rápido y sin desplazarse. Competencia: la web actual y apps genéricas como Playtomic, que no están integradas con la UGR.\nModelo de negocio. Financiación del Centro de Actividades Deportivas; 4 meses; cobro de la reserva con una pequeña comisión; difusión en la web y las redes de la UGR; costes de desarrollo y servidores.\nElevator pitch: «Para los estudiantes y el personal de la UGR que pierden tiempo reservando pistas, ReservaUGR es una app que permite reservar en segundos con la cuenta de la universidad. A diferencia de la web actual y de Playtomic, muestra la disponibilidad en tiempo real y libera automáticamente las reservas no confirmadas»."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 2 (Sprint 0): planifica el Sprint 0 del proyecto anterior.",
+      "answer": "Qué: visión (ejercicio 1) y Product Backlog inicial (registro, ver disponibilidad, reservar, cancelar, pagar, avisos). Cómo: equipo de 6 multifuncional + SM; PO del Centro de Deportes; Sprints de 2 semanas; Trello y Slack; estándares y Definition of Done; arquitectura inicial (app + API + base de datos); prueba de concepto del login con la cuenta de la UGR. Cuándo: plan de entregas (reservas básicas en el Sprint 3, pagos en el 5). Al final: viabilidad y contrato con alcance, fechas y recursos."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 3 (Sprint Planning): velocidad media de 15 puntos; backlog priorizado: H1 (5), H2 (8), H3 (3), H4 (5), H5 (2). ¿Qué entra en el Sprint?",
+      "answer": "Se recorren las historias en orden de prioridad: H1 → 5; H2 → 13; H3 → 16, que supera ligeramente los 15, así que es aceptable según la diap. 56. Entran H1, H2 y H3, en ese orden. H4 y H5 quedan para el siguiente Sprint. Después, en la planificación detallada, el equipo divide cada historia en tareas."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 4 (Burndown): Sprint de 10 días y 100 horas. El día 6 quedan 70 horas. Interpreta y decide.",
+      "answer": "La línea ideal el día 6 está en 40 horas. Con 70 horas la real va por encima: el ritmo es bajo. Acciones: revisar los impedimentos en el Daily; el SM trabaja en eliminarlos; si no se recupera, el equipo y el PO renegocian el alcance (sacar la historia menos prioritaria) sin bajar la calidad ni cambiar el objetivo del Sprint."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 5 (Roles): ¿quién hace cada cosa? (a) Decidir que el pago con Bizum va antes que las notificaciones. (b) Estimar la historia de reservas en 8 puntos. (c) Conseguir que el servicio de informática dé acceso al servidor. (d) Decidir quién programa la pantalla de login.",
+      "answer": "(a) El Product Owner, que prioriza el Product Backlog. (b) El equipo de desarrollo, que estima. (c) El Scrum Master, porque es un impedimento y se apunta en su lista. (d) El equipo, que se auto-organiza; no lo decide el SM."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 6 (¿Qué está mal?): «El SM abre el Daily, pregunta a cada uno qué ha hecho y le dice qué hacer hoy. Cuando aparece un error de la base de datos, el equipo se queda 40 minutos resolviéndolo».",
+      "answer": "Dos errores. (1) El SM dirige y asigna tareas: debe facilitar sin dirigir, y el equipo se auto-organiza. (2) Se discute la solución en el Daily: hay que anotarlo como impedimento, decir quién lo resolverá y tratarlo después. El Daily es breve y solo responde a qué hice, qué haré y qué impedimentos tengo."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 7 (Review): organiza la Sprint Review del primer incremento de la app de reservas.",
+      "answer": "Preparación: entorno de demo con datos, guion y comprobar que funciona. Guion: 1) normas para los nuevos asistentes; 2) objetivos del Sprint; 3) el PO dice qué se terminó (registro y ver disponibilidad) y qué no (reservar); 4) el equipo presenta métricas y problemas; 5) demo de lo terminado; 6) el PO repasa el backlog y el plan de entregas; 7) comentarios de los stakeholders (Centro de Deportes, estudiantes); 8) recoger comentarios. Resultado: Product Backlog adaptado y plan de entregas con la nueva velocidad."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 8 (Retrospectiva): el equipo ha tenido problemas con despliegues manuales y con un PO poco disponible, pero las pruebas automáticas funcionan bien. Haz la retrospectiva con el Barco.",
+      "answer": "Viento (nos impulsa): las pruebas automáticas. Sol (nos facilita): buen ambiente y panel actualizado. Ancla (impedimentos): despliegues manuales y PO poco disponible. Iceberg (riesgos): no llegar a la entrega de pagos; dependencia del servicio de informática. Isla (objetivo): MVP de reservas en el Sprint 3. Acciones: automatizar el despliegue (responsable: un miembro del equipo) y fijar 30 minutos semanales con el PO (el SM lo gestiona)."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 9 (Product Backlog): escribe 5 historias para la app de reservas y priorízalas con MoSCoW.",
+      "answer": "1. Como estudiante, quiero iniciar sesión con mi cuenta de la UGR para reservar a mi nombre (Must). 2. Como estudiante, quiero ver las pistas libres por día y hora para elegir (Must). 3. Como estudiante, quiero reservar una pista para asegurarme de jugar (Must). 4. Como estudiante, quiero cancelar mi reserva para liberar la pista (Should). 5. Como estudiante, quiero recibir un aviso una hora antes para no olvidarme (Could). Pagar con Bizum: Won't en esta entrega. Es DEEP: detallado arriba, emergente, estimado por el equipo y priorizado por el PO."
+    },
+    {
+      "tema": "Ejercicios de examen",
+      "q": "Ejercicio 10 (Sprint Backlog): descompón «Como estudiante, quiero reservar una pista» en tareas e indica quién lo hace y en qué estados pueden estar.",
+      "answer": "Tareas: diseñar la pantalla de reserva; servicio de reserva en la API con control de solapes; tabla de reservas en la base de datos; correo de confirmación; pruebas de aceptación (no se puede reservar una pista ocupada; máximo 2 reservas por persona); pruebas en móvil. Lo hace el equipo en la planificación detallada del Sprint Planning. Estados: pendiente, en curso, terminada e impedida."
+    }
+  ]
+}
