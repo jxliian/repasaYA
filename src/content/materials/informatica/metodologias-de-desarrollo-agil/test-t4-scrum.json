@@ -1,6 +1,7 @@
 {
   "subject": "informatica/metodologias-de-desarrollo-agil",
   "type": "test",
+  "group": "t4-scrum",
   "order": -9,
   "title": "Test Tema 4: Scrum",
   "description": "62 preguntas tipo test del Tema 4 (origen, pilares, roles, artefactos, Sprint, reuniones, retrospectivas, Sprint 0 y visión) con justificación y la diapositiva de la que sale cada una.",

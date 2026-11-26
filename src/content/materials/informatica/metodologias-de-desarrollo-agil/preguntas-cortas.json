@@ -1,6 +1,7 @@
 {
   "subject": "informatica/metodologias-de-desarrollo-agil",
   "type": "reveal",
+  "group": "seminario-2",
   "title": "Preguntas Cortas y Ejercicios de Examen",
   "description": "25 preguntas cortas de desarrollo y ejercicios prácticos resueltos paso a paso para preparar la prueba parcial de teoría del Seminario 2.",
   "order": 4,

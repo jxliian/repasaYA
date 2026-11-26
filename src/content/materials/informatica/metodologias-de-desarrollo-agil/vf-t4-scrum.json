@@ -1,6 +1,7 @@
 {
   "subject": "informatica/metodologias-de-desarrollo-agil",
   "type": "vf",
+  "group": "t4-scrum",
   "order": -7,
   "title": "Verdadero o falso: Tema 4 Scrum (trampas de examen)",
   "description": "30 afirmaciones con las confusiones típicas: quién prioriza y quién estima, qué reunión es cuál, qué no se cambia en un Sprint.",

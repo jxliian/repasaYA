@@ -4,6 +4,7 @@
 interface Props {
   title: string;
   code: string;
+  storageKey?: string;
   vfData?: any[];
   testData?: any[];
   quizzData?: any[];
@@ -16,7 +17,7 @@ interface Props {
   /** Si se indica, ofrece un simulacro con ese número de preguntas al azar. */
   examSize?: number;
 }
-const { title, code, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar', initialMode, penalty = 0.33, examSize } = Astro.props;
+const { title, code, storageKey, vfData = [], testData = [], quizzData = [], backHref, backLabel, initialTab = 'practicar', initialMode, penalty = 0.33, examSize } = Astro.props;
 // Etiqueta del descuento: «-0.33 por fallo», «-0.5 por fallo»…
 const penaltyLabel = `-${String(penalty)} por fallo`;
 const hasExamSize = typeof examSize === 'number' && examSize > 0 && examSize < testData.length;
@@ -937,7 +938,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   Sígueme en GitHub 
 </a>
 
-<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code, defaultMode, penalty, examSize }}>
+<script define:vars={{ vfData, testData, quizzData, hasMultiple, hasVF, hasTest, hasQuizz, hasBoth, hasCases, startInCases, code, storageKey, defaultMode, penalty, examSize }}>
 document.documentElement.dataset.quizActive = 'false';
 const LETTERS = ['A','B','C','D','E'];
 const VF_DATA    = vfData.map(q => ({ ...q, qType: 'vf' }));
@@ -956,9 +957,10 @@ let timerInterval = null;
 let timeLeft = 30;
 
 // Local storage keys
-const WEAK_KEY = 'ry_weak_' + code;
-const STAR_KEY = 'ry_star_' + code;
-const STATS_KEY = 'ry_stats_' + code;
+const SCOPE_KEY = storageKey || code;
+const WEAK_KEY = 'ry_weak_' + SCOPE_KEY;
+const STAR_KEY = 'ry_star_' + SCOPE_KEY;
+const STATS_KEY = 'ry_stats_' + SCOPE_KEY;
 
 function getWeakQuestions() {
   try {
@@ -985,7 +987,8 @@ function removeWeakQuestion(qText) {
 function updateWeakChipCount() {
   const chip = document.getElementById('chip-weak-count');
   if (chip) {
-    const count = getWeakQuestions().length;
+    const weakTexts = getWeakQuestions();
+    const count = [...VF_DATA, ...TEST_DATA, ...QUIZZ_DATA].filter(q => q && q.q && weakTexts.includes(String(q.q).trim())).length;
     chip.textContent = count > 0 ? `${count} falladas` : '0 acumuladas';
   }
 }
@@ -1029,7 +1032,8 @@ function updateStarredState() {
 function updateStarredChipCount() {
   const chip = document.getElementById('chip-starred-count');
   if (chip) {
-    const count = getStarredQuestions().length;
+    const starredTexts = getStarredQuestions();
+    const count = [...VF_DATA, ...TEST_DATA, ...QUIZZ_DATA].filter(q => q && q.q && starredTexts.includes(String(q.q).trim())).length;
     chip.textContent = count > 0 ? `${count} guardadas` : '0 guardadas';
   }
 }

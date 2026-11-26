@@ -1,6 +1,7 @@
 {
   "subject": "informatica/metodologias-de-desarrollo-agil",
   "type": "vf",
+  "group": "seminario-2",
   "title": "Verdadero o Falso: Seminario 2 (Trampas de Examen)",
   "description": "30 preguntas de Verdadero/Falso centradas en las trampas conceptuales más frecuentes sobre Historias de Usuario, Planning Poker, Velocidad y Spikes.",
   "order": 3,

@@ -118,6 +118,12 @@ const materialBase = {
   /** Orden dentro del hub de la asignatura. Menor, antes. */
   order: z.number().int().default(0),
   /**
+   * Grupo temático o parcial al que pertenece el material (p. ej. "t4-scrum").
+   * Cuando una asignatura tiene varios bloques (varios test, V/F o quiz),
+   * el motor solo combina entre sí materiales del mismo grupo.
+   */
+  group: z.string().optional(),
+  /**
    * Genera página pero no se lista en ningún sitio ni se indexa.
    * Para material que solo se encuentra si te pasan el enlace.
    */

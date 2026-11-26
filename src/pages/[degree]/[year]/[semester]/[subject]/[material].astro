@@ -100,38 +100,54 @@ const pdf = 'pdf' in material.data ? `${base}${material.data.pdf}` : null;
 const allMaterials = isEngine ? await getCollection('materials') : [];
 const subjectMaterials = isEngine ? allMaterials.filter((m) => m.data.subject.id === subject.id) : [];
 
-const vfMat = subjectMaterials.find((m) => m.data.type === 'vf');
-const revealMat = subjectMaterials.find((m) => m.data.type === 'reveal');
-
 const isCaseExamMaterial =
   type === 'test' &&
   items.length > 0 &&
   items.every((it: any) => Boolean(it.caseStatement));
 
-// Cada material de test maneja su propio conjunto de preguntas para no mezclar bancos
+const isNonCaseTest = (m: (typeof subjectMaterials)[number]) =>
+  m.data.type === 'test' &&
+  !('items' in m.data && m.data.items.every((it: any) => Boolean(it.caseStatement)));
+
+// Si el material declara `group`, solo se empareja con compañeros del mismo grupo
+// (p. ej. MDA Tema 4 Scrum vs. Seminario 2). Si no, solo con materiales sin grupo
+// y únicamente cuando no haya ambigüedad (un único bloque de ese tipo).
+const currentGroup = material.data.group;
+const peerMaterials = currentGroup
+  ? subjectMaterials.filter((m) => m.data.group === currentGroup)
+  : subjectMaterials.filter((m) => !m.data.group);
+
+const pickUniqueCompanion = (
+  predicate: (m: (typeof subjectMaterials)[number]) => boolean
+) => {
+  const matches = peerMaterials.filter(predicate);
+  return matches.length === 1 && 'items' in matches[0].data ? matches[0].data.items : [];
+};
+
+// Cada material usa siempre sus propios `items` para su propio tipo;
+// los tipos complementarios se adjuntan solo si pertenecen al mismo bloque sin ambigüedad.
 const testItems = type === 'test'
   ? items
-  : subjectMaterials.find((m) => m.data.type === 'test' && !('items' in m.data && m.data.items.every((it: any) => Boolean(it.caseStatement))))?.data?.items ?? [];
+  : pickUniqueCompanion(isNonCaseTest);
 
 const vfItems = isCaseExamMaterial
   ? []
-  : vfMat && 'items' in vfMat.data
-    ? vfMat.data.items
-    : type === 'vf'
-      ? items
-      : [];
+  : type === 'vf'
+    ? items
+    : pickUniqueCompanion((m) => m.data.type === 'vf');
+
 const revealItems = isCaseExamMaterial
   ? []
-  : revealMat && 'items' in revealMat.data
-    ? revealMat.data.items
-    : type === 'reveal'
-      ? items
-      : [];
+  : type === 'reveal'
+    ? items
+    : pickUniqueCompanion((m) => m.data.type === 'reveal');
+
 // Puntuación propia del examen (p. ej. SCD T2.2: cada fallo resta medio acierto)
 const penalty = type === 'test' && 'penalty' in material.data ? material.data.penalty : undefined;
 const examSize = type === 'test' && 'examSize' in material.data ? material.data.examSize : undefined;
 const initialTab = isCaseExamMaterial ? 'supuestos' : 'practicar';
 const initialMode = type === 'vf' ? 'vf' : type === 'reveal' ? 'quizz' : 'test';
+const storageKey = currentGroup ? `${subjectCode(subject)}_${currentGroup}` : subjectCode(subject);
 const hidden = material.data.hidden;
 ---
 
@@ -141,6 +157,7 @@ const hidden = material.data.hidden;
       <QuizEngine
         title={subjectTitle}
         code={subjectCode(subject)}
+        storageKey={storageKey}
         testData={testItems as any[]}
         vfData={vfItems as any[]}
         quizzData={revealItems as any[]}

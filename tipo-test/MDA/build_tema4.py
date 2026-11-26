@@ -410,7 +410,7 @@ def dump(name, data):
 
 
 dump('test-t4-scrum.json', {
-    'subject': SUBJECT, 'type': 'test', 'order': -9,
+    'subject': SUBJECT, 'type': 'test', 'group': 't4-scrum', 'order': -9,
     'title': 'Test Tema 4: Scrum',
     'description': f'{len(TEST)} preguntas tipo test del Tema 4 (origen, pilares, roles, artefactos, Sprint, reuniones, retrospectivas, Sprint 0 y visión) con justificación y la diapositiva de la que sale cada una.',
     'items': TEST,
@@ -422,13 +422,13 @@ dump('flashcards-t4-scrum.json', {
     'items': [{'tema': t, 'term': a, 'def': b} for t, a, b in FC],
 })
 dump('vf-t4-scrum.json', {
-    'subject': SUBJECT, 'type': 'vf', 'order': -7,
+    'subject': SUBJECT, 'type': 'vf', 'group': 't4-scrum', 'order': -7,
     'title': 'Verdadero o falso: Tema 4 Scrum (trampas de examen)',
     'description': f'{len(VF)} afirmaciones con las confusiones típicas: quién prioriza y quién estima, qué reunión es cuál, qué no se cambia en un Sprint.',
     'items': [{'n': k + 1, 'tema': t, 'q': a, 'answer': r, 'justification': j} for k, (t, a, r, j) in enumerate(VF)],
 })
 dump('preguntas-cortas-t4-scrum.json', {
-    'subject': SUBJECT, 'type': 'reveal', 'order': -6,
+    'subject': SUBJECT, 'type': 'reveal', 'group': 't4-scrum', 'order': -6,
     'title': 'Preguntas cortas y ejercicios: Tema 4 Scrum',
     'description': f'{sum(1 for x in REVEAL if x[0] == RC)} preguntas cortas y {sum(1 for x in REVEAL if x[0] == RE)} ejercicios resueltos del tipo de la prueba (visión y elevator pitch, Sprint 0, Sprint Planning con velocidad, Burndown, roles, Review y retrospectiva).',
     'items': [{'tema': t, 'q': a, 'answer': b} for t, a, b in REVEAL],

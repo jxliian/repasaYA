@@ -25,3 +25,8 @@ prácticas), sin apuntes, una hora como máximo, con preguntas cortas y ejercici
 - Duraciones de las reuniones en un Sprint de 4 semanas (diap. 50, imagen): Planning 8 h, Review 4 h, Retrospective 3 h.
 - 3 + 3 roles (diap. 16, imagen): cerdos PO/SM/equipo; gallinas user/customer/management.
 - `npm run build`: 121 páginas.
+
+## Corrección de aislamiento entre parciales (2026-11-26)
+- Añadido `group` opcional en `materialBase` (`src/content.config.ts`) y agrupados los bloques de MDA en `"t4-scrum"` y `"seminario-2"`.
+- Corregida la resolución de `testItems`, `vfItems` y `revealItems` en `[material].astro` para que cada página cargue siempre sus propios `items` y solo combine materiales complementarios del mismo `group` (sin mezclar Seminario 2 con Tema 4 Scrum).
+- Aislado `localStorage` por grupo (`storageKey`) en `QuizEngine.astro`.

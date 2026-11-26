@@ -1,6 +1,7 @@
 {
   "subject": "informatica/metodologias-de-desarrollo-agil",
   "type": "test",
+  "group": "seminario-2",
   "title": "Test Seminario 2: Historias de Usuario",
   "description": "65 preguntas tipo test de nivel examen (teoría y problemas prácticos de velocidad, planificación, INVEST, CCC, BDD, patrones de división y Spikes) con justificación detallada.",
   "order": 1,

@@ -1,6 +1,7 @@
 {
   "subject": "informatica/metodologias-de-desarrollo-agil",
   "type": "reveal",
+  "group": "t4-scrum",
   "order": -6,
   "title": "Preguntas cortas y ejercicios: Tema 4 Scrum",
   "description": "15 preguntas cortas y 10 ejercicios resueltos del tipo de la prueba (visión y elevator pitch, Sprint 0, Sprint Planning con velocidad, Burndown, roles, Review y retrospectiva).",
